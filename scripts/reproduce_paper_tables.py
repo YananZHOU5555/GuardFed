@@ -94,6 +94,10 @@ class ExperimentConfig:
     root_label_noise: float = 0.0
     root_sensitive_noise: float = 0.0
     compas_preprocessing_version: str = "legacy"
+    celeba_cache_dir: str = ""
+    celeba_train_limit: int = 0
+    celeba_eval_limit: int = 0
+    celeba_evaluation_split: str = "test"
 
     def __post_init__(self):
         if self.ablation_component not in {"none", "U", "C", "A", "F", "V", "N"}:
@@ -108,6 +112,10 @@ class ExperimentConfig:
             raise ValueError("Root noise currently requires synthetic_ratio=0")
         if self.compas_preprocessing_version not in {"legacy", "train_only"}:
             raise ValueError("Unsupported compas_preprocessing_version")
+        if self.celeba_train_limit < 0 or self.celeba_eval_limit < 0:
+            raise ValueError("CelebA subset limits must be nonnegative")
+        if self.celeba_evaluation_split not in {"valid", "test"}:
+            raise ValueError("CelebA evaluation split must be valid or test")
 
 class SimpleMLP(nn.Module):
     def __init__(self, input_size: int, seed: int = 123):
@@ -118,6 +126,13 @@ class SimpleMLP(nn.Module):
         self.linear2 = nn.Linear(16, 2)
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.linear2(self.relu(self.linear1(x)))
+
+def make_model(bundle: Dict[str, Any], config: ExperimentConfig, device: torch.device) -> nn.Module:
+    if bundle.get("dataset") == "celeba":
+        from src.celeba_data import CelebACNN
+        return CelebACNN(config.seed).to(device)
+    return SimpleMLP(bundle["num_features"], config.seed).to(device)
+
 
 def set_seed(seed: int) -> None:
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
@@ -519,8 +534,10 @@ def client_runtime_data(
     sdfa_foe_mode: Optional[str],
     spdfa_foe_mode: Optional[str],
 ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-    X = raw["X"].detach().clone().to(device)
-    y = raw["y"].detach().clone().to(device)
+    image_input = raw["X"].ndim == 4
+    data_device = torch.device("cpu") if image_input else device
+    X = raw["X"] if image_input else raw["X"].detach().clone().to(device)
+    y = raw["y"].detach().clone().to(data_device)
     sensitive = np.asarray(raw["sensitive"], dtype=int).copy()
     orig_s = sensitive.copy()
     orig_y = y.cpu().numpy().astype(int).copy()
@@ -579,7 +596,7 @@ def client_runtime_data(
         audit["label_changed_count"] = int(np.sum(y.cpu().numpy().astype(int) != orig_y))
     y_np = y.cpu().numpy().astype(int)
     sw = np.asarray([rw.get((int(s), int(label)), 1.0) for s, label in zip(sensitive, y_np)], dtype="float32")
-    return {"cid": cid, "X": X, "y": y, "sensitive": sensitive, "weights": torch.tensor(sw, dtype=torch.float32, device=device), "n": int(len(y)), "attack_types": ats, "attack": attack, "foe_mode": active_foe_mode}, audit
+    return {"cid": cid, "X": X, "y": y, "sensitive": sensitive, "weights": torch.tensor(sw, dtype=torch.float32, device=data_device), "n": int(len(y)), "attack_types": ats, "attack": attack, "foe_mode": active_foe_mode}, audit
 
 def train_local_model(global_model: nn.Module, client: Dict[str, Any], config: ExperimentConfig) -> Dict[str, torch.Tensor]:
     if client["n"] == 0: return clone_state(global_model)
@@ -587,6 +604,8 @@ def train_local_model(global_model: nn.Module, client: Dict[str, Any], config: E
     loader = DataLoader(TensorDataset(client["X"], client["y"], client["weights"]), batch_size=min(config.batch_size, max(1, client["n"])), shuffle=True)
     for _ in range(config.local_epochs):
         for xb, yb, wb in loader:
+            if xb.ndim == 4:
+                yb, wb = yb.to(next(local.parameters()).device), wb.to(next(local.parameters()).device)
             opt.zero_grad(set_to_none=True); loss = weighted_ce(local(xb), yb, wb); loss.backward(); opt.step()
     return clone_state(local)
 
@@ -595,11 +614,13 @@ def train_server_update(global_model: nn.Module, bundle: Dict[str, Any], config:
     if len(y) == 0: return zero_like(clone_state(global_model))
     local = copy.deepcopy(global_model); local.train(); opt = make_optimizer(local, config)
     for xb, yb in DataLoader(TensorDataset(X, y), batch_size=min(config.batch_size, len(y)), shuffle=True):
+        if xb.ndim == 4:
+            yb = yb.to(next(local.parameters()).device)
         opt.zero_grad(set_to_none=True); loss = F.cross_entropy(local(xb), yb); loss.backward(); opt.step()
     return state_delta(clone_state(local), clone_state(global_model))
 
 def evaluate_state_on_server(state: Dict[str, torch.Tensor], input_size: int, bundle: Dict[str, Any], config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
-    model = SimpleMLP(input_size, config.seed).to(device); model.load_state_dict(state)
+    model = make_model(bundle, config, device); model.load_state_dict(state)
     return evaluate_model(model, bundle["server_X"], bundle["server_y"], bundle["server_sensitive"], config.batch_size)
 
 def fairguard_select(fairness: List[float], seed: int) -> List[int]:
@@ -1665,6 +1686,9 @@ def apply_root_noise(root_df: pd.DataFrame, label_col: str, sensitive_col: str, 
 
 def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
     set_seed(config.seed)
+    if dataset == "celeba":
+        from src.celeba_data import load_celeba_bundle
+        return load_celeba_bundle(alpha, config, sys.modules[__name__])
     loader_options = {"preprocessing_version": config.compas_preprocessing_version} if dataset == "compas" else {}
     loader = DatasetLoader(dataset_name=dataset, seed=config.seed, device=str(device), **loader_options)
     label_col = "income" if dataset == "adult" else "two_year_recid"
@@ -1696,7 +1720,7 @@ def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: to
 def run_experiment(dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig, mode: str, device: torch.device, progress_callback=None, checkpoint_path=None) -> Dict[str, Any]:
     start = time.time(); alpha = config.client_alpha if config.client_alpha is not None else DISTRIBUTIONS[distribution]; bundle = load_bundle(dataset, alpha, config, device)
     if bundle["feature_includes_label"]: raise RuntimeError(f"Feature leakage detected for {dataset}: label column is in features")
-    set_seed(config.seed); global_model = SimpleMLP(bundle["num_features"], config.seed).to(device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
+    set_seed(config.seed); global_model = make_model(bundle, config, device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
     for cid in range(config.num_clients):
         c, a = client_runtime_data(bundle["clients"][cid], cid, attack, malicious_ids, bundle["rw_weights"], device, config.fflip_mode, config.foe_mode, config.sdfa_foe_mode, config.spdfa_foe_mode); clients.append(c); audits.append(a)
     warnings=[]; round_summaries=[]; last10_metrics=[]; trajectory_metrics=[]
@@ -1720,10 +1744,12 @@ def run_experiment(dataset: str, distribution: str, method: str, attack: str, co
     if any(w.startswith("client") or w.startswith("Sp-DFA") for w in warnings): raise RuntimeError("Attack self-check failed: " + "; ".join(warnings))
     if checkpoint_path is not None:
         torch.save(global_model.state_dict(), checkpoint_path)
-    return {"run_id": make_run_id(mode, dataset, distribution, method, attack, config), "mode": mode, "dataset": dataset, "distribution": distribution, "alpha": alpha, "method": method, "attack": attack, "seed": config.seed, "rounds": config.rounds, "num_clients": config.num_clients, "num_malicious": config.num_malicious, "config": asdict(config), "metrics": {k: metrics[k] for k in METRICS}, "evaluation_stats": {k: metrics.get(k) for k in ("positive_rate", "majority_accuracy", "prediction_count")}, "warnings": warnings, "attack_audit": audits, "round_summaries": round_summaries, "last10_metrics": last10_metrics, "trajectory_metrics": trajectory_metrics, "data_contract": {"label_col": bundle["label_col"], "sensitive_col": bundle["sensitive_col"], "feature_includes_label": bundle["feature_includes_label"], "feature_includes_sensitive": bundle["feature_includes_sensitive"], "num_features": bundle["num_features"], "train_rows": bundle["train_rows"], "test_rows": bundle["test_rows"], "root_clean_rows": bundle.get("root_clean_rows"), "root_synthetic_rows": bundle.get("root_synthetic_rows"), "server_sampling": config.server_sampling, "server_alpha": config.server_alpha, "server_sampling_audit": bundle.get("server_sampling_audit"), "root_noise_audit": bundle.get("root_noise_audit"), "preprocessing_version": config.compas_preprocessing_version if dataset == "compas" else "legacy", "synthetic_method": bundle.get("synthetic_method")}, "attack_impl_note": f"F Flip mode={config.fflip_mode}; labels are unchanged. FOE mode={config.foe_mode}; S-DFA FOE mode={config.sdfa_foe_mode or config.foe_mode}; Sp-DFA FOE mode={config.spdfa_foe_mode or config.foe_mode}; FedSA mode uses foe_mode=fedsa.", "method_impl_note": f"All methods share identical preprocessing. sensitive_feature={config.include_sensitive_feature}, aggregation_weighting={config.aggregation_weighting}, use_reweighting={config.use_reweighting}, fairguard_mode={config.fairguard_mode}. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled={config.ad2_calibration_enabled}.", "duration_sec": time.time() - start}
+    return {"run_id": make_run_id(mode, dataset, distribution, method, attack, config), "mode": mode, "dataset": dataset, "distribution": distribution, "alpha": alpha, "method": method, "attack": attack, "seed": config.seed, "rounds": config.rounds, "num_clients": config.num_clients, "num_malicious": config.num_malicious, "config": asdict(config), "metrics": {k: metrics[k] for k in METRICS}, "evaluation_stats": {k: metrics.get(k) for k in ("positive_rate", "majority_accuracy", "prediction_count")}, "warnings": warnings, "attack_audit": audits, "round_summaries": round_summaries, "last10_metrics": last10_metrics, "trajectory_metrics": trajectory_metrics, "data_contract": {"label_col": bundle["label_col"], "sensitive_col": bundle["sensitive_col"], "feature_includes_label": bundle["feature_includes_label"], "feature_includes_sensitive": bundle["feature_includes_sensitive"], "num_features": bundle["num_features"], "train_rows": bundle["train_rows"], "test_rows": bundle["test_rows"], "root_clean_rows": bundle.get("root_clean_rows"), "root_synthetic_rows": bundle.get("root_synthetic_rows"), "server_sampling": config.server_sampling, "server_alpha": config.server_alpha, "server_sampling_audit": bundle.get("server_sampling_audit"), "root_noise_audit": bundle.get("root_noise_audit"), "image_data_contract": bundle.get("image_data_contract"), "preprocessing_version": config.compas_preprocessing_version if dataset == "compas" else ("rgb64_v1" if dataset == "celeba" else "legacy"), "synthetic_method": bundle.get("synthetic_method")}, "attack_impl_note": f"F Flip mode={config.fflip_mode}; labels are unchanged. FOE mode={config.foe_mode}; S-DFA FOE mode={config.sdfa_foe_mode or config.foe_mode}; Sp-DFA FOE mode={config.spdfa_foe_mode or config.foe_mode}; FedSA mode uses foe_mode=fedsa.", "method_impl_note": f"All methods share identical preprocessing. sensitive_feature={config.include_sensitive_feature}, aggregation_weighting={config.aggregation_weighting}, use_reweighting={config.use_reweighting}, fairguard_mode={config.fairguard_mode}. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled={config.ad2_calibration_enabled}.", "duration_sec": time.time() - start}
 
 def make_run_id(mode: str, dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig) -> str:
     revision_id = ""
+    if dataset == "celeba":
+        revision_id += f"|celeba=rgb64_v1|trainlimit={config.celeba_train_limit}|evallimit={config.celeba_eval_limit}|evalsplit={config.celeba_evaluation_split}"
     if config.root_label_noise or config.root_sensitive_noise:
         revision_id += f"|rootlabelnoise={config.root_label_noise}|rootsensitivenoise={config.root_sensitive_noise}"
     if config.compas_preprocessing_version != "legacy":

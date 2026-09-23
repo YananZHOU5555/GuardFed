@@ -16,7 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SEEDS = [123,456,789,1001,2024,3141,4242,5050,6060,7070]
 
 def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    h = hashlib.sha256()
+    with Path(path).open("rb") as f:
+        for block in iter(lambda: f.read(4 * 1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
 
 def write_json(path, obj):
     path = Path(path)
@@ -26,9 +30,17 @@ def write_json(path, obj):
     temp.replace(path)
 
 def source_hashes():
-    return {str(p.relative_to(ROOT)): digest(p) for p in [
+    paths = [
         ROOT/'scripts/reproduce_paper_tables.py', ROOT/'src/data_loader.py',
-        Path(__file__).resolve(), ROOT/'data/adult/adult.data', ROOT/'data/adult/adult.test']}
+        Path(__file__).resolve(), ROOT/'data/adult/adult.data', ROOT/'data/adult/adult.test',
+        ROOT/'src/celeba_data.py', ROOT/'scripts/build_celeba_cache.py']
+    cache = ROOT/'data/celeba/derived/rgb64_v1'
+    # Image jobs must freeze the complete cache manifest as well as its model/loader.
+    if (cache/'manifest.json').exists():
+        assert json.loads((cache/'manifest.json').read_text())["complete"], "Cannot freeze an incomplete image cache"
+        paths += [cache/'manifest.json', cache/'metadata.npz', cache/'images.npy', cache/'available.npy',
+                  ROOT/'data/celeba/list_attr_celeba.txt', ROOT/'data/celeba/list_eval_partition.txt']
+    return {str(p.relative_to(ROOT)): digest(p) for p in paths}
 
 def checked_result(job):
     out=Path(job['output']); path=out/'result.json'
