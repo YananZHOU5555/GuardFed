@@ -1,6 +1,7 @@
 # src/data_loader.py - 统一数据加载器，支持多个数据集
 
 import os
+import hashlib
 import numpy as np
 import pandas as pd
 import torch
@@ -65,6 +66,8 @@ class DatasetLoader:
         """根据数据集名称加载相应的数据"""
         if self.dataset_name == 'adult':
             self._load_adult()
+        elif self.dataset_name == 'acs_income':
+            self._load_acs_income()
         elif self.dataset_name == 'compas':
             self._load_compas()
         else:
@@ -154,6 +157,58 @@ class DatasetLoader:
         print(f"   测试集: {len(self.test_df)} 样本")
         print(f"   特征数: {self.X_train.shape[1]}")
         print(f"   敏感属性: {self.sensitive_column} (Male=1, Female=0)")
+
+    def _load_acs_income(self):
+        """CA2018 ACSIncome, official folktables filter, custom SEX grouping.
+
+        Census category codes remain numeric (no fitted category encoder).
+        All nine input columns are standardized using training rows only.
+        """
+        features = ['AGEP', 'COW', 'SCHL', 'MAR', 'OCCP', 'POBP', 'RELP', 'WKHP', 'RAC1P']
+        path = os.path.join(self.data_dir, 'acs_income', '2018', '1-Year', 'psam_p06.csv')
+        raw = pd.read_csv(path, usecols=features + ['PINCP', 'SEX', 'PWGTP'])
+        df = raw.loc[(raw.AGEP > 16) & (raw.PINCP > 100) & (raw.WKHP > 0) & (raw.PWGTP >= 1)].copy()
+        if not df.SEX.isin([1, 2]).all():
+            raise ValueError('ACSIncome requires Census SEX codes 1 or 2')
+        missing = {col: int(df[col].isna().sum()) for col in features}
+        # folktables ACSIncome uses np.nan_to_num(x, -1): -1 is the copy
+        # argument, so missing features become zero, not minus one.
+        df[features] = np.nan_to_num(df[features].to_numpy(dtype=float))
+        df['income'] = (df.PINCP > 50000).astype(int)
+        df['sex'] = (df.SEX == 1).astype(int)
+        df = df[features + ['income', 'sex']]
+        train, test = train_test_split(df, test_size=0.3, random_state=self.seed,
+                                      stratify=df['sex'] * 2 + df['income'])
+        self.train_original_row_ids = train.index.to_numpy(dtype=np.int64)
+        self.test_original_row_ids = test.index.to_numpy(dtype=np.int64)
+        self.scaler = StandardScaler()
+        train[features] = self.scaler.fit_transform(train[features])
+        test[features] = self.scaler.transform(test[features])
+        self.train_df = train.reset_index(drop=True)
+        self.test_df = test.reset_index(drop=True)
+        self.X_train, self.X_test = self.train_df[features], self.test_df[features]
+        self.y_train, self.y_test = self.train_df['income'], self.test_df['income']
+        self.sex_train, self.sex_test = self.train_df.sex.to_numpy(), self.test_df.sex.to_numpy()
+        self.sensitive_column, self.A_PRIVILEGED, self.A_UNPRIVILEGED = 'sex', 1, 0
+        self.numerical_columns = features
+        self.preprocessing_version = 'acs_sex_train_only_v1'
+        def counts(frame):
+            return {f'sex={s},income={y}': int(n) for (s, y), n in frame.groupby(['sex', 'income']).size().items()}
+        self.preprocessing_audit = {
+            'version': self.preprocessing_version, 'raw_rows': len(raw), 'filtered_rows': len(df),
+            'filter': 'AGEP>16 & PINCP>100 & WKHP>0 & PWGTP>=1',
+            'target': 'PINCP>50000', 'sensitive': 'SEX: Census 1 -> Male=1, 2 -> Female=0',
+            'features': features, 'feature_encoding': 'Census numeric codes; no one-hot; train-only StandardScaler on all nine columns',
+            'feature_missing_before_zero_fill': missing, 'test_fraction': 0.3,
+            'split_seed': self.seed, 'split_stratify': 'joint SEX x income',
+            'split_unit': 'person row; household-disjoint split is not claimed',
+            'train_strata': counts(train), 'test_strata': counts(test),
+            'train_row_ids_sha256': hashlib.sha256(self.train_original_row_ids.astype('<i8').tobytes()).hexdigest(),
+            'test_row_ids_sha256': hashlib.sha256(self.test_original_row_ids.astype('<i8').tobytes()).hexdigest(),
+            'train_test_overlap': len(set(self.train_original_row_ids) & set(self.test_original_row_ids)),
+            'scaler_fit_rows': int(self.scaler.n_samples_seen_), 'scaler_mean': self.scaler.mean_.tolist(),
+            'scaler_scale': self.scaler.scale_.tolist(), 'survey_weighting': 'PWGTP used only for official filter; observations otherwise equally weighted',
+        }
 
     def _load_compas(self):
         """加载COMPAS数据集"""
@@ -322,9 +377,9 @@ class DatasetLoader:
             for i in range(num_clients):
                 if len(splits[i]) > 0:
                     client_subset = client_df.loc[splits[i]]
-                    X_subset = client_subset.drop(['income' if self.dataset_name == 'adult' else 'two_year_recid',
+                    X_subset = client_subset.drop(['two_year_recid' if self.dataset_name == 'compas' else 'income',
                                                    self.sensitive_column], axis=1)
-                    y_subset = client_subset['income' if self.dataset_name == 'adult' else 'two_year_recid']
+                    y_subset = client_subset['two_year_recid' if self.dataset_name == 'compas' else 'income']
 
                     client_data_dict[i]["X"].append(torch.tensor(X_subset.values, dtype=torch.float32))
                     client_data_dict[i]["y"].append(torch.tensor(y_subset.values, dtype=torch.long))
