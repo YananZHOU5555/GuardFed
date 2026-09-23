@@ -646,7 +646,16 @@ def weighted_average(updates: List[Dict[str, torch.Tensor]], weights: List[float
     return out
 
 def median_update(updates: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
-    return {k: torch.median(torch.stack([u[k] for u in updates], dim=0), dim=0).values for k in updates[0]}
+    result = {}
+    for k in updates[0]:
+        stacked = torch.stack([u[k] for u in updates], dim=0)
+        # Strict CUDA median rejects its unused tied indices. CPU values keep
+        # the original lower-median and NaN semantics for deterministic images.
+        if stacked.is_cuda and torch.are_deterministic_algorithms_enabled():
+            result[k] = torch.median(stacked.cpu(), dim=0).values.to(stacked.device)
+        else:
+            result[k] = torch.median(stacked, dim=0).values
+    return result
 
 
 def update_distance(a: Dict[str, torch.Tensor], b: Dict[str, torch.Tensor]) -> float:
