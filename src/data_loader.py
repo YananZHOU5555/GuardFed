@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore')
 class DatasetLoader:
     """统一的数据集加载器，支持Adult和COMPAS数据集"""
 
-    def __init__(self, dataset_name='adult', seed=123, device='cpu'):
+    def __init__(self, dataset_name='adult', seed=123, device='cpu', preprocessing_version='legacy'):
         """
         初始化数据加载器
 
@@ -23,7 +23,11 @@ class DatasetLoader:
             dataset_name: 数据集名称 ('adult' 或 'compas')
             seed: 随机种子
             device: 设备 ('cpu' 或 'cuda')
+            preprocessing_version: COMPAS scaler fit scope ('legacy' or 'train_only')
         """
+        if preprocessing_version not in ('legacy', 'train_only'):
+            raise ValueError(f'Unknown preprocessing_version: {preprocessing_version}')
+        self.preprocessing_version = preprocessing_version
         self.dataset_name = dataset_name.lower()
         self.seed = seed
         self.device = torch.device(device)
@@ -203,16 +207,24 @@ class DatasetLoader:
             'juv_other_count', 'priors_count'
         ]
 
-        # 标准化
+        # Keep historical all-data scaling explicit for reproducing old results.
         self.scaler = StandardScaler()
-        df[self.numerical_columns] = self.scaler.fit_transform(
-            df[self.numerical_columns]
-        )
+        if self.preprocessing_version == 'legacy':
+            df[self.numerical_columns] = self.scaler.fit_transform(
+                df[self.numerical_columns]
+            )
 
-        # 划分训练集和测试集
+        # Both versions use the same rows and the same seeded stratified split.
         train_df, test_df = train_test_split(
             df, test_size=0.3, random_state=self.seed, stratify=df['race']
         )
+        if self.preprocessing_version == 'train_only':
+            train_df[self.numerical_columns] = self.scaler.fit_transform(
+                train_df[self.numerical_columns]
+            )
+            test_df[self.numerical_columns] = self.scaler.transform(
+                test_df[self.numerical_columns]
+            )
 
         # 分离特征和标签
         self.train_df = train_df.reset_index(drop=True)

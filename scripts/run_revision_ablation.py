@@ -124,7 +124,7 @@ def summarize(manifest):
     root=Path(manifest['output']); rows=[]
     for path in sorted((root/'reused_full').glob('*.json')):
         r=json.loads(path.read_text())['result']
-        rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full_historical',seed=r['seed'],
+        rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full_historical',root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),seed=r['seed'],
                          source='historical',**r['metrics']))
     completed=failed=0
     for path in manifest['jobs']:
@@ -133,9 +133,9 @@ def summarize(manifest):
         if r is not None:
             completed+=1
             rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full' if r['config']['ablation_component']=='none' else 'minus_'+r['config']['ablation_component'],
-                             seed=r['seed'],source='new',**r['metrics']))
+                             root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),seed=r['seed'],source='new',**r['metrics']))
         elif (out/'failure.json').exists(): failed+=1
-    group_fields=['dataset','distribution','alpha','method','attack','profile']
+    group_fields=['dataset','distribution','alpha','method','attack','profile','root_label_noise','root_sensitive_noise']
     fields=group_fields+['seed','source','accuracy','aeod','aspd']
     with (root/'per_seed.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
