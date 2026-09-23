@@ -60,3 +60,31 @@ data/compas/*.csv
 # Keep example files
 !data/adult/adult.names
 !data/compas/README
+
+# Machine environments and migration scratch
+/GuardFed/
+.svn/
+/tmp/
+/.codex-pet-runs/
+/$outdir/
+*.before_*
+*.log
+*.aux
+*.out
+*.jsonl
+*.ndjson
+*.tar.gz
+*.zip
+*.pt
+*.pth
+*.ckpt
+*.pem
+*.key
+.env.*
+# Public benchmark inputs required by the server runner
+!data/adult/adult.data
+!data/adult/adult.test
+!data/compas/compas-scores-two-years.csv
+# Frozen calibration metadata for resuming the existing protocol
+!configs/calibration_results_5090.jsonl
+node_modules/

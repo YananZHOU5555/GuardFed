@@ -1,0 +1,28 @@
+{
+  "calibration_seed": 314159,
+  "fflip_mode": "all_unprivileged",
+  "fflip_scores": {
+    "invert": -0.010752401923749304,
+    "label_conditioned": -0.014370633538183505,
+    "label_conditioned_reverse": -0.021674248808934787,
+    "all_privileged": -0.01924018233641088,
+    "all_unprivileged": -0.008782760749526955
+  },
+  "fedsa_gain": 4.5,
+  "fedsa_norm_ratio": 3.0,
+  "fedsa_scores": {
+    "{\"gain\": 1.75, \"norm_ratio\": 2.0}": 0.010343243859967904,
+    "{\"gain\": 1.75, \"norm_ratio\": 3.0}": 0.010646424997601212,
+    "{\"gain\": 1.75, \"norm_ratio\": 4.0}": 0.010646424997601212,
+    "{\"gain\": 2.5, \"norm_ratio\": 2.0}": 0.01606312327738396,
+    "{\"gain\": 2.5, \"norm_ratio\": 3.0}": 0.017386876199117163,
+    "{\"gain\": 2.5, \"norm_ratio\": 4.0}": 0.017386876199117163,
+    "{\"gain\": 3.5, \"norm_ratio\": 2.0}": 0.019704004063498537,
+    "{\"gain\": 3.5, \"norm_ratio\": 3.0}": 0.029129224546158766,
+    "{\"gain\": 3.5, \"norm_ratio\": 4.0}": 0.029822125485688605,
+    "{\"gain\": 4.5, \"norm_ratio\": 2.0}": 0.02183416036591565,
+    "{\"gain\": 4.5, \"norm_ratio\": 3.0}": 0.038314433351208765,
+    "{\"gain\": 4.5, \"norm_ratio\": 4.0}": 0.034849337028135696
+  },
+  "selection_rule": "global FedAvg calibration; maximize fairness increase for F Flip and ACC drop for FedSA; invalid/degenerate runs are excluded"
+}

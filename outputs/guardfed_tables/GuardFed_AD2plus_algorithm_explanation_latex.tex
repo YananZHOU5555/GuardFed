@@ -1,0 +1,445 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+\setCJKmainfont{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\setCJKmonofont{Microsoft YaHei}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small GuardFed-AD2+ 算法说明}
+\rhead{\small \thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\definecolor{titleblue}{HTML}{17324D}
+\definecolor{headblue}{HTML}{2E74B5}
+\definecolor{lightblue}{HTML}{EEF4FF}
+\definecolor{lightorange}{HTML}{FFF7ED}
+\definecolor{tablegray}{HTML}{F2F4F7}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{leftmargin=2em,itemsep=3pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=2.4em,itemsep=3pt,topsep=3pt}
+\renewcommand{\arraystretch}{1.28}
+
+\newcommand{\sectiontitle}[1]{%
+  \vspace{0.9em}
+  {\Large\bfseries\color{headblue} #1}\par
+  \vspace{0.3em}
+}
+
+\newcommand{\examplebox}[2]{%
+  \vspace{0.4em}
+  \noindent
+  \fcolorbox{lightblue}{lightblue}{%
+    \begin{minipage}{0.96\linewidth}
+    \textbf{\color{titleblue}#1}\par
+    #2
+    \end{minipage}
+  }
+  \vspace{0.4em}
+}
+
+\newcommand{\notebox}[2]{%
+  \vspace{0.4em}
+  \noindent
+  \fcolorbox{lightorange}{lightorange}{%
+    \begin{minipage}{0.96\linewidth}
+    \textbf{\color{titleblue}#1}\par
+    #2
+    \end{minipage}
+  }
+  \vspace{0.4em}
+}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries\color{titleblue} GuardFed-AD2+ 算法说明}\\[0.6em]
+{\large 自适应双目标聚合：同时防御性能攻击与公平性攻击}
+\end{center}
+
+\sectiontitle{1. 一句话概括}
+
+GuardFed-AD2+ 是一个自适应双目标聚合算法。它不直接平均客户端更新，而是在每一轮用少量干净 server/root data 检查每个客户端更新是否同时满足 ``提升性能、不过度破坏公平性、方向不异常、幅度不过大'' 这几个条件，然后根据综合得分分配聚合权重。
+
+\begin{itemize}
+  \item 如果一个客户端更新让 clean accuracy 变高，而且 AEOD/ASPD 没有明显变坏，它会获得更高权重。
+  \item 如果一个客户端更新看起来像性能攻击，例如方向和 clean root update 相反，或者离大多数客户端很远，它会被降权。
+  \item 如果一个客户端更新导致敏感群体之间的 TPR 或 positive prediction rate 差距变大，它也会被降权。
+\end{itemize}
+
+\sectiontitle{2. 为什么需要 AD2+}
+
+传统鲁棒聚合方法通常重点防御性能攻击，例如模型投毒、反向更新或离群更新。这类方法可以保护 accuracy，但不一定能保护 fairness。另一方面，公平性算法通常关注不同敏感群体之间的预测差异，但面对 FOE 或 DFA 这类性能攻击时，accuracy 可能明显下降。
+
+AD2+ 的目标是同时处理这两类风险：既不能让性能攻击破坏模型可用性，也不能让公平性攻击让某个敏感群体受到系统性伤害。
+
+\examplebox{直观例子}{
+假设某一轮有两个客户端更新。客户端 A 让 accuracy 从 83\% 提到 84\%，但 AEOD 从 0.02 变成 0.12；客户端 B 让 accuracy 从 83\% 提到 83.7\%，AEOD 只从 0.02 变成 0.03。普通 FedAvg 可能更偏向 A，因为它看起来性能更好；AD2+ 会识别 A 的公平性风险，并更倾向于 B。
+}
+
+\sectiontitle{3. 符号定义}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.16\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} X}
+\toprule
+\textbf{符号} & \textbf{含义} & \textbf{解释} \\
+\midrule
+$w^t$ & 第 $t$ 轮全局模型 & 服务器当前持有的模型参数。 \\
+$\Delta_i^t$ & 客户端 $i$ 上传的更新 & $\Delta_i^t = w_i^{t+1}-w^t$。 \\
+$D_r$ & clean server/root data & 服务器保留的一小部分干净数据，包含标签和敏感属性。 \\
+$a$ & 敏感属性 & Adult 中可为 sex，COMPAS 中可为 race。 \\
+$\Delta_r^t$ & clean root update & 只用 root data 得到的可信更新方向。 \\
+$U_i^t$ & utility 分数 & 客户端更新在 root data 上的 clean accuracy。 \\
+$R_i^t$ & fairness risk & 由 AEOD 和 ASPD 组成的公平风险。 \\
+$C_i^t$ & centrality & 客户端更新是否靠近正常更新中心。 \\
+$A_i^t$ & alignment & 客户端更新是否和 clean root update 方向一致。 \\
+$s_i^t$ & AD2+ 总分 & 决定客户端聚合权重的综合得分。 \\
+\bottomrule
+\end{tabularx}
+
+\sectiontitle{4. 第一步：评估 clean utility}
+
+服务器先把客户端更新临时作用到当前模型上：
+
+\[
+w_i^t = w^t + \Delta_i^t .
+\]
+
+然后在 clean root data 上计算 accuracy：
+
+\[
+U_i^t
+=
+\operatorname{Acc}(w_i^t;D_r)
+=
+\frac{1}{|D_r|}
+\sum_{(x,y)\in D_r}
+\mathbf{1}\!\left[\hat y_{w_i^t}(x)=y\right].
+\tag{1}
+\]
+
+这里的 $U_i^t$ 不是客户端自己报告的训练准确率，而是服务器用干净 root data 独立评估得到的。因此攻击者不能轻易伪造这个分数。
+
+\examplebox{小例子：utility 怎么影响权重}{
+如果客户端 A 的更新在 root data 上得到 84.0\% accuracy，而客户端 B 得到 81.0\%，在其它风险相近时，A 的 utility 项更高，AD2+ 会给 A 更高的聚合权重。
+}
+
+\sectiontitle{5. 第二步：评估 fairness risk}
+
+AD2+ 同时考虑两类公平性指标。第一类是 AEOD，即两个敏感群体的 TPR 差异：
+
+\[
+\operatorname{AEOD}(w;D_r)
+=
+\left|
+\operatorname{TPR}_{a=0}(w)
+-
+\operatorname{TPR}_{a=1}(w)
+\right|,
+\tag{2}
+\]
+
+其中
+
+\[
+\operatorname{TPR}_{a=g}(w)
+=
+\Pr(\hat y_w=1 \mid y=1,a=g).
+\]
+
+第二类是 ASPD，即两个敏感群体被预测为 positive 的概率差异：
+
+\[
+\operatorname{ASPD}(w;D_r)
+=
+\left|
+\Pr(\hat y_w=1\mid a=0)
+-
+\Pr(\hat y_w=1\mid a=1)
+\right|.
+\tag{3}
+\]
+
+当前 AD2+ 使用 \texttt{act\_fairness\_metric=aeod\_aspd}，因此公平风险可以写作：
+
+\[
+R_i^t
+=
+\frac{1}{2}
+\operatorname{AEOD}(w_i^t;D_r)
++
+\frac{1}{2}
+\operatorname{ASPD}(w_i^t;D_r).
+\tag{4}
+\]
+
+\examplebox{小例子：为什么不能只看 accuracy}{
+假设一个更新让 root accuracy 达到 84\%，但 AEOD=0.15、ASPD=0.12；另一个更新让 root accuracy 为 83.5\%，但 AEOD=0.02、ASPD=0.03。AD2+ 不会简单选择第一个更新，因为它可能显著伤害某个敏感群体。
+}
+
+\sectiontitle{6. 第三步：公平预算与 violation}
+
+AD2+ 设置一个公平预算 $B$。只要公平风险没有超过预算，就不额外施加 violation 惩罚；超过预算的部分才会被进一步惩罚：
+
+\[
+V_i^t
+=
+\max(0,R_i^t-B).
+\tag{5}
+\]
+
+当前表格中的 AD2+ 配置使用
+
+\[
+B = 0.12 .
+\]
+
+这个预算可以理解为 ``服务器允许的最大公平风险容忍度''。
+
+\examplebox{小例子：violation 怎么计算}{
+若某客户端更新的 fairness risk 为 $R_i^t=0.08$，且 $B=0.12$，则 $V_i^t=0$，不额外惩罚。若另一个更新 $R_i^t=0.18$，则 $V_i^t=0.06$，表示它超过预算 0.06，需要被额外降权。
+}
+
+\sectiontitle{7. 第四步：鲁棒中心性 centrality}
+
+性能攻击常常表现为更新方向或幅度异常。AD2+ 因此计算每个客户端更新相对于本轮更新中心的距离。令鲁棒中心为
+
+\[
+\Delta_{\mathrm{med}}^t
+=
+\operatorname{median}\{\Delta_1^t,\ldots,\Delta_m^t\}.
+\]
+
+客户端 $i$ 的离群距离为
+
+\[
+d_i^t
+=
+\left\|
+\Delta_i^t-\Delta_{\mathrm{med}}^t
+\right\|_2.
+\]
+
+中心性分数可以写成
+
+\[
+C_i^t
+=
+-
+\frac{d_i^t}
+{\operatorname{median}_j d_j^t+\epsilon}.
+\tag{6}
+\]
+
+越靠近大多数客户端的更新，$C_i^t$ 越高；越像离群攻击更新，$C_i^t$ 越低。
+
+\examplebox{小例子：识别离群更新}{
+如果 20 个客户端中有 16 个更新方向相近，而 4 个恶意客户端上传反向或极端更新，那么这 4 个更新通常离 median center 更远，$C_i^t$ 更低，从而在 AD2+ 得分中被降权。
+}
+
+\sectiontitle{8. 第五步：与 clean root update 的方向一致性}
+
+服务器还计算每个客户端更新与 clean root update 的 cosine alignment：
+
+\[
+A_i^t
+=
+\cos(\Delta_i^t,\Delta_r^t)
+=
+\frac{
+\langle \Delta_i^t,\Delta_r^t\rangle
+}{
+\|\Delta_i^t\|_2\|\Delta_r^t\|_2+\epsilon
+}.
+\tag{7}
+\]
+
+如果一个更新和 clean root update 方向一致，$A_i^t$ 较高；如果方向相反或近似正交，$A_i^t$ 较低。
+
+\examplebox{小例子：FOE 攻击}{
+FOE 类攻击会让恶意客户端更新偏离正常优化方向。即使它在某些局部指标上看起来不差，只要它和 clean root update 方向明显不一致，alignment 项就会降低其总分。
+}
+
+\sectiontitle{9. 第六步：AD2+ 综合得分}
+
+AD2+ 将上述信号合成为一个统一客户端得分：
+
+\[
+s_i^t
+=
+\alpha U_i^t
++
+\beta C_i^t
++
+\gamma A_i^t
+-
+\lambda_r R_i^t
+-
+\lambda_v V_i^t .
+\tag{8}
+\]
+
+这个公式是 AD2+ 的核心。前三项是奖励项，后两项是惩罚项：
+
+\begin{itemize}
+  \item $\alpha U_i^t$：奖励 clean root utility 高的更新。
+  \item $\beta C_i^t$：奖励靠近正常更新中心的更新。
+  \item $\gamma A_i^t$：奖励和 clean root update 方向一致的更新。
+  \item $\lambda_r R_i^t$：惩罚公平风险高的更新。
+  \item $\lambda_v V_i^t$：额外惩罚超过公平预算的更新。
+\end{itemize}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.18\linewidth} >{\raggedright\arraybackslash}p{0.29\linewidth} X}
+\toprule
+\textbf{参数} & \textbf{当前表格配置} & \textbf{含义} \\
+\midrule
+$B$ & 0.12 & 公平风险预算。 \\
+$\alpha$ & 3.0 & utility 权重。 \\
+$\beta$ & 0.2 & centrality 权重。 \\
+$\gamma$ & COMPAS=1.0, Adult=1.5 & root alignment 权重。 \\
+$\lambda_r$ & 0.1 & fairness risk 惩罚权重。 \\
+$\lambda_v$ & 0.02 & violation 惩罚权重。 \\
+$\tau$ & 0.8 & softmax temperature。 \\
+$c$ & 5.0 & score clipping 范围。 \\
+norm & root & 聚合更新范数缩放到 clean root update 尺度。 \\
+\bottomrule
+\end{tabularx}
+
+\sectiontitle{10. 第七步：softmax 权重与聚合}
+
+AD2+ 不一定硬删除客户端，而是用 softmax 将得分转为连续聚合权重。先裁剪得分：
+
+\[
+\tilde{s}_i^t
+=
+\operatorname{clip}(s_i^t,-c,c).
+\]
+
+然后计算权重：
+
+\[
+p_i^t
+=
+\frac{
+\exp(\tilde{s}_i^t/\tau)
+}{
+\sum_{j\in \mathcal{K}_t}
+\exp(\tilde{s}_j^t/\tau)
+}.
+\tag{9}
+\]
+
+当前配置 \texttt{keep=1}，因此所有客户端都可以进入候选集合 $\mathcal{K}_t$，但权重不同。最终加权聚合为
+
+\[
+\Delta_{\mathrm{AD2+}}^t
+=
+\sum_{i\in \mathcal{K}_t}
+p_i^t\Delta_i^t .
+\tag{10}
+\]
+
+\examplebox{小例子：soft weighting 比硬过滤更稳定}{
+假设某客户端只是轻微可疑，而不是明显恶意。硬过滤可能直接丢弃它，导致可用训练信息损失；AD2+ 可以降低它的权重但不完全删除，因此聚合更平滑。
+}
+
+\sectiontitle{11. 第八步：root-norm scaling}
+
+为了避免聚合更新幅度过大，AD2+ 使用 clean root update 的范数进行缩放：
+
+\[
+\widehat{\Delta}_{\mathrm{AD2+}}^t
+=
+\Delta_{\mathrm{AD2+}}^t
+\cdot
+\min\left(
+1,
+\frac{\|\Delta_r^t\|_2}
+{\|\Delta_{\mathrm{AD2+}}^t\|_2+\epsilon}
+\right).
+\tag{11}
+\]
+
+最后更新全局模型：
+
+\[
+w^{t+1}
+=
+w^t
++
+\widehat{\Delta}_{\mathrm{AD2+}}^t .
+\tag{12}
+\]
+
+\examplebox{小例子：限制异常大更新}{
+如果恶意客户端让聚合更新范数变得远大于 clean root update，root-norm scaling 会把整体更新缩回到可信尺度，从而减少模型漂移。
+}
+
+\sectiontitle{12. 为什么 AD2+ 是 adaptive}
+
+AD2+ 的 adaptive 不是指每个超参数都自动调参，而是指每一轮的聚合行为会根据当前训练状态重新计算。
+
+\begin{itemize}
+  \item 每轮重新计算每个客户端的 root utility。
+  \item 每轮重新计算 AEOD/ASPD 和 fairness violation。
+  \item 每轮重新计算客户端更新的 centrality 和 alignment。
+  \item 每轮重新计算 softmax 聚合权重。
+  \item 每轮根据 clean root update 重新进行 norm scaling。
+\end{itemize}
+
+因此，即使 $B,\alpha,\beta,\gamma,\lambda_r,\lambda_v$ 是固定超参数，AD2+ 的实际客户端权重和全局更新仍然会随攻击强度、数据分布和训练阶段动态变化。
+
+\sectiontitle{13. 算法伪代码}
+
+\begin{enumerate}
+  \item 输入全局模型 $w^t$、客户端更新 $\{\Delta_i^t\}_{i=1}^m$、clean root data $D_r$、clean root update $\Delta_r^t$。
+  \item 对每个客户端 $i$，构造候选模型 $w_i^t=w^t+\Delta_i^t$。
+  \item 在 $D_r$ 上评估 clean utility $U_i^t$。
+  \item 在 $D_r$ 上计算 AEOD 和 ASPD，并得到 fairness risk $R_i^t$。
+  \item 计算 violation：$V_i^t=\max(0,R_i^t-B)$。
+  \item 计算客户端更新相对于鲁棒更新中心的 centrality $C_i^t$。
+  \item 计算 root alignment：$A_i^t=\cos(\Delta_i^t,\Delta_r^t)$。
+  \item 计算 AD2+ score：
+  \[
+  s_i^t=\alpha U_i^t+\beta C_i^t+\gamma A_i^t-\lambda_r R_i^t-\lambda_v V_i^t .
+  \]
+  \item 将 score 转换为 softmax 聚合权重 $p_i^t$。
+  \item 聚合客户端更新，并进行 root-norm scaling。
+  \item 输出更新后的全局模型 $w^{t+1}$。
+\end{enumerate}
+
+\sectiontitle{14. 可以放进论文的中文表述}
+
+GuardFed-AD2+ 是一种面向性能攻击与公平性攻击的自适应双目标聚合机制。与传统鲁棒聚合方法主要依赖更新几何异常检测不同，GuardFed-AD2+ 在服务器端引入少量干净 root data，对每个客户端更新同时评估其 clean utility 和 fairness risk。具体而言，服务器将每个客户端更新临时作用到当前全局模型上，并在 root data 上计算 accuracy、AEOD 和 ASPD。随后，算法根据公平预算构造 violation term，用于额外惩罚超过可接受公平风险的更新。与此同时，GuardFed-AD2+ 还计算客户端更新相对于本轮更新中心的 centrality，以及其与 clean root update 的 cosine alignment，从而识别方向异常或离群的恶意更新。最终，utility、fairness risk、fairness violation、centrality 和 alignment 被整合为统一的 AD2+ score，并通过 temperature-controlled softmax 转化为聚合权重。聚合后的全局更新进一步通过 clean root update 的范数进行缩放，以限制恶意更新造成的模型漂移。由于上述所有信号均在每一轮根据当前客户端更新和 root-data 反馈重新计算，GuardFed-AD2+ 能够动态调整客户端权重，在保持模型性能的同时抑制公平性退化。
+
+\sectiontitle{15. 最后需要注意的边界}
+
+\begin{itemize}
+  \item Root data 只用于服务器端评估和校准，不等于把敏感属性作为模型输入特征。
+  \item AD2+ 的公平预算 $B$ 是超参数；adaptive 体现在每一轮客户端得分、权重和更新尺度会动态变化。
+  \item 若需要更强的理论表达，可以把 AD2+ score 解释为 utility-robustness-fairness constrained aggregation 的拉格朗日型近似。
+\end{itemize}
+
+\end{document}

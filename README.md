@@ -1,3 +1,11 @@
+# 5090 最新实验代码（2026-09-23 同步）
+
+服务器运行请先阅读 **[服务器迁移与运行说明](docs/SERVER_SETUP.md)**。当前入口是 `scripts/reproduce_paper_tables.py` 和 `scripts/run_attack_strength_study.py`；下方原 README 描述早期实现，仅作历史参考。
+
+最新代码来自 5090 的未提交工作区，保留原实验行为；尚未声称与 TDSC 稿件逐式对齐。`configs/` 保存攻击校准和原运行环境。完整原始结果、旧源码快照与 Windows 报告见 [迁移快照 Release](https://github.com/YananZHOU5555/GuardFed/releases/tag/snapshot-5090-20260923)。
+
+---
+
 # GuardFed - 公平性感知的拜占庭鲁棒联邦学习框架
 
 **版本**: v2.0.0  
