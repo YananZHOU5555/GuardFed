@@ -88,6 +88,15 @@ class ExperimentConfig:
     ad2_plus_mode: str = "adaptive"
     experiment_suite: str = "main"
     experiment_tag: str = "default"
+    ablation_component: str = "none"
+    client_alpha: Optional[float] = None
+    full_round_diagnostics: bool = False
+
+    def __post_init__(self):
+        if self.ablation_component not in {"none", "U", "C", "A", "F", "V", "N"}:
+            raise ValueError(f"Unsupported ablation_component: {self.ablation_component}")
+        if self.client_alpha is not None and (not math.isfinite(self.client_alpha) or self.client_alpha <= 0):
+            raise ValueError("client_alpha must be finite and positive")
 
 class SimpleMLP(nn.Module):
     def __init__(self, input_size: int, seed: int = 123):
@@ -1042,11 +1051,23 @@ def guardfed_act_aggregate(updates: List[Dict[str, torch.Tensor]], fairness: Lis
 
     # Constrained additive objective: learnable-style weights over utility, robustness, and fairness risk.
     scores = []
+    component_contributions = []
     for u, c, a, rv, rz in zip(utility_z, centrality_z, alignment_z, violation_z, risk_z):
-        fairness_term = config.act_risk_weight * rz + config.act_violation_weight * dual_lambda * rv
-        robustness_term = config.ad2_centrality_weight * c + config.ad2_alignment_weight * a
-        utility_term = config.ad2_utility_weight * u
+        terms = {
+            "U": config.ad2_utility_weight * u,
+            "C": config.ad2_centrality_weight * c,
+            "A": config.ad2_alignment_weight * a,
+            "F": config.act_risk_weight * rz,
+            "V": config.act_violation_weight * dual_lambda * rv,
+        }
+        # Apply after all candidate overrides: a deleted term cannot be re-enabled.
+        if config.ablation_component in terms:
+            terms[config.ablation_component] = 0.0
+        fairness_term = terms["F"] + terms["V"]
+        robustness_term = terms["C"] + terms["A"]
+        utility_term = terms["U"]
         scores.append(float(utility_term + robustness_term + fairness_term))
+        component_contributions.append(terms)
 
     dist_med, dist_scale = robust_median_mad(distances)
     hard_gate = [i for i, (d, a) in enumerate(zip(distances, alignments)) if d <= dist_med + 2.5 * dist_scale or a > 0.0]
@@ -1063,14 +1084,25 @@ def guardfed_act_aggregate(updates: List[Dict[str, torch.Tensor]], fairness: Lis
     norm_clip_scales = []
     for i in selected:
         norm = update_norm(updates[i])
-        if config.ad2_norm_mode == "root":
+        if config.ablation_component == "N":
+            scale = 1.0
+        elif config.ad2_norm_mode == "root":
             scale = server_norm / (norm + 1e-12) if server_norm > 0 and norm > 0 else 1.0
         else:
             scale = min(1.0, clip_cap / (norm + 1e-12)) if norm > 0 and clip_cap > 0 else 1.0
         norm_clip_scales.append(float(scale))
         scaled.append({k: v * scale for k, v in updates[i].items()})
     weights = softmax_weights([scores[i] for i in selected], config.act_temperature)
+    client_weights = [0.0] * n
+    for i, weight in zip(selected, weights):
+        client_weights[i] = float(weight / sum(weights))
     return weighted_average(scaled, weights), {
+        "ablation_component": config.ablation_component,
+        "component_contributions": component_contributions,
+        "component_raw": {"U": clean_accs, "C": centrality_raw, "A": alignments, "F": risks, "V": violations},
+        "component_standardized": {"U": utility_z, "C": centrality_z, "A": alignment_z, "F": risk_z, "V": violation_z},
+        "client_weights": client_weights,
+        "aggregation_temperature": config.act_temperature,
         "selected_clients": selected,
         "method_core": "AD2 bounded dual-objective trust with adaptive/root norm scaling",
         "norm_mode": config.ad2_norm_mode,
@@ -1614,8 +1646,8 @@ def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: to
     rw_weights = compute_reweighing_weights(loader.train_df, loader.sensitive_column, label_col) if config.use_reweighting else {(s, y): 1.0 for s in [0, 1] for y in [0, 1]}
     return {"dataset": dataset, "loader": loader, "label_col": label_col, "sensitive_col": loader.sensitive_column, "feature_cols": feature_cols, "feature_includes_sensitive": loader.sensitive_column in feature_cols, "feature_includes_label": label_col in feature_cols, "server_X": server_X, "server_y": server_y, "server_sensitive": server_sensitive, "root_clean_rows": int(len(server_df)), "root_synthetic_rows": int(len(synth_df)), "server_sampling_audit": server_sampling_audit, "synthetic_method": config.synthetic_method, "clients": clients, "X_test": X_test, "y_test": y_test, "test_sensitive": test_sensitive, "num_features": len(feature_cols), "rw_weights": rw_weights, "train_rows": int(len(loader.train_df)), "test_rows": int(len(loader.test_df))}
 
-def run_experiment(dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig, mode: str, device: torch.device) -> Dict[str, Any]:
-    start = time.time(); alpha = DISTRIBUTIONS[distribution]; bundle = load_bundle(dataset, alpha, config, device)
+def run_experiment(dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig, mode: str, device: torch.device, progress_callback=None, checkpoint_path=None) -> Dict[str, Any]:
+    start = time.time(); alpha = config.client_alpha if config.client_alpha is not None else DISTRIBUTIONS[distribution]; bundle = load_bundle(dataset, alpha, config, device)
     if bundle["feature_includes_label"]: raise RuntimeError(f"Feature leakage detected for {dataset}: label column is in features")
     set_seed(config.seed); global_model = SimpleMLP(bundle["num_features"], config.seed).to(device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
     for cid in range(config.num_clients):
@@ -1628,18 +1660,26 @@ def run_experiment(dataset: str, distribution: str, method: str, attack: str, co
             state_for_eval = {k: global_state[k] + update[k] for k in global_state}; root_metrics = evaluate_state_on_server(state_for_eval, bundle["num_features"], bundle, config, device); fair = root_metrics["aeod"]; fairness.append(float(fair) if not math.isnan(float(fair)) else 1.0); fairness_details.append({k: float(root_metrics.get(k, math.nan)) for k in METRICS})
         if rnd == 0: warnings.extend(validate_attack_audit(attack, malicious_ids, audits))
         agg, info = aggregate_round(method, updates, counts, fairness, server_update, config, fairness_details=fairness_details, global_state=global_state, bundle=bundle, device=device); apply_update(global_model, agg)
-        if rnd in {0, config.rounds - 1}: round_summaries.append({"round": rnd + 1, "aggregate": info, "fairness_min": float(np.min(fairness)), "fairness_max": float(np.max(fairness)), "fairness_mean": float(np.mean(fairness))})
+        if config.full_round_diagnostics or rnd in {0, config.rounds - 1}:
+            round_summaries.append({"round": rnd + 1, "aggregate": info, "client_ids": [c["cid"] for c in clients], "malicious_mask": [c["cid"] in malicious_ids for c in clients], "fairness_min": float(np.min(fairness)), "fairness_max": float(np.max(fairness)), "fairness_mean": float(np.mean(fairness))})
         round_metrics = evaluate_for_reporting(method, global_model, bundle, config)
         trajectory_metrics.append({"round": rnd + 1, "metrics": {k: round_metrics[k] for k in METRICS}})
+        if progress_callback is not None:
+            progress_callback(copy.deepcopy(trajectory_metrics[-1]))
         if rnd >= max(0, config.rounds - 10):
             round_metrics = evaluate_for_reporting(method, global_model, bundle, config)
             last10_metrics.append({"round": rnd + 1, "metrics": {k: round_metrics[k] for k in METRICS}})
     metrics = evaluate_for_reporting(method, global_model, bundle, config); warnings.extend(metrics.get("warnings", []))
     if any(w.startswith("client") or w.startswith("Sp-DFA") for w in warnings): raise RuntimeError("Attack self-check failed: " + "; ".join(warnings))
+    if checkpoint_path is not None:
+        torch.save(global_model.state_dict(), checkpoint_path)
     return {"run_id": make_run_id(mode, dataset, distribution, method, attack, config), "mode": mode, "dataset": dataset, "distribution": distribution, "alpha": alpha, "method": method, "attack": attack, "seed": config.seed, "rounds": config.rounds, "num_clients": config.num_clients, "num_malicious": config.num_malicious, "config": asdict(config), "metrics": {k: metrics[k] for k in METRICS}, "evaluation_stats": {k: metrics.get(k) for k in ("positive_rate", "majority_accuracy", "prediction_count")}, "warnings": warnings, "attack_audit": audits, "round_summaries": round_summaries, "last10_metrics": last10_metrics, "trajectory_metrics": trajectory_metrics, "data_contract": {"label_col": bundle["label_col"], "sensitive_col": bundle["sensitive_col"], "feature_includes_label": bundle["feature_includes_label"], "feature_includes_sensitive": bundle["feature_includes_sensitive"], "num_features": bundle["num_features"], "train_rows": bundle["train_rows"], "test_rows": bundle["test_rows"], "root_clean_rows": bundle.get("root_clean_rows"), "root_synthetic_rows": bundle.get("root_synthetic_rows"), "server_sampling": config.server_sampling, "server_alpha": config.server_alpha, "server_sampling_audit": bundle.get("server_sampling_audit"), "synthetic_method": bundle.get("synthetic_method")}, "attack_impl_note": f"F Flip mode={config.fflip_mode}; labels are unchanged. FOE mode={config.foe_mode}; S-DFA FOE mode={config.sdfa_foe_mode or config.foe_mode}; Sp-DFA FOE mode={config.spdfa_foe_mode or config.foe_mode}; FedSA mode uses foe_mode=fedsa.", "method_impl_note": f"All methods share identical preprocessing. sensitive_feature={config.include_sensitive_feature}, aggregation_weighting={config.aggregation_weighting}, use_reweighting={config.use_reweighting}, fairguard_mode={config.fairguard_mode}. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled={config.ad2_calibration_enabled}.", "duration_sec": time.time() - start}
 
 def make_run_id(mode: str, dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig) -> str:
-    return "|".join([mode, dataset, distribution, method, attack, f"rounds={config.rounds}", f"seed={config.seed}", f"clients={config.num_clients}", f"malicious={config.num_malicious}", f"epochs={config.local_epochs}", f"batch={config.batch_size}", f"lr={config.learning_rate}", f"opt={config.optimizer}", f"root={config.server_ratio}+{config.synthetic_ratio}", f"serversamp={config.server_sampling}", f"serveralpha={config.server_alpha}", f"servertarget={config.server_target_sensitive}:{config.server_target_label}", f"synth={config.synthetic_method}", f"synth_epochs={config.synthetic_epochs}", f"sensfeat={int(config.include_sensitive_feature)}", f"agg={config.aggregation_weighting}", f"fflip={config.fflip_mode}", f"rw={int(config.use_reweighting)}", f"foe={config.foe_mode}", f"sdfafoe={config.sdfa_foe_mode or config.foe_mode}", f"spdfafoe={config.spdfa_foe_mode or config.foe_mode}", f"fedsa_gain={config.fedsa_gain}", f"fedsa_norm={config.fedsa_norm_ratio}", f"fg={config.fairguard_mode}", f"actfb={config.act_fairness_budget}", f"acttemp={config.act_temperature}", f"actkeep={config.act_keep_ratio}", f"actmetric={config.act_fairness_metric}", f"actdrop={config.act_anchor_drop}", f"actrisk={config.act_risk_weight}", f"actviol={config.act_violation_weight}", f"ad2calw={config.ad2_calibration_base_weight}", f"ad2calb={config.ad2_calibration_budget}", f"ad2calt={config.ad2_calibration_temperature}", f"ad2calq={config.ad2_calibration_quantiles}", f"ad2clip={config.ad2_score_clip}", f"ad2normclip={config.ad2_norm_clip_scale}", f"ad2accdrop={config.ad2_calibration_max_acc_drop}", f"ad2calobj={config.ad2_calibration_objective}", f"ad2calen={int(config.ad2_calibration_enabled)}", f"ad2normmode={config.ad2_norm_mode}", f"ad2uw={config.ad2_utility_weight}", f"ad2cw={config.ad2_centrality_weight}", f"ad2aw={config.ad2_alignment_weight}", f"ad2plus={config.ad2_plus_mode}", f"suite={config.experiment_suite}", f"tag={config.experiment_tag}"])
+    revision_id = ""
+    if config.ablation_component != "none" or config.client_alpha is not None or config.full_round_diagnostics:
+        revision_id = f"|ablation={config.ablation_component}|clientalpha={config.client_alpha}|fullrounddiag={int(config.full_round_diagnostics)}"
+    return "|".join([mode, dataset, distribution, method, attack, f"rounds={config.rounds}", f"seed={config.seed}", f"clients={config.num_clients}", f"malicious={config.num_malicious}", f"epochs={config.local_epochs}", f"batch={config.batch_size}", f"lr={config.learning_rate}", f"opt={config.optimizer}", f"root={config.server_ratio}+{config.synthetic_ratio}", f"serversamp={config.server_sampling}", f"serveralpha={config.server_alpha}", f"servertarget={config.server_target_sensitive}:{config.server_target_label}", f"synth={config.synthetic_method}", f"synth_epochs={config.synthetic_epochs}", f"sensfeat={int(config.include_sensitive_feature)}", f"agg={config.aggregation_weighting}", f"fflip={config.fflip_mode}", f"rw={int(config.use_reweighting)}", f"foe={config.foe_mode}", f"sdfafoe={config.sdfa_foe_mode or config.foe_mode}", f"spdfafoe={config.spdfa_foe_mode or config.foe_mode}", f"fedsa_gain={config.fedsa_gain}", f"fedsa_norm={config.fedsa_norm_ratio}", f"fg={config.fairguard_mode}", f"actfb={config.act_fairness_budget}", f"acttemp={config.act_temperature}", f"actkeep={config.act_keep_ratio}", f"actmetric={config.act_fairness_metric}", f"actdrop={config.act_anchor_drop}", f"actrisk={config.act_risk_weight}", f"actviol={config.act_violation_weight}", f"ad2calw={config.ad2_calibration_base_weight}", f"ad2calb={config.ad2_calibration_budget}", f"ad2calt={config.ad2_calibration_temperature}", f"ad2calq={config.ad2_calibration_quantiles}", f"ad2clip={config.ad2_score_clip}", f"ad2normclip={config.ad2_norm_clip_scale}", f"ad2accdrop={config.ad2_calibration_max_acc_drop}", f"ad2calobj={config.ad2_calibration_objective}", f"ad2calen={int(config.ad2_calibration_enabled)}", f"ad2normmode={config.ad2_norm_mode}", f"ad2uw={config.ad2_utility_weight}", f"ad2cw={config.ad2_centrality_weight}", f"ad2aw={config.ad2_alignment_weight}", f"ad2plus={config.ad2_plus_mode}", f"suite={config.experiment_suite}", f"tag={config.experiment_tag}"]) + revision_id
 
 def load_completed(path: Path) -> set[str]:
     if not path.exists(): return set()
@@ -1762,8 +1802,11 @@ def main() -> int:
     p.add_argument("--experiment-suite", default="main")
     p.add_argument("--experiment-tag", default="default")
     p.add_argument("--no-reweighting", action="store_true")
+    p.add_argument("--ablation-component", default="none", choices=["none", "U", "C", "A", "F", "V", "N"])
+    p.add_argument("--client-alpha", type=float)
+    p.add_argument("--full-round-diagnostics", action="store_true")
     p.add_argument("--force", action="store_true")
-    args=p.parse_args(); rounds=args.rounds if args.rounds is not None else (1 if args.smoke else 70); config=ExperimentConfig(seed=args.seed, num_clients=args.num_clients, num_malicious=args.num_malicious, local_epochs=args.local_epochs, batch_size=args.batch_size, learning_rate=args.learning_rate, rounds=rounds, device=args.device, optimizer=args.optimizer, server_ratio=args.server_ratio, synthetic_ratio=args.synthetic_ratio, server_sampling=args.server_sampling, server_alpha=args.server_alpha, server_target_sensitive=args.server_target_sensitive, server_target_label=args.server_target_label, synthetic_method=args.synthetic_method, synthetic_epochs=args.synthetic_epochs, include_sensitive_feature=args.include_sensitive_feature, aggregation_weighting=args.aggregation_weighting, fflip_mode=args.fflip_mode, foe_mode=args.foe_mode, sdfa_foe_mode=args.sdfa_foe_mode, spdfa_foe_mode=args.spdfa_foe_mode, fedsa_gain=args.fedsa_gain, fedsa_norm_ratio=args.fedsa_norm_ratio, fairguard_mode=args.fairguard_mode, use_reweighting=not args.no_reweighting, act_fairness_budget=args.act_fairness_budget, act_temperature=args.act_temperature, act_keep_ratio=args.act_keep_ratio, act_fairness_metric=args.act_fairness_metric, act_anchor_drop=args.act_anchor_drop, act_risk_weight=args.act_risk_weight, act_violation_weight=args.act_violation_weight, ad2_calibration_base_weight=args.ad2_calibration_base_weight, ad2_calibration_budget=args.ad2_calibration_budget, ad2_calibration_temperature=args.ad2_calibration_temperature, ad2_calibration_quantiles=args.ad2_calibration_quantiles, ad2_score_clip=args.ad2_score_clip, ad2_norm_clip_scale=args.ad2_norm_clip_scale, ad2_calibration_max_acc_drop=args.ad2_calibration_max_acc_drop, ad2_calibration_objective=args.ad2_calibration_objective, ad2_calibration_enabled=not args.disable_ad2_calibration, ad2_norm_mode=args.ad2_norm_mode, ad2_utility_weight=args.ad2_utility_weight, ad2_centrality_weight=args.ad2_centrality_weight, ad2_alignment_weight=args.ad2_alignment_weight, ad2_plus_mode=args.ad2_plus_mode, experiment_suite=args.experiment_suite, experiment_tag=args.experiment_tag)
+    args=p.parse_args(); rounds=args.rounds if args.rounds is not None else (1 if args.smoke else 70); config=ExperimentConfig(ablation_component=args.ablation_component, client_alpha=args.client_alpha, full_round_diagnostics=args.full_round_diagnostics, seed=args.seed, num_clients=args.num_clients, num_malicious=args.num_malicious, local_epochs=args.local_epochs, batch_size=args.batch_size, learning_rate=args.learning_rate, rounds=rounds, device=args.device, optimizer=args.optimizer, server_ratio=args.server_ratio, synthetic_ratio=args.synthetic_ratio, server_sampling=args.server_sampling, server_alpha=args.server_alpha, server_target_sensitive=args.server_target_sensitive, server_target_label=args.server_target_label, synthetic_method=args.synthetic_method, synthetic_epochs=args.synthetic_epochs, include_sensitive_feature=args.include_sensitive_feature, aggregation_weighting=args.aggregation_weighting, fflip_mode=args.fflip_mode, foe_mode=args.foe_mode, sdfa_foe_mode=args.sdfa_foe_mode, spdfa_foe_mode=args.spdfa_foe_mode, fedsa_gain=args.fedsa_gain, fedsa_norm_ratio=args.fedsa_norm_ratio, fairguard_mode=args.fairguard_mode, use_reweighting=not args.no_reweighting, act_fairness_budget=args.act_fairness_budget, act_temperature=args.act_temperature, act_keep_ratio=args.act_keep_ratio, act_fairness_metric=args.act_fairness_metric, act_anchor_drop=args.act_anchor_drop, act_risk_weight=args.act_risk_weight, act_violation_weight=args.act_violation_weight, ad2_calibration_base_weight=args.ad2_calibration_base_weight, ad2_calibration_budget=args.ad2_calibration_budget, ad2_calibration_temperature=args.ad2_calibration_temperature, ad2_calibration_quantiles=args.ad2_calibration_quantiles, ad2_score_clip=args.ad2_score_clip, ad2_norm_clip_scale=args.ad2_norm_clip_scale, ad2_calibration_max_acc_drop=args.ad2_calibration_max_acc_drop, ad2_calibration_objective=args.ad2_calibration_objective, ad2_calibration_enabled=not args.disable_ad2_calibration, ad2_norm_mode=args.ad2_norm_mode, ad2_utility_weight=args.ad2_utility_weight, ad2_centrality_weight=args.ad2_centrality_weight, ad2_alignment_weight=args.ad2_alignment_weight, ad2_plus_mode=args.ad2_plus_mode, experiment_suite=args.experiment_suite, experiment_tag=args.experiment_tag)
     run_validation(); device=choose_device(args.device); mode="smoke" if args.smoke else "full"; jobs=make_jobs(args); completed=load_completed(RAW_PATH); print(f"Running {len(jobs)} {mode} jobs on {device}"); new=[]
     for idx, (dataset, dist, method, attack) in enumerate(jobs, 1):
         run_id=make_run_id(mode, dataset, dist, method, attack, config)
