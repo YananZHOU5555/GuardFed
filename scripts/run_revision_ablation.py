@@ -28,7 +28,7 @@ def write_json(path, obj):
 def source_hashes():
     return {str(p.relative_to(ROOT)): digest(p) for p in [
         ROOT/'scripts/reproduce_paper_tables.py', ROOT/'src/data_loader.py',
-        Path(__file__).resolve(), ROOT/'data/adult/adult.data', ROOT/'data/adult/adult.test']}
+        Path(__file__).resolve(), ROOT/'data/adult/adult.data', ROOT/'data/adult/adult.test', ROOT/'data/compas/compas-scores-two-years.csv']}
 
 def checked_result(job):
     out=Path(job['output']); path=out/'result.json'
@@ -124,7 +124,7 @@ def summarize(manifest):
     root=Path(manifest['output']); rows=[]
     for path in sorted((root/'reused_full').glob('*.json')):
         r=json.loads(path.read_text())['result']
-        rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full_historical',root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),seed=r['seed'],
+        rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full_historical',root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),root_protected_share=r['config'].get('root_protected_share',None),seed=r['seed'],
                          source='historical',**r['metrics']))
     completed=failed=0
     for path in manifest['jobs']:
@@ -133,9 +133,9 @@ def summarize(manifest):
         if r is not None:
             completed+=1
             rows.append(dict(dataset=r['dataset'],distribution=r['distribution'],alpha=r['alpha'],method=r['method'],attack=r['attack'],profile='full' if r['config']['ablation_component']=='none' else 'minus_'+r['config']['ablation_component'],
-                             root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),seed=r['seed'],source='new',**r['metrics']))
+                             root_label_noise=r['config'].get('root_label_noise',0.0),root_sensitive_noise=r['config'].get('root_sensitive_noise',0.0),root_protected_share=r['config'].get('root_protected_share',None),seed=r['seed'],source='new',**r['metrics']))
         elif (out/'failure.json').exists(): failed+=1
-    group_fields=['dataset','distribution','alpha','method','attack','profile','root_label_noise','root_sensitive_noise']
+    group_fields=['dataset','distribution','alpha','method','attack','profile','root_label_noise','root_sensitive_noise','root_protected_share']
     fields=group_fields+['seed','source','accuracy','aeod','aspd']
     with (root/'per_seed.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)

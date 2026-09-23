@@ -93,9 +93,18 @@ class ExperimentConfig:
     full_round_diagnostics: bool = False
     root_label_noise: float = 0.0
     root_sensitive_noise: float = 0.0
+    root_protected_share: Optional[float] = None
+    root_reserve_ratio: float = 0.2
     compas_preprocessing_version: str = "legacy"
 
     def __post_init__(self):
+        if self.root_protected_share is not None:
+            if not math.isfinite(self.root_protected_share) or not 0 <= self.root_protected_share <= 0.5:
+                raise ValueError("Root protected share must be in [0, 0.5]")
+            if not 0 < self.server_ratio < self.root_reserve_ratio < 1:
+                raise ValueError("Require root ratio < reservoir ratio < 1")
+            if self.synthetic_ratio or self.root_label_noise or self.root_sensitive_noise:
+                raise ValueError("Root-share experiment is single-factor; no synthesis or noise")
         if self.ablation_component not in {"none", "U", "C", "A", "F", "V", "N"}:
             raise ValueError(f"Unsupported ablation_component: {self.ablation_component}")
         if self.client_alpha is not None and (not math.isfinite(self.client_alpha) or self.client_alpha <= 0):
@@ -1663,14 +1672,55 @@ def apply_root_noise(root_df: pd.DataFrame, label_col: str, sensitive_col: str, 
     return noisy, audit
 
 
+def sample_reservoir_root(train_df, label_col, sensitive_col, config, dataset):
+    """A fixed reserved pool keeps clients identical across protected-share levels."""
+    import hashlib
+    protected = {"adult": 0, "compas": 1}[dataset]
+    other = 1 - protected
+    pool = pd.concat([g.sample(frac=config.root_reserve_ratio, random_state=config.seed)
+                      for _, g in train_df.groupby([sensitive_col, label_col])]).sort_index()
+    rng = np.random.default_rng(config.seed)
+    ids = {g: rng.permutation(pool.index[pool[sensitive_col] == g].to_numpy()) for g in [0, 1]}
+    # Supports all prespecified shares 0, .02, .1, .5 with one common root size.
+    n = min(int(round(len(train_df) * config.server_ratio)), len(ids[other]), 2 * len(ids[protected]))
+    if n < 1:
+        raise ValueError("Reservoir cannot support a nonempty common root")
+    n_protected = int(round(n * config.root_protected_share))
+    chosen = np.concatenate([ids[protected][:n_protected], ids[other][:n - n_protected]])
+    root = train_df.loc[np.sort(chosen)].copy()
+    clients = train_df.drop(pool.index).reset_index(drop=True)
+    def index_hash(indices):
+        return hashlib.sha256(np.sort(np.asarray(indices, dtype=np.int64)).tobytes()).hexdigest()
+    audit = {"server_sampling": "fixed_reservoir_protected_share_v1",
+             "protected_group_name": "Female" if dataset == "adult" else "African-American",
+             "protected_group_value": protected, "target_protected_share": config.root_protected_share,
+             "actual_protected_share": n_protected / n, "server_rows": n,
+             "reserve_ratio": config.root_reserve_ratio, "reserve_rows": len(pool),
+             "unused_reserve_rows": len(pool) - n, "client_rows": len(clients),
+             "requested_root_rows": int(round(len(train_df) * config.server_ratio)),
+             "server_sensitive_counts": {str(g): int((root[sensitive_col] == g).sum()) for g in [0, 1]},
+             "server_group_counts": {f"{g}|{y}": int(((root[sensitive_col] == g) & (root[label_col] == y)).sum()) for g in [0, 1] for y in [0, 1]},
+             "reserve_index_sha256": index_hash(pool.index),
+             "root_index_sha256": index_hash(root.index),
+             "client_index_sha256": index_hash(train_df.index.difference(pool.index)),
+             "protected_group_present": n_protected > 0,
+             "limitation": "At zero share, missing-group scores and threshold defaults are implementation fallbacks, not identified fairness. S-DFA reference update also depends on root."}
+    assert set(root.index).issubset(set(pool.index))
+    assert len(clients) + len(pool) == len(train_df)
+    return root, clients, audit
+
+
 def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
     set_seed(config.seed)
     loader_options = {"preprocessing_version": config.compas_preprocessing_version} if dataset == "compas" else {}
     loader = DatasetLoader(dataset_name=dataset, seed=config.seed, device=str(device), **loader_options)
     label_col = "income" if dataset == "adult" else "two_year_recid"
     feature_cols = [col for col in loader.train_df.columns if col != label_col and (config.include_sensitive_feature or col != loader.sensitive_column)]
-    server_df, server_sampling_audit = sample_server_dataframe(loader.train_df, label_col, loader.sensitive_column, config)
-    client_df = loader.train_df.drop(server_df.index).reset_index(drop=True)
+    if config.root_protected_share is None:
+        server_df, server_sampling_audit = sample_server_dataframe(loader.train_df, label_col, loader.sensitive_column, config)
+        client_df = loader.train_df.drop(server_df.index).reset_index(drop=True)
+    else:
+        server_df, client_df, server_sampling_audit = sample_reservoir_root(loader.train_df, label_col, loader.sensitive_column, config, dataset)
     server_df = server_df.reset_index(drop=True)
     np.random.seed(config.seed)
     clients = create_client_data_dict(client_df, feature_cols, label_col, loader.sensitive_column, config.num_clients, alpha, device, config.seed)
@@ -1724,6 +1774,8 @@ def run_experiment(dataset: str, distribution: str, method: str, attack: str, co
 
 def make_run_id(mode: str, dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig) -> str:
     revision_id = ""
+    if config.root_protected_share is not None:
+        revision_id += f"|rootprotectedshare={config.root_protected_share}|reserveratio={config.root_reserve_ratio}"
     if config.root_label_noise or config.root_sensitive_noise:
         revision_id += f"|rootlabelnoise={config.root_label_noise}|rootsensitivenoise={config.root_sensitive_noise}"
     if config.compas_preprocessing_version != "legacy":
