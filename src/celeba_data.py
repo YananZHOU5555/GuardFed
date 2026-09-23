@@ -80,6 +80,13 @@ def load_celeba_bundle(alpha, config, core):
     rw = core.compute_reweighing_weights(df, "Male", "Smiling") if config.use_reweighting else {(s, y): 1.0 for s in [0, 1] for y in [0, 1]}
     cache_hash = hashlib.sha256((cache / "manifest.json").read_bytes()).hexdigest()
     image_contract = {
+        "numerical_execution": {"version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+            "cudnn_benchmark": torch.backends.cudnn.benchmark,
+            "cudnn_deterministic": torch.backends.cudnn.deterministic,
+            "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
+            "matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
+            "cublas_workspace_config": ":4096:8"},
         "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2", "image_shape": [3, 64, 64],
         "normalization": "uint8 divided by 255 per batch", "augmentation": "none",
         "target": "Smiling", "sensitive": "Male", "evaluation_split": config.celeba_evaluation_split,

@@ -134,10 +134,17 @@ def make_model(bundle: Dict[str, Any], config: ExperimentConfig, device: torch.d
     return SimpleMLP(bundle["num_features"], config.seed).to(device)
 
 
-def set_seed(seed: int) -> None:
+def set_seed(seed: int, deterministic_image: bool = False) -> None:
+    if deterministic_image:
+        import os
+        os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cuda.matmul.allow_tf32 = False
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
     if torch.cuda.is_available(): torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.benchmark = not deterministic_image
 
 def choose_device(name: str) -> torch.device:
     if name == "cuda" and not torch.cuda.is_available():
@@ -1685,7 +1692,7 @@ def apply_root_noise(root_df: pd.DataFrame, label_col: str, sensitive_col: str, 
 
 
 def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
-    set_seed(config.seed)
+    set_seed(config.seed, deterministic_image=(dataset == "celeba"))
     if dataset == "celeba":
         from src.celeba_data import load_celeba_bundle
         return load_celeba_bundle(alpha, config, sys.modules[__name__])
@@ -1720,7 +1727,7 @@ def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: to
 def run_experiment(dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig, mode: str, device: torch.device, progress_callback=None, checkpoint_path=None) -> Dict[str, Any]:
     start = time.time(); alpha = config.client_alpha if config.client_alpha is not None else DISTRIBUTIONS[distribution]; bundle = load_bundle(dataset, alpha, config, device)
     if bundle["feature_includes_label"]: raise RuntimeError(f"Feature leakage detected for {dataset}: label column is in features")
-    set_seed(config.seed); global_model = make_model(bundle, config, device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
+    set_seed(config.seed, deterministic_image=(dataset == "celeba")); global_model = make_model(bundle, config, device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
     for cid in range(config.num_clients):
         c, a = client_runtime_data(bundle["clients"][cid], cid, attack, malicious_ids, bundle["rw_weights"], device, config.fflip_mode, config.foe_mode, config.sdfa_foe_mode, config.spdfa_foe_mode); clients.append(c); audits.append(a)
     warnings=[]; round_summaries=[]; last10_metrics=[]; trajectory_metrics=[]

@@ -102,6 +102,8 @@ def worker(args):
     for name, expected in job['source_hashes'].items():
         assert digest(ROOT/name)==expected, ('source changed after freeze',name)
     if checked_result(job) is not None:return
+    if job["dataset"] == "celeba":
+        os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
     import torch
     import reproduce_paper_tables as core
     torch.set_num_threads(int(os.environ.get('GUARDFED_CPU_THREADS','1')))
