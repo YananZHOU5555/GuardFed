@@ -1,0 +1,88 @@
+{
+  "checked_utc": "2026-09-27T10:40:11.811827+00:00",
+  "new_complete": 409,
+  "new_total": 644,
+  "reused_verified": 56,
+  "total_complete": 465,
+  "total_planned": 700,
+  "failed": [],
+  "active": [
+    {
+      "id": "FLTrust_non-IID_F-Flip_seed91007",
+      "round": 60,
+      "pid": 28863,
+      "updated_unix": 1790505603.7121308,
+      "age_sec": 6.0,
+      "log_bytes": 0
+    },
+    {
+      "id": "FairGuard_non-IID_F-Flip_seed91007",
+      "round": 60,
+      "pid": 28864,
+      "updated_unix": 1790505607.3533685,
+      "age_sec": 2.4,
+      "log_bytes": 0
+    },
+    {
+      "id": "FLTrust+FairGuard_non-IID_F-Flip_seed91007",
+      "round": 56,
+      "pid": 28889,
+      "updated_unix": 1790505599.441717,
+      "age_sec": 10.3,
+      "log_bytes": 0
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_F-Flip_seed91007",
+      "round": 38,
+      "pid": 28906,
+      "updated_unix": 1790505602.1053908,
+      "age_sec": 7.6,
+      "log_bytes": 0
+    },
+    {
+      "id": "FedAvg_non-IID_FedSA_seed91007",
+      "round": 13,
+      "pid": 29127,
+      "updated_unix": 1790505589.400436,
+      "age_sec": 20.3,
+      "log_bytes": 0
+    },
+    {
+      "id": "FairFed_non-IID_FedSA_seed91007",
+      "round": 12,
+      "pid": 29138,
+      "updated_unix": 1790505602.5767436,
+      "age_sec": 7.2,
+      "log_bytes": 0
+    },
+    {
+      "id": "Median_non-IID_FedSA_seed91007",
+      "round": 11,
+      "pid": 29149,
+      "updated_unix": 1790505606.9625092,
+      "age_sec": 2.8,
+      "log_bytes": 0
+    },
+    {
+      "id": "FLTrust_non-IID_FedSA_seed91007",
+      "round": 7,
+      "pid": 29172,
+      "updated_unix": 1790505596.586692,
+      "age_sec": 13.1,
+      "log_bytes": 0
+    }
+  ],
+  "errors": [],
+  "previous_new_complete": 0,
+  "queue_progress_since_previous": true,
+  "cpu_cores": 8.12,
+  "cpu_quota_cores": 61.43999,
+  "memory_bytes": 50032529408,
+  "memory_failcnt": 0,
+  "disk_free_bytes": 2048887177216,
+  "gpu": "0, 96 %, 3949 MiB, 51, None\n1, 96 %, 3956 MiB, 49, None\n",
+  "service": "guardfed_celeba_fullcoverage     RUNNING   pid 6770, uptime 1 day, 4:09:51\n",
+  "worker_count": 8,
+  "worker_identity_ok": true,
+  "workers": "6773 tclsh8.6 /usr/bin/unbuffer -p /workspace/GuardFed-celeba-expanded/.venv/bin/python -u deployment/run_celeba_migration.py --manifest /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/manifest.json --concurrency 8\n6774 /workspace/GuardFed-celeba-expanded/.venv/bin/python -u deployment/run_celeba_migration.py --manifest /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/manifest.json --concurrency 8\n28863 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FLTrust_non-IID_F-Flip_seed91007.json\n28864 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FairGuard_non-IID_F-Flip_seed91007.json\n28889 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FLTrust+FairGuard_non-IID_F-Flip_seed91007.json\n28906 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_F-Flip_seed91007.json\n29127 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FedAvg_non-IID_FedSA_seed91007.json\n29138 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FairFed_non-IID_FedSA_seed91007.json\n29149 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/Median_non-IID_FedSA_seed91007.json\n29172 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FLTrust_non-IID_FedSA_seed91007.json\n"
+}

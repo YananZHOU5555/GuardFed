@@ -1,0 +1,36 @@
+{
+  "source_path": "E:\\OneDrive\\\u6587\u6863\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\acceptance_summary.json",
+  "source_sha256": "30212bdd4c7a505ccbc5175916267036a8216519757bbfae384791f613a646cc",
+  "source_checked_utc": "2026-09-28T10:20:44.788275+00:00",
+  "manifest_sha256": "6426f31571a9bea111dd9e9371f504ddcded73c0ba69debfb81aed7e45ffd799",
+  "accepted_total": 700,
+  "common_seeds": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005,
+    91006,
+    91007,
+    91008,
+    91009,
+    91010
+  ],
+  "main_table_records_used": 700,
+  "accepted_records_preserved_in_snapshot": 700,
+  "summary_mean_sd_pairs_verified": 630,
+  "complete_ten_seed_groups": 70,
+  "source_environments": {
+    "2.11.0+cu128": 686,
+    "2.11.0+cu130": 14
+  },
+  "statistics": "mean and sample SD, ddof=1; all metrics from each accepted final checkpoint",
+  "limitations": [
+    "Round 70; validation only (19,867 images). Mean \u00b1 sample SD (ddof = 1); ACC in %, gaps on [0, 1].",
+    "AEOD denotes the implemented absolute TPR gap. No significance claim follows from mean ranks alone.",
+    "* Project adaptations. GuardFed includes training-root group calibration; baseline outputs are uncalibrated.",
+    "Recipes were selected on non-IID Benign/S-DFA, including seed 91001; this is coverage transfer, not IID-specific tuning.",
+    "The source cohort includes 14 reused seed-91001 records on cu130; all other records use cu128. No 70-round equivalence claim.",
+    "Stage A covers seven implementations; ten further manuscript baselines and mechanism controls remain outstanding."
+  ]
+}

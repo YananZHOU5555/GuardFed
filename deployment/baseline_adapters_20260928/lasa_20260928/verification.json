@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.2.6",
+  "upstream_commit": "8477367a4e8708cde264f7572805040c650af59f",
+  "cases": [
+    {
+      "case": "random_default",
+      "official_output_bitwise_equal": true,
+      "selection_equal": true
+    },
+    {
+      "case": "random_no_sparsity",
+      "official_output_bitwise_equal": true,
+      "selection_equal": true
+    },
+    {
+      "case": "random_high_sparsity",
+      "official_output_bitwise_equal": true,
+      "selection_equal": true
+    },
+    {
+      "case": "strict_ties",
+      "official_output_bitwise_equal": true,
+      "selection_equal": true
+    },
+    {
+      "case": "identical_zero_std",
+      "official_output_bitwise_equal": true,
+      "selection_equal": true
+    },
+    {
+      "case": "zero_norm_explicit_repair",
+      "finite_zero_and_mixed": true
+    },
+    {
+      "case": "nonfinite_and_invalid_config",
+      "fail_fast": true
+    }
+  ],
+  "hashes": {
+    "adapter.py": "41062ed1c44714fbe7c387bc5891fd19cbf97022634dff55400c16f0b32fe50c",
+    "check_adapter.py": "05befc4e1eb268dd15900c30354665ddecc944c81b2dbf8522cd1017abba5ecc",
+    "upstream/lasa.py": "f9bd36274b9b9047fef5fcdb547767307996c4e1a90d583c7b86f1d5f6d734bc",
+    "upstream/mask_help.py": "a4026bdf20d689707fc0c796698db86a6a635bcfdbea473721d5f1e8032c19d2",
+    "upstream/main.py": "213ff32dfd3097b866710ae825b76c04a8d5fc47310d4f526450c3ac9c2c8fe8"
+  },
+  "scope": "aggregation only; no image training, GPU determinism or worker integration asserted"
+}

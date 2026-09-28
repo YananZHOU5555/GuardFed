@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "torch": "2.8.0+cpu",
+  "device": "cpu",
+  "scope": "synthetic parameters and fabricated RGB64; not real CelebA",
+  "actual_celeba_verified": false,
+  "GPU_verified": false,
+  "actor_changed": true,
+  "controller_resume_three_rounds_bitwise_equal": true,
+  "full_model_weighted_aggregation_exact": true,
+  "cnn_real_core_local_train_attack_root_path_rounds": 3,
+  "synthetic_cnn_serialized_checkpoint_resume_two_rounds_bitwise_equal": true,
+  "cnn_diagnostics": [
+    {
+      "implementation": "official_DDPG_useful_round_adaptation_v1",
+      "round": 1,
+      "selected_client_ids": [
+        3,
+        2
+      ],
+      "state": [
+        0.9853598475456238,
+        1.0
+      ],
+      "action": [
+        0.48046791553497314,
+        0.5195320844650269
+      ],
+      "policy_updates": 1,
+      "policy_device": "cpu",
+      "reward_split": "train_clean_root",
+      "root_accuracy": 0.5
+    },
+    {
+      "implementation": "official_DDPG_useful_round_adaptation_v1",
+      "round": 2,
+      "selected_client_ids": [
+        2,
+        0
+      ],
+      "state": [
+        0.9972965121269226,
+        1.0
+      ],
+      "action": [
+        0.38936927914619446,
+        0.6106307506561279
+      ],
+      "policy_updates": 2,
+      "policy_device": "cpu",
+      "reward_split": "train_clean_root",
+      "root_accuracy": 0.5
+    },
+    {
+      "implementation": "official_DDPG_useful_round_adaptation_v1",
+      "round": 3,
+      "selected_client_ids": [
+        3,
+        0
+      ],
+      "state": [
+        0.9848233461380005,
+        1.0
+      ],
+      "action": [
+        0.30993619561195374,
+        0.6900637745857239
+      ],
+      "policy_updates": 3,
+      "policy_device": "cpu",
+      "reward_split": "train_clean_root",
+      "root_accuracy": 0.5
+    }
+  ],
+  "source_hashes": {
+    "fedaa_round_adapter.py": "621ef50c73c4a68b77e3272fab31bc8fee9dd31400d18ce904cba53df823fa7a",
+    "check_round_adapter.py": "384cecdcdb9dfb00dc38e2e403c62c98f9ee2e038576ed7154da4e8480c5861a",
+    "source_snapshot\\scripts\\reproduce_paper_tables.py": "cd216da860da0a733a0d6c784f84429fcfd1735bf2244841240544f57a7ac121",
+    "source_snapshot\\src\\celeba_data.py": "360ddca247236a4da51b34b5fdf16ba53860fb1230e50a68ea1fab8e1caa4aee"
+  }
+}

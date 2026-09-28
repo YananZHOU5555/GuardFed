@@ -1,0 +1,187 @@
+{
+  "verdict": "PASS",
+  "checked_utc": "2026-09-28T10:47:41.597737+00:00",
+  "scope": "Independent read-only code and local frozen manifest review; no server actions and no source edits",
+  "manifest_sha256": "9942046a8de0c8893a2d03f4a5da5c80add92fc7513fbde182b0e5eb4a94b38d",
+  "evaluation_script_sha256": "e0644fbc60e9322bcedfecdddd9cadad826aa47ad3a93d74dd9dc935cb999527",
+  "checked_jobs": 700,
+  "exact_match_original_accepted_jobs": true,
+  "source_acceptance_hash_matches": true,
+  "data_hashes_match_all_original_job_source_hashes": true,
+  "group_counts": {
+    "groups": 20,
+    "jobs_per_group": 35
+  },
+  "group_varying_config_fields": {
+    "('IID', 91001)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91001)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_suite",
+      "experiment_tag"
+    ],
+    "('IID', 91002)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91002)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_suite",
+      "experiment_tag"
+    ],
+    "('IID', 91003)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91003)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_suite",
+      "experiment_tag"
+    ],
+    "('IID', 91004)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91004)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_suite",
+      "experiment_tag"
+    ],
+    "('IID', 91005)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91005)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('IID', 91006)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91006)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('IID', 91007)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91007)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('IID', 91008)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91008)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('IID', 91009)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91009)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('IID', 91010)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ],
+    "('non-IID', 91010)": [
+      "learning_rate",
+      "ad2_calibration_max_acc_drop",
+      "experiment_tag"
+    ]
+  },
+  "shared_calibration": {
+    "ad2_calibration_base_weight": 1.0,
+    "ad2_calibration_budget": 0.06,
+    "ad2_calibration_temperature": 0.03,
+    "ad2_calibration_quantiles": 41,
+    "ad2_calibration_max_acc_drop": 0.005,
+    "ad2_calibration_objective": "acc_floor",
+    "ad2_calibration_enabled": true
+  },
+  "all_guardfed_native_calibration_equals_shared": true,
+  "canary_design": [
+    {
+      "id": "FedAvg_IID_Benign_seed91002",
+      "distribution": "IID",
+      "seed": 91002,
+      "torch_version": "2.11.0+cu128"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Benign_seed91002",
+      "distribution": "IID",
+      "seed": 91002,
+      "torch_version": "2.11.0+cu128"
+    },
+    {
+      "id": "FedAvg_lr0.002_Benign_seed91002",
+      "distribution": "non-IID",
+      "seed": 91002,
+      "torch_version": "2.11.0+cu128"
+    },
+    {
+      "id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002",
+      "distribution": "non-IID",
+      "seed": 91002,
+      "torch_version": "2.11.0+cu128"
+    },
+    {
+      "id": "FedAvg_lr0.002_Benign_seed91001",
+      "distribution": "non-IID",
+      "seed": 91001,
+      "torch_version": "2.11.0+cu130"
+    },
+    {
+      "id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001",
+      "distribution": "non-IID",
+      "seed": 91001,
+      "torch_version": "2.11.0+cu130"
+    }
+  ],
+  "canary_execution_evidence": "Parent reports 6 direct/native/cache checks passed; independent reviewer did not retrieve remote canary outputs",
+  "resolved_findings": [
+    "Preexisting failure now rejects queue startup and dispatch, rather than returning success",
+    "Outer exception saves shard failure marker; coordinator also stops dispatch after nonzero worker exit",
+    "checked_output validates identity, final round/split, actual model SHA, original result SHA, manifest/cache SHA, raw/shared recomputation and native-vs-original metrics before skip and after write"
+  ],
+  "numerical_review": [
+    "Root fitting uses only original training-root labels/margins; validation labels only used for metrics",
+    "raw margin>0 matches original binary argmax tie handling",
+    "Original frozen threshold fitting function used for shared/native; cached margins are tied to server_X identity",
+    "Per-dist/seed bundle reuse safe for this manifest: only learning rate, calibration max drop and bookkeeping vary; all data-affecting fields identical"
+  ],
+  "nonblocking_notes": [
+    "Queue exit JSON is saved before final record-count assertion; final acceptance must continue checking process exit/failure markers and all700 checked_output records, never trust queue_exit.failed alone",
+    "checked_output recomputes shared metrics from stored thresholds and validates native against original result, but does not rerun threshold fitting on cache; six canaries and original job-time native/direct checks provide this gate",
+    "No significance or untouched-test claims; 14 original checkpoints trained under cu130, current replay cu128; native equality is checked per model",
+    "Remaining methods and mechanism experiments are outside this checkpoint-only evaluation stage"
+  ]
+}

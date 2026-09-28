@@ -1,0 +1,37 @@
+# CelebA: IID
+
+COMPLETED VALIDATION COHORT - 10 shared seeds (91001-91010).
+
+Snapshot: 2026-09-28T10:20:44.788275+00:00; 700/700 accepted records.
+
+| Category | Method | Metric | Benign | F-Flip | FedSA | S-DFA | Sp-DFA |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Vanilla FL | FedAvg | ACC (%) ↑ | 84.72 ± 11.74 | 89.57 ± 0.78 | 68.19 ± 5.77 | 66.01 ± 3.57 | 84.37 ± 2.38 |
+|  |  | AEOD ↓ | 0.0384 ± 0.0176 | 0.0519 ± 0.0096 | 0.1004 ± 0.0410 | 0.0950 ± 0.0477 | 0.0280 ± 0.0076 |
+|  |  | ASPD ↓ | 0.0937 ± 0.0366 | 0.1212 ± 0.0064 | 0.0993 ± 0.0380 | 0.0807 ± 0.0413 | 0.0693 ± 0.0161 |
+| Fairness-aware | FairFed* | ACC (%) ↑ | 89.47 ± 0.85 | 89.79 ± 0.76 | 69.47 ± 4.65 | 62.59 ± 5.11 | 85.55 ± 2.31 |
+|  |  | AEOD ↓ | 0.0414 ± 0.0076 | 0.0489 ± 0.0042 | 0.1158 ± 0.0635 | 0.1594 ± 0.0822 | 0.0288 ± 0.0081 |
+|  |  | ASPD ↓ | 0.1102 ± 0.0077 | 0.1188 ± 0.0043 | 0.1120 ± 0.0554 | 0.1461 ± 0.0668 | 0.0781 ± 0.0116 |
+| Robust FL | Median | ACC (%) ↑ | 86.28 ± 1.31 | 86.52 ± 1.35 | 84.66 ± 1.47 | 85.00 ± 1.38 | 85.54 ± 1.50 |
+|  |  | AEOD ↓ | 0.0510 ± 0.0081 | 0.0610 ± 0.0087 | 0.0438 ± 0.0135 | 0.0484 ± 0.0090 | 0.0534 ± 0.0096 |
+|  |  | ASPD ↓ | 0.0980 ± 0.0117 | 0.1062 ± 0.0111 | 0.0825 ± 0.0142 | 0.0852 ± 0.0127 | 0.0965 ± 0.0124 |
+| Robust FL | FLTrust | ACC (%) ↑ | 89.43 ± 0.75 | 89.67 ± 0.82 | 89.68 ± 0.74 | 89.68 ± 0.74 | 89.72 ± 0.64 |
+|  |  | AEOD ↓ | 0.0432 ± 0.0075 | 0.0518 ± 0.0072 | 0.0422 ± 0.0069 | 0.0422 ± 0.0069 | 0.0496 ± 0.0061 |
+|  |  | ASPD ↓ | 0.1111 ± 0.0062 | 0.1207 ± 0.0064 | 0.1119 ± 0.0071 | 0.1119 ± 0.0071 | 0.1177 ± 0.0057 |
+| Robust + fair | FairGuard* | ACC (%) ↑ | 89.18 ± 0.83 | 89.57 ± 1.24 | 49.32 ± 1.59 | 50.33 ± 1.72 | 83.20 ± 1.76 |
+|  |  | AEOD ↓ | 0.0317 ± 0.0026 | 0.0369 ± 0.0071 | 0.0042 ± 0.0132 | 0.0000 ± 0.0000 | 0.0205 ± 0.0098 |
+|  |  | ASPD ↓ | 0.0998 ± 0.0062 | 0.1078 ± 0.0092 | 0.0049 ± 0.0156 | 0.0000 ± 0.0000 | 0.0491 ± 0.0199 |
+| Robust + fair | FLTrust+FairGuard* | ACC (%) ↑ | 89.93 ± 1.10 | 90.37 ± 0.60 | 77.83 ± 12.15 | 75.99 ± 16.52 | 86.44 ± 5.76 |
+|  |  | AEOD ↓ | 0.0365 ± 0.0075 | 0.0363 ± 0.0086 | 0.0298 ± 0.0299 | 0.0293 ± 0.0146 | 0.0368 ± 0.0144 |
+|  |  | ASPD ↓ | 0.1074 ± 0.0113 | 0.1118 ± 0.0100 | 0.0607 ± 0.0354 | 0.0652 ± 0.0419 | 0.0903 ± 0.0325 |
+| Ours | GuardFed-AD2+ | ACC (%) ↑ | 88.26 ± 1.04 | 88.39 ± 0.63 | 88.47 ± 0.91 | 88.69 ± 0.81 | 88.38 ± 0.89 |
+|  |  | AEOD ↓ | 0.0097 ± 0.0075 | 0.0107 ± 0.0096 | 0.0061 ± 0.0042 | 0.0077 ± 0.0046 | 0.0165 ± 0.0072 |
+|  |  | ASPD ↓ | 0.0625 ± 0.0138 | 0.0607 ± 0.0103 | 0.0640 ± 0.0142 | 0.0638 ± 0.0070 | 0.0559 ± 0.0156 |
+
+All 70 method/distribution/scenario cells use the same 10 seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.  
+Round 70; validation only (19,867 images). Mean ± sample SD (ddof = 1); ACC in %, gaps on [0, 1].  
+AEOD denotes the implemented absolute TPR gap. No significance claim follows from mean ranks alone.  
+* Project adaptations. GuardFed includes training-root group calibration; baseline outputs are uncalibrated.  
+Recipes were selected on non-IID Benign/S-DFA, including seed 91001; this is coverage transfer, not IID-specific tuning.  
+All records in this table use torch 2.11/cu128. The source cohort contains 14 cu130 records, excluded from this table.  
+Stage A covers seven implementations; ten further manuscript baselines and mechanism controls remain outstanding.  

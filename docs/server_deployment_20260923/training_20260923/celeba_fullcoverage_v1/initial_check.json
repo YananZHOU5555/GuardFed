@@ -1,0 +1,109 @@
+{
+  "checked_utc": "2026-09-26T06:31:05.187307+00:00",
+  "new_complete": 0,
+  "new_total": 644,
+  "reused_verified": 56,
+  "total_planned": 700,
+  "failed": [],
+  "active": [
+    {
+      "id": "FedAvg_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FedAvg_IID_Benign_seed91001",
+      "pid": 6780,
+      "elapsed_sec": 30.295233249664307,
+      "updated_unix": 1790404254.3938165
+    },
+    {
+      "id": "FairFed_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FairFed_IID_Benign_seed91001",
+      "pid": 6781,
+      "elapsed_sec": 31.908883571624756,
+      "updated_unix": 1790404256.1679757
+    },
+    {
+      "id": "Median_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "Median_IID_Benign_seed91001",
+      "pid": 6782,
+      "elapsed_sec": 31.35352325439453,
+      "updated_unix": 1790404255.6083274
+    },
+    {
+      "id": "FLTrust_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FLTrust_IID_Benign_seed91001",
+      "pid": 6783,
+      "elapsed_sec": 32.205488204956055,
+      "updated_unix": 1790404256.409112
+    },
+    {
+      "id": "FairGuard_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FairGuard_IID_Benign_seed91001",
+      "pid": 6784,
+      "elapsed_sec": 31.995399951934814,
+      "updated_unix": 1790404256.240386
+    },
+    {
+      "id": "FLTrust+FairGuard_IID_Benign_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FLTrust+FairGuard_IID_Benign_seed91001",
+      "pid": 6785,
+      "elapsed_sec": 30.079488515853882,
+      "updated_unix": 1790404254.246992
+    },
+    {
+      "id": "FedAvg_IID_F-Flip_seed91001",
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "job_id": "FedAvg_IID_F-Flip_seed91001",
+      "pid": 6787,
+      "elapsed_sec": 31.09397840499878,
+      "updated_unix": 1790404255.3422453
+    }
+  ],
+  "cpu_cores": 8.006445976383537,
+  "cpu_quota": "6143999",
+  "memory_bytes": 50721447936,
+  "memory_failcnt": 0,
+  "disk_free_bytes": 2049251229696,
+  "gpu": "0, 96 %, 3947 MiB, 42, None\n1, 96 %, 3946 MiB, 44, None\n",
+  "service": "guardfed_celeba_fullcoverage     RUNNING   pid 6770, uptime 0:00:45\n",
+  "workers": "6773 tclsh8.6 /usr/bin/unbuffer -p /workspace/GuardFed-celeba-expanded/.venv/bin/python -u deployment/run_celeba_migration.py --manifest /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/manifest.json --concurrency 8\n6774 /workspace/GuardFed-celeba-expanded/.venv/bin/python -u deployment/run_celeba_migration.py --manifest /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/manifest.json --concurrency 8\n6780 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FedAvg_IID_Benign_seed91001.json\n6781 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FairFed_IID_Benign_seed91001.json\n6782 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/Median_IID_Benign_seed91001.json\n6783 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FLTrust_IID_Benign_seed91001.json\n6784 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FairGuard_IID_Benign_seed91001.json\n6785 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FLTrust+FairGuard_IID_Benign_seed91001.json\n6786 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91001.json\n6787 /workspace/GuardFed-celeba-expanded/.venv/bin/python /workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py worker --job /workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/jobs/FedAvg_IID_F-Flip_seed91001.json\n"
+}
