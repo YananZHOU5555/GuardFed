@@ -1,0 +1,413 @@
+{
+  "plans": [
+    {
+      "plan": "01_FFlip_FairnessAttack_Last10Selected",
+      "attack": "F Flip",
+      "source_hashes": {
+        "tmp\\table2_rawaudit_20261002\\attack_strength_raw.jsonl": "3c364d055b46d8559c36e0d21bb107c2c206b7b6c4c14f26b405c01b9c0218d0",
+        "tmp\\table2_trace_20261002\\lineage_search\\.codex_transfer\\prepare_fflip_last10.mjs": "cce1a77951e9e1f7fecb9e7b29f5e2a44618476865f867857498bf01b218ae88",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\01_FFlip_FairnessAttack_Last10Selected\\checkpoint_selection.csv": "8c5363c0d3449982fbf9c4ad5fdd3ffb5452a3ddcd46b79449409f2e6d4524c7",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\01_FFlip_FairnessAttack_Last10Selected\\raw_seed_metrics.csv": "f6a5626bedb4c2620e438beb42bd9a90a3b750f8b778fdea23347ad49ae2dda2",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\01_FFlip_FairnessAttack_Last10Selected\\summary.csv": "d438e5af1ddac1bca4451dd3bd53d71dd221c1469ad402476fbe71942830473c"
+      },
+      "selected_run_records": 1760,
+      "attack_round_selection_checks": 880,
+      "round_selection_failures": [],
+      "per_seed_metric_checks": 5280,
+      "summary_rows": 528,
+      "summary_scalar_checks": 2640,
+      "max_numeric_error": 2.220446049250313e-16,
+      "all_summary_n10": true,
+      "failures": [],
+      "accepted": true,
+      "rule": "Benign final70. Attack61..70: F Flip protected methods=min(aeod+aspd), other=max; FedSA FedAvg/FairFed=minACC, other=maxACC; ties later round."
+    },
+    {
+      "plan": "02_FedSA_PerformanceAttack_Last10Selected",
+      "attack": "FedSA",
+      "source_hashes": {
+        "tmp\\table2_rawaudit_20261002\\attack_strength_raw.jsonl": "3c364d055b46d8559c36e0d21bb107c2c206b7b6c4c14f26b405c01b9c0218d0",
+        "tmp\\table2_trace_20261002\\lineage_search\\.codex_transfer\\prepare_fedsa_last10.mjs": "567efb366b3b7079c832f02b8e41a34315a57cf7a4765d47bc4f54f3236b8d65",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\02_FedSA_PerformanceAttack_Last10Selected\\checkpoint_selection.csv": "09e71c525876215ce0f32c5bf02e1a90da2d39329b5973c8c67e32684b438661",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\02_FedSA_PerformanceAttack_Last10Selected\\raw_seed_metrics.csv": "65c7ddc4867f14c9388edcb33a30f91d1a530e15cf5a51cd3656c008a2de283d",
+        "tmp\\table2_trace_20261002\\lineage_search\\outputs\\attack_strength\\three_plans\\02_FedSA_PerformanceAttack_Last10Selected\\summary.csv": "56b6cf9545755c886be98c2b30ed7978937c6627bd28cbce4a168883140a1c22"
+      },
+      "selected_run_records": 1760,
+      "attack_round_selection_checks": 880,
+      "round_selection_failures": [],
+      "per_seed_metric_checks": 5280,
+      "summary_rows": 528,
+      "summary_scalar_checks": 2640,
+      "max_numeric_error": 2.220446049250313e-16,
+      "all_summary_n10": true,
+      "failures": [],
+      "accepted": true,
+      "rule": "Benign final70. Attack61..70: F Flip protected methods=min(aeod+aspd), other=max; FedSA FedAvg/FairFed=minACC, other=maxACC; ties later round."
+    }
+  ],
+  "accepted": true,
+  "limitations": [
+    "These are explicitly method-dependent retrospective checkpoint selection rules, not a uniform final-round protocol or prospective checkpoint criterion.",
+    "Original trajectory labels verified, but no source/data/checkpoint-content hashes are in raw JSONL; CSV checkpoint_selection names a round rather than cryptographically verifying a model checkpoint.",
+    "Fflip min/max groups and FedSA min/max groups must be disclosed alongside 10seed means/SD; cannot call them uniform protocol performances."
+  ],
+  "FedWA_candidate_AdaAggRL_n3": {
+    "accepted": true,
+    "raw_records": 12,
+    "same_last10_rounds_61_to70": true,
+    "raw_scalar_checks": 60,
+    "summary_rows": 4,
+    "summary_scalar_checks": 40,
+    "max_numeric_error": 1.1102230246251565e-16,
+    "failures": [],
+    "source_hashes": {
+      "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl": "c94441fc33b4a460008bcb6eac409a856ae4ad79ed8baa132866342120f4e541",
+      "outputs\\guardfed_tables\\expanded_experiments_final\\fedsa_ad2plus_candidate_joint_raw.csv": "c380f25f1261d801d864a447308c952cc9c94485c998669c19ccf4bc4996a249",
+      "outputs\\guardfed_tables\\expanded_experiments_final\\fedsa_ad2plus_candidate_joint_summary.csv": "6ac137ba8302b2d558a067f8240e941ff65a6ebb514046a47eb2f78b6bac3697",
+      "outputs\\guardfed_tables\\expanded_experiments_final\\summarize_fedsa_ad2plus_candidates.py": "96af43573ed1a026a92e5c8ff738cb53182a65c66487c08904c485261b0c92ea"
+    },
+    "cohorts": [
+      {
+        "dataset": "adult",
+        "distribution": "IID",
+        "n": 3,
+        "statistics": {
+          "n": 3,
+          "round_mean": 66.33333333333333,
+          "acc_mean": 0.8343404829891317,
+          "acc_std": 0.00685564808019504,
+          "aeod_mean": 0.06346115435534172,
+          "aeod_std": 0.046059355065977935,
+          "aspd_mean": 0.11738381486595323,
+          "aspd_std": 0.019117886050625425,
+          "score_mean": 0.7439179983784842,
+          "score_std": 0.01681967952156088
+        },
+        "per_seed": [
+          {
+            "seed": 123,
+            "selected_round": 63,
+            "acc": 0.8264825021581779,
+            "aeod": 0.06998196670838452,
+            "aspd": 0.11617704935581463,
+            "score": 0.7334029941260782,
+            "run_id": "full|adult|IID|AdaAggRL|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed123",
+            "config_sha256": "f9ab3b3d34fbf14db9adba867c7cf3c9ac3c884dfe2be7e7339cd7be068a1a60",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 456,
+            "selected_round": 68,
+            "acc": 0.8390995418022446,
+            "aeod": 0.014488895845031324,
+            "aspd": 0.13707649710521924,
+            "score": 0.7633168453271193,
+            "run_id": "full|adult|IID|AdaAggRL|FedSA|rounds=70|seed=456|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed456",
+            "config_sha256": "929c9045524606ffdb0f6037dd045081f32191e5fa667163e84df50c42c9144f",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 789,
+            "selected_round": 68,
+            "acc": 0.8374394050069726,
+            "aeod": 0.10591260051260931,
+            "aspd": 0.0988978981368258,
+            "score": 0.735034155682255,
+            "run_id": "full|adult|IID|AdaAggRL|FedSA|rounds=70|seed=789|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed789",
+            "config_sha256": "7ae8c09882898ab977f43b66aab297eaaa99e19e9df687b4853e9d75d752fe78",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          }
+        ]
+      },
+      {
+        "dataset": "adult",
+        "distribution": "non-IID",
+        "n": 3,
+        "statistics": {
+          "n": 3,
+          "round_mean": 63,
+          "acc_mean": 0.8339420501582664,
+          "acc_std": 0.0027237038939887117,
+          "aeod_mean": 0.03680421359444763,
+          "aeod_std": 0.01966167618430813,
+          "aspd_mean": 0.1086560599533399,
+          "aspd_std": 0.00931683093577984,
+          "score_mean": 0.7612119133843726,
+          "score_std": 0.00626789503247355
+        },
+        "per_seed": [
+          {
+            "seed": 123,
+            "selected_round": 61,
+            "acc": 0.8349159970781592,
+            "aeod": 0.02144116674311447,
+            "aspd": 0.1192135429286458,
+            "score": 0.7645886422422791,
+            "run_id": "full|adult|non-IID|AdaAggRL|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed123",
+            "config_sha256": "f9ab3b3d34fbf14db9adba867c7cf3c9ac3c884dfe2be7e7339cd7be068a1a60",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 456,
+            "selected_round": 64,
+            "acc": 0.8308652632976957,
+            "aeod": 0.030009407928821896,
+            "aspd": 0.101586228404998,
+            "score": 0.7650674451307857,
+            "run_id": "full|adult|non-IID|AdaAggRL|FedSA|rounds=70|seed=456|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed456",
+            "config_sha256": "929c9045524606ffdb0f6037dd045081f32191e5fa667163e84df50c42c9144f",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 789,
+            "selected_round": 64,
+            "acc": 0.8360448900989441,
+            "aeod": 0.05896206611140653,
+            "aspd": 0.1051684085263759,
+            "score": 0.7539796527800529,
+            "run_id": "full|adult|non-IID|AdaAggRL|FedSA|rounds=70|seed=789|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed789",
+            "config_sha256": "7ae8c09882898ab977f43b66aab297eaaa99e19e9df687b4853e9d75d752fe78",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          }
+        ]
+      },
+      {
+        "dataset": "compas",
+        "distribution": "IID",
+        "n": 3,
+        "statistics": {
+          "n": 3,
+          "round_mean": 66.66666666666667,
+          "acc_mean": 0.6695464362850971,
+          "acc_std": 0.008839473835715372,
+          "aeod_mean": 0.22743807930525753,
+          "aeod_std": 0.0311346410371692,
+          "aspd_mean": 0.2288275690878793,
+          "aspd_std": 0.007816736221731069,
+          "score_mean": 0.44141361208852875,
+          "score_std": 0.011582664348356626
+        },
+        "per_seed": [
+          {
+            "seed": 123,
+            "selected_round": 67,
+            "acc": 0.661987041036717,
+            "aeod": 0.19225081336882577,
+            "aspd": 0.222148428882739,
+            "score": 0.45478741991093463,
+            "run_id": "full|compas|IID|AdaAggRL|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed123",
+            "config_sha256": "f9ab3b3d34fbf14db9adba867c7cf3c9ac3c884dfe2be7e7339cd7be068a1a60",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 456,
+            "selected_round": 63,
+            "acc": 0.6673866090712743,
+            "aeod": 0.23864750445632793,
+            "aspd": 0.22690946101941412,
+            "score": 0.4346081263334033,
+            "run_id": "full|compas|IID|AdaAggRL|FedSA|rounds=70|seed=456|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed456",
+            "config_sha256": "929c9045524606ffdb0f6037dd045081f32191e5fa667163e84df50c42c9144f",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 789,
+            "selected_round": 70,
+            "acc": 0.6792656587473002,
+            "aeod": 0.2514159200906189,
+            "aspd": 0.23742481736148477,
+            "score": 0.43484529002124833,
+            "run_id": "full|compas|IID|AdaAggRL|FedSA|rounds=70|seed=789|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed789",
+            "config_sha256": "7ae8c09882898ab977f43b66aab297eaaa99e19e9df687b4853e9d75d752fe78",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          }
+        ]
+      },
+      {
+        "dataset": "compas",
+        "distribution": "non-IID",
+        "n": 3,
+        "statistics": {
+          "n": 3,
+          "round_mean": 66,
+          "acc_mean": 0.6715262778977682,
+          "acc_std": 0.011030636030269644,
+          "aeod_mean": 0.20714422079012704,
+          "aeod_std": 0.021113589046852003,
+          "aspd_mean": 0.2193058938831028,
+          "aspd_std": 0.007775623888653833,
+          "score_mean": 0.4583012205611533,
+          "score_std": 0.003661468668073926
+        },
+        "per_seed": [
+          {
+            "seed": 123,
+            "selected_round": 69,
+            "acc": 0.6636069114470843,
+            "aeod": 0.18527062999112692,
+            "aspd": 0.21690183916605482,
+            "score": 0.4625206768684934,
+            "run_id": "full|compas|non-IID|AdaAggRL|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed123",
+            "config_sha256": "f9ab3b3d34fbf14db9adba867c7cf3c9ac3c884dfe2be7e7339cd7be068a1a60",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 456,
+            "selected_round": 68,
+            "acc": 0.6668466522678186,
+            "aeod": 0.2087566844919786,
+            "aspd": 0.21301621132026144,
+            "score": 0.4559602043616986,
+            "run_id": "full|compas|non-IID|AdaAggRL|FedSA|rounds=70|seed=456|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed456",
+            "config_sha256": "929c9045524606ffdb0f6037dd045081f32191e5fa667163e84df50c42c9144f",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          },
+          {
+            "seed": 789,
+            "selected_round": 61,
+            "acc": 0.6841252699784017,
+            "aeod": 0.22740534788727557,
+            "aspd": 0.2279996311629921,
+            "score": 0.4564227804532679,
+            "run_id": "full|compas|non-IID|AdaAggRL|FedSA|rounds=70|seed=789|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=fedsa_all_methods|tag=fedsa_all_methods_seed789",
+            "config_sha256": "7ae8c09882898ab977f43b66aab297eaaa99e19e9df687b4853e9d75d752fe78",
+            "last10_rounds": [
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ]
+          }
+        ]
+      }
+    ],
+    "rule": "argmax ACC-.5*(AEOD+ASPD) on round61..70; strict > keeps first input round on ties; seed123/456/789; method raw identity AdaAggRL, display FedWA requires naming/algorithm disclosure."
+  }
+}

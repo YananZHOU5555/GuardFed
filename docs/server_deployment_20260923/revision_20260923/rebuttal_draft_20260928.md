@@ -4,6 +4,8 @@
 **Draft date:** 28 September 2026  
 **Status:** Internal response draft for author review; not a submission-ready response letter.
 
+> 2 October 2026 evidence update: [Table II provenance audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/table2_trace_20261002/追溯报告.md) identifies numerical sources for all 480 cells and restores all 44 threshold-suppressed values. The [four-page table packet](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/table2_recovered_20261002/table2_complete_review.pdf) provides historical reconstruction and a final-round-70 correction candidate for both distributions. Actual sample sizes are mixed: 294 cells n=1, 180 n=10, and 6 n=3. Independent checks reproduce the available statistics. Method-dependent historical checkpoint selection, mixed method identities and one published/source discrepancy are disclosed. This completes the available numerical recovery, not missing-seed experiments, baseline-fidelity certification or manuscript insertion; the response letter remains an internal draft.
+
 The responses below distinguish completed experiments from proposed manuscript changes. **No statement in this draft certifies that the corresponding manuscript passage has already been revised.** Every manuscript insertion, location, unresolved analysis, and unfinished experiment is marked **TODO**. Comment summaries are paraphrases of the supplied decision letter; Reviewer 2's unnumbered comments receive descriptive labels rather than invented original numbers. The final scientific claims require author approval.
 
 ## Evidence available when preparing this draft
@@ -146,9 +148,9 @@ Our experiments expose the consequences of imperfect root data rather than elimi
 
 **Draft response.** We agree that low utility does not make a well-defined fairness metric unreportable. The completed supplementary cohorts retain low-accuracy and low-disparity outcomes. These metrics must be interpreted jointly: for example, low disparity can accompany almost constant prediction and is not by itself evidence of useful fairness.
 
-The historical table still requires a cell-level provenance reconciliation. Threshold-suppressed but defined values should be restored from the corresponding raw records. Truly undefined group rates caused by missing denominators must be identified separately; missing evidence must not be replaced by a fabricated numerical value.
+The completed reconciliation identifies numerical sources for all 480 historical cells, restoring all 44 values previously hidden as N/E. It matches 435 printed values at their displayed precision and identifies one discrepancy: FairGuard/IID/FedSA ACC was printed as 59.13%, whereas its source summary contains 54.13%. The original submission remains preserved. The recovered packet includes both historical selections and a correction candidate using the final-round-70 record for all three metrics within each run. Numerical zeros are retained; where subgroup denominators were not preserved, we do not infer well-defined group rates from the presence of a finite recorded value.
 
-**TODO — data/table:** reconstruct the old Table II from matching stored records, document each genuinely missing or undefined entry, and insert the complete table. This historical reconciliation is not claimed as finished and does not authorize rerunning the preserved old experiments.
+**Completed — numerical recovery:** all cells and hidden values traced, statistics independently checked, both distribution tables generated; no training was rerun. **TODO — manuscript/table:** insert the corrected table and accurately disclose sample sizes, selection history, metric implementation and method identities. The FedWA historical label maps to AdaAggRL, and the Cosine/fairness row combines GuardFed-AD2 and GuardFed branches; these labels cannot certify faithful implementations of the named baselines.
 
 ### R2 — Standard deviations across seeds
 
@@ -156,9 +158,9 @@ The historical table still requires a cell-level provenance reconciliation. Thre
 
 **Draft response.** The completed new cohorts report the mean and sample standard deviation (ddof=1) over the actual predefined seeds at the fixed final checkpoint. E3 includes ten-seed primary tables, a nine-seed subset excluding configuration-selection seed 91001, and a six-seed subset 91005–91010 that was unobserved before the coverage stage. Cross-scenario summaries first average within each seed, preserving the seed as the independent unit rather than treating multiple scenarios as extra seeds.
 
-An audit found that some legacy manuscript values derive from selected seeds, selected rounds, or oracle-best exports rather than ordinary ten-seed means. Preserving those source files does not justify relabeling those statistics as mean±SD. Where matching raw records exist, the appropriate complete-seed statistics must be reconstructed; otherwise the actual sample size and selection rule must be disclosed. A standard deviation from a different cohort cannot be attached to a selected legacy value.
+The completed Table II audit establishes actual n per cell: 294 single-seed cells, 180 ten-seed cells and six three-seed cells. The recovered tables include the mean and sample SD only where matching repeat records exist; single-seed entries explicitly mark SD unavailable. Historical single-seed exports select ACC and fairness metrics independently over the final ten rounds, and the ten-seed F-Flip/FedSA exports change selection direction by method group. These selected statistics are not uniform final-round results. We provide a separate final-round-70 correction candidate, with all metrics from the same run/round record. Different recipes and baseline-identity limitations remain disclosed; a different cohort's SD is never attached to a selected point value. Retained logs do not establish binary checkpoint hashes or create missing repeated runs.
 
-**TODO — manuscript/table:** complete this historical reconciliation, replace ambiguous statistical labels, and state paired comparison rules. No significance claim is inferred solely from small mean differences or overlapping/nonoverlapping SDs.
+**Completed — available historical statistics:** numerical source reconciliation and true-n mean/SD tables. **TODO — manuscript/table:** replace ambiguous statistical labels, resolve method names and state paired comparison rules. The record does not support describing the full historical table as ten-seed means; any uniform-repeat requirement remains a separate missing-experiment decision. No significance claim is inferred solely from small mean differences or overlapping/nonoverlapping SDs.
 
 ### R2 — Recommended literature and subgroup harms
 
@@ -281,7 +283,7 @@ The completed original 240-run and separate expanded 700-record image cohorts pr
 - **已完成证据：** 原1,390次正式补充实验；CelebA阶段A 700条、70组完整10seed及10/9/6seed表；260个表格同checkpoint校准配对；已有严格margin诊断；CelebA共享校准700/700验收、1,400个raw/shared评价、0次新训练，native replay最大差异为0。旧1,390次不重跑。
 - **新增归因结果：** 同校准后GuardFed相对FLTrust的ACC差为−0.844个百分点、AEOD均值略高0.00043、ASPD低0.01020；ASPD方向在9/6seed子集保留，AEOD无稳定优势。校准贡献重要，不能把方法间差异全部归因于聚合。
 - **已通过但不入表：** FedAA/LASA各自full-CelebA三轮Benign/S-DFA pilot；FedAA真实GPU恢复全state逐位一致。正式十seed基线比较仍未完成。
-- **P0：** 旧Table II全值及真实mean±SD追溯；DFA贡献定位、理论条件、真实AD2+与root更新、COMPAS负消融解释、符号表、逐条回复与正文位置。
+- **旧Table II本项已完成：** 480格数值来源、44隐藏值、真实n统计、IID/non-IID历史复原和同终轮修正候选已交付；不虚构单seed SD，不认证混用基线身份。最终排表脚本仍未找到，数值生成链已核对。**P0：** Table II正文插入与统计/方法身份更正；DFA贡献定位、理论条件、真实AD2+与root更新、COMPAS负消融解释、符号表、逐条回复与正文位置。
 - **P1：** 把已验收共享校准归因表写入正文；基线忠实度与正文剩余10行。共享校准与pilot本地备份已通过整体SHA及2,904个内容文件校验。缺1,000个匹配记录不等于全部新增训练，不用简化分支冒充原法。
 - **P2：** CelebA机制消融、最终冻结评价、可复现公开版本、8条推荐文献核验和局限段。规划不等于启动，更不等于完成。
 - **核心边界：** 公平性降低伴随准确率代价；不能承诺全面胜出，不能选择GuardFed最佳seed对比基线均值；validation不改名为未触碰test，旧最佳值不伪装成十次均值。

@@ -1,0 +1,644 @@
+{
+  "source_summaries": [
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "sha256": "c94441fc33b4a460008bcb6eac409a856ae4ad79ed8baa132866342120f4e541",
+      "filtered_records": 3387,
+      "cohorts": 2196,
+      "n_seed_histogram": {
+        "1": 1624,
+        "9": 8,
+        "3": 558,
+        "2": 6
+      },
+      "seeds": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        456,
+        789
+      ],
+      "by_attack": {
+        "Benign": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 332,
+          "records": 1094
+        },
+        "F Flip": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 308,
+          "records": 326
+        },
+        "FedSA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 130,
+          "records": 1072
+        },
+        "S-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 421,
+          "records": 442
+        },
+        "Sp-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 433,
+          "records": 453
+        }
+      }
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\attack_strength_raw.jsonl",
+      "sha256": "3c364d055b46d8559c36e0d21bb107c2c206b7b6c4c14f26b405c01b9c0218d0",
+      "filtered_records": 1320,
+      "cohorts": 132,
+      "n_seed_histogram": {
+        "10": 132
+      },
+      "seeds": [
+        123,
+        456,
+        789,
+        1001,
+        2024,
+        3141,
+        4242,
+        5050,
+        6060,
+        7070
+      ],
+      "by_attack": {
+        "Benign": {
+          "n10_cohorts": 44,
+          "n1_cohorts": 0,
+          "records": 440
+        },
+        "F Flip": {
+          "n10_cohorts": 44,
+          "n1_cohorts": 0,
+          "records": 440
+        },
+        "FedSA": {
+          "n10_cohorts": 44,
+          "n1_cohorts": 0,
+          "records": 440
+        },
+        "S-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 0,
+          "records": 0
+        },
+        "Sp-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 0,
+          "records": 0
+        }
+      }
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "sha256": "369e4a264df815c8359366f3cdb272f9dd34dba620c78179811f389ea7a79fe3",
+      "filtered_records": 1235,
+      "cohorts": 1166,
+      "n_seed_histogram": {
+        "1": 1158,
+        "9": 8
+      },
+      "seeds": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "by_attack": {
+        "Benign": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 230,
+          "records": 248
+        },
+        "F Flip": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 230,
+          "records": 248
+        },
+        "FedSA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 0,
+          "records": 0
+        },
+        "S-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 343,
+          "records": 364
+        },
+        "Sp-DFA": {
+          "n10_cohorts": 0,
+          "n1_cohorts": 355,
+          "records": 375
+        }
+      }
+    }
+  ],
+  "conflicts": [
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "cohort_id": "0677fb9cff0da6d1080e4c0ebefbd6aec8ff7cc6f9492fafa4228e9231580f07",
+      "conflicting_seeds": [
+        123
+      ],
+      "record_lines": [
+        2195,
+        2197,
+        2198
+      ]
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "cohort_id": "91b287e06e2239578930b7453aef183d733f11b912ee0aab20722fce840abf61",
+      "conflicting_seeds": [
+        123
+      ],
+      "record_lines": [
+        2196,
+        2199
+      ]
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "cohort_id": "0677fb9cff0da6d1080e4c0ebefbd6aec8ff7cc6f9492fafa4228e9231580f07",
+      "conflicting_seeds": [
+        123
+      ],
+      "record_lines": [
+        2195,
+        2197,
+        2198
+      ]
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "cohort_id": "91b287e06e2239578930b7453aef183d733f11b912ee0aab20722fce840abf61",
+      "conflicting_seeds": [
+        123
+      ],
+      "record_lines": [
+        2196,
+        2199
+      ]
+    }
+  ],
+  "run_id_metric_conflicts": [
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1727,
+        1797
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1728,
+        1798
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1729,
+        1799
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1730,
+        1800
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1735,
+        1773
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1736,
+        1774
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1737,
+        1775
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1738,
+        1776
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1743,
+        1781
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1744,
+        1782
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1745,
+        1783
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1746,
+        1784
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1751,
+        1789
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1752,
+        1790
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1753,
+        1791
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1754,
+        1792
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive",
+      "lines": [
+        2195,
+        2197,
+        2198
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive",
+      "lines": [
+        2196,
+        2199
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1727,
+        1797
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1728,
+        1798
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1729,
+        1799
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.025|acttemp=0.18|actkeep=0.7|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.5|actviol=1.0",
+      "lines": [
+        1730,
+        1800
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1735,
+        1773
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1736,
+        1774
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1737,
+        1775
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.04|acttemp=0.2|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=0.5",
+      "lines": [
+        1738,
+        1776
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1743,
+        1781
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1744,
+        1782
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1745,
+        1783
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.25|actkeep=0.85|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.75|actviol=0.2",
+      "lines": [
+        1746,
+        1784
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1751,
+        1789
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1752,
+        1790
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1753,
+        1791
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|non-IID|GuardFed-AD2|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=1|agg=equal|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.045|acttemp=0.2|actkeep=0.8|actmetric=max|actdrop=0.005|actrisk=1.0|actviol=0.4",
+      "lines": [
+        1754,
+        1792
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive",
+      "lines": [
+        2195,
+        2197,
+        2198
+      ],
+      "metric_variants": 2
+    },
+    {
+      "source": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "run_id": "full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=state|spdfafoe=state|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive",
+      "lines": [
+        2196,
+        2199
+      ],
+      "metric_variants": 2
+    }
+  ],
+  "limitations": [
+    "Config seed removed; experiment_tag seed token normalized only. Other candidates/tags/config fields and implementation notes/data contract retained; seed-generated server_sampling_audit removed from cohort identity only; missing defaults not assumed equal.",
+    "Source-file SHA proves this copied input's identity, not original worker source or dataset provenance.",
+    "Some 70-round records have only rounds 1/70 summary and no full trajectory; label rounds=70 alone does not prove 70 complete metrics/checkpoint identity.",
+    "Evaluation stats report prediction_count/positive_rate/majority_accuracy only; no sensitive-group positive denominators, so unsupported AEOD denominator cannot be established from them.",
+    "Ten-seed attack-strength Benign/F Flip/FedSA cohorts use all_unprivileged F Flip and gain4.5/norm3; cannot supply SD to different original invert or gain1.75/5 final-value table.",
+    "Paper row aliases FedWA and cosine+fairness require implementation/name verification; no silent substitution."
+  ],
+  "non_AD2_baseline_counts": {
+    "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl": {
+      "cohorts": 610,
+      "seed_n": {
+        "1": 570,
+        "3": 40
+      },
+      "seeds": [
+        123,
+        456,
+        789
+      ],
+      "conflict_cohorts": 0,
+      "complete_70_trajectories": 0,
+      "exactzero_records": 19,
+      "constant_prediction_records": 0,
+      "by_attack": {
+        "Benign": {
+          "1": 126
+        },
+        "F Flip": {
+          "1": 126
+        },
+        "FedSA": {
+          "3": 40
+        },
+        "S-DFA": {
+          "1": 159
+        },
+        "Sp-DFA": {
+          "1": 159
+        }
+      }
+    },
+    "tmp\\table2_rawaudit_20261002\\attack_strength_raw.jsonl": {
+      "cohorts": 120,
+      "seed_n": {
+        "10": 120
+      },
+      "seeds": [
+        123,
+        456,
+        789,
+        1001,
+        2024,
+        3141,
+        4242,
+        5050,
+        6060,
+        7070
+      ],
+      "conflict_cohorts": 0,
+      "complete_70_trajectories": 1200,
+      "exactzero_records": 12,
+      "constant_prediction_records": 9,
+      "by_attack": {
+        "Benign": {
+          "10": 40
+        },
+        "F Flip": {
+          "10": 40
+        },
+        "FedSA": {
+          "10": 40
+        },
+        "S-DFA": {},
+        "Sp-DFA": {}
+      }
+    },
+    "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl": {
+      "cohorts": 570,
+      "seed_n": {
+        "1": 570
+      },
+      "seeds": [
+        123
+      ],
+      "conflict_cohorts": 0,
+      "complete_70_trajectories": 0,
+      "exactzero_records": 19,
+      "constant_prediction_records": 0,
+      "by_attack": {
+        "Benign": {
+          "1": 126
+        },
+        "F Flip": {
+          "1": 126
+        },
+        "FedSA": {},
+        "S-DFA": {
+          "1": 159
+        },
+        "Sp-DFA": {
+          "1": 159
+        }
+      }
+    }
+  },
+  "ten_seed_strict_validation": {
+    "cohorts": 132,
+    "distinct_records": 1320,
+    "all_70_rounds_present": true,
+    "all_final_metrics_equal_round70": true,
+    "sample_SD": "ddof=1",
+    "metric_checkpoint_identity": "Not proven: no checkpoint hashes in this raw schema"
+  }
+}

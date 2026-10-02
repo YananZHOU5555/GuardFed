@@ -1,0 +1,81 @@
+\begin{center}
+\textbf{Adult Table II: IID --- Historical selections reconstructed}
+\end{center}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|l|ccccc}
+\toprule
+Historical label & Metric & Benign & F-Flip & FedSA & S-DFA & Sp-DFA \\
+\midrule
+\multirow{3}{*}{FedAvg} & ACC (\%) & $83.18^{1}$ & $83.00 \pm 0.66$ & $76.07 \pm 1.79$ & $75.89^{1}$ & $79.59^{1}$ \\
+ & AEOD & $0.0615^{1}$ & $0.0559 \pm 0.0420$ & $0.2667 \pm 0.0806$ & $0.0039^{1}$ & $0.0917^{1}$ \\
+ & ASPD & $0.1098^{1}$ & $0.1367 \pm 0.0192$ & $0.0498 \pm 0.0402$ & $0.0044^{1}$ & $0.0798^{1}$ \\
+\midrule
+\multirow{3}{*}{FairFed} & ACC (\%) & $83.26^{1}$ & $82.95 \pm 0.72$ & $73.55 \pm 3.97$ & $75.91^{1}$ & $79.19^{1}$ \\
+ & AEOD & $0.0570^{1}$ & $0.0343 \pm 0.0404$ & $0.3225 \pm 0.0881$ & $0.0021^{1}$ & $0.0714^{1}$ \\
+ & ASPD & $0.1137^{1}$ & $0.1296 \pm 0.0202$ & $0.0948 \pm 0.0650$ & $0.0044^{1}$ & $0.0671^{1}$ \\
+\midrule
+\multirow{3}{*}{LoGoFair} & ACC (\%) & $82.12^{1}$ & $81.59 \pm 0.95$ & $75.53 \pm 0.05$ & $75.53^{1}$ & $78.33^{1}$ \\
+ & AEOD & $0.0107^{1}$ & $0.0457 \pm 0.0274$ & $0.0075 \pm 0.0082$ & $0.0227^{1}$ & $0.0248^{1}$ \\
+ & ASPD & $0.0711^{1}$ & $0.0656 \pm 0.0167$ & $0.0011 \pm 0.0008$ & $0.0024^{1}$ & $0.0215^{1}$ \\
+\midrule
+\multirow{3}{*}{FedWA$^{\dagger}$} & ACC (\%) & $83.11^{1}$ & $82.77^{1}$ & $83.43 \pm 0.69$ & $82.84^{1}$ & $83.03^{1}$ \\
+ & AEOD & $0.0698^{1}$ & $0.0195^{1}$ & $0.0635 \pm 0.0461$ & $0.0613^{1}$ & $0.0379^{1}$ \\
+ & ASPD & $0.1043^{1}$ & $0.1314^{1}$ & $0.1174 \pm 0.0191$ & $0.1127^{1}$ & $0.1241^{1}$ \\
+\midrule
+\multirow{3}{*}{LASA} & ACC (\%) & $82.93^{1}$ & $83.06 \pm 0.68$ & $82.69 \pm 0.88$ & $82.93^{1}$ & $82.93^{1}$ \\
+ & AEOD & $0.0695^{1}$ & $0.0638 \pm 0.0500$ & $0.0617 \pm 0.0412$ & $0.0571^{1}$ & $0.0416^{1}$ \\
+ & ASPD & $0.1089^{1}$ & $0.1360 \pm 0.0204$ & $0.0867 \pm 0.0212$ & $0.1158^{1}$ & $0.1181^{1}$ \\
+\midrule
+\multirow{3}{*}{FedAA} & ACC (\%) & $83.59^{1}$ & $83.38 \pm 0.51$ & $83.35 \pm 0.45$ & $83.49^{1}$ & $83.44^{1}$ \\
+ & AEOD & $0.0660^{1}$ & $0.0886 \pm 0.0755$ & $0.0499 \pm 0.0580$ & $0.0359^{1}$ & $0.0591^{1}$ \\
+ & ASPD & $0.0878^{1}$ & $0.1245 \pm 0.0302$ & $0.1152 \pm 0.0205$ & $0.1021^{1}$ & $0.0948^{1}$ \\
+\midrule
+\multirow{3}{*}{Median} & ACC (\%) & $83.41^{1}$ & $82.97 \pm 0.69$ & $81.85 \pm 1.24$ & $83.80^{1}$ & $83.73^{1}$ \\
+ & AEOD & $0.0287^{1}$ & $0.0660 \pm 0.0362$ & $0.0430 \pm 0.0335$ & $0.0498^{1}$ & $0.0396^{1}$ \\
+ & ASPD & $0.1140^{1}$ & $0.1263 \pm 0.0282$ & $0.0777 \pm 0.0303$ & $0.1063^{1}$ & $0.1210^{1}$ \\
+\midrule
+\multirow{3}{*}{FLTrust} & ACC (\%) & $83.13^{1}$ & $82.44 \pm 0.82$ & $83.13 \pm 1.25$ & $83.48^{1}$ & $83.22^{1}$ \\
+ & AEOD & $0.0820^{1}$ & $0.1365 \pm 0.0802$ & $0.0436 \pm 0.0280$ & $0.0013^{1}$ & $0.1207^{1}$ \\
+ & ASPD & $0.0207^{1}$ & $0.2157 \pm 0.0403$ & $0.1126 \pm 0.0339$ & $0.0774^{1}$ & $0.0598^{1}$ \\
+\midrule
+\multirow{3}{*}{Huber-BRFL} & ACC (\%) & $83.17^{1}$ & $82.95 \pm 0.67$ & $81.55 \pm 0.66$ & $83.68^{1}$ & $83.19^{1}$ \\
+ & AEOD & $0.0627^{1}$ & $0.0543 \pm 0.0441$ & $0.0886 \pm 0.0440$ & $0.0290^{1}$ & $0.0331^{1}$ \\
+ & ASPD & $0.1101^{1}$ & $0.1362 \pm 0.0184$ & $0.0569 \pm 0.0165$ & $0.1098^{1}$ & $0.1313^{1}$ \\
+\midrule
+\multirow{3}{*}{FLGMM} & ACC (\%) & $83.19^{1}$ & $82.40 \pm 0.64$ & $82.54 \pm 0.94$ & $82.69^{1}$ & $81.82^{1}$ \\
+ & AEOD & $0.0561^{1}$ & $0.0627 \pm 0.0310$ & $0.0419 \pm 0.0397$ & $0.0607^{1}$ & $0.1117^{1}$ \\
+ & ASPD & $0.1022^{1}$ & $0.1288 \pm 0.0307$ & $0.1079 \pm 0.0226$ & $0.0892^{1}$ & $0.0492^{1}$ \\
+\midrule
+\multirow{3}{*}{SmartFL} & ACC (\%) & $83.23^{1}$ & $82.94 \pm 0.53$ & $82.04 \pm 0.72$ & $80.61^{1}$ & $83.02^{1}$ \\
+ & AEOD & $0.0556^{1}$ & $0.0685 \pm 0.0432$ & $0.0640 \pm 0.0432$ & $0.0041^{1}$ & $0.0081^{1}$ \\
+ & ASPD & $0.1144^{1}$ & $0.1462 \pm 0.0350$ & $0.0790 \pm 0.0198$ & $0.0564^{1}$ & $0.1040^{1}$ \\
+\midrule
+\multirow{3}{*}{Fed-NGA} & ACC (\%) & $82.60^{1}$ & $81.81 \pm 2.14$ & $81.07 \pm 1.88$ & $83.25^{1}$ & $82.75^{1}$ \\
+ & AEOD & $0.1042^{1}$ & $0.0915 \pm 0.0552$ & $0.0858 \pm 0.0441$ & $0.0764^{1}$ & $0.0356^{1}$ \\
+ & ASPD & $0.0531^{1}$ & $0.1452 \pm 0.0728$ & $0.0650 \pm 0.0568$ & $0.0098^{1}$ & $0.0664^{1}$ \\
+\midrule
+\multirow{3}{*}{FedDNA} & ACC (\%) & $82.99^{1}$ & $82.89 \pm 0.69$ & $83.03 \pm 0.65$ & $83.15^{1}$ & $83.08^{1}$ \\
+ & AEOD & $0.0320^{1}$ & $0.0721 \pm 0.0572$ & $0.0617 \pm 0.0378$ & $0.0565^{1}$ & $0.0441^{1}$ \\
+ & ASPD & $0.1180^{1}$ & $0.1482 \pm 0.0266$ & $0.1101 \pm 0.0220$ & $0.1154^{1}$ & $0.1155^{1}$ \\
+\midrule
+\multirow{3}{*}{FairGuard} & ACC (\%) & $83.30^{1}$ & $82.85 \pm 0.84$ & $54.13 \pm 26.10$ & $75.43^{1}$ & $78.70^{1}$ \\
+ & AEOD & $0.0232^{1}$ & $0.0219 \pm 0.0160$ & $0.0362 \pm 0.1072$ & $0.0000^{1}$ & $0.0498^{1}$ \\
+ & ASPD & $0.1154^{1}$ & $0.1125 \pm 0.0251$ & $0.0347 \pm 0.0774$ & $0.0000^{1}$ & $0.0469^{1}$ \\
+\midrule
+\multirow{3}{*}{FairGuard $\to$ FLTrust} & ACC (\%) & $82.99^{1}$ & $82.37 \pm 1.72$ & $75.85 \pm 17.79$ & $84.14^{1}$ & $82.86^{1}$ \\
+ & AEOD & $0.0011^{1}$ & $0.0115 \pm 0.0069$ & $0.0241 \pm 0.0284$ & $0.0035^{1}$ & $0.0060^{1}$ \\
+ & ASPD & $0.0584^{1}$ & $0.0959 \pm 0.0353$ & $0.0790 \pm 0.0594$ & $0.1084^{1}$ & $0.0788^{1}$ \\
+\midrule
+\multirow{3}{*}{Cosine + fairness$^{\ddagger}$} & ACC (\%) & $83.11^{1}$ & $81.90 \pm 1.74$ & $83.10 \pm 0.55$ & $82.21^{1}$ & $82.22^{1}$ \\
+ & AEOD & $0.0003^{1}$ & $0.0264 \pm 0.0221$ & $0.0475 \pm 0.0442$ & $0.0038^{1}$ & $0.0094^{1}$ \\
+ & ASPD & $0.0639^{1}$ & $0.0850 \pm 0.0317$ & $0.1190 \pm 0.0160$ & $0.0629^{1}$ & $0.0592^{1}$ \\
+\bottomrule
+\end{tabular*}
+\vspace{4mm}
+\begin{minipage}{\linewidth}\footnotesize
+Superscript $1$: single seed, SD unavailable. Other cells: mean $\pm$ sample SD (ddof=1), n=10 except FedWA/FedSA n=3. No accuracy-based suppression of fairness values. AEOD denotes the implemented absolute TPR gap.
+\par $\dagger$ FedWA is a historical display label whose numeric source is AdaAggRL. $\ddagger$ The Cosine row combines GuardFed-AD2 in Benign/S-DFA/Sp-DFA with GuardFed in F-Flip/FedSA. These are source identifications, not certifications of the named baseline algorithms.
+\par Historical n=1 cells independently maximize ACC and minimize AEOD/ASPD over rounds61--70; 94/98 conditions have no common selected round. F-Flip/FedSA n=10 use opposite selection directions for different method groups. FedWA/FedSA n=3 jointly select ACC-.5(AEOD+ASPD). These test-selected results do not provide an unbiased matched-method ranking.
+\par FairGuard IID FedSA ACC is restored as54.13\% from the source, versus59.13\% in the submitted PDF. Original submission retained separately.
+\end{minipage}

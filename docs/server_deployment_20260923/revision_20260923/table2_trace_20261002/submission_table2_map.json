@@ -1,0 +1,7003 @@
+{
+  "submission_pdf": "E:/Edge下载/IEEE_TDSC__二次版___GuardFed____.pdf",
+  "submission_pdf_sha256": "549a4191b1ac560bdaba79d9dce3b11693ab69c4a8cc0f7f52be31afa1110071",
+  "table": "II",
+  "page": 6,
+  "dataset": "Adult",
+  "methods": [
+    "FedAvg",
+    "FairFed",
+    "LoGoFair",
+    "FedWA",
+    "LASA",
+    "FedAA",
+    "Median",
+    "FLTrust",
+    "Huber-BRFL",
+    "FLGMM",
+    "SmartFL",
+    "Fed-NGA",
+    "FedDNA",
+    "FairGuard",
+    "FairGuard → FLTrust",
+    "Cosine Similarity + Fairness Deviation"
+  ],
+  "distributions": {
+    "IID": 5000,
+    "non-IID": 5
+  },
+  "attacks": [
+    "Benign",
+    "F-Flip",
+    "FedSA",
+    "S-DFA",
+    "Sp-DFA"
+  ],
+  "metrics": [
+    "ACC",
+    "AEOD",
+    "ASPD"
+  ],
+  "cells": 480,
+  "numeric_cells": 436,
+  "ne_cells": 44,
+  "ne_by_method": {
+    "FedAvg": 10,
+    "FairFed": 10,
+    "LoGoFair": 12,
+    "FedWA": 0,
+    "LASA": 0,
+    "FedAA": 0,
+    "Median": 0,
+    "FLTrust": 0,
+    "Huber-BRFL": 0,
+    "FLGMM": 0,
+    "SmartFL": 0,
+    "Fed-NGA": 0,
+    "FedDNA": 0,
+    "FairGuard": 10,
+    "FairGuard → FLTrust": 2,
+    "Cosine Similarity + Fairness Deviation": 0
+  },
+  "published_mean_or_single_status": "PDF Benchmark Protocol explicitly declares ten random seeds and mean results; actual cell provenance remains unresolved. Table II itself has no n or SD.",
+  "fresh_pdf_extraction": "tmp\\table2_trace_20261002\\submission_table2_page.txt",
+  "visually_checked_render": "tmp\\table2_trace_20261002\\submission_table2_page.png",
+  "legacy_reference": "outputs\\guardfed_tables\\GuardFed_AD2plus_clean10_COMPASBASE3COL_ADULTORACLE10_NOZERO_FULL_TRUE_NoACT_FairValid_ReferenceLinks.md",
+  "legacy_numbering": {
+    "TableII": "COMPAS",
+    "TableIII": "Adult"
+  },
+  "legacy_warning": "Historical export not the same table; exact matches are anchors, not proof of raw provenance. FedWA alias AdaAggRL and FairGuard→FLTrust alias FLTrust+FairGuard are name mappings requiring source verification. Legacy third attack is FOE, current third attack is FedSA; third-slot equality does NOT establish attack equivalence or source provenance. Counts compare display positions only.",
+  "legacy_cell_comparison": {
+    "equal": 292,
+    "different": 158,
+    "unavailable": 30
+  },
+  "matching_numeric_anchors": [
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.18",
+      "numeric_value": 83.18,
+      "legacy_display": "83.18"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.89",
+      "numeric_value": 75.89,
+      "legacy_display": "75.89"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "79.59",
+      "numeric_value": 79.59,
+      "legacy_display": "79.59"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.83",
+      "numeric_value": 83.83,
+      "legacy_display": "83.83"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "76.52",
+      "numeric_value": 76.52,
+      "legacy_display": "76.52"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "80.10",
+      "numeric_value": 80.1,
+      "legacy_display": "80.10"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0615",
+      "numeric_value": 0.0615,
+      "legacy_display": "0.0615"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0206",
+      "numeric_value": 0.0206,
+      "legacy_display": "0.0206"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0763",
+      "numeric_value": 0.0763,
+      "legacy_display": "0.0763"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1098",
+      "numeric_value": 0.1098,
+      "legacy_display": "0.1098"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1223",
+      "numeric_value": 0.1223,
+      "legacy_display": "0.1223"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0717",
+      "numeric_value": 0.0717,
+      "legacy_display": "0.0717"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.26",
+      "numeric_value": 83.26,
+      "legacy_display": "83.26"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.95",
+      "numeric_value": 82.95,
+      "legacy_display": "82.95"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.91",
+      "numeric_value": 75.91,
+      "legacy_display": "75.91"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "79.19",
+      "numeric_value": 79.19,
+      "legacy_display": "79.19"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.80",
+      "numeric_value": 83.8,
+      "legacy_display": "83.80"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "75.99",
+      "numeric_value": 75.99,
+      "legacy_display": "75.99"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "79.19",
+      "numeric_value": 79.19,
+      "legacy_display": "79.19"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0570",
+      "numeric_value": 0.057,
+      "legacy_display": "0.0570"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0119",
+      "numeric_value": 0.0119,
+      "legacy_display": "0.0119"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1137",
+      "numeric_value": 0.1137,
+      "legacy_display": "0.1137"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1277",
+      "numeric_value": 0.1277,
+      "legacy_display": "0.1277"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.12",
+      "numeric_value": 82.12,
+      "legacy_display": "82.12"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.53",
+      "numeric_value": 75.53,
+      "legacy_display": "75.53"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "78.33",
+      "numeric_value": 78.33,
+      "legacy_display": "78.33"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "82.37",
+      "numeric_value": 82.37,
+      "legacy_display": "82.37"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "77.79",
+      "numeric_value": 77.79,
+      "legacy_display": "77.79"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "79.65",
+      "numeric_value": 79.65,
+      "legacy_display": "79.65"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0107",
+      "numeric_value": 0.0107,
+      "legacy_display": "0.0107"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0172",
+      "numeric_value": 0.0172,
+      "legacy_display": "0.0172"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0711",
+      "numeric_value": 0.0711,
+      "legacy_display": "0.0711"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0695",
+      "numeric_value": 0.0695,
+      "legacy_display": "0.0695"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.11",
+      "numeric_value": 83.11,
+      "legacy_display": "83.11"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.77",
+      "numeric_value": 82.77,
+      "legacy_display": "82.77"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.84",
+      "numeric_value": 82.84,
+      "legacy_display": "82.84"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.03",
+      "numeric_value": 83.03,
+      "legacy_display": "83.03"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.66",
+      "numeric_value": 83.66,
+      "legacy_display": "83.66"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.68",
+      "numeric_value": 83.68,
+      "legacy_display": "83.68"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.54",
+      "numeric_value": 83.54,
+      "legacy_display": "83.54"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.75",
+      "numeric_value": 83.75,
+      "legacy_display": "83.75"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0698",
+      "numeric_value": 0.0698,
+      "legacy_display": "0.0698"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0195",
+      "numeric_value": 0.0195,
+      "legacy_display": "0.0195"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0613",
+      "numeric_value": 0.0613,
+      "legacy_display": "0.0613"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0379",
+      "numeric_value": 0.0379,
+      "legacy_display": "0.0379"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0047",
+      "numeric_value": 0.0047,
+      "legacy_display": "0.0047"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0062",
+      "numeric_value": 0.0062,
+      "legacy_display": "0.0062"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0097",
+      "numeric_value": 0.0097,
+      "legacy_display": "0.0097"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0092",
+      "numeric_value": 0.0092,
+      "legacy_display": "0.0092"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1043",
+      "numeric_value": 0.1043,
+      "legacy_display": "0.1043"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1314",
+      "numeric_value": 0.1314,
+      "legacy_display": "0.1314"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1127",
+      "numeric_value": 0.1127,
+      "legacy_display": "0.1127"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1241",
+      "numeric_value": 0.1241,
+      "legacy_display": "0.1241"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1314",
+      "numeric_value": 0.1314,
+      "legacy_display": "0.1314"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1400",
+      "numeric_value": 0.14,
+      "legacy_display": "0.1400"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1227",
+      "numeric_value": 0.1227,
+      "legacy_display": "0.1227"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1393",
+      "numeric_value": 0.1393,
+      "legacy_display": "0.1393"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.77",
+      "numeric_value": 83.77,
+      "legacy_display": "83.77"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.65",
+      "numeric_value": 83.65,
+      "legacy_display": "83.65"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.94",
+      "numeric_value": 83.94,
+      "legacy_display": "83.94"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0695",
+      "numeric_value": 0.0695,
+      "legacy_display": "0.0695"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0571",
+      "numeric_value": 0.0571,
+      "legacy_display": "0.0571"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0416",
+      "numeric_value": 0.0416,
+      "legacy_display": "0.0416"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0186",
+      "numeric_value": 0.0186,
+      "legacy_display": "0.0186"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0228",
+      "numeric_value": 0.0228,
+      "legacy_display": "0.0228"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0024",
+      "numeric_value": 0.0024,
+      "legacy_display": "0.0024"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1089",
+      "numeric_value": 0.1089,
+      "legacy_display": "0.1089"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1158",
+      "numeric_value": 0.1158,
+      "legacy_display": "0.1158"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1181",
+      "numeric_value": 0.1181,
+      "legacy_display": "0.1181"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1237",
+      "numeric_value": 0.1237,
+      "legacy_display": "0.1237"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1156",
+      "numeric_value": 0.1156,
+      "legacy_display": "0.1156"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1259",
+      "numeric_value": 0.1259,
+      "legacy_display": "0.1259"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.59",
+      "numeric_value": 83.59,
+      "legacy_display": "83.59"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.49",
+      "numeric_value": 83.49,
+      "legacy_display": "83.49"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.44",
+      "numeric_value": 83.44,
+      "legacy_display": "83.44"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.33",
+      "numeric_value": 83.33,
+      "legacy_display": "83.33"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "84.00",
+      "numeric_value": 84.0,
+      "legacy_display": "84.00"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.93",
+      "numeric_value": 83.93,
+      "legacy_display": "83.93"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0660",
+      "numeric_value": 0.066,
+      "legacy_display": "0.0660"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0359",
+      "numeric_value": 0.0359,
+      "legacy_display": "0.0359"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0591",
+      "numeric_value": 0.0591,
+      "legacy_display": "0.0591"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0005",
+      "numeric_value": 0.0005,
+      "legacy_display": "0.0005"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0020",
+      "numeric_value": 0.002,
+      "legacy_display": "0.0020"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0032",
+      "numeric_value": 0.0032,
+      "legacy_display": "0.0032"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0878",
+      "numeric_value": 0.0878,
+      "legacy_display": "0.0878"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1021",
+      "numeric_value": 0.1021,
+      "legacy_display": "0.1021"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0948",
+      "numeric_value": 0.0948,
+      "legacy_display": "0.0948"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1052",
+      "numeric_value": 0.1052,
+      "legacy_display": "0.1052"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1200",
+      "numeric_value": 0.12,
+      "legacy_display": "0.1200"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1161",
+      "numeric_value": 0.1161,
+      "legacy_display": "0.1161"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.41",
+      "numeric_value": 83.41,
+      "legacy_display": "83.41"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.80",
+      "numeric_value": 83.8,
+      "legacy_display": "83.80"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.73",
+      "numeric_value": 83.73,
+      "legacy_display": "83.73"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "82.82",
+      "numeric_value": 82.82,
+      "legacy_display": "82.82"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "82.67",
+      "numeric_value": 82.67,
+      "legacy_display": "82.67"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.27",
+      "numeric_value": 83.27,
+      "legacy_display": "83.27"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0287",
+      "numeric_value": 0.0287,
+      "legacy_display": "0.0287"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0498",
+      "numeric_value": 0.0498,
+      "legacy_display": "0.0498"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0396",
+      "numeric_value": 0.0396,
+      "legacy_display": "0.0396"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0701",
+      "numeric_value": 0.0701,
+      "legacy_display": "0.0701"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0001",
+      "numeric_value": 0.0001,
+      "legacy_display": "0.0001"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0233",
+      "numeric_value": 0.0233,
+      "legacy_display": "0.0233"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1140",
+      "numeric_value": 0.114,
+      "legacy_display": "0.1140"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1063",
+      "numeric_value": 0.1063,
+      "legacy_display": "0.1063"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1210",
+      "numeric_value": 0.121,
+      "legacy_display": "0.1210"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0560",
+      "numeric_value": 0.056,
+      "legacy_display": "0.0560"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0725",
+      "numeric_value": 0.0725,
+      "legacy_display": "0.0725"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0836",
+      "numeric_value": 0.0836,
+      "legacy_display": "0.0836"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.13",
+      "numeric_value": 83.13,
+      "legacy_display": "83.13"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.48",
+      "numeric_value": 83.48,
+      "legacy_display": "83.48"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.22",
+      "numeric_value": 83.22,
+      "legacy_display": "83.22"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.82",
+      "numeric_value": 83.82,
+      "legacy_display": "83.82"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.76",
+      "numeric_value": 83.76,
+      "legacy_display": "83.76"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "84.01",
+      "numeric_value": 84.01,
+      "legacy_display": "84.01"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0820",
+      "numeric_value": 0.082,
+      "legacy_display": "0.0820"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0013",
+      "numeric_value": 0.0013,
+      "legacy_display": "0.0013"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1207",
+      "numeric_value": 0.1207,
+      "legacy_display": "0.1207"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0038",
+      "numeric_value": 0.0038,
+      "legacy_display": "0.0038"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0003",
+      "numeric_value": 0.0003,
+      "legacy_display": "0.0003"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0031",
+      "numeric_value": 0.0031,
+      "legacy_display": "0.0031"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0207",
+      "numeric_value": 0.0207,
+      "legacy_display": "0.0207"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0774",
+      "numeric_value": 0.0774,
+      "legacy_display": "0.0774"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0598",
+      "numeric_value": 0.0598,
+      "legacy_display": "0.0598"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0801",
+      "numeric_value": 0.0801,
+      "legacy_display": "0.0801"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0796",
+      "numeric_value": 0.0796,
+      "legacy_display": "0.0796"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1380",
+      "numeric_value": 0.138,
+      "legacy_display": "0.1380"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.17",
+      "numeric_value": 83.17,
+      "legacy_display": "83.17"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.95",
+      "numeric_value": 82.95,
+      "legacy_display": "82.95"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.68",
+      "numeric_value": 83.68,
+      "legacy_display": "83.68"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.19",
+      "numeric_value": 83.19,
+      "legacy_display": "83.19"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.70",
+      "numeric_value": 83.7,
+      "legacy_display": "83.70"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.98",
+      "numeric_value": 83.98,
+      "legacy_display": "83.98"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.98",
+      "numeric_value": 83.98,
+      "legacy_display": "83.98"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0627",
+      "numeric_value": 0.0627,
+      "legacy_display": "0.0627"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0290",
+      "numeric_value": 0.029,
+      "legacy_display": "0.0290"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0331",
+      "numeric_value": 0.0331,
+      "legacy_display": "0.0331"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0139",
+      "numeric_value": 0.0139,
+      "legacy_display": "0.0139"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0271",
+      "numeric_value": 0.0271,
+      "legacy_display": "0.0271"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0098",
+      "numeric_value": 0.0098,
+      "legacy_display": "0.0098"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1101",
+      "numeric_value": 0.1101,
+      "legacy_display": "0.1101"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1098",
+      "numeric_value": 0.1098,
+      "legacy_display": "0.1098"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1313",
+      "numeric_value": 0.1313,
+      "legacy_display": "0.1313"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1278",
+      "numeric_value": 0.1278,
+      "legacy_display": "0.1278"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1181",
+      "numeric_value": 0.1181,
+      "legacy_display": "0.1181"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1370",
+      "numeric_value": 0.137,
+      "legacy_display": "0.1370"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.19",
+      "numeric_value": 83.19,
+      "legacy_display": "83.19"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.69",
+      "numeric_value": 82.69,
+      "legacy_display": "82.69"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "81.82",
+      "numeric_value": 81.82,
+      "legacy_display": "81.82"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "81.45",
+      "numeric_value": 81.45,
+      "legacy_display": "81.45"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "81.78",
+      "numeric_value": 81.78,
+      "legacy_display": "81.78"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "81.75",
+      "numeric_value": 81.75,
+      "legacy_display": "81.75"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0561",
+      "numeric_value": 0.0561,
+      "legacy_display": "0.0561"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0607",
+      "numeric_value": 0.0607,
+      "legacy_display": "0.0607"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1117",
+      "numeric_value": 0.1117,
+      "legacy_display": "0.1117"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0786",
+      "numeric_value": 0.0786,
+      "legacy_display": "0.0786"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0291",
+      "numeric_value": 0.0291,
+      "legacy_display": "0.0291"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0510",
+      "numeric_value": 0.051,
+      "legacy_display": "0.0510"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1022",
+      "numeric_value": 0.1022,
+      "legacy_display": "0.1022"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0892",
+      "numeric_value": 0.0892,
+      "legacy_display": "0.0892"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0492",
+      "numeric_value": 0.0492,
+      "legacy_display": "0.0492"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0473",
+      "numeric_value": 0.0473,
+      "legacy_display": "0.0473"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0485",
+      "numeric_value": 0.0485,
+      "legacy_display": "0.0485"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0469",
+      "numeric_value": 0.0469,
+      "legacy_display": "0.0469"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.23",
+      "numeric_value": 83.23,
+      "legacy_display": "83.23"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "80.61",
+      "numeric_value": 80.61,
+      "legacy_display": "80.61"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.02",
+      "numeric_value": 83.02,
+      "legacy_display": "83.02"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.74",
+      "numeric_value": 83.74,
+      "legacy_display": "83.74"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "81.44",
+      "numeric_value": 81.44,
+      "legacy_display": "81.44"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.79",
+      "numeric_value": 83.79,
+      "legacy_display": "83.79"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0556",
+      "numeric_value": 0.0556,
+      "legacy_display": "0.0556"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0041",
+      "numeric_value": 0.0041,
+      "legacy_display": "0.0041"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0081",
+      "numeric_value": 0.0081,
+      "legacy_display": "0.0081"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0162",
+      "numeric_value": 0.0162,
+      "legacy_display": "0.0162"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0418",
+      "numeric_value": 0.0418,
+      "legacy_display": "0.0418"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0033",
+      "numeric_value": 0.0033,
+      "legacy_display": "0.0033"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1144",
+      "numeric_value": 0.1144,
+      "legacy_display": "0.1144"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0564",
+      "numeric_value": 0.0564,
+      "legacy_display": "0.0564"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1040",
+      "numeric_value": 0.104,
+      "legacy_display": "0.1040"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1195",
+      "numeric_value": 0.1195,
+      "legacy_display": "0.1195"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0713",
+      "numeric_value": 0.0713,
+      "legacy_display": "0.0713"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1326",
+      "numeric_value": 0.1326,
+      "legacy_display": "0.1326"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.60",
+      "numeric_value": 82.6,
+      "legacy_display": "82.60"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.25",
+      "numeric_value": 83.25,
+      "legacy_display": "83.25"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.75",
+      "numeric_value": 82.75,
+      "legacy_display": "82.75"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.09",
+      "numeric_value": 83.09,
+      "legacy_display": "83.09"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "82.81",
+      "numeric_value": 82.81,
+      "legacy_display": "82.81"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "82.40",
+      "numeric_value": 82.4,
+      "legacy_display": "82.40"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1042",
+      "numeric_value": 0.1042,
+      "legacy_display": "0.1042"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0764",
+      "numeric_value": 0.0764,
+      "legacy_display": "0.0764"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0356",
+      "numeric_value": 0.0356,
+      "legacy_display": "0.0356"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0525",
+      "numeric_value": 0.0525,
+      "legacy_display": "0.0525"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0275",
+      "numeric_value": 0.0275,
+      "legacy_display": "0.0275"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0551",
+      "numeric_value": 0.0551,
+      "legacy_display": "0.0551"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0531",
+      "numeric_value": 0.0531,
+      "legacy_display": "0.0531"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0098",
+      "numeric_value": 0.0098,
+      "legacy_display": "0.0098"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0664",
+      "numeric_value": 0.0664,
+      "legacy_display": "0.0664"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0654",
+      "numeric_value": 0.0654,
+      "legacy_display": "0.0654"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0488",
+      "numeric_value": 0.0488,
+      "legacy_display": "0.0488"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0666",
+      "numeric_value": 0.0666,
+      "legacy_display": "0.0666"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.99",
+      "numeric_value": 82.99,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.15",
+      "numeric_value": 83.15,
+      "legacy_display": "83.15"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.08",
+      "numeric_value": 83.08,
+      "legacy_display": "83.08"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.50",
+      "numeric_value": 83.5,
+      "legacy_display": "83.50"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.76",
+      "numeric_value": 83.76,
+      "legacy_display": "83.76"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.72",
+      "numeric_value": 83.72,
+      "legacy_display": "83.72"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0320",
+      "numeric_value": 0.032,
+      "legacy_display": "0.0320"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0565",
+      "numeric_value": 0.0565,
+      "legacy_display": "0.0565"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0441",
+      "numeric_value": 0.0441,
+      "legacy_display": "0.0441"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0006",
+      "numeric_value": 0.0006,
+      "legacy_display": "0.0006"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0167",
+      "numeric_value": 0.0167,
+      "legacy_display": "0.0167"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0025",
+      "numeric_value": 0.0025,
+      "legacy_display": "0.0025"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1180",
+      "numeric_value": 0.118,
+      "legacy_display": "0.1180"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1154",
+      "numeric_value": 0.1154,
+      "legacy_display": "0.1154"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1155",
+      "numeric_value": 0.1155,
+      "legacy_display": "0.1155"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1242",
+      "numeric_value": 0.1242,
+      "legacy_display": "0.1242"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1220",
+      "numeric_value": 0.122,
+      "legacy_display": "0.1220"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1322",
+      "numeric_value": 0.1322,
+      "legacy_display": "0.1322"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.30",
+      "numeric_value": 83.3,
+      "legacy_display": "83.30"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.43",
+      "numeric_value": 75.43,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "78.70",
+      "numeric_value": 78.7,
+      "legacy_display": "78.70"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.94",
+      "numeric_value": 83.94,
+      "legacy_display": "83.94"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "75.43",
+      "numeric_value": 75.43,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.47",
+      "numeric_value": 83.47,
+      "legacy_display": "83.47"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0232",
+      "numeric_value": 0.0232,
+      "legacy_display": "0.0232"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0006",
+      "numeric_value": 0.0006,
+      "legacy_display": "0.0006"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0014",
+      "numeric_value": 0.0014,
+      "legacy_display": "0.0014"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1154",
+      "numeric_value": 0.1154,
+      "legacy_display": "0.1154"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1220",
+      "numeric_value": 0.122,
+      "legacy_display": "0.1220"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0693",
+      "numeric_value": 0.0693,
+      "legacy_display": "0.0693"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.99",
+      "numeric_value": 82.99,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "84.14",
+      "numeric_value": 84.14,
+      "legacy_display": "84.14"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.86",
+      "numeric_value": 82.86,
+      "legacy_display": "82.86"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.88",
+      "numeric_value": 83.88,
+      "legacy_display": "83.88"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.75",
+      "numeric_value": 83.75,
+      "legacy_display": "83.75"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "84.08",
+      "numeric_value": 84.08,
+      "legacy_display": "84.08"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0011",
+      "numeric_value": 0.0011,
+      "legacy_display": "0.0011"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0035",
+      "numeric_value": 0.0035,
+      "legacy_display": "0.0035"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0060",
+      "numeric_value": 0.006,
+      "legacy_display": "0.0060"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0036",
+      "numeric_value": 0.0036,
+      "legacy_display": "0.0036"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0037",
+      "numeric_value": 0.0037,
+      "legacy_display": "0.0037"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0025",
+      "numeric_value": 0.0025,
+      "legacy_display": "0.0025"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0584",
+      "numeric_value": 0.0584,
+      "legacy_display": "0.0584"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1084",
+      "numeric_value": 0.1084,
+      "legacy_display": "0.1084"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0788",
+      "numeric_value": 0.0788,
+      "legacy_display": "0.0788"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0831",
+      "numeric_value": 0.0831,
+      "legacy_display": "0.0831"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0901",
+      "numeric_value": 0.0901,
+      "legacy_display": "0.0901"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0998",
+      "numeric_value": 0.0998,
+      "legacy_display": "0.0998"
+    }
+  ],
+  "different_cells": [
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "83.00",
+      "numeric_value": 83.0,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "76.07",
+      "numeric_value": 76.07,
+      "legacy_display": "76.02"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.12",
+      "numeric_value": 83.12,
+      "legacy_display": "83.86"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "70.17",
+      "numeric_value": 70.17,
+      "legacy_display": "76.78"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0559",
+      "numeric_value": 0.0559,
+      "legacy_display": "0.0022"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0715",
+      "numeric_value": 0.0715,
+      "legacy_display": "0.0001"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1367",
+      "numeric_value": 0.1367,
+      "legacy_display": "0.1531"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1547",
+      "numeric_value": 0.1547,
+      "legacy_display": "0.1384"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "73.55",
+      "numeric_value": 73.55,
+      "legacy_display": "75.93"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.10",
+      "numeric_value": 83.1,
+      "legacy_display": "83.79"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "71.90",
+      "numeric_value": 71.9,
+      "legacy_display": "75.97"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0343",
+      "numeric_value": 0.0343,
+      "legacy_display": "0.0009"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0466",
+      "numeric_value": 0.0466,
+      "legacy_display": "0.0096"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.3087",
+      "numeric_value": 0.3087,
+      "legacy_display": "N/E"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1296",
+      "numeric_value": 0.1296,
+      "legacy_display": "0.1482"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1417",
+      "numeric_value": 0.1417,
+      "legacy_display": "0.1454"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1106",
+      "numeric_value": 0.1106,
+      "legacy_display": "N/E"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "81.59",
+      "numeric_value": 81.59,
+      "legacy_display": "83.68"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "75.53",
+      "numeric_value": 75.53,
+      "legacy_display": "75.57"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "81.75",
+      "numeric_value": 81.75,
+      "legacy_display": "83.72"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "77.38",
+      "numeric_value": 77.38,
+      "legacy_display": "77.84"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0457",
+      "numeric_value": 0.0457,
+      "legacy_display": "0.0014"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0706",
+      "numeric_value": 0.0706,
+      "legacy_display": "0.0004"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0656",
+      "numeric_value": 0.0656,
+      "legacy_display": "0.0704"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0618",
+      "numeric_value": 0.0618,
+      "legacy_display": "0.0700"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "83.43",
+      "numeric_value": 83.43,
+      "legacy_display": "82.82"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "83.39",
+      "numeric_value": 83.39,
+      "legacy_display": "83.62"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0635",
+      "numeric_value": 0.0635,
+      "legacy_display": "0.0640"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0368",
+      "numeric_value": 0.0368,
+      "legacy_display": "0.0131"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1174",
+      "numeric_value": 0.1174,
+      "legacy_display": "0.1147"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1087",
+      "numeric_value": 0.1087,
+      "legacy_display": "0.1234"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "83.06",
+      "numeric_value": 83.06,
+      "legacy_display": "83.11"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "82.69",
+      "numeric_value": 82.69,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.09",
+      "numeric_value": 83.09,
+      "legacy_display": "83.84"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "82.63",
+      "numeric_value": 82.63,
+      "legacy_display": "83.65"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0638",
+      "numeric_value": 0.0638,
+      "legacy_display": "0.0276"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0617",
+      "numeric_value": 0.0617,
+      "legacy_display": "0.0571"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0627",
+      "numeric_value": 0.0627,
+      "legacy_display": "0.0003"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0620",
+      "numeric_value": 0.062,
+      "legacy_display": "0.0228"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1360",
+      "numeric_value": 0.136,
+      "legacy_display": "0.1375"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0867",
+      "numeric_value": 0.0867,
+      "legacy_display": "0.1158"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1427",
+      "numeric_value": 0.1427,
+      "legacy_display": "0.1420"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0899",
+      "numeric_value": 0.0899,
+      "legacy_display": "0.1156"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "83.38",
+      "numeric_value": 83.38,
+      "legacy_display": "83.49"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "83.35",
+      "numeric_value": 83.35,
+      "legacy_display": "83.60"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.88",
+      "numeric_value": 82.88,
+      "legacy_display": "83.46"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "83.18",
+      "numeric_value": 83.18,
+      "legacy_display": "84.15"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0886",
+      "numeric_value": 0.0886,
+      "legacy_display": "0.0106"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0499",
+      "numeric_value": 0.0499,
+      "legacy_display": "0.0485"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0612",
+      "numeric_value": 0.0612,
+      "legacy_display": "0.0042"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0382",
+      "numeric_value": 0.0382,
+      "legacy_display": "0.0135"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1245",
+      "numeric_value": 0.1245,
+      "legacy_display": "0.0986"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1152",
+      "numeric_value": 0.1152,
+      "legacy_display": "0.0968"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1135",
+      "numeric_value": 0.1135,
+      "legacy_display": "0.1001"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1161",
+      "numeric_value": 0.1161,
+      "legacy_display": "0.1260"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.97",
+      "numeric_value": 82.97,
+      "legacy_display": "83.29"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "81.85",
+      "numeric_value": 81.85,
+      "legacy_display": "83.73"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.95",
+      "numeric_value": 82.95,
+      "legacy_display": "83.43"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "82.24",
+      "numeric_value": 82.24,
+      "legacy_display": "82.87"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0660",
+      "numeric_value": 0.066,
+      "legacy_display": "0.0372"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0430",
+      "numeric_value": 0.043,
+      "legacy_display": "0.0645"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0561",
+      "numeric_value": 0.0561,
+      "legacy_display": "0.0024"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0402",
+      "numeric_value": 0.0402,
+      "legacy_display": "0.0018"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1263",
+      "numeric_value": 0.1263,
+      "legacy_display": "0.1228"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0777",
+      "numeric_value": 0.0777,
+      "legacy_display": "0.1038"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1326",
+      "numeric_value": 0.1326,
+      "legacy_display": "0.1078"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0904",
+      "numeric_value": 0.0904,
+      "legacy_display": "0.0783"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.44",
+      "numeric_value": 82.44,
+      "legacy_display": "83.31"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "83.13",
+      "numeric_value": 83.13,
+      "legacy_display": "83.48"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "81.36",
+      "numeric_value": 81.36,
+      "legacy_display": "83.86"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "83.11",
+      "numeric_value": 83.11,
+      "legacy_display": "83.76"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1365",
+      "numeric_value": 0.1365,
+      "legacy_display": "0.0199"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0436",
+      "numeric_value": 0.0436,
+      "legacy_display": "0.0013"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1463",
+      "numeric_value": 0.1463,
+      "legacy_display": "0.0004"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0617",
+      "numeric_value": 0.0617,
+      "legacy_display": "0.0003"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.2157",
+      "numeric_value": 0.2157,
+      "legacy_display": "0.1222"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1126",
+      "numeric_value": 0.1126,
+      "legacy_display": "0.0774"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.2402",
+      "numeric_value": 0.2402,
+      "legacy_display": "0.1444"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1224",
+      "numeric_value": 0.1224,
+      "legacy_display": "0.0796"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "81.55",
+      "numeric_value": 81.55,
+      "legacy_display": "83.66"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.05",
+      "numeric_value": 83.05,
+      "legacy_display": "83.70"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "81.19",
+      "numeric_value": 81.19,
+      "legacy_display": "83.95"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0543",
+      "numeric_value": 0.0543,
+      "legacy_display": "0.0065"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0886",
+      "numeric_value": 0.0886,
+      "legacy_display": "0.0244"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0619",
+      "numeric_value": 0.0619,
+      "legacy_display": "0.0136"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0886",
+      "numeric_value": 0.0886,
+      "legacy_display": "0.0001"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1362",
+      "numeric_value": 0.1362,
+      "legacy_display": "0.1425"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0569",
+      "numeric_value": 0.0569,
+      "legacy_display": "0.1120"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1458",
+      "numeric_value": 0.1458,
+      "legacy_display": "0.1459"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0567",
+      "numeric_value": 0.0567,
+      "legacy_display": "0.1118"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.40",
+      "numeric_value": 82.4,
+      "legacy_display": "82.56"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "82.54",
+      "numeric_value": 82.54,
+      "legacy_display": "82.88"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "81.62",
+      "numeric_value": 81.62,
+      "legacy_display": "82.79"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "81.83",
+      "numeric_value": 81.83,
+      "legacy_display": "81.33"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0627",
+      "numeric_value": 0.0627,
+      "legacy_display": "0.0622"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0419",
+      "numeric_value": 0.0419,
+      "legacy_display": "0.0286"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0674",
+      "numeric_value": 0.0674,
+      "legacy_display": "0.0149"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0519",
+      "numeric_value": 0.0519,
+      "legacy_display": "0.0590"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1288",
+      "numeric_value": 0.1288,
+      "legacy_display": "0.0788"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1079",
+      "numeric_value": 0.1079,
+      "legacy_display": "0.0880"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1124",
+      "numeric_value": 0.1124,
+      "legacy_display": "0.0547"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0857",
+      "numeric_value": 0.0857,
+      "legacy_display": "0.0336"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.94",
+      "numeric_value": 82.94,
+      "legacy_display": "82.97"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "82.04",
+      "numeric_value": 82.04,
+      "legacy_display": "81.63"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.97",
+      "numeric_value": 82.97,
+      "legacy_display": "83.83"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "82.23",
+      "numeric_value": 82.23,
+      "legacy_display": "81.17"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0685",
+      "numeric_value": 0.0685,
+      "legacy_display": "0.0015"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0640",
+      "numeric_value": 0.064,
+      "legacy_display": "0.0102"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0682",
+      "numeric_value": 0.0682,
+      "legacy_display": "0.0016"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0621",
+      "numeric_value": 0.0621,
+      "legacy_display": "0.0335"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1462",
+      "numeric_value": 0.1462,
+      "legacy_display": "0.1279"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0790",
+      "numeric_value": 0.079,
+      "legacy_display": "0.0659"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1545",
+      "numeric_value": 0.1545,
+      "legacy_display": "0.1380"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0842",
+      "numeric_value": 0.0842,
+      "legacy_display": "0.0463"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "81.81",
+      "numeric_value": 81.81,
+      "legacy_display": "82.89"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "81.07",
+      "numeric_value": 81.07,
+      "legacy_display": "82.62"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.44",
+      "numeric_value": 82.44,
+      "legacy_display": "82.60"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "81.51",
+      "numeric_value": 81.51,
+      "legacy_display": "82.38"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0915",
+      "numeric_value": 0.0915,
+      "legacy_display": "0.0254"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0858",
+      "numeric_value": 0.0858,
+      "legacy_display": "0.0089"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0829",
+      "numeric_value": 0.0829,
+      "legacy_display": "0.0023"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0829",
+      "numeric_value": 0.0829,
+      "legacy_display": "0.0275"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1452",
+      "numeric_value": 0.1452,
+      "legacy_display": "0.0801"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0650",
+      "numeric_value": 0.065,
+      "legacy_display": "0.0190"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1356",
+      "numeric_value": 0.1356,
+      "legacy_display": "0.0813"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0667",
+      "numeric_value": 0.0667,
+      "legacy_display": "0.0329"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.89",
+      "numeric_value": 82.89,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "83.03",
+      "numeric_value": 83.03,
+      "legacy_display": "83.07"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.82",
+      "numeric_value": 82.82,
+      "legacy_display": "83.46"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "83.09",
+      "numeric_value": 83.09,
+      "legacy_display": "83.58"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0721",
+      "numeric_value": 0.0721,
+      "legacy_display": "0.0743"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0617",
+      "numeric_value": 0.0617,
+      "legacy_display": "0.0593"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0882",
+      "numeric_value": 0.0882,
+      "legacy_display": "0.0368"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0435",
+      "numeric_value": 0.0435,
+      "legacy_display": "0.0323"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1482",
+      "numeric_value": 0.1482,
+      "legacy_display": "0.1046"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1101",
+      "numeric_value": 0.1101,
+      "legacy_display": "0.1124"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1494",
+      "numeric_value": 0.1494,
+      "legacy_display": "0.1608"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1178",
+      "numeric_value": 0.1178,
+      "legacy_display": "0.1134"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.85",
+      "numeric_value": 82.85,
+      "legacy_display": "83.24"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "59.13",
+      "numeric_value": 59.13,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.80",
+      "numeric_value": 82.8,
+      "legacy_display": "83.88"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "62.20",
+      "numeric_value": 62.2,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0219",
+      "numeric_value": 0.0219,
+      "legacy_display": "0.0024"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0221",
+      "numeric_value": 0.0221,
+      "legacy_display": "0.0002"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1125",
+      "numeric_value": 0.1125,
+      "legacy_display": "0.1260"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1089",
+      "numeric_value": 0.1089,
+      "legacy_display": "0.1280"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.37",
+      "numeric_value": 82.37,
+      "legacy_display": "83.13"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "75.85",
+      "numeric_value": 75.85,
+      "legacy_display": "84.07"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "82.22",
+      "numeric_value": 82.22,
+      "legacy_display": "84.02"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "82.67",
+      "numeric_value": 82.67,
+      "legacy_display": "83.70"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0115",
+      "numeric_value": 0.0115,
+      "legacy_display": "0.0218"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "N/E",
+      "numeric_value": null,
+      "legacy_display": "0.0004"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0141",
+      "numeric_value": 0.0141,
+      "legacy_display": "0.0009"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0397",
+      "numeric_value": 0.0397,
+      "legacy_display": "0.0019"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0959",
+      "numeric_value": 0.0959,
+      "legacy_display": "0.0447"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "N/E",
+      "numeric_value": null,
+      "legacy_display": "0.1115"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0961",
+      "numeric_value": 0.0961,
+      "legacy_display": "0.1238"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1102",
+      "numeric_value": 0.1102,
+      "legacy_display": "0.0917"
+    }
+  ],
+  "missing_legacy_cells": [
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.11",
+      "numeric_value": 83.11,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "81.90",
+      "numeric_value": 81.9,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "83.10",
+      "numeric_value": 83.1,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.21",
+      "numeric_value": 82.21,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.22",
+      "numeric_value": 82.22,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "82.56",
+      "numeric_value": 82.56,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "81.76",
+      "numeric_value": 81.76,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "82.85",
+      "numeric_value": 82.85,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "82.71",
+      "numeric_value": 82.71,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "82.56",
+      "numeric_value": 82.56,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0003",
+      "numeric_value": 0.0003,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0264",
+      "numeric_value": 0.0264,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.0475",
+      "numeric_value": 0.0475,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0038",
+      "numeric_value": 0.0038,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0094",
+      "numeric_value": 0.0094,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0002",
+      "numeric_value": 0.0002,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0226",
+      "numeric_value": 0.0226,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.0409",
+      "numeric_value": 0.0409,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0107",
+      "numeric_value": 0.0107,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0082",
+      "numeric_value": 0.0082,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0639",
+      "numeric_value": 0.0639,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0850",
+      "numeric_value": 0.085,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "FedSA",
+      "display": "0.1190",
+      "numeric_value": 0.119,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0629",
+      "numeric_value": 0.0629,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0592",
+      "numeric_value": 0.0592,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0416",
+      "numeric_value": 0.0416,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0774",
+      "numeric_value": 0.0774,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1110",
+      "numeric_value": 0.111,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0469",
+      "numeric_value": 0.0469,
+      "legacy_display": null
+    },
+    {
+      "method": "Cosine Similarity + Fairness Deviation",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0425",
+      "numeric_value": 0.0425,
+      "legacy_display": null
+    }
+  ],
+  "fairness_numeric_despite_ACC_below80": [
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.3087",
+      "numeric_value": 0.3087
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "FedSA",
+      "display": "0.1106",
+      "numeric_value": 0.1106
+    }
+  ],
+  "numeric_anchors_excluding_FedSA_slot": [
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.18",
+      "numeric_value": 83.18,
+      "legacy_display": "83.18"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.89",
+      "numeric_value": 75.89,
+      "legacy_display": "75.89"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "79.59",
+      "numeric_value": 79.59,
+      "legacy_display": "79.59"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.83",
+      "numeric_value": 83.83,
+      "legacy_display": "83.83"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "76.52",
+      "numeric_value": 76.52,
+      "legacy_display": "76.52"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "80.10",
+      "numeric_value": 80.1,
+      "legacy_display": "80.10"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0615",
+      "numeric_value": 0.0615,
+      "legacy_display": "0.0615"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0206",
+      "numeric_value": 0.0206,
+      "legacy_display": "0.0206"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0763",
+      "numeric_value": 0.0763,
+      "legacy_display": "0.0763"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1098",
+      "numeric_value": 0.1098,
+      "legacy_display": "0.1098"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1223",
+      "numeric_value": 0.1223,
+      "legacy_display": "0.1223"
+    },
+    {
+      "method": "FedAvg",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0717",
+      "numeric_value": 0.0717,
+      "legacy_display": "0.0717"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.26",
+      "numeric_value": 83.26,
+      "legacy_display": "83.26"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.95",
+      "numeric_value": 82.95,
+      "legacy_display": "82.95"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.91",
+      "numeric_value": 75.91,
+      "legacy_display": "75.91"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "79.19",
+      "numeric_value": 79.19,
+      "legacy_display": "79.19"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.80",
+      "numeric_value": 83.8,
+      "legacy_display": "83.80"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "75.99",
+      "numeric_value": 75.99,
+      "legacy_display": "75.99"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "79.19",
+      "numeric_value": 79.19,
+      "legacy_display": "79.19"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0570",
+      "numeric_value": 0.057,
+      "legacy_display": "0.0570"
+    },
+    {
+      "method": "FairFed",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0119",
+      "numeric_value": 0.0119,
+      "legacy_display": "0.0119"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1137",
+      "numeric_value": 0.1137,
+      "legacy_display": "0.1137"
+    },
+    {
+      "method": "FairFed",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1277",
+      "numeric_value": 0.1277,
+      "legacy_display": "0.1277"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.12",
+      "numeric_value": 82.12,
+      "legacy_display": "82.12"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.53",
+      "numeric_value": 75.53,
+      "legacy_display": "75.53"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "78.33",
+      "numeric_value": 78.33,
+      "legacy_display": "78.33"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "82.37",
+      "numeric_value": 82.37,
+      "legacy_display": "82.37"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "77.79",
+      "numeric_value": 77.79,
+      "legacy_display": "77.79"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "79.65",
+      "numeric_value": 79.65,
+      "legacy_display": "79.65"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0107",
+      "numeric_value": 0.0107,
+      "legacy_display": "0.0107"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0172",
+      "numeric_value": 0.0172,
+      "legacy_display": "0.0172"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0711",
+      "numeric_value": 0.0711,
+      "legacy_display": "0.0711"
+    },
+    {
+      "method": "LoGoFair",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0695",
+      "numeric_value": 0.0695,
+      "legacy_display": "0.0695"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.11",
+      "numeric_value": 83.11,
+      "legacy_display": "83.11"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.77",
+      "numeric_value": 82.77,
+      "legacy_display": "82.77"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.84",
+      "numeric_value": 82.84,
+      "legacy_display": "82.84"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.03",
+      "numeric_value": 83.03,
+      "legacy_display": "83.03"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.66",
+      "numeric_value": 83.66,
+      "legacy_display": "83.66"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "83.68",
+      "numeric_value": 83.68,
+      "legacy_display": "83.68"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.54",
+      "numeric_value": 83.54,
+      "legacy_display": "83.54"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.75",
+      "numeric_value": 83.75,
+      "legacy_display": "83.75"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0698",
+      "numeric_value": 0.0698,
+      "legacy_display": "0.0698"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.0195",
+      "numeric_value": 0.0195,
+      "legacy_display": "0.0195"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0613",
+      "numeric_value": 0.0613,
+      "legacy_display": "0.0613"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0379",
+      "numeric_value": 0.0379,
+      "legacy_display": "0.0379"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0047",
+      "numeric_value": 0.0047,
+      "legacy_display": "0.0047"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.0062",
+      "numeric_value": 0.0062,
+      "legacy_display": "0.0062"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0097",
+      "numeric_value": 0.0097,
+      "legacy_display": "0.0097"
+    },
+    {
+      "method": "FedWA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0092",
+      "numeric_value": 0.0092,
+      "legacy_display": "0.0092"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1043",
+      "numeric_value": 0.1043,
+      "legacy_display": "0.1043"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "0.1314",
+      "numeric_value": 0.1314,
+      "legacy_display": "0.1314"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1127",
+      "numeric_value": 0.1127,
+      "legacy_display": "0.1127"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1241",
+      "numeric_value": 0.1241,
+      "legacy_display": "0.1241"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1314",
+      "numeric_value": 0.1314,
+      "legacy_display": "0.1314"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "F-Flip",
+      "display": "0.1400",
+      "numeric_value": 0.14,
+      "legacy_display": "0.1400"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1227",
+      "numeric_value": 0.1227,
+      "legacy_display": "0.1227"
+    },
+    {
+      "method": "FedWA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1393",
+      "numeric_value": 0.1393,
+      "legacy_display": "0.1393"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.93",
+      "numeric_value": 82.93,
+      "legacy_display": "82.93"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.77",
+      "numeric_value": 83.77,
+      "legacy_display": "83.77"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.65",
+      "numeric_value": 83.65,
+      "legacy_display": "83.65"
+    },
+    {
+      "method": "LASA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.94",
+      "numeric_value": 83.94,
+      "legacy_display": "83.94"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0695",
+      "numeric_value": 0.0695,
+      "legacy_display": "0.0695"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0571",
+      "numeric_value": 0.0571,
+      "legacy_display": "0.0571"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0416",
+      "numeric_value": 0.0416,
+      "legacy_display": "0.0416"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0186",
+      "numeric_value": 0.0186,
+      "legacy_display": "0.0186"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0228",
+      "numeric_value": 0.0228,
+      "legacy_display": "0.0228"
+    },
+    {
+      "method": "LASA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0024",
+      "numeric_value": 0.0024,
+      "legacy_display": "0.0024"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1089",
+      "numeric_value": 0.1089,
+      "legacy_display": "0.1089"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1158",
+      "numeric_value": 0.1158,
+      "legacy_display": "0.1158"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1181",
+      "numeric_value": 0.1181,
+      "legacy_display": "0.1181"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1237",
+      "numeric_value": 0.1237,
+      "legacy_display": "0.1237"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1156",
+      "numeric_value": 0.1156,
+      "legacy_display": "0.1156"
+    },
+    {
+      "method": "LASA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1259",
+      "numeric_value": 0.1259,
+      "legacy_display": "0.1259"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.59",
+      "numeric_value": 83.59,
+      "legacy_display": "83.59"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.49",
+      "numeric_value": 83.49,
+      "legacy_display": "83.49"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.44",
+      "numeric_value": 83.44,
+      "legacy_display": "83.44"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.33",
+      "numeric_value": 83.33,
+      "legacy_display": "83.33"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "84.00",
+      "numeric_value": 84.0,
+      "legacy_display": "84.00"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.93",
+      "numeric_value": 83.93,
+      "legacy_display": "83.93"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0660",
+      "numeric_value": 0.066,
+      "legacy_display": "0.0660"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0359",
+      "numeric_value": 0.0359,
+      "legacy_display": "0.0359"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0591",
+      "numeric_value": 0.0591,
+      "legacy_display": "0.0591"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0005",
+      "numeric_value": 0.0005,
+      "legacy_display": "0.0005"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0020",
+      "numeric_value": 0.002,
+      "legacy_display": "0.0020"
+    },
+    {
+      "method": "FedAA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0032",
+      "numeric_value": 0.0032,
+      "legacy_display": "0.0032"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0878",
+      "numeric_value": 0.0878,
+      "legacy_display": "0.0878"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1021",
+      "numeric_value": 0.1021,
+      "legacy_display": "0.1021"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0948",
+      "numeric_value": 0.0948,
+      "legacy_display": "0.0948"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1052",
+      "numeric_value": 0.1052,
+      "legacy_display": "0.1052"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1200",
+      "numeric_value": 0.12,
+      "legacy_display": "0.1200"
+    },
+    {
+      "method": "FedAA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1161",
+      "numeric_value": 0.1161,
+      "legacy_display": "0.1161"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.41",
+      "numeric_value": 83.41,
+      "legacy_display": "83.41"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.80",
+      "numeric_value": 83.8,
+      "legacy_display": "83.80"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.73",
+      "numeric_value": 83.73,
+      "legacy_display": "83.73"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "82.82",
+      "numeric_value": 82.82,
+      "legacy_display": "82.82"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "82.67",
+      "numeric_value": 82.67,
+      "legacy_display": "82.67"
+    },
+    {
+      "method": "Median",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.27",
+      "numeric_value": 83.27,
+      "legacy_display": "83.27"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0287",
+      "numeric_value": 0.0287,
+      "legacy_display": "0.0287"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0498",
+      "numeric_value": 0.0498,
+      "legacy_display": "0.0498"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0396",
+      "numeric_value": 0.0396,
+      "legacy_display": "0.0396"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0701",
+      "numeric_value": 0.0701,
+      "legacy_display": "0.0701"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0001",
+      "numeric_value": 0.0001,
+      "legacy_display": "0.0001"
+    },
+    {
+      "method": "Median",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0233",
+      "numeric_value": 0.0233,
+      "legacy_display": "0.0233"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1140",
+      "numeric_value": 0.114,
+      "legacy_display": "0.1140"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1063",
+      "numeric_value": 0.1063,
+      "legacy_display": "0.1063"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1210",
+      "numeric_value": 0.121,
+      "legacy_display": "0.1210"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0560",
+      "numeric_value": 0.056,
+      "legacy_display": "0.0560"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0725",
+      "numeric_value": 0.0725,
+      "legacy_display": "0.0725"
+    },
+    {
+      "method": "Median",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0836",
+      "numeric_value": 0.0836,
+      "legacy_display": "0.0836"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.13",
+      "numeric_value": 83.13,
+      "legacy_display": "83.13"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.48",
+      "numeric_value": 83.48,
+      "legacy_display": "83.48"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.22",
+      "numeric_value": 83.22,
+      "legacy_display": "83.22"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.82",
+      "numeric_value": 83.82,
+      "legacy_display": "83.82"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.76",
+      "numeric_value": 83.76,
+      "legacy_display": "83.76"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "84.01",
+      "numeric_value": 84.01,
+      "legacy_display": "84.01"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0820",
+      "numeric_value": 0.082,
+      "legacy_display": "0.0820"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0013",
+      "numeric_value": 0.0013,
+      "legacy_display": "0.0013"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1207",
+      "numeric_value": 0.1207,
+      "legacy_display": "0.1207"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0038",
+      "numeric_value": 0.0038,
+      "legacy_display": "0.0038"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0003",
+      "numeric_value": 0.0003,
+      "legacy_display": "0.0003"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0031",
+      "numeric_value": 0.0031,
+      "legacy_display": "0.0031"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0207",
+      "numeric_value": 0.0207,
+      "legacy_display": "0.0207"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0774",
+      "numeric_value": 0.0774,
+      "legacy_display": "0.0774"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0598",
+      "numeric_value": 0.0598,
+      "legacy_display": "0.0598"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0801",
+      "numeric_value": 0.0801,
+      "legacy_display": "0.0801"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0796",
+      "numeric_value": 0.0796,
+      "legacy_display": "0.0796"
+    },
+    {
+      "method": "FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1380",
+      "numeric_value": 0.138,
+      "legacy_display": "0.1380"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.17",
+      "numeric_value": 83.17,
+      "legacy_display": "83.17"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "F-Flip",
+      "display": "82.95",
+      "numeric_value": 82.95,
+      "legacy_display": "82.95"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.68",
+      "numeric_value": 83.68,
+      "legacy_display": "83.68"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.19",
+      "numeric_value": 83.19,
+      "legacy_display": "83.19"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.70",
+      "numeric_value": 83.7,
+      "legacy_display": "83.70"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.98",
+      "numeric_value": 83.98,
+      "legacy_display": "83.98"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.98",
+      "numeric_value": 83.98,
+      "legacy_display": "83.98"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0627",
+      "numeric_value": 0.0627,
+      "legacy_display": "0.0627"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0290",
+      "numeric_value": 0.029,
+      "legacy_display": "0.0290"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0331",
+      "numeric_value": 0.0331,
+      "legacy_display": "0.0331"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0139",
+      "numeric_value": 0.0139,
+      "legacy_display": "0.0139"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0271",
+      "numeric_value": 0.0271,
+      "legacy_display": "0.0271"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0098",
+      "numeric_value": 0.0098,
+      "legacy_display": "0.0098"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1101",
+      "numeric_value": 0.1101,
+      "legacy_display": "0.1101"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1098",
+      "numeric_value": 0.1098,
+      "legacy_display": "0.1098"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1313",
+      "numeric_value": 0.1313,
+      "legacy_display": "0.1313"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1278",
+      "numeric_value": 0.1278,
+      "legacy_display": "0.1278"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1181",
+      "numeric_value": 0.1181,
+      "legacy_display": "0.1181"
+    },
+    {
+      "method": "Huber-BRFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1370",
+      "numeric_value": 0.137,
+      "legacy_display": "0.1370"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.19",
+      "numeric_value": 83.19,
+      "legacy_display": "83.19"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "82.69",
+      "numeric_value": 82.69,
+      "legacy_display": "82.69"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "81.82",
+      "numeric_value": 81.82,
+      "legacy_display": "81.82"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "81.45",
+      "numeric_value": 81.45,
+      "legacy_display": "81.45"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "81.78",
+      "numeric_value": 81.78,
+      "legacy_display": "81.78"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "81.75",
+      "numeric_value": 81.75,
+      "legacy_display": "81.75"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0561",
+      "numeric_value": 0.0561,
+      "legacy_display": "0.0561"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0607",
+      "numeric_value": 0.0607,
+      "legacy_display": "0.0607"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1117",
+      "numeric_value": 0.1117,
+      "legacy_display": "0.1117"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0786",
+      "numeric_value": 0.0786,
+      "legacy_display": "0.0786"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0291",
+      "numeric_value": 0.0291,
+      "legacy_display": "0.0291"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0510",
+      "numeric_value": 0.051,
+      "legacy_display": "0.0510"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1022",
+      "numeric_value": 0.1022,
+      "legacy_display": "0.1022"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0892",
+      "numeric_value": 0.0892,
+      "legacy_display": "0.0892"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0492",
+      "numeric_value": 0.0492,
+      "legacy_display": "0.0492"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0473",
+      "numeric_value": 0.0473,
+      "legacy_display": "0.0473"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0485",
+      "numeric_value": 0.0485,
+      "legacy_display": "0.0485"
+    },
+    {
+      "method": "FLGMM",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0469",
+      "numeric_value": 0.0469,
+      "legacy_display": "0.0469"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.23",
+      "numeric_value": 83.23,
+      "legacy_display": "83.23"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "80.61",
+      "numeric_value": 80.61,
+      "legacy_display": "80.61"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.02",
+      "numeric_value": 83.02,
+      "legacy_display": "83.02"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.74",
+      "numeric_value": 83.74,
+      "legacy_display": "83.74"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "81.44",
+      "numeric_value": 81.44,
+      "legacy_display": "81.44"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.79",
+      "numeric_value": 83.79,
+      "legacy_display": "83.79"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0556",
+      "numeric_value": 0.0556,
+      "legacy_display": "0.0556"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0041",
+      "numeric_value": 0.0041,
+      "legacy_display": "0.0041"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0081",
+      "numeric_value": 0.0081,
+      "legacy_display": "0.0081"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0162",
+      "numeric_value": 0.0162,
+      "legacy_display": "0.0162"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0418",
+      "numeric_value": 0.0418,
+      "legacy_display": "0.0418"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0033",
+      "numeric_value": 0.0033,
+      "legacy_display": "0.0033"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1144",
+      "numeric_value": 0.1144,
+      "legacy_display": "0.1144"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0564",
+      "numeric_value": 0.0564,
+      "legacy_display": "0.0564"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1040",
+      "numeric_value": 0.104,
+      "legacy_display": "0.1040"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1195",
+      "numeric_value": 0.1195,
+      "legacy_display": "0.1195"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0713",
+      "numeric_value": 0.0713,
+      "legacy_display": "0.0713"
+    },
+    {
+      "method": "SmartFL",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1326",
+      "numeric_value": 0.1326,
+      "legacy_display": "0.1326"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.60",
+      "numeric_value": 82.6,
+      "legacy_display": "82.60"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.25",
+      "numeric_value": 83.25,
+      "legacy_display": "83.25"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.75",
+      "numeric_value": 82.75,
+      "legacy_display": "82.75"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.09",
+      "numeric_value": 83.09,
+      "legacy_display": "83.09"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "82.81",
+      "numeric_value": 82.81,
+      "legacy_display": "82.81"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "82.40",
+      "numeric_value": 82.4,
+      "legacy_display": "82.40"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1042",
+      "numeric_value": 0.1042,
+      "legacy_display": "0.1042"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0764",
+      "numeric_value": 0.0764,
+      "legacy_display": "0.0764"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0356",
+      "numeric_value": 0.0356,
+      "legacy_display": "0.0356"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0525",
+      "numeric_value": 0.0525,
+      "legacy_display": "0.0525"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0275",
+      "numeric_value": 0.0275,
+      "legacy_display": "0.0275"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0551",
+      "numeric_value": 0.0551,
+      "legacy_display": "0.0551"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0531",
+      "numeric_value": 0.0531,
+      "legacy_display": "0.0531"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0098",
+      "numeric_value": 0.0098,
+      "legacy_display": "0.0098"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0664",
+      "numeric_value": 0.0664,
+      "legacy_display": "0.0664"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0654",
+      "numeric_value": 0.0654,
+      "legacy_display": "0.0654"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0488",
+      "numeric_value": 0.0488,
+      "legacy_display": "0.0488"
+    },
+    {
+      "method": "Fed-NGA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0666",
+      "numeric_value": 0.0666,
+      "legacy_display": "0.0666"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.99",
+      "numeric_value": 82.99,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "83.15",
+      "numeric_value": 83.15,
+      "legacy_display": "83.15"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "83.08",
+      "numeric_value": 83.08,
+      "legacy_display": "83.08"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.50",
+      "numeric_value": 83.5,
+      "legacy_display": "83.50"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.76",
+      "numeric_value": 83.76,
+      "legacy_display": "83.76"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.72",
+      "numeric_value": 83.72,
+      "legacy_display": "83.72"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0320",
+      "numeric_value": 0.032,
+      "legacy_display": "0.0320"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0565",
+      "numeric_value": 0.0565,
+      "legacy_display": "0.0565"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0441",
+      "numeric_value": 0.0441,
+      "legacy_display": "0.0441"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0006",
+      "numeric_value": 0.0006,
+      "legacy_display": "0.0006"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0167",
+      "numeric_value": 0.0167,
+      "legacy_display": "0.0167"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0025",
+      "numeric_value": 0.0025,
+      "legacy_display": "0.0025"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1180",
+      "numeric_value": 0.118,
+      "legacy_display": "0.1180"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1154",
+      "numeric_value": 0.1154,
+      "legacy_display": "0.1154"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.1155",
+      "numeric_value": 0.1155,
+      "legacy_display": "0.1155"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1242",
+      "numeric_value": 0.1242,
+      "legacy_display": "0.1242"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.1220",
+      "numeric_value": 0.122,
+      "legacy_display": "0.1220"
+    },
+    {
+      "method": "FedDNA",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.1322",
+      "numeric_value": 0.1322,
+      "legacy_display": "0.1322"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "83.30",
+      "numeric_value": 83.3,
+      "legacy_display": "83.30"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "75.43",
+      "numeric_value": 75.43,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "78.70",
+      "numeric_value": 78.7,
+      "legacy_display": "78.70"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.94",
+      "numeric_value": 83.94,
+      "legacy_display": "83.94"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "75.43",
+      "numeric_value": 75.43,
+      "legacy_display": "75.43"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "83.47",
+      "numeric_value": 83.47,
+      "legacy_display": "83.47"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0232",
+      "numeric_value": 0.0232,
+      "legacy_display": "0.0232"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0006",
+      "numeric_value": 0.0006,
+      "legacy_display": "0.0006"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0014",
+      "numeric_value": 0.0014,
+      "legacy_display": "0.0014"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.1154",
+      "numeric_value": 0.1154,
+      "legacy_display": "0.1154"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.1220",
+      "numeric_value": 0.122,
+      "legacy_display": "0.1220"
+    },
+    {
+      "method": "FairGuard",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0693",
+      "numeric_value": 0.0693,
+      "legacy_display": "0.0693"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "82.99",
+      "numeric_value": 82.99,
+      "legacy_display": "82.99"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "84.14",
+      "numeric_value": 84.14,
+      "legacy_display": "84.14"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "82.86",
+      "numeric_value": 82.86,
+      "legacy_display": "82.86"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "83.88",
+      "numeric_value": 83.88,
+      "legacy_display": "83.88"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "83.75",
+      "numeric_value": 83.75,
+      "legacy_display": "83.75"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ACC",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "84.08",
+      "numeric_value": 84.08,
+      "legacy_display": "84.08"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0011",
+      "numeric_value": 0.0011,
+      "legacy_display": "0.0011"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.0035",
+      "numeric_value": 0.0035,
+      "legacy_display": "0.0035"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0060",
+      "numeric_value": 0.006,
+      "legacy_display": "0.0060"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0036",
+      "numeric_value": 0.0036,
+      "legacy_display": "0.0036"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0037",
+      "numeric_value": 0.0037,
+      "legacy_display": "0.0037"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "AEOD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0025",
+      "numeric_value": 0.0025,
+      "legacy_display": "0.0025"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Benign",
+      "display": "0.0584",
+      "numeric_value": 0.0584,
+      "legacy_display": "0.0584"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "S-DFA",
+      "display": "0.1084",
+      "numeric_value": 0.1084,
+      "legacy_display": "0.1084"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "IID",
+      "alpha": 5000,
+      "attack": "Sp-DFA",
+      "display": "0.0788",
+      "numeric_value": 0.0788,
+      "legacy_display": "0.0788"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Benign",
+      "display": "0.0831",
+      "numeric_value": 0.0831,
+      "legacy_display": "0.0831"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "S-DFA",
+      "display": "0.0901",
+      "numeric_value": 0.0901,
+      "legacy_display": "0.0901"
+    },
+    {
+      "method": "FairGuard → FLTrust",
+      "metric": "ASPD",
+      "distribution": "non-IID",
+      "alpha": 5,
+      "attack": "Sp-DFA",
+      "display": "0.0998",
+      "numeric_value": 0.0998,
+      "legacy_display": "0.0998"
+    }
+  ],
+  "legacy_equal_numeric_count": 250,
+  "name_mapping_candidate": {
+    "FedAvg": "FedAvg",
+    "FairFed": "FairFed",
+    "LoGoFair": "LoGoFair",
+    "FedWA": "AdaAggRL",
+    "LASA": "LASA",
+    "FedAA": "FedAA",
+    "Median": "Median",
+    "FLTrust": "FLTrust",
+    "Huber-BRFL": "Huber-BRFL",
+    "FLGMM": "FLGMM",
+    "SmartFL": "SmartFL",
+    "Fed-NGA": "Fed-NGA",
+    "FedDNA": "FedDNA",
+    "FairGuard": "FairGuard",
+    "FairGuard → FLTrust": "FLTrust+FairGuard",
+    "Cosine Similarity + Fairness Deviation": "not located in clean10 export"
+  }
+}

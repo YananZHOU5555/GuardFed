@@ -1,0 +1,42 @@
+{
+  "status": "PARTIAL_PROVENANCE_AUDIT_NOT_FINAL_TABLE",
+  "submission_pdf_sha256": "549a4191b1ac560bdaba79d9dce3b11693ab69c4a8cc0f7f52be31afa1110071",
+  "dataset": "adult",
+  "conditions": 160,
+  "cells": 480,
+  "numeric_cells": 436,
+  "hidden_cells": 44,
+  "condition_status": {
+    "NUMERIC_COMPATIBILITY_ONLY": 93,
+    "NO_MATCH_IN_CHECKED_PROJECTIONS": 67
+  },
+  "hidden_status": {
+    "NO_MATCHED_RECORD": 14,
+    "CANDIDATE_VALUE_AGREEMENT_NOT_PROVEN_SOURCE": 17,
+    "AMBIGUOUS_CANDIDATE_VALUES": 13
+  },
+  "source_files": [
+    {
+      "path": "tmp\\table2_rawaudit_20261002\\paper_tables_raw.jsonl",
+      "sha256": "c94441fc33b4a460008bcb6eac409a856ae4ad79ed8baa132866342120f4e541",
+      "bytes": 132119641
+    },
+    {
+      "path": "tmp\\table2_rawaudit_20261002\\attack_strength_raw.jsonl",
+      "sha256": "3c364d055b46d8559c36e0d21bb107c2c206b7b6c4c14f26b405c01b9c0218d0",
+      "bytes": 71311159
+    },
+    {
+      "path": "outputs\\guardfed_tables\\raw_results_5090_clean10_full.jsonl",
+      "sha256": "369e4a264df815c8359366f3cdb272f9dd34dba620c78179811f389ea7a79fe3",
+      "bytes": 37398432
+    }
+  ],
+  "rules_checked": [
+    "round70",
+    "last10_per_metric_extrema",
+    "last10_mean"
+  ],
+  "source_identity_limit": "Numeric agreement, even all visible metrics, does not prove generating source or exact source-code/data/checkpoint identity. Unmatched records are not declared lost. FOE is never used as a substitute for FedSA.",
+  "new_training": 0
+}
