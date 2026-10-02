@@ -1,4 +1,24 @@
-# CURRENT: FedAA/LASA bounded validation screen64 RUNNING — 2026-09-28
+# CURRENT: Server idle; revision evidence organized — 2026-10-02
+
+总入口：E:/OneDrive/文档/GuardFed/docs/返修实验总览.md。2026-10-02 00:45 UTC实测：服务器213.224.31.105:26712在线，项目目录存在，0个训练worker，两张5090空闲、25℃，磁盘剩余2.047TB。阶段A700条、共享校准700模型、FedAA/LASA64项已验收备份；当前没有新训练。仍需补齐17方法矩阵、新增两方法多种子、其余8方法、图像机制消融、最终评价及正文/回复。
+
+巡检核验：原调度器实际PAUSED，与旧本地ACTIVE记录不一致；按用户继续巡检的授权，已恢复原guardfed-training-health任务并更新提示，读取调度器确认ACTIVE且下次运行时间非空。健康空闲不通知，不因旧64项完成再次暂停，不自动开启未冻结队列。
+
+# HISTORICAL: Ongoing three-hour health monitor RESUMED — 2026-09-29
+
+User explicitly requested continued scheduled monitoring in this chat. Existing guardfed-training-health re-enabled; no new scheduler or training queue. Latest live server check: all GuardFed training services EXITED from completed stages, bothGPUidle27C. Baseline screen64 remains COMPLETE_ACCEPTED_BACKED_UP. Idle is expected, not a fault. Read current TRAINING_STATE and a newly authorized frozen stage before switching targets; never restart completed queues. Remain quiet while healthy/unchanged; report faults, meaningful changes or new stage completion once. Keep this ongoing monitor active until user pauses/updates it, including idle intervals.
+
+# HISTORICAL: FedAA/LASA validation screen64 COMPLETE — 2026-09-28
+
+17:17UTC livecheck:64/64strictlyaccepted,0failure/0workers;service exited normally15:30UTC. GPUidle28/27C,RecoveryNone;memory24.1/129.4GB,failcnt0,disk2.047TBfree. All64 source/data/job/checkpoint/round70/validsplit identities passed;529independentgrid/statisticschecks matchedexactly. Results final/结果分析.md and final/verification.json underceleba_baseline_screen_v1. All16candidates,accuracychampions,Pareto,rawmetricsandnegativeoutcomes retained;sharedseed91001 only,n=1,nosampleSD/significance.
+
+Backups40+24cover64uniquejobs;last24archiveSHA430778b1556c5d60ded3816adaa931fbd638656ccad7da265f719a7c42c8c502,208memberhashesverifiedlocally;prior40SHA0be6d0821afca1b7f527989097ed6e2b6b464591b68497c0d7c62369c6b62665,344membersverified. Seeceleba_baseline_screen_v1/restore_chain.json. Native3hmonitorPAUSED;read-onlyschedulerverifiednext_run_at=null. No newtrainingstarted;old89.22.197.55queuesremainarchival.
+
+Frozen4conditionmean scorewinners:FedAA policy0.001_keep16_local0.001 ACC86.893%,AEOD.04506,ASPD.09643;LASA s0.3_l2_lr0.001 ACC85.068%,.03506,.07590. LASA accuracychampion differs(s0.3_l1_lr0.001,85.475%). These arevalid-onlyadaptedbaselines,notallmethod/testor10seedresults. Remaining8methodsfaithfulintegration,added2methodsfullcoverage(proposal200cells=8reuse+192new),CelebAmechanismablations,frozenfinaleval,manuscript/rebuttalremain. Do notrestartcompletedqueuesorautomaticallyfreezenextprotocol.
+
+# HISTORICAL: FedAA/LASA bounded validation screen64 RUNNING — 2026-09-28
+
+Latestcheck2026-09-28 14:16-14:18UTC:40/64strictlyaccepted,0failed,8active rounds48-52→52-56/70,16pending. Correctworkeridentities/loggrowth;GPU96/96%,52/49C,RecoveryNone;CPU8.28/61.44cores,GPU-bound;RAM52.0/129.4GB,memoryfailcnt0,disk2.048TBfree. First40incrementalbackup SHA0be6d0821afca1b7f527989097ed6e2b6b464591b68497c0d7c62369c6b62665 and344memberhashesverifiedoffserver. Preserveallresults;continue24remaining,monitorACTIVE,nointervention.
 
 User continued remaining revision work. Server213.224.31.105:26712, repo/workspace/GuardFed-celeba-expanded; serviceguardfed_celeba_baseline_screen; manifestresults/revision_20260928/celeba_baseline_screen_v1/manifest.json. Readceleba_baseline_screen_v1/PROTOCOL.md. 2newfaithfuldisclosedadapters ×8candidates ×IID/non-IID ×Benign/S-DFA =64new70roundvalid-only jobs, seed91001,8concurrency. Fourreal-image3roundnew/oldworkerregressionspassedexactly beforelaunch. Fullsource/data/64job/gridpreflightPASS. Windows parent-manifest path separator issue was caught before any worker launch and corrected to POSIX paths; frozen worker/job/config bytes unchanged.
 

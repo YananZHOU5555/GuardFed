@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1790594289,
+  "updated_unix": 1790902812,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -2193,7 +2193,7 @@
     "formal_results": false
   },
   "celeba_baseline_screen_v1": {
-    "status": "RUNNING",
+    "status": "COMPLETE_ACCEPTED_BACKED_UP",
     "authorization": "User continue20260928",
     "server": "213.224.31.105:26712",
     "repository": "/workspace/GuardFed-celeba-expanded",
@@ -2212,21 +2212,12 @@
     "evaluation_split": "valid",
     "concurrency": 8,
     "preflight_exact_regressions": 4,
-    "latest_observed_complete": 0,
-    "active": 8,
-    "active_rounds": [
-      13,
-      13,
-      13,
-      13,
-      13,
-      13,
-      13,
-      13
-    ],
+    "latest_observed_complete": 64,
+    "active": 0,
+    "active_rounds": [],
     "current_failures": 0,
     "initial_health_unix": 1790594005.5380738,
-    "next_action": "Continue frozen64valid-only jobs; strict result acceptance, incremental backups and all-candidate/accuracy/Pareto summary. No automatic full10seed/test expansion.",
+    "next_action": "Stagecomplete. Remaining8methodimplementations,2newmethodfullcoveragepotential192new+8reuse,mechanismablations,frozenfinalevaluation,manuscript/rebuttal. No newqueueautomaticallylaunched.",
     "setup_backup": {
       "archive": "/workspace/GuardFed-celeba-expanded/deployment/baseline_screen_setup_20260928.tar.gz",
       "sha256": "ae6a5ff76e61adb0e3dc94e6ddfbf6e50985f30d866ce96be36249797701e736",
@@ -2240,76 +2231,106 @@
       "local_verified_utc": "2026-09-28T11:16:04.818749+00:00"
     },
     "monitor": {
-      "status": "ACTIVE",
-      "correct_stage_scheduler_verified": true,
-      "next_run_at": 1790604907000
+      "status": "PAUSED",
+      "scheduler_verified": true,
+      "next_run_at": null
     },
     "latest_health": {
-      "time": 1790594289.6131513,
-      "completed": 0,
-      "failed": false,
-      "active": 8,
-      "workers": [
-        {
-          "id": "FedAA-DDPG_policy0.001_keep10_local0.0005_IID_Benign_seed91001",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "LASA_s0.3_l1_lr0.0005_IID_Benign_seed91001_screen",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "FedAA-DDPG_policy0.001_keep10_local0.001_IID_Benign_seed91001",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "LASA_s0.3_l1_lr0.001_IID_Benign_seed91001_screen",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "FedAA-DDPG_policy0.001_keep16_local0.0005_IID_Benign_seed91001",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "LASA_s0.3_l2_lr0.0005_IID_Benign_seed91001_screen",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        },
-        {
-          "id": "LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen",
-          "round": 13,
-          "prior_round": 3,
-          "grew": true
-        }
-      ],
-      "gpu": "0, 96 %, 3939 MiB, 49\n1, 96 %, 3962 MiB, 49\n",
-      "effective_cpu_cores": 8.052344171228675,
-      "cpu_quota_cores": 61.43999,
-      "memory_bytes": 51453440000,
-      "memory_failcnt": "0",
-      "disk_free": 2048066392064,
-      "recent_training_log_errors": [],
-      "gpu_recovery_lines": [
+      "time": 1790615826.656943,
+      "service": "guardfed_celeba_baseline_screen   EXITED    Sep 28 03:30 PM",
+      "completed": 64,
+      "active": 0,
+      "failed": 0,
+      "gpu": "0, 0 %, 6 MiB, 28\n1, 0 %, 1 MiB, 27\n",
+      "recovery": [
         "GPU Recovery Action                   : None",
         "GPU Recovery Action                   : None"
-      ]
-    }
+      ],
+      "memory": {
+        "memory.usage_in_bytes": "24070152192",
+        "memory.limit_in_bytes": "129370161152",
+        "memory.failcnt": "0"
+      },
+      "disk_free": 2047542964224
+    },
+    "accepted_total": 64,
+    "last_backup": {
+      "archive": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/backups/baseline_screen_final24_total64_20260928T171801Z.tar.gz",
+      "sha256": "430778b1556c5d60ded3816adaa931fbd638656ccad7da265f719a7c42c8c502",
+      "bytes": 84227123,
+      "content_members": 208,
+      "inventory_member": "results/revision_20260928/celeba_baseline_screen_v1/backups/baseline_screen_final24_total64_20260928T171801Z_inventory.json",
+      "accepted_new_ids": [
+        "FedAA-DDPG_policy0.001_keep10_local0.0005_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.001_keep10_local0.001_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.001_keep16_local0.0005_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.01_keep10_local0.0005_non-IID_Benign_seed91001",
+        "FedAA-DDPG_policy0.01_keep10_local0.0005_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.01_keep10_local0.001_non-IID_Benign_seed91001",
+        "FedAA-DDPG_policy0.01_keep10_local0.001_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.01_keep16_local0.0005_non-IID_Benign_seed91001",
+        "FedAA-DDPG_policy0.01_keep16_local0.0005_non-IID_S-DFA_seed91001",
+        "FedAA-DDPG_policy0.01_keep16_local0.001_non-IID_Benign_seed91001",
+        "FedAA-DDPG_policy0.01_keep16_local0.001_non-IID_S-DFA_seed91001",
+        "LASA_s0.3_l1_lr0.0005_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.3_l1_lr0.001_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.3_l2_lr0.0005_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.5_l1_lr0.0005_non-IID_Benign_seed91001_screen",
+        "LASA_s0.5_l1_lr0.0005_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.5_l1_lr0.001_non-IID_Benign_seed91001_screen",
+        "LASA_s0.5_l1_lr0.001_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.5_l2_lr0.0005_non-IID_Benign_seed91001_screen",
+        "LASA_s0.5_l2_lr0.0005_non-IID_S-DFA_seed91001_screen",
+        "LASA_s0.5_l2_lr0.001_non-IID_Benign_seed91001_screen",
+        "LASA_s0.5_l2_lr0.001_non-IID_S-DFA_seed91001_screen"
+      ],
+      "accepted_total": 64,
+      "previous_receipts": [
+        "baseline_screen_incremental40_total40_20260928T141641Z_receipt.json"
+      ],
+      "created_unix": 1790615887.74489,
+      "off_server_verified": true,
+      "member_hashes_verified": 208,
+      "local_archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_baseline_screen_v1\\baseline_screen_final24_total64_20260928T171801Z.tar.gz",
+      "local_verified_utc": "2026-09-28T17:19:42.923626+00:00"
+    },
+    "final_report": "celeba_baseline_screen_v1/final/结果分析.md",
+    "independent_checks": 529,
+    "independent_max_numeric_error": 0,
+    "completed_service_time": "2026-09-28 15:30 UTC"
+  },
+  "health_monitor": {
+    "status": "ACTIVE",
+    "automation_id": "guardfed-training-health",
+    "interval_hours": 3,
+    "authorization": "User explicitly resumed existing monitor2026-09-29",
+    "current_training": "none;baseline_screen64complete",
+    "keep_active_while_idle": true,
+    "notification_policy": "meaningfulchanges/failures/newcompletion/useractiononly",
+    "updated_utc": "2026-10-02T01:00:12.188311+00:00",
+    "scheduler_verified": true,
+    "next_run_at": 1790913418000,
+    "state_before_20261002_repair": "PAUSED",
+    "repair_basis": "Prior user instruction to continue existing3hourmonitor; schedulerstate disagreed with oldlocalACTIVErecord; prompt corrected to avoid pausingagain on oldstagecompletion"
+  },
+  "latest_status_20261002": {
+    "checked_utc": "2026-10-02T00:45:31.557601+00:00",
+    "server": "213.224.31.105:26712",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "active_training_workers": 0,
+    "gpu_utilization": [
+      0,
+      0
+    ],
+    "gpu_temperature": [
+      25,
+      25
+    ],
+    "disk_free_tb": 2.047,
+    "overview": "docs/返修实验总览.md",
+    "no_new_training_started": true
   }
 }
