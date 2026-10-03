@@ -1,10 +1,12 @@
-# CURRENT: FedAA/LASA complete coverage — RUNNING 2026-10-03
+# CURRENT: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
 用户最新授权：“继续运行吧”。当前服务器213.224.31.105:26712；repo/workspace/GuardFed-celeba-expanded；service guardfed_celeba_baseline_fullcoverage。当前阶段协议celeba_baseline_fullcoverage_v1/PROTOCOL.md；manifest results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json；runner deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py。
 
-目标2方法×IID/non-IID×5场景×10seed＝200条，192新增+8显式复用；固定此前score冠军、70轮valid-only、8并发。先做10个3轮图像门检，4项旧前三轮回归+6项新攻击覆盖；门检不是论文样本。10门检和2同horizon旧worker参考已通过，gate/修正历史/源码均本地SHA验收备份。05:30UTC实测正式192任务已启动，8active都round1/70、184pending、0当前失败；GPU96/96%、40/39℃。历史检查失败是3轮/70轮额外评价次数不同造成的回归设计问题，已保留并修正；训练核心和正式70轮配置不变。8旧结果已原工具严格验收；setup备份254成员SHA核验通过。本入口状态优先于以下历史快照与旧heartbeat的固定阶段文字。
+2方法×IID/non-IID×5场景×10seed＝200条，192新增+8显式复用全部完成；固定此前score冠军、70轮valid-only。2026-10-03 19:10:58UTC实测：service正常EXITED（18:24），192结果均round70，0worker、0pending、0当前失败/日志错误；严格验收200/200、0invalid。GPU0/0%、26/26℃、Recovery None；CPU0.13/61.44核、内存25.80/129.37GB、failcnt0、磁盘余量2.046TB。新增192全部备份，增量24+40+48+40+40无重复；最终40archive SHA34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279及306成员哈希本机通过，恢复链complete=true；8复用引用原screen链。10门检/2同horizon参考通过；两历史预检失败保留，不计正式样本。没有在本次heartbeat启动训练。Git启动快照b493110；本入口优先于历史快照和旧heartbeat固定阶段文字。
 
-巡检继续使用既有3小时任务，每次读取本入口/TRAINING_STATE后针对当前阶段：核service、实际worker与轮次、failure/preflight/failure.json/launch_failure.json/queue_failure.json、GPU/实际cgroup-v1资源；健康安静。正式队列已由本次授权手动启动；巡检只监督与有限恢复，不开发方法或自行改变协议。阶段严格验收命令：.venv/bin/python deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py summarize，合并192新+8旧。关键批次按accepted_new_ID差集备份model/fullstate/raw/config/logs并核archive/memberSHA。现有runner拒绝部分目录，不能盲重启；FedAA仅同身份fullstate恢复，LASA无中轮恢复保证；保留所有负结果/失败。runtime helper deployment/check_baseline_fullcoverage_20261003.py；备份helper deployment/backup_baseline_fullcoverage_20261003.py，核验后把verified receipt上传回stage/backups再抑制重复成员。目标200完成后生成200汇总并与StageA700按配对条件合并900验证记录，交付9方法IID/non-IID论文表；报告阶段边界，保持监控启用；仍待其余8基线、机制消融、最终评价、正文/rebuttal。不要启动已完成旧队列或旧服务器。
+200条与StageA700按配对条件合并900验证记录；9方法IID/non-IID论文表已交付：outputs/guardfed_tables/celeba_nine_method_final_20261004/README.md。主表10seed均值±sampleSD，附9/6seed；独立核900网格/身份、新200原始metadata、1944统计标量及各1080个Markdown/LaTeX单元，五份LaTeX编译、三页PDF视觉检查通过。旧700值、负结果不变；14cu130/其余cu128、适配/校准差异、seed91001选择历史均披露。整个返修未完成：尚缺其余8基线800格、机制消融、冻结最终评价及正文/rebuttal。
+
+巡检继续使用原3小时任务，用户要求持续保持启用。现在健康空闲为正常状态；不重复全量验收、不重复备份已验证模型、不重启完成队列。每次读取本入口/TRAINING_STATE，再合并核SSH、service/worker/failure、GPU/实际cgroup-v1资源；仅重大变化/故障/有效恢复/新阶段完成通知。runtime helper deployment/check_baseline_fullcoverage_20261003.py；备份helper deployment/backup_baseline_fullcoverage_20261003.py。既有严格验收与同身份有限恢复规则仍有效，但完成阶段无需恢复。下一阶段方案不等于启动授权；巡检不开发方法/变更协议/自动训练或test。旧服务器仅归档。
 
 # HISTORICAL: Server idle; revision evidence organized — 2026-10-03
 

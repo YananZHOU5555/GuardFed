@@ -1,44 +1,54 @@
 {
-  "checked_utc": "2026-10-03T05:30:10.735569+00:00",
+  "checked_utc": "2026-10-03T19:10:58.023142+00:00",
   "server": "213.224.31.105:26712",
   "stage": "celeba_baseline_fullcoverage_v1",
-  "mode": "healthy_running",
-  "accepted_new": 0,
+  "mode": "healthy_idle_completed",
+  "accepted_new": 192,
   "accepted_reused": 8,
+  "accepted_total": 200,
   "planned_new": 192,
   "planned_total": 200,
-  "active": 8,
-  "active_rounds": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
+  "active": 0,
+  "active_rounds": [],
+  "failed": 0,
+  "pending_new": 0,
+  "gpu_utilization": [
+    0,
+    0
+  ],
+  "gpu_vram_mib": [
+    6,
     1
   ],
-  "failed": 0,
-  "pending_new": 184,
-  "gpu_utilization": [
-    96,
-    96
-  ],
   "gpu_temperature": [
-    40,
-    39
+    26,
+    26
   ],
   "gpu_recovery": [
     "GPU Recovery Action                   : None",
     "GPU Recovery Action                   : None"
   ],
   "cpu_quota_cores": 61.43999,
-  "cpu_used_cores_2sec": 8.004435487608001,
-  "memory_used_bytes": 52246405120,
+  "cpu_used_cores_2sec": 0.13028932870705878,
+  "memory_used_bytes": 25803890688,
   "memory_limit_bytes": 129370161152,
   "memory_failcnt": 0,
-  "disk_free_bytes": 2047355404288,
-  "progress_latest_unix": 1791005408.3842754,
+  "disk_free_bytes": 2045591379968,
+  "progress_latest_unix": 1791051858.9266255,
+  "progress_changed_since_previous": true,
   "healthy": true,
-  "new_training_started": true
+  "new_training_started": false,
+  "new_training_started_by_heartbeat": false,
+  "service_status": [
+    "guardfed_celeba_baseline_fullcoverage   EXITED    Oct 03 06:24 PM"
+  ],
+  "last_backup_receipt": "celeba_baseline_fullcoverage_v1/incremental_new40_total192_20261003T191154Z_receipt.json",
+  "last_backup_sha256": "34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279",
+  "backed_up_new_ids": 192,
+  "strict_acceptance": "200/200 accepted (192new+8reuse),0invalid/currentfailure;900 merged records and independent statistics PASS",
+  "next_action": "Keep existing3hour health monitor active while healthy idle. No completed queue restart or automatic next adapter/test queue.",
+  "previous_accepted_new": 152,
+  "newly_accepted": 40,
+  "authorized_queue_started_previously": true,
+  "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004"
 }

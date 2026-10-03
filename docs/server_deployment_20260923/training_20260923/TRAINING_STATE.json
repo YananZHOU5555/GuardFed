@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1790902812,
+  "updated_unix": 1791056357.5809596,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -185,9 +185,7 @@
   },
   "latest_evidence": "/workspace/GuardFed-revision/deployment/revision_evidence_summary/README.md",
   "formal_total_planned_new_runs": 1390,
-  "active_services": [
-    "guardfed_celeba_baseline_fullcoverage"
-  ],
+  "active_services": [],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
   "acs_acceptance": "/workspace/GuardFed-acs/deployment/acs_income_v1/acceptance.json",
   "ablation_calibration_analysis": {
@@ -197,48 +195,58 @@
     "notes": "254CPU matches plus6originalGPU matches; rawCPU mismatch files preserved."
   },
   "last_health_check": {
-    "checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "checked_utc": "2026-10-03T19:10:58.023142+00:00",
     "server": "213.224.31.105:26712",
     "stage": "celeba_baseline_fullcoverage_v1",
-    "mode": "healthy_running",
-    "accepted_new": 0,
+    "mode": "healthy_idle_completed",
+    "accepted_new": 192,
     "accepted_reused": 8,
+    "accepted_total": 200,
     "planned_new": 192,
     "planned_total": 200,
-    "active": 8,
-    "active_rounds": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
+    "active": 0,
+    "active_rounds": [],
+    "failed": 0,
+    "pending_new": 0,
+    "gpu_utilization": [
+      0,
+      0
+    ],
+    "gpu_vram_mib": [
+      6,
       1
     ],
-    "failed": 0,
-    "pending_new": 184,
-    "gpu_utilization": [
-      96,
-      96
-    ],
     "gpu_temperature": [
-      40,
-      39
+      26,
+      26
     ],
     "gpu_recovery": [
       "GPU Recovery Action                   : None",
       "GPU Recovery Action                   : None"
     ],
     "cpu_quota_cores": 61.43999,
-    "cpu_used_cores_2sec": 8.004435487608001,
-    "memory_used_bytes": 52246405120,
+    "cpu_used_cores_2sec": 0.13028932870705878,
+    "memory_used_bytes": 25803890688,
     "memory_limit_bytes": 129370161152,
     "memory_failcnt": 0,
-    "disk_free_bytes": 2047355404288,
-    "progress_latest_unix": 1791005408.3842754,
+    "disk_free_bytes": 2045591379968,
+    "progress_latest_unix": 1791051858.9266255,
+    "progress_changed_since_previous": true,
     "healthy": true,
-    "new_training_started": true
+    "new_training_started": false,
+    "new_training_started_by_heartbeat": false,
+    "service_status": [
+      "guardfed_celeba_baseline_fullcoverage   EXITED    Oct 03 06:24 PM"
+    ],
+    "last_backup_receipt": "celeba_baseline_fullcoverage_v1/incremental_new40_total192_20261003T191154Z_receipt.json",
+    "last_backup_sha256": "34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279",
+    "backed_up_new_ids": 192,
+    "strict_acceptance": "200/200 accepted (192new+8reuse),0invalid/currentfailure;900 merged records and independent statistics PASS",
+    "next_action": "Keep existing3hour health monitor active while healthy idle. No completed queue restart or automatic next adapter/test queue.",
+    "previous_accepted_new": 152,
+    "newly_accepted": 40,
+    "authorized_queue_started_previously": true,
+    "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004"
   },
   "celeba_tuning_v1": {
     "status": "complete_verified_backed_up",
@@ -2338,19 +2346,21 @@
     "automation_id": "guardfed-training-health",
     "interval_hours": 3,
     "authorization": "User explicitly resumed existing monitor2026-09-29",
-    "current_training": "celeba_baseline_fullcoverage_v1;192new70roundjobs+8reused;8parallel",
+    "current_training": "none;celeba_baseline_fullcoverage_v1 complete200/200;900recordtables delivered",
     "keep_active_while_idle": true,
     "notification_policy": "meaningfulchanges/failures/newcompletion/useractiononly",
-    "updated_utc": "2026-10-02T01:00:12.188311+00:00",
+    "updated_utc": "2026-10-03T19:39:17.542435+00:00",
     "scheduler_verified": true,
     "next_run_at": 1790913418000,
     "state_before_20261002_repair": "PAUSED",
     "repair_basis": "Prior user instruction to continue existing3hourmonitor; schedulerstate disagreed with oldlocalACTIVErecord; prompt corrected to avoid pausingagain on oldstagecompletion",
-    "last_checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "last_checked_utc": "2026-10-03T19:10:58.023142+00:00",
     "current_stage": "celeba_baseline_fullcoverage_v1",
     "current_protocol": "celeba_baseline_fullcoverage_v1/PROTOCOL.md",
     "current_manifest": "results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json",
-    "note": "The existing saved heartbeat begins by reading RUNNING/TRAINING_STATE; these are authoritative current-stage pointers. Native automation editing tool unavailable in this turn; no replacement scheduler created."
+    "note": "Ongoing monitor retained per user instruction; current heartbeat executed. Native automation editing tool unavailable; no new scheduler created. RUNNING/TRAINING_STATE override historical fixed-stage text.",
+    "current_phase_status": "COMPLETE_ACCEPTED_BACKED_UP_REPORTED",
+    "scheduler_verified_in_current_turn": false
   },
   "latest_status_20261002": {
     "checked_utc": "2026-10-02T22:04:10.482414+00:00",
@@ -2371,27 +2381,29 @@
     "no_new_training_started": true
   },
   "latest_status_20261003": {
-    "checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "checked_utc": "2026-10-03T19:10:58.023142+00:00",
     "server": "213.224.31.105:26712",
     "ssh_connected": true,
     "repo_exists": true,
-    "active_training_workers": 8,
+    "active_training_workers": 0,
     "gpu_utilization": [
-      96,
-      96
+      0,
+      0
     ],
     "gpu_temperature": [
-      40,
-      39
+      26,
+      26
     ],
-    "disk_free_tb": 2.047,
+    "disk_free_tb": 2.045591379968,
     "overview": "docs/返修实验总览.md",
-    "no_new_training_started": false,
-    "phase": "multi_seed_validation_coverage"
+    "no_new_training_started": true,
+    "phase": "nine_method_validation_complete",
+    "accepted_stage_records": 200,
+    "accepted_combined_records": 900
   },
   "current_stage": "celeba_baseline_fullcoverage_v1",
   "celeba_baseline_fullcoverage_v1": {
-    "status": "RUNNING",
+    "status": "COMPLETE_ACCEPTED_BACKED_UP",
     "authorization": "User explicitly said continue running2026-10-03",
     "server": "213.224.31.105:26712",
     "repository": "/workspace/GuardFed-celeba-expanded",
@@ -2432,7 +2444,7 @@
       "FedAA": "policy0.001_keep16_local0.001",
       "LASA": "LASA_s0.3_l2_lr0.001"
     },
-    "accepted_new": 0,
+    "accepted_new": 192,
     "accepted_reused": 8,
     "preflight_planned": 10,
     "preflight_initial_active": 8,
@@ -2459,29 +2471,76 @@
       "member_hashes_verified": 254,
       "local_archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_baseline_fullcoverage_v1\\fullcoverage_setup_20261003.tar.gz"
     },
-    "next_action": "Continue192missing70round jobs;strictlymerge192+8;incremental accepted-ID backups;then9method900recordtables. No automatic newadapter/testqueue.",
+    "next_action": "Keep existing3hour health monitor active while healthy idle. No completed queue restart or automatic next adapter/test queue.",
     "manifest_sha256": "0751a4f7c15cec43bdfcfb1df428683fda895dd4a3d495b30dd2f6ef0088063c",
     "preflight_status": "PASS",
     "preflight_completed": 10,
     "preflight_reference_fixtures": 2,
     "formal_started_utc": "2026-10-03T05:30:10.735569+00:00",
-    "active": 8,
-    "active_rounds": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    "pending_new": 184,
-    "latest_runtime": "celeba_baseline_fullcoverage_v1/initial_runtime.json",
+    "active": 0,
+    "active_rounds": [],
+    "pending_new": 0,
+    "latest_runtime": "celeba_baseline_fullcoverage_v1/latest_runtime.json",
     "preflight_acceptance": "celeba_baseline_fullcoverage_v1/preflight_acceptance.json",
     "restore_chain": "celeba_baseline_fullcoverage_v1/restore_chain.json",
     "backup_helper": "deployment/backup_baseline_fullcoverage_20261003.py",
     "runtime_helper": "deployment/check_baseline_fullcoverage_20261003.py",
-    "preserved_history": "Regression-check horizon mismatch preserved;same-horizon image model checkPASS;no formal result invalidated;no completed gate rerun"
+    "preserved_history": "Regression-check horizon mismatch preserved;same-horizon image model checkPASS;no formal result invalidated;no completed gate rerun",
+    "verified_round_growth": [
+      {
+        "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_FedSA_seed91010",
+        "before": 64,
+        "after": 70
+      },
+      {
+        "id": "LASA_s0.3_l2_lr0.001_non-IID_FedSA_seed91010_fullcoverage",
+        "before": 65,
+        "after": 70
+      },
+      {
+        "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91002",
+        "before": 64,
+        "after": 70
+      },
+      {
+        "id": "LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91002_fullcoverage",
+        "before": 64,
+        "after": 70
+      },
+      {
+        "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91003",
+        "before": 58,
+        "after": 70
+      },
+      {
+        "id": "LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91003_fullcoverage",
+        "before": 58,
+        "after": 70
+      },
+      {
+        "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91004",
+        "before": 55,
+        "after": 70
+      },
+      {
+        "id": "LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91004_fullcoverage",
+        "before": 55,
+        "after": 70
+      }
+    ],
+    "publication_commit": "b4931101b33784b68038978850ece19270540034",
+    "publication_branch": "codex/revision-evidence-baselines-20260928",
+    "cpu_bottleneck_observation": "GPU96percent both;CPU8of61.44cores at8frozen1threadworkers. GPU-bound;no numerical/thread/concurrency amendment.",
+    "last_checked_utc": "2026-10-03T19:10:58.023142+00:00",
+    "accepted_total": 200,
+    "last_backup_receipt": "celeba_baseline_fullcoverage_v1/incremental_new40_total192_20261003T191154Z_receipt.json",
+    "last_backup_sha256": "34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279",
+    "backed_up_new": 192,
+    "backup_verified_utc": "2026-10-03T19:16:19.682428+00:00",
+    "historical_failure_count": 2,
+    "report_verified_utc": "2026-10-03T19:39:17.542435+00:00",
+    "report_status": "COMPLETE_VERIFIED",
+    "combined_table_records": 900,
+    "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004"
   }
 }
