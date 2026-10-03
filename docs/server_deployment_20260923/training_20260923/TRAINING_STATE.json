@@ -186,7 +186,7 @@
   "latest_evidence": "/workspace/GuardFed-revision/deployment/revision_evidence_summary/README.md",
   "formal_total_planned_new_runs": 1390,
   "active_services": [
-    "guardfed_celeba_fullcoverage"
+    "guardfed_celeba_baseline_fullcoverage"
   ],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
   "acs_acceptance": "/workspace/GuardFed-acs/deployment/acs_income_v1/acceptance.json",
@@ -197,16 +197,48 @@
     "notes": "254CPU matches plus6originalGPU matches; rawCPU mismatch files preserved."
   },
   "last_health_check": {
-    "checked_utc": "2026-09-28T10:22:01.225056+00:00",
-    "stage": "celeba_fullcoverage_v1",
-    "new_accepted": 644,
-    "reused_verified": 56,
-    "accepted_total": 700,
-    "backed_up_new": 644,
-    "active": 0,
+    "checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "server": "213.224.31.105:26712",
+    "stage": "celeba_baseline_fullcoverage_v1",
+    "mode": "healthy_running",
+    "accepted_new": 0,
+    "accepted_reused": 8,
+    "planned_new": 192,
+    "planned_total": 200,
+    "active": 8,
+    "active_rounds": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
     "failed": 0,
+    "pending_new": 184,
+    "gpu_utilization": [
+      96,
+      96
+    ],
+    "gpu_temperature": [
+      40,
+      39
+    ],
+    "gpu_recovery": [
+      "GPU Recovery Action                   : None",
+      "GPU Recovery Action                   : None"
+    ],
+    "cpu_quota_cores": 61.43999,
+    "cpu_used_cores_2sec": 8.004435487608001,
+    "memory_used_bytes": 52246405120,
+    "memory_limit_bytes": 129370161152,
+    "memory_failcnt": 0,
+    "disk_free_bytes": 2047355404288,
+    "progress_latest_unix": 1791005408.3842754,
     "healthy": true,
-    "stage_complete": true
+    "new_training_started": true
   },
   "celeba_tuning_v1": {
     "status": "complete_verified_backed_up",
@@ -2306,17 +2338,22 @@
     "automation_id": "guardfed-training-health",
     "interval_hours": 3,
     "authorization": "User explicitly resumed existing monitor2026-09-29",
-    "current_training": "none;baseline_screen64complete",
+    "current_training": "celeba_baseline_fullcoverage_v1;192new70roundjobs+8reused;8parallel",
     "keep_active_while_idle": true,
     "notification_policy": "meaningfulchanges/failures/newcompletion/useractiononly",
     "updated_utc": "2026-10-02T01:00:12.188311+00:00",
     "scheduler_verified": true,
     "next_run_at": 1790913418000,
     "state_before_20261002_repair": "PAUSED",
-    "repair_basis": "Prior user instruction to continue existing3hourmonitor; schedulerstate disagreed with oldlocalACTIVErecord; prompt corrected to avoid pausingagain on oldstagecompletion"
+    "repair_basis": "Prior user instruction to continue existing3hourmonitor; schedulerstate disagreed with oldlocalACTIVErecord; prompt corrected to avoid pausingagain on oldstagecompletion",
+    "last_checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "current_stage": "celeba_baseline_fullcoverage_v1",
+    "current_protocol": "celeba_baseline_fullcoverage_v1/PROTOCOL.md",
+    "current_manifest": "results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json",
+    "note": "The existing saved heartbeat begins by reading RUNNING/TRAINING_STATE; these are authoritative current-stage pointers. Native automation editing tool unavailable in this turn; no replacement scheduler created."
   },
   "latest_status_20261002": {
-    "checked_utc": "2026-10-02T00:45:31.557601+00:00",
+    "checked_utc": "2026-10-02T22:04:10.482414+00:00",
     "server": "213.224.31.105:26712",
     "ssh_connected": true,
     "repo_exists": true,
@@ -2332,5 +2369,119 @@
     "disk_free_tb": 2.047,
     "overview": "docs/返修实验总览.md",
     "no_new_training_started": true
+  },
+  "latest_status_20261003": {
+    "checked_utc": "2026-10-03T05:30:10.735569+00:00",
+    "server": "213.224.31.105:26712",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "active_training_workers": 8,
+    "gpu_utilization": [
+      96,
+      96
+    ],
+    "gpu_temperature": [
+      40,
+      39
+    ],
+    "disk_free_tb": 2.047,
+    "overview": "docs/返修实验总览.md",
+    "no_new_training_started": false,
+    "phase": "multi_seed_validation_coverage"
+  },
+  "current_stage": "celeba_baseline_fullcoverage_v1",
+  "celeba_baseline_fullcoverage_v1": {
+    "status": "RUNNING",
+    "authorization": "User explicitly said continue running2026-10-03",
+    "server": "213.224.31.105:26712",
+    "repository": "/workspace/GuardFed-celeba-expanded",
+    "service": "guardfed_celeba_baseline_fullcoverage",
+    "manifest": "results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json",
+    "protocol": "celeba_baseline_fullcoverage_v1/PROTOCOL.md",
+    "runner": "deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py",
+    "planned_new": 192,
+    "reused": 8,
+    "planned_total": 200,
+    "seeds": [
+      91001,
+      91002,
+      91003,
+      91004,
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ],
+    "distributions": {
+      "IID": 5000.0,
+      "non-IID": 5.0
+    },
+    "attacks": [
+      "Benign",
+      "F Flip",
+      "FedSA",
+      "S-DFA",
+      "Sp-DFA"
+    ],
+    "rounds": 70,
+    "evaluation_split": "valid",
+    "concurrency": 8,
+    "selected_recipes": {
+      "FedAA": "policy0.001_keep16_local0.001",
+      "LASA": "LASA_s0.3_l2_lr0.001"
+    },
+    "accepted_new": 0,
+    "accepted_reused": 8,
+    "preflight_planned": 10,
+    "preflight_initial_active": 8,
+    "preflight_initial_rounds": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "current_failures": 0,
+    "setup_backup": {
+      "archive": "/workspace/GuardFed-celeba-expanded/results/revision_20261003/celeba_baseline_fullcoverage_v1/backups/fullcoverage_setup_20261003.tar.gz",
+      "sha256": "da364ae7e55db6504920c8315940c2d88c5a90507db3b191f47ebe2f4e4420c7",
+      "bytes": 172535,
+      "content_members": 254,
+      "inventory_member": "results/revision_20261003/celeba_baseline_fullcoverage_v1/backups/setup_inventory.json",
+      "prepared_manifest_sha256": "7f7b01fbab84445ab31ba14fd86df3b9b6f84ea79fcbeb7995d611927a9bf13d",
+      "created_utc": "2026-10-03T05:18:26.841695+00:00",
+      "off_server_verified": true,
+      "member_hashes_verified": 254,
+      "local_archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_baseline_fullcoverage_v1\\fullcoverage_setup_20261003.tar.gz"
+    },
+    "next_action": "Continue192missing70round jobs;strictlymerge192+8;incremental accepted-ID backups;then9method900recordtables. No automatic newadapter/testqueue.",
+    "manifest_sha256": "0751a4f7c15cec43bdfcfb1df428683fda895dd4a3d495b30dd2f6ef0088063c",
+    "preflight_status": "PASS",
+    "preflight_completed": 10,
+    "preflight_reference_fixtures": 2,
+    "formal_started_utc": "2026-10-03T05:30:10.735569+00:00",
+    "active": 8,
+    "active_rounds": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pending_new": 184,
+    "latest_runtime": "celeba_baseline_fullcoverage_v1/initial_runtime.json",
+    "preflight_acceptance": "celeba_baseline_fullcoverage_v1/preflight_acceptance.json",
+    "restore_chain": "celeba_baseline_fullcoverage_v1/restore_chain.json",
+    "backup_helper": "deployment/backup_baseline_fullcoverage_20261003.py",
+    "runtime_helper": "deployment/check_baseline_fullcoverage_20261003.py",
+    "preserved_history": "Regression-check horizon mismatch preserved;same-horizon image model checkPASS;no formal result invalidated;no completed gate rerun"
   }
 }

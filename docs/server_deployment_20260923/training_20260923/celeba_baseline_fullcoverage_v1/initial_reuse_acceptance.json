@@ -1,0 +1,672 @@
+{
+  "accepted": 8,
+  "accepted_new": 0,
+  "accepted_reused": 8,
+  "planned_new": 192,
+  "planned_total": 200,
+  "complete": false,
+  "records": [
+    {
+      "id": "FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001",
+      "algorithm": "FedAA",
+      "method": "FedAA-DDPG-adapted-v1",
+      "distribution": "IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "candidate": "policy0.001_keep16_local0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001",
+      "checkpoint_sha256": "e1646daeb4dfb3d184398e038bf90281bc8654584ed0d33029913485aaa93cd0",
+      "evaluation_stats": {
+        "positive_rate": 0.4645391855841345,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.862737202395933,
+      "aeod": 0.05336878057542671,
+      "aspd": 0.09966149112407496,
+      "reused": true
+    },
+    {
+      "id": "LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen",
+      "algorithm": "LASA",
+      "method": "LASA-official",
+      "distribution": "IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "candidate": "LASA_s0.3_l2_lr0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen",
+      "checkpoint_sha256": "9e636a0e315852cfcbb07031df9f0d76551a5ee3eef2a04511d2045320d04fb3",
+      "evaluation_stats": {
+        "positive_rate": 0.4716363819399003,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.859968792469925,
+      "aeod": 0.04133961533393382,
+      "aspd": 0.08504969702682524,
+      "reused": true
+    },
+    {
+      "id": "FedAA-DDPG_policy0.001_keep16_local0.001_IID_S-DFA_seed91001",
+      "algorithm": "FedAA",
+      "method": "FedAA-DDPG-adapted-v1",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "candidate": "policy0.001_keep16_local0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/FedAA-DDPG_policy0.001_keep16_local0.001_IID_S-DFA_seed91001",
+      "checkpoint_sha256": "05ea3a994ef4590f35643d2d2671764a621f884bd56b53bdb6a4f91e3a9bb33d",
+      "evaluation_stats": {
+        "positive_rate": 0.42452307847183773,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8809080384557306,
+      "aeod": 0.05886667045403382,
+      "aspd": 0.11253808680825361,
+      "reused": true
+    },
+    {
+      "id": "LASA_s0.3_l2_lr0.001_IID_S-DFA_seed91001_screen",
+      "algorithm": "LASA",
+      "method": "LASA-official",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "candidate": "LASA_s0.3_l2_lr0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/LASA_s0.3_l2_lr0.001_IID_S-DFA_seed91001_screen",
+      "checkpoint_sha256": "7e4fca495d8a51439cb6f7d0fad5b0efc26f109f0064004358bacd9ae0fafb88",
+      "evaluation_stats": {
+        "positive_rate": 0.47173705139175515,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8430563245583128,
+      "aeod": 0.025080636739708617,
+      "aspd": 0.06381333566956399,
+      "reused": true
+    },
+    {
+      "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_Benign_seed91001",
+      "algorithm": "FedAA",
+      "method": "FedAA-DDPG-adapted-v1",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "candidate": "policy0.001_keep16_local0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_Benign_seed91001",
+      "checkpoint_sha256": "5a468e372673a325c4cf20d8c03d56d62b42aedab112509a650439072b420d38",
+      "evaluation_stats": {
+        "positive_rate": 0.45447224039865103,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8796496703075452,
+      "aeod": 0.037704261471656175,
+      "aspd": 0.10436665796797967,
+      "reused": true
+    },
+    {
+      "id": "LASA_s0.3_l2_lr0.001_non-IID_Benign_seed91001_screen",
+      "algorithm": "LASA",
+      "method": "LASA-official",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "candidate": "LASA_s0.3_l2_lr0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/LASA_s0.3_l2_lr0.001_non-IID_Benign_seed91001_screen",
+      "checkpoint_sha256": "1828a9f0d4ec022d1457bb0a41fbee246cd51d8b303ee79aa5de6eb5472a9b74",
+      "evaluation_stats": {
+        "positive_rate": 0.4745054613177631,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8753208838777873,
+      "aeod": 0.04448088279285167,
+      "aspd": 0.10013393946828913,
+      "reused": true
+    },
+    {
+      "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91001",
+      "algorithm": "FedAA",
+      "method": "FedAA-DDPG-adapted-v1",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "candidate": "policy0.001_keep16_local0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_S-DFA_seed91001",
+      "checkpoint_sha256": "0016889b010e5099040f15699d1142457c905ff4da8c03b3e247e4cce7234f27",
+      "evaluation_stats": {
+        "positive_rate": 0.49619972819248,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8524185835808124,
+      "aeod": 0.03030918352457579,
+      "aspd": 0.06914675829034928,
+      "reused": true
+    },
+    {
+      "id": "LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91001_screen",
+      "algorithm": "LASA",
+      "method": "LASA-official",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "candidate": "LASA_s0.3_l2_lr0.001",
+      "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260928/celeba_baseline_screen_v1/runs/LASA_s0.3_l2_lr0.001_non-IID_S-DFA_seed91001_screen",
+      "checkpoint_sha256": "f64acbde62f3a3607b4ef5ed80736daa60503b48ce7a269f530343fbc73f0d95",
+      "evaluation_stats": {
+        "positive_rate": 0.463029143806312,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "accuracy": 0.8243821412392409,
+      "aeod": 0.029341377638300026,
+      "aspd": 0.05462042770471909,
+      "reused": true
+    }
+  ],
+  "invalid_records": [],
+  "preserved_failures": [],
+  "cohorts": {
+    "ten_seed": {
+      "cells": [
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 1,
+          "expected_n": 10,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 10,
+          "complete": false
+        }
+      ],
+      "overall": []
+    },
+    "exclude_selection_nine_seed": {
+      "cells": [
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 9,
+          "complete": false
+        }
+      ],
+      "overall": []
+    },
+    "matching_six_seed": {
+      "cells": [
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "FedAA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Benign",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "F Flip",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "FedSA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "S-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        },
+        {
+          "algorithm": "LASA",
+          "distribution": "non-IID",
+          "attack": "Sp-DFA",
+          "n": 0,
+          "expected_n": 6,
+          "complete": false
+        }
+      ],
+      "overall": []
+    }
+  },
+  "manifest_sha256": "7f7b01fbab84445ab31ba14fd86df3b9b6f84ea79fcbeb7995d611927a9bf13d",
+  "summarizer_sha256": "abbb1de4b28144f0102d1ee071a986e4b1972d2c3b2d127996114af4bd2415a1",
+  "note": "Validation coverage; fixed selected recipes; sampleSD across seeds; no new recipe or seed selection"
+}

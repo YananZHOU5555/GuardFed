@@ -1,6 +1,14 @@
-# CURRENT: Server idle; revision evidence organized — 2026-10-02
+# CURRENT: FedAA/LASA complete coverage — RUNNING 2026-10-03
 
-总入口：E:/OneDrive/文档/GuardFed/docs/返修实验总览.md。2026-10-02 00:45 UTC实测：服务器213.224.31.105:26712在线，项目目录存在，0个训练worker，两张5090空闲、25℃，磁盘剩余2.047TB。阶段A700条、共享校准700模型、FedAA/LASA64项已验收备份；当前没有新训练。仍需补齐17方法矩阵、新增两方法多种子、其余8方法、图像机制消融、最终评价及正文/回复。
+用户最新授权：“继续运行吧”。当前服务器213.224.31.105:26712；repo/workspace/GuardFed-celeba-expanded；service guardfed_celeba_baseline_fullcoverage。当前阶段协议celeba_baseline_fullcoverage_v1/PROTOCOL.md；manifest results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json；runner deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py。
+
+目标2方法×IID/non-IID×5场景×10seed＝200条，192新增+8显式复用；固定此前score冠军、70轮valid-only、8并发。先做10个3轮图像门检，4项旧前三轮回归+6项新攻击覆盖；门检不是论文样本。10门检和2同horizon旧worker参考已通过，gate/修正历史/源码均本地SHA验收备份。05:30UTC实测正式192任务已启动，8active都round1/70、184pending、0当前失败；GPU96/96%、40/39℃。历史检查失败是3轮/70轮额外评价次数不同造成的回归设计问题，已保留并修正；训练核心和正式70轮配置不变。8旧结果已原工具严格验收；setup备份254成员SHA核验通过。本入口状态优先于以下历史快照与旧heartbeat的固定阶段文字。
+
+巡检继续使用既有3小时任务，每次读取本入口/TRAINING_STATE后针对当前阶段：核service、实际worker与轮次、failure/preflight/failure.json/launch_failure.json/queue_failure.json、GPU/实际cgroup-v1资源；健康安静。正式队列已由本次授权手动启动；巡检只监督与有限恢复，不开发方法或自行改变协议。阶段严格验收命令：.venv/bin/python deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py summarize，合并192新+8旧。关键批次按accepted_new_ID差集备份model/fullstate/raw/config/logs并核archive/memberSHA。现有runner拒绝部分目录，不能盲重启；FedAA仅同身份fullstate恢复，LASA无中轮恢复保证；保留所有负结果/失败。runtime helper deployment/check_baseline_fullcoverage_20261003.py；备份helper deployment/backup_baseline_fullcoverage_20261003.py，核验后把verified receipt上传回stage/backups再抑制重复成员。目标200完成后生成200汇总并与StageA700按配对条件合并900验证记录，交付9方法IID/non-IID论文表；报告阶段边界，保持监控启用；仍待其余8基线、机制消融、最终评价、正文/rebuttal。不要启动已完成旧队列或旧服务器。
+
+# HISTORICAL: Server idle; revision evidence organized — 2026-10-03
+
+总入口：E:/OneDrive/文档/GuardFed/docs/返修实验总览.md。2026-10-03 04:26 UTC实测：服务器213.224.31.105:26712在线，项目目录存在，0个训练worker，既有服务均EXITED；64结果/终轮70保留且轮次与日志无新增，0失败/新错误，两张5090空闲、25/24℃，Recovery None；CPU0.007/61.44核，内存24.17/129.37GB、failcnt0，磁盘剩余2.047TB。阶段A700条、共享校准700模型、FedAA/LASA64项已验收备份；当前没有新训练。仍需补齐17方法矩阵、新增两方法多种子、其余8方法、图像机制消融、最终评价及正文/回复。
 
 巡检核验：原调度器实际PAUSED，与旧本地ACTIVE记录不一致；按用户继续巡检的授权，已恢复原guardfed-training-health任务并更新提示，读取调度器确认ACTIVE且下次运行时间非空。健康空闲不通知，不因旧64项完成再次暂停，不自动开启未冻结队列。
 
