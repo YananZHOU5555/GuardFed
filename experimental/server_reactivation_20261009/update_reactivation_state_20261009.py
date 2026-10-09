@@ -459,6 +459,63 @@ if seven_root.exists():
         independent_metrics=63, independent_confusion_counts=168, independent_prediction_rules=21,
         root_verification_sha256=sha(seven_root), paired_Full_six_three_views_missing=True)
     state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_mechanism_valid_remaining7']
+fifteen_root = CHECKS / 'MECHANISM_FIFTEEN_STARTUP_ROOT_VERIFICATION.json'
+if fifteen_root.exists():
+    proof = read(fifteen_root)
+    folder = ROOT / 'tmp/celeba_mechanism_valid_incremental_v2_execution_20261009/startup_delivery'
+    assert sha(folder/'startup_delivery.tar.gz') == proof['archive_sha256']
+    observed = proof['raw_live_evidence']
+    workers = [p for p in observed['processes'] if p['role'] == 'worker']
+    assert len(workers) == 1 and workers[0]['cpus'] == list(range(112,120))
+    assert workers[0]['nice'] == 10 and workers[0]['cuda_visible_devices'] == ''
+    assert workers[0]['user_seconds'] + workers[0]['system_seconds'] > 0
+    assert workers[0]['thread_environment']['OMP_NUM_THREADS'] == workers[0]['thread_environment']['MKL_NUM_THREADS'] == '8'
+    assert observed['batch_failure'] is None and not observed['new_training'] and not observed['new_Full_inference'] and not observed['new_test_inference']
+    state['celeba_mechanism_v1']['incremental_fifteen_valid_replay'] = dict(
+        status='EXACT15_RUNNING_AT_STARTUP_OBSERVATION',service_at_observation=observed['service'],
+        observed_utc=observed['utc'],selected_original_terminals=15,earlier_eight_excluded=True,
+        new_training=0,new_Full_inference=0,new_test_inference=0,
+        remote_strict_complete_at_observation=len(observed['completed']),
+        startup_not_offserver_scientific_acceptance=True,
+        source_seal_sha256=proof['execution_source_seal_sha256'],
+        startup_archive_sha256=proof['archive_sha256'],startup_members_verified=44,
+        root_startup_verification_sha256=sha(fifteen_root),cpu_threads=8,cpus=list(range(112,120)),
+        entry='tmp/celeba_mechanism_valid_incremental_v2_execution_20261009')
+    state['active_services'] = list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_incremental15']))
+    previous_ids = state['celeba_mechanism_v1']['three_view_accepted_ids']
+    incremental_proofs = list(CHECKS.glob('MECHANISM_VALID_INCREMENTAL_*_ROOT_VERIFICATION.json'))
+    newly_accepted_ids = []
+    for p in incremental_proofs:
+        checked = read(p)
+        batch = ROOT/'tmp/celeba_mechanism_valid_incremental_v2_execution_20261009/backups'/checked['batch']
+        assert sha(batch/'incremental_valid_three_views.tar.gz') == checked['archive_sha256']
+        assert sha(batch/'OFFSERVER_VERIFICATION.json') == checked['offserver_verification_sha256']
+        assert not set(checked['accepted_new_ids']).intersection(previous_ids+newly_accepted_ids)
+        assert checked['native_max_abs_difference'] == checked['Full_reinference'] == checked['original_models_repacked'] == 0
+        newly_accepted_ids.extend(checked['accepted_new_ids'])
+    if newly_accepted_ids:
+        combined = sorted(previous_ids+newly_accepted_ids)
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=len(combined),
+            three_view_new_models_offserver_verified=len(combined),three_view_accepted_ids=combined,
+            mechanism_raw_native_shared_evaluation='INCREMENTAL_STRICT_VALID_REPLAYS_OFFSERVER_VERIFIED',
+            three_view_scope_limit='Actual accepted minus_U terminals only; original eight plus explicit new deltas; no Full reinference or test')
+        state['celeba_mechanism_v1']['incremental_fifteen_valid_replay'].update(
+            new_offserver_root_accepted=len(newly_accepted_ids),new_offserver_root_accepted_ids=newly_accepted_ids,
+            original_eight_reference_only=True,root_incremental_proof_paths=[p.relative_to(TRAIN).as_posix() for p in incremental_proofs])
+hybrid_cuda_start_root = CHECKS / 'HYBRID_CUDA_STARTUP_ROOT_VERIFICATION.json'
+if hybrid_cuda_start_root.exists():
+    proof = read(hybrid_cuda_start_root)
+    folder = ROOT/'tmp/celeba_hybrid_cuda_execution_20261009/execution_attachments/startup_backup'
+    assert sha(folder/'FILES_SHA256.json') == proof['startup_delivery_seal_sha256']
+    assert sha(folder/'offserver_verification.json') == proof['offserver_proof_sha256']
+    state['hybrid_cuda_gate_20261009'] = dict(status='FOUR_CUDA_CANARIES_RUNNING_AT_STARTUP_OBSERVATION',
+        observed_service=proof['observed_service'],observed_first_round=1,gate_total=4,
+        source_startup_members_verified=81,source_seal_sha256=proof['execution_source_seal_sha256'],
+        root_verification_sha256=sha(hybrid_cuda_start_root),max_processes=1,cpu_threads=1,
+        allowed_cpus=[104],physical_gpu=0,nominal_compute_threads_including_gate=107,
+        quota_cores=proof['quota_cores'],startup_not_complete_gate=True,
+        formal_screen32_started=False,test_started=False,automatic_retry=False)
+    state['active_services'] = list(dict.fromkeys(state['active_services']+['guardfed_celeba_hybrid_cuda_four']))
 flscreen_root = CHECKS / 'FLGMM32_STARTUP_ROOT_VERIFICATION.json'
 flscreen_started = flscreen_root.exists()
 if flscreen_started:
@@ -632,6 +689,12 @@ if fl_two_root.exists():
     top += 'FLGMM搜索接受更新：首2/32条完整70轮任务已严格接受并离机备份，22成员经主代理核SHA及原冻结接受器复核。它们仅是同一候选的IID/Benign与IID/S-DFA；尚无完整四条件候选，未选择冠军，30条未接受。原32项队列继续；此前“尚无完整70轮接受”为启动观察。凭据FLGMM_FIRST_TWO_ROOT_VERIFICATION.json。\n\n'
 if hybrid_complete_root.exists():
     top += 'Hybrid CPU门检完成更新：两新non-IID加两原IID引用已全部严格接受，56成员离机及主代理同checkpoint张量/每轮指标/攻击/诊断/RNG核验通过。原失败仍有效保留；修复服务正常EXITED，不重启。两新为恒定负类短程结果，不作性能优势证据，不推断CUDA或70轮等价。四项CUDA门检包另行审阅批准，32项搜索尚未授权启动。凭据HYBRID_REPAIRED_TWO_ROOT_VERIFICATION.json。\n\n'
+if fifteen_root.exists():
+    top += '机制下一增量实际启动：guardfed_celeba_mechanism_valid_incremental15仅重放23真实终轮减去已闭合8的精确15，顺序fresh-child、单进程8线程、CPU112–119/nice10/CUDA隐藏；137原source/data/artifact身份预检通过，启动44成员离机及主代理核SHA，实际child CPU增长。原19准备包/科学函数不改；外部批准只适配独占新输出路径。启动快照远端strict完成2不当作离机新接受，不训练/推理Full或test；完整增量另行接受。凭据MECHANISM_FIFTEEN_STARTUP_ROOT_VERIFICATION.json。\n\n'
+    if newly_accepted_ids:
+        top += f"机制三视图增量接受更新：本15中{len(newly_accepted_ids)}条新增已原严格接受、离机SHA/member闭合并由主代理独立重算预测规则/指标/混淆计数；合计{len(combined)}条新机制终轮三视图接受，native误差0。未重包原模型/重推理Full；其余任务仍以独立真实验收为准。\n\n"
+if hybrid_cuda_start_root.exists():
+    top += 'Hybrid CUDA四项门检实际启动：独占新执行副本沿原5科学源/body/driver/writer，GPU0/CPU104单线程/nice10，真实首轮及cuda:0运行时身份已核。81成员source/startup离机及主代理核SHA，资源107名义计算线程含新机制15，低于122.88配额；不是实用率。全部四项严格接受及离机闭合前不称完整门检PASS；32搜索仍PREPARED，不运行test。凭据HYBRID_CUDA_STARTUP_ROOT_VERIFICATION.json。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

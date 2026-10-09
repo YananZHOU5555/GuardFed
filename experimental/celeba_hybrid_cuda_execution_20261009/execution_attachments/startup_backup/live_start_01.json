@@ -1,0 +1,56 @@
+{
+  "at_unix": 1791542251.4177363,
+  "service": "guardfed_celeba_hybrid_cuda_four   RUNNING   pid 29217, uptime 0:00:18",
+  "workers": [
+    {
+      "pid": 29220,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "/workspace/guardfed_checks/celeba_hybrid_cuda_execution_20261009/driver.py",
+        "run",
+        "--kind",
+        "gate",
+        "--approved",
+        "/workspace/guardfed_checks/celeba_hybrid_cuda_execution_20261009/APPROVED_gate.json",
+        "--approved-sha256",
+        "da49e151d2cc2766da90c3559fac972b504c40ef5d64152822706cb43a112c36"
+      ],
+      "cwd": "/workspace/guardfed_checks/celeba_hybrid_cuda_execution_20261009",
+      "cpus": [
+        104
+      ],
+      "nice": 10,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "OPENBLAS_NUM_THREADS": null,
+        "CUBLAS_WORKSPACE_CONFIG": null
+      }
+    }
+  ],
+  "runs": {
+    "IID_Benign_hybrid_seed91001_cuda_gate3": {
+      "files": [
+        "resource_before.json",
+        "provenance.json"
+      ],
+      "progress": null
+    },
+    "IID_Benign_legacy_reference_seed91001_cuda_gate3": {
+      "files": [],
+      "progress": null
+    },
+    "non-IID_S-DFA_hybrid_seed91001_cuda_gate3": {
+      "files": [],
+      "progress": null
+    },
+    "non-IID_S-DFA_legacy_reference_seed91001_cuda_gate3": {
+      "files": [],
+      "progress": null
+    }
+  },
+  "failure": null,
+  "logging_utils": "# Load PTY wrapper for progress bar support\n. \"$(dirname \"${BASH_SOURCE[0]}\")/pty.sh\"\nlogpath=$1\nlogfile=\"${logpath:-/var/log/portal/${PROC_NAME}.log}\"\n[[ -f \"$logfile\" ]] && mv \"${logfile}\" \"${logfile}.old\"\n# Rotate the clean log alongside the portal log (log-tee auto-derives\n# /var/log/<name>.log from /var/log/portal/<name>.log)\nif [[ -z \"$logpath\" ]]; then\n    cleanlog=\"/var/log/${PROC_NAME}.log\"\n    [[ -f \"$cleanlog\" ]] && mv \"${cleanlog}\" \"${cleanlog}.old\"\nfi\nif command -v log-tee &>/dev/null; then\n    exec > >(log-tee \"${logfile}\")\nelse\n    exec > >(tee -a \"${logfile}\")\nfi\nexec 2>&1"
+}

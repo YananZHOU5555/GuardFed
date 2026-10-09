@@ -1,0 +1,6 @@
+{
+  "status": "FAILED_LOCAL_PATH_STRING_PORTABILITY",
+  "error": "Windows str(Path) used backslashes in Linux output comparison",
+  "scope": "identity-only check, before any upload or inference",
+  "fix": "Compare remote paths with Path.as_posix(); exact Linux path unchanged"
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eo pipefail
+. /opt/supervisor-scripts/utils/logging.sh
+. /opt/supervisor-scripts/utils/environment.sh
+set -u
+stage=/workspace/guardfed_checks/celeba_mechanism_valid_incremental_v2_execution_20261009
+cd "$stage"
+read -r approved_sha < "$stage/APPROVED.sha256"
+[[ "$approved_sha" =~ ^[0-9a-f]{64}$ ]]
+export CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -u "$stage/batch.py" manage --approved "$stage/APPROVED.json" --approved-sha256 "$approved_sha"
