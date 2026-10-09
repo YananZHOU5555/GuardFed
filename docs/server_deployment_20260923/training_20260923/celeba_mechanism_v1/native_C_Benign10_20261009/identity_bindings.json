@@ -1,0 +1,3367 @@
+{
+  "status": "ACCEPTED_ORIGINAL_NATIVE_IDENTITIES_BOUND_NO_MODEL_READ",
+  "bindings": [
+    {
+      "seed": 91001,
+      "id": "minus_C_IID_Benign_seed91001",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91001",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T181013Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91001.json",
+          "bytes": 5668,
+          "sha256": "0f553d0a7508f129584387edd004dbd10e536fd23001ca74bfab7ed052a467f6"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91001/config.json",
+          "bytes": 1907,
+          "sha256": "c96c90f369290ec1309864e208e960f7f5d67b780a7445f778ed5dbdf7b8189f"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91001/result.json",
+          "bytes": 2212101,
+          "sha256": "1a0c81ae09f550df1e9f5ac8a5f8b7f6704b2d92006c748641728ee48efbe92c"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91001/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "4fd9853b9859e676f6fd866c0ab55c44baae465dac5aeae03a7376df0a86d313"
+        }
+      },
+      "checkpoint_sha256": "ea97ab3211774dfcf83a3a246de0f5f6c7fdeb5ad85e368a4668a27eb1dcae25",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91001/model.pt",
+        "sha256": "f4bb0646f0145053373de97ce593f1f2c60fab3ede1c606bb1566f51533973a8",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91001/result.json",
+        "sha256": "53d7549279d9d0196d91998810a4cfe42b661f5e2951b9d2830b7d7561a00163",
+        "bytes": 2268003,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91001.json",
+        "sha256": "10c5bbc8866fdb43841a028e939889a86abd8d2f2b292fb9d90833658beff130",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91001",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91001,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "97206f5c734ac8e9099dae600bf968d9442d02b4dff7e2cad19da1ecea1f4aa0",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91001",
+          "minus_C_IID_Benign_seed91001"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8425,
+            "1": 7852
+          },
+          "server_group_counts": {
+            "0|0": 4318,
+            "0|1": 5133,
+            "1|0": 4107,
+            "1|1": 2719
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2652823001781655,
+            "0|1": 0.3153529520181852,
+            "1|0": 0.2523192234441236,
+            "1|1": 0.16704552435952572
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.003544879277508156,
+          "group_kl": 3.470695385154144e-05,
+          "max_group_abs_delta": 0.0031271118756527883,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.002703200835534797
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4318,
+            "0|1": 5133,
+            "1|0": 4107,
+            "1|1": 2719
+          },
+          "clean_root_sha256": "6d8c343ecbffe7b4aec2db767c896a56d9a2666db593a46422dc9a279607fb59",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4318,
+            "0|1": 5133,
+            "1|0": 4107,
+            "1|1": 2719
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7351,
+            7320,
+            7305,
+            7336,
+            7261,
+            7406,
+            7410,
+            7412,
+            7233,
+            7259,
+            7287,
+            7403,
+            7365,
+            7383,
+            7284,
+            7387,
+            7302,
+            7252,
+            7255,
+            7282
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "0f553d0a7508f129584387edd004dbd10e536fd23001ca74bfab7ed052a467f6",
+        "result_sha256": "1a0c81ae09f550df1e9f5ac8a5f8b7f6704b2d92006c748641728ee48efbe92c",
+        "checkpoint_sha256": "ea97ab3211774dfcf83a3a246de0f5f6c7fdeb5ad85e368a4668a27eb1dcae25",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91002,
+      "id": "minus_C_IID_Benign_seed91002",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91002",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T181013Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91002.json",
+          "bytes": 5668,
+          "sha256": "fa1a83734d134fec3bf01518bc34bc3572fe264c193389be25a59ab1c8933858"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91002/config.json",
+          "bytes": 1907,
+          "sha256": "c4f0fc0d003b0d5e1b251355514f22e54f5bc166c8b747d2a0b49dcb32056a3a"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91002/result.json",
+          "bytes": 2262099,
+          "sha256": "3d0f27b8649d170451229d72e8f58119d96cf8746a4190c6bf8a4e3da618e774"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91002/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "95fd6485acbee4b65543c2e76c65356fac5eae364d8a668769f80176176c263e"
+        }
+      },
+      "checkpoint_sha256": "2d88e8ae43f52d76e4ab3dfe9d988df6ad012ee3fe3b71ae68291e391d1b127d",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91002/model.pt",
+        "sha256": "1cdadf636baeb9ce3902425d8e68e4cb2a391bb12b219bd017af688cea2970b5",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91002/result.json",
+        "sha256": "986651fc2026dd623545da81ee114209b0b11bb3ea85fe855b5b9a344538351d",
+        "bytes": 2282148,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91002.json",
+        "sha256": "eb9f675b00d5826ca747e1d06d1b53b682a55ae9228a73949bfe22fb8c142802",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91002",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91002,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "9616321fd7f6a6caa8b0e5260ce8d439d5c555c18d723eae423489cd679bbe29",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91002",
+          "minus_C_IID_Benign_seed91002"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8408,
+            "1": 7869
+          },
+          "server_group_counts": {
+            "0|0": 4300,
+            "0|1": 5151,
+            "1|0": 4108,
+            "1|1": 2718
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2641764452909013,
+            "0|1": 0.3164588069054494,
+            "1|0": 0.2523806598267494,
+            "1|1": 0.16698408797689993
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.00471217054739817,
+          "group_kl": 6.318285176808315e-05,
+          "max_group_abs_delta": 0.004232966762917012,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.003747619340173286
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4300,
+            "0|1": 5151,
+            "1|0": 4108,
+            "1|1": 2718
+          },
+          "clean_root_sha256": "c7976a046749e7d52195c418fccae10f6f4cac7d1f877663dca95068b68c6113",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4300,
+            "0|1": 5151,
+            "1|0": 4108,
+            "1|1": 2718
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b912bf10cc84946c88b3162cabd26914a4d55b6ae8bac759f05e3bb8183954b3",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7231,
+            7256,
+            7271,
+            7486,
+            7424,
+            7208,
+            7394,
+            7516,
+            7288,
+            7353,
+            7240,
+            7243,
+            7333,
+            7423,
+            7350,
+            7331,
+            7320,
+            7238,
+            7239,
+            7349
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "fa1a83734d134fec3bf01518bc34bc3572fe264c193389be25a59ab1c8933858",
+        "result_sha256": "3d0f27b8649d170451229d72e8f58119d96cf8746a4190c6bf8a4e3da618e774",
+        "checkpoint_sha256": "2d88e8ae43f52d76e4ab3dfe9d988df6ad012ee3fe3b71ae68291e391d1b127d",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91003,
+      "id": "minus_C_IID_Benign_seed91003",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91003",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T181013Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91003.json",
+          "bytes": 5668,
+          "sha256": "0e6d257109a82709f61018232b39de5f5daa059950eb860d3a44e47ba8385a8f"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91003/config.json",
+          "bytes": 1907,
+          "sha256": "080c46ed59ee23d10072f1fde86732974728ad0c1432305ae7475bfd377816f3"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91003/result.json",
+          "bytes": 2259641,
+          "sha256": "93fcfdfe213a653abafde260302a2b0c95ce8b068ece3fc50728f7aef9b5707e"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91003/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "c4604a8b7b97831a353330b86081f5625994326dddb91f2be7787451a5663404"
+        }
+      },
+      "checkpoint_sha256": "314657f6ab239ed910fe14a0013621cc3b35cdcd8cb6a673e2b6eee5e9481a8d",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91003/model.pt",
+        "sha256": "af6229318e3f9faea530611789db00b0da6f33f459243a62b29b8acd100e0bc5",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91003/result.json",
+        "sha256": "528ce14e8aa29c1a5af40b7807c0987855726f134af5472c092aef9fd75dde78",
+        "bytes": 2271408,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91003.json",
+        "sha256": "0ee16d5d31338174c7e9a9d51f229b7c129f65a48c915c4ba8459e6fc25e8a4a",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91003",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91003,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "c298b4b5c3a15ed260c34f8384bfd8df5a189344e98b6f095281a8ed734616f5",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91003",
+          "minus_C_IID_Benign_seed91003"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8382,
+            "1": 7895
+          },
+          "server_group_counts": {
+            "0|0": 4315,
+            "0|1": 5136,
+            "1|0": 4067,
+            "1|1": 2759
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.26509799103028814,
+            "0|1": 0.31553726116606257,
+            "1|0": 0.24986176813909197,
+            "1|1": 0.16950297966455735
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.005344965288443804,
+          "group_kl": 5.8511092622704885e-05,
+          "max_group_abs_delta": 0.003311421023530159,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.005344965288443859
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4315,
+            "0|1": 5136,
+            "1|0": 4067,
+            "1|1": 2759
+          },
+          "clean_root_sha256": "8fe8d0250763dc299e03c8f5adbfa2c8fe51cf1c94ab51526c79143e00f94a93",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4315,
+            "0|1": 5136,
+            "1|0": 4067,
+            "1|1": 2759
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "0714b84ec4bbfbb993a1f42d32cdf6ccf08a3edf7e8604200d6761223bb4441b",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7286,
+            7333,
+            7233,
+            7375,
+            7232,
+            7297,
+            7263,
+            7271,
+            7270,
+            7163,
+            7392,
+            7429,
+            7367,
+            7418,
+            7311,
+            7532,
+            7343,
+            7315,
+            7266,
+            7397
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "0e6d257109a82709f61018232b39de5f5daa059950eb860d3a44e47ba8385a8f",
+        "result_sha256": "93fcfdfe213a653abafde260302a2b0c95ce8b068ece3fc50728f7aef9b5707e",
+        "checkpoint_sha256": "314657f6ab239ed910fe14a0013621cc3b35cdcd8cb6a673e2b6eee5e9481a8d",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91004,
+      "id": "minus_C_IID_Benign_seed91004",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91004",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T181013Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91004.json",
+          "bytes": 5668,
+          "sha256": "d96805cead35ff22a8d01fa36a06a6c9d242e240b9e26ec4720a05f7fb18eca2"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91004/config.json",
+          "bytes": 1907,
+          "sha256": "d708ba4d3a3860192a686e4545e6949e793a069e8945bc83da4069d443df066b"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91004/result.json",
+          "bytes": 2249222,
+          "sha256": "a350bc1d2f3280c1dcc1192243d17000c3040c0736063bd4a2f92d33c398a4a7"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91004/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "2a080f75b515695a0f4fd6dbaf71b239157c8095bd716a5e570ac7bc960bb6fb"
+        }
+      },
+      "checkpoint_sha256": "efdad2e96c86b5712626742bb18e4943688d256309ba83a1f4f3fb24405a5c77",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91004/model.pt",
+        "sha256": "4b05b755f2ef2d817cc3b9728787a9f79aa9f37c99233ae4747ec1e4107cc701",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91004/result.json",
+        "sha256": "4a468d2bd9f88488322775854cae00e3adb56dc825fcbcc5ec58cd8d839cabae",
+        "bytes": 2276144,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91004.json",
+        "sha256": "997c007363292e8ff0c43c2466e7a8f6395ec891d234fbd38471913afed62961",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91004",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91004,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "a8fbb027d64e524de6ba1686a946e906c99a4262d29f78edb04a4af8555e86d1",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91004",
+          "minus_C_IID_Benign_seed91004"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8547,
+            "1": 7730
+          },
+          "server_group_counts": {
+            "0|0": 4403,
+            "0|1": 5048,
+            "1|0": 4144,
+            "1|1": 2682
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.27050439270135773,
+            "0|1": 0.3101308594949929,
+            "1|0": 0.2545923696012779,
+            "1|1": 0.16477237820237145
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.0047920378448117334,
+          "group_kl": 5.140401147744585e-05,
+          "max_group_abs_delta": 0.002697057197272229,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.004792037844811664
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4403,
+            "0|1": 5048,
+            "1|0": 4144,
+            "1|1": 2682
+          },
+          "clean_root_sha256": "415642a5aacc931d4d5a42373287af7260d90855025b1f4a5562690e355fc521",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4403,
+            "0|1": 5048,
+            "1|0": 4144,
+            "1|1": 2682
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "428470d23b3d16031dc9125fbf6391c7ebc6bc1fa062c563eb60fa8ddfd93ec9",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7414,
+            7405,
+            7369,
+            7339,
+            7447,
+            7237,
+            7354,
+            7275,
+            7226,
+            7289,
+            7245,
+            7234,
+            7433,
+            7264,
+            7417,
+            7347,
+            7246,
+            7354,
+            7324,
+            7274
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "d96805cead35ff22a8d01fa36a06a6c9d242e240b9e26ec4720a05f7fb18eca2",
+        "result_sha256": "a350bc1d2f3280c1dcc1192243d17000c3040c0736063bd4a2f92d33c398a4a7",
+        "checkpoint_sha256": "efdad2e96c86b5712626742bb18e4943688d256309ba83a1f4f3fb24405a5c77",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91005,
+      "id": "minus_C_IID_Benign_seed91005",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91005",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91005.json",
+          "bytes": 5668,
+          "sha256": "fe6a23536a2883f4194990576176cf5435a00329586e34813199559f54a7606b"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91005/config.json",
+          "bytes": 1907,
+          "sha256": "0bb84040b19b4b8f5f3f1479881840afdb3ad72fc79aec5c5f13047b0c45544e"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91005/result.json",
+          "bytes": 2250465,
+          "sha256": "26ec38b4d209d290ccbfd7cb6f349ccc404e026d2cfa0edb897faad74bc8084a"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91005/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "21c59493beb9caa2a5bc2d03f91ef50e53582bb5272c616c1a65ea42e3238c85"
+        }
+      },
+      "checkpoint_sha256": "adc71ad7744d06315b8f937fc28285e5629a06a4b77a6002653db4b399adeb58",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91005/model.pt",
+        "sha256": "c0c94ab4411094220c95d244094f1090d13d208ae047395d9ae6745b97382287",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91005/result.json",
+        "sha256": "bd2fcdfd42bd732a49ecf63a920515f0e6d849ea9bbe363c62bd7a2088d58826",
+        "bytes": 2280818,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91005.json",
+        "sha256": "dbe9af76f4ad47d4e3f6c059376f013c56822d68212dfc1402ebd8df1b9426b6",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91005",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91005,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "bd446a2b7cb9d5764d86f6b51db3f46cc72c3a6c41a64cdf55713785d197dda4",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91005",
+          "minus_C_IID_Benign_seed91005"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8494,
+            "1": 7783
+          },
+          "server_group_counts": {
+            "0|0": 4356,
+            "0|1": 5095,
+            "1|0": 4138,
+            "1|1": 2688
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2676168827179456,
+            "0|1": 0.3130183694784051,
+            "1|0": 0.2542237513055231,
+            "1|1": 0.1651409964981262
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.003114824599127583,
+          "group_kl": 2.9092535816264064e-05,
+          "max_group_abs_delta": 0.0023284389015174878,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.0015359095656447552
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4356,
+            "0|1": 5095,
+            "1|0": 4138,
+            "1|1": 2688
+          },
+          "clean_root_sha256": "a2331eefc791400c018d2589c3888b08bdec307cb0fe3463d871243ebfcbb50c",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4356,
+            "0|1": 5095,
+            "1|0": 4138,
+            "1|1": 2688
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "9f64191242bedac086d91b2ec1541d06b8a4381566fbffe361169bd3ce13a8de",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7352,
+            7243,
+            7307,
+            7216,
+            7424,
+            7375,
+            7292,
+            7450,
+            7363,
+            7348,
+            7336,
+            7288,
+            7268,
+            7287,
+            7304,
+            7244,
+            7349,
+            7444,
+            7293,
+            7310
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "fe6a23536a2883f4194990576176cf5435a00329586e34813199559f54a7606b",
+        "result_sha256": "26ec38b4d209d290ccbfd7cb6f349ccc404e026d2cfa0edb897faad74bc8084a",
+        "checkpoint_sha256": "adc71ad7744d06315b8f937fc28285e5629a06a4b77a6002653db4b399adeb58",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91006,
+      "id": "minus_C_IID_Benign_seed91006",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91006",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91006.json",
+          "bytes": 5668,
+          "sha256": "4b1dc7d9f42a1d5d9adf3da4c7820d257778de8bda45ccaa49b74252c5f74eba"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91006/config.json",
+          "bytes": 1907,
+          "sha256": "8a5f934a299cfa66e26c2a36aa7d9abad3bd22a12e63001493887195ad5fdf73"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91006/result.json",
+          "bytes": 2255775,
+          "sha256": "c6c3b2015ba8679d94c2eba911a5b678785e5b6f99d5a0f4b139495aacc40514"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91006/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "33abe63b35ac3361a68cc7b5971a94f33e545f579792a0b5f22de1e846867af8"
+        }
+      },
+      "checkpoint_sha256": "0d8f0a9cf8984838f00a7835de4e4b20755028a0f2e2e28554ad3315c9527074",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91006/model.pt",
+        "sha256": "1970c7976beb679a9fc12b0d510e58a61ea215d08deb7cc6d21f04d878b8f2bb",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91006/result.json",
+        "sha256": "cffaa297e067df97a0d9e08d3890b3133bc716c8440e8bb5439657847a5be86c",
+        "bytes": 2276294,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91006.json",
+        "sha256": "7f649e03c68e3d87a36417ff329cc489f51a8db2fc439f5b4fd8fc44a5627eae",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91006",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91006,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "4fd126e6689fdbd9f88529975b06bb5d06fa54d6e74e102ac84dee0b2968dee7",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91006",
+          "minus_C_IID_Benign_seed91006"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8465,
+            "1": 7812
+          },
+          "server_group_counts": {
+            "0|0": 4373,
+            "0|1": 5078,
+            "1|0": 4092,
+            "1|1": 2734
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.268661301222584,
+            "0|1": 0.3119739509737667,
+            "1|0": 0.25139767770473676,
+            "1|1": 0.16796707009891257
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.000755667506297214,
+          "group_kl": 1.4683436548654357e-06,
+          "max_group_abs_delta": 0.0005037783375314575,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.00024574553050316084
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4373,
+            "0|1": 5078,
+            "1|0": 4092,
+            "1|1": 2734
+          },
+          "clean_root_sha256": "1a7d5ef9a2353379a094aadb22121aa7a8efb56371dacb61010ee722311d040a",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4373,
+            "0|1": 5078,
+            "1|0": 4092,
+            "1|1": 2734
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "f8b60acfdd7e62c09787da55a173f9beb60dc07b9d262319b81acab7632fa479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7332,
+            7250,
+            7284,
+            7266,
+            7314,
+            7385,
+            7364,
+            7355,
+            7326,
+            7397,
+            7373,
+            7330,
+            7442,
+            7136,
+            7351,
+            7359,
+            7265,
+            7309,
+            7296,
+            7359
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "4b1dc7d9f42a1d5d9adf3da4c7820d257778de8bda45ccaa49b74252c5f74eba",
+        "result_sha256": "c6c3b2015ba8679d94c2eba911a5b678785e5b6f99d5a0f4b139495aacc40514",
+        "checkpoint_sha256": "0d8f0a9cf8984838f00a7835de4e4b20755028a0f2e2e28554ad3315c9527074",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91007,
+      "id": "minus_C_IID_Benign_seed91007",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91007",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91007.json",
+          "bytes": 5668,
+          "sha256": "319589c22fa2bef68ad06c1d900a0d7d9e30913142dd519a9c846f971646339c"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91007/config.json",
+          "bytes": 1907,
+          "sha256": "7e0ec88468c374255a979bb9b8ca63807ce0ef12715938fd1886413efa6f0f11"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91007/result.json",
+          "bytes": 2249576,
+          "sha256": "028f518992bf3cac6e6fbfea80889dc3d438a0a9edfc655b7d1b04bd26d824c5"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91007/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "2bd567a24741c40f52be11dacae3f6ed79ddcebbd500cb80b865b1fe831477bf"
+        }
+      },
+      "checkpoint_sha256": "d7d76f9e1c0f9cef6460f7e4b1599cb3d8ac7f49850bec78abd83007ef839f9f",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91007/model.pt",
+        "sha256": "b147e20e00a4d79cdd5ca441d8becb1efe39da0a9f8e6be92c8a3908b61389cf",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91007/result.json",
+        "sha256": "08ff78bb648ec67b19a183c4c66151ee03c5d79718a5928f70c6dd292f8a000d",
+        "bytes": 2276136,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+        "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91007.json",
+        "sha256": "94b09ef170135ce75393f421449f82bf3bb0c993dfc8e15291854e920cea530a",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91007",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91007,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "de0c052b65b8001e1c8bb0937f3e0889c699ae683eb43c9cf2f6b431d21208cb",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91007",
+          "minus_C_IID_Benign_seed91007"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8459,
+            "1": 7818
+          },
+          "server_group_counts": {
+            "0|0": 4364,
+            "0|1": 5087,
+            "1|0": 4095,
+            "1|1": 2731
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2681083737789519,
+            "0|1": 0.3125268784173988,
+            "1|0": 0.2515819868526141,
+            "1|1": 0.1677827609510352
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.0006143638262578743,
+          "group_kl": 8.027292083639362e-07,
+          "max_group_abs_delta": 0.0003194691896540869,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.0006143638262579021
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4364,
+            "0|1": 5087,
+            "1|0": 4095,
+            "1|1": 2731
+          },
+          "clean_root_sha256": "38038df2a9a497b3d528e9f5e542531f8e36e4131a1ec55445420236a3480e26",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4364,
+            "0|1": 5087,
+            "1|0": 4095,
+            "1|1": 2731
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "1b90dbca172cde5e8400727845a8da589f8d6f3bb8f55957e41bd9d22a94f9e7",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7292,
+            7321,
+            7126,
+            7292,
+            7271,
+            7326,
+            7396,
+            7412,
+            7232,
+            7246,
+            7327,
+            7340,
+            7363,
+            7273,
+            7374,
+            7402,
+            7329,
+            7419,
+            7380,
+            7372
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "319589c22fa2bef68ad06c1d900a0d7d9e30913142dd519a9c846f971646339c",
+        "result_sha256": "028f518992bf3cac6e6fbfea80889dc3d438a0a9edfc655b7d1b04bd26d824c5",
+        "checkpoint_sha256": "d7d76f9e1c0f9cef6460f7e4b1599cb3d8ac7f49850bec78abd83007ef839f9f",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91008,
+      "id": "minus_C_IID_Benign_seed91008",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91008",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91008.json",
+          "bytes": 5668,
+          "sha256": "b541a56b84bb5b6f6ead67c41699837691d59d53690224cfd48514bc57bca2bc"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91008/config.json",
+          "bytes": 1907,
+          "sha256": "f33e3b9e1453660325f7f908da22c332a7c0b5b4685c7882ede6b9ac4bf310f2"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91008/result.json",
+          "bytes": 2253238,
+          "sha256": "764b1951972c8e941924b6d3c1a23a37eb52b183d491a9f3ba86f84e13eb08fa"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91008/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "a5a81d02e01404b70ee686c898f1845c1e20bf34b8979b0101fae99ab367a057"
+        }
+      },
+      "checkpoint_sha256": "2ac6d1c11ea1b852e2a8f9ec999551e0ffdef656a58291877a5fdb9c0a473716",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental52_total461_20260927T140654Z.tar.gz",
+        "archive_sha256": "bd11612cb04c5fdfbd592481237322d0eb0073be37901e6ff2cf2e6d815ab430",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91008/model.pt",
+        "sha256": "67365d094d97bb5a7606be4001afa0d2b532d8a2f590506fa9075bf1112d2db0",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental52_total461_20260927T140654Z.tar.gz",
+        "archive_sha256": "bd11612cb04c5fdfbd592481237322d0eb0073be37901e6ff2cf2e6d815ab430",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91008/result.json",
+        "sha256": "0a96f8eacb922d810fe9126356328bf92ebacb1eb6bb4345bf11b52ddefd52f2",
+        "bytes": 2274822,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental52_total461_20260927T140654Z.tar.gz",
+        "archive_sha256": "bd11612cb04c5fdfbd592481237322d0eb0073be37901e6ff2cf2e6d815ab430",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91008.json",
+        "sha256": "3e12fc14177528909f58f4497f1e77d2321bf385fcea62930d73f29d426a7020",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91008",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91008,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "e7cb0cee8508b7af9dd7b3fcf07da74aa77389495ebcb56a4619198bcd7a25ac",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91008",
+          "minus_C_IID_Benign_seed91008"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8591,
+            "1": 7686
+          },
+          "server_group_counts": {
+            "0|0": 4431,
+            "0|1": 5020,
+            "1|0": 4160,
+            "1|1": 2666
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2722246114148799,
+            "0|1": 0.3084106407814708,
+            "1|0": 0.25557535172329054,
+            "1|1": 0.16378939608035878
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.007495238680346544,
+          "group_kl": 0.00011787454766453787,
+          "max_group_abs_delta": 0.00382134299932424,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.007495238680346489
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4431,
+            "0|1": 5020,
+            "1|0": 4160,
+            "1|1": 2666
+          },
+          "clean_root_sha256": "716d85345fc3b86ce2a0b7704a46d25904bc9eac4ac8fd423d47180ad0fa2ca7",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4431,
+            "0|1": 5020,
+            "1|0": 4160,
+            "1|1": 2666
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b7c6f8ae8d38c58dfb8d684534a1a3e54047e2731f9c0ef0272bc3fa700729d7",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7316,
+            7365,
+            7395,
+            7175,
+            7334,
+            7367,
+            7301,
+            7384,
+            7376,
+            7234,
+            7394,
+            7299,
+            7445,
+            7211,
+            7307,
+            7184,
+            7410,
+            7281,
+            7359,
+            7356
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "b541a56b84bb5b6f6ead67c41699837691d59d53690224cfd48514bc57bca2bc",
+        "result_sha256": "764b1951972c8e941924b6d3c1a23a37eb52b183d491a9f3ba86f84e13eb08fa",
+        "checkpoint_sha256": "2ac6d1c11ea1b852e2a8f9ec999551e0ffdef656a58291877a5fdb9c0a473716",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91009,
+      "id": "minus_C_IID_Benign_seed91009",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91009",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91009.json",
+          "bytes": 5668,
+          "sha256": "dbbe265da74d02e9c67734d9ef2c2e4f2798c1c56f8035dd3a1e5e3747d5a7c2"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91009/config.json",
+          "bytes": 1907,
+          "sha256": "807ef490c99a2723b6a22896bb6d3895fc41426bfc559286a0f79281aafb8076"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91009/result.json",
+          "bytes": 2259476,
+          "sha256": "c50be70b26771cd1942efb069510855c5685527b534a5b9d06c094504202ab5a"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91009/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "7757fced2a0a5af2682061b9c8b50cde474ee8f1db8319ff67202a5e775da1cf"
+        }
+      },
+      "checkpoint_sha256": "8e595a58baa1f2915d0841f6967389377883bd9d037814f0755d7b2e44243ec2",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+        "archive_sha256": "e59af4f3bd2a293fbded390392baf91cad84364660b2e547ce4ccfeb1c9f9362",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91009/model.pt",
+        "sha256": "d09ac4a01815d5a2a0413eb2d28fa680e64513d9d35c862c1f41781c4254e443",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+        "archive_sha256": "e59af4f3bd2a293fbded390392baf91cad84364660b2e547ce4ccfeb1c9f9362",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91009/result.json",
+        "sha256": "25cec402ddc071f08c260dc2d688fe0c70357149d954c7dca5b35adff11a29b2",
+        "bytes": 2279615,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+        "archive_sha256": "e59af4f3bd2a293fbded390392baf91cad84364660b2e547ce4ccfeb1c9f9362",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91009.json",
+        "sha256": "ed9efbd9d6e2d1d35818301d3ed1d194f4bc1cd36b54cedca7d9811f172c920e",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91009",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91009,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "a39419c3a0de1328c26a7e635184de5fcd1f303c1e5caeabff1de0a2c9c2f79e",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91009",
+          "minus_C_IID_Benign_seed91009"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8489,
+            "1": 7788
+          },
+          "server_group_counts": {
+            "0|0": 4395,
+            "0|1": 5056,
+            "1|0": 4094,
+            "1|1": 2732
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.2700129016403514,
+            "0|1": 0.31062235055599924,
+            "1|0": 0.25152055046998834,
+            "1|1": 0.167844197333661
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.001984395158813046,
+          "group_kl": 9.648627865650706e-06,
+          "max_group_abs_delta": 0.0016096332247957368,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 0.0012287276525158042
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4395,
+            "0|1": 5056,
+            "1|0": 4094,
+            "1|1": 2732
+          },
+          "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4395,
+            "0|1": 5056,
+            "1|0": 4094,
+            "1|1": 2732
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "012322877bc962928024dfac212af726e036b160b9b78ef68bad540c812c1de6",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7276,
+            7363,
+            7456,
+            7347,
+            7260,
+            7336,
+            7266,
+            7280,
+            7239,
+            7227,
+            7364,
+            7327,
+            7353,
+            7368,
+            7280,
+            7328,
+            7312,
+            7461,
+            7375,
+            7275
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "dbbe265da74d02e9c67734d9ef2c2e4f2798c1c56f8035dd3a1e5e3747d5a7c2",
+        "result_sha256": "c50be70b26771cd1942efb069510855c5685527b534a5b9d06c094504202ab5a",
+        "checkpoint_sha256": "8e595a58baa1f2915d0841f6967389377883bd9d037814f0755d7b2e44243ec2",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    },
+    {
+      "seed": 91010,
+      "id": "minus_C_IID_Benign_seed91010",
+      "Full_id": "GuardFed-AD2+_IID_Benign_seed91010",
+      "archive": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261009T190056Z.tar.gz",
+      "members": {
+        "job": {
+          "member": "jobs/minus_C_IID_Benign_seed91010.json",
+          "bytes": 5668,
+          "sha256": "0fd6fbb28258542baff4da2df1d43ba2d7531ecf8c712d0736aaf6bffffcab10"
+        },
+        "config": {
+          "member": "runs/minus_C_IID_Benign_seed91010/config.json",
+          "bytes": 1907,
+          "sha256": "6ead679bb9cfa3b1c60d1db056b711951fb199b98c51453b367f6aa81c23ffd0"
+        },
+        "result": {
+          "member": "runs/minus_C_IID_Benign_seed91010/result.json",
+          "bytes": 2243255,
+          "sha256": "7cb22ba05ab8242d895e0e6c64729a90f157dfb6c7261dfc73ba9716e224f072"
+        },
+        "acceptance": {
+          "member": "runs/minus_C_IID_Benign_seed91010/mechanism_acceptance.json",
+          "bytes": 1146,
+          "sha256": "fdf594544a4f083a60b3df56f91c91da36cb2b6c17325e3e709d377ad5142fd2"
+        }
+      },
+      "checkpoint_sha256": "9cc0770334913a71dee5aba2843e4a7c2af3735a99a11d7850b0fb3c259609ab",
+      "Full_checkpoint": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental23_total589_20260927T230926Z.tar.gz",
+        "archive_sha256": "0f4e87a2c936afc9922dfa1edc3e159119a46b140d855558895a69cc2511de1c",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91010/model.pt",
+        "sha256": "a3813aad9da98f875aa2a1c786f9a7f9980f5f043605368f6c5320d8c25e42d0",
+        "bytes": 377457,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_result": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental23_total589_20260927T230926Z.tar.gz",
+        "archive_sha256": "0f4e87a2c936afc9922dfa1edc3e159119a46b140d855558895a69cc2511de1c",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91010/result.json",
+        "sha256": "bc5fbb02f7795382edb53a63264167f465bb8d2f814d347f45117e3a347d0faf",
+        "bytes": 2272507,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "Full_raw_job": {
+        "archive": "docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/celeba_fullcoverage_incremental23_total589_20260927T230926Z.tar.gz",
+        "archive_sha256": "0f4e87a2c936afc9922dfa1edc3e159119a46b140d855558895a69cc2511de1c",
+        "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Benign_seed91010.json",
+        "sha256": "d3786ca2d0e4c7a41246d7aa944814631f2d42436313d549bba9e95286c6b8a7",
+        "bytes": 4902,
+        "archive_sha_verified_now": true,
+        "member_inventory_verified_now": true
+      },
+      "config": {
+        "ablation_component": "C",
+        "act_anchor_drop": 0.005,
+        "act_fairness_budget": 0.06,
+        "act_fairness_metric": "aeod_aspd",
+        "act_keep_ratio": 0.8,
+        "act_risk_weight": 1.0,
+        "act_temperature": 0.35,
+        "act_violation_weight": 1.0,
+        "ad2_alignment_weight": 0.35,
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_enabled": true,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_centrality_weight": 0.35,
+        "ad2_norm_clip_scale": 2.5,
+        "ad2_norm_mode": "adaptive",
+        "ad2_plus_mode": "adaptive",
+        "ad2_score_clip": 5.0,
+        "ad2_utility_weight": 1.0,
+        "aggregation_weighting": "count",
+        "batch_size": 64,
+        "celeba_cache_dir": "",
+        "celeba_eval_limit": 0,
+        "celeba_evaluation_split": "valid",
+        "celeba_train_limit": 0,
+        "client_alpha": 5000.0,
+        "compas_preprocessing_version": "train_only",
+        "device": "cuda",
+        "experiment_suite": "celeba_mechanism_v1",
+        "experiment_tag": "minus_C_IID_Benign_seed91010",
+        "fairfed_beta": 1.0,
+        "fairguard_mode": "server_aeod",
+        "fedsa_gain": 4.5,
+        "fedsa_norm_ratio": 3.0,
+        "fflip_mode": "all_unprivileged",
+        "foe_mode": "state",
+        "full_round_diagnostics": true,
+        "guardfed_fairness_lambda": 20.0,
+        "include_sensitive_feature": false,
+        "learning_rate": 0.0005,
+        "local_epochs": 1,
+        "num_clients": 20,
+        "num_malicious": 4,
+        "optimizer": "adam",
+        "root_label_noise": 0.0,
+        "root_sensitive_noise": 0.0,
+        "rounds": 70,
+        "sdfa_foe_mode": "fedsa",
+        "seed": 91010,
+        "server_alpha": null,
+        "server_ratio": 0.1,
+        "server_sampling": "stratified_sensitive",
+        "server_target_label": null,
+        "server_target_sensitive": null,
+        "spdfa_foe_mode": "fedsa",
+        "synthetic_epochs": 50,
+        "synthetic_method": "none",
+        "synthetic_ratio": 0.0,
+        "trust_threshold": 0.2,
+        "use_reweighting": true
+      },
+      "Full_config_canonical_sha256": "d009ea0e971136793351f052b49e9a3632bd6d639cc7b240d24ea9520dad3473",
+      "config_differences": {
+        "ablation_component": [
+          "none",
+          "C"
+        ],
+        "experiment_suite": [
+          "celeba_fullcoverage_v1",
+          "celeba_mechanism_v1"
+        ],
+        "experiment_tag": [
+          "GuardFed-AD2+_IID_Benign_seed91010",
+          "minus_C_IID_Benign_seed91010"
+        ]
+      },
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_hashes": {
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "server_sampling": "stratified_sensitive",
+        "server_alpha": null,
+        "server_sampling_audit": {
+          "server_sampling": "stratified_sensitive",
+          "server_alpha": null,
+          "server_target_sensitive": null,
+          "server_target_label": null,
+          "server_rows": 16277,
+          "server_sensitive_counts": {
+            "0": 9451,
+            "1": 6826
+          },
+          "server_label_counts": {
+            "0": 8470,
+            "1": 7807
+          },
+          "server_group_counts": {
+            "0|0": 4349,
+            "0|1": 5102,
+            "1|0": 4121,
+            "1|1": 2705
+          },
+          "global_group_counts": {
+            "0|0": 43688,
+            "0|1": 50821,
+            "1|0": 41002,
+            "1|1": 27259
+          },
+          "server_group_prob": {
+            "0|0": 0.267186828039565,
+            "0|1": 0.31344842415678564,
+            "1|0": 0.25317933280088467,
+            "1|1": 0.16618541500276462
+          },
+          "global_group_prob": {
+            "0|0": 0.2684032684155557,
+            "0|1": 0.3122258401425324,
+            "1|0": 0.2519014560422682,
+            "1|1": 0.16746943539964368
+          },
+          "group_tvd": 0.0025004607728697087,
+          "group_kl": 1.3322094375744272e-05,
+          "max_group_abs_delta": 0.0012840203968790542,
+          "sensitive_tvd": 6.143638262595674e-06,
+          "label_tvd": 6.143638262579021e-05
+        },
+        "root_noise_audit": {
+          "root_rows": 16277,
+          "clean_group_label_counts": {
+            "0|0": 4349,
+            "0|1": 5102,
+            "1|0": 4121,
+            "1|1": 2705
+          },
+          "clean_root_sha256": "bad200672e4c944ae84237c5abc1b34fff4efd87895422ffc603b68d079368b0",
+          "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+          "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+          "label": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "sensitive": {
+            "requested_rate": 0.0,
+            "flipped_count": 0,
+            "actual_rate": 0.0,
+            "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+          },
+          "observed_group_label_counts": {
+            "0|0": 4349,
+            "0|1": 5102,
+            "1|0": 4121,
+            "1|1": 2705
+          }
+        },
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "efa5dd7e9dc87494c74c3f3d2ebe780f02578da0fe507e532c6c7232af99aa4f",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7356,
+            7318,
+            7253,
+            7248,
+            7372,
+            7245,
+            7348,
+            7367,
+            7330,
+            7491,
+            7287,
+            7310,
+            7254,
+            7282,
+            7364,
+            7364,
+            7378,
+            7333,
+            7340,
+            7253
+          ]
+        },
+        "preprocessing_version": "rgb64_v1",
+        "synthetic_method": "none"
+      },
+      "acceptance": {
+        "variant": "minus_C",
+        "rounds": 70,
+        "candidate_calls_verified": 700,
+        "expected_candidate_calls": 700,
+        "pass": true,
+        "job_sha256": "0fd6fbb28258542baff4da2df1d43ba2d7531ecf8c712d0736aaf6bffffcab10",
+        "result_sha256": "7cb22ba05ab8242d895e0e6c64729a90f157dfb6c7261dfc73ba9716e224f072",
+        "checkpoint_sha256": "9cc0770334913a71dee5aba2843e4a7c2af3735a99a11d7850b0fb3c259609ab",
+        "candidate_audit_sha256": "512bf855f97c76a0f92d85482e5c5a92178580d6e065c4ea9db10df5ce976338",
+        "adapter_hashes": {
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b"
+        }
+      },
+      "native_prediction_rule": "root_fitted_group_thresholds_from_original_recipe",
+      "Full_training_torch": "2.11.0+cu128",
+      "C_training_torch": "2.11.0+cu128"
+    }
+  ],
+  "root_proof_sha256": "0b1e4f3ffc03730bae3bc9ff580d61a64f9ae698060f68ddaebc0e0803c54f17",
+  "independent_root_review_sha256": "b7f9f69aaeef788346a0eb7a589ebe672d38c78602d5e526d55120d0df8e5394"
+}

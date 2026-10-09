@@ -1,0 +1,315 @@
+{
+  "status": "READ_ONLY_SPEC_DECISION_COMPLETE_THREE_IDENTITIES_MATCHED_ZERO_FAITHFUL_IMPLEMENTATIONS_UNLOCKED",
+  "utc": "2026-10-09T19:31:56.550610+00:00",
+  "scope": "FedWA[28],SmartFL[33],FedDNA[35] only; source completeness, not performance or execution.",
+  "methods": [
+    {
+      "method": "FedWA",
+      "submitted_reference": 28,
+      "submitted_reference_lines": [
+        956,
+        958,
+        960,
+        962
+      ],
+      "identity_status": "MATCHED_TITLE_AUTHORS_VENUE_AND_PAGES",
+      "title": "Adaptive Aggregation Weight Assignment for Federated Learning: A Deep Reinforcement Learning Approach: Extended Abstract",
+      "authors": [
+        "Enwei Guo",
+        "Xiumin Wang",
+        "Weiwei Wu"
+      ],
+      "doi": "10.5555/3535850.3536051",
+      "doi_evidence_scope": "Existing source report and saved S2 externalIds bind this DOI; the held IFAAMAS PDF itself prints the title/authors/AAMAS2022/pages1610-1612, not a DOI. No fresh DOI request.",
+      "primary_url": "https://ifaamas.org/Proceedings/aamas2022/pdfs/p1610.pdf",
+      "held_primary_text": "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.txt",
+      "spec_status": "HELD_COMPLETE_THREE_PAGE_EXTENDED_ABSTRACT_UNDERSPECIFIES_EXECUTABLE_DRL",
+      "verified_formula_scope": {
+        "Eq1": "Client mean sample loss F_i(omega).",
+        "Eq2": "Dataset-size-weighted global objective.",
+        "Eq3": "Client-weighted global loss objective sum_i phi_i^t F_i(omega), with weights to be chosen.",
+        "Section3": "Per-round server/global model, client local training, upload, DRL contribution/weight decision, aggregation. No executable DRL learner is specified."
+      },
+      "original_short_excerpt": {
+        "text": "Using the received local models and current global model",
+        "line": 200
+      },
+      "missing": [
+        {
+          "component": "state",
+          "required": "Exact encoding/normalization/order of global and local parameter inputs; dimensionality and permutation/partial-participation behavior.",
+          "why_not_infer": "Parameter flattening, per-client features and recurrent encodings define different policies.",
+          "formula_number": null
+        },
+        {
+          "component": "action_and_model_update",
+          "required": "Exact policy output-to-client-weight map, constraints, full-model versus delta update formula and client ordering.",
+          "why_not_infer": "The printed weighted-loss objective is not a specified actor mapping or parameter aggregation equation; softmax/clipping/renormalizing cannot be assumed.",
+          "formula_number": null
+        },
+        {
+          "component": "reward_and_data_access",
+          "required": "Reward formula, reference data/labels and ownership, evaluation timing, discount and terminal rules.",
+          "why_not_infer": "Using clean root/valid/test accuracy or loss chooses different information and objectives; a reward cannot be borrowed from FedAA.",
+          "formula_number": null
+        },
+        {
+          "component": "learner_and_defaults",
+          "required": "DRL algorithm and policy/value architecture; initialization, optimizer/LR, exploration, replay/target networks if applicable, update schedule and all defaults.",
+          "why_not_infer": "DDPG/DQN/PPO and their training schedules are not interchangeable specifications.",
+          "formula_number": null
+        }
+      ],
+      "minimal_author_input": "Either the source-matched full algorithm/supplement, if one exists, or the authors implementation plus exact defaults/MDP description. Another copy of this same three-page abstract is insufficient.",
+      "executable_now": false
+    },
+    {
+      "method": "SmartFL",
+      "submitted_reference": 33,
+      "submitted_reference_lines": [
+        984,
+        985,
+        986
+      ],
+      "identity_status": "MATCHED_TITLE_AUTHOR_GROUP_ARTICLE_NUMBER_AND_DOI",
+      "title": "SmartFL: Simple majority rule based Byzantine-robust federated learning",
+      "authors": [
+        "Qihao Dong",
+        "Yansong Gao",
+        "Chunyi Zhou",
+        "Shengyuan Yang",
+        "Boyu Kuang",
+        "Anmin Fu"
+      ],
+      "doi": "10.1016/j.inffus.2025.103555",
+      "primary_url": "https://www.sciencedirect.com/science/article/pii/S156625352500627X",
+      "author_primary_url": "https://cobbd.github.io/publication/smartfl",
+      "held_primary_text": "Saved publisher XML contains coredata only; saved author publication entry contains citation only. No held full method text identified in the bounded baseline package.",
+      "spec_status": "COMPLETE_BODY_NOT_OBTAINED_CANNOT_JUDGE_WHETHER_PAPER_SPEC_IS_SUFFICIENT",
+      "formula_number_status": "No formula or algorithm numbering can be certified from held primary text. Existing reports refer to method section/Appendix C; these are retrieval targets, not independently read formulas.",
+      "missing": [
+        {
+          "component": "first_phase",
+          "required": "Exact pairwise score, how each removal pair is chosen, ties/order, stopping condition, f/majority assumptions.",
+          "why_not_infer": "Row-mean cosine top-n-f is a different operation from iterative pair deletion.",
+          "formula_number": null
+        },
+        {
+          "component": "pseudo_reference",
+          "required": "Normalized full parameters versus updates/gradients, reference formula, zero-norm and cancellation behavior.",
+          "why_not_infer": "Normalization before versus after summation and full-model versus delta semantics change the direction.",
+          "formula_number": null
+        },
+        {
+          "component": "recall_and_final_aggregation",
+          "required": "Second-phase population/recall rule, positive/zero cosine boundary, final weights and norm restoration, empty-set fallback.",
+          "why_not_infer": "Positive-cosine selection, cosine-weighted aggregation and equal averaging are different algorithms.",
+          "formula_number": null
+        },
+        {
+          "component": "experiment_defaults",
+          "required": "Complete model/training hyperparameters and method defaults, including any Appendix C supplement; all server-data assumptions.",
+          "why_not_infer": "Adapting shared CelebA local Adam or choosing constants without documenting the original/adaptation changes would not be a faithful full-method claim.",
+          "formula_number": null
+        }
+      ],
+      "minimal_author_input": "The exact DOI full PDF or accepted manuscript plus all algorithm/default appendices (prior report specifically names Appendix C); official code is an alternative, not a prerequisite if the complete mathematical specification is sufficient.",
+      "executable_now": false
+    },
+    {
+      "method": "FedDNA",
+      "submitted_reference": 35,
+      "submitted_reference_lines": [
+        991,
+        992,
+        993,
+        994,
+        995
+      ],
+      "identity_status": "MATCHED_TITLE_AUTHOR_GROUP_VOLUME_ARTICLE_NUMBER_AND_DOI",
+      "title": "FedDNA: Behavioural based approach for byzantine defense in federated learning via model fingerprinting and adaptive thresholding",
+      "authors": [
+        "Aditya Garg",
+        "Naman Bansal",
+        "Sumit Yadav",
+        "Nisha Kandhoul",
+        "Sanjay K. Dhurandher",
+        "Isaac Woungang"
+      ],
+      "doi": "10.1016/j.jisa.2025.104358",
+      "primary_url": "https://www.sciencedirect.com/science/article/pii/S2214212625003941",
+      "author_share_url_previously_attempted": "https://authors.elsevier.com/c/1mNTC7tT2C~7Mb",
+      "held_primary_text": "Saved publisher XML contains coredata only. Existing author announcement/preview routes are not full Sections3/4 or defaults.",
+      "spec_status": "COMPLETE_BODY_NOT_OBTAINED_CANNOT_JUDGE_WHETHER_PAPER_SPEC_IS_SUFFICIENT",
+      "formula_number_status": "No fingerprint/history/threshold equation number can be certified from held primary text.",
+      "missing": [
+        {
+          "component": "probe",
+          "required": "Probe source/data permissions, number, construction/preprocessing, fixed versus resampled schedule and server access.",
+          "why_not_infer": "A fixed probe is an old-report mechanism summary, not a source-complete sampling/data-access specification; root/valid/test reuse cannot be invented.",
+          "formula_number": null
+        },
+        {
+          "component": "activation_fingerprint",
+          "required": "Exact layers, activation extraction, across-probe/neuron reduction, normalization and similarity/distance formula.",
+          "why_not_infer": "Parameters, logits, penultimate activations and concatenated layer outputs are different features.",
+          "formula_number": null
+        },
+        {
+          "component": "temporal_history",
+          "required": "Per-client state/init, history reference/decay/window, consistency score, update order, new/missing-client handling.",
+          "why_not_infer": "Comparing to the current median or the previous model cannot substitute for the unknown history rule.",
+          "formula_number": null
+        },
+        {
+          "component": "MAD_and_aggregation",
+          "required": "Score being thresholded, center/MAD/scaling constant/multiplier, strictness/ties/zero-MAD, retained weights, full-model versus delta and empty/all-anomalous fallback.",
+          "why_not_infer": "A conventional3-MAD threshold on parameter norms is not the unspecified behavioral detector.",
+          "formula_number": null
+        },
+        {
+          "component": "models_and_defaults",
+          "required": "Complete model/probe/strategy defaults and algorithm/experiment appendices.",
+          "why_not_infer": "Cross-architecture activations and threshold defaults cannot be chosen from the acronym or abstract.",
+          "formula_number": null
+        }
+      ],
+      "minimal_author_input": "The exact DOI full PDF/accepted manuscript with method, implementation details and appendices, or source-matched strategy/probe/model code and defaults. Old share-link ATP-3 error does not establish permanent unavailability.",
+      "executable_now": false
+    }
+  ],
+  "primary_response_checks": {
+    "SmartFL": {
+      "top_children": [
+        "coredata"
+      ],
+      "formula_elements": 0,
+      "algorithm_elements": 0,
+      "raw_response_sha256": "5f53ba50d7ff5e9fe9dfb899171e268bef5a7963eca326f23479a3a5617bc7d9"
+    },
+    "FedDNA": {
+      "top_children": [
+        "coredata"
+      ],
+      "formula_elements": 0,
+      "algorithm_elements": 0,
+      "raw_response_sha256": "b6b6a50cdcabd1f89dc62a311d3d4e177ebf0230083d18dc8c06fc9dbbc746ce"
+    }
+  },
+  "bibliography_note": "SmartFL submitted2025 is compatible with online-first citation, whereas saved publisher coredata and Crossref identify final issue February2026 volume126 article103555; this is a citation-format clarification, not another method. FedDNA final March2026 volume97 article104358 matches submission. No manuscript/Bib changes.",
+  "minimal_recovery_sequence": [
+    "Root obtains source-matched author material stated per method; no new search or server experiment is necessary to specify the request.",
+    "Read and pin the complete algorithms, equations, defaults and legal data-access rules; code availability alone is not the accept/reject criterion.",
+    "If the full mathematical specification is sufficient, implement an isolated method adapter with equation/line map and explicit caller message semantics; preserve the existing image protocol and label any separately authorized adaptation.",
+    "First check deterministic fixed-input mechanics against the paper pseudocode/author implementation, including algorithm-specific boundaries and state restore; only then propose the smallest real-image gate for root authorization. No training or gate is executed by this package."
+  ],
+  "interface_requirements_to_resolve_before_implementation": {
+    "FedWA": "Inputs: stable client IDs, global/local model information and explicitly permitted reward observations; outputs: source-defined weights/model update and persistent policy/optimizer/RNG state. This is an integration checklist, not an invented original signature.",
+    "SmartFL": "Inputs: source-confirmed full models or updates plus any required f/majority parameter; outputs: exact filtered/recall indices, pseudo-reference and aggregate; no assumed n-f top-k.",
+    "FedDNA": "Inputs: source-confirmed models, permitted probe tensors and persistent per-client history; outputs: fingerprints/consistency/threshold/accepted set/aggregate and history. No probe constructed here."
+  },
+  "new_primary_searches": 0,
+  "new_downloads": 0,
+  "new_clue_found": false,
+  "search_decision": "No untried primary-source route was found in the held reports/materials. User permits new search only with a new clue; previous31HTTP/42author-file routes were not repeated.",
+  "held_baseline_pdf_inventory": [
+    "tmp/celeba_baselines/gradient_bridge_20261009/sources/fednga_final.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/back.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/filesave.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/forward.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/hand.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/help.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/home.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/matplotlib.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/move.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/qt4_editor_options.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/subplots.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_a/.venv/Lib/site-packages/matplotlib/mpl-data/images/zoom_to_rect.pdf",
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.pdf",
+    "tmp/celeba_baselines/remaining_fidelity_20260928/fedwa_aamas2022.pdf",
+    "tmp/celeba_baselines/remaining_fidelity_20260928/huber_arxiv.pdf"
+  ],
+  "input_pins": {
+    "tmp/pdfs/tdsc_submission/submission.txt": {
+      "sha256": "14194a82b18fc82ed64294f7899ad1d65f9b71f7dc268b651c43e3bfb8ad2b7f",
+      "bytes": 102829
+    },
+    "tmp/celeba_baselines/remaining_fidelity_20260928/REPORT.md": {
+      "sha256": "2e783d8e932019b03b45b56e6cd66e67ffdb7db1d239e1143884582f5101208b",
+      "bytes": 11352
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/REPORT.md": {
+      "sha256": "b9a4cda8b164b8c2ea30c05906d3e641b3f342c8be659150ab74942546b89620",
+      "bytes": 11753
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/SOURCE_RECOVERY_20261009.md": {
+      "sha256": "8de69583346b279ff13a04d594238327ffb3b597c304a762febe77f39d5af3fa",
+      "bytes": 9125
+    },
+    "tmp/celeba_baselines/source_recovery_followup_20261009/REPORT.md": {
+      "sha256": "026cbb7ec14b2e74e31146a6a14f409d3f247d9288729e8c7a0b542ce338b88b",
+      "bytes": 7583
+    },
+    "tmp/celeba_baselines/source_recovery_followup_20261009/search_notes.json": {
+      "sha256": "5e4dd5d563632c3a31b2755e8b573af936bdb49170a5cd9420dcbbd70660a1be",
+      "bytes": 3681
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.pdf": {
+      "sha256": "3766b6d06c2568370e7be52c7f8ab4ae9417a373b7e66afb462296e0e1e29e48",
+      "bytes": 948118
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.txt": {
+      "sha256": "b0377ff24ab12ace562efc6804f3bfb33f49cfb6705840dedc651d9eac0b0d8b",
+      "bytes": 13854
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/download_receipt.json": {
+      "sha256": "87379a3af4c0d1670a0103c53f7e74ba96db8bb2540e14aa913cfb1e8b9f7057",
+      "bytes": 2954
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/fedwa_s2.json": {
+      "sha256": "f4666947790587001705183e5dfa53f1bb8a1bfdd532bd71410e483c9223202f",
+      "bytes": 585
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/smartfl_crossref.json": {
+      "sha256": "b978572a36438f34a9faa6ea6cddea10e4874e92f185b3b143c59a1cfd721b7c",
+      "bytes": 16507
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/feddna_crossref.json": {
+      "sha256": "a2c9006a3ca3ecf6e8948fcc31d883ba3dc8b24e721d393dc5d801388e746449",
+      "bytes": 11706
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/smartfl_publisher_xml.html": {
+      "sha256": "5f53ba50d7ff5e9fe9dfb899171e268bef5a7963eca326f23479a3a5617bc7d9",
+      "bytes": 1818
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/feddna_publisher_xml.html": {
+      "sha256": "b6b6a50cdcabd1f89dc62a311d3d4e177ebf0230083d18dc8c06fc9dbbc746ce",
+      "bytes": 1899
+    },
+    "tmp/celeba_baselines/remaining_20261009/group_b/sources/recovery_20261009/smartfl_author_entry.html": {
+      "sha256": "21651e84d3bba5079e8f7c26e5e058e182ea036b10cae3d6d28e9ba0fb842483",
+      "bytes": 438
+    },
+    "docs/server_deployment_20260923/training_20260923/manuscript_source_locator_20261009/REPORT.md": {
+      "sha256": "7d2819e3e71e39589f6754931cf11539580d5ed1120228a6072b7a889aa64a00",
+      "bytes": 5617
+    },
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_20261009/recommended_references.bib": {
+      "sha256": "c33f4617b5ed23253d4aa4afae9e859238774a77e410182b646745e66ef81c19",
+      "bytes": 4046
+    },
+    "E:\\Edge下载\\IEEE_TDSC__二次版___GuardFed____.pdf": {
+      "sha256": "549a4191b1ac560bdaba79d9dce3b11693ab69c4a8cc0f7f52be31afa1110071",
+      "bytes": 1255996
+    }
+  },
+  "provided_submitted_pdf_sha256": "549a4191b1ac560bdaba79d9dce3b11693ab69c4a8cc0f7f52be31afa1110071",
+  "evidence_scope_limits": [
+    "Local primary FedWA complete abstract is read; its publication itself is underspecified for executable DRL.",
+    "SmartFL/FedDNA algorithm omissions are omissions in acquired material, not proof that their full papers omit formulas or that authors have no implementation.",
+    "Mechanism summaries in old reports do not certify exact formulas/defaults.",
+    "Bounded paths are the existing baseline recovery package, submitted extracted text, associated metadata and known manuscript/bib locator; no whole-user-drive scan.",
+    "No adapter, method, official protocol, server, GPU, STATE, Git or paper change; no victory guarantee."
+  ],
+  "scientific_acceptance_added": 0
+}

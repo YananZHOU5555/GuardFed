@@ -1,0 +1,80 @@
+--- U100/panels.py
++++ C_single_scene/panels.py
+@@ -10,23 +10,23 @@
+ PANELS=[('All 10 seeds',list(range(91001,91011))),('Exclude selection seed: 9 seeds',list(range(91002,91011))),('Seeds 91005–91010: 6 seeds',list(range(91005,91011)))]
+ 
+ def panels(records, original):
+-    expected=[(d,a) for d in ('IID','non-IID') for a in original.ATTACKS]
++    expected=[('IID','Benign')]
+     output=[];coverage={};paired={}
+     for view in source.VIEWS:
+         flat=[{k:r[k] for k in ('id','variant','distribution','attack','seed')} |
+             dict(accuracy_pct=100*r['views'][view]['accuracy'],aeod=r['views'][view]['aeod'],aspd=r['views'][view]['aspd']) for r in records]
+         summary=original.summarize(flat)
+-        complete=[(r['distribution'],r['attack']) for r in summary['paired_per_scene'] if r['variant']=='minus_U' and r['complete']]
+-        source.need(complete==expected,'Only the exact ten complete ten-shared-seed scenes are publishable')
+-        coverage[view]=[{k:r[k] for k in ('variant','distribution','attack','n','expected_n','complete','seeds')} for r in summary['paired_per_scene'] if r['variant']=='minus_U']
++        complete=[(r['distribution'],r['attack']) for r in summary['paired_per_scene'] if r['variant']=='minus_C' and r['complete']]
++        source.need(complete==expected,'Only the exact C IID Benign ten-shared-seed scene is publishable')
++        coverage[view]=[{k:r[k] for k in ('variant','distribution','attack','n','expected_n','complete','seeds')} for r in summary['paired_per_scene'] if r['variant']=='minus_C']
+         paired[view]=summary['paired_per_seed']
+         for label,seeds in PANELS:
+             rows=[]
+             for dist,attack in complete:
+-                for variant in ('Full','minus_U','minus_U minus Full'):
++                for variant in ('Full','minus_C','minus_C minus Full'):
+                     candidates=summary['paired_per_seed'] if variant.endswith(' minus Full') else flat
+                     selected=[r for r in candidates if r['distribution']==dist and r['attack']==attack and r['seed'] in seeds
+-                        and r['variant']==('minus_U' if variant.endswith(' minus Full') else variant)]
++                        and r['variant']==('minus_C' if variant.endswith(' minus Full') else variant)]
+                     source.need({r['seed'] for r in selected}==set(seeds),'Matched seed panel incomplete')
+                     rows.append(dict(distribution=dist,attack=attack,variant=variant,**original.statistic(selected,len(seeds))))
+             output.append(dict(view=view,label=label,seeds=seeds,rows=rows))
+
+--- U100/verify_numeric.py
++++ C_single_scene/verify_numeric.py
+@@ -3,28 +3,28 @@
+ import math
+ 
+ def verify(records,panels):
+-    assert len(records)==200 and len({r['id'] for r in records})==200
++    assert len(records)==24 and len({r['id'] for r in records})==24
+     bycell={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+-    assert len(bycell)==200
+-    scenes={('IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']}|{('non-IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']}
++    assert len(bycell)==24
++    scenes={('IID','Benign')}
+     views=['native','raw','shared_calibration'];seedsets=[list(range(91001,91011)),list(range(91002,91011)),list(range(91005,91011))]
+     assert len(panels)==9 and {(p['view'],tuple(p['seeds'])) for p in panels}==set(itertools.product(views,map(tuple,seedsets)))
+     partial=[r for r in records if (r['distribution'],r['attack']) not in scenes]
+-    assert not partial
++    assert len(partial)==4 and {(r['variant'],r['distribution'],r['attack'],r['seed']) for r in partial}=={(v,'IID','F Flip',s) for v in ['Full','minus_C'] for s in [91001,91002]}
+     errors=[]
+     for panel in panels:
+         rows=panel['rows'];seeds=panel['seeds'];view=panel['view']
+-        assert len(rows)==30 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_U','minus_U minus Full']}
++        assert len(rows)==3 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_C','minus_C minus Full']}
+         for row in rows:
+             assert row['n']==row['expected_n']==len(seeds) and row['complete'] and row['seeds']==seeds
+             for metric in ['accuracy_pct','aeod','aspd']:
+                 def value(variant,seed):
+                     r=bycell[variant,row['distribution'],row['attack'],seed]
+                     return r['views'][view]['accuracy']*100 if metric=='accuracy_pct' else r['views'][view][metric]
+-                xs=[value('minus_U',s)-value('Full',s) if row['variant']=='minus_U minus Full' else value(row['variant'],s) for s in seeds]
++                xs=[value('minus_C',s)-value('Full',s) if row['variant']=='minus_C minus Full' else value(row['variant'],s) for s in seeds]
+                 mu=math.fsum(xs)/len(xs);sd=math.sqrt(math.fsum((x-mu)**2 for x in xs)/(len(xs)-1))
+                 errors.extend([abs(mu-row[metric]['mean']),abs(sd-row[metric]['sample_sd_ddof1'])])
+-    assert len(errors)==1620 and max(errors)<=1e-12
++    assert len(errors)==162 and max(errors)<=1e-12
+     metric_checks=0;count_checks=0
+     for record in records:
+         assert set(record['views'])=={'native','raw','shared_calibration'}
+@@ -39,6 +39,6 @@
+                 aeod=abs(a['tp']/(a['tp']+a['fn'])-b['tp']/(b['tp']+b['fn'])),
+                 aspd=abs((a['tp']+a['fp'])/a['n']-(b['tp']+b['fp'])/b['n']))
+             for key,value in metrics.items():assert abs(view[key]-value)<=1e-12;metric_checks+=1
+-    assert metric_checks==1800 and count_checks==4800
+-    return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':0,
++    assert metric_checks==216 and count_checks==576
++    return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':2,
+         'receipt_metrics_from_group_counts':metric_checks,'base_confusion_counts_structurally_checked':count_checks}

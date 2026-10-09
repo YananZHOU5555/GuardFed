@@ -1,0 +1,1192 @@
+{
+  "scope": "VALID_ONLY_IMPLEMENTATION_PREFLIGHT",
+  "status": "NATIVE_VALID_REPLAY_PASS",
+  "id": "minus_C_IID_Benign_seed91005",
+  "method": "GuardFed-AD2+",
+  "distribution": "IID",
+  "attack": "Benign",
+  "seed": 91005,
+  "model_inventory_record_sha256": "6dafb24f142913d521c017976aa7711c5ce9c68714230d633f6ceb27b9c733fc",
+  "checkpoint_sha256": "adc71ad7744d06315b8f937fc28285e5629a06a4b77a6002653db4b399adeb58",
+  "original_result_sha256": "26ec38b4d209d290ccbfd7cb6f349ccc404e026d2cfa0edb897faad74bc8084a",
+  "original_job_sha256": "fe6a23536a2883f4194990576176cf5435a00329586e34813199559f54a7606b",
+  "config_canonical_sha256": "e686232477f960824a3714da2aeaca483001c8c6892a6da16b8ac0779761b622",
+  "original_training_torch": "2.11.0+cu128",
+  "runtime": {
+    "python": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "torch": "2.11.0+cu128",
+    "device": "cpu",
+    "original_config_device": "cuda",
+    "torch_threads": 8,
+    "interop_threads": 1,
+    "loader_workers": 0,
+    "nice": 10,
+    "cuda_device_count": 0,
+    "cpu": "x86_64"
+  },
+  "root_reconstruction": {
+    "root_n": 16277,
+    "root_image_ids_sha256": "9f64191242bedac086d91b2ec1541d06b8a4381566fbffe361169bd3ce13a8de",
+    "root_support": {
+      "0|0": 4356,
+      "0|1": 5095,
+      "1|0": 4138,
+      "1|1": 2688
+    },
+    "client_sample_counts": [
+      7352,
+      7243,
+      7307,
+      7216,
+      7424,
+      7375,
+      7292,
+      7450,
+      7363,
+      7348,
+      7336,
+      7288,
+      7268,
+      7287,
+      7304,
+      7244,
+      7349,
+      7444,
+      7293,
+      7310
+    ],
+    "train_eval_disjoint": true,
+    "root_client_disjoint": true,
+    "server_sampling_audit": {
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_target_sensitive": null,
+      "server_target_label": null,
+      "server_rows": 16277,
+      "server_sensitive_counts": {
+        "0": 9451,
+        "1": 6826
+      },
+      "server_label_counts": {
+        "0": 8494,
+        "1": 7783
+      },
+      "server_group_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      },
+      "global_group_counts": {
+        "0|0": 43688,
+        "0|1": 50821,
+        "1|0": 41002,
+        "1|1": 27259
+      },
+      "server_group_prob": {
+        "0|0": 0.2676168827179456,
+        "0|1": 0.3130183694784051,
+        "1|0": 0.2542237513055231,
+        "1|1": 0.1651409964981262
+      },
+      "global_group_prob": {
+        "0|0": 0.2684032684155557,
+        "0|1": 0.3122258401425324,
+        "1|0": 0.2519014560422682,
+        "1|1": 0.16746943539964368
+      },
+      "group_tvd": 0.003114824599127583,
+      "group_kl": 2.9092535816264064e-05,
+      "max_group_abs_delta": 0.0023284389015174878,
+      "sensitive_tvd": 6.143638262595674e-06,
+      "label_tvd": 0.0015359095656447552
+    },
+    "root_noise_audit": {
+      "root_rows": 16277,
+      "clean_group_label_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      },
+      "clean_root_sha256": "a2331eefc791400c018d2589c3888b08bdec307cb0fe3463d871243ebfcbb50c",
+      "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+      "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+      "label": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "sensitive": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "observed_group_label_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      }
+    }
+  },
+  "valid_n": 19867,
+  "valid_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+  "fits": {
+    "native": {
+      "view": "native",
+      "method": "GuardFed-AD2+",
+      "rule": "group_margin_greater_equal",
+      "thresholds": {
+        "0": 0.42850041,
+        "1": 0.0
+      },
+      "fit_data": "clean_train_root_only",
+      "fit_diagnostics": {
+        "server_calibration_metrics": {
+          "accuracy": 0.8795232536708238,
+          "aeod": 0.0016748738258797191,
+          "aspd": 0.07155142243228857
+        },
+        "server_calibration_score": 9.972182084407624,
+        "server_calibration_risk": 0.036613148129084144,
+        "server_base_calibration_metrics": {
+          "accuracy": 0.8831480002457456,
+          "aeod": 0.03208371302397317,
+          "aspd": 0.10170696152868053
+        },
+        "server_base_calibration_risk": 0.06689533727632685,
+        "server_adaptive_lambda": 0.8146585499249643,
+        "server_calibration_budget": 0.06,
+        "server_calibration_acc_floor": 0.8781480002457456,
+        "server_calibration_max_acc_drop": 0.005,
+        "server_calibration_objective": "acc_floor"
+      },
+      "fit_sha256": "bfee3b72bc7b38d1f3dae5dcffea959158aaa31b237da3648ddda4c6be28b775"
+    },
+    "raw": {
+      "view": "raw",
+      "method": "GuardFed-AD2+",
+      "rule": "argmax_margin_strictly_positive",
+      "thresholds": null,
+      "fit_data": "none",
+      "fit_sha256": "403b7b187121326970b87cc37813296bf8a1e71078ccad2210b986ddd0b68747"
+    },
+    "shared_calibration": {
+      "view": "shared_calibration",
+      "method": "GuardFed-AD2+",
+      "rule": "group_margin_greater_equal",
+      "thresholds": {
+        "0": 0.42850041,
+        "1": 0.0
+      },
+      "fit_data": "clean_train_root_only",
+      "fit_diagnostics": {
+        "server_calibration_metrics": {
+          "accuracy": 0.8795232536708238,
+          "aeod": 0.0016748738258797191,
+          "aspd": 0.07155142243228857
+        },
+        "server_calibration_score": 9.972182084407624,
+        "server_calibration_risk": 0.036613148129084144,
+        "server_base_calibration_metrics": {
+          "accuracy": 0.8831480002457456,
+          "aeod": 0.03208371302397317,
+          "aspd": 0.10170696152868053
+        },
+        "server_base_calibration_risk": 0.06689533727632685,
+        "server_adaptive_lambda": 0.8146585499249643,
+        "server_calibration_budget": 0.06,
+        "server_calibration_acc_floor": 0.8781480002457456,
+        "server_calibration_max_acc_drop": 0.005,
+        "server_calibration_objective": "acc_floor"
+      },
+      "fit_sha256": "41c1a0cc08c067009e6210a52afb4a65083772d85ffd6be2763364662d6f683f"
+    }
+  },
+  "views": {
+    "native": {
+      "accuracy": 0.8801530175668193,
+      "aeod": 5.129446630303125e-05,
+      "aspd": 0.06251374520009995,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.45195550410228014,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5194,
+          "fp": 266,
+          "tn": 4986,
+          "fn": 963,
+          "tpr": 0.8435926587623843,
+          "fpr": 0.05064737242955065,
+          "positive_rate": 0.4785695503549829
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 2906,
+          "fp": 613,
+          "tn": 4400,
+          "fn": 539,
+          "tpr": 0.8435413642960813,
+          "fpr": 0.1222820666267704,
+          "positive_rate": 0.41605580515488294
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "raw": {
+      "accuracy": 0.8833241053002466,
+      "aeod": 0.036919899306322446,
+      "aspd": 0.0967849346119678,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.4716363819399003,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5421,
+          "fp": 430,
+          "tn": 4822,
+          "fn": 736,
+          "tpr": 0.8804612636024037,
+          "fpr": 0.08187357197258187,
+          "positive_rate": 0.5128407397668507
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 2906,
+          "fp": 613,
+          "tn": 4400,
+          "fn": 539,
+          "tpr": 0.8435413642960813,
+          "fpr": 0.1222820666267704,
+          "positive_rate": 0.41605580515488294
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "shared_calibration": {
+      "accuracy": 0.8801530175668193,
+      "aeod": 5.129446630303125e-05,
+      "aspd": 0.06251374520009995,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.45195550410228014,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5194,
+          "fp": 266,
+          "tn": 4986,
+          "fn": 963,
+          "tpr": 0.8435926587623843,
+          "fpr": 0.05064737242955065,
+          "positive_rate": 0.4785695503549829
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 2906,
+          "fp": 613,
+          "tn": 4400,
+          "fn": 539,
+          "tpr": 0.8435413642960813,
+          "fpr": 0.1222820666267704,
+          "positive_rate": 0.41605580515488294
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    }
+  },
+  "native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.8801530175668193,
+      "aeod": 5.129446630303125e-05,
+      "aspd": 0.06251374520009995
+    },
+    "observed": {
+      "accuracy": 0.8801530175668193,
+      "aeod": 5.129446630303125e-05,
+      "aspd": 0.06251374520009995
+    },
+    "differences": {
+      "accuracy": 0.0,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "max_abs_difference": 0.0,
+    "accepted": true
+  },
+  "prediction_arrays_sha256": "de3e07833913b6f6a2cd44ae4bebf1e46eda2dcb174f01e59f6361f5eafd1c64",
+  "weights_before": {
+    "features.0.weight": {
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "d8015cc6a4207a3bf6b597a506557b203e59726dc5f5ddc1923de45f13e2c825"
+    },
+    "features.0.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "<f4",
+      "sha256": "b87060ae40a22958cfd6559cbf4370c268d9cd942de7bb8e7b24197eaec02e14"
+    },
+    "features.3.weight": {
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "3e5d30626ae798ae3d99d4b63f084bb9d6ff769df12aeedbff56ff6e12a760d8"
+    },
+    "features.3.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "<f4",
+      "sha256": "ce7bd0054a9602cede2e5496bc39e94040f7214444381219d894539c060ecdb7"
+    },
+    "features.6.weight": {
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "54e38a0be0f4aacc3d33643886fe727f6d896ff1f88a2bde2e6b7f64a3308e70"
+    },
+    "features.6.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "8479f5480ee451ecff47e705eac41885f89f6ffd1b9bf3798640e4cfe2a22dec"
+    },
+    "classifier.weight": {
+      "shape": [
+        2,
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "6c81886314e2ae95d0bc2352b1ff671494e666813443e156d666f36ad2adcdcf"
+    },
+    "classifier.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "<f4",
+      "sha256": "7508208754af92f3c30a199cfeb266bcf1bb7c244e6a9c1b7c6b456150d9d03f"
+    }
+  },
+  "weights_after": {
+    "features.0.weight": {
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "d8015cc6a4207a3bf6b597a506557b203e59726dc5f5ddc1923de45f13e2c825"
+    },
+    "features.0.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "<f4",
+      "sha256": "b87060ae40a22958cfd6559cbf4370c268d9cd942de7bb8e7b24197eaec02e14"
+    },
+    "features.3.weight": {
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "3e5d30626ae798ae3d99d4b63f084bb9d6ff769df12aeedbff56ff6e12a760d8"
+    },
+    "features.3.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "<f4",
+      "sha256": "ce7bd0054a9602cede2e5496bc39e94040f7214444381219d894539c060ecdb7"
+    },
+    "features.6.weight": {
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "54e38a0be0f4aacc3d33643886fe727f6d896ff1f88a2bde2e6b7f64a3308e70"
+    },
+    "features.6.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "8479f5480ee451ecff47e705eac41885f89f6ffd1b9bf3798640e4cfe2a22dec"
+    },
+    "classifier.weight": {
+      "shape": [
+        2,
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "6c81886314e2ae95d0bc2352b1ff671494e666813443e156d666f36ad2adcdcf"
+    },
+    "classifier.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "<f4",
+      "sha256": "7508208754af92f3c30a199cfeb266bcf1bb7c244e6a9c1b7c6b456150d9d03f"
+    }
+  },
+  "optimizer_created": false,
+  "gradients_created": false,
+  "zero_margin_count": 0,
+  "elapsed_seconds": 70.84054068289697,
+  "cpu_user_seconds": 407.54433,
+  "cpu_system_seconds": 91.824153,
+  "peak_rss_kib": 2493376,
+  "before_resources": {
+    "utc": "2026-10-09T19:21:43.344121+00:00",
+    "process_pid": 64984,
+    "os_threads": 16,
+    "process_status": {
+      "VmHWM": "2412572 kB",
+      "VmRSS": "2412572 kB",
+      "Threads": "16",
+      "Cpus_allowed_list": "112-119"
+    },
+    "cgroup": {
+      "cpu.max": "12287999 100000",
+      "cpu.stat": "usage_usec 3186081997583\nuser_usec 2372282038858\nsystem_usec 813799958725\ncore_sched.force_idle_usec 0\nnr_periods 12166845\nnr_throttled 724\nthrottled_usec 4447803770\nnr_bursts 0\nburst_usec 0",
+      "memory.current": "72606625792",
+      "memory.max": "519171997696",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "load_average": [
+      197.275390625,
+      173.92626953125,
+      134.8310546875
+    ],
+    "thread_cpu_affinities": {
+      "64984": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64987": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64988": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64989": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64990": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64991": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64992": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64993": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64994": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64995": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64996": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64997": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64998": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64999": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "65000": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "65001": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ]
+    },
+    "service": {
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:02:47",
+      "stderr": ""
+    },
+    "gpu": {
+      "returncode": 0,
+      "stdout": "0, 88 %, 6038 MiB, 61\n1, 82 %, 4034 MiB, 59",
+      "stderr": ""
+    },
+    "training_queue_snapshot": {
+      "phase": "formal",
+      "completed": [
+        "minus_U_IID_Benign_seed91003",
+        "minus_U_IID_Benign_seed91002",
+        "minus_U_IID_Benign_seed91008",
+        "minus_U_IID_Benign_seed91005",
+        "minus_U_IID_Benign_seed91006",
+        "minus_U_IID_Benign_seed91007",
+        "minus_U_IID_Benign_seed91001",
+        "minus_U_IID_Benign_seed91004",
+        "minus_U_IID_F Flip_seed91001",
+        "minus_U_IID_Benign_seed91009",
+        "minus_U_IID_F Flip_seed91002",
+        "minus_U_IID_Benign_seed91010",
+        "minus_U_IID_F Flip_seed91003",
+        "minus_U_IID_F Flip_seed91004",
+        "minus_U_IID_F Flip_seed91006",
+        "minus_U_IID_F Flip_seed91005",
+        "minus_U_IID_F Flip_seed91009",
+        "minus_U_IID_F Flip_seed91007",
+        "minus_U_IID_F Flip_seed91008",
+        "minus_U_IID_F Flip_seed91010",
+        "minus_U_IID_FedSA_seed91001",
+        "minus_U_IID_FedSA_seed91003",
+        "minus_U_IID_FedSA_seed91002",
+        "minus_U_IID_FedSA_seed91004",
+        "minus_U_IID_FedSA_seed91005",
+        "minus_U_IID_FedSA_seed91007",
+        "minus_U_IID_FedSA_seed91006",
+        "minus_U_IID_FedSA_seed91008",
+        "minus_U_IID_FedSA_seed91009",
+        "minus_U_IID_FedSA_seed91010",
+        "minus_U_IID_S-DFA_seed91001",
+        "minus_U_IID_S-DFA_seed91002",
+        "minus_U_IID_S-DFA_seed91003",
+        "minus_U_IID_S-DFA_seed91004",
+        "minus_U_IID_S-DFA_seed91005",
+        "minus_U_IID_S-DFA_seed91006",
+        "minus_U_IID_S-DFA_seed91007",
+        "minus_U_IID_S-DFA_seed91009",
+        "minus_U_IID_S-DFA_seed91008",
+        "minus_U_IID_S-DFA_seed91010",
+        "minus_U_IID_Sp-DFA_seed91003",
+        "minus_U_IID_Sp-DFA_seed91005",
+        "minus_U_IID_Sp-DFA_seed91004",
+        "minus_U_IID_Sp-DFA_seed91007",
+        "minus_U_IID_Sp-DFA_seed91001",
+        "minus_U_IID_Sp-DFA_seed91002",
+        "minus_U_IID_Sp-DFA_seed91006",
+        "minus_U_IID_Sp-DFA_seed91008",
+        "minus_U_IID_Sp-DFA_seed91009",
+        "minus_U_IID_Sp-DFA_seed91010",
+        "minus_U_non-IID_Benign_seed91001",
+        "minus_U_non-IID_Benign_seed91002",
+        "minus_U_non-IID_Benign_seed91004",
+        "minus_U_non-IID_Benign_seed91003",
+        "minus_U_non-IID_Benign_seed91005",
+        "minus_U_non-IID_Benign_seed91006",
+        "minus_U_non-IID_Benign_seed91007",
+        "minus_U_non-IID_Benign_seed91008",
+        "minus_U_non-IID_Benign_seed91009",
+        "minus_U_non-IID_Benign_seed91010",
+        "minus_U_non-IID_F Flip_seed91002",
+        "minus_U_non-IID_F Flip_seed91001",
+        "minus_U_non-IID_F Flip_seed91003",
+        "minus_U_non-IID_F Flip_seed91004",
+        "minus_U_non-IID_F Flip_seed91007",
+        "minus_U_non-IID_F Flip_seed91005",
+        "minus_U_non-IID_F Flip_seed91008",
+        "minus_U_non-IID_F Flip_seed91006",
+        "minus_U_non-IID_F Flip_seed91009",
+        "minus_U_non-IID_F Flip_seed91010",
+        "minus_U_non-IID_FedSA_seed91001",
+        "minus_U_non-IID_FedSA_seed91002",
+        "minus_U_non-IID_FedSA_seed91003",
+        "minus_U_non-IID_FedSA_seed91005",
+        "minus_U_non-IID_FedSA_seed91004",
+        "minus_U_non-IID_FedSA_seed91006",
+        "minus_U_non-IID_FedSA_seed91008",
+        "minus_U_non-IID_FedSA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91002",
+        "minus_U_non-IID_S-DFA_seed91003",
+        "minus_U_non-IID_FedSA_seed91009",
+        "minus_U_non-IID_S-DFA_seed91004",
+        "minus_U_non-IID_FedSA_seed91010",
+        "minus_U_non-IID_S-DFA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91008",
+        "minus_U_non-IID_S-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91006",
+        "minus_U_non-IID_S-DFA_seed91005",
+        "minus_U_non-IID_S-DFA_seed91010",
+        "minus_U_non-IID_Sp-DFA_seed91002",
+        "minus_U_non-IID_Sp-DFA_seed91003",
+        "minus_U_non-IID_Sp-DFA_seed91004",
+        "minus_U_non-IID_Sp-DFA_seed91005",
+        "minus_U_non-IID_Sp-DFA_seed91006",
+        "minus_U_non-IID_Sp-DFA_seed91008",
+        "minus_U_non-IID_Sp-DFA_seed91007",
+        "minus_U_non-IID_Sp-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91010",
+        "minus_C_IID_Benign_seed91001",
+        "minus_C_IID_Benign_seed91002",
+        "minus_C_IID_Benign_seed91003",
+        "minus_C_IID_Benign_seed91004",
+        "minus_C_IID_Benign_seed91005",
+        "minus_C_IID_Benign_seed91006",
+        "minus_C_IID_Benign_seed91007",
+        "minus_C_IID_Benign_seed91008",
+        "minus_C_IID_Benign_seed91009",
+        "minus_C_IID_Benign_seed91010",
+        "minus_C_IID_F Flip_seed91001",
+        "minus_C_IID_F Flip_seed91002"
+      ],
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_C_IID_F Flip_seed91003",
+          "pid": 64174
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91004",
+          "pid": 64192
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91005",
+          "pid": 64200
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91006",
+          "pid": 64234
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91007",
+          "pid": 64318
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91008",
+          "pid": 64480
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91009",
+          "pid": 64547
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91010",
+          "pid": 64553
+        }
+      ],
+      "pending": 680,
+      "updated_unix": 1791573701.5620878
+    }
+  },
+  "after_resources": {
+    "utc": "2026-10-09T19:22:50.998655+00:00",
+    "process_pid": 64984,
+    "os_threads": 16,
+    "process_status": {
+      "VmHWM": "2493376 kB",
+      "VmRSS": "2430648 kB",
+      "Threads": "16",
+      "Cpus_allowed_list": "112-119"
+    },
+    "cgroup": {
+      "cpu.max": "12287999 100000",
+      "cpu.stat": "usage_usec 3187259770191\nuser_usec 2373370353806\nsystem_usec 813889416384\ncore_sched.force_idle_usec 0\nnr_periods 12167522\nnr_throttled 724\nthrottled_usec 4447803770\nnr_bursts 0\nburst_usec 0",
+      "memory.current": "72615391232",
+      "memory.max": "519171997696",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "load_average": [
+      215.35595703125,
+      182.9462890625,
+      140.54052734375
+    ],
+    "thread_cpu_affinities": {
+      "64984": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64987": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64988": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64989": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64990": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64991": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64992": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64993": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64994": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64995": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64996": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64997": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64998": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "64999": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "65000": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "65001": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ]
+    },
+    "service": {
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:03:55",
+      "stderr": ""
+    },
+    "gpu": {
+      "returncode": 0,
+      "stdout": "0, 80 %, 6038 MiB, 61\n1, 70 %, 4034 MiB, 60",
+      "stderr": ""
+    },
+    "training_queue_snapshot": {
+      "phase": "formal",
+      "completed": [
+        "minus_U_IID_Benign_seed91003",
+        "minus_U_IID_Benign_seed91002",
+        "minus_U_IID_Benign_seed91008",
+        "minus_U_IID_Benign_seed91005",
+        "minus_U_IID_Benign_seed91006",
+        "minus_U_IID_Benign_seed91007",
+        "minus_U_IID_Benign_seed91001",
+        "minus_U_IID_Benign_seed91004",
+        "minus_U_IID_F Flip_seed91001",
+        "minus_U_IID_Benign_seed91009",
+        "minus_U_IID_F Flip_seed91002",
+        "minus_U_IID_Benign_seed91010",
+        "minus_U_IID_F Flip_seed91003",
+        "minus_U_IID_F Flip_seed91004",
+        "minus_U_IID_F Flip_seed91006",
+        "minus_U_IID_F Flip_seed91005",
+        "minus_U_IID_F Flip_seed91009",
+        "minus_U_IID_F Flip_seed91007",
+        "minus_U_IID_F Flip_seed91008",
+        "minus_U_IID_F Flip_seed91010",
+        "minus_U_IID_FedSA_seed91001",
+        "minus_U_IID_FedSA_seed91003",
+        "minus_U_IID_FedSA_seed91002",
+        "minus_U_IID_FedSA_seed91004",
+        "minus_U_IID_FedSA_seed91005",
+        "minus_U_IID_FedSA_seed91007",
+        "minus_U_IID_FedSA_seed91006",
+        "minus_U_IID_FedSA_seed91008",
+        "minus_U_IID_FedSA_seed91009",
+        "minus_U_IID_FedSA_seed91010",
+        "minus_U_IID_S-DFA_seed91001",
+        "minus_U_IID_S-DFA_seed91002",
+        "minus_U_IID_S-DFA_seed91003",
+        "minus_U_IID_S-DFA_seed91004",
+        "minus_U_IID_S-DFA_seed91005",
+        "minus_U_IID_S-DFA_seed91006",
+        "minus_U_IID_S-DFA_seed91007",
+        "minus_U_IID_S-DFA_seed91009",
+        "minus_U_IID_S-DFA_seed91008",
+        "minus_U_IID_S-DFA_seed91010",
+        "minus_U_IID_Sp-DFA_seed91003",
+        "minus_U_IID_Sp-DFA_seed91005",
+        "minus_U_IID_Sp-DFA_seed91004",
+        "minus_U_IID_Sp-DFA_seed91007",
+        "minus_U_IID_Sp-DFA_seed91001",
+        "minus_U_IID_Sp-DFA_seed91002",
+        "minus_U_IID_Sp-DFA_seed91006",
+        "minus_U_IID_Sp-DFA_seed91008",
+        "minus_U_IID_Sp-DFA_seed91009",
+        "minus_U_IID_Sp-DFA_seed91010",
+        "minus_U_non-IID_Benign_seed91001",
+        "minus_U_non-IID_Benign_seed91002",
+        "minus_U_non-IID_Benign_seed91004",
+        "minus_U_non-IID_Benign_seed91003",
+        "minus_U_non-IID_Benign_seed91005",
+        "minus_U_non-IID_Benign_seed91006",
+        "minus_U_non-IID_Benign_seed91007",
+        "minus_U_non-IID_Benign_seed91008",
+        "minus_U_non-IID_Benign_seed91009",
+        "minus_U_non-IID_Benign_seed91010",
+        "minus_U_non-IID_F Flip_seed91002",
+        "minus_U_non-IID_F Flip_seed91001",
+        "minus_U_non-IID_F Flip_seed91003",
+        "minus_U_non-IID_F Flip_seed91004",
+        "minus_U_non-IID_F Flip_seed91007",
+        "minus_U_non-IID_F Flip_seed91005",
+        "minus_U_non-IID_F Flip_seed91008",
+        "minus_U_non-IID_F Flip_seed91006",
+        "minus_U_non-IID_F Flip_seed91009",
+        "minus_U_non-IID_F Flip_seed91010",
+        "minus_U_non-IID_FedSA_seed91001",
+        "minus_U_non-IID_FedSA_seed91002",
+        "minus_U_non-IID_FedSA_seed91003",
+        "minus_U_non-IID_FedSA_seed91005",
+        "minus_U_non-IID_FedSA_seed91004",
+        "minus_U_non-IID_FedSA_seed91006",
+        "minus_U_non-IID_FedSA_seed91008",
+        "minus_U_non-IID_FedSA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91002",
+        "minus_U_non-IID_S-DFA_seed91003",
+        "minus_U_non-IID_FedSA_seed91009",
+        "minus_U_non-IID_S-DFA_seed91004",
+        "minus_U_non-IID_FedSA_seed91010",
+        "minus_U_non-IID_S-DFA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91008",
+        "minus_U_non-IID_S-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91006",
+        "minus_U_non-IID_S-DFA_seed91005",
+        "minus_U_non-IID_S-DFA_seed91010",
+        "minus_U_non-IID_Sp-DFA_seed91002",
+        "minus_U_non-IID_Sp-DFA_seed91003",
+        "minus_U_non-IID_Sp-DFA_seed91004",
+        "minus_U_non-IID_Sp-DFA_seed91005",
+        "minus_U_non-IID_Sp-DFA_seed91006",
+        "minus_U_non-IID_Sp-DFA_seed91008",
+        "minus_U_non-IID_Sp-DFA_seed91007",
+        "minus_U_non-IID_Sp-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91010",
+        "minus_C_IID_Benign_seed91001",
+        "minus_C_IID_Benign_seed91002",
+        "minus_C_IID_Benign_seed91003",
+        "minus_C_IID_Benign_seed91004",
+        "minus_C_IID_Benign_seed91005",
+        "minus_C_IID_Benign_seed91006",
+        "minus_C_IID_Benign_seed91007",
+        "minus_C_IID_Benign_seed91008",
+        "minus_C_IID_Benign_seed91009",
+        "minus_C_IID_Benign_seed91010",
+        "minus_C_IID_F Flip_seed91001",
+        "minus_C_IID_F Flip_seed91002"
+      ],
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_C_IID_F Flip_seed91003",
+          "pid": 64174
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91004",
+          "pid": 64192
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91005",
+          "pid": 64200
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91006",
+          "pid": 64234
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91007",
+          "pid": 64318
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91008",
+          "pid": 64480
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91009",
+          "pid": 64547
+        },
+        {
+          "id": "minus_C_IID_F Flip_seed91010",
+          "pid": 64553
+        }
+      ],
+      "pending": 680,
+      "updated_unix": 1791573766.6141212
+    }
+  },
+  "test_labels_accessed": false,
+  "test_inference_performed": false,
+  "final_dispatch_created": false,
+  "claim_limit": "Two bounded valid-only canaries are implementation evidence, not all900 replay or a new final performance table",
+  "effective_cpu_cores": 7.049190734375104
+}

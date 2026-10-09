@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -36,7 +36,10 @@ profiles={
         native_tag='root_delta_20261009T181013Z',native_delta=12,handoffs=[],live_tags=[],formal_tag='20261009T182951Z'),
     25:dict(previous='1899126e405770a46a6936ee25483b60b28cd84a',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=112,views=101,
-        native_tag='root_delta_20261009T190056Z',native_delta=8,handoffs=[],live_tags=[],formal_tag='20261009T190051Z')}
+        native_tag='root_delta_20261009T190056Z',native_delta=8,handoffs=[],live_tags=[],formal_tag='20261009T190051Z'),
+    26:dict(previous='b55159fc951c8d3bfd41b5c039cb1239fbdb2219',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=112,views=112,
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T193513Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -522,6 +525,43 @@ if args.increment==25:
             'adopt_rebuttal100_root_20261009.py','capture_authorized_screens_root_20261009.py',
             'update_overview_closure100_root_20261009.py'):
         copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+if args.increment==26:
+    prep=ROOT/'tmp/celeba_mechanism_valid_C_after1_20261009'
+    delta=prep/'execution_candidate/backups/incremental_20261009T193419Z'
+    assert sha(delta/'ROOT_ADOPTION_REVIEW.json')=='8d064687ad7841e1050120a12ada9e10458fea5bb6a4d9da5aeed77584437fc5'
+    adopted=read(delta/'ROOT_ADOPTION_REVIEW.json')
+    assert (adopted['prior_three_view_models'],adopted['accepted_new'],adopted['cumulative_three_view_models'])==(101,11,112)
+    assert adopted['all_native_differences_zero'] and adopted['original101_unchanged'] and not adopted['test_inference']
+    for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('backup_receipt_sha256','backup_receipt.json'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json')]:
+        assert adopted[key]==sha(delta/name)
+    for path in prep.rglob('*'):
+        if path.is_file() and '__pycache__' not in path.parts:
+            copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    for base_name,seal_name in [('celeba_mechanism_native_C_Benign10_20261009','FILES_SHA256.json'),
+            ('celeba_mechanism_C_three_view_table_prepare_20261009','FINAL_FILES_SHA256.json')]:
+        source=ROOT/'tmp'/base_name
+        for item in read(source/seal_name)['members']:
+            copy(source/item['path'],Path('experimental')/base_name/item['path'],item['sha256'])
+        copy(source/seal_name,Path('experimental')/base_name/seal_name)
+    for leaf in ('native_C_Benign10_20261009','three_view_C_Benign10_20261009'):
+        canonical=ROOT/TRAIN/'celeba_mechanism_v1'/leaf
+        root_review=read(canonical/'ROOT_VERIFICATION.json')
+        assert root_review['mean_SD_scalars']==(54 if leaf.startswith('native_') else 162)
+        assert not root_review['test'] and root_review['original_U100_unchanged']
+        for path in canonical.rglob('*'):
+            if path.is_file():copy(path,path.relative_to(ROOT))
+    extra=ROOT/'tmp/guardfed_remaining_three_baseline_spec_decision_20261009'
+    assert sha(extra/'FILES_SHA256.json')=='0e955b461a0543c615fb5307f693901a310c0479e24a433e4c6856cc8cdf427f'
+    for name,pin in read(extra/'FILES_SHA256.json')['files'].items():
+        copy(extra/name,Path('experimental')/extra.name/name,pin['sha256'])
+    copy(extra/'FILES_SHA256.json',Path('experimental')/extra.name/'FILES_SHA256.json')
+    for name in ('prepare_C_after1_root_operations_20261009.py','deploy_mechanism_C_after1_root_20261009.py',
+            'observe_mechanism_C_after1_root_20261009.py','prepare_C_after1_backup_helpers_root_20261009.py',
+            'backup_mechanism_C_after1_root_20261009.py','adopt_mechanism_C_after1_root_20261009.py',
+            'adopt_native_C_Benign10_table_root_20261009.py','adopt_C_three_view_table_root_20261009.py',
+            'update_overview_closure100_root_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+    copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -571,6 +611,13 @@ if args.increment==25:
     patterns += ['experimental/celeba_mechanism_valid_C1_gate_20261009/** -text',
         'experimental/guardfed_rebuttal_integrated100_20261009/** -text',
         'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/** -text']
+if args.increment==26:
+    patterns += ['experimental/celeba_mechanism_valid_C_after1_20261009/** -text',
+        'experimental/celeba_mechanism_native_C_Benign10_20261009/** -text',
+        'experimental/celeba_mechanism_C_three_view_table_prepare_20261009/** -text',
+        'experimental/guardfed_remaining_three_baseline_spec_decision_20261009/** -text',
+        'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_C_Benign10_20261009/** -text',
+        'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_Benign10_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -606,6 +653,12 @@ if args.increment==25:
         C_single_gate_is_not_complete_C_scene=True,complete_rebuttal_comments_verbatim=24,
         writing_numeric_pointer_checks=37,writing_author_review_only=True,main_manuscript_edited=False,
         primary_endpoint_selected=False)
+if args.increment==26:
+    receipt.update(increment_scope='accepted_C11_increment_and_C_IID_Benign_native_and_three_view_paired_tables',
+        new_mechanism_native_accepted=0,new_mechanism_three_view_accepted=11,
+        minus_U_complete_three_view=100,minus_C_three_view=12,complete_C_scenes=1,
+        C_three_view_mean_SD_scalars=162,C_three_view_display_cells=81,C_native_mean_SD_scalars=54,
+        other_C_scenes_complete=False,main_manuscript_edited=False,primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

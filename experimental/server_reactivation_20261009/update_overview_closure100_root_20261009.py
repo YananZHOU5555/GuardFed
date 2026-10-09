@@ -48,7 +48,14 @@ git_row=(f'| Git / 三小时巡检 | 最近证据发布已推送{published["comm
     '[巡检交接](server_deployment_20260923/training_20260923/server_reactivation_20261009/MONITOR_HANDOFF.md) |')
 text='\n'.join(git_row if line.startswith('| Git / 三小时巡检 |') else line for line in text.split('\n'))
 native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100完整，C部分{main["scientific_results_offserver_verified"]-100}。已审U十场景native表保持封存，新C均值须独立验收 | [十场景native表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md) |')
+if main.get('C_native_single_scene_table'):
+    native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100完整。C IID Benign十seed表另核54统计，F Flip2仍不入均值；取舍及9/6面板方向变化保留 | [U十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md)、[C单场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_C_Benign10_20261009/TABLES.md) |')
 views_row=(f'| 机制三视图 | U100完整，另C单项门检{main.get("C1_valid_gate",{}).get("offserver_new_accepted",0)}已严格离机；U十场景1620统计、1800计数指标和810展示单元已核，C1不算完整C场景 | [十场景三视图论文表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim100_20261009/snapshot100/TABLES.md) |')
+if main.get('C_after1_valid_replay'):
+    C_now=main['C_after1_valid_replay']
+    views_row=(f'| 机制三视图 | U100完整、C累计{main["three_view_counts_by_variant"]["minus_C"]}离机；准确C补集11状态{C_now["status"]}、新增接受{C_now["offserver_new_accepted"]}。U十场景表保持；C三视图统计表尚未验收 | [U十场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim100_20261009/snapshot100/TABLES.md) |')
+if main.get('C_three_view_single_scene_table'):
+    views_row='| 机制三视图 | U100十场景完整；C12离机，IID Benign十seed单场景三视图表另核162统计/81单元/216计数指标。F Flip2对仅coverage，其余C未齐 | [C单场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_Benign10_20261009/snapshot/TABLES.md) |'
 reply_row=('| 英文回复 | 24条原意见逐字、37数值pointer及37链接核验；完整稿纳入U100十场景与900校准解释，保留全部pending，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/manuscript_insertions_integrated_20261009.md) |')
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
 overview.write_bytes(text.encode('utf8')+marker+history)
@@ -66,9 +73,11 @@ top=f'''# GuardFed 当前巡检交接
 - 双5090利用率{gpu_usage}、{gpu_temps}℃、RecoveryNone；CPU{live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核，RAM{live['memory_used_bytes']/1e9:.2f}GB，余量{live['disk_free_bytes']/1e12:.3f}TB，OOM0/近期错误0。冻结8并发，不因低CPU或交接瞬时低GPU重启。
 - Native累计{main['scientific_results_offserver_verified']}=U100完整+C{main['scientific_results_offserver_verified']-100}部分；当前差集与恢复链见STATE.incremental_science_backups。只打包已验收ID差集，不重复旧Full/权重。
 - C1单项评价门检严格离机{main.get('C1_valid_gate',{}).get('offserver_new_accepted',0)}，ROOT d045665b066dafc25f9970adfdffef9c9a8a388575ec87b9b54d5dcabfa65cab；9指标/24计数/3规则、40归档成员核验，native偏差0。原U100与Full不重推，C1不计作C十seed完整场景。
+- C补集准确11已实际启动，状态{main.get('C_after1_valid_replay',{}).get('status','未启动')}，新增离机接受{main.get('C_after1_valid_replay',{}).get('offserver_new_accepted',0)}；独立namespace tmp/celeba_mechanism_valid_C_after1_20261009。观测/备份/采用分别用tmp/observe_mechanism_C_after1_root_20261009.py、backup_mechanism_C_after1_root_20261009.py、adopt_mechanism_C_after1_root_20261009.py；只在正常终态11/0worker后备份验收，不重推旧101/Full。C单场景native表已核54统计，ROOT77d046d695d9a36988b7ecbae0a37256389eb92413a70d74d0a838805a6d8872；9/6方向变化保留，三视图表尚须另验。
 - 删除U三视图已100/100严格离机，after92最后8正常EXITED/0残留失败，ROOT9050eb059a797c70f0ca977294989b5ae5757286dbc85b36d529012cb5ab72ee，archive235837afdd336df8db7e3f224c6598f6f9b0a216a2deb10dcf11f3cf54987577。原92/Full不重推，C4排除；全部旧闭合服务禁止重启。
 - 完整十场景三视图表celeba_mechanism_v1/three_view_interim100_20261009/snapshot100/TABLES.md已独立验收，ROOT20d1031448701938063a398fc5416e404b1e8f0549807c85dab0c0204618a2a0；1620stats/1800计数指标/810显示cells，原184records/243rows精确。native100另核540stats。Full5CPU95GPU/98cu1282cu130，controls100CPU/cu128；负结果、validation选择/历史test暴露保留，不声称每项不可或缺/整个机制完成。
 - FLGMM26/32、组合10/32已严格验收离机；{fo['checked_utc']}来源绑定只读实测分别{fo['observed_complete']}终轮/{fo['active']}活动/{fo['pending']}等待与{ho['observed_complete']}终轮/{ho['active']}活动/{ho['pending']}等待，失败0；新终轮未验收不得计入接受。LATEST_BACKUP各链已绑定；未完整选recipe或启动formal100/test。
+- FLGMM final6闭合准备已独立源审，tmp/celeba_flgmm_final6_closure_20261009封条1d7cc11f95727a57478dd8575f65170024b36df98187030ac2de05e1e08cf6b9、独立源审f41bc996196c06772de23b578dd6f522c877b5ee8d877a601aa12ecdcc5e62e8。仅在原schema实际32终轮/无producer快照后调用tmp/execute_flgmm_final6_root_20261009.py，不以31终轮启动；CPU106单线程/nice10/idle、原loop保持、一次严格备份/本机验收后另root登记并汇总，不启动formal100/test。
 - 原after82审批数量错误CNN前0完成/空输出和FLGMM旧chain字段collector失败原证据保留；独立V2分别准确10/7一次通过，不重启旧失败目录。
 - 九方法900三视图/9页PDF、2052校准统计、旧TableII480原值追溯均验收；Fig3候选未采纳且原执行身份不足，提交版正文源项目待路径。
 - 完整24英文回复和正文插入候选已升级U100/900校准证据，ROOT6dfb210c5d53c2badbe4fb53220008e784430fa33f9e68f0ebb81968ce18c391；24comments/37数值与链接核验，仍为作者审阅稿，正文未应用。
