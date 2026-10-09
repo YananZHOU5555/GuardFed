@@ -5,9 +5,14 @@ ROOT=Path(__file__).resolve().parents[1]
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 read=lambda p:json.loads(p.read_bytes())
 parser=argparse.ArgumentParser();parser.add_argument('--progress',action='store_true')
-parser.add_argument('--scope',type=int,choices=(37,11),default=37);args=parser.parse_args()
+parser.add_argument('--scope',type=int,choices=(37,11),default=37)
+parser.add_argument('--after71',action='store_true');args=parser.parse_args()
+if args.after71:args.scope=11
 EX=ROOT/f'tmp/celeba_mechanism_valid_incremental_next{args.scope}_20261009/execution_candidate'
 REMOTE=f'/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next{args.scope}_20261009/execution_candidate'
+if args.after71:
+    EX=ROOT/'tmp/celeba_mechanism_valid_incremental_after71_20261009/execution_candidate'
+    REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_incremental_after71_20261009/execution_candidate'
 stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
 deployment=read(EX/'deployment_receipt.json');assert deployment['remote_installation']['returncode']==0
 code="""from pathlib import Path
@@ -43,6 +48,7 @@ print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat
     guide_sha256=sha(Path('/etc/vast-agents-guide.md')),no_registry_update=True)))
 """%(REMOTE,deployment['execution_seal_sha256'],deployment['root_approval_sha256'])
 if args.scope==11:code=code.replace('guardfed_celeba_mechanism_valid_next37','guardfed_celeba_mechanism_valid_next11')
+if args.after71:code=code.replace('guardfed_celeba_mechanism_valid_next11','guardfed_celeba_mechanism_valid_after71')
 result=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55',
     'python -c '+shlex.quote(code)],capture_output=True,check=True,timeout=45)
 data=json.loads(result.stdout)
@@ -79,9 +85,13 @@ data.update(status=f'ROOT_NEXT{args.scope}_REAL_LINUX_STARTUP_AND_ALLOCATION_PAS
     deployment_receipt_sha256=sha(EX/'deployment_receipt.json'),execution_seal_sha256=deployment['execution_seal_sha256'],
     original23_not_rerun=True,new_training=0,new_Full_inference=0,scientific_offserver_new_accepted=0,test_inference=False)
 if args.scope==11:data['original60_not_rerun']=True
+if args.after71:
+    data['original71_not_rerun']=True
+    data['status']='ROOT_AFTER71_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
 if args.progress:
     data.update(status=f'ROOT_NEXT{args.scope}_REAL_LINUX_PROGRESS_AND_ALLOCATION_PASS',
         source_startup_proof_sha256=sha(EX/'ROOT_STARTUP_OBSERVATION.json'),offserver_acceptance_not_measured=True)
+    if args.after71:data['status']='ROOT_AFTER71_REAL_LINUX_PROGRESS_AND_ALLOCATION_PASS'
 target=EX/(f'ROOT_PROGRESS_{stamp}.json' if args.progress else 'ROOT_STARTUP_OBSERVATION.json')
 with target.open('x',encoding='utf8') as stream:json.dump(data,stream,indent=2);stream.write('\n')
 print(json.dumps({'status':data['status'],'service':data['service'],'actual_processes':len(data['processes']),

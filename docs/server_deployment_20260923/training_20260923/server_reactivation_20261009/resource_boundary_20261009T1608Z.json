@@ -1,0 +1,20 @@
+{
+  "status": "APPROVED_WORK_RESOURCE_BOUNDARY_FROM_EXISTING_MEASUREMENTS",
+  "source_snapshot": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_live_20261009T155834Z.json",
+  "source_snapshot_sha256": "4459190451dd25b528ce7f57893d1311fd8e10f0b840221b6ad335d326454005",
+  "source_snapshot_previous": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_live_20261009T154505Z.json",
+  "source_previous_sha256": "b0ac4d4076dd8e4cfe4ae7ab2be6d9efcd3484839838bf464838dfb0b7b1ef6c",
+  "current_cpu_cores": 11.023344682217656,
+  "current_cpu_quota": 122.87999,
+  "current_gpu_utilization_percent": [
+    100,
+    100
+  ],
+  "main_terminal_observed_delta": 1,
+  "elapsed_between_snapshots_minutes": 13.476,
+  "evidence_limit": "Two point-in-time snapshots across13.5min; not continuous utilization proof or controlled bottleneck/worker-count experiment",
+  "action": "Keep frozen8 concurrent training workers and two frozen auxiliary searches. Use only exact new accepted-terminal CPU replay on112..119 after real allocation/source gate. Do not inflate CPU usage with duplicated work or change scientific arithmetic/thread/loader semantics.",
+  "interpretation": "Low CPU use with both GPUs saturated and round/job progress; no measured benefit established for more GPU concurrency. Extra CPU-only approved work is limited by available accepted models and strict validation contract.",
+  "performance_improvement_claim": false,
+  "training_protocol_changed": false
+}

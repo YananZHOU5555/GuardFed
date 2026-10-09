@@ -1,0 +1,46 @@
+--- sealed_after71/bridge.py
++++ SOURCE_ONLY_DRAFT/new_bridge.py
+@@ -91,6 +91,25 @@
+             'views_status': 'REFERENCE_ONLY_REQUIRE_SHA_BOUND_BASELINE_REPLAY_ACCEPTANCE'}
+ 
+ 
++"""Source-only helper proposed for insertion in a NEW bounded bridge; no runtime."""
++VARIANT_COMPONENTS = {
++    'minus_U': 'U', 'minus_C': 'C', 'minus_A': 'A', 'minus_F': 'F',
++    'minus_V': 'V', 'minus_N': 'N', 'no_hard_screen': 'none', 'fixed_balanced': 'none',
++}
++
++
++def validate_variant_metadata(record):
++    # Metadata does not prove an intervention: the original strict acceptor still
++    # checks the frozen raw-job SHA, adapter SHA and all-round candidate ledger.
++    variant, cfg = record['variant'], record['config']
++    require(variant in VARIANT_COMPONENTS, 'Unknown variant; Full is reference-only')
++    require(record['id'] == f"{variant}_{record['distribution']}_{record['attack']}_seed{record['seed']}",
++            'Variant/scenario/seed ID mismatch')
++    require(cfg['ablation_component'] == VARIANT_COMPONENTS[variant], 'Variant mask mismatch')
++    require(cfg['experiment_suite'] == 'celeba_mechanism_v1' and cfg['experiment_tag'] == record['id']
++            and cfg['full_round_diagnostics'] is True, 'Frozen mechanism bookkeeping changed')
++
++
+ def validate_inventory(inventory, baseline):
+     """Accept actual accepted terminals and explicit Full references, never pending models."""
+     require(inventory['scope'] == SCOPE and inventory['status'] == 'PREPARED_NOT_APPROVED', 'Wrong bridge scope/status')
+@@ -108,14 +127,15 @@
+     require(set(r['id'] for r in records) == set(ACCEPTED_IDS), 'Actual accepted82 snapshot changed')
+     require(inventory['excluded_prior_replay_ids'] == EXCLUDED_PRIOR_IDS and inventory['selected_replay_ids'] == REPLAY_IDS, 'Excluded-prior71/selected11 boundary changed')
+     require(not set(full).intersection(r['id'] for r in records), 'Full may not enter a new replay cohort')
+-    require(all(r['variant'] == 'minus_U' and r['distribution'] in DISTRIBUTIONS for r in records), 'Only actual minus_U cohort is covered; no future variant semantics')
++    require(all(r['variant'] in VARIANT_COMPONENTS and r['distribution'] in DISTRIBUTIONS for r in records), 'Unknown mechanism variant/distribution')
+     paired = {cell(r): r for r in full.values()}
+     for r in records:
+         cfg, contract, control = r['config'], r['data_contract'], paired[cell(r)]
++        validate_variant_metadata(r)
+         require(r['method'] == r['source_method'] == 'GuardFed-AD2+' and r['variant'] in VARIANTS[1:], 'Mechanism must retain its actual method/variant')
+         require((r['terminal_round'], r['original_split'], r['original_n_eval']) == (70, 'valid', 19867), 'Incomplete/non-valid terminal refused')
+         require(canonical(cfg) == r['config_canonical_sha256'], 'Configuration identity changed')
+-        require(cfg['ablation_component'] == r['variant'][-1] and cfg['seed'] == r['seed'] and cfg['client_alpha'] == r['actual_alpha'] == DISTRIBUTIONS[r['distribution']], 'Mask/seed/alpha changed')
++        require(cfg['ablation_component'] == VARIANT_COMPONENTS[r['variant']] and cfg['seed'] == r['seed'] and cfg['client_alpha'] == r['actual_alpha'] == DISTRIBUTIONS[r['distribution']], 'Mask/seed/alpha changed')
+         require(cfg['rounds'] == 70 and cfg['celeba_evaluation_split'] == 'valid' and not cfg['celeba_train_limit'] and not cfg['celeba_eval_limit'], 'Subset/test configuration refused')
+         require(not cfg['synthetic_ratio'] and not cfg['root_label_noise'] and not cfg['root_sensitive_noise'] and cfg['ad2_calibration_enabled'] is True, 'Original clean root/native calibration required')
+         require({k: v for k, v in cfg.items() if k not in IGNORE_RECIPE} == {k: v for k, v in control['config'].items() if k not in IGNORE_RECIPE}, 'Non-intervention recipe differs from paired Full')

@@ -1,0 +1,121 @@
+--- tmp/backup_mechanism_next11_root_20261009.py
++++ tmp/backup_mechanism_after71_root_20261009.py
+@@ -1,21 +1,37 @@
+-"""Transfer the completed frozen eleven once, using the original backup/verifier."""
++"""ROOT-only completed after71 exact11 transfer; original backup/verifier, no CNN."""
+ from pathlib import Path
+-import hashlib,json,shlex,subprocess,sys
+-
++import datetime,hashlib,json,shlex,subprocess,sys
++sys.dont_write_bytecode=True
+ ROOT=Path(__file__).resolve().parents[1]
+-EX=ROOT/'tmp/celeba_mechanism_valid_incremental_next11_20261009/execution_candidate'
+-REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next11_20261009/execution_candidate'
++BASE=ROOT/'tmp/celeba_mechanism_valid_incremental_after71_20261009';EX=BASE/'execution_candidate'
++REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_incremental_after71_20261009/execution_candidate'
++SCIENCE='d05a0b81620d1791858a9f71405252443e593600f390359175ff961dde0e2bec'
++EXECUTION='0fe232aab75a870b7840fd6ef0bba85b3d12c541ca49a0c0976f3f8a7095352f'
+ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ read=lambda p:json.loads(p.read_bytes())
+-assert sha(EX/'EXECUTION_SOURCE_SHA256.json')=='9f1252dd7c11abfe7cee297b2028ca9c58f179d964efb39ee6008ea860508b15'
+-assert not (EX/'BACKUP_LATEST.json').exists(), 'Already backed up; inspect the existing receipt instead of retrying'
+-progress=sorted(EX.glob('ROOT_PROGRESS_*.json'))
+-progress=[p for p in progress if not p.name.endswith('.RAW.json')]
+-latest=progress[-1];live=read(latest)
+-assert 'EXITED' in live['service'] and not live['processes'] and not live['batch_failure']
+-assert len(live['completed'])==11 and live['batch_complete']
+-deployment=read(EX/'deployment_receipt.json')
+-code="""
++
++def check_terminal(live,expected):
++    assert 'EXITED' in live['service'] and not live['processes'] and not live['batch_failure']
++    assert live['batch_complete'] and len(live['completed'])==11
++    ids=[row['id'] for row in live['completed']]
++    assert len(ids)==len(set(ids))==len(expected)==11 and set(ids)==set(expected)
++
++def main():
++    assert not sys.flags.optimize and sha(BASE/'FILES_SHA256.json')==SCIENCE
++    assert sha(EX/'EXECUTION_SOURCE_SHA256.json')==EXECUTION
++    assert sha(BASE/'inventory_actual82_Full100refs.json')=='72aca76f626580faf465c61f35b2274068e76782eb1bcef543e98da23c2e6d1e'
++    assert sha(EX/'ROOT_STARTUP_OBSERVATION.json')=='a95018b7ccc62472d7b1f796e7a2d1307a72bb4bd4905397c9f623ca6a4d2f60'
++    for folder,seal in ((BASE,BASE/'FILES_SHA256.json'),(EX,EX/'EXECUTION_SOURCE_SHA256.json')):
++        for row in read(seal)['members']:assert sha(folder/row['path'])==row['sha256']
++    assert not (EX/'BACKUP_LATEST.json').exists(), 'Already backed up; inspect existing evidence'
++    assert not (EX/'ROOT_BACKUP_ATTEMPT.json').exists(), 'Prior attempt preserved; no blind retry'
++    expected=read(BASE/'SCOPE.json')['selected_ids'];assert len(expected)==len(set(expected))==11
++    progress=[p for p in EX.glob('ROOT_PROGRESS_*.json') if not p.name.endswith('.RAW.json')]
++    assert progress, 'Actual terminal observation is required; startup is insufficient'
++    latest=max(progress);live=read(latest);check_terminal(live,expected)
++    deployment=read(EX/'deployment_receipt.json')
++    assert sha(EX/'ROOT_APPROVED.json')==deployment['root_approval_sha256']=='0438a11351de81103f52983dd86b5eee5f5ecbabdef4585dbb44d01602af838d'
++    code="""
+ from pathlib import Path
+ import hashlib,json,subprocess
+ H=Path(%r)
+@@ -23,28 +39,45 @@
+ read=lambda p:json.loads(p.read_bytes())
+ assert sha(Path('/etc/vast-agents-guide.md'))=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ assert sha(H/'EXECUTION_SOURCE_SHA256.json')==%r and sha(H/'ROOT_APPROVED.json')==%r
+-for row in read(H/'EXECUTION_SOURCE_SHA256.json')['members']:assert sha(H/row['path'])==row['sha256']
++assert sha(H.parent/'FILES_SHA256.json')==%r
++for folder,seal in ((H,H/'EXECUTION_SOURCE_SHA256.json'),(H.parent,H.parent/'FILES_SHA256.json')):
++ for row in read(seal)['members']:assert sha(folder/row['path'])==row['sha256']
+ assert (H/'batch_complete.json').is_file() and not (H/'batch_failure.json').exists()
+-assert len(list(H.glob('completed_*.json')))==11 and not (H/'BACKUP_LATEST.json').exists()
++assert read(H/'batch_complete.json')==%r
++complete=[read(p)['id'] for p in H.glob('completed_*.json')]
++assert len(complete)==len(set(complete))==11 and set(complete)==set(%r)
++assert not (H/'BACKUP_LATEST.json').exists()
+ result=subprocess.run(['taskset','-c','107','ionice','-c','3','nice','-n','10',
+  '/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(H/'backup_completed.py')],check=True,capture_output=True,text=True)
+ print(result.stdout,end='')
+-"""%(REMOTE,sha(EX/'EXECUTION_SOURCE_SHA256.json'),deployment['root_approval_sha256'])
+-result=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55',
+- 'python -c '+shlex.quote(code)],capture_output=True,check=True,timeout=120)
+-with (EX/'ROOT_BACKUP_COMMAND_STDOUT.json').open('xb') as stream:stream.write(result.stdout)
+-receipt=json.loads(result.stdout)
+-assert len(receipt['accepted_new_ids'])==len(receipt['all_accepted_ids'])==11
+-assert receipt['previous_backup_receipt_sha256'] is None
+-remote_archive=receipt['archive'];stamp=Path(remote_archive).parent.name
+-dest=EX/'backups'/stamp;dest.mkdir(parents=True,exist_ok=False)
+-for name in ('incremental_valid_three_views.tar.gz','backup_receipt.json'):
+- subprocess.run(['scp','-q','-P','60350','root@89.22.197.55:'+str(Path(remote_archive).parent.as_posix())+'/'+name,
+-  str(dest/name)],check=True,timeout=180)
+-assert sha(dest/'incremental_valid_three_views.tar.gz')==receipt['archive_sha256']
+-assert read(dest/'backup_receipt.json')==receipt
+-verified=subprocess.run([sys.executable,'-B',str(EX/'verify_backup.py'),str(dest)],capture_output=True,check=True,timeout=120)
+-with (dest/'ROOT_LOCAL_VERIFY_STDOUT.json').open('xb') as stream:stream.write(verified.stdout)
+-print(json.dumps({'delta':stamp,'receipt_sha256':sha(dest/'backup_receipt.json'),
+- 'offserver_proof_sha256':sha(dest/'OFFSERVER_VERIFICATION.json'),'verification':json.loads(verified.stdout),
+- 'terminal_progress_sha256':sha(latest)}))
++"""%(REMOTE,EXECUTION,deployment['root_approval_sha256'],SCIENCE,live['batch_complete'],expected)
++    with (EX/'ROOT_BACKUP_ATTEMPT.json').open('x',encoding='utf-8') as f:
++        json.dump(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),terminal_progress=str(latest),
++            terminal_progress_sha256=sha(latest),execution_seal_sha256=EXECUTION,selected_ids=expected),f,indent=2);f.write('\n')
++    result=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55',
++        'python -c '+shlex.quote(code)],capture_output=True,timeout=120)
++    with (EX/'ROOT_BACKUP_COMMAND_RESULT.json').open('x',encoding='utf-8') as f:
++        json.dump(dict(returncode=result.returncode,stdout=result.stdout.decode(errors='replace'),stderr=result.stderr.decode(errors='replace')),f,indent=2);f.write('\n')
++    result.check_returncode()
++    with (EX/'ROOT_BACKUP_COMMAND_STDOUT.json').open('xb') as stream:stream.write(result.stdout)
++    receipt=json.loads(result.stdout)
++    assert receipt['accepted_new_ids']==receipt['all_accepted_ids']==expected
++    assert receipt['previous_backup_receipt_sha256'] is None
++    remote_archive=receipt['archive'];stamp=Path(remote_archive).parent.name
++    assert Path(remote_archive).parent.parent.as_posix()==REMOTE+'/backups'
++    dest=EX/'backups'/stamp;dest.mkdir(parents=True,exist_ok=False)
++    for name in ('incremental_valid_three_views.tar.gz','backup_receipt.json'):
++        subprocess.run(['scp','-q','-P','60350','root@89.22.197.55:'+str(Path(remote_archive).parent.as_posix())+'/'+name,
++            str(dest/name)],check=True,timeout=180)
++    assert sha(dest/'incremental_valid_three_views.tar.gz')==receipt['archive_sha256']
++    assert read(dest/'backup_receipt.json')==receipt
++    verified=subprocess.run([sys.executable,'-B',str(EX/'verify_backup.py'),str(dest)],capture_output=True,timeout=120)
++    with (dest/'ROOT_LOCAL_VERIFY_COMMAND_RESULT.json').open('x',encoding='utf-8') as f:
++        json.dump(dict(returncode=verified.returncode,stdout=verified.stdout.decode(errors='replace'),stderr=verified.stderr.decode(errors='replace')),f,indent=2);f.write('\n')
++    verified.check_returncode()
++    with (dest/'ROOT_LOCAL_VERIFY_STDOUT.json').open('xb') as stream:stream.write(verified.stdout)
++    print(json.dumps(dict(delta=str(dest),receipt_sha256=sha(dest/'backup_receipt.json'),
++        offserver_proof_sha256=sha(dest/'OFFSERVER_VERIFICATION.json'),verification=json.loads(verified.stdout),
++        terminal_progress_sha256=sha(latest))))
++
++if __name__=='__main__':main()

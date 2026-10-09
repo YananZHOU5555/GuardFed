@@ -95,7 +95,7 @@ failure_paragraph=("The CPU replay service has fail-stopped on FairGuard/IID/F F
 paragraph=(f"The original32-item Hybrid validation search has actually started under `{screen['service']}`; its independent source/startup archive and root verification bind the unchanged eight recipes, four conditions, seed91001 and70 rounds. It uses one GPU0 worker, CPU104, one compute thread and nice10. No100-job multi-seed confirmation, test or automatic retry is authorized. "
     if screen else "The unchanged original32-item Hybrid validation search is root-approved for a separate frozen execution copy; exact source/scope approval is complete, while actual dispatch and source-bound startup acceptance remain separate requirements. ")
 if screen and screen.get('offserver_accepted70round_jobs'):
-    paragraph += (f"The first{screen['offserver_accepted70round_jobs']}/32 terminal jobs have original server strict acceptance,53 verified archive members and an independent CPU record-layer replay. "
+    paragraph += (f"The first{screen['offserver_accepted70round_jobs']}/32 terminal jobs have original server strict acceptance and linked off-server backups, including53 members in the original four-job increment and35 in the next two-job increment, with an independent CPU record-layer replay. "
         "Only three current-host runtime metadata queries are bound to the original server receipt; all scientific checks and null diagnostic policies are unchanged. Local torch2.8 CPU is disclosed separately from server torch2.11 cu128 and no local CNN inference or CUDA context was used. "
         "The still-running shared service log is saved as a prefix, not a closed per-job log; terminal artifacts were checked before and after backup. No final recipe is selected from this partial snapshot. ")
 paragraph=paragraph.rstrip()
@@ -118,6 +118,13 @@ if main.get('next11_valid_replay',{}).get('offserver_new_accepted') == 11:
     next11_note += (' The later terminal snapshot verifies normalEXITED,11 complete,zero residual workers and no failure. All11 have original strict acceptance,120 verified archive members and independent saved-array reconstruction of99 metrics,264 confusion counts and33 rules, followed by root source/checkpoint/terminal adoption. Native discrepancy is exactly zero. This closes71 minus_U three-view models; the prior60 are unchanged. The fixed six-scene table remains separate from a future explicitly accepted seven-scene join.')
     if paired_table and paired_table['complete_scenes'] == 7:
         next11_note = next11_note.replace('a future explicitly accepted seven-scene join','the subsequent explicitly root-accepted seven-scene join')
+after71_note=''
+if main.get('after71_valid_replay'):
+    after71=main['after71_valid_replay']
+    after71_note=(f'The separate after71 exact11 replay status is {after71["status"]}, with{after71["offserver_new_accepted"]} new offserver acceptances. '
+        'It excludes all previously closed71 and Full inference, covering only non-IID FedSA91002–91009 and S-DFA91001–91003. '
+        'Remote completion is not acceptance. Existing seven-scene mean/SD tables remain a separate sealed evidence snapshot; these IDs cannot create a complete eighth scene because FedSA91010 is outside the frozen replay scope. '
+        'The other seven variants have source-only metadata/recipe preparation, with no supplied terminal or empirical replay gate.')
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
@@ -134,9 +141,11 @@ Hybrid's CPU4 and separate CUDA4 pipeline gates are complete, strict and backed 
 
 The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID F Flip seeds91001–91010 and FedSA91001. Its source review preserves scientific functions and passes42 refusals. {next11_note}
 
+{after71_note}
+
 The latest previously verified Git publication is `{published['commit']}`, with{published['committed_blobs_sha256_verified']} committed blob SHA checks against the remote branch. New completion evidence is published in a separate increment. Source preparation, approval, dispatch and completed scientific results are distinct. The native three-hour chat monitor remains PAUSED; supervisor-managed training does not restore it. Final test, the remaining baselines, complete mechanism comparisons and final manuscript claims remain unfinished.
 
-The complete900-record three-view descriptive paper tables are now independently root-reviewed:900 original receipts rejoined,8100 metrics reconstructed from saved group counts and4860 mean/sampleSD scalars checked. AllIID/non-IID/five-scene/fixed10/9/6-seed views are retained under outputs/guardfed_tables/celeba_nine_method_three_view_20261009. Old native metrics/displayed values remain exact;94 oldJSON sampleSD last-bit differences(max2.78e-17) are disclosed without changing tolerance. The24-comment complete author-review reply now uses the accepted seven-scene snapshot under revision_20260923/rebuttal_integrated71_20261009; submission remains gated on the full cohort, and the manuscript source is not yet applied.
+The complete900-record three-view descriptive paper tables are now independently root-reviewed:900 original receipts rejoined,8100 metrics reconstructed from saved group counts and4860 mean/sampleSD scalars checked. AllIID/non-IID/five-scene/fixed10/9/6-seed views are retained under outputs/guardfed_tables/celeba_nine_method_three_view_20261009. Old native metrics/displayed values remain exact;94 oldJSON sampleSD last-bit differences(max2.78e-17) are disclosed without changing tolerance. The24-comment complete author-review reply now uses the accepted seven-scene snapshot at {state['latest_rebuttal_draft']['entry']}; v2 corrects only the P2 six/seven-scene wording and adds the accepted900 provenance, with no new performance claim. Submission remains gated on the full cohort, and the manuscript source is not yet applied.
 
 '''
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')

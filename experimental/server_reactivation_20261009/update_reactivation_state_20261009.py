@@ -1268,6 +1268,23 @@ if paired71_path.exists():
         'ASPD均更低，AEOD六场景更高；raw AEOD五场景更低、两场景更高（IID Sp-DFA及non-IID F Flip）。这是取舍而非所有指标上的必要性。'
         '表入口celeba_mechanism_v1/three_view_interim71_20261009/TABLES.md；历史六场景数值完全保留，'
         'Full5CPU/65GPU、69cu128/1cu130与control70CPU/cu128、driver及valid选择限制仍披露，主口径待决定。')
+for base_name,state_key,minimum in (
+        ('celeba_flgmm_screen_20261009_v2_dispatch','flgmm_screen32_20261009',13),
+        ('celeba_hybrid_screen_execution_20261009','hybrid_screen32_20261009',4)):
+    base=ROOT/'tmp'/base_name;latest_path=base/'LATEST_BACKUP.json';latest=read(latest_path)
+    if latest['accepted']>minimum:
+        chain_path=base/latest['chain_file'];chain=read(chain_path)
+        assert sha(chain_path)==latest['chain_sha256']
+        proof_path=ROOT/chain['root_adoption_path'];proof=read(proof_path)
+        assert proof['status']=='ROOT_LOCKED_AUXILIARY_DELTA_ARCHIVE_MEMBER_AND_ORIGINAL_RECORD_ACCEPTANCE_PASS'
+        assert sha(proof_path)==chain['root_adoption_sha256'] and proof['accepted_total']==chain['accepted_total']==latest['accepted']
+        assert len(set(chain['accepted_job_ids']))==chain['accepted_total'] and not proof['selection_performed'] and not proof['final_test']
+        assert sha(base/chain['delta_dir']/chain['archive'])==chain['archive_sha256']==proof['archive_sha256']
+        state[state_key].update(offserver_accepted70round_jobs=latest['accepted'],accepted_ids=chain['accepted_job_ids'],
+            latest_chain_path=chain_path.relative_to(ROOT).as_posix(),latest_chain_sha256=sha(chain_path),
+            latest_root_review_path=proof_path.relative_to(ROOT).as_posix(),latest_root_review_sha256=sha(proof_path),
+            latest_new_accepted=proof['accepted_new'],latest_archive_members=proof['members_verified'],
+            latest_archive_sha256=proof['archive_sha256'],selected_recipe=None,formal100_started=False,final_test=False)
 baseline_table_root = ROOT/'outputs/guardfed_tables/celeba_nine_method_three_view_20261009/ROOT_REVIEW.json'
 if baseline_table_root.exists():
     table_proof = read(baseline_table_root)
@@ -1290,6 +1307,83 @@ if integrated_root.exists():
     state['latest_rebuttal_draft']=dict(entry=integrated_root.with_name('rebuttal_integrated_20261009.md').relative_to(ROOT).as_posix(),
         root_proof_sha256=sha(integrated_root),original_comments_preserved=24,complete_paired_scenes=7,
         manuscript_source_applied=False,submission_ready=False,raw_AEOD_decrease=5,raw_AEOD_increase=2)
+integrated_v2=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated71_v2_20261009/ROOT_REVIEW.json'
+if integrated_v2.exists():
+    v2_proof=read(integrated_v2)
+    assert v2_proof['status']=='ROOT_MINIMAL_V2_SEVEN_SCENE_PROSE_CORRECTION_AND_ACCEPTED900_SOURCE_PASS'
+    assert v2_proof['original_comments_preserved']==24 and v2_proof['all_allowed_substitutions_reversed_to_exact_originals']
+    assert not v2_proof['new_performance_claims'] and not v2_proof['submission_ready']
+    state['latest_rebuttal_draft'].update(entry=integrated_v2.with_name('rebuttal_integrated_20261009.md').relative_to(ROOT).as_posix(),
+        root_proof_sha256=sha(integrated_v2),source_seal_sha256=sha(integrated_v2.with_name('FILES_SHA256.json')),
+        P2_six_to_seven_factual_correction=True,accepted900_three_view_source_extension_added=True,prior_sealed_draft_unchanged=True)
+after71=ROOT/'tmp/celeba_mechanism_valid_incremental_after71_20261009'
+after71_execution=after71/'execution_candidate'
+if (after71_execution/'ROOT_STARTUP_OBSERVATION.json').exists():
+    startup71=read(after71_execution/'ROOT_STARTUP_OBSERVATION.json')
+    assert startup71['status']=='ROOT_AFTER71_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+    assert startup71['deployment_receipt_sha256']==sha(after71_execution/'deployment_receipt.json')
+    assert startup71['execution_seal_sha256']==sha(after71_execution/'EXECUTION_SOURCE_SHA256.json')
+    assert startup71['original71_not_rerun'] and startup71['scientific_offserver_new_accepted']==0 and not startup71['test_inference']
+    scope71=read(after71/'SCOPE.json')
+    state['celeba_mechanism_v1']['after71_valid_replay']=dict(status='ACTUAL_STARTUP_PASS_OFFSERVER_PENDING',
+        service='guardfed_celeba_mechanism_valid_after71',observed_service=startup71['service'],measured_utc=startup71['utc'],
+        actual_native_snapshot=82,excluded_closed=71,selected_new=11,selected_ids=scope71['selected_ids'],
+        startup_root_proof_path=(after71_execution/'ROOT_STARTUP_OBSERVATION.json').relative_to(ROOT).as_posix(),
+        startup_root_proof_sha256=sha(after71_execution/'ROOT_STARTUP_OBSERVATION.json'),
+        execution_seal_sha256=startup71['execution_seal_sha256'],CPU_affinity=list(range(112,120)),compute_threads=8,
+        new_Full_inference=0,new_training=0,test_inference=False,offserver_new_accepted=0,original71_not_rerun=True)
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_after71']))
+    transport_review=after71_execution/'ROOT_TRANSPORT_RECOVERY_REVIEW.json'
+    if transport_review.exists():
+        transport71=read(transport_review)
+        assert transport71['status']=='ROOT_WINDOWS_ARGV206_PRE_SSH_FAILURE_AND_EMPTY_REMOTE_BACKUP_CONFIRMED'
+        assert not transport71['remote_readonly']['backup_latest_exists'] and not transport71['remote_readonly']['backup_directories']
+        state['celeba_mechanism_v1']['after71_valid_replay']['preserved_backup_transport_failure']=dict(
+            kind='Windows CreateProcess WinError206 before SSH child creation; no scientific failure',
+            old_attempt_sha256=transport71['old_attempt_sha256'],recovery_review_path=transport_review.relative_to(ROOT).as_posix(),
+            recovery_review_sha256=sha(transport_review),original_evaluation_outputs_unchanged=True,automatic_retry=False)
+    progress71=[p for p in after71_execution.glob('ROOT_PROGRESS_*.json') if not p.name.endswith('.RAW.json')]
+    if progress71:
+        progress71_path=max(progress71);p71=read(progress71_path)
+        assert p71['status']=='ROOT_AFTER71_REAL_LINUX_PROGRESS_AND_ALLOCATION_PASS' and not p71['batch_failure']
+        state['celeba_mechanism_v1']['after71_valid_replay'].update(latest_measured_utc=p71['utc'],
+            latest_progress_path=progress71_path.relative_to(ROOT).as_posix(),latest_progress_sha256=sha(progress71_path),
+            observed_service=p71['service'],remote_terminal_candidates=len(p71['completed']))
+        if p71['batch_complete']:
+            assert 'EXITED' in p71['service'] and not p71['processes']
+            assert {r['id'] for r in p71['completed']}==set(scope71['selected_ids'])
+            state['celeba_mechanism_v1']['after71_valid_replay']['status']='REMOTE_COMPLETE_OFFSERVER_PENDING'
+            state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_after71']
+    closure71=list((after71_execution/'backups').glob('*/ROOT_ADOPTION_REVIEW.json'))
+    if closure71:
+        assert len(closure71)==1
+        adopted71_path=closure71[0];adopted71=read(adopted71_path);delta71=adopted71_path.parent
+        assert adopted71['status']=='ROOT_AFTER71_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+        assert adopted71['prior_three_view_models']==71 and adopted71['accepted_new']==11 and adopted71['cumulative_three_view_models']==82
+        assert adopted71['science_seal_sha256']==sha(after71/'FILES_SHA256.json') and adopted71['execution_seal_sha256']==sha(after71_execution/'EXECUTION_SOURCE_SHA256.json')
+        assert adopted71['offserver_verification_sha256']==sha(delta71/'OFFSERVER_VERIFICATION.json')
+        assert adopted71['backup_receipt_sha256']==sha(delta71/'backup_receipt.json')
+        assert adopted71['archive_sha256']==sha(delta71/'incremental_valid_three_views.tar.gz')
+        assert adopted71['accepted_new_ids']==scope71['selected_ids'] and adopted71['all_native_differences_zero']
+        assert adopted71['original71_unchanged'] and adopted71['new_Full_inference']==0 and not adopted71['test_inference']
+        prior71=state['celeba_mechanism_v1']['three_view_accepted_ids']
+        assert len(prior71)==len(set(prior71))==71 and set(prior71)==set(scope71['excluded_prior_ids'])
+        assert not set(prior71)&set(adopted71['accepted_new_ids'])
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=82,three_view_new_models_offserver_verified=82,
+            three_view_accepted_ids=prior71+adopted71['accepted_new_ids'],
+            three_view_scope_limit='Prior71 plus exact after71 eleven root-adopted terminals; Full only joined from existing900, no new Full inference/test')
+        state['celeba_mechanism_v1']['after71_valid_replay'].update(status='COMPLETE_STRICT_OFFSERVER_NO_NEW_FULL_INFERENCE',
+            offserver_new_accepted=11,archive_members_verified=adopted71['archive_members_verified'],
+            root_adoption_path=adopted71_path.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(adopted71_path),
+            archive_sha256=adopted71['archive_sha256'])
+        state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_after71']
+variant_source=ROOT/'tmp/celeba_mechanism_remaining_variants_source_plan_20261009/ROOT_SOURCE_REVIEW.json'
+if variant_source.exists():
+    variant_proof=read(variant_source)
+    assert variant_proof['status']=='ROOT_SOURCE_ONLY_REMAINING_VARIANT_MAPPING_AND_RECIPE_REVIEW_PASS_NOT_DISPATCH'
+    state['celeba_mechanism_v1']['remaining_variant_replay_source_plan']=dict(status='PREPARED_NOT_DISPATCHED',
+        entry=variant_source.with_name('PLAN.md').relative_to(ROOT).as_posix(),root_source_review_sha256=sha(variant_source),
+        paired_planned_recipes_verified=800,actual_remaining_variant_terminals_supplied=0,new_inference=0)
 auxiliary_paths = list(CHECKS.glob('auxiliary_screens_*.json'))
 if auxiliary_paths:
     auxiliary_path = max(auxiliary_paths, key=lambda p: read(p)['utc'])
@@ -1334,6 +1428,21 @@ if main.get('next11_valid_replay',{}).get('offserver_new_accepted') == 11:
     if main.get('latest_paired_three_view_table',{}).get('complete_scenes') == 7:
         next11_note = next11_note.replace('新七场景三视图表仍须实际Full配对和独立统计验收，不从71条数量推断表完成。',
             '新七场景三视图表已另经实际Full配对与1134独立统计核验；FedSA单seed仍不入均值，不推断全机制完成。')
+after71_note=''
+if main.get('after71_valid_replay'):
+    replay71=main['after71_valid_replay']
+    after71_note=('新一批准确11份已训练模型的三视图valid评价已实际启动guardfed_celeba_mechanism_valid_after71，'
+        '仅覆盖native82减已闭合71：non-IID FedSA seed91002–91009和S-DFA seed91001–91003。'
+        'CPU112–119、单进程8线程/nice10/idleIO/CUDA隐藏已实测；Full仅引用，已接受71不重跑。'
+        f'当前状态{replay71["status"]}，该批新增离机接受{replay71["offserver_new_accepted"]}；启动与远端完成不代替科学验收。'
+        f'实际启动凭据{replay71["startup_root_proof_path"]}。'
+        '其余七种variant仅有元数据/配方扩展源码准备，800冻结job与Full配方核验通过；尚无这些variant实际终轮或新评价，不自动扩大本11范围。')
+    if replay71['offserver_new_accepted']==11:
+        after71_note=('准确11份after71三视图valid评价已严格验收、离机备份及root登记，累计82份；仅覆盖此前native82减已闭合71，'
+            'non-IID FedSA seed91002–91009及S-DFA seed91001–91003。实际服务正常EXITED、11完整、无残留/失败，'
+            f'{replay71["archive_members_verified"]}个archive成员、99指标/264计数/33规则均验证，native偏差全0。'
+            'Full仅引用900已接受的原三视图身份，原71记录不变。现有七场景均值表保持原封存；新FedSA仍仅九seed，不能称八个完整场景。'
+            f'新批验收入口{replay71["root_adoption_path"]}。其余七variant只有源码/800配方核验，未捏造终轮或图像门检。')
 top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
 当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
@@ -1372,9 +1481,11 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 {paired_note}
 
-九方法三视图论文表已另行完成并通过root实际900份原receipt连接、8100个组计数指标重建及4860个均值/样本SD核验：outputs/guardfed_tables/celeba_nine_method_three_view_20261009/README.md。完整IID/non-IID、五场景、10/9/6共享种子和三视图均平行保留；旧native三指标及展示表值精确一致，94个旧JSON的SD最后bit差异最大2.78e-17单独保留。英文24意见七场景完整草稿入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated71_20261009/rebuttal_integrated_20261009.md，仍禁止在全实验完成前提交，正文源文件未应用。
+九方法三视图论文表已另行完成并通过root实际900份原receipt连接、8100个组计数指标重建及4860个均值/样本SD核验：outputs/guardfed_tables/celeba_nine_method_three_view_20261009/README.md。完整IID/non-IID、五场景、10/9/6共享种子和三视图均平行保留；旧native三指标及展示表值精确一致，94个旧JSON的SD最后bit差异最大2.78e-17单独保留。英文24意见七场景完整草稿入口{state['latest_rebuttal_draft']['entry']}；v2仅修正P2误写六场景为七场景并补900已验收表来源，原数值和全部24原意见不变。仍禁止在全实验完成前提交，正文源文件未应用。
 
 {next11_note}
+
+{after71_note}
 
 ## Git与巡检
 
