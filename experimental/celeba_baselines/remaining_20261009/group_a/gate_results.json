@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "evidence": "CPU synthetic analytical/regression gates only; no CelebA measured scientific result",
+  "python": "3.10.4",
+  "torch": "2.8.0+cpu",
+  "scipy": "1.15.3",
+  "checks": [
+    "same-global empirical gradient equals analytical linear CE; unequal minibatch and sample weights; input/grads unchanged; signed Eq9 application",
+    "existing uint8 RGB64 CelebACNN full-versus-minibatch gradient equivalence and unchanged global checkpoint",
+    "Fed-NGA final NeurIPS Eq9 hand calculation, per-client scaling invariance, exact zero extension with unchanged denominator",
+    "fixed-Ti sample-weighted Huber solver versus independent SciPy BFGS objective/gradient; decreasing objective; quadratic and zero-residual limits; incomplete solve rejected by convergence flag",
+    "60 exact AST regressions against legacy GuardFed branch; strict threshold equality, first-argmax fallback, NaN fairness, zero vector, equal-versus-trust weighting, proportion units",
+    "LoGoFair official pinned DP optimizer deterministic replay, per-client thresholds and local/global constraint activation; unknown evaluation client rejected"
+  ],
+  "logofair_provenance": {
+    "upstream_commit": "7044815cf813cdad53fca7bab426c4d2194ab505",
+    "upstream_client_lf_sha256": "244e8bd3f3a6f5b4945cd8cf93035d5996954acc7f5b61e41e89651d9f88fba2",
+    "adapter_sha256": "8ac65ac38812b90ab44c71284d19184fe55f120e9d44262841ca9d925c26a5a7",
+    "calibration_source": "caller must record clean train-root identities",
+    "group_priors": "calibration-only corrected denominator",
+    "metric": "DP only; EO upstream issues unresolved"
+  },
+  "files_sha256": {
+    "adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+    "check_adapters.py": "532b27df12beba69d1b14421b0ffa62751a5cdc8d85b751b7d2cef0a7aaad1a6"
+  }
+}

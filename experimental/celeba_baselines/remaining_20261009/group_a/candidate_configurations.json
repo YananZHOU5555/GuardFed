@@ -1,0 +1,291 @@
+{
+  "status": "PROPOSED_NOT_FROZEN_NOT_QUEUED",
+  "screen_conditions": [
+    "IID/Benign",
+    "IID/S-DFA",
+    "non-IID/Benign",
+    "non-IID/S-DFA"
+  ],
+  "screen_seed": 91001,
+  "methods": {
+    "Fed-NGA-gradient": [
+      {
+        "server_eta0": 0.1,
+        "server_eta_schedule": "constant",
+        "decay_coefficient": 0.0,
+        "candidate": "Fed-NGA-gradient_00"
+      },
+      {
+        "server_eta0": 0.1,
+        "server_eta_schedule": "eta0/sqrt(1+.002*t)",
+        "decay_coefficient": 0.002,
+        "candidate": "Fed-NGA-gradient_01"
+      },
+      {
+        "server_eta0": 0.25,
+        "server_eta_schedule": "constant",
+        "decay_coefficient": 0.0,
+        "candidate": "Fed-NGA-gradient_02"
+      },
+      {
+        "server_eta0": 0.25,
+        "server_eta_schedule": "eta0/sqrt(1+.002*t)",
+        "decay_coefficient": 0.002,
+        "candidate": "Fed-NGA-gradient_03"
+      },
+      {
+        "server_eta0": 0.5,
+        "server_eta_schedule": "constant",
+        "decay_coefficient": 0.0,
+        "candidate": "Fed-NGA-gradient_04"
+      },
+      {
+        "server_eta0": 0.5,
+        "server_eta_schedule": "eta0/sqrt(1+.002*t)",
+        "decay_coefficient": 0.002,
+        "candidate": "Fed-NGA-gradient_05"
+      },
+      {
+        "server_eta0": 1.0,
+        "server_eta_schedule": "constant",
+        "decay_coefficient": 0.0,
+        "candidate": "Fed-NGA-gradient_06"
+      },
+      {
+        "server_eta0": 1.0,
+        "server_eta_schedule": "eta0/sqrt(1+.002*t)",
+        "decay_coefficient": 0.002,
+        "candidate": "Fed-NGA-gradient_07"
+      }
+    ],
+    "Huber-BRFL-gradient": [
+      {
+        "server_eta": 0.1,
+        "T0": 0.0,
+        "M": 1.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_00"
+      },
+      {
+        "server_eta": 0.1,
+        "T0": 0.0,
+        "M": 10.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_01"
+      },
+      {
+        "server_eta": 0.1,
+        "T0": 0.05,
+        "M": 1.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_02"
+      },
+      {
+        "server_eta": 0.1,
+        "T0": 0.05,
+        "M": 10.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_03"
+      },
+      {
+        "server_eta": 1.0,
+        "T0": 0.0,
+        "M": 1.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_04"
+      },
+      {
+        "server_eta": 1.0,
+        "T0": 0.0,
+        "M": 10.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_05"
+      },
+      {
+        "server_eta": 1.0,
+        "T0": 0.05,
+        "M": 1.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_06"
+      },
+      {
+        "server_eta": 1.0,
+        "T0": 0.05,
+        "M": 10.0,
+        "max_iter": 1000,
+        "tolerance": 1e-09,
+        "threshold_schedule": "T0+M/sqrt(n_i), fixed inside solve",
+        "candidate": "Huber-BRFL-gradient_07"
+      }
+    ],
+    "CosineFairnessHybrid": [
+      {
+        "client_adam_lr": 0.0005,
+        "fairness_lambda": 5.0,
+        "threshold": 0.1,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_00"
+      },
+      {
+        "client_adam_lr": 0.0005,
+        "fairness_lambda": 5.0,
+        "threshold": 0.2,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_01"
+      },
+      {
+        "client_adam_lr": 0.0005,
+        "fairness_lambda": 20.0,
+        "threshold": 0.1,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_02"
+      },
+      {
+        "client_adam_lr": 0.0005,
+        "fairness_lambda": 20.0,
+        "threshold": 0.2,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_03"
+      },
+      {
+        "client_adam_lr": 0.001,
+        "fairness_lambda": 5.0,
+        "threshold": 0.1,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_04"
+      },
+      {
+        "client_adam_lr": 0.001,
+        "fairness_lambda": 5.0,
+        "threshold": 0.2,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_05"
+      },
+      {
+        "client_adam_lr": 0.001,
+        "fairness_lambda": 20.0,
+        "threshold": 0.1,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_06"
+      },
+      {
+        "client_adam_lr": 0.001,
+        "fairness_lambda": 20.0,
+        "threshold": 0.2,
+        "aggregation_weighting": "equal_after_threshold",
+        "candidate": "CosineFairnessHybrid_07"
+      }
+    ],
+    "LoGoFair-DP": [
+      {
+        "global_delta": 0.02,
+        "local_delta": 0.02,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_00"
+      },
+      {
+        "global_delta": 0.02,
+        "local_delta": 0.02,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_01"
+      },
+      {
+        "global_delta": 0.02,
+        "local_delta": 0.06,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_02"
+      },
+      {
+        "global_delta": 0.02,
+        "local_delta": 0.06,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_03"
+      },
+      {
+        "global_delta": 0.06,
+        "local_delta": 0.02,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_04"
+      },
+      {
+        "global_delta": 0.06,
+        "local_delta": 0.02,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_05"
+      },
+      {
+        "global_delta": 0.06,
+        "local_delta": 0.06,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_06"
+      },
+      {
+        "global_delta": 0.06,
+        "local_delta": 0.06,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0,
+        "candidate": "LoGoFair-DP_07"
+      }
+    ]
+  },
+  "unresolved_before_freezing": [
+    "LoGoFair root and central validation stable client-ID mapping must be explicitly reviewed; no dummy mapping.",
+    "Fed-NGA/Huber unweighted versus shared reweighted objective must be explicitly frozen.",
+    "Fed-NGA/Huber gradient-space malicious-message semantics must pass source/protocol and real-image gates.",
+    "Huber unconstrained parameter space versus explicit projection must be frozen.",
+    "Screen candidate range may be reviewed before any observations, never changed after results to force GuardFed victory."
+  ]
+}

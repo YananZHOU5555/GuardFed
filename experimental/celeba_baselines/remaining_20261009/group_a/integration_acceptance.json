@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "evidence_stage": "component_synthetic_pipeline_only",
+  "real_celeba_training": false,
+  "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "worker_sha256": "00e94c2cc37fe0f91bfdf1388bc13fee9781a564f564c165a0c6dce4c5206d04",
+  "adapter_sha256": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+  "check_sha256": "3988b1d1b6a73d760f42b7cfdce998f45980d795e7700c0941748e502c7eff7b",
+  "rounds_per_run": 3,
+  "pipeline_runs": 3,
+  "total_pipeline_rounds": 9,
+  "device": "cpu",
+  "clients": 20,
+  "images_per_client": 4,
+  "root_images": 8,
+  "evaluation_images": 16,
+  "attack": "S-DFA",
+  "attack_path": "unchanged frozen client sensitive metadata flip and FedSA delta attack",
+  "training_path": "unchanged frozen CelebACNN, localAdam, root localAdam, native argmax evaluation",
+  "post_attack_clean_root_aeod_source_verified": true,
+  "equal_selected_mean_verified": true,
+  "deterministic_replay_bitwise_equal": true,
+  "legacy_GuardFed_checkpoint_trajectory_attack_bitwise_equal": true,
+  "unfrozen_entrypoint_rejected_before_output": true,
+  "prepared_screen_jobs": 32,
+  "per_run_evidence": {
+    "elapsed_seconds": 6.667452812194824,
+    "post_attack_root_model_checks": 60,
+    "local_adam_calls": 60,
+    "root_adam_calls": 3,
+    "checkpoint_reevaluation_equal": true
+  },
+  "output_hashes": {
+    "model.pt": "2f03549a881bd12a4657f8e221b8f671b29ba66d838bc48f9112cd51e4464cbd",
+    "diagnostics.json": "98904c0480e7c797a6fa146e1a211ae9ce86751535bfb5d17cd71b89268c5bf6",
+    "result.json": "137e8ad55baa6ada5cef2891a10b080d41c0a7d8aac299bc90c10f464995f53f"
+  },
+  "limits": [
+    "Synthetic uint8 RGB64 only; no real CelebA/GPU or 70-round scientific evidence",
+    "Draft protocol remains PREPARED_NOT_FROZEN; no server queue launched",
+    "No mid-round resume guarantee; production worker preserves partial output and failures"
+  ]
+}

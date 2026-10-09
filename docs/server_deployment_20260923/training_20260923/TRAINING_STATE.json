@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791056357.5809596,
+  "updated_unix": 1791523417.2074692,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -195,7 +195,7 @@
     "notes": "254CPU matches plus6originalGPU matches; rawCPU mismatch files preserved."
   },
   "last_health_check": {
-    "checked_utc": "2026-10-03T19:10:58.023142+00:00",
+    "checked_utc": "2026-10-07T12:46:36.063743+00:00",
     "server": "213.224.31.105:26712",
     "stage": "celeba_baseline_fullcoverage_v1",
     "mode": "healthy_idle_completed",
@@ -217,36 +217,55 @@
       1
     ],
     "gpu_temperature": [
-      26,
-      26
+      29,
+      28
     ],
     "gpu_recovery": [
       "GPU Recovery Action                   : None",
       "GPU Recovery Action                   : None"
     ],
     "cpu_quota_cores": 61.43999,
-    "cpu_used_cores_2sec": 0.13028932870705878,
-    "memory_used_bytes": 25803890688,
+    "cpu_used_cores_2sec": 0.009011736982367602,
+    "memory_used_bytes": 25958043648,
     "memory_limit_bytes": 129370161152,
     "memory_failcnt": 0,
-    "disk_free_bytes": 2045591379968,
+    "disk_free_bytes": 2045441400832,
     "progress_latest_unix": 1791051858.9266255,
-    "progress_changed_since_previous": true,
+    "progress_changed_since_previous": false,
     "healthy": true,
     "new_training_started": false,
     "new_training_started_by_heartbeat": false,
     "service_status": [
-      "guardfed_celeba_baseline_fullcoverage   EXITED    Oct 03 06:24 PM"
+      "guardfed_celeba_baseline_fullcoverage   EXITED    Oct 03 06:24 PM",
+      "guardfed_celeba_baseline_gates          EXITED    Sep 28 10:54 AM",
+      "guardfed_celeba_baseline_screen         EXITED    Sep 28 03:30 PM",
+      "guardfed_celeba_expanded                EXITED    Sep 25 02:38 AM",
+      "guardfed_celeba_fullcoverage            EXITED    Sep 28 02:32 AM",
+      "guardfed_celeba_screen_gates            EXITED    Sep 28 11:07 AM",
+      "guardfed_celeba_seedcheck               EXITED    Sep 25 07:08 AM",
+      "guardfed_celeba_sharedcal               EXITED    Sep 28 10:51 AM",
+      "guardfed_fullcoverage_pilot             EXITED    Sep 26 06:26 AM"
     ],
     "last_backup_receipt": "celeba_baseline_fullcoverage_v1/incremental_new40_total192_20261003T191154Z_receipt.json",
     "last_backup_sha256": "34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279",
     "backed_up_new_ids": 192,
     "strict_acceptance": "200/200 accepted (192new+8reuse),0invalid/currentfailure;900 merged records and independent statistics PASS",
     "next_action": "Keep existing3hour health monitor active while healthy idle. No completed queue restart or automatic next adapter/test queue.",
-    "previous_accepted_new": 152,
-    "newly_accepted": 40,
+    "previous_accepted_new": 192,
+    "newly_accepted": 0,
     "authorized_queue_started_previously": true,
-    "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004"
+    "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "observed_result_files": 192,
+    "observed_terminal_round": 70,
+    "recent_log_errors": [],
+    "cpu_quota_path": "/sys/fs/cgroup/cpuacct/cpu.cfs_quota_us",
+    "strict_acceptance_rerun": false,
+    "new_backup_created": false,
+    "problems": [],
+    "completion_previously_reported": true,
+    "server_guide_sha256": "b7983a0d3e2157340ff8d1534b0b557352b0392ff40fc1976bdbca97b096579f"
   },
   "celeba_tuning_v1": {
     "status": "complete_verified_backed_up",
@@ -2354,7 +2373,7 @@
     "next_run_at": 1790913418000,
     "state_before_20261002_repair": "PAUSED",
     "repair_basis": "Prior user instruction to continue existing3hourmonitor; schedulerstate disagreed with oldlocalACTIVErecord; prompt corrected to avoid pausingagain on oldstagecompletion",
-    "last_checked_utc": "2026-10-03T19:10:58.023142+00:00",
+    "last_checked_utc": "2026-10-07T12:46:36.063743+00:00",
     "current_stage": "celeba_baseline_fullcoverage_v1",
     "current_protocol": "celeba_baseline_fullcoverage_v1/PROTOCOL.md",
     "current_manifest": "results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json",
@@ -2381,7 +2400,7 @@
     "no_new_training_started": true
   },
   "latest_status_20261003": {
-    "checked_utc": "2026-10-03T19:10:58.023142+00:00",
+    "checked_utc": "2026-10-03T22:13:39.680323+00:00",
     "server": "213.224.31.105:26712",
     "ssh_connected": true,
     "repo_exists": true,
@@ -2391,10 +2410,10 @@
       0
     ],
     "gpu_temperature": [
-      26,
-      26
+      24,
+      24
     ],
-    "disk_free_tb": 2.045591379968,
+    "disk_free_tb": 2.045441462272,
     "overview": "docs/返修实验总览.md",
     "no_new_training_started": true,
     "phase": "nine_method_validation_complete",
@@ -2531,7 +2550,7 @@
     "publication_commit": "b4931101b33784b68038978850ece19270540034",
     "publication_branch": "codex/revision-evidence-baselines-20260928",
     "cpu_bottleneck_observation": "GPU96percent both;CPU8of61.44cores at8frozen1threadworkers. GPU-bound;no numerical/thread/concurrency amendment.",
-    "last_checked_utc": "2026-10-03T19:10:58.023142+00:00",
+    "last_checked_utc": "2026-10-07T12:46:36.063743+00:00",
     "accepted_total": 200,
     "last_backup_receipt": "celeba_baseline_fullcoverage_v1/incremental_new40_total192_20261003T191154Z_receipt.json",
     "last_backup_sha256": "34eccda2c885258b95f482dfb3c3df2138e72bd03f59fd4f027a194139b1b279",
@@ -2542,5 +2561,130 @@
     "report_status": "COMPLETE_VERIFIED",
     "combined_table_records": 900,
     "paper_table_directory": "outputs/guardfed_tables/celeba_nine_method_final_20261004"
+  },
+  "latest_status_20261004": {
+    "checked_utc": "2026-10-04T22:24:12.580779+00:00",
+    "server": "213.224.31.105:26712",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "active_training_workers": 0,
+    "gpu_utilization": [
+      0,
+      0
+    ],
+    "gpu_temperature": [
+      24,
+      24
+    ],
+    "disk_free_tb": 2.045441441792,
+    "no_new_training_started": true,
+    "phase": "nine_method_validation_complete",
+    "accepted_stage_records": 200,
+    "accepted_combined_records": 900
+  },
+  "latest_status_20261005": {
+    "checked_utc": "2026-10-05T22:31:21.549233+00:00",
+    "server": "213.224.31.105:26712",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "active_training_workers": 0,
+    "gpu_utilization": [
+      0,
+      0
+    ],
+    "gpu_temperature": [
+      26,
+      26
+    ],
+    "disk_free_tb": 2.045441425408,
+    "no_new_training_started": true,
+    "phase": "nine_method_validation_complete",
+    "accepted_stage_records": 200,
+    "accepted_combined_records": 900
+  },
+  "latest_status_20261007": {
+    "checked_utc": "2026-10-07T12:46:36.063743+00:00",
+    "server": "213.224.31.105:26712",
+    "ssh_connected": true,
+    "repo_exists": true,
+    "active_training_workers": 0,
+    "gpu_utilization": [
+      0,
+      0
+    ],
+    "gpu_temperature": [
+      29,
+      28
+    ],
+    "disk_free_tb": 2.045441400832,
+    "no_new_training_started": true,
+    "phase": "nine_method_validation_complete",
+    "accepted_stage_records": 200,
+    "accepted_combined_records": 900
+  },
+  "latest_connection_check": {
+    "recorded_utc": "2026-10-09T05:21:10.543029+00:00",
+    "server": "213.224.31.105:26712",
+    "instance": 52514165,
+    "observed": "SSH banner/key-exchange connection refused before authentication; direct TCP WinError10061",
+    "ssh_attempts_in_current_turn": 4,
+    "direct_tcp_checked": true,
+    "authentication_reached": false,
+    "user_report": "Instance running; SSH endpoint unchanged",
+    "user_report_independently_confirmed": false,
+    "current_internal_runtime": "unknown",
+    "prior_verified_runtime_utc": "2026-10-07T12:46:36.063743+00:00",
+    "next_evidence_requested": "Vast web-terminal ss -lntp text output",
+    "new_training_started": false,
+    "old_queue_restarted": false
+  },
+  "current_work": "rebuttal_complete_20261009",
+  "active_goal_20261009": {
+    "objective": "Complete all rebuttal experiments and a sufficiently clear, complete response",
+    "status": "active_incomplete",
+    "new_scientific_runs_this_turn": 0,
+    "entry": "REBUTTAL_COMPLETION_20261009.md",
+    "current_gpu_runtime": "unobservable_ssh_refused",
+    "independent_local_work": "Mechanism controls/grid/launcher checked; remaining adapters and full rebuttal/evidence reconstruction advancing",
+    "next": "Resolve SSH listener/public mapping with web-terminal evidence, then live identity checks and real-image gates before missing-only GPU queue"
+  },
+  "celeba_mechanism_v1": {
+    "status": "PREPARED_PENDING_SERVER_AND_REAL_IMAGE_GATES",
+    "new_total_prepared": 800,
+    "reused_full": 100,
+    "new_completed": 0,
+    "new_started": 0,
+    "prepared_gate_jobs": 18,
+    "reference_jobs": 2,
+    "cpu_component_tests_passed": 6,
+    "real_image_gates_passed": false,
+    "manifest_sha256": "498ed0e033ef6eb5532286820ec987af3b44ca6251d8a84c42ce9c3e5ff5ab2d",
+    "setup_sha256": "4669a4986219adf7348a46cd2bbe11291825a246cd6d0284f47eb595f8f90008",
+    "entry": "celeba_mechanism_v1/EXECUTION.md",
+    "queue_dispatched": false
+  },
+  "celeba_partition_audit_20261009": {
+    "status": "PASS",
+    "partitions": 20,
+    "clients": 400,
+    "original_male_count_checks": 40,
+    "scope": "Pre-attack sensitive-group counts and root support; not client label-joint counts",
+    "entry": "celeba_partition_audit_20261009/README.md",
+    "new_training": false
+  },
+  "adult_score_recovered_20261009": {
+    "status": "PASS",
+    "raw_files": 140,
+    "visible_rounds": 8440,
+    "fields_compared": 388240,
+    "entry": "score_analysis/restoration_and_score_report_20261009.md",
+    "new_training": false
+  },
+  "rebuttal_draft_20261009": {
+    "status": "VERIFIED_WORKING_DRAFT_NOT_SUBMISSION_READY",
+    "comment_blocks": 24,
+    "checked_recommended_references": 8,
+    "entry": "../revision_20260923/rebuttal_20261009/README.md",
+    "sha256": "d9343d0fd476c885c1d2ca1bca372442deb29f0d172685ae42ffe42459ed1caf"
   }
 }

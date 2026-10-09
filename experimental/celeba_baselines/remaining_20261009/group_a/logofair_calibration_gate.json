@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "evidence": "synthetic CPU scores, not real CelebA performance",
+  "python": "3.10.4",
+  "torch": "2.8.0+cpu",
+  "netcal": "1.3.6",
+  "numpy": "1.26.4",
+  "settings": {
+    "post_rounds": 3,
+    "local_steps": 3,
+    "global_steps": 3,
+    "calibration": true
+  },
+  "clients": 20,
+  "sample_count": 1600,
+  "per_group_beta_calibrators": 40,
+  "checks": [
+    "40 official BetaCalibration MLE fits",
+    "all transformed probabilities finite",
+    "deterministic replay of predictions and client thresholds",
+    "calibration changes thresholds",
+    "distinct client-specific group thresholds"
+  ],
+  "global_lambda": 0.00951138325035572,
+  "provenance": {
+    "upstream_commit": "7044815cf813cdad53fca7bab426c4d2194ab505",
+    "upstream_client_lf_sha256": "244e8bd3f3a6f5b4945cd8cf93035d5996954acc7f5b61e41e89651d9f88fba2",
+    "adapter_sha256": "8ac65ac38812b90ab44c71284d19184fe55f120e9d44262841ca9d925c26a5a7",
+    "calibration_source": "caller must record clean train-root identities",
+    "group_priors": "calibration-only corrected denominator",
+    "metric": "DP only; EO upstream issues unresolved"
+  },
+  "check_script_sha256": "5089365c53e70448d4c80e4a42a49e3fd5aa9835caf03ab6d8f9aec8dcf13ab2"
+}

@@ -1,0 +1,47 @@
+{
+  "implemented": [
+    "FLGMM-author-code"
+  ],
+  "component_passed": [
+    "FLGMM-author-code"
+  ],
+  "real_image_gate_passed": [],
+  "training_started": false,
+  "unimplemented_due_to_source_specification": {
+    "FedWA": [
+      "DRL state encoding",
+      "reward and evaluation data",
+      "actor/critic and policy algorithm",
+      "optimization/exploration/update settings"
+    ],
+    "SmartFL": [
+      "pairwise elimination and stopping",
+      "pseudo vector construction",
+      "full-state versus delta semantics",
+      "final weighting and normalization",
+      "90-degree equality"
+    ],
+    "FedDNA": [
+      "probe construction/data access",
+      "activation fingerprint layer/aggregation",
+      "history consistency/update/initialization",
+      "MAD formula/hyperparameters/zero-MAD behavior",
+      "aggregation weighting/empty set"
+    ]
+  },
+  "correction_to_old_report": "flgmm_official.py line444 assigns excluded_clients=excluded before line463 aggregation; dynamic detections are applied.",
+  "worker_integration": "PASS_SYNTHETIC_RGB64_CPU_ONLY",
+  "prepared_screen_jobs": 32,
+  "protocol_status": "PREPARED_NOT_FROZEN",
+  "source_recovery_20261009": {
+    "status": "BOUNDED_SEARCH_COMPLETE_SPECIFICATION_STILL_MISSING",
+    "report": "SOURCE_RECOVERY_20261009.md",
+    "receipts": "sources/recovery_20261009/recovery_summary.json",
+    "new_fulltext_obtained": 0,
+    "request_receipts": 51,
+    "local_unnamed_scholarly_pdf_first_two_page_matches": 0,
+    "new_adapter_count": 0,
+    "new_training_count": 0,
+    "feddna_author_share": "TEMPORARY_ATP_3_REQUEST_ERROR_NOT_PERMANENT_UNAVAILABILITY"
+  }
+}

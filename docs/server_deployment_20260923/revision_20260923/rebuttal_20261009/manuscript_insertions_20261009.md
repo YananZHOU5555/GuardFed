@@ -1,0 +1,146 @@
+# GuardFed revision — manuscript insertion candidates
+
+These passages are written for author review and insertion into the manuscript. They are not assertions that the submitted PDF has already changed. Equation/table numbers must follow the final manuscript build. Numerical claims below are supported by the linked evidence packet; unresolved experiments remain in the response's pending register. The implementation facts were checked against `tmp/celeba_shared_calibration_20260928/reproduce_paper_tables.py`, `celeba_data.py`, the initial implementation audit, and frozen coverage protocols. Cohort-specific manifests remain authoritative for individual recipes and any later wrapper changes.
+
+## 1. Contribution and threat-model positioning
+
+**Replacement contribution paragraph.** We study a coordinated poisoning threat in which malicious clients target predictive utility and group fairness simultaneously. DFA combines existing sensitive-attribute and model-update poisoning primitives in two allocations: synchronous DFA applies both roles to the same malicious clients, whereas split DFA distributes the roles across a fixed malicious-client budget. The contribution is a threat setting and comparative evaluation of their interaction with defenses, rather than invention of the constituent primitives. We then evaluate GuardFed, an implemented root-assisted pipeline combining reliability/risk scoring, filtering, update-norm handling, root-based internal configuration selection, and group-dependent prediction calibration. Our experiments characterize trade-offs and failure conditions; they do not establish universal superiority across methods, datasets, or fairness definitions.
+
+**Threat-model clarification.** In the executed supplementary experiments, 20 clients participate in each round. Attack scenarios normally contain four nominal malicious clients. S-DFA uses the same malicious clients for both roles; Sp-DFA assigns two to sensitive-attribute manipulation and two to update poisoning. Sensitive-attribute manipulation changes the local annotation/reweighting path and leaves task labels unchanged; on CelebA it does not modify pixels. The implemented utility component is a FedSA-inspired update attack using a root-reference direction and the recorded amplitude/norm constraints. This reference access is part of the simulated attacker-information assumption. It is not an implicit consequence of federated learning and should not be attributed to the original FedSA algorithm without qualification. Attack configurations and actual client effects are recorded per run.
+
+**Client-scale discussion.** Our simulations represent a small participating population. For uniform sampling without replacement from N available clients containing M malicious clients, the malicious count K in a round of m participants satisfies K∼Hypergeometric(N,M,m), with expectation mM/N. A larger population reduces expected malicious participation when M remains fixed, but not when M/N remains fixed. Availability, selection bias, and coordination can change the relevant distribution. Our evaluation does not validate these effects in million-device deployment. The defense also uses the configured malicious count in its retained-set rule; this resource assumption is disclosed rather than inferred to be known in practice.
+
+## 2. Root update and actual GuardFed-AD2+ operations
+
+**Trusted root reference.** At the start of round t, let θ_t be the global parameter vector. The server copies θ_t into a temporary model and creates a fresh optimizer with the run's configured optimizer and learning rate. It shuffles the root minibatches and performs one pass minimizing ordinary cross-entropy on the root labels. The resulting root update is δ_t^r=θ_t^{r,end}−θ_t. This positive parameter-difference convention is also used for client updates. The root reference is computed once before client aggregation and reused for root alignment and norm handling. It is not an independently aggregated pseudo-client. Contrary to the earlier description, this root-training step does not use an additional fairness-aware loss. Fairness-related reweighting, scoring, candidate selection, and threshold fitting are distinct steps described below.
+
+```text
+RootReference(theta_t, root, frozen_run_config):
+    theta_r <- deep copy of theta_t
+    optimizer <- fresh configured optimizer(theta_r, learning_rate)
+    for (x, y) in shuffled root minibatches:    # exactly one pass
+        optimizer.zero_grad()
+        cross_entropy(model(theta_r, x), y).backward()
+        optimizer.step()
+    return theta_r - theta_t
+```
+
+**Client scoring.** For each client update δ_i, evaluate the corresponding one-step model θ_t+δ_i on the root data. Utility U_i is root accuracy. With δ_med the coordinate-wise median update, raw centrality is C_i=−||δ_i−δ_med||_2, and root alignment is A_i=max{0,cos(δ_i,δ_t^r)}. The candidate-specific root risk F_i uses AEOD, ASPD, their average, or their maximum according to the frozen internal candidate. The violation is V_i=max{0,F_i−b}. Each signal is centered by its median and scaled by max{1.4826 MAD,10^−6}; utility, centrality, and alignment have positive orientation, while risk and violation have negative orientation. Any score clipping is a recorded configuration choice. The final additive score combines these standardized terms, with a dynamic violation factor softplus((mean_i F_i−b)/τ). Thus the implementation is not simply a linear combination of unnormalized raw metrics.
+
+**Filtering and norm handling.** The intermediate geometric gate includes a client if its distance from the coordinate median is at most median(distance)+2.5×robust-scale(distance), or if its nonnegative root cosine is positive. If this gate leaves fewer than max{1,n−f} clients, it falls back to all n clients. For ranking, the implementation temporarily replaces every gate-excluded score with −10^9 and takes top-k over all n positions, where k=max{n−f,ceil(nq)} within the implementation's bounded q and f is the configured malicious count. Thus k exceeding the gate size can re-admit excluded clients; the final selected set is not guaranteed to be a subset of the intermediate gate. Softmax weights use the selected clients' original scores. The Adult audit observed such re-admission in 116 deletion rounds. The AD2+ root-norm mode scales a nonzero retained update to the root-update norm; the zero-norm cases follow the recorded fallback. The alternative norm mode uses the implemented adaptive cap. These operations must not be described as only clipping the final aggregate or as unconditional hard exclusion.
+
+**Internal candidate selection.** The frozen core defines ten named internal configurations: balanced, balanced_open, fair_stable, utility_fair, dual_strict, dual_sharp, aeod_focus, aspd_focus, aspd_strict, and max_guard. They vary scoring weights, risk definition, retention ratio and temperature; they are not external baseline aggregators. For each candidate c, the server forms its aggregate and evaluates θ_t+δ_t^(c) on the root data. Let a_max be the highest candidate root accuracy and a_floor=a_max−min{max{0,d},0.005}, with d the recorded allowable calibration accuracy drop. Candidate score uses
+
+\[
+L_c=0.45\,\mathrm{AEOD}_c+0.45\,\mathrm{ASPD}_c
+     +0.10\max(\mathrm{AEOD}_c,\mathrm{ASPD}_c),
+\]
+\[
+Q_c=a_c-0.35L_c-6\max(0,a_{\mathrm{floor}}-a_c)
+     -0.10\max\{0,\max(\mathrm{AEOD}_c,\mathrm{ASPD}_c)-b_{\mathrm{cal}}\}.
+\]
+
+The server chooses the highest-scoring candidate among those satisfying the root accuracy floor (or all candidates if the feasible set is empty). Ties use the recorded lower fairness loss and higher accuracy ordering, then the stable candidate order if the tuple is identical. Only root metrics enter this per-round choice. Whole-run recipe screening on external validation data is a separate operation and its history is reported. Candidate tables and cohort-specific wrappers must be released with their manifests; the formula does not replace those exact settings.
+
+**Prediction calibration.** For the selected final model, prediction uses the margin z_1−z_0 and a group-specific threshold t_a. Threshold pairs are searched on root-labelled margins, using the recorded quantile grid, fairness budget, objective, and allowable root-accuracy drop. The executed search includes zero and extreme thresholds as well as quantiles; its finite fallbacks do not make missing group support identifiable. Applying t_a requires the sensitive group at inference. The native comparison evaluates this complete GuardFed pipeline against the baseline's recorded native output. It is therefore an end-to-end comparison, not an isolation of aggregation scoring. A separate same-checkpoint common-calibration control is reported to distinguish the postprocessing effect.
+
+**Simulator information.** Client loss reweighting uses aggregate training-population sensitive/label counts. The root is training-derived and distinct from evaluation data; root selection and any retained reservoir are specified by protocol. This simulator access does not constitute a privacy-preserving mechanism for acquiring population statistics. Sensitive labels used for fitting and applying group thresholds are also explicit resources.
+
+## 3. Synthetic-root construction and its scope
+
+The inspected synthetic routines do not support an unqualified “root-only data access” statement. CTGAN/TVAE fit on clean root rows with the configured epochs, seed, discrete-column treatment and batch size, but type/support selection and output projection use the encoded training-reference table. The empirical Gaussian-copula routine estimates dependence on clean root rows, then maps samples through full training-population empirical marginals. PCA/Gaussian and interpolation paths also project outputs using training-reference support. These are additional simulator resources, which differ from having only a small clean root set. No differential-privacy guarantee is supplied by these generators or by the use of synthetic data itself.
+
+This description is verified for the inspected core. It is not a provenance certificate for every earlier synthetic figure. The submitted figure also names ForestDiffusion, whose exact run-specific implementation, model settings and training-data lineage have not yet been linked to the plotted records in this writing task. The final figure-method paragraph must use those original records or explicitly limit which generator results are supported. We do not infer that an absent protected group can be accurately reconstructed from no observations.
+
+## 4. Conditional weighting result, proof and diagnostics
+
+**Proposition (softmax mass under retained-set separation).** Fix round t and the selected internal configuration. Let S_t be the retained clients, H_t=S_t∩B_t the retained benign clients, and M_t=S_t∩A_t the retained malicious clients, with h=|H_t|>0 and m=|M_t|. Let s_i be the actual final scores entering softmax and τ>0 its selected temperature. Assume
+
+\[
+\mu_t=\min_{i\in H_t}s_i-\max_{j\in M_t}s_j\ge0.
+\]
+
+For m>0, with p_i=exp(s_i/τ)/Σ_{k∈S_t}exp(s_k/τ), the malicious coefficient mass satisfies
+
+\[
+\Omega_t=\sum_{j\in M_t}p_j
+\le\frac{m}{h\exp(\mu_t/\tau)+m}.
+\]
+
+**Proof.** Let a=max_{j∈M_t}s_j. The malicious exponential sum is at most m exp(a/τ), while the benign sum is at least h exp((a+μ_t)/τ). Since x/(x+y) increases with x and decreases with y for nonnegative x and positive y, substitution gives the bound. If m=0, Ω_t=0 without requiring a malicious maximum. If h=0, retained weight can be entirely malicious and this proposition gives no protection. This completes the conditional weighting argument.
+
+**Interpretation.** The proposition conditions on score separation rather than proving it. It applies after the actual selected candidate and filter are known; counts and temperature must match that round. It does not prove sound filtering, generalization of root estimates, convergence, accuracy, or population fairness. If all scaled malicious updates satisfy ||δ_j'||≤R_t, then their weighted vector contribution is at most R_t Ω_t by the triangle inequality. This additional bound requires the actual norm-handling assumptions, including zero-root fallbacks. It still does not bound harm relative to an unknown benign-only learning trajectory.
+
+**Empirical diagnostics.** Strict pre-gate, intermediate-gate and actual retained-set margins are recorded separately; average benign minus average malicious score is not the premise. All 140 Adult/S-DFA source files and 8,440 visible CSV records have been independently matched to their raw results. The 120 deletion runs contain 8,400 complete rounds: 6,065 pre-gate margins are positive and 2,335 negative. Their final selection contains no malicious client in 8,278 rounds; the remaining 122 contain both classes, with two positive and 120 negative strict margins. Both nonempty nonnegative-margin cases satisfy the coefficient-mass bound; the no-malicious cases are zero-mass outcomes with an undefined empty-class margin, not nonempty-premise successes. The 20 historical Full runs expose only rounds 1 and 70 (40 observations): 31 pre-gate margins are positive, nine negative, and every observed final set has no malicious client. Historical weights are reconstructed from stored scores/selection/temperature, whose formula was cross-checked against the direct logs of all 8,400 new rounds. The new-round direct-weight reconstruction error is at most 6.66×10^−16 in the independent local audit. All 14 distribution/component summaries and ten shared seeds per group remain available in the [full audit report](../../training_20260923/score_analysis/restoration_and_score_report_20261009.md). Correlated round counts are descriptive diagnostics, not independent sample sizes; missing historical rounds are not reconstructed. These deletion-cohort observations do not establish an untested Full/CelebA separation rate.
+
+## 5. Notation table candidate
+
+| Symbol | Meaning and role |
+|---|---|
+| t; i | Communication round; client index |
+| θ_t; θ_{i,t}^{end} | Round-start global parameters; local parameters after client training |
+| δ_{i,t}=θ_{i,t}^{end}−θ_t | Client parameter difference; positive update sign |
+| D_i; D_r; D_eval | Client data; server root data; evaluation split; disjointness follows the data protocol |
+| δ_t^r | One-pass cross-entropy root parameter difference, recomputed each round |
+| n; f | Participating-client count; configured malicious-client count used by filtering |
+| B_t; A_t | Actual benign/malicious participating sets for diagnostic analysis |
+| G | Sensitive-group set; {0,1} in executed experiments |
+| U_i; C_i; A_i | Root accuracy; negative distance to coordinate median; nonnegative root cosine. Italic A_i is a scalar alignment, unlike the set A_t |
+| F_i; V_i | Candidate-specific disparity risk; max{0,F_i−b} violation |
+| b; b_cal | Scoring fairness budget; prediction/candidate fairness budget in the run configuration |
+| med; MAD | Median and median absolute deviation across the scored values |
+| \widetilde U_i, …, \widetilde V_i | Signed robust-standardized signals; risk/violation use lower-is-better orientation |
+| λ_t | Dynamic softplus violation factor; not a DP budget or certified dual optimum |
+| c; q_c; τ_c | Internal configuration index; retention ratio; softmax temperature |
+| s_i^(c); S_t^(c) | Final candidate score; retained set after hard gate and top-score selection |
+| p_i; Ω_t | Normalized retained-client coefficient; malicious coefficient mass |
+| μ_t | Strict minimum-benign minus maximum-malicious score margin on the stated set |
+| t_a; z_1−z_0 | Group prediction threshold; two-logit prediction margin |
+| α | Client sensitive-group Dirichlet allocation parameter |
+| root skew/share/noise controls | Separate root-distribution or corruption settings; not client α |
+| seed; n_rep; sample SD | Shared run seed; actual repeated-seed count; SD with denominator n_rep−1 |
+
+For final typesetting, use distinct typography or rename the scalar alignment to avoid collision with the malicious set. This proposed notation correction changes no experiment. The candidate-specific coefficients and fixed candidate family belong in the exact configuration table/release, rather than hiding them behind generic symbols.
+
+## 6. Models and optimization
+
+The supplementary tabular network has a Linear(d,16) layer, ReLU, and Linear(16,2), with two-logit cross-entropy. The encoded feature schema and train-only/legacy preprocessing identity are reported per dataset. Its executed supplementary protocol uses 70 rounds, one local epoch, Adam learning rate 0.005, batch size 256, 20 clients and a training-derived 10% root set. A legacy run must be linked to its archived model source; matching the name MLP alone does not prove identical architecture or preprocessing.
+
+For CelebA, the input is RGB 64×64 converted to FP32 and scaled by 1/255. Three Conv3×3/ReLU/MaxPool2 blocks have channels 3→32→64→128, followed by adaptive average pooling to one spatial cell and a Linear(128,2) output. There is no batch normalization, dropout or image augmentation in this model. Image runs use 70 rounds, one local epoch, batch size 64 and their frozen selected learning rates. The official training/validation sizes are 162,770/19,867. Smiling is the target and Male is metadata for evaluation/reweighting/calibration, not an added image input channel.
+
+**Realized CelebA partition audit.** We audited 20 pre-attack partitions (two allocation anchors and ten shared seeds) using the archived GuardFed-AD2+ Sp-DFA records. The frozen loader samples the root and partitions clients before applying any runtime attack. Its sensitive-group split uses a fresh seed generator, shuffles group 1 and then group 0, and makes a Dirichlet allocation after each shuffle. Replaying these count operations exactly matches all 400 stored client sample counts; 40 original Male counts also match the attribute-flip diagnostic. Across 200 client observations per distribution, Male=1 proportions range from 40.495%–42.969% under IID and 9.832%–74.303% under non-IID, with no missing sensitive group. The per-partition sample-count CV is 0.00946±0.00129 versus 0.29870±0.06038 across ten seeds. The first four nominally malicious clients cover 19.964±0.102% versus 18.874±3.132% of client-held samples. Thus a fixed malicious-client ratio does not ensure a fixed adversarial sample ratio. All raw counts and source/member/helper hashes are supplied in the [audit packet](../../training_20260923/celeba_partition_audit_20261009/README.md).
+
+The root has 16,277 images, with Male=0/1 counts 9,451/6,826 and nonzero support in all four Male×Smiling cells. The smallest cell across ten roots has 2,666 images. Joint TVD from full-training sensitive/label proportions is 0.003486±0.002155. A shared seed gives the same root image identities across IID/non-IID, so root summaries use ten unique seeds. These are descriptive diagnostics of the simulated resource, not a privacy or representative-root availability guarantee. No client Smiling or Male×Smiling counts were recovered without metadata; sensitive allocation must not be described as measured general label heterogeneity.
+
+The image evaluation changes data modality and architecture together. It supports applicability to the tested CNN/image task, not an architecture-only causal effect or universal generality. The initial 240-run official-test cohort and the later tuned validation cohort are reported separately.
+
+## 7. Result interpretation, statistical correction and selection history
+
+**Expanded CelebA result paragraph.** The current complete matrix covers nine methods, both allocation anchors and five scenarios, with ten shared seeds per cell and all metrics from round 70. It comprises 900 records, including explicit reused runs rather than 900 newly repeated trainings. Across the ten distribution/scenario conditions averaged within each seed, GuardFed obtains ACC 88.420±0.623%, AEOD 0.00967±0.00297 and ASPD 0.06105±0.00466. Against native FLTrust, the corresponding means reflect lower disparity at a 1.209-percentage-point accuracy cost. Against FedAA-DDPG adaptation, accuracy is lower by 0.204 points; against LASA adaptation it is higher by 0.668 points. The respective accuracy win counts are 0/10, 4/10 and 7/10 paired seeds. Both disparity metrics are lower in all ten paired seeds against these three methods. FairGuard has lower mean ASPD but substantially lower accuracy. These descriptive patterns do not establish significance or simultaneous superiority over every method and metric.
+
+**Calibration control paragraph.** On the same 700 Stage A checkpoints, a shared root-only calibration rule gives GuardFed−FLTrust paired differences of −0.844±0.371 percentage points in ACC, +0.00043±0.00414 in AEOD and −0.01020±0.00407 in ASPD. Thus the ASPD direction remains, accuracy remains lower, and AEOD has no stable advantage under a common calibration rule. The native end-to-end comparison must not attribute the full disparity difference solely to aggregation. This completed control covers seven methods; it has not yet been extended to FedAA/LASA.
+
+**Ablation paragraph.** Component effects depend on dataset and distribution. In the new COMPAS train-only protocol, all 12 individual-deletion conditions have higher mean accuracy than Full, and six improve all three reported means. For IID, deleting alignment changes ACC/AEOD/ASPD from Full's 0.64838/0.06130/0.04196 to 0.65999/0.05352/0.03752. Postprocessing can change rankings: non-IID deletion of F is worse than Full in raw AEOD (0.250984 versus 0.239597), but better after the respective root calibration (0.044831 versus 0.049143). Candidate compensation, redundancy and estimation variability are possible explanations, not isolated causes. We therefore report raw/calibrated outputs and reject a claim that every score term is indispensable. Historical Adult Full controls have incomplete binary checkpoint and environment comparability; those limitations remain visible.
+
+**Root/heterogeneity paragraph.** Stronger sensitive-group heterogeneity incurs utility costs: Adult benign GuardFed ACC changes from 0.81568±0.01296 at α=1 to 0.78040±0.02401 at α=0.1. Root corruption can also substantially affect fairness while accuracy changes little: COMPAS benign sensitive-attribute noise 0%→40% changes AEOD 0.05106→0.15761 and ASPD 0.04538→0.15814. In the separate fixed-reservoir study, protected-group share 50%→0% changes AEOD 0.03804→0.24644 and ASPD 0.03271→0.23001. Under Adult S-DFA and 40% root label noise, 8/10 runs predict positives on fewer than 1% of examples. Smaller disparity under nearly constant prediction is not successful utility preservation. Root-dependent attacks make the corruption experiment end-to-end sensitivity, not defense-only causal attribution.
+
+**Historical-table correction.** The recovered submitted Adult Table II has 480 numerical sources, including all 44 values previously suppressed as N/E. Actual repeat counts are mixed: 294 metric cells have n=1, 180 n=10 and six n=3. SD is reported only where compatible repeated records exist and is unavailable for a single seed. The historical selection reconstruction is distinguished from a round-70 correction candidate in which all three metrics come from one run/round. The recovery also identifies FairGuard/IID/FedSA ACC 59.13% in the submitted table versus 54.13% in its source; the original is preserved and the discrepancy disclosed. FedWA/AdaAggRL and the mixed cosine/fairness identities need explicit naming corrections. None of these historical artifacts is silently relabelled a uniform faithful ten-seed comparison.
+
+**Selection and uncertainty.** New complete conditions report all predefined seeds with mean ± sample SD (ddof=1). Cross-scenario summaries first average within each seed. Configuration-selection seed 91001 is disclosed and separately excluded in a nine-seed table; a matching six-seed subset is also provided without an untouched-test claim. Earlier official CelebA test evaluation already exists. A later frozen final evaluation must disclose this exposure, and cannot be called a never-viewed holdout. Fourteen reused image records used cu130 and the other 886 used cu128; migration first-round equality does not prove complete-trajectory equivalence. Main tables use ACC/AEOD/ASPD, not a custom selection score or metric-wise best seeds.
+
+## 8. Limitations paragraph
+
+GuardFed depends on a trusted root set with useful support for the measured groups, sensitive labels for risk estimation, and group annotations at inference for group-dependent calibration. The simulator's population-statistic and synthetic-support access are additional assumptions, not formal privacy guarantees. Sparse or missing root group/label cells make fairness estimates unreliable or unidentifiable. The executed filtering rule uses the configured malicious count, and its final top-k can re-admit intermediate-gate exclusions when the required retained count exceeds that gate's size. Our small-client simulations do not validate realistic large-scale sampling/availability. The softmax result is conditional on score separation in the actual selected set and does not certify the full pipeline, its candidate picker or its threshold calibration. Candidate selection and calibration add server computation and can adapt to root estimation error. Experiments show utility–disparity trade-offs, stronger-heterogeneity losses, and dataset-dependent ablation effects. Smaller disparities neither guarantee useful predictions nor imply every subgroup/client benefits; group-specific TPR/FPR and support should accompany aggregate metrics. Empirical generality remains limited to the tested tasks, binary attributes and models, and the expanded image evidence includes validation selection and prior test exposure.
+
+## 9. Code-availability candidate
+
+The completed revision evidence and nine-method validation tables are available at https://github.com/YananZHOU5555/GuardFed/tree/51629c2df5e56259a0d750744b7dc9299349efd0. This immutable snapshot includes source/configuration and reporting metadata, per-seed summaries and provenance checks. Large data/model archives are maintained separately with verified hashes. The release identifies project adaptations and incomplete legacy checkpoint evidence. The final revision artifact will need a new immutable reference if later accepted methods/evaluations are added; the current snapshot does not claim those missing experiments are included.
+
+## 10. Integration checklist confined to the main manuscript
+
+1. Replace the earlier fairness-aware root-training claim and simplified pipeline description; align update signs and AEOD definition.
+2. Insert the already verified tables and the actual-n historical correction; do not change original archived outputs.
+3. Insert the eight verified references using the supplied keys, checking collisions and final numbering.
+4. Attach the completed Adult strict-margin and CelebA sensitive-partition/root-support audits; attach stronger Adult/COMPAS partition and historical synthetic-source summaries when the remaining P4 items are audited.
+5. Fill the remaining baseline/mechanism/final-evaluation evidence after acceptance; do not convert planned numbers to measured data.
+6. Compile the final manuscript, inspect affected pages and all cross-references, assign real section/page/line locations, and obtain the author's final scientific choices. These operations have not been claimed as completed by creating this insertion file.

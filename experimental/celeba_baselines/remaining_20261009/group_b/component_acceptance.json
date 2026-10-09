@@ -1,0 +1,207 @@
+{
+  "status": "PASS",
+  "kind": "component_only_not_real_image_training",
+  "torch_version": "2.8.0+cpu",
+  "numpy_version": "2.2.6",
+  "source_sha256": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+  "adapter_sha256": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+  "gates": [
+    {
+      "gate": "upstream_round_0",
+      "passed": true,
+      "stage": "per_round_gmm",
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_1",
+      "passed": true,
+      "stage": "per_round_gmm",
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_2",
+      "passed": true,
+      "stage": "fit_control_limit",
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_3",
+      "passed": true,
+      "stage": "monitor",
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_4",
+      "passed": true,
+      "stage": "monitor",
+      "selected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_5",
+      "passed": true,
+      "stage": "monitor",
+      "selected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "upstream_round_6",
+      "passed": true,
+      "stage": "monitor",
+      "selected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bitwise_aggregate": true,
+      "exact_history_and_ucl": true
+    },
+    {
+      "gate": "newly_malicious_client_affects_actual_aggregate",
+      "passed": true
+    },
+    {
+      "gate": "json_state_restore_crosses_warmup",
+      "passed": true
+    },
+    {
+      "gate": "upstream_largest_is_not_paper_smallest_mean",
+      "passed": true
+    },
+    {
+      "gate": "identical_models_finite_extension_and_empty_skip",
+      "passed": true
+    },
+    {
+      "gate": "nonfinite_identity_and_recipe_rejected",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "No real CelebA or GPU gate in this task",
+    "Author code largest-component semantics differ from paper introduction",
+    "Degenerate zero-std extension is not an exact upstream execution"
+  ]
+}

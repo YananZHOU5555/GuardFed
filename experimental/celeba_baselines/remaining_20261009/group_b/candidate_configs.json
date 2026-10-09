@@ -1,0 +1,86 @@
+{
+  "status": "PROPOSED_NOT_FROZEN_NOT_STARTED",
+  "model_protocol": "same CelebA CNN/global initialization as existing stage, full local model messages after attacks",
+  "screen_seed": 91001,
+  "rounds": 70,
+  "candidate_count": 8,
+  "conditions": [
+    "IID/Benign",
+    "IID/S-DFA",
+    "non-IID/Benign",
+    "non-IID/S-DFA"
+  ],
+  "proposed_runs": 32,
+  "candidates": [
+    {
+      "candidate": "FLGMM_Tg10_L2.0_lr0.0005",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 10,
+      "control_width": 2.0,
+      "local_adam_lr": 0.0005,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg10_L2.0_lr0.001",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 10,
+      "control_width": 2.0,
+      "local_adam_lr": 0.001,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg10_L3.0_lr0.0005",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 10,
+      "control_width": 3.0,
+      "local_adam_lr": 0.0005,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg10_L3.0_lr0.001",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 10,
+      "control_width": 3.0,
+      "local_adam_lr": 0.001,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg20_L2.0_lr0.0005",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 20,
+      "control_width": 2.0,
+      "local_adam_lr": 0.0005,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 20,
+      "control_width": 2.0,
+      "local_adam_lr": 0.001,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg20_L3.0_lr0.0005",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 20,
+      "control_width": 3.0,
+      "local_adam_lr": 0.0005,
+      "label": "author_code_aggregation_adaptation"
+    },
+    {
+      "candidate": "FLGMM_Tg20_L3.0_lr0.001",
+      "method": "FLGMM-author-code",
+      "warmup_rounds": 20,
+      "control_width": 3.0,
+      "local_adam_lr": 0.001,
+      "label": "author_code_aggregation_adaptation"
+    }
+  ],
+  "not_ready": [
+    "FedWA",
+    "SmartFL",
+    "FedDNA"
+  ],
+  "note": "No scientific result is produced by this file; real-image component gate and frozen parent manifest are required."
+}

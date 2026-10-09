@@ -1,0 +1,474 @@
+# scripts/reproduce_paper_tables.py:532 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def client_runtime_data(
+    raw: Dict[str, Any],
+    cid: int,
+    attack: str,
+    malicious_ids: Sequence[int],
+    rw: Dict[Tuple[int,int], float],
+    device: torch.device,
+    fflip_mode: str,
+    foe_mode: str,
+    sdfa_foe_mode: Optional[str],
+    spdfa_foe_mode: Optional[str],
+) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    image_input = raw["X"].ndim == 4
+    data_device = torch.device("cpu") if image_input else device
+    X = raw["X"] if image_input else raw["X"].detach().clone().to(device)
+    y = raw["y"].detach().clone().to(data_device)
+    sensitive = np.asarray(raw["sensitive"], dtype=int).copy()
+    orig_s = sensitive.copy()
+    orig_y = y.cpu().numpy().astype(int).copy()
+    ats = attack_types_for_client(attack, cid, malicious_ids)
+    active_foe_mode = foe_mode
+    if attack == "FedSA":
+        active_foe_mode = "fedsa"
+    if attack == "S-DFA" and sdfa_foe_mode is not None:
+        active_foe_mode = sdfa_foe_mode
+    if attack == "Sp-DFA" and spdfa_foe_mode is not None:
+        active_foe_mode = spdfa_foe_mode
+    audit: Dict[str, Any] = {"client_id": cid, "is_malicious": cid in malicious_ids, "attack_types": ats, "samples": int(len(y)), "foe_mode": active_foe_mode if "foe" in ats else None}
+    if "fflip" in ats:
+        y_np = y.cpu().numpy().astype(int)
+        if len(sensitive) > 0:
+            if fflip_mode == "invert":
+                sensitive = 1 - sensitive
+                requires_full_flip = True
+            elif fflip_mode == "label_conditioned":
+                sensitive = np.where(y_np == 0, 1, 0).astype(int)
+                requires_full_flip = False
+            elif fflip_mode == "label_conditioned_reverse":
+                sensitive = np.where(y_np == 0, 0, 1).astype(int)
+                requires_full_flip = False
+            elif fflip_mode == "all_privileged":
+                sensitive = np.ones_like(sensitive)
+                requires_full_flip = False
+            elif fflip_mode == "all_unprivileged":
+                sensitive = np.zeros_like(sensitive)
+                requires_full_flip = False
+            else:
+                raise ValueError(f"Unsupported fflip_mode: {fflip_mode}")
+            changed = sensitive != orig_s
+            audit["fflip_changed"] = int(np.sum(changed))
+            audit["fflip_ratio"] = float(np.mean(changed))
+            audit["fflip_mode"] = fflip_mode
+            audit["fflip_requires_full_flip"] = requires_full_flip
+            audit["fflip_overwrite_ratio"] = 1.0
+            if len(sensitive) > 1 and np.std(orig_s) > 0 and np.std(y_np) > 0:
+                audit["fflip_label_corr_before"] = float(np.corrcoef(orig_s, y_np)[0, 1])
+            else:
+                audit["fflip_label_corr_before"] = math.nan
+            if len(sensitive) > 1 and np.std(sensitive) > 0 and np.std(y_np) > 0:
+                audit["fflip_label_corr_after"] = float(np.corrcoef(sensitive, y_np)[0, 1])
+            else:
+                audit["fflip_label_corr_after"] = math.nan
+            sens_idx = raw.get("sensitive_feature_index")
+            if sens_idx is not None:
+                X[:, int(sens_idx)] = torch.tensor(sensitive, dtype=X.dtype, device=device)
+                audit["fflip_feature_column_changed"] = int(np.sum(changed))
+        else:
+            audit["fflip_changed"] = 0
+            audit["fflip_ratio"] = math.nan
+            audit["fflip_mode"] = fflip_mode
+            audit["fflip_requires_full_flip"] = fflip_mode == "invert"
+        audit["label_changed_count"] = int(np.sum(y.cpu().numpy().astype(int) != orig_y))
+    y_np = y.cpu().numpy().astype(int)
+    sw = np.asarray([rw.get((int(s), int(label)), 1.0) for s, label in zip(sensitive, y_np)], dtype="float32")
+    return {"cid": cid, "X": X, "y": y, "sensitive": sensitive, "weights": torch.tensor(sw, dtype=torch.float32, device=data_device), "n": int(len(y)), "attack_types": ats, "attack": attack, "foe_mode": active_foe_mode}, audit
+
+# scripts/reproduce_paper_tables.py:1433 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def create_client_data_dict(
+    client_df: pd.DataFrame,
+    feature_cols: List[str],
+    label_col: str,
+    sensitive_col: str,
+    num_clients: int,
+    alpha: float,
+    device: torch.device,
+    seed: int,
+) -> Dict[int, Dict[str, Any]]:
+    rng = np.random.default_rng(seed)
+    out: Dict[int, Dict[str, Any]] = {i: {"X": [], "y": [], "sensitive": []} for i in range(num_clients)}
+    for group_val in [1, 0]:
+        indices = client_df[client_df[sensitive_col] == group_val].index.to_numpy().copy()
+        rng.shuffle(indices)
+        cuts = (np.cumsum(rng.dirichlet([alpha] * num_clients)) * len(indices)).astype(int)[:-1]
+        for cid, split in enumerate(np.split(indices, cuts)):
+            if len(split) == 0:
+                continue
+            subset = client_df.loc[split]
+            out[cid]["X"].append(torch.tensor(subset[feature_cols].values, dtype=torch.float32, device=device))
+            out[cid]["y"].append(torch.tensor(subset[label_col].values, dtype=torch.long, device=device))
+            out[cid]["sensitive"].append(subset[sensitive_col].values.astype(int))
+    sensitive_feature_index = feature_cols.index(sensitive_col) if sensitive_col in feature_cols else None
+    for cid in range(num_clients):
+        if out[cid]["X"]:
+            out[cid]["X"] = torch.cat(out[cid]["X"])
+            out[cid]["y"] = torch.cat(out[cid]["y"])
+            out[cid]["sensitive"] = np.concatenate(out[cid]["sensitive"])
+        else:
+            out[cid]["X"] = torch.empty(0, len(feature_cols), dtype=torch.float32, device=device)
+            out[cid]["y"] = torch.empty(0, dtype=torch.long, device=device)
+            out[cid]["sensitive"] = np.array([], dtype=int)
+        out[cid]["sensitive_feature_index"] = sensitive_feature_index
+    return out
+
+# scripts/reproduce_paper_tables.py:1488 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def sample_server_dataframe(
+    train_df: pd.DataFrame,
+    label_col: str,
+    sensitive_col: str,
+    config: ExperimentConfig,
+) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    target = max(1, int(round(len(train_df) * config.server_ratio)))
+    rng = np.random.default_rng(config.seed)
+    mode = config.server_sampling
+    if mode == "stratified_sensitive":
+        parts = [group_df.sample(frac=config.server_ratio, random_state=config.seed) for _, group_df in train_df.groupby(sensitive_col)]
+        server_df = pd.concat(parts).sort_index()
+    elif mode == "iid_random":
+        server_df = train_df.sample(n=target, replace=False, random_state=config.seed).sort_index()
+    else:
+        strata_cols = [sensitive_col, label_col]
+        groups = {k: g for k, g in train_df.groupby(strata_cols, dropna=False)}
+        keys = list(groups)
+        capacities = {k: len(groups[k]) for k in keys}
+        if mode == "group_balanced":
+            raw_counts = {k: target // max(1, len(keys)) for k in keys}
+        elif mode == "sensitive_balanced":
+            raw_counts = {}
+            for s_val, s_group in train_df.groupby(sensitive_col, dropna=False):
+                s_target = target // max(1, train_df[sensitive_col].nunique())
+                label_groups = {k: g for k, g in s_group.groupby(label_col, dropna=False)}
+                for y_val, y_group in label_groups.items():
+                    raw_counts[(s_val, y_val)] = int(round(s_target * len(y_group) / max(1, len(s_group))))
+        elif mode == "class_balanced":
+            raw_counts = {}
+            for y_val, y_group in train_df.groupby(label_col, dropna=False):
+                y_target = target // max(1, train_df[label_col].nunique())
+                sens_groups = {k: g for k, g in y_group.groupby(sensitive_col, dropna=False)}
+                for s_val, s_group in sens_groups.items():
+                    raw_counts[(s_val, y_val)] = int(round(y_target * len(s_group) / max(1, len(y_group))))
+        elif mode in {"dirichlet_strata", "dirichlet_strata_floor"}:
+            alpha = float(config.server_alpha if config.server_alpha is not None else 5000.0)
+            base = np.asarray([len(groups[k]) / len(train_df) for k in keys], dtype=float)
+            concentration = np.maximum(base * alpha * len(keys), 1e-6)
+            probs = rng.dirichlet(concentration)
+            if mode == "dirichlet_strata_floor":
+                min_per_group = max(5, int(round(0.02 * target)))
+                floor_counts = {k: min(capacities[k], min_per_group) for k in keys}
+                floor_total = sum(floor_counts.values())
+                if floor_total >= target:
+                    raw_counts = {k: int(round(target / max(1, len(keys)))) for k in keys}
+                else:
+                    remaining = target - floor_total
+                    raw_counts = {k: floor_counts[k] + int(round(float(p) * remaining)) for k, p in zip(keys, probs)}
+            else:
+                raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode in {"dirichlet_label_preserved", "dirichlet_label_preserved_strong_floor"}:
+            # Preserve the label marginal distribution and apply Dirichlet skew
+            # only over sensitive groups within each label. The strong-floor
+            # variant keeps every sensitive-label stratum substantially
+            # represented, so the alpha curve measures skew intensity instead
+            # of root-group disappearance.
+            alpha = float(config.server_alpha if config.server_alpha is not None else 5000.0)
+            raw_counts = {}
+            label_values = list(train_df[label_col].value_counts().sort_index().index)
+            for y_val in label_values:
+                y_group = train_df[train_df[label_col] == y_val]
+                y_target = int(round(target * len(y_group) / len(train_df)))
+                y_keys = [k for k in keys if k[1] == y_val]
+                if not y_keys:
+                    continue
+                y_capacities = {k: capacities[k] for k in y_keys}
+                base = np.asarray([capacities[k] / max(1, len(y_group)) for k in y_keys], dtype=float)
+                concentration = np.maximum(base * alpha * len(y_keys), 1e-6)
+                probs = rng.dirichlet(concentration)
+                if mode == "dirichlet_label_preserved_strong_floor":
+                    floor_fraction = 0.10
+                    floor_min = 10
+                else:
+                    floor_fraction = 0.01
+                    floor_min = 3
+                min_per_group = min(max(floor_min, int(round(floor_fraction * y_target))), max(0, y_target // max(1, len(y_keys))))
+                floor_counts = {k: min(y_capacities[k], min_per_group) for k in y_keys}
+                floor_total = sum(floor_counts.values())
+                remaining = max(0, y_target - floor_total)
+                y_raw = {k: floor_counts[k] + int(round(float(p) * remaining)) for k, p in zip(y_keys, probs)}
+                y_counts = _adjust_counts_to_total(y_raw, y_capacities, y_target, rng)
+                raw_counts.update(y_counts)
+        elif mode == "controlled_group_skew":
+            # Deterministic sensitivity design for root/server distribution.
+            # server_alpha is interpreted as skew strength rather than a
+            # Dirichlet concentration: 0.0 keeps the global sensitive-label
+            # group proportions, while values near 1.0 concentrate the clean
+            # root set on one stratum. This makes the x-axis an auditable
+            # distribution-shift level instead of a random Dirichlet draw.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            dominant = max(keys, key=lambda k: capacities[k])
+            one_hot = np.asarray([1.0 if k == dominant else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode == "controlled_positive_sensitive_skew":
+            # Fairness-stress root/server distribution design. server_alpha is
+            # again skew strength. Instead of drifting to the largest group, it
+            # drifts toward the sensitive=1,label=1 stratum when available.
+            # This produces an auditable root-data bias aligned with sensitive
+            # and label attributes, making AEOD/ASPD sensitivity easier to
+            # interpret than a random or majority-only skew.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            target_key = (1, 1) if (1, 1) in capacities else max(keys, key=lambda k: (k[0], k[1], capacities[k]))
+            one_hot = np.asarray([1.0 if k == target_key else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode == "controlled_target_group_skew":
+            # Targeted fairness sensitivity search. server_alpha is skew
+            # strength, while server_target_sensitive/server_target_label
+            # choose the sensitive-label stratum to over-represent in the
+            # clean root/server set. This lets us audit which root-data bias
+            # actually degrades AEOD/ASPD without hand-editing results.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            requested = (
+                config.server_target_sensitive,
+                config.server_target_label,
+            )
+            if requested[0] is not None and requested[1] is not None and requested in capacities:
+                target_key = requested
+            else:
+                target_key = max(keys, key=lambda k: capacities[k])
+            one_hot = np.asarray([1.0 if k == target_key else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        else:
+            raise ValueError(f"Unsupported server_sampling: {mode}")
+        counts = _adjust_counts_to_total(raw_counts, capacities, target, rng)
+        parts = []
+        for k, count in counts.items():
+            if count > 0:
+                parts.append(groups[k].sample(n=count, replace=False, random_state=int(rng.integers(0, 2**31 - 1))))
+        server_df = pd.concat(parts).sort_index() if parts else train_df.sample(n=target, random_state=config.seed).sort_index()
+    global_group_counts = train_df.groupby([sensitive_col, label_col]).size().sort_index().to_dict()
+    server_group_counts_raw = server_df.groupby([sensitive_col, label_col]).size().sort_index().to_dict()
+    all_group_keys = sorted(set(global_group_counts) | set(server_group_counts_raw))
+    global_group_prob = {k: global_group_counts.get(k, 0) / max(1, len(train_df)) for k in all_group_keys}
+    server_group_prob = {k: server_group_counts_raw.get(k, 0) / max(1, len(server_df)) for k in all_group_keys}
+    group_tvd = 0.5 * sum(abs(server_group_prob[k] - global_group_prob[k]) for k in all_group_keys)
+    group_kl = sum(
+        server_group_prob[k] * math.log(max(server_group_prob[k], 1e-12) / max(global_group_prob[k], 1e-12))
+        for k in all_group_keys
+        if server_group_prob[k] > 0
+    )
+    max_group_abs_delta = max((abs(server_group_prob[k] - global_group_prob[k]) for k in all_group_keys), default=0.0)
+    global_sensitive_prob = train_df[sensitive_col].value_counts(normalize=True).sort_index().to_dict()
+    server_sensitive_prob = server_df[sensitive_col].value_counts(normalize=True).sort_index().to_dict()
+    all_sensitive_keys = sorted(set(global_sensitive_prob) | set(server_sensitive_prob))
+    sensitive_tvd = 0.5 * sum(abs(server_sensitive_prob.get(k, 0.0) - global_sensitive_prob.get(k, 0.0)) for k in all_sensitive_keys)
+    global_label_prob = train_df[label_col].value_counts(normalize=True).sort_index().to_dict()
+    server_label_prob = server_df[label_col].value_counts(normalize=True).sort_index().to_dict()
+    all_label_keys = sorted(set(global_label_prob) | set(server_label_prob))
+    label_tvd = 0.5 * sum(abs(server_label_prob.get(k, 0.0) - global_label_prob.get(k, 0.0)) for k in all_label_keys)
+    audit = {
+        "server_sampling": mode,
+        "server_alpha": config.server_alpha,
+        "server_target_sensitive": config.server_target_sensitive,
+        "server_target_label": config.server_target_label,
+        "server_rows": int(len(server_df)),
+        "server_sensitive_counts": {str(k): int(v) for k, v in server_df[sensitive_col].value_counts().sort_index().to_dict().items()},
+        "server_label_counts": {str(k): int(v) for k, v in server_df[label_col].value_counts().sort_index().to_dict().items()},
+        "server_group_counts": {f"{int(k[0])}|{int(k[1])}": int(v) for k, v in server_group_counts_raw.items()},
+        "global_group_counts": {f"{int(k[0])}|{int(k[1])}": int(v) for k, v in global_group_counts.items()},
+        "server_group_prob": {f"{int(k[0])}|{int(k[1])}": float(server_group_prob[k]) for k in all_group_keys},
+        "global_group_prob": {f"{int(k[0])}|{int(k[1])}": float(global_group_prob[k]) for k in all_group_keys},
+        "group_tvd": float(group_tvd),
+        "group_kl": float(group_kl),
+        "max_group_abs_delta": float(max_group_abs_delta),
+        "sensitive_tvd": float(sensitive_tvd),
+        "label_tvd": float(label_tvd),
+    }
+    return server_df, audit
+
+# scripts/reproduce_paper_tables.py:1671 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def apply_root_noise(root_df: pd.DataFrame, label_col: str, sensitive_col: str, config: ExperimentConfig):
+    """Flip only root values using independent nested permutations; never use global RNG."""
+    noisy = root_df.copy(deep=True)
+    def supports(frame):
+        return {f"{group}|{label}": int(((frame[sensitive_col] == group) & (frame[label_col] == label)).sum())
+                for group in (0, 1) for label in (0, 1)}
+    audit = {
+        "root_rows": len(root_df),
+        "clean_group_label_counts": supports(root_df),
+        "clean_root_sha256": hashlib.sha256(pd.util.hash_pandas_object(root_df, index=False).values.tobytes()).hexdigest(),
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+    }
+    for stream, (name, column, rate) in enumerate((
+        ("label", label_col, config.root_label_noise),
+        ("sensitive", sensitive_col, config.root_sensitive_noise),
+    )):
+        mask = np.zeros(len(root_df), dtype=bool)
+        count = int(math.floor(rate * len(root_df)))
+        if count:
+            if not root_df[column].isin([0, 1]).all():
+                raise ValueError(f"Root noise requires binary {column}")
+            rng = np.random.default_rng(np.random.SeedSequence([config.seed, 240923, stream]))
+            mask[rng.permutation(len(root_df))[:count]] = True
+            noisy.loc[mask, column] = 1 - noisy.loc[mask, column]
+        audit[name] = {"requested_rate": rate, "flipped_count": count,
+                       "actual_rate": count / len(root_df) if len(root_df) else 0.0,
+                       "mask_sha256": hashlib.sha256(mask.tobytes()).hexdigest()}
+    audit["observed_group_label_counts"] = supports(noisy)
+    return noisy, audit
+
+# scripts/reproduce_paper_tables.py:1703 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
+    set_seed(config.seed, deterministic_image=(dataset == "celeba"))
+    if dataset == "celeba":
+        from src.celeba_data import load_celeba_bundle
+        return load_celeba_bundle(alpha, config, sys.modules[__name__])
+    loader_options = {"preprocessing_version": config.compas_preprocessing_version} if dataset == "compas" else {}
+    loader = DatasetLoader(dataset_name=dataset, seed=config.seed, device=str(device), **loader_options)
+    label_col = "income" if dataset == "adult" else "two_year_recid"
+    feature_cols = [col for col in loader.train_df.columns if col != label_col and (config.include_sensitive_feature or col != loader.sensitive_column)]
+    server_df, server_sampling_audit = sample_server_dataframe(loader.train_df, label_col, loader.sensitive_column, config)
+    client_df = loader.train_df.drop(server_df.index).reset_index(drop=True)
+    server_df = server_df.reset_index(drop=True)
+    np.random.seed(config.seed)
+    clients = create_client_data_dict(client_df, feature_cols, label_col, loader.sensitive_column, config.num_clients, alpha, device, config.seed)
+    n_synth = int(round(len(loader.train_df) * config.synthetic_ratio))
+    root_cols = list(dict.fromkeys(feature_cols + [loader.sensitive_column, label_col]))
+    root_hash = int(pd.util.hash_pandas_object(server_df[root_cols], index=False).sum()) if len(server_df) else 0
+    synth_key = (dataset, tuple(root_cols), config.synthetic_method, n_synth, config.seed, config.synthetic_epochs, root_hash)
+    if n_synth > 0 and config.synthetic_method != "none" and synth_key in SYNTH_ROOT_CACHE:
+        synth_df = SYNTH_ROOT_CACHE[synth_key].copy()
+    else:
+        synth_df = make_synthetic_root(config.synthetic_method, server_df, loader.train_df, feature_cols, label_col, loader.sensitive_column, n_synth, config.seed, config.synthetic_epochs)
+        if n_synth > 0 and config.synthetic_method != "none":
+            SYNTH_ROOT_CACHE[synth_key] = synth_df.copy()
+    root_df = pd.concat([server_df[root_cols], synth_df], ignore_index=True)
+    root_df, root_noise_audit = apply_root_noise(root_df, label_col, loader.sensitive_column, config)
+    server_X = torch.tensor(root_df[feature_cols].values, dtype=torch.float32, device=device)
+    server_y = torch.tensor(root_df[label_col].values, dtype=torch.long, device=device)
+    server_sensitive = root_df[loader.sensitive_column].values.astype(int)
+    X_test = torch.tensor(loader.test_df[feature_cols].values, dtype=torch.float32, device=device); y_test = torch.tensor(loader.test_df[label_col].values, dtype=torch.long, device=device); test_sensitive = np.asarray(loader.test_df[loader.sensitive_column].values, dtype=int)
+    rw_weights = compute_reweighing_weights(loader.train_df, loader.sensitive_column, label_col) if config.use_reweighting else {(s, y): 1.0 for s in [0, 1] for y in [0, 1]}
+    return {"dataset": dataset, "loader": loader, "label_col": label_col, "sensitive_col": loader.sensitive_column, "feature_cols": feature_cols, "feature_includes_sensitive": loader.sensitive_column in feature_cols, "feature_includes_label": label_col in feature_cols, "server_X": server_X, "server_y": server_y, "server_sensitive": server_sensitive, "root_clean_rows": int(len(server_df)), "root_synthetic_rows": int(len(synth_df)), "server_sampling_audit": server_sampling_audit, "root_noise_audit": root_noise_audit, "synthetic_method": config.synthetic_method, "clients": clients, "X_test": X_test, "y_test": y_test, "test_sensitive": test_sensitive, "num_features": len(feature_cols), "rw_weights": rw_weights, "train_rows": int(len(loader.train_df)), "test_rows": int(len(loader.test_df))}
+
+# scripts/reproduce_paper_tables.py:1736 [cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed]
+def run_experiment(dataset: str, distribution: str, method: str, attack: str, config: ExperimentConfig, mode: str, device: torch.device, progress_callback=None, checkpoint_path=None) -> Dict[str, Any]:
+    start = time.time(); alpha = config.client_alpha if config.client_alpha is not None else DISTRIBUTIONS[distribution]; bundle = load_bundle(dataset, alpha, config, device)
+    if bundle["feature_includes_label"]: raise RuntimeError(f"Feature leakage detected for {dataset}: label column is in features")
+    set_seed(config.seed, deterministic_image=(dataset == "celeba")); global_model = make_model(bundle, config, device); malicious_ids = list(range(config.num_malicious)); clients=[]; audits=[]
+    for cid in range(config.num_clients):
+        c, a = client_runtime_data(bundle["clients"][cid], cid, attack, malicious_ids, bundle["rw_weights"], device, config.fflip_mode, config.foe_mode, config.sdfa_foe_mode, config.spdfa_foe_mode); clients.append(c); audits.append(a)
+    warnings=[]; round_summaries=[]; last10_metrics=[]; trajectory_metrics=[]
+    for rnd in range(config.rounds):
+        global_state = clone_state(global_model); server_update = train_server_update(global_model, bundle, config); updates=[]; counts=[]; fairness=[]; fairness_details=[]
+        for client in clients:
+            local_state = train_local_model(global_model, client, config); update, audits[client["cid"]] = apply_foe_if_needed(local_state, global_state, client, audits[client["cid"]], server_update, config); updates.append(update); counts.append(client["n"])
+            state_for_eval = {k: global_state[k] + update[k] for k in global_state}; root_metrics = evaluate_state_on_server(state_for_eval, bundle["num_features"], bundle, config, device); fair = root_metrics["aeod"]; fairness.append(float(fair) if not math.isnan(float(fair)) else 1.0); fairness_details.append({k: float(root_metrics.get(k, math.nan)) for k in METRICS})
+        if rnd == 0: warnings.extend(validate_attack_audit(attack, malicious_ids, audits))
+        agg, info = aggregate_round(method, updates, counts, fairness, server_update, config, fairness_details=fairness_details, global_state=global_state, bundle=bundle, device=device); apply_update(global_model, agg)
+        if config.full_round_diagnostics or rnd in {0, config.rounds - 1}:
+            round_summaries.append({"round": rnd + 1, "aggregate": info, "client_ids": [c["cid"] for c in clients], "malicious_mask": [c["cid"] in malicious_ids for c in clients], "root_noise_audit": bundle.get("root_noise_audit"), "fairness_min": float(np.min(fairness)), "fairness_max": float(np.max(fairness)), "fairness_mean": float(np.mean(fairness))})
+        round_metrics = evaluate_for_reporting(method, global_model, bundle, config)
+        trajectory_metrics.append({"round": rnd + 1, "metrics": {k: round_metrics[k] for k in METRICS}})
+        if progress_callback is not None:
+            progress_callback(copy.deepcopy(trajectory_metrics[-1]))
+        if rnd >= max(0, config.rounds - 10):
+            round_metrics = evaluate_for_reporting(method, global_model, bundle, config)
+            last10_metrics.append({"round": rnd + 1, "metrics": {k: round_metrics[k] for k in METRICS}})
+    metrics = evaluate_for_reporting(method, global_model, bundle, config); warnings.extend(metrics.get("warnings", []))
+    if any(w.startswith("client") or w.startswith("Sp-DFA") for w in warnings): raise RuntimeError("Attack self-check failed: " + "; ".join(warnings))
+    if checkpoint_path is not None:
+        torch.save(global_model.state_dict(), checkpoint_path)
+    return {"run_id": make_run_id(mode, dataset, distribution, method, attack, config), "mode": mode, "dataset": dataset, "distribution": distribution, "alpha": alpha, "method": method, "attack": attack, "seed": config.seed, "rounds": config.rounds, "num_clients": config.num_clients, "num_malicious": config.num_malicious, "config": asdict(config), "metrics": {k: metrics[k] for k in METRICS}, "evaluation_stats": {k: metrics.get(k) for k in ("positive_rate", "majority_accuracy", "prediction_count")}, "warnings": warnings, "attack_audit": audits, "round_summaries": round_summaries, "last10_metrics": last10_metrics, "trajectory_metrics": trajectory_metrics, "data_contract": {"label_col": bundle["label_col"], "sensitive_col": bundle["sensitive_col"], "feature_includes_label": bundle["feature_includes_label"], "feature_includes_sensitive": bundle["feature_includes_sensitive"], "num_features": bundle["num_features"], "train_rows": bundle["train_rows"], "test_rows": bundle["test_rows"], "root_clean_rows": bundle.get("root_clean_rows"), "root_synthetic_rows": bundle.get("root_synthetic_rows"), "server_sampling": config.server_sampling, "server_alpha": config.server_alpha, "server_sampling_audit": bundle.get("server_sampling_audit"), "root_noise_audit": bundle.get("root_noise_audit"), "image_data_contract": bundle.get("image_data_contract"), "preprocessing_version": config.compas_preprocessing_version if dataset == "compas" else ("rgb64_v1" if dataset == "celeba" else "legacy"), "synthetic_method": bundle.get("synthetic_method")}, "attack_impl_note": f"F Flip mode={config.fflip_mode}; labels are unchanged. FOE mode={config.foe_mode}; S-DFA FOE mode={config.sdfa_foe_mode or config.foe_mode}; Sp-DFA FOE mode={config.spdfa_foe_mode or config.foe_mode}; FedSA mode uses foe_mode=fedsa.", "method_impl_note": f"All methods share identical preprocessing. sensitive_feature={config.include_sensitive_feature}, aggregation_weighting={config.aggregation_weighting}, use_reweighting={config.use_reweighting}, fairguard_mode={config.fairguard_mode}. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled={config.ad2_calibration_enabled}.", "duration_sec": time.time() - start}
+
+# src/celeba_data.py:31 [0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce]
+def load_celeba_bundle(alpha, config, core):
+    if config.include_sensitive_feature:
+        raise ValueError("Male is metadata only; it is never an image input feature")
+    if config.synthetic_ratio:
+        raise ValueError("Tabular root synthesis is not supported for images")
+    if config.celeba_evaluation_split not in {"valid", "test"}:
+        raise ValueError("CelebA evaluation split must be valid or test")
+    cache = Path(config.celeba_cache_dir) if config.celeba_cache_dir else core.ROOT / "data/celeba/derived/rgb64_v1"
+    manifest = json.loads((cache / "manifest.json").read_text())
+    if not manifest["complete"]:
+        raise ValueError("CelebA RGB cache is incomplete; do not silently omit missing images")
+    metadata = np.load(cache / "metadata.npz")
+    images = np.load(cache / "images.npy", mmap_mode="r")
+    ids, split, labels, sensitive = (metadata[k] for k in ["image_id", "split", "Smiling", "Male"])
+    assert images.shape == (len(ids), 3, 64, 64) and images.dtype == np.uint8
+    assert np.array_equal(ids, np.arange(1, len(ids) + 1))
+    assert np.load(cache / "available.npy", mmap_mode="r").all()
+    train_pos = np.flatnonzero(split == 0)
+    eval_split = 1 if config.celeba_evaluation_split == "valid" else 2
+    eval_pos = np.flatnonzero(split == eval_split)
+    official_sizes = {str(i): int((split == i).sum()) for i in [0, 1, 2]}
+    # A seeded subset of the full official split, not identity-sorted parquet rows.
+    rng = np.random.default_rng(config.seed)
+    for name, limit in [("train", config.celeba_train_limit), ("eval", config.celeba_eval_limit)]:
+        if limit < 0:
+            raise ValueError("Pilot subset limits must be nonnegative")
+    if config.celeba_train_limit:
+        train_pos = np.sort(rng.choice(train_pos, min(config.celeba_train_limit, len(train_pos)), replace=False))
+    if config.celeba_eval_limit:
+        eval_pos = np.sort(rng.choice(eval_pos, min(config.celeba_eval_limit, len(eval_pos)), replace=False))
+    df = pd.DataFrame({"image_id": ids[train_pos], "Smiling": labels[train_pos], "Male": sensitive[train_pos]})
+    root_df, sampling_audit = core.sample_server_dataframe(df, "Smiling", "Male", config)
+    client_df = df.drop(root_df.index).reset_index(drop=True)
+    raw_clients = core.create_client_data_dict(client_df, ["image_id"], "Smiling", "Male",
+                                               config.num_clients, alpha, torch.device("cpu"), config.seed)
+    root_df, noise_audit = core.apply_root_noise(root_df.reset_index(drop=True), "Smiling", "Male", config)
+    def pixels(image_ids):
+        # One compact CPU uint8 copy per partition; runtime shares it without another clone.
+        return torch.from_numpy(np.array(images[np.asarray(image_ids, dtype=np.int64) - 1], copy=True))
+    for client in raw_clients.values():
+        client_ids = client["X"][:, 0].numpy().astype(np.int64)
+        client["X"] = pixels(client_ids)
+        client["image_ids"] = client_ids
+        client["sensitive_feature_index"] = None
+    root_ids = root_df["image_id"].to_numpy(dtype=np.int64)
+    union = np.concatenate([v["image_ids"] for v in raw_clients.values()])
+    assert len(set(root_ids) & set(union)) == 0
+    assert np.array_equal(np.sort(np.concatenate([root_ids, union])), ids[train_pos])
+    assert not np.intersect1d(ids[train_pos], ids[eval_pos]).size
+    rw = core.compute_reweighing_weights(df, "Male", "Smiling") if config.use_reweighting else {(s, y): 1.0 for s in [0, 1] for y in [0, 1]}
+    cache_hash = hashlib.sha256((cache / "manifest.json").read_bytes()).hexdigest()
+    image_contract = {
+        "numerical_execution": {"version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+            "cudnn_benchmark": torch.backends.cudnn.benchmark,
+            "cudnn_deterministic": torch.backends.cudnn.deterministic,
+            "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
+            "matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
+            "cublas_workspace_config": ":4096:8"},
+        "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2", "image_shape": [3, 64, 64],
+        "normalization": "uint8 divided by 255 per batch", "augmentation": "none",
+        "target": "Smiling", "sensitive": "Male", "evaluation_split": config.celeba_evaluation_split,
+        "official_split_sizes": official_sizes, "actual_train_rows": len(train_pos), "actual_evaluation_rows": len(eval_pos),
+        "evidence_stage": "pilot_subset" if config.celeba_train_limit or config.celeba_eval_limit else "full_official_split",
+        "train_image_ids_sha256": hashlib.sha256(ids[train_pos].tobytes()).hexdigest(),
+        "evaluation_image_ids_sha256": hashlib.sha256(ids[eval_pos].tobytes()).hexdigest(),
+        "root_image_ids_sha256": hashlib.sha256(root_ids.tobytes()).hexdigest(),
+        "cache_manifest_sha256": cache_hash, "official_metadata": manifest["official_metadata"],
+        "train_eval_disjoint": True, "root_client_disjoint": True,
+        "client_sample_counts": [int(len(v["y"])) for v in raw_clients.values()],
+    }
+    return {"dataset": "celeba", "label_col": "Smiling", "sensitive_col": "Male",
+            "feature_cols": ["RGB"], "feature_includes_sensitive": False, "feature_includes_label": False,
+            "server_X": pixels(root_ids), "server_y": torch.tensor(root_df["Smiling"].to_numpy(), dtype=torch.long),
+            "server_sensitive": root_df["Male"].to_numpy(dtype=int), "root_clean_rows": len(root_ids),
+            "root_synthetic_rows": 0, "server_sampling_audit": sampling_audit, "root_noise_audit": noise_audit,
+            "synthetic_method": "none", "clients": raw_clients, "X_test": pixels(ids[eval_pos]),
+            "y_test": torch.tensor(labels[eval_pos], dtype=torch.long), "test_sensitive": sensitive[eval_pos].astype(int),
+            "num_features": 3, "rw_weights": rw, "train_rows": len(train_pos), "test_rows": len(eval_pos),
+            "image_data_contract": image_contract}

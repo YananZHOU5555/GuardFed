@@ -1,0 +1,629 @@
+{
+  "evidence": "synthetic RGB64 CPU only; not real CelebA results",
+  "result": {
+    "run_id": "synthetic_pipeline_only|celeba|non-IID|GuardFed|S-DFA|rounds=3|seed=812|clients=20|malicious=4|epochs=1|batch=4|lr=0.001|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|servertarget=None:None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=all_unprivileged|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=4.5|fedsa_norm=3.0|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2calen=0|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive|suite=synthetic_pipeline_gate_only|tag=hybrid_RGB64_not_CelebA|celeba=rgb64_v1|trainlimit=0|evallimit=0|evalsplit=valid|compasprep=train_only|ablation=none|clientalpha=5.0|fullrounddiag=1",
+    "mode": "synthetic_pipeline_only",
+    "dataset": "celeba",
+    "distribution": "non-IID",
+    "alpha": 5.0,
+    "method": "GuardFed",
+    "attack": "S-DFA",
+    "seed": 812,
+    "rounds": 3,
+    "num_clients": 20,
+    "num_malicious": 4,
+    "config": {
+      "seed": 812,
+      "num_clients": 20,
+      "num_malicious": 4,
+      "local_epochs": 1,
+      "batch_size": 4,
+      "learning_rate": 0.001,
+      "rounds": 3,
+      "device": "cpu",
+      "server_ratio": 0.1,
+      "synthetic_ratio": 0.0,
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_target_sensitive": null,
+      "server_target_label": null,
+      "synthetic_method": "none",
+      "synthetic_epochs": 50,
+      "optimizer": "adam",
+      "include_sensitive_feature": false,
+      "aggregation_weighting": "count",
+      "fflip_mode": "all_unprivileged",
+      "foe_mode": "state",
+      "sdfa_foe_mode": "fedsa",
+      "spdfa_foe_mode": "fedsa",
+      "fedsa_gain": 4.5,
+      "fedsa_norm_ratio": 3.0,
+      "fairguard_mode": "server_aeod",
+      "use_reweighting": true,
+      "fairfed_beta": 1.0,
+      "trust_threshold": 0.2,
+      "guardfed_fairness_lambda": 20.0,
+      "act_fairness_budget": 0.06,
+      "act_temperature": 0.35,
+      "act_keep_ratio": 0.8,
+      "act_fairness_metric": "aeod_aspd",
+      "act_anchor_drop": 0.005,
+      "act_risk_weight": 1.0,
+      "act_violation_weight": 1.0,
+      "ad2_calibration_base_weight": 1.0,
+      "ad2_calibration_budget": 0.06,
+      "ad2_calibration_temperature": 0.03,
+      "ad2_calibration_quantiles": 41,
+      "ad2_score_clip": 5.0,
+      "ad2_norm_clip_scale": 2.5,
+      "ad2_calibration_max_acc_drop": 0.03,
+      "ad2_calibration_objective": "acc_floor",
+      "ad2_calibration_enabled": false,
+      "ad2_norm_mode": "adaptive",
+      "ad2_utility_weight": 1.0,
+      "ad2_centrality_weight": 0.35,
+      "ad2_alignment_weight": 0.35,
+      "ad2_plus_mode": "adaptive",
+      "experiment_suite": "synthetic_pipeline_gate_only",
+      "experiment_tag": "hybrid_RGB64_not_CelebA",
+      "ablation_component": "none",
+      "client_alpha": 5.0,
+      "full_round_diagnostics": true,
+      "root_label_noise": 0.0,
+      "root_sensitive_noise": 0.0,
+      "compas_preprocessing_version": "train_only",
+      "celeba_cache_dir": "",
+      "celeba_train_limit": 0,
+      "celeba_eval_limit": 0,
+      "celeba_evaluation_split": "valid"
+    },
+    "metrics": {
+      "accuracy": 0.5,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "evaluation_stats": {
+      "positive_rate": 1.0,
+      "majority_accuracy": 0.5,
+      "prediction_count": 16
+    },
+    "warnings": [],
+    "attack_audit": [
+      {
+        "client_id": 0,
+        "is_malicious": true,
+        "attack_types": [
+          "fflip",
+          "foe"
+        ],
+        "samples": 4,
+        "foe_mode": "fedsa",
+        "fflip_changed": 2,
+        "fflip_ratio": 0.5,
+        "fflip_mode": "all_unprivileged",
+        "fflip_requires_full_flip": false,
+        "fflip_overwrite_ratio": 1.0,
+        "fflip_label_corr_before": 0.0,
+        "fflip_label_corr_after": null,
+        "label_changed_count": 0,
+        "foe_impl": "FedSA-inspired sliding performance attack: delta shifted against clean server update, gain=4.5, norm_ratio_cap=3.0",
+        "foe_pre_update_norm": 0.2541786730289459,
+        "foe_post_update_norm": 0.7625357508659363,
+        "foe_norm_ratio": 2.9999989447426954,
+        "foe_pre_post_cosine": -0.6127228736877441
+      },
+      {
+        "client_id": 1,
+        "is_malicious": true,
+        "attack_types": [
+          "fflip",
+          "foe"
+        ],
+        "samples": 4,
+        "foe_mode": "fedsa",
+        "fflip_changed": 2,
+        "fflip_ratio": 0.5,
+        "fflip_mode": "all_unprivileged",
+        "fflip_requires_full_flip": false,
+        "fflip_overwrite_ratio": 1.0,
+        "fflip_label_corr_before": 0.0,
+        "fflip_label_corr_after": null,
+        "label_changed_count": 0,
+        "foe_impl": "FedSA-inspired sliding performance attack: delta shifted against clean server update, gain=4.5, norm_ratio_cap=3.0",
+        "foe_pre_update_norm": 0.25437358021736145,
+        "foe_post_update_norm": 0.7631208300590515,
+        "foe_norm_ratio": 3.000000351467189,
+        "foe_pre_post_cosine": -0.5576067566871643
+      },
+      {
+        "client_id": 2,
+        "is_malicious": true,
+        "attack_types": [
+          "fflip",
+          "foe"
+        ],
+        "samples": 4,
+        "foe_mode": "fedsa",
+        "fflip_changed": 2,
+        "fflip_ratio": 0.5,
+        "fflip_mode": "all_unprivileged",
+        "fflip_requires_full_flip": false,
+        "fflip_overwrite_ratio": 1.0,
+        "fflip_label_corr_before": 0.0,
+        "fflip_label_corr_after": null,
+        "label_changed_count": 0,
+        "foe_impl": "FedSA-inspired sliding performance attack: delta shifted against clean server update, gain=4.5, norm_ratio_cap=3.0",
+        "foe_pre_update_norm": 0.2530309855937958,
+        "foe_post_update_norm": 0.7590926885604858,
+        "foe_norm_ratio": 2.999998939956303,
+        "foe_pre_post_cosine": -0.5926802754402161
+      },
+      {
+        "client_id": 3,
+        "is_malicious": true,
+        "attack_types": [
+          "fflip",
+          "foe"
+        ],
+        "samples": 4,
+        "foe_mode": "fedsa",
+        "fflip_changed": 2,
+        "fflip_ratio": 0.5,
+        "fflip_mode": "all_unprivileged",
+        "fflip_requires_full_flip": false,
+        "fflip_overwrite_ratio": 1.0,
+        "fflip_label_corr_before": 0.0,
+        "fflip_label_corr_after": null,
+        "label_changed_count": 0,
+        "foe_impl": "FedSA-inspired sliding performance attack: delta shifted against clean server update, gain=4.5, norm_ratio_cap=3.0",
+        "foe_pre_update_norm": 0.25443023443222046,
+        "foe_post_update_norm": 0.7632906436920166,
+        "foe_norm_ratio": 2.9999997657210637,
+        "foe_pre_post_cosine": -0.5966181755065918
+      },
+      {
+        "client_id": 4,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 5,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 6,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 7,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 8,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 9,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 10,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 11,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 12,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 13,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 14,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 15,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 16,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 17,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 18,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      },
+      {
+        "client_id": 19,
+        "is_malicious": false,
+        "attack_types": [],
+        "samples": 4,
+        "foe_mode": null
+      }
+    ],
+    "round_summaries": [
+      {
+        "round": 1,
+        "aggregate": {
+          "selected_clients": [
+            6
+          ],
+          "trust_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.07371551543474197,
+            0.06885005533695221,
+            0.11802558600902557,
+            0.04880734533071518,
+            0.08767439424991608,
+            0.04641140624880791,
+            0.012782653793692589,
+            0.11107686907052994,
+            0.04449928551912308,
+            0.04613553360104561,
+            0.07743988186120987,
+            0.056496087461709976,
+            0.05498168244957924,
+            0.0911608338356018,
+            0.050884585827589035,
+            0.07587170600891113
+          ]
+        },
+        "client_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "malicious_mask": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "root_noise_audit": null,
+        "fairness_min": 0.0,
+        "fairness_max": 0.0,
+        "fairness_mean": 0.0
+      },
+      {
+        "round": 2,
+        "aggregate": {
+          "selected_clients": [
+            0
+          ],
+          "trust_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "client_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "malicious_mask": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "root_noise_audit": null,
+        "fairness_min": 0.0,
+        "fairness_max": 0.0,
+        "fairness_mean": 0.0
+      },
+      {
+        "round": 3,
+        "aggregate": {
+          "selected_clients": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "trust_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.8460090160369873,
+            0.8293582201004028,
+            0.8386929631233215,
+            0.8438724279403687,
+            0.8549436330795288,
+            0.8286383748054504,
+            0.8462563157081604,
+            0.8289265632629395,
+            0.8303622603416443,
+            0.8312063813209534,
+            0.8528341054916382,
+            0.8193731904029846,
+            0.8462302088737488,
+            0.8202047348022461,
+            0.8362643122673035,
+            0.8349504470825195
+          ]
+        },
+        "client_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "malicious_mask": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "root_noise_audit": null,
+        "fairness_min": 0.0,
+        "fairness_max": 0.0,
+        "fairness_mean": 0.0
+      }
+    ],
+    "last10_metrics": [
+      {
+        "round": 1,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      {
+        "round": 3,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      }
+    ],
+    "trajectory_metrics": [
+      {
+        "round": 1,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      {
+        "round": 3,
+        "metrics": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      }
+    ],
+    "data_contract": {
+      "label_col": "Smiling",
+      "sensitive_col": "Male",
+      "feature_includes_label": false,
+      "feature_includes_sensitive": false,
+      "num_features": 12288,
+      "train_rows": 88,
+      "test_rows": 16,
+      "root_clean_rows": 8,
+      "root_synthetic_rows": 0,
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_sampling_audit": null,
+      "root_noise_audit": null,
+      "image_data_contract": {
+        "evaluation_split": "synthetic_pipeline_only",
+        "actual_train_rows": 88,
+        "actual_evaluation_rows": 16,
+        "train_eval_disjoint": true,
+        "root_client_disjoint": true,
+        "real_celeba_data": false
+      },
+      "preprocessing_version": "rgb64_v1",
+      "synthetic_method": null
+    },
+    "attack_impl_note": "F Flip mode=all_unprivileged; labels are unchanged. FOE mode=state; S-DFA FOE mode=fedsa; Sp-DFA FOE mode=fedsa; FedSA mode uses foe_mode=fedsa.",
+    "method_impl_note": "All methods share identical preprocessing. sensitive_feature=False, aggregation_weighting=count, use_reweighting=True, fairguard_mode=server_aeod. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled=False.",
+    "duration_sec": 4.184903860092163
+  }
+}

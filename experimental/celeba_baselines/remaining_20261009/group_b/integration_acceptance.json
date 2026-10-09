@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "evidence_stage": "component_synthetic_pipeline_only",
+  "bridge": {
+    "status": "PASS",
+    "fixture": "nonzero dyadic global state and two local-model clusters",
+    "formula": "local_i=global+attacked_delta_i; returned_delta=aggregate_full-global; apply_update=global+returned_delta",
+    "actual_full_state_bitwise_equal": true,
+    "wrong_full_as_delta_detected": true,
+    "selected": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "worker_sha256": "a3fe21a5a334b63de9c2167ed28293cd7f38d4411edf11de7d226d895b550fdc",
+  "adapter_sha256": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+  "toy_rounds": 3,
+  "clients": 20,
+  "device": "cpu",
+  "images_per_client": 4,
+  "root_images": 8,
+  "evaluation_images": 16,
+  "attack": "S-DFA",
+  "attack_path": "unchanged core actual client metadata flip and FedSA delta attack",
+  "training_path": "unchanged frozen CelebACNN + localAdam + train-root update + native metrics",
+  "full_stage_sequence": [
+    "per_round_gmm",
+    "fit_control_limit",
+    "monitor"
+  ],
+  "separate_run_state_reset": true,
+  "unfrozen_launch_rejected": true,
+  "elapsed_seconds": 6.5702855587005615,
+  "output_hashes": {
+    "model.pt": "33d28d70e469c8334f87ee6ae0350fefd004866f07da254169d947c9837958c8",
+    "state.json": "7786feaf11e76fba550ce78d510438adb5731dbb3991791cac46706d4bdcffad",
+    "diagnostics.json": "d5733b9b285713de740c0cf0e3bf63df9d95e4a3a37bab17024b343d68dc9c9c",
+    "result.json": "de170308da503fc1c6a48475ec0eb06f8aa63d521e0dbc96629caac007b7cda8"
+  },
+  "limits": [
+    "Synthetic uint8 RGB64 only; no real CelebA/GPU performance evidence",
+    "Tg1/three rounds used only to check all stages, not a search recipe",
+    "Controller JSON is not a full training checkpoint or resume guarantee"
+  ]
+}

@@ -1,0 +1,689 @@
+{
+  "created_utc": "2026-10-09T05:21:29.005439+00:00",
+  "status": "PASS",
+  "source_method": "GuardFed-AD2+",
+  "source_attack": "Sp-DFA",
+  "scope": "pre-attack partition/support only",
+  "partitions_verified": 20,
+  "shared_seeds": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005,
+    91006,
+    91007,
+    91008,
+    91009,
+    91010
+  ],
+  "clients_per_partition": 20,
+  "client_total_count_exact_checks": 400,
+  "attack_audit_sample_count_exact_checks": 400,
+  "extra_original_Male1_counts_from_fflip_changed_checks": 40,
+  "shuffle_content_independence_checks": 20,
+  "missing_sensitive_group_client_occurrences": 0,
+  "actual_alpha": {
+    "IID": 5000.0,
+    "non-IID": 5.0
+  },
+  "root_same_across_distributions_per_seed": true,
+  "root_unique_seed_n": 10,
+  "source_manifest_sha256": "6426f31571a9bea111dd9e9371f504ddcded73c0ba69debfb81aed7e45ffd799",
+  "stageA_snapshot_sha256": "30212bdd4c7a505ccbc5175916267036a8216519757bbfae384791f613a646cc",
+  "source_pins": {
+    "scripts/reproduce_paper_tables.py": {
+      "path": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_shared_calibration_20260928\\reproduce_paper_tables.py",
+      "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed"
+    },
+    "src/celeba_data.py": {
+      "path": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_shared_calibration_20260928\\celeba_data.py",
+      "sha256": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce"
+    }
+  },
+  "source_function_ast_records": [
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "client_runtime_data",
+      "line": 532,
+      "end_line": 606,
+      "source_sha256": "51fc9175e47e050106ddff7405d95f35e120bef2b0e756ec99320fcfe44f3c96",
+      "ast_sha256": "b504dd2a0dd36fc8ed5166838eb4741012f371ba3e5851983cca73d64374e1d6"
+    },
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "create_client_data_dict",
+      "line": 1433,
+      "end_line": 1467,
+      "source_sha256": "c4dfca27a52b6393c66c217c56987a3aaa0bf7a010667d00d512d614451aa547",
+      "ast_sha256": "254db6ccc202ef6d7999ee70096a07b61bacac8f56ebd01d011c899956804851"
+    },
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "sample_server_dataframe",
+      "line": 1488,
+      "end_line": 1668,
+      "source_sha256": "0b746a77bbb46684ab72c056e6620fc8b2b6de09bf8635e52e80f41b148d5f95",
+      "ast_sha256": "9bde27aeb58cfc84535985fa7d860415bdf214e8dd3c08dd78a34d84114bec1d"
+    },
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "apply_root_noise",
+      "line": 1671,
+      "end_line": 1700,
+      "source_sha256": "6905abdd4959d9541320d59aa02d763d19cad2ed3bc43e19bc00c8d4f88b66fa",
+      "ast_sha256": "77a0e6358d75a5115476cac196b20328ea55b21dabfd75e6d01f926f977839ca"
+    },
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "load_bundle",
+      "line": 1703,
+      "end_line": 1734,
+      "source_sha256": "7d0d88e949c4c68d454200cddff8df8ad185cec834495940864fad0609d96c14",
+      "ast_sha256": "79675b815f4049651b14fd0fcd29adb1a32913c3f0430e8be63386be675e59d7"
+    },
+    {
+      "file": "scripts/reproduce_paper_tables.py",
+      "function": "run_experiment",
+      "line": 1736,
+      "end_line": 1763,
+      "source_sha256": "c634cf20fb67ddec12d0ee7319127ca10b887614431001864212e5c3678b6ffa",
+      "ast_sha256": "d5dfdc5d221c2f6e4e465a3d38fa15e54d85538d2df91ed199c3d9c893ffb425"
+    },
+    {
+      "file": "src/celeba_data.py",
+      "function": "load_celeba_bundle",
+      "line": 31,
+      "end_line": 110,
+      "source_sha256": "0f01ab268e5d1b2d6cd44cb96464891033dab44842e8fe0ec63efb79bfb246e8",
+      "ast_sha256": "dee2a210b9fb21e7f07875395f49a75a0f99aa108bde77a520636a865cd0f106"
+    }
+  ],
+  "helper_ast_sha256": "86a7ae6bd6241123942552ad9cefc34692b2601d0f5d542324b965de6d0bd7e6",
+  "helper_script_sha256": "e7a3d9614fb8b5df08f761c2da9f8c48e6d1924d593b11e2646e10391f840cac",
+  "numpy_local_version": "2.2.6",
+  "source_execution_order": {
+    "load_bundle_line": 1737,
+    "runtime_attack_line": 1741,
+    "load_precedes_attack": true,
+    "partition_signatures_have_no_attack": true,
+    "partition_config_has_no_attack_or_tag_dependency": true,
+    "group_order": [
+      1,
+      0
+    ],
+    "shuffle_precedes_dirichlet": true
+  },
+  "archives": [
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_final_incremental55_total644_20260928T102233Z.tar.gz",
+      "sha256": "22a5cfacfd93d2e187e941165a3ff7f83b1d547f956dba23e467d9fe6dfc8c47"
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental23_total589_20260927T230926Z.tar.gz",
+      "sha256": "0f4e87a2c936afc9922dfa1edc3e159119a46b140d855558895a69cc2511de1c"
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137"
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental42_total503_20260927T170830Z.tar.gz",
+      "sha256": "39a57a3bb9224cd608461ec56b2f86af7dbc594581b605c77cac85bbe90d7ec7"
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+      "sha256": "e59af4f3bd2a293fbded390392baf91cad84364660b2e547ce4ccfeb1c9f9362"
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental52_total461_20260927T140654Z.tar.gz",
+      "sha256": "bd11612cb04c5fdfbd592481237322d0eb0073be37901e6ff2cf2e6d815ab430"
+    }
+  ],
+  "restored_result_sources": [
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_final_incremental55_total644_20260928T102233Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91010/result.json",
+      "sha256": "ad2668e84d6b07ae80e5da24e8ee287abda49c9f39fc24e07fb506b12c92c4f2",
+      "bytes": 2255906,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91010.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_final_incremental55_total644_20260928T102233Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "ad2668e84d6b07ae80e5da24e8ee287abda49c9f39fc24e07fb506b12c92c4f2",
+        "bytes": 2255906
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_final_incremental55_total644_20260928T102233Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91010/result.json",
+      "sha256": "d051e019bcd02c1e22594738198bb53a4d3b004a2484521adeb68f042ed2893f",
+      "bytes": 2234321,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91010.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_final_incremental55_total644_20260928T102233Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "d051e019bcd02c1e22594738198bb53a4d3b004a2484521adeb68f042ed2893f",
+        "bytes": 2234321
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental23_total589_20260927T230926Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91009/result.json",
+      "sha256": "fa7a176b968af0d40bbbe81cbd7e751d3e584709f34a3b36c9e002668a753755",
+      "bytes": 2274600,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91009.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental23_total589_20260927T230926Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "fa7a176b968af0d40bbbe81cbd7e751d3e584709f34a3b36c9e002668a753755",
+        "bytes": 2274600
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91001/result.json",
+      "sha256": "0398d0d19e7b5db98b7647bfce9beb5c2f8c07f52327696a85672d5af4dccbfb",
+      "bytes": 2246810,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91001.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "0398d0d19e7b5db98b7647bfce9beb5c2f8c07f52327696a85672d5af4dccbfb",
+        "bytes": 2246810
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91002/result.json",
+      "sha256": "920387313a2cb952be700765929b9c24491683e63c9b3e7ccfe87904bc568676",
+      "bytes": 2276675,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91002.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "920387313a2cb952be700765929b9c24491683e63c9b3e7ccfe87904bc568676",
+        "bytes": 2276675
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91003/result.json",
+      "sha256": "ba9d152a4f44f3b5cc3f22cb023042e2a419c1c264c6b7dc91c5f3b147304cbd",
+      "bytes": 2270330,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91003.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "ba9d152a4f44f3b5cc3f22cb023042e2a419c1c264c6b7dc91c5f3b147304cbd",
+        "bytes": 2270330
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91004/result.json",
+      "sha256": "0e0a28bf119922b0cdd91d7f3543487cfc63ce58573383139740fcfebd374172",
+      "bytes": 2270282,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91004.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "0e0a28bf119922b0cdd91d7f3543487cfc63ce58573383139740fcfebd374172",
+        "bytes": 2270282
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91005/result.json",
+      "sha256": "cbdfcc047e4b4c30fb7c4b6be52a3e1e93237ce47c7c1c1e69f4e09e1ec27a75",
+      "bytes": 2273593,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91005.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "cbdfcc047e4b4c30fb7c4b6be52a3e1e93237ce47c7c1c1e69f4e09e1ec27a75",
+        "bytes": 2273593
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91006/result.json",
+      "sha256": "e148730207a320c95e236c1a891d8ecb87e447d9465e2eb36ad4f709ac218cf2",
+      "bytes": 2272324,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91006.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "e148730207a320c95e236c1a891d8ecb87e447d9465e2eb36ad4f709ac218cf2",
+        "bytes": 2272324
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91007/result.json",
+      "sha256": "50667aff3b04653c44bfe09e05f2a5a861afb737342431f0bbf23c0c6231aa62",
+      "bytes": 2270751,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91007.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "50667aff3b04653c44bfe09e05f2a5a861afb737342431f0bbf23c0c6231aa62",
+        "bytes": 2270751
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91001/result.json",
+      "sha256": "73687c887eb1763fa152b022d1f046e033cc0e493b6bd606d1a69365d899a398",
+      "bytes": 2264514,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91001.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "73687c887eb1763fa152b022d1f046e033cc0e493b6bd606d1a69365d899a398",
+        "bytes": 2264514
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91002/result.json",
+      "sha256": "e392c10f0e2bebe7b6359bb93dec275fe39eedf705f77ac2c5728b91a43161b0",
+      "bytes": 2273673,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91002.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "e392c10f0e2bebe7b6359bb93dec275fe39eedf705f77ac2c5728b91a43161b0",
+        "bytes": 2273673
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91003/result.json",
+      "sha256": "3fec9f75c811ac8f064601ef3a2fbaf4c385caafd34ec965fb0bd7a262f0c512",
+      "bytes": 2264576,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91003.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "3fec9f75c811ac8f064601ef3a2fbaf4c385caafd34ec965fb0bd7a262f0c512",
+        "bytes": 2264576
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91004/result.json",
+      "sha256": "d26725e9252358951b9a853983907bc01a7f9b236a9a22b5d963f00a895d2721",
+      "bytes": 2271740,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91004.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "d26725e9252358951b9a853983907bc01a7f9b236a9a22b5d963f00a895d2721",
+        "bytes": 2271740
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91005/result.json",
+      "sha256": "9b16188dba9069cc3cb0234cd9330b6726e718fc4dbe89d8aa66655ebdfb16b2",
+      "bytes": 2266065,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91005.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "9b16188dba9069cc3cb0234cd9330b6726e718fc4dbe89d8aa66655ebdfb16b2",
+        "bytes": 2266065
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental409_total409_20260927T104055Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91006/result.json",
+      "sha256": "f17a13d4353904bcfcd9b9f777bc3949b67897c6ac1291e1dd3bf07a6331ae53",
+      "bytes": 2268199,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91006.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental409_total409_20260927T104055Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "f17a13d4353904bcfcd9b9f777bc3949b67897c6ac1291e1dd3bf07a6331ae53",
+        "bytes": 2268199
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental42_total503_20260927T170830Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91008/result.json",
+      "sha256": "0cadcca67f03ae992befa24830127f5c42390f1489665461be284900ac2d389b",
+      "bytes": 2255791,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91008.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental42_total503_20260927T170830Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "0cadcca67f03ae992befa24830127f5c42390f1489665461be284900ac2d389b",
+        "bytes": 2255791
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Sp-DFA_seed91009/result.json",
+      "sha256": "fa4dadf45ceb892bbcb124463ef33e5b67cc7c5c879aefd8288d65f2f59410b5",
+      "bytes": 2276540,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_IID_Sp-DFA_seed91009.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental46_total549_20260927T200901Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "fa4dadf45ceb892bbcb124463ef33e5b67cc7c5c879aefd8288d65f2f59410b5",
+        "bytes": 2276540
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental46_total549_20260927T200901Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91008/result.json",
+      "sha256": "5b77d8c18a2f56b1e6d7ed0373526e24c4e1eb51a2d4f399a7da6ff61bfb5f76",
+      "bytes": 2263384,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91008.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental46_total549_20260927T200901Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "5b77d8c18a2f56b1e6d7ed0373526e24c4e1eb51a2d4f399a7da6ff61bfb5f76",
+        "bytes": 2263384
+      }
+    },
+    {
+      "archive": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_fullcoverage_v1\\celeba_fullcoverage_incremental52_total461_20260927T140654Z.tar.gz",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Sp-DFA_seed91007/result.json",
+      "sha256": "b6539d6ab810237f904a4f4784d9ae3b22128b059a747aaf9d60f4d2580e07bc",
+      "bytes": 2268003,
+      "output": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\celeba_partition_audit_20261009\\raw_results\\GuardFed-AD2+_non-IID_Sp-DFA_seed91007.json",
+      "inventory_member": "deployment/fullcoverage_acceptance/celeba_fullcoverage_incremental52_total461_20260927T140654Z_inventory.json",
+      "inventory_entry": {
+        "sha256": "b6539d6ab810237f904a4f4784d9ae3b22128b059a747aaf9d60f4d2580e07bc",
+        "bytes": 2268003
+      }
+    }
+  ],
+  "frozen_job_member_checks": [
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91010",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91010.json",
+      "sha256": "654f8d9607092d9b5c7c6b50dbabe0b3bfc928aae0c2a96b9fa7b5138998d459"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91010",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91010.json",
+      "sha256": "a64126c7252f11e65b6707157e133fef05c44b8b1358ba84d9aa59658ebb0f15"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91009",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91009.json",
+      "sha256": "548ad57c3be054d1d7d2c945ec2e946f5221847a03795a5ff99a8241c4f99fbe"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91001",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91001.json",
+      "sha256": "7def1560c02e3cb78e46702e8415452ca7339537a6fc078d653d63fdb16b2f21"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91002",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91002.json",
+      "sha256": "c03367d99115271bb1c24da889784a026465d053e7711267f363d1cc1531caf7"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91003",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91003.json",
+      "sha256": "e89e267a6d466d3e06919282511c7a31f59e509467a806ed2fb8082f057ce934"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91004",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91004.json",
+      "sha256": "43d319ca0802efdbb76554a33531daab08ff98cd6f236d87dc8d9e0a4b733085"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91005",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91005.json",
+      "sha256": "e9b5d1ace3dde4841f6fc1d4c1d17375045383dd1225a5bf380806cdfcd8c7bc"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91006",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91006.json",
+      "sha256": "ecd0c4116e9af19a2286328e7ea9d02ba0b608f04fd250d2f59a930a22bf00b9"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91007",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91007.json",
+      "sha256": "3dc37f0b651f64df457c359c05b4ee402a2e47941bcdca9f0da2cefc048d1119"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91001",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91001.json",
+      "sha256": "a692b4eebb5a0a61853b834c2b3cea1666ce43d7ec2cdba2b06e0a9d534f91cc"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91002",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91002.json",
+      "sha256": "a5b1af8b49b1f54e01b94c7f4288b36ed353062c50c9266de4a585fb918d20d1"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91003",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91003.json",
+      "sha256": "21837182f7bcf6c2924055c87c810ab4f9c3c6a30f281590985ddee045fac1cf"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91004",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91004.json",
+      "sha256": "8a9f2302f579b263c0bf13f8992cc8a8c0c8d9e275bc40e2a52a24658c7d4fd0"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91005",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91005.json",
+      "sha256": "dce13b686bf09156037d5bdbe579bf2c25bbc6bb8eda9cb11d9d606fea138d09"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91006",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91006.json",
+      "sha256": "f4ccab33edfb8c1dcd05dcf73636bc67386fada7801cb52f2724dcc841dfce66"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91008",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91008.json",
+      "sha256": "c5de01420b249a1f32b72019dc79aec130c0745674aef86cf5e6fcf49ffc38cd"
+    },
+    {
+      "id": "GuardFed-AD2+_IID_Sp-DFA_seed91009",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_IID_Sp-DFA_seed91009.json",
+      "sha256": "b37519bbaeb5c0eb27043471a2e89ba477ef9ba41d5cbf9f9a48d65cdc603d78"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91008",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91008.json",
+      "sha256": "3f9291cf077870cc942c1b8cd5da0af0266ce7dbe4e26c540c7e3218790edaf9"
+    },
+    {
+      "id": "GuardFed-AD2+_non-IID_Sp-DFA_seed91007",
+      "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/GuardFed-AD2+_non-IID_Sp-DFA_seed91007.json",
+      "sha256": "9eda12eefaaf55cde7a3ede0627b20415078a1d631ef76e110845d24cea1888f"
+    }
+  ],
+  "partition_summaries_across_10_seeds": {
+    "IID": {
+      "client_sample_min": {
+        "n_seeds": 10,
+        "mean": 7195.5,
+        "sample_sd": 42.42968038741015,
+        "min": 7126.0,
+        "max": 7245.0
+      },
+      "client_sample_max": {
+        "n_seeds": 10,
+        "mean": 7461.5,
+        "sample_sd": 39.528470752104745,
+        "min": 7412.0,
+        "max": 7532.0
+      },
+      "client_sample_cv": {
+        "n_seeds": 10,
+        "mean": 0.009461110376313687,
+        "sample_sd": 0.0012925632690107627,
+        "min": 0.008083551330615975,
+        "max": 0.011790306983562258
+      },
+      "client_Male1_fraction_min": {
+        "n_seeds": 10,
+        "mean": 0.4094904940807977,
+        "sample_sd": 0.002375400412817783,
+        "min": 0.40495305483739286,
+        "max": 0.41204394412043943
+      },
+      "client_Male1_fraction_max": {
+        "n_seeds": 10,
+        "mean": 0.42811133594320266,
+        "sample_sd": 0.0014936701181459287,
+        "min": 0.4242631004366812,
+        "max": 0.42969407802413695
+      },
+      "client_Male1_fraction_population_sd": {
+        "n_seeds": 10,
+        "mean": 0.004729397426600283,
+        "sample_sd": 0.0005171783794098891,
+        "min": 0.003629745447108471,
+        "max": 0.0053758427653756834
+      },
+      "first4_malicious_sample_fraction": {
+        "n_seeds": 10,
+        "mean": 0.19964025584840234,
+        "sample_sd": 0.001024619330290489,
+        "min": 0.19817329155659313,
+        "max": 0.20155911886574784
+      },
+      "first4_malicious_Male0_coverage_fraction": {
+        "n_seeds": 10,
+        "mean": 0.19943567918361588,
+        "sample_sd": 0.0011837033825250632,
+        "min": 0.19753579910178937,
+        "max": 0.20155658491852618
+      },
+      "first4_malicious_Male1_coverage_fraction": {
+        "n_seeds": 10,
+        "mean": 0.199923496378286,
+        "sample_sd": 0.0016918032248715352,
+        "min": 0.1986652559615854,
+        "max": 0.20332058272971434
+      },
+      "first4_malicious_Male1_fraction": {
+        "n_seeds": 10,
+        "mean": 0.41996433759639384,
+        "sample_sd": 0.0024188609732631676,
+        "min": 0.4176267478034939,
+        "max": 0.4248771834061135
+      }
+    },
+    "non-IID": {
+      "client_sample_min": {
+        "n_seeds": 10,
+        "mean": 3979.2,
+        "sample_sd": 644.1897236063301,
+        "min": 2926.0,
+        "max": 4683.0
+      },
+      "client_sample_max": {
+        "n_seeds": 10,
+        "mean": 12053.1,
+        "sample_sd": 1670.766786704702,
+        "min": 10128.0,
+        "max": 15638.0
+      },
+      "client_sample_cv": {
+        "n_seeds": 10,
+        "mean": 0.29869813037703924,
+        "sample_sd": 0.06037692012850796,
+        "min": 0.23610491323060265,
+        "max": 0.4276608457444537
+      },
+      "client_Male1_fraction_min": {
+        "n_seeds": 10,
+        "mean": 0.16312188812135126,
+        "sample_sd": 0.030473886093141743,
+        "min": 0.09832200804326723,
+        "max": 0.20116869431937925
+      },
+      "client_Male1_fraction_max": {
+        "n_seeds": 10,
+        "mean": 0.6828485159667348,
+        "sample_sd": 0.04918151159936642,
+        "min": 0.5848080588075143,
+        "max": 0.7430254184748915
+      },
+      "client_Male1_fraction_population_sd": {
+        "n_seeds": 10,
+        "mean": 0.13755550075552272,
+        "sample_sd": 0.015544801469867118,
+        "min": 0.10889363245893831,
+        "max": 0.15455535390809008
+      },
+      "first4_malicious_sample_fraction": {
+        "n_seeds": 10,
+        "mean": 0.18874075894411338,
+        "sample_sd": 0.031322037819695496,
+        "min": 0.15173421255623135,
+        "max": 0.24661246612466126
+      },
+      "first4_malicious_Male0_coverage_fraction": {
+        "n_seeds": 10,
+        "mean": 0.18289284958498905,
+        "sample_sd": 0.03396188243119982,
+        "min": 0.14403113169837053,
+        "max": 0.2532036963013473
+      },
+      "first4_malicious_Male1_coverage_fraction": {
+        "n_seeds": 10,
+        "mean": 0.19683730772361033,
+        "sample_sd": 0.05582781564406532,
+        "min": 0.15133067469683406,
+        "max": 0.304793684381867
+      },
+      "first4_malicious_Male1_fraction": {
+        "n_seeds": 10,
+        "mean": 0.43415682574470216,
+        "sample_sd": 0.0739081725272138,
+        "min": 0.3487152790689027,
+        "max": 0.5916741659167417
+      }
+    }
+  },
+  "root_summary_across_10_unique_seeds": {
+    "root_joint_min_support": {
+      "n_seeds": 10,
+      "mean": 2713.4,
+      "sample_sd": 28.206382256503577,
+      "min": 2666.0,
+      "max": 2759.0
+    },
+    "root_joint_tvd": {
+      "n_seeds": 10,
+      "mean": 0.0034859003501873835,
+      "sample_sd": 0.0021552862186583416,
+      "min": 0.0006143638262578743,
+      "max": 0.007495238680346544
+    },
+    "root_label_tvd": {
+      "n_seeds": 10,
+      "mean": 0.0027769244946857508,
+      "sample_sd": 0.002500225113067964,
+      "min": 6.143638262579021e-05,
+      "max": 0.007495238680346461
+    },
+    "root_sensitive_tvd": {
+      "n_seeds": 10,
+      "mean": 6.14363826262343e-06,
+      "sample_sd": 0.0,
+      "min": 6.14363826262343e-06,
+      "max": 6.14363826262343e-06
+    },
+    "root_Smiling1_fraction": {
+      "n_seeds": 10,
+      "mean": 0.4794495300116729,
+      "sample_sd": 0.0038408523125064574,
+      "min": 0.4722000368618296,
+      "max": 0.4850402408306199
+    },
+    "root_Male1_fraction": {
+      "n_seeds": 10,
+      "mean": 0.4193647478036493,
+      "sample_sd": 0.0,
+      "min": 0.4193647478036493,
+      "max": 0.4193647478036493
+    }
+  },
+  "client_label_joint_counts_reconstructed": false,
+  "limitations": [
+    "Group counts reconstructed from frozen shuffle/Dirichlet logic and archived global/root counts; all 400 archived client totals match exactly.",
+    "Only pre-attack sensitive-group counts are reconstructed. Runtime attack annotations differ for the first two Sp-DFA clients.",
+    "No client label-by-sensitive joint counts or within-client Smiling rate can be recovered without the original attribute metadata.",
+    "Shared root repeated under IID/non-IID is one root sample per seed, not two independent observations.",
+    "The audited source is 20 GuardFed-AD2+ Sp-DFA records. Transfer to other attack choices follows frozen attack-independent loading, not a new extraction of every method/scenario.",
+    "This audit does not measure heterogeneity beyond sensitive-group allocation or establish realistic device populations."
+  ],
+  "training_started": false,
+  "image_metadata_loaded": false,
+  "original_results_modified": false
+}

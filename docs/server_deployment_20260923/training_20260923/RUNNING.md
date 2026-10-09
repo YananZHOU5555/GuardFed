@@ -1,4 +1,14 @@
-# CURRENT: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
+# CURRENT: Rebuttal completion ACTIVE; SSH unavailable; missing GPU work NOT STARTED — 2026-10-09 Sydney
+
+用户要求完成全部rebuttal实验并写清晰充分的回复。当前服务器213.224.31.105:26712（实例52514165）多次SSH与直接TCP在认证前被拒绝；用户确认实例运行、地址未变，但实例内部SSH/GPU/进程状态尚不可观测。2026-10-07的健康空闲实测只作历史，不当作当前状态。已请求网页终端 `ss -lntp` 文本；等待新证据，不循环重试或重启旧队列。
+
+入口 REBUTTAL_COMPLETION_20261009.md。本轮实际完成：机制消融800新任务+100Full复用完整网格、18图像门检与2原worker同horizon参考均已准备；6项CPU/合成组件检查及820任务身份/路径/配置/源码哈希检查通过。控制与失败即停launcher已写，prepared setup archive及成员SHA逐一核验；真实图像/CUDA门检未做、无新正式训练、无dispatch receipt。见 celeba_mechanism_v1/EXECUTION.md、prepared_acceptance.json、setup_receipt.json。Windows远程路径问题在启动前拦截修正，失败记录保留。
+
+其余基线：Fed-NGA/Huber/LoGoFair组件已完成本地检查，hybrid及FLGMM已接入冻结CNN/Adam/攻击路径并通过合成三轮检查，各有32条未冻结搜索草案；缺真实图像验收与科学训练，LoGoFair client-ID及梯度攻击适配需具体解决。FedWA/SmartFL/FedDNA原法细节的51条原始来源响应已核验，仍缺关键全文/代码，不能以简化分支冒充。24块原审稿意见的完整英文回复稿、中文证据对齐、正文候选和8篇核验文献已整理；评分分析从旧归档恢复，140文件/8440轮/388240字段复核通过，硬门禁外再纳入及理论适用范围已写清。CelebA分区20份/400client及额外40原Male计数已精确对应，强α Adult/COMPAS分区仍待后续离线验收。不可据此称全部返修实验完成。
+
+旧2454个新增完成训练、九方法900验证记录和备份保持不变。既有 current_stage 仍指最后完成的科学队列；current_work 指上述主动返修工作。巡检读取本入口和latest_connection_check，不能把旧healthy标签当新事实；无新阶段冻结/运行时不恢复完成队列。连通后先读服务器guide，再核源码/数据/复用模型和无重复进程，完成门检后只跑缺失项。旧服务器仅归档。
+
+# HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
 用户最新授权：“继续运行吧”。当前服务器213.224.31.105:26712；repo/workspace/GuardFed-celeba-expanded；service guardfed_celeba_baseline_fullcoverage。当前阶段协议celeba_baseline_fullcoverage_v1/PROTOCOL.md；manifest results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json；runner deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py。
 
