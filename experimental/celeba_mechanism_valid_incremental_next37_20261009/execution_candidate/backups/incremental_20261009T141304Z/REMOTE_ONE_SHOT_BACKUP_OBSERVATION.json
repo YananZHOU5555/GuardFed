@@ -1,0 +1,127 @@
+{
+  "status": "ONE_SHOT_BACKUP_RETURNED",
+  "before": {
+    "utc": "2026-10-09T14:13:04.159846+00:00",
+    "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+    "source_and_authority_pins": {
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/FILES_SHA256.json": "95978fa42c28e9b4ff5b855b33c2dda56edc2b14fcfd56c3a29b0a9ba98135fd",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/EXECUTION_SOURCE_SHA256.json": "4f71c60c6966da40d334f0ac17141a7e763520b7fe478df8548809e773971caf",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/batch.py": "4fc0af41a9973ed41782c1320e29abb0cd709ee30c3fb4bfaf4ca74ac9579c67",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backup_completed.py": "097e494bc3c3447dfc3d6e48236badd26fc167bd143e9ffa5e87ad6b5825ef26",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/ROOT_APPROVED.json": "ffe354b23fcbbba5d42c0b9034e1b273243542165f6d638d0fac61b1f7ca57d3",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/APPROVED.json": "9e8ed20858f0a913dbc60a704095670c04fa9086fea3e461497bcbfa1a2557a3",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/APPROVED.sha256": "366354d5ae2b729da0799b8cbede4658fc98131a047c90c5b66db2b00fd340f3",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/EXECUTION_DRAFT.json": "a4e2941a8057b4c6a3f28726619112f6e9eefece4a76593e29feef8cf6b9892c",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/preflight.json": "f8ec27e4ea3b3fc02ae99a0bbe83dfc3a811dd25914c8285284bed3310c7d931",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/start_receipt.json": "12334ab5fe1bbe7a6c9ec6ad7f371f39ef00af5caff972200298e12f552b7bef"
+    },
+    "source32_members_verified": true,
+    "backup_no_subprocess_no_lock_no_CNN": true,
+    "closed_ids_before_call": [
+      "minus_U_IID_FedSA_seed91004",
+      "minus_U_IID_FedSA_seed91005",
+      "minus_U_IID_FedSA_seed91006",
+      "minus_U_IID_FedSA_seed91007",
+      "minus_U_IID_FedSA_seed91008"
+    ],
+    "previous_backup": null,
+    "active": [
+      {
+        "pid": 45834,
+        "id": "minus_U_IID_FedSA_seed91009",
+        "cpus": [
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119
+        ]
+      }
+    ],
+    "service": "guardfed_celeba_mechanism_valid_next37   RUNNING   pid 45108, uptime 0:04:13",
+    "sglang": "sglang                           STOPPED   Oct 09 05:46 AM",
+    "cpu_max": "12287999 100000",
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+  },
+  "backup_process": {
+    "pid": 45962,
+    "command": [
+      "taskset",
+      "-c",
+      "110",
+      "ionice",
+      "-c",
+      "3",
+      "nice",
+      "-n",
+      "10",
+      "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+      "-B",
+      "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backup_completed.py"
+    ],
+    "cpus": [
+      110
+    ],
+    "nice": 10,
+    "task_count": 1,
+    "io_priority": "idle"
+  },
+  "returncode": 0,
+  "stdout": "{\"archive_sha256\": \"4f16c82638807b3432610d31600a34b4c4fa3ffe092babdbf63d18e1ab260f3f\", \"inventory_sha256\": \"8b70d067ef446eb5285983e587c8b9cca8a8e863522b3c66f41570542651176f\", \"accepted_new_ids\": [\"minus_U_IID_FedSA_seed91004\", \"minus_U_IID_FedSA_seed91005\", \"minus_U_IID_FedSA_seed91006\", \"minus_U_IID_FedSA_seed91007\", \"minus_U_IID_FedSA_seed91008\"], \"all_accepted_ids\": [\"minus_U_IID_FedSA_seed91004\", \"minus_U_IID_FedSA_seed91005\", \"minus_U_IID_FedSA_seed91006\", \"minus_U_IID_FedSA_seed91007\", \"minus_U_IID_FedSA_seed91008\"], \"members\": 78, \"source_host\": \"0becaeaa5515\", \"archive\": \"/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups/incremental_20261009T141304Z/incremental_valid_three_views.tar.gz\", \"previous_backup_receipt_sha256\": null}\n",
+  "stderr": "",
+  "elapsed_seconds": 0.22015926311723888,
+  "after_source_and_authority_pins": {
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/FILES_SHA256.json": "95978fa42c28e9b4ff5b855b33c2dda56edc2b14fcfd56c3a29b0a9ba98135fd",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/EXECUTION_SOURCE_SHA256.json": "4f71c60c6966da40d334f0ac17141a7e763520b7fe478df8548809e773971caf",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/batch.py": "4fc0af41a9973ed41782c1320e29abb0cd709ee30c3fb4bfaf4ca74ac9579c67",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backup_completed.py": "097e494bc3c3447dfc3d6e48236badd26fc167bd143e9ffa5e87ad6b5825ef26",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/ROOT_APPROVED.json": "ffe354b23fcbbba5d42c0b9034e1b273243542165f6d638d0fac61b1f7ca57d3",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/APPROVED.json": "9e8ed20858f0a913dbc60a704095670c04fa9086fea3e461497bcbfa1a2557a3",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/APPROVED.sha256": "366354d5ae2b729da0799b8cbede4658fc98131a047c90c5b66db2b00fd340f3",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/EXECUTION_DRAFT.json": "a4e2941a8057b4c6a3f28726619112f6e9eefece4a76593e29feef8cf6b9892c",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/preflight.json": "f8ec27e4ea3b3fc02ae99a0bbe83dfc3a811dd25914c8285284bed3310c7d931",
+    "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/start_receipt.json": "12334ab5fe1bbe7a6c9ec6ad7f371f39ef00af5caff972200298e12f552b7bef"
+  },
+  "CNN_inference": false,
+  "registration": false,
+  "backup_receipt": {
+    "archive_sha256": "4f16c82638807b3432610d31600a34b4c4fa3ffe092babdbf63d18e1ab260f3f",
+    "inventory_sha256": "8b70d067ef446eb5285983e587c8b9cca8a8e863522b3c66f41570542651176f",
+    "accepted_new_ids": [
+      "minus_U_IID_FedSA_seed91004",
+      "minus_U_IID_FedSA_seed91005",
+      "minus_U_IID_FedSA_seed91006",
+      "minus_U_IID_FedSA_seed91007",
+      "minus_U_IID_FedSA_seed91008"
+    ],
+    "all_accepted_ids": [
+      "minus_U_IID_FedSA_seed91004",
+      "minus_U_IID_FedSA_seed91005",
+      "minus_U_IID_FedSA_seed91006",
+      "minus_U_IID_FedSA_seed91007",
+      "minus_U_IID_FedSA_seed91008"
+    ],
+    "members": 78,
+    "source_host": "0becaeaa5515",
+    "archive": "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups/incremental_20261009T141304Z/incremental_valid_three_views.tar.gz",
+    "previous_backup_receipt_sha256": null
+  },
+  "remote_receipt_sha256": "e22525155441aa6d2368b252ca103fdba03978c00e45659e1ba72123c1a45ec6",
+  "remote_latest_sha256": "452b2cce04309da557c04541cedf8bcefec250b83b50a2ebd27519fd1082987d",
+  "remote_latest": {
+    "receipt_sha256": "e22525155441aa6d2368b252ca103fdba03978c00e45659e1ba72123c1a45ec6",
+    "receipt": "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups/incremental_20261009T141304Z/backup_receipt.json",
+    "archive_sha256": "4f16c82638807b3432610d31600a34b4c4fa3ffe092babdbf63d18e1ab260f3f",
+    "archive": "/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups/incremental_20261009T141304Z/incremental_valid_three_views.tar.gz",
+    "all_accepted_ids": [
+      "minus_U_IID_FedSA_seed91004",
+      "minus_U_IID_FedSA_seed91005",
+      "minus_U_IID_FedSA_seed91006",
+      "minus_U_IID_FedSA_seed91007",
+      "minus_U_IID_FedSA_seed91008"
+    ]
+  }
+}

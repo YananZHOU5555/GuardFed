@@ -1,4 +1,4 @@
-# CURRENT: GuardFed返修实验 — 实测 2026-10-09T14:09:42.637939+00:00
+# CURRENT: GuardFed返修实验 — 实测 2026-10-09T14:21:24.287049+00:00
 
 当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
 
@@ -10,11 +10,11 @@
 | FLGMM验证搜索 | 13/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
 | 组合基线验证搜索 | 4/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | 570/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | tmp/celeba_valid_gpu_remaining440_v2_evidence_20261009/chunk_009/cumulative_570_accepted.json |
-| 机制三视图评价 | 23份minus_U已严格验收并离机；下一批37项状态为RUNNING_AT_SOURCE_BOUND_LINUX_STARTUP_OBSERVATION，新批接受0，不能将运行等同完成 | tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/ROOT_STARTUP_OBSERVATION.json；旧23凭据保持 |
+| 机制三视图评价 | 28份minus_U已严格验收并离机；下一批37项状态为RUNNING_AT_SOURCE_BOUND_LINUX_STARTUP_OBSERVATION，新批接受5，不能将运行等同完成 | tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups；旧23凭据保持 |
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
-主机制最近实测CPU 15.89/122.88核，RAM 77.61GB，磁盘余1.062TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
+主机制最近实测CPU 20.02/122.88核，RAM 76.40GB，磁盘余1.062TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 
 ## 当前恢复与研究选择
 
@@ -36,7 +36,7 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 ## Git与巡检
 
-最近已验证推送：a6c18b41826289a6ee5574789732ca548d9dae92，分支codex/revision-evidence-baselines-20260928，111份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment14_verified_20261009.json。
+最近已验证推送：d659e0bb37bbe89b8390927c54ef5f37f602e6b6，分支codex/revision-evidence-baselines-20260928，147份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment15_verified_20261009.json。
 
 三小时聊天任务guardfed-training-health仍PAUSED；本会话没有原生automation_update工具，未编辑调度器或建立替代cron/Windows任务。supervisor持续运行训练不等于聊天巡检恢复。待原生接口可用时按server_reactivation_20261009/MONITOR_HANDOFF.md恢复同一任务；不从历史计划自动派发新队列。
 

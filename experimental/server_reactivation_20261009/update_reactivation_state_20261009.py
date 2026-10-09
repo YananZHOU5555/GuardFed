@@ -1039,6 +1039,43 @@ if (next37/'root_source_review/ROOT_REVIEW.json').exists():
             remote_terminal_candidates=len(started37['completed']),offserver_new_accepted=0)
         if 'RUNNING' in started37['service']:
             state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_next37']))
+    prior23 = state['celeba_mechanism_v1']['three_view_accepted_ids']
+    assert len(prior23) == len(set(prior23)) == 23
+    allowed37 = {row['id'] for row in read(next37/'inventory_actual60_Full100refs.json')['records']} - set(prior23)
+    assert len(allowed37) == 37
+    adopted37_ids, adopted37_backups = [], []
+    for adopted_path in sorted((next37_execution/'backups').glob('*/ROOT_ADOPTION_REVIEW.json')):
+        adopted37 = read(adopted_path); delta37 = adopted_path.parent
+        proof37_path = delta37/'OFFSERVER_VERIFICATION.json'
+        receipt37_path = delta37/'backup_receipt.json'
+        proof37, receipt37 = read(proof37_path), read(receipt37_path)
+        assert adopted37['status'] == 'ROOT_NEXT37_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+        assert adopted37['execution_seal_sha256'] == sha(next37_execution/'EXECUTION_SOURCE_SHA256.json')
+        assert adopted37['science_seal_sha256'] == sha(next37/'FILES_SHA256.json')
+        assert adopted37['offserver_verification_sha256'] == sha(proof37_path)
+        assert adopted37['backup_receipt_sha256'] == sha(receipt37_path)
+        assert adopted37['archive_sha256'] == receipt37['archive_sha256'] == proof37['archive_sha256'] == sha(delta37/'incremental_valid_three_views.tar.gz')
+        assert proof37['status'] == 'INCREMENTAL_INDEPENDENT_SAVED_ARRAYS_THREE_VIEWS_PASS'
+        ids37 = adopted37['accepted_new_ids']
+        assert ids37 == proof37['accepted_new_ids'] == receipt37['accepted_new_ids']
+        assert len(ids37) == adopted37['accepted_new'] == len(set(ids37))
+        assert set(ids37) <= allowed37 and not set(ids37).intersection(adopted37_ids)
+        assert adopted37['prior_three_view_models'] == 23 + len(adopted37_ids)
+        assert adopted37['cumulative_three_view_models'] == 23 + len(adopted37_ids) + len(ids37)
+        assert adopted37['all_native_differences_zero'] and adopted37['original23_unchanged']
+        assert adopted37['new_training'] == adopted37['new_Full_inference'] == 0 and not adopted37['test_inference']
+        adopted37_ids.extend(ids37)
+        adopted37_backups.append(dict(new_ids=ids37,checked_utc=adopted37['checked_utc'],
+            root_proof_path=adopted_path.relative_to(ROOT).as_posix(),root_proof_sha256=sha(adopted_path),
+            archive_sha256=adopted37['archive_sha256'],receipt_sha256=sha(receipt37_path),offserver_proof_sha256=sha(proof37_path)))
+    if adopted37_ids:
+        total37 = prior23 + adopted37_ids
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=len(total37),
+            three_view_new_models_offserver_verified=len(total37),three_view_accepted_ids=total37,
+            three_view_scope_limit='Original23 plus explicitly adopted actual terminals from the exact37 frozen scope; no Full reinference or test')
+        state['celeba_mechanism_v1']['next37_valid_replay'].update(offserver_new_accepted=len(adopted37_ids),
+            offserver_remaining=37-len(adopted37_ids),accepted_ids=adopted37_ids,incremental_backups=adopted37_backups,
+            latest_acceptance_utc=adopted37_backups[-1]['checked_utc'],startup_snapshot_is_historical=True)
 hybrid_delta = ROOT/'tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_first_20261009'
 hybrid_chain_path = hybrid_delta.parent/'BACKUP_CHAIN_first4_20261009.json'
 if hybrid_chain_path.exists():
@@ -1105,7 +1142,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 | FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
 | 组合基线验证搜索 | {hybrid.get('offserver_accepted70round_jobs', 0)}/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
-| 机制三视图评价 | 23份minus_U已严格验收并离机；下一批37项状态为{main.get('next37_valid_replay', {}).get('status', 'NOT_PREPARED')}，新批接受0，不能将运行等同完成 | tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/ROOT_STARTUP_OBSERVATION.json；旧23凭据保持 |
+| 机制三视图评价 | {main['three_view_new_models_offserver_verified']}份minus_U已严格验收并离机；下一批37项状态为{main.get('next37_valid_replay', {}).get('status', 'NOT_PREPARED')}，新批接受{main.get('next37_valid_replay', {}).get('offserver_new_accepted', 0)}，不能将运行等同完成 | tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/backups；旧23凭据保持 |
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
