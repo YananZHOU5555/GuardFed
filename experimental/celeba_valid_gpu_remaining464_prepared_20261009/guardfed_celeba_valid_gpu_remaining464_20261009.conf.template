@@ -1,0 +1,15 @@
+[program:guardfed_celeba_valid_gpu_remaining464_20261009]
+command=/usr/bin/nice -n 10 /usr/bin/ionice -c 3 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/guardfed_checks/celeba_valid_gpu_remaining464_prepared_20261009/remaining.py run --review /workspace/guardfed_checks/celeba_valid_gpu_recovery_execution_20261009/ROOT_REVIEW_REMAINING464.json --review-sha256 __REVIEW_SHA256__ --package-sha256 __QUEUE_PACKAGE_SHA256__
+directory=/workspace/guardfed_checks/celeba_valid_gpu_remaining464_prepared_20261009
+autostart=false
+autorestart=false
+startsecs=1
+startretries=0
+stopsignal=TERM
+stopasgroup=true
+killasgroup=true
+stopwaitsecs=45
+redirect_stderr=true
+stdout_logfile=/workspace/guardfed_checks/celeba_valid_gpu_recovery_execution_20261009/remaining464_supervisor.log
+stdout_logfile_maxbytes=0
+environment=PYTHONDONTWRITEBYTECODE="1"

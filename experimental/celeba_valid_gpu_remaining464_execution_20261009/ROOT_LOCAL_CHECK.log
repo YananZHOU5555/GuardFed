@@ -1,0 +1,86 @@
+{
+  "status": "PASS_LOCAL_EXACT464_NO_CNN_NO_DISPATCH",
+  "exact_ordered_ids": 464,
+  "chunks": 43,
+  "chunk_sizes": {
+    "11": 42,
+    "2": 1
+  },
+  "prior_accepted": 425,
+  "prior_first1_excluded": true,
+  "pending_import11_excluded": true,
+  "refusal_checks": [
+    "PREPARED_is_not_authorization",
+    "tolerance_drift",
+    "CPU_partial_import_permission",
+    "diagnostic_import_permission",
+    "restart_failed872",
+    "two_GPU_workers",
+    "old425_binding_drift",
+    "duplicate_ID",
+    "omit_ID",
+    "changed_order",
+    "replay_first1",
+    "oversize_chunk"
+  ],
+  "flow_scenarios": [
+    {
+      "case": "two_chunks_closed_REMOTE_only",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup",
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "run-chunk",
+      "commands": [
+        "run-chunk"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "accept",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "backup",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "mixed_strict",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "wrong_archive",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    }
+  ],
+  "CPU106_parent_CPU105_child_AST_verified": true,
+  "nice_set_once_no_child_prefix": true,
+  "new_CNN_inference": 0,
+  "cohort_changed": false,
+  "Linux_spawn_runtime_verified": false
+}

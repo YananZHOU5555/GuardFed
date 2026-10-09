@@ -1,0 +1,82 @@
+{
+  "scope": "EXISTING_BASELINE900_GPU_VALID_RECOVERY_V1",
+  "status": "REVIEWED_IMPORT_STRICT_MATCH_PENDING_OFFSERVER_AND_REGISTRATION",
+  "eligible_ids": [
+    "FairGuard_IID_F-Flip_seed91009"
+  ],
+  "eligible_n": 1,
+  "review_sha256": "7bf4abe52df74f46894525a933c27bd65f66ef159bb638c2084f4633e5acbd4e",
+  "implementation_source_sha256": "d9d60f043169c46b1116e2fb421fee1b161847303ed863c7240b8bf34afe88c9",
+  "proposal_sha256": "125ab344736a0bf306be99fefc71ca701daf7fc0c337f76b3da7dd62e24c5058",
+  "original_strict_or_diagnostic_check": {
+    "id": "FairGuard_IID_F-Flip_seed91009",
+    "native_comparison": {
+      "tolerance": 1e-12,
+      "expected": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177
+      },
+      "observed": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177
+      },
+      "differences": {
+        "accuracy": 0.0,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "max_abs_difference": 0.0,
+      "accepted": true
+    },
+    "metadata_read_receipt": {
+      "strategy": "NPY headers then exactly train+valid scalar prefix; no full label-array load",
+      "prefix_reads": [
+        {
+          "member": "Smiling.npy",
+          "shape": [
+            202599
+          ],
+          "dtype": "<i8",
+          "requested_entries": 182637,
+          "requested_payload_bytes": 1461096,
+          "last_included_position": 182636,
+          "test_entries_requested_or_materialized": 0,
+          "train_valid_prefix_sha256": "b8904a23514541d745bdff8162eed1baa6423de4865916c5f336f00d61ee10d5"
+        },
+        {
+          "member": "Male.npy",
+          "shape": [
+            202599
+          ],
+          "dtype": "<i8",
+          "requested_entries": 182637,
+          "requested_payload_bytes": 1461096,
+          "last_included_position": 182636,
+          "test_entries_requested_or_materialized": 0,
+          "train_valid_prefix_sha256": "2aaf82aa3b591c0910c586b4de12cbc2ea9b90240f9426f4d92042b661ef7913"
+        }
+      ],
+      "train_n": 162770,
+      "valid_n": 19867,
+      "test_labels_accessed": false,
+      "full_loader_executed": false,
+      "valid_support": {
+        "0|0": 5252,
+        "0|1": 6157,
+        "1|0": 5013,
+        "1|1": 3445
+      },
+      "official_metadata": {
+        "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+      }
+    },
+    "GPU_diagnostic_source_before_after_unchanged": true
+  },
+  "accepted424_unchanged": true,
+  "original_CPU_failure_still_invalid": true,
+  "new_CNN_inference": 0,
+  "cohort_registered": false
+}

@@ -756,6 +756,57 @@ if gpu_collector_path.exists():
     gpu_recovery_paragraph = ('476恢复提案的首条未执行记录已在新GPU工具中完成run、原strict、本机离机与保存数组独立核验，'
         '原三指标差值0；73成员SHA、9指标、24混淆计数及3预测规则通过。累计425/900，旧424未改。'
         '其余464未派发，10 CPU partial和1原诊断仍未登记；原CPU数值失败保留。')
+import_collector_path = gpu_execution / 'cumulative_436_accepted.json'
+if import_collector_path.exists():
+    collector = read(import_collector_path)
+    checked_path = gpu_execution / 'preserved11_import/ROOT_OFFSERVER_IMPORT_VERIFICATION.json'
+    checked = read(checked_path)
+    assert collector['accepted_n'] == len(set(collector['accepted_ids'])) == 436
+    assert collector['preserved11_import_verification_sha256'] == sha(checked_path)
+    assert checked['status'] == 'ROOT_PRESERVED_IMPORT11_STRICT_AND_OFFSERVER_REPORTS_PASS'
+    assert checked['new_CNN_inference'] == 0 and checked['original_CPU_failure_still_invalid']
+    for name, row in checked['members'].items():
+        assert sha(checked_path.parent / name) == row['sha256']
+    state['final_evaluator_runtime_20261009'].update(
+        actual_native_valid_image_replays_accepted=436, actual_native_valid_image_replays_remaining=464,
+        accepted_collection_path=import_collector_path.relative_to(ROOT).as_posix(),
+        accepted_collection_sha256=sha(import_collector_path),
+        cumulative_unique_checkpoint_acceptance=import_collector_path.relative_to(ROOT).as_posix(),
+        cumulative_unique_checkpoint_acceptance_sha256=sha(import_collector_path),
+        GPU_diagnostic_completed_not_added_to_cohort=False,
+        GPU_diagnostic_later_explicit_versioned_import=True)
+    state['baseline_valid_GPU_recovery_20261009'].update(
+        status='436_ACCEPTED_INCLUDING_EXPLICIT_PRESERVED11_IMPORT_REMAINING464_NOT_DISPATCHED',
+        CPU_partial10_registered=True, diagnostic1_registered=True,
+        preserved11_new_CNN_inference=0, preserved11_offserver_proof_sha256=sha(checked_path),
+        current_collector_sha256=sha(import_collector_path))
+    state['baseline_valid_recovery_prepared_20261009'].update(current_missing=464)
+    gpu_recovery_paragraph = ('独立GPU工具首1已strict及离机接受，原三指标差值0、73成员SHA通过。'
+        '随后另经显式审阅重验并登记原CPU partial10和已保存GPU诊断1，新增CNN推理0；'
+        '累计436/900（CPU434、GPU2），旧424/425账本及原CPU数值失败不改。余464未派发。')
+queue_execution = ROOT / 'tmp/celeba_valid_gpu_remaining464_execution_20261009'
+if (queue_execution / 'ROOT_LAUNCH.json').exists():
+    launch = read(queue_execution / 'ROOT_LAUNCH.json')
+    observed_path = max(queue_execution.glob('live_*.json'))
+    observed = read(observed_path)
+    assert launch['status'] == 'TARGETED464_SERVICE_START_OBSERVED'
+    assert launch['queue_package_sha256'] == observed['source_package_sha256'] == 'fa5626ad0ab8be12ac501aea531d7b8ad2f2c05b1a18937dd86fb3708acc8d6b'
+    assert not observed['worker_failed'] and not observed['queue_failure']
+    state['baseline_valid_GPU_recovery_20261009'].update(
+        status='436_ACCEPTED_REMAINING464_GPU_QUEUE_RUNNING', remaining464_dispatched=True,
+        service='guardfed_celeba_valid_gpu_remaining464_20261009',
+        queue_source_package_sha256=observed['source_package_sha256'],
+        queue_review_sha256=launch['review_sha256'],
+        queue_startup_path=(queue_execution / 'ROOT_LAUNCH.json').relative_to(ROOT).as_posix(),
+        queue_live=observed, queue_live_sha256=sha(observed_path),
+        coordinator_CPU=106, worker_CPU=105, threads=1, nice=10,
+        queued_new_replays=464, remote_closed_not_offserver=observed['remote_closed_n'])
+    state['final_evaluator_runtime_20261009']['status'] = '436_ACCEPTED_REMAINING464_GPU_VALID_REPLAY_RUNNING'
+    state['active_services'] = list(dict.fromkeys(state['active_services'] + ['guardfed_celeba_valid_gpu_remaining464_20261009']))
+    gpu_recovery_paragraph = ('独立GPU工具首1及另行审阅的原CPU partial10/成功GPU诊断1已strict、离机和登记，'
+        '累计436/900（CPU434、GPU2）；导入11新增CNN推理0。原424/425账本和CPU失效现场不改。'
+        '余464已按原顺序、43批次、每批至多11条、单GPU/单线程启动；实际CPU106协调、CPU105 worker/nice10已核。'
+        f"最近仅观测{observed['worker_complete_exit_only']}条worker退出成功、{observed['remote_closed_n']}条远端闭合，未离机登记前不增加436。")
 population_proof = CHECKS / 'LOGOFAIR_POPULATION_PROPOSAL_ROOT_VERIFICATION.json'
 if population_proof.exists():
     proposal = ROOT / 'tmp/celeba_logofair_population_proposal_20261009'

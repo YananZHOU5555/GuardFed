@@ -24,6 +24,18 @@ if gpu_recovery:
         'The cumulative425 collector explicitly retains CPU/GPU source provenance. The remaining464 are not dispatched; '
         'the10 preserved CPU partial results and one original GPU diagnostic are not registered. '
         'Mixed-device raw/shared results are not a uniform-device final comparison. ')
+    if gpu_recovery.get('CPU_partial10_registered') and gpu_recovery.get('diagnostic1_registered'):
+        recovery_paragraph = ('The first new GPU replay passed original strict acceptance and73 off-server archive-member checks, '
+            'with exact native metrics and saved-array reconstruction. A separate explicit review then revalidated and '
+            'registered the original10 CPU partial records and one saved successful GPU diagnostic without CNN inference. '
+            'The new436 collector retains CPU434/GPU2 provenance, unchanged historical424/425 collectors and the invalid '
+            'original CPU failure. The remaining464 are not dispatched. Mixed-device raw/shared results are not a '
+            'uniform-device final comparison. ')
+    if gpu_recovery.get('remaining464_dispatched'):
+        recovery_paragraph = recovery_paragraph.replace('The remaining464 are not dispatched. ',
+            'The exact remaining464 GPU queue is now running in43 bounded chunks with one GPU worker. '
+            'CPU106 coordination, CPU105 workers and nice10 were independently observed. '
+            'Worker zero exits and remote closures do not increment436 before off-server registration. ')
 diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces the original three native metrics exactly. '
     'Its saved CPU/GPU arrays differ on one native/raw prediction (image172599); shared-calibration predictions match. '
     'The unchanged source/data/checkpoint and all saved metrics, counts and rules were independently verified. '
@@ -31,6 +43,10 @@ diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces
     'Two engineering failures are preserved; the comparison was completed offline without another CNN execution. '
     'Historical GPU per-image outputs are unavailable, so unique historical causality remains unproved. '
     if diagnostic else '')
+if baseline.get('GPU_diagnostic_later_explicit_versioned_import'):
+    diagnostic_paragraph = diagnostic_paragraph.replace(
+        'This is one diagnostic execution, not a cohort acceptance or restoration of the failed CPU queue. ',
+        'Its original diagnostic receipt remains unchanged; a later explicit saved-array import is included in the current derived collector. The failed CPU queue remains stopped. ')
 screen=state.get('hybrid_screen32_20261009')
 failure=state['final_evaluator_runtime_20261009'].get('failed_model_id')
 failure_paragraph=("The CPU replay service has fail-stopped on FairGuard/IID/F Flip/seed91009: native metrics differ from the original record despite matching model/config/data identities and unchanged tensors. The original1e-12 tolerance is preserved, the65-member failure archive is verified off server, and chunk036's10 strict partial results are not counted. The cause is not established; no original metric, model, threshold or selection rule has changed and no retry has started. Previously accepted records remain valid. " if failure else "")
