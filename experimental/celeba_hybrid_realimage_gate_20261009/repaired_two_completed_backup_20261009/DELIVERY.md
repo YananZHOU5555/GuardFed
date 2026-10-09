@@ -1,0 +1,9 @@
+# Hybrid四项CPU真实图像门检闭环
+
+两条修复non-IID/S-DFA新门检严格接受；两条原IID/Benign只作严格引用，未再训练或推理。两条件的Hybrid与legacy完整终轮模型、每轮指标、攻击审计、诊断和RNG均逐位一致。两新门检各三轮，完整train162770、root16277、valid19867，终轮重新加载同checkpoint核全部指标。
+
+56成员增量档案离机全SHA/member size通过，只包两条新门检权重与原始结果/sidecar/source/启动链，不重复旧IID权重。原失败46成员档案继续引用；原第三条TERMINAL_FAILURE及两次工程启动失败不改。限定attack_audit[0..3].fflip_label_corr_after由原IEEE754 NaN记录为null并附零方差语义sidecar；未知非finite仍拒收，科学body和原9seal不改。
+
+两条新门检各ACC0.5166859616449389、AEOD0、ASPD0；positive_rate0，均是恒定负类的短门检结果，公平性零不作方法优越性证据。原IID三轮同样只验证管线，不作70round或CUDA等价证明。正式800队列从启动23完成持续长到闭环32完成、0失败；原GPU队列未停或重启。
+
+当前CUDA门检与原8候选×4条件32条70round搜索仍PREPARED未启动。无最终test、正式多seed新增结果或完整方法扩展完成主张。原loader可materialize全split属性元数据，但未进行test图像推理/拟合/选择。

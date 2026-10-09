@@ -1,0 +1,44 @@
+{
+  "status": "MEASURED_READ_ONLY_DIAGNOSIS_NO_EXECUTION_CHANGE",
+  "source_sha256": "23f2de59d5e32e900170f20e6cfd4a56366e16e54d560f0c7329a613283f3ea9",
+  "measurement_sha256": "d0bc67386f6268e549a19dbb1c66a8db54688b3df2d71a21987d7d676a7a39e3",
+  "sample_seconds": 10.078477148897946,
+  "allocation": {
+    "cnn_workers": 11,
+    "cpus_per_worker": 8,
+    "cnn_allowed_cores": 88,
+    "fixed_nice": 10,
+    "quota_cores": 122.87999
+  },
+  "measured": {
+    "cnn_effective_cores": 44.815302284967615,
+    "cnn_effective_fraction_of_allocation": 0.5092647986928138,
+    "cgroup_effective_cores": 68.43940397041273,
+    "cgroup_effective_fraction_of_quota": 0.5569613406577647,
+    "cnn_worker_min_max_effective_cores": [
+      3.590820266329351,
+      4.367723352412767
+    ],
+    "worker_minor_faults": 23818078,
+    "worker_major_faults": 0,
+    "worker_read_bytes": 0,
+    "worker_write_bytes": 0,
+    "cgroup_throttled_usec": 0,
+    "gpu": "0, 100 %\n1, 100 %"
+  },
+  "supported_observations": [
+    "Eleven actual allocated CNN processes remained present through the 10-second window; all observed thread affinities remained within the assigned eight CPUs.",
+    "The fixed 88 allowed CNN CPUs were used at about half effective capacity in this window; the process/thread budget is an upper bound, not measured busy cores.",
+    "This window records no CNN read/write bytes, no major faults and no cgroup throttling; disk transfer and quota throttling did not explain this sampled gap.",
+    "Running and futex endpoint observations coexist. Endpoint counts are not waiting durations.",
+    "Numerous minor faults and RSS activity were measured but do not identify an allocator or memory-bandwidth bottleneck."
+  ],
+  "unknown": [
+    "Operator-specific parallel efficiency, serial compute fraction, allocator cost and memory-bandwidth limits were not profiled.",
+    "A single short sample does not exclude I/O or CPU throttling outside the window, or establish zero impact on training."
+  ],
+  "throughput_scope": "Closed chunks 000..008 contain different useful checkpoints; actual batch throughput does not establish controlled acceleration or global optimum. Existing 1/2/4/8/11 curve remains unchanged.",
+  "execution_changes": [],
+  "additional_inference_or_artificial_load": false,
+  "scientific_source_or_concurrency_changed": false
+}

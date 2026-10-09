@@ -421,6 +421,44 @@ if bounded_started:
         startup_delivery_members_verified=20, startup_root_proof_sha256=sha(bounded_startup_root))
     state['active_services'] = list(dict.fromkeys(state['active_services'] + [
         'guardfed_celeba_hybrid_writer_repair_v2', 'guardfed_celeba_mechanism_valid_remaining7']))
+seven_root = CHECKS / 'MECHANISM_VALID_SEVEN_ROOT_VERIFICATION.json'
+hybrid_complete_root = CHECKS / 'HYBRID_REPAIRED_TWO_ROOT_VERIFICATION.json'
+if hybrid_complete_root.exists():
+    proof = read(hybrid_complete_root)
+    folder = ROOT / 'tmp/celeba_hybrid_realimage_gate_20261009/repaired_two_completed_backup_20261009'
+    assert sha(folder / 'FILES_SHA256.json') == proof['source_seal_sha256']
+    assert sha(folder / 'offserver_verification.json') == proof['offserver_proof_sha256']
+    assert proof['aggregate_four_canaries_accepted'] and proof['scientific_table_records'] == 0
+    state['hybrid_canaries_20261009'].update(
+        status='FOUR_CPU_CANARIES_STRICT_OFFSERVER_ACCEPTED_TWO_NEW_TWO_REUSED',
+        service_terminal_state='EXITED', service_state='EXITED', complete_canaries=4,
+        complete_cohort_accepted=True, recovery_new_canaries_accepted=2,
+        new_canaries=2, reused_canaries=2,
+        root_verification_sha256=sha(hybrid_complete_root),
+        archive_sha256=proof['archive_sha256'], archive_members_verified=56,
+        CPU_gate_not_CUDA_or70_round_equivalence=True, scientific_table_records=0)
+    state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_hybrid_writer_repair_v2']
+if seven_root.exists():
+    proof = read(seven_root)
+    folder = ROOT / 'tmp/celeba_mechanism_valid_replay_20261009/remaining_seven_completed_backup_20261009'
+    assert sha(folder / 'FILES_SHA256.json') == proof['delivery_seal_sha256']
+    assert sha(folder / 'offserver_verification.json') == proof['offserver_verification_sha256']
+    assert proof['cumulative_new_mechanism_three_views'] == 8 and proof['native_max_abs_difference'] == 0
+    single_ids = read(single_root_proof)['accepted_new_ids']
+    assert not set(single_ids).intersection(proof['accepted_new_ids'])
+    combined_ids = sorted(single_ids + proof['accepted_new_ids'])
+    assert len(combined_ids) == 8
+    state['celeba_mechanism_v1'].update(
+        mechanism_raw_native_shared_evaluation='EIGHT_STRICT_VALID_REPLAYS_OFFSERVER_VERIFIED',
+        three_view_new_models_accepted=8, three_view_new_models_offserver_verified=8,
+        three_view_accepted_ids=combined_ids, three_view_scope_limit='Eight actual minus_U/IID/Benign terminals; no Full reinference or test')
+    state['celeba_mechanism_v1']['remaining_seven_valid_replay'].update(
+        status='SEVEN_COMPLETE_STRICT_OFFSERVER_AND_ROOT_INDEPENDENTLY_ACCEPTED',
+        service_terminal_state='EXITED', accepted_new_ids=proof['accepted_new_ids'],
+        archive_sha256=proof['archive_sha256'], archive_members_verified=74,
+        independent_metrics=63, independent_confusion_counts=168, independent_prediction_rules=21,
+        root_verification_sha256=sha(seven_root), paired_Full_six_three_views_missing=True)
+    state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_mechanism_valid_remaining7']
 flscreen_root = CHECKS / 'FLGMM32_STARTUP_ROOT_VERIFICATION.json'
 flscreen_started = flscreen_root.exists()
 if flscreen_started:
@@ -446,6 +484,17 @@ if flscreen_started:
             subsequent_growth_observation_sha256=sha(fl_growth),
             growth_from_rounds=[2,1], growth_to_rounds=[52,49], observed_complete70=0,
             subsequent_failure_count=0, rounds_are_not_completed_results=True)
+fl_two_root = CHECKS / 'FLGMM_FIRST_TWO_ROOT_VERIFICATION.json'
+if fl_two_root.exists():
+    proof = read(fl_two_root)
+    folder = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch'
+    assert sha(folder / 'backups/first_two_20261009/OFFSERVER_ACCEPTANCE.json') == proof['offserver_acceptance_sha256']
+    assert sha(folder / 'BACKUP_CHAIN_first_two_20261009.json') == '61d40a7e91ae4d05f4bafaa3bfcffaca0292a68f58e3fe9d491bd41aa3588b11'
+    state['flgmm_screen32_20261009'].update(
+        accepted70round_jobs=2, offserver_accepted70round_jobs=2, not_yet_accepted=30,
+        first_partial_archive_sha256=proof['archive_sha256'], first_partial_archive_members_verified=22,
+        first_partial_records=proof['records'], first_partial_root_proof_sha256=sha(fl_two_root),
+        candidate_selection_performed=False, scientific_fullcoverage_complete=False)
 remaining_root = CHECKS / 'REMAINING872_STARTUP_ROOT_VERIFICATION.json'
 remaining_started = remaining_root.exists()
 if remaining_started:
@@ -481,6 +530,24 @@ if remaining_started:
             distinct_checkpoint_sha256_count=collection['distinct_checkpoint_sha256_n'],
             all900_native_realimage_valid_replayed=collection['all900_native_valid_replayed'],
             all900_three_view_valid_replayed=collection['all900_three_views_valid_replayed'],missing900_models=900-n)
+    diagnostic_path = folder / 'bounded_queue_cpu_diagnostic_10s.json'
+    if diagnostic_path.exists():
+        assert sha(diagnostic_path) == 'd0bc67386f6268e549a19dbb1c66a8db54688b3df2d71a21987d7d676a7a39e3'
+        diagnostic = read(diagnostic_path)
+        assert diagnostic['status'] == 'STEADY10S_PROC_DIAGNOSTIC_COMPLETE'
+        interpretation = folder / 'bounded_queue_cpu_diagnostic_interpretation.json'
+        assert sha(interpretation) == 'ef299d39c1823085433eb47f9bcdab4a847a10d561c17b683b161fa8c56d7ef6'
+        state['final_evaluator_runtime_20261009']['cpu_diagnostic'] = dict(
+            measurement_sha256=sha(diagnostic_path), interpretation_sha256=sha(interpretation),
+            sample_seconds=diagnostic['sample_seconds'],
+            global_effective_cores=diagnostic['global_effective_cpu_cores'],
+            quota_cores=diagnostic['quota_cores'],
+            actual_cnn_effective_cores=diagnostic['cnn_effective_cpu_cores'],
+            eleven_eight_thread_workers_are_not_88_actual_cores=True,
+            low_cpu_target_diagnosis_performed=True,
+            supported_window_observations='No worker disk-read bytes, major page faults or cgroup throttling in this sample',
+            unresolved='Cannot identify CNN operator, allocator or memory bandwidth cause from endpoint samples',
+            execution_or_scientific_changes=0, artificial_load=0)
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
 publication_proofs = list(TRAIN.glob('publication_*verified_20261009.json'))
@@ -558,7 +625,13 @@ if remaining_started:
     if new_collections:
         top += f"最新九方法离机接受：唯一ID collector严格合并{n}/900实际三视图重放，尚缺{900-n}；其中原吞吐/门检28+新补集{n-28}，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该{n}项称完整最终评价。新collector路径{collection_path.relative_to(ROOT).as_posix()}。\n\n"
 if bounded_started:
-    top += '新增受限任务实际启动：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放也已启动，明确排除已验收seed91002，当前已离机三视图接受仍为1；不重推理Full、不运行test。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。\n\n'
+    top += '受限任务启动历史：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放另行启动，明确排除已验收seed91002。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。当前接受数量见下面完成更新。\n\n'
+if seven_root.exists():
+    top += '机制统一评价完成更新：另外7条原终轮已严格接受并离机备份，74成员及63指标/168混淆计数/21预测规则经主代理独立核验；合计8条新机制raw/native/shared验证重放，native误差0。对应服务正常EXITED；不重启，不重推理Full，不计作新训练，不运行test。尚缺的六条配对Full三视图将显式等待九方法重放接受，不能用旧校准结果冒充。凭据MECHANISM_VALID_SEVEN_ROOT_VERIFICATION.json。\n\n'
+if fl_two_root.exists():
+    top += 'FLGMM搜索接受更新：首2/32条完整70轮任务已严格接受并离机备份，22成员经主代理核SHA及原冻结接受器复核。它们仅是同一候选的IID/Benign与IID/S-DFA；尚无完整四条件候选，未选择冠军，30条未接受。原32项队列继续；此前“尚无完整70轮接受”为启动观察。凭据FLGMM_FIRST_TWO_ROOT_VERIFICATION.json。\n\n'
+if hybrid_complete_root.exists():
+    top += 'Hybrid CPU门检完成更新：两新non-IID加两原IID引用已全部严格接受，56成员离机及主代理同checkpoint张量/每轮指标/攻击/诊断/RNG核验通过。原失败仍有效保留；修复服务正常EXITED，不重启。两新为恒定负类短程结果，不作性能优势证据，不推断CUDA或70轮等价。四项CUDA门检包另行审阅批准，32项搜索尚未授权启动。凭据HYBRID_REPAIRED_TWO_ROOT_VERIFICATION.json。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

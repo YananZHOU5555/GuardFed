@@ -8,7 +8,7 @@
 - 前台wrapper：`/opt/supervisor-scripts/guardfed_celeba_flgmm_screen.sh`
 - 原v1失败release：同父目录的`release`，保持不动；失败解释已在v2封存evidence内。
 - 本地release源码：`E:/OneDrive/文档/GuardFed/tmp/celeba_flgmm_screen_20261009_v2_frozen_release`
-- 本地source/startup备份链：本目录`BACKUP_CHAIN.json`。
+- 原source/startup备份链保留在`BACKUP_CHAIN.json`；当前有效增量链从`LATEST_BACKUP.json`读取，首2条已闭环，见`BACKUP_CHAIN_first_two_20261009.json`。后续新增差集必须排除最新链已接受ID，不能只读原启动链。
 
 已离机验证启动source archive的67成员（66封存输入＋seal），及预检、授权、启动和首进度4项实际receipt。当前没有已接受模型，`accepted_job_ids=[]`；不要把启动备份称为32结果备份完成。
 

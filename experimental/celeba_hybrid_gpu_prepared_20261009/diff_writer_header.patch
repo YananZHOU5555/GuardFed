@@ -1,0 +1,15 @@
+--- sealed_original_writer_policy.py
++++ prepared_writer_policy.py
+@@ -11,10 +11,10 @@
+ def sanitize_result(value, job, job_sha256, expected_job_sha256):
+     require(job_sha256 == expected_job_sha256, 'Frozen repair job SHA mismatch')
+     require(job['method'] in {'CosineFairnessHybrid', 'GuardFed'} and job['attack'] == 'S-DFA'
+-            and job['distribution'] == 'non-IID', 'Only frozen non-IID S-DFA controls')
++            and job['distribution'] in {'IID', 'non-IID'}, 'Only SHA-bound IID/non-IID S-DFA controls')
+     cfg = job['config']
+     require(cfg['fflip_mode'] == 'all_unprivileged' and cfg['num_malicious'] == 4
+-            and cfg['num_clients'] == 20 and cfg['rounds'] == 3 and cfg['seed'] == 91001
++            and cfg['num_clients'] == 20 and cfg['rounds'] in (3, 70) and cfg['seed'] == 91001
+             and cfg['celeba_evaluation_split'] == 'valid', 'Undefined-correlation cause/config differs')
+     require(value['config'] == cfg and value['method'] == job['method'] and value['attack'] == job['attack'],
+             'Result identity differs from frozen job')
