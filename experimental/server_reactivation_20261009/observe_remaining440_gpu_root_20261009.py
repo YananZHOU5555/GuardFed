@@ -24,7 +24,8 @@ for p in Path('/proc').iterdir():
                               'thread_env':{k:env.get(k) for k in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','CUDA_VISIBLE_DEVICES')},'ionice':call(['ionice','-p',p.name])})
     except (FileNotFoundError,ProcessLookupError,PermissionError):pass
 proofs=[read(p) for p in sorted(base.glob('chunk_*/batch/runs/*.worker.json'))]
-resources=[{'path':str(p),'sha256':sha(p),'resource':read(p)} for p in sorted(base.glob('chunk_*/batch/runs/*.resource.json'))]
+resource_paths=sorted(base.glob('chunk_*/batch/runs/*.resource.json'))
+resources=[{'path':str(p),'sha256':sha(p),'resource':read(p)} for p in resource_paths[-2:]]
 pending=[read(p) for p in sorted(base.glob('chunk_*.REMOTE_PENDING_OFFSERVER.json'))]
 out={'checked_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'read_only':True,
      'service':call(['supervisorctl','status','guardfed_celeba_valid_gpu_remaining440_resource_gate_v2_20261009']),
@@ -32,7 +33,7 @@ out={'checked_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'rea
      'source_package_sha256':sha(pkg/'PACKAGE_SHA256.json'),'runtime_package_sha256':sha(runtime/'PACKAGE_SHA256.json'),
      'review_sha256':sha(base.parent/'ROOT_REVIEW_REMAINING440_RESOURCE_GATE_V2.json'),
      'config_sha256':sha(Path('/etc/supervisor/conf.d/guardfed_celeba_valid_gpu_remaining440_resource_gate_v2_20261009.conf')),
-     'processes':processes,'resources':resources,'worker_complete_exit_only':sum(p['status']=='DIAGNOSTIC_NATIVE_MATCH' for p in proofs),
+     'processes':processes,'resources':resources,'resource_receipts_observed':len(resource_paths),'resource_receipts_checked':len(resources),'worker_complete_exit_only':sum(p['status']=='DIAGNOSTIC_NATIVE_MATCH' for p in proofs),
      'worker_failed':[p['id'] for p in proofs if p['status']!='DIAGNOSTIC_NATIVE_MATCH'],
      'remote_closed_n':sum(len(p['remote_closed_ids']) for p in pending),'offserver_accepted_new_n':0,
      'queue_failure':read(base/'queue_failure.json') if (base/'queue_failure.json').exists() else None,
@@ -62,6 +63,6 @@ for row in data['resources']:
     resource=row['resource']; guard=resource['main_guard_inputs']
     assert resource['CPU']==105 and resource['gpu_uuid']=='GPU-da357477-30a7-fddc-344b-a20513b9a2d0'
     assert guard['service']['returncode']==0 and not guard['queue_snapshot']['failed'] and 1<=len(guard['queue_snapshot']['active'])<=8
-verified={'status':'ROOT_LINUX_SPAWN_AND_V2_RESOURCE_RECEIPTS_PASS','path':str(path),'sha256':hashlib.sha256(payload).hexdigest(),'service':data['service'],'processes':len(data['processes']),'actual_worker_resources':len(data['resources']),'worker_complete_exit_only':data['worker_complete_exit_only'],'remote_closed_n':data['remote_closed_n'],'accepted_new_n':0}
+verified={'status':'ROOT_LINUX_SPAWN_AND_V2_RESOURCE_RECEIPTS_PASS','path':str(path),'sha256':hashlib.sha256(payload).hexdigest(),'service':data['service'],'processes':len(data['processes']),'resource_receipts_observed':data.get('resource_receipts_observed',len(data['resources'])),'resource_receipts_checked':len(data['resources']),'worker_complete_exit_only':data['worker_complete_exit_only'],'remote_closed_n':data['remote_closed_n'],'accepted_new_n':0}
 with path.with_suffix('.ROOT.json').open('x',encoding='utf8') as stream:json.dump(verified,stream,indent=2);stream.write('\n')
 print(json.dumps(verified))

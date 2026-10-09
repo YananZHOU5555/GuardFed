@@ -1,0 +1,13 @@
+本包仅PREPARED_NOT_APPROVED：未部署、派发、图像推理或新登记。固定原native strict/offserver60 inspection214737…及ledger0bf78…；10段科学备份链780成员本地原v4工具验收通过。原single1+remaining7+incremental15共23项三视图身份与这60项原checkpoint/config/source/root分区一致；精确剩余37，按原manifest顺序：IID FedSA91004–91010七项、IID S-DFA十项、IID Sp-DFA十项、non-IID Benign十项。SELECTED_37.txt为完整ID。后续新完成项不自动进入此冻结范围。
+
+inventory_actual60_Full100refs.json冻结60个实际终轮checkpoint/result/rawjob及config/source/data/root/client partition、逐成员archive SHA和已闭合23的原source/proofs；其余740仅列无checkpoint的待完成ID。Full100仅原baseline引用，不推理、不打包模型；原98cu128+2cu130及seed91001择方历史继续披露。准备未读取test标签、未做test推理；原训练loader曾materialize全split scalar metadata，不能声称全历史未触碰test。
+
+bridge仅更新SCOPE、60/23/37身份集合、inspectionSHA、740缺失数量以及旧IID-only快照边界为实际已存在两分布。旧DISTRIBUTIONS中的IID5000/non-IID5不变，所有模型逐项保持其原alpha/seed/recipe。bind_runtime（含validate_original/replay_one/accept_saved_predictions）、full_reference、reference_baseline_full源码段及AST与已执行15完全相同；16个原科学函数AST/source proof原字节保持。原root-only拟合、raw margin>0 tie0与calibrated >=阈值、native1e-12、同checkpoint、完整valid19867及clean-train root16277均不变。
+
+prepare.py沿用原v4.verify_archive、terminal_checks、partition_identity；遇source/root/recipe不一致即拒收，不修补科学值。closed_twenty_three.py仅冻结原已接受23身份及source/proof链，读取其已核归档strict成员并比对checkpoint，不重新接受或推理。source_reuse_proof.json、SOURCE_PINS.json及MINIMAL_SOURCE_DIFF.patch提供完整来源。selfcheck36项拒收通过（含root-ID漂移、原生容差、重复/闭合ID回流/Full/test与未授权资源），0Torch/NumPy/CNN。
+
+SCOPE.json输出指向全新next37命名空间；外层执行候选稍后仅新增execution_candidate/独立封存，不回写本科学封条。root须独立review/source SHA、实时资源/guide和新namespace后才能授权。保持CPU112–119、最多一个8线程进程、nice10/idleIO、fresh子进程顺序执行；失败/partial保留即停，不恢复旧服务或旧output、不重复23。APPROVAL_TEMPLATE默认未批准，仅列已核37个真实模型，无派发入口。
+
+本地只读校验候选：python <本目录>/selfcheck.py --output-dir <全新本目录内检查目录>；原selfcheck输出若存在会拒绝覆盖。重复prepare必须指定新的本目录内output；原归档不在Git时需按已封恢复链恢复源字节，不能删去归档验收。后续执行/备份复用原15工具的薄适配候选，接受仍由原bridge，新增离机仍要原member/SHA和保存数组验算；仅RUNNING或远端归档不代表接受。
+
+此37若未来完整闭环，只使该60项机制快照三视图补齐；机制900（800new+Full100）及baseline900是不同范围，Full可引用join但不重复模型推理。当前正式native/shared主终点与final协议仍pending，不称最终test或统一设备公平比较，不把minus_U局部结果说成every项必要。

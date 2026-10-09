@@ -1,0 +1,70 @@
+{
+  "status": "RECORD_BOUND_ORIGINAL_SCIENTIFIC_AND_WRITER_CHECKS_PASS",
+  "local_torch": "2.8.0+cpu",
+  "actual_server_runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "torch": "2.11.0+cu128",
+    "cuda_build": "12.8",
+    "CPU": [
+      109
+    ],
+    "threads": 1,
+    "gpu_name_for_original_checker": "NVIDIA GeForce RTX 5090",
+    "cuda_context_initialized_for_original_device_metadata": true
+  },
+  "local_runtime_not_claimed_equal": true,
+  "local_CUDA_initialized": false,
+  "server_check_receipt_sha256": "85710111f6702e24404546aa7c17312dab6de67864a199b1eba64d83e268a434",
+  "records": [
+    {
+      "id": "CosineFairness_lam5.0_tau0.1_lr0.0005_IID_Benign_seed91001_screen",
+      "metrics": {
+        "accuracy": 0.8629385412996426,
+        "aeod": 0.04901469129146785,
+        "aspd": 0.09175782100978924
+      },
+      "checkpoint_sha256": "4cbcd1e5c55975d2e1667f54b8f27733bdaf403b699201cecb97b97869f84462"
+    },
+    {
+      "id": "CosineFairness_lam5.0_tau0.1_lr0.0005_IID_S-DFA_seed91001_screen",
+      "metrics": {
+        "accuracy": 0.8640962399959732,
+        "aeod": 0.03934573153900134,
+        "aspd": 0.08874304304527747
+      },
+      "checkpoint_sha256": "e1736ff8279b7becee15104e6f05fa3ad3df665be2c82e35aac6b83b569893bf"
+    },
+    {
+      "id": "CosineFairness_lam5.0_tau0.1_lr0.0005_non-IID_Benign_seed91001_screen",
+      "metrics": {
+        "accuracy": 0.8557910102179493,
+        "aeod": 0.05737040898614931,
+        "aspd": 0.10075422611209872
+      },
+      "checkpoint_sha256": "6818ca2c3360a6b5f95aab849b1ba41ce98093c034293ac4a3ce128598607ee4"
+    },
+    {
+      "id": "CosineFairness_lam5.0_tau0.1_lr0.0005_non-IID_S-DFA_seed91001_screen",
+      "metrics": {
+        "accuracy": 0.8682236875220214,
+        "aeod": 0.04555556786580839,
+        "aspd": 0.1000238949636344
+      },
+      "checkpoint_sha256": "b04fcedd54012b3f2513c3664ac0e9432cfb1be70d9d33fb26a207f7675f8bac"
+    }
+  ],
+  "checked_utc": "2026-10-09T13:55:09.880552+00:00",
+  "source_seal_sha256": "2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f",
+  "bridge_seal_sha256": "dd02f82fefc26f352bc854fd1671e04627907aea57ca6b795fa7f526a53b68a7",
+  "delivery_seal_sha256": "362508dc871bda917ca64b645f792957e7730e55361d2d262d3e8e1c2a034be1",
+  "archive_sha256": "f526ed208dea23c014fb9dcdb15e5cf42c73746266e083cdec58902c00352b87",
+  "offserver_tensor_proof_sha256": "17bbbe2b9480080146b3d1f3840cac1c4c130de1fa9b42142e403335548d3bf1",
+  "archive_members_verified": 53,
+  "accepted_before": 0,
+  "accepted_new": 4,
+  "root_source_reversal_review": true,
+  "scientific_checks_and_null_policy_unchanged": true,
+  "local_CNN_inference": 0,
+  "selection_performed": false,
+  "log_limitation": "Shared still-running producer log prefix only. Each accepted result bytes hashed before/after archive; no active result included."
+}

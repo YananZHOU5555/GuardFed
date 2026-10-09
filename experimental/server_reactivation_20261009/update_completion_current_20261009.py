@@ -38,8 +38,8 @@ if gpu_recovery:
             'Worker zero exits and remote closures do not increment436 before off-server registration. ')
     if gpu_recovery.get('GPU_remaining464_offserver_accepted'):
         recovery_paragraph = (f'The original436 source chain and {gpu_recovery["GPU_remaining464_offserver_accepted"]} '
-            f'new GPU records are now strictly accepted and verified off server, for {replayed}/900 '
-            f'(CPU434/GPU{replayed-434}). The exact original464 scope is divided into43 bounded chunks; '
+            f'new GPU records were strictly accepted and verified off server, closing the legacy chain at460/900 '
+            '(CPU434/GPU26). The exact original464 scope is divided into43 bounded chunks; '
             'only independently verified chunks enter separate cumulative collectors. Original424/425/436 collectors '
             'and the invalid CPU output are unchanged. Saved arrays reconstruct all three rules, nine metrics and24 '
             'confusion counts; root refitting is checked by the bound original remote strict tool, not repeated locally. '
@@ -78,6 +78,17 @@ failure=state['final_evaluator_runtime_20261009'].get('failed_model_id')
 failure_paragraph=("The CPU replay service has fail-stopped on FairGuard/IID/F Flip/seed91009: native metrics differ from the original record despite matching model/config/data identities and unchanged tensors. The original1e-12 tolerance is preserved and the65-member failure archive is verified off server. Chunk036's10 strict partial results were subsequently imported after explicit review into the derived436 source chain; the failed CPU result remains invalid. No original metric, model, threshold or selection rule has changed and the failed CPU service remains stopped. Previously accepted records remain valid. " if failure else "")
 paragraph=(f"The original32-item Hybrid validation search has actually started under `{screen['service']}`; its independent source/startup archive and root verification bind the unchanged eight recipes, four conditions, seed91001 and70 rounds. It uses one GPU0 worker, CPU104, one compute thread and nice10. No100-job multi-seed confirmation, test or automatic retry is authorized. "
     if screen else "The unchanged original32-item Hybrid validation search is root-approved for a separate frozen execution copy; exact source/scope approval is complete, while actual dispatch and source-bound startup acceptance remain separate requirements. ")
+if screen and screen.get('offserver_accepted70round_jobs'):
+    paragraph += (f"The first{screen['offserver_accepted70round_jobs']}/32 terminal jobs have original server strict acceptance,53 verified archive members and an independent CPU record-layer replay. "
+        "Only three current-host runtime metadata queries are bound to the original server receipt; all scientific checks and null diagnostic policies are unchanged. Local torch2.8 CPU is disclosed separately from server torch2.11 cu128 and no local CNN inference or CUDA context was used. "
+        "The still-running shared service log is saved as a prefix, not a closed per-job log; terminal artifacts were checked before and after backup. No final recipe is selected from this partial snapshot. ")
+paragraph=paragraph.rstrip()
+next37_status=main.get('next37_valid_replay',{})
+next37_note='Dispatch and new off-server acceptance require their own actual receipts.'
+if next37_status.get('startup_root_proof_sha256'):
+    next37_note=(f"The exact37 scope has actually started under guardfed_celeba_mechanism_valid_next37, observed at {next37_status['measured_utc']}, "
+        "after fresh Linux full source/data/terminal hash, CPU owner and quota checks. One eight-thread CPU worker is restricted to112–119, nice10 and idle I/O with CUDA hidden. "
+        "Source-bound startup and actual approval receipts are saved; no new off-server scientific acceptance is inferred from this startup. The old23 replays and Full weights are excluded.")
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
@@ -85,6 +96,8 @@ The main mechanism queue has{main['queue_completed_observed']} terminal jobs obs
 The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
 The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight,23 actual minus_U terminal checkpoints have strict raw/native/shared validation replays; native discrepancy is zero. Full paired three-view receipts remain missing and will join actual baseline replay acceptance, without new Full inference or substituting old calibration. This does not establish the complete mechanism comparison.
+
+The accepted native mechanism data currently support six complete Full–minus_U scenes, with ten paired seeds per scene and consistent additional nine-seed and six-seed panels. In non-IID Benign, Full hasACC88.594±1.168%, AEOD0.00696±0.00423 andASPD0.06511±0.00902; minus_U has87.290±1.870%,0.01300±0.00732 and0.05140±0.01598. Full therefore has higher mean accuracy and lower meanAEOD but higher meanASPD in this scene. These native end-to-end results retain calibration effects and do not establish an isolated aggregation cause or that every score term is necessary. The next37 replay scope is exactly the remaining accepted60 minus the already closed23; source review and36 scientific no-CNN rejection checks plus32 execution rejection checks have passed. {next37_note}
 
 FLGMM has{flgmm['offserver_accepted70round_jobs']}/32 full70-round validation-search jobs strictly accepted and backed up off server using the frozen original acceptor. The original search continues. A partial candidate summary is not the final selection across all eight candidates; no winner has been selected and the100-job multi-seed coverage has not started.
 

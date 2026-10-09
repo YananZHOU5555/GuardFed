@@ -1005,6 +1005,58 @@ if (fl_delta/'ROOT_ADOPTION_REVIEW.json').exists():
         accepted_ids=link['accepted_job_ids'],latest_chain_path=fl_chain.relative_to(ROOT).as_posix(),latest_chain_sha256=sha(fl_chain),
         latest_root_adoption_sha256=sha(fl_delta/'ROOT_ADOPTION_REVIEW.json'),latest_archive_sha256=adopted['archive_sha256'],
         latest_readonly_terminal_observation=dict(checked_utc=link['snapshot_utc'],observed_complete=13,active=link['snapshot_active'],pending=17,failures=0))
+next37 = ROOT/'tmp/celeba_mechanism_valid_incremental_next37_20261009'
+if (next37/'root_source_review/ROOT_REVIEW.json').exists():
+    reviewed37 = read(next37/'root_source_review/ROOT_REVIEW.json')
+    assert reviewed37['status']=='ROOT_NEXT37_SOURCE_SCOPE_AND_NO_CNN_REJECTIONS_PASS_NOT_RUNTIME_APPROVAL'
+    assert reviewed37['source_seal_sha256']==sha(next37/'FILES_SHA256.json')
+    assert reviewed37['selected_new_three_view']==37 and reviewed37['closed_three_view']==23
+    state['celeba_mechanism_v1']['next37_valid_replay'] = dict(
+        status='SOURCE_REVIEWED_RUNTIME_NOT_STARTED',selected_terminal_models=37,previous23_excluded=True,
+        actual_native_accepted_snapshot=60,source_seal_sha256=reviewed37['source_seal_sha256'],
+        root_source_review_sha256=sha(next37/'root_source_review/ROOT_REVIEW.json'),
+        inventory_sha256=reviewed37['inventory_sha256'],bridge_sha256=reviewed37['bridge_sha256'],
+        source_scientific_functions_unchanged=True,native_tolerance=1e-12,new_training=0,new_Full_inference=0,
+        final_test_dispatch=False,offserver_new_accepted=0,
+        entry=next37.relative_to(ROOT).as_posix())
+    next37_execution = next37/'execution_candidate'
+    if (next37_execution/'ROOT_STARTUP_OBSERVATION.json').exists():
+        started37 = read(next37_execution/'ROOT_STARTUP_OBSERVATION.json')
+        deployed37 = read(next37_execution/'deployment_receipt.json')
+        assert started37['status']=='ROOT_NEXT37_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+        assert started37['deployment_receipt_sha256']==sha(next37_execution/'deployment_receipt.json')
+        assert started37['execution_seal_sha256']==sha(next37_execution/'EXECUTION_SOURCE_SHA256.json')
+        assert deployed37['remote_installation']['returncode']==0 and not started37['batch_failure']
+        assert started37['original23_not_rerun'] and started37['scientific_offserver_new_accepted']==0
+        state['celeba_mechanism_v1']['next37_valid_replay'].update(
+            status='RUNNING_AT_SOURCE_BOUND_LINUX_STARTUP_OBSERVATION' if 'RUNNING' in started37['service'] else 'REMOTE_COMPLETE_OFFSERVER_PENDING',
+            service='guardfed_celeba_mechanism_valid_next37',observed_service=started37['service'],measured_utc=started37['utc'],
+            actual_processes=len(started37['processes']),CPU_threads=8,CPUs=list(range(112,120)),nice=10,io_priority='idle',
+            startup_root_proof_sha256=sha(next37_execution/'ROOT_STARTUP_OBSERVATION.json'),
+            execution_seal_sha256=started37['execution_seal_sha256'],root_execution_approval_sha256=deployed37['root_approval_sha256'],
+            actual_approval_sha256=started37['files']['APPROVED.json']['sha256'],
+            deployment_receipt_sha256=sha(next37_execution/'deployment_receipt.json'),
+            remote_terminal_candidates=len(started37['completed']),offserver_new_accepted=0)
+        if 'RUNNING' in started37['service']:
+            state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_next37']))
+hybrid_delta = ROOT/'tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_first_20261009'
+hybrid_chain_path = hybrid_delta.parent/'BACKUP_CHAIN_first4_20261009.json'
+if hybrid_chain_path.exists():
+    hybrid_chain = read(hybrid_chain_path); hybrid_proof = read(hybrid_delta/'ROOT_RECORD_REVIEW.json')
+    hybrid_ready = read(hybrid_delta/'ROOT_READY_DELIVERY.json')
+    assert hybrid_chain['status']=='PARTIAL_STRICT_OFFSERVER_ROOT_RECORD_REVIEW_ADOPTED'
+    assert hybrid_chain['root_record_review_sha256']==sha(hybrid_delta/'ROOT_RECORD_REVIEW.json')
+    assert hybrid_chain['archive_sha256']==sha(hybrid_delta/'hybrid_first_delta.tar.gz')
+    assert hybrid_proof['accepted_new']==hybrid_chain['accepted_total']==4
+    assert hybrid_proof['scientific_checks_and_null_policy_unchanged'] and hybrid_proof['local_CNN_inference']==0
+    state['hybrid_screen32_20261009'].update(
+        scientific_70round_results_strict_accepted=4,offserver_accepted70round_jobs=4,not_yet_accepted=28,
+        accepted_ids=hybrid_chain['accepted_job_ids'],latest_chain_path=hybrid_chain_path.relative_to(ROOT).as_posix(),
+        latest_chain_sha256=sha(hybrid_chain_path),latest_root_review_sha256=sha(hybrid_delta/'ROOT_RECORD_REVIEW.json'),
+        local_runtime_not_claimed_equal=True,source_scientific_checks_unchanged=True,
+        latest_terminal_observation=dict(checked_utc=hybrid_ready['snapshot_utc'],observed_complete=4,
+            active=hybrid_ready['active'],pending=hybrid_ready['pending'],failures=len(hybrid_ready['failures'])),
+        selected_recipe=None,formal100_started=False,test_started=False)
 if population_proof.exists():
     proposal = ROOT / 'tmp/celeba_logofair_population_proposal_20261009'
     checked = read(population_proof)
@@ -1039,6 +1091,7 @@ history = old[old.index(boundary):]
 main = state['celeba_mechanism_v1']
 baseline = state['final_evaluator_runtime_20261009']
 flgmm = state.get('flgmm_screen32_20261009', {})
+hybrid = state.get('hybrid_screen32_20261009', {})
 published = state['latest_publication_verification']
 top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
@@ -1050,9 +1103,9 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 |---|---|---|
 | CelebA机制消融 | 当前观测完成{live['queue_completed']}、活动{len(live['active'])}、等待{live['pending']}、失败{len(live['failed'])}；已独立严格验收并离机{main['scientific_results_offserver_verified']}/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
 | FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
-| 组合基线验证搜索 | 原32项队列已启动；最新离机快照尚无完整70轮接受，不把首轮或文件存在计作完成 | tmp/celeba_hybrid_screen_execution_20261009/results_incremental_20261009T1133Z/STATUS.json |
+| 组合基线验证搜索 | {hybrid.get('offserver_accepted70round_jobs', 0)}/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
-| 机制三视图评价 | 23份minus_U已严格验收并离机，另行统计；不是800份均已完成三视图 | server_reactivation_20261009/MECHANISM_VALID_INCREMENTAL_20261009T104749Z_ROOT_VERIFICATION.json |
+| 机制三视图评价 | 23份minus_U已严格验收并离机；下一批37项状态为{main.get('next37_valid_replay', {}).get('status', 'NOT_PREPARED')}，新批接受0，不能将运行等同完成 | tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate/ROOT_STARTUP_OBSERVATION.json；旧23凭据保持 |
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
