@@ -1,14 +1,16 @@
-"""Verify increment16 committed bytes and, after push, the actual remote branch."""
+"""Verify a pinned committed increment and, after push, the actual remote branch."""
 from pathlib import Path
 import argparse,datetime,hashlib,json,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=ROOT/'docs/server_deployment_20260923/training_20260923'
-RECEIPT=TRAIN/'publication_closed_increment16_20261009.json'
 BRANCH='codex/revision-evidence-baselines-20260928'
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
-parser=argparse.ArgumentParser();parser.add_argument('--remote',action='store_true');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--remote',action='store_true')
+parser.add_argument('--increment',type=int,choices=(16,17),default=16);args=parser.parse_args()
+RECEIPT=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
+expected_previous={16:'d659e0bb37bbe89b8390927c54ef5f37f602e6b6',17:'795f4b09c60c4a81de3d4aa67dad5beac5075827'}[args.increment]
 receipt=json.loads(RECEIPT.read_bytes());commit=git('rev-parse','HEAD',text=True).strip()
-assert git('rev-parse','HEAD^',text=True).strip()==receipt['previous_commit']=='d659e0bb37bbe89b8390927c54ef5f37f602e6b6'
+assert git('rev-parse','HEAD^',text=True).strip()==receipt['previous_commit']==expected_previous
 assert git('branch','--show-current',text=True).strip()==BRANCH and not git('status','--porcelain',text=True).strip()
 mapping=receipt['copied_sha256'];mapping[RECEIPT.relative_to(ROOT).as_posix()]=hashlib.sha256(RECEIPT.read_bytes()).hexdigest()
 payload=git('cat-file','--batch',input=''.join(commit+':'+name+'\n' for name in mapping).encode());position=0
@@ -28,6 +30,6 @@ if args.remote:
     actual=git('ls-remote','--heads','origin',BRANCH,text=True).strip().split()
     assert len(actual)==2 and actual[0]==commit and actual[1]=='refs/heads/'+BRANCH
     proof['status']='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'
-    with (TRAIN/'publication_closed_increment16_verified_20261009.json').open('x',encoding='utf8',newline='\n') as stream:
+    with (TRAIN/f'publication_closed_increment{args.increment}_verified_20261009.json').open('x',encoding='utf8',newline='\n') as stream:
         json.dump(proof,stream,indent=2);stream.write('\n')
 print(json.dumps(proof))
