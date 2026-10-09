@@ -1,0 +1,106 @@
+--- tmp\celeba_flgmm_screen_20261009_v2_dispatch\backups\increment_20261009T1133Z\collect_delta.py
++++ accepted_delta_after6/collect_delta.py
+@@ -11,7 +11,6 @@
+ 
+ BATCH=Path(__file__).resolve().parent
+ RELEASE=Path('/workspace/guardfed_checks/celeba_flgmm_screen_20261009/release_v2')
+-HYBRID=Path('/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009')
+ REPO=Path('/workspace/GuardFed-celeba-expanded')
+ sys.path.insert(0,str(RELEASE))
+ from screen_common import accepted,digest,local_identity,read,repo_identity,write_json
+@@ -19,7 +18,7 @@
+ def execute():
+     assert digest('/etc/vast-agents-guide.md')=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+     assert not (BATCH/'PARTIAL_ACCEPTANCE.json').exists(), 'Existing batch must not be overwritten'
+-    assert set(os.sched_getaffinity(0))=={106} and os.getpriority(os.PRIO_PROCESS,0)>=10
++    assert set(os.sched_getaffinity(0))=={108} and os.getpriority(os.PRIO_PROCESS,0)>=10
+     resource=[]
+     for proc in Path('/proc').iterdir():
+         if not proc.name.isdigit() or int(proc.name)==os.getpid(): continue
+@@ -27,15 +26,25 @@
+             argv=[v.decode(errors='replace') for v in (proc/'cmdline').read_bytes().split(b'\0') if v]
+             if not argv or 'python' not in Path(argv[0]).name: continue
+             cpus=os.sched_getaffinity(int(proc.name))
+-            assert not (len(cpus)<=16 and 106 in cpus), 'Another restricted Python process occupies CPU106'
++            assert not (len(cpus)<=16 and 108 in cpus), 'Another restricted Python process occupies CPU108'
+             resource.append(dict(pid=int(proc.name),argv=argv,affinity=sorted(cpus) if len(cpus)<=16 else dict(count=len(cpus))))
+         except (FileNotFoundError,ProcessLookupError,PermissionError): pass
+-    snapshot=read(BATCH/'live_snapshot.json')
++    assert 'idle' in __import__('subprocess').check_output(['ionice','-p',str(os.getpid())],text=True)
++    protocol,manifest=local_identity()
++    queue_snapshot=read(RELEASE/'queue_progress.json')
++    active={row['id'] for row in queue_snapshot['active']}
++    rows=[]
++    for item in manifest['jobs']:
++        out=RELEASE/'runs'/item['id']
++        progress=read(out/'progress.json') if (out/'progress.json').exists() else None
++        rows.append(dict(id=item['id'],active=item['id'] in active,progress=progress,terminal_acceptance=all((out/name).exists() for name in ['result.json','acceptance.json','screen_identity.json']) and item['id'] not in active))
++    snapshot=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),queue=queue_snapshot,flgmm=dict(rows=rows,source_seal_sha256=digest(RELEASE/'PACKAGE_SHA256.json'),protocol_sha256=digest(RELEASE/'source/protocol.json')))
++    write_json(BATCH/'live_snapshot.json',snapshot)
+     previous=read(BATCH/'PREVIOUS_CHAIN.json')
+-    assert digest(BATCH/'PREVIOUS_CHAIN.json')=='61d40a7e91ae4d05f4bafaa3bfcffaca0292a68f58e3fe9d491bd41aa3588b11'
+-    assert previous['accepted']==2 and len(previous['accepted_job_ids'])==2
++    assert digest(BATCH/'PREVIOUS_CHAIN.json')=='e2e6b6f98abc5d66bc493c2b4e09dc6d9470fca46116778d01e08c69328528a4'
++    assert previous['accepted']==6 and len(previous['accepted_job_ids'])==6
+     wanted=[row['id'] for row in snapshot['flgmm']['rows'] if row['terminal_acceptance'] and row['progress']['round']==70 and row['id'] not in previous['accepted_job_ids']]
+-    assert len(wanted)==len(set(wanted))==4, 'Only the frozen snapshot delta is authorized in this batch'
++    assert wanted and len(wanted)==len(set(wanted)) and not set(wanted)&set(previous['accepted_job_ids']), 'Only this single fresh snapshot delta beyond old6 is authorized'
+     queue=read(RELEASE/'queue_progress.json')
+     assert not set(wanted)&{row['id'] for row in queue['active']}
+     assert not list(RELEASE.glob('*FAILURE*.json'))
+@@ -43,18 +52,13 @@
+     assert digest(RELEASE/'PACKAGE_SHA256.json')==previous['package_sha256']==snapshot['flgmm']['source_seal_sha256']
+     assert digest(RELEASE/'source/protocol.json')==snapshot['flgmm']['protocol_sha256']
+     before=repo_identity(REPO,protocol)
+-    # Identity-only check for the healthy unfinished Hybrid; no old gate audit or model load.
+-    hseal=read(HYBRID/'FILES_SHA256.json')
+-    assert digest(HYBRID/'FILES_SHA256.json')=='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+-    for name,expected in hseal['files'].items(): assert digest(HYBRID/name)==expected, 'Hybrid frozen source drift: '+name
+-    assert digest(HYBRID/'screen_scope.json')=='d76d5fdff375c58b3b42354fc4256e19b26b29f3fdb4387530f0ae8617920f94'
+-    assert not (HYBRID/'screen_failure.json').exists()
+     records=[]; files={}
+     for identity in wanted:
+         item=next(row for row in manifest['jobs'] if row['id']==identity)
+         out=RELEASE/'runs'/identity
+         # Producers must be gone, even when the coordinator retains idle log descriptors.
+         assert not any('--job-id' in row['argv'] and identity in row['argv'] for row in resource)
++        assert not Path('/proc',str(read(out/'progress.json')['pid'])).exists(), 'Original producer PID still exists'
+         result=accepted(item,out)
+         assert result is not None and result['rounds']==70
+         assert read(out/'progress.json')['round']==70
+@@ -77,21 +81,21 @@
+     local_identity()
+     acceptance=dict(status='PARTIAL_ACCEPTED_OFFSERVER_PENDING',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         snapshot_utc=snapshot['utc'],snapshot_sha256=digest(BATCH/'live_snapshot.json'),
+-        accepted_new_ids=wanted,accepted_new=4,accepted_total_including_previous=6,planned=32,complete=False,
++        accepted_new_ids=wanted,accepted_new=len(wanted),accepted_total_including_previous=6+len(wanted),planned=32,complete=False,
+         previous_chain_sha256=digest(BATCH/'PREVIOUS_CHAIN.json'),previous_ids_reused_without_recheck=previous['accepted_job_ids'],
+         package_sha256=digest(RELEASE/'PACKAGE_SHA256.json'),protocol_sha256=digest(RELEASE/'source/protocol.json'),
+         original_checker_sha256=digest(RELEASE/'source/accept_result.py'),original_screen_common_sha256=digest(RELEASE/'screen_common.py'),
+         collector_sha256=digest(__file__),records=records,before_source_data=before,after_source_data=after,
+-        helper_cpu=106,helper_threads=1,helper_nice=os.getpriority(os.PRIO_PROCESS,0),
++        helper_cpu=108,helper_threads=1,helper_nice=os.getpriority(os.PRIO_PROCESS,0),
+         no_training_or_inference=True,no_old_models_repackaged=True,candidate_selection_performed=False,
+         source_host=os.uname().nodename,final_test=False,formal100=False,
+         logs='Original job producers absent; artifact and closed log bytes verified before/after archive',
+-        hybrid=dict(terminal_at_snapshot=0,active_round_at_snapshot=48,frozen_source_members_verified=len(hseal['files'])))
++        acceptance_runtime=dict(python=sys.version,executable=sys.executable,torch=__import__('torch').__version__,cuda_initialized=__import__('torch').cuda.is_initialized()),canonical_ledger_not_modified=True)
+     write_json(BATCH/'PARTIAL_ACCEPTANCE.json',acceptance)
+-    for name in ('PARTIAL_ACCEPTANCE.json','live_snapshot.json','PREVIOUS_CHAIN.json','collect_delta.py'):
++    for name in ('PARTIAL_ACCEPTANCE.json','live_snapshot.json','PREVIOUS_CHAIN.json','collect_delta.py','COLLECTOR_DIFF.patch','SOURCE_RECEIPT.json'):
+         files[name]=dict(sha256=digest(BATCH/name),size=(BATCH/name).stat().st_size)
+     write_json(BATCH/'MEMBERS.json',dict(members=files))
+-    archive=BATCH/'accepted_delta_four.tar.gz'
++    archive=BATCH/'accepted_delta_after6.tar.gz'
+     with tarfile.open(archive,'w:gz') as tar:
+         for name in files: tar.add(RELEASE/name if name.startswith(('runs/','logs/')) else BATCH/name,arcname=name)
+         tar.add(BATCH/'MEMBERS.json',arcname='MEMBERS.json')
+@@ -106,7 +110,7 @@
+             assert hashlib.sha256(value).hexdigest()==expected['sha256'] and len(value)==expected['size']
+     receipt=dict(status='PARTIAL_ACCEPTED_SERVER_ARCHIVE_VERIFIED_OFFSERVER_PENDING',archive_sha256=digest(archive),
+         archive_size=archive.stat().st_size,inventory_sha256=digest(BATCH/'MEMBERS.json'),acceptance_sha256=digest(BATCH/'PARTIAL_ACCEPTANCE.json'),
+-        archived_member_count=len(files)+1,accepted_new_ids=wanted,accepted_new=4,accepted_total=6,planned=32,
++        archived_member_count=len(files)+1,accepted_new_ids=wanted,accepted_new=len(wanted),accepted_total=6+len(wanted),planned=32,
+         previous_chain_sha256=digest(BATCH/'PREVIOUS_CHAIN.json'),package_sha256=digest(RELEASE/'PACKAGE_SHA256.json'))
+     write_json(BATCH/'BACKUP_SHA256.json',receipt)
+     print(json.dumps(receipt))

@@ -1,0 +1,13 @@
+本包仅本机准备，未部署、推理、启动或登记。460已接受记录（含原两项partial）不变；剩余范围严格等于原900 inventory减460，并按旧464 manifest顺序过滤，得到440项、40×11。首项FairGuard_IID_Sp-DFA_seed91009。prior/仅4份小JSON原字节：460 collector、partial2 root证明、旧464 manifest和V2 guard root review；没有模型、预测数组或失败归档。
+
+remaining.py沿用旧464 coordinator：每chunk顺序调用已封recovery.py run-chunk、accept、strict SHA绑定backup；同时最多一个GPU worker。runtime固定release seal 7be4686d5117eaab9b4fb57da5ae345f2446b60dfd31292f8a5b931a2ce3b5b8，scope为EXISTING_BASELINE900_GPU_VALID_RECOVERY_RESOURCE_GUARD_V2。新package/schema/source绑定见INPUT_BASIS.json、SOURCE_DIFF.patch。原GPU科学体、proposal、source/data/seed/root/valid19867/70round/checkpoint及native1e-12由原recovery继续严格执行；不新建accept/evidence。
+
+新输出固定remaining440_resource_gate_v2_attempt1；必须不存在，由wrapper创建，禁止预建、覆盖或自动resume。任何命令非零、身份/strict/数值/归档错误立即停止，保存已闭合项及partial/log/queue_failure，不启动下一chunk或自动重试。旧464失败目录、原81-member归档、已接受460与两项partial均不可改写/重算。未来恢复只能root基于严格离机登记审阅新的精确补集与新目录。
+
+每chunk只写REMOTE_PENDING_OFFSERVER链：绑定queue/review、V2 runtime/scope、strict及archive/inventory SHA和前一收据SHA。accepted_new_n始终0、cohort_registered=false；即使440全部远端闭合也不表示离机接受。原archiver只打包新数组/receipt/config/log/sourcefreeze，不重包旧模型。离机原member/SHA及保存数组严格核验仍由root后续显式V2-source入口完成；V1历史来源保持V1，不能把原V1 evidence常量直接套用V2 receipt。
+
+coordinator CPU106/nice10/idleIO且无Torch。child Popen先绑定CPU105，原recovery再自绑CPU105、1线程/interop及单GPU0实际UUID。外层nice不足10才一次补到10；子命令直接Python，不再nice -n10累加。保持原supervisor模式autostart/autorestart=false、startretries=0、stopasgroup/killasgroup=true。Linux spawn/资源门实际运行尚未核验；启动前root需核旧队列退出、无CPU105重复worker、主800健康及实测资源。
+
+ROOT_REVIEW_TEMPLATE.json默认PREPARED、approved_ids空、execute_remaining440/execute_new465=false，不可执行。root须另存包外review，填queue seal、实际GPU UUID和完整manifest.ids，两个execute字段明确true、status按原recovery API设ROOT_APPROVED_GPU_VALID_RECOVERY_V1；execute_new465是原API对UNEXECUTED_465分类的许可字段，本wrapper额外只允许exact440。review同时外部SHA绑定460、partial2、旧464 manifest/package、V2 root review、新runtime/scope与manifest；imports仍false。具体命令和targeted supervisor模板见COMMANDS.md及conf.template；本包不执行安装/启动。
+
+本机selfcheck用真实集合和临时合成文件，检查17项拒收、8种流程（成功仅REMOTE，三命令失败、混ID、错archive、旧V1scope及native超1e-12均停止）、收据链、CPU继承和一次nice；不启动子进程/CNN、不上机。旧CPU与新GPU逐IDprovenance保留，混合device raw/shared不称统一设备最终公平比较或final test。正式native/shared主终点仍pending，本包不替用户决定。

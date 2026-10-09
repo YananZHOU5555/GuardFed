@@ -1,0 +1,44 @@
+--- tmp\celeba_flgmm_screen_20261009_v2_dispatch\backups\increment_20261009T1133Z\verify_delta_offserver.py
++++ accepted_delta_after6/verify_delta_offserver.py
+@@ -8,20 +8,22 @@
+ import tarfile
+ 
+ BATCH=Path(__file__).resolve().parent
+-RELEASE=BATCH.parents[2]/'celeba_flgmm_screen_20261009_v2_frozen_release'
++RELEASE=BATCH.parents[1]/'celeba_flgmm_screen_20261009_v2_frozen_release'
+ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+ def read(path): return json.loads(path.read_text())
+ def execute():
+     receipt=read(BATCH/'BACKUP_SHA256.json')
+-    assert receipt['archive_sha256']=='91d5815381fa7f148e145b7220f417db6afc1af9074c868ce7156f754221891d'
+-    archive=BATCH/'accepted_delta_four.tar.gz'
++    assert receipt['previous_chain_sha256']=='e2e6b6f98abc5d66bc493c2b4e09dc6d9470fca46116778d01e08c69328528a4'
++    assert receipt['accepted_total']==6+receipt['accepted_new']
++    assert not set(receipt['accepted_new_ids'])&set(read(BATCH/'PREVIOUS_CHAIN.json')['accepted_job_ids'])
++    archive=BATCH/'accepted_delta_after6.tar.gz'
+     assert sha(archive)==receipt['archive_sha256'] and archive.stat().st_size==receipt['archive_size']
+     assert sha(BATCH/'MEMBERS.json')==receipt['inventory_sha256']
+     assert sha(BATCH/'PARTIAL_ACCEPTANCE.json')==receipt['acceptance_sha256']
+     expected=read(BATCH/'MEMBERS.json')['members']; out=BATCH/'restored'
+     assert not out.exists(), 'Do not overwrite prior restoration'
+     with tarfile.open(archive) as tar:
+-        assert len(tar.getmembers())==receipt['archived_member_count']==45
++        assert len(tar.getmembers())==receipt['archived_member_count']
+         assert len(set(tar.getnames()))==len(tar.getnames())
+         assert set(tar.getnames())==set(expected)|{'MEMBERS.json'}
+         values=[]
+@@ -46,11 +48,11 @@
+         results.append(dict(id=identity,rounds=result['rounds'],seed=result['seed'],distribution=result['distribution'],
+             attack=result['attack'],metrics=result['metrics'],evaluation_stats=result['evaluation_stats'],
+             checkpoint_sha256=sha(out/'runs'/identity/'model.pt')))
+-    assert len(results)==4
++    assert len(results)==receipt['accepted_new']
+     acceptance=read(BATCH/'PARTIAL_ACCEPTANCE.json'); assert acceptance['source_host']!=platform.node()
+-    proof=dict(status='PARTIAL_ACCEPTED_OFFSERVER_VERIFIED',accepted_new=4,accepted_total=6,planned=32,
++    proof=dict(status='PARTIAL_ACCEPTED_OFFSERVER_VERIFIED',accepted_new=receipt['accepted_new'],accepted_total=receipt['accepted_total'],planned=32,
+         utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),records=results,
+-        archive_sha256=receipt['archive_sha256'],archived_member_count=45,inventory_sha256=receipt['inventory_sha256'],
++        archive_sha256=receipt['archive_sha256'],archived_member_count=receipt['archived_member_count'],inventory_sha256=receipt['inventory_sha256'],
+         server_backup_receipt_sha256=sha(BATCH/'BACKUP_SHA256.json'),package_sha256=receipt['package_sha256'],
+         original_checked_result_replayed_locally=True,source_host=acceptance['source_host'],verification_host=platform.node(),
+         different_host_observed=True,no_old_models_repackaged=True,previous_chain_sha256=receipt['previous_chain_sha256'],

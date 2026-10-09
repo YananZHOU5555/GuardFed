@@ -1,0 +1,99 @@
+--- sealed_remaining464/evidence.py
++++ remaining440_resource_guard_v2/evidence.py
+@@ -18,6 +18,7 @@
+ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read = lambda p: json.loads(Path(p).read_bytes())
+ TOL = 1e-12
++SCOPE = 'EXISTING_BASELINE900_GPU_VALID_RECOVERY_RESOURCE_GUARD_V2'
+ 
+ 
+ def need(ok, message):
+@@ -41,9 +42,15 @@
+     pins = read(HERE / 'INPUT_PINS.json')
+     for row in pins['files'].values(): need(sha(ROOT / row['path']) == row['sha256'], 'Frozen input drift: ' + row['path'])
+     paths = {k: ROOT / row['path'] for k, row in pins['files'].items()}
+-    c = {'pins': pins, 'paths': paths, 'plan': read(paths['plan']), 'proposal': read(paths['proposal']), 'review': read(paths['review']), 'base': read(paths['base436']), 'records': {r['id']: r for r in read(paths['inventory'])['records']}}
++    c = {'pins': pins, 'paths': paths, 'plan': read(paths['plan']), 'proposal': read(paths['proposal']), 'review': read(paths['review']), 'base': read(paths['base460']), 'records': {r['id']: r for r in read(paths['inventory'])['records']}}
+     c['review_sha'] = sha(paths['review']); c['recovery_sha'] = sha(paths['recovery_seal']); c['queue_sha'] = sha(paths['queue_seal'])
+-    need(c['review']['current436_collector_sha256'] == sha(paths['base436']) and len(set(c['base']['accepted_ids'])) == c['base']['accepted_n'] == 436 and set(c['base']['accepted_ids']).isdisjoint(c['plan']['ids']) and len(c['records']) == 900, '436/464 lineage or inventory differs')
++    need(c['review']['accepted460_collector_sha256'] == sha(paths['base460']) and len(set(c['base']['accepted_ids'])) == c['base']['accepted_n'] == 460 and set(c['base']['accepted_ids']).isdisjoint(c['plan']['ids']) and len(c['records']) == 900, '460/440 lineage or inventory differs')
++    need(len(c['plan']['ids']) == len(set(c['plan']['ids'])) == 440 and set(c['plan']['ids']) == set(c['records']) - set(c['base']['accepted_ids']) and c['plan']['chunks'] == [{'index': n // 11, 'ids': c['plan']['ids'][n:n + 11]} for n in range(0, 440, 11)], 'Exact440/40x11 differs')
++    need(c['review']['approved_ids'] == c['plan']['ids'] and c['review']['queue_package_sha256'] == c['queue_sha'] and c['review']['queue_manifest_sha256'] == sha(paths['plan']) and c['review']['implementation_package_sha256'] == c['recovery_sha'] and c['review']['recovery_scope'] == SCOPE, 'Actual root review/source lineage differs')
++    deployment = read(paths['deployment'])
++    need(deployment['status'] == 'EXACT440_DEPLOYED_INSPECT_PASS_NOT_STARTED' and deployment['package_sha256'] == c['queue_sha'] and deployment['review_sha256'] == c['review_sha'], 'Historical root deploy-inspect binding differs')
++    launch = read(paths['launch'])
++    need(launch['status'] == 'PRECONTRACT_FILENAME_FIX_TARGETED_START_CHECK' and launch['review_sha256'] == c['review_sha'] and not launch['scientific_changes'] and not launch['old464_restarted'], 'Actual review filename/config-overlay lineage differs')
+     for folder, seal in ((paths['recovery_seal'].parent, read(paths['recovery_seal'])), (paths['queue_seal'].parent, read(paths['queue_seal']))):
+         for name, row in seal['members'].items(): need(sha(folder / name) == row['sha256'] and (folder / name).stat().st_size == row['bytes'], 'Frozen package member drift: ' + name)
+     c['evaluator'] = extract_functions(paths['evaluator'], ['canonical_sha', 'check_binary', 'group_metrics', 'predict_views', 'evaluate_frozen_predictions'], {'np': np, 'json': json, 'hashlib': hashlib, 'METHODS': set(r['method'] for r in c['records'].values()), 'VIEWS': {'native', 'raw', 'shared_calibration'}})
+@@ -53,12 +60,13 @@
+ 
+ def prior_chain(path, expected, c, chunk):
+     need(sha(path) == expected, 'Externally bound prior SHA differs'); current = read(path); latest = current; seen = set()
+-    while sha(path) != sha(c['paths']['base436']):
++    while sha(path) != sha(c['paths']['base460']):
+         need(sha(path) not in seen, 'Prior chain cycle'); seen.add(sha(path))
+-        need(current['base436_sha256'] == sha(c['paths']['base436']) and current['evidence_package_sha256'] == sha(HERE / 'PACKAGE_SHA256.json'), 'Wrong436/source lineage')
++        need(current['base460_sha256'] == sha(c['paths']['base460']) and current['evidence_package_sha256'] == sha(HERE / 'PACKAGE_SHA256.json'), 'Wrong460/source lineage')
+         proof_path = Path(current['new_proof_path']); need(sha(proof_path) == current['new_proof_sha256'], 'Prior proof changed'); proof = read(proof_path)
+         before = Path(current['previous_collector_path']); need(sha(before) == current['previous_collector_sha256'], 'Previous collector changed'); old = read(before)
+-        need(proof['status'] == 'ROOT_GPU464_CHUNK_OFFSERVER_SAVED_ARRAY_PASS' and proof['evidence_package_sha256'] == current['evidence_package_sha256'] and proof['chunk_index'] == current['last_chunk_index'] and proof['accepted_new_ids'] == current['added_ids'] == c['plan']['chunks'][current['last_chunk_index']]['ids'] and proof['remote_receipt_sha256'] == current['last_remote_receipt_sha256'], 'Prior chunk proof differs')
++        need(proof['status'] == 'ROOT_GPU440_RESOURCE_GUARD_V2_CHUNK_OFFSERVER_SAVED_ARRAY_PASS' and proof['evidence_package_sha256'] == current['evidence_package_sha256'] and proof['chunk_index'] == current['last_chunk_index'] and proof['accepted_new_ids'] == current['added_ids'] == c['plan']['chunks'][current['last_chunk_index']]['ids'] and proof['remote_receipt_sha256'] == current['last_remote_receipt_sha256'], 'Prior chunk proof differs')
++        need(current['implementation_package_sha256'] == proof['source_package_sha256'] == c['recovery_sha'] and current['queue_package_sha256'] == proof['queue_package_sha256'] == c['queue_sha'] and current['recovery_scope'] == proof['recovery_scope'] == SCOPE and current['review_sha256'] == proof['review_sha256'] == c['review_sha'], 'Prior V2 runtime/queue/review identity differs')
+         need(current['accepted_ids'] == old['accepted_ids'] + current['added_ids'] and len(set(current['accepted_ids'])) == current['accepted_n'], 'Prior duplicate/omitted IDs')
+         path, current = before, old
+     prefix = [i for item in c['plan']['chunks'][:chunk] for i in item['ids']]
+@@ -89,7 +97,7 @@
+     expected = next(x for x in c['proposal']['records'] if x['id'] == identity)['artifacts']
+     need(set(p['artifact_before']) == {v['target'] for v in expected.values()} and all(p['artifact_before'][v['target']]['sha256'] == v['sha256'] and p['artifact_before'][v['target']]['bytes'] == v['bytes'] for v in expected.values()), 'Wrong storage-map artifacts')
+     def local(path): return run.parent.parent.parent / Path(path).relative_to(Path(remote_stage)) if Path(path).is_relative_to(Path(remote_stage)) else Path(path)
+-    guard = extract_functions(c['paths']['recovery'], ['receipt_guard'], {'Path': Path, 'need': need, 'sha': lambda x: sha(local(x)), 'read': lambda x: read(local(x)), '__file__': str(c['paths']['recovery']), 'SCOPE': 'EXISTING_BASELINE900_GPU_VALID_RECOVERY_V1'})
++    guard = extract_functions(c['paths']['recovery'], ['receipt_guard'], {'Path': Path, 'need': need, 'sha': lambda x: sha(local(x)), 'read': lambda x: read(local(x)), '__file__': str(c['paths']['recovery']), 'SCOPE': SCOPE})
+     guard['receipt_guard'](p, r, c['review'], Path(remote_stage) / 'batch/runs', record)
+     need(r['model_inventory_record_sha256'] == c['original']['canonical'](record) and record['terminal_round'] == record['config']['rounds'] == 70 and record['config']['seed'] == r['seed'], 'Original record/config/70round differs')
+     need(r['valid_n'] == 19867 and r['weights_before'] == r['weights_after'] and not any(r[k] for k in ('optimizer_created', 'gradients_created', 'test_labels_accessed', 'test_inference_performed', 'final_dispatch_created')), 'Inference-only contract failed')
+@@ -114,19 +122,20 @@
+ def verify_chunk(folder, c, index, previous):
+     ids = c['plan']['chunks'][index]['ids']; chain = read(folder / 'REMOTE_PENDING_OFFSERVER.json'); inv = read(folder / 'remote_archive_inventory.json')
+     need(chain['status'] == 'REMOTE_CLOSED_PENDING_OFFSERVER' and chain['chunk_index'] == inv['chunk_index'] == index and chain['remote_closed_ids'] == inv['accepted_ids'] == ids and chain['previous_receipt_sha256'] == previous and chain['queue_package_sha256'] == c['queue_sha'] and chain['review_sha256'] == c['review_sha'] and chain['accepted_new_n'] == 0 and not chain['cohort_registered'] and not chain['offserver_verified'], 'Remote receipt chain differs')
++    need(chain['implementation_package_sha256'] == c['recovery_sha'] and chain['recovery_scope'] == SCOPE and chain['remote_closed_cumulative_n'] == (index + 1) * 11, 'Remote V2 source/scope/count differs')
+     need(inv['status'] == 'REMOTE_STRICT_ACCEPTED_ARCHIVE_VERIFIED_PENDING_OFFSERVER' and not inv['offserver_verified'] and inv['old_model_files_archived'] == 0 and chain['archive_sha256'] == inv['sha256'] and chain['archive_inventory_sha256'] == sha(folder / 'remote_archive_inventory.json'), 'Remote archive binding differs')
+     dest = folder / 'verified_extract'; unpack(folder / 'chunk_evidence.tar.gz', inv, dest)
+     strict = read(dest / 'execution/strict_acceptance.json'); batch = read(dest / 'batch/batch_inputs.json'); execution = read(dest / 'batch/batch_execution.json'); binding = read(dest / 'execution/queue_binding.json')
+-    need(sha(dest / 'execution/strict_acceptance.json') == chain['strict_sha256'] and strict['status'] == 'SELECTED_VALID_REPLAY_ACCEPTED' and strict['scope'] == 'EXISTING_BASELINE900_GPU_VALID_RECOVERY_V1' and strict['accepted_ids'] == ids and strict['accepted_n'] == strict['requested_n'] == len(ids) and not strict['invalid'] and strict['max_abs_native_metric_difference'] <= TOL and not strict['all900_native_valid_replayed'], 'Original strict incomplete')
++    need(sha(dest / 'execution/strict_acceptance.json') == chain['strict_sha256'] and strict['status'] == 'SELECTED_VALID_REPLAY_ACCEPTED' and strict['scope'] == SCOPE and strict['accepted_ids'] == ids and strict['accepted_n'] == strict['requested_n'] == len(ids) and not strict['invalid'] and strict['max_abs_native_metric_difference'] <= TOL and not strict['all900_native_valid_replayed'], 'Original strict incomplete')
+     need(batch['selected_ids'] == execution['finished_zero_exit_ids'] == execution['requested_ids'] == ids and batch['workers'] == 1 and batch['review_sha256'] == c['review_sha'] and batch['implementation_package_sha256'] == c['recovery_sha'] and sha(dest / 'batch/batch_inputs.json') == strict['batch_inputs_sha256'] and not execution['failures'] and execution['source_unchanged'] and execution['source_after'] == batch['source_before'] and not execution['cohort_registered'], 'Batch/source binding differs')
+     need(strict['inventory_sha256'] == c['pins']['files']['inventory']['sha256'] and strict['storage_map_sha256'] == batch['storage_map_sha256'] == c['proposal']['scientific_cli_bindings_unchanged']['storage-map-sha256'] and strict['v2_source_sha256'] == sha(c['paths']['v2']) and strict['calibration_core_sha256'] == 'cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed' and strict['final_protocol_status'] == 'PREPARED_NOT_FROZEN' and not strict['test_labels_accessed'], 'Strict data/source/protocol differs')
+-    need(binding == {'queue_package_sha256': c['queue_sha'], 'queue_manifest_sha256': sha(c['paths']['plan']), 'root_review_sha256': c['review_sha'], 'prior425_sha256': c['plan']['accepted425_sha256'], 'cohort_registered': False}, 'Wrapper source binding differs')
++    need(binding == {'queue_package_sha256': c['queue_sha'], 'queue_manifest_sha256': sha(c['paths']['plan']), 'root_review_sha256': c['review_sha'], 'prior460_sha256': c['plan']['accepted460_collector_sha256'], 'implementation_package_sha256': c['recovery_sha'], 'recovery_scope': SCOPE, 'cohort_registered': False}, 'Wrapper source binding differs')
+     files = dict(c['proposal']['scientific_source_pins_unchanged']); files.update({c['pins']['remote_review']: c['review_sha'], c['pins']['remote_proposal']: sha(c['paths']['proposal'])}); files.update({c['pins']['remote_recovery'] + '/' + n: v['sha256'] for n, v in read(c['paths']['recovery_seal'])['members'].items()})
+     expected = {'sourcefreeze/%03d_%s' % (n, PurePosixPath(path).name): digest for n, (path, digest) in enumerate(sorted(files.items())) if not path.startswith('/workspace/GuardFed-celeba-expanded/data/')}
+     need({n for n in inv['members'] if n.startswith('sourcefreeze/')} == set(expected) and all(sha(dest / n) == digest for n, digest in expected.items()) and sha(dest / 'execution/manifest.json') == sha(c['paths']['proposal']), 'Sourcefreeze differs')
+     need(all(batch['source_before'][path]['sha256'] == digest for path, digest in files.items()), 'Source/data snapshot differs')
+     results = [check_run(dest / 'batch/runs' / identity, c['records'][identity], c, strict, batch, c['plan']['output_parent'] + '/chunk_%03d' % index) for identity in ids]
+-    return {'status': 'ROOT_GPU464_CHUNK_OFFSERVER_SAVED_ARRAY_PASS', 'chunk_index': index, 'accepted_new_ids': ids, 'archive_sha256': inv['sha256'], 'archive_members_verified': inv['member_n'], 'archive_inventory_sha256': sha(folder / 'remote_archive_inventory.json'), 'remote_receipt_sha256': sha(folder / 'REMOTE_PENDING_OFFSERVER.json'), 'strict_sha256': chain['strict_sha256'], 'source_package_sha256': c['recovery_sha'], 'queue_package_sha256': c['queue_sha'], 'review_sha256': c['review_sha'], 'results': results, 'saved_metrics_verified': len(ids) * 9, 'saved_confusion_counts_verified': len(ids) * 24, 'saved_prediction_rules_verified': len(ids) * 3, 'native_max_abs_difference': max(r['native_max_abs_difference'] for r in results), 'root_refit_verified_in_original_remote_strict': True, 'local_root_refit': False, 'new_CNN_inference': 0, 'final_test': False}
++    return {'status': 'ROOT_GPU440_RESOURCE_GUARD_V2_CHUNK_OFFSERVER_SAVED_ARRAY_PASS', 'chunk_index': index, 'accepted_new_ids': ids, 'archive_sha256': inv['sha256'], 'archive_members_verified': inv['member_n'], 'archive_inventory_sha256': sha(folder / 'remote_archive_inventory.json'), 'remote_receipt_sha256': sha(folder / 'REMOTE_PENDING_OFFSERVER.json'), 'strict_sha256': chain['strict_sha256'], 'source_package_sha256': c['recovery_sha'], 'recovery_scope': SCOPE, 'queue_package_sha256': c['queue_sha'], 'review_sha256': c['review_sha'], 'results': results, 'saved_metrics_verified': len(ids) * 9, 'saved_confusion_counts_verified': len(ids) * 24, 'saved_prediction_rules_verified': len(ids) * 3, 'native_max_abs_difference': max(r['native_max_abs_difference'] for r in results), 'root_refit_verified_in_original_remote_strict': True, 'local_root_refit': False, 'new_CNN_inference': 0, 'final_test': False}
+ 
+ 
+ def main():
+@@ -135,7 +144,7 @@
+     for n, row in read(HERE / 'PACKAGE_SHA256.json')['members'].items(): need(sha(HERE / n) == row['sha256'], 'Verifier member drift')
+     c = context(); need(0 <= args.chunk < len(c['plan']['chunks']), 'Unknown chunk')
+     need(bool(args.prior) == bool(args.prior_sha256), 'Pass prior and external SHA together')
+-    prior_path = args.prior or c['paths']['base436']; prior_sha = args.prior_sha256 if args.prior else sha(prior_path)
++    prior_path = args.prior or c['paths']['base460']; prior_sha = args.prior_sha256 if args.prior else sha(prior_path)
+     prior, previous = prior_chain(prior_path, prior_sha, c, args.chunk); ids = c['plan']['chunks'][args.chunk]['ids']; need(not set(ids) & set(prior['accepted_ids']), 'Already accepted ID')
+     out = args.output.absolute(); need(out.parent.resolve() == out.parent and out.is_relative_to(HERE) and not out.exists(), 'Fresh owned output required'); out.mkdir()
+     try:
+@@ -150,9 +159,9 @@
+         proof = verify_chunk(out, c, args.chunk, previous)
+         need(sha(prior_path) == prior_sha, 'Prior changed during verification')
+         for row in c['pins']['files'].values(): need(sha(ROOT / row['path']) == row['sha256'], 'Frozen input changed during verification')
+-        proof.update(evidence_package_sha256=args.package_sha256, model_inventory_sha256=c['pins']['files']['inventory']['sha256'], labels_cache_sha256=c['pins']['files']['labels']['sha256'], base436_sha256=sha(c['paths']['base436'])); proof_path = out / 'ROOT_OFFSERVER_VERIFICATION.json'; save(proof_path, proof)
++        proof.update(evidence_package_sha256=args.package_sha256, model_inventory_sha256=c['pins']['files']['inventory']['sha256'], labels_cache_sha256=c['pins']['files']['labels']['sha256'], base460_sha256=sha(c['paths']['base460'])); proof_path = out / 'ROOT_OFFSERVER_VERIFICATION.json'; save(proof_path, proof)
+         combined = prior['accepted_ids'] + ids; need(len(set(combined)) == len(combined), 'Duplicate cohort identity')
+-        collector = {'scope': 'NINE_METHOD900_VALID_REPLAY_CUMULATIVE_EXPLICIT_CPU_GPU_SOURCE_VERSIONS', 'status': 'PARTIAL_UNIQUE_VALID_REPLAY_ACCEPTED' if len(combined) < 900 else 'ALL900_VALID_REPLAY_ACCEPTED', 'expected_n': 900, 'accepted_n': len(combined), 'accepted_ids': combined, 'base436_sha256': sha(c['paths']['base436']), 'previous_collector_path': str(prior_path.resolve()), 'previous_collector_sha256': prior_sha, 'new_proof_path': str(proof_path), 'new_proof_sha256': sha(proof_path), 'added_ids': ids, 'last_chunk_index': args.chunk, 'last_remote_receipt_sha256': proof['remote_receipt_sha256'], 'evidence_package_sha256': args.package_sha256, 'mixing_CPU_GPU_disclosed': True, 'uniform_device_comparison': False, 'all900_native_valid_replayed': len(combined) == 900, 'final_protocol_frozen': False, 'test_evaluation_performed': False}
++        collector = {'scope': 'NINE_METHOD900_VALID_REPLAY_CUMULATIVE_EXPLICIT_CPU_GPU_SOURCE_VERSIONS', 'status': 'PARTIAL_UNIQUE_VALID_REPLAY_ACCEPTED' if len(combined) < 900 else 'ALL900_VALID_REPLAY_ACCEPTED', 'expected_n': 900, 'accepted_n': len(combined), 'accepted_ids': combined, 'base460_sha256': sha(c['paths']['base460']), 'previous_collector_path': str(prior_path.resolve()), 'previous_collector_sha256': prior_sha, 'new_proof_path': str(proof_path), 'new_proof_sha256': sha(proof_path), 'added_ids': ids, 'last_chunk_index': args.chunk, 'last_remote_receipt_sha256': proof['remote_receipt_sha256'], 'evidence_package_sha256': args.package_sha256, 'implementation_package_sha256': c['recovery_sha'], 'queue_package_sha256': c['queue_sha'], 'recovery_scope': SCOPE, 'review_sha256': c['review_sha'], 'mixing_CPU_GPU_disclosed': True, 'uniform_device_comparison': False, 'all900_native_valid_replayed': len(combined) == 900, 'final_protocol_frozen': False, 'test_evaluation_performed': False}
+         save(out / ('cumulative_%d_accepted.json' % len(combined)), collector); print(json.dumps({'accepted_n': len(combined), 'new_n': len(ids), 'proof_sha256': sha(proof_path)}))
+     except BaseException as error:
+         save(out / 'FAILURE_PRESERVED.json', {'status': 'NOT_ACCEPTED_PRESERVED_NO_RETRY', 'error': repr(error), 'traceback': traceback.format_exc(), 'chunk': args.chunk}); raise

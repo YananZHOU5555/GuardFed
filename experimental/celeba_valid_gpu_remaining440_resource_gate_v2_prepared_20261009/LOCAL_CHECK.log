@@ -1,0 +1,109 @@
+Command: python tmp/celeba_valid_gpu_remaining440_resource_gate_v2_prepared_20261009/selfcheck.py
+Exit: 0
+{
+  "status": "PASS_LOCAL_EXACT440_NO_CNN_NO_DISPATCH",
+  "exact_inventory900_minus460_in_parent464_order": true,
+  "exact_ordered_ids": 440,
+  "chunks": 40,
+  "chunk_size": 11,
+  "prior_accepted": 460,
+  "accepted_partial2_excluded": true,
+  "refusal_checks": [
+    "PREPARED_is_not_authorization",
+    "tolerance_drift",
+    "CPU_partial_import",
+    "diagnostic_import",
+    "restart_old464",
+    "two_GPU_workers",
+    "old460_binding_drift",
+    "V1_runtime",
+    "V1_scope",
+    "parent_source_drift",
+    "duplicate_ID",
+    "omit_ID",
+    "changed_order",
+    "replay_accepted_partial2",
+    "oversize_chunk",
+    "duplicate_prior460",
+    "existing_output_no_resume"
+  ],
+  "flow_scenarios": [
+    {
+      "case": "two_chunks_closed_REMOTE_only",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup",
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "run-chunk",
+      "commands": [
+        "run-chunk"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "accept",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "backup",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "mixed_strict",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "wrong_archive",
+      "commands": [
+        "run-chunk",
+        "accept",
+        "backup"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "old_scope",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    },
+    {
+      "case": "native_mismatch",
+      "commands": [
+        "run-chunk",
+        "accept"
+      ],
+      "new_accepted": 0
+    }
+  ],
+  "V2_source_scope_and_remote_receipt_chain_checked": true,
+  "CPU106_parent_CPU105_child_AST_verified": true,
+  "nice_set_once_no_child_prefix": true,
+  "new_CNN_inference": 0,
+  "new_server_access": 0,
+  "cohort_changed": false,
+  "Linux_spawn_runtime_verified": false
+}
+

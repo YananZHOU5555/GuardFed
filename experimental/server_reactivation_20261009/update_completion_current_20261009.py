@@ -54,6 +54,14 @@ if gpu_recovery:
             recovery_paragraph = recovery_paragraph.replace(
                 'Two completed partial records remain unregistered; ',
                 'The two saved partial records subsequently passed original partial strict acceptance and independent saved-array checks and were explicitly imported without new CNN inference; ')
+v2 = state.get('baseline_valid_GPU_remaining440_v2_20261009')
+if v2:
+    recovery_paragraph += (f'The exact remaining440 complement was subsequently deployed in a new V2 namespace with unchanged scientific inference/acceptance and native1e-12. '
+        f'Actual Linux processes, CPU106 coordination, CPU105 single-GPU workers, nice10/idle I/O and resource receipts were verified at {v2["measured_utc"]}; '
+        f'{v2["worker_exit_complete_observed"]} worker zero exits and {v2["remote_closed_n"]} remote closures were observed in that snapshot. '
+        f'Separately, {v2["new_offserver_accepted"]} V2 records have passed original strict acceptance and independent off-server checks, for the current cumulative{replayed}/900. '
+        'The first supervisor attempt exited before contract/CNN because its review filename differed from the installed file; original configuration/log bytes were preserved and only the external config path was corrected before starting the fresh queue. '
+        'The failed original464 queue and historical collectors remain unchanged. ')
 diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces the original three native metrics exactly. '
     'Its saved CPU/GPU arrays differ on one native/raw prediction (image172599); shared-calibration predictions match. '
     'The unchanged source/data/checkpoint and all saved metrics, counts and rules were independently verified. '

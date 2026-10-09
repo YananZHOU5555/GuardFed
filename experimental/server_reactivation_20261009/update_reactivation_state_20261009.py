@@ -911,6 +911,74 @@ if guard_review.exists():
         entry='tmp/celeba_valid_gpu_resource_gate_fix_20261009/README.md')
     gpu_recovery_paragraph += ('独立V2工程修复已通过root源码差异审阅、60个健康组合、11个资源拒收边界及两份实际快照schema核验，'
         '仅资源预检与输入保全变化，原科学body/strict及24个成员字节不变；尚未上机，新440补集需独立命名空间。')
+v2_execution = ROOT / 'tmp/celeba_valid_gpu_remaining440_resource_gate_v2_execution_20261009'
+v2_observations = list(v2_execution.glob('live_*.ROOT.json'))
+if v2_observations:
+    v2_checked_path = max(v2_observations)
+    v2_checked = read(v2_checked_path)
+    v2_live_path = v2_checked_path.with_name(v2_checked_path.name.replace('.ROOT.json', '.json'))
+    v2_live = read(v2_live_path)
+    assert v2_checked['status'] == 'ROOT_LINUX_SPAWN_AND_V2_RESOURCE_RECEIPTS_PASS'
+    assert sha(v2_live_path) == v2_checked['sha256']
+    assert v2_live['runtime_package_sha256'] == reviewed_guard['runtime_seal_sha256']
+    assert v2_live['source_package_sha256'] == '355e22697f213b4b4b9f2509cf5e12000009be0d6e836a5c5cceb1f913906a93'
+    fixed_launch_path = v2_execution / 'ROOT_PRECONTRACT_CONFIG_FIX_AND_LAUNCH.json'
+    fixed_launch = read(fixed_launch_path)
+    assert fixed_launch['before']['output_absent'] and not fixed_launch['before']['CNN_started']
+    assert all(row['returncode'] == 0 for row in fixed_launch['commands'])
+    v2_running = 'RUNNING' in v2_live['service'] and not v2_live['queue_failure']
+    v2_service = 'guardfed_celeba_valid_gpu_remaining440_resource_gate_v2_20261009'
+    state['baseline_valid_GPU_remaining440_v2_20261009'] = dict(
+        status='RUNNING_ACTUAL_LINUX_SPAWN_VERIFIED' if v2_running else 'STOPPED_READ_LATEST_EVIDENCE',
+        service=v2_service, queue_running=v2_running, queue_size=440,
+        output_parent='/workspace/guardfed_checks/celeba_valid_gpu_recovery_execution_20261009/remaining440_resource_gate_v2_attempt1',
+        queue_package_sha256=v2_live['source_package_sha256'], runtime_package_sha256=v2_live['runtime_package_sha256'],
+        root_review_sha256=v2_live['review_sha256'], actual_config_sha256=v2_live['config_sha256'],
+        launch_proof_path=fixed_launch_path.relative_to(ROOT).as_posix(), launch_proof_sha256=sha(fixed_launch_path),
+        measured_utc=v2_live['checked_utc'], live_path=v2_live_path.relative_to(ROOT).as_posix(), live_sha256=sha(v2_live_path),
+        spawn_verification_path=v2_checked_path.relative_to(ROOT).as_posix(), spawn_verification_sha256=sha(v2_checked_path),
+        worker_exit_complete_observed=v2_live['worker_complete_exit_only'], remote_closed_n=v2_live['remote_closed_n'],
+        new_offserver_accepted=0, accepted_prior=460, accepted_prior_sha256=sha(partial_path),
+        exact_inventory900_minus460=True, original464_not_restarted=True, scientific_changes=False,
+        precontract_config_mismatch_preserved=True, precontract_failed_CNN_started=False,
+        CPU_coordinator=106, CPU_worker=105, nice=10, max_GPU_workers=1, native_tolerance=1e-12)
+    state['baseline_valid_GPU_resource_guard_v2_20261009'].update(
+        status='DEPLOYED_LINUX_SPAWN_AND_RESOURCE_RECEIPTS_VERIFIED', deployed=True, Linux_runtime_verified=True,
+        new_CNN_inference=None, worker_exit_complete_observed=v2_live['worker_complete_exit_only'], new_offserver_accepted=0)
+    state['final_evaluator_runtime_20261009']['status'] = '460_ACCEPTED_REMAINING440_GPU_V2_RUNNING' if v2_running else '460_ACCEPTED_READ_V2_STOP_EVIDENCE'
+    if v2_running:
+        state['active_services'] = list(dict.fromkeys(state['active_services'] + [v2_service]))
+    gpu_recovery_paragraph = gpu_recovery_paragraph.replace(
+        '尚未上机，新440补集需独立命名空间。',
+        f'新440精确补集已在独立目录启动，{v2_live["checked_utc"]}实际CPU106协调、CPU105单GPU/单线程worker、nice10/idle及资源凭据通过；观测{v2_live["worker_complete_exit_only"]}条推理正常退出、远端闭合{v2_live["remote_closed_n"]}条，新增离机接受0，累计仍为460。初次supervisor审批文件名不一致导致contract前退出、未创建输出或推理；原日志与配置保存后仅修正包外路径，现用配置SHA71826d102a628eb9fa0869dfa9f360a71527f2c595d8467d7464f6b720f429f5。')
+v2_evidence_dir = ROOT / 'tmp/celeba_valid_gpu_remaining440_v2_evidence_20261009'
+v2_collectors = list(v2_evidence_dir.glob('chunk_*/cumulative_*_accepted.json'))
+if v2_collectors:
+    assert sha(v2_evidence_dir / 'PACKAGE_SHA256.json') == 'e389767b0d7846509226f2669b34e5a87ad4e407983d85cbcdde1c3edf62a5a8'
+    v2_spec = importlib.util.spec_from_file_location('closed_gpu440_v2_evidence', v2_evidence_dir / 'evidence.py')
+    v2_tool = importlib.util.module_from_spec(v2_spec); v2_spec.loader.exec_module(v2_tool)
+    v2_current_path = max(v2_collectors, key=lambda p: read(p)['accepted_n'])
+    v2_current = read(v2_current_path); v2_context = v2_tool.context()
+    v2_tool.prior_chain(v2_current_path, sha(v2_current_path), v2_context, v2_current['last_chunk_index']+1)
+    v2_proof_path = Path(v2_current['new_proof_path']); v2_proof = read(v2_proof_path)
+    assert sha(v2_proof_path)==v2_current['new_proof_sha256'] and v2_proof['native_max_abs_difference']<=1e-12
+    assert sha(v2_proof_path.parent/'chunk_evidence.tar.gz')==v2_proof['archive_sha256']
+    assert v2_proof['new_CNN_inference']==0 and not v2_proof['final_test']
+    v2_n = v2_current['accepted_n']
+    state['final_evaluator_runtime_20261009'].update(
+        status=f'{v2_n}_ACCEPTED_REMAINING440_GPU_V2_RUNNING',
+        actual_native_valid_image_replays_accepted=v2_n,actual_native_valid_image_replays_remaining=900-v2_n,
+        accepted_collection_path=v2_current_path.relative_to(ROOT).as_posix(), accepted_collection_sha256=sha(v2_current_path),
+        cumulative_unique_checkpoint_acceptance=v2_current_path.relative_to(ROOT).as_posix(),
+        cumulative_unique_checkpoint_acceptance_sha256=sha(v2_current_path))
+    state['baseline_valid_GPU_remaining440_v2_20261009'].update(
+        new_offserver_accepted=v2_n-460,current_accepted=v2_n,remaining_unaccepted=900-v2_n,
+        collector_path=v2_current_path.relative_to(ROOT).as_posix(),collector_sha256=sha(v2_current_path),
+        latest_offserver_proof_sha256=sha(v2_proof_path),CPU_provenance_n=434,GPU_provenance_n=v2_n-434)
+    state['baseline_valid_GPU_resource_guard_v2_20261009']['new_offserver_accepted']=v2_n-460
+    state['baseline_valid_recovery_prepared_20261009']['current_missing']=900-v2_n
+    gpu_recovery_paragraph += (f'V2队列随后已有{v2_n-460}条通过原严格验收、全部archive/member SHA和独立保存数组复核，'
+        f'累计{v2_n}/900（CPU434/GPU{v2_n-434}），仍缺{900-v2_n}；原460账本不改，离机验收新增CNN推理0。')
 population_proof = CHECKS / 'LOGOFAIR_POPULATION_PROPOSAL_ROOT_VERIFICATION.json'
 fl_observation = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch/observations/bounded_review_20261009T130206Z/STATUS.json'
 if fl_observation.exists():
@@ -923,6 +991,20 @@ if fl_observation.exists():
         active=observed_fl['active'], pending=19, failures=0,
         new_terminal_candidates_not_strict_or_offserver=5,
         entry=fl_observation.relative_to(ROOT).as_posix(), sha256=sha(fl_observation))
+fl_delta = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch/accepted_delta_after6_20261009'
+if (fl_delta/'ROOT_ADOPTION_REVIEW.json').exists():
+    adopted = read(fl_delta/'ROOT_ADOPTION_REVIEW.json'); link = read(fl_delta/'ROOT_READY_CHAIN_LINK.json')
+    assert adopted['status']=='ROOT_FLGMM_NEW7_LINK_ARCHIVE_MEMBER_AND_ORIGINAL_ACCEPTOR_REVIEW_PASS'
+    assert adopted['reviewed_link_sha256']==sha(fl_delta/'ROOT_READY_CHAIN_LINK.json')
+    assert adopted['offserver_proof_sha256']==sha(fl_delta/'OFFSERVER_ACCEPTANCE.json')
+    assert adopted['archive_sha256']==sha(fl_delta/'accepted_delta_after6.tar.gz') and adopted['accepted_total']==13
+    fl_chain = fl_delta.parent/'BACKUP_CHAIN_increment_after6_20261009.json'
+    assert read(fl_chain)['root_adoption_sha256']==sha(fl_delta/'ROOT_ADOPTION_REVIEW.json')
+    state['flgmm_screen32_20261009'].update(
+        accepted70round_jobs=13,offserver_accepted70round_jobs=13,not_yet_accepted=19,
+        accepted_ids=link['accepted_job_ids'],latest_chain_path=fl_chain.relative_to(ROOT).as_posix(),latest_chain_sha256=sha(fl_chain),
+        latest_root_adoption_sha256=sha(fl_delta/'ROOT_ADOPTION_REVIEW.json'),latest_archive_sha256=adopted['archive_sha256'],
+        latest_readonly_terminal_observation=dict(checked_utc=link['snapshot_utc'],observed_complete=13,active=link['snapshot_active'],pending=17,failures=0))
 if population_proof.exists():
     proposal = ROOT / 'tmp/celeba_logofair_population_proposal_20261009'
     checked = read(population_proof)
@@ -967,7 +1049,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 | 阶段 | 实际状态与分母 | 接续入口 |
 |---|---|---|
 | CelebA机制消融 | 当前观测完成{live['queue_completed']}、活动{len(live['active'])}、等待{live['pending']}、失败{len(live['failed'])}；已独立严格验收并离机{main['scientific_results_offserver_verified']}/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
-| FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；13:03实测11终轮、2活动、0失败，新增5项待验收，不能计为接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及observations/bounded_review_20261009T130206Z/STATUS.json |
+| FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
 | 组合基线验证搜索 | 原32项队列已启动；最新离机快照尚无完整70轮接受，不把首轮或文件存在计作完成 | tmp/celeba_hybrid_screen_execution_20261009/results_incremental_20261009T1133Z/STATUS.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
 | 机制三视图评价 | 23份minus_U已严格验收并离机，另行统计；不是800份均已完成三视图 | server_reactivation_20261009/MECHANISM_VALID_INCREMENTAL_20261009T104749Z_ROOT_VERIFICATION.json |
