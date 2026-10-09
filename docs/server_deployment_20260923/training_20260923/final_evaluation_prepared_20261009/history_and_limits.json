@@ -1,0 +1,68 @@
+{
+  "status": "PREPARED_NOT_FROZEN",
+  "prior_test_exposure": {
+    "fact": "First240 CelebA results used official test and were reviewed before further development. Do not claim pristine test.",
+    "sources": [
+      "../celeba_tuning_v1/PROTOCOL.md paragraphs1 and last",
+      "../celeba_final_acceptance/verification.json",
+      "../celeba_fullcoverage_v1/PROTOCOL.md"
+    ]
+  },
+  "selection_history": {
+    "seven_methods": "seed91001 non-IID Benign/S-DFA recipe choice then transfer; no IID retuning",
+    "FedAA_LASA": "seed91001 IID/non-IID x Benign/S-DFA four-condition score choice",
+    "all_current_validation_seeds_observed": [
+      91001,
+      91002,
+      91003,
+      91004,
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ],
+    "historical_matching_six_not_currently_unobserved": [
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ]
+  },
+  "environments": {
+    "training_torch_counts": {
+      "2.11.0+cu128": 886,
+      "2.11.0+cu130": 14
+    },
+    "old14_identifiers": [
+      "FedAvg_lr0.002_Benign_seed91001",
+      "FedAvg_lr0.002_S-DFA_seed91001",
+      "FairFed_lr0.001_Benign_seed91001",
+      "FairFed_lr0.001_S-DFA_seed91001",
+      "Median_lr0.0005_Benign_seed91001",
+      "Median_lr0.0005_S-DFA_seed91001",
+      "FLTrust_lr0.0005_Benign_seed91001",
+      "FLTrust_lr0.0005_S-DFA_seed91001",
+      "FairGuard_lr0.001_Benign_seed91001",
+      "FairGuard_lr0.001_S-DFA_seed91001",
+      "FLTrust+FairGuard_lr0.001_Benign_seed91001",
+      "FLTrust+FairGuard_lr0.001_S-DFA_seed91001",
+      "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001",
+      "GuardFed-AD2+_lr0.0005_drop0.005_S-DFA_seed91001"
+    ],
+    "migration_gate_limit": "Four first-round exact comparisons do not establish70-round training equivalence.700 shared-calibration native replay proves those weights can reproduce native validation metrics under its frozen evaluation environment, not universal training equivalence.",
+    "future_evaluation_environment": "Not yet observed or frozen"
+  },
+  "current_record_traceability": {
+    "models_results_raw_jobs": 900,
+    "missing_record_identity": 0,
+    "live_server_unchanged_not_verified": true,
+    "target_partition_id_sha_not_yet_attested": true,
+    "scope_only_current900": true
+  },
+  "no_new_test_labels_read": true,
+  "no_inference_or_training": true
+}

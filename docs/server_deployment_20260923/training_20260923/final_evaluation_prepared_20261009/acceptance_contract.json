@@ -1,0 +1,70 @@
+{
+  "schema": "guardfed_final_evaluation_acceptance_contract_v1",
+  "status": "PREPARED_NOT_FROZEN",
+  "not_an_execution_entrypoint": true,
+  "required_identity": [
+    "frozen_protocol_sha256",
+    "frozen_manifest_sha256",
+    "dispatch_receipt_sha256",
+    "model_id",
+    "original_result_sha256",
+    "original_job_sha256",
+    "checkpoint_sha256",
+    "config_canonical_sha256",
+    "source_hashes",
+    "adapter_source_hashes",
+    "data_hashes",
+    "seed",
+    "distribution",
+    "actual_alpha",
+    "attack",
+    "terminal_round70",
+    "training_environment",
+    "evaluation_environment",
+    "root_image_ids_sha256",
+    "target_image_ids_sha256",
+    "target_order_sha256",
+    "original_split",
+    "target_split",
+    "target_n"
+  ],
+  "required_same_model_views": [
+    "Every collected view is predeclared and complete for all900",
+    "All views same terminal weights; no checkpoint search",
+    "Within each view ACC/TPRgap/ASPD derive from one prediction vector"
+  ],
+  "native_valid_replay": {
+    "records": 900,
+    "max_abs_delta_each_metric": 1e-12,
+    "root_and_valid_ids_must_match": true,
+    "current_new_stage_replay_completed": false
+  },
+  "label_access": {
+    "root_labels": "Allowed only for predeclared native/shared threshold fitting",
+    "validation_labels": "Replay old metrics only; no new recipe/view choice",
+    "target_labels": "Metrics only after freeze; never threshold fitting, tuning, seed/checkpoint/view selection"
+  },
+  "finite_and_denominator_checks": [
+    "Finite logits/margins and safe weights_only state load",
+    "Complete target_n and IDs/order match",
+    "Both sensitive groups and positive/negative group denominators explicit",
+    "Preserve constant predictions and undefined-fairness evidence; no zero substitution for missing denominator"
+  ],
+  "artifacts": [
+    "root_thresholds_and_fit_rule.json",
+    "evaluation_identity.json",
+    "margins_and_predictions.npz",
+    "group_confusion_counts.json",
+    "raw_metrics.json",
+    "acceptance.json",
+    "failure_evidence_if_any"
+  ],
+  "checkpoint_weights_immutable": true,
+  "partial_output_overwrite_allowed": false,
+  "automatic_retry_on_logic_numeric_failure": false,
+  "backup": "accepted-ID difference only; archive SHA and every new member hash; preserve negative/failure artifacts",
+  "aggregation": "900 condition keys paired; n=10 per method/distribution/attack; sampleSD ddof1; supplementary9/6; seed-first cross-scenario means",
+  "formal_inference_policy": null,
+  "dispatch_implemented": false,
+  "test_called": false
+}

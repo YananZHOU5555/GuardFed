@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "scientific_results": 0,
+  "real_celeba_training": false,
+  "protocol_status": "PREPARED_NOT_FROZEN",
+  "algebra": {
+    "frozen_attack_exact_oracles": 108,
+    "sign_handcheck": true,
+    "ambiguous_state_refused": true,
+    "zero_gradient_and_zero_reference_fallback_checked": true
+  },
+  "huber": {
+    "independent_scipy_objective_matches": true,
+    "unconverged_aggregate_refused": true
+  },
+  "sensitive_null_check": {
+    "unweighted_FFlip_is_exact_null": true,
+    "shared_reweight_FFlip_changes_gradient": true,
+    "images_and_labels_unchanged": true
+  },
+  "pipeline_runs": 6,
+  "total_synthetic_rounds": 18,
+  "deterministic_replay_bitwise_equal": true,
+  "per_run": [
+    {
+      "method": "Fed-NGA-gradient",
+      "root_reference": "frozen_root_localadam_delta",
+      "objective": "original_unweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 60,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 3,
+      "checkpoint_reevaluation_equal": true
+    },
+    {
+      "method": "Fed-NGA-gradient",
+      "root_reference": "same_point_unweighted_gradient",
+      "objective": "original_unweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 63,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 0,
+      "checkpoint_reevaluation_equal": true
+    },
+    {
+      "method": "Huber-BRFL-gradient",
+      "root_reference": "frozen_root_localadam_delta",
+      "objective": "original_unweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 60,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 3,
+      "checkpoint_reevaluation_equal": true
+    },
+    {
+      "method": "Huber-BRFL-gradient",
+      "root_reference": "same_point_unweighted_gradient",
+      "objective": "original_unweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 63,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 0,
+      "checkpoint_reevaluation_equal": true
+    },
+    {
+      "method": "Fed-NGA-gradient",
+      "root_reference": "same_point_unweighted_gradient",
+      "objective": "shared_reweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 63,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 0,
+      "checkpoint_reevaluation_equal": true
+    },
+    {
+      "method": "Fed-NGA-gradient",
+      "root_reference": "frozen_root_localadam_delta",
+      "objective": "original_unweighted_ce",
+      "rounds": 3,
+      "exact_upload_oracle_checks": 60,
+      "same_point_full_gradient_checks": 60,
+      "whole_cohort_autograd_oracle_checks": 60,
+      "client_optimizer_steps": 0,
+      "root_only_adam_calls": 3,
+      "checkpoint_reevaluation_equal": true
+    }
+  ],
+  "worker_sha256": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4",
+  "check_sha256": "2e8c2ee49268bd088e2063804a0c0b56c20c7ff2794ffed36c00cd1747be876e",
+  "component_hashes": {
+    "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+    "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+  },
+  "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "limits": [
+    "Synthetic uint8 RGB64 CPU only; no real CelebA/GPU, seventy-round or performance evidence",
+    "Protocol decisions remain unresolved; alternative reference/objective gates are component checks, not approvals"
+  ]
+}
