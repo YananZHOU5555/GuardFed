@@ -1314,6 +1314,17 @@ for base_name,state_key,minimum in (
             latest_root_review_path=proof_path.relative_to(ROOT).as_posix(),latest_root_review_sha256=sha(proof_path),
             latest_new_accepted=proof['accepted_new'],latest_archive_members=proof['members_verified'],
             latest_archive_sha256=proof['archive_sha256'],selected_recipe=None,formal100_started=False,final_test=False)
+        if state_key=='flgmm_screen32_20261009' and latest['accepted']==32:
+            terminal_path=base/chain['delta_dir']/'AUTHORIZED_SNAPSHOT.json';terminal=read(terminal_path)
+            assert sha(terminal_path)==proof['authorized_snapshot_sha256']
+            assert terminal['queue']['completed']==32 and not terminal['queue']['active'] and terminal['queue']['pending']==0
+            assert 'EXITED' in terminal['service']['stdout'] and not terminal['failure_paths']
+            state[state_key].update(status='SCREEN32_COMPLETE_STRICT_OFFSERVER_SUMMARY_PENDING',
+                service='guardfed_celeba_flgmm_screen',terminal_service=terminal['service']['stdout'],terminal_workers=0,
+                latest_readonly_terminal_observation=dict(checked_utc=terminal['utc'],observed_complete=32,active=0,pending=0,
+                    failures=0,source_bound=True,observed_terminal_ids=chain['accepted_job_ids'],active_rounds=[],
+                    snapshot_path=terminal_path.relative_to(ROOT).as_posix(),snapshot_sha256=sha(terminal_path)))
+            state['active_services']=[name for name in state['active_services'] if name!=state[state_key]['service']]
 baseline_table_root = ROOT/'outputs/guardfed_tables/celeba_nine_method_three_view_20261009/ROOT_REVIEW.json'
 if baseline_table_root.exists():
     table_proof = read(baseline_table_root)
@@ -1826,6 +1837,21 @@ if (spec_dir/'FILES_SHA256.json').exists():
         requested_input='Source-matched full methods/supplements or code/defaults; executable mathematics is sufficient',
         other_experiments_continue=True)
 
+fl_summary_path=ROOT/'tmp/celeba_flgmm_final6_closure_20261009/ROOT_SUMMARY_ADOPTION.json'
+if fl_summary_path.exists():
+    fl_summary=read(fl_summary_path)
+    assert sha(fl_summary_path)=='e602761016e199da157862da3f24c9f9d0f191cfde10fad49074540c672b4a7f'
+    assert fl_summary['status']=='ROOT_FROZEN_VALIDATION32_RECIPE_SUMMARY_ADOPTED'
+    assert fl_summary['accepted_records']==32 and not fl_summary['formal100_binding_or_execution'] and not fl_summary['final_test']
+    assert sha(ROOT/fl_summary['summary_path'])==fl_summary['summary_sha256']
+    assert sha(ROOT/fl_summary['independent_review_path'])==fl_summary['independent_review_sha256']
+    state['flgmm_screen32_20261009'].update(status='SCREEN32_COMPLETE_STRICT_OFFSERVER_RECIPE_SUMMARY_ADOPTED',
+        selected_recipe=fl_summary['selected_recipe'],recipe_summary_root_path=fl_summary_path.relative_to(ROOT).as_posix(),
+        recipe_summary_root_sha256=sha(fl_summary_path),summary_path=fl_summary['summary_path'],summary_sha256=fl_summary['summary_sha256'],
+        selected_four_condition_mean=fl_summary['selected_four_condition_mean'],accuracy_champion=fl_summary['accuracy_champion'],
+        pareto_candidates=len(fl_summary['three_metric_pareto']),score_gap_to_second=fl_summary['score_gap_to_second'],
+        seed_n=1,sample_SD_reported=False,significance_claimed=False,formal100_started=False,final_test=False)
+
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1927,7 +1953,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
 删除C的IID Benign native十seed论文表已独立核验54统计标量/27展示单元/10对checkpoint，保留9/6seed面板；入口celeba_mechanism_v1/native_C_Benign10_20261009/TABLES.md。十seed配对删除差ACC−0.083个百分点、AEOD+0.00292、ASPD−0.00142，9/6面板方向有变化，不作必要性/因果/显著性结论。F Flip仅2seed、其他C场景未齐，不纳入本表均值。
 
-主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
+主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM原搜索服务已正常EXITED、0worker，32/32严格离机，冻结规则选Tg20/L2/lr0.001，32评分与32候选均值标量经独立及root复核；前两分差0.00004978，仅n=1验证搜索，不作SD或显著性结论。组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe。两套搜索均固定8候选×四条件、seed91001，100项多seed确认尚未启动，不运行test。
 
 主机制最近实测CPU {live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核，RAM {live['memory_used_bytes']/1e9:.2f}GB，磁盘余{live['disk_free_bytes']/1e12:.3f}TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 

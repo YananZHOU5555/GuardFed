@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -39,7 +39,10 @@ profiles={
         native_tag='root_delta_20261009T190056Z',native_delta=8,handoffs=[],live_tags=[],formal_tag='20261009T190051Z'),
     26:dict(previous='b55159fc951c8d3bfd41b5c039cb1239fbdb2219',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=112,views=112,
-        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T193513Z')}
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T193513Z'),
+    27:dict(previous='9ed3ff9d5fa1eba3a42d858275c7e9994b028776',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=112,views=112,
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T195725Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -562,6 +565,31 @@ if args.increment==26:
             'update_overview_closure100_root_20261009.py'):
         copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
     copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
+if args.increment==27:
+    final=ROOT/'tmp/celeba_flgmm_final6_closure_20261009'
+    assert sha(final/'ROOT_SUMMARY_ADOPTION.json')=='e602761016e199da157862da3f24c9f9d0f191cfde10fad49074540c672b4a7f'
+    decision=read(final/'ROOT_SUMMARY_ADOPTION.json')
+    assert decision['accepted_records']==32 and decision['new_inference']==0 and not decision['formal100_binding_or_execution']
+    assert sha(final/'summary32_final/SUMMARY32.json')==decision['summary_sha256']
+    assert sha(final/'FILES_SHA256.json')=='1d7cc11f95727a57478dd8575f65170024b36df98187030ac2de05e1e08cf6b9'
+    for name,pin in read(final/'FILES_SHA256.json')['files'].items():assert sha(final/name)==pin['sha256']
+    actual=final/'actual_20261009T194424Z';proof=read(actual/'ROOT_ADOPTION_REVIEW.json')
+    assert sha(actual/'ROOT_ADOPTION_REVIEW.json')==decision['final32_root_proof_sha256']
+    assert (proof['accepted_before'],proof['accepted_new'],proof['accepted_total'])==(26,6,32)
+    assert sha(actual/'accepted_final6_delta.tar.gz')==proof['archive_sha256']
+    for directory in (final,ROOT/'tmp/celeba_flgmm_summary32_root_independent_20261009'):
+        for path in directory.rglob('*'):
+            if path.is_file() and '__pycache__' not in path.parts:copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    parent=ROOT/'tmp/celeba_flgmm_screen_20261009_v2_dispatch';latest=read(parent/'LATEST_BACKUP.json')
+    assert latest['accepted']==32 and sha(parent/latest['chain_file'])==latest['chain_sha256']
+    for name in ('LATEST_BACKUP.json',latest['chain_file']):copy(parent/name,Path('experimental')/parent.name/name)
+    for name in ('execute_flgmm_final6_root_20261009.py','adopt_flgmm_final6_root_20261009.py',
+            'capture_flgmm_original_snapshot_root_20261009.py','run_flgmm_summary32_legacy2_root_20261009.py',
+            'adopt_flgmm_summary32_root_20261009.py','update_overview_closure100_root_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+    for name in ('auxiliary_screens_20261009T195440Z.json','auxiliary_screens_20261009T195440Z.RAW.json'):
+        copy(ROOT/CHECKS/name,CHECKS/name)
+    copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -618,6 +646,9 @@ if args.increment==26:
         'experimental/guardfed_remaining_three_baseline_spec_decision_20261009/** -text',
         'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_C_Benign10_20261009/** -text',
         'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_Benign10_20261009/** -text']
+if args.increment==27:
+    patterns += ['experimental/celeba_flgmm_final6_closure_20261009/** -text',
+        'experimental/celeba_flgmm_summary32_root_independent_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -659,6 +690,13 @@ if args.increment==26:
         minus_U_complete_three_view=100,minus_C_three_view=12,complete_C_scenes=1,
         C_three_view_mean_SD_scalars=162,C_three_view_display_cells=81,C_native_mean_SD_scalars=54,
         other_C_scenes_complete=False,main_manuscript_edited=False,primary_endpoint_selected=False)
+if args.increment==27:
+    receipt.update(increment_scope='FLGMM_final6_acceptance_and_frozen32_record_only_recipe_selection',
+        new_mechanism_native_accepted=0,new_mechanism_three_view_accepted=0,new_FLGMM_strict_offserver=6,
+        FLGMM_summary_candidates=8,FLGMM_selected_recipe=decision['selected_recipe'],FLGMM_search_seed_n=1,
+        FLGMM_summary_root_sha256=sha(final/'ROOT_SUMMARY_ADOPTION.json'),
+        original_schema_failure_preserved=True,missing_legacy_host_flag_fabricated=False,
+        formal100_started=False,main_manuscript_edited=False,primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

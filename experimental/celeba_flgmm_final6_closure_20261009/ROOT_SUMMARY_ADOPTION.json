@@ -1,0 +1,103 @@
+{
+  "status": "ROOT_FROZEN_VALIDATION32_RECIPE_SUMMARY_ADOPTED",
+  "checked_utc": "2026-10-09T19:55:39.560363+00:00",
+  "accepted_records": 32,
+  "candidates": 8,
+  "condition_scores_checked": 32,
+  "candidate_mean_scalars_checked": 32,
+  "summary_path": "tmp/celeba_flgmm_final6_closure_20261009/summary32_final/SUMMARY32.json",
+  "summary_sha256": "d8f32441402f0ce7870bacc34e94de2a334133b2881d0a59ccf5123ef0781291",
+  "independent_review_path": "tmp/celeba_flgmm_summary32_root_independent_20261009/ROOT_INDEPENDENT_REVIEW.json",
+  "independent_review_sha256": "4b25891a75ddfd99c356c23dbc6422610ea217204a27ebc44dd89c343da959e4",
+  "independent_seal_sha256": "14326cef49bed537f9552fe787d4bb3e7ddecab95d1bb0ba64c499f20dff59cb",
+  "final32_root_proof_sha256": "66097564f346b0dd5a0194ea7bd8c1413d51936819db086283f1d9a99a85738e",
+  "selected_recipe": {
+    "id": "FLGMM_Tg20_L2.0_lr0.001",
+    "adapter": {
+      "warmup_rounds": 20,
+      "control_width": 2.0
+    },
+    "learning_rate": 0.001
+  },
+  "selected_four_condition_mean": {
+    "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+    "n_seeds": 1,
+    "accuracy": 0.878970151507525,
+    "aeod": 0.04389513346108234,
+    "aspd": 0.10095577574681294,
+    "score": 0.8485271035814618
+  },
+  "accuracy_champion": {
+    "candidate": "FLGMM_Tg20_L3.0_lr0.001",
+    "n_seeds": 1,
+    "accuracy": 0.8793979966779081,
+    "aeod": 0.04688861109624712,
+    "aspd": 0.10348083286705095,
+    "score": 0.8477448968166368
+  },
+  "three_metric_pareto": [
+    {
+      "candidate": "FLGMM_Tg10_L2.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.8786681431519605,
+      "aeod": 0.04340875537136271,
+      "aspd": 0.10035534975778913,
+      "score": 0.8484773243768176
+    },
+    {
+      "candidate": "FLGMM_Tg10_L3.0_lr0.0005",
+      "n_seeds": 1,
+      "accuracy": 0.8616172547440479,
+      "aeod": 0.05155718543303159,
+      "aspd": 0.09594130498253618,
+      "score": 0.8314341663309537
+    },
+    {
+      "candidate": "FLGMM_Tg10_L3.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.8793099109075351,
+      "aeod": 0.04600741176750689,
+      "aspd": 0.10283826581218491,
+      "score": 0.8479835508040887
+    },
+    {
+      "candidate": "FLGMM_Tg20_L2.0_lr0.0005",
+      "n_seeds": 1,
+      "accuracy": 0.8601197966477072,
+      "aeod": 0.05150017455676606,
+      "aspd": 0.09625199495173556,
+      "score": 0.8298548106316339
+    },
+    {
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.878970151507525,
+      "aeod": 0.04389513346108234,
+      "aspd": 0.10095577574681294,
+      "score": 0.8485271035814618
+    },
+    {
+      "candidate": "FLGMM_Tg20_L3.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.8793979966779081,
+      "aeod": 0.04688861109624712,
+      "aspd": 0.10348083286705095,
+      "score": 0.8477448968166368
+    }
+  ],
+  "score_gap_to_second": 4.9779204644218034e-05,
+  "exact_tie": false,
+  "selection_rule": "Frozen per-condition score, then four-condition mean, exact ties candidate lexical order",
+  "seed_n": 1,
+  "sample_SD_reported": false,
+  "significance_claimed": false,
+  "all_candidates_retained": true,
+  "original_summary_unchanged": true,
+  "legacy_missing_host_field_fabricated": false,
+  "recipe_selected_for_next_valid_coverage": true,
+  "formal100_binding_or_execution": false,
+  "new_inference": 0,
+  "final_test": false,
+  "scientific_goal_complete": false,
+  "limitation": "Exposed validation seed91001; four conditions are not independent seeds. Near score tie does not establish stable superiority. Author-code FLGMM adaptations and zero-SD extension remain disclosed. Formal coverage requires separate source-bound binding and actual canaries."
+}

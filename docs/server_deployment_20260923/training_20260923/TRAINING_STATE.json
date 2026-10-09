@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791575004.033084,
+  "updated_unix": 1791575886.9824302,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -187,7 +187,6 @@
   "formal_total_planned_new_runs": 1390,
   "active_services": [
     "guardfed_celeba_mechanism_formal",
-    "guardfed_celeba_flgmm_screen",
     "guardfed_celeba_hybrid_screen32"
   ],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
@@ -199,165 +198,154 @@
     "notes": "254CPU matches plus6originalGPU matches; rawCPU mismatch files preserved."
   },
   "last_health_check": {
-    "checked_utc": "2026-10-09T19:35:12.629199+00:00",
+    "checked_utc": "2026-10-09T19:57:24.888503+00:00",
     "server": "89.22.197.55:60350",
     "instance": 52183675,
     "phase": "formal",
-    "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:16:16",
-    "queue_completed": 112,
+    "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:38:28",
+    "queue_completed": 119,
     "failed": [],
     "failure_files": [],
     "active": [
       {
-        "id": "minus_C_IID_F Flip_seed91003",
-        "pid": 64174,
-        "progress": {
-          "round": 65,
-          "metrics": {
-            "accuracy": 0.8876528917300045,
-            "aeod": 0.0005800800674560236,
-            "aspd": 0.06567276550949258
-          },
-          "job_id": "minus_C_IID_F Flip_seed91003",
-          "pid": 64174,
-          "elapsed_sec": 3773.342473745346,
-          "updated_unix": 1791574499.3663695
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91003.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91004",
-        "pid": 64192,
-        "progress": {
-          "round": 62,
-          "metrics": {
-            "accuracy": 0.8864448583077466,
-            "aeod": 0.007564896575410707,
-            "aspd": 0.061051155388540224
-          },
-          "job_id": "minus_C_IID_F Flip_seed91004",
-          "pid": 64192,
-          "elapsed_sec": 3680.6108021736145,
-          "updated_unix": 1791574501.6899612
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91004.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91005",
-        "pid": 64200,
-        "progress": {
-          "round": 62,
-          "metrics": {
-            "accuracy": 0.8802033522927468,
-            "aeod": 0.014604072016864977,
-            "aspd": 0.04094148851094537
-          },
-          "job_id": "minus_C_IID_F Flip_seed91005",
-          "pid": 64200,
-          "elapsed_sec": 3627.7779364585876,
-          "updated_unix": 1791574504.7999787
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91005.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91006",
-        "pid": 64234,
-        "progress": {
-          "round": 59,
-          "metrics": {
-            "accuracy": 0.8785926410630694,
-            "aeod": 0.014164297401355386,
-            "aspd": 0.07234838081827805
-          },
-          "job_id": "minus_C_IID_F Flip_seed91006",
-          "pid": 64234,
-          "elapsed_sec": 3140.314292192459,
-          "updated_unix": 1791574492.961086
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91006.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91007",
-        "pid": 64318,
-        "progress": {
-          "round": 48,
-          "metrics": {
-            "accuracy": 0.8832737705743192,
-            "aeod": 0.0035079191725561065,
-            "aspd": 0.06296886663859957
-          },
-          "job_id": "minus_C_IID_F Flip_seed91007",
-          "pid": 64318,
-          "elapsed_sec": 2482.845720767975,
-          "updated_unix": 1791574486.859921
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91007.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91008",
-        "pid": 64480,
-        "progress": {
-          "round": 48,
-          "metrics": {
-            "accuracy": 0.8786933105149243,
-            "aeod": 0.0008367881272168809,
-            "aspd": 0.053947880543254834
-          },
-          "job_id": "minus_C_IID_F Flip_seed91008",
-          "pid": 64480,
-          "elapsed_sec": 2222.9374811649323,
-          "updated_unix": 1791574459.971126
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91008.json "
-      },
-      {
-        "id": "minus_C_IID_F Flip_seed91009",
-        "pid": 64547,
-        "progress": {
-          "round": 46,
-          "metrics": {
-            "accuracy": 0.8753208838777873,
-            "aeod": 0.01099191381398168,
-            "aspd": 0.06736532025209985
-          },
-          "job_id": "minus_C_IID_F Flip_seed91009",
-          "pid": 64547,
-          "elapsed_sec": 2142.1381916999817,
-          "updated_unix": 1791574474.316255
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91009.json "
-      },
-      {
         "id": "minus_C_IID_F Flip_seed91010",
         "pid": 64553,
         "progress": {
-          "round": 45,
+          "round": 69,
           "metrics": {
-            "accuracy": 0.8415462827804903,
-            "aeod": 0.0010753451120452118,
-            "aspd": 0.03789298940337432
+            "accuracy": 0.8714451099813761,
+            "aeod": 0.003147537830258118,
+            "aspd": 0.060909555604040544
           },
           "job_id": "minus_C_IID_F Flip_seed91010",
           "pid": 64553,
-          "elapsed_sec": 2135.0339522361755,
-          "updated_unix": 1791574502.1875968
+          "elapsed_sec": 3449.7702026367188,
+          "updated_unix": 1791575816.9238474
         },
         "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91010.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91001",
+        "pid": 65377,
+        "progress": {
+          "round": 17,
+          "metrics": {
+            "accuracy": 0.6500226506266673,
+            "aeod": 0.004574730922100589,
+            "aspd": 0.024653834434907984
+          },
+          "job_id": "minus_C_IID_FedSA_seed91001",
+          "pid": 65377,
+          "elapsed_sec": 994.9217751026154,
+          "updated_unix": 1791575829.2559178
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91001.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91002",
+        "pid": 65391,
+        "progress": {
+          "round": 12,
+          "metrics": {
+            "accuracy": 0.7155081290582372,
+            "aeod": 0.01153291013827118,
+            "aspd": 0.006070437892566616
+          },
+          "job_id": "minus_C_IID_FedSA_seed91002",
+          "pid": 65391,
+          "elapsed_sec": 780.3065223693848,
+          "updated_unix": 1791575799.4178007
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91002.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91003",
+        "pid": 65393,
+        "progress": {
+          "round": 13,
+          "metrics": {
+            "accuracy": 0.6792671263904968,
+            "aeod": 0.0160086823427521,
+            "aspd": 0.023475967550684984
+          },
+          "job_id": "minus_C_IID_FedSA_seed91003",
+          "pid": 65393,
+          "elapsed_sec": 768.4914314746857,
+          "updated_unix": 1791575801.478912
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91003.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91004",
+        "pid": 65530,
+        "progress": {
+          "round": 10,
+          "metrics": {
+            "accuracy": 0.5166859616449389,
+            "aeod": 0.00032483352281955497,
+            "aspd": 0.00035060040319046367
+          },
+          "job_id": "minus_C_IID_FedSA_seed91004",
+          "pid": 65530,
+          "elapsed_sec": 576.147882938385,
+          "updated_unix": 1791575809.3838134
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91004.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91005",
+        "pid": 65628,
+        "progress": {
+          "round": 1,
+          "metrics": {
+            "accuracy": 0.5166859616449389,
+            "aeod": 0.00016241676140977748,
+            "aspd": 0.00017530020159523183
+          },
+          "job_id": "minus_C_IID_FedSA_seed91005",
+          "pid": 65628,
+          "elapsed_sec": 72.239755153656,
+          "updated_unix": 1791575800.2495914
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91005.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91006",
+        "pid": 65653,
+        "progress": {
+          "round": 1,
+          "metrics": {
+            "accuracy": 0.5166356269190114,
+            "aeod": 0.0005805515239477503,
+            "aspd": 0.0005911563017261764
+          },
+          "job_id": "minus_C_IID_FedSA_seed91006",
+          "pid": 65653,
+          "elapsed_sec": 52.237969398498535,
+          "updated_unix": 1791575837.5970657
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91006.json "
+      },
+      {
+        "id": "minus_C_IID_FedSA_seed91007",
+        "pid": 65663,
+        "progress": {},
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91007.json "
       }
     ],
-    "pending": 680,
-    "queue_updated_unix": 1791574506.9636664,
-    "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 98 %, 6038 MiB, 65\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 73 %, 4034 MiB, 61\n",
+    "pending": 673,
+    "queue_updated_unix": 1791575838.5186903,
+    "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 95 %, 5039 MiB, 65\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 86 %, 4024 MiB, 62\n",
     "gpu_recovery": [
       "GPU Recovery Action                                : None",
       "GPU Recovery Action                                : None"
     ],
-    "cpu_used_cores_2sec": 10.015823734958524,
+    "cpu_used_cores_2sec": 9.032508979752777,
     "cpu_quota_cores": 122.87999,
-    "memory_used_bytes": 71698972672,
+    "memory_used_bytes": 67832221696,
     "memory_limit": "519171997696",
     "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
-    "disk_free_bytes": 1061158436864,
+    "disk_free_bytes": 1061134487552,
     "recent_active_log_errors": []
   },
   "celeba_tuning_v1": {
@@ -2716,11 +2704,11 @@
     "accepted_combined_records": 900
   },
   "latest_connection_check": {
-    "recorded_utc": "2026-10-09T19:35:12.629199+00:00",
+    "recorded_utc": "2026-10-09T19:57:24.888503+00:00",
     "server": "89.22.197.55:60350",
     "instance": 52183675,
     "observed": "SSH authenticated; both real CUDA tensor checks PASS; five frozen core hashes and all four RGB64 cache hashes exactly match",
-    "current_internal_runtime": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:16:16",
+    "current_internal_runtime": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:38:28",
     "torch": "2.11.0+cu128",
     "driver": "595.84",
     "gpu_recovery": [
@@ -2753,7 +2741,7 @@
     "new_total_prepared": 800,
     "reused_full": 100,
     "new_completed": 112,
-    "new_started": 120,
+    "new_started": 127,
     "prepared_gate_jobs": 18,
     "reference_jobs": 2,
     "cpu_component_tests_passed": 6,
@@ -2766,7 +2754,7 @@
     "current_runtime": "torch2.11.0+cu128 driver595.84",
     "preflight_queue_completed": 20,
     "scientific_results_completed": 112,
-    "queue_completed_observed": 112,
+    "queue_completed_observed": 119,
     "scientific_results_strictly_accepted": 112,
     "real_image_cu128_gates_accepted": 20,
     "cross_runtime_three_round_exact": 20,
@@ -3841,7 +3829,7 @@
     "status": "FORMAL800_RUNNING",
     "server": "89.22.197.55:60350",
     "instance": 52183675,
-    "new_formal_training": 120,
+    "new_formal_training": 127,
     "setup_members_transferred": 834,
     "restore_bundle": "server_reactivation_20261009/restore_bundle.json",
     "scientific_protocol_or_method_changed": false,
@@ -3853,165 +3841,154 @@
     "cu130_offserver_members_verified": 149,
     "cu128_environment": "server_reactivation_20261009/cu128_environment.json",
     "latest_live": {
-      "checked_utc": "2026-10-09T19:35:12.629199+00:00",
+      "checked_utc": "2026-10-09T19:57:24.888503+00:00",
       "server": "89.22.197.55:60350",
       "instance": 52183675,
       "phase": "formal",
-      "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:16:16",
-      "queue_completed": 112,
+      "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 13:38:28",
+      "queue_completed": 119,
       "failed": [],
       "failure_files": [],
       "active": [
         {
-          "id": "minus_C_IID_F Flip_seed91003",
-          "pid": 64174,
-          "progress": {
-            "round": 65,
-            "metrics": {
-              "accuracy": 0.8876528917300045,
-              "aeod": 0.0005800800674560236,
-              "aspd": 0.06567276550949258
-            },
-            "job_id": "minus_C_IID_F Flip_seed91003",
-            "pid": 64174,
-            "elapsed_sec": 3773.342473745346,
-            "updated_unix": 1791574499.3663695
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91003.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91004",
-          "pid": 64192,
-          "progress": {
-            "round": 62,
-            "metrics": {
-              "accuracy": 0.8864448583077466,
-              "aeod": 0.007564896575410707,
-              "aspd": 0.061051155388540224
-            },
-            "job_id": "minus_C_IID_F Flip_seed91004",
-            "pid": 64192,
-            "elapsed_sec": 3680.6108021736145,
-            "updated_unix": 1791574501.6899612
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91004.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91005",
-          "pid": 64200,
-          "progress": {
-            "round": 62,
-            "metrics": {
-              "accuracy": 0.8802033522927468,
-              "aeod": 0.014604072016864977,
-              "aspd": 0.04094148851094537
-            },
-            "job_id": "minus_C_IID_F Flip_seed91005",
-            "pid": 64200,
-            "elapsed_sec": 3627.7779364585876,
-            "updated_unix": 1791574504.7999787
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91005.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91006",
-          "pid": 64234,
-          "progress": {
-            "round": 59,
-            "metrics": {
-              "accuracy": 0.8785926410630694,
-              "aeod": 0.014164297401355386,
-              "aspd": 0.07234838081827805
-            },
-            "job_id": "minus_C_IID_F Flip_seed91006",
-            "pid": 64234,
-            "elapsed_sec": 3140.314292192459,
-            "updated_unix": 1791574492.961086
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91006.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91007",
-          "pid": 64318,
-          "progress": {
-            "round": 48,
-            "metrics": {
-              "accuracy": 0.8832737705743192,
-              "aeod": 0.0035079191725561065,
-              "aspd": 0.06296886663859957
-            },
-            "job_id": "minus_C_IID_F Flip_seed91007",
-            "pid": 64318,
-            "elapsed_sec": 2482.845720767975,
-            "updated_unix": 1791574486.859921
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91007.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91008",
-          "pid": 64480,
-          "progress": {
-            "round": 48,
-            "metrics": {
-              "accuracy": 0.8786933105149243,
-              "aeod": 0.0008367881272168809,
-              "aspd": 0.053947880543254834
-            },
-            "job_id": "minus_C_IID_F Flip_seed91008",
-            "pid": 64480,
-            "elapsed_sec": 2222.9374811649323,
-            "updated_unix": 1791574459.971126
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91008.json "
-        },
-        {
-          "id": "minus_C_IID_F Flip_seed91009",
-          "pid": 64547,
-          "progress": {
-            "round": 46,
-            "metrics": {
-              "accuracy": 0.8753208838777873,
-              "aeod": 0.01099191381398168,
-              "aspd": 0.06736532025209985
-            },
-            "job_id": "minus_C_IID_F Flip_seed91009",
-            "pid": 64547,
-            "elapsed_sec": 2142.1381916999817,
-            "updated_unix": 1791574474.316255
-          },
-          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91009.json "
-        },
-        {
           "id": "minus_C_IID_F Flip_seed91010",
           "pid": 64553,
           "progress": {
-            "round": 45,
+            "round": 69,
             "metrics": {
-              "accuracy": 0.8415462827804903,
-              "aeod": 0.0010753451120452118,
-              "aspd": 0.03789298940337432
+              "accuracy": 0.8714451099813761,
+              "aeod": 0.003147537830258118,
+              "aspd": 0.060909555604040544
             },
             "job_id": "minus_C_IID_F Flip_seed91010",
             "pid": 64553,
-            "elapsed_sec": 2135.0339522361755,
-            "updated_unix": 1791574502.1875968
+            "elapsed_sec": 3449.7702026367188,
+            "updated_unix": 1791575816.9238474
           },
           "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_F Flip_seed91010.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91001",
+          "pid": 65377,
+          "progress": {
+            "round": 17,
+            "metrics": {
+              "accuracy": 0.6500226506266673,
+              "aeod": 0.004574730922100589,
+              "aspd": 0.024653834434907984
+            },
+            "job_id": "minus_C_IID_FedSA_seed91001",
+            "pid": 65377,
+            "elapsed_sec": 994.9217751026154,
+            "updated_unix": 1791575829.2559178
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91001.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91002",
+          "pid": 65391,
+          "progress": {
+            "round": 12,
+            "metrics": {
+              "accuracy": 0.7155081290582372,
+              "aeod": 0.01153291013827118,
+              "aspd": 0.006070437892566616
+            },
+            "job_id": "minus_C_IID_FedSA_seed91002",
+            "pid": 65391,
+            "elapsed_sec": 780.3065223693848,
+            "updated_unix": 1791575799.4178007
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91002.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91003",
+          "pid": 65393,
+          "progress": {
+            "round": 13,
+            "metrics": {
+              "accuracy": 0.6792671263904968,
+              "aeod": 0.0160086823427521,
+              "aspd": 0.023475967550684984
+            },
+            "job_id": "minus_C_IID_FedSA_seed91003",
+            "pid": 65393,
+            "elapsed_sec": 768.4914314746857,
+            "updated_unix": 1791575801.478912
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91003.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91004",
+          "pid": 65530,
+          "progress": {
+            "round": 10,
+            "metrics": {
+              "accuracy": 0.5166859616449389,
+              "aeod": 0.00032483352281955497,
+              "aspd": 0.00035060040319046367
+            },
+            "job_id": "minus_C_IID_FedSA_seed91004",
+            "pid": 65530,
+            "elapsed_sec": 576.147882938385,
+            "updated_unix": 1791575809.3838134
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91004.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91005",
+          "pid": 65628,
+          "progress": {
+            "round": 1,
+            "metrics": {
+              "accuracy": 0.5166859616449389,
+              "aeod": 0.00016241676140977748,
+              "aspd": 0.00017530020159523183
+            },
+            "job_id": "minus_C_IID_FedSA_seed91005",
+            "pid": 65628,
+            "elapsed_sec": 72.239755153656,
+            "updated_unix": 1791575800.2495914
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91005.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91006",
+          "pid": 65653,
+          "progress": {
+            "round": 1,
+            "metrics": {
+              "accuracy": 0.5166356269190114,
+              "aeod": 0.0005805515239477503,
+              "aspd": 0.0005911563017261764
+            },
+            "job_id": "minus_C_IID_FedSA_seed91006",
+            "pid": 65653,
+            "elapsed_sec": 52.237969398498535,
+            "updated_unix": 1791575837.5970657
+          },
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91006.json "
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91007",
+          "pid": 65663,
+          "progress": {},
+          "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91007.json "
         }
       ],
-      "pending": 680,
-      "queue_updated_unix": 1791574506.9636664,
-      "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 98 %, 6038 MiB, 65\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 73 %, 4034 MiB, 61\n",
+      "pending": 673,
+      "queue_updated_unix": 1791575838.5186903,
+      "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 95 %, 5039 MiB, 65\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 86 %, 4024 MiB, 62\n",
       "gpu_recovery": [
         "GPU Recovery Action                                : None",
         "GPU Recovery Action                                : None"
       ],
-      "cpu_used_cores_2sec": 10.015823734958524,
+      "cpu_used_cores_2sec": 9.032508979752777,
       "cpu_quota_cores": 122.87999,
-      "memory_used_bytes": 71698972672,
+      "memory_used_bytes": 67832221696,
       "memory_limit": "519171997696",
       "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
-      "disk_free_bytes": 1061158436864,
+      "disk_free_bytes": 1061134487552,
       "recent_active_log_errors": []
     }
   },
@@ -4392,11 +4369,11 @@
     "CPU_gate_not_CUDA_or70_round_equivalence": true
   },
   "flgmm_screen32_20261009": {
-    "status": "FROZEN_RUNNING_VALID_ONLY",
+    "status": "SCREEN32_COMPLETE_STRICT_OFFSERVER_RECIPE_SUMMARY_ADOPTED",
     "total": 32,
     "rounds": 70,
     "seed": 91001,
-    "accepted70round_jobs": 26,
+    "accepted70round_jobs": 32,
     "observed_utc": "2026-10-09T09:28:52.874131+00:00",
     "service_at_observation": "guardfed_celeba_flgmm_screen     RUNNING   pid 18899, uptime 0:01:32",
     "package_sha256": "aec95ceb5e8c9b7aa9cec89e9d70d2700c2f242c29e918792088648d6269bad4",
@@ -4432,8 +4409,8 @@
     "observed_complete70": 0,
     "subsequent_failure_count": 0,
     "rounds_are_not_completed_results": true,
-    "offserver_accepted70round_jobs": 26,
-    "not_yet_accepted": 6,
+    "offserver_accepted70round_jobs": 32,
+    "not_yet_accepted": 0,
     "first_partial_archive_sha256": "638d7bba07fcc1f3a9953a8f71fb412516d8b5ffcc134eb3b3794cf82dedcbbf",
     "first_partial_archive_members_verified": 22,
     "first_partial_records": [
@@ -4503,9 +4480,9 @@
       }
     ],
     "latest_readonly_terminal_observation": {
-      "checked_utc": "2026-10-09T19:15:41.436290+00:00",
-      "observed_complete": 31,
-      "active": 1,
+      "checked_utc": "2026-10-09T19:54:38.983768+00:00",
+      "observed_complete": 32,
+      "active": 0,
       "pending": 0,
       "failures": 0,
       "source_bound": true,
@@ -4541,13 +4518,12 @@
         "FLGMM_Tg20_L3.0_lr0.0005_non-IID_S-DFA_seed91001_screen",
         "FLGMM_Tg20_L3.0_lr0.001_IID_Benign_seed91001_screen",
         "FLGMM_Tg20_L3.0_lr0.001_IID_S-DFA_seed91001_screen",
-        "FLGMM_Tg20_L3.0_lr0.001_non-IID_Benign_seed91001_screen"
+        "FLGMM_Tg20_L3.0_lr0.001_non-IID_Benign_seed91001_screen",
+        "FLGMM_Tg20_L3.0_lr0.001_non-IID_S-DFA_seed91001_screen"
       ],
-      "active_rounds": [
-        36
-      ],
-      "entry": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/auxiliary_screens_20261009T191543Z.json",
-      "sha256": "d3fbc608a55d800ebf2da21ebd7690150568dd3e176b8451679558d3df3ee301"
+      "active_rounds": [],
+      "entry": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/auxiliary_screens_20261009T195440Z.json",
+      "sha256": "6f948c621389db827d45df1a46a92f11fa3ec652374248c8256e9628a3042ea8"
     },
     "accepted_ids": [
       "FLGMM_Tg10_L2.0_lr0.0005_IID_Benign_seed91001_screen",
@@ -4575,26 +4551,67 @@
       "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91001_screen",
       "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen",
       "FLGMM_Tg20_L3.0_lr0.0005_IID_Benign_seed91001_screen",
-      "FLGMM_Tg20_L3.0_lr0.0005_IID_S-DFA_seed91001_screen"
+      "FLGMM_Tg20_L3.0_lr0.0005_IID_S-DFA_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.0005_non-IID_Benign_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.0005_non-IID_S-DFA_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.001_IID_Benign_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.001_IID_S-DFA_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.001_non-IID_Benign_seed91001_screen",
+      "FLGMM_Tg20_L3.0_lr0.001_non-IID_S-DFA_seed91001_screen"
     ],
-    "latest_chain_path": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_CHAIN_accepted_delta_after19_v2_20261009.json",
-    "latest_chain_sha256": "3844e24261b7e3a89a550b0fcb0016bbf2fb1b8a579f6e51b6a3e5afff23032b",
+    "latest_chain_path": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_CHAIN_final6_actual_20261009T194424Z.json",
+    "latest_chain_sha256": "2a5e11085b724a2395239110b7796611e8ae26d5766ad22f14bb4ca620316877",
     "latest_root_adoption_sha256": "985241395a16bf4a28522afb7658b98ecabde08a40e9988b57f57d0cc68898e5",
-    "latest_archive_sha256": "7241e5d44a36de177d2b634caed60a5d60009feddad02afa61a183d3ffb50f11",
-    "latest_root_review_path": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/accepted_delta_after19_v2_20261009/ROOT_ADOPTION_REVIEW.json",
-    "latest_root_review_sha256": "93a5ab127fb357be93cf7b07bda6d09fab8839f73bca87406222b3f270fd1134",
-    "latest_new_accepted": 7,
-    "latest_archive_members": 80,
-    "selected_recipe": null,
-    "final_test": false
+    "latest_archive_sha256": "ae194c1e6d5ddefe0f2340eee4fd12e70b3a1b5965c778307330c028e0546716",
+    "latest_root_review_path": "tmp/celeba_flgmm_final6_closure_20261009/actual_20261009T194424Z/ROOT_ADOPTION_REVIEW.json",
+    "latest_root_review_sha256": "66097564f346b0dd5a0194ea7bd8c1413d51936819db086283f1d9a99a85738e",
+    "latest_new_accepted": 6,
+    "latest_archive_members": 72,
+    "selected_recipe": {
+      "id": "FLGMM_Tg20_L2.0_lr0.001",
+      "adapter": {
+        "warmup_rounds": 20,
+        "control_width": 2.0
+      },
+      "learning_rate": 0.001
+    },
+    "final_test": false,
+    "service": "guardfed_celeba_flgmm_screen",
+    "terminal_service": "guardfed_celeba_flgmm_screen     EXITED    Oct 09 07:43 PM",
+    "terminal_workers": 0,
+    "recipe_summary_root_path": "tmp/celeba_flgmm_final6_closure_20261009/ROOT_SUMMARY_ADOPTION.json",
+    "recipe_summary_root_sha256": "e602761016e199da157862da3f24c9f9d0f191cfde10fad49074540c672b4a7f",
+    "summary_path": "tmp/celeba_flgmm_final6_closure_20261009/summary32_final/SUMMARY32.json",
+    "summary_sha256": "d8f32441402f0ce7870bacc34e94de2a334133b2881d0a59ccf5123ef0781291",
+    "selected_four_condition_mean": {
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.878970151507525,
+      "aeod": 0.04389513346108234,
+      "aspd": 0.10095577574681294,
+      "score": 0.8485271035814618
+    },
+    "accuracy_champion": {
+      "candidate": "FLGMM_Tg20_L3.0_lr0.001",
+      "n_seeds": 1,
+      "accuracy": 0.8793979966779081,
+      "aeod": 0.04688861109624712,
+      "aspd": 0.10348083286705095,
+      "score": 0.8477448968166368
+    },
+    "pareto_candidates": 6,
+    "score_gap_to_second": 4.9779204644218034e-05,
+    "seed_n": 1,
+    "sample_SD_reported": false,
+    "significance_claimed": false
   },
   "latest_publication_verification": {
-    "commit": "b55159fc951c8d3bfd41b5c039cb1239fbdb2219",
+    "commit": "9ed3ff9d5fa1eba3a42d858275c7e9994b028776",
     "branch": "codex/revision-evidence-baselines-20260928",
-    "verified_utc": "2026-10-09T19:09:31.845103+00:00",
-    "committed_blobs_sha256_verified": 181,
-    "proof_path": "publication_closed_increment25_verified_20261009.json",
-    "proof_sha256": "8e38a2d3e15bacc7a84b599b9a705c322209c9e2223bc9a1b78cc035c437e42a",
+    "verified_utc": "2026-10-09T19:44:00.494596+00:00",
+    "committed_blobs_sha256_verified": 285,
+    "proof_path": "publication_closed_increment26_verified_20261009.json",
+    "proof_sha256": "7b9df063e4a8eb2f91ba8955dde261d01d22359c2ceb10b9279a07cb4a913666",
     "earlier_publication_snapshot_is_historical": true
   },
   "hybrid_cuda_gate_20261009": {
@@ -4699,10 +4716,10 @@
     "latest_archive_sha256": "efffebcaecacace9143e579f91d315ab13dd16fd20cce90481a3ba3072dd3c9d",
     "final_test": false,
     "latest_readonly_terminal_observation": {
-      "checked_utc": "2026-10-09T19:15:41.436290+00:00",
-      "observed_complete": 12,
+      "checked_utc": "2026-10-09T19:54:38.983768+00:00",
+      "observed_complete": 13,
       "active": 1,
-      "pending": 19,
+      "pending": 18,
       "failures": 0,
       "source_bound": true,
       "new_acceptances": 0,
@@ -4718,13 +4735,14 @@
         "CosineFairness_lam20.0_tau0.1_lr0.0005_IID_Benign_seed91001_screen",
         "CosineFairness_lam20.0_tau0.1_lr0.0005_IID_S-DFA_seed91001_screen",
         "CosineFairness_lam20.0_tau0.1_lr0.0005_non-IID_Benign_seed91001_screen",
-        "CosineFairness_lam20.0_tau0.1_lr0.0005_non-IID_S-DFA_seed91001_screen"
+        "CosineFairness_lam20.0_tau0.1_lr0.0005_non-IID_S-DFA_seed91001_screen",
+        "CosineFairness_lam20.0_tau0.2_lr0.0005_IID_Benign_seed91001_screen"
       ],
       "active_rounds": [
-        26
+        13
       ],
-      "entry": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/auxiliary_screens_20261009T191543Z.json",
-      "sha256": "d3fbc608a55d800ebf2da21ebd7690150568dd3e176b8451679558d3df3ee301"
+      "entry": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/auxiliary_screens_20261009T195440Z.json",
+      "sha256": "6f948c621389db827d45df1a46a92f11fa3ec652374248c8256e9628a3042ea8"
     }
   },
   "native_mismatch_GPU_diagnostic_20261009": {

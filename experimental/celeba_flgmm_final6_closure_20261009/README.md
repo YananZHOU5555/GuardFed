@@ -1,0 +1,25 @@
+# FLGMM final six: prepared only
+
+This directory prepares one final increment from the already root-adopted26 chain. It contains no actual future terminal snapshot, accepted result, checkpoint SHA, archive, recipe choice or permission to execute. The root-provided18:45 observation reported29 terminals / two active / one pending; that incomplete state must be refused and was not re-observed here. No SSH, acceptor, backup, CNN, training, STATE or Git operation was performed during preparation.
+
+Parent: `tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_CHAIN_accepted_delta_after19_v2_20261009.json`, SHA `3844e24261b7e3a89a550b0fcb0016bbf2fb1b8a579f6e51b6a3e5afff23032b`; root adoption SHA `93a5ab127fb357be93cf7b07bda6d09fab8839f73bca87406222b3f270fd1134`. `EXACT_DELTA.json` is the exact frozen manifest minus those26 IDs. It contains six jobs: Tg20/L3/lr0.0005 non-IID Benign and S-DFA, and Tg20/L3/lr0.001 all four IID/non-IID × Benign/S-DFA conditions, seed91001, round70.
+
+`collect_delta.py` and `verify_delta_offserver.py` reuse accepted after19_v2. `SOURCE_DIFF.patch` shows only parent/count/namespace/snapshot gates and archive metadata bindings. Their per-job scientific loops are byte-identical to the original files. The original `accepted()`, source/data identity, worker, calibration, metric definitions and frozen score are unchanged. The actual parent schema intentionally has no package_sha256; package identity is bound through the frozen release and the real authorized snapshot. Existing failure files block reuse; archives use exclusive creation; no automatic retry is provided. All old/negative observations remain available.
+
+Before root dispatches this one increment, it must supply:
+
+1. A new actual read-only snapshot in the existing observer schema, with the frozen eight source hashes, all32 unique manifest rows at round70, result/acceptance/screen_identity present, empty active queue, pending0/completed32 and no failure paths. A process observation must show the six original producers gone. The collector also rereads the live queue/process list and retains the original per-job producer-PID checks. Idle coordinator log descriptors are not treated as producers.
+2. A fresh CPU106 ×1/nice10/idleIO resource check, current guide identity, unchanged release/source/data identities and a verified unchanged accepted26 parent. This preparation does not allocate that CPU or change any service.
+3. A separate fresh execution attempt directory. Copy the sealed collector/verifier/closure_guard, PREVIOUS_CHAIN, PREVIOUS_LATEST, EXACT_DELTA, COLLECTOR_DIFF and SOURCE_RECEIPT into it. Only then copy the actual snapshot as AUTHORIZED_SNAPSHOT.json and replace the template's status with `ROOT_AUTHORIZED_FIXED_FINAL6_CLOSURE` plus its measured SHA in EXECUTION_BINDINGS.json. Neither actual file exists in this preparation.
+
+The remote namespace is a new attempt under `/workspace/guardfed_checks/celeba_flgmm_screen_20261009/final6_closure_20261009/`; the collector derives its output from its own location and preserves `accepted_final6_delta.tar.gz`. The local attempt should be one level under this preparation directory, so the unchanged verifier's relative frozen-release lookup remains correct. Root must record actual commands, return codes and transfers, and stop on the first source/logic/numeric/transport failure. Run the original collector once under its declared resource role; download the complete archive and receipts before invoking the verifier once. No old model is rechecked or repackaged by the collector.
+
+After root adopts all six strict/offserver records, `summary32.py` can read the five pinned prior strict-record cohorts (2+4+7+6+7) and the actual final six. It requires a SHA-bound root proof with accepted_before26/new6/total32, the actual strict/offserver/archive bytes, the prepared seal and all32 exact manifest identities. It never imports an acceptor or loads a model. It uses the byte-identical frozen_score.py to score each condition, averages the four conditions per candidate, and selects the largest mean score within FLGMM; exact ties use candidate lexical order. It also retains all eight candidates, all32 individual results, the ACC champion and three-metric Pareto set. It reports n=1 without sample SD or significance. It does not adopt a recipe, start formal100 or evaluate test.
+
+Future local summary entry, with measured values supplied by root:
+
+```text
+python -B summary32.py --final-directory ACTUAL_FINAL6_DIRECTORY --root-proof-sha256 ACTUAL_ROOT_ADOPTION_SHA --prepared-seal-sha256 REVIEWED_PREPARED_SEAL_SHA --output NEW_SUMMARY_DIRECTORY
+```
+
+`PREPARATION_CHECKS.json` records local structural positive/refusal fixtures, not scientific observations. The actual accepted26 source index is metadata-only and makes no candidate selection. Actual final-six acceptance, server compatibility, transfer integrity and the future summary remain unexecuted. Historical exposed-validation and server/local environment limits remain unchanged.
