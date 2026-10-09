@@ -791,23 +791,94 @@ if (queue_execution / 'ROOT_LAUNCH.json').exists():
     observed = read(observed_path)
     assert launch['status'] == 'TARGETED464_SERVICE_START_OBSERVED'
     assert launch['queue_package_sha256'] == observed['source_package_sha256'] == 'fa5626ad0ab8be12ac501aea531d7b8ad2f2c05b1a18937dd86fb3708acc8d6b'
-    assert not observed['worker_failed'] and not observed['queue_failure']
+    queue_running = 'RUNNING' in observed['service'] and not observed['worker_failed'] and not observed['queue_failure']
     state['baseline_valid_GPU_recovery_20261009'].update(
-        status='436_ACCEPTED_REMAINING464_GPU_QUEUE_RUNNING', remaining464_dispatched=True,
+        status='436_ACCEPTED_GPU_QUEUE_RUNNING' if queue_running else '436_ACCEPTED_GPU_QUEUE_STOPPED_PRESERVED', remaining464_dispatched=True,
         service='guardfed_celeba_valid_gpu_remaining464_20261009',
         queue_source_package_sha256=observed['source_package_sha256'],
         queue_review_sha256=launch['review_sha256'],
         queue_startup_path=(queue_execution / 'ROOT_LAUNCH.json').relative_to(ROOT).as_posix(),
         queue_live=observed, queue_live_sha256=sha(observed_path),
         coordinator_CPU=106, worker_CPU=105, threads=1, nice=10,
-        queued_new_replays=464, remote_closed_not_offserver=observed['remote_closed_n'])
-    state['final_evaluator_runtime_20261009']['status'] = '436_ACCEPTED_REMAINING464_GPU_VALID_REPLAY_RUNNING'
-    state['active_services'] = list(dict.fromkeys(state['active_services'] + ['guardfed_celeba_valid_gpu_remaining464_20261009']))
+        queued_new_replays=464, remote_closed_not_offserver=observed['remote_closed_n'],
+        queue_running=queue_running, queue_failure=observed['queue_failure'])
+    state['final_evaluator_runtime_20261009']['status'] = '436_ACCEPTED_GPU_VALID_REPLAY_RUNNING' if queue_running else '436_ACCEPTED_GPU_VALID_REPLAY_STOPPED_PRESERVED'
+    if queue_running:
+        state['active_services'] = list(dict.fromkeys(state['active_services'] + ['guardfed_celeba_valid_gpu_remaining464_20261009']))
+    else:
+        state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_valid_gpu_remaining464_20261009']
     gpu_recovery_paragraph = ('独立GPU工具首1及另行审阅的原CPU partial10/成功GPU诊断1已strict、离机和登记，'
         '累计436/900（CPU434、GPU2）；导入11新增CNN推理0。原424/425账本和CPU失效现场不改。'
         '余464已按原顺序、43批次、每批至多11条、单GPU/单线程启动；实际CPU106协调、CPU105 worker/nice10已核。'
         f"最近仅观测{observed['worker_complete_exit_only']}条worker退出成功、{observed['remote_closed_n']}条远端闭合，未离机登记前不增加436。")
+evidence_dir = ROOT / 'tmp/celeba_valid_gpu_remaining464_evidence_20261009'
+closed_collectors = list(evidence_dir.glob('chunk_*/cumulative_*_accepted.json'))
+if closed_collectors:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('closed_gpu_evidence', evidence_dir / 'evidence.py')
+    evidence = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(evidence)
+    assert sha(evidence_dir / 'PACKAGE_SHA256.json') == '52f46820fd3d01ea532af1ec70f7a8c731116662541c85307549730ac20f609b'
+    for name, row in read(evidence_dir / 'PACKAGE_SHA256.json')['members'].items():
+        assert sha(evidence_dir / name) == row['sha256']
+    current_path = max(closed_collectors, key=lambda p: read(p)['accepted_n'])
+    current = read(current_path)
+    context = evidence.context()
+    evidence.prior_chain(current_path, sha(current_path), context, current['last_chunk_index'] + 1)
+    proof_path = Path(current['new_proof_path'])
+    proof = read(proof_path)
+    assert sha(proof_path) == current['new_proof_sha256']
+    assert proof['native_max_abs_difference'] <= 1e-12 and not proof['final_test']
+    assert sha(proof_path.parent / 'chunk_evidence.tar.gz') == proof['archive_sha256']
+    n = current['accepted_n']
+    state['final_evaluator_runtime_20261009'].update(
+        status=f'{n}_ACCEPTED_GPU_VALID_REPLAY_RUNNING' if queue_running else f'{n}_ACCEPTED_GPU_VALID_REPLAY_STOPPED_PRESERVED',
+        actual_native_valid_image_replays_accepted=n, actual_native_valid_image_replays_remaining=900-n,
+        accepted_collection_path=current_path.relative_to(ROOT).as_posix(),
+        accepted_collection_sha256=sha(current_path),
+        cumulative_unique_checkpoint_acceptance=current_path.relative_to(ROOT).as_posix(),
+        cumulative_unique_checkpoint_acceptance_sha256=sha(current_path))
+    state['baseline_valid_GPU_recovery_20261009'].update(
+        status=f'{n}_ACCEPTED_GPU_QUEUE_RUNNING' if queue_running else f'{n}_ACCEPTED_GPU_QUEUE_STOPPED_PRESERVED',
+        current_collector_sha256=sha(current_path), GPU_remaining464_offserver_accepted=n-436,
+        current_CPU_provenance_n=434, current_GPU_provenance_n=n-434,
+        current_chunk_proof_path=proof_path.relative_to(ROOT).as_posix(), current_chunk_proof_sha256=sha(proof_path),
+        remote_closed_not_offserver=max(0, observed['remote_closed_n']-(n-436)))
+    state['baseline_valid_recovery_prepared_20261009']['current_missing'] = 900-n
+    gpu_recovery_paragraph = (f'旧436来源链及新GPU队列的前{current["last_chunk_index"]+1}批已严格验收、离机登记，'
+        f'累计{n}/900（CPU434、GPU{n-434}）；import11新增CNN推理0，旧424/425/436账本及原CPU失效现场不改。'
+        '原464范围按43批次、每批至多11条、单GPU/单线程派发；实际CPU106协调、CPU105 worker/nice10已核。'
+        '已登记与远端闭合分开统计，保存预测按原规则重建9指标、24混淆计数；root重拟合核验引用原远端strict，未声称本机重新拟合。')
+    if not queue_running:
+        failure_dir = queue_execution / 'failure_chunk002'
+        failure_proof = failure_dir / 'ROOT_OFFSERVER_FAILURE_VERIFICATION.json'
+        state['baseline_valid_GPU_recovery_20261009'].update(
+            stopped_chunk=observed['queue_failure']['failed_chunk'], original_service_not_restarted=True,
+            failure_diagnosis_path=(queue_execution / 'ROOT_FAILURE_DIAGNOSIS_20261009.json').relative_to(ROOT).as_posix(),
+            completed_partial_not_registered=observed['worker_complete_exit_only']-observed['remote_closed_n'])
+        if failure_proof.exists():
+            checked = read(failure_proof)
+            assert checked['status'] == 'ROOT_FAILURE_CHUNK002_ARCHIVE_MEMBER_OFFSERVER_PASS_NOT_ACCEPTED'
+            assert sha(failure_dir / 'failure_chunk_evidence.tar.gz') == checked['archive_sha256']
+            state['baseline_valid_GPU_recovery_20261009'].update(
+                failure_offserver_proof_sha256=sha(failure_proof), failure_archive_sha256=checked['archive_sha256'],
+                failure_before_CNN=True, instantaneous_main_queue_snapshot_missing=True,
+                unique_turnover_cause_proved=False)
+        gpu_recovery_paragraph += ('第三批在worker资源预检、CNN之前触发Protected main800 health failed而自动停下。'
+            '当前主训练正常，但失败瞬间的三个健康条件未保存原始截图，不能唯一归因为任务交接。'
+            '原服务未重启，两条成功partial未登记；修复需独立版本和不重复已完成项的补集。')
 population_proof = CHECKS / 'LOGOFAIR_POPULATION_PROPOSAL_ROOT_VERIFICATION.json'
+fl_observation = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch/observations/bounded_review_20261009T130206Z/STATUS.json'
+if fl_observation.exists():
+    observed_fl = read(fl_observation)
+    assert sha(fl_observation) == '4d56e805779a707b26d4aa40877576dcb5784026eabb802d3c10b35e5ae6bb75'
+    assert observed_fl['accepted_after'] == state['flgmm_screen32_20261009']['offserver_accepted70round_jobs'] == 6
+    assert observed_fl['new_strict_offserver_accepted'] == 0 and not observed_fl['failure_paths']
+    state['flgmm_screen32_20261009']['latest_readonly_terminal_observation'] = dict(
+        checked_utc=observed_fl['snapshot_utc'], observed_complete=11,
+        active=observed_fl['active'], pending=19, failures=0,
+        new_terminal_candidates_not_strict_or_offserver=5,
+        entry=fl_observation.relative_to(ROOT).as_posix(), sha256=sha(fl_observation))
 if population_proof.exists():
     proposal = ROOT / 'tmp/celeba_logofair_population_proposal_20261009'
     checked = read(population_proof)
@@ -823,6 +894,16 @@ if population_proof.exists():
         valid_labels_or_scores_decoded=False, CNN_or_Beta_or_performance=False,
         execution_started=False, formal_approval=False,
         entry='tmp/celeba_logofair_population_proposal_20261009/REPORT.md')
+interim_path = max((TRAIN / 'celeba_mechanism_v1').glob('interim_tables_*/tables.json'))
+interim = read(interim_path)
+assert interim['status'] == 'INTERIM_COMPLETE_SCENES_ONLY_NO_NEW_INFERENCE'
+assert interim['new_training'] == interim['new_inference'] == 0 and not interim['test_used']
+state['celeba_mechanism_v1']['latest_interim_paper_table'] = dict(
+    table_path=interim_path.with_name('TABLES.md').relative_to(TRAIN).as_posix(),
+    table_sha256=sha(interim_path.with_name('TABLES.md')), statistics_sha256=sha(interim_path),
+    complete_paired_scenes=interim['complete_paired_scenes'],
+    identity='native Full versus minus_U only; other components incomplete',
+    mean_sampleSD=True, additional_9_and_6_seed_panels=True, whole_comparison_complete=False)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -842,7 +923,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 | 阶段 | 实际状态与分母 | 接续入口 |
 |---|---|---|
 | CelebA机制消融 | 当前观测完成{live['queue_completed']}、活动{len(live['active'])}、等待{live['pending']}、失败{len(live['failed'])}；已独立严格验收并离机{main['scientific_results_offserver_verified']}/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
-| FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；搜索已启动，最新完成凭据以备份链为准 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json |
+| FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；13:03实测11终轮、2活动、0失败，新增5项待验收，不能计为接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及observations/bounded_review_20261009T130206Z/STATUS.json |
 | 组合基线验证搜索 | 原32项队列已启动；最新离机快照尚无完整70轮接受，不把首轮或文件存在计作完成 | tmp/celeba_hybrid_screen_execution_20261009/results_incremental_20261009T1133Z/STATUS.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
 | 机制三视图评价 | 23份minus_U已严格验收并离机，另行统计；不是800份均已完成三视图 | server_reactivation_20261009/MECHANISM_VALID_INCREMENTAL_20261009T104749Z_ROOT_VERIFICATION.json |
@@ -853,7 +934,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
 ## 当前恢复与研究选择
 
-原CPU失败为FairGuard/IID/F Flip/seed91009：native超原1e-12，65成员失败现场完整保留，原chunk036的10份strict partial仍未登记。独立单模型GPU诊断已复现原三指标，差值全0；当前CPU/GPU native/raw只有image172599一处翻转，共享校准预测无翻转。三份归档与保存数组已独立验收；缺历史GPU逐图数组，不声称唯一历史根因，不据此自动增加424。凭据NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json。
+原CPU失败为FairGuard/IID/F Flip/seed91009：native超原1e-12，65成员失败现场完整保留，原chunk036的10份strict partial当时未登记，后来通过显式审阅导入派生436账本。独立单模型GPU诊断已复现原三指标，差值全0；当前CPU/GPU native/raw只有image172599一处翻转，共享校准预测无翻转。三份归档与保存数组已独立验收；缺历史GPU逐图数组，不声称唯一历史根因，原424账本保持不变。凭据NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json。
 
 {gpu_recovery_paragraph} native1e-12、原model/source/data/map/root/valid、同checkpoint全部视图与失败保留规则不变；混合CPU/GPU来源不能冒充统一设备的最终公平比较。入口tmp/celeba_valid_gpu_recovery_implementation_20261009/README.md。监控不自动启动准备包。
 
@@ -867,7 +948,7 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 完整17行比较仍缺8方法的完整多seed结果：LoGoFair、Fed-NGA、FedWA、Huber、FLGMM、SmartFL、FedDNA及组合控制。梯度方法正式协议、LoGoFair人口和最终评价主终点/测试边界仍待裁定；FedWA/SmartFL/FedDNA忠实规格仍缺，不能用简化旧分支冒充。主机制800、完整机制三视图、冻结最终评价、正文及最终回复仍未完成。Fig3原脚本/ForestDiffusion执行身份仍缺；已核数值与缺失来源明确区分。
 
-已接受场景的10/9/6种子中期论文表：celeba_mechanism_v1/interim_tables_20261009T113229Z/TABLES.md。仅展示4个齐备的IID配对场景，保留所有指标及取舍，不补造未完成场景，不以Full最佳seed对比消融均值。AEOD为绝对TPR差，不是完整equalized odds；Full98cu128+2cu130、多数旧driver570.211.01和当前driver595.84差异、seed91001选择历史均披露。native含各方法原校准，不能据此单独证明聚合机制。
+已接受场景的10/9/6种子中期论文表：{state['celeba_mechanism_v1']['latest_interim_paper_table']['table_path']}。仅展示{interim['complete_paired_scenes']}个齐备的Full–minus_U配对场景，保留所有指标及取舍，不补造未完成场景，不以Full最佳seed对比消融均值。新增Sp-DFA场景Full准确率较高、去U的两个公平性差距更低，不能声称每项不可或缺。AEOD为绝对TPR差，不是完整equalized odds；Full98cu128+2cu130、多数旧driver570.211.01和当前driver595.84差异、seed91001选择历史均披露。native含各方法原校准，不能据此单独证明聚合机制。
 
 ## Git与巡检
 

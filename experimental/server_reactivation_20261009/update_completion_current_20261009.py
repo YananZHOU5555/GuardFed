@@ -36,6 +36,20 @@ if gpu_recovery:
             'The exact remaining464 GPU queue is now running in43 bounded chunks with one GPU worker. '
             'CPU106 coordination, CPU105 workers and nice10 were independently observed. '
             'Worker zero exits and remote closures do not increment436 before off-server registration. ')
+    if gpu_recovery.get('GPU_remaining464_offserver_accepted'):
+        recovery_paragraph = (f'The original436 source chain and {gpu_recovery["GPU_remaining464_offserver_accepted"]} '
+            f'new GPU records are now strictly accepted and verified off server, for {replayed}/900 '
+            f'(CPU434/GPU{replayed-434}). The exact original464 scope is divided into43 bounded chunks; '
+            'only independently verified chunks enter separate cumulative collectors. Original424/425/436 collectors '
+            'and the invalid CPU output are unchanged. Saved arrays reconstruct all three rules, nine metrics and24 '
+            'confusion counts; root refitting is checked by the bound original remote strict tool, not repeated locally. '
+            'Mixed CPU/GPU results are not a uniform-device final comparison. ')
+        if not gpu_recovery.get('queue_running'):
+            recovery_paragraph += ('The queue stopped in chunk002 during a worker resource preflight before CNN inference, '
+                'with Protected main800 health failed. The main mechanism queue is currently healthy; the instantaneous '
+                'guard inputs were not preserved, so a transient handover is a hypothesis, not a proved unique cause. '
+                'The failure archive is retained and the original service has not been restarted. Two completed partial '
+                'records remain unregistered; any repair needs a separate reviewed version and exact missing-ID scope. ')
 diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces the original three native metrics exactly. '
     'Its saved CPU/GPU arrays differ on one native/raw prediction (image172599); shared-calibration predictions match. '
     'The unchanged source/data/checkpoint and all saved metrics, counts and rules were independently verified. '
@@ -49,7 +63,7 @@ if baseline.get('GPU_diagnostic_later_explicit_versioned_import'):
         'Its original diagnostic receipt remains unchanged; a later explicit saved-array import is included in the current derived collector. The failed CPU queue remains stopped. ')
 screen=state.get('hybrid_screen32_20261009')
 failure=state['final_evaluator_runtime_20261009'].get('failed_model_id')
-failure_paragraph=("The CPU replay service has fail-stopped on FairGuard/IID/F Flip/seed91009: native metrics differ from the original record despite matching model/config/data identities and unchanged tensors. The original1e-12 tolerance is preserved, the65-member failure archive is verified off server, and chunk036's10 strict partial results are not counted. The cause is not established; no original metric, model, threshold or selection rule has changed and no retry has started. Previously accepted records remain valid. " if failure else "")
+failure_paragraph=("The CPU replay service has fail-stopped on FairGuard/IID/F Flip/seed91009: native metrics differ from the original record despite matching model/config/data identities and unchanged tensors. The original1e-12 tolerance is preserved and the65-member failure archive is verified off server. Chunk036's10 strict partial results were subsequently imported after explicit review into the derived436 source chain; the failed CPU result remains invalid. No original metric, model, threshold or selection rule has changed and the failed CPU service remains stopped. Previously accepted records remain valid. " if failure else "")
 paragraph=(f"The original32-item Hybrid validation search has actually started under `{screen['service']}`; its independent source/startup archive and root verification bind the unchanged eight recipes, four conditions, seed91001 and70 rounds. It uses one GPU0 worker, CPU104, one compute thread and nice10. No100-job multi-seed confirmation, test or automatic retry is authorized. "
     if screen else "The unchanged original32-item Hybrid validation search is root-approved for a separate frozen execution copy; exact source/scope approval is complete, while actual dispatch and source-bound startup acceptance remain separate requirements. ")
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}

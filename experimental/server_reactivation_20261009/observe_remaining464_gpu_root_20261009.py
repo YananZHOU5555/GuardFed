@@ -40,12 +40,12 @@ print(json.dumps(out))
 result=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55',
                        'python -c '+shlex.quote(code)],capture_output=True,check=True,timeout=60)
 data=json.loads(result.stdout)
+path=DEST/('live_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'.json')
+with path.open('xb') as out:out.write(result.stdout)
 assert data['read_only'] and data['source_package_sha256']=='fa5626ad0ab8be12ac501aea531d7b8ad2f2c05b1a18937dd86fb3708acc8d6b'
 assert not data['queue_failure'] and not data['worker_failed']
 for row in data['processes']:
     assert row['nice']==10 and row['affinity']==([106] if '/remaining.py run' in row['command'] else [105])
-path=DEST/('live_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'.json')
-with path.open('xb') as out:out.write(result.stdout)
 print(json.dumps({'path':str(path),'sha256':hashlib.sha256(result.stdout).hexdigest(),
                   'service':data['service'],'processes':len(data['processes']),
                   'worker_complete_exit_only':data['worker_complete_exit_only'],

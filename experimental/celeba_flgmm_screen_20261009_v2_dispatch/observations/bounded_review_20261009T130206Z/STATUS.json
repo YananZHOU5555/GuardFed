@@ -1,0 +1,75 @@
+{
+  "status": "READONLY_FIXED_SNAPSHOT_NO_GENERAL_BACKUP_ENTRY_NO_NEW_ACCEPTANCE",
+  "snapshot_utc": "2026-10-09T13:03:21.765766+00:00",
+  "snapshot_sha256": "c20156219910d5a647a2bcb7da1773467e9a053b32a3952eef5daeea9b9a0ce0",
+  "accepted_before": 6,
+  "new_strict_offserver_accepted": 0,
+  "accepted_after": 6,
+  "planned": 32,
+  "raw_queue_completed_unverified_here": 11,
+  "new_terminal_candidates_unverified": [
+    "FLGMM_Tg10_L2.0_lr0.001_non-IID_Benign_seed91001_screen",
+    "FLGMM_Tg10_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen",
+    "FLGMM_Tg10_L3.0_lr0.0005_IID_Benign_seed91001_screen",
+    "FLGMM_Tg10_L3.0_lr0.0005_IID_S-DFA_seed91001_screen",
+    "FLGMM_Tg10_L3.0_lr0.0005_non-IID_Benign_seed91001_screen"
+  ],
+  "candidate_delta_n": 5,
+  "active": [
+    {
+      "id": "FLGMM_Tg10_L3.0_lr0.0005_non-IID_S-DFA_seed91001_screen",
+      "round": 44
+    },
+    {
+      "id": "FLGMM_Tg10_L3.0_lr0.001_IID_Benign_seed91001_screen",
+      "round": 16
+    }
+  ],
+  "pending": 19,
+  "failure_paths": [],
+  "recent_log_error_matches_n": 0,
+  "source_sha256": {
+    "PACKAGE_SHA256.json": "aec95ceb5e8c9b7aa9cec89e9d70d2700c2f242c29e918792088648d6269bad4",
+    "source/protocol.json": "63bfa927f841fee637b4d80e08e0f902a493361eae28b999f13302dc69c4304c",
+    "jobs/manifest.json": "d888509df45f2392c38cc8a73c9a01fae1a4b3af104857f391a32cdc3a950632",
+    "frozen_score.py": "1b31c0322b06bc1901f2a2f49a2b7b3524fed0164b6191d8bb9a5ed7e5f24b27",
+    "screen_common.py": "dea4756c20a364156dd3bd0bebd719e0f82b11f34f5d7d9e42bbce18a84983aa",
+    "source/accept_result.py": "000b2711673431bd83487eeee0d79913e71805d221bb25829646538f630a06c5",
+    "source/worker.py": "a3fe21a5a334b63de9c2167ed28293cd7f38d4411edf11de7d226d895b550fdc",
+    "source/flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453"
+  },
+  "source_essential_files_local_remote_SHA_matches": 8,
+  "previous_ledger_file": "BACKUP_CHAIN_increment_20261009T1133Z.json",
+  "ledger_sha256_unchanged": "e2e6b6f98abc5d66bc493c2b4e09dc6d9470fca46116778d01e08c69328528a4",
+  "LATEST_BACKUP_sha256_unchanged": "7e7108217c13c5ebbe4576f0091d162a0020ad4662123d7ae6fe5fdffc687640",
+  "new_archive_sha256": null,
+  "new_archive_members": 0,
+  "new_offserver_proof_sha256": null,
+  "helper_gap": {
+    "original_strict_entry": "release_v2/screen_common.py:accepted -> source/accept_result.py:checked_result",
+    "first_two_backup": "backup_first_two_v2.py fixes wanted2 and original startup chain; cannot select new5 from current6",
+    "last_delta_backup": "backups/increment_20261009T1133Z/collect_delta.py fixes previous chain SHA/accepted2, wanted4, totals6, and CPU106; verifier fixes old archive SHA and45 members",
+    "no_temporary_strict_or_backup_implementation_created": true,
+    "CPU106_restricted_Python_at_this_snapshot": 0,
+    "note": "CPU106 now has no restricted Python owner; batch identity/cardinality hardcodes independently still prevent reuse."
+  },
+  "resources": {
+    "sample_seconds": 4,
+    "effective_CPU_cores": 11.035220011668905,
+    "quota": "12287999 100000",
+    "throttled_usec_delta": 0,
+    "RAM_bytes": 74653593600,
+    "RAM_limit": "519171997696",
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "disk_free_bytes": 1061731467264,
+    "GPU": "0, 100 %, 6038 MiB, 32607 MiB, 69\n1, 100 %, 5037 MiB, 32607 MiB, 67",
+    "FLGMM_service": "guardfed_celeba_flgmm_screen     RUNNING   pid 18899, uptime 3:36:04",
+    "sglang": "sglang                           STOPPED   Oct 09 05:46 AM"
+  },
+  "no_source_or_science_change": true,
+  "no_training_or_inference": true,
+  "no_test_or_selection": true,
+  "no_retry_or_service_change": true,
+  "canonical_STATE_RUNNING_Git_untouched": true,
+  "limitation": "Filesystem terminal flags and queue completed count are observed status; new5 have not been independently strict/offserver accepted in this bounded task."
+}
