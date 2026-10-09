@@ -1,0 +1,61 @@
+% Requires multirow and graphicx.
+\begin{table*}[t]
+\centering
+\caption{CelebA [shared calibration]: IID / non-IID. COMPLETED VALIDATION COHORT -- 9 shared seeds (91002--91010). Validation-only; mean $\pm$ sample SD at round 70.}
+\label{tab:celeba-iid-noniid-exclude-selection}
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|c|ccccc|ccccc}
+\hline\hline
+Category & Method & Metric & IID: Benign & IID: F-Flip & IID: FedSA & IID: S-DFA & IID: Sp-DFA & non-IID: Benign & non-IID: F-Flip & non-IID: FedSA & non-IID: S-DFA & non-IID: Sp-DFA \\
+\hline
+\multirow{3}{*}{Vanilla FL} & \multirow{3}{*}{FedAvg} & ACC (\%) $\uparrow$ & $88.02 \pm 1.84$ & $89.37 \pm 0.68$ & $70.08 \pm 4.92$ & $67.33 \pm 2.98$ & $84.57 \pm 1.66$ & $87.74 \pm 4.05$ & $89.48 \pm 1.45$ & $75.90 \pm 12.95$ & $75.47 \pm 13.23$ & $85.18 \pm 2.61$ \\
+ &  & AEOD $\downarrow$ & $0.0068 \pm 0.0057$ & $0.0100 \pm 0.0079$ & $0.0115 \pm 0.0084$ & $0.0110 \pm 0.0081$ & $0.0117 \pm 0.0064$ & $0.0085 \pm 0.0053$ & $0.0074 \pm 0.0068$ & $0.0107 \pm 0.0070$ & $0.0113 \pm 0.0077$ & $0.0163 \pm 0.0119$ \\
+ &  & ASPD $\downarrow$ & $0.0607 \pm 0.0172$ & $0.0720 \pm 0.0129$ & $0.0092 \pm 0.0071$ & $0.0143 \pm 0.0129$ & $0.0299 \pm 0.0183$ & $0.0636 \pm 0.0203$ & $0.0719 \pm 0.0156$ & $0.0121 \pm 0.0114$ & $0.0179 \pm 0.0124$ & $0.0309 \pm 0.0217$ \\
+\hline
+\multirow{3}{*}{Fairness-aware} & \multirow{3}{*}{FairFed$^{*}$} & ACC (\%) $\uparrow$ & $89.25 \pm 0.75$ & $89.50 \pm 0.69$ & $70.77 \pm 3.91$ & $64.24 \pm 3.93$ & $85.78 \pm 1.25$ & $89.42 \pm 0.89$ & $89.65 \pm 0.97$ & $72.49 \pm 11.74$ & $68.54 \pm 11.62$ & $86.14 \pm 2.25$ \\
+ &  & AEOD $\downarrow$ & $0.0092 \pm 0.0070$ & $0.0070 \pm 0.0076$ & $0.0086 \pm 0.0070$ & $0.0114 \pm 0.0104$ & $0.0095 \pm 0.0082$ & $0.0084 \pm 0.0051$ & $0.0093 \pm 0.0067$ & $0.0092 \pm 0.0077$ & $0.0082 \pm 0.0069$ & $0.0107 \pm 0.0033$ \\
+ &  & ASPD $\downarrow$ & $0.0707 \pm 0.0094$ & $0.0757 \pm 0.0055$ & $0.0077 \pm 0.0061$ & $0.0137 \pm 0.0054$ & $0.0410 \pm 0.0117$ & $0.0710 \pm 0.0088$ & $0.0766 \pm 0.0087$ & $0.0051 \pm 0.0051$ & $0.0090 \pm 0.0075$ & $0.0547 \pm 0.0174$ \\
+\hline
+\multirow{3}{*}{Robust FL} & \multirow{3}{*}{Median} & ACC (\%) $\uparrow$ & $86.08 \pm 1.21$ & $86.40 \pm 1.33$ & $84.53 \pm 1.47$ & $84.82 \pm 1.17$ & $85.38 \pm 1.49$ & $85.99 \pm 1.22$ & $86.09 \pm 1.32$ & $84.19 \pm 1.31$ & $84.25 \pm 1.39$ & $85.16 \pm 1.33$ \\
+ &  & AEOD $\downarrow$ & $0.0121 \pm 0.0070$ & $0.0128 \pm 0.0082$ & $0.0131 \pm 0.0128$ & $0.0085 \pm 0.0085$ & $0.0136 \pm 0.0077$ & $0.0109 \pm 0.0075$ & $0.0170 \pm 0.0088$ & $0.0080 \pm 0.0037$ & $0.0103 \pm 0.0097$ & $0.0095 \pm 0.0095$ \\
+ &  & ASPD $\downarrow$ & $0.0586 \pm 0.0115$ & $0.0600 \pm 0.0113$ & $0.0412 \pm 0.0184$ & $0.0450 \pm 0.0125$ & $0.0543 \pm 0.0141$ & $0.0569 \pm 0.0111$ & $0.0641 \pm 0.0100$ & $0.0422 \pm 0.0109$ & $0.0460 \pm 0.0108$ & $0.0509 \pm 0.0094$ \\
+\hline
+\multirow{3}{*}{Robust FL} & \multirow{3}{*}{FLTrust} & ACC (\%) $\uparrow$ & $89.18 \pm 0.87$ & $89.42 \pm 0.95$ & $89.32 \pm 0.88$ & $89.32 \pm 0.88$ & $89.38 \pm 0.77$ & $89.46 \pm 0.58$ & $89.61 \pm 0.78$ & $89.18 \pm 0.70$ & $89.18 \pm 0.70$ & $89.26 \pm 0.79$ \\
+ &  & AEOD $\downarrow$ & $0.0085 \pm 0.0068$ & $0.0081 \pm 0.0069$ & $0.0080 \pm 0.0062$ & $0.0080 \pm 0.0062$ & $0.0137 \pm 0.0114$ & $0.0080 \pm 0.0056$ & $0.0130 \pm 0.0072$ & $0.0095 \pm 0.0074$ & $0.0095 \pm 0.0074$ & $0.0099 \pm 0.0069$ \\
+ &  & ASPD $\downarrow$ & $0.0756 \pm 0.0078$ & $0.0750 \pm 0.0120$ & $0.0653 \pm 0.0105$ & $0.0653 \pm 0.0105$ & $0.0781 \pm 0.0188$ & $0.0749 \pm 0.0071$ & $0.0775 \pm 0.0125$ & $0.0700 \pm 0.0105$ & $0.0700 \pm 0.0105$ & $0.0686 \pm 0.0106$ \\
+\hline
+\multirow{3}{*}{Adaptive FL} & \multirow{3}{*}{FedAA-DDPG$^{*}$} & ACC (\%) $\uparrow$ & $88.30 \pm 1.28$ & $88.83 \pm 0.97$ & $88.54 \pm 1.28$ & $88.53 \pm 1.28$ & $88.42 \pm 0.73$ & $88.29 \pm 1.22$ & $88.28 \pm 1.27$ & $88.50 \pm 1.14$ & $88.52 \pm 1.11$ & $88.14 \pm 1.32$ \\
+ &  & AEOD $\downarrow$ & $0.0139 \pm 0.0112$ & $0.0099 \pm 0.0069$ & $0.0143 \pm 0.0131$ & $0.0108 \pm 0.0122$ & $0.0150 \pm 0.0096$ & $0.0083 \pm 0.0044$ & $0.0133 \pm 0.0082$ & $0.0105 \pm 0.0074$ & $0.0129 \pm 0.0067$ & $0.0114 \pm 0.0089$ \\
+ &  & ASPD $\downarrow$ & $0.0572 \pm 0.0237$ & $0.0613 \pm 0.0172$ & $0.0485 \pm 0.0213$ & $0.0594 \pm 0.0187$ & $0.0547 \pm 0.0215$ & $0.0569 \pm 0.0117$ & $0.0553 \pm 0.0223$ & $0.0550 \pm 0.0162$ & $0.0601 \pm 0.0136$ & $0.0513 \pm 0.0226$ \\
+\hline
+\multirow{3}{*}{Robust FL} & \multirow{3}{*}{LASA$^{*}$} & ACC (\%) $\uparrow$ & $89.35 \pm 0.77$ & $89.13 \pm 0.77$ & $85.86 \pm 1.21$ & $85.81 \pm 1.61$ & $88.00 \pm 1.31$ & $89.12 \pm 0.64$ & $89.31 \pm 0.71$ & $85.91 \pm 1.06$ & $85.96 \pm 1.09$ & $87.94 \pm 1.13$ \\
+ &  & AEOD $\downarrow$ & $0.0094 \pm 0.0078$ & $0.0070 \pm 0.0053$ & $0.0085 \pm 0.0062$ & $0.0054 \pm 0.0027$ & $0.0084 \pm 0.0044$ & $0.0093 \pm 0.0046$ & $0.0069 \pm 0.0056$ & $0.0066 \pm 0.0046$ & $0.0085 \pm 0.0071$ & $0.0030 \pm 0.0018$ \\
+ &  & ASPD $\downarrow$ & $0.0678 \pm 0.0124$ & $0.0724 \pm 0.0070$ & $0.0478 \pm 0.0094$ & $0.0461 \pm 0.0089$ & $0.0592 \pm 0.0105$ & $0.0721 \pm 0.0097$ & $0.0738 \pm 0.0049$ & $0.0451 \pm 0.0064$ & $0.0466 \pm 0.0103$ & $0.0641 \pm 0.0084$ \\
+\hline
+\multirow{3}{*}{Robust + fair} & \multirow{3}{*}{FairGuard$^{*}$} & ACC (\%) $\uparrow$ & $89.03 \pm 0.89$ & $89.25 \pm 1.30$ & $51.67 \pm 0.01$ & $51.67 \pm 0.00$ & $83.18 \pm 1.33$ & $89.23 \pm 1.01$ & $89.64 \pm 0.63$ & $62.28 \pm 15.93$ & $63.45 \pm 14.97$ & $77.68 \pm 14.95$ \\
+ &  & AEOD $\downarrow$ & $0.0081 \pm 0.0048$ & $0.0080 \pm 0.0058$ & $0.0002 \pm 0.0003$ & $0.0000 \pm 0.0000$ & $0.0112 \pm 0.0052$ & $0.0108 \pm 0.0089$ & $0.0132 \pm 0.0071$ & $0.0057 \pm 0.0104$ & $0.0074 \pm 0.0088$ & $0.0128 \pm 0.0109$ \\
+ &  & ASPD $\downarrow$ & $0.0605 \pm 0.0118$ & $0.0672 \pm 0.0167$ & $0.0001 \pm 0.0002$ & $0.0000 \pm 0.0001$ & $0.0215 \pm 0.0080$ & $0.0605 \pm 0.0147$ & $0.0695 \pm 0.0156$ & $0.0049 \pm 0.0140$ & $0.0053 \pm 0.0103$ & $0.0180 \pm 0.0175$ \\
+\hline
+\multirow{3}{*}{Robust + fair} & \multirow{3}{*}{FLTrust+FairGuard$^{*}$} & ACC (\%) $\uparrow$ & $89.88 \pm 0.69$ & $90.05 \pm 0.65$ & $79.98 \pm 6.94$ & $75.58 \pm 15.20$ & $86.82 \pm 3.99$ & $89.81 \pm 0.37$ & $89.81 \pm 1.36$ & $81.04 \pm 12.08$ & $79.93 \pm 11.30$ & $80.49 \pm 11.48$ \\
+ &  & AEOD $\downarrow$ & $0.0099 \pm 0.0072$ & $0.0094 \pm 0.0063$ & $0.0077 \pm 0.0074$ & $0.0106 \pm 0.0087$ & $0.0082 \pm 0.0047$ & $0.0110 \pm 0.0088$ & $0.0052 \pm 0.0028$ & $0.0120 \pm 0.0100$ & $0.0111 \pm 0.0093$ & $0.0136 \pm 0.0143$ \\
+ &  & ASPD $\downarrow$ & $0.0715 \pm 0.0154$ & $0.0712 \pm 0.0153$ & $0.0216 \pm 0.0248$ & $0.0235 \pm 0.0220$ & $0.0514 \pm 0.0216$ & $0.0685 \pm 0.0124$ & $0.0693 \pm 0.0118$ & $0.0399 \pm 0.0302$ & $0.0297 \pm 0.0199$ & $0.0385 \pm 0.0203$ \\
+\hline
+\multirow{3}{*}{Ours} & \multirow{3}{*}{GuardFed-AD2+} & ACC (\%) $\uparrow$ & $88.35 \pm 1.06$ & $88.41 \pm 0.66$ & $88.62 \pm 0.82$ & $88.84 \pm 0.68$ & $88.55 \pm 0.77$ & $88.59 \pm 1.24$ & $88.50 \pm 0.76$ & $88.39 \pm 0.97$ & $88.24 \pm 0.82$ & $88.47 \pm 0.94$ \\
+ &  & AEOD $\downarrow$ & $0.0097 \pm 0.0080$ & $0.0115 \pm 0.0098$ & $0.0054 \pm 0.0039$ & $0.0068 \pm 0.0038$ & $0.0171 \pm 0.0074$ & $0.0063 \pm 0.0039$ & $0.0104 \pm 0.0073$ & $0.0083 \pm 0.0057$ & $0.0119 \pm 0.0095$ & $0.0079 \pm 0.0065$ \\
+ &  & ASPD $\downarrow$ & $0.0623 \pm 0.0146$ & $0.0604 \pm 0.0108$ & $0.0667 \pm 0.0120$ & $0.0633 \pm 0.0072$ & $0.0555 \pm 0.0165$ & $0.0638 \pm 0.0086$ & $0.0579 \pm 0.0090$ & $0.0609 \pm 0.0148$ & $0.0605 \pm 0.0188$ & $0.0613 \pm 0.0144$ \\
+\hline\hline
+\end{tabular}}
+\par\smallskip
+\begin{minipage}{\textwidth}\scriptsize
+All displayed cells use the same 9 seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.\par
+Round 70; validation only (19,867 images). Mean +/- sample SD (ddof = 1); ACC in \%, gaps on [0, 1].\par
+AEOD is the implemented absolute TPR gap. Descriptive values do not establish statistical significance.\par
+* Adaptations: FairFed, FairGuard, hybrid; FedAA-DDPG round/policy adapter; LASA with local-Adam update differences.\par
+Recipes fixed before coverage. Seven methods used non-IID Benign/S-DFA search; FedAA/LASA used both distributions, Benign/S-DFA, seed 91001.\par
+All records in this table use torch 2.11/cu128. The source cohort contains 14 cu130 records, excluded from this table.\par
+Nine methods only; eight additional manuscript baselines and final frozen evaluation remain. Native/shared main endpoint is pending.\par
+Shared-calibration view: all nine methods use saved clean-training-root group thresholds; no validation-label fitting.\par
+All outcomes, including constant predictions, are retained. Inference: 434 CPU / 466 GPU in the 900-ID source; no uniform-device claim.\par
+\end{minipage}
+\end{table*}

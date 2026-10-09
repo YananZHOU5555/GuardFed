@@ -1,0 +1,57 @@
+--- original/render
++++ raw/render
+@@ -1,6 +1,6 @@
+ def render(name, distributions, seeds, formal=False, images=True):
+     conditions = [(d, a) for d in distributions for a in attacks]
+-    title = 'CelebA: ' + ' / '.join(distributions)
++    title = 'CelebA [raw]: ' + ' / '.join(distributions)
+     status = 'TEN-SEED COMPLETION TEMPLATE - incomplete cells withheld' if formal else f'COMPLETED VALIDATION COHORT - {len(seeds)} shared seeds ({seeds[0]}-{seeds[-1]})'
+     headers = ['Category', 'Method', 'Metric'] + [(d + ': ' if len(distributions) > 1 else '') + a.replace('F Flip', 'F-Flip') for (d, a) in conditions]
+     md = ['# ' + title, '', status + '.', '', f"Snapshot: {data['checked_utc']}; {data['accepted_total']}/900 accepted records.", '', '| ' + ' | '.join(headers) + ' |', '| ' + ' | '.join(['---'] * len(headers)) + ' |']
+@@ -57,7 +57,7 @@
+         used_rows = [r for r in data['all_conditions'] if r['distribution'] in distributions and r['seed'] in seeds]
+         n130 = sum(('cu130' in r['torch_version'] for r in used_rows))
+         table_notes[4] = f'This table uses {len(used_rows) - n130} cu128 and {n130} cu130 records; the source cohort contains 14 cu130 records. No 70-round equivalence claim.' if n130 else 'All records in this table use torch 2.11/cu128. The source cohort contains 14 cu130 records, excluded from this table.'
+-    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All 90 method/distribution/scenario cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
++    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All displayed cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
+     local_notes[1:] = table_notes
+     md += ['', *[n + '  ' for n in local_notes]]
+     tex += ['\\hline\\hline', '\\end{tabular}}', '\\par\\smallskip', '\\begin{minipage}{\\textwidth}\\scriptsize'] + [n.replace('±', '$\\pm$').replace('%', '\\%').replace('* Project', '$^{*}$ Project') + '\\par' for n in local_notes] + ['\\end{minipage}', '\\end{table*}']
+--- original/render
++++ native/render
+@@ -1,6 +1,6 @@
+ def render(name, distributions, seeds, formal=False, images=True):
+     conditions = [(d, a) for d in distributions for a in attacks]
+-    title = 'CelebA: ' + ' / '.join(distributions)
++    title = 'CelebA [native]: ' + ' / '.join(distributions)
+     status = 'TEN-SEED COMPLETION TEMPLATE - incomplete cells withheld' if formal else f'COMPLETED VALIDATION COHORT - {len(seeds)} shared seeds ({seeds[0]}-{seeds[-1]})'
+     headers = ['Category', 'Method', 'Metric'] + [(d + ': ' if len(distributions) > 1 else '') + a.replace('F Flip', 'F-Flip') for (d, a) in conditions]
+     md = ['# ' + title, '', status + '.', '', f"Snapshot: {data['checked_utc']}; {data['accepted_total']}/900 accepted records.", '', '| ' + ' | '.join(headers) + ' |', '| ' + ' | '.join(['---'] * len(headers)) + ' |']
+@@ -57,7 +57,7 @@
+         used_rows = [r for r in data['all_conditions'] if r['distribution'] in distributions and r['seed'] in seeds]
+         n130 = sum(('cu130' in r['torch_version'] for r in used_rows))
+         table_notes[4] = f'This table uses {len(used_rows) - n130} cu128 and {n130} cu130 records; the source cohort contains 14 cu130 records. No 70-round equivalence claim.' if n130 else 'All records in this table use torch 2.11/cu128. The source cohort contains 14 cu130 records, excluded from this table.'
+-    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All 90 method/distribution/scenario cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
++    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All displayed cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
+     local_notes[1:] = table_notes
+     md += ['', *[n + '  ' for n in local_notes]]
+     tex += ['\\hline\\hline', '\\end{tabular}}', '\\par\\smallskip', '\\begin{minipage}{\\textwidth}\\scriptsize'] + [n.replace('±', '$\\pm$').replace('%', '\\%').replace('* Project', '$^{*}$ Project') + '\\par' for n in local_notes] + ['\\end{minipage}', '\\end{table*}']
+--- original/render
++++ shared_calibration/render
+@@ -1,6 +1,6 @@
+ def render(name, distributions, seeds, formal=False, images=True):
+     conditions = [(d, a) for d in distributions for a in attacks]
+-    title = 'CelebA: ' + ' / '.join(distributions)
++    title = 'CelebA [shared calibration]: ' + ' / '.join(distributions)
+     status = 'TEN-SEED COMPLETION TEMPLATE - incomplete cells withheld' if formal else f'COMPLETED VALIDATION COHORT - {len(seeds)} shared seeds ({seeds[0]}-{seeds[-1]})'
+     headers = ['Category', 'Method', 'Metric'] + [(d + ': ' if len(distributions) > 1 else '') + a.replace('F Flip', 'F-Flip') for (d, a) in conditions]
+     md = ['# ' + title, '', status + '.', '', f"Snapshot: {data['checked_utc']}; {data['accepted_total']}/900 accepted records.", '', '| ' + ' | '.join(headers) + ' |', '| ' + ' | '.join(['---'] * len(headers)) + ' |']
+@@ -57,7 +57,7 @@
+         used_rows = [r for r in data['all_conditions'] if r['distribution'] in distributions and r['seed'] in seeds]
+         n130 = sum(('cu130' in r['torch_version'] for r in used_rows))
+         table_notes[4] = f'This table uses {len(used_rows) - n130} cu128 and {n130} cu130 records; the source cohort contains 14 cu130 records. No 70-round equivalence claim.' if n130 else 'All records in this table use torch 2.11/cu128. The source cohort contains 14 cu130 records, excluded from this table.'
+-    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All 90 method/distribution/scenario cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
++    local_notes = ['Pending cells have fewer than ten accepted seeds; no partial-seed values are substituted.' if formal else f'All displayed cells use the same {len(seeds)} seeds. Seed subsets follow the frozen protocol; all cells within each table use identical seeds.'] + notes
+     local_notes[1:] = table_notes
+     md += ['', *[n + '  ' for n in local_notes]]
+     tex += ['\\hline\\hline', '\\end{tabular}}', '\\par\\smallskip', '\\begin{minipage}{\\textwidth}\\scriptsize'] + [n.replace('±', '$\\pm$').replace('%', '\\%').replace('* Project', '$^{*}$ Project') + '\\par' for n in local_notes] + ['\\end{minipage}', '\\end{table*}']

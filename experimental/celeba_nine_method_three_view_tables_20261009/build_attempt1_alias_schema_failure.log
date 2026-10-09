@@ -1,0 +1,14 @@
+{"verified_IDs": 2, "archive": "tmp/celeba_final_valid_replay_20261009/valid_replay_canary2_receipts_20261009.tar.gz", "used_IDs": 2}
+{"verified_IDs": 3, "archive": "tmp/celeba_final_valid_replay_20261009/v3/phase1_execution_20261009/phase1_useful_receipts_20261009.tar.gz", "used_IDs": 1}
+{"verified_IDs": 5, "archive": "tmp/celeba_final_valid_replay_20261009/v3/phase2_execution_20261009/phase2_useful_receipts_20261009.tar.gz", "used_IDs": 2}
+{"verified_IDs": 9, "archive": "tmp/celeba_final_valid_replay_20261009/v3/phase3_execution_20261009/phase3_useful_receipts_20261009.tar.gz", "used_IDs": 4}
+Traceback (most recent call last):
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_nine_method_three_view_tables_20261009\build_three_view_tables.py", line 242, in <module>
+    group(g['proof'], g['proof_sha256'], g['archive'], g['archive_sha256'], g['accepted_ids'], cpu_rows)
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_nine_method_three_view_tables_20261009\build_three_view_tables.py", line 214, in group
+    check_record(rid, member_bytes[receipt_member], member_bytes[array_member], binding)
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_nine_method_three_view_tables_20261009\build_three_view_tables.py", line 138, in check_record
+    predictions = science['predict_views'](z['valid_margins'], valid_s, fits)
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_final_valid_replay_20261009\inputs\evaluator.py", line 190, in predict_views
+    raise ValueError("Prediction fit identity changed")
+ValueError: Prediction fit identity changed

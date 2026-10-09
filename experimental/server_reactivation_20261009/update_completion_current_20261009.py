@@ -18,6 +18,11 @@ paired_note=('Full paired three-view receipts remain missing and will join actua
     'whileAEOD increases in five; rawAEOD decreases in five. These tradeoffs do not establish that every term is necessary. '
     'Full replay mixes5CPU/95GPU overall (5CPU/55GPU in the displayed60); controls useCPU. The disclosed training-build/driver and validation-selection history remain limitations, '
     'and neither a uniform-device final comparison nor a primary endpoint has been established. ')
+if paired_table and paired_table['complete_scenes'] == 7:
+    paired_note = ('A root-reviewed join supplies70 complete Full–minus_U pairs in seven scenes;71 pairs/142 individual records are retained, with the incomplete non-IID FedSA91001 pair excluded from means. '
+        'Raw/native/shared10/9/6-seed tables and paired differences passed1134 independent mean/sampleSD checks. '
+        'Native/shared metrics and counts coincide for all140 displayed models. DeletingU lowers native accuracy in all seven scenes by0.309–1.384pp andASPD in all seven;AEOD increases in six, while rawAEOD decreases in five and increases in two(IIDSp-DFA andnon-IID F Flip). '
+        'The original six-scene records/statistics are unchanged. Full5CPU/65GPU and69cu128/1cu130 versus70CPU/cu128 controls, driver/runtime and validation-selection limits remain explicit. Neither a uniform-device final comparison nor a primary endpoint has been established. ')
 increments=main['incremental_science_backups']
 latest_increment=increments[-1]
 flgmm=state['flgmm_screen32_20261009']
@@ -106,6 +111,13 @@ if next37_status.get('offserver_new_accepted'):
 if next37_status.get('status') in ('COMPLETE_STRICT_OFFSERVER_NO_FULL_JOIN','COMPLETE_STRICT_OFFSERVER_PAIRED_SIX_SCENES'):
     next37_note += (f" The later terminal observation at{next37_status['latest_progress_utc']} verified service exit,37 completed IDs,zero residual workers and no failure. "
         "Both disjoint backups are now strict/off-server accepted; the exact37 scope is complete. Later native terminals remain outside this scope, and the subsequent paired Full join has its own actual root proof.")
+next11_note = ('Execution has not been inferred from preparation.')
+if main.get('next11_valid_replay',{}).get('execution_started'):
+    next11_note = ('The separate execution passed39 refusals and actually started under guardfed_celeba_mechanism_valid_next11 after109 Linux source/data/terminal-member checks and actual quota/CPU-owner checks; one eight-thread CPU worker on112–119, nice10/idleI/O and CUDA hidden was independently observed. Old37 and next8 were not restarted.')
+if main.get('next11_valid_replay',{}).get('offserver_new_accepted') == 11:
+    next11_note += (' The later terminal snapshot verifies normalEXITED,11 complete,zero residual workers and no failure. All11 have original strict acceptance,120 verified archive members and independent saved-array reconstruction of99 metrics,264 confusion counts and33 rules, followed by root source/checkpoint/terminal adoption. Native discrepancy is exactly zero. This closes71 minus_U three-view models; the prior60 are unchanged. The fixed six-scene table remains separate from a future explicitly accepted seven-scene join.')
+    if paired_table and paired_table['complete_scenes'] == 7:
+        next11_note = next11_note.replace('a future explicitly accepted seven-scene join','the subsequent explicitly root-accepted seven-scene join')
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
@@ -120,9 +132,11 @@ FLGMM has{flgmm['offserver_accepted70round_jobs']}/32 full70-round validation-se
 
 Hybrid's CPU4 and separate CUDA4 pipeline gates are complete, strict and backed up off server. The CUDA increment has49 verified members; both same-GPU Hybrid/legacy pairs match terminal tensors, every-round metrics, attacks, diagnostic fields and RNG exactly, excluding only cumulative wall time as in the original comparator. All four CUDA terminals predict a constant negative class, withACC0.516686 and zero gaps. These negative short-run outcomes are preserved and cannot establish performance advantage, CPU/CUDA equivalence or70-round equivalence. {paragraph}
 
-The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID F Flip seeds91001–91010 and FedSA91001. Its source review preserves scientific functions and passes42 refusals. {('The separate execution passed39 refusals and has actually started under guardfed_celeba_mechanism_valid_next11 after109 Linux source/data/terminal-member checks and actual quota/CPU-owner checks; one eight-thread CPU worker on112–119, nice10/idleI/O and CUDA hidden is independently observed. New off-server scientific acceptance remains0; source/dispatch is not completion. Old37 and next8 are not restarted.' if main.get('next11_valid_replay',{}).get('execution_started') else 'Execution has not been inferred from preparation.')}
+The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID F Flip seeds91001–91010 and FedSA91001. Its source review preserves scientific functions and passes42 refusals. {next11_note}
 
 The latest previously verified Git publication is `{published['commit']}`, with{published['committed_blobs_sha256_verified']} committed blob SHA checks against the remote branch. New completion evidence is published in a separate increment. Source preparation, approval, dispatch and completed scientific results are distinct. The native three-hour chat monitor remains PAUSED; supervisor-managed training does not restore it. Final test, the remaining baselines, complete mechanism comparisons and final manuscript claims remain unfinished.
+
+The complete900-record three-view descriptive paper tables are now independently root-reviewed:900 original receipts rejoined,8100 metrics reconstructed from saved group counts and4860 mean/sampleSD scalars checked. AllIID/non-IID/five-scene/fixed10/9/6-seed views are retained under outputs/guardfed_tables/celeba_nine_method_three_view_20261009. Old native metrics/displayed values remain exact;94 oldJSON sampleSD last-bit differences(max2.78e-17) are disclosed without changing tolerance. The24-comment complete author-review reply now uses the accepted seven-scene snapshot under revision_20260923/rebuttal_integrated71_20261009; submission remains gated on the full cohort, and the manuscript source is not yet applied.
 
 '''
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')

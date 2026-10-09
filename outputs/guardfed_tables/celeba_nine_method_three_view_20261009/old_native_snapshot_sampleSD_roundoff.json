@@ -1,0 +1,947 @@
+{
+  "note": "All original 2700 record metrics, 810 summary means and five displayed native tables are exactly equal. The original table renderer uses statistics.stdev; 94 original snapshot SD values differ only in final floating-point bits. No values are substituted or adjusted.",
+  "original_renderer_audit_tolerance": 1e-12,
+  "differences": [
+    {
+      "subset": "all_ten",
+      "method": "FLTrust",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.007480832728132377,
+      "original_renderer_sample_sd": 0.007480832728132376,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.007082623350316019,
+      "original_renderer_sample_sd": 0.007082623350316018,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.007082623350316019,
+      "original_renderer_sample_sd": 0.007082623350316018,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.004853295439233074,
+      "original_renderer_sample_sd": 0.004853295439233073,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.00601504977160575,
+      "original_renderer_sample_sd": 0.0060150497716057495,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust+FairGuard",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.011032201262429394,
+      "original_renderer_sample_sd": 0.011032201262429396,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust+FairGuard",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.01004150409443403,
+      "original_renderer_sample_sd": 0.010041504094434031,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust+FairGuard",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.12146683153912169,
+      "original_renderer_sample_sd": 0.1214668315391217,
+      "difference": 1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FLTrust+FairGuard",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.012443734147300836,
+      "original_renderer_sample_sd": 0.012443734147300838,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.007640048424916946,
+      "original_renderer_sample_sd": 0.007640048424916945,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.00764493189635573,
+      "original_renderer_sample_sd": 0.007644931896355731,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.08218266665405942,
+      "original_renderer_sample_sd": 0.08218266665405943,
+      "difference": 1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.11850799066573853,
+      "original_renderer_sample_sd": 0.11850799066573851,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.1067101045775232,
+      "original_renderer_sample_sd": 0.10671010457752318,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairGuard",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.009845973102534423,
+      "original_renderer_sample_sd": 0.009845973102534421,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FairGuard",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.023781576300218762,
+      "original_renderer_sample_sd": 0.02378157630021876,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAvg",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.006430897133846746,
+      "original_renderer_sample_sd": 0.006430897133846747,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.13382860774477776,
+      "original_renderer_sample_sd": 0.13382860774477773,
+      "difference": -2.7755575615628914e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.10965286930096003,
+      "original_renderer_sample_sd": 0.10965286930096005,
+      "difference": 1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.09133112876165471,
+      "original_renderer_sample_sd": 0.09133112876165472,
+      "difference": 1.3877787807814457e-17
+    },
+    {
+      "subset": "all_ten",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.006965039176811277,
+      "original_renderer_sample_sd": 0.006965039176811276,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "GuardFed-AD2+",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007413076559297466,
+      "original_renderer_sample_sd": 0.007413076559297467,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "Median",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.013548125474755101,
+      "original_renderer_sample_sd": 0.0135481254747551,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "Median",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.014193573570941444,
+      "original_renderer_sample_sd": 0.014193573570941443,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "Median",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.012377577595450676,
+      "original_renderer_sample_sd": 0.012377577595450677,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "Median",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.012625405790433697,
+      "original_renderer_sample_sd": 0.012625405790433695,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAA-DDPG",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.011604709955346024,
+      "original_renderer_sample_sd": 0.011604709955346026,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.015051348695423005,
+      "original_renderer_sample_sd": 0.015051348695423006,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.023099630671401254,
+      "original_renderer_sample_sd": 0.02309963067140125,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.01491554563657767,
+      "original_renderer_sample_sd": 0.014915545636577671,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.01892539665241722,
+      "original_renderer_sample_sd": 0.018925396652417225,
+      "difference": 3.469446951953614e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "LASA",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.01380532489895517,
+      "original_renderer_sample_sd": 0.013805324898955171,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "LASA",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.011332234969076545,
+      "original_renderer_sample_sd": 0.011332234969076543,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "all_ten",
+      "method": "LASA",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.005703013214908723,
+      "original_renderer_sample_sd": 0.005703013214908722,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "all_ten",
+      "method": "LASA",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.006931658964130203,
+      "original_renderer_sample_sd": 0.006931658964130202,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.006940326958895303,
+      "original_renderer_sample_sd": 0.006940326958895304,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.004899244339972076,
+      "original_renderer_sample_sd": 0.004899244339972077,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007011694370098254,
+      "original_renderer_sample_sd": 0.007011694370098253,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007011694370098254,
+      "original_renderer_sample_sd": 0.007011694370098253,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007446128214036681,
+      "original_renderer_sample_sd": 0.0074461282140366805,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.00489244162018539,
+      "original_renderer_sample_sd": 0.004892441620185389,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust+FairGuard",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.015420418849280302,
+      "original_renderer_sample_sd": 0.0154204188492803,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FLTrust+FairGuard",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.029117629585920495,
+      "original_renderer_sample_sd": 0.0291176295859205,
+      "difference": 3.469446951953614e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007824154065253188,
+      "original_renderer_sample_sd": 0.007824154065253186,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.036184436820402344,
+      "original_renderer_sample_sd": 0.03618443682040234,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.052146523116180066,
+      "original_renderer_sample_sd": 0.05214652311618006,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.012897260646231623,
+      "original_renderer_sample_sd": 0.012897260646231624,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.00730021160387366,
+      "original_renderer_sample_sd": 0.0073002116038736594,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FairGuard",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.019943869704685382,
+      "original_renderer_sample_sd": 0.01994386970468538,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAvg",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.011932226563790452,
+      "original_renderer_sample_sd": 0.011932226563790454,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.13926358141898676,
+      "original_renderer_sample_sd": 0.13926358141898673,
+      "difference": -2.7755575615628914e-17
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.02646592571242529,
+      "original_renderer_sample_sd": 0.026465925712425294,
+      "difference": 3.469446951953614e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.014587641211049268,
+      "original_renderer_sample_sd": 0.01458764121104927,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.006597231627569713,
+      "original_renderer_sample_sd": 0.006597231627569712,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.006812121211861216,
+      "original_renderer_sample_sd": 0.006812121211861215,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.0037622791007525295,
+      "original_renderer_sample_sd": 0.003762279100752529,
+      "difference": -4.336808689942018e-19
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "GuardFed-AD2+",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.014429865950006237,
+      "original_renderer_sample_sd": 0.014429865950006235,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "Median",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.01391379911671527,
+      "original_renderer_sample_sd": 0.013913799116715269,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "Median",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.013241717109425611,
+      "original_renderer_sample_sd": 0.013241717109425613,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "Median",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.009149276375660405,
+      "original_renderer_sample_sd": 0.009149276375660407,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAA-DDPG",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.010083858866930464,
+      "original_renderer_sample_sd": 0.010083858866930466,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.012972829432188854,
+      "original_renderer_sample_sd": 0.012972829432188852,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.011273377445290769,
+      "original_renderer_sample_sd": 0.01127337744529077,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.012075206449231832,
+      "original_renderer_sample_sd": 0.01207520644923183,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.011710455690360564,
+      "original_renderer_sample_sd": 0.011710455690360565,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "LASA",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.01265738274661184,
+      "original_renderer_sample_sd": 0.012657382746611842,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "nonselection_nine",
+      "method": "LASA",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.011590386604578652,
+      "original_renderer_sample_sd": 0.011590386604578654,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FLTrust",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.006304587284170174,
+      "original_renderer_sample_sd": 0.006304587284170173,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FLTrust+FairGuard",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007089117972922248,
+      "original_renderer_sample_sd": 0.007089117972922247,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FLTrust+FairGuard",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.006885605575032253,
+      "original_renderer_sample_sd": 0.006885605575032252,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FLTrust+FairGuard",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.010936207812261475,
+      "original_renderer_sample_sd": 0.010936207812261477,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.03830066394058742,
+      "original_renderer_sample_sd": 0.038300663940587426,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.005989268280896937,
+      "original_renderer_sample_sd": 0.005989268280896936,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.0033473495917032948,
+      "original_renderer_sample_sd": 0.003347349591703295,
+      "difference": 4.336808689942018e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.12365103312935474,
+      "original_renderer_sample_sd": 0.12365103312935473,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.11146572247458442,
+      "original_renderer_sample_sd": 0.1114657224745844,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairFed",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.025585380617536586,
+      "original_renderer_sample_sd": 0.02558538061753659,
+      "difference": 3.469446951953614e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairGuard",
+      "distribution": "IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.0047945765151072555,
+      "original_renderer_sample_sd": 0.004794576515107256,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairGuard",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.011064148162346958,
+      "original_renderer_sample_sd": 0.01106414816234696,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairGuard",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.008974773797819871,
+      "original_renderer_sample_sd": 0.00897477379781987,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FairGuard",
+      "distribution": "non-IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.008339364704253492,
+      "original_renderer_sample_sd": 0.008339364704253494,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAvg",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.03773042557716723,
+      "original_renderer_sample_sd": 0.037730425577167236,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAvg",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.013846231356519603,
+      "original_renderer_sample_sd": 0.0138462313565196,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.045375017544092615,
+      "original_renderer_sample_sd": 0.04537501754409262,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAvg",
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.012820120516370898,
+      "original_renderer_sample_sd": 0.0128201205163709,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "GuardFed-AD2+",
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.007861053116189837,
+      "original_renderer_sample_sd": 0.007861053116189839,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "GuardFed-AD2+",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aeod",
+      "original_snapshot_sample_sd": 0.0038911434133286917,
+      "original_renderer_sample_sd": 0.003891143413328692,
+      "difference": 4.336808689942018e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "Median",
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.0032573773043059412,
+      "original_renderer_sample_sd": 0.0032573773043059417,
+      "difference": 4.336808689942018e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "Median",
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.007186872651563609,
+      "original_renderer_sample_sd": 0.007186872651563608,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAA-DDPG",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.008608253598859266,
+      "original_renderer_sample_sd": 0.008608253598859267,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAA-DDPG",
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.0055412490616069,
+      "original_renderer_sample_sd": 0.005541249061606899,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "FedAA-DDPG",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.012764900388840116,
+      "original_renderer_sample_sd": 0.012764900388840114,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "subset": "matching_six",
+      "method": "LASA",
+      "distribution": "IID",
+      "attack": "F Flip",
+      "metric": "accuracy",
+      "original_snapshot_sample_sd": 0.006933688428681979,
+      "original_renderer_sample_sd": 0.006933688428681978,
+      "difference": -8.673617379884035e-19
+    },
+    {
+      "subset": "matching_six",
+      "method": "LASA",
+      "distribution": "IID",
+      "attack": "FedSA",
+      "metric": "aspd",
+      "original_snapshot_sample_sd": 0.011167132704176767,
+      "original_renderer_sample_sd": 0.011167132704176769,
+      "difference": 1.734723475976807e-18
+    }
+  ],
+  "max_absolute_difference": 2.7755575615628914e-17
+}

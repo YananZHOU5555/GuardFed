@@ -1,0 +1,366 @@
+# Response to the Associate Editor and Reviewers
+
+**Manuscript:** TDSC-2026-07-3058, “To Kill Two Birds with One Stone: Defending Both Utility and Fairness in Federated Learning Systems”  
+**Evidence cut-off:** 9 October 2026 (Australia/Sydney).  
+**Status:** Evidence-grounded working response, for author review. The response distinguishes completed evidence from text supplied for insertion. It does not certify that the original manuscript has already been revised or that all remaining experiments are complete. Proposed final scientific claims remain subject to the authors' decision.
+
+**DO_NOT_SUBMIT_BEFORE_FULL_COHORT. Integrated author-review copy; fixed intermediate evidence snapshot.** This copy uses only the closed seven-scene snapshot `three_view_interim71_20261009`, accepted at 2026-10-09T15:35:42.401065+00:00 in the [independent root review](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim71_20261009/ROOT_REVIEW.json). The [accepted three-view table](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim71_20261009/TABLES.md) contains 70 complete matched seed pairs (140 displayed checkpoints), with equal-rule 10/9/6-seed panels. A total of 71 pairs/142 original receipts are preserved; the additional non-IID FedSA seed91001 pair is retained individually and excluded from mean/SD panels because its scene lacks ten seeds. The original draft's evidence cut-off and completed-cohort descriptions retain their historical meaning. This version supersedes the six-scene writing copy without changing its evidence. Later results are not incorporated without explicit acceptance and a new revision. P2 and the native/shared main endpoint remain pending. Completion of a 900-model validation replay would not itself complete the mechanism cohort or a final test evaluation.
+
+Dear Associate Editor and Reviewers,
+
+Thank you for the careful assessment. The most consequential revisions concern the positioning of DFA, the exact executed GuardFed pipeline, the conditional scope of the theory, and the comparability of the experiments. We address each actionable comment below. Reviewer 1 and Reviewer 3 retain their original numbering. Reviewer 2 did not number the comments; the descriptive labels below are navigation aids, not original reviewer numbers. All blocks labelled **Original comment** are reproduced from the supplied decision letter; our interpretation and response follow separately.
+
+We have completed supplementary experiments on ACSIncome and CelebA with a CNN, individual-component tabular ablations, stronger heterogeneity, and root-data imperfections. The current expanded CelebA comparison contains **900 accepted records: nine methods × two distributions × five scenarios × ten shared seeds**. This is validation evidence. It is not a completed 17-method benchmark or an untouched-test confirmation. The remaining experimental and integration items are identified once in the pending register at the end, with cross-references where relevant.
+
+## Evidence and reporting conventions
+
+| ID | Completed evidence | Scope and limitation |
+|---|---|---|
+| E1 | 1,150 supplementary tabular training runs: 260 individual deletions, 360 stronger-heterogeneity, 250 root-noise, 160 fixed-reservoir group-share, 120 ACSIncome | Fixed final round 70; actual predefined seeds and sample SD. Matching historical controls are separate. New COMPAS experiments use train-only preprocessing. |
+| E2 | Initial CelebA/CNN formal cohort: 240 runs, four methods × two distributions × three scenarios × ten seeds | Official train/test partitions; original recipes preserved. These results are not pooled with the later tuned validation cohort. |
+| E3 | Expanded CelebA validation comparison: 900 records, nine methods × two distributions × five scenarios × ten seeds | Stage A 700 plus FedAA/LASA 200; the latter includes 192 new and eight explicitly reused records. All metrics use the same round-70 checkpoint. Nine methods do not complete the 17-row target. |
+| E4 | 260 accepted tabular raw/calibrated same-checkpoint pairs | 26 complete ten-seed conditions; no retraining. Twenty historical Adult Full checkpoints are unavailable. Six CPU replay mismatches were resolved on the original GPU and remain disclosed. |
+| E5 | Independently re-audited Adult score diagnostics: 140 runs and 8,440 visible round records | All raw-file hashes, CSV rows and 14 condition summaries matched. The 120 deletion runs provide 8,400 complete rounds; 20 historical Full runs provide only 40 first/last-round observations. Pre-gate, intermediate gate and actual final selection are distinguished. |
+| E6 | Shared-calibration comparison for 700 Stage A final models: 1,400 raw/shared outcomes | Root-only threshold fitting; zero new training; native replay metrics match. This control covers seven methods, not the two later added baselines. |
+| E7 | Historical Adult Table II recovery: all 480 numerical sources, all 44 suppressed values, actual sample sizes and recoverable SD | 294 cells have n=1, 180 n=10, six n=3. Historical selections and method-identity problems are explicit. A uniform round-70 correction candidate is supplied separately. |
+| E8 | Public revision artifact snapshot at commit `51629c2df5e56259a0d750744b7dc9299349efd0` | Source/configuration/reporting metadata and the nine-method table packet; model/data archives are separately backed up. This is a verified published snapshot, not certification that the entire final revision release is finished. |
+| E9 | Independently audited CelebA pre-attack partitions: two distributions × ten seeds, 400 client sample counts | Frozen shuffle/Dirichlet replay matches every archived count; 40 original Male counts also match attribute-flip audit counts. This first audit used sensitive margins and root support only; the training-metadata joint extension is E13. |
+| E10 | Adult/COMPAS realized strong-heterogeneity partitions: α=1/0.5/0.1 × ten seeds, 60 partitions and 1,200 clients | All sample totals and 2,400 sensitive marginals exactly match frozen replay and the archived audits; 240 S-DFA attribute-flip counts also match. Original client joint tables were recovered and checked for consistency, rather than inferred from marginals. Empty and single-group clients are retained. |
+| E11 | Historical expanded synthetic-ratio numerical lineage: 840 original records and two 840-row exports | All joint-checkpoint and terminal values trace to raw records. The earlier export selects each metric independently; 797 rows have no common checkpoint. Descriptive summaries use three seeds, with scenarios averaged within seed. Historical generator execution and submitted-figure provenance remain partial; the separate PCA-containing suite is E12. |
+| E12 | Separate historical root-generation suite: 260 original records, including all 40 PCA-Gaussian records, and 26 setting summaries | All three raw exports match the source records. The old triplets have no common checkpoint in 250/260 records, including 40/40 PCA records. Each setting averages ten distribution–attack scenarios at seed 123; n=10 is not ten seeds. A recovered candidate is strongly compatible with Fig.3 but does not establish its original plotting source. |
+| E13 | CelebA clean training joint allocation: 20 partitions, 1,600 Male×Smiling client counts and 80 root counts | Frozen original-function replay and an independent index-based implementation agree. Archived train/validation/root ID hashes and 400 totals match; 800 sensitive margins match E9. New ordered client-ID/joint hashes are reconstruction receipts, not original-run hashes. The split allocates Male groups, not Smiling labels. |
+
+For E3, the official CelebA split sizes are 162,770 training and 19,867 validation images. Smiling is the target and Male is the annotated binary grouping variable. Images are RGB 64×64. All 20 clients participate in each round, with four nominal malicious clients in attack scenarios. The protocol uses a training-derived 10% root set, 70 rounds, one local epoch, batch size 64, and deterministic FP32 execution. The recipes are fixed before the coverage runs. Seven methods were screened on non-IID Benign/S-DFA; FedAA/LASA were screened on both distributions under Benign/S-DFA. Configuration-selection seed 91001 is included in the ten-seed main table, with separate nine-seed results excluding it and a matching six-seed subset. The six-seed subset is not labelled an untouched independent test. Fourteen reused records used cu130; the remaining 886 used cu128. A first-round migration check does not establish equivalence of all 70 training rounds.
+
+ACC is reported in percent. AEOD and ASPD are absolute differences on [0,1], with lower values indicating smaller measured disparity. **AEOD is the absolute TPR gap (equal opportunity), not full equalized odds.** New repeated-training conditions use all predefined seeds, mean ± sample SD (ddof=1). Historical cohorts retain their actual repeat counts; a single-seed synthetic setting has no across-seed SD. Cross-scenario summaries average conditions within each seed before calculating between-seed statistics. No main comparison places a selected GuardFed seed against a baseline average. Negative outcomes and nearly constant predictions remain in the evidence.
+
+## Associate Editor
+
+**Original comment (verbatim).**
+
+> This paper proposes a federated learning system that aims to achieve predictive utility and group fairness in the presence of malicious clients. Though the topic is interesting, several concerns were raised by the reviewers regarding the unclear positioning of DFA, the lack of detailed theoretical analysis, and insufficient benchmarking and ablation studies. Please revise the manuscript carefully based on the reviewers' comments.
+
+**Response.** We agree that the manuscript needs a more precise contribution and stronger evidence. We position DFA as a coordinated threat setting and comparative evaluation using existing attack primitives. We interpret the theorem as a conditional property of soft aggregation, not a guarantee that the complete implemented defense always separates malicious clients. The executed GuardFed-AD2+ pipeline also contains hard filtering, update-norm handling, per-round root-based selection among internal configurations, and group-dependent prediction thresholds; these operations must be described explicitly.
+
+The completed additions broaden the evaluation beyond the original two tabular tasks and the original grouped ablation. They also reveal limitations. For example, the nine-method CelebA results show lower measured disparities for GuardFed than FLTrust, FedAA, and LASA in the native end-to-end comparison, but accuracy remains lower than FLTrust and FedAA. Shared calibration removes a stable AEOD advantage over FLTrust, while an ASPD difference remains. We preserve these findings rather than claim universal dominance.
+
+The new image mechanism evidence is currently intermediate: it pairs 70 CelebA minus_U checkpoints with 70 historical Full checkpoints across seven complete scenes, with ten matched seeds per scene. Removing the utility-score term reduces mean accuracy by 0.309–1.384 percentage points in the ten-seed native panel, but also reduces ASPD in every scene. AEOD increases in six scenes. The same checkpoints' raw outputs instead show lower AEOD after deletion in five scenes. These results expose a utility–disparity trade-off and dependence on the prediction rule; they do not establish that every component is necessary. Other image interventions and the remaining scene coverage are still pending. The existing tabular evidence and its unfavorable COMPAS outcomes remain in the response.
+
+**Revision material supplied.** The companion insertion text provides the contribution/threat-model correction, exact root-update procedure, method description, notation table, statistical disclosure, related work, and limitations. The remaining experiments are P1–P4 below. Final manuscript section/table/page references are P5; they will be assigned after insertion and compilation.
+
+## Reviewer 1
+
+### R1.1 — Novelty and positioning of DFA
+
+**Original comment (verbatim).**
+
+> 1. Clarification of the novelty and positioning of DFA.
+> The proposed Dual-Facet Attack provides a useful setting for jointly examining utility and fairness degradation, but its relationship to existing attack mechanisms could be articulated more clearly. In particular, S-DFA essentially combines sensitive-attribute manipulation with update-level poisoning, while Sp-DFA distributes these two components across different malicious clients. The authors are encouraged to clarify whether the main novelty of DFA lies in a new attack mechanism or in a coordinated threat model and evaluation framework that exposes interactions between the two objectives. A more precise positioning would help readers better understand the contribution without requiring substantial methodological changes.
+
+**Response.** The contribution is the coordinated threat model and evaluation of utility and group-fairness degradation, including whether the two attack roles are colocated or distributed across malicious clients. The sensitive-attribute manipulation and model-update poisoning primitives are not newly invented. S-DFA applies both roles to the same malicious clients; Sp-DFA divides a fixed malicious-client budget between the roles. In the executed four-malicious-client split setting, two clients perform sensitive-attribute manipulation and two perform model-update poisoning. The latter is therefore a different allocation of a common adversarial budget, not two attacks each receiving the full budget.
+
+This positioning does not require an unmeasured claim of super-additive synergy. A stronger claim that coordination creates a fundamentally new mechanism would require matched-budget component controls and is not made here. We also distinguish the implemented root-reference FedSA-inspired variant from the original literature algorithm; access to the root reference is an attacker-information assumption and is disclosed. The candidate text revises the contribution and threat-model wording consistently rather than changing the previously executed method.
+
+**Evidence/status.** Existing benchmark evidence and attack-configuration audit support this narrower positioning. See E1–E3 and the insertion text, §1. No new synergy result is claimed.
+
+### R1.2 — Scope of the theoretical analysis
+
+**Original comment (verbatim).**
+
+> 2. The theoretical analysis could be interpreted more carefully.
+> Theorem 1 shows exponential suppression of malicious aggregation mass under the assumption that every benign client's normalized score exceeds every malicious client's score by a margin \mu_t. The result is mathematically reasonable, but the key property required by the theorem is exactly the property that a robust scoring rule is expected to achieve. Therefore, the current result is more naturally viewed as an analysis of the soft aggregation mechanism than as a complete robustness guarantee for GuardFed. The manuscript would benefit from making this scope explicit and, if possible, briefly reporting the empirical score separation observed in representative experiments to better connect the theoretical result with practice.
+
+**Response.** We agree. The score-separation assumption is substantive: the theorem does not prove that the scoring function produces such separation. It quantifies suppression by the softmax weighting mechanism when a strict score margin holds. In the executed pipeline, this analysis must also use the clients retained after filtering, the selected internal configuration, and that configuration's temperature. Hard filtering, configuration selection, root-estimation error, and threshold calibration are not certified by the softmax bound.
+
+The supplied corrected statement uses the retained benign and malicious counts. For margin μ and temperature τ, malicious mass is at most m/(h exp(μ/τ)+m), provided h>0 and every retained benign score exceeds every retained malicious score by at least μ≥0. If no malicious client is retained, the mass is zero; if no benign client is retained, the theorem gives no protection. This bound concerns coefficient mass; translating it into a perturbation bound also needs a bound on scaled update norms. It is not a convergence, accuracy, or population-fairness guarantee.
+
+We independently re-audited all 140 Adult/S-DFA diagnostic result files against their archived hashes and recomputed all 8,440 visible CSV records. The 120 deletion runs cover all 8,400 rounds. Their strict pre-gate margin is positive in 6,065 rounds and negative in 2,335, with no zero margins. After the actual candidate selection and retention operation, 8,278 rounds retain no malicious client; the remaining 122 contain both classes, with positive margin in two and negative margin in 120. We do not count an empty-malicious set as satisfying the nonempty strict-separation premise. Both nonempty nonnegative-margin cases obey the conditional bound. The 20 historical Full runs record only rounds 1 and 70: 31 of their 40 pre-gate margins are positive and nine negative; all 40 observed final sets contain no malicious client. Their missing intermediate rounds are not imputed, and their weights are explicitly reconstructed rather than claimed to be directly logged.
+
+The implementation's intermediate gate is also not an absolute final-set constraint. It assigns gate-excluded scores a temporary sentinel of −10^9 and then takes top-k over all positions; when k exceeds the gate size, excluded clients can re-enter. Softmax then uses their original scores. This occurs in 116 of the 8,400 observed deletion rounds. Deletion variants can assign malicious coefficient mass as high as 1.0; these negative results are retained. This is the executed behavior, not a method change made after seeing outcomes. The theorem uses the actual final set and cannot certify the intermediate gate or adaptive selection. Average score differences cannot substitute for its minimum/maximum premise, and these correlated round counts are descriptive observations, not independent statistical replicates.
+
+**Revision material supplied.** Conditional theorem, proof, edge cases and audited diagnostic counts in insertion §4; [full per-condition report and reproducible independent verification](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/score_analysis/restoration_and_score_report_20261009.md). All 8,400 new-round gates were reconstructed from their recorded geometry, all 8,440 candidate/top-k decisions were checked, and the 20 historical wrappers were matched to the original JSONL source lines. This completes the existing Adult score-diagnostic analysis; it does not extend its scope to unmeasured image mechanisms.
+
+### R1.3 — Additional dataset and architecture
+
+**Original comment (verbatim).**
+
+> 3. The experimental coverage could be further strengthened.
+> The evaluation is primarily conducted on Adult and COMPAS, both of which are tabular binary-classification benchmarks, with an MLP as the learning model. While these datasets are standard for group-fairness studies and the current experiments already cover both IID and non-IID settings, the generality of GuardFed would be more convincing with at least one additional dataset or model architecture. This is particularly relevant because the method is presented as a general-purpose defense for federated learning systems rather than a defense specialized to tabular fairness benchmarks.
+
+**Response.** We added ACSIncome (120 runs) and CelebA image classification using a CNN. The initial CelebA cohort contains 240 runs; the later validation comparison expands coverage to 900 records, with both distributions, all five scenarios, and ten shared seeds per condition. These cohorts remain separate because their configurations and evaluation-selection histories differ.
+
+Across both distributions and five scenarios, averaging within each seed before summarizing across ten seeds, native GuardFed-AD2+ obtains ACC 88.420±0.623%, AEOD 0.00967±0.00297, and ASPD 0.06105±0.00466. Corresponding native FLTrust values are 89.629±0.652%, 0.04585±0.00406, and 0.11456±0.00468. FedAA-DDPG adaptation obtains 88.623±1.044%, 0.04572±0.00610, 0.10847±0.00908; LASA adaptation obtains 87.752±1.221%, 0.03963±0.00395, 0.09785±0.00826. These are utility–disparity trade-offs, not superiority on every metric.
+
+Changing both data modality and model establishes applicability to this tested image/CNN setting; it does not isolate an architecture-only effect or support arbitrary-architecture generality. The current table contains nine methods; the remaining eight methods are P1. Frozen final evaluation is P3.
+
+We also checked the realized image-data allocation rather than treating α as a sufficient description. The [training-only joint audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_joint_partition_20261009/README.md) recovers all 1,600 client Male×Smiling counts and 80 root counts for two distributions and ten shared seeds (E13). It verifies the original train/validation/root ID hashes, 400 client totals and 800 sensitive margins. The frozen split allocates Male groups; it is not label-Dirichlet allocation. The joint counts and their support describe the tested data protocol, not additional predictive performance or generality.
+
+**Revision material supplied.** Dataset/model specification and the separate evaluation histories, insertion §§6–7. E1–E3 and the supplied IID/non-IID paper tables support the numerical statements.
+
+### R1.4 — Imperfect root data and synthetic construction
+
+**Original comment (verbatim).**
+
+> 4. The evaluation of the server-side root data could be made more complete.
+> The paper usefully studies distributional skew and synthetic augmentation, and the results already show that root-data imbalance can noticeably affect fairness assessment. However, other practically relevant imperfections of the root set, such as label noise, sensitive-attribute noise, or severe underrepresentation of a protected group, are not considered. In addition, the synthetic-root experiment would benefit from a clearer description of how the synthetic generators are trained and exactly what data are available to the server, since this affects the practicality of the proposed root-data construction strategy.
+
+**Response.** We completed root-only label-noise and sensitive-attribute-noise studies and a protected-group-share study using a fixed reservoir. The fixed-reservoir design keeps the client data fixed while changing which reservoir examples form the root. Poor-performing outcomes and zero-support conditions are retained.
+
+For COMPAS benign runs, increasing root sensitive-attribute noise from 0% to 40% changes mean ACC from 0.65821 to 0.65232, AEOD from 0.05106 to 0.15761, and ASPD from 0.04538 to 0.15814. In the separate fixed-reservoir study, reducing the protected-group share from 50% to 0% changes AEOD from 0.03804 to 0.24644 and ASPD from 0.03271 to 0.23001. These results identify failure boundaries; they do not establish immunity to arbitrary root corruption. At zero group support, a fallback in the implementation cannot identify the missing group's risk. Under S-DFA, root changes can also change the attack reference, so that experiment is end-to-end sensitivity rather than a defense-only intervention.
+
+For the expanded CelebA cohort, we also independently audited root support. The 16,277-example root contains all four Male/Smiling cells in every seed, with minimum support 2,666 across the ten unique roots. Their joint total-variation distance from training-population proportions is 0.003486±0.002155. The shared root is identical between IID/non-IID for each seed, so it is counted once. This describes the implemented stratified sample, not an assurance that a practical root acquisition process supplies comparable support. E9 preserves the counts and provenance.
+
+The synthetic-root access assumption also needs correction. The inspected implementation fits the generator's dependence structure on clean root rows, but uses encoded training-population support information in projection; the Gaussian-copula path additionally uses training-population empirical marginals. Therefore, the existing setup must not be described as requiring only the small root sample. Synthetic data do not automatically provide differential privacy or reconstruct a genuinely unobserved group.
+
+We have now traced all 840 records of the historical expanded synthetic-ratio suite to its archived raw JSONL and verified both exports (E11). The `synthetic_joint_raw.csv` values come together from one of rounds 61–70 selected by the recorded ACC−0.5(AEOD+ASPD) rule; the terminal three metrics also match. In contrast, the earlier `expanded_synthetic_ratios_raw.csv` independently takes maximum ACC and minimum AEOD/ASPD. For 797/840 rows, no single checkpoint attains that triplet. This export cannot support a same-model utility–fairness point. We preserve it as historical evidence and separate it from coherent same-checkpoint values. The newly supplied summaries first average the four scenarios within each seed, yielding 210 seed-level records and 70 setting summaries over three seeds with sample SD. They do not remove the historical evaluation-based checkpoint-selection limitation.
+
+We have also recovered the separate `server_generation_ablation` suite (E12), including all 40 PCA-labelled records. Its 260 records cover 13 root-construction settings, two datasets, two distributions and five attacks, all at seed 123. Three raw exports match exactly, and the 26 setting summaries have been independently checked. Each setting's n=10 denotes ten distribution–attack scenarios, not ten independent seeds. This export also selects metric-wise extrema over rounds 61–70: 250/260 triplets, including all 40 PCA triplets, have no common attaining checkpoint. Metric-round identities, terminal triplets and a same-round historical joint-selection alternative are preserved; historical checkpoint binary identities and untouched-test status are not thereby recovered.
+
+The [Fig.3/PCA recovery audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/synthetic_figure_recovery_20261009/README.md) identifies a concrete reporting discrepancy. The submitted figure's 26 marker positions/colours are strongly compatible with the ten-scenario setting averages and `1−0.5*(AEOD+ASPD)`. The manuscript instead describes S-DFA-only results and defines `1−(AEOD+ASPD)`. This is raster/numerical compatibility, not proof of the original plotting script or exact input file. The candidate coordinates also inherit the old mixed-checkpoint limitation. We therefore do not claim that Fig.3 has already been redrawn or its final correction approved. Its input, selection rule, scenario aggregation, formula and scope remain an explicit author decision under P4/P5.
+
+The recovered candidate also contradicts an unqualified improvement claim: on COMPAS, TVAE with 1% real plus 9% synthetic gives the old coordinates ACC 60.167387% and half-sum FairScore 0.902013, versus 64.784017% and 0.949063 for 10% real. CTGAN with 1% plus 9% gives 66.916847% and 0.760114, illustrating a different utility–disparity trade-off. These are descriptions of the historical export, not newly validated same-model performance. The candidate manuscript text removes the blanket synthetic-improvement and specific TVAE-example claims while retaining negative evidence.
+
+Numerical recovery still does not establish generator execution identity. The archived function named `pca_gaussian_augment` fits a full-covariance Gaussian with diagonal shrinkage and projects its samples; it has no explicit PCA decomposition or dimensionality reduction. We identify it as the project's PCA-Gaussian statistical control. The bounded search of three known archives, project code/output paths and reachable Git history finds ForestDiffusion in driver lists and reports/logs, but does not recover its historical adapter/call implementation, dependency versions, or fitted-data/model/cache identities. The old records lack per-run immutable source/cache hashes, so the archived PCA source is not certified as the executed byte version of each run either. Those residual provenance items remain P4. The independent nine-method CelebA round-70 table is unaffected by these historical export issues.
+
+**Evidence/status.** E1 and the root result tables support noise/share results. The insertion explains the verified implementation and its information requirements without claiming unresolved generator provenance is complete.
+
+## Reviewer 2
+
+### Opening concern — What is new in DFA?
+
+**Original comment (verbatim).**
+
+> The paper is built around the idea that poisoning attacks in FL are usually studied either from the point of view of damaging utility or group fairness. Here, the authors instead propose an attack that combines these two goals by implementing a fairness and utility attack. The motivation is convincing and clear to me. However, the novelty of DFA could be discussed more explicitly. The authors should better clarify what is fundamentally new in DFA compared with the joint use of existing fairness- and utility-oriented attacks.
+
+**Response.** We distinguish coordinated evaluation from novelty of the constituent poisoning primitives. The contribution is to examine simultaneous protection of utility and group fairness under synchronous and split adversarial roles. We do not treat the mere composition of existing attacks as a new primitive or claim synergy beyond the measured comparisons. R1.1 gives the budget allocation and information-access details. The supplied contribution text adopts this scope throughout.
+
+### Client population and participation scale
+
+**Original comment (verbatim).**
+
+> - It was also interested to read the impact of malicious-client Ratio section. I was wondering how many clients are needed for this attack and this section explained this to me. One comment that I have about this is that my guess is that when I have only a few clients (like in the experiments) these kinds of attacks are more doable than in real-life scenarios where I have millions of clients. In this case, the presence of malicious clients would be probably hidden by the amout of clients and by the selection of the clients done by the server. A discussion about this could be interesting.
+
+**Response.** The executed supplementary setup has 20 clients, all participating each round, typically with four malicious clients. This is a controlled small-participant simulation, not a million-device deployment. It must not be described as sampling 20 clients from 100 if that is not the executed protocol.
+
+For a population of N clients with M malicious clients and a uniformly sampled round of m clients, K malicious participants follows Hypergeometric(N,M,m), with E[K]=mM/N. Increasing N reduces expected malicious participation if M is fixed; it does not do so if the malicious fraction M/N is fixed. The chance of no malicious participant is C(N−M,m)/C(N,m), when m≤N−M, and zero otherwise. Availability and biased selection may further change the distribution. Thus population size alone does not establish that poisoning is hidden or harmless.
+
+The experiments measure behavior conditional on the specified participating-client budget. They do not validate realistic cross-device availability, selection dynamics, or million-client scalability. The filtering implementation also uses the configured malicious-client count, an additional practical assumption. These limitations and the corrected participation protocol are explicitly supplied in insertion §§2 and 8.
+
+### Broader benchmark, including non-tabular data
+
+**Original comment (verbatim).**
+
+> - Authors only tested the methodology on two (simple) tabular benchmarks. I'd recommend 1) introducing other tabular benchmarks 2) introduce at least a non tabular benchmark (Celeba for instance if they want to use images) to make the paper stronger and to show that the method generalizes also on non-tabular datasets. Moreover. I'd avoid saying "Mini-Benchmark", for a journal paper I'd expect an extended benchmark.
+
+**Response.** The completed additions include both requested types: ACSIncome as an additional tabular task and CelebA with a CNN as a non-tabular task. The expanded CelebA validation evidence now covers nine methods, both distributions, five scenarios, and ten shared seeds. We replace “Mini-Benchmark” with a scope-specific description of the comparative evaluation. We do not use “extended benchmark” to conceal the remaining eight-method coverage gap (P1).
+
+The new tasks also reveal contrary results. On ACSIncome non-IID S-DFA, GuardFed has mean ACC/AEOD/ASPD 0.768731/0.043193/0.014080, whereas FLTrust has 0.796770/0.023964/0.044124. Only ASPD is lower for GuardFed. ACSIncome uses the documented customized SEX grouping, 2018 California person-row split, and encoded features; the scope is not all possible ACS tasks. These outcomes remain in the result tables and temper the generality claim.
+
+**Evidence/status.** E1–E3; insertion §§6–7. Additional image mechanisms and final evaluation are P2/P3, separate from the already completed data-modality extension.
+
+### Stronger non-IID settings
+
+**Original comment (verbatim).**
+
+> - With the goal of having an extended benchmark, it would also be beneficial to have a more non-IID experiment with values closer to 0.
+
+**Response.** We completed 360 additional runs at client-allocation α=1, 0.5, and 0.1: Adult/COMPAS × GuardFed/FedAvg/FLTrust × Benign/S-DFA × ten seeds. These supplement the historical α=5000 and α=5 anchors. The implemented Dirichlet allocation is by sensitive group; α alone does not characterize all feature, label, sample-size, or participation heterogeneity.
+
+The stronger settings have measurable costs. For Adult benign runs, GuardFed ACC is 0.81568±0.01296 at α=1 and 0.78040±0.02401 at α=0.1. Small disparity alone cannot establish retained utility. We retain sparse groups, low-performance seeds, and nearly constant predictions rather than silently resampling or selecting favorable cases. New COMPAS runs use train-only preprocessing and require their own matching controls; they are not pooled with the historical legacy-preprocessed values.
+
+We have additionally audited the realized CelebA anchor partitions rather than interpreting α alone. Replaying the frozen sensitive-group splitter for 20 partitions exactly matched all 400 archived client sample counts. Across 200 client observations per distribution, Male=1 proportions range from 40.495% to 42.969% under IID and 9.832% to 74.303% under non-IID; neither group is missing from any of these clients. Per-partition sample-count CV, summarized over ten seeds, is 0.00946±0.00129 versus 0.29870±0.06038. The first four malicious clients cover 19.964±0.102% versus 18.874±3.132% of client-held samples, showing why a client ratio is not necessarily the same sample ratio. The audit uses GuardFed-AD2+ Sp-DFA sources; frozen loading constructs the partition before and independently of runtime attack application.
+
+The [first CelebA partition audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_partition_audit_20261009/README.md) includes the 20 partition and 400 client records, source/member hashes, root support, and sensitive-allocation checks (E9). We subsequently recovered the clean client label-by-sensitive counts using frozen training metadata and the 20 matching archived Benign Full contracts. The [joint-allocation audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_joint_partition_20261009/README.md) verifies all 1,600 client four-cell counts and 80 root counts with an independent index-based implementation, alongside the original train/validation/root ID hashes, 400 totals and 800 sensitive margins (E13). No evaluation labels, pixels, predictions or new training are used.
+
+Across 200 client observations per distribution, Smiling=1 proportions range from 46.278% to 49.630% under IID and from 43.747% to 52.381% under non-IID. All 400 clients contain every Male×Smiling cell; the smallest cell has 1,161 IID and 278 non-IID examples. First computing each partition's mean client joint TVD from its client-held population and then summarizing ten seeds gives 0.007366±0.000723 versus 0.113408±0.017341. These are descriptive seed-level allocation summaries, not 400 independent replications. The realized target-label variation is much narrower than the Male variation because the Dirichlet split acts on Male groups, not Smiling labels. The original contracts preserve train/validation/root ID hashes and client totals, but no ordered client-ID or joint-row hashes. Those new hashes certify agreement between the two reconstructions; they are not retrospectively attributed to the original runs. This closes the missing client-joint-count subitem without claiming general label/feature heterogeneity coverage.
+
+We have also completed the [strong-α Adult/COMPAS partition audit](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/tabular_partition_audit_20261009/README.md), covering all 60 α/seed/dataset partitions (E10). Frozen replay exactly matches 1,200 client totals and 2,400 sensitive marginals; 240 original S-DFA flip counts provide an additional check. At α=0.1, the 200 Adult client observations contain 29 empty clients and 104 nonempty single-sensitive-group clients; COMPAS has 44 and 78, respectively. Across seeds, the first four nominal attacked IDs hold 1.912%–66.680% of Adult and 1.337%–65.458% of COMPAS client examples. A fixed 4/20 attacked-client ratio thus does not fix the attacked-example fraction. All sparse and empty allocations remain in the evidence, with empty-client group ratios undefined. The original tabular client label-by-sensitive tables were separately recovered from contemporaneous audits and checked for marginal/population-minus-root conservation; their labels were not inferred from sensitive counts or independently regenerated from raw metadata. These realized-support diagnostics complete the stronger-partition subitem of P4. The existing experiments still do not constitute a full component×every-α factorial study.
+
+### Practicality of a server-side root dataset
+
+**Original comment (verbatim).**
+
+> - I know that in the literature papers assume the presence of this server-side validation dataset but this is not always a realistic scenario. Usually in FL clients do not want to share their data with an external server. A discussion about this and about solutions that could be used to build this dataset would be beneficial for the paper.
+
+**Response.** A trusted, sufficiently representative root set is an explicit resource assumption of this defense. Federated learning does not itself guarantee that such data exist. Publicly available data, separately collected data, or authorized contributions are possible sources, each with distribution and governance limitations; none is an implemented privacy-preserving acquisition protocol in these experiments.
+
+The executed simulator also uses training-population statistics for client reweighting, while some synthetic routines use training-population support or marginal information. Those resources are distinct from the small root sample and must be disclosed. Root threshold fitting requires sensitive labels; applying group-specific thresholds also requires the group attribute at inference. Holding raw client records locally is not equivalent to a formal differential-privacy guarantee.
+
+The completed noise and group-underrepresentation studies expose this dependence empirically, as described in R1.4. E10 also verifies four-cell support of the sampled tabular roots (minimum 90 Adult and 68 COMPAS across ten unique roots each), while exposing severe missing support among clients at α=0.1. E13 reconstructs all 80 CelebA root counts, exactly matches their original sampling/noise contracts and ID hashes, and confirms minimum four-cell support 2,666 across ten unique root seeds. The same root is reused across distributions for each seed. These are descriptions of the implemented stratified resource, not a practical root-acquisition guarantee. The suggested related work gives alternatives and privacy–utility–fairness context, but does not transfer a privacy guarantee to GuardFed. The candidate text states actual access, disjointness, and failure cases. Both historical synthetic numerical suites are traced (E11/E12), including the separate PCA records. Original generator execution identities and the exact submitted plotting source remain P4; the identified Fig.3 scenario/formula conflict is not presented as an already implemented correction.
+
+### Table II — Report all computed values
+
+**Original comment (verbatim).**
+
+> - I think it would also be useful to have in Table II all the values that you computed and not only the ones over the threshold. Having N/E in the table is something that seems strange to me.
+
+**Response.** We agree that a low-accuracy model's well-defined disparity should be shown and interpreted jointly with utility, rather than hidden by a threshold. The completed audit traced all 480 numerical cells of the submitted Adult Table II and recovered all 44 entries suppressed as N/E. It matches 435 displayed values and identifies one discrepancy: FairGuard/IID/FedSA ACC was printed as 59.13%, while the source summary gives 54.13%. The original submission and source records remain preserved; no unsupported explanation of the discrepancy is asserted.
+
+We supply two explicitly different artifacts: the historical-selection reconstruction and a correction candidate taking all metrics from round 70 within each run. Numerical zeros and low-accuracy outcomes are retained. A finite stored value is not by itself proof of a nonzero subgroup denominator; missing denominator evidence is disclosed.
+
+The audit also found method-name problems: the historical FedWA row maps to AdaAggRL, and the cosine/fairness row mixes GuardFed-AD2 and GuardFed branches across scenarios. Recovering the values does not certify those labels as faithful baselines. The corrected table must identify the actual implementation or exclude an unsupported attribution, while retaining the historical record. No new training was used for this recovery.
+
+**Evidence/status.** E7 and the four-page recovery packet. Final manuscript insertion and author decisions about unsupported historical labels are P5; these are not missing numerical-source searches.
+
+### Standard deviations and repeat counts
+
+**Original comment (verbatim).**
+
+> - Authors wrote that the experiments are run 10 times with 10 different seeds, however, they only report the avg and not the std. I'd recommend reporting it in the tables. This is important for the fairness metrics, where some values are extremely small and differences between methods can also be very small.
+
+**Response.** We report mean ± sample SD over the actual predefined seeds, with all metrics taken together from the fixed final checkpoint in new complete cohorts. The current CelebA table has ten seeds in each of 90 method/distribution/scenario cells. We also provide nine-seed summaries excluding configuration-selection seed 91001. Cross-scenario statistics average within each seed first; multiple conditions are not extra independent seed replicates.
+
+The historical Table II requires a correction to the manuscript's blanket ten-repeat statement. Its actual cell counts are 294 with n=1, 180 with n=10, and six with n=3. We compute sample SD only where matching repeated records exist. For n=1, SD is unavailable, not zero. We do not attach another cohort's SD to a selected point value or use across-round variation as across-seed uncertainty.
+
+The same distinction applies to the recovered synthetic cohorts. E11 has three independent seeds and averages scenarios within each seed. E12 has only seed 123: its n=10 summaries average two distributions and five attacks and cannot support ten-seed sample SD or significance. The 250/260 mixed-checkpoint triplets in E12, including all 40 PCA records, are disclosed separately from coherent same-round/terminal alternatives; recovering the underlying records does not turn those historical choices into frozen evaluation.
+
+The historical single-seed exporter chose accuracy and disparity extrema independently over the final ten rounds; in 94/98 such conditions no single round supplies all three values. Other exports use method-dependent selection directions. These are selected historical statistics, not uniform final-round ten-seed means. The separate round-70 correction candidate removes within-run metric/checkpoint mixing but cannot create missing seeds, fix missing checkpoint binaries, or certify ambiguous baseline identities. These limits remain explicit. Small mean differences and SD overlap are not used as significance tests.
+
+### Recommended literature and unequal subgroup benefit
+
+**Original comment (verbatim).**
+
+> There exists a lot of others unfairness reduction methods that are not cited in this paper:
+> - https://arxiv.org/abs/2012.02447
+> - https://journals.sagepub.com/doi/abs/10.3233/FAIA240671
+> - https://arxiv.org/abs/2503.15163
+> - https://ieeexplore.ieee.org/document/9378043/
+> - https://arxiv.org/abs/2108.08435
+> - https://arxiv.org/abs/2109.08604
+>
+> Some of them involve the use of Differential Privacy, which is not used in this paper.
+>
+> Moreover, there are recent studies that also tried to highlight how unfairness reduction can be beneficial only for a subgroup of people while harming others; these can also be interesting considering the topic of the paper: 1) https://ojs.aaai.org/index.php/AIES/article/view/36730 and 2) https://dl.acm.org/doi/full/10.1145/3715275.3732152
+
+**Response.** We checked all eight suggested identifiers against primary records. They cover federated bias mitigation and reweighting (Abay et al.), privacy–utility–fairness trade-offs (PUFFLE), global fairness function tracking (Rychener et al.), FairFL, client-wise constrained fairness/performance optimization (Cui et al.), private fairness-constrained learning (FPFL), harm-centered fairness evaluation (Taik et al.), and client-level benefits with differing fairness objectives (Corbucci et al.). Full verified bibliographic entries and targeted insertion text are supplied in the companion literature audit. The IEEE identifier resolves to FairFL, not FairFed. Differential privacy is part of some referenced settings; GuardFed does not claim that property.
+
+We agree that reducing an aggregate disparity does not ensure every group benefits. In the accepted COMPAS Full non-IID same-checkpoint comparison, one group's mean TPR rises from 0.417638 to 0.575338 after calibration, while FPR also rises from 0.161773 to 0.297088. This is a concrete reason to report group-wise TPR/FPR, support, and utility alongside disparity. It does not establish universal subgroup benefit, causal real-world harm, or protection of unmeasured attributes. The related-work and limitations text distinguish these claims. Source links and BibTeX are in `recommended_literature_audit.md` and `recommended_references.bib`.
+
+## Reviewer 3
+
+### R3.1 — DFA novelty
+
+**Original comment (verbatim).**
+
+> 1. The novelty of DFA should be further clarified and strengthened. The current formulation appears to combine two existing attack mechanism, rather than introducing a fundamentally new joint attack strategy.
+
+**Response.** We adopt the precise contribution scope discussed in R1.1: coordinated threat modelling and evaluation of two objectives with synchronous/split allocation of existing primitives. We do not claim that the composition alone creates a new primitive. The attack budget, role split, actual FedSA-inspired implementation, and root-reference access are specified. A stronger synergy claim would require matched-budget evidence and is not included in the proposed wording.
+
+### R3.2 — Individual components
+
+**Original comment (verbatim).**
+
+> 2. The ablation study better isolates the contribution of each individual component of GuardFed. The current ablation study groups several components together. For example, C and A, as well as F and V are removed together, it is difficult to determine the individual contribution of each component. So, I suggest evaluating each component separately, or providing further justification for why these components are evaluated jointly.
+
+**Response.** We completed separate deletions of U, C, A, F, V, and the norm mechanism N on Adult and COMPAS under S-DFA, for both distributions and ten seeds per condition. The analysis matrix has 280 records including Full controls: 260 new runs and 20 explicitly identified historical Adult Full records. The deletion mask is applied after each internal candidate's parameter overrides, so a candidate cannot silently restore the deleted scoring term.
+
+The interpretation is bounded by what each deletion changes. Removing C or A removes the score contribution while geometric hard filtering remains. Removing F or V leaves group-threshold calibration in place. We verified 260 raw/calibrated same-checkpoint pairs to expose postprocessing effects. The 20 unavailable historical Adult Full checkpoint binaries were not fabricated or replaced by retraining; the different historical environment is disclosed.
+
+The 280-record tabular analysis, including the 260 new runs and 20 historical Adult Full controls, improves on the grouped deletions without establishing universal component necessity: all 12 COMPAS deletion conditions have higher mean accuracy than Full, and six improve all three means. We retain these negative findings. The additional CelebA snapshot now evaluates deletion of U alone in seven complete scenes: all five IID scenarios plus non-IID Benign and F Flip, using 70 minus_U and 70 matched Full terminal checkpoints. The U mask is applied after every candidate override so that candidate selection cannot restore its contribution; other mechanisms remain enabled. Each model's ACC, AEOD and ASPD come from its same round-70 checkpoint; each paired difference uses the same scenario and seed. For example, IID Benign native ACC/AEOD/ASPD changes from Full's 88.258%/0.00973/0.06254 to minus_U's 87.152%/0.01138/0.03982. The [n=10 three-view table and paired differences](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim71_20261009/TABLES.md) report all seven scenes with mean ± sample SD (ddof=1), alongside the identical seed rules for the nine-seed and six-seed panels in the [accepted complete snapshot](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim71_20261009/TABLES.md). This is a completed intermediate U comparison, not completion of the eight-control image mechanism study. C, A, F, V, norm treatment, hard filtering and candidate selection remain outside this snapshot's conclusions.
+
+**Interim image comparability.** This is validation-only: the seven scenes are IID Benign, F Flip, FedSA, S-DFA and Sp-DFA, and non-IID Benign and F Flip. The main panel uses seeds 91001–91010; sensitivity panels exclude selection seed 91001 or retain seeds 91005–91010, identically for Full and minus_U. All these validation seeds were previously exposed; neither sensitivity panel is an untouched confirmation set. Native includes each procedure's own original root-fitted calibration, raw uses strict positive margins (ties predict class 0), and shared calibration applies the unchanged common root-only fitting rule. AEOD is the absolute TPR gap, not full equalized odds. The displayed Full replays comprise five CPU and 65 GPU checkpoints, whereas all 70 minus_U replays use CPU. Full training comprises 69 cu128 and one cu130 checkpoint (non-IID Benign, seed 91001); minus_U training uses cu128 in the current driver 595 environment. Driver equality with the historical Full environment was not established. This mixed-device, mixed-environment snapshot is not a uniform-device final fairness comparison. No significance test, guaranteed win, completed 800-control claim or final-test conclusion is made. All seven complete scenes are included by coverage; the additional non-IID FedSA seed91001 pair is preserved individually and excluded from the mean/SD panels.
+
+### R3.3 — Sensitive attributes and fairness definitions
+
+**Original comment (verbatim).**
+
+> 3. The applicability of the proposed framework to different sensitive-attribute settings and fairness definitions should be clarified. The current formulation assumes a binary sensitive attribute a\in{0,1} and the experiments also appear to focus on a single sensitive attribute. It would be helpful to clarify whether GuardFed can support multi-valued sensitive attributes or multiple sensitive attributes simultaneously. In addition, the current fairness-risk term is based on AEOD and ASPD. It would be helpful for the authors to discuss whether GuardFed can be extended to other fairness metrics, e.g. equalized odds.
+
+**Response.** The executed experiments support a single annotated binary grouping attribute. They do not validate multi-valued or intersectional fairness. Conceptually, the score interface can accept risks defined over a set of groups G, including intersections of multiple attributes. For example, an equalized-odds risk may be defined as max{max_g TPR_g−min_g TPR_g, max_g FPR_g−min_g FPR_g}. This is an extension definition, not a completed implementation or result.
+
+The distinction from the current metric is essential: AEOD is the absolute binary TPR gap, so it corresponds to equal opportunity, not both TPR and FPR parity. Multi-group extensions require adequate positive and negative root support for every group. Without it, rates and thresholds may be unidentifiable or noisy; choosing a finite fallback does not solve missing support. Inference-time group-dependent thresholds also need the relevant group annotation. The candidate text states these requirements and keeps conceptual extensibility separate from measured evidence.
+
+### R3.4 — IID/non-IID motivation and component behavior
+
+**Original comment (verbatim).**
+
+> 4. The IID and non-IID settings require more motivation and analysis. The experiments use Dirichlet parameters \alpha=5000 and \alpha=5 to represent IID and non-IID settings, respectively. The authors should explain why these particular values were selected and whether \alpha=5 represents a sufficiently heterogeneous practical FL scenario. It would strengthen the evaluation to include additional heterogeneity levels, or at least provide a more detailed analysis of how data heterogeneity affects GuardFed and its individual components. In particular, some components appear to behave differently between IID and non-IID cases, which deserves further explanation.
+
+**Response.** We interpret α=5000 as an approximately uniform allocation anchor and α=5 as a milder heterogeneous anchor, not a claim that α=5 captures severe or universally realistic FL heterogeneity. We completed the additional α=1/0.5/0.1 matrix described in Reviewer 2's heterogeneity response. The partition allocates sensitive groups with a Dirichlet mechanism. The independent CelebA audit (E9) supplies actual counts: all 400 client totals match frozen replay, with a wider Male-composition range in non-IID. Its training-only joint extension (E13) now reconstructs and independently checks 1,600 client Male×Smiling counts and 80 root counts; all client cells have support, with minima 1,161 IID and 278 non-IID. This allocation is explicitly Male-group Dirichlet, not label-Dirichlet. The strong-α Adult/COMPAS audit (E10) covers all 60 partitions and 1,200 client totals. It exposes empty and nonempty single-group clients, as well as large differences in attacked-example coverage despite a fixed attacked-ID ratio. For example, Adult α=0.1 has 29 empty and 104 nonempty single-group observations out of 200. The full dataset/α/seed counts and ten-seed descriptive summaries are supplied, retaining every seed. Tabular joint counts are recovered original measurements with consistency checks; CelebA joint counts are deterministic reconstructions from hash-matched training metadata and frozen source, not joint counts originally logged by those runs. Neither audit converts sensitive-group allocation into a general label/feature heterogeneity claim.
+
+Individual-component ablations cover the original two distribution anchors and show dataset-dependent effects. They do not constitute a complete component-by-α factorial experiment. Stronger heterogeneity can reduce root–client alignment and the reliability of root-based group estimates, but the current evidence does not isolate one of these explanations as the cause of every observed difference. We describe such mechanisms as hypotheses and give the complete measured utility/disparity outcomes. New COMPAS train-only preprocessing remains separate from legacy controls.
+
+### R3.5 — Notation table
+
+**Original comment (verbatim).**
+
+> 5. A notation summary table would improve readability, as the manuscript introduces many symbols and hyperparameters across different sections, making it somewhat difficult for readers to quickly track their meanings and roles.
+
+**Response.** A complete notation-table candidate is supplied in insertion §5. It distinguishes global/local/root parameters and update signs, participating/benign/malicious/retained sets, utility/centrality/alignment/risk/violation signals, median/MAD standardization, internal candidate index and temperature, the configured malicious count, group thresholds, client-allocation α, and separate root-skew controls. It also distinguishes a fixed configuration from the per-round choice among its frozen internal candidates. This resolves the requested text-production task; final equation-number alignment and manuscript location are P5.
+
+### R3.6 — Exact trusted root update
+
+**Original comment (verbatim).**
+
+> 6. The manuscript states that the trusted root update is obtained through fairness-aware training on the server-side root dataset and is then used as the reference direction for computing root alignment. However, the exact procedure for obtaining this root update is not sufficiently clear.
+
+**Response.** The executed implementation revealed a description error: the trusted root update uses ordinary cross-entropy, not an additional fairness-aware root objective. We correct the description to match the method that produced the results. At each round, the server copies the current global model, creates a fresh optimizer with the run's configured optimizer and learning rate, shuffles root minibatches, and performs one pass over the root data. Its update is the resulting parameter vector minus the round's initial global vector. It is computed before client aggregation, once per round, and reused as the alignment/norm reference; it is not added as a separate pseudo-client in GuardFed-AD2+.
+
+Fairness enters through client weighting, root risk signals, internal configuration selection, and prediction thresholds, which are different operations. The actual training-population reweighting information is also disclosed. The root pseudocode and sign convention are provided in insertion §2, with tabular/image architecture and optimization parameters stated separately. This is a correction of the method description, not a new root-training method or a claim that an unexecuted fairness objective was tested.
+
+### R3.7 — Adult/COMPAS differences
+
+**Original comment (verbatim).**
+
+> 7. The ablation results require further analysis. For example, when the reward terms U, C, and A are removed, the Adult non-IID accuracy decreases, whereas the corresponding COMPAS accuracy is slightly higher than that of Full GuardFed. The manuscript currently mainly emphasizes the Adult result. The authors should explain this dataset-dependent behavior.
+
+**Response.** We agree that emphasizing only the favorable Adult behavior would be incomplete. The individual-deletion experiments confirm dataset and distribution dependence. In the new COMPAS train-only protocol, all 12 deletion conditions have higher mean ACC than Full, and six have better means on all three metrics. For IID, Full has ACC/AEOD/ASPD 0.64838/0.06130/0.04196; deleting A yields 0.65999/0.05352/0.03752. These descriptive means do not support universal component necessity.
+
+Calibration can also reverse an ordering. On COMPAS non-IID, deleting F gives raw AEOD 0.250984 versus Full 0.239597; with each model's group-threshold calibration, the values become 0.044831 versus 0.049143. Thus the calibrated ablation table alone cannot identify the aggregation mechanism. Internal candidate compensation, score redundancy, and estimation variability are plausible explanations, not isolated causes. We supply a discussion that presents both datasets, raw and calibrated outputs, actual controls, and paired-seed results where available. We do not turn a selected Full seed into necessity evidence by comparing it with deletion averages.
+
+The intermediate image comparison also argues against a universal-necessity interpretation. In the ten-seed native panel, deleting U lowers ACC by 0.309–1.384 percentage points across the seven complete scenes, while lowering ASPD in all seven; AEOD is higher in six and lower only for IID Sp-DFA. Raw AEOD is lower in five scenes and higher for IID Sp-DFA and non-IID F Flip. For the added non-IID F Flip scene, the mean paired differences (minus_U−Full) are -0.996124 percentage points in ACC, +0.002269346 in AEOD and -0.011180244 in ASPD. Thus retaining U is associated with higher measured accuracy here, but the disparity direction depends on the metric and prediction rule. Native and shared-calibration metrics and saved group confusion counts are identical for all 140 displayed checkpoints. Their equality supplies no independent evidence of a calibration gain and does not choose the final endpoint. These descriptive results complement, rather than overturn, the COMPAS counterexamples. Candidate compensation, redundancy and root-estimation variability remain hypotheses; this single intervention does not isolate their causal contributions. The directions above apply to the ten-seed panel, not a guarantee across sensitivity panels, datasets or all components.
+
+### R3.8 — Explain attacks and comparison methods
+
+**Original comment (verbatim).**
+
+> 8. The related-work discussion should provide a more detailed description of the benchmark attacks and compared methods. The manuscript covers a large number of robust, fairness-aware, and root-data-based FL methods, but many are introduced only briefly.
+
+**Response.** The comparison needs more than a name for each row. The supplied implementation/access table distinguishes objective, trusted-root/sensitive-attribute access, update/gradient interface, training/aggregation/postprocessing operations, implementation source and deviations, and selection procedure. The attack description identifies sensitive-attribute manipulation, the implemented update-poisoning reference and amplitude, and synchronous/split role allocation. F Flip alters the selected attribute/reweighting path, not image pixels or task labels.
+
+The completed CelebA matrix now contains nine methods, including frozen FedAA-DDPG and LASA adaptations evaluated over 200 records. Those are full ten-seed coverage records, not merely three-round pilots. FairFed, FairGuard, their combination, FedAA, and LASA retain adaptation labels. The remaining eight methods are LoGoFair, Fed-NGA, FedWA, Huber-BRFL, FLGMM, SmartFL, FedDNA, and the cosine/fairness hybrid (P1). They account for 800 missing matrix records; postprocessing may reuse matching trained checkpoints, so this does not necessarily imply 800 new CNN trainings. Existing lite/core/inspired branches cannot certify faithful reproduction of the original methods.
+
+### R3.9 — Source code and configurations
+
+**Original comment (verbatim).**
+
+> 9. It is hoped that the authors will make the source code and experimental configurations publicly available and facilitate follow-up research based on this work.
+
+**Response.** A published revision snapshot is available at [GuardFed, commit 51629c2](https://github.com/YananZHOU5555/GuardFed/tree/51629c2df5e56259a0d750744b7dc9299349efd0). The recorded release verification confirms the remote head, clean publication worktree, exact bytes of 26 table artifacts, and complete coverage-stage restore receipts. The nine-method table packet includes source snapshots, per-seed aggregation, statistical audit, and model/configuration provenance. Data and large model archives are maintained separately with archive/member hashes; a Git commit alone is not the model backup.
+
+This establishes a concrete release reference for completed evidence, not completion of the entire eventual revision artifact. The final release must incorporate any remaining methods, frozen final evaluation, documented adaptations, setup instructions, and unavailable legacy-checkpoint limitations after their acceptance. That is P6. The availability wording identifies the immutable snapshot and its scope instead of promising code at an unspecified future URL.
+
+### R3.10 — Limitations
+
+**Original comment (verbatim).**
+
+> 10. The authors are encouraged to add a brief discussion of the limitations of the proposed method.
+
+**Response.** The supplied limitations paragraph covers trusted-root representativeness and annotation, training-population statistics, inference-time sensitive attributes, sparse-group identifiability, the configured malicious-count assumption, small-participant simulations, conditional score-separation theory, and candidate/calibration cost. It also states the empirical scope: tested binary groups and architectures, stronger-heterogeneity losses, dataset-dependent ablations, and observed accuracy–disparity trade-offs.
+
+The audited retention implementation may re-admit intermediate-gate exclusions when its required top-k count exceeds the gate size; this was observed in 116 Adult deletion rounds. We therefore make no unconditional hard-exclusion guarantee. The conditional softmax proposition concerns the actual selected set, and does not prove that adaptive configuration selection or threshold calibration delivers the claimed population objectives.
+
+Selection and reporting limits are substantive. The expanded CelebA results are validation-only and include a recipe-selection seed; prior experiments have already evaluated the official test partition. A later frozen test evaluation therefore cannot be labelled a completely untouched holdout. Historical Table II has mixed repeat counts, selection rules, ambiguous identities, and incomplete checkpoint/support evidence. Shared calibration shows why end-to-end fairness differences must not all be attributed to aggregation. These boundaries are included in insertion §8 and the pending final-evaluation item P3.
+
+### R3.11 — Architecture specification and additional models
+
+**Original comment (verbatim).**
+
+> 11. The evaluation appears to use only a single MLP model, while its architecture is not specified. I would suggest including evaluation with additional model architectures to demonstrate the generalizability of GuardFed.
+
+**Response.** The inspected supplementary tabular model is input dimension → Linear(16) → ReLU → Linear(2), trained with two-logit cross-entropy. The exact encoded input columns and preprocessing accompany each data protocol. The CelebA model uses three 3×3 convolution/ReLU/2×2 max-pool blocks with channels 3→32→64→128, adaptive spatial average pooling, and a Linear(128,2) classifier. Inputs are RGB 64×64, scaled by 1/255; this implementation has no batch normalization, dropout, or image augmentation.
+
+The tabular supplementary protocol uses Adam at learning rate 0.005, batch size 256, one local epoch, and 70 rounds. The image protocol uses one local epoch, batch size 64, and 70 rounds; method-specific image learning rates are frozen in the selected recipes. The root update makes a fresh configured optimizer and one root pass at each round. The additional image/CNN evidence answers the architecture-extension concern while changing both modality and architecture; it does not isolate architecture-only generalization. The submitted MLP description must be tied to its actual archived source rather than assumed identical solely from the word MLP. E1–E3 and insertion §6 provide the executed specifications.
+
+## Pending register — unresolved work is not a completed result
+
+| Item | Required completion evidence | Where used |
+|---|---|---|
+| P1 — remaining methods | Faithful implementation/access specifications, accepted gates/search, eight methods × two distributions × five scenarios × ten seeds (800 records), with reuse explicit | R1.3; R2 benchmark; R3.8 |
+| P2 — CelebA mechanisms; still pending | Accepted/offserver same-checkpoint raw/native/shared results for 70 minus_U and 70 matched historical Full checkpoints in six complete ten-seed scenes, with equal-rule nine-/six-seed panels and paired differences. Complete and accept the remaining image variant/scene coverage, retain correct Full/source/partition identities, and reconcile calibration/device/runtime limitations before a full-cohort claim. | R3.2; R3.7; mechanism attribution |
+| P3 — frozen final evaluation | A frozen model/recipe/metric/selection manifest, verified checkpoint/data identities, full matched evaluations and backups, disclosure of prior official-test exposure | R1.3; R2 statistics; R3.10 |
+| P4 — historical generator/figure lineage | Original ForestDiffusion implementation/dependencies/fit-data/model/cache identities; exact Fig.3 plotting source/inputs; per-run PCA/source/cache and historical checkpoint binary identities. The authors must choose the final figure correction, scenario/formula/selection disclosure and retained scope; no redraw or final approval is claimed. Adult strict-score (E5), both initial partition audits (E9/E10), the CelebA training-joint extension (E13), 840-record synthetic lineage (E11) and the separate 260-record lineage including 40 PCA records (E12) are complete. | R1.4; R2 root/statistics |
+| P5 — manuscript integration | Insert candidate text and accepted tables, correct legacy Table II identities/statistical labels, align equations/captions, compile and inspect, fill actual section/page/line references | All responses; no invented manuscript locations |
+| P6 — final artifact and author review | Update immutable release to the final accepted scope; check citations/data/setup/selection manifest; author decision on final claims and historical-table presentation | R3.9; submission readiness |
+
+The completed nine-method validation evidence, historical numerical recovery, shared-calibration control, and literature verification remain useful while P1–P6 are finished. No unrun result is supplied as if measured; no old formal cohort is retrained or overwritten by this response draft.
