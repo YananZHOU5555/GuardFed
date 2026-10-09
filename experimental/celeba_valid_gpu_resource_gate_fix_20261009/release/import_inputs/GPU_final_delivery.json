@@ -1,0 +1,176 @@
+{
+  "status": "SINGLE_GPU_DIAGNOSTIC_AND_OFFLINE_COMPARISON_COMPLETE_NOT_COHORT_ACCEPTED",
+  "utc": "2026-10-09T11:43:30.502988+00:00",
+  "id": "FairGuard_IID_F-Flip_seed91009",
+  "prepared18_sha256": "25d6c79f1d70b40f762bd9a372f1e9d2c2f64d8e9e82919c85f1667ce9a0bc61",
+  "INPUTS_sha256": "3f16a575836789f55e3f7bd48ee1923fe059b1af5921c2707a754583f3fc8c8e",
+  "attempt1_archive_sha256": "f45ff6a479386ce2e53c533d11d9b23f40036b895f4d363d1df22063a0e66988",
+  "attempt2_archive_sha256": "fb1c2861429fc03acd0f2304c68a6a0b6a39c147153b7db1eef03d6172a3ec5d",
+  "attempt2_inventory_sha256": "d4ce8cdcaf86718df209071a1e44a5b256bf3c0364c0db67fb65c986e88146d8",
+  "attempt2_offserver_proof_sha256": "26779b047b792b2b352153a5e16ba0a4acec413212fa9d3799c750cc9ce0ff92",
+  "offline_seal_sha256": "6cd8515f146434d02de9fe74d31432839af2e79d83a494d779dc1710dfa41514",
+  "GPU_native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.9040116776564152,
+      "aeod": 0.04282574048724552,
+      "aspd": 0.11859776792562177
+    },
+    "observed": {
+      "accuracy": 0.9040116776564152,
+      "aeod": 0.04282574048724552,
+      "aspd": 0.11859776792562177
+    },
+    "differences": {
+      "accuracy": 0.0,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "max_abs_difference": 0.0,
+    "accepted": true
+  },
+  "margins": {
+    "valid": {
+      "n": 19867,
+      "exact_array_equal": false,
+      "changed_count": 18089,
+      "max_abs_difference": 1.049041748046875e-05,
+      "mean_abs_difference": 1.3791258324192857e-06,
+      "CPU_min_abs": 2.60770320892334e-07,
+      "GPU_min_abs": 1.5944242477416992e-06
+    },
+    "root": {
+      "n": 16277,
+      "exact_array_equal": false,
+      "changed_count": 14784,
+      "max_abs_difference": 9.655952453613281e-06,
+      "mean_abs_difference": 1.3577162307640357e-06,
+      "CPU_min_abs": 0.001315198838710785,
+      "GPU_min_abs": 0.0013137683272361755
+    }
+  },
+  "flips": {
+    "native": [
+      {
+        "position": 9828,
+        "image_id": 172599,
+        "y": 1,
+        "sensitive": 1,
+        "CPU_prediction": 0,
+        "GPU_prediction": 1,
+        "CPU_margin": -2.60770320892334e-07,
+        "GPU_margin": 1.5944242477416992e-06
+      }
+    ],
+    "raw": [
+      {
+        "position": 9828,
+        "image_id": 172599,
+        "y": 1,
+        "sensitive": 1,
+        "CPU_prediction": 0,
+        "GPU_prediction": 1,
+        "CPU_margin": -2.60770320892334e-07,
+        "GPU_margin": 1.5944242477416992e-06
+      }
+    ],
+    "shared_calibration": []
+  },
+  "shared_fit_CPU": {
+    "view": "shared_calibration",
+    "method": "FairGuard",
+    "rule": "group_margin_greater_equal",
+    "thresholds": {
+      "0": 0.40281543,
+      "1": -0.12875835
+    },
+    "fit_data": "clean_train_root_only",
+    "fit_diagnostics": {
+      "server_calibration_metrics": {
+        "accuracy": 0.8994900780242059,
+        "aeod": 0.000841816168430487,
+        "aspd": 0.07198375707688148
+      },
+      "server_calibration_score": 9.972582114157587,
+      "server_calibration_risk": 0.036412786622655985,
+      "server_base_calibration_metrics": {
+        "accuracy": 0.9030533882165018,
+        "aeod": 0.035784281928202044,
+        "aspd": 0.10642813769220566
+      },
+      "server_base_calibration_risk": 0.07110620981020385,
+      "server_adaptive_lambda": 0.8952853831738156,
+      "server_calibration_budget": 0.06,
+      "server_calibration_acc_floor": 0.8980533882165018,
+      "server_calibration_max_acc_drop": 0.005,
+      "server_calibration_objective": "acc_floor"
+    },
+    "fit_sha256": "df06e629e3cc14be1a932bc8934ef1f6a3cdb3fa2a2e14a8e289bd0f6a9e5e5d"
+  },
+  "shared_fit_GPU": {
+    "view": "shared_calibration",
+    "method": "FairGuard",
+    "rule": "group_margin_greater_equal",
+    "thresholds": {
+      "0": 0.40281457,
+      "1": -0.12875681
+    },
+    "fit_data": "clean_train_root_only",
+    "fit_diagnostics": {
+      "server_calibration_metrics": {
+        "accuracy": 0.8994900780242059,
+        "aeod": 0.000841816168430487,
+        "aspd": 0.07198375707688148
+      },
+      "server_calibration_score": 9.972582114157587,
+      "server_calibration_risk": 0.036412786622655985,
+      "server_base_calibration_metrics": {
+        "accuracy": 0.9030533882165018,
+        "aeod": 0.035784281928202044,
+        "aspd": 0.10642813769220566
+      },
+      "server_base_calibration_risk": 0.07110620981020385,
+      "server_adaptive_lambda": 0.8952853831738156,
+      "server_calibration_budget": 0.06,
+      "server_calibration_acc_floor": 0.8980533882165018,
+      "server_calibration_max_acc_drop": 0.005,
+      "server_calibration_objective": "acc_floor"
+    },
+    "fit_sha256": "8acc6f43652dcb5178957d0a8b96190f568f097bf26f645fe1adf5a50e4a4107"
+  },
+  "weights_and_all_source_data_before_after_identical": true,
+  "scientific_source_input_count": 31,
+  "scientific_seconds": 6.5114448990207165,
+  "runtime": {
+    "python": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "torch": "2.11.0+cu128",
+    "device": "cuda:0",
+    "original_config_device": "cuda",
+    "torch_threads": 1,
+    "interop_threads": 1,
+    "loader_workers": 0,
+    "nice": 10,
+    "cuda_device_count": 1,
+    "cpu": "x86_64"
+  },
+  "resource_threads_before": 11,
+  "quota": 122.87999,
+  "gpu_free_bytes_before": 27337424896,
+  "RAM_free_bytes_before": 444504842240,
+  "protected_main_after": {
+    "completed": 40,
+    "active": 8,
+    "failed": 0,
+    "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 5:23:52"
+  },
+  "preserved_failures": [
+    "attempt1 duplicate interop initialization before CNN",
+    "attempt2 saved-array comparison JSON threshold key type after successful GPU inference"
+  ],
+  "scientific_GPU_executions": 1,
+  "new_training": 0,
+  "test_inference": 0,
+  "accepted_cohort_count_unchanged": 424,
+  "original_CPU_failure_still_invalid": true,
+  "limitation": "Measured flips are between saved CPU and this new GPU execution only. Historical aggregate equality cannot identify historical per-sample predictions or establish unique causality."
+}

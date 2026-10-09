@@ -1,0 +1,84 @@
+--- parent/recovery.py
++++ resource_guard_v2/recovery.py
+@@ -15,7 +15,7 @@
+ 
+ sys.dont_write_bytecode = True
+ HERE = Path(__file__).resolve().parent
+-REMOTE = Path('/workspace/guardfed_checks/celeba_valid_gpu_recovery_implementation_20261009')
++REMOTE = Path('/workspace/guardfed_checks/celeba_valid_gpu_resource_gate_fix_20261009/release')
+ PROPOSAL = Path('/workspace/guardfed_checks/celeba_valid_recovery_prepared_20261009')
+ BASE = Path('/workspace/guardfed_checks/celeba_final_valid_replay_20261009')
+ REPO = Path('/workspace/GuardFed-celeba-expanded')
+@@ -26,13 +26,28 @@
+ V4_SHA = '43b16d20d2497b7762cd0f6039f7f4bfc8fddd4e4c32979a16291b26e394ae5e'
+ GPU_SHA = '2aafb0d08b2a0c84bbcfc224638dc216329f72d450facf37fd2e50d1cb0f0ad5'
+ ARCHIVER_SHA = 'c06d145a1c5b97014bc5d6e7a25c53da1020ec298cae9285f0d8d02da1cd4d00'
+-SCOPE = 'EXISTING_BASELINE900_GPU_VALID_RECOVERY_V1'
++SCOPE = 'EXISTING_BASELINE900_GPU_VALID_RECOVERY_RESOURCE_GUARD_V2'
+ FAILED_ID = 'FairGuard_IID_F-Flip_seed91009'
+ 
+ 
+ def need(ok, message):
+     if not ok:
+         raise ValueError(message)
++
++
++def main_health(service, queue, phase):
++    active, failed = queue.get('active'), queue.get('failed')
++    fields = service.get('stdout', '').split()
++    inputs = {'utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'phase': phase,
++              'service': service, 'queue_snapshot': queue, 'active_n': len(active) if isinstance(active, list) else None,
++              'failed_n': len(failed) if isinstance(failed, list) else None,
++              'required': {'service': 'RUNNING', 'failed_n': 0, 'active_min': 1, 'active_max': 8}}
++    if not (service.get('returncode') == 0 and len(fields) > 1 and fields[1] == 'RUNNING'
++            and failed == [] and isinstance(active, list) and 1 <= len(active) <= 8):
++        error = ValueError('Protected main800 health failed')
++        error.resource_guard_inputs = inputs
++        raise error
++    return inputs
+ 
+ 
+ def sha(path):
+@@ -180,10 +195,12 @@
+     need([x.split(':', 1)[1].strip() for x in detail.splitlines() if 'GPU Recovery Action' in x] == ['None'], 'GPU requires recovery')
+     mem, limit = int(Path('/sys/fs/cgroup/memory.current').read_text()), int(Path('/sys/fs/cgroup/memory.max').read_text())
+     need(limit - mem >= 8 * 1024**3, 'RAM headroom failed')
+-    main = command(['supervisorctl', 'status', 'guardfed_celeba_mechanism_formal'])
++    observed = subprocess.run(['supervisorctl', 'status', 'guardfed_celeba_mechanism_formal'], check=False, capture_output=True, text=True)
++    service = {'returncode': observed.returncode, 'stdout': observed.stdout.strip(), 'stderr': observed.stderr.strip()}
++    main = service['stdout']
+     queue = read(REPO / 'results/revision_20261009/celeba_mechanism_v1/formal_queue_progress.json')
+-    need('RUNNING' in main and not queue['failed'] and len(queue['active']) == 8, 'Protected main800 health failed')
+-    return {'utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'CPU': 105, 'quota': int(quota) / int(period), 'other_declared_threads': used, 'tasks': tasks, 'gpu_uuid': a['gpu_uuid'], 'gpu_free_MiB': int(gpu[1]), 'RAM_free_bytes': limit - mem, 'main_service': main, 'main_completed_n': len(queue['completed']), 'main_active_n': len(queue['active']), 'main_failed_n': 0}
++    guard_inputs = main_health(service, queue, 'preflight')
++    return {'utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'CPU': 105, 'quota': int(quota) / int(period), 'other_declared_threads': used, 'tasks': tasks, 'gpu_uuid': a['gpu_uuid'], 'gpu_free_MiB': int(gpu[1]), 'RAM_free_bytes': limit - mem, 'main_service': main, 'main_completed_n': len(queue['completed']), 'main_active_n': len(queue['active']), 'main_failed_n': 0, 'main_guard_inputs': guard_inputs}
+ 
+ 
+ def GPU_gate(v2, a, snapshot, resource):
+@@ -192,7 +209,7 @@
+     need(os.environ.get('CUDA_VISIBLE_DEVICES') == a['gpu_uuid'] and os.getpriority(os.PRIO_PROCESS, 0) == 10, 'UUID/nice identity failed')
+     need(all(c == [105] for c in snapshot['thread_cpu_affinities'].values()), 'A worker thread escapedCPU105')
+     need(t.are_deterministic_algorithms_enabled() and not t.backends.cudnn.benchmark and t.backends.cudnn.deterministic and not t.backends.cudnn.allow_tf32 and not t.backends.cuda.matmul.allow_tf32 and os.environ.get('CUBLAS_WORKSPACE_CONFIG') == ':4096:8', 'Original deterministic FP32 settings changed')
+-    need(not snapshot['training_queue_snapshot']['failed'] and 'RUNNING' in snapshot['service']['stdout'], 'Protected training failed')
++    main_health(snapshot['service'], snapshot['training_queue_snapshot'], 'CNN_before_or_after')
+     cg = snapshot['cgroup']; quota, period = cg['cpu.max'].split()
+     need(quota != 'max' and resource['other_declared_threads'] + 1 <= int(quota) / int(period), 'Live inference CPU quota changed')
+     need(cg['memory.max'] != 'max' and int(cg['memory.max']) - int(cg['memory.current']) >= 8 * 1024**3, 'Live inference RAM headroom failed')
+@@ -249,7 +266,7 @@
+         receipt_guard(proof, r, a, args.output.parent, record)
+     except BaseException as error:
+         signal.alarm(0)
+-        proof.update(status='FAILED', error=repr(error), traceback=traceback.format_exc())
++        proof.update(status='FAILED', error=repr(error), traceback=traceback.format_exc(), resource_guard_inputs=getattr(error, 'resource_guard_inputs', None))
+     finally:
+         try:
+             proof['artifact_after'] = v3.full_hashes(pins); need(proof['artifact_after'] == before, 'Mapped artifacts changed'); proof['artifacts_unchanged'] = True
+@@ -432,7 +449,7 @@
+         need(base.is_absolute() and base.parent.is_dir() and base.parent.resolve() == base.parent and (base.parent == parent or base.parent.is_relative_to(parent)), 'Failure outside approved real output namespace')
+         stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+         target = base.with_name(base.name + '.' + args.command + '.' + stamp + '.failure.json')
+-        save(target, {'status': 'COMMAND_FAILED_PRESERVED_NO_RETRY', 'command': args.command, 'error_type': type(error).__name__, 'error': str(error), 'traceback': trace, 'review_sha256': args.review_sha256, 'implementation_package_sha256': args.package_sha256, 'cohort_registered': False, 'accepted424_unchanged': True})
++        save(target, {'status': 'COMMAND_FAILED_PRESERVED_NO_RETRY', 'command': args.command, 'error_type': type(error).__name__, 'error': str(error), 'traceback': trace, 'resource_guard_inputs': getattr(error, 'resource_guard_inputs', None), 'review_sha256': args.review_sha256, 'implementation_package_sha256': args.package_sha256, 'cohort_registered': False, 'accepted424_unchanged': True})
+         return target
+     except Exception:
+         return None

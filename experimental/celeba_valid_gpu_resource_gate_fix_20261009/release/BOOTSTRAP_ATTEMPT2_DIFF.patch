@@ -1,0 +1,70 @@
+--- preserved_attempt1/run_once.py
++++ attempt2/run_once.py
+@@ -3,8 +3,9 @@
+ from datetime import datetime,timezone
+ import hashlib,importlib.util,json,os,signal,subprocess,sys,traceback
+ HERE=Path(__file__).resolve().parent
+-EXPECTED=Path('/workspace/guardfed_checks/celeba_native_mismatch_diagnostic_execution_20261009')
+-PREP=HERE/'prepared'
++EXPECTED=Path('/workspace/guardfed_checks/celeba_native_mismatch_diagnostic_execution_20261009/attempt2')
++EXECUTION_ROOT=HERE.parent
++PREP=EXECUTION_ROOT/'prepared'
+ REPO=Path('/workspace/GuardFed-celeba-expanded')
+ sys.dont_write_bytecode=True
+ def sha(p):
+@@ -28,7 +29,10 @@
+         f=HERE/name;need(sha(f)==row['sha256'] and f.stat().st_size==row['bytes'],'Execution source drift')
+     for name,row in read(PREP/'PACKAGE_SHA256.json')['members'].items():
+         f=PREP/name;need(sha(f)==row['sha256'] and f.stat().st_size==row['bytes'],'Prepared18 drift')
+-    for name in ['APPROVED.json','resource_receipt.json','runs','execution_started.json','failure.json','execution.lock']:
++    need((EXECUTION_ROOT/'runs').is_dir() and not (EXECUTION_ROOT/'runs').is_symlink() and not any((EXECUTION_ROOT/'runs').iterdir()),'Prior real runs parent must be empty; preserve any evidence')
++    need(sha(EXECUTION_ROOT/'EXECUTION_FILES_SHA256.json')=='8c970210d4f72a1f88baa15ce29f1331327a49f30002130f8134f01c61e60c7d','Original execution seal changed')
++    for rel,row in read(EXECUTION_ROOT/'EXECUTION_FILES_SHA256.json')['members'].items():need(sha(EXECUTION_ROOT/rel)==row['sha256'],'Original attempt1 source changed')
++    for name in ['APPROVED.json','resource_receipt.json','execution_started.json','failure.json','execution.lock']:
+         need(not (HERE/name).exists(),'Prior evidence forbids retry: '+name)
+     need(os.getpriority(os.PRIO_PROCESS,0)>=10 and 'idle' in command(['ionice','-p',str(os.getpid())]),'nice10/idleIO required')
+     import fcntl
+@@ -37,7 +41,7 @@
+     pins={Path(v['remote']):v['sha256'] for v in inputs['scientific_sources'].values()}
+     pins.update({REPO/k:v for k,v in record['source_hashes'].items()})
+     pins.update({Path(p):r['sha256'] for p,r in inputs['original_artifacts'].items()})
+-    pins[HERE/'original_valid_cache.npz']='39e5fe16ea5f06c0a7594fd6b1c1cbc27cf1a71a261c1b4f0db7228cce380f64'
++    pins[EXECUTION_ROOT/'original_valid_cache.npz']='39e5fe16ea5f06c0a7594fd6b1c1cbc27cf1a71a261c1b4f0db7228cce380f64'
+     checked={}
+     for p,s in pins.items():
+         need(sha(p)==s,'Original input changed: '+str(p));checked[str(p)]={'sha256':s,'bytes':p.stat().st_size,'resolved':str(p.resolve())}
+@@ -75,16 +79,22 @@
+         gpu_uuid=uuid,resource_receipt=str(HERE/'resource_receipt.json'),resource_receipt_sha256=sha(HERE/'resource_receipt.json'),
+         root_authorization_sha256=sha(HERE/'ROOT_AUTHORIZATION.json'),execution_source_seal_sha256=sha(HERE/'EXECUTION_FILES_SHA256.json'),
+         authority='Explicit root task approval of prepared18/INPUTS exact one diagnostic',approved_utc=utc)
+-    save('APPROVED.json',approval);(HERE/'runs').mkdir(exist_ok=False)
++    save('APPROVED.json',approval) # root explicitly approved reuse of existing empty real parent; no evidence removed
+     os.sched_setaffinity(0,{105})
+     os.environ.update(CUDA_VISIBLE_DEVICES=uuid,OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',NUMEXPR_NUM_THREADS='1',
+         CUBLAS_WORKSPACE_CONFIG=':4096:8',PYTHONDONTWRITEBYTECODE='1')
+-    def timeout(_s,_f):raise TimeoutError('One diagnostic1800sec limit; no automatic retry')
++    def timeout(_s,_f):raise TimeoutError('One diagnostic1800sec limit; no further retry')
+     signal.signal(signal.SIGALRM,timeout);signal.alarm(1800)
+     sys.path.insert(0,str(Path(inputs['scientific_sources']['v2']['remote']).parent));import replay as v2
+     need(sha(v2.__file__)==inputs['scientific_sources']['v2']['sha256'],'Foreign original replay')
+-    v2.torch.set_num_threads(1);v2.torch.set_num_interop_threads(1)
++    bootstrap=dict(intra_threads=v2.torch.get_num_threads(),interop_threads=v2.torch.get_num_interop_threads(),cuda_initialized=v2.torch.cuda.is_initialized(),environment={k:os.environ.get(k) for k in ['CUDA_VISIBLE_DEVICES','OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS']})
++    need(bootstrap['cuda_initialized'] is False,'CUDA initialized before restoring approved GPU identity')
++    os.environ.update(CUDA_VISIBLE_DEVICES=uuid,OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',NUMEXPR_NUM_THREADS='1')
++    v2.torch.set_num_threads(1)
++    need(v2.torch.get_num_interop_threads()==1,'Original v2 interop must already be1')
++    save('bootstrap_receipt.json',dict(observed_import_bootstrap=bootstrap,restored_intra_threads=v2.torch.get_num_threads(),interop_threads=v2.torch.get_num_interop_threads(),restored_cuda_visible_devices=os.environ['CUDA_VISIBLE_DEVICES'],cpus=sorted(os.sched_getaffinity(0)),CUDA_or_CNN_inference_before_restoration=False,transient_original_import8_disclosed=True))
+     v4=v2.load('single_diag_v4',Path(inputs['scientific_sources']['v4']['remote']))
++    need(v4.v2 is v2 and v4.v3.v2 is v2 and sys.modules['replay'] is v2,'v3/v4 must reuse same already restored original v2 module')
+     core=v2.load('single_diag_core',Path(inputs['scientific_sources']['core']['remote']))
+     original=v2.load('single_diag_original',REPO/'scripts/run_revision_ablation.py')
+     cnn=v2.load('single_diag_cnn',Path(inputs['scientific_sources']['cnn']['remote']))
+@@ -95,7 +105,7 @@
+     report=adapter.diagnose(v4,core,original,cnn,evaluator,HERE/'APPROVED.json',sha(HERE/'APPROVED.json'))
+     signal.alarm(0)
+     compare=v2.load('single_diag_compare',PREP/'compare_saved.py')
+-    compared=compare.compare(Path(approval['output']),HERE/'original_valid_cache.npz',evaluator)
++    compared=compare.compare(Path(approval['output']),EXECUTION_ROOT/'original_valid_cache.npz',evaluator)
+     save('comparison.json',compared)
+     save('COMPLETED.json',dict(status='ONE_GPU_DIAGNOSTIC_COMPLETE_NOT_COHORT_ACCEPTED',utc=datetime.now(timezone.utc).isoformat(),id=record['id'],
+         native_comparison=report['native_comparison'],comparison_sha256=sha(HERE/'comparison.json'),original_CPU_failure_still_invalid=True,

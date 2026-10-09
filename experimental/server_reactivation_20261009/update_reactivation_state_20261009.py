@@ -867,6 +867,50 @@ if closed_collectors:
         gpu_recovery_paragraph += ('第三批在worker资源预检、CNN之前触发Protected main800 health failed而自动停下。'
             '当前主训练正常，但失败瞬间的三个健康条件未保存原始截图，不能唯一归因为任务交接。'
             '原服务未重启，两条成功partial未登记；修复需独立版本和不重复已完成项的补集。')
+partial_path = queue_execution / 'partial2_explicit_import/cumulative_460_accepted.json'
+if partial_path.exists():
+    partial = read(partial_path)
+    checked_path = Path(partial['new_proof_path'])
+    checked = read(checked_path)
+    assert sha(checked_path) == partial['new_proof_sha256']
+    assert sha(Path(partial['previous_collector_path'])) == partial['previous_collector_sha256'] == sha(current_path)
+    assert partial['accepted_ids'] == current['accepted_ids'] + checked['accepted_new_ids']
+    assert partial['accepted_n'] == len(set(partial['accepted_ids'])) == 460
+    assert checked['status'] == 'ROOT_EXPLICIT_GPU_PARTIAL2_ORIGINAL_STRICT_AND_SAVED_ARRAY_PASS'
+    assert checked['new_CNN_inference'] == 0 and checked['missing9_not_accepted']
+    assert sha(checked_path.parent / 'original_partial_strict_acceptance.json') == checked['partial_strict_sha256']
+    assert checked['saved_metrics_verified'] == 18 and checked['saved_confusion_counts_verified'] == 48
+    state['final_evaluator_runtime_20261009'].update(
+        status='460_ACCEPTED_GPU_VALID_REPLAY_STOPPED_PRESERVED',
+        actual_native_valid_image_replays_accepted=460, actual_native_valid_image_replays_remaining=440,
+        accepted_collection_path=partial_path.relative_to(ROOT).as_posix(), accepted_collection_sha256=sha(partial_path),
+        cumulative_unique_checkpoint_acceptance=partial_path.relative_to(ROOT).as_posix(),
+        cumulative_unique_checkpoint_acceptance_sha256=sha(partial_path))
+    state['baseline_valid_GPU_recovery_20261009'].update(
+        status='460_ACCEPTED_GPU_QUEUE_STOPPED_PRESERVED', current_collector_sha256=sha(partial_path),
+        GPU_remaining464_offserver_accepted=24, current_GPU_provenance_n=26,
+        completed_partial_not_registered=0, completed_partial2_explicitly_registered=True,
+        partial2_no_CNN_import_proof_path=checked_path.relative_to(ROOT).as_posix(),
+        partial2_no_CNN_import_proof_sha256=sha(checked_path))
+    state['baseline_valid_recovery_prepared_20261009']['current_missing'] = 440
+    gpu_recovery_paragraph = gpu_recovery_paragraph.replace('累计458/900（CPU434、GPU24）', '累计460/900（CPU434、GPU26）').replace(
+        '两条成功partial未登记；修复需独立版本和不重复已完成项的补集。',
+        '两条成功partial随后通过原strict部分验收与保存数组复核显式登记，新增CNN推理0；仍缺440条，修复需独立版本和不重复已完成项的补集。')
+guard_review = CHECKS / 'GPU_RESOURCE_GUARD_V2_ROOT_REVIEW.json'
+if guard_review.exists():
+    reviewed_guard = read(guard_review)
+    assert reviewed_guard['status'] == 'ROOT_RESOURCE_GUARD_V2_DIFF_AND_NO_CNN_REVIEW_PASS_PREPARED'
+    guard_dir = ROOT / 'tmp/celeba_valid_gpu_resource_gate_fix_20261009'
+    assert sha(guard_dir / 'release/PACKAGE_SHA256.json') == reviewed_guard['runtime_seal_sha256']
+    state['baseline_valid_GPU_resource_guard_v2_20261009'] = dict(
+        status='SOURCE_REVIEWED_NO_CNN_GUARDS_PASS_NOT_DEPLOYED',
+        runtime_seal_sha256=reviewed_guard['runtime_seal_sha256'],
+        root_review_sha256=sha(guard_review), remaining=440, accepted_source=460,
+        main_active_guard_range=[1,8], scientific_concurrency_unchanged=8, native_tolerance=1e-12,
+        new_CNN_inference=0, deployed=False, Linux_runtime_verified=False,
+        entry='tmp/celeba_valid_gpu_resource_gate_fix_20261009/README.md')
+    gpu_recovery_paragraph += ('独立V2工程修复已通过root源码差异审阅、60个健康组合、11个资源拒收边界及两份实际快照schema核验，'
+        '仅资源预检与输入保全变化，原科学body/strict及24个成员字节不变；尚未上机，新440补集需独立命名空间。')
 population_proof = CHECKS / 'LOGOFAIR_POPULATION_PROPOSAL_ROOT_VERIFICATION.json'
 fl_observation = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch/observations/bounded_review_20261009T130206Z/STATUS.json'
 if fl_observation.exists():

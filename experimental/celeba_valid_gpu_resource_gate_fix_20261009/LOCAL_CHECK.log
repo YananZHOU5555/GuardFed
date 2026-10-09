@@ -1,0 +1,40 @@
+Command: python tmp/celeba_valid_gpu_resource_gate_fix_20261009/selfcheck.py
+Exit: 0
+{
+  "status": "PASS_NO_CNN_NO_SERVER_NO_DISPATCH",
+  "original_members_read_verified": 25,
+  "unchanged_source_members": 24,
+  "health_matrix_cases": 60,
+  "health_matrix_passed": 8,
+  "health_matrix_rejected": 52,
+  "success_activity_boundaries_checked": [
+    1,
+    7,
+    8
+  ],
+  "unchanged_nonhealth_resource_AST": true,
+  "resource_refusal_checks": [
+    "preflight_active0",
+    "CNN_gate_active0",
+    "preflight_active9",
+    "CNN_gate_active9",
+    "quota_insufficient",
+    "GPU_memory2047MiB",
+    "RAM_below8GiB",
+    "GPU_UUID_drift",
+    "GPU_recovery_required",
+    "CNN_quota_insufficient",
+    "CNN_RAM_below8GiB"
+  ],
+  "supervisor_STOPPED_returncode_preserved": true,
+  "success_and_failure_health_inputs_preserved": true,
+  "GPU_memory_exact2048MiB_and_RAM_exact8GiB_passed": true,
+  "native_tolerance_unchanged": 1e-12,
+  "new_CNN_inference": 0,
+  "new_server_access": 0,
+  "accepted460_unchanged": true,
+  "partial2_now_accepted_in_root460_baseline": true,
+  "partial2_recomputed_or_accepted_by_this_check": false,
+  "Linux_runtime_verified": false
+}
+

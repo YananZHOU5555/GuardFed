@@ -1,0 +1,13 @@
+# GPU valid 资源守卫修复：仅本地准备
+
+当前已接受460项；其中两项原partial已经root原strict及离机接受，后续补集为440。INPUT_BASIS保留历史458身份、当前460身份和原81-member失败归档SHA。本包不重算、重新接受或改写这些记录，不访问服务器，不启动队列。
+
+原故障在CNN前的资源检查发生；瞬时service/failed/active输入没有保存，因此不能唯一断言是任务交接导致。新main_health要求supervisor返回0且状态RUNNING、failed为空列表、active为1..8项列表。活动0或9、服务停止或任何失败均拒收；主训练原8并发配置不变。每次保存实际service输出、完整queue快照、数量、UTC及检查阶段；失败也进入原worker/外层异常凭据。无自动等待或重试。
+
+release复制原25成员，仅recovery.py改变。精确差异见SOURCE_DIFF.patch，逐文件身份见SOURCE_LINEAGE.json。除资源健康逻辑、输入保全和REMOTE/SCOPE版本身份外，其余函数AST保持；GPU科学体、bootstrap、strict、原native容差1e-12、模型/数据/来源/同checkpoint与三视图守卫不变。quota、GPU UUID/RecoveryAction/显存与RAM边界未放宽。原25成员中的README、自检及日志是父版本历史材料；本版本验收入口是上级selfcheck.py/selfcheck.json。
+
+新独立runtime候选路径：/workspace/guardfed_checks/celeba_valid_gpu_resource_gate_fix_20261009/release；新SCOPE：EXISTING_BASELINE900_GPU_VALID_RECOVERY_RESOURCE_GUARD_V2。release/PACKAGE_SHA256.json是候选runtime新封存。原V1归档/receipt保持原source版本；后续离机验收须显式区分V1/V2来源，禁止用新源码冒充旧receipt来源。
+
+下一步需root独立审阅并创建fresh440 review/manifest/新输出目录，绑定新runtime seal、当前460 collector及精确补集；沿用外部review原API时仍须满足全部原字段。旧464 wrapper硬绑定原版本，不应改写或重启；本包不提供新wrapper或执行授权。root可先等主训练健康再启动新范围；若主800自然全部结束而active=0，本守卫仍拒收，需另行明确审阅该保护条件。
+
+本机无CNN自检覆盖60个service/failed/active组合（8通过、52拒收）、11个资源拒收边界、成功与失败输入保存、25成员身份及非健康资源逻辑AST不变。Linux实际runtime尚未核验。运行本机检查：python tmp/celeba_valid_gpu_resource_gate_fix_20261009/selfcheck.py。

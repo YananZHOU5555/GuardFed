@@ -50,6 +50,10 @@ if gpu_recovery:
                 'guard inputs were not preserved, so a transient handover is a hypothesis, not a proved unique cause. '
                 'The failure archive is retained and the original service has not been restarted. Two completed partial '
                 'records remain unregistered; any repair needs a separate reviewed version and exact missing-ID scope. ')
+        if gpu_recovery.get('completed_partial2_explicitly_registered'):
+            recovery_paragraph = recovery_paragraph.replace(
+                'Two completed partial records remain unregistered; ',
+                'The two saved partial records subsequently passed original partial strict acceptance and independent saved-array checks and were explicitly imported without new CNN inference; ')
 diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces the original three native metrics exactly. '
     'Its saved CPU/GPU arrays differ on one native/raw prediction (image172599); shared-calibration predictions match. '
     'The unchanged source/data/checkpoint and all saved metrics, counts and rules were independently verified. '
