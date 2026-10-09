@@ -1,0 +1,52 @@
+{
+  "original_sources": {
+    "v2": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+    "v3": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+    "v4": "43b16d20d2497b7762cd0f6039f7f4bfc8fddd4e4c32979a16291b26e394ae5e",
+    "evaluator": "805eedf1fb08137cd86a543a80c83b9527e5c8937be02f7d2dca83a33b86e04c",
+    "core": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+    "cnn": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce"
+  },
+  "unchanged_function_source_hashes": {
+    "v2.metadata": "6cbfedc770f23067b6a0952c66a435feb9730e3b5880fbdfdc59ab2ae3f38723",
+    "v2.rebuild_root": "0f7b1d7f37754f0cb661a2b32a27390f394d8bed0dd2a6d45b6bff86f5dc84a6",
+    "v2.check_native": "2f5583d5585a2a2aac139fe86affba781b94053b4fb2417c4bce59b5f9805291",
+    "v2.validate_original": "93c4d4007d0aa7298a9169ed7b58244204f58ff2c15c37da0b746d14aa3eacde",
+    "core.model_margins": "7438a2fc8211acab3619119afe7147173734f2d4bf066f73fe21233c4343a1f1",
+    "core.fit_group_thresholds": "a2728f3a3d2de9a3ed36c5436e06c841d5e0cadeef9e7b87778600d3d794ccbc",
+    "evaluator.extract_and_predict": "95ec9660195809a3764375fdb83de246b6f111a9a4cd9e85af37652f66af5711",
+    "evaluator.fit_views": "b6549daf20a14eb557bb3cd0ef525de1e08fcc8a9039deb7d524d08949084cd0",
+    "evaluator.predict_views": "a58573172d6fd08a0973a068b37173d7d14b21aaf8d192892c2fc5807415e99c",
+    "evaluator.evaluate_frozen_predictions": "b4144933cf8de2c4f0ef6e1ce9910e3cda9127ed542f8c3cb36f297b76d7b39f",
+    "evaluator.thresholds_from_root": "3f839a5de010c51fe795457ae3ffdba2c048bfcc74477ee9fb25f9f698363d54",
+    "evaluator.weights_identity": "167ad81a8a41308a43751daab0a7a04aea972c9b4985b65dd480e890f8bbead8"
+  },
+  "original_body_sha256": "ad8d5ff8f38fe6e8cc62522b143bf7d446192fbe4c5c52ab312275daa07d8f5c",
+  "derived_body_sha256": "2aafb0d08b2a0c84bbcfc224638dc216329f72d450facf37fd2e50d1cb0f0ad5",
+  "exact_inverse_diff_equal": true,
+  "changes": [
+    {
+      "before": "model = cnn.CelebACNN(seed=cfg.seed).cpu()",
+      "after": "model = cnn.CelebACNN(seed=cfg.seed).to('cuda:0')"
+    },
+    {
+      "before": "'scope': 'VALID_ONLY_IMPLEMENTATION_PREFLIGHT'",
+      "after": "'scope': 'SINGLE_MODEL_GPU_DIAGNOSTIC_NOT_ACCEPTED_COHORT'"
+    },
+    {
+      "before": "'NATIVE_VALID_REPLAY_PASS' if comparison['accepted'] else 'NATIVE_VALID_REPLAY_MISMATCH'",
+      "after": "'DIAGNOSTIC_NATIVE_MATCH' if comparison['accepted'] else 'DIAGNOSTIC_NATIVE_MISMATCH'"
+    },
+    {
+      "before": "'device': 'cpu', 'original_config_device'",
+      "after": "'device': 'cuda:0', 'original_config_device'"
+    },
+    {
+      "before": "Two bounded valid-only canaries are implementation evidence, not all900 replay or a new final performance table",
+      "after": "Single-model CUDA diagnostic only; never authorizes cohort inclusion, CPU failure invalidation, training, test or queue restart"
+    }
+  ],
+  "extra_dependency_change": "Independent strict GPU resource_gate replaces CPU-only resource_gate in private function globals; no metric/threshold/native gate change",
+  "cnn_forward_note": "Existing forward transfers each uint8 batch to classifier.weight.device and FP32; tensor ordering/batch size/normalization unchanged",
+  "no_torch_or_CNN_imported": true
+}

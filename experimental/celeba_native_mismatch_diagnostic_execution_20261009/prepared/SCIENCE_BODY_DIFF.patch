@@ -1,0 +1,35 @@
+--- sealed_v2/replay_one
++++ diagnostic_gpu/replay_one
+@@ -5,7 +5,7 @@
+     cfg = core.ExperimentConfig(**record['config'])  # original config bytes remain unchanged, including device string
+     core.set_seed(cfg.seed, deterministic_image=True)
+     root_ids, root_y, root_sensitive, root_receipt = rebuild_root(core, cfg, record, ids, y, s)
+-    model = cnn.CelebACNN(seed=cfg.seed).cpu()
++    model = cnn.CelebACNN(seed=cfg.seed).to('cuda:0')
+     state = torch.load(inside(repo, record['checkpoint']['member']), map_location='cpu', weights_only=True)
+     require(state and all(isinstance(v, torch.Tensor) and torch.isfinite(v).all().item() for v in state.values()), 'Invalid/nonfinite checkpoint tensors')
+     model.load_state_dict(state, strict=True)
+@@ -33,12 +33,12 @@
+                         valid_image_ids=ids[162770:182637], root_margins=root_margins, valid_margins=valid_margins,
+                         **{'prediction_' + k: v for k, v in predictions.items()})
+     receipt = {
+-        'scope': 'VALID_ONLY_IMPLEMENTATION_PREFLIGHT', 'status': 'NATIVE_VALID_REPLAY_PASS' if comparison['accepted'] else 'NATIVE_VALID_REPLAY_MISMATCH',
++        'scope': 'SINGLE_MODEL_GPU_DIAGNOSTIC_NOT_ACCEPTED_COHORT', 'status': 'DIAGNOSTIC_NATIVE_MATCH' if comparison['accepted'] else 'DIAGNOSTIC_NATIVE_MISMATCH',
+         'id': record['id'], 'method': record['method'], 'distribution': record['distribution'], 'attack': record['attack'], 'seed': record['seed'],
+         'model_inventory_record_sha256': canonical(record), 'checkpoint_sha256': record['checkpoint']['sha256'],
+         'original_result_sha256': record['result']['sha256'], 'original_job_sha256': record['raw_job']['sha256'],
+         'config_canonical_sha256': record['config_canonical_sha256'], 'original_training_torch': record['training_torch'],
+-        'runtime': {'python': sys.executable, 'torch': torch.__version__, 'device': 'cpu', 'original_config_device': cfg.device,
++        'runtime': {'python': sys.executable, 'torch': torch.__version__, 'device': 'cuda:0', 'original_config_device': cfg.device,
+                     'torch_threads': torch.get_num_threads(), 'interop_threads': torch.get_num_interop_threads(), 'loader_workers': 0,
+                     'nice': os.getpriority(os.PRIO_PROCESS, 0), 'cuda_device_count': torch.cuda.device_count(), 'cpu': platform.processor()},
+         'root_reconstruction': root_receipt, 'valid_n': len(valid_X), 'valid_image_ids_sha256': array_sha(ids[162770:182637]),
+@@ -50,7 +50,7 @@
+         'cpu_user_seconds': usage_end.ru_utime - usage_start.ru_utime, 'cpu_system_seconds': usage_end.ru_stime - usage_start.ru_stime,
+         'peak_rss_kib': usage_end.ru_maxrss, 'before_resources': before, 'after_resources': after,
+         'test_labels_accessed': False, 'test_inference_performed': False, 'final_dispatch_created': False,
+-        'claim_limit': 'Two bounded valid-only canaries are implementation evidence, not all900 replay or a new final performance table',
++        'claim_limit': 'Single-model CUDA diagnostic only; never authorizes cohort inclusion, CPU failure invalidation, training, test or queue restart',
+     }
+     receipt['effective_cpu_cores'] = (receipt['cpu_user_seconds'] + receipt['cpu_system_seconds']) / receipt['elapsed_seconds']
+     save(output / 'receipt.json', receipt)

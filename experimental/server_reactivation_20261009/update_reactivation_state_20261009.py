@@ -552,6 +552,22 @@ if fl_two_root.exists():
         first_partial_archive_sha256=proof['archive_sha256'], first_partial_archive_members_verified=22,
         first_partial_records=proof['records'], first_partial_root_proof_sha256=sha(fl_two_root),
         candidate_selection_performed=False, scientific_fullcoverage_complete=False)
+fl_delta_root = CHECKS / 'FLGMM_DELTA_FOUR_20261009T1133Z_ROOT_VERIFICATION.json'
+if fl_delta_root.exists():
+    proof = read(fl_delta_root)
+    folder = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch'
+    chain_path = folder / 'BACKUP_CHAIN_increment_20261009T1133Z.json'
+    chain = read(chain_path)
+    assert sha(chain_path) == 'e2e6b6f98abc5d66bc493c2b4e09dc6d9470fca46116778d01e08c69328528a4'
+    assert proof['accepted'] == chain['accepted'] == 6 and proof['accepted_new'] == 4
+    assert proof['archive_sha256'] == chain['new_batch']['archive_sha256']
+    assert proof['offserver_acceptance_sha256'] == chain['new_batch']['offserver_acceptance_sha256']
+    state['flgmm_screen32_20261009'].update(
+        accepted70round_jobs=6, offserver_accepted70round_jobs=6, not_yet_accepted=26,
+        latest_delta_root_verification=fl_delta_root.relative_to(TRAIN).as_posix(),
+        latest_delta_root_proof_sha256=sha(fl_delta_root), latest_backup_chain_sha256=sha(chain_path),
+        latest_delta_archive_sha256=proof['archive_sha256'], latest_delta_members_verified=45,
+        latest_delta_records=proof['records'], candidate_selection_performed=False)
 remaining_root = CHECKS / 'REMAINING872_STARTUP_ROOT_VERIFICATION.json'
 remaining_started = remaining_root.exists()
 if remaining_started:
@@ -668,6 +684,27 @@ if hybrid_screen_root.exists():
         entry='tmp/celeba_hybrid_screen_execution_20261009/execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md')
     state['hybrid_cuda_gate_20261009']['formal_screen32_started']=True
     state['active_services']=list(dict.fromkeys(state['active_services']+[proof['service']]))
+gpu_diagnostic_root = CHECKS / 'NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json'
+if gpu_diagnostic_root.exists():
+    proof = read(gpu_diagnostic_root)
+    folder = ROOT / 'tmp/celeba_native_mismatch_diagnostic_execution_20261009'
+    delivery = read(folder / 'FINAL_DELIVERY.json')
+    assert sha(folder / 'FINAL_DELIVERY.json') == proof['delivery_sha256']
+    assert proof['status'] == 'ROOT_SAVED_CPU_GPU_ARRAYS_AND_ARCHIVES_PASS_DIAGNOSTIC_ONLY'
+    assert delivery['scientific_GPU_executions'] == 1 and proof['accepted_cohort_unchanged'] == 424
+    state['native_mismatch_GPU_diagnostic_20261009'] = dict(
+        status='COMPLETE_DIAGNOSTIC_ONLY_NOT_COHORT_ACCEPTED', id=delivery['id'],
+        native_GPU_max_abs_difference=0, original_tolerance=1e-12,
+        prediction_flip_image_ids=proof['prediction_flip_image_ids'],
+        original_CPU_failure_preserved=True, scientific_GPU_executions=1,
+        scientific_seconds=delivery['scientific_seconds'],
+        historical_GPU_array_available=False, unique_historical_cause_established=False,
+        source_and_weights_unchanged=True, original872_restarted=False,
+        delivery_sha256=sha(folder / 'FINAL_DELIVERY.json'), root_proof_sha256=sha(gpu_diagnostic_root),
+        archive_members_including_inventories=proof['archive_members_verified'],
+        preserved_engineering_failures=delivery['preserved_failures'],
+        entry='tmp/celeba_native_mismatch_diagnostic_execution_20261009/FINAL_DELIVERY.json')
+    state['final_evaluator_runtime_20261009']['GPU_diagnostic_completed_not_added_to_cohort'] = True
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -754,6 +791,9 @@ if baseline_failure_root.exists():
     top += '最新故障覆盖前文baseline重放启动观察：原872服务已failstop EXITED。chunk036中FairGuard/IID/F Flip/seed91009的CPU native指标偏离原GPU记录，ACC差约−0.00503个百分点，AEOD差+0.00029028、ASPD差+0.00011823，超过原1e-12；模型/配置/数据SHA一致且权重未改，但根因未确定。65成员失败现场离机保全；036虽10/11单项strict，也不计该partial批。此前实际已离机接受的唯一ID继续有效，最新分母读collector；未放宽容差、未改旧指标、未重试或继续后续批。主800/FL32/另行批准Hybrid32不受影响。后续有界诊断必须保持原记录、源与选择规则，不能将近边界假设当已证实原因。凭据BASELINE_VALID_CHUNK036_FAILURE_ROOT_VERIFICATION.json。\n\n'
 if hybrid_screen_root.exists():
     top += '最新Hybrid32已实际启动并覆盖前文准备观察：独立/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009，服务guardfed_celeba_hybrid_screen32，原8候选×四条件×70round valid-only/seed91001，GPU0/CPU104单线程/nice10/idleIO。首轮真实146493 client rows、随后round7，source69前后及28科学数据身份不变，73新增archive成员离机及主代理核验，20原source显式复用可重构69源；旧gate/model不重包。当前70轮接受0，不能称32完成；不自动100确认/test/retry。接续见该目录execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md及HYBRID_SCREEN32_STARTUP_ROOT_VERIFICATION.json。\n\n'
+if gpu_diagnostic_root.exists():
+    top += '单模型GPU诊断已完成并离机及主代理独立核验：原FairGuard/IID/F Flip/seed91009三指标差值全0，CPU与此次GPU的native/raw恰有image172599一处0→1翻转，共享校准预测无翻转。仅一次GPU科学执行；两次工程异常及原CPU失败全部保留。缺历史GPU逐图数组，不声称唯一历史根因；424正式接受数不变，原872服务不重启。凭据NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json。\n\n'
+top += '已接受机制场景的10/9/6种子中期论文表见celeba_mechanism_v1/interim_tables_20261009T113229Z/TABLES.md；只列已凑齐10个配对seed的四个IID场景，不把partial或未跑的其他组件补成结果，仍保留准确率/公平性取舍。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

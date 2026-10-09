@@ -1,0 +1,431 @@
+{
+  "status": "DIAGNOSTIC_SAVED_ARRAY_COMPARISON_ONLY",
+  "id": "FairGuard_IID_F-Flip_seed91009",
+  "historical_GPU_aggregate": {
+    "accuracy": 0.9040116776564152,
+    "aeod": 0.04282574048724552,
+    "aspd": 0.11859776792562177
+  },
+  "historical_GPU_array_available": false,
+  "CPU_native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.9040116776564152,
+      "aeod": 0.04282574048724552,
+      "aspd": 0.11859776792562177
+    },
+    "observed": {
+      "accuracy": 0.9039613429304878,
+      "aeod": 0.04311601624921935,
+      "aspd": 0.11871599918596698
+    },
+    "differences": {
+      "accuracy": -5.03347259274145e-05,
+      "aeod": 0.0002902757619738239,
+      "aspd": 0.00011823126034521403
+    },
+    "max_abs_difference": 0.0002902757619738239,
+    "accepted": false
+  },
+  "GPU_native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.9040116776564152,
+      "aeod": 0.04282574048724552,
+      "aspd": 0.11859776792562177
+    },
+    "observed": {
+      "accuracy": 0.9040116776564152,
+      "aeod": 0.04282574048724552,
+      "aspd": 0.11859776792562177
+    },
+    "differences": {
+      "accuracy": 0.0,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "max_abs_difference": 0.0,
+    "accepted": true
+  },
+  "margins": {
+    "valid": {
+      "n": 19867,
+      "exact_array_equal": false,
+      "changed_count": 18089,
+      "max_abs_difference": 1.049041748046875e-05,
+      "mean_abs_difference": 1.3791258324192857e-06,
+      "CPU_min_abs": 2.60770320892334e-07,
+      "GPU_min_abs": 1.5944242477416992e-06
+    },
+    "root": {
+      "n": 16277,
+      "exact_array_equal": false,
+      "changed_count": 14784,
+      "max_abs_difference": 9.655952453613281e-06,
+      "mean_abs_difference": 1.3577162307640357e-06,
+      "CPU_min_abs": 0.001315198838710785,
+      "GPU_min_abs": 0.0013137683272361755
+    }
+  },
+  "views": {
+    "native": {
+      "CPU_metrics": {
+        "accuracy": 0.9039613429304878,
+        "aeod": 0.04311601624921935,
+        "aspd": 0.11871599918596698,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.48009261589570645,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5620,
+            "fp": 434,
+            "tn": 4818,
+            "fn": 537,
+            "tpr": 0.9127821991229494,
+            "fpr": 0.08263518659558264,
+            "positive_rate": 0.5306337102287667
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 2996,
+            "fp": 488,
+            "tn": 4525,
+            "fn": 449,
+            "tpr": 0.8696661828737301,
+            "fpr": 0.09734689806503093,
+            "positive_rate": 0.41191771104279973
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "GPU_metrics": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.48014295062163387,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5620,
+            "fp": 434,
+            "tn": 4818,
+            "fn": 537,
+            "tpr": 0.9127821991229494,
+            "fpr": 0.08263518659558264,
+            "positive_rate": 0.5306337102287667
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 2997,
+            "fp": 488,
+            "tn": 4525,
+            "fn": 448,
+            "tpr": 0.8699564586357039,
+            "fpr": 0.09734689806503093,
+            "positive_rate": 0.41203594230314494
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "CPU_fit": {
+        "view": "native",
+        "method": "FairGuard",
+        "rule": "argmax_margin_strictly_positive",
+        "thresholds": null,
+        "fit_data": "none",
+        "fit_sha256": "50845caf47fc25b6b10b7041284e677fefa5827d85fec926f67b03ff05981c7d"
+      },
+      "GPU_fit": {
+        "view": "native",
+        "method": "FairGuard",
+        "rule": "argmax_margin_strictly_positive",
+        "thresholds": null,
+        "fit_data": "none",
+        "fit_sha256": "50845caf47fc25b6b10b7041284e677fefa5827d85fec926f67b03ff05981c7d"
+      },
+      "prediction_flip_count": 1,
+      "flips": [
+        {
+          "position": 9828,
+          "image_id": 172599,
+          "y": 1,
+          "sensitive": 1,
+          "CPU_prediction": 0,
+          "GPU_prediction": 1,
+          "CPU_margin": -2.60770320892334e-07,
+          "GPU_margin": 1.5944242477416992e-06
+        }
+      ]
+    },
+    "raw": {
+      "CPU_metrics": {
+        "accuracy": 0.9039613429304878,
+        "aeod": 0.04311601624921935,
+        "aspd": 0.11871599918596698,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.48009261589570645,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5620,
+            "fp": 434,
+            "tn": 4818,
+            "fn": 537,
+            "tpr": 0.9127821991229494,
+            "fpr": 0.08263518659558264,
+            "positive_rate": 0.5306337102287667
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 2996,
+            "fp": 488,
+            "tn": 4525,
+            "fn": 449,
+            "tpr": 0.8696661828737301,
+            "fpr": 0.09734689806503093,
+            "positive_rate": 0.41191771104279973
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "GPU_metrics": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.48014295062163387,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5620,
+            "fp": 434,
+            "tn": 4818,
+            "fn": 537,
+            "tpr": 0.9127821991229494,
+            "fpr": 0.08263518659558264,
+            "positive_rate": 0.5306337102287667
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 2997,
+            "fp": 488,
+            "tn": 4525,
+            "fn": 448,
+            "tpr": 0.8699564586357039,
+            "fpr": 0.09734689806503093,
+            "positive_rate": 0.41203594230314494
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "CPU_fit": {
+        "view": "raw",
+        "method": "FairGuard",
+        "rule": "argmax_margin_strictly_positive",
+        "thresholds": null,
+        "fit_data": "none",
+        "fit_sha256": "e5bdadd286e91512719258887e57d491cb8fb505fd79f436113536aee897bc80"
+      },
+      "GPU_fit": {
+        "view": "raw",
+        "method": "FairGuard",
+        "rule": "argmax_margin_strictly_positive",
+        "thresholds": null,
+        "fit_data": "none",
+        "fit_sha256": "e5bdadd286e91512719258887e57d491cb8fb505fd79f436113536aee897bc80"
+      },
+      "prediction_flip_count": 1,
+      "flips": [
+        {
+          "position": 9828,
+          "image_id": 172599,
+          "y": 1,
+          "sensitive": 1,
+          "CPU_prediction": 0,
+          "GPU_prediction": 1,
+          "CPU_margin": -2.60770320892334e-07,
+          "GPU_margin": 1.5944242477416992e-06
+        }
+      ]
+    },
+    "shared_calibration": {
+      "CPU_metrics": {
+        "accuracy": 0.9006392510192782,
+        "aeod": 0.00700424051541515,
+        "aspd": 0.08087909424056344,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.4711330346806262,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5462,
+            "fp": 306,
+            "tn": 4946,
+            "fn": 695,
+            "tpr": 0.8871203508202047,
+            "fpr": 0.05826351865955826,
+            "positive_rate": 0.5055657814006486
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 3032,
+            "fp": 560,
+            "tn": 4453,
+            "fn": 413,
+            "tpr": 0.8801161103047895,
+            "fpr": 0.11170955515659285,
+            "positive_rate": 0.4246866871600851
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "GPU_metrics": {
+        "accuracy": 0.9006392510192782,
+        "aeod": 0.00700424051541515,
+        "aspd": 0.08087909424056344,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.4711330346806262,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867,
+        "constant_predictions": false,
+        "group_confusion_counts": {
+          "0": {
+            "n": 11409,
+            "positives": 6157,
+            "negatives": 5252,
+            "tp": 5462,
+            "fp": 306,
+            "tn": 4946,
+            "fn": 695,
+            "tpr": 0.8871203508202047,
+            "fpr": 0.05826351865955826,
+            "positive_rate": 0.5055657814006486
+          },
+          "1": {
+            "n": 8458,
+            "positives": 3445,
+            "negatives": 5013,
+            "tp": 3032,
+            "fp": 560,
+            "tn": 4453,
+            "fn": 413,
+            "tpr": 0.8801161103047895,
+            "fpr": 0.11170955515659285,
+            "positive_rate": 0.4246866871600851
+          }
+        },
+        "warnings": [],
+        "fairness_status": "DEFINED"
+      },
+      "CPU_fit": {
+        "view": "shared_calibration",
+        "method": "FairGuard",
+        "rule": "group_margin_greater_equal",
+        "thresholds": {
+          "0": 0.40281543,
+          "1": -0.12875835
+        },
+        "fit_data": "clean_train_root_only",
+        "fit_diagnostics": {
+          "server_calibration_metrics": {
+            "accuracy": 0.8994900780242059,
+            "aeod": 0.000841816168430487,
+            "aspd": 0.07198375707688148
+          },
+          "server_calibration_score": 9.972582114157587,
+          "server_calibration_risk": 0.036412786622655985,
+          "server_base_calibration_metrics": {
+            "accuracy": 0.9030533882165018,
+            "aeod": 0.035784281928202044,
+            "aspd": 0.10642813769220566
+          },
+          "server_base_calibration_risk": 0.07110620981020385,
+          "server_adaptive_lambda": 0.8952853831738156,
+          "server_calibration_budget": 0.06,
+          "server_calibration_acc_floor": 0.8980533882165018,
+          "server_calibration_max_acc_drop": 0.005,
+          "server_calibration_objective": "acc_floor"
+        },
+        "fit_sha256": "df06e629e3cc14be1a932bc8934ef1f6a3cdb3fa2a2e14a8e289bd0f6a9e5e5d"
+      },
+      "GPU_fit": {
+        "view": "shared_calibration",
+        "method": "FairGuard",
+        "rule": "group_margin_greater_equal",
+        "thresholds": {
+          "0": 0.40281457,
+          "1": -0.12875681
+        },
+        "fit_data": "clean_train_root_only",
+        "fit_diagnostics": {
+          "server_calibration_metrics": {
+            "accuracy": 0.8994900780242059,
+            "aeod": 0.000841816168430487,
+            "aspd": 0.07198375707688148
+          },
+          "server_calibration_score": 9.972582114157587,
+          "server_calibration_risk": 0.036412786622655985,
+          "server_base_calibration_metrics": {
+            "accuracy": 0.9030533882165018,
+            "aeod": 0.035784281928202044,
+            "aspd": 0.10642813769220566
+          },
+          "server_base_calibration_risk": 0.07110620981020385,
+          "server_adaptive_lambda": 0.8952853831738156,
+          "server_calibration_budget": 0.06,
+          "server_calibration_acc_floor": 0.8980533882165018,
+          "server_calibration_max_acc_drop": 0.005,
+          "server_calibration_objective": "acc_floor"
+        },
+        "fit_sha256": "8acc6f43652dcb5178957d0a8b96190f568f097bf26f645fe1adf5a50e4a4107"
+      },
+      "prediction_flip_count": 0,
+      "flips": []
+    }
+  },
+  "accepted_for_cohort": false,
+  "old_CPU_failure_remains": true,
+  "limitation": "Measured flips are between saved CPU and this new GPU execution only. Historical aggregate equality cannot identify historical per-sample predictions or establish unique causality."
+}

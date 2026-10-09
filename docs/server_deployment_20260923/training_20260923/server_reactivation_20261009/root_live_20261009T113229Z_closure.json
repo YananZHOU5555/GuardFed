@@ -1,0 +1,258 @@
+{
+  "schema": "root_live_mechanism_incremental_closure_v1",
+  "closed_utc": "2026-10-09T11:42:13.129182+00:00",
+  "status": "NEW2_STRICT_OFFSERVER_ACCEPTED_TOTAL40",
+  "scope": "One fixed original evidence_v4 inspection snapshot; read-only live observation; no training/inference/test/queue mutation.",
+  "observed_utc": "2026-10-09T11:36:51.205304+00:00",
+  "observation": {
+    "main800": {
+      "completed_observed_n": 40,
+      "active_n": 8,
+      "pending_n": 752,
+      "failure_n": 0,
+      "failure_files": [],
+      "round_changes": [
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91001",
+          "before_round": 53,
+          "after_round": 56,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15837
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91002",
+          "before_round": 51,
+          "after_round": 54,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15835
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91003",
+          "before_round": 56,
+          "after_round": 60,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15839
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91004",
+          "before_round": 54,
+          "after_round": 58,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15839
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91005",
+          "before_round": 55,
+          "after_round": 59,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15832
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91006",
+          "before_round": 46,
+          "after_round": 49,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15837
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91007",
+          "before_round": 52,
+          "after_round": 56,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15831
+        },
+        {
+          "id": "minus_U_IID_Sp-DFA_seed91008",
+          "before_round": 35,
+          "after_round": 38,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15834
+        }
+      ]
+    },
+    "FLGMM32": {
+      "completed_observed_n": 6,
+      "active_n": 2,
+      "failure_files": [],
+      "round_changes": [
+        {
+          "id": "FLGMM_Tg10_L2.0_lr0.001_non-IID_Benign_seed91001_screen",
+          "before_round": 38,
+          "after_round": 44,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15827
+        },
+        {
+          "id": "FLGMM_Tg10_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen",
+          "before_round": 30,
+          "after_round": 34,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15830
+        }
+      ],
+      "scientific_acceptance_rechecked": false
+    },
+    "Hybrid32": {
+      "acceptance_file_n_not_revalidated": 0,
+      "active_n": 1,
+      "failure_files": [],
+      "round_changes": [
+        {
+          "id": "CosineFairness_lam5.0_tau0.1_lr0.0005_IID_Benign_seed91001_screen",
+          "before_round": 49,
+          "after_round": 53,
+          "pid_unchanged": true,
+          "cpu_ticks_delta": 15804
+        }
+      ],
+      "scientific_acceptance_rechecked": false
+    },
+    "services": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 5:17:55\nguardfed_celeba_flgmm_screen       RUNNING   pid 18899, uptime 2:09:30\nguardfed_celeba_hybrid_screen32    RUNNING   pid 33737, uptime 0:30:11\nsglang                             STOPPED   Oct 09 05:46 AM",
+    "CPU": {
+      "sample_seconds": 158.2617153809406,
+      "effective_cgroup_cores": 11.07308651231166,
+      "cpu_max": "12287999 100000",
+      "throttled_usec_delta": 0
+    },
+    "gpu": "0, 100 %, 6040 MiB, 32607 MiB, 70\n1, 100 %, 5039 MiB, 32607 MiB, 66",
+    "memory": {
+      "memory.current": "74661330944",
+      "memory.max": "519171997696",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "disk": {
+      "total": 1154272460800,
+      "used": 92457611264,
+      "free": 1061814849536
+    },
+    "bounded_log_files_n": 10,
+    "bounded_log_error_matches_n": 0,
+    "log_limitations": "10 active main/FL tails, max64KiB each; Hybrid stdout directed to /dev/stdout and not scanned as persistent log. All queues have no observed failure files and cgroup oom/oom_kill0."
+  },
+  "scientific_snapshot": {
+    "status": "PARTIAL",
+    "new_accepted_n": 40,
+    "reused_full_accepted_n": 100,
+    "invalid_n": 0,
+    "pending_new_n": 760,
+    "previous_backed_up_n": 38,
+    "accepted_incremental_ids": [
+      "minus_U_IID_S-DFA_seed91008",
+      "minus_U_IID_S-DFA_seed91010"
+    ],
+    "accepted_new_ids": [
+      "minus_U_IID_Benign_seed91001",
+      "minus_U_IID_Benign_seed91002",
+      "minus_U_IID_Benign_seed91003",
+      "minus_U_IID_Benign_seed91004",
+      "minus_U_IID_Benign_seed91005",
+      "minus_U_IID_Benign_seed91006",
+      "minus_U_IID_Benign_seed91007",
+      "minus_U_IID_Benign_seed91008",
+      "minus_U_IID_Benign_seed91009",
+      "minus_U_IID_Benign_seed91010",
+      "minus_U_IID_F Flip_seed91001",
+      "minus_U_IID_F Flip_seed91002",
+      "minus_U_IID_F Flip_seed91003",
+      "minus_U_IID_F Flip_seed91004",
+      "minus_U_IID_F Flip_seed91005",
+      "minus_U_IID_F Flip_seed91006",
+      "minus_U_IID_F Flip_seed91007",
+      "minus_U_IID_F Flip_seed91008",
+      "minus_U_IID_F Flip_seed91009",
+      "minus_U_IID_F Flip_seed91010",
+      "minus_U_IID_FedSA_seed91001",
+      "minus_U_IID_FedSA_seed91002",
+      "minus_U_IID_FedSA_seed91003",
+      "minus_U_IID_FedSA_seed91004",
+      "minus_U_IID_FedSA_seed91005",
+      "minus_U_IID_FedSA_seed91006",
+      "minus_U_IID_FedSA_seed91007",
+      "minus_U_IID_FedSA_seed91008",
+      "minus_U_IID_FedSA_seed91009",
+      "minus_U_IID_FedSA_seed91010",
+      "minus_U_IID_S-DFA_seed91001",
+      "minus_U_IID_S-DFA_seed91002",
+      "minus_U_IID_S-DFA_seed91003",
+      "minus_U_IID_S-DFA_seed91004",
+      "minus_U_IID_S-DFA_seed91005",
+      "minus_U_IID_S-DFA_seed91006",
+      "minus_U_IID_S-DFA_seed91007",
+      "minus_U_IID_S-DFA_seed91008",
+      "minus_U_IID_S-DFA_seed91009",
+      "minus_U_IID_S-DFA_seed91010"
+    ],
+    "fixed_snapshot_not_chased_again": true,
+    "model_evidence_only": true,
+    "whole_rebuttal_complete": false,
+    "postprocessing_raw_native_shared": "PENDING"
+  },
+  "backup": {
+    "archive_local": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\server_reactivation_20261009\\mechanism_science_backups_20261009\\root_live_20261009T113229Z_incremental_new2_total40.tar.gz",
+    "archive_remote": "/workspace/guardfed_checks/server_reactivation_20261009/mechanism_science_backups_20261009/root_live_20261009T113229Z_incremental_new2_total40.tar.gz",
+    "archive_sha256": "24feda20a6e73ca1ecbc5c178cd24d6d34fcb3bfebf9151ccca19630e85564fd",
+    "archive_bytes": 2053922,
+    "receipt_sha256": "3f494748e233b4a446baefd52e96e12431b169bda0a3d6181a0e40b42b01cffd",
+    "inventory_sha256": "c60840d6a9fafcf50b29353f01bbdf09d601ba4d1caffb5323d1e403f8f3e334",
+    "members_verified": 46,
+    "offserver_proof_sha256": "168cd0407d87a95bc010dcaf2eac283be40c9a327519d4cee74b8cfefc19896b",
+    "source_host": "0becaeaa5515",
+    "verification_host": "BlueBook",
+    "different_host_observed": true,
+    "previous_receipt_sha256": "00ba1beb3e92909961817ad206156b6e1ac025f180f4e11afef5cbab276dc196",
+    "ledger_before_sha256": "bd67fcb1bda91c702211c531fd7aa96396af86cfe50b4f98fc71520bf672d432",
+    "ledger_after_sha256": "57f5be3a577bb73f4ca355419e9d7b7c1a11112174c38ce3d49837c819e7794b",
+    "ledger_segments_n": 8,
+    "old_seven_entries_unchanged": true,
+    "native_backup_required_old_chain_scan_performed_once": true,
+    "reused_full_weights_repacked": 0,
+    "old_new38_weights_repacked": 0,
+    "strict_prerequisites_preserved_in_sourcefreeze": true,
+    "immutable_archive_receipt_pending_field": "Original receipt remains PENDING_COPY_AND_VERIFY by original tool schema; separate offserver proof above establishes actual completed copy/member verification."
+  },
+  "source_bindings": {
+    "evidence_v4_sha256": "3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef",
+    "observer_sha256": "6901b801dd349d1194bf7ba0d4d9c974184f2791169a54caa1dd4798018412d1",
+    "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+    "manifest_sha256": "498ed0e033ef6eb5532286820ec987af3b44ca6251d8a84c42ce9c3e5ff5ab2d",
+    "full_inventory_sha256": "3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd",
+    "inspection_sha256": "577cb49f365caa6823b721c21aa70207d8236d3d42b7a7b9fddf0cf1371d48c6",
+    "adapter_hashes": {
+      "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/adapter.py": "b3e3079175a0427335209bc94f53b8185bb68b082a27a9afa08cf45c85374248",
+      "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/prepare.py": "14c3212a61c5d6b13d80b21ac1dd3a4976f58fff6da50d7936ece5dbd0a655a0",
+      "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/runner.py": "c8053537a0836fc830a66e6277f535e50f965bce1d3210d352aa4afdaf4f6a5b",
+      "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py": "e9a5449e0148ad4043dda5eb25c596b0912d6249af6149b69b861385e9668577"
+    },
+    "frozen_source_hashes": {
+      "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+      "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+      "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+      "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+      "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+      "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+      "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+      "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+      "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+      "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+      "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+      "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+      "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+      "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc",
+      "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+      "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+      "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+      "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091"
+    }
+  },
+  "ownership": {
+    "canonical_latest_RUNNING_STATE_Git_modified": false,
+    "main_backup_ledger_appended_with_parent_sole_writer_authorization": true,
+    "local_and_remote_backup_ledger_sha_match": true,
+    "baseline872_touched": false,
+    "queues_started_stopped_or_reconfigured": false
+  },
+  "next": "Parent may integrate this one closure. No further snapshot, replay, training, test, retry, or dispatch performed."
+}

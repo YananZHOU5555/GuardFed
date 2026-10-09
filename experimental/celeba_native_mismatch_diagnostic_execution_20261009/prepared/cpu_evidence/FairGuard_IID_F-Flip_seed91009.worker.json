@@ -1,0 +1,116 @@
+{
+  "id": "FairGuard_IID_F-Flip_seed91009",
+  "scope": "VALID_ONLY_IMPLEMENTATION_REPLAY_V4",
+  "status": "FAILED",
+  "artifact_before": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt": {
+      "sha256": "9bfe093da09b3821394db9a7ca97e2db13e995a4c1b59beff8ff8c3f77728376",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529050906921002,
+        "inode": 17232446318,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json": {
+      "sha256": "d810b15d357a9d31a14f2edda7e18fb780d5f7329ae4202f313daef8da395944",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json",
+      "bytes": 180348,
+      "stat": {
+        "bytes": 180348,
+        "mtime_ns": 1791529050919920770,
+        "inode": 17232446319,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json": {
+      "sha256": "ff9e2ec75ae19cbb82e3a27cc3feb2df7a9bee0dbf031e71080a5be18e87533c",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json",
+      "bytes": 4933,
+      "stat": {
+        "bytes": 4933,
+        "mtime_ns": 1791529050088935596,
+        "inode": 10775022022,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json"
+      }
+    }
+  },
+  "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009",
+  "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "batch_receipt_sha256": "a4112e74e9d2288ed4e19dbcc3d2bdc1e18228d8d75563c1d6d7ec3ad11172a5",
+  "slot": 7,
+  "allowed_cpus": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79
+  ],
+  "original_job_bytes_modified": false,
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "v3_source_sha256": "43b16d20d2497b7762cd0f6039f7f4bfc8fddd4e4c32979a16291b26e394ae5e",
+  "error_type": "ValueError",
+  "error": "Native metrics exceed fixed tolerance; preserve evidence and stop without retry",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 237, in worker\n    r = inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, args.max_wall_seconds)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 405, in replay_one\n    require(comparison['accepted'], 'Native metrics exceed fixed tolerance; preserve evidence and stop without retry')\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 58, in require\n    raise ValueError(message)\nValueError: Native metrics exceed fixed tolerance; preserve evidence and stop without retry\n",
+  "artifact_after": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt": {
+      "sha256": "9bfe093da09b3821394db9a7ca97e2db13e995a4c1b59beff8ff8c3f77728376",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529050906921002,
+        "inode": 17232446318,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json": {
+      "sha256": "d810b15d357a9d31a14f2edda7e18fb780d5f7329ae4202f313daef8da395944",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json",
+      "bytes": 180348,
+      "stat": {
+        "bytes": 180348,
+        "mtime_ns": 1791529050919920770,
+        "inode": 17232446319,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json": {
+      "sha256": "ff9e2ec75ae19cbb82e3a27cc3feb2df7a9bee0dbf031e71080a5be18e87533c",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json",
+      "bytes": 4933,
+      "stat": {
+        "bytes": 4933,
+        "mtime_ns": 1791529050088935596,
+        "inode": 10775022022,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_F-Flip_seed91009.json"
+      }
+    }
+  },
+  "artifacts_unchanged": true,
+  "sealed_v3_runner_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "v4_schema_bridge": {
+    "schema": "original_revision_job",
+    "raw_job_sha256": "ff9e2ec75ae19cbb82e3a27cc3feb2df7a9bee0dbf031e71080a5be18e87533c",
+    "result_sha256": "d810b15d357a9d31a14f2edda7e18fb780d5f7329ae4202f313daef8da395944",
+    "checkpoint_sha256": "9bfe093da09b3821394db9a7ca97e2db13e995a4c1b59beff8ff8c3f77728376",
+    "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009",
+    "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009",
+    "derived_job_fields": [],
+    "derived_result_fields": [],
+    "original_artifact_bytes_modified": false
+  },
+  "semantic_inspection_sha256": "cc93d94d69478a4ee190abff76da4fb185791ece7e4e1d2ee75360482ead80b4"
+}
