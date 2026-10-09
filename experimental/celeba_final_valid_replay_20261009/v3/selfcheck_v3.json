@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "groups": [
+    {
+      "name": "actual900_inventory_2700_map_2400_bundle_chain",
+      "passed": true,
+      "models": 900,
+      "mapped_files": 2700
+    },
+    {
+      "name": "storage_tamper_rejections_and_original_tuning_Full_path",
+      "passed": true,
+      "tuning_full_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001"
+    },
+    {
+      "name": "actual_nonFull_original_checked_result_via_mapped_storage",
+      "passed": true,
+      "archive_sha256": "a71e178596d8f1f46539ca01faf27dba5e692ed1002a21730ada43619c85c137",
+      "members": {
+        "checkpoint": {
+          "sha256": "2bd941918aa225a41de864c78d65620c86c5851b39487bcaff4fe97d9e9dff4b",
+          "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/FedAvg_IID_Benign_seed91001/model.pt"
+        },
+        "result": {
+          "sha256": "72292ed8be4bc2be5f4a4ee95f6a88f6ad98f890cc2da748393dd60d1d53e82a",
+          "member": "results/revision_20260926/celeba_fullcoverage_v1/runs/FedAvg_IID_Benign_seed91001/result.json"
+        },
+        "raw_job": {
+          "sha256": "43dce1d2ab18490d1fb452058937b9ac37477e076d18978dbc8c2e590921cdfe",
+          "member": "results/revision_20260926/celeba_fullcoverage_v1/jobs/FedAvg_IID_Benign_seed91001.json"
+        }
+      },
+      "historical_output_preserved": true,
+      "sealed_v2_inference_code_object_reused": true,
+      "actual_image_inference_performed": false
+    },
+    {
+      "name": "cumulative_explicit_reuse_duplicate_rejection_partial_n",
+      "passed": true,
+      "actual_replayed_canaries": 2,
+      "new_v3_replayed_models": 0,
+      "overall_complete": false
+    }
+  ],
+  "rejected": [
+    {
+      "name": "duplicate id/kind",
+      "error": "Duplicate or missing model/kind in storage map"
+    },
+    {
+      "name": "missing seed/kind",
+      "error": "Duplicate or missing model/kind in storage map"
+    },
+    {
+      "name": "wrong source archive",
+      "error": "Mapped artifact differs from accepted original member"
+    },
+    {
+      "name": "wrong original member bytes",
+      "error": "Mapped artifact differs from accepted original member"
+    },
+    {
+      "name": "storage escape",
+      "error": "NonFull storage escapes isolated artifact store"
+    },
+    {
+      "name": "cross-model checkpoint path",
+      "error": "Different artifacts share a storage target"
+    },
+    {
+      "name": "remote acceptance binds another map",
+      "error": "Remote acceptance chain differs from trusted map/bundle"
+    },
+    {
+      "name": "missing restore bundle member",
+      "error": "Storage target missing from accepted restore bundle"
+    },
+    {
+      "name": "real accepted but mixed checkpoint",
+      "error": "('checkpoint mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_final_valid_replay_20261009/v3/tmpr70soz0l/actual_artifacts/result.json'))"
+    },
+    {
+      "name": "root ID tamper before inference",
+      "error": "Original image contract differs from inventory"
+    },
+    {
+      "name": "raw job historical output rewrite",
+      "error": "Original job identity drift"
+    },
+    {
+      "name": "duplicate ID across explicit v2 reuse and reviewed batch",
+      "error": "Duplicate or foreign model IDs across accepted batches"
+    }
+  ],
+  "v3_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "selfcheck_sha256": "452f8eb4e8228b69163bd41bc41ba43c1c5901b9bc0b1a4b12984fe82e6ecab3",
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "restore_receipt_sha256": "0cfa391b0d317622551d4c6526f2d14ec33c3dda0f3e9e523066bd3718cbcf3a",
+  "restore_acceptance_sha256": "5114c2cd96e5b8ffaf46e40a341619dd8b3547f89d417263c19c6e7f1f33bf77",
+  "test_labels_accessed": false,
+  "actual_new_image_inference_performed": false,
+  "new_v3_replayed_models": 0
+}

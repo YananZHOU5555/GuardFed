@@ -39,7 +39,8 @@ if formal:
         full_reuse_strictly_accepted=100, new_total=800,
         dispatch_receipt_sha256=sha(TRAIN/'celeba_mechanism_v1/dispatch_receipt.json'),
         validation_only=True, test_started=False)
-state['active_services'] = ['guardfed_celeba_mechanism_formal' if formal else 'guardfed_celeba_mechanism_preflight']
+state['active_services'] = list(dict.fromkeys(state.get('active_services', []) +
+    ['guardfed_celeba_mechanism_formal' if formal else 'guardfed_celeba_mechanism_preflight']))
 if formal:
     state['current_stage'] = 'celeba_mechanism_v1'
 state['last_health_check'] = live
@@ -77,6 +78,96 @@ if (restore_dir / 'restore_acceptance.json').exists():
         exact_900_artifact_storage_ready=True,
         full900_replay_started=False,
         final_protocol_frozen=False)
+phase1_dir = ROOT / 'tmp/celeba_final_valid_replay_20261009/v3/phase1_execution_20261009'
+if (phase1_dir / 'offserver_verification.json').exists():
+    replay = read(phase1_dir / 'offserver_verification.json')
+    acceptance = read(phase1_dir / 'strict_acceptance.json')
+    assert replay['status'] == 'PASS' and replay['archive_members_verified'] == 20
+    assert sha(phase1_dir / 'strict_acceptance.json') == replay['strict_acceptance_sha256']
+    assert acceptance['accepted_ids'] == ['FedAvg_IID_Benign_seed91001'] and acceptance['accepted_n'] == 1
+    assert replay['native_max_abs_difference'] == 0 and not acceptance['invalid']
+    state['final_evaluator_runtime_20261009'].update(
+        status='VALID_REPLAY_PHASE1_ACCEPTED_PHASE2_AUTHORIZED',
+        actual_native_valid_image_replays_accepted=3,
+        throughput_phase1= {'workers':1, 'accepted':1,
+            'batch_wall_seconds':replay['batch_wall_seconds'],
+            'accepted_models_per_second':replay['batch_accepted_models_per_second'],
+            'offserver_archive_sha256':replay['archive_sha256'],
+            'archive_members_verified':20},
+        final_protocol_frozen=False, full900_replay_started=False)
+    replay_base = phase1_dir.parent
+    throughput_plan = read(replay_base / 'throughput_plan.json')
+    replay_ids, measured_phases = set(), []
+    for planned in throughput_plan['phases']:
+        phase_dir = replay_base / ('phase' + str(planned['phase']) + '_execution_20261009')
+        if not (phase_dir / 'offserver_verification.json').exists():
+            continue
+        check = read(phase_dir / 'offserver_verification.json')
+        accepted_phase = read(phase_dir / 'strict_acceptance.json')
+        assert check['status'] == 'PASS' and sha(phase_dir / 'strict_acceptance.json') == check['strict_acceptance_sha256']
+        ids = set(accepted_phase['accepted_ids'])
+        assert ids == {m['id'] for m in planned['models']} and not ids.intersection(replay_ids)
+        assert accepted_phase['workers'] == planned['workers'] and not accepted_phase['invalid']
+        assert accepted_phase['max_abs_native_metric_difference'] == 0
+        replay_ids.update(ids)
+        measured_phases.append({'phase':planned['phase'], 'workers':planned['workers'],
+            'accepted':len(ids),'batch_wall_seconds':accepted_phase['wall_seconds'],
+            'models_per_second':accepted_phase['models_per_second'],
+            'offserver_archive_sha256':check['archive_sha256'],
+            'archive_members_verified':check['archive_members_verified']})
+    replay_count = 2 + len(replay_ids)
+    state['final_evaluator_runtime_20261009'].update(status='VALID_REPLAY_THROUGHPUT_STAGES_IN_PROGRESS',
+        actual_native_valid_image_replays_accepted=replay_count,
+        measured_throughput_phases=measured_phases, final_protocol_frozen=False,
+        full900_replay_started=False)
+science_backup = CHECKS / 'mechanism_science_backups_20261009'
+first_verification = science_backup / 'incremental_new5_offserver_verification.json'
+if first_verification.exists():
+    proof = read(first_verification)
+    receipt_path = science_backup / 'incremental_new5_v3_20261009T073000Z.tar.gz.receipt.json'
+    receipt = read(receipt_path)
+    inspection = read(science_backup / 'mechanism_inspection_new_v3_20261009T073000Z/inspection.json')
+    assert proof['pass'] and proof['different_host_observed'] and proof['members_verified'] == 70
+    assert proof['archive_sha256'] == receipt['archive_sha256']
+    assert set(proof['accepted_new_ids']) == set(receipt['accepted_new_ids']) == set(inspection['accepted_new_ids'])
+    assert inspection['new_count'] == 5 and inspection['reused_count'] == 100 and not inspection['invalid']
+    state['celeba_mechanism_v1'].update(scientific_results_strictly_accepted=5,
+        scientific_results_offserver_verified=5,
+        science_acceptance_inspection='server_reactivation_20261009/mechanism_science_backups_20261009/mechanism_inspection_new_v3_20261009T073000Z/inspection.json',
+        latest_science_backup_sha256=proof['archive_sha256'],
+        latest_science_backup_members_verified=70,
+        backup_tool_version='evidence_v3.py; sealed v2 unchanged',
+        active_partial_outputs_are_pending=True,
+        mechanism_raw_native_shared_evaluation='PENDING')
+    # Count each model once from the actually verified off-server chain.
+    ledger = read(science_backup / 'verified_ledger.json')
+    verified_proofs = {read(p)['archive_sha256']: read(p)
+                       for p in science_backup.glob('*offserver_verification.json')}
+    backed_up, previous, backup_entries = set(), None, []
+    for entry in ledger['entries']:
+        local_receipt = science_backup / Path(entry['receipt']).name
+        assert sha(local_receipt) == entry['receipt_sha256']
+        record = read(local_receipt)
+        proof = verified_proofs[record['archive_sha256']]
+        assert proof['pass'] and proof['different_host_observed']
+        assert record['previous_receipt_sha256'] == previous
+        assert record['manifest_sha256'] == ledger['manifest_sha256']
+        ids = set(record['accepted_new_ids'])
+        assert ids == set(proof['accepted_new_ids']) and not ids.intersection(backed_up)
+        backed_up.update(ids)
+        previous = entry['receipt_sha256']
+        backup_entries.append({'archive_sha256':record['archive_sha256'],
+            'new_ids':sorted(ids),'members_verified':proof['members_verified']})
+    inspections = [(p, read(p)) for p in science_backup.glob('mechanism_inspection_*/inspection.json')]
+    accepted_path, accepted = max(((p,d) for p,d in inspections if d['status'] != 'INVALID'), key=lambda item:item[1]['new_count'])
+    assert backed_up <= set(accepted['accepted_new_ids'])
+    state['celeba_mechanism_v1'].update(scientific_results_strictly_accepted=accepted['new_count'],
+        scientific_results_offserver_verified=len(backed_up),
+        incremental_science_backups=backup_entries,
+        latest_science_backup_sha256=backup_entries[-1]['archive_sha256'],
+        latest_science_backup_members_verified=backup_entries[-1]['members_verified'],
+        science_acceptance_inspection=accepted_path.relative_to(TRAIN).as_posix(),
+        backup_tool_version='evidence_v4.py; sealed v1/v2/v3 and original five-model archive unchanged')
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -102,6 +193,16 @@ top = f'''# CURRENT: GuardFed mechanism {'formal800' if formal else 'cu128 prefl
 '''
 if (restore_dir / 'restore_acceptance.json').exists():
     top += '''九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。900全批尚未启动，不称最终评价完成；详见validation900_restore_20261009/README.md。Hybrid与FLGMM完整真实图像CPU门检继续运行，首轮证据不等于三轮PASS。
+
+'''
+if first_verification.exists():
+    top += f'''机制新结果已有{accepted['new_count']}项通过独立70轮严格验收，{len(backed_up)}项离机备份，100Full身份复核保持有效；{len(backup_entries)}份增量各SHA/member通过本机验收，原Full权重不重复打包。实时queue完成数与该已验收/备份分母分开。v2首备份因活动日志增长而在preflight拒绝，原检查保留；独立v3处理正常活动目录，新v4修正异常重检的诊断保全路径，经独立审查/回归通过。训练及封存v1/v2/v3不变，首5项归档保持有效。当前不是800或整个返修完成。
+
+CPU端另有Fed-NGA/Huber四条真实图像三轮探索门检已启动，CPU104–111、8线程、独立supervisor、无自动重试；仅首client梯度已实测（7351样本、optimizer0步、同点/符号oracle一致），尚无完整四项PASS。原加载器会物化全split标签元数据，包括test尾部；仅训练/验证像素参与运算，不称untouched test。执行附件见tmp/celeba_gradient_realimage_gate_20261009/EXECUTION_HANDOFF.md。九方法验证CPU重放正在1/2/4/8/11互斥有用任务测吞吐，未启动900全批。
+
+'''
+if (phase1_dir / 'offserver_verification.json').exists():
+    top += f'''九方法验证重放已有{len(replay_ids)}项吞吐阶段新任务严格接受并离机SHA/member验收，加之前2条共{replay_count}个实际重放；native误差0，三视图指标/混淆计数独立重算一致。已完成1/2/4/8/11计划中的前{len(measured_phases)}阶段，只报实测吞吐，不称已知最优或受控提速。其余授权阶段依次严格接受/离机后自动推进，未启动900全批；阶段明细见tmp/celeba_final_valid_replay_20261009/v3/。该CPU重放只读train-root/valid语义标签，完整文件SHA读取包含test所在字节；它不调用会物化全split标签的原完整loader，不能与梯度gate的元数据边界混淆。
 
 '''
 running.write_text(top+history,encoding='utf-8')

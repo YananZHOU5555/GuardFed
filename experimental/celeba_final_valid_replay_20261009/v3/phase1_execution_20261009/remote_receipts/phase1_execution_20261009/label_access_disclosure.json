@@ -1,0 +1,56 @@
+{
+  "scope": "PHASE1_ONE_EXPLICITLY_AUTHORIZED_VALID_REPLAY",
+  "id": "FedAvg_IID_Benign_seed91001",
+  "source": "sealed v3 abb456 + sealed v2 8476d6 unchanged",
+  "label_access_semantics": {
+    "raw_identity_hash_reads": "All original frozen files are byte-hashed in full, including metadata/official label files containing test rows. This does not parse labels. Compressed member I/O may buffer source bytes; no claim of avoiding physical test-containing bytes.",
+    "semantic_label_parse": "NPY member headers then exactly first182637 Smiling/Male entries, corresponding to train162770+valid19867. Test tail19962 entries is not returned as label arrays.",
+    "full_celeba_loader_called": false,
+    "full_loader_context": "Frozen src/celeba_data.py:load_celeba_bundle would load complete Smiling/Male arrays, but this replay never calls it. Module is imported only to construct its original CelebACNN.",
+    "root_path": "Original sample_server_dataframe/create_client_data_dict/apply_root_noise operate on explicitly constructed train-only dataframe.",
+    "pixel_access": "Original images.npy is read-only mmap; only root IDs and valid slice162770:182637 copied for forward inference.",
+    "test_image_inference": false,
+    "test_labels_used_for_fit_metric_selection_or_reporting": false,
+    "train_valid_label_entries_requested_per_member": 182637,
+    "test_label_entries_requested_or_materialized_as_arrays": 0
+  },
+  "call_graph_review": {
+    "sealed_replay": [
+      "metadata/read_prefix",
+      "rebuild_root",
+      "replay_one"
+    ],
+    "original_core": [
+      "sample_server_dataframe",
+      "create_client_data_dict",
+      "apply_root_noise",
+      "model_margins",
+      "fit_group_thresholds"
+    ],
+    "cnn_module": [
+      "CelebACNN.__init__",
+      "CelebACNN.forward"
+    ],
+    "excluded_full_loaders": [
+      "load_celeba_bundle",
+      "load_dataset_bundle"
+    ]
+  },
+  "execution_boundary": {
+    "workers": 1,
+    "torch_threads_per_worker": 8,
+    "allowed_cpu_indices": [
+      16,
+      23
+    ],
+    "nice": 10,
+    "idle_io": true,
+    "max_wall_seconds_per_model": 1800,
+    "autostart": false,
+    "autorestart": false,
+    "phase2_or900_dispatch": false,
+    "fixed_native_metric_abs_tolerance": 1e-12
+  },
+  "claim_limit": "Static call-graph review plus execution prefix receipt supports no semantic test-label use; full-file hashing is disclosed. No physical-byte nonaccess or GPU-equivalence claim.",
+  "protected_files_modified": 0
+}

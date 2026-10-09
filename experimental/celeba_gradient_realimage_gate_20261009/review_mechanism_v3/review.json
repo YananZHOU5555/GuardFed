@@ -1,0 +1,52 @@
+{
+  "status": "V3_DIAGNOSTIC_DEFECT_FIXED_IN_SEPARATE_V4_NO_REMAINING_BLOCKER_FOUND",
+  "scope": "Read-only delta review of live-partial classification, invalid snapshots, content deduplication and existing five-model restore chain",
+  "source_sha256": {
+    "v3": "836f2d01085510b47ea05c2b19be7af88b8a0a41e019f606304b8616e55365e9",
+    "v4": "3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef"
+  },
+  "findings": [
+    {
+      "id": "V3_INVALID_RECHECK_ESCAPES_SNAPSHOT",
+      "severity": "P2_diagnostic_availability",
+      "evidence": "evidence_v3.py inspect lines394-415: active_pending identity error triggers the same helper unguarded in except; actual loop reproduced two helper calls, escaping ValueError and zero snapshots",
+      "impact": "Wrong live progress PID or duplicate ownership can make the whole inspection INVALID and discard its accepted-ID list instead of preserving the bad job snapshot and continuing",
+      "scientific_false_acceptance": false,
+      "existing_five_model_archive_affected": false,
+      "fix": "Separate v4 recheck_pending catches recheck exceptions, retains both errors and follows existing invalid snapshot path",
+      "fix_verified": "Actual v4 loop produced one immutable progress snapshot, kept other accepted fixture IDs, no escaping exception",
+      "state": "RESOLVED_IN_V4_V3_SEALED_UNCHANGED"
+    }
+  ],
+  "reviewed_boundaries": {
+    "live_partial": "Exact job/repo/adapter argv owner remains pending, including finalization; never enters accepted records",
+    "failure_precedence": "Existing failure*.json prevents live-pending classification; orphan partial remains invalid",
+    "immutable_snapshot": "Observed bytes copied to fresh SHA-named snapshot; original and copied hashes plus any intervening change retained",
+    "failure_deduplication": "Identity is original_path=actual_content_SHA, independent of inspection snapshot directory; changed content remains new evidence",
+    "accepted_model_backup_delta": "Accepted IDs are a strict difference against verified ledger; duplicate/undeclared IDs and mixed checkpoint paths rejected",
+    "restore_chain": "Previous receipt SHA, cohort manifest, receipt SHA and archive/member guards retained; reused Full models not repacked",
+    "guard_equivalence": "accept_new, accept_full, terminal_checks, partition_identity, verify_archive, verified_ledger, row_from_result, summarize and validate_design AST unchanged across v2/v3/v4"
+  },
+  "existing_backup": {
+    "accepted_new_models": 5,
+    "archive_sha256": "de867e84fe6185af62368e5ddacbf618d23f432112bb5cc3238dd49d25d08cd8",
+    "archive_sha_receipt_inventory_and_local_ledger_checked": true,
+    "members": 70,
+    "ledger_entries": 1,
+    "previous_receipt_sha256": null,
+    "offserver_verification_host": "BlueBook",
+    "archived_pending": 795,
+    "archived_exact_live_owners": 8,
+    "invalid_records": 0,
+    "reused_full_weights_repacked": 0
+  },
+  "limits": {
+    "server_accessed": false,
+    "training_or_inference_executed": false,
+    "full_scientific_acceptance_rerun": false,
+    "full_archive_member_sha_rerun": false,
+    "root_or_sealed_files_modified": false,
+    "live_owner_is_progress_proof": false,
+    "note": "A matching PID only owns a pending output at inspection time; training health still requires separate measured round/log growth. Boundary fixtures are software checks, not scientific observations."
+  }
+}

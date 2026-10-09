@@ -1,0 +1,194 @@
+{
+  "checks": [
+    {
+      "id": "GuardFed-AD2+_IID_Benign_seed91001",
+      "name": "actual_archived_Full_strict_gate",
+      "original_checked_result_called": true,
+      "original_checkpoint_sha256": "f4bb0646f0145053373de97ce593f1f2c60fab3ede1c606bb1566f51533973a8",
+      "original_result_sha256": "53d7549279d9d0196d91998810a4cfe42b661f5e2951b9d2830b7d7561a00163",
+      "real_images_evaluated": 0,
+      "scope": "one already accepted archived terminal Full checkpoint/result; local read-only software gate, not Full100 server acceptance",
+      "status": "PASS",
+      "strict_rejections": {
+        "cache_manifest_sha256": {
+          "exception": "ValueError",
+          "reason": "Reused Full root/train/valid identity drift"
+        },
+        "evaluation_image_ids_sha256": {
+          "exception": "ValueError",
+          "reason": "Reused Full root/train/valid identity drift"
+        },
+        "mixed_or_tampered_checkpoint": {
+          "exception": "ValueError",
+          "reason": "Reused Full checkpoint drift"
+        },
+        "preserved_failure": {
+          "exception": "ValueError",
+          "reason": "Preserved Full failure requires review"
+        },
+        "root_image_ids_sha256": {
+          "exception": "ValueError",
+          "reason": "Reused Full root/train/valid identity drift"
+        },
+        "scientific_source_data/celeba/derived/rgb64_v1/available.npy": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_data/celeba/derived/rgb64_v1/images.npy": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_data/celeba/derived/rgb64_v1/manifest.json": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_data/celeba/derived/rgb64_v1/metadata.npz": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_data/celeba/list_attr_celeba.txt": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_data/celeba/list_eval_partition.txt": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_scripts/build_celeba_cache.py": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_scripts/reproduce_paper_tables.py": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_src/celeba_data.py": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "scientific_source_src/data_loader.py": {
+          "exception": "AssertionError",
+          "reason": "('source mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/full_gate_ay6r6zmy/result.json'))"
+        },
+        "train_image_ids_sha256": {
+          "exception": "ValueError",
+          "reason": "Reused Full root/train/valid identity drift"
+        }
+      }
+    },
+    {
+      "actual_declared_jobs_checked": 800,
+      "hand_computed_mean": 54.5,
+      "hand_computed_sample_sd": 3.0276503540974917,
+      "incomplete_seed_panel_has_no_mean": true,
+      "name": "design_and_hand_computed_statistics",
+      "paired_n": 800,
+      "partial_scene_n": 9,
+      "rejections": {
+        "duplicate_Full_ID": {
+          "exception": "ValueError",
+          "reason": "Duplicate or missing model IDs"
+        },
+        "duplicate_accepted_cell": {
+          "exception": "ValueError",
+          "reason": "Duplicate accepted cells"
+        },
+        "duplicate_seed_missing_declared_seed": {
+          "exception": "ValueError",
+          "reason": "New controls contain duplicate cells or missing seeds/scenes"
+        },
+        "missing_seed_job": {
+          "exception": "ValueError",
+          "reason": "Missing declared job/Full record"
+        }
+      },
+      "runtime_sensitivity_paired_n": 784,
+      "status": "PASS",
+      "synthetic_complete_rows": 900
+    },
+    {
+      "candidate_calls": 700,
+      "existing_worker_checked_and_original_checked_result_used": true,
+      "fixture_rounds": 70,
+      "name": "existing_checked_new_candidate_evidence",
+      "new_training": false,
+      "rejections": {
+        "actual_evaluation_rows": {
+          "exception": "AssertionError",
+          "reason": ""
+        },
+        "client_sample_counts": {
+          "exception": "ValueError",
+          "reason": "Paired Full partition identity mismatch: client_sample_counts"
+        },
+        "contradictory_candidate_ledger_component": {
+          "exception": "ValueError",
+          "reason": "Candidate ledger fields contradict the frozen intervention"
+        },
+        "evaluation_image_ids_sha256": {
+          "exception": "AssertionError",
+          "reason": ""
+        },
+        "missing_diagnostic_round": {
+          "exception": "ValueError",
+          "reason": "Diagnostic rounds are incomplete or duplicated"
+        },
+        "mixed_checkpoint": {
+          "exception": "AssertionError",
+          "reason": "('checkpoint mismatch', WindowsPath('E:/OneDrive/文档/GuardFed/tmp/celeba_mechanism_evidence_20261009/new_gate_tqc63mfu/runs/minus_U_IID_Benign_seed91001/result.json'))"
+        },
+        "root_image_ids_sha256": {
+          "exception": "ValueError",
+          "reason": "Paired Full partition identity mismatch: root_image_ids_sha256"
+        },
+        "train_image_ids_sha256": {
+          "exception": "ValueError",
+          "reason": "Paired Full partition identity mismatch: train_image_ids_sha256"
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "archive_members_verified": 20,
+      "failure_only_incremental_new_models": 0,
+      "first_backup_new_models": 1,
+      "name": "incremental_backup_and_corruption_rejection",
+      "off_server_verification_claimed": false,
+      "rejections": {
+        "archive_bytes_tampered": {
+          "exception": "ValueError",
+          "reason": "Archive SHA mismatch"
+        },
+        "duplicate_accepted_ID": {
+          "exception": "ValueError",
+          "reason": "Duplicate/undeclared accepted IDs"
+        },
+        "duplicate_backup_ledger_entry": {
+          "exception": "ValueError",
+          "reason": "Broken restore chain"
+        },
+        "member_tamper_with_archive_SHA_refreshed": {
+          "exception": "ValueError",
+          "reason": "Archive member SHA/size mismatch: runs/minus_U_IID_Benign_seed91001/result.json"
+        },
+        "mixed_report_checkpoint": {
+          "exception": "ValueError",
+          "reason": "Backup row mixes checkpoints"
+        },
+        "receipt_ID_mismatch": {
+          "exception": "ValueError",
+          "reason": "Receipt/archive ID mismatch"
+        }
+      },
+      "repeat_backup_new_models": 0,
+      "reused_Full_models_repacked": 0,
+      "status": "PASS",
+      "strict_prerequisites_preserved_as_exact_bytes": true
+    }
+  ],
+  "evidence_sha256": "3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef",
+  "new_training": false,
+  "server_accessed": false,
+  "status": "PASS",
+  "test_labels_read": false
+}
