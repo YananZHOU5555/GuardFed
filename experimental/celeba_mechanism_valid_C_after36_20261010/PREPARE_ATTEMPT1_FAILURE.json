@@ -1,0 +1,14 @@
+{
+  "status": "PRESERVED_PREPARE_ENGINEERING_FAILURE_BEFORE_OUTPUT",
+  "attempt": 1,
+  "command": "python -B tmp/celeba_mechanism_valid_C_after36_20261010/prepare.py",
+  "result": {
+    "chunk_id": "031e35",
+    "wall_time_seconds": 0.4683156,
+    "exit_code": 1,
+    "original_token_count": 212,
+    "output": "Traceback (most recent call last):\r\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_mechanism_valid_C_after36_20261010\\prepare.py\", line 28, in <module>\r\n    for row in read(folder/name,pin)['members']:\r\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_mechanism_valid_C_after36_20261010\\prepare.py\", line 13, in read\r\n    PINS[p.relative_to(ROOT).as_posix()]={'sha256':h,'bytes':p.stat().st_size};return json.loads(p.read_text(encoding='utf-4-sig'))\r\n  File \"C:\\Users\\周亚楠\\AppData\\Local\\Programs\\Python\\Python310\\lib\\pathlib.py\", line 1132, in read_text\r\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\r\n  File \"C:\\Users\\周亚楠\\AppData\\Local\\Programs\\Python\\Python310\\lib\\pathlib.py\", line 1117, in open\r\n    return self._accessor.open(self, mode, buffering, encoding, errors,\r\nLookupError: unknown encoding: utf-4-sig\r\n"
+  },
+  "impact": "LookupError utf-4-sig while reading first parent seal. No science/execution outputs existed; native140 independent review remains valid.",
+  "blind_retry": false
+}

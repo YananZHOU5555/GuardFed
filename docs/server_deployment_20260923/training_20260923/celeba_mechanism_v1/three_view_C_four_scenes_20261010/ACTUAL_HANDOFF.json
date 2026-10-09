@@ -1,0 +1,105 @@
+{
+  "status": "ACTUAL_C40_FOUR_SCENE_THREE_VIEW_TABLES_PENDING_INDEPENDENT_ROOT_REVIEW",
+  "unique_records": 80,
+  "Full": 40,
+  "minus_C": 40,
+  "complete_scenes": [
+    "IID Benign",
+    "IID F Flip",
+    "IID FedSA",
+    "IID S-DFA"
+  ],
+  "source_prepared_seal_sha256": "e8821734d524b47fc485ad1509de54ee1295a05c4e5e7065a2e6db9b20d07f89",
+  "actual_builder_sha256": "a396d4376cd1a4e8294f8f8e7f057374c34465d9f5ee11417946159b921480f9",
+  "schema_diff_sha256": "83570ddcd34692dff3575b52969d988c38af8c80dd206f70e14ce45733eadc3c",
+  "actual_C4_adoption": "tmp\\celeba_mechanism_valid_C_after36_20261010\\execution_candidate\\backups\\incremental_20261009T225335Z\\ROOT_ADOPTION_REVIEW.json",
+  "actual_C4_adoption_sha256": "eb1f6c3120febb138e32af25484ac790cf962cd15d5ea9921140119bc5a3317a",
+  "snapshot": "tmp/celeba_mechanism_three_view_C_four_scenes_prepared_20261010/snapshot",
+  "snapshot_files": {
+    "records.json": "d11a6b92f2ddbf947100b97c703575cadca0f72ab899b4978b3693d9e665904a",
+    "tables.json": "611abfe295871682ac895e9ed2871e313be6249f369fdcb85dd5f9c52928332b",
+    "TABLES.md": "b45d2c7a937459abce557bb72b853d3def045e45da294887edde447fae6864a9",
+    "SOURCE_BINDINGS.json": "435a9d69ad0e0947e1bd42d3a2353ba7499622c54712a372b8ab20b48239a78b",
+    "verification.json": "8b197edf59fe0d80b86386c3a43b3955a510165a74a157187b21e7f4fb523d8c",
+    "FILES_SHA256.json": "34a9ab054c0db3bda3c51aff25fb83d66e5a49102990d42f48be4466f4eaab26"
+  },
+  "numeric_check": {
+    "mean_sd_scalars": 648,
+    "max_abs_difference": 1.4210854715202004e-14,
+    "partial_pairs_excluded": 0,
+    "receipt_metrics_from_group_counts": 720,
+    "base_confusion_counts_structurally_checked": 1920,
+    "display_mean_sd_cells": 324,
+    "status": "INDEPENDENT_STDLIB_NUMERIC_AND_DISPLAY_PASS_PENDING_ROOT_REVIEW"
+  },
+  "old60_records_486_scalars_243_cells_exact": true,
+  "S_DFA10_delta_minus_C_minus_Full": {
+    "native": {
+      "accuracy_pct": {
+        "mean": -0.07701213066895037,
+        "sample_sd_ddof1": 0.7153950012430204
+      },
+      "aeod": {
+        "mean": 0.0004994515782359654,
+        "sample_sd_ddof1": 0.00760279368917656
+      },
+      "aspd": {
+        "mean": 0.00021927240633682344,
+        "sample_sd_ddof1": 0.014108352932611829
+      }
+    },
+    "raw": {
+      "accuracy_pct": {
+        "mean": -0.03473096088991952,
+        "sample_sd_ddof1": 0.7152627723320543
+      },
+      "aeod": {
+        "mean": 0.0020015213900988703,
+        "sample_sd_ddof1": 0.009361416117139308
+      },
+      "aspd": {
+        "mean": 0.00143933942539875,
+        "sample_sd_ddof1": 0.01139019144916285
+      }
+    },
+    "shared_calibration": {
+      "accuracy_pct": {
+        "mean": -0.07701213066895037,
+        "sample_sd_ddof1": 0.7153950012430204
+      },
+      "aeod": {
+        "mean": 0.0004994515782359654,
+        "sample_sd_ddof1": 0.00760279368917656
+      },
+      "aspd": {
+        "mean": 0.00021927240633682344,
+        "sample_sd_ddof1": 0.014108352932611829
+      }
+    }
+  },
+  "native_shared_three_metrics_and_counts_all80_exact": true,
+  "replay_devices": {
+    "Full": {
+      "cpu": 3,
+      "cuda:0": 37
+    },
+    "minus_C": {
+      "cpu": 40
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 40
+    },
+    "minus_C": {
+      "2.11.0+cu128": 40
+    }
+  },
+  "first_failure_preserved": "FIRST_BUILD_FAILURE_AND_REPAIR.json",
+  "handoff_field_read_initial_error": "group_counts absent; corrected group_confusion_counts before any handoff file creation; snapshot untouched",
+  "inference": 0,
+  "training": 0,
+  "test": false,
+  "canonical_modified": false,
+  "negative_results_preserved": true
+}

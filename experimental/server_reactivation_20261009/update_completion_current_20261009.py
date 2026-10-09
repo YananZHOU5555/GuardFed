@@ -83,8 +83,14 @@ if main.get('C_after28_valid_replay'):
 if main.get('C_three_view_three_scene_table'):
     C_view_note=C_view_note.replace('The previously accepted two-scene table remains valid; the three-scene table requires separate independent statistical adoption.',
         'The three-scene table is now independently adopted:30 matched pairs/60 records,486 mean/sampleSD scalars,243 cells and540 metrics reconstructed from group counts. The old40 records,324 scalars and162 display cells remain exact. Full replay2CPU/28GPU versus C30CPU is explicit; seven other C scenes and the full mechanism grid remain incomplete.')
+if main.get('C_after36_valid_replay',{}).get('offserver_new_accepted')==4:
+    C_view_note=('40 C terminal checkpoints now pass strict off-server/root adoption. The exact four new IID S-DFA checkpoints passed61 archive-member checks,36 saved-array metrics,96 confusion counts and12 prediction rules; native discrepancies are zero. Prior136 and Full were not reinferred. Benign/F Flip/FedSA/S-DFA each have ten paired checkpoints; the four-scene table requires separate statistical adoption. The remaining six C scenes and six other controls are incomplete. Validation, mixed-device/environment and selection/test-exposure limitations remain. ')
+if main.get('C_three_view_four_scene_table'):
+    C_view_note=C_view_note.replace('the four-scene table requires separate statistical adoption.',
+        'the four-scene table is independently adopted:40 pairs/80 records,648 mean/sampleSD scalars,324 cells and720 count-derived metrics. Old60 records/486 statistics/243 cells and the original S-DFA six records remain exact. Full replay3CPU/37GPU versus C40CPU is explicit; all fixed10/9/6 panels and negative results are retained.')
 if state.get('latest_rebuttal_addendum'):
-    C_view_note+=' A separate C30 English author-review addendum for R3.2/R3.7 is source-checked at98 scalar pointers,49 display values,25 scope facts and9 links; the frozen24-comment response and submitted manuscript remain unchanged. Entry: '+state['latest_rebuttal_addendum']['entry']+'. '
+    addendum=state['latest_rebuttal_addendum']
+    C_view_note+=(f" A separate C{10*addendum['complete_C_scenes']} English author-review addendum for R3.2/R3.7 is source-checked at{addendum['scalar_pointer_checks']} scalar pointers,{addendum['display_cells_checked']} display values,{addendum['scope_fact_checks']} scope facts and{addendum['links_checked']} links; the frozen24-comment response and submitted manuscript remain unchanged. Entry: "+addendum['entry']+'. ')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '

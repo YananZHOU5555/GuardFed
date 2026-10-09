@@ -1,0 +1,12 @@
+--- sealed/build.py
++++ build_seal_adapter_v2.py
+@@ -89,7 +89,8 @@
+     inputs = read(H/'INPUTS.json')
+     for name,pin in inputs['files'].items():
+         need(sha(R/name) == pin['sha256'] and (R/name).stat().st_size == pin['bytes'], 'Input/source changed '+name)
+-    for name,pin in read(H/'FILES_SHA256.json')['files'].items():
++    for pin in read(H/'FILES_SHA256.json')['files']:
++        name = pin['path']
+         need(sha(H/name) == pin['sha256'], 'Prepared member changed '+name)
+     prior = read(C28/'inventory_actual136_Full100refs.json'); current = read(C4/'inventory_actual140_Full100refs.json')
+     controls = scope(prior,current)

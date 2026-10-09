@@ -1,0 +1,10 @@
+{
+  "status": "V3_METADATA_MATERIALIZER_ASSERTED_BEFORE_WRITING_OR_ARITHMETIC",
+  "error": "AssertionError: (handoff['prepared_source_seal_sha256'], 2)",
+  "cause": "The metadata field is referenced twice in the preserved V2 source; the materializer initially required one occurrence.",
+  "impact": "No V3 source or actual arithmetic output was created; original V1/V2 source and seals are unchanged.",
+  "recovery": "Require the actual two occurrences for this exact alias and preserve the inverse full-source identity check.",
+  "CNN": false,
+  "SSH": false,
+  "scientific_retry": false
+}

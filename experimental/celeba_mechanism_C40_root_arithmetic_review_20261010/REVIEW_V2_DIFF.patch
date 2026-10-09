@@ -1,0 +1,14 @@
+--- sealed_review.py
++++ review_v2.py
+@@ -37,8 +37,9 @@
+     assert handoff['test'] is False and handoff['primary_endpoint'] == 'PENDING_AUTHOR'
+     source_seal = BASE/'FILES_SHA256.json'
+     assert sha(source_seal) == handoff['prepared_source_seal_sha256']
+-    for name, pin in read(source_seal)['files'].items():
+-        assert sha(BASE/name) == pin['sha256'] and (BASE/name).stat().st_size == pin['bytes']
++    for pin in read(source_seal)['files']:
++        name = pin['path']
++        assert sha(BASE/name) == pin['sha256'] and (BASE/name).stat().st_size == pin['size']
+     actual_seal = BASE/'ACTUAL_FILES_SHA256.json'; files = read(actual_seal)['files']
+     assert files['ACTUAL_HANDOFF.json']['sha256'] == external_sha
+     for name, pin in files.items():

@@ -1,0 +1,18 @@
+{
+  "status": "PRESERVED_WRITING_CHECKER_READER_FAILURE_NO_RESULT",
+  "attempt": 1,
+  "command": "python -B tmp/rebuttal_C40_addendum_prepared_20261010/check_sources.py",
+  "checker_sha256": "494a6269c86a32d081280c898b27064982f07db7e93a03d610368dd83b2c9eb5",
+  "result": {
+    "chunk_id": "3a6bae",
+    "wall_time_seconds": 0.5018709,
+    "exit_code": 1,
+    "original_token_count": 67,
+    "output": "Traceback (most recent call last):\r\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\rebuttal_C40_addendum_prepared_20261010\\check_sources.py\", line 53, in <module>\r\n    assert actual['root_sha256']==s['root_adoption_sha256']\r\nTypeError: 'bool' object is not subscriptable\r\n"
+  },
+  "cause": "New ACTUAL_INPUTS reader used variable actual, shadowed by unchanged pointer-check loop. Failed before CHECK_RESULTS/PASS.",
+  "scope_affected": "Local writing checker only; canonical tables, prose, quoted values and original C30 checker were not changed.",
+  "recovery": "Rename only new ACTUAL_INPUTS binding to actual_inputs; rerun local writing check once.",
+  "new_CNN": 0,
+  "new_statistics": false
+}

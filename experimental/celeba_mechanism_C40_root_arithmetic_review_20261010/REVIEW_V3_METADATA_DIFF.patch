@@ -1,0 +1,62 @@
+--- sealed_review_v2.py
++++ review_actual_v3.py
+@@ -32,26 +32,26 @@
+         assert sha(ROOT/name) == pin['sha256'] and (ROOT/name).stat().st_size == pin['bytes']
+     handoff = read(handoff_path)
+     assert handoff['unique_records'] == 80 and handoff['Full'] == handoff['minus_C'] == 40
+-    assert handoff['prepared_source_seal_sha256'] == 'e8821734d524b47fc485ad1509de54ee1295a05c4e5e7065a2e6db9b20d07f89'
+-    assert handoff['new_CNN'] == handoff['new_Full_inference'] == handoff['threshold_refits'] == handoff['new_training'] == 0
+-    assert handoff['test'] is False and handoff['primary_endpoint'] == 'PENDING_AUTHOR'
++    assert handoff['source_prepared_seal_sha256'] == 'e8821734d524b47fc485ad1509de54ee1295a05c4e5e7065a2e6db9b20d07f89'
++    assert handoff['inference'] == handoff['training'] == 0
++    assert handoff['test'] is False and handoff['canonical_modified'] is False and handoff['negative_results_preserved'] is True
+     source_seal = BASE/'FILES_SHA256.json'
+-    assert sha(source_seal) == handoff['prepared_source_seal_sha256']
++    assert sha(source_seal) == handoff['source_prepared_seal_sha256']
+     for pin in read(source_seal)['files']:
+         name = pin['path']
+         assert sha(BASE/name) == pin['sha256'] and (BASE/name).stat().st_size == pin['size']
+     actual_seal = BASE/'ACTUAL_FILES_SHA256.json'; files = read(actual_seal)['files']
++    assert sha(actual_seal) == '47c6175e04ef40910f67cdd09bd61928153ba3274369e37ede423f1b51763632'
+     assert files['ACTUAL_HANDOFF.json']['sha256'] == external_sha
+     for name, pin in files.items():
+         assert sha(BASE/name) == pin['sha256'] and (BASE/name).stat().st_size == pin['bytes']
+-    for name, pin in handoff['actual_closure_pins'].items():
+-        assert sha(ROOT/name) == pin['sha256'] and (ROOT/name).stat().st_size == pin['bytes']
++    assert handoff['actual_C4_adoption_sha256'] == 'eb1f6c3120febb138e32af25484ac790cf962cd15d5ea9921140119bc5a3317a'
+     snap = BASE/'snapshot'; bindings = read(snap/'SOURCE_BINDINGS.json')
+     for name, pin in bindings['prepared_input_pins'].items():
+         assert sha(ROOT/name) == pin['sha256'] and (ROOT/name).stat().st_size == pin['bytes']
+     adoption = Path(bindings['actual_C4_adoption']); adopted = read(adoption)
+     assert adoption.resolve().parent.parent == ROOT/'tmp/celeba_mechanism_valid_C_after36_20261010/execution_candidate/backups'
+-    assert sha(adoption) == bindings['actual_C4_adoption_sha256'] == handoff['actual_C4_root_sha256']
++    assert sha(adoption) == bindings['actual_C4_adoption_sha256'] == handoff['actual_C4_adoption_sha256']
+     assert adopted['status'] == 'ROOT_C_AFTER36_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+     assert (adopted['prior_three_view_models'], adopted['accepted_new'], adopted['cumulative_three_view_models']) == (136, 4, 140)
+     assert adopted['original136_unchanged'] and adopted['source_scope_complete'] and adopted['negative_results_preserved']
+@@ -59,12 +59,13 @@
+     expected4 = [f'minus_C_IID_S-DFA_seed{s}' for s in range(91007, 91011)]
+     assert adopted['accepted_new_ids'] == expected4
+     assert sha(OLD/'ROOT_VERIFICATION.json') == '2cce0519555efbff75f559875c4c1afe63e07d242cb8e3ebe6af644efc95961d'
+-    for name, key in [('records.json','records_sha256'), ('tables.json','tables_sha256'), ('TABLES.md','display_sha256')]:
+-        assert sha(snap/name) == handoff[key]
+-    assert sha(snap/'FILES_SHA256.json') == handoff['snapshot_seal_sha256']
++    for name, pin in handoff['snapshot_files'].items():
++        assert sha(snap/name) == pin
++    assert sha(snap/'FILES_SHA256.json') == handoff['snapshot_files']['FILES_SHA256.json']
+     for name, pin in read(snap/'FILES_SHA256.json')['files'].items():
+         assert sha(snap/name) == pin['sha256'] and (snap/name).stat().st_size == pin['bytes']
+     records = read(snap/'records.json')['records']; tables = read(snap/'tables.json')
++    assert tables['primary_endpoint_selected'] is False and tables['final_test'] is False and tables['new_inference'] == tables['new_training'] == 0
+     by = {(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+     assert len(records) == len({r['id'] for r in records}) == len(by) == 80
+     assert set(by) == set(itertools.product(('Full','minus_C'),('IID',),SCENES,range(91001,91011)))
+@@ -133,7 +134,7 @@
+     assert sha(handoff_path) == external_sha
+     return dict(source_connections=source_connections, status='INDEPENDENT_C40_FOUR_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION',
+         checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),actual_handoff_sha256=external_sha,
+-        actual_delivery_seal_sha256=sha(actual_seal),actual_members_verified=len(files),actual_closure_pins=handoff['actual_closure_pins'],
++        actual_delivery_seal_sha256=sha(actual_seal),actual_members_verified=len(files),actual_adoption_identity=dict(path=str(adoption),sha256=sha(adoption),archive_sha256=adopted['archive_sha256']),
+         actual_C4_root_adoption_sha256=sha(adoption),source_prepared_seal_sha256=sha(source_seal),
+         prior_three_scene_root_sha256=sha(OLD/'ROOT_VERIFICATION.json'),records_sha256=sha(snap/'records.json'),tables_sha256=sha(snap/'tables.json'),display_sha256=sha(snap/'TABLES.md'),
+         unique_records=80,paired_models=40,complete_scenes=4,mean_SD_scalars_recomputed=648,display_cells=324,

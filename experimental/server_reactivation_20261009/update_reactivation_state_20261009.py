@@ -2089,6 +2089,42 @@ if (C28_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
             archive_members_verified=89,all_native_differences_zero=True,service_terminal='EXITED')
         state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_C_after28']
     state['celeba_mechanism_v1']['C_after28_valid_replay']=C28_stage
+C36_dir=ROOT/'tmp/celeba_mechanism_valid_C_after36_20261010/execution_candidate'
+if (C36_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
+    C36_start=read(C36_dir/'ROOT_STARTUP_OBSERVATION.json')
+    assert sha(C36_dir/'ROOT_STARTUP_OBSERVATION.json')=='8803f150d8d81ea23d27f5888a9d3735873c68c910fb2d79c50299a2714a73b4'
+    assert C36_start['status']=='ROOT_C_AFTER36_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+    assert C36_start['execution_seal_sha256']=='b1e6467eac5b7218cda6af189c2ae2b655fb80780d48db05b45463aa9bdb578f'
+    assert C36_start['deployment_receipt_sha256']==sha(C36_dir/'deployment_receipt.json')
+    assert C36_start['original136_not_rerun'] and not C36_start['test_inference']
+    C36_stage=dict(status='ACTUAL_STARTUP_VERIFIED_ACCEPTANCE_PENDING',selected_count=4,prior_three_view_models=136,
+        offserver_new_accepted=0,execution_started=True,startup_root_proof_path=(C36_dir/'ROOT_STARTUP_OBSERVATION.json').relative_to(ROOT).as_posix(),
+        startup_root_proof_sha256=sha(C36_dir/'ROOT_STARTUP_OBSERVATION.json'),CPU_affinity=list(range(112,120)),
+        compute_threads=8,nice=10,IO='idle',CUDA_visible='',new_training=0,new_Full_inference=0,final_test=False)
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_C_after36']))
+    C36_roots=list((C36_dir/'backups').glob('incremental_*/ROOT_ADOPTION_REVIEW.json'))
+    if C36_roots:
+        assert len(C36_roots)==1
+        C36_path=C36_roots[0];C36=read(C36_path);C36_delta=C36_path.parent
+        assert C36['status']=='ROOT_C_AFTER36_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+        assert (C36['prior_three_view_models'],C36['accepted_new'],C36['cumulative_three_view_models'])==(136,4,140)
+        assert C36['original136_unchanged'] and C36['all_native_differences_zero'] and C36['new_Full_inference']==0 and not C36['test_inference']
+        assert C36['prior136_root_adoption_sha256']=='cd197e57b42dda87bc239736e401cb5accd029313546533f6a48caf27950e1e0'
+        assert C36['startup_observation_sha256']==sha(C36_dir/'ROOT_STARTUP_OBSERVATION.json')
+        C36_arrays=read(C36_delta/'OFFSERVER_VERIFICATION.json')
+        assert (C36_arrays['independent_metric_checks'],C36_arrays['independent_confusion_count_checks'],C36_arrays['prediction_rule_checks'])==(36,96,12)
+        for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json'),('backup_receipt_sha256','backup_receipt.json')]:
+            assert sha(C36_delta/name)==C36[key]
+        prior_ids=state['celeba_mechanism_v1']['three_view_accepted_ids']
+        assert len(prior_ids)==136 and not set(prior_ids)&set(C36['accepted_new_ids'])
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=140,three_view_new_models_offserver_verified=140,
+            three_view_accepted_ids=prior_ids+C36['accepted_new_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':40},
+            three_view_scope_limit='U100 complete; C40 IID Benign/F Flip/FedSA/S-DFA replays complete; paired table review separate, no final test.')
+        C36_stage.update(status='EXACT4_COMPLETE_STRICT_OFFSERVER_ROOT_ADOPTED',offserver_new_accepted=4,
+            root_adoption_path=C36_path.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(C36_path),
+            archive_members_verified=C36['archive_members_verified'],all_native_differences_zero=True,service_terminal='EXITED')
+        state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_C_after36']
+    state['celeba_mechanism_v1']['C_after36_valid_replay']=C36_stage
 C30_dir=TRAIN/'celeba_mechanism_v1/three_view_C_three_scenes_20261009'
 if (C30_dir/'ROOT_VERIFICATION.json').exists():
     C30=read(C30_dir/'ROOT_VERIFICATION.json')
@@ -2103,6 +2139,23 @@ if (C30_dir/'ROOT_VERIFICATION.json').exists():
         root_proof_path=(C30_dir/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C30_dir/'ROOT_VERIFICATION.json'),
         table_path=C30['canonical_table'],paired_models=30,unique_records=60,complete_scenes=3,mean_SD_scalars=486,display_cells=243,
         count_metrics=540,excluded_partial_C_records=6,replay_devices=C30['replay_devices'],other_C_scenes_complete=False,final_test=False)
+C40_dir=TRAIN/'celeba_mechanism_v1/three_view_C_four_scenes_20261010'
+if (C40_dir/'ROOT_VERIFICATION.json').exists():
+    C40=read(C40_dir/'ROOT_VERIFICATION.json')
+    assert C40['status']=='ROOT_C40_FOUR_SCENE_THREE_VIEW_TABLES_ADOPTED'
+    assert (C40['unique_records'],C40['paired_models'],C40['complete_scenes'],C40['mean_SD_scalars_recomputed'],C40['display_cells'],C40['count_metrics_recomputed'])==(80,40,4,648,324,720)
+    assert C40['C4_root_adoption_sha256']==state['celeba_mechanism_v1']['C_after36_valid_replay']['root_adoption_sha256']=='eb1f6c3120febb138e32af25484ac790cf962cd15d5ea9921140119bc5a3317a'
+    assert sha(C40_dir/'ACTUAL_FILES_SHA256.json')==C40['actual_delivery_seal_sha256']
+    for name,pin in read(C40_dir/'ACTUAL_FILES_SHA256.json')['files'].items():
+        assert sha(C40_dir/name)==pin['sha256'] and (C40_dir/name).stat().st_size==pin['bytes']
+    assert sha(ROOT/C40['independent_review_path'])==C40['independent_review_sha256']
+    assert C40['original_three_scene60_records_exact'] and C40['original_three_scene486_statistics_exact'] and C40['original_three_scene243_cells_preserved']
+    assert C40['prior_S_DFA_six_original_record_bytes_preserved'] and not C40['test'] and not C40['whole_rebuttal_complete']
+    state['celeba_mechanism_v1']['C_three_view_four_scene_table']=dict(status=C40['status'],
+        root_proof_path=(C40_dir/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C40_dir/'ROOT_VERIFICATION.json'),
+        table_path=C40['canonical_table'],paired_models=40,unique_records=80,complete_scenes=4,mean_SD_scalars=648,display_cells=324,
+        count_metrics=720,replay_devices=C40['replay_devices'],other_C_scenes_complete=False,final_test=False)
+    state['celeba_mechanism_v1']['three_view_scope_limit']='U100 ten scenes plus C40 four IID scenes independently adopted; remaining six C scenes and six other variants incomplete; Full reused; no final test.'
 C30_reply_dir=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_C30_addendum_20261009'
 if (C30_reply_dir/'ROOT_REVIEW.json').exists():
     C30_reply=read(C30_reply_dir/'ROOT_REVIEW.json')
@@ -2116,6 +2169,22 @@ if (C30_reply_dir/'ROOT_REVIEW.json').exists():
         manuscript_candidate=(C30_reply_dir/'C30_MANUSCRIPT_INSERTIONS.md').relative_to(ROOT).as_posix(),
         root_proof_path=(C30_reply_dir/'ROOT_REVIEW.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C30_reply_dir/'ROOT_REVIEW.json'),
         complete_C_scenes=3,scalar_pointer_checks=98,display_cells_checked=49,scope_fact_checks=25,links_checked=9,
+        author_review_only=True,whole_rebuttal_complete=False,manuscript_applied=False)
+C40_reply_dir=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_C40_addendum_20261010'
+if (C40_reply_dir/'ROOT_REVIEW.json').exists():
+    C40_reply=read(C40_reply_dir/'ROOT_REVIEW.json')
+    assert C40_reply['status']=='ROOT_C40_AUTHOR_REVIEW_ADDENDUM_QUOTED_VALUES_SCOPE_AND_SOURCE_PINS_PASS'
+    assert C40_reply['root_table_sha256']==state['celeba_mechanism_v1']['C_three_view_four_scene_table']['root_proof_sha256']=='eb08dbc328339e8293133bbd35f60e627ca70b7436ec3b20871bc149e6047172'
+    assert sha(C40_reply_dir/'FILES_SHA256.json')==C40_reply['source_seal_sha256']
+    for name,pin in read(C40_reply_dir/'FILES_SHA256.json')['files'].items():assert sha(C40_reply_dir/name)==pin['sha256']
+    assert C40_reply['author_review_only'] and not C40_reply['manuscript_applied'] and C40_reply['old_24_comment_draft_unchanged']
+    assert C40_reply['complete_C_scenes']==4 and not C40_reply['final_test'] and not C40_reply['whole_rebuttal_complete']
+    state['latest_rebuttal_addendum']=dict(status=C40_reply['status'],
+        entry=(C40_reply_dir/'C40_REVIEWER_ADDENDUM.md').relative_to(ROOT).as_posix(),
+        manuscript_candidate=(C40_reply_dir/'C40_MANUSCRIPT_INSERTIONS.md').relative_to(ROOT).as_posix(),
+        root_proof_path=(C40_reply_dir/'ROOT_REVIEW.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C40_reply_dir/'ROOT_REVIEW.json'),
+        complete_C_scenes=4,scalar_pointer_checks=C40_reply['scalar_pointer_checks'],display_cells_checked=C40_reply['display_cells_checked'],
+        scope_fact_checks=C40_reply['scope_fact_checks'],links_checked=C40_reply['links_checked'],
         author_review_only=True,whole_rebuttal_complete=False,manuscript_applied=False)
 FL96_base=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
 if (FL96_base/'LATEST_BACKUP.json').exists():
@@ -2134,12 +2203,12 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (2,3):
-        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638'}[FL96_latest['accepted_total']]
+    if FL96_latest['accepted_total'] in (2,3,5):
+        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288'}[FL96_latest['accepted_total']]
         assert FL96_current['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         FL96_previous_path=ROOT/FL96_current['previous_root_adoption_path'];FL96_previous=read(FL96_previous_path)
-        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb'}[FL96_latest['accepted_total']]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],1,FL96_latest['accepted_total'])
+        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638'}[FL96_latest['accepted_total']]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
         assert FL96_current['accepted_total']==FL96_current['accepted_before']+FL96_current['accepted_new']
         FL96_current_batch=FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')==FL96_current['offserver_acceptance_sha256']==FL96_latest['next_collector_previous_sha256']
@@ -2147,14 +2216,15 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         assert FL96_off['accepted_job_ids']==FL96_current['accepted_job_ids']==FL96_previous.get('accepted_job_ids',FL96_previous['accepted_new_ids'])+FL96_current['accepted_new_ids']
         assert len(set(FL96_off['accepted_job_ids']))==FL96_latest['accepted_total'] and FL96_current['source_package_sha256']==FL96_root['source_package_sha256']
         state['flgmm_fullcoverage_v2_20261009'].update(new_accepted=FL96_latest['accepted_total'],accepted_new_ids=FL96_off['accepted_job_ids'],
-            coverage_verified_cells_including_reuse=FL96_latest['accepted_total']+4,latest_backup=FL96_latest,archive_members_verified=17,
+            coverage_verified_cells_including_reuse=FL96_latest['accepted_total']+4,latest_backup=FL96_latest,archive_members_verified=FL96_current['archive_members_verified'],
             latest_full70_root_adoption_path=FL96_current_path.relative_to(ROOT).as_posix(),latest_full70_root_adoption_sha256=sha(FL96_current_path))
     else:
         assert FL96_latest['accepted_total']==1 and FL96_current_path==FL96_first_path
 reply_progress_note=('最新版本纳入U100十场景及900校准归因，24原意见逐字、37数值pointer与37链接复核' if not state['latest_rebuttal_draft'].get('complete_C_scenes') else
     '最新版本纳入U100十场景、C的IID Benign/F Flip两场景及900校准归因，24原意见逐字保持，新增22数值pointer、12范围/环境事实和41链接复核')
 if state.get('latest_rebuttal_addendum'):
-    reply_progress_note+='；C30英文独立补稿已另核98数值pointer/49展示值/25范围事实/9链接，入口'+state['latest_rebuttal_addendum']['entry']+'；原24意见完整稿保持封存'
+    addendum=state['latest_rebuttal_addendum']
+    reply_progress_note+=(f"；C{10*addendum['complete_C_scenes']}英文独立补稿已另核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，入口"+addendum['entry']+'；原24意见完整稿保持封存')
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -2242,8 +2312,12 @@ if main.get('C_after28_valid_replay',{}).get('offserver_new_accepted')==8:
     C_replay_note='minus_C累计36已严格离机；IID Benign/F Flip/FedSA各10seed评价齐备，S-DFA仅6/10不入完整场景均值；三场景配对表须另核'
 if main.get('C_three_view_three_scene_table'):
     C_replay_note='minus_C累计36已严格离机；IID Benign/F Flip/FedSA三场景表已独立核验486统计/243单元/540计数指标；旧两场景精确保持，S-DFA仅6/10单列排除，其他七C场景未齐'
-C_latest_table=main.get('C_three_view_three_scene_table',main.get('C_three_view_two_scene_table',{})).get('table_path','待独立核验')
-C_other_scenes=7 if main.get('C_three_view_three_scene_table') else 8
+if main.get('C_after36_valid_replay',{}).get('offserver_new_accepted')==4:
+    C_replay_note='minus_C累计40已严格离机；IID Benign/F Flip/FedSA/S-DFA各10seed齐备，四场景配对表须单独核验；旧136与Full不重推'
+if main.get('C_three_view_four_scene_table'):
+    C_replay_note='minus_C累计40已严格离机；IID Benign/F Flip/FedSA/S-DFA四场景表已独立核验648统计/324单元/720计数指标；旧三场景精确保持，其他六C场景未齐'
+C_latest_table=main.get('C_three_view_four_scene_table',main.get('C_three_view_three_scene_table',main.get('C_three_view_two_scene_table',{}))).get('table_path','待独立核验')
+C_other_scenes=6 if main.get('C_three_view_four_scene_table') else (7 if main.get('C_three_view_three_scene_table') else 8)
 after92_note=''
 if main.get('after92_valid_replay'):
     replay92=main['after92_valid_replay']

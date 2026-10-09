@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-09T22:34:02.934816+00:00",
+  "command": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "ionice -c 3 nice -n 10 taskset -c 110 env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -B -"
+  ],
+  "exit_code": 0,
+  "observer_sha256": "1f5f854eaa6040bd2010d847f6fe03f9ac8789c7627595e1393226c3b600e7b5",
+  "automatic_retry": false
+}
