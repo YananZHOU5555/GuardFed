@@ -1,0 +1,16 @@
+{
+  "status": "HELPER_PRE_DISPATCH_FAILURE_NOT_SCIENTIFIC_ATTEMPT",
+  "actual_remote_path": "/workspace/guardfed_checks/celeba_hybrid_realimage_gate_20261009/execution_approved_20261009/launcher_v2/install_once.py",
+  "source_at_failure_sha256": "46ae198b875b728893cc29ae9f91fa1b7a80f3898277b533cfc34b85d8a16147",
+  "error_type": "AttributeError",
+  "error_message": "'str' object has no attribute 'read_bytes'",
+  "traceback_locations": [
+    "install_once.py:47 digest(__file__)",
+    "install_once.py:14 hashlib.sha256(path.read_bytes()).hexdigest()"
+  ],
+  "recovery_receipt_written": false,
+  "v2_service_installed": false,
+  "start_sent": false,
+  "new_scientific_output": false,
+  "minimal_fix": "Path(path).read_bytes()"
+}

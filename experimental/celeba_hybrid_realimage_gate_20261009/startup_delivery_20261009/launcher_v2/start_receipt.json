@@ -1,0 +1,31 @@
+{
+  "status": "ONE_AUTHORIZED_RECOVERY_START_SENT_NOT_ACCEPTANCE",
+  "steps": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair_v2: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "add",
+        "guardfed_celeba_hybrid_writer_repair_v2"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair_v2: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_hybrid_writer_repair_v2"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair_v2: started\n",
+      "stderr": ""
+    }
+  ]
+}

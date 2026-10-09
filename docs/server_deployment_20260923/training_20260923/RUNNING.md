@@ -40,6 +40,8 @@ FLGMM原v2四项GPU三轮canary均完成，各自身份通过，跨卡训练张�
 
 最新九方法离机接受：唯一ID collector严格合并83/900实际三视图重放，尚缺817；其中原吞吐/门检28+新补集55，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该83项称完整最终评价。新collector路径tmp/celeba_final_valid_replay_20261009/v4/remaining872_execution_20261009/cumulative_83_accepted.json。
 
+新增受限任务实际启动：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放也已启动，明确排除已验收seed91002，当前已离机三视图接受仍为1；不重推理Full、不运行test。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。
+
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
 用户最新授权：“继续运行吧”。当前服务器213.224.31.105:26712；repo/workspace/GuardFed-celeba-expanded；service guardfed_celeba_baseline_fullcoverage。当前阶段协议celeba_baseline_fullcoverage_v1/PROTOCOL.md；manifest results/revision_20261003/celeba_baseline_fullcoverage_v1/manifest.json；runner deployment/baseline_adapters_20260928/fullcoverage_20261003/run_fullcoverage.py。

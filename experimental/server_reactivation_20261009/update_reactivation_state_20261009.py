@@ -388,6 +388,39 @@ if hybrid_diagnosis.exists():
         failed_id=diagnosis['failed_id'], failed_stage=diagnosis['failed_stage'],
         archive_sha256=off['archive_sha256'], offserver_members_verified=off['members_verified'],
         original_failure_preserved=True, precise_writer_fix='PREPARATION_ONLY_NOT_EXECUTED')
+bounded_startup_root = CHECKS / 'BOUNDED_STARTUPS4_ROOT_VERIFICATION.json'
+bounded_started = bounded_startup_root.exists()
+if bounded_started:
+    proof = read(bounded_startup_root)
+    hybrid_start = hybrid_dir / 'startup_delivery_20261009'
+    observed = read(hybrid_start / 'startup_receipt.json')
+    assert sha(hybrid_start / 'FILES_SHA256.json') == proof['hybrid_delivery_seal_sha256']
+    assert sha(hybrid_start / 'startup_receipt.json') == proof['hybrid_startup_receipt_sha256']
+    state['hybrid_canaries_20261009'].update(
+        status='TWO_NONIID_CANARIES_BOUNDED_WRITER_RECOVERY_RUNNING',
+        original_stage_status=diagnosis['status'], precise_writer_fix='APPROVED_EXECUTED_ORIGINAL_NINE_SOURCE_SEAL_UNCHANGED',
+        service_state='RUNNING_AT_STARTUP_OBSERVATION',
+        service_at_observation=proof['hybrid_service_at_observation'],
+        observed_utc=proof['hybrid_observed_utc'],
+        first_real_round=observed['first_round']['round'],
+        first_round_metrics=observed['first_round']['metrics'],
+        recovery_new_canaries_accepted=0, reused_IID_canaries=2,
+        engineering_failures_preserved=2, repeated_IID_inference_or_training=0,
+        startup_delivery_members_verified=20, startup_root_proof_sha256=sha(bounded_startup_root))
+    seven_start = ROOT / 'tmp/celeba_mechanism_valid_replay_20261009/remaining_seven_startup_delivery_20261009'
+    observed = read(seven_start / 'startup_receipt.json')
+    assert sha(seven_start / 'FILES_SHA256.json') == proof['seven_delivery_seal_sha256']
+    assert sha(seven_start / 'startup_receipt.json') == proof['seven_startup_receipt_sha256']
+    state['celeba_mechanism_v1']['remaining_seven_valid_replay'] = dict(
+        status='EXACT_SEVEN_ORIGINAL_TERMINALS_RUNNING_AT_OBSERVATION',
+        service_at_observation=proof['seven_service_at_observation'],
+        observed_utc=proof['seven_observed_utc'], new_original_terminals=7,
+        already_accepted_seed91002_excluded=True, new_training=0, new_Full_inference=0,
+        new_test_inference=0, offserver_accepted_in_startup_receipt=0,
+        source_seal_sha256=observed['source_seal_sha256'], approval_sha256=observed['approval_sha256'],
+        startup_delivery_members_verified=20, startup_root_proof_sha256=sha(bounded_startup_root))
+    state['active_services'] = list(dict.fromkeys(state['active_services'] + [
+        'guardfed_celeba_hybrid_writer_repair_v2', 'guardfed_celeba_mechanism_valid_remaining7']))
 flscreen_root = CHECKS / 'FLGMM32_STARTUP_ROOT_VERIFICATION.json'
 flscreen_started = flscreen_root.exists()
 if flscreen_started:
@@ -405,6 +438,14 @@ if flscreen_started:
         entry='tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md')
     state['flgmm_gpu_canary_v3_20261009']['formal_screen_started'] = True
     state['active_services'] = list(dict.fromkeys(state['active_services']+['guardfed_celeba_flgmm_screen']))
+    fl_growth = folder / 'observations/growth_20261009T095851Z.json'
+    if fl_growth.exists():
+        assert sha(fl_growth) == '83286cee25ad20f95a3b6f541c3464620657db052e5f65ab22d3638b7aa75549'
+        state['flgmm_screen32_20261009'].update(
+            subsequent_growth_observation=fl_growth.relative_to(ROOT).as_posix(),
+            subsequent_growth_observation_sha256=sha(fl_growth),
+            growth_from_rounds=[2,1], growth_to_rounds=[52,49], observed_complete70=0,
+            subsequent_failure_count=0, rounds_are_not_completed_results=True)
 remaining_root = CHECKS / 'REMAINING872_STARTUP_ROOT_VERIFICATION.json'
 remaining_started = remaining_root.exists()
 if remaining_started:
@@ -442,6 +483,16 @@ if remaining_started:
             all900_three_view_valid_replayed=collection['all900_three_views_valid_replayed'],missing900_models=900-n)
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
+publication_proofs = list(TRAIN.glob('publication_*verified_20261009.json'))
+if publication_proofs:
+    publication_proof = max(publication_proofs, key=lambda p: read(p).get('verified_utc', ''))
+    verified = read(publication_proof)
+    assert verified['status'] == 'COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'
+    state['latest_publication_verification'] = dict(
+        commit=verified['commit'], branch=verified['branch'], verified_utc=verified['verified_utc'],
+        committed_blobs_sha256_verified=verified['committed_blobs_sha256_verified'],
+        proof_path=publication_proof.relative_to(TRAIN).as_posix(), proof_sha256=sha(publication_proof),
+        earlier_publication_snapshot_is_historical=True)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -506,6 +557,8 @@ if remaining_started:
     top += f"最新九方法重放启动：{state['final_evaluator_runtime_20261009']['service_at_observation'].strip()}，只执行900既有模型减去已接受28的872补集，80批、每批至多11；11个真实CNNworker均nice10、8计算线程，outer nice0仅编排。38成员部署包、只读inspect及启动凭据离机并经主代理核验。首10秒全cgroup实用{state['final_evaluator_runtime_20261009']['observed_effective_global_cpu_cores']:.2f}/{state['final_evaluator_runtime_20261009']['observed_cpu_quota_cores']:.2f}核，throttle0，主800仍增长。新批仍待独立三视图和离机接受，不把RUNNING计入已接受；不训练旧模型、不运行test。入口tmp/celeba_final_valid_replay_20261009/v4/remaining872_prepared_v2_20261009/README.md。\n\n"
     if new_collections:
         top += f"最新九方法离机接受：唯一ID collector严格合并{n}/900实际三视图重放，尚缺{900-n}；其中原吞吐/门检28+新补集{n-28}，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该{n}项称完整最终评价。新collector路径{collection_path.relative_to(ROOT).as_posix()}。\n\n"
+if bounded_started:
+    top += '新增受限任务实际启动：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放也已启动，明确排除已验收seed91002，当前已离机三视图接受仍为1；不重推理Full、不运行test。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

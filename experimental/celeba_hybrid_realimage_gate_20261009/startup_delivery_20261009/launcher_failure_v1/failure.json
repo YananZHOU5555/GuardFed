@@ -1,0 +1,24 @@
+{
+  "status": "TERMINAL_LAUNCHER_FAILURE_BEFORE_PYTHON",
+  "argv": [
+    "/bin/bash",
+    "/opt/supervisor-scripts/guardfed_celeba_hybrid_writer_repair.sh"
+  ],
+  "diagnostic_returncode": 1,
+  "stdout": "",
+  "stderr": "/opt/supervisor-scripts/utils/logging.sh: line 3: $1: unbound variable\n",
+  "scientific_runtime_directory_exists": false,
+  "gate_log_exists": false,
+  "new_prediction_or_model_files": 0,
+  "scientific_module_imports_performed": false,
+  "source_approval_and_launcher_sha_before_after_identical": {
+    "/opt/supervisor-scripts/guardfed_celeba_hybrid_writer_repair.sh": "99720bdb57e433759f7becb59f3335f8c00198221ea6b31d8db36ed4a6324b40",
+    "/etc/supervisor/conf.d/guardfed_celeba_hybrid_writer_repair.conf": "5cf50fc835eaea7c275ed7d2d11f626631b18350a13a0e1aa4085f65c0cc8713",
+    "/workspace/guardfed_checks/celeba_hybrid_realimage_gate_20261009/execution_approved_20261009/APPROVED.json": "59b0c3b4298050ee55d9dd2b0d9e9e28c4b3b90390cd3e0c3b79c4a73c6d3bd1",
+    "/workspace/guardfed_checks/celeba_hybrid_realimage_gate_20261009/execution_repair_v1/FILES_SHA256.json": "54c67847b44a26a654b380c6c4d03863279261126a61de29489bfa78572e332b"
+  },
+  "logging_tool_sha256": "6d0c06191abd004a979c48ebff10cdca967ae98b533c1ee9a827afb8c33e7a4e",
+  "cause": "set -u makes logging.sh logpath=$1 fail before logging redirection and before environment/Python",
+  "diagnostic_executed_only_to_capture_same_pre_science_shell_error": true,
+  "root_authorized_recovery": "One independent launcher v2 only; shared utils initialize without nounset; scientific9/APPROVED unchanged; no automatic retry"
+}

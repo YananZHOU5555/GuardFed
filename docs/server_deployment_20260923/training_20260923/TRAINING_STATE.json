@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791539647.3530314,
+  "updated_unix": 1791540135.9831338,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -188,7 +188,9 @@
   "active_services": [
     "guardfed_celeba_mechanism_formal",
     "guardfed_celeba_flgmm_screen",
-    "guardfed_celeba_valid_remaining872_20261009"
+    "guardfed_celeba_valid_remaining872_20261009",
+    "guardfed_celeba_hybrid_writer_repair_v2",
+    "guardfed_celeba_mechanism_valid_remaining7"
   ],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
   "acs_acceptance": "/workspace/GuardFed-acs/deployment/acs_income_v1/acceptance.json",
@@ -2845,7 +2847,22 @@
     "three_view_native_max_abs_difference": 0,
     "three_view_root_proof_sha256": "0cf21cd23725f2ae384388586587e85dca556d50b8311b9d6fd532b02636a8ef",
     "three_view_scope_limit": "One minus_U/IID/Benign checkpoint; no Full reinference, no test, no component necessity inference",
-    "original_two_engineering_failures_preserved": true
+    "original_two_engineering_failures_preserved": true,
+    "remaining_seven_valid_replay": {
+      "status": "EXACT_SEVEN_ORIGINAL_TERMINALS_RUNNING_AT_OBSERVATION",
+      "service_at_observation": "guardfed_celeba_mechanism_valid_remaining7   RUNNING   pid 22298, uptime 0:01:00",
+      "observed_utc": "2026-10-09T09:56:44.900526+00:00",
+      "new_original_terminals": 7,
+      "already_accepted_seed91002_excluded": true,
+      "new_training": 0,
+      "new_Full_inference": 0,
+      "new_test_inference": 0,
+      "offserver_accepted_in_startup_receipt": 0,
+      "source_seal_sha256": "119418ce0ba509c364ad7f8c82361abd2d806d018ace847f6cd46714ea6b431d",
+      "approval_sha256": "270721872c1a8a021d72f114c3300addcaceab4aa9435c4307e5471994101a05",
+      "startup_delivery_members_verified": 20,
+      "startup_root_proof_sha256": "fe8e010e7c92730a36cc3ffa309e51e23585364ac48e0212aa0272e52d17fcc9"
+    }
   },
   "celeba_partition_audit_20261009": {
     "status": "PASS",
@@ -3397,19 +3414,34 @@
     "negative_constant_predictions_retained": true
   },
   "hybrid_canaries_20261009": {
-    "status": "TERMINAL_FAILURE_DIAGNOSTIC_NONFINITE_SERIALIZATION_LOCALIZED",
+    "status": "TWO_NONIID_CANARIES_BOUNDED_WRITER_RECOVERY_RUNNING",
     "diagnosis_sha256": "3bd22dc4a98ac408706ef20348066b003c691ef455b08d1d0fa4248545394c85",
     "strict_individual_canaries": 2,
     "expected": 4,
     "complete_cohort_accepted": false,
     "scientific_table_records": 0,
-    "service_state": "EXITED",
+    "service_state": "RUNNING_AT_STARTUP_OBSERVATION",
     "failed_id": "non-IID_S-DFA_hybrid_seed91001_cpu_gate3",
     "failed_stage": "result JSON serialization after round3 model save, before replay and acceptance",
     "archive_sha256": "a84446ed2b37d38877a3d81c0226c5be40919b050054635eb00bf1e457436b2b",
     "offserver_members_verified": 46,
     "original_failure_preserved": true,
-    "precise_writer_fix": "PREPARATION_ONLY_NOT_EXECUTED"
+    "precise_writer_fix": "APPROVED_EXECUTED_ORIGINAL_NINE_SOURCE_SEAL_UNCHANGED",
+    "original_stage_status": "TERMINAL_FAILURE_DIAGNOSTIC_NONFINITE_SERIALIZATION_LOCALIZED",
+    "service_at_observation": "guardfed_celeba_hybrid_writer_repair_v2   RUNNING   pid 19996, uptime 0:20:35",
+    "observed_utc": "2026-10-09T09:56:49.776254+00:00",
+    "first_real_round": 1,
+    "first_round_metrics": {
+      "accuracy": 0.5166859616449389,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "recovery_new_canaries_accepted": 0,
+    "reused_IID_canaries": 2,
+    "engineering_failures_preserved": 2,
+    "repeated_IID_inference_or_training": 0,
+    "startup_delivery_members_verified": 20,
+    "startup_root_proof_sha256": "fe8e010e7c92730a36cc3ffa309e51e23585364ac48e0212aa0272e52d17fcc9"
   },
   "flgmm_screen32_20261009": {
     "status": "FROZEN_RUNNING_VALID_ONLY",
@@ -3438,6 +3470,28 @@
     "formal100_started": false,
     "test_started": false,
     "automatic_retry": false,
-    "entry": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md"
+    "entry": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md",
+    "subsequent_growth_observation": "tmp/celeba_flgmm_screen_20261009_v2_dispatch/observations/growth_20261009T095851Z.json",
+    "subsequent_growth_observation_sha256": "83286cee25ad20f95a3b6f541c3464620657db052e5f65ab22d3638b7aa75549",
+    "growth_from_rounds": [
+      2,
+      1
+    ],
+    "growth_to_rounds": [
+      52,
+      49
+    ],
+    "observed_complete70": 0,
+    "subsequent_failure_count": 0,
+    "rounds_are_not_completed_results": true
+  },
+  "latest_publication_verification": {
+    "commit": "c53519a43ce40e8394f1cba077bbe94be4acdee6",
+    "branch": "codex/revision-evidence-baselines-20260928",
+    "verified_utc": "2026-10-09T09:58:18.190988+00:00",
+    "committed_blobs_sha256_verified": 73,
+    "proof_path": "publication_accepted_increment4_verified_20261009.json",
+    "proof_sha256": "381eb49a9a7b377ab0c32016a3d9db51305b1abfd0581d5cc369318f21da7f8c",
+    "earlier_publication_snapshot_is_historical": true
   }
 }

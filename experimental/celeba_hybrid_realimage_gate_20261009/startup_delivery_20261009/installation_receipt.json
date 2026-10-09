@@ -1,0 +1,37 @@
+{
+  "status": "AUTHORIZED_SERVICE_INSTALLED_AND_SINGLE_START_SENT",
+  "steps": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "add",
+        "guardfed_celeba_hybrid_writer_repair"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_hybrid_writer_repair"
+      ],
+      "stdout": "guardfed_celeba_hybrid_writer_repair: started\n",
+      "stderr": ""
+    }
+  ],
+  "scientific_source_changed": false,
+  "test_authorized": false,
+  "formal32_authorized": false,
+  "automatic_retry": false,
+  "service_sha256": "99720bdb57e433759f7becb59f3335f8c00198221ea6b31d8db36ed4a6324b40",
+  "config_sha256": "5cf50fc835eaea7c275ed7d2d11f626631b18350a13a0e1aa4085f65c0cc8713"
+}

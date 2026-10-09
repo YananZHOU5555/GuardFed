@@ -1,0 +1,55 @@
+{
+  "utc": "2026-10-09T09:55:45.469921+00:00",
+  "status": "guardfed_celeba_mechanism_valid_remaining7   RUNNING   pid 22298, uptime 0:00:00",
+  "steps": [
+    {
+      "command": [
+        "supervisorctl",
+        "reread"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_valid_remaining7: available\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "add",
+        "guardfed_celeba_mechanism_valid_remaining7"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_valid_remaining7: added process group\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_mechanism_valid_remaining7"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_valid_remaining7: started\n",
+      "stderr": ""
+    }
+  ],
+  "script_sha256": "dd1adb971720f8ce4df68e6d69f8e29f24b5ff64e546b832aa4e4e2de9d11bac",
+  "config_sha256": "3bc072bd459bbbeceaa20ecb48296a97e9abfaa1397dea64c1e653cb7cd5d2b2",
+  "approval_sha256": "270721872c1a8a021d72f114c3300addcaceab4aa9435c4307e5471994101a05",
+  "seal_sha256": "119418ce0ba509c364ad7f8c82361abd2d806d018ace847f6cd46714ea6b431d",
+  "max_new_ids": 7,
+  "compute_threads": 8,
+  "cpu_allocation": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "autostart": false,
+  "autorestart": false,
+  "no_automatic_retry": true,
+  "nominal_reservation_not_actual_cpu_usage": true
+}
