@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -14,7 +14,10 @@ profiles={
         prior_sha='43c5a3f0c13de9870485a1a68fbbe32755f6786feedc95ab8108947d2ed6f6a7',baseline=724,native=71,views=60,
         native_tag='root_delta_20261009T144558Z',native_delta=3,
         handoffs=['BOUNDED_DELTA_018_021_HANDOFF.json','BOUNDED_DELTA_022_023_HANDOFF.json'],
-        live_tags=['20261009T143614Z','20261009T144231Z'],formal_tag='20261009T150054Z')}
+        live_tags=['20261009T143614Z','20261009T144231Z'],formal_tag='20261009T150054Z'),
+    19:dict(previous='59c6e47b00e4875767dd1814fa09382cfc2b4e1c',start=24,end=24,prior_n=724,
+        prior_sha='456ceac1a9b149fea39ef4c91e7910d679a91123a02058106de105e0303b23c2',baseline=724,native=71,views=60,
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T151358Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -52,14 +55,15 @@ assert prior_data['accepted_n']==profile['baseline']
 for name in profile['handoffs']:
     handoff=evidence/name;copy(handoff,Path('experimental')/evidence.name/handoff.name)
 backup=ROOT/CHECKS/'mechanism_science_backups_20261009';tag=profile['native_tag']
-proof=read(backup/tag/'ROOT_DELTA_VERIFICATION.json')
-assert proof['total_new_strict_and_offserver']==profile['native'] and len(proof['new_ids'])==profile['native_delta']
-assert proof['oldFull_models_repacked']==0 and not proof['test']
-for name in (tag+'.tar.gz',tag+'.tar.gz.receipt.json',tag+'_offserver_verification.json','verified_ledger.json'):
-    copy(backup/name,CHECKS/'mechanism_science_backups_20261009'/name)
-for folder in (backup/tag,backup/('mechanism_inspection_v4_'+tag)):
-    for p in folder.rglob('*'):
-        if p.is_file():copy(p,CHECKS/'mechanism_science_backups_20261009'/p.relative_to(backup))
+if tag is not None:
+    proof=read(backup/tag/'ROOT_DELTA_VERIFICATION.json')
+    assert proof['total_new_strict_and_offserver']==profile['native'] and len(proof['new_ids'])==profile['native_delta']
+    assert proof['oldFull_models_repacked']==0 and not proof['test']
+    for name in (tag+'.tar.gz',tag+'.tar.gz.receipt.json',tag+'_offserver_verification.json','verified_ledger.json'):
+        copy(backup/name,CHECKS/'mechanism_science_backups_20261009'/name)
+    for folder in (backup/tag,backup/('mechanism_inspection_v4_'+tag)):
+        for p in folder.rglob('*'):
+            if p.is_file():copy(p,CHECKS/'mechanism_science_backups_20261009'/p.relative_to(backup))
 runtime=ROOT/'tmp/celeba_valid_gpu_remaining440_resource_gate_v2_execution_20261009'
 for live_tag in profile['live_tags']:
     for name in (f'live_{live_tag}.json',f'live_{live_tag}.ROOT.json'):
@@ -105,6 +109,19 @@ if args.increment==18:
         src=ROOT/'tmp/celeba_mechanism_three_view_paired_interim_20261009'
         for p in src.iterdir():
             if p.is_file():copy(p,Path('experimental')/src.name/p.name)
+if args.increment==19:
+    execution=ROOT/'tmp/celeba_mechanism_valid_incremental_next11_20261009/execution_candidate'
+    startup=read(execution/'ROOT_STARTUP_OBSERVATION.json')
+    assert startup['status']=='ROOT_NEXT11_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+    assert startup['scientific_offserver_new_accepted']==0 and startup['original60_not_rerun']
+    assert startup['deployment_receipt_sha256']==sha(execution/'deployment_receipt.json')
+    assert sha(execution/'EXECUTION_SOURCE_SHA256.json')=='9f1252dd7c11abfe7cee297b2028ca9c58f179d964efb39ee6008ea860508b15'
+    for row in read(execution/'EXECUTION_SOURCE_SHA256.json')['members']:
+        assert sha(execution/row['path'])==row['sha256']
+    for p in execution.iterdir():
+        if p.is_file():copy(p,Path('experimental')/p.relative_to(ROOT/'tmp'))
+    for name in ('review_mechanism_next37_execution_root_20261009.py','deploy_mechanism_next37_root_20261009.py','observe_mechanism_next37_root_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -117,6 +134,7 @@ receipt=dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(
     copied_sha256=MAPPING.copy(),new_GPU_chunks_root_reviewed=reviews,baseline_valid_replays_accepted=profile['baseline'],
     mechanism_offserver_verified=profile['native'],mechanism_three_view_offserver_verified=profile['views'],FLGMM_offserver_verified=13,
     Hybrid_offserver_verified=4,native_tolerance=1e-12,duplicated_old_models=0,test_started=False,scientific_goal_complete=False)
+if args.increment==19:receipt['next11_evaluation_started_with_no_new_offserver_acceptance']=True
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

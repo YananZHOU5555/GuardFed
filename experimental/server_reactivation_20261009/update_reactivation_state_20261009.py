@@ -1174,6 +1174,24 @@ if (next11/'root_source_review/ROOT_REVIEW.json').exists():
         source_seal_sha256=reviewed11['source_seal_sha256'], root_source_proof_sha256=sha(next11/'root_source_review/ROOT_REVIEW.json'),
         scientific_functions_unchanged=True, scientific_no_CNN_refusals=42, execution_started=False,
         entry=next11.relative_to(ROOT).as_posix())
+    started11_path = next11/'execution_candidate/ROOT_STARTUP_OBSERVATION.json'
+    if started11_path.exists():
+        started11 = read(started11_path); execution11 = started11_path.parent
+        deployment11 = read(execution11/'deployment_receipt.json')
+        assert started11['status'] == 'ROOT_NEXT11_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+        assert started11['deployment_receipt_sha256'] == sha(execution11/'deployment_receipt.json')
+        assert started11['execution_seal_sha256'] == sha(execution11/'EXECUTION_SOURCE_SHA256.json')
+        assert deployment11['remote_installation']['returncode']==0 and started11['original60_not_rerun']
+        assert started11['scientific_offserver_new_accepted']==0 and not started11['test_inference']
+        state['celeba_mechanism_v1']['next11_valid_replay'].update(
+            status='RUNNING_STARTUP_ACCEPTED_NO_NEW_OFFSERVER_RESULTS',execution_started=True,
+            service='guardfed_celeba_mechanism_valid_next11',observed_service=started11['service'],measured_utc=started11['utc'],
+            startup_root_proof_sha256=sha(started11_path),execution_seal_sha256=started11['execution_seal_sha256'],
+            deployment_receipt_sha256=sha(execution11/'deployment_receipt.json'),actual_processes=len(started11['processes']),
+            source_data_terminal_members_checked=109,allowed_cpus=list(range(112,120)),compute_threads=8,
+            new_training=0,new_Full_inference=0,offserver_new_accepted=0)
+        if 'RUNNING' in started11['service']:
+            state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_next11']))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1185,6 +1203,12 @@ baseline = state['final_evaluator_runtime_20261009']
 flgmm = state.get('flgmm_screen32_20261009', {})
 hybrid = state.get('hybrid_screen32_20261009', {})
 published = state['latest_publication_verification']
+next11_note = ('后续准确11份模型评价已经源审：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；42拒收检查和原科学函数复用通过。仅为准备，历史next8包不派发。')
+if main.get('next11_valid_replay',{}).get('execution_started'):
+    next11_note = ('准确11份模型评价已实际启动guardfed_celeba_mechanism_valid_next11：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；'
+        'Linux实测核109项源码/数据/终轮身份、实际配额和CPU112–119无占用，单进程8线程/nice10/idleIO/CUDA隐藏已独立观察。'
+        '执行封条9f1252dd7c11abfe7cee297b2028ca9c58f179d964efb39ee6008ea860508b15；新科学离机接受仍0，不能以启动推断完成。'
+        '主机制8并发保持，旧37与next8不重启，失败即保留停止，不自动重试。')
 top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
 当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
@@ -1223,7 +1247,7 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 {paired_note}
 
-后续准确11份模型评价已经源审：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；42拒收检查和原科学函数复用通过。仅为准备，未从源码准备推断Linux部署、运行或接受完成，历史next8包不派发。
+{next11_note}
 
 ## Git与巡检
 

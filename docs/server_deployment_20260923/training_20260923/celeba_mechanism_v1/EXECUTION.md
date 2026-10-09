@@ -1,4 +1,4 @@
-# CURRENT EXECUTION: GuardFed返修实验 — 实测 2026-10-09T15:00:53.422858+00:00
+# CURRENT EXECUTION: GuardFed返修实验 — 实测 2026-10-09T15:13:57.513316+00:00
 
 当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
 
@@ -14,7 +14,7 @@
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
-主机制最近实测CPU 12.00/122.88核，RAM 75.91GB，磁盘余1.061TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
+主机制最近实测CPU 20.02/122.88核，RAM 76.82GB，磁盘余1.061TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 
 ## 当前恢复与研究选择
 
@@ -36,11 +36,11 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 六个完整场景、60对checkpoint已连接实际Full三视图并独立核验：raw/native/shared并列表、10/9/6同种子面板及配对差值均保留。native与shared在这120记录的三指标完全相同；去U后native准确率六场景均降低0.309–1.384个百分点，ASPD均更低，AEOD五场景更高；raw下AEOD五场景更低。结果表明准确率与差距取舍，不能宣称U在所有指标上不可或缺。表入口celeba_mechanism_v1/three_view_interim_20261009T145900Z/TABLES.md；混合设备/训练环境与验证集选择历史已披露，主评价口径仍待决定。
 
-后续准确11份模型评价已经源审：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；42拒收检查和原科学函数复用通过。仅为准备，未从源码准备推断Linux部署、运行或接受完成，历史next8包不派发。
+准确11份模型评价已实际启动guardfed_celeba_mechanism_valid_next11：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；Linux实测核109项源码/数据/终轮身份、实际配额和CPU112–119无占用，单进程8线程/nice10/idleIO/CUDA隐藏已独立观察。执行封条9f1252dd7c11abfe7cee297b2028ca9c58f179d964efb39ee6008ea860508b15；新科学离机接受仍0，不能以启动推断完成。主机制8并发保持，旧37与next8不重启，失败即保留停止，不自动重试。
 
 ## Git与巡检
 
-最近已验证推送：1ac345c0dda16dcdfdedfcc0b020f58a24092aef，分支codex/revision-evidence-baselines-20260928，86份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment17_verified_20261009.json。
+最近已验证推送：59c6e47b00e4875767dd1814fa09382cfc2b4e1c，分支codex/revision-evidence-baselines-20260928，127份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment18_verified_20261009.json。
 
 三小时聊天任务guardfed-training-health仍PAUSED；本会话没有原生automation_update工具，未编辑调度器或建立替代cron/Windows任务。supervisor持续运行训练不等于聊天巡检恢复。待原生接口可用时按server_reactivation_20261009/MONITOR_HANDOFF.md恢复同一任务；不从历史计划自动派发新队列。
 
