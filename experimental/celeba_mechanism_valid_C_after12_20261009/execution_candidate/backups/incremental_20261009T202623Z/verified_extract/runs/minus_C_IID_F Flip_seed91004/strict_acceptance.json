@@ -1,0 +1,169 @@
+{
+  "scope": "MECHANISM_TERMINAL_VALID_REPLAY_C_AFTER12",
+  "status": "MECHANISM_VALID_THREE_VIEWS_ACCEPTED",
+  "id": "minus_C_IID_F Flip_seed91004",
+  "variant": "minus_C",
+  "views": {
+    "native": {
+      "accuracy": 0.8879045653596416,
+      "aeod": 0.022828536224241636,
+      "aspd": 0.04097616304833829,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.4855791010217949,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5407,
+          "fp": 332,
+          "tn": 4920,
+          "fn": 750,
+          "tpr": 0.8781874289426669,
+          "fpr": 0.06321401370906321,
+          "positive_rate": 0.5030239284775178
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 3104,
+          "fp": 804,
+          "tn": 4209,
+          "fn": 341,
+          "tpr": 0.9010159651669085,
+          "fpr": 0.1603830041891083,
+          "positive_rate": 0.46204776542917947
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "raw": {
+      "accuracy": 0.8906729752856496,
+      "aeod": 0.04739042938607163,
+      "aspd": 0.1139568619323964,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.4239190617607087,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5187,
+          "fp": 203,
+          "tn": 5049,
+          "fn": 970,
+          "tpr": 0.8424557414325158,
+          "fpr": 0.03865194211728865,
+          "positive_rate": 0.4724340432991498
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 2739,
+          "fp": 293,
+          "tn": 4720,
+          "fn": 706,
+          "tpr": 0.7950653120464442,
+          "fpr": 0.058448035108717336,
+          "positive_rate": 0.3584771813667534
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "shared_calibration": {
+      "accuracy": 0.8879045653596416,
+      "aeod": 0.022828536224241636,
+      "aspd": 0.04097616304833829,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.4855791010217949,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5407,
+          "fp": 332,
+          "tn": 4920,
+          "fn": 750,
+          "tpr": 0.8781874289426669,
+          "fpr": 0.06321401370906321,
+          "positive_rate": 0.5030239284775178
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 3104,
+          "fp": 804,
+          "tn": 4209,
+          "fn": 341,
+          "tpr": 0.9010159651669085,
+          "fpr": 0.1603830041891083,
+          "positive_rate": 0.46204776542917947
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    }
+  },
+  "native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.8879045653596416,
+      "aeod": 0.022828536224241636,
+      "aspd": 0.04097616304833829
+    },
+    "observed": {
+      "accuracy": 0.8879045653596416,
+      "aeod": 0.022828536224241636,
+      "aspd": 0.04097616304833829
+    },
+    "differences": {
+      "accuracy": 0.0,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "max_abs_difference": 0.0,
+    "accepted": true
+  },
+  "checkpoint_sha256": "cc945447d52f48583dd4b21f8416dea4abee0284ba32e354b86df3f59b7b8e6e",
+  "bridge_receipt_sha256": "042673de2b20a7eef81ddcb5e454e41f7dc3aba3631477aba12e18cb3ff667e3",
+  "inventory_sha256": "7e0e0a3d1e32efaf7a02e57327cc2b255b9616eef25eb0d5a45bd830d52e4e73",
+  "paired_full_reference": {
+    "id": "GuardFed-AD2+_IID_F-Flip_seed91004",
+    "role": "Full_reference_only",
+    "variant": "Full",
+    "method": "GuardFed-AD2+",
+    "distribution": "IID",
+    "attack": "F Flip",
+    "seed": 91004,
+    "actual_alpha": 5000.0,
+    "training_torch": "2.11.0+cu128",
+    "baseline_inventory_sha256": "3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd",
+    "baseline_record_canonical_sha256": "7523c2ab7bbae3920873068de4505f015602e8692832ff5671b7285a21e1e35d",
+    "checkpoint_sha256": "ffdfc0a540c8dc9c942c0b9b587de5c0049cb98f83eec029a64a28cfa2bb2efc",
+    "result_sha256": "522651c51aa2b2c5374da682a25a525cda74ddb80564b8c2ea41105529ea74ed",
+    "raw_job_sha256": "888a5e0ec274ac58339e3f3e3635c7f1102b917755dd8f9142e5c3d24246aae7",
+    "data_contract_canonical_sha256": "254b480ceca3fec28f063d3221c8db5aee4d518d9cca88b40eb574f9a898f40d",
+    "root_image_ids_sha256": "428470d23b3d16031dc9125fbf6391c7ebc6bc1fa062c563eb60fa8ddfd93ec9",
+    "replay_required_here": false,
+    "weights_repacked_here": false,
+    "views_status": "REFERENCE_ONLY_REQUIRE_SHA_BOUND_BASELINE_REPLAY_ACCEPTANCE"
+  },
+  "new_training": false,
+  "test_inference": false,
+  "final_protocol_status": "PREPARED_NOT_FROZEN"
+}

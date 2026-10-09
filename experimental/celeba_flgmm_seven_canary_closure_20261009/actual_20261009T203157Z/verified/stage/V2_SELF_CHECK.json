@@ -1,0 +1,178 @@
+{
+  "status": "PASS_V2_ENGINEERING_FIXTURES_ONLY",
+  "queue_fixtures": [
+    {
+      "scenario": "one_failed_child_one_terminal_peer",
+      "launched": 2,
+      "actual_strict_success_fixture": 1,
+      "failed_exits": 1,
+      "reported_completed_new": 1,
+      "dispatch_stopped": true,
+      "peer_drained": true,
+      "summary_called": false
+    },
+    {
+      "scenario": "identity_error_with_two_active_peers",
+      "launched": 2,
+      "both_peers_waited": true,
+      "summary_called": false
+    }
+  ],
+  "accepted_skip_initializer": 7,
+  "entry_checks": [
+    {
+      "entry": "bind_stage.py",
+      "mode": "normal",
+      "returncode": 0,
+      "explicit_guard_rejected": false
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "-O",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "env1",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "env2",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "normal",
+      "returncode": 0,
+      "explicit_guard_rejected": false
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "-O",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "env1",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "env2",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "normal",
+      "returncode": 0,
+      "explicit_guard_rejected": false
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "-O",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "env1",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "env2",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "normal",
+      "returncode": 0,
+      "explicit_guard_rejected": false
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "-O",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "env1",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "env2",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "normal",
+      "returncode": 0,
+      "explicit_guard_rejected": false
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "-O",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "env1",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "env2",
+      "returncode": 1,
+      "explicit_guard_rejected": true
+    }
+  ],
+  "optimization_refusals": 20,
+  "normal_help_positive": 5,
+  "scientific_execution": 0,
+  "real_training_children": 0
+}

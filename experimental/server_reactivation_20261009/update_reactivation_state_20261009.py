@@ -1869,6 +1869,105 @@ if fl_bound_path.exists():
         local_extract_failure_preserved=True,local_manual_safe_extraction_pass=True,repeated_remote_binding=0,
         checkpoint_repacked=0,formal100_started=False,final_test=False)
 
+fl_start_path=ROOT/'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_CANARY_STARTUP.json'
+if fl_start_path.exists():
+    fl_start=read(fl_start_path)
+    assert sha(fl_start_path)=='22486ecfd6e4012fcb30a27c120574dee918c62069dec55c6ad225e24d68d68b'
+    for key,pin in [('start_receipt_path','start_receipt_sha256'),('resource_path','resource_sha256'),('snapshot_path','snapshot_sha256')]:
+        assert sha(ROOT/fl_start[key])==fl_start[pin]
+    assert fl_start['main_growth_verified'] and not fl_start['formal100_started'] and not fl_start['final_test']
+    coverage=state['flgmm_fullcoverage_v2_20261009']
+    coverage.pop('canaries_started',None)
+    coverage.update(status='SEVEN_CANARY_QUEUE_ACTUALLY_STARTED_NOT_ACCEPTED',canary_runner_started=True,
+        canary_scope=7,canaries_accepted=0,startup_root_path=fl_start_path.relative_to(ROOT).as_posix(),
+        startup_root_sha256=sha(fl_start_path),startup_observed_utc=fl_start['observed_utc'])
+    observations=list((ROOT/'tmp/celeba_flgmm_fullcoverage_root_operations_20261009').glob('observation_*/SNAPSHOT.json'))
+    if observations:
+        observed_path=max(observations,key=lambda p:read(p)['utc']);observed=read(observed_path)
+        coverage.update(latest_readonly_observation_path=observed_path.relative_to(ROOT).as_posix(),
+            latest_readonly_observation_sha256=sha(observed_path),latest_observed_utc=observed['utc'],
+            service_observed=observed['canary_service'],failure_paths_observed=observed['failure_paths'],
+            source_members_match_observed=observed['source_members_match'])
+    if 'RUNNING' in coverage['service_observed']['stdout']:
+        state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_flgmm_fullcoverage_canary']))
+
+fl_closure_path=ROOT/'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_SEVEN_CANARY_CLOSURE.json'
+if fl_closure_path.exists():
+    fl_closure=read(fl_closure_path)
+    assert sha(fl_closure_path)=='e17c50890129b512dbcf1f426fcf6392e47b1cb9db95a038a8a61b515ca8b958'
+    assert sha(ROOT/fl_closure['offserver_path'])==fl_closure['offserver_sha256']
+    assert (fl_closure['accepted_new_canaries'],fl_closure['same_horizon_pairs'],fl_closure['total_canary_runs'])==(5,2,7)
+    state['flgmm_fullcoverage_v2_20261009'].update(status='SEVEN_CANARIES_COMPLETE_STRICT_OFFSERVER_ROOT_ADOPTED',
+        canaries_accepted=5,same_horizon_reference_pairs_verified=2,total_canary_runs_verified=7,canary_archive_members_verified=315,
+        closure_root_path=fl_closure_path.relative_to(ROOT).as_posix(),closure_root_sha256=sha(fl_closure_path),
+        gate_sha256=fl_closure['gate_sha256'],offserver_sha256=fl_closure['offserver_sha256'],canary_archive_sha256=fl_closure['archive_sha256'])
+    state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_flgmm_fullcoverage_canary']
+
+fl_coverage_start_path=ROOT/'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_COVERAGE_STARTUP.json'
+if fl_coverage_start_path.exists():
+    full_start=read(fl_coverage_start_path)
+    assert sha(fl_coverage_start_path)=='abfa572c21cd5724379ff007a71c1a030f69c773dfc3021358cee4fe08845d1d'
+    for key,pin in [('startup_path','startup_sha256'),('resource_path','resource_sha256'),('runtime_path','runtime_sha256')]:
+        assert sha(ROOT/full_start[key])==full_start[pin]
+    assert full_start['formal100_started'] and not full_start['final_test'] and full_start['active_rounds']==[1,1]
+    state['flgmm_fullcoverage_v2_20261009'].update(status=full_start['status'],formal100_started=True,
+        coverage_startup_root_path=fl_coverage_start_path.relative_to(ROOT).as_posix(),coverage_startup_root_sha256=sha(fl_coverage_start_path),
+        coverage_observed_utc=full_start['observed_utc'],active=2,pending=94,active_rounds=full_start['active_rounds'],
+        new_completed_observed=0,new_accepted=0,worker_pids=full_start['worker_pids'],canary_authorization_preserved=True)
+    latest_full_obs=read(ROOT/state['flgmm_fullcoverage_v2_20261009']['latest_readonly_observation_path'])
+    if latest_full_obs.get('queue') is not None:
+        q=latest_full_obs['queue'];assert q['failed'] is False
+        progress_rows={r['id']:r for r in latest_full_obs['rows'] if r['kind']=='new'}
+        state['flgmm_fullcoverage_v2_20261009'].update(coverage_observed_utc=latest_full_obs['utc'],
+            active=len(q['active']),pending=q['pending'],new_completed_observed=q['completed_new'],
+            active_rounds=[(progress_rows[r['id']].get('progress') or {}).get('round') for r in q['active']],
+            worker_pids=[r['pid'] for r in q['active']],coverage_service_observed=latest_full_obs['coverage_service'])
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_flgmm_fullcoverage']))
+
+C8_dir=ROOT/'tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate'
+if (C8_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
+    C8_start=read(C8_dir/'ROOT_STARTUP_OBSERVATION.json')
+    assert sha(C8_dir/'ROOT_STARTUP_OBSERVATION.json')=='a812bff3084254968d2fdafddd2dac99ebbf0d28eab942effb751b7f3de03757'
+    assert C8_start['deployment_receipt_sha256']==sha(C8_dir/'deployment_receipt.json')
+    assert C8_start['scientific_offserver_new_accepted']==0 and not C8_start['test_inference']
+    state['celeba_mechanism_v1']['C_after12_valid_replay']=dict(status='ACTUAL_STARTUP_VERIFIED_ACCEPTANCE_PENDING',
+        selected_count=8,prior_three_view_models=112,offserver_new_accepted=0,execution_started=True,
+        startup_root_proof_path=(C8_dir/'ROOT_STARTUP_OBSERVATION.json').relative_to(ROOT).as_posix(),
+        startup_root_proof_sha256=sha(C8_dir/'ROOT_STARTUP_OBSERVATION.json'),
+        actual_worker_pids=[p['pid'] for p in C8_start['processes'] if 'worker' in p['argv']],
+        CPU_affinity=list(range(112,120)),compute_threads=8,nice=10,IO='idle',CUDA_visible='',new_training=0,
+        new_Full_inference=0,final_test=False)
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_C_after12']))
+    C8_roots=list((C8_dir/'backups').glob('incremental_*/ROOT_ADOPTION_REVIEW.json'))
+    if C8_roots:
+        assert len(C8_roots)==1
+        C8_root_path=C8_roots[0];C8_root=read(C8_root_path);C8_delta=C8_root_path.parent
+        assert sha(C8_root_path)=='817d5f8ebebb566ee4b851fd600edcddaf07a410d29e618d1e5a821c5748b775'
+        assert (C8_root['prior_three_view_models'],C8_root['accepted_new'],C8_root['cumulative_three_view_models'])==(112,8,120)
+        for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json'),('backup_receipt_sha256','backup_receipt.json')]:
+            assert sha(C8_delta/name)==C8_root[key]
+        old112=state['celeba_mechanism_v1']['three_view_accepted_ids'];assert len(old112)==112
+        assert not set(old112)&set(C8_root['accepted_new_ids']) and C8_root['original112_unchanged'] and C8_root['all_native_differences_zero']
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=120,three_view_new_models_offserver_verified=120,
+            three_view_accepted_ids=old112+C8_root['accepted_new_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':20},
+            three_view_scope_limit='U100 ten scenes and C20 IID Benign/F Flip complete terminal replays; C F Flip paired table remains a separate review; Full reused, no test')
+        state['celeba_mechanism_v1']['C_after12_valid_replay'].update(status='EXACT8_COMPLETE_STRICT_OFFSERVER_ROOT_ADOPTED',
+            offserver_new_accepted=8,root_adoption_path=C8_root_path.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(C8_root_path),
+            archive_sha256=C8_root['archive_sha256'],archive_members_verified=89,independent_metric_checks=72,
+            confusion_count_checks=192,prediction_rule_checks=24,native_max_abs_difference=0,actual_worker_pids=[])
+        state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_C_after12']
+
+C20_table_dir=TRAIN/'celeba_mechanism_v1/three_view_C_two_scenes_20261009'
+if (C20_table_dir/'ROOT_VERIFICATION.json').exists():
+    C20_table=read(C20_table_dir/'ROOT_VERIFICATION.json')
+    assert sha(C20_table_dir/'ROOT_VERIFICATION.json')=='f29be3341d12558099c92a59a06cdf7de7f45b5c8d3194e126ae21899a12b875'
+    assert (C20_table['unique_records'],C20_table['paired_models'],C20_table['mean_SD_scalars_recomputed'])==(40,20,324)
+    assert sha(C20_table_dir/'snapshot/TABLES.md')==C20_table['display_sha256']
+    state['celeba_mechanism_v1']['C_three_view_two_scene_table']=dict(status=C20_table['status'],
+        root_proof_path=(C20_table_dir/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C20_table_dir/'ROOT_VERIFICATION.json'),
+        table_path=C20_table['canonical_table'],paired_models=20,unique_records=40,complete_scenes=2,mean_SD_scalars=324,display_cells=162,
+        count_metrics=360,replay_devices=C20_table['replay_devices'],other_C_scenes_complete=False,final_test=False)
+
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1941,6 +2040,10 @@ if main.get('C_three_view_single_scene_table'):
     C_after1_note+=(f" C IID Benign三视图表现已核验162统计标量、81展示单元和216计数指标，入口{C_table['table_path']}。"
         'raw删除C后ACC−0.014pp、AEOD−0.00483、ASPD−0.00383；native/shared为−0.083pp、+0.00292、−0.00142。'
         '保留10/9/6面板及Full2CPU/8GPU对C10CPU、环境/选择历史；不作C必要性、因果或显著性主张。')
+if main.get('C_after12_valid_replay',{}).get('offserver_new_accepted')==8:
+    C_replay_note='minus_C累计20已离机：IID Benign与F Flip各10seed；后者完整配对表待另核'
+if main.get('C_three_view_two_scene_table'):
+    C_replay_note='minus_C累计20已离机，IID Benign/F Flip两完整场景三视图表已独立采用，324统计/162单元/360计数指标'
 
 after92_note=''
 if main.get('after92_valid_replay'):
@@ -1962,16 +2065,18 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 |---|---|---|
 | CelebA机制消融 | 当前观测完成{live['queue_completed']}、活动{len(live['active'])}、等待{live['pending']}、失败{len(live['failed'])}；已独立严格验收并离机{main['scientific_results_offserver_verified']}/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
 | FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
-| FLGMM完整覆盖准备 | 已实际绑定96新+4复用、五新短程+两原参考；144元数据成员离机SHA与root范围核验通过，尚未启动canary/正式训练 | tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json |
+| FLGMM完整覆盖 | 96新+4复用；状态{state.get('flgmm_fullcoverage_v2_20261009',{}).get('status','未启动')}，短程5新+2参考已核；新增70轮离机接受{state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted',0)}/96 | tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_SEVEN_CANARY_CLOSURE.json及ROOT_COVERAGE_STARTUP.json |
 | 组合基线验证搜索 | {hybrid.get('offserver_accepted70round_jobs', 0)}/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
 | 机制三视图评价 | 累计{main['three_view_new_models_offserver_verified']}份：minus_U完整100，{C_replay_note}；U论文表{main.get('latest_paired_three_view_table',{}).get('complete_scenes',0)}完整场景 | {main.get('latest_paired_three_view_table',{}).get('table_path','需独立配对')}；其他七variant未完成 |
 
 {C_after1_note}
 
+新增准确8项C/IID/F Flip seed91003–91010终轮checkpoint评价状态{main.get('C_after12_valid_replay',{}).get('status','未启动')}，新增离机接受{main.get('C_after12_valid_replay',{}).get('offserver_new_accepted',0)}。只重建valid三视图，CPU112–119/8线程/nice10/idleIO/CUDA隐藏；旧112与Full不重推。最新C表入口{main.get('C_three_view_two_scene_table',{}).get('table_path','待独立核验')}，其余八个C场景仍待完成。
+
 删除C的IID Benign native十seed论文表已独立核验54统计标量/27展示单元/10对checkpoint，保留9/6seed面板；入口celeba_mechanism_v1/native_C_Benign10_20261009/TABLES.md。十seed配对删除差ACC−0.083个百分点、AEOD+0.00292、ASPD−0.00142，9/6面板方向有变化，不作必要性/因果/显著性结论。F Flip仅2seed、其他C场景未齐，不纳入本表均值。
 
-主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM原搜索服务已正常EXITED、0worker，32/32严格离机，冻结规则选Tg20/L2/lr0.001，32评分与32候选均值标量经独立及root复核；前两分差0.00004978，仅n=1验证搜索，不作SD或显著性结论。组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe。两套搜索均固定8候选×四条件、seed91001，100项多seed确认尚未启动，不运行test。
+主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM原搜索服务已正常EXITED、0worker，32/32严格离机，冻结规则选Tg20/L2/lr0.001，32评分与32候选均值标量经独立及root复核；前两分差0.00004978，仅n=1搜索不作SD或显著性结论。其后5新+2参考短程已严格离机，FLGMM完整覆盖启动状态{state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started',False)}，新96项仍待逐项严格验收，不把短程计入论文样本。组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe，组合100项尚未启动。全程不运行test。
 
 主机制最近实测CPU {live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核，RAM {live['memory_used_bytes']/1e9:.2f}GB，磁盘余{live['disk_free_bytes']/1e12:.3f}TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 

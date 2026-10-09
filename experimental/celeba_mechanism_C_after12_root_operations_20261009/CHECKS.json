@@ -1,0 +1,144 @@
+{
+  "status": "PREPARED_HELPERS_LOCAL_NO_NETWORK_CHECKS_PASS_NOT_OPERATION_APPROVAL",
+  "actual_source_review_sha256": "3b2c936c91a78e6caa39fb007c8d485c6e7870ebfab3bae49831adc1c60c64db",
+  "exact8_ids": [
+    "minus_C_IID_F Flip_seed91003",
+    "minus_C_IID_F Flip_seed91004",
+    "minus_C_IID_F Flip_seed91005",
+    "minus_C_IID_F Flip_seed91006",
+    "minus_C_IID_F Flip_seed91007",
+    "minus_C_IID_F Flip_seed91008",
+    "minus_C_IID_F Flip_seed91009",
+    "minus_C_IID_F Flip_seed91010"
+  ],
+  "positive_external_review_schema": true,
+  "terminal_positive_modules": 2,
+  "refusals": [
+    "external_review_SHA",
+    "review_status",
+    "review_science_seal_sha256",
+    "review_execution_seal_sha256",
+    "review_package_sha256",
+    "review_actual_dispatch_authorized_by_this_review",
+    "review_exact_selected_ids",
+    "review_new_three_view_accepted",
+    "root_operation_check_backup_missing",
+    "root_operation_check_backup_duplicate",
+    "root_operation_check_backup_extra",
+    "root_operation_check_backup_service",
+    "root_operation_check_backup_processes",
+    "root_operation_check_backup_batch_failure",
+    "root_operation_check_backup_batch_complete",
+    "root_operation_check_adopt_missing",
+    "root_operation_check_adopt_duplicate",
+    "root_operation_check_adopt_extra",
+    "root_operation_check_adopt_service",
+    "root_operation_check_adopt_processes",
+    "root_operation_check_adopt_batch_failure",
+    "root_operation_check_adopt_batch_complete"
+  ],
+  "refusal_count": 22,
+  "expected_archive_members": 89,
+  "expected_metrics_counts_rules": [
+    72,
+    192,
+    24
+  ],
+  "entry_checks": [
+    {
+      "entry": "deploy",
+      "optimized": false,
+      "returncode": 0,
+      "stdout": "usage: deploy.py [-h] --execution-seal EXECUTION_SEAL --review REVIEW\n                 --review-sha256 REVIEW_SHA256\n\nROOT-only one-shot C_after12 deployment. Preparing/importing this file does\nnot run it.\n\noptions:\n  -h, --help            show this help message and exit\n  --execution-seal EXECUTION_SEAL\n  --review REVIEW\n  --review-sha256 REVIEW_SHA256\n",
+      "stderr": ""
+    },
+    {
+      "entry": "deploy",
+      "optimized": true,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_mechanism_C_after12_root_operations_20261009\\deploy.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden for root operation guards')\nRuntimeError: Optimized Python is forbidden for root operation guards\n"
+    },
+    {
+      "entry": "observe",
+      "optimized": false,
+      "returncode": 0,
+      "stdout": "usage: observe.py [-h] [--progress]\n\nRead-only actual-process observation of the frozen exact8 replay.\n\noptions:\n  -h, --help  show this help message and exit\n  --progress\n",
+      "stderr": ""
+    },
+    {
+      "entry": "observe",
+      "optimized": true,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_mechanism_C_after12_root_operations_20261009\\observe.py\", line 6, in <module>\n    raise RuntimeError('Optimized Python is forbidden for root operation guards')\nRuntimeError: Optimized Python is forbidden for root operation guards\n"
+    },
+    {
+      "entry": "backup",
+      "optimized": false,
+      "returncode": 0,
+      "stdout": "usage: backup.py [-h] --startup-sha256 STARTUP_SHA256 --deployment-sha256\n                 DEPLOYMENT_SHA256 --terminal-progress TERMINAL_PROGRESS\n                 --terminal-progress-sha256 TERMINAL_PROGRESS_SHA256\n\nROOT-only completed C_after12 exact8 transfer; original backup/verifier, no\nCNN.\n\noptions:\n  -h, --help            show this help message and exit\n  --startup-sha256 STARTUP_SHA256\n  --deployment-sha256 DEPLOYMENT_SHA256\n  --terminal-progress TERMINAL_PROGRESS\n  --terminal-progress-sha256 TERMINAL_PROGRESS_SHA256\n",
+      "stderr": ""
+    },
+    {
+      "entry": "backup",
+      "optimized": true,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_mechanism_C_after12_root_operations_20261009\\backup.py\", line 6, in <module>\n    raise RuntimeError('Optimized Python is forbidden for root operation guards')\nRuntimeError: Optimized Python is forbidden for root operation guards\n"
+    },
+    {
+      "entry": "adopt",
+      "optimized": false,
+      "returncode": 0,
+      "stdout": "usage: adopt.py [-h] --delta DELTA --receipt-sha256 RECEIPT_SHA256\n                --proof-sha256 PROOF_SHA256 --terminal-progress\n                TERMINAL_PROGRESS --terminal-progress-sha256\n                TERMINAL_PROGRESS_SHA256 --startup-sha256 STARTUP_SHA256\n                --deployment-sha256 DEPLOYMENT_SHA256\n\nROOT-only bind actual C_after12 exact8 archive to source, actual terminal and\nprior112.\n\noptions:\n  -h, --help            show this help message and exit\n  --delta DELTA\n  --receipt-sha256 RECEIPT_SHA256\n  --proof-sha256 PROOF_SHA256\n  --terminal-progress TERMINAL_PROGRESS\n  --terminal-progress-sha256 TERMINAL_PROGRESS_SHA256\n  --startup-sha256 STARTUP_SHA256\n  --deployment-sha256 DEPLOYMENT_SHA256\n",
+      "stderr": ""
+    },
+    {
+      "entry": "adopt",
+      "optimized": true,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_mechanism_C_after12_root_operations_20261009\\adopt.py\", line 6, in <module>\n    raise RuntimeError('Optimized Python is forbidden for root operation guards')\nRuntimeError: Optimized Python is forbidden for root operation guards\n"
+    }
+  ],
+  "embedded_code_compile_only": [
+    {
+      "helper": "deploy",
+      "target": "preflight",
+      "stdin_code_bytes": 672,
+      "argv_remote_command": "python -B -",
+      "executed": false
+    },
+    {
+      "helper": "deploy",
+      "target": "code",
+      "stdin_code_bytes": 1178,
+      "argv_remote_command": "python -B -",
+      "executed": false
+    },
+    {
+      "helper": "observe",
+      "target": "code",
+      "stdin_code_bytes": 2498,
+      "argv_remote_command": "python -B -",
+      "executed": false
+    },
+    {
+      "helper": "backup",
+      "target": "code",
+      "stdin_code_bytes": 1701,
+      "argv_remote_command": "python -B -",
+      "executed": false
+    }
+  ],
+  "short_ssh_argv_stdin": true,
+  "local_manual_safe_extract_reused": true,
+  "original_source_package39_members_unchanged": true,
+  "future_runtime_SHA_not_invented": true,
+  "root_authority_files_created": false,
+  "network_calls": 0,
+  "CNN": false,
+  "SSH": false,
+  "scientific_acceptance_registered": false
+}

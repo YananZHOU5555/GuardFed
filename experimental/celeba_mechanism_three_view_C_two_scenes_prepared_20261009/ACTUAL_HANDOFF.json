@@ -1,0 +1,134 @@
+{
+  "status": "ACTUAL_C_TWO_SCENE_TABLES_AND_INDEPENDENT_NUMERIC_PASS_PENDING_ROOT_ADOPTION",
+  "checked_utc": "2026-10-09T20:29:11.964291+00:00",
+  "prepared_source_seal_sha256": "e014283c04d1eb88084f938b39feba14866538ab57cfd3d784742ebbdd2fd0c2",
+  "prepared_source_members_unchanged": 9,
+  "actual_C8_root_sha256": "817d5f8ebebb566ee4b851fd600edcddaf07a410d29e618d1e5a821c5748b775",
+  "actual_closure_pins": {
+    "tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate/backups/incremental_20261009T202623Z/ROOT_ADOPTION_REVIEW.json": {
+      "sha256": "817d5f8ebebb566ee4b851fd600edcddaf07a410d29e618d1e5a821c5748b775",
+      "bytes": 1880
+    },
+    "tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate/backups/incremental_20261009T202623Z/backup_receipt.json": {
+      "sha256": "ba52840a497e2213feba458aa3b3164767c4a1aa24fcf83cfc8041330f0b69d7",
+      "bytes": 1084
+    },
+    "tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate/backups/incremental_20261009T202623Z/OFFSERVER_VERIFICATION.json": {
+      "sha256": "c400c83354433b9abb30fe66a7b55ef03692c4ca583e2d20eea1a7745d2870ef",
+      "bytes": 39230
+    },
+    "tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate/backups/incremental_20261009T202623Z/incremental_valid_three_views.tar.gz": {
+      "sha256": "4b614826cdbeabc689da7104d84ac3f744079f1c49b4cc50b75ebd78f277fbc3",
+      "bytes": 1748912
+    }
+  },
+  "source_functions": {
+    "accepted_increment_original_sha256": "3da9113f5a646f0b8a9a67d270c29843d17b9c39a3deef7481d09e7235e0e796",
+    "accepted_increment_C_variant_sha256": "b77c80bcc23598fe99aadbe8dd5e19d79de87766b768defe6b204ba15b58f502",
+    "only_two_variant_literals_rebound": true,
+    "receipt_identity": "ddd738e1381ab501800944ffde377206f7fbc6754b50dbd1da7b2b05083068ae",
+    "normalized": "5e3494d5369d1707942633dda6fff03332881b6168412fff6a68e7fe9d1fe763",
+    "canonical": "fe8b35defbc15f67a098e657fd60bf160aaf5cdbf9a92a7300e2e1227463ad56"
+  },
+  "new_archive_members_verified": 89,
+  "snapshot_seal_sha256": "9d6af8f235dddc0e4b9b0e1416eae2a9c9735fac2708eafb87dfc235a312b6ca",
+  "records_sha256": "805a5dbcb49c345e6f527655685af18b24b2c32bc00da3e03f7a237d0c016eb2",
+  "tables_sha256": "4e992c0cf284279dc549ad82bab83309b66f8ec415d8dc9120d25444f1353334",
+  "display_sha256": "f950fb1749d98063d85b4cda092935dd316e21ca5917be5fc47a9762b7826753",
+  "numeric_check_sha256": "06928cfa00b38677b74a2ad713c0203fec2c0f369ee543746536b4883bdbbf01",
+  "original_Benign_root_sha256": "0d047461186184718f58c5423c546137930b287d3bd7cff8e06eacd6e28ad73f",
+  "unique_records": 40,
+  "Full": 20,
+  "minus_C": 20,
+  "complete_scenes": [
+    {
+      "distribution": "IID",
+      "attack": "Benign",
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ]
+    },
+    {
+      "distribution": "IID",
+      "attack": "F Flip",
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ]
+    }
+  ],
+  "views": [
+    "native",
+    "raw",
+    "shared_calibration"
+  ],
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "mean_sd_scalar_checks": 324,
+  "display_cell_checks": 162,
+  "unique_record_count_metric_checks": 360,
+  "base_count_fields_checked": 960,
+  "maximum_abs_numeric_difference": 1.4210854715202004e-14,
+  "old_Benign_regression": {
+    "original24_records_exact": true,
+    "statistics_exact": 162,
+    "cells_exact": 81,
+    "count_metrics": 216,
+    "max_abs_independent_numeric_difference": 1.4210854715202004e-14,
+    "not_new_evidence": true
+  },
+  "replay_devices": {
+    "Full": {
+      "cpu": 2,
+      "cuda:0": 18
+    },
+    "minus_C": {
+      "cpu": 20
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 20
+    },
+    "minus_C": {
+      "2.11.0+cu128": 20
+    }
+  },
+  "native_shared_metric_and_count_records_identical": 40,
+  "new_CNN": 0,
+  "new_Full_inference": 0,
+  "threshold_refits": 0,
+  "new_training": 0,
+  "test": false,
+  "primary_endpoint": "PENDING_AUTHOR",
+  "necessity_or_causal_claim": false,
+  "whole_mechanism_complete": false,
+  "root_table_adoption": "PENDING_INDEPENDENT_ROOT_REVIEW",
+  "limits": [
+    "Valid-only; AEOD absolute TPR gap; all negative differences/results retained.",
+    "Mixed replay devices and training/driver environment provenance are retained per record; no device equivalence is claimed.",
+    "Seed91001 recipe selection and prior validation/test exposure remain disclosed; 9/6 panels are descriptive subsets.",
+    "Other eight C scenes remain incomplete; U100 is excluded from this C table.",
+    "Original statistic/summarize and saved-receipt join are reused; independent stdlib numerical differences are bounded by1e-12."
+  ]
+}

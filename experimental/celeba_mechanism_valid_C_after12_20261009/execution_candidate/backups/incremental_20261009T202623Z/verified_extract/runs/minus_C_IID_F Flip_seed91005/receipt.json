@@ -1,0 +1,1208 @@
+{
+  "scope": "VALID_ONLY_IMPLEMENTATION_PREFLIGHT",
+  "status": "NATIVE_VALID_REPLAY_PASS",
+  "id": "minus_C_IID_F Flip_seed91005",
+  "method": "GuardFed-AD2+",
+  "distribution": "IID",
+  "attack": "F Flip",
+  "seed": 91005,
+  "model_inventory_record_sha256": "34361116fabb0356989db7c9cdaf950724a689a4ff3d5dbb0f17e5fbbff9759b",
+  "checkpoint_sha256": "4428bd951ec41eeb9777e20f78eaf9e9ca51894749eb2e03e91f28a77f6c4029",
+  "original_result_sha256": "0c36b1abcbc6907a22ea8441cb2595e233a9f40733a014185f46219a161a684f",
+  "original_job_sha256": "baf3b4119236fe8813ffbf6dd8499d3bb98848e54b29a37f683b3d6c38812dae",
+  "config_canonical_sha256": "9f43e0442d0b82438f6837e4d363d92822a425a426ca678b30ab6de8d46c11db",
+  "original_training_torch": "2.11.0+cu128",
+  "runtime": {
+    "python": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "torch": "2.11.0+cu128",
+    "device": "cpu",
+    "original_config_device": "cuda",
+    "torch_threads": 8,
+    "interop_threads": 1,
+    "loader_workers": 0,
+    "nice": 10,
+    "cuda_device_count": 0,
+    "cpu": "x86_64"
+  },
+  "root_reconstruction": {
+    "root_n": 16277,
+    "root_image_ids_sha256": "9f64191242bedac086d91b2ec1541d06b8a4381566fbffe361169bd3ce13a8de",
+    "root_support": {
+      "0|0": 4356,
+      "0|1": 5095,
+      "1|0": 4138,
+      "1|1": 2688
+    },
+    "client_sample_counts": [
+      7352,
+      7243,
+      7307,
+      7216,
+      7424,
+      7375,
+      7292,
+      7450,
+      7363,
+      7348,
+      7336,
+      7288,
+      7268,
+      7287,
+      7304,
+      7244,
+      7349,
+      7444,
+      7293,
+      7310
+    ],
+    "train_eval_disjoint": true,
+    "root_client_disjoint": true,
+    "server_sampling_audit": {
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_target_sensitive": null,
+      "server_target_label": null,
+      "server_rows": 16277,
+      "server_sensitive_counts": {
+        "0": 9451,
+        "1": 6826
+      },
+      "server_label_counts": {
+        "0": 8494,
+        "1": 7783
+      },
+      "server_group_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      },
+      "global_group_counts": {
+        "0|0": 43688,
+        "0|1": 50821,
+        "1|0": 41002,
+        "1|1": 27259
+      },
+      "server_group_prob": {
+        "0|0": 0.2676168827179456,
+        "0|1": 0.3130183694784051,
+        "1|0": 0.2542237513055231,
+        "1|1": 0.1651409964981262
+      },
+      "global_group_prob": {
+        "0|0": 0.2684032684155557,
+        "0|1": 0.3122258401425324,
+        "1|0": 0.2519014560422682,
+        "1|1": 0.16746943539964368
+      },
+      "group_tvd": 0.003114824599127583,
+      "group_kl": 2.9092535816264064e-05,
+      "max_group_abs_delta": 0.0023284389015174878,
+      "sensitive_tvd": 6.143638262595674e-06,
+      "label_tvd": 0.0015359095656447552
+    },
+    "root_noise_audit": {
+      "root_rows": 16277,
+      "clean_group_label_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      },
+      "clean_root_sha256": "a2331eefc791400c018d2589c3888b08bdec307cb0fe3463d871243ebfcbb50c",
+      "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+      "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+      "label": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "sensitive": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "observed_group_label_counts": {
+        "0|0": 4356,
+        "0|1": 5095,
+        "1|0": 4138,
+        "1|1": 2688
+      }
+    }
+  },
+  "valid_n": 19867,
+  "valid_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+  "fits": {
+    "native": {
+      "view": "native",
+      "method": "GuardFed-AD2+",
+      "rule": "group_margin_greater_equal",
+      "thresholds": {
+        "0": 0.28944981,
+        "1": -0.25192858
+      },
+      "fit_data": "clean_train_root_only",
+      "fit_diagnostics": {
+        "server_calibration_metrics": {
+          "accuracy": 0.8910732936044725,
+          "aeod": 0.0036832182578625527,
+          "aspd": 0.07198375707688148
+        },
+        "server_calibration_score": 9.971077245268672,
+        "server_calibration_risk": 0.03783348766737202,
+        "server_base_calibration_metrics": {
+          "accuracy": 0.8958653314492843,
+          "aeod": 0.037717518926117966,
+          "aspd": 0.11496559598363892
+        },
+        "server_base_calibration_risk": 0.07634155745487844,
+        "server_adaptive_lambda": 1.0021465834939427,
+        "server_calibration_budget": 0.06,
+        "server_calibration_acc_floor": 0.8908653314492843,
+        "server_calibration_max_acc_drop": 0.005,
+        "server_calibration_objective": "acc_floor"
+      },
+      "fit_sha256": "59f568952c788b2e8489890999bbbd2158dbaf000790f6d5cd24b73736f3f330"
+    },
+    "raw": {
+      "view": "raw",
+      "method": "GuardFed-AD2+",
+      "rule": "argmax_margin_strictly_positive",
+      "thresholds": null,
+      "fit_data": "none",
+      "fit_sha256": "403b7b187121326970b87cc37813296bf8a1e71078ccad2210b986ddd0b68747"
+    },
+    "shared_calibration": {
+      "view": "shared_calibration",
+      "method": "GuardFed-AD2+",
+      "rule": "group_margin_greater_equal",
+      "thresholds": {
+        "0": 0.28944981,
+        "1": -0.25192858
+      },
+      "fit_data": "clean_train_root_only",
+      "fit_diagnostics": {
+        "server_calibration_metrics": {
+          "accuracy": 0.8910732936044725,
+          "aeod": 0.0036832182578625527,
+          "aspd": 0.07198375707688148
+        },
+        "server_calibration_score": 9.971077245268672,
+        "server_calibration_risk": 0.03783348766737202,
+        "server_base_calibration_metrics": {
+          "accuracy": 0.8958653314492843,
+          "aeod": 0.037717518926117966,
+          "aspd": 0.11496559598363892
+        },
+        "server_base_calibration_risk": 0.07634155745487844,
+        "server_adaptive_lambda": 1.0021465834939427,
+        "server_calibration_budget": 0.06,
+        "server_calibration_acc_floor": 0.8908653314492843,
+        "server_calibration_max_acc_drop": 0.005,
+        "server_calibration_objective": "acc_floor"
+      },
+      "fit_sha256": "d2f5e3ccf2adb0da0ce60f5df0d9f6f37a077ceca86ed61c7cca6c30d2ab38e3"
+    }
+  },
+  "views": {
+    "native": {
+      "accuracy": 0.8892132682337545,
+      "aeod": 0.0004971980162054024,
+      "aspd": 0.06701545562062339,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.47712286706598883,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5413,
+          "fp": 356,
+          "tn": 4896,
+          "fn": 744,
+          "tpr": 0.8791619295111256,
+          "fpr": 0.06778370144706779,
+          "positive_rate": 0.5056534315014463
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 3027,
+          "fp": 683,
+          "tn": 4330,
+          "fn": 418,
+          "tpr": 0.8786647314949202,
+          "fpr": 0.1362457610213445,
+          "positive_rate": 0.4386379758808229
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "raw": {
+      "accuracy": 0.8942467408264962,
+      "aeod": 0.042442116339904024,
+      "aspd": 0.11245407411409819,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.4773242059696985,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5539,
+          "fp": 453,
+          "tn": 4799,
+          "fn": 618,
+          "tpr": 0.8996264414487575,
+          "fpr": 0.08625285605483625,
+          "positive_rate": 0.5251994039793145
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 2953,
+          "fp": 538,
+          "tn": 4475,
+          "fn": 492,
+          "tpr": 0.8571843251088535,
+          "fpr": 0.10732096548972671,
+          "positive_rate": 0.41274532986521634
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    },
+    "shared_calibration": {
+      "accuracy": 0.8892132682337545,
+      "aeod": 0.0004971980162054024,
+      "aspd": 0.06701545562062339,
+      "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+      "positive_rate": 0.47712286706598883,
+      "majority_accuracy": 0.5166859616449389,
+      "prediction_count": 19867,
+      "constant_predictions": false,
+      "group_confusion_counts": {
+        "0": {
+          "n": 11409,
+          "positives": 6157,
+          "negatives": 5252,
+          "tp": 5413,
+          "fp": 356,
+          "tn": 4896,
+          "fn": 744,
+          "tpr": 0.8791619295111256,
+          "fpr": 0.06778370144706779,
+          "positive_rate": 0.5056534315014463
+        },
+        "1": {
+          "n": 8458,
+          "positives": 3445,
+          "negatives": 5013,
+          "tp": 3027,
+          "fp": 683,
+          "tn": 4330,
+          "fn": 418,
+          "tpr": 0.8786647314949202,
+          "fpr": 0.1362457610213445,
+          "positive_rate": 0.4386379758808229
+        }
+      },
+      "warnings": [],
+      "fairness_status": "DEFINED"
+    }
+  },
+  "native_comparison": {
+    "tolerance": 1e-12,
+    "expected": {
+      "accuracy": 0.8892132682337545,
+      "aeod": 0.0004971980162054024,
+      "aspd": 0.06701545562062339
+    },
+    "observed": {
+      "accuracy": 0.8892132682337545,
+      "aeod": 0.0004971980162054024,
+      "aspd": 0.06701545562062339
+    },
+    "differences": {
+      "accuracy": 0.0,
+      "aeod": 0.0,
+      "aspd": 0.0
+    },
+    "max_abs_difference": 0.0,
+    "accepted": true
+  },
+  "prediction_arrays_sha256": "56a05efa1b4b3f057bb9b1f413c07242d02cf3c391f4570562462e136afd070f",
+  "weights_before": {
+    "features.0.weight": {
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "3f16c14cc4c5bded9d44853e8411558b23d07feab31b4f6a63fad213d5c056fd"
+    },
+    "features.0.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "<f4",
+      "sha256": "29d9a2b66f1023c5a6da795c140a1e1a89a93c45d13e39f4b5b9c0daddd9c31b"
+    },
+    "features.3.weight": {
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "1cc42246d4759bb1566d0f32e9d309b7070d8997ddd354c6af2b244288dbfc64"
+    },
+    "features.3.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "<f4",
+      "sha256": "b2206dc34e023265ea7834a04b04d7d809f2d04ce6a873f67fd2bf2b8a92484c"
+    },
+    "features.6.weight": {
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "f27af4139870e373cea84415d7c163518df50b18b644a2250f95f85aa5f6bf21"
+    },
+    "features.6.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "9c1da9a42e2ec7ff465e396db0ea451107edff3acadacc7df65eb7ea7b0837c9"
+    },
+    "classifier.weight": {
+      "shape": [
+        2,
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "4bb0b56d4e6657030c34161699a6b3a4d6341f18c895ec20eab8443900c74968"
+    },
+    "classifier.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "<f4",
+      "sha256": "c013b7bec8a7ada1e6734d584ba830b8aa510d1bd02e35002087ac813e5d31c7"
+    }
+  },
+  "weights_after": {
+    "features.0.weight": {
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "3f16c14cc4c5bded9d44853e8411558b23d07feab31b4f6a63fad213d5c056fd"
+    },
+    "features.0.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "<f4",
+      "sha256": "29d9a2b66f1023c5a6da795c140a1e1a89a93c45d13e39f4b5b9c0daddd9c31b"
+    },
+    "features.3.weight": {
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "1cc42246d4759bb1566d0f32e9d309b7070d8997ddd354c6af2b244288dbfc64"
+    },
+    "features.3.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "<f4",
+      "sha256": "b2206dc34e023265ea7834a04b04d7d809f2d04ce6a873f67fd2bf2b8a92484c"
+    },
+    "features.6.weight": {
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "dtype": "<f4",
+      "sha256": "f27af4139870e373cea84415d7c163518df50b18b644a2250f95f85aa5f6bf21"
+    },
+    "features.6.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "9c1da9a42e2ec7ff465e396db0ea451107edff3acadacc7df65eb7ea7b0837c9"
+    },
+    "classifier.weight": {
+      "shape": [
+        2,
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "4bb0b56d4e6657030c34161699a6b3a4d6341f18c895ec20eab8443900c74968"
+    },
+    "classifier.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "<f4",
+      "sha256": "c013b7bec8a7ada1e6734d584ba830b8aa510d1bd02e35002087ac813e5d31c7"
+    }
+  },
+  "optimizer_created": false,
+  "gradients_created": false,
+  "zero_margin_count": 0,
+  "elapsed_seconds": 36.72382988408208,
+  "cpu_user_seconds": 200.080541,
+  "cpu_system_seconds": 54.018253,
+  "peak_rss_kib": 2484520,
+  "before_resources": {
+    "utc": "2026-10-09T20:20:07.889163+00:00",
+    "process_pid": 66277,
+    "os_threads": 16,
+    "process_status": {
+      "VmHWM": "2405900 kB",
+      "VmRSS": "2405900 kB",
+      "Threads": "16",
+      "Cpus_allowed_list": "112-119"
+    },
+    "cgroup": {
+      "cpu.max": "12287999 100000",
+      "cpu.stat": "usage_usec 3223590622715\nuser_usec 2408960802507\nsystem_usec 814629820208\ncore_sched.force_idle_usec 0\nnr_periods 12201891\nnr_throttled 728\nthrottled_usec 4474038003\nnr_bursts 0\nburst_usec 0",
+      "memory.current": "72431890432",
+      "memory.max": "519171997696",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "load_average": [
+      134.9794921875,
+      140.31494140625,
+      158.69287109375
+    ],
+    "thread_cpu_affinities": {
+      "66277": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66278": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66279": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66280": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66281": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66282": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66283": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66284": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66285": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66286": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66287": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66288": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66289": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66290": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66291": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66292": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ]
+    },
+    "service": {
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 14:01:12",
+      "stderr": ""
+    },
+    "gpu": {
+      "returncode": 0,
+      "stdout": "0, 100 %, 6046 MiB, 71\n1, 99 %, 4042 MiB, 68",
+      "stderr": ""
+    },
+    "training_queue_snapshot": {
+      "phase": "formal",
+      "completed": [
+        "minus_U_IID_Benign_seed91003",
+        "minus_U_IID_Benign_seed91002",
+        "minus_U_IID_Benign_seed91008",
+        "minus_U_IID_Benign_seed91005",
+        "minus_U_IID_Benign_seed91006",
+        "minus_U_IID_Benign_seed91007",
+        "minus_U_IID_Benign_seed91001",
+        "minus_U_IID_Benign_seed91004",
+        "minus_U_IID_F Flip_seed91001",
+        "minus_U_IID_Benign_seed91009",
+        "minus_U_IID_F Flip_seed91002",
+        "minus_U_IID_Benign_seed91010",
+        "minus_U_IID_F Flip_seed91003",
+        "minus_U_IID_F Flip_seed91004",
+        "minus_U_IID_F Flip_seed91006",
+        "minus_U_IID_F Flip_seed91005",
+        "minus_U_IID_F Flip_seed91009",
+        "minus_U_IID_F Flip_seed91007",
+        "minus_U_IID_F Flip_seed91008",
+        "minus_U_IID_F Flip_seed91010",
+        "minus_U_IID_FedSA_seed91001",
+        "minus_U_IID_FedSA_seed91003",
+        "minus_U_IID_FedSA_seed91002",
+        "minus_U_IID_FedSA_seed91004",
+        "minus_U_IID_FedSA_seed91005",
+        "minus_U_IID_FedSA_seed91007",
+        "minus_U_IID_FedSA_seed91006",
+        "minus_U_IID_FedSA_seed91008",
+        "minus_U_IID_FedSA_seed91009",
+        "minus_U_IID_FedSA_seed91010",
+        "minus_U_IID_S-DFA_seed91001",
+        "minus_U_IID_S-DFA_seed91002",
+        "minus_U_IID_S-DFA_seed91003",
+        "minus_U_IID_S-DFA_seed91004",
+        "minus_U_IID_S-DFA_seed91005",
+        "minus_U_IID_S-DFA_seed91006",
+        "minus_U_IID_S-DFA_seed91007",
+        "minus_U_IID_S-DFA_seed91009",
+        "minus_U_IID_S-DFA_seed91008",
+        "minus_U_IID_S-DFA_seed91010",
+        "minus_U_IID_Sp-DFA_seed91003",
+        "minus_U_IID_Sp-DFA_seed91005",
+        "minus_U_IID_Sp-DFA_seed91004",
+        "minus_U_IID_Sp-DFA_seed91007",
+        "minus_U_IID_Sp-DFA_seed91001",
+        "minus_U_IID_Sp-DFA_seed91002",
+        "minus_U_IID_Sp-DFA_seed91006",
+        "minus_U_IID_Sp-DFA_seed91008",
+        "minus_U_IID_Sp-DFA_seed91009",
+        "minus_U_IID_Sp-DFA_seed91010",
+        "minus_U_non-IID_Benign_seed91001",
+        "minus_U_non-IID_Benign_seed91002",
+        "minus_U_non-IID_Benign_seed91004",
+        "minus_U_non-IID_Benign_seed91003",
+        "minus_U_non-IID_Benign_seed91005",
+        "minus_U_non-IID_Benign_seed91006",
+        "minus_U_non-IID_Benign_seed91007",
+        "minus_U_non-IID_Benign_seed91008",
+        "minus_U_non-IID_Benign_seed91009",
+        "minus_U_non-IID_Benign_seed91010",
+        "minus_U_non-IID_F Flip_seed91002",
+        "minus_U_non-IID_F Flip_seed91001",
+        "minus_U_non-IID_F Flip_seed91003",
+        "minus_U_non-IID_F Flip_seed91004",
+        "minus_U_non-IID_F Flip_seed91007",
+        "minus_U_non-IID_F Flip_seed91005",
+        "minus_U_non-IID_F Flip_seed91008",
+        "minus_U_non-IID_F Flip_seed91006",
+        "minus_U_non-IID_F Flip_seed91009",
+        "minus_U_non-IID_F Flip_seed91010",
+        "minus_U_non-IID_FedSA_seed91001",
+        "minus_U_non-IID_FedSA_seed91002",
+        "minus_U_non-IID_FedSA_seed91003",
+        "minus_U_non-IID_FedSA_seed91005",
+        "minus_U_non-IID_FedSA_seed91004",
+        "minus_U_non-IID_FedSA_seed91006",
+        "minus_U_non-IID_FedSA_seed91008",
+        "minus_U_non-IID_FedSA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91002",
+        "minus_U_non-IID_S-DFA_seed91003",
+        "minus_U_non-IID_FedSA_seed91009",
+        "minus_U_non-IID_S-DFA_seed91004",
+        "minus_U_non-IID_FedSA_seed91010",
+        "minus_U_non-IID_S-DFA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91008",
+        "minus_U_non-IID_S-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91006",
+        "minus_U_non-IID_S-DFA_seed91005",
+        "minus_U_non-IID_S-DFA_seed91010",
+        "minus_U_non-IID_Sp-DFA_seed91002",
+        "minus_U_non-IID_Sp-DFA_seed91003",
+        "minus_U_non-IID_Sp-DFA_seed91004",
+        "minus_U_non-IID_Sp-DFA_seed91005",
+        "minus_U_non-IID_Sp-DFA_seed91006",
+        "minus_U_non-IID_Sp-DFA_seed91008",
+        "minus_U_non-IID_Sp-DFA_seed91007",
+        "minus_U_non-IID_Sp-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91010",
+        "minus_C_IID_Benign_seed91001",
+        "minus_C_IID_Benign_seed91002",
+        "minus_C_IID_Benign_seed91003",
+        "minus_C_IID_Benign_seed91004",
+        "minus_C_IID_Benign_seed91005",
+        "minus_C_IID_Benign_seed91006",
+        "minus_C_IID_Benign_seed91007",
+        "minus_C_IID_Benign_seed91008",
+        "minus_C_IID_Benign_seed91009",
+        "minus_C_IID_Benign_seed91010",
+        "minus_C_IID_F Flip_seed91001",
+        "minus_C_IID_F Flip_seed91002",
+        "minus_C_IID_F Flip_seed91003",
+        "minus_C_IID_F Flip_seed91005",
+        "minus_C_IID_F Flip_seed91004",
+        "minus_C_IID_F Flip_seed91006",
+        "minus_C_IID_F Flip_seed91007",
+        "minus_C_IID_F Flip_seed91008",
+        "minus_C_IID_F Flip_seed91009",
+        "minus_C_IID_F Flip_seed91010"
+      ],
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_C_IID_FedSA_seed91001",
+          "pid": 65377
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91002",
+          "pid": 65391
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91003",
+          "pid": 65393
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91004",
+          "pid": 65530
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91005",
+          "pid": 65628
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91006",
+          "pid": 65653
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91007",
+          "pid": 65663
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91008",
+          "pid": 65690
+        }
+      ],
+      "pending": 672,
+      "updated_unix": 1791577204.1093566
+    }
+  },
+  "after_resources": {
+    "utc": "2026-10-09T20:20:42.704727+00:00",
+    "process_pid": 66277,
+    "os_threads": 16,
+    "process_status": {
+      "VmHWM": "2484520 kB",
+      "VmRSS": "2423752 kB",
+      "Threads": "16",
+      "Cpus_allowed_list": "112-119"
+    },
+    "cgroup": {
+      "cpu.max": "12287999 100000",
+      "cpu.stat": "usage_usec 3224189881283\nuser_usec 2409507632737\nsystem_usec 814682248545\ncore_sched.force_idle_usec 0\nnr_periods 12202239\nnr_throttled 728\nthrottled_usec 4474038003\nnr_bursts 0\nburst_usec 0",
+      "memory.current": "72446128128",
+      "memory.max": "519171997696",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "load_average": [
+      84.876953125,
+      127.1865234375,
+      153.6181640625
+    ],
+    "thread_cpu_affinities": {
+      "66277": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66278": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66279": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66280": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66281": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66282": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66283": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66284": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66285": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66286": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66287": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66288": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66289": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66290": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66291": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "66292": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ]
+    },
+    "service": {
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 14:01:46",
+      "stderr": ""
+    },
+    "gpu": {
+      "returncode": 0,
+      "stdout": "0, 100 %, 6046 MiB, 68\n1, 99 %, 4042 MiB, 67",
+      "stderr": ""
+    },
+    "training_queue_snapshot": {
+      "phase": "formal",
+      "completed": [
+        "minus_U_IID_Benign_seed91003",
+        "minus_U_IID_Benign_seed91002",
+        "minus_U_IID_Benign_seed91008",
+        "minus_U_IID_Benign_seed91005",
+        "minus_U_IID_Benign_seed91006",
+        "minus_U_IID_Benign_seed91007",
+        "minus_U_IID_Benign_seed91001",
+        "minus_U_IID_Benign_seed91004",
+        "minus_U_IID_F Flip_seed91001",
+        "minus_U_IID_Benign_seed91009",
+        "minus_U_IID_F Flip_seed91002",
+        "minus_U_IID_Benign_seed91010",
+        "minus_U_IID_F Flip_seed91003",
+        "minus_U_IID_F Flip_seed91004",
+        "minus_U_IID_F Flip_seed91006",
+        "minus_U_IID_F Flip_seed91005",
+        "minus_U_IID_F Flip_seed91009",
+        "minus_U_IID_F Flip_seed91007",
+        "minus_U_IID_F Flip_seed91008",
+        "minus_U_IID_F Flip_seed91010",
+        "minus_U_IID_FedSA_seed91001",
+        "minus_U_IID_FedSA_seed91003",
+        "minus_U_IID_FedSA_seed91002",
+        "minus_U_IID_FedSA_seed91004",
+        "minus_U_IID_FedSA_seed91005",
+        "minus_U_IID_FedSA_seed91007",
+        "minus_U_IID_FedSA_seed91006",
+        "minus_U_IID_FedSA_seed91008",
+        "minus_U_IID_FedSA_seed91009",
+        "minus_U_IID_FedSA_seed91010",
+        "minus_U_IID_S-DFA_seed91001",
+        "minus_U_IID_S-DFA_seed91002",
+        "minus_U_IID_S-DFA_seed91003",
+        "minus_U_IID_S-DFA_seed91004",
+        "minus_U_IID_S-DFA_seed91005",
+        "minus_U_IID_S-DFA_seed91006",
+        "minus_U_IID_S-DFA_seed91007",
+        "minus_U_IID_S-DFA_seed91009",
+        "minus_U_IID_S-DFA_seed91008",
+        "minus_U_IID_S-DFA_seed91010",
+        "minus_U_IID_Sp-DFA_seed91003",
+        "minus_U_IID_Sp-DFA_seed91005",
+        "minus_U_IID_Sp-DFA_seed91004",
+        "minus_U_IID_Sp-DFA_seed91007",
+        "minus_U_IID_Sp-DFA_seed91001",
+        "minus_U_IID_Sp-DFA_seed91002",
+        "minus_U_IID_Sp-DFA_seed91006",
+        "minus_U_IID_Sp-DFA_seed91008",
+        "minus_U_IID_Sp-DFA_seed91009",
+        "minus_U_IID_Sp-DFA_seed91010",
+        "minus_U_non-IID_Benign_seed91001",
+        "minus_U_non-IID_Benign_seed91002",
+        "minus_U_non-IID_Benign_seed91004",
+        "minus_U_non-IID_Benign_seed91003",
+        "minus_U_non-IID_Benign_seed91005",
+        "minus_U_non-IID_Benign_seed91006",
+        "minus_U_non-IID_Benign_seed91007",
+        "minus_U_non-IID_Benign_seed91008",
+        "minus_U_non-IID_Benign_seed91009",
+        "minus_U_non-IID_Benign_seed91010",
+        "minus_U_non-IID_F Flip_seed91002",
+        "minus_U_non-IID_F Flip_seed91001",
+        "minus_U_non-IID_F Flip_seed91003",
+        "minus_U_non-IID_F Flip_seed91004",
+        "minus_U_non-IID_F Flip_seed91007",
+        "minus_U_non-IID_F Flip_seed91005",
+        "minus_U_non-IID_F Flip_seed91008",
+        "minus_U_non-IID_F Flip_seed91006",
+        "minus_U_non-IID_F Flip_seed91009",
+        "minus_U_non-IID_F Flip_seed91010",
+        "minus_U_non-IID_FedSA_seed91001",
+        "minus_U_non-IID_FedSA_seed91002",
+        "minus_U_non-IID_FedSA_seed91003",
+        "minus_U_non-IID_FedSA_seed91005",
+        "minus_U_non-IID_FedSA_seed91004",
+        "minus_U_non-IID_FedSA_seed91006",
+        "minus_U_non-IID_FedSA_seed91008",
+        "minus_U_non-IID_FedSA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91002",
+        "minus_U_non-IID_S-DFA_seed91003",
+        "minus_U_non-IID_FedSA_seed91009",
+        "minus_U_non-IID_S-DFA_seed91004",
+        "minus_U_non-IID_FedSA_seed91010",
+        "minus_U_non-IID_S-DFA_seed91007",
+        "minus_U_non-IID_S-DFA_seed91008",
+        "minus_U_non-IID_S-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91001",
+        "minus_U_non-IID_S-DFA_seed91006",
+        "minus_U_non-IID_S-DFA_seed91005",
+        "minus_U_non-IID_S-DFA_seed91010",
+        "minus_U_non-IID_Sp-DFA_seed91002",
+        "minus_U_non-IID_Sp-DFA_seed91003",
+        "minus_U_non-IID_Sp-DFA_seed91004",
+        "minus_U_non-IID_Sp-DFA_seed91005",
+        "minus_U_non-IID_Sp-DFA_seed91006",
+        "minus_U_non-IID_Sp-DFA_seed91008",
+        "minus_U_non-IID_Sp-DFA_seed91007",
+        "minus_U_non-IID_Sp-DFA_seed91009",
+        "minus_U_non-IID_Sp-DFA_seed91010",
+        "minus_C_IID_Benign_seed91001",
+        "minus_C_IID_Benign_seed91002",
+        "minus_C_IID_Benign_seed91003",
+        "minus_C_IID_Benign_seed91004",
+        "minus_C_IID_Benign_seed91005",
+        "minus_C_IID_Benign_seed91006",
+        "minus_C_IID_Benign_seed91007",
+        "minus_C_IID_Benign_seed91008",
+        "minus_C_IID_Benign_seed91009",
+        "minus_C_IID_Benign_seed91010",
+        "minus_C_IID_F Flip_seed91001",
+        "minus_C_IID_F Flip_seed91002",
+        "minus_C_IID_F Flip_seed91003",
+        "minus_C_IID_F Flip_seed91005",
+        "minus_C_IID_F Flip_seed91004",
+        "minus_C_IID_F Flip_seed91006",
+        "minus_C_IID_F Flip_seed91007",
+        "minus_C_IID_F Flip_seed91008",
+        "minus_C_IID_F Flip_seed91009",
+        "minus_C_IID_F Flip_seed91010"
+      ],
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_C_IID_FedSA_seed91001",
+          "pid": 65377
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91002",
+          "pid": 65391
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91003",
+          "pid": 65393
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91004",
+          "pid": 65530
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91005",
+          "pid": 65628
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91006",
+          "pid": 65653
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91007",
+          "pid": 65663
+        },
+        {
+          "id": "minus_C_IID_FedSA_seed91008",
+          "pid": 65690
+        }
+      ],
+      "pending": 672,
+      "updated_unix": 1791577239.1150126
+    }
+  },
+  "test_labels_accessed": false,
+  "test_inference_performed": false,
+  "final_dispatch_created": false,
+  "claim_limit": "Two bounded valid-only canaries are implementation evidence, not all900 replay or a new final performance table",
+  "effective_cpu_cores": 6.919180129143855
+}

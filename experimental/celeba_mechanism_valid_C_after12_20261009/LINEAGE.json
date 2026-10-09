@@ -1,0 +1,65 @@
+{
+  "status": "PREPARED_ONLY_NO_RUNTIME",
+  "parent_science_seal_sha256": "025877d0a81a5dc74c81ed2623413ca51959b6c4b68344f0ab89477198a11811",
+  "parent_execution_seal_sha256": "86ecdbb9dea023ea04cc99cec5d6cf8cb02ad707cd3964490efa152aca68af91",
+  "prior112_root_adoption_sha256": "8d064687ad7841e1050120a12ada9e10458fea5bb6a4d9da5aeed77584437fc5",
+  "native120_inspection_sha256": "d964b9782299803261ce3d4b915b6217fabfa117b1bcf6cb1d6a075bcb89972c",
+  "native120_root_independent_review_sha256": "24925c6771e895765bbe98f1e767df06292cbbed2d222e3c112af65ebc1c9519",
+  "native120_ledger_sha256": "792253b38dfc43e99d544bb36250d2a689a7e8ede14761e28b268437b213645c",
+  "science_seal_sha256": "4e8b7bde2f3cb30c850623c0153ecba01ba1135185f7e2375b4b052301224f99",
+  "execution_seal_sha256": "0d81aa3f26490dd26c9f2254fa89cde5bc23e3e402c6333d089da22cc167efae",
+  "changed_functions": {
+    "bridge.py": [
+      "validate_inventory",
+      "require_approval"
+    ],
+    "execution_candidate/batch.py": [
+      "identities",
+      "bind_scope",
+      "check_approval",
+      "worker",
+      "manage"
+    ],
+    "execution_candidate/install_once.py": [
+      "prior_completed_service_stopped",
+      "main"
+    ],
+    "execution_candidate/resource_extra.py": [],
+    "execution_candidate/verify_saved_increment.py": [
+      "verify"
+    ],
+    "execution_candidate/verify_backup.py": [
+      "main"
+    ]
+  },
+  "unchanged_bridge_functions": [
+    "require",
+    "digest",
+    "canonical",
+    "read",
+    "save_new",
+    "load",
+    "cell",
+    "full_reference",
+    "validate_variant_metadata",
+    "bind_runtime",
+    "reference_baseline_full"
+  ],
+  "original112_records_exact": true,
+  "Full100_refs_and_actual900_source_records_exact": true,
+  "native_U100_C20_scope": true,
+  "selected8_difference_exact": true,
+  "excluded112_disjoint": true,
+  "pending_native_models_not_included": 680,
+  "source_reuse_comment": "Only scope/count/path/input/approval pins rebind; original bind_runtime and its nested replay_one/accept_saved_predictions body byte exact.",
+  "source_review_lineage_sha256_inherited_but_not_new_approval": "b1ff1fad6f5fe08cebec3008b6df861396c2e11c289b8f05815debb78dc3ed14",
+  "new_namespace": "/workspace/guardfed_checks/celeba_mechanism_valid_C_after12_20261009",
+  "service": "guardfed_celeba_mechanism_valid_C_after12",
+  "prior_service_must_be_EXITED": "guardfed_celeba_mechanism_valid_C_after1",
+  "no_Linux_resource_availability_claim": true,
+  "source_diff_sha256": "fb6f961e51e9b141b9f241ba5f57a2995e7ab7733261ff79081b7ae06f1ec49d",
+  "preparation_diff_sha256": "651962eeb0bc9295af8f5293697b7b3f3990af20ebc0037e154790a41d94e2d8",
+  "selfcheck_sha256": "d5a409b3fbfba663430a25c6a55cd7dd3c2c4547a658a69368a3eabef6f7e901",
+  "prepare_failure_preserved": "PREPARE_ATTEMPT1_FAILURE.json",
+  "test_or_CNN_execution": false
+}

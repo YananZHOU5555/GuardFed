@@ -1,0 +1,54 @@
+{
+  "status": "ROOT_ACTUAL_SEVEN_CANARY_STARTUP_AND_RESOURCE_VERIFIED_NOT_ACCEPTANCE",
+  "utc": "2026-10-09T20:18:57.080357+00:00",
+  "start_receipt_path": "tmp/celeba_flgmm_fullcoverage_canary_operations_20261009/attempt_20261009T201641646912Z/START.json",
+  "start_receipt_sha256": "6bce5a454ce36368d9f19abb32ed1c6defe6d5b95d7eb1964f2a277376298a42",
+  "resource_path": "tmp/celeba_flgmm_fullcoverage_canary_operations_20261009/attempt_20261009T201641646912Z/RESOURCE.json",
+  "resource_sha256": "03d6875a46207ec37724f2d21de27d07aecd8fdbc67bd40fff06757eb687559c",
+  "snapshot_path": "tmp/celeba_flgmm_fullcoverage_root_operations_20261009/observation_20261009T201720583136Z/SNAPSHOT.json",
+  "snapshot_sha256": "27c2d20f7a4cd7b4a116aa92745945a85e6387609897bc20376579edd3f80622",
+  "observed_utc": "2026-10-09T20:17:24.706406+00:00",
+  "service": "guardfed_celeba_flgmm_fullcoverage_canary   RUNNING   pid 66102, uptime 0:00:35",
+  "actual_processes": [
+    {
+      "pid": 66102,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_canaries.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded"
+      ],
+      "affinity": [
+        102,
+        103
+      ]
+    },
+    {
+      "pid": 66106,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/canary_reference.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--attack",
+        "Benign"
+      ],
+      "affinity": [
+        102,
+        103
+      ]
+    }
+  ],
+  "main_growth_verified": true,
+  "source_members_match": true,
+  "canary_scope": 7,
+  "canaries_accepted": 0,
+  "root_approval_sha256": "b5c2e38a9711f1f9a0023668fb445a6e5cf2ab8e0356a4808661d563bdd8fc3f",
+  "planned_new70round": 96,
+  "reused70round": 4,
+  "formal100_started": false,
+  "final_test": false,
+  "limit": "Sequential seven3-round checks are running. Tg20 transition is beyond horizon; no70-round equivalence or scientific acceptance inferred from startup."
+}

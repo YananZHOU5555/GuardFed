@@ -51,6 +51,22 @@ fl_selection_note=('Numerical recipe-summary adoption remains a separate step.' 
     'Independent and root record-only reviews adopted the unchanged frozen-score choice Tg20/L2/lr0.001, with32 condition scores and32 candidate mean scalars exact. The score margin over second place is0.0000497792; all eight candidates, the different ACC champion(Tg20/L3/lr0.001) and six Pareto candidates remain retained. This is exposed seed91001 validation selection, not stable superiority or a final endpoint.')
 diagnostic=state.get('native_mismatch_GPU_diagnostic_20261009')
 fl_bound_note=('FLGMM coverage metadata has separately passed actual server binding and root144-member SHA/scope checks:96 new70-round jobs plus four explicit original references, five new3-round gates and two same-horizon original references. No canary or full-coverage training has started. The local Python3.10 extraction-API failure is retained; a new safe per-file local extraction passed without repeating any remote bind or checkpoint inference.' if state.get('flgmm_fullcoverage_v2_20261009') else '')
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
+    fl_bound_note=fl_bound_note.replace('No canary or full-coverage training has started.',
+        'The exact seven-canary queue has actually started after source/data, protected-main growth and real Linux resource checks. No canary has yet been adopted; the96 new70-round queue has not started. Three rounds cannot exercise the selected Tg20 transition or prove70-round equivalence.')
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
+    fl_bound_note=fl_bound_note.replace('No canary has yet been adopted; the96 new70-round queue has not started.',
+        'All seven canary runs passed original strict/tensor/RNG checks and315 archive-member offserver/root checks. The frozen96-new+4-reused validation queue has actually started with one worker on eachGPU, both observed at round1; zero new70-round results are adopted at this startup boundary.')
+if main.get('C_after12_valid_replay'):
+    C_view_note+=(' An independent eight-checkpoint C/IID/F Flip terminal replay actually started onCPU112..119 with eight threads, nice10/idleI/O and hiddenCUDA. Source, actual original artifacts and resource guards passed; the prior112 and Full are not replayed. New offserver adoption and a complete F Flip table remain pending.')
+    if main['C_after12_valid_replay']['offserver_new_accepted']==8:
+        C_view_note=C_view_note.replace('12 accepted C terminal checkpoints.','20 accepted C terminal checkpoints.').replace('The two F Flip pairs remain excluded from means; other C scenes are incomplete.',
+            'The previous two F Flip pairs were excluded from that Benign table; all ten F Flip checkpoint replays are now accepted, with its separate complete paired table still pending. Other C scenes remain incomplete.').replace(
+            'New offserver adoption and a complete F Flip table remain pending.',
+            'The exact eight increment completed normally and passed89 archive-member checks,72 reconstructed metrics,192 confusion counts,24 rules and root adoption. Native discrepancies are all zero; only the F Flip paired-table review remains pending.')
+if main.get('C_three_view_two_scene_table'):
+    C_view_note+=(' The actual20-pair,40-record Benign/F Flip table now passes root recomputation of324 mean/sampleSD scalars and360 count metrics, with162 display cells and the old24 records/162 Benign scalars exact. All three views and fixed10/9/6-seed panels are retained; Full replay2CPU/18GPU versus C20CPU remains explicit. Other eight C scenes are incomplete. ')
+    C_view_note=C_view_note.replace('with its separate complete paired table still pending.','with its separate complete paired table now independently adopted.').replace('only the F Flip paired-table review remains pending.','the F Flip paired-table review is now independently adopted.')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '

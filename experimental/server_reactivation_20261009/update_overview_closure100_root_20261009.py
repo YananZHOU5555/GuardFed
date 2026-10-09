@@ -30,6 +30,8 @@ fl_accepted=state['flgmm_screen32_20261009']['offserver_accepted70round_jobs']
 hy_accepted=state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']
 aux_row=(f'| FLGMM / 组合控制 | 已严格验收离机{fl_accepted}/32与{hy_accepted}/32；{fo["checked_utc"]}只读实测分别'
     f'{fo["observed_complete"]}/{ho["observed_complete"]}终轮、{fo["active"]}/{ho["active"]}活动、{fo["pending"]}/{ho["pending"]}等待、失败0。FLGMM已按冻结规则选Tg20/L2/lr0.001，n=1；组合未选recipe，100项确认未启动 | TRAINING_STATE对应搜索记录及备份链 |')
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
+    aux_row=aux_row.replace('组合未选recipe，100项确认未启动','FLGMM七项短程严格离机后已启动96新+4复用、双GPU各1线程；组合未选recipe/100项未启动')
 text='\n'.join(resource_row if line.startswith('| 服务器与资源 |') else aux_row if line.startswith('| FLGMM / 组合控制 |') else line for line in text.split('\n'))
 text=text.replace('18:08 UTC实测；18:12 UTC验收','18:29 UTC实测；18:36 UTC验收')
 text=text.replace('69/65℃','68/66℃').replace('CPU11.02/122.88核，RAM75.14GB','CPU17.61/122.88核，RAM76.11GB')
@@ -58,8 +60,28 @@ if main.get('C_after1_valid_replay'):
     views_row=(f'| 机制三视图 | U100完整、C累计{main["three_view_counts_by_variant"]["minus_C"]}离机；准确C补集11状态{C_now["status"]}、新增接受{C_now["offserver_new_accepted"]}。U十场景表保持；C三视图统计表尚未验收 | [U十场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim100_20261009/snapshot100/TABLES.md) |')
 if main.get('C_three_view_single_scene_table'):
     views_row='| 机制三视图 | U100十场景完整；C12离机，IID Benign十seed单场景三视图表另核162统计/81单元/216计数指标。F Flip2对仅coverage，其余C未齐 | [C单场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_Benign10_20261009/snapshot/TABLES.md) |'
+if main.get('C_after12_valid_replay',{}).get('offserver_new_accepted')==8:
+    views_row=views_row.replace('C12离机','C20离机').replace('F Flip2对仅coverage','F Flip十对完整评价已核，配对表待另验收')
+    native_row=native_row.replace('F Flip2仍不入均值','F Flip十seed数据齐备、独立配对表待核')
+if main.get('C_three_view_two_scene_table'):
+    views_row='| 机制三视图 | U100十场景完整；C20的IID Benign/F Flip各十seed三视图表已独立核验324统计/162单元/360计数指标，旧Benign精确保持，其余八C场景未齐 | [C两场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_two_scenes_20261009/snapshot/TABLES.md) |'
 reply_row=('| 英文回复 | 24条原意见逐字、37数值pointer及37链接核验；完整稿纳入U100十场景与900校准解释，保留全部pending，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/manuscript_insertions_integrated_20261009.md) |')
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
+new_stage_note=''
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
+    new_stage_note+='FLGMM七项短程检查队列已实际启动，完成验收仍待原科学检查和离机备份；96新+4复用的70轮覆盖未启动。'
+    if state['flgmm_fullcoverage_v2_20261009'].get('formal100_started'):
+        new_stage_note=new_stage_note.replace('FLGMM七项短程检查队列已实际启动，完成验收仍待原科学检查和离机备份；96新+4复用的70轮覆盖未启动。',
+            'FLGMM七项短程已通过原严格、全状态/RNG比较及315成员离机核验；96新+4复用70轮valid完整覆盖已启动，双GPU worker首轮已实测，新70轮离机接受仍0。')
+if main.get('C_after12_valid_replay'):
+    new_stage_note+='新增8项C/IID F Flip终轮valid三视图CPU评价已实际启动，旧112和Full不重推；新增验收与完整F Flip表仍待完成。'
+    if main['C_after12_valid_replay']['offserver_new_accepted']==8:
+        new_stage_note=new_stage_note.replace('新增8项C/IID F Flip终轮valid三视图CPU评价已实际启动，旧112和Full不重推；新增验收与完整F Flip表仍待完成。',
+            '新增8项C/IID F Flip终轮三视图已正常完成并严格离机采用：89归档成员、72指标/192计数/24规则通过，native偏差0；累计U100+C20，旧112/Full不重推，F Flip配对表待独立验收。')
+text=re.sub(r'\n当前新增执行：[^\n]*\n','\n',text)
+if main.get('C_three_view_two_scene_table'):
+    new_stage_note=new_stage_note.replace('F Flip配对表待独立验收。','两场景三视图论文表已独立采用，324统计/162单元/360计数指标，旧Benign精确保持。')
+if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
 handoff=CHECKS/'MONITOR_HANDOFF.md'
@@ -81,6 +103,7 @@ top=f'''# GuardFed 当前巡检交接
 - FLGMM{fl_accepted}/32、组合{hy_accepted}/32已严格验收离机；{fo['checked_utc']}来源绑定只读实测分别{fo['observed_complete']}终轮/{fo['active']}活动/{fo['pending']}等待与{ho['observed_complete']}终轮/{ho['active']}活动/{ho['pending']}等待，失败0；新终轮未验收不得计入接受。LATEST_BACKUP各链已绑定；选recipe状态以STATE的独立汇总采用凭据为准，未启动formal100/test。
 - FLGMM final6已一次严格验收、离机成员SHA核验并root登记，原26不重训/打包；actual_20261009T194424Z/ROOT_ADOPTION_REVIEW.json SHA66097564f346b0dd5a0194ea7bd8c1413d51936819db086283f1d9a99a85738e。32→8冻结规则汇总已独立及root采用，ROOT_SUMMARY_ADOPTION.json SHAe602761016e199da157862da3f24c9f9d0f191cfde10fad49074540c672b4a7f，选Tg20/L2/lr0.001，score前两差0.0000497792；ACC冠军不同、六Pareto及全部候选保留。n=1不作SD/显著性，formal100/test未启动，原搜索与final6不得重跑。
 - 原after82审批数量错误CNN前0完成/空输出和FLGMM旧chain字段collector失败原证据保留；独立V2分别准确10/7一次通过，不重启旧失败目录。
+- {new_stage_note} 实际入口分别tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_CANARY_STARTUP.json及tmp/celeba_mechanism_valid_C_after12_20261009/execution_candidate/ROOT_STARTUP_OBSERVATION.json；后续只读观测，不盲重启。
 - 九方法900三视图/9页PDF、2052校准统计、旧TableII480原值追溯均验收；Fig3候选未采纳且原执行身份不足，提交版正文源项目待路径。
 - 完整24英文回复和正文插入候选已升级U100/900校准证据，ROOT6dfb210c5d53c2badbe4fb53220008e784430fa33f9e68f0ebb81968ce18c391；24comments/37数值与链接核验，仍为作者审阅稿，正文未应用。
 - 仍待800机制剩余{800-main['scientific_results_offserver_verified']}严格验收及其余七variant三视图、8方法完整覆盖/忠实规格和作者待决正式协议、冻结最终评价及正文/rebuttal。U100完成不等于全部返修完成，不从方案派发test或新方法。
@@ -90,6 +113,8 @@ top=f'''# GuardFed 当前巡检交接
 下次先读RUNNING/STATE/最新冻结协议，合并检查SSH、正确worker和真实轮次增长、错误/OOM/双GPU/实际cgroup资源。只有source/data/jobhash一致、无重复worker且恢复机制严格跳过已验收结果时，才有限恢复外部中断；代码/数值错误保存证据，不循环重试、不改科学配置/seed/指标/driver/实例、不购买资源。仅对重要变化、故障、完成或需用户处理通知。
 
 '''
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
+    top=top.replace('未启动formal100/test','FLGMM96新+4复用已启动、组合100未启动；test未启动').replace('formal100/test未启动','FLGMM96新+4复用已启动、组合100未启动；test未启动')
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

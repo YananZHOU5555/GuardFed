@@ -1,0 +1,309 @@
+{
+  "time_unix": 1791577922.3939054,
+  "service": {
+    "returncode": 3,
+    "stdout": "guardfed_celeba_flgmm_fullcoverage_canary   EXITED    Oct 09 08:30 PM\n",
+    "stderr": ""
+  },
+  "python_owners": [
+    {
+      "pid": 258,
+      "argv": [
+        "/opt/sys-venv/bin/python3",
+        "/opt/sys-venv/bin/jupyter-notebook",
+        "--no-browser",
+        "--ContentsManager.allow_hidden=True",
+        "--ServerApp.root_dir=/",
+        "--ServerApp.preferred_dir=/",
+        "--ip=0.0.0.0",
+        "--port=8080",
+        "--NotebookApp.open_browser=False",
+        "--NotebookApp.token=ee2227f4428ab67d4662daea816574673ba564bd15245a5eaef1ee2f3efcc25f",
+        "--NotebookApp.allow_remote_access=True",
+        "--NotebookApp.allow_origin=*",
+        "--NotebookApp.certfile=/etc/instance.crt",
+        "--NotebookApp.keyfile=/etc/instance.key",
+        "--allow-root",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 302,
+      "argv": [
+        "/opt/sys-venv/bin/python3",
+        "/opt/sys-venv/shim/supervisord",
+        "-n",
+        "-u",
+        "root",
+        "-c",
+        "/etc/supervisor/supervisord.conf",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 369,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/cron.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 371,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/caddy.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 372,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/instance_portal.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 383,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/model-ui.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 405,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/tunnel_manager.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 427,
+      "argv": [
+        "/opt/portal-aio/venv/bin/python3",
+        "/opt/portal-aio/venv/bin/fastapi",
+        "run",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "11111",
+        "portal.py",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 428,
+      "argv": [
+        "/opt/portal-aio/venv/bin/python3",
+        "/opt/portal-aio/venv/bin/fastapi",
+        "run",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "11112",
+        "tunnel_manager.py",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 429,
+      "argv": [
+        "/opt/model-ui/venv/bin/python",
+        "/opt/model-ui/app.py",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 9181,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/guardfed_celeba_mechanism_formal.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 9183,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "deployment/celeba_mechanism_20261009/runner.py",
+        "run",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--stage",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 33739,
+      "argv": [
+        "python3",
+        "/usr/local/bin/log-tee",
+        "/var/log/portal/guardfed_celeba_hybrid_screen32.log",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 33740,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/driver.py",
+        "run",
+        "--kind",
+        "screen",
+        "--approved",
+        "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/APPROVED_screen.json",
+        "--approved-sha256",
+        "c984c7bf910ce87156c4901f559eac30f7aebbad28858a942dd5343226c476ee",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65377,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91001.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65391,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91002.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65393,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91003.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65530,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91004.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65628,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91005.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65653,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91006.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65663,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91007.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 65690,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job",
+        "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_IID_FedSA_seed91008.json",
+        ""
+      ],
+      "declared_threads": 1
+    },
+    {
+      "pid": 66777,
+      "argv": [
+        "python",
+        "-B",
+        "-",
+        ""
+      ],
+      "declared_threads": 1
+    }
+  ],
+  "nominal_cpu_threads": 24,
+  "raw_cgroup": {
+    "cpu.max": "12287999 100000\n",
+    "memory.current": "67901554688\n",
+    "memory.max": "519171997696\n",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+  },
+  "no_producer": true
+}

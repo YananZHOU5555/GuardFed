@@ -1,0 +1,31 @@
+[
+  {
+    "command": [
+      "supervisorctl",
+      "reread"
+    ],
+    "returncode": 0,
+    "stdout": "guardfed_celeba_flgmm_fullcoverage: available",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "supervisorctl",
+      "update",
+      "guardfed_celeba_flgmm_fullcoverage"
+    ],
+    "returncode": 0,
+    "stdout": "guardfed_celeba_flgmm_fullcoverage: added process group",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "supervisorctl",
+      "start",
+      "guardfed_celeba_flgmm_fullcoverage"
+    ],
+    "returncode": 0,
+    "stdout": "guardfed_celeba_flgmm_fullcoverage: started",
+    "stderr": ""
+  }
+]
