@@ -1,0 +1,102 @@
+{
+  "status": "ROOT_READY_FL96_INCREMENT_STRICT_OFFSERVER_PASS",
+  "utc": "2026-10-09T21:49:28.129691+00:00",
+  "accepted_new_ids": [
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91004_fullcoverage"
+  ],
+  "prior_accepted_new": 2,
+  "accepted_new": 1,
+  "accepted_new_cumulative": 3,
+  "planned_new": 96,
+  "separately_reused70round": 4,
+  "planned_total": 100,
+  "single_collector_snapshot": true,
+  "source_package_sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+  "prepared_helper_seal_sha256": "f6de59a56de25a8d316cf7e05c44eafc9751041757e4dc61c88f7bccfd988472",
+  "offserver_acceptance_sha256": "bdb72d40fdb99a582ab0e6b346900cd92202611eedb25692c4ba05c91fe7b333",
+  "server_backup_receipt_sha256": "b24346e3006eda2bf8190ed0a2479c11370a77fcfc902f480f0b3cbf7e42e293",
+  "archive_sha256": "0ecdb69ef6014731dae8354c031af8c5191592869bebded48e49c775d677b267",
+  "archive_bytes": 467257,
+  "archive_members": 17,
+  "inventory_sha256": "a618436dba813da7f5e29942b8d344a44c91701246ac4ff3953a87fbb0286ad8",
+  "server_strict_sha256": "ee363498a4be67449ff4f550a19d3c1d7f8339fba4823a2dc3355ecc15c0cce3",
+  "previous_actual_offserver_sha256": "9e9591bf3bede29b74a6ea34a944ef1b63b0584edd3ad95802d3725f77bd510e",
+  "previous_latest_sha256": "0eb5f92ca214ab4c2fde1c12fc40279e26f62a547397d07e6a1964251ab38eb3",
+  "actual_snapshot_utc": "2026-10-09T21:47:51.544513+00:00",
+  "records": [
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91004_fullcoverage",
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "seed": 91004,
+      "distribution": "IID",
+      "attack": "Benign",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.897719836915488,
+        "aeod": 0.03411388455869202,
+        "aspd": 0.1081683593250391
+      },
+      "evaluation_stats": {
+        "positive_rate": 0.4538178889615946,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "checkpoint_sha256": "7cc5f3fb60d6b8b67ac0530e703e8c171ee855ff381d008032b7a02ff6b76485",
+      "original_acceptance_sha256": "d52c217d5cef9f590423bbc2ec90934ad928a30d319e4ca8256ca6b455dbc2df",
+      "screen_identity_sha256": "47fad24bdf59eabc0aa9703dafe4a9cb99be30b6f512e2955019ba1a6d350d29",
+      "job_sha256": "1d1c48e81e8074f6bdb4dc373842ddd2b2a697e1778075ba3b9e5a4edfe94d59",
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_source_hashes": {
+        "flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+        "worker.py": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+        "prepare_jobs.py": "91d33acf2ec25be1d1636a74ee960346548d85c4b17b0bfc1ab12fd5340f9f6c",
+        "protocol.json": "1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4",
+        "sources/flgmm_pinned.py": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+        "sources/flgmm_fedavg.py": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+        "sources/flgmm_license.txt": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+      }
+    }
+  ],
+  "helper_CPU": 106,
+  "helper_threads": 1,
+  "nice": 10,
+  "IO": "idle",
+  "server_verification_runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "executable": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "torch": "2.11.0+cu128",
+    "cuda_initialized": false
+  },
+  "local_verification_runtime": {
+    "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.8.0+cpu",
+    "cuda_initialized": false
+  },
+  "training_runtime_not_recreated": true,
+  "root_adoption_required": true,
+  "no_old_models_repacked": true,
+  "no_CNN_training_test": true,
+  "canonical_state_git_queue_unchanged": true
+}

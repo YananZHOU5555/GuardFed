@@ -1,0 +1,26 @@
+{
+  "status": "COMPLETED_NO_CANONICAL_ACTION",
+  "actual_review_command": "python -B tmp/celeba_mechanism_C30_root_arithmetic_review_20261009/review.py --handoff tmp/celeba_mechanism_three_view_C_three_scenes_prepared_20261009/ACTUAL_HANDOFF.json --handoff-sha256 86b1a397e4c96adae15cf668b43b6ecbb3755bc669ab61bc669269889ecbf94f",
+  "actual_review_result": {
+    "chunk_id": "9da778",
+    "wall_time_seconds": 0.5722495,
+    "exit_code": 0,
+    "original_token_count": 87,
+    "output": "{\"path\": \"E:\\\\OneDrive\\\\\\u6587\\u6863\\\\GuardFed\\\\tmp\\\\celeba_mechanism_C30_root_arithmetic_review_20261009\\\\ROOT_ARITHMETIC_REVIEW.json\", \"sha256\": \"4c0816364469b16cdc1f76b6852633d5b4c9157af8161ae43b1cf2ada908e4a5\", \"status\": \"INDEPENDENT_C30_THREE_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION\", \"max_abs_difference\": 1.4210854715202004e-14}\r\n"
+  },
+  "source_connection_command": "python -B tmp/celeba_mechanism_C30_root_arithmetic_review_20261009/verify_source_connections.py",
+  "source_connection_result": {
+    "chunk_id": "41b768",
+    "wall_time_seconds": 1.3308777,
+    "exit_code": 0,
+    "original_token_count": 78,
+    "output": "{\"path\": \"E:\\\\OneDrive\\\\\\u6587\\u6863\\\\GuardFed\\\\tmp\\\\celeba_mechanism_C30_root_arithmetic_review_20261009\\\\SOURCE_CONNECTION_REVIEW.json\", \"sha256\": \"e53dbbd8b8e7e4757d0104d2744af23edae50d41db749585f8b0bf6147915996\", \"status\": \"INDEPENDENT_C30_ARCHIVE_ROOT_FULL900_CONNECTION_PASS_NO_ADOPTION\", \"members\": 211}\r\n"
+  },
+  "read_only_schema_probe_failure": {
+    "exit_code": 1,
+    "error": "KeyError: 'identity'",
+    "context": "A read-only tar receipt schema probe printed its actual keys, then attempted dr['identity']; actual receipt stores id and scientific fields at top level.",
+    "impact": "No source, table, report or scientific data was changed. Main sealed arithmetic review had already passed; source supplement uses observed top-level fields and passed once.",
+    "automatic_scientific_retry": false
+  }
+}

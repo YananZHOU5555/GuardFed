@@ -1,0 +1,33 @@
+--- tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after14_20261009/collect_once.py
++++ tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after15_20261009/collect_once.py
+@@ -40,11 +40,11 @@
+  service=subprocess.check_output(['supervisorctl','status','guardfed_celeba_hybrid_screen32'],text=True).strip()
+  snapshot=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),rows=rows,service=service,processes=processes,nominal_threads=nominal,cpu_quota=int(quota)/int(period),helper_cpu=110,helper_nice=os.getpriority(os.PRIO_PROCESS,0),helper_IO='idle')
+  save('live_snapshot.json',snapshot)
+- assert digest(B/'PREVIOUS_CHAIN.json')=='841f0a5accfd413d35f2f17ac6bd8309fa0029a7096cff635f9e98bddc937f33' and digest(B/'AUTHORIZED_SNAPSHOT.json')=='dffadb0d8e2bef827c802318cc4efc111922489ee0762d3c4900e27cbd4b6bba'
+- wanted=['CosineFairness_lam20.0_tau0.2_lr0.0005_non-IID_Benign_seed91001_screen']
++ assert digest(B/'PREVIOUS_CHAIN.json')=='801c0f53211ee9c51d3666565660155a154dabbd6791c34d597a4aafb3fa3d99' and digest(B/'AUTHORIZED_SNAPSHOT.json')=='27fb954f55e113d938f03f289048d84cc16303abfd9c437a40fd09b180370d2c'
++ wanted=['CosineFairness_lam20.0_tau0.2_lr0.0005_non-IID_S-DFA_seed91001_screen']
+  previous=read(B/'PREVIOUS_CHAIN.json')
+  assert set(wanted)<={r['id'] for r in rows if r['terminal'] and r['result_exists'] and r['round']==70} and not set(wanted)&set(previous['accepted_job_ids'])
+- assert read(B/'EXACT_DELTA.json')['selected_ids']==wanted and previous['accepted_total']==14
++ assert read(B/'EXACT_DELTA.json')['selected_ids']==wanted and previous['accepted_total']==15
+  assert not(H/'screen_failure.json').exists() and not any(r['failures'] for r in rows)
+  for producer in processes:
+   assert all(not any(identity in arg for arg in producer['argv']) for identity in wanted),'Frozen terminal producer still active'
+@@ -68,12 +68,12 @@
+  body.verify_scope(scope)
+  # The original queue uses one persistent producer and one shared stdout log; capture a labelled prefix, not a closed per-job log.
+  log=Path('/var/log/guardfed_celeba_hybrid_screen32.log');(B/'service_log_prefix.txt').write_bytes(log.read_bytes())
+- proof=dict(status='PARTIAL_ORIGINAL_STRICT_ACCEPTED_OFFSERVER_PENDING',previous_chain_sha256=digest(B/'PREVIOUS_CHAIN.json'),old_accepted=14,accepted_total=14+len(wanted),accepted_new=len(wanted),accepted_new_ids=wanted,planned=32,records=records,snapshot_sha256=digest(B/'live_snapshot.json'),source_seal_sha256=digest(H/'FILES_SHA256.json'),scope_sha256=digest(H/'screen_scope.json'),runtime_protocol_sha256=digest(H/'runtime_protocol.json'),driver_sha256=digest(H/'driver.py'),body_sha256=digest(H/'body.py'),writer_policy_sha256=digest(H/'writer_policy.py'),source_data_verified_before_after=True,source_host=os.uname().nodename,runtime=dict(python=sys.version,torch=torch.__version__,cuda_build=torch.version.cuda,CPU=sorted(os.sched_getaffinity(0)),threads=torch.get_num_threads(),gpu_name_for_original_checker=torch.cuda.get_device_name(0),cuda_context_initialized_for_original_device_metadata=torch.cuda.is_initialized()),no_CNN_training_or_test=True,no_selection=True,log_semantics='Shared still-running producer log prefix only. Each accepted result bytes hashed before/after archive; no active result included.',collector_sha256=digest(__file__))
++ proof=dict(status='PARTIAL_ORIGINAL_STRICT_ACCEPTED_OFFSERVER_PENDING',previous_chain_sha256=digest(B/'PREVIOUS_CHAIN.json'),old_accepted=15,accepted_total=15+len(wanted),accepted_new=len(wanted),accepted_new_ids=wanted,planned=32,records=records,snapshot_sha256=digest(B/'live_snapshot.json'),source_seal_sha256=digest(H/'FILES_SHA256.json'),scope_sha256=digest(H/'screen_scope.json'),runtime_protocol_sha256=digest(H/'runtime_protocol.json'),driver_sha256=digest(H/'driver.py'),body_sha256=digest(H/'body.py'),writer_policy_sha256=digest(H/'writer_policy.py'),source_data_verified_before_after=True,source_host=os.uname().nodename,runtime=dict(python=sys.version,torch=torch.__version__,cuda_build=torch.version.cuda,CPU=sorted(os.sched_getaffinity(0)),threads=torch.get_num_threads(),gpu_name_for_original_checker=torch.cuda.get_device_name(0),cuda_context_initialized_for_original_device_metadata=torch.cuda.is_initialized()),no_CNN_training_or_test=True,no_selection=True,log_semantics='Shared still-running producer log prefix only. Each accepted result bytes hashed before/after archive; no active result included.',collector_sha256=digest(__file__))
+  save('PARTIAL_ACCEPTANCE.json',proof)
+  for name in ['collect_once.py','live_snapshot.json','PARTIAL_ACCEPTANCE.json','service_log_prefix.txt','PREVIOUS_CHAIN.json','PREVIOUS_LATEST.json','AUTHORIZED_SNAPSHOT.json','EXACT_DELTA.json','COLLECTOR_DIFF.patch','SOURCE_RECEIPT.json']:
+-  files['accepted_delta_after14_20261009/'+name]=dict(sha256=digest(B/name),size=(B/name).stat().st_size)
++  files['accepted_delta_after15_20261009/'+name]=dict(sha256=digest(B/name),size=(B/name).stat().st_size)
+  save('MEMBERS.json',{'members':files})
+- archive=B/'hybrid_after14_delta.tar.gz'
++ archive=B/'hybrid_after15_delta.tar.gz'
+  with tarfile.open(archive,'x:gz') as t:
+   for name in files:t.add(H/name,arcname=name,recursive=False)
+   t.add(B/'MEMBERS.json',arcname='MEMBERS.json',recursive=False)

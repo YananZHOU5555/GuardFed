@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27,28,29,30,31),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -55,6 +55,10 @@ profiles={
     31:dict(previous='c3f6beba17866b23b83c5339b69b03610a7100d0',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=128,views=128,
         native_tag='root_delta_20261009T212311Z',native_delta=3,handoffs=[],live_tags=[],
+        formal_tag=max((ROOT/CHECKS).glob('root_live_*.json'),key=lambda p:p.name).stem.removeprefix('root_live_')),
+    32:dict(previous='6a0d567dc9ec81d21f915465785b50d2b627509b',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=136,views=136,
+        native_tag='root_delta_20261009T214755Z',native_delta=8,handoffs=[],live_tags=[],
         formal_tag=max((ROOT/CHECKS).glob('root_live_*.json'),key=lambda p:p.name).stem.removeprefix('root_live_'))}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
@@ -66,16 +70,16 @@ def copy(src,dst,expected=None):
     assert expected is None or digest==expected
     target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,target)
     assert sha(target)==digest and MAPPING.setdefault(dst.as_posix(),digest)==digest
-if args.increment==31:
-    C3=ROOT/'tmp/celeba_mechanism_valid_C_after25_20261009'
+if args.increment in (31,32):
+    C3=ROOT/('tmp/celeba_mechanism_valid_C_after25_20261009' if args.increment==31 else 'tmp/celeba_mechanism_valid_C_after28_20261009')
     C3_adoptions=list((C3/'execution_candidate/backups').glob('incremental_*/ROOT_ADOPTION_REVIEW.json'))
-    assert len(C3_adoptions)==1,'Actual exact3 offserver/root adoption is required before any publication copy'
+    assert len(C3_adoptions)==1,'Actual exact increment offserver/root adoption is required before any publication copy'
     C3_proof=read(C3_adoptions[0]);C3_scope=read(C3/'SCOPE.json')
-    assert C3_proof['status']=='ROOT_C_AFTER25_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
-    assert (C3_proof['prior_three_view_models'],C3_proof['accepted_new'],C3_proof['cumulative_three_view_models'])==(125,3,128)
-    assert C3_proof['original125_unchanged'] and C3_proof['all_native_differences_zero'] and not C3_proof['test_inference']
+    assert C3_proof['status']==('ROOT_C_AFTER25_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS' if args.increment==31 else 'ROOT_C_AFTER28_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS')
+    assert (C3_proof['prior_three_view_models'],C3_proof['accepted_new'],C3_proof['cumulative_three_view_models'])==({31:(125,3,128),32:(128,8,136)}[args.increment])
+    assert C3_proof['original125_unchanged' if args.increment==31 else 'original128_unchanged'] and C3_proof['all_native_differences_zero'] and not C3_proof['test_inference']
     assert C3_proof['new_Full_inference']==0 and set(C3_proof['accepted_new_ids'])==set(C3_scope['selected_ids'])
-    assert len(C3_scope['excluded_prior_ids'])==125 and not set(C3_scope['excluded_prior_ids'])&set(C3_scope['selected_ids'])
+    assert len(C3_scope['excluded_prior_ids'])=={31:125,32:128}[args.increment] and not set(C3_scope['excluded_prior_ids'])&set(C3_scope['selected_ids'])
     assert sha(C3/'FILES_SHA256.json')==C3_proof['science_seal_sha256']
     assert sha(C3/'execution_candidate/EXECUTION_SOURCE_SHA256.json')==C3_proof['execution_seal_sha256']
 if args.increment==30:
@@ -769,17 +773,17 @@ if args.increment==30:
         if path.is_file():copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
     copy(ROOT/'tmp/update_overview_closure100_root_20261009.py',Path('experimental/server_reactivation_20261009/update_overview_closure100_root_20261009.py'))
     copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
-if args.increment==31:
+if args.increment in (31,32):
     native_review=read(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')
-    assert sha(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')=='e15a5e1653af57a79d71385c9c3a64d72267a5ae92de3623ccc0f3bc55236b58'
-    for folder in (C3,ROOT/'tmp/celeba_mechanism_C_after25_root_operations_20261009'):
+    assert sha(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')=={31:'e15a5e1653af57a79d71385c9c3a64d72267a5ae92de3623ccc0f3bc55236b58',32:'977ab3a96b91c495001127583d8c71af25fec4cca838a0c8e2415dfb4917117d'}[args.increment]
+    for folder in (C3,ROOT/('tmp/celeba_mechanism_C_after25_root_operations_20261009' if args.increment==31 else 'tmp/celeba_mechanism_C_after28_root_operations_20261009')):
         for path in folder.rglob('*'):
             if path.is_file() and not {'__pycache__','restored','verified','verified_extract'}&set(path.parts):
                 assert path.suffix!='.pt'
                 copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
     hybrid=ROOT/'tmp/celeba_hybrid_screen_execution_20261009';hl=read(hybrid/'LATEST_BACKUP.json')
     hc=hybrid/hl['chain_file'];hchain=read(hc)
-    assert hl['accepted']==state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']==15
+    assert hl['accepted']==state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']=={31:15,32:16}[args.increment]
     hd=hybrid/hchain['delta_dir'];hp=ROOT/hchain['root_adoption_path']
     assert sha(hp)==hchain['root_adoption_sha256'] and read(hp)['accepted_new']==1
     for pin in read(hd/'DELIVERY_FILES_SHA256.json')['members']:
@@ -788,14 +792,15 @@ if args.increment==31:
         copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
     fl=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009';fl_latest=read(fl/'LATEST_BACKUP.json')
     fp=ROOT/fl_latest['root_adoption_path'];fd=fp.parent
-    assert sha(fp)==fl_latest['root_adoption_sha256']=='d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb'
-    assert read(fp)['accepted_total']==state['flgmm_fullcoverage_v2_20261009']['new_accepted']==2
+    assert sha(fp)==fl_latest['root_adoption_sha256']=={31:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',32:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638'}[args.increment]
+    assert read(fp)['accepted_total']==state['flgmm_fullcoverage_v2_20261009']['new_accepted']=={31:2,32:3}[args.increment]
     for name,pin in read(fd/'DELIVERY_FILES_SHA256.json')['files'].items():
         copy(fd/name,Path('experimental')/(fd/name).relative_to(ROOT/'tmp'),pin['sha256'])
     for path in (fd/'DELIVERY_FILES_SHA256.json',fp,fl/'LATEST_BACKUP.json'):
         copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
-    for name in ('prepare_C_after25_root_operations_20261009.py','adopt_Hybrid_after14_root_20261009.py',
-                 'adopt_FL96_second_delta_root_20261009.py','update_overview_closure100_root_20261009.py'):
+    new_helpers={31:('prepare_C_after25_root_operations_20261009.py','adopt_Hybrid_after14_root_20261009.py','adopt_FL96_second_delta_root_20261009.py'),
+                 32:('prepare_C_after28_root_operations_20261009.py','adopt_Hybrid_after15_root_20261009.py','adopt_FL96_third_delta_root_20261009.py')}[args.increment]
+    for name in new_helpers+('update_overview_closure100_root_20261009.py',):
         copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
     for record in (state['flgmm_screen32_20261009']['latest_readonly_terminal_observation'],state['hybrid_screen32_20261009']['latest_readonly_terminal_observation']):
         source=ROOT/record['entry'];copy(source,source.relative_to(ROOT),record['sha256'])
@@ -806,6 +811,39 @@ if args.increment==31:
         if path.is_file():copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
     copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
+if args.increment==32:
+    C30=ROOT/TRAIN/'celeba_mechanism_v1/three_view_C_three_scenes_20261009'
+    C30_source=ROOT/'tmp/celeba_mechanism_three_view_C_three_scenes_prepared_20261009'
+    assert sha(C30/'ROOT_VERIFICATION.json')=='2cce0519555efbff75f559875c4c1afe63e07d242cb8e3ebe6af644efc95961d'
+    C30_review=read(C30/'ROOT_VERIFICATION.json')
+    assert (C30_review['paired_models'],C30_review['mean_SD_scalars_recomputed'],C30_review['display_cells'],C30_review['count_metrics_recomputed'])==(30,486,243,540)
+    assert C30_review['C8_root_adoption_sha256']==sha(C3_adoptions[0])
+    assert sha(C30_source/'ACTUAL_FILES_SHA256.json')==sha(C30/'ACTUAL_FILES_SHA256.json')=='46c405262070155a55dbeefd569d13af11d301113217f4b0f77f2437a981fef2'
+    for name,pin in read(C30_source/'ACTUAL_FILES_SHA256.json')['files'].items():
+        copy(C30_source/name,Path('experimental')/C30_source.name/name,pin['sha256'])
+        copy(C30/name,(C30/name).relative_to(ROOT),pin['sha256'])
+    copy(C30_source/'ACTUAL_FILES_SHA256.json',Path('experimental')/C30_source.name/'ACTUAL_FILES_SHA256.json')
+    for name in ('ACTUAL_FILES_SHA256.json','ROOT_VERIFICATION.json'):copy(C30/name,(C30/name).relative_to(ROOT))
+    C30_independent=ROOT/'tmp/celeba_mechanism_C30_root_arithmetic_review_20261009'
+    assert sha(C30_independent/'ROOT_ARITHMETIC_REVIEW.json')=='4c0816364469b16cdc1f76b6852633d5b4c9157af8161ae43b1cf2ada908e4a5'
+    assert sha(C30_independent/'SOURCE_CONNECTION_REVIEW.json')=='e53dbbd8b8e7e4757d0104d2744af23edae50d41db749585f8b0bf6147915996'
+    assert sha(C30_independent/'FINAL_FILES_SHA256.json')=='112ddae5507989565b02f6cbf8e9498fe8373c3f9a74b1883964191f87f43bae'
+    for name,pin in read(C30_independent/'FINAL_FILES_SHA256.json')['files'].items():
+        assert sha(C30_independent/name)==pin['sha256'] and (C30_independent/name).stat().st_size==pin['bytes']
+    for path in C30_independent.iterdir():
+        if path.is_file():copy(path,Path('experimental')/C30_independent.name/path.name)
+    for path in (ROOT/'tmp/adopt_C_three_scene_table_root_20261009.py',hd/'ROOT_LOCAL_BINDING_CORRECTION.json'):
+        copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    C30_writing=ROOT/'tmp/guardfed_rebuttal_C30_20261009'
+    C30_canonical=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_C30_addendum_20261009'
+    assert sha(C30_canonical/'ROOT_REVIEW.json')=='e5ae4ea68ce7b41d0f98b918af8873b167d6d5cff758f0a03221f6356911ff7e'
+    assert sha(C30_writing/'FILES_SHA256.json')==sha(C30_canonical/'FILES_SHA256.json')=='8276afbd89a40041d4204dcc9cd3245092c005d6e79a4077fe4ca28a058566ad'
+    for name,pin in read(C30_writing/'FILES_SHA256.json')['files'].items():
+        copy(C30_writing/name,Path('experimental')/C30_writing.name/name,pin['sha256'])
+        copy(C30_canonical/name,(C30_canonical/name).relative_to(ROOT),pin['sha256'])
+    copy(C30_writing/'FILES_SHA256.json',Path('experimental')/C30_writing.name/'FILES_SHA256.json')
+    for name in ('FILES_SHA256.json','ROOT_REVIEW.json'):copy(C30_canonical/name,(C30_canonical/name).relative_to(ROOT))
+    copy(ROOT/'tmp/adopt_rebuttal_C30_addendum_root_20261009.py',Path('experimental/server_reactivation_20261009/adopt_rebuttal_C30_addendum_root_20261009.py'))
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
     patterns += ['experimental/celeba_mechanism_valid_incremental_next11_20261009/** -text',
@@ -891,6 +929,15 @@ if args.increment==31:
     patterns+=['experimental/celeba_mechanism_valid_C_after25_20261009/** -text',
         'experimental/celeba_mechanism_C_after25_root_operations_20261009/** -text',
         'experimental/celeba_hybrid_screen_execution_20261009/accepted_delta_after14_20261009/** -text']
+if args.increment==32:
+    patterns+=['experimental/celeba_mechanism_valid_C_after28_20261009/** -text',
+        'experimental/celeba_mechanism_C_after28_root_operations_20261009/** -text',
+        'experimental/celeba_hybrid_screen_execution_20261009/accepted_delta_after15_20261009/** -text',
+        'experimental/celeba_mechanism_three_view_C_three_scenes_prepared_20261009/** -text',
+        'experimental/celeba_mechanism_C30_root_arithmetic_review_20261009/** -text',
+        'experimental/guardfed_rebuttal_C30_20261009/** -text',
+        'docs/server_deployment_20260923/revision_20260923/rebuttal_C30_addendum_20261009/** -text',
+        'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_three_scenes_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -967,6 +1014,17 @@ if args.increment==31:
         C3_root_adoption_sha256=sha(C3_adoptions[0]),C_FedSA_scene_complete=False,new_Hybrid_strict_offserver=1,
         Hybrid_selected_recipe=False,FLGMM_new_full70_offserver_accepted=2,FLGMM_new_full70_accepted_this_increment=1,
         new_complete_C_scene_tables=0,main_manuscript_edited=False,primary_endpoint_selected=False)
+if args.increment==32:
+    receipt.update(increment_scope='native136_and_exact8_C_replay_closure_with_FLGMM3_Hybrid16_actual_incremental_backups',
+        new_mechanism_native_accepted=8,new_mechanism_three_view_accepted=8,minus_U_complete_three_view=100,minus_C_three_view=36,
+        C8_root_adoption_sha256=sha(C3_adoptions[0]),C_FedSA_scene_complete=True,C_SDFA_scene_complete=False,
+        C_complete_scene_tables=3,C_mean_SD_scalars=486,C_display_cells=243,C_count_metric_checks=540,
+        old_two_scene_records_unchanged=40,old_two_scene_statistics_unchanged=324,old_two_scene_cells_unchanged=162,
+        C30_table_root_sha256=sha(C30/'ROOT_VERIFICATION.json'),C_SDFA_partial_records_excluded=6,
+        C30_writing_root_sha256=sha(C30_canonical/'ROOT_REVIEW.json'),C30_writing_scalar_checks=98,C30_writing_scope_checks=25,
+        C30_writing_author_review_only=True,original_24_comment_draft_unchanged=True,
+        new_Hybrid_strict_offserver=1,Hybrid_selected_recipe=False,FLGMM_new_full70_offserver_accepted=3,
+        FLGMM_new_full70_accepted_this_increment=1,main_manuscript_edited=False,primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

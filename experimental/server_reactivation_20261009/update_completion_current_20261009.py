@@ -75,6 +75,16 @@ if main.get('C_after25_valid_replay'):
     C_view_note+=(f' The exact next three IID FedSA checkpoints (91002/04/07) have status {c3["status"]}, with{c3["offserver_new_accepted"]} new off-server acceptances; the prior125 and Full are excluded from inference. ')
     if c3['offserver_new_accepted']==3:
         C_view_note+=('All54 archive members,27 saved-array metrics,72 confusion counts and9 rules passed, with zero native discrepancy. This closes U100+C28=128; FedSA is still8/10 and supplies no complete-scene mean or sample SD. ')
+if main.get('C_after28_valid_replay'):
+    c28=main['C_after28_valid_replay']
+    C_view_note+=(f' The next exact eight terminal checkpoints (two IID FedSA and six IID S-DFA) have actual source-bound Linux startup, status {c28["status"]}, with {c28["offserver_new_accepted"]} new off-server acceptances. The prior128 and Full are excluded from inference. ')
+    if c28['offserver_new_accepted']==8:
+        C_view_note=('36 accepted C terminal checkpoints. The new exact8 passed89 archive-member checks,72 saved-array metric checks,192 confusion counts and24 prediction rules; native discrepancies are zero. The prior128 and Full were not reinferred. Benign, F Flip and FedSA each have ten matched C checkpoints; S-DFA has only six and is excluded from complete-scene means. The previously accepted two-scene table remains valid; the three-scene table requires separate independent statistical adoption. All views remain validation-only, with calibration, device/environment and selection/test-exposure limitations retained. ')
+if main.get('C_three_view_three_scene_table'):
+    C_view_note=C_view_note.replace('The previously accepted two-scene table remains valid; the three-scene table requires separate independent statistical adoption.',
+        'The three-scene table is now independently adopted:30 matched pairs/60 records,486 mean/sampleSD scalars,243 cells and540 metrics reconstructed from group counts. The old40 records,324 scalars and162 display cells remain exact. Full replay2CPU/28GPU versus C30CPU is explicit; seven other C scenes and the full mechanism grid remain incomplete.')
+if state.get('latest_rebuttal_addendum'):
+    C_view_note+=' A separate C30 English author-review addendum for R3.2/R3.7 is source-checked at98 scalar pointers,49 display values,25 scope facts and9 links; the frozen24-comment response and submitted manuscript remain unchanged. Entry: '+state['latest_rebuttal_addendum']['entry']+'. '
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
