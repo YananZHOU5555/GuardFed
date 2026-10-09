@@ -1,0 +1,129 @@
+{
+  "schema": "guardfed_final_evaluation_preparation_v1",
+  "status": "PREPARED_NOT_FROZEN",
+  "scope": "Current nine-method 900 terminal models only; no 17-method or entire-revision completion claim",
+  "prior_official_test_exposed": true,
+  "recipe_selection_seed": 91001,
+  "observed_validation_seeds": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005,
+    91006,
+    91007,
+    91008,
+    91009,
+    91010
+  ],
+  "seeds": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005,
+    91006,
+    91007,
+    91008,
+    91009,
+    91010
+  ],
+  "distributions": {
+    "IID": 5000.0,
+    "non-IID": 5.0
+  },
+  "attacks": [
+    "Benign",
+    "F Flip",
+    "FedSA",
+    "S-DFA",
+    "Sp-DFA"
+  ],
+  "round": 70,
+  "original_split": "valid",
+  "target_split_candidate": "official_test_partition2",
+  "target_n_candidate": 19962,
+  "target_image_ids_sha256": null,
+  "decisions": {
+    "campaign_scope_and_wait_for_remaining_methods": null,
+    "evaluation_endpoint_and_prior_exposure_claim_wording": null,
+    "primary_view_and_complete_collected_views": null,
+    "paired_inference_and_multiplicity_policy": null
+  },
+  "available_views": {
+    "native": {
+      "rule": "Original per-method prediction interface; current900 AD2+ original root-group calibration, other8 raw argmax",
+      "threshold_selection_data": "Original clean train-root only"
+    },
+    "raw": {
+      "rule": "Argmax logits / margin>0; exact-zero tie class0"
+    },
+    "shared_calibration": {
+      "rule": "All methods use identical root-only frozen-core group-threshold search; >= thresholds",
+      "calibration": {
+        "ad2_calibration_base_weight": 1.0,
+        "ad2_calibration_budget": 0.06,
+        "ad2_calibration_temperature": 0.03,
+        "ad2_calibration_quantiles": 41,
+        "ad2_calibration_max_acc_drop": 0.005,
+        "ad2_calibration_objective": "acc_floor",
+        "ad2_calibration_enabled": true
+      },
+      "source": "celeba_shared_calibration_v1/manifest.json",
+      "extension_to_current900_completed": false
+    }
+  },
+  "calibration_core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "known_native_raw_tie_difference": "raw margin>0 versus group threshold margin>=t; preserve and record zero margins",
+  "descriptive_statistics": {
+    "primary_seed_cohort": [
+      91001,
+      91002,
+      91003,
+      91004,
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ],
+    "nonselection_nine": [
+      91002,
+      91003,
+      91004,
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ],
+    "historical_matching_six": [
+      91005,
+      91006,
+      91007,
+      91008,
+      91009,
+      91010
+    ],
+    "uncertainty": "sampleSD ddof1",
+    "cross_scenario": "average within each seed before across-seed statistics",
+    "metrics": [
+      "accuracy",
+      "aeod_absolute_tpr_gap",
+      "aspd"
+    ],
+    "score_is_final_primary": false
+  },
+  "blocked_until": [
+    "Decisions frozen before target labels/inference",
+    "Live server guide/source/data/model identity checks",
+    "Target IDs/order SHA attested without labels",
+    "Native valid replay all900 at <=1e-12",
+    "Evaluation source and output schema frozen",
+    "Explicit dispatch receipt recorded"
+  ],
+  "test_called": false,
+  "new_training": false
+}

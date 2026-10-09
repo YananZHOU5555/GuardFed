@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/inspect_inputs.py", line 61, in <module>
+    main()
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/inspect_inputs.py", line 31, in main
+    pinned = replay.input_paths(repo, selected, plan_path, plan)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py", line 251, in input_paths
+    path = inside(repo, rel)
+           ^^^^^^^^^^^^^^^^^
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py", line 97, in inside
+    require(path.is_relative_to(repo), 'Input path escapes original repository: ' + str(relative))
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py", line 58, in require
+    raise ValueError(message)
+ValueError: Input path escapes original repository: data/celeba/derived/rgb64_v1/manifest.json

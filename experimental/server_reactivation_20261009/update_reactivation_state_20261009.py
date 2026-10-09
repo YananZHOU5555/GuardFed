@@ -55,6 +55,28 @@ state['final_evaluator_runtime_20261009'] = {'status':'PREPARED_NOT_FROZEN', 'lo
     'historical_valid_cached_jobs':8, 'all900_native_realimage_valid_replayed':False, 'test_started':False,
     'local_entry':'tmp/celeba_final_evaluator_20261009/README.md',
     'published_entry':'experimental/celeba_final_evaluator_20261009/README.md'}
+restore_dir = TRAIN / 'validation900_restore_20261009'
+if (restore_dir / 'restore_acceptance.json').exists():
+    restored = read(restore_dir / 'restore_acceptance.json')
+    independent = read(restore_dir / 'root_canary_independent_verification.json')
+    assert restored['status'] == 'EXACT_900_ARTIFACT_STORAGE_VERIFIED'
+    assert restored['models'] == 900 and restored['all_artifact_file_hashes_verified'] == 2700
+    assert independent['status'] == 'PASS' and len(independent['canaries']) == 2
+    state['validation900_restore_20261009'] = {
+        'status': restored['status'], 'models': 900, 'artifact_hashes_verified': 2700,
+        'existing_full_artifacts_reused': 300, 'new_isolated_artifacts': 2400,
+        'original_output_files_modified': 0,
+        'restore_acceptance_sha256': sha(restore_dir / 'restore_acceptance.json'),
+        'storage_map_sha256': restored['storage_map_sha256'],
+        'entry': 'validation900_restore_20261009/README.md'}
+    state['final_evaluator_runtime_20261009'].update(
+        actual_native_valid_image_replays_accepted=2,
+        actual_canary_native_max_abs_difference=0,
+        root_independent_verification='validation900_restore_20261009/root_canary_independent_verification.json',
+        new_runtime_entry='tmp/celeba_final_valid_replay_20261009/README.md',
+        exact_900_artifact_storage_ready=True,
+        full900_replay_started=False,
+        final_protocol_frozen=False)
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -76,6 +98,10 @@ top = f'''# CURRENT: GuardFed mechanism {'formal800' if formal else 'cu128 prefl
 原三小时任务guardfed-training-health本地TOML为PAUSED且提示仍指旧阶段；当前没有原生automation_update工具，未修改调度器、未建立替代监督机制。服务器supervisor只管理已启动队列，不等于三小时聊天巡检已恢复。可审阅提示与限制见server_reactivation_20261009/MONITOR_HANDOFF.md。
 
 2454个历史新增完整训练及九方法900验证记录/备份保持原值。返修回复已逐字核24块原意见、40本地引用、209项SHA声明；新增260条生成器/PCA数值追溯与20份CelebA联合分组重建已核，投稿Fig3原脚本/FD执行身份仍缺。其余8基线与正式最终评价仍未完成；准备代码/门检不当作论文科学结果。主入口REBUTTAL_COMPLETION_20261009.md。
+
+'''
+if (restore_dir / 'restore_acceptance.json').exists():
+    top += '''九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。900全批尚未启动，不称最终评价完成；详见validation900_restore_20261009/README.md。Hybrid与FLGMM完整真实图像CPU门检继续运行，首轮证据不等于三轮PASS。
 
 '''
 running.write_text(top+history,encoding='utf-8')

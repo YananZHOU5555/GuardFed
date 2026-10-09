@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "groups": [
+    {
+      "name": "independent900_grid_and_identity",
+      "passed": true,
+      "records": 900
+    },
+    {
+      "name": "label_prefix_and_input_tamper_boundaries",
+      "passed": true
+    },
+    {
+      "name": "actual_train_metadata_original_root_and_client_partition",
+      "passed": true,
+      "train_metadata_sha256": "5471aab47706d110704bf91624726e3863f13639a29fb6ce69cf06b1b9a11abd",
+      "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "canary_root_n": 16277,
+      "image_inference_performed": false
+    },
+    {
+      "name": "strict_native_tolerance_and_nonfinite_rejection",
+      "passed": true,
+      "measured_mismatch": 1.999955756559757e-12
+    }
+  ],
+  "rejected": [
+    {
+      "name": "duplicate model ID",
+      "error": "900 unique accepted inventory records required"
+    },
+    {
+      "name": "missing seed cell",
+      "error": "900 unique accepted inventory records required"
+    },
+    {
+      "name": "test endpoint",
+      "error": "Subset or test configuration refused"
+    },
+    {
+      "name": "source drift",
+      "error": "Incomplete scientific input lineage"
+    },
+    {
+      "name": "mixed terminal checkpoint identity",
+      "error": "Non-terminal/non-valid inventory record"
+    },
+    {
+      "name": "request whole label array including test",
+      "error": "Prefix must exclude test entries"
+    },
+    {
+      "name": "request extends into nonbinary test sentinel",
+      "error": "Nonbinary train/valid labels or sensitive attribute"
+    },
+    {
+      "name": "object-pickle label payload",
+      "error": "Non-vector or unsafe label metadata"
+    },
+    {
+      "name": "before/after raw byte drift",
+      "error": "Input SHA mismatch: E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_final_valid_replay_20261009\\tmp66mnbqd2\\pinned.txt"
+    },
+    {
+      "name": "root ID tamper GuardFed-AD2+_IID_Benign_seed91001",
+      "error": "Original root image ID/order SHA mismatch"
+    },
+    {
+      "name": "root ID tamper GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002",
+      "error": "Original root image ID/order SHA mismatch"
+    },
+    {
+      "name": "nonfinite native metric",
+      "error": "Undefined/nonfinite native metric"
+    }
+  ],
+  "replay_source_sha256": "c7a741ecea7d3acd70972f9f69fe1e502407d5aefff36702b53b70d78bf4eb1d",
+  "selfcheck_sha256": "5a257e97785cf7861380cca77fd0e974375caec3804cfa691e53df1c18ace87b",
+  "test_labels_accessed": false,
+  "new_training": false,
+  "real_image_replay": "Separate remote receipts required"
+}

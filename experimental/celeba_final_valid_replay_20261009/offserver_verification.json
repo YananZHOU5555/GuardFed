@@ -1,0 +1,113 @@
+{
+  "status": "PASS",
+  "archive_sha256": "e4d78045c2e22d9cb55608c215a192d63830f84e5eea8adf7f51559e0acef99b",
+  "members_verified": 27,
+  "run_receipt_sha256": "678f6b05697b8f11cdc4c93050ca9e1fa21c97191c47a9a9e4f8e353918cdc1b",
+  "unchanged_input_count": 32,
+  "canaries": [
+    {
+      "id": "GuardFed-AD2+_IID_Benign_seed91001",
+      "native_max_abs_difference": 0,
+      "independent_view_metric_differences": {
+        "native": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "raw": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "shared_calibration": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      "elapsed_seconds": 108.02205437608063,
+      "effective_cpu_cores": 6.580718808819531,
+      "peak_rss_kib": 2489160,
+      "receipt_sha256": "0549c2843ff3b405da217d67bb0838fd5bef42c826113802e69017c9780e28bb",
+      "prediction_arrays_sha256": "11bb74484a790431b6e697183983c02a85bfeb1828019c267eb0f1d4f8a019fe"
+    },
+    {
+      "id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002",
+      "native_max_abs_difference": 0,
+      "independent_view_metric_differences": {
+        "native": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "raw": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "shared_calibration": {
+          "accuracy": 0.0,
+          "aeod": 0.0,
+          "aspd": 0.0
+        }
+      },
+      "elapsed_seconds": 121.93649673601612,
+      "effective_cpu_cores": 6.576528377193725,
+      "peak_rss_kib": 2489160,
+      "receipt_sha256": "417966750b15b0d9fdeb89a38dcfe6d48cc1bd790d36385213f683785b8bf685",
+      "prediction_arrays_sha256": "4819446a2ba5dae6be85e7373eb424328bb4d8e0added58d91a5f5edee42e4e6"
+    }
+  ],
+  "training_round_growth": [
+    {
+      "id": "minus_U_IID_Benign_seed91001",
+      "during": 28,
+      "after": 30
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91002",
+      "during": 33,
+      "after": 36
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91003",
+      "during": 34,
+      "after": 37
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91004",
+      "during": 26,
+      "after": 28
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91005",
+      "during": 26,
+      "after": 29
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91006",
+      "during": 28,
+      "after": 31
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91007",
+      "during": 27,
+      "after": 29
+    },
+    {
+      "id": "minus_U_IID_Benign_seed91008",
+      "during": 36,
+      "after": 39
+    }
+  ],
+  "independent_valid_label_cache": {
+    "sha256": "39e5fe16ea5f06c0a7594fd6b1c1cbc27cf1a71a261c1b4f0db7228cce380f64",
+    "source_archive_sha256": "f7528394e8888163e157323654ad9cee31f4d32a1b65a0ef57cb6894382e352e",
+    "source_member": "results/revision_20260928/celeba_shared_calibration_v1/runs/FedAvg_IID_Benign_seed91001/margins.npz",
+    "use": "Previously sealed accepted cache; local independent prediction scoring only, not new image inference or revalidation of all700"
+  },
+  "all900_native_valid_replayed": false,
+  "final_protocol_status": "PREPARED_NOT_FROZEN",
+  "test_labels_accessed": false,
+  "impact_claim": "Observed formal service RUNNING, all eight rounds advancing, no failed queue entries; no controlled estimate of zero training slowdown"
+}

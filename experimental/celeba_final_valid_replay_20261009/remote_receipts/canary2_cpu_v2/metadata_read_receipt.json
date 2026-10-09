@@ -1,0 +1,43 @@
+{
+  "strategy": "NPY headers then exactly train+valid scalar prefix; no full label-array load",
+  "prefix_reads": [
+    {
+      "member": "Smiling.npy",
+      "shape": [
+        202599
+      ],
+      "dtype": "<i8",
+      "requested_entries": 182637,
+      "requested_payload_bytes": 1461096,
+      "last_included_position": 182636,
+      "test_entries_requested_or_materialized": 0,
+      "train_valid_prefix_sha256": "b8904a23514541d745bdff8162eed1baa6423de4865916c5f336f00d61ee10d5"
+    },
+    {
+      "member": "Male.npy",
+      "shape": [
+        202599
+      ],
+      "dtype": "<i8",
+      "requested_entries": 182637,
+      "requested_payload_bytes": 1461096,
+      "last_included_position": 182636,
+      "test_entries_requested_or_materialized": 0,
+      "train_valid_prefix_sha256": "2aaf82aa3b591c0910c586b4de12cbc2ea9b90240f9426f4d92042b661ef7913"
+    }
+  ],
+  "train_n": 162770,
+  "valid_n": 19867,
+  "test_labels_accessed": false,
+  "full_loader_executed": false,
+  "valid_support": {
+    "0|0": 5252,
+    "0|1": 6157,
+    "1|0": 5013,
+    "1|1": 3445
+  },
+  "official_metadata": {
+    "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+    "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+  }
+}

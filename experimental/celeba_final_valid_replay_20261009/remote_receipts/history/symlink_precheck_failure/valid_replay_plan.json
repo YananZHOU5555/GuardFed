@@ -1,0 +1,46 @@
+{
+  "schema": "guardfed_valid_replay_input_plan_v1",
+  "scope": "VALID_ONLY_IMPLEMENTATION_PREFLIGHT",
+  "final_protocol_status": "PREPARED_NOT_FROZEN",
+  "final_dispatch_created": false,
+  "test_labels_accessed": false,
+  "target_split": "valid",
+  "target_n": 19867,
+  "target_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+  "target_order_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+  "root": "original_clean_train_root_by_original_config_and_ID_SHA",
+  "model_count": 900,
+  "inventory_file": "model_inventory.json",
+  "inventory_sha256": "3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd",
+  "prepared_protocol_file": "protocol.json",
+  "prepared_protocol_sha256": "8ef15af6adec686fecc3462a038edbc94a78456362292cba01f03a27817aa749",
+  "evaluator_file": "evaluator.py",
+  "evaluator_sha256": "805eedf1fb08137cd86a543a80c83b9527e5c8937be02f7d2dca83a33b86e04c",
+  "replay_source_sha256": "c7a741ecea7d3acd70972f9f69fe1e502407d5aefff36702b53b70d78bf4eb1d",
+  "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "checked_result_source_sha256": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+  "native_tolerance": 1e-12,
+  "diagnostic_views": [
+    "native",
+    "raw",
+    "shared_calibration"
+  ],
+  "runtime": {
+    "device": "cpu",
+    "torch": "2.11.0+cu128",
+    "max_processes": 1,
+    "max_allowed_cpus": 8,
+    "loader_workers": 0,
+    "cpu_affinity": "sorted inherited allowed CPUs [16:24], as coordinated with other checks"
+  },
+  "canary_ids": [
+    "GuardFed-AD2+_IID_Benign_seed91001",
+    "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002"
+  ],
+  "limits": [
+    "Not a final freeze or dispatch receipt",
+    "All900 replay remains pending until every record passes",
+    "Original CUDA checkpoint inference is being checked on CPU; no runtime equivalence assumption",
+    "Native metric mismatch stops the sequential run and preserves outputs; no tolerance relaxation or retry"
+  ]
+}

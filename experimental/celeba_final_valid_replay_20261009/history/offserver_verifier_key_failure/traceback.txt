@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_final_valid_replay_20261009\selfcheck.py", line 190, in <module>
+    report = verify_remote_receipts()
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_final_valid_replay_20261009\selfcheck.py", line 87, in verify_remote_receipts
+    replay.require(all(receipt['views'][view]['groups'][str(g)][k] == v for k, v in expected.items()), 'Stored confusion counts differ')
+  File "E:\OneDrive\文档\GuardFed\tmp\celeba_final_valid_replay_20261009\selfcheck.py", line 87, in <genexpr>
+    replay.require(all(receipt['views'][view]['groups'][str(g)][k] == v for k, v in expected.items()), 'Stored confusion counts differ')
+KeyError: 'groups'
