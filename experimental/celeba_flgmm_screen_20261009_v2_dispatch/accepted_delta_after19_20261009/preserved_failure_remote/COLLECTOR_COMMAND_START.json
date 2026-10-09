@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-09T17:45:05.860208+00:00",
+  "command": [
+    "taskset",
+    "-c",
+    "106",
+    "ionice",
+    "-c",
+    "3",
+    "nice",
+    "-n",
+    "10",
+    "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "-B",
+    "/workspace/guardfed_checks/celeba_flgmm_screen_20261009/accepted_delta_after19_20261009/collect_delta.py"
+  ],
+  "helper_cpu": 106,
+  "threads": 1,
+  "nice": 10,
+  "IO": "idle",
+  "fixed_snapshot": "f87eb797aef52016d1e9a77de871b5cd4942474545c2e628184f993a2ebfc404",
+  "automatic_retry": false
+}

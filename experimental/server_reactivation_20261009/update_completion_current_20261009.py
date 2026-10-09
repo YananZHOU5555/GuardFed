@@ -23,6 +23,13 @@ if paired_table and paired_table['complete_scenes'] == 7:
         'Raw/native/shared10/9/6-seed tables and paired differences passed1134 independent mean/sampleSD checks. '
         'Native/shared metrics and counts coincide for all140 displayed models. DeletingU lowers native accuracy in all seven scenes by0.309–1.384pp andASPD in all seven;AEOD increases in six, while rawAEOD decreases in five and increases in two(IIDSp-DFA andnon-IID F Flip). '
         'The original six-scene records/statistics are unchanged. Full5CPU/65GPU and69cu128/1cu130 versus70CPU/cu128 controls, driver/runtime and validation-selection limits remain explicit. Neither a uniform-device final comparison nor a primary endpoint has been established. ')
+if paired_table and paired_table['complete_scenes'] == 9:
+    paired_note = ('The later independently accepted nine-scene join contains90 complete Full–minus_U pairs and retains92 pairs/184 individual records. '
+        'The two non-IID Sp-DFA pairs are incomplete and excluded from scene means. Raw/native/shared fixed10/9/6-seed panels include729 displayed cells; '
+        '1458 mean/sampleSD scalars and1656 metrics reconstructed from group counts pass independent checks. All189 prior seven-scene statistic rows and81 native92 display rows remain exact. '
+        'Native and shared outcomes coincide for all184 models. In the newly complete non-IID FedSA and S-DFA scenes, deletingU lowers raw accuracy by0.492 and0.453pp, with disparity tradeoffs retained. '
+        'Complete-scene Full inference is5CPU/85GPU and its training88cu128/2cu130; controls use90CPU/cu128. Mixed devices, historical environments, validation selection and prior test exposure remain limitations. '
+        'This is a descriptive validation comparison, not an isolated aggregation effect, a selected primary endpoint or evidence that every scoring term is indispensable. ')
 increments=main['incremental_science_backups']
 latest_increment=increments[-1]
 flgmm=state['flgmm_screen32_20261009']
@@ -125,6 +132,18 @@ if main.get('after71_valid_replay'):
         'It excludes all previously closed71 and Full inference, covering only non-IID FedSA91002–91009 and S-DFA91001–91003. '
         'Remote completion is not acceptance. Existing seven-scene mean/SD tables remain a separate sealed evidence snapshot; these IDs cannot create a complete eighth scene because FedSA91010 is outside the frozen replay scope. '
         'The other seven variants have source-only metadata/recipe preparation, with no supplied terminal or empirical replay gate.')
+after82_failure_note=''
+if main.get('after82_failed_attempt'):
+    failure82=main['after82_failed_attempt']
+    after82_failure_note=('The exact10 after82 replay attempt stopped before runtime dependency binding and CNN because its approval guard retained the old11-ID cardinality. '
+        'Actual service exit, zero workers/completions and an empty output tree are preserved with source/log/approval evidence; zero new scientific acceptances are inferred. '
+        'The original82 accepted records and main800 training are unaffected. A separate engineering version requires a positive valid10 approval gate and fresh namespace; the failed service is not restarted. '
+        f'Root failure review: {failure82["root_failure_review_path"]}.')
+if main.get('after82_v2_valid_replay'):
+    replay82=main['after82_v2_valid_replay']
+    after82_failure_note+=(f' The separately reviewed V2 service has actual startup evidence: {replay82["status"]}, '
+        f'{replay82["offserver_new_accepted"]} new off-server acceptances; one8-thread CPU worker on112–119, nice10/idleI/O and CUDA hidden. '
+        'Positive valid10 approvals and invalid-approval refusals pass; only cardinality and namespace/pins changed, and the failed original service is retained.')
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
@@ -142,6 +161,8 @@ Hybrid's CPU4 and separate CUDA4 pipeline gates are complete, strict and backed 
 The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID F Flip seeds91001–91010 and FedSA91001. Its source review preserves scientific functions and passes42 refusals. {next11_note}
 
 {after71_note}
+
+{after82_failure_note}
 
 The latest previously verified Git publication is `{published['commit']}`, with{published['committed_blobs_sha256_verified']} committed blob SHA checks against the remote branch. New completion evidence is published in a separate increment. Source preparation, approval, dispatch and completed scientific results are distinct. The native three-hour chat monitor remains PAUSED; supervisor-managed training does not restore it. Final test, the remaining baselines, complete mechanism comparisons and final manuscript claims remain unfinished.
 

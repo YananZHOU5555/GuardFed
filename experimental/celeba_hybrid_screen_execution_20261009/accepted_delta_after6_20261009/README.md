@@ -1,0 +1,9 @@
+# Hybrid fixed terminal delta: 6 -> 10, root adoption pending
+
+Only the four IDs frozen in EXACT_DELTA.json are included. The 17:43:57Z source/scope/approval snapshot had ten 70-round terminals and the next job at round7. Original driver/body strict passed once, SCP returned zero, all 59 archive members passed raw SHA/size checks, and four CPU tensor identities plus the existing record bridge passed. Five wrong-runtime records and a wrong evidence hash were refused. No later arrival was added.
+
+Collector, archive verifier and bridge differ from accepted after4 only in cohort/count/path/evidence bindings; reversing these changes restores each exact original source. The actual prior root-adopted chain has both previous fields used by the collector; no schema adapter was needed. Original 69 source members, scientific checked body, driver, writer/null policy, thresholds and recipes remain unchanged. All raw/negative outputs and undefined sidecars are retained.
+
+ROOT_READY_CHAIN_LINK.json is a proposed link, not root adoption. DELIVERY.json lists actual hashes, resources and limits. The old LATEST_BACKUP and 231dda chain retain their exact bytes. Original source members are referenced, not repackaged in the delta archive. The local restored tree is a derived verification cache bound by the archive/source seals and is excluded from the delivery member seal.
+
+Service resources were observed, not changed: training CPU104 x1/GPU0; backup CPU106 x1/nice10/idle IO. The log is a shared running-producer prefix. Server torch2.11.0+cu128/5090 and local torch2.8.0+cpu are unequal; only original runtime metadata is bound through the already adopted three-query record bridge. No CNN/training/test, new parameter, restart, recipe selection, formal100 or canonical/Git edit occurred. This is a partial n=1 validation search, without sample SD or significance.

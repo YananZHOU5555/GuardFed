@@ -1,0 +1,31 @@
+--- preserved_failed_after19/collect_delta.py
++++ after19_v2/collect_delta.py
+@@ -52,7 +52,7 @@
+     assert not set(wanted)&{row['id'] for row in queue['active']}
+     assert not list(RELEASE.glob('*FAILURE*.json'))
+     protocol,manifest=local_identity()
+-    assert digest(RELEASE/'PACKAGE_SHA256.json')==previous['package_sha256']==snapshot['flgmm']['source_seal_sha256']
++    assert digest(RELEASE/'PACKAGE_SHA256.json')==snapshot['flgmm']['source_seal_sha256']==read(BATCH/'AUTHORIZED_SNAPSHOT.json')['source_sha256']['PACKAGE_SHA256.json']=='aec95ceb5e8c9b7aa9cec89e9d70d2700c2f242c29e918792088648d6269bad4'
+     assert digest(RELEASE/'source/protocol.json')==snapshot['flgmm']['protocol_sha256']
+     before=repo_identity(REPO,protocol)
+     records=[]; files={}
+@@ -98,7 +98,7 @@
+     for name in ('PARTIAL_ACCEPTANCE.json','live_snapshot.json','PREVIOUS_CHAIN.json','collect_delta.py','COLLECTOR_DIFF.patch','SOURCE_RECEIPT.json','EXACT_DELTA.json','AUTHORIZED_SNAPSHOT.json','PREVIOUS_LATEST.json'):
+         files[name]=dict(sha256=digest(BATCH/name),size=(BATCH/name).stat().st_size)
+     write_json(BATCH/'MEMBERS.json',dict(members=files))
+-    archive=BATCH/'accepted_delta_after19.tar.gz'
++    archive=BATCH/'accepted_delta_after19_v2.tar.gz'
+     with tarfile.open(archive,'w:gz') as tar:
+         for name in files: tar.add(RELEASE/name if name.startswith(('runs/','logs/')) else BATCH/name,arcname=name)
+         tar.add(BATCH/'MEMBERS.json',arcname='MEMBERS.json')
+--- preserved_failed_after19/verify_delta_offserver.py
++++ after19_v2/verify_delta_offserver.py
+@@ -16,7 +16,7 @@
+     assert receipt['previous_chain_sha256']=='84be50b9c7dc44ceb3bf34e1bedd0c3ce36e5186b9020e1d6935b9cdc0c95dcd'
+     assert receipt['accepted_total']==19+receipt['accepted_new']
+     assert not set(receipt['accepted_new_ids'])&set(read(BATCH/'PREVIOUS_CHAIN.json')['accepted_job_ids'])
+-    archive=BATCH/'accepted_delta_after19.tar.gz'
++    archive=BATCH/'accepted_delta_after19_v2.tar.gz'
+     assert sha(archive)==receipt['archive_sha256'] and archive.stat().st_size==receipt['archive_size']
+     assert sha(BATCH/'MEMBERS.json')==receipt['inventory_sha256']
+     assert sha(BATCH/'PARTIAL_ACCEPTANCE.json')==receipt['acceptance_sha256']

@@ -1,0 +1,24 @@
+--- accepted_after4/local_record_bridge_v2/bridge.py
++++ accepted_after6/local_record_bridge_v2/bridge.py
+@@ -2,9 +2,9 @@
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+ HERE=Path(__file__).resolve().parent;B=HERE.parent;H=B.parent
+-SERVER_SHA='143a489bcb28dc5234ba275137daae944dd95e20f26723240e8d583b27baff41'
+-ARCHIVE_SHA='261596ba4a4a11d5877630a436fc0649f857e3f0746263060bd944075bd6afa9'
+-INVENTORY_SHA='20ea9d3a05368fd0aedd83172417d6b4102b9254f8c924ee7a3656467e64671e'
++SERVER_SHA='c796e51e497e6f8d03d337da019beeb4d24550095dece1bd9cf3d3c9a871d722'
++ARCHIVE_SHA='efffebcaecacace9143e579f91d315ab13dd16fd20cce90481a3ba3072dd3c9d'
++INVENTORY_SHA='4a76135321d4da21b5a08e70b615da90b345fc3a507b1fb06044ed71a39ddbaf'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+@@ -18,7 +18,7 @@
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after4_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after6_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])

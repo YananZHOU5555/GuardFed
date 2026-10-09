@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -27,7 +27,10 @@ profiles={
         native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T162838Z'),
     22:dict(previous='d9130d3987ce38ed5a7a3a2083221b8f1bee95da',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=82,views=82,
-        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T170115Z')}
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T170115Z'),
+    23:dict(previous='8780a3f8435dcbc5717cecb6237d79151f88b002',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=92,views=92,
+        native_tag='root_delta_20261009T171247Z',native_delta=10,handoffs=[],live_tags=[],formal_tag='20261009T174808Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -38,7 +41,17 @@ def copy(src,dst,expected=None):
     assert expected is None or digest==expected
     target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,target)
     assert sha(target)==digest and MAPPING.setdefault(dst.as_posix(),digest)==digest
-assert git('rev-parse','HEAD',text=True).strip()==PREVIOUS and not git('status','--porcelain',text=True).strip()
+assert git('rev-parse','HEAD',text=True).strip()==PREVIOUS
+if git('status','--porcelain',text=True).strip():
+    assert args.increment==23
+    attempt=ROOT/CHECKS/'publication23_stage_attempt1.json'
+    assert sha(attempt)=='26e89edefc54e09b421c6623f4220869d6a888b618d4dc944438795bd8272dd6'
+    prior_copy=read(attempt)
+    assert prior_copy['previous_commit']==PREVIOUS and not prior_copy['commit_created'] and not prior_copy['pushed']
+    current={row[3:].decode('utf8'):row[:2].decode() for row in git('status','--porcelain=v1','-z','--untracked-files=all').split(b'\0') if row}
+    assert current=={row['path']:row['status'] for row in prior_copy['files']}
+    for row in prior_copy['files']:assert sha(REPO/row['path'])==row['sha256']
+
 state=read(ROOT/TRAIN/'TRAINING_STATE.json');main=state['celeba_mechanism_v1']
 assert main['scientific_results_offserver_verified']==profile['native'] and main['three_view_new_models_offserver_verified']==profile['views']
 assert state['final_evaluator_runtime_20261009']['actual_native_valid_image_replays_accepted']==profile['baseline']
@@ -65,6 +78,15 @@ assert prior_data['accepted_n']==profile['baseline']
 for name in profile['handoffs']:
     handoff=evidence/name;copy(handoff,Path('experimental')/evidence.name/handoff.name)
 backup=ROOT/CHECKS/'mechanism_science_backups_20261009';tag=profile['native_tag']
+if args.increment==23:
+    for path,digest in (
+            (backup/(tag+'.tar.gz'),'839eb1f3b0bb6fa272f869c190e810b8cad33d565c6f9a2cf55b995e68411778'),
+            (backup/(tag+'.tar.gz.receipt.json'),'fdb90bb38b80dba4c61e12a62882510747ef3380110e64455086c3699f130481'),
+            (backup/(tag+'_offserver_verification.json'),'1f793c5975e6af2fb087304986e7cb2dd0af80d1b7a330aa4704b49aae1ef470'),
+            (backup/tag/'ROOT_DELTA_VERIFICATION.json','a4a8c506668db73b16931a37fa3fe843c5590b0bf5049846967bb9a86be6bd56'),
+            (backup/'verified_ledger.json','dda48b06f25f529bb8688acc5f6979d5bd27adf3964068e204451f43d43072a2'),
+            (ROOT/CHECKS/f"root_live_{profile['formal_tag']}.json",'e220eb91200d601ec4b4060058b4fc6c718a9ad55f74d2ae566bbee16c025da1')):
+        assert sha(path)==digest
 if tag is not None:
     proof=read(backup/tag/'ROOT_DELTA_VERIFICATION.json')
     assert proof['total_new_strict_and_offserver']==profile['native'] and len(proof['new_ids'])==profile['native_delta']
@@ -312,6 +334,96 @@ if args.increment==22:
     for relative in ('docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md',
             'docs/返修实验总览.md'):
         copy(ROOT/relative,Path(relative))
+if args.increment==23:
+    copy(ROOT/CHECKS/'auxiliary_screens_20261009T170231Z.json',CHECKS/'auxiliary_screens_20261009T170231Z.json',
+        '15dd20dff83dfb39f9695577c376d446124314fde6b28e8b5d467d946cfa7424')
+    table=TRAIN/'celeba_mechanism_v1/native_interim92_20261009'
+    seal_sha='fd89108efec447d058f04f45bed96222b762eaf4c0d4d2df1c4b055f534b47dc'
+    root_sha='ef7ff011b68eb67216e0d97e289e74e4334f0d492b12e773dc62bad19917794e'
+    assert sha(ROOT/table/'FILES_SHA256.json')==seal_sha and sha(ROOT/table/'ROOT_REVIEW.json')==root_sha
+    table_proof=read(ROOT/table/'ROOT_REVIEW.json')
+    assert table_proof['source_seal_sha256']==seal_sha and table_proof['accepted_native92']==profile['native']
+    assert table_proof['complete_scenes']==9 and table_proof['new_three_view_acceptance']==0 and not table_proof['test']
+    for name,row in read(ROOT/table/'FILES_SHA256.json')['files'].items():
+        copy(ROOT/table/name,table/name,row['sha256'])
+    copy(ROOT/table/'FILES_SHA256.json',table/'FILES_SHA256.json',seal_sha)
+    copy(ROOT/table/'ROOT_REVIEW.json',table/'ROOT_REVIEW.json',root_sha)
+    for relative in ('docs/返修实验总览.md',
+            'docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md'):
+        copy(ROOT/relative,Path(relative))
+    for base_name,package_sha in (
+            ('celeba_mechanism_valid_incremental_after82_20261009','5dc4cb3f5c6d824e886b7f570b0b8c948407a6fbfddbca650a4530de66d636a7'),
+            ('celeba_mechanism_valid_incremental_after82_v2_20261009','4f2232933fcf474548dba28724afb8dbb8b39c12ae42169c91e1440f51934d28')):
+        base=ROOT/'tmp'/base_name;execution=base/'execution_candidate'
+        assert sha(base/'PACKAGE_SHA256.json')==package_sha
+        for name,row in read(base/'PACKAGE_SHA256.json')['artifacts'].items():
+            copy(base/name,Path('experimental')/base_name/name,row['sha256'])
+        copy(base/'PACKAGE_SHA256.json',Path('experimental')/base_name/'PACKAGE_SHA256.json',package_sha)
+        for path in (base/'root_independent_review').iterdir():
+            if path.is_file():copy(path,Path('experimental')/base_name/'root_independent_review'/path.name)
+        for path in execution.iterdir():
+            if path.is_file() and (path.name.startswith('ROOT_') or path.name in
+                    ('EXECUTION_DRAFT.json','deployment_receipt.json','APPROVED.json','APPROVED.sha256','preflight.json','start_receipt.json')):
+                copy(path,Path('experimental')/base_name/'execution_candidate'/path.name)
+    repaired=ROOT/'tmp/celeba_mechanism_valid_incremental_after82_v2_20261009/execution_candidate'
+    delta=repaired/'backups/incremental_20261009T174922Z'
+    assert sha(delta/'ROOT_ADOPTION_REVIEW.json')=='b9e40d1ca565c0bcf146058433ff3e037ab4e824aa6972d1a3f3f47a088e8683'
+    adoption=read(delta/'ROOT_ADOPTION_REVIEW.json')
+    assert (adoption['prior_three_view_models'],adoption['accepted_new'],adoption['cumulative_three_view_models'])==(82,10,92)
+    assert adoption['all_native_differences_zero'] and adoption['original82_unchanged'] and not adoption['test_inference']
+    for key,name in (('archive_sha256','incremental_valid_three_views.tar.gz'),
+            ('offserver_verification_sha256','OFFSERVER_VERIFICATION.json'),('backup_receipt_sha256','backup_receipt.json')):
+        assert adoption[key]==sha(delta/name)
+    for path in delta.iterdir():
+        if path.is_file():copy(path,Path('experimental')/repaired.parent.name/'execution_candidate/backups'/delta.name/path.name)
+    for name in ('prepare_after82_root_operations_20261009.py','deploy_mechanism_after82_root_20261009.py',
+            'observe_mechanism_after82_root_20261009.py','prepare_after82_v2_root_operations_20261009.py',
+            'deploy_mechanism_after82_v2_root_20261009.py','observe_mechanism_after82_v2_root_20261009.py',
+            'prepare_after82_v2_backup_helpers_20261009.py','backup_mechanism_after82_v2_root_20261009.py',
+            'adopt_mechanism_after82_v2_root_20261009.py','update_current_delivery_entries_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+    copy(ROOT/CHECKS/'publication23_stage_attempt1.json',CHECKS/'publication23_stage_attempt1.json','26e89edefc54e09b421c6623f4220869d6a888b618d4dc944438795bd8272dd6')
+    paired=TRAIN/'celeba_mechanism_v1/three_view_interim92_20261009'
+    paired_seal='4ae84bc75ac08902ea6787bd525270950945f6e5166887010b41b5d40df61c7d'
+    paired_root='7f432387cdc8afc97cc1972d528b3b141ec6316eddec523d6134ba0f20563546'
+    assert sha(ROOT/paired/'FILES_SHA256.json')==paired_seal and sha(ROOT/paired/'ROOT_REVIEW.json')==paired_root
+    accepted=read(ROOT/paired/'ROOT_REVIEW.json')
+    assert accepted['complete_scenes']==9 and accepted['independent_mean_sd_scalars']==1458
+    assert accepted['accepted_three_view92']==92 and accepted['new_inference']==0 and not accepted['test']
+    for name,row in read(ROOT/paired/'FILES_SHA256.json')['files'].items():
+        copy(ROOT/paired/name,paired/name,row['sha256'])
+    copy(ROOT/paired/'FILES_SHA256.json',paired/'FILES_SHA256.json',paired_seal)
+    copy(ROOT/paired/'ROOT_REVIEW.json',paired/'ROOT_REVIEW.json',paired_root)
+    for name in ('review_mechanism_three_view92_root_20261009.py','adopt_auxiliary_after19_after6_root_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+    for base_name,delta_name,total,seal_name,seal_sha,root_sha in (
+            ('celeba_flgmm_screen_20261009_v2_dispatch','accepted_delta_after19_v2_20261009',26,
+             'FILES_SHA256.json','e18cd7c016af1e0799e22a9dd06f69576934ac9ab831b93401f77e3aa9915c26',
+             '93a5ab127fb357be93cf7b07bda6d09fab8839f73bca87406222b3f270fd1134'),
+            ('celeba_hybrid_screen_execution_20261009','accepted_delta_after6_20261009',10,
+             'DELIVERY_FILES_SHA256.json','6b28b22bdab9767bffc04be90a26b19214092d8bf74858ba71d4c523f2bb3988',
+             'd09bd7e2181ed709d04f95a16c4ca99ecd179ab2ca7b978dfa7dd018296e8f91')):
+        base=ROOT/'tmp'/base_name;delta=base/delta_name;latest=read(base/'LATEST_BACKUP.json')
+        assert latest['accepted']==total and sha(base/latest['chain_file'])==latest['chain_sha256']
+        assert sha(delta/seal_name)==seal_sha and sha(delta/'ROOT_ADOPTION_REVIEW.json')==root_sha
+        proof=read(delta/'ROOT_ADOPTION_REVIEW.json')
+        assert proof['accepted_total']==total and proof['new_inference']==0 and not proof['final_test']
+        sealed=read(delta/seal_name)
+        rows=sealed['members'] if seal_name.startswith('DELIVERY') else [dict(path=name,**row) for name,row in sealed['artifacts'].items()]
+        for row in rows:
+            copy(delta/row['path'],Path('experimental')/base_name/delta_name/row['path'],row['sha256'])
+        for name in (seal_name,'ROOT_ADOPTION_REVIEW.json',read(base/latest['chain_file'])['archive']):
+            copy(delta/name,Path('experimental')/base_name/delta_name/name)
+        for name in ('LATEST_BACKUP.json',latest['chain_file']):
+            copy(base/name,Path('experimental')/base_name/name)
+    failure=ROOT/'tmp/celeba_flgmm_screen_20261009_v2_dispatch/accepted_delta_after19_20261009'
+    failure_seal='0504e8b086ba6b67227b23b08f3b794c5f6637178d33249f2c26284e4c49f82e'
+    assert sha(failure/'FAILURE_FILES_SHA256.json')==failure_seal
+    failed=read(failure/'FAILURE_FILES_SHA256.json')
+    assert failed['accepted_new']==0 and failed['archive'] is False
+    for name,row in failed['artifacts'].items():
+        copy(failure/name,Path('experimental')/failure.parent.name/failure.name/name,row['sha256'])
+    copy(failure/'FAILURE_FILES_SHA256.json',Path('experimental')/failure.parent.name/failure.name/'FAILURE_FILES_SHA256.json',failure_seal)
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -343,6 +455,14 @@ if args.increment==22:
         'docs/server_deployment_20260923/training_20260923/manuscript_source_locator_20261009/** -text',
         'docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md -text',
         'docs/返修实验总览.md -text']
+if args.increment==23:
+    patterns += ['docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim92_20261009/** -text',
+        'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_interim92_20261009/** -text',
+        'experimental/celeba_mechanism_valid_incremental_after82_20261009/** -text',
+        'experimental/celeba_mechanism_valid_incremental_after82_v2_20261009/** -text',
+        'experimental/celeba_flgmm_screen_20261009_v2_dispatch/accepted_delta_after19_20261009/** -text',
+        'experimental/celeba_flgmm_screen_20261009_v2_dispatch/accepted_delta_after19_v2_20261009/** -text',
+        'experimental/celeba_hybrid_screen_execution_20261009/accepted_delta_after6_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -356,6 +476,14 @@ if args.increment==19:receipt['next11_evaluation_started_with_no_new_offserver_a
 if args.increment==22:
     receipt.update(increment_scope='accepted_evidence_descriptive_analysis_display_and_source_location_only',
         new_scientific_experiments=0,synthetic_figure_candidate_adopted=False,main_manuscript_edited=False,
+        primary_endpoint_selected=False)
+if args.increment==23:
+    receipt.update(increment_scope='accepted_native_and_repaired_three_view_deltas_with_nine_scene_tables',
+        new_mechanism_native_accepted=profile['native_delta'],new_mechanism_three_view_accepted=10,
+        original_after82_pre_CNN_failed_attempt_preserved=True,
+        auxiliary_observations_promoted_to_accepted=False,new_FLGMM_strict_offserver=7,new_Hybrid_strict_offserver=4,
+        original_FLGMM_prior_schema_collector_failure_preserved=True,nine_scene_paired_table_independent_checks=1458,
+        main_manuscript_edited=False,
         primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
