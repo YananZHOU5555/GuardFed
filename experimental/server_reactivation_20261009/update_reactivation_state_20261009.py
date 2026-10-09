@@ -1477,7 +1477,7 @@ if variant_source.exists():
     state['celeba_mechanism_v1']['remaining_variant_replay_source_plan']=dict(status='PREPARED_NOT_DISPATCHED',
         entry=variant_source.with_name('PLAN.md').relative_to(ROOT).as_posix(),root_source_review_sha256=sha(variant_source),
         paired_planned_recipes_verified=800,actual_remaining_variant_terminals_supplied_at_source_preparation=0,new_inference=0)
-auxiliary_paths = list(CHECKS.glob('auxiliary_screens_*.json'))
+auxiliary_paths = [p for p in CHECKS.glob('auxiliary_screens_*.json') if not p.name.endswith('.RAW.json')]
 if auxiliary_paths:
     auxiliary_path = max(auxiliary_paths, key=lambda p: read(p)['utc'])
     auxiliary = read(auxiliary_path)
@@ -1656,6 +1656,62 @@ if (paired100_dir/'ROOT_REVIEW.json').exists():
         '此表只闭合minus_U，不是其余七variant完成或最终test，也不能证明每项不可或缺。'
         f'入口{state["celeba_mechanism_v1"]["latest_paired_three_view_table"]["table_path"]}。')
 
+C1_base = ROOT/'tmp/celeba_mechanism_valid_C1_gate_20261009'
+C1_ex = C1_base/'execution_candidate'
+if (C1_ex/'ROOT_STARTUP_OBSERVATION.json').exists():
+    C1_start = read(C1_ex/'ROOT_STARTUP_OBSERVATION.json')
+    C1_scope = read(C1_base/'SCOPE.json')
+    C1_deployment = read(C1_ex/'deployment_receipt.json')
+    assert C1_start['deployment_receipt_sha256'] == sha(C1_ex/'deployment_receipt.json')
+    assert C1_start['execution_seal_sha256'] == sha(C1_ex/'EXECUTION_SOURCE_SHA256.json')
+    assert C1_scope['selected_ids'] == ['minus_C_IID_Benign_seed91001']
+    assert set(C1_scope['excluded_prior_ids']) == set(state['celeba_mechanism_v1']['three_view_accepted_ids'])
+    C1_state = dict(status='REAL_SINGLE_C_GATE_STARTED_OFFSERVER_PENDING',service='guardfed_celeba_mechanism_valid_C1_gate',
+        selected_ids=C1_scope['selected_ids'],excluded_U100=True,other_C3_excluded=True,new_Full_inference=0,test=False,
+        startup_root_proof_sha256=sha(C1_ex/'ROOT_STARTUP_OBSERVATION.json'),
+        deployment_receipt_sha256=sha(C1_ex/'deployment_receipt.json'),offserver_new_accepted=0)
+    state['active_services']=list(dict.fromkeys(state['active_services']+[C1_state['service']]))
+    C1_progress = sorted(p for p in C1_ex.glob('ROOT_PROGRESS_*.json') if not p.name.endswith('.RAW.json'))
+    if C1_progress:
+        C1_latest=read(C1_progress[-1])
+        C1_state.update(latest_observation_sha256=sha(C1_progress[-1]),actual_service=C1_latest['service'],
+            actual_processes=len(C1_latest['processes']),observed_complete=len(C1_latest['completed']))
+        if C1_latest['batch_complete'] and not C1_latest['processes']:
+            state['active_services']=[s for s in state['active_services'] if s != C1_state['service']]
+    C1_roots=list((C1_ex/'backups').glob('*/ROOT_ADOPTION_REVIEW.json'))
+    if C1_roots:
+        assert len(C1_roots)==1
+        C1_path=C1_roots[0]; C1_review=read(C1_path)
+        assert sha(C1_path)=='d045665b066dafc25f9970adfdffef9c9a8a388575ec87b9b54d5dcabfa65cab'
+        assert (C1_review['prior_three_view_models'],C1_review['accepted_new'],C1_review['cumulative_three_view_models'])==(100,1,101)
+        assert C1_review['accepted_new_ids']==C1_scope['selected_ids'] and C1_review['all_native_differences_zero']
+        assert C1_review['science_seal_sha256']==sha(C1_base/'FILES_SHA256.json')
+        assert C1_review['execution_seal_sha256']==sha(C1_ex/'EXECUTION_SOURCE_SHA256.json')
+        for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json'),('backup_receipt_sha256','backup_receipt.json')]:
+            assert C1_review[key]==sha(C1_path.parent/name)
+        prior_U100=state['celeba_mechanism_v1']['three_view_accepted_ids']
+        assert len(prior_U100)==100 and all(i.startswith('minus_U_') for i in prior_U100)
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=101,three_view_new_models_offserver_verified=101,
+            three_view_accepted_ids=prior_U100+C1_review['accepted_new_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':1},
+            three_view_scope_limit='Complete minus_U100 plus one accepted minus_C interface gate; C1 is not a full C scene, Full only existing900, no test')
+        C1_state.update(status='SINGLE_C_GATE_COMPLETE_STRICT_OFFSERVER',offserver_new_accepted=1,
+            root_adoption_path=C1_path.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(C1_path),
+            archive_members_verified=C1_review['archive_members_verified'],native_max_abs_difference=0)
+    state['celeba_mechanism_v1']['C1_valid_gate']=C1_state
+
+rebuttal100_dir=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009'
+if (rebuttal100_dir/'ROOT_REVIEW.json').exists():
+    rebuttal100=read(rebuttal100_dir/'ROOT_REVIEW.json')
+    assert sha(rebuttal100_dir/'ROOT_REVIEW.json')=='6dfb210c5d53c2badbe4fb53220008e784430fa33f9e68f0ebb81968ce18c391'
+    assert rebuttal100['source_seal_sha256']==sha(rebuttal100_dir/'FINAL_FILES_SHA256.json')
+    for name,pin in read(rebuttal100_dir/'FINAL_FILES_SHA256.json')['files'].items():
+        assert sha(rebuttal100_dir/name)==pin['sha256'] and (rebuttal100_dir/name).stat().st_size==pin['bytes']
+    state['latest_rebuttal_draft']=dict(status=rebuttal100['status'],entry=rebuttal100['entry'],
+        manuscript_candidate=rebuttal100['manuscript_candidate'],comments_verbatim=24,complete_U_scenes=10,
+        root_proof_sha256=sha(rebuttal100_dir/'ROOT_REVIEW.json'),source_seal_sha256=rebuttal100['source_seal_sha256'],
+        numeric_pointer_checks=37,submission_gate=rebuttal100['submission_gate'],submitted_manuscript_edited=False,
+        other_seven_controls_pending=True,remaining_eight_methods_pending=True,final_test_pending=True)
+
 # Bind newer terminal observations to each adopted delta's sealed snapshot.
 for state_key, base_name, expected_terminal, expected_active in (
         ('flgmm_screen32_20261009','celeba_flgmm_screen_20261009_v2_dispatch',26,2),
@@ -1667,6 +1723,9 @@ for state_key, base_name, expected_terminal, expected_active in (
     delta = base/chain['delta_dir']; link = read(delta/'ROOT_READY_CHAIN_LINK.json')
     snapshot_path = delta/'AUTHORIZED_SNAPSHOT.json'; snapshot = read(snapshot_path)
     assert sha(snapshot_path) == link['authorized_snapshot_sha256']
+    prior_observation = state[state_key].get('latest_readonly_terminal_observation', {})
+    if prior_observation.get('checked_utc', '') >= snapshot['utc']:
+        continue
     if state_key.startswith('flgmm'):
         terminals = [row['id'] for row in snapshot['rows'] if row['result_exists'] and row['progress']['round'] == 70]
         active = [row for row in snapshot['rows'] if row['active']]
@@ -1757,7 +1816,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 | FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
 | 组合基线验证搜索 | {hybrid.get('offserver_accepted70round_jobs', 0)}/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
-| 机制三视图评价 | {main['three_view_new_models_offserver_verified']}份minus_U已严格验收并离机；37项和后11项分别闭合；当前论文表{main.get('latest_paired_three_view_table',{}).get('complete_scenes',0)}完整场景 | {main.get('latest_paired_three_view_table',{}).get('table_path','需独立配对')}；旧增量凭据保持 |
+| 机制三视图评价 | 累计{main['three_view_new_models_offserver_verified']}份：minus_U完整100，另minus_C单项门检{main.get('C1_valid_gate',{}).get('offserver_new_accepted',0)}；论文表仍为U的{main.get('latest_paired_three_view_table',{}).get('complete_scenes',0)}完整场景 | {main.get('latest_paired_three_view_table',{}).get('table_path','需独立配对')}；C门检不代表C十seed完成 |
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
@@ -1783,7 +1842,7 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 {paired_note}
 
-九方法三视图论文表已另行完成并通过root实际900份原receipt连接、8100个组计数指标重建及4860个均值/样本SD核验：outputs/guardfed_tables/celeba_nine_method_three_view_20261009/README.md。完整IID/non-IID、五场景、10/9/6共享种子和三视图均平行保留；旧native三指标及展示表值精确一致，94个旧JSON的SD最后bit差异最大2.78e-17单独保留。英文24意见七场景完整草稿入口{state['latest_rebuttal_draft']['entry']}；v2仅修正P2误写六场景为七场景并补900已验收表来源，原数值和全部24原意见不变。仍禁止在全实验完成前提交，正文源文件未应用。
+九方法三视图论文表已另行完成并通过root实际900份原receipt连接、8100个组计数指标重建及4860个均值/样本SD核验：outputs/guardfed_tables/celeba_nine_method_three_view_20261009/README.md。完整IID/non-IID、五场景、10/9/6共享种子和三视图均平行保留；旧native三指标及展示表值精确一致，94个旧JSON的SD最后bit差异最大2.78e-17单独保留。英文24意见完整草稿入口{state['latest_rebuttal_draft']['entry']}；最新版本纳入U100十场景及900校准归因，24原意见逐字、37数值pointer与37链接复核，保留COMPAS反例/真实n/环境/选择史及全部pending。原七场景封存稿保留。仍为作者审阅稿，正文源文件未应用，最终评价与其余方法/机制未写成完成。
 
 {next11_note}
 
