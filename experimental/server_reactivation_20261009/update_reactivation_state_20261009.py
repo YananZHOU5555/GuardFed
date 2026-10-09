@@ -324,12 +324,17 @@ if first_verification.exists():
     accepted_path, accepted = max(((p,d) for p,d in inspections if d['status'] != 'INVALID'), key=lambda item:item[1]['new_count'])
     assert backed_up <= set(accepted['accepted_new_ids'])
     state['celeba_mechanism_v1'].update(scientific_results_strictly_accepted=accepted['new_count'],
+        new_completed=accepted['new_count'], scientific_results_completed=accepted['new_count'],
         scientific_results_offserver_verified=len(backed_up),
         incremental_science_backups=backup_entries,
         latest_science_backup_sha256=backup_entries[-1]['archive_sha256'],
         latest_science_backup_members_verified=backup_entries[-1]['members_verified'],
         science_acceptance_inspection=accepted_path.relative_to(TRAIN).as_posix(),
         backup_tool_version='evidence_v4.py; sealed v1/v2/v3 and original five-model archive unchanged')
+    state['mechanism_evidence_tooling_20261009'].update(
+        status='SEALED_VALIDATORS_AND_INCREMENTAL_TERMINAL_ACCEPTANCE',
+        live_new_strictly_accepted=accepted['new_count'], live_reused_strictly_accepted=100,
+        live_inspection_sha256=sha(accepted_path), offserver_new_count=len(backed_up))
 flgmm_v3_final_path = flgmm_v3 / 'FINAL_STATUS.json'
 if flgmm_v3_final_path.exists():
     terminal = read(flgmm_v3_final_path)
@@ -500,7 +505,7 @@ if flscreen_started:
 if remaining_started:
     top += f"最新九方法重放启动：{state['final_evaluator_runtime_20261009']['service_at_observation'].strip()}，只执行900既有模型减去已接受28的872补集，80批、每批至多11；11个真实CNNworker均nice10、8计算线程，outer nice0仅编排。38成员部署包、只读inspect及启动凭据离机并经主代理核验。首10秒全cgroup实用{state['final_evaluator_runtime_20261009']['observed_effective_global_cpu_cores']:.2f}/{state['final_evaluator_runtime_20261009']['observed_cpu_quota_cores']:.2f}核，throttle0，主800仍增长。新批仍待独立三视图和离机接受，不把RUNNING计入已接受；不训练旧模型、不运行test。入口tmp/celeba_final_valid_replay_20261009/v4/remaining872_prepared_v2_20261009/README.md。\n\n"
     if new_collections:
-        top += f"最新九方法离机接受：唯一ID collector严格合并{n}/900实际三视图重放，尚缺{900-n}；其中原吞吐/门检28+新补集{n-28}，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该39项称完整最终评价。新collector路径{collection_path.relative_to(ROOT).as_posix()}。\n\n"
+        top += f"最新九方法离机接受：唯一ID collector严格合并{n}/900实际三视图重放，尚缺{900-n}；其中原吞吐/门检28+新补集{n-28}，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该{n}项称完整最终评价。新collector路径{collection_path.relative_to(ROOT).as_posix()}。\n\n"
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')
