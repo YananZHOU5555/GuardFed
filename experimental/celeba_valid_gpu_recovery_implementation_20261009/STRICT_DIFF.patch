@@ -1,0 +1,14 @@
+--- sealed_v3/accept
++++ gpu_recovery/accept
+@@ -22,8 +22,9 @@
+             record, path = indexed[model_id], args.batch / 'runs' / model_id
+             proof = v2.read(path.parent / (model_id + '.worker.json'))
+             r = v2.read(path / 'receipt.json')
+-            v2.require(proof['status'] == r['status'] == 'NATIVE_VALID_REPLAY_PASS' and proof['artifacts_unchanged'], 'Worker receipt failed or incomplete')
+-            v2.require(proof['id'] == r['id'] == model_id and r['runtime']['device'] == 'cpu' and r['runtime']['cuda_device_count'] == 0, 'Worker/model/device identity changed')
++            v2.require(proof['status'] == r['status'] == 'DIAGNOSTIC_NATIVE_MATCH' and proof['artifacts_unchanged'], 'Worker receipt failed or incomplete')
++            v2.require(proof['id'] == r['id'] == model_id and r['runtime']['device'] == 'cuda:0' and r['runtime']['cuda_device_count'] == 1, 'Worker/model/device identity changed')
++            gpu_receipt_guard(proof, r)
+             v2.require(not r['optimizer_created'] and not r['gradients_created'] and not r['test_labels_accessed'], 'Inference-only label/optimizer contract failed')
+             for resources in (r['before_resources'], r['after_resources']):
+                 v2.require(all(cpus == proof['allowed_cpus'] for cpus in resources['thread_cpu_affinities'].values()), 'Worker escaped its eight-CPU slot')

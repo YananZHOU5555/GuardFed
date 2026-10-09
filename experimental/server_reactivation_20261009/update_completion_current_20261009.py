@@ -11,6 +11,19 @@ increments=main['incremental_science_backups']
 latest_increment=increments[-1]
 flgmm=state['flgmm_screen32_20261009']
 diagnostic=state.get('native_mismatch_GPU_diagnostic_20261009')
+recovery=state.get('baseline_valid_recovery_prepared_20261009')
+recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
+    '10 preserved CPU partial results and one separately verified GPU diagnostic. '
+    'The new GPU worker and strict acceptance entry are being implemented separately; '
+    'the proposal has dispatched no inference and registered no new acceptance. ' if recovery else '')
+gpu_recovery = state.get('baseline_valid_GPU_recovery_20261009')
+if gpu_recovery:
+    recovery_paragraph = ('The independently reviewed first new GPU replay has passed the original strict checks, '
+        '73 archive-member SHA checks and off-server saved-array reconstruction of nine metrics, '
+        '24 confusion counts and three prediction rules. Native discrepancy is exactly zero; the old424 collector is unchanged. '
+        'The cumulative425 collector explicitly retains CPU/GPU source provenance. The remaining464 are not dispatched; '
+        'the10 preserved CPU partial results and one original GPU diagnostic are not registered. '
+        'Mixed-device raw/shared results are not a uniform-device final comparison. ')
 diagnostic_paragraph=('A separately approved one-model GPU diagnostic reproduces the original three native metrics exactly. '
     'Its saved CPU/GPU arrays differ on one native/raw prediction (image172599); shared-calibration predictions match. '
     'The unchanged source/data/checkpoint and all saved metrics, counts and rules were independently verified. '
@@ -27,7 +40,7 @@ current=f'''## Current accepted increment — measured {state['last_health_check
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
 
-The existing nine-method terminal-model validation replay has{replayed} distinct accepted and off-server-verified models, with{900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}This is validation replay, not final-test evaluation or new model training.
+The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
 The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight,23 actual minus_U terminal checkpoints have strict raw/native/shared validation replays; native discrepancy is zero. Full paired three-view receipts remain missing and will join actual baseline replay acceptance, without new Full inference or substituting old calibration. This does not establish the complete mechanism comparison.
 

@@ -1,70 +1,46 @@
-# CURRENT: GuardFed mechanism formal800 — measured 2026-10-09T11:38:28.778086+00:00
+# CURRENT: GuardFed返修实验 — 实测 2026-10-09T12:21:52.133560+00:00
 
-用户重新提供89.22.197.55:60350并明确授权停止sglang，现使用实例52183675开展缺失返修实验。sglang已停止；两张5090实际CUDA张量检查通过。先读/etc/vast-agents-guide.md（SHA42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa）。旧完成GuardFed队列仍禁止重启；213.224.31.105:26712内部当前状态未知，不自动切回。
+当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
 
-源码五文件、全部RGB64缓存与官方标签/划分身份已核，100已验收Full对照及缺失历史依赖准确恢复（307成员验收，303新建+4原有相同）。20项cu130真实图像三轮门检全部严格接受，两套Full与原worker同horizon模型张量/全部指标/诊断精确一致；149备份成员及archive SHA在本机通过。原cu130门检完整保留在preflight_history/cu130_20261009，仅原job字节复制回空输出路径。
+## 当前执行与验收
 
-当前使用独立/workspace/guardfed_envs/celeba-cu128-20261009/bin/python，torch2.11.0+cu128、driver595.84，未改原环境/驱动/方法/seed/指标。实测服务guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 5:19:32；完成40，活动8，等待752，失败0；资源与轮次见server_reactivation_20261009/latest_formal_live.json。800新机制正式队列已启动，70round valid-only，8并发；100Full显式复用；检查dispatch receipt与full identity acceptance。
+| 阶段 | 实际状态与分母 | 接续入口 |
+|---|---|---|
+| CelebA机制消融 | 当前观测完成48、活动8、等待744、失败0；已独立严格验收并离机40/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
+| FLGMM验证搜索 | 6/32已严格验收并离机；搜索已启动，最新完成凭据以备份链为准 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json |
+| 组合基线验证搜索 | 原32项队列已启动；最新离机快照尚无完整70轮接受，不把首轮或文件存在计作完成 | tmp/celeba_hybrid_screen_execution_20261009/results_incremental_20261009T1133Z/STATUS.json |
+| 九方法旧checkpoint三视图评价 | 425/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | tmp/celeba_valid_gpu_recovery_execution_20261009/cumulative_425_accepted.json |
+| 机制三视图评价 | 23份minus_U已严格验收并离机，另行统计；不是800份均已完成三视图 | server_reactivation_20261009/MECHANISM_VALID_INCREMENTAL_20261009T104749Z_ROOT_VERIFICATION.json |
 
-正式机制设计800新+100复用，IID/non-IID×5场景×10共享seed，按原协议固定recipe。Full98cu128+2cu130且多数原产出driver570.211.01，环境混合须披露；短程门检不能证明70round等价，提供排除两条cu130的配对敏感性口径。PROTOCOL.md为不可改动的准备快照，当前执行事实优先读EXECUTION.md、dispatch receipt、本入口及状态JSON。
+主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM服务guardfed_celeba_flgmm_screen，两张GPU各1任务；组合基线服务guardfed_celeba_hybrid_screen32，GPU0/CPU104单线程。两套32搜索均固定8候选×四条件、seed91001，尚未完整选recipe或启动100项多seed确认，不运行test。
 
-原三小时任务guardfed-training-health本地TOML为PAUSED且提示仍指旧阶段；当前没有原生automation_update工具，未修改调度器、未建立替代监督机制。服务器supervisor只管理已启动队列，不等于三小时聊天巡检已恢复。可审阅提示与限制见server_reactivation_20261009/MONITOR_HANDOFF.md。
+主机制最近实测CPU 11.03/122.88核，RAM 74.63GB，磁盘余1.062TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 
-2454个历史新增完整训练及九方法900验证记录/备份保持原值。返修回复已逐字核24块原意见、40本地引用、209项SHA声明；新增260条生成器/PCA数值追溯与20份CelebA联合分组重建已核，投稿Fig3原脚本/FD执行身份仍缺。其余8基线与正式最终评价仍未完成；准备代码/门检不当作论文科学结果。主入口REBUTTAL_COMPLETION_20261009.md。
+## 当前恢复与研究选择
 
-九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。初始阶段仅2条重放；当前全批启动和接受数见下面最新执行更新，不称最终评价完成；详见validation900_restore_20261009/README.md。各基线真实图像门检的完整接受及备份状态分开记录，首轮证据不等于完整门检PASS。
+原CPU失败为FairGuard/IID/F Flip/seed91009：native超原1e-12，65成员失败现场完整保留，原chunk036的10份strict partial仍未登记。独立单模型GPU诊断已复现原三指标，差值全0；当前CPU/GPU native/raw只有image172599一处翻转，共享校准预测无翻转。三份归档与保存数组已独立验收；缺历史GPU逐图数组，不声称唯一历史根因，不据此自动增加424。凭据NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json。
 
-机制新结果已有40项通过独立70轮严格验收，40项离机备份，100Full身份复核保持有效；8份增量各SHA/member通过本机验收，原Full权重不重复打包。实时queue完成数与该已验收/备份分母分开。v2首备份因活动日志增长而在preflight拒绝，原检查保留；独立v3处理正常活动目录，新v4修正异常重检的诊断保全路径，经独立审查/回归通过。训练及封存v1/v2/v3不变，首5项归档保持有效。当前不是800或整个返修完成。
+476恢复提案的首条未执行记录已在新GPU工具中完成run、原strict、本机离机与保存数组独立核验，原三指标差值0；73成员SHA、9指标、24混淆计数及3预测规则通过。累计425/900，旧424未改。其余464未派发，10 CPU partial和1原诊断仍未登记；原CPU数值失败保留。 native1e-12、原model/source/data/map/root/valid、同checkpoint全部视图与失败保留规则不变；混合CPU/GPU来源不能冒充统一设备的最终公平比较。入口tmp/celeba_valid_gpu_recovery_implementation_20261009/README.md。监控不自动启动准备包。
 
-CPU端Fed-NGA/Huber四条真实图像三轮探索门检沿原源码/数据路径执行，完整接受和备份见下面更新；原加载器会物化全split标签元数据，包括test尾部，仅训练/验证像素参与运算，不称untouched test。执行附件见tmp/celeba_gradient_realimage_gate_20261009/EXECUTION_HANDOFF.md。
+LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID哈希20组，root/valid顺序相同，80个root(label,Male)格最小116人；未解码valid标签/score、未拟合或评价。虚拟群体不是原训练client，人口定义仍待用户裁定；原32草案的mapping SHA仍null。入口tmp/celeba_logofair_population_proposal_20261009/REPORT.md。
 
-九方法验证重放已有26项吞吐阶段新任务严格接受并离机SHA/member验收，加之前2条共28个实际重放；native误差0，三视图指标/混淆计数独立重算一致。已完成1/2/4/8/11计划中的前5阶段，只报实测吞吐，不称已知最优或受控提速。v3的8并发失败证据完整保留；v4覆盖900条语义身份与2700文件SHA，语义接受不计图像推理。基于已接受28个独立ID，剩余872补集已独立冻结并实际启动；11并发、每worker8线程/nice10，详见下面最新启动更新；test未启动；阶段明细见tmp/celeba_final_valid_replay_20261009/v3/。该CPU重放只读train-root/valid语义标签，完整文件SHA读取包含test所在字节；它不调用会物化全split标签的原完整loader，不能与梯度gate的元数据边界混淆。
+## 已完成证据与剩余交付
 
-新增基线门检实测（2026-10-09T08:40:59.797823+00:00）：celeba_hybrid_realimage_gate_20261009：2/4条单项canary产物PASS；celeba_gradient_realimage_gate_20261009：2/4条单项canary产物PASS。各完整cohort尚未严格汇总/离机验收，科学表记录仍为0；不将三轮canary计入正式70轮结果。原始只读快照及SHA见TRAINING_STATE.json的baseline_gate_live_20261009，保留原startup封存证明。
+2454项历史新增训练、九方法900原始验证结果及旧备份保持原值；900原始训练结果完整，不等于900统一评价重放完整或最终test已完成。旧TableII的480个原值已追溯实际重复数，缺乏依据的SD不补造。完整入口REBUTTAL_COMPLETION_20261009.md；英文rebuttal已对齐24块原意见、40处本地引用及209项SHA声明，尚不能把待补实验写成完成。
 
-FLGMM两条完整真实图像CPU三轮canary均已严格接受并离机验收54成员，CPU任务已退出。两条ACC均0.516686、AEOD/ASPD为0的恒定预测负结果保留；Tg1为管线覆盖，不计正式论文结果，不推断CPU/GPU等价。GPU四项跨卡重复门检另行接受；32项搜索尚未启动。凭据见TRAINING_STATE.json的flgmm_cpu_canary_20261009。
+原20项cu130与另20项cu128真实图像三轮门检已严格接受、离机，两套Full与原worker短程张量/指标/诊断精确。Fed-NGA/Huber四条真实图像三轮门检含240梯度/攻击oracle已接受；FLGMM的CPU2/GPU4及组合基线的CPU4/CUDA4门检已接受。所有恒定负类和工程/数值失败保留。三轮门检不证明70轮跨环境等价或科学性能优势；门检服务已EXITED，不重启。
 
-FLGMM原v2四项GPU三轮canary均完成，各自身份通过，跨卡训练张量、指标、controller及Torch RNG逐位一致；整体门检按原冻结规则保留REPEAT_MISMATCH。实际差异限于被快照混入的SciPy导入期文档示例default_rng熵状态，原失败报告与121成员已离机核验。记录范围缺陷由独立v3修复；原v2门检不追改，32项搜索未启动；三轮canary不计正式性能结果。
+完整17行比较仍缺8方法的完整多seed结果：LoGoFair、Fed-NGA、FedWA、Huber、FLGMM、SmartFL、FedDNA及组合控制。梯度方法正式协议、LoGoFair人口和最终评价主终点/测试边界仍待裁定；FedWA/SmartFL/FedDNA忠实规格仍缺，不能用简化旧分支冒充。主机制800、完整机制三视图、冻结最终评价、正文及最终回复仍未完成。Fig3原脚本/ForestDiffusion执行身份仍缺；已核数值与缺失来源明确区分。
 
-更新：FLGMM v3四项GPU门检已全部严格接受、两组跨卡重复精确，139内容成员+清单及四份旧模型引用离机核验，服务正常EXITED；此前3/4启动快照只作历史记录。32项新搜索包已准备，尚未启动，不计正式性能样本。
+已接受场景的10/9/6种子中期论文表：celeba_mechanism_v1/interim_tables_20261009T113229Z/TABLES.md。仅展示4个齐备的IID配对场景，保留所有指标及取舍，不补造未完成场景，不以Full最佳seed对比消融均值。AEOD为绝对TPR差，不是完整equalized odds；Full98cu128+2cu130、多数旧driver570.211.01和当前driver595.84差异、seed91001选择历史均披露。native含各方法原校准，不能据此单独证明聚合机制。
 
-更新：Fed-NGA/Huber四项三轮真实图像门检全部严格接受，240条同点client gradient与攻击符号oracle通过；86成员离机及主代理核验，服务EXITED。四项恒定预测负结果保留；五项正式协议选择仍未冻结，科学表记录0。此前2/4快照及“尚无完整四项PASS”为历史观察。
+## Git与巡检
 
-更新：Hybrid第三条non-IID/S-DFA在result严格JSON记录层失败，已定位敏感组零方差使原攻击审计相关系数未定义；两条IID已接受，整体2/4未通过。46成员失败证据离机保留，第三条模型有限且三轮aggregate精确仍不能替代完整接受。仅准备限定字段null与独立原因记录的writer修复；未知NaN和主指标/训练状态仍必须拒绝，未重启队列。
+最近已验证推送：ff61b603f32a22981b8b179afc9026c61c7c9d66，分支codex/revision-evidence-baselines-20260928，129份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment9_verified_20261009.json。
 
-机制统一评价更新：一条minus_U/IID/Benign/seed91002终轮checkpoint已完成raw/native/shared三视图重放，native误差0，9指标/24混淆计数/3规则独立重算一致，14成员离机及主代理核验。它与70轮科学训练验收分母分开；Full仅引用已有严格结果，未重复推理/备份，未运行test。两项工程失败及第三次受限恢复链完整保留。
+三小时聊天任务guardfed-training-health仍PAUSED；本会话没有原生automation_update工具，未编辑调度器或建立替代cron/Windows任务。supervisor持续运行训练不等于聊天巡检恢复。待原生接口可用时按server_reactivation_20261009/MONITOR_HANDOFF.md恢复同一任务；不从历史计划自动派发新队列。
 
-最新FLGMM搜索启动：guardfed_celeba_flgmm_screen     RUNNING   pid 18899, uptime 0:01:32，32项×70轮valid-only、seed91001、两卡各1任务/CPU1/nice10。首批实际round2/1，无失败；66封存源/输入+seal和4启动凭据已离机及主代理核验。尚无完整70轮接受，不称阶段完成；前文‘32未启动’为门检历史观察。入口tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md。
-
-最新九方法重放启动：guardfed_celeba_valid_remaining872_20261009   RUNNING   pid 19149, uptime 0:01:14，只执行900既有模型减去已接受28的872补集，80批、每批至多11；11个真实CNNworker均nice10、8计算线程，outer nice0仅编排。38成员部署包、只读inspect及启动凭据离机并经主代理核验。首10秒全cgroup实用50.39/122.88核，throttle0，主800仍增长。新批仍待独立三视图和离机接受，不把RUNNING计入已接受；不训练旧模型、不运行test。入口tmp/celeba_final_valid_replay_20261009/v4/remaining872_prepared_v2_20261009/README.md。
-
-最新九方法离机接受：唯一ID collector严格合并424/900实际三视图重放，尚缺476；其中原吞吐/门检28+新补集396，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该424项称完整最终评价。新collector路径tmp/celeba_final_valid_replay_20261009/v4/remaining872_execution_20261009/cumulative_424_accepted.json。
-
-受限任务启动历史：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放另行启动，明确排除已验收seed91002。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。当前接受数量见下面完成更新。
-
-机制统一评价完成更新：另外7条原终轮已严格接受并离机备份，74成员及63指标/168混淆计数/21预测规则经主代理独立核验；合计8条新机制raw/native/shared验证重放，native误差0。对应服务正常EXITED；不重启，不重推理Full，不计作新训练，不运行test。尚缺的六条配对Full三视图将显式等待九方法重放接受，不能用旧校准结果冒充。凭据MECHANISM_VALID_SEVEN_ROOT_VERIFICATION.json。
-
-FLGMM搜索接受更新：首2/32条完整70轮任务已严格接受并离机备份，22成员经主代理核SHA及原冻结接受器复核。它们仅是同一候选的IID/Benign与IID/S-DFA；尚无完整四条件候选，未选择冠军，30条未接受。原32项队列继续；此前“尚无完整70轮接受”为启动观察。凭据FLGMM_FIRST_TWO_ROOT_VERIFICATION.json。
-
-Hybrid CPU门检完成更新：两新non-IID加两原IID引用已全部严格接受，56成员离机及主代理同checkpoint张量/每轮指标/攻击/诊断/RNG核验通过。原失败仍有效保留；修复服务正常EXITED，不重启。两新为恒定负类短程结果，不作性能优势证据，不推断CUDA或70轮等价。四项CUDA门检包另行审阅批准，32项搜索尚未授权启动。凭据HYBRID_REPAIRED_TWO_ROOT_VERIFICATION.json。
-
-机制下一增量实际启动：guardfed_celeba_mechanism_valid_incremental15仅重放23真实终轮减去已闭合8的精确15，顺序fresh-child、单进程8线程、CPU112–119/nice10/CUDA隐藏；137原source/data/artifact身份预检通过，启动44成员离机及主代理核SHA，实际child CPU增长。原19准备包/科学函数不改；外部批准只适配独占新输出路径。启动快照远端strict完成2不当作离机新接受，不训练/推理Full或test；完整增量另行接受。凭据MECHANISM_FIFTEEN_STARTUP_ROOT_VERIFICATION.json。
-
-机制三视图增量接受更新：本15中15条新增已原严格接受、离机SHA/member闭合并由主代理独立重算预测规则/指标/混淆计数；合计23条新机制终轮三视图接受，native误差0。未重包原模型/重推理Full；其余任务仍以独立真实验收为准。
-
-Hybrid CUDA四项门检实际启动：独占新执行副本沿原5科学源/body/driver/writer，GPU0/CPU104单线程/nice10，真实首轮及cuda:0运行时身份已核。81成员source/startup离机及主代理核SHA，资源107名义计算线程含新机制15，低于122.88配额；不是实用率。全部四项严格接受及离机闭合前不称完整门检PASS；32搜索仍PREPARED，不运行test。凭据HYBRID_CUDA_STARTUP_ROOT_VERIFICATION.json。
-
-最新完成覆盖上述启动观察：exact15全部原strict接受、三条差集备份和主代理独立复算闭合，连旧8共23实际机制终轮三视图；服务EXITED、worker0、失败0，禁止重启。Full配对仍等待已有baseline真实重放凭据join，不能重推理或用旧校准代替。FINAL_DELIVERY.json绑定原15ID、149内容成员、135指标/360计数/45规则，native最大差0。
-
-最新CUDA门检完成覆盖上述启动观察：4/4完整严格接受、49新增成员离机及主代理核验，两组同GPU模型张量/每轮指标/攻击/诊断/RNG精确；服务EXITED，禁止重启。四终轮均恒定负类ACC0.516686、AEOD/ASPD0，保留负结果，不称性能优势、CPU/CUDA或70轮等价。原32验证搜索已获root范围批准，仍须新scope/seal exact审批及实时资源预检才能派发；本门检不等于32搜索完成。凭据HYBRID_CUDA_FOUR_ROOT_VERIFICATION.json。
-
-最新故障覆盖前文baseline重放启动观察：原872服务已failstop EXITED。chunk036中FairGuard/IID/F Flip/seed91009的CPU native指标偏离原GPU记录，ACC差约−0.00503个百分点，AEOD差+0.00029028、ASPD差+0.00011823，超过原1e-12；模型/配置/数据SHA一致且权重未改，但根因未确定。65成员失败现场离机保全；036虽10/11单项strict，也不计该partial批。此前实际已离机接受的唯一ID继续有效，最新分母读collector；未放宽容差、未改旧指标、未重试或继续后续批。主800/FL32/另行批准Hybrid32不受影响。后续有界诊断必须保持原记录、源与选择规则，不能将近边界假设当已证实原因。凭据BASELINE_VALID_CHUNK036_FAILURE_ROOT_VERIFICATION.json。
-
-最新Hybrid32已实际启动并覆盖前文准备观察：独立/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009，服务guardfed_celeba_hybrid_screen32，原8候选×四条件×70round valid-only/seed91001，GPU0/CPU104单线程/nice10/idleIO。首轮真实146493 client rows、随后round7，source69前后及28科学数据身份不变，73新增archive成员离机及主代理核验，20原source显式复用可重构69源；旧gate/model不重包。当前70轮接受0，不能称32完成；不自动100确认/test/retry。接续见该目录execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md及HYBRID_SCREEN32_STARTUP_ROOT_VERIFICATION.json。
-
-单模型GPU诊断已完成并离机及主代理独立核验：原FairGuard/IID/F Flip/seed91009三指标差值全0，CPU与此次GPU的native/raw恰有image172599一处0→1翻转，共享校准预测无翻转。仅一次GPU科学执行；两次工程异常及原CPU失败全部保留。缺历史GPU逐图数组，不声称唯一历史根因；424正式接受数不变，原872服务不重启。凭据NATIVE_GPU_DIAGNOSTIC_ROOT_VERIFICATION.json。
-
-已接受机制场景的10/9/6种子中期论文表见celeba_mechanism_v1/interim_tables_20261009T113229Z/TABLES.md；只列已凑齐10个配对seed的四个IID场景，不把partial或未跑的其他组件补成结果，仍保留准确率/公平性取舍。
+下方为历史记录；当前事实以本入口、TRAINING_STATE.json及对应实际凭据为准。源/数据/冻结配置保持一致、无重复worker且已验收项严格跳过时才有限恢复外部中断；数值/逻辑错误保留证据，不循环重试、不改统计/seed/并发或driver/实例。
 
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
