@@ -1,0 +1,24 @@
+--- accepted_after6
++++ accepted_after10
+@@ -2,9 +2,9 @@
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+ HERE=Path(__file__).resolve().parent;B=HERE.parent;H=B.parent
+-SERVER_SHA='c796e51e497e6f8d03d337da019beeb4d24550095dece1bd9cf3d3c9a871d722'
+-ARCHIVE_SHA='efffebcaecacace9143e579f91d315ab13dd16fd20cce90481a3ba3072dd3c9d'
+-INVENTORY_SHA='4a76135321d4da21b5a08e70b615da90b345fc3a507b1fb06044ed71a39ddbaf'
++SERVER_SHA='2fcb8394c91b86b0cd86189b6f09d58deb4c12813cec8389160c26d290df596c'
++ARCHIVE_SHA='1e1e9e502087191eeb2001a9e9776cc4d3f4f7c0e1d580abffde851af2786782'
++INVENTORY_SHA='351988b6fdb2bf3780d7a1bafe15f97a03ae0472b4a8a26377b035d41fcfa237'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+@@ -18,7 +18,7 @@
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after6_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after10_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])

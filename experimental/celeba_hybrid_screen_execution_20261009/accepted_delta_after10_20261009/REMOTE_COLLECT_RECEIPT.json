@@ -1,0 +1,34 @@
+{
+  "command": [
+    "ionice",
+    "-c",
+    "3",
+    "nice",
+    "-n",
+    "10",
+    "taskset",
+    "-c",
+    "106",
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "OMP_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "OPENBLAS_NUM_THREADS=1",
+    "CUDA_VISIBLE_DEVICES=0",
+    "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "-B",
+    "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/accepted_delta_after10_20261009/collect_once.py"
+  ],
+  "exit_code": 0,
+  "transport_members": {
+    "collect_once.py": "a95fea08438e5ec05999eaeafcabf296854720310b6fb23e71cb23c6b5809ec5",
+    "PREVIOUS_CHAIN.json": "6733ca577aa2805af4bc6ee0f2d31429464caaa7c65846df83e09555b3634748",
+    "PREVIOUS_LATEST.json": "9d8e65ce03b4b7106a32425b01a5e745fa2ea0b889385db3721a99bc8c8c4007",
+    "AUTHORIZED_SNAPSHOT.json": "62c36937bc0270a9f26dcaa29cfdd139dda57c8f7daf11bed16815cf823cd375",
+    "EXACT_DELTA.json": "8bf446d8735b5b08b54485ca9c4d5b08b1c6f077c6b9ddd07e8cb320bdbac354",
+    "COLLECTOR_DIFF.patch": "c7f84c1db51a5adc928b346542e6cdde448e2bd07a003647e865636c4b5bcdd9",
+    "SOURCE_RECEIPT.json": "a43f0494642f810ed4137a5d9dd8e026cae28ca1968adeebc5e3e9ac513fde97"
+  },
+  "collector_stdout_sha256": "9e4c81aaaf9f42818dc8540ef639c795f0f235e8f28477916f145dbe42da3af8",
+  "collector_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

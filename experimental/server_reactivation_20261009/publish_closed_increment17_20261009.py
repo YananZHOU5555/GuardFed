@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27,28,29),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27,28,29,30),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -48,7 +48,10 @@ profiles={
         native_tag='root_delta_20261009T195854Z',native_delta=8,handoffs=[],live_tags=[],formal_tag='20261009T200421Z'),
     29:dict(previous='e470f99d2a5645a5991c77412dc300281f9f6a47',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=120,views=120,
-        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T203646Z')}
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T203646Z'),
+    30:dict(previous='359e47ce06ed14627ee1d78072b1ed8e5cbea920',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=125,views=125,
+        native_tag='root_delta_20261009T204215Z',native_delta=5,handoffs=[],live_tags=[],formal_tag='20261009T211531Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -59,6 +62,24 @@ def copy(src,dst,expected=None):
     assert expected is None or digest==expected
     target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,target)
     assert sha(target)==digest and MAPPING.setdefault(dst.as_posix(),digest)==digest
+if args.increment==30:
+    # Fail before any copy/staging: prepared C5 source is not completed scientific evidence.
+    assert profile['formal_tag'] is not None,'Root must bind the actual latest formal observation before increment30'
+    C5=ROOT/'tmp/celeba_mechanism_valid_C_after20_20261009'
+    C5_adoptions=list((C5/'execution_candidate/backups').glob('incremental_*/ROOT_ADOPTION_REVIEW.json'))
+    assert len(C5_adoptions)==1,'Exactly one actual C5 offserver/root adoption is required'
+    C5_delta=C5_adoptions[0].parent;C5_proof=read(C5_adoptions[0]);C5_scope=read(C5/'SCOPE.json')
+    assert C5_proof['status']=='ROOT_C_AFTER20_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+    assert (C5_proof['accepted_new'],C5_proof['cumulative_three_view_models'])==(5,125)
+    assert C5_proof['original120_unchanged'] and not C5_proof['test_inference'] and C5_proof['new_Full_inference']==0
+    assert len(C5_scope['selected_ids'])==5 and len(C5_scope['excluded_prior_ids'])==120
+    assert C5_proof['prior_three_view_models']==120 and set(C5_proof['accepted_new_ids'])==set(C5_scope['selected_ids'])
+    assert C5_proof['all_native_differences_zero'] and C5_proof['negative_results_preserved'] and C5_proof['source_scope_complete']
+    assert sha(C5/'FILES_SHA256.json')==C5_proof['science_seal_sha256']
+    assert sha(C5/'execution_candidate/EXECUTION_SOURCE_SHA256.json')==C5_proof['execution_seal_sha256']
+    assert not set(C5_scope['selected_ids'])&set(C5_scope['excluded_prior_ids'])
+    for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('backup_receipt_sha256','backup_receipt.json'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json')]:
+        assert sha(C5_delta/name)==C5_proof[key]
 assert git('rev-parse','HEAD',text=True).strip()==PREVIOUS
 if git('status','--porcelain',text=True).strip():
     assert args.increment==23
@@ -666,6 +687,72 @@ if args.increment==29:
     for name in ('auxiliary_screens_20261009T203645Z.json','auxiliary_screens_20261009T203645Z.RAW.json'):
         copy(ROOT/CHECKS/name,CHECKS/name)
     copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
+if args.increment==30:
+    assert sha(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')=='0d3f357dfdea297b9c97a6d521b442bd32f401f77f2b256c5b9d1be7738690bc'
+    native_review=read(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')
+    assert native_review['native_accepted']==125 and native_review['ledger_accepted_unique_ids']==125
+    assert set(native_review['added5'])==set(C5_scope['selected_ids']) and native_review['oldFull_models_repacked']==0
+    assert sha(backup/(tag+'.tar.gz'))==native_review['archive_sha256']
+    # This scope contains only new C5 source/execution and its actually adopted replay evidence.
+    for folder in (C5,ROOT/'tmp/celeba_mechanism_C_after20_root_operations_20261009'):
+        assert folder.is_dir()
+        for path in folder.rglob('*'):
+            if path.is_file() and not any(part in ('__pycache__','restored','verified','verified_extract') for part in path.relative_to(folder).parts):
+                assert path.suffix!='.pt','Raw checkpoints belong in the already bound native delta, not replay publication'
+                copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    for path in (ROOT/'tmp').glob('*C_after20*root*20261009.py'):
+        copy(path,Path('experimental/server_reactivation_20261009')/path.name)
+    hybrid=ROOT/'tmp/celeba_hybrid_screen_execution_20261009';delta=hybrid/'accepted_delta_after10_20261009'
+    assert sha(delta/'ROOT_ADOPTION_REVIEW.json')=='f51b6251db03663b7f1206ad84ccead1d77510e1bb5c257d716ae81caddbeef2'
+    hybrid_adopt=read(delta/'ROOT_ADOPTION_REVIEW.json')
+    assert (hybrid_adopt['accepted_before'],hybrid_adopt['accepted_new'],hybrid_adopt['accepted_total'])==(10,4,14)
+    assert sha(delta/'hybrid_after10_delta.tar.gz')==hybrid_adopt['archive_sha256']
+    assert sha(delta/'DELIVERY_FILES_SHA256.json')==hybrid_adopt['delivery_seal_sha256']
+    for pin in read(delta/'DELIVERY_FILES_SHA256.json')['members']:
+        copy(delta/pin['path'],Path('experimental')/delta.relative_to(ROOT/'tmp')/pin['path'],pin['sha256'])
+    for name in ('DELIVERY_FILES_SHA256.json','ROOT_ADOPTION_REVIEW.json'):
+        copy(delta/name,Path('experimental')/delta.relative_to(ROOT/'tmp')/name)
+    chain=hybrid/'BACKUP_CHAIN_accepted_delta_after10_20261009.json'
+    assert sha(chain)=='841f0a5accfd413d35f2f17ac6bd8309fa0029a7096cff635f9e98bddc937f33'
+    assert read(chain)['accepted_total']==14 and read(hybrid/'LATEST_BACKUP.json')['chain_sha256']==sha(chain)
+    assert state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']==14
+    for path in (chain,hybrid/'LATEST_BACKUP.json'):copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    writing=ROOT/'tmp/guardfed_rebuttal_C20_20261009'
+    canonical=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C20_20261009'
+    assert sha(writing/'FILES_SHA256.json')==sha(canonical/'FILES_SHA256.json')=='196d5822ddb7dec20bb7014ea9a150725019b0b09ec0de62d1215d0498e9287c'
+    assert sha(canonical/'ROOT_REVIEW.json')=='9a753fa62d3aae670c2660246c1dc1df58cb7f6e78f21a7f8be099ef1c770d3d'
+    writing_review=read(canonical/'ROOT_REVIEW.json')
+    assert writing_review['comments_verbatim']==24 and writing_review['new_scalar_pointer_checks']==22
+    assert not writing_review['manuscript_applied'] and not writing_review['final_endpoint_selected'] and not writing_review['final_test']
+    for name,pin in read(writing/'FILES_SHA256.json')['files'].items():
+        copy(writing/name,Path('experimental')/writing.name/name,pin['sha256'])
+        copy(canonical/name,(canonical/name).relative_to(ROOT),pin['sha256'])
+    copy(writing/'FILES_SHA256.json',Path('experimental')/writing.name/'FILES_SHA256.json')
+    for name in ('FILES_SHA256.json','ROOT_REVIEW.json'):copy(canonical/name,(canonical/name).relative_to(ROOT))
+    copy(ROOT/'tmp/adopt_rebuttal_C20_root_20261009.py',Path('experimental/server_reactivation_20261009/adopt_rebuttal_C20_root_20261009.py'))
+    fl_incremental=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
+    assert sha(fl_incremental/'FILES_SHA256.json')=='f6de59a56de25a8d316cf7e05c44eafc9751041757e4dc61c88f7bccfd988472'
+    prepared=read(fl_incremental/'FILES_SHA256.json');assert prepared['status']=='PREPARED_NO_ACTUAL_COLLECTION' and len(prepared['files'])==5
+    for name,pin in prepared['files'].items():copy(fl_incremental/name,Path('experimental')/fl_incremental.name/name,pin['sha256'])
+    copy(fl_incremental/'FILES_SHA256.json',Path('experimental')/fl_incremental.name/'FILES_SHA256.json')
+    FL96_latest=read(fl_incremental/'LATEST_BACKUP.json');FL96_root_path=ROOT/FL96_latest['root_adoption_path']
+    assert sha(FL96_root_path)==FL96_latest['root_adoption_sha256']=='9663fe584e27eadcd6b81260e676e4a37a47331d6e31e6098c3cb2c407ba8a65'
+    FL96_root=read(FL96_root_path);FL96_attempt=FL96_root_path.parent
+    assert FL96_root['accepted_total']==state['flgmm_fullcoverage_v2_20261009']['new_accepted']==1
+    for name,pin in read(FL96_attempt/'DELIVERY_FILES_SHA256.json')['files'].items():
+        copy(FL96_attempt/name,Path('experimental')/(FL96_attempt/name).relative_to(ROOT/'tmp'),pin['sha256'])
+    for path in (FL96_attempt/'DELIVERY_FILES_SHA256.json',FL96_root_path,fl_incremental/'LATEST_BACKUP.json'):
+        copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    copy(ROOT/'tmp/adopt_FL96_first_delta_root_20261009.py',Path('experimental/server_reactivation_20261009/adopt_FL96_first_delta_root_20261009.py'))
+    for record in (state['flgmm_screen32_20261009']['latest_readonly_terminal_observation'],state['hybrid_screen32_20261009']['latest_readonly_terminal_observation']):
+        source=ROOT/record['entry'];copy(source,source.relative_to(ROOT),record['sha256'])
+        raw=source.with_name(source.stem+'.RAW.json')
+        if raw.exists():copy(raw,raw.relative_to(ROOT))
+    latest_fl=ROOT/state['flgmm_fullcoverage_v2_20261009']['latest_readonly_observation_path']
+    for path in latest_fl.parent.iterdir():
+        if path.is_file():copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    copy(ROOT/'tmp/update_overview_closure100_root_20261009.py',Path('experimental/server_reactivation_20261009/update_overview_closure100_root_20261009.py'))
+    copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -741,6 +828,13 @@ if args.increment==29:
         'experimental/celeba_flgmm_fullcoverage_launch_operations_20261009/** -text',
         'experimental/celeba_mechanism_three_view_C_two_scenes_prepared_20261009/** -text',
         'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_two_scenes_20261009/** -text']
+if args.increment==30:
+    patterns += ['experimental/celeba_mechanism_valid_C_after20_20261009/** -text',
+        'experimental/celeba_mechanism_C_after20_root_operations_20261009/** -text',
+        'experimental/celeba_hybrid_screen_execution_20261009/accepted_delta_after10_20261009/** -text',
+        'experimental/guardfed_rebuttal_C20_20261009/** -text',
+        'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C20_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_incremental_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -803,6 +897,14 @@ if args.increment==29:
         FLGMM_canaries_scientifically_adopted=state['flgmm_fullcoverage_v2_20261009'].get('canaries_accepted',0),
         FLGMM_fullcoverage_started=state['flgmm_fullcoverage_v2_20261009'].get('formal100_started',False),
         canaries_are_formal_samples=False,main_manuscript_edited=False,primary_endpoint_selected=False)
+if args.increment==30:
+    receipt.update(increment_scope='accepted_native125_C5_three_view_closure_Hybrid14_and_C20_author_review_text',
+        new_mechanism_native_accepted=5,new_mechanism_three_view_accepted=5,minus_U_complete_three_view=100,minus_C_three_view=25,
+        C5_root_adoption_sha256=sha(C5_adoptions[0]),C_FedSA_scene_complete=False,
+        new_Hybrid_strict_offserver=4,Hybrid_selected_recipe=False,
+        C20_rebuttal_comments_verbatim=24,C20_new_scalar_pointer_checks=22,C20_author_review_only=True,
+        FLGMM_incremental_helper_prepared_only=False,FLGMM_backups_created_by_prepared_helper=1,FLGMM_new_full70_offserver_accepted=1,
+        main_manuscript_edited=False,primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

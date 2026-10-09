@@ -1,0 +1,5 @@
+# Hybrid fixed delta 10 to 14 — root adoption pending
+
+The source-bound20:48:58Z snapshot contained14 terminals and one active job at48/70. Only the four IDs in EXACT_DELTA.json were accepted. Original server strict ran once onCPU106, one thread, nice10/idleIO, while main8 and FL2 queues were untouched. All59 archive members, four CPU tensor identities and the existing original-science record bridge passed. Five runtime mutations and one SHA mutation were rejected. Writer/null rules and negative outputs are preserved.
+
+ROOT_READY_CHAIN_LINK.json is proposed, not canonical adoption. Prior LATEST and6733ca chain are byte-unchanged. Source69 and old10 models are referenced, not repackaged. The shared running log is an explicitly labelled prefix. Server cu128/RTX5090 metadata is bound to the actual strict receipt; localtorch2.8cpu is not a reproduction of that runtime. No CNN, threshold fitting, training, test, recipe selection, queue mutation or Git change was performed. No arrivals after the frozen snapshot were included.
