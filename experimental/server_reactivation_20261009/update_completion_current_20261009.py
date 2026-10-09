@@ -7,7 +7,17 @@ state=json.loads((TRAIN/'TRAINING_STATE.json').read_bytes())
 main=state['celeba_mechanism_v1'];baseline=state['final_evaluator_runtime_20261009']
 accepted=main['scientific_results_offserver_verified'];replayed=baseline['actual_native_valid_image_replays_accepted']
 mechanism_views=main['three_view_new_models_offserver_verified']
+complete_native_scenes=main['latest_interim_paper_table']['complete_paired_scenes']
 published=state['latest_publication_verification']
+paired_table=main.get('latest_paired_three_view_table')
+paired_note=('Full paired three-view receipts remain missing and will join actual baseline replay acceptance, without new Full inference or substituting old calibration. '
+    if not paired_table else
+    'A subsequent root-reviewed identity join now supplies actual Full100 replay receipts and the exact60 Full counterparts for six complete scenes. '
+    'The raw/native/shared tables include all three consistent10/9/6-seed panels and paired differences, with972 independently recomputed mean/sampleSD checks. '
+    'For these120 records, native and shared-calibration metrics are exactly equal. DeletingU lowers native accuracy in all six scenes by0.309–1.384 percentage points and lowersASPD in all six, '
+    'whileAEOD increases in five; rawAEOD decreases in five. These tradeoffs do not establish that every term is necessary. '
+    'Full replay mixes5CPU/95GPU overall (5CPU/55GPU in the displayed60); controls useCPU. The disclosed training-build/driver and validation-selection history remain limitations, '
+    'and neither a uniform-device final comparison nor a primary endpoint has been established. ')
 increments=main['incremental_science_backups']
 latest_increment=increments[-1]
 flgmm=state['flgmm_screen32_20261009']
@@ -93,15 +103,18 @@ if next37_status.get('startup_root_proof_sha256'):
 if next37_status.get('offserver_new_accepted'):
     next37_note += (f" Separately, {next37_status['offserver_new_accepted']} new terminals have passed original strict checks, archive-member verification, independent saved-array reconstruction and root adoption; "
         f"{next37_status['offserver_remaining']} of this37-item scope remain unaccepted off server. All native discrepancies are zero. These acceptances bind later backup receipts rather than the startup snapshot.")
+if next37_status.get('status') in ('COMPLETE_STRICT_OFFSERVER_NO_FULL_JOIN','COMPLETE_STRICT_OFFSERVER_PAIRED_SIX_SCENES'):
+    next37_note += (f" The later terminal observation at{next37_status['latest_progress_utc']} verified service exit,37 completed IDs,zero residual workers and no failure. "
+        "Both disjoint backups are now strict/off-server accepted; the exact37 scope is complete. Later native terminals remain outside this scope, and the subsequent paired Full join has its own actual root proof.")
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
 
 The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
-The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight, the historical increment closed23 actual minus_U terminal checkpoints. Subsequent explicitly adopted increments bring the current total to{mechanism_views} strict, off-server raw/native/shared validation replays; native discrepancy is zero. Full paired three-view receipts remain missing and will join actual baseline replay acceptance, without new Full inference or substituting old calibration. This does not establish the complete mechanism comparison.
+The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight, the historical increment closed23 actual minus_U terminal checkpoints. Subsequent explicitly adopted increments bring the current total to{mechanism_views} strict, off-server raw/native/shared validation replays; native discrepancy is zero. {paired_note}This does not establish the complete mechanism comparison.
 
-The accepted native mechanism data currently support six complete Full–minus_U scenes, with ten paired seeds per scene and consistent additional nine-seed and six-seed panels. In non-IID Benign, Full hasACC88.594±1.168%, AEOD0.00696±0.00423 andASPD0.06511±0.00902; minus_U has87.290±1.870%,0.01300±0.00732 and0.05140±0.01598. Full therefore has higher mean accuracy and lower meanAEOD but higher meanASPD in this scene. These native end-to-end results retain calibration effects and do not establish an isolated aggregation cause or that every score term is necessary. The next37 replay scope is exactly the remaining accepted60 minus the already closed23; source review and36 scientific no-CNN rejection checks plus32 execution rejection checks have passed. {next37_note}
+The accepted native mechanism data currently support{complete_native_scenes} complete Full–minus_U scenes, with ten paired seeds per scene and consistent additional nine-seed and six-seed panels. In non-IID Benign, Full hasACC88.594±1.168%, AEOD0.00696±0.00423 andASPD0.06511±0.00902; minus_U has87.290±1.870%,0.01300±0.00732 and0.05140±0.01598. Full therefore has higher mean accuracy and lower meanAEOD but higher meanASPD in this scene. These native end-to-end results retain calibration effects and do not establish an isolated aggregation cause or that every score term is necessary. The next37 replay scope is exactly the historical accepted60 minus the already closed23; source review and36 scientific no-CNN rejection checks plus32 execution rejection checks have passed. {next37_note}
 
 FLGMM has{flgmm['offserver_accepted70round_jobs']}/32 full70-round validation-search jobs strictly accepted and backed up off server using the frozen original acceptor. The original search continues. A partial candidate summary is not the final selection across all eight candidates; no winner has been selected and the100-job multi-seed coverage has not started.
 

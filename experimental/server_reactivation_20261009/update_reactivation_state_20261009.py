@@ -1039,6 +1039,24 @@ if (next37/'root_source_review/ROOT_REVIEW.json').exists():
             remote_terminal_candidates=len(started37['completed']),offserver_new_accepted=0)
         if 'RUNNING' in started37['service']:
             state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_next37']))
+    progress37_paths = [p for p in next37_execution.glob('ROOT_PROGRESS_*.json') if not p.name.endswith('.RAW.json')]
+    if progress37_paths:
+        progress37_path = max(progress37_paths, key=lambda p: read(p)['utc'])
+        progress37 = read(progress37_path)
+        assert progress37['status'] == 'ROOT_NEXT37_REAL_LINUX_PROGRESS_AND_ALLOCATION_PASS'
+        assert progress37['source_startup_proof_sha256'] == sha(next37_execution/'ROOT_STARTUP_OBSERVATION.json')
+        assert progress37['execution_seal_sha256'] == sha(next37_execution/'EXECUTION_SOURCE_SHA256.json')
+        assert progress37['offserver_acceptance_not_measured'] and not progress37['batch_failure']
+        state['celeba_mechanism_v1']['next37_valid_replay'].update(
+            latest_progress_utc=progress37['utc'],latest_progress_sha256=sha(progress37_path),
+            latest_progress_path=progress37_path.relative_to(ROOT).as_posix(),
+            observed_service=progress37['service'],actual_processes=len(progress37['processes']),
+            remote_terminal_candidates=len(progress37['completed']))
+        if progress37['batch_complete']:
+            assert len(progress37['completed']) == 37 and not progress37['processes']
+            assert {r['id'] for r in progress37['completed']} == set(read(next37/'SCOPE.json')['selected_ids'])
+            state['celeba_mechanism_v1']['next37_valid_replay']['status'] = 'REMOTE_COMPLETE_OFFSERVER_PENDING'
+            state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_mechanism_valid_next37']
     prior23 = state['celeba_mechanism_v1']['three_view_accepted_ids']
     assert len(prior23) == len(set(prior23)) == 23
     allowed37 = {row['id'] for row in read(next37/'inventory_actual60_Full100refs.json')['records']} - set(prior23)
@@ -1076,6 +1094,9 @@ if (next37/'root_source_review/ROOT_REVIEW.json').exists():
         state['celeba_mechanism_v1']['next37_valid_replay'].update(offserver_new_accepted=len(adopted37_ids),
             offserver_remaining=37-len(adopted37_ids),accepted_ids=adopted37_ids,incremental_backups=adopted37_backups,
             latest_acceptance_utc=adopted37_backups[-1]['checked_utc'],startup_snapshot_is_historical=True)
+        if len(adopted37_ids) == 37:
+            assert state['celeba_mechanism_v1']['next37_valid_replay']['status'] == 'REMOTE_COMPLETE_OFFSERVER_PENDING'
+            state['celeba_mechanism_v1']['next37_valid_replay']['status'] = 'COMPLETE_STRICT_OFFSERVER_NO_FULL_JOIN'
 hybrid_delta = ROOT/'tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_first_20261009'
 hybrid_chain_path = hybrid_delta.parent/'BACKUP_CHAIN_first4_20261009.json'
 if hybrid_chain_path.exists():
@@ -1119,6 +1140,40 @@ state['celeba_mechanism_v1']['latest_interim_paper_table'] = dict(
     complete_paired_scenes=interim['complete_paired_scenes'],
     identity='native Full versus minus_U only; other components incomplete',
     mean_sampleSD=True, additional_9_and_6_seed_panels=True, whole_comparison_complete=False)
+paired_root_path = TRAIN/'celeba_mechanism_v1/three_view_interim_20261009T145900Z/ROOT_REVIEW.json'
+paired_note = '完整Full配对三视图仍需实际来源连接，不从Full引用数量推断完成。'
+if paired_root_path.exists():
+    paired_root = read(paired_root_path); paired_dir = paired_root_path.parent
+    assert paired_root['status'] == 'ROOT_SIX_SCENE_THREE_VIEW_PAIRED_SAVED_RECEIPTS_AND_STATISTICS_PASS'
+    assert paired_root['paired_checkpoints'] == 60 and paired_root['new_inference'] == 0 and not paired_root['final_test']
+    for name, expected in paired_root['artifact_sha256'].items():
+        assert sha(paired_dir/name) == expected
+    state['celeba_mechanism_v1']['latest_paired_three_view_table'] = dict(
+        status='SIX_SCENES_STRICT_OFFSERVER_FULL_JOIN_AND_ROOT_STATISTICS_ACCEPTED',
+        complete_scenes=6, paired_checkpoints=60, Full_identity_available=100,
+        Full_replay_devices={'cpu':5,'gpu':95}, paired_Full_replay_devices={'cpu':5,'gpu':55},
+        minus_U_replay_device='cpu', native_shared_metrics_exact=True,
+        table_path=(paired_dir/'TABLES.md').relative_to(TRAIN).as_posix(),
+        root_proof_path=paired_root_path.relative_to(ROOT).as_posix(), root_proof_sha256=sha(paired_root_path),
+        main_endpoint_selected=False, uniform_device_comparison=False, final_test=False, whole_mechanism_complete=False)
+    state['celeba_mechanism_v1']['next37_valid_replay'].update(
+        status='COMPLETE_STRICT_OFFSERVER_PAIRED_SIX_SCENES', paired_table_root_proof_sha256=sha(paired_root_path))
+    paired_note = ('六个完整场景、60对checkpoint已连接实际Full三视图并独立核验：'
+        'raw/native/shared并列表、10/9/6同种子面板及配对差值均保留。native与shared在这120记录的三指标完全相同；'
+        '去U后native准确率六场景均降低0.309–1.384个百分点，ASPD均更低，AEOD五场景更高；'
+        'raw下AEOD五场景更低。结果表明准确率与差距取舍，不能宣称U在所有指标上不可或缺。'
+        '表入口celeba_mechanism_v1/three_view_interim_20261009T145900Z/TABLES.md；混合设备/训练环境与验证集选择历史已披露，主评价口径仍待决定。')
+next11 = ROOT/'tmp/celeba_mechanism_valid_incremental_next11_20261009'
+if (next11/'root_source_review/ROOT_REVIEW.json').exists():
+    reviewed11 = read(next11/'root_source_review/ROOT_REVIEW.json')
+    assert reviewed11['status'] == 'ROOT_NEXT11_SOURCE_SCOPE_AND_NO_CNN_REJECTIONS_PASS_NOT_RUNTIME_APPROVAL'
+    assert reviewed11['source_seal_sha256'] == sha(next11/'FILES_SHA256.json')
+    assert reviewed11['actual_native_accepted']==71 and reviewed11['closed_three_view']==60 and reviewed11['selected_new_three_view']==11
+    state['celeba_mechanism_v1']['next11_valid_replay'] = dict(status='SOURCE_REVIEWED_NOT_DISPATCHED',
+        actual_native_snapshot=71, excluded_closed=60, selected_new=11, pending_native=729,
+        source_seal_sha256=reviewed11['source_seal_sha256'], root_source_proof_sha256=sha(next11/'root_source_review/ROOT_REVIEW.json'),
+        scientific_functions_unchanged=True, scientific_no_CNN_refusals=42, execution_started=False,
+        entry=next11.relative_to(ROOT).as_posix())
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1165,6 +1220,10 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 完整17行比较仍缺8方法的完整多seed结果：LoGoFair、Fed-NGA、FedWA、Huber、FLGMM、SmartFL、FedDNA及组合控制。梯度方法正式协议、LoGoFair人口和最终评价主终点/测试边界仍待裁定；FedWA/SmartFL/FedDNA忠实规格仍缺，不能用简化旧分支冒充。主机制800、完整机制三视图、冻结最终评价、正文及最终回复仍未完成。Fig3原脚本/ForestDiffusion执行身份仍缺；已核数值与缺失来源明确区分。
 
 已接受场景的10/9/6种子中期论文表：{state['celeba_mechanism_v1']['latest_interim_paper_table']['table_path']}。仅展示{interim['complete_paired_scenes']}个齐备的Full–minus_U配对场景，保留所有指标及取舍，不补造未完成场景，不以Full最佳seed对比消融均值。新增Sp-DFA场景Full准确率较高、去U的两个公平性差距更低，不能声称每项不可或缺。AEOD为绝对TPR差，不是完整equalized odds；Full98cu128+2cu130、多数旧driver570.211.01和当前driver595.84差异、seed91001选择历史均披露。native含各方法原校准，不能据此单独证明聚合机制。
+
+{paired_note}
+
+后续准确11份模型评价已经源审：non-IID F Flip十seed及FedSA seed91001，排除已闭合60；42拒收检查和原科学函数复用通过。仅为准备，未从源码准备推断Linux部署、运行或接受完成，历史next8包不派发。
 
 ## Git与巡检
 

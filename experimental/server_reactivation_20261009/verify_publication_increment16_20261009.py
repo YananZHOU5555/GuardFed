@@ -6,9 +6,9 @@ TRAIN=ROOT/'docs/server_deployment_20260923/training_20260923'
 BRANCH='codex/revision-evidence-baselines-20260928'
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 parser=argparse.ArgumentParser();parser.add_argument('--remote',action='store_true')
-parser.add_argument('--increment',type=int,choices=(16,17),default=16);args=parser.parse_args()
+parser.add_argument('--increment',type=int,choices=(16,17,18),default=16);args=parser.parse_args()
 RECEIPT=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
-expected_previous={16:'d659e0bb37bbe89b8390927c54ef5f37f602e6b6',17:'795f4b09c60c4a81de3d4aa67dad5beac5075827'}[args.increment]
+expected_previous={16:'d659e0bb37bbe89b8390927c54ef5f37f602e6b6',17:'795f4b09c60c4a81de3d4aa67dad5beac5075827',18:'1ac345c0dda16dcdfdedfcc0b020f58a24092aef'}[args.increment]
 receipt=json.loads(RECEIPT.read_bytes());commit=git('rev-parse','HEAD',text=True).strip()
 assert git('rev-parse','HEAD^',text=True).strip()==receipt['previous_commit']==expected_previous
 assert git('branch','--show-current',text=True).strip()==BRANCH and not git('status','--porcelain',text=True).strip()
@@ -24,7 +24,7 @@ proof=dict(status='COMMITTED_BLOB_SHA_PASS_BEFORE_PUSH',verified_utc=datetime.da
     commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(mapping),changed_paths=len(changed),
     publication_receipt_sha256=mapping[RECEIPT.relative_to(ROOT).as_posix()],
     baseline_valid_replays_accepted=receipt['baseline_valid_replays_accepted'],
-    mechanism_offserver_verified=receipt['mechanism_offserver_verified'],mechanism_three_view_offserver_verified=28,
+    mechanism_offserver_verified=receipt['mechanism_offserver_verified'],mechanism_three_view_offserver_verified=receipt['mechanism_three_view_offserver_verified'],
     FLGMM_offserver_verified=13,Hybrid_offserver_verified=4,test_started=False,scientific_goal_complete=False)
 if args.remote:
     actual=git('ls-remote','--heads','origin',BRANCH,text=True).strip().split()

@@ -1,11 +1,13 @@
 """Observe the exact37 deployment and real Linux processes; register no result."""
 from pathlib import Path
-import hashlib,json,shlex,subprocess
+import argparse,datetime,hashlib,json,shlex,subprocess
 ROOT=Path(__file__).resolve().parents[1]
 EX=ROOT/'tmp/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate'
 REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_incremental_next37_20261009/execution_candidate'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 read=lambda p:json.loads(p.read_bytes())
+parser=argparse.ArgumentParser();parser.add_argument('--progress',action='store_true');args=parser.parse_args()
+stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
 deployment=read(EX/'deployment_receipt.json');assert deployment['remote_installation']['returncode']==0
 code="""from pathlib import Path
 import datetime,hashlib,json,os,subprocess
@@ -42,6 +44,8 @@ print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat
 result=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55',
     'python -c '+shlex.quote(code)],capture_output=True,check=True,timeout=45)
 data=json.loads(result.stdout)
+if args.progress:
+    with (EX/f'ROOT_PROGRESS_{stamp}.RAW.json').open('xb') as stream:stream.write(result.stdout)
 assert not data['batch_failure']
 assert data['files']['APPROVED.json']['data']['root_approval_sha256']==deployment['root_approval_sha256']
 assert data['files']['preflight.json']['data']['external_draft_sha256']==deployment['external_draft_sha256']
@@ -61,12 +65,18 @@ for name,row in data['files'].items():
     if source.exists():assert sha(source)==row['sha256']
     else:source.write_bytes(payload)
 approved_sha=EX/'APPROVED.sha256'
-assert not approved_sha.exists();approved_sha.write_bytes((data['files']['APPROVED.json']['sha256']+'\n').encode())
+if args.progress:
+    assert approved_sha.exists()
+else:
+    assert not approved_sha.exists();approved_sha.write_bytes((data['files']['APPROVED.json']['sha256']+'\n').encode())
 assert sha(approved_sha)==data['approval_hash_file_sha256']
 data.update(status='ROOT_NEXT37_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS',
     deployment_receipt_sha256=sha(EX/'deployment_receipt.json'),execution_seal_sha256=deployment['execution_seal_sha256'],
     original23_not_rerun=True,new_training=0,new_Full_inference=0,scientific_offserver_new_accepted=0,test_inference=False)
-target=EX/'ROOT_STARTUP_OBSERVATION.json'
+if args.progress:
+    data.update(status='ROOT_NEXT37_REAL_LINUX_PROGRESS_AND_ALLOCATION_PASS',
+        source_startup_proof_sha256=sha(EX/'ROOT_STARTUP_OBSERVATION.json'),offserver_acceptance_not_measured=True)
+target=EX/(f'ROOT_PROGRESS_{stamp}.json' if args.progress else 'ROOT_STARTUP_OBSERVATION.json')
 with target.open('x',encoding='utf8') as stream:json.dump(data,stream,indent=2);stream.write('\n')
 print(json.dumps({'status':data['status'],'service':data['service'],'actual_processes':len(data['processes']),
     'worker_pids':[p['pid'] for p in workers],'remote_terminal_candidates':len(data['completed']),
