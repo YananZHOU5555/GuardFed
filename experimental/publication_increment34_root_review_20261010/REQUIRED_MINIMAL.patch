@@ -1,0 +1,11 @@
+--- sealed/publish_increment34.py
++++ proposed_v2/publish_increment34.py
+@@ -164,7 +164,7 @@
+         attributes.write_bytes(original + (b'' if not original or original.endswith(b'\n') else b'\n') + ''.join('"' + n + '" -text\n' for n in mapping).encode('utf-8'))
+         mapping['.gitattributes'] = sha(attributes)
+         names = list(mapping)
+-        for start in range(0, len(names), 25): git('add', '--', *names[start:start + 25])
++        for start in range(0, len(names), 25): git('add', '-f', '--', *names[start:start + 25])
+         for start in range(0, len(names), 25): git('add', '--renormalize', '--', *names[start:start + 25])
+         verify_blobs(':', mapping)
+         changed = set(filter(None, git('diff', '--cached', '--name-only', '-z', binary=True).decode().split('\0')))

@@ -1,0 +1,70 @@
+{
+  "status": "CHANGES_REQUIRED_ONE_CONFIRMED_STAGING_BLOCKER",
+  "sealed_package_sha256": "fd98b16b4bf3f1bec7d86438adea8dd3a5738f9549ef683a6d15d99505daadd0",
+  "publisher_sha256": "c11bd1bf87adaebd3b27bf7ff65f869ffff6e6e37fbec9515f1705f6e79409fa",
+  "verifier_sha256": "347d8817a6342e6cef325d5d5a6e1a10ea73c5ce7d82f9466d373f54216c19d5",
+  "sealed_members_verified": 6,
+  "actual_ready_pins_verified": 18,
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "publish_increment34.py",
+      "line": 166,
+      "issue": "First git add lacks -f; actual planned new archives are ignored by .gitignore:76 *.tar.gz. Execution copies into worktree then staging fails before INDEX_VERIFICATION.",
+      "evidence": "CHECK_IGNORE.txt",
+      "minimal_fix": "Add -f only to first git add on the already explicit reviewed mapping; keep all exact blob checks.",
+      "patch": "REQUIRED_MINIMAL.patch"
+    }
+  ],
+  "nonblocking_notes": [
+    {
+      "item": "Hybrid ROOT_DELIVERY_COPY.json",
+      "missing_from_mapping": true,
+      "effect": "No loss of original strict/member/record/root-adoption evidence: these are sealed and copied. This omitted25KB file is root transfer-provenance metadata only.",
+      "suggestion": "Optionally append it to existing Hybrid explicit path tuple; not a scientific acceptance blocker.",
+      "sha256": "b85a0731af609b44e16e2658f440028462a3d30803e57e3ce27adf8108cdbd28"
+    },
+    {
+      "item": "Origin identity",
+      "effect": "Remote verifier checks current origin branch equals exact commit; it does not separately pin origin URL. Existing target worktree/parent/branch determine context; no remote writes occur."
+    }
+  ],
+  "passed_checks": {
+    "actual_C7_ROOT_SHA_required_before_mutation": true,
+    "source_only_and_wrong_count_refused": true,
+    "C7_archive_receipt_offserver_SHA_bound": true,
+    "C7_metric_count_rule_counts": [
+      63,
+      168,
+      21
+    ],
+    "required_state_counts": [
+      147,
+      147,
+      7,
+      18
+    ],
+    "no_test_or_recipe_selection": true,
+    "precise_parent": "5526afddfce841b2a771795918f33c31478c83c4",
+    "precise_branch": "codex/revision-evidence-baselines-20260928",
+    "all_index_and_commit_bytes_SHA_checked": true,
+    "committed_receipt_and_gitattributes_bound": true,
+    "remote_branch_commit_exact_if_remote_flag": true,
+    "copy_paths_repo_contained": true,
+    "archive_duplicates_rejected": true,
+    "new_models_in_incremental_archives_only": true,
+    "derived_restored_trees_excluded": true,
+    "high_confidence_secret_patterns_and_sensitive_extensions_guarded": true,
+    "canonical_state_running_completion_overview_execution_monitor_and_live_included": true,
+    "nine_root_helpers_included": true,
+    "prior_pub33_verification_included": true,
+    "only_worktree_copy_stage_no_commit_push": true,
+    "sealed_source_bytes_preserved_via_copy_and_text_attributes": true
+  },
+  "limits": [
+    "Publisher/verifier plan/main not invoked; no stage, commit, push, SSH or shared writes.",
+    "Actual future C7 closure and final state147/147 were not asserted; runtime gates remain required.",
+    "Mapping follows frozen pins and named subtrees; secret check is pattern-based, not a comprehensive credential audit."
+  ],
+  "source_was_modified": false
+}

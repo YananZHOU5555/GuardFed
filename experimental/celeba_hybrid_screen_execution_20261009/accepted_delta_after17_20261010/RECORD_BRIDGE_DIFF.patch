@@ -1,0 +1,24 @@
+--- root_accepted_after16/bridge.py
++++ owned_after17/bridge.py
+@@ -2,9 +2,9 @@
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+ HERE=Path(__file__).resolve().parent;B=HERE.parent;H=Path('E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_screen_execution_20261009')
+-SERVER_SHA='b4bb801a0a4e02309c9947b481658ef581893b29ac5c48014b814bd82555f54b'
+-ARCHIVE_SHA='cd00667fd14364be9c270a8408d677750c7c1a3843ab1c632addb5c8c50e70ee'
+-INVENTORY_SHA='91da67ac20b75452ea42230859c1a8ccb31112bd5561dd2b08f684265dcb5407'
++SERVER_SHA='2c6aa714659ff5289f31923725e17fc5af72ad68e01630b60882f01f3a3bdecd'
++ARCHIVE_SHA='54d4c08c37206ea60d52951a92fb2ca47d9da6a56ec83617671c4400e728fd92'
++INVENTORY_SHA='6d5720aceb9184f9cbacf1397e9d9e986c7c3d669885624cc434f2971b3d1beb'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+@@ -18,7 +18,7 @@
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after16_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after17_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])
