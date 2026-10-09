@@ -1,0 +1,265 @@
+def create_client_data_dict(
+    client_df: pd.DataFrame,
+    feature_cols: List[str],
+    label_col: str,
+    sensitive_col: str,
+    num_clients: int,
+    alpha: float,
+    device: torch.device,
+    seed: int,
+) -> Dict[int, Dict[str, Any]]:
+    rng = np.random.default_rng(seed)
+    out: Dict[int, Dict[str, Any]] = {i: {"X": [], "y": [], "sensitive": []} for i in range(num_clients)}
+    for group_val in [1, 0]:
+        indices = client_df[client_df[sensitive_col] == group_val].index.to_numpy().copy()
+        rng.shuffle(indices)
+        cuts = (np.cumsum(rng.dirichlet([alpha] * num_clients)) * len(indices)).astype(int)[:-1]
+        for cid, split in enumerate(np.split(indices, cuts)):
+            if len(split) == 0:
+                continue
+            subset = client_df.loc[split]
+            out[cid]["X"].append(torch.tensor(subset[feature_cols].values, dtype=torch.float32, device=device))
+            out[cid]["y"].append(torch.tensor(subset[label_col].values, dtype=torch.long, device=device))
+            out[cid]["sensitive"].append(subset[sensitive_col].values.astype(int))
+    sensitive_feature_index = feature_cols.index(sensitive_col) if sensitive_col in feature_cols else None
+    for cid in range(num_clients):
+        if out[cid]["X"]:
+            out[cid]["X"] = torch.cat(out[cid]["X"])
+            out[cid]["y"] = torch.cat(out[cid]["y"])
+            out[cid]["sensitive"] = np.concatenate(out[cid]["sensitive"])
+        else:
+            out[cid]["X"] = torch.empty(0, len(feature_cols), dtype=torch.float32, device=device)
+            out[cid]["y"] = torch.empty(0, dtype=torch.long, device=device)
+            out[cid]["sensitive"] = np.array([], dtype=int)
+        out[cid]["sensitive_feature_index"] = sensitive_feature_index
+    return out
+
+def _adjust_counts_to_total(counts: Dict[Any, int], capacities: Dict[Any, int], total: int, rng: np.random.Generator) -> Dict[Any, int]:
+    counts = {k: max(0, min(int(v), int(capacities.get(k, 0)))) for k, v in counts.items()}
+    keys = list(counts)
+    while sum(counts.values()) < total:
+        available = [k for k in keys if counts[k] < capacities.get(k, 0)]
+        if not available:
+            break
+        k = available[int(rng.integers(0, len(available)))]
+        counts[k] += 1
+    while sum(counts.values()) > total:
+        positive = [k for k in keys if counts[k] > 0]
+        if not positive:
+            break
+        k = positive[int(rng.integers(0, len(positive)))]
+        counts[k] -= 1
+    return counts
+
+def sample_server_dataframe(
+    train_df: pd.DataFrame,
+    label_col: str,
+    sensitive_col: str,
+    config: ExperimentConfig,
+) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    target = max(1, int(round(len(train_df) * config.server_ratio)))
+    rng = np.random.default_rng(config.seed)
+    mode = config.server_sampling
+    if mode == "stratified_sensitive":
+        parts = [group_df.sample(frac=config.server_ratio, random_state=config.seed) for _, group_df in train_df.groupby(sensitive_col)]
+        server_df = pd.concat(parts).sort_index()
+    elif mode == "iid_random":
+        server_df = train_df.sample(n=target, replace=False, random_state=config.seed).sort_index()
+    else:
+        strata_cols = [sensitive_col, label_col]
+        groups = {k: g for k, g in train_df.groupby(strata_cols, dropna=False)}
+        keys = list(groups)
+        capacities = {k: len(groups[k]) for k in keys}
+        if mode == "group_balanced":
+            raw_counts = {k: target // max(1, len(keys)) for k in keys}
+        elif mode == "sensitive_balanced":
+            raw_counts = {}
+            for s_val, s_group in train_df.groupby(sensitive_col, dropna=False):
+                s_target = target // max(1, train_df[sensitive_col].nunique())
+                label_groups = {k: g for k, g in s_group.groupby(label_col, dropna=False)}
+                for y_val, y_group in label_groups.items():
+                    raw_counts[(s_val, y_val)] = int(round(s_target * len(y_group) / max(1, len(s_group))))
+        elif mode == "class_balanced":
+            raw_counts = {}
+            for y_val, y_group in train_df.groupby(label_col, dropna=False):
+                y_target = target // max(1, train_df[label_col].nunique())
+                sens_groups = {k: g for k, g in y_group.groupby(sensitive_col, dropna=False)}
+                for s_val, s_group in sens_groups.items():
+                    raw_counts[(s_val, y_val)] = int(round(y_target * len(s_group) / max(1, len(y_group))))
+        elif mode in {"dirichlet_strata", "dirichlet_strata_floor"}:
+            alpha = float(config.server_alpha if config.server_alpha is not None else 5000.0)
+            base = np.asarray([len(groups[k]) / len(train_df) for k in keys], dtype=float)
+            concentration = np.maximum(base * alpha * len(keys), 1e-6)
+            probs = rng.dirichlet(concentration)
+            if mode == "dirichlet_strata_floor":
+                min_per_group = max(5, int(round(0.02 * target)))
+                floor_counts = {k: min(capacities[k], min_per_group) for k in keys}
+                floor_total = sum(floor_counts.values())
+                if floor_total >= target:
+                    raw_counts = {k: int(round(target / max(1, len(keys)))) for k in keys}
+                else:
+                    remaining = target - floor_total
+                    raw_counts = {k: floor_counts[k] + int(round(float(p) * remaining)) for k, p in zip(keys, probs)}
+            else:
+                raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode in {"dirichlet_label_preserved", "dirichlet_label_preserved_strong_floor"}:
+            # Preserve the label marginal distribution and apply Dirichlet skew
+            # only over sensitive groups within each label. The strong-floor
+            # variant keeps every sensitive-label stratum substantially
+            # represented, so the alpha curve measures skew intensity instead
+            # of root-group disappearance.
+            alpha = float(config.server_alpha if config.server_alpha is not None else 5000.0)
+            raw_counts = {}
+            label_values = list(train_df[label_col].value_counts().sort_index().index)
+            for y_val in label_values:
+                y_group = train_df[train_df[label_col] == y_val]
+                y_target = int(round(target * len(y_group) / len(train_df)))
+                y_keys = [k for k in keys if k[1] == y_val]
+                if not y_keys:
+                    continue
+                y_capacities = {k: capacities[k] for k in y_keys}
+                base = np.asarray([capacities[k] / max(1, len(y_group)) for k in y_keys], dtype=float)
+                concentration = np.maximum(base * alpha * len(y_keys), 1e-6)
+                probs = rng.dirichlet(concentration)
+                if mode == "dirichlet_label_preserved_strong_floor":
+                    floor_fraction = 0.10
+                    floor_min = 10
+                else:
+                    floor_fraction = 0.01
+                    floor_min = 3
+                min_per_group = min(max(floor_min, int(round(floor_fraction * y_target))), max(0, y_target // max(1, len(y_keys))))
+                floor_counts = {k: min(y_capacities[k], min_per_group) for k in y_keys}
+                floor_total = sum(floor_counts.values())
+                remaining = max(0, y_target - floor_total)
+                y_raw = {k: floor_counts[k] + int(round(float(p) * remaining)) for k, p in zip(y_keys, probs)}
+                y_counts = _adjust_counts_to_total(y_raw, y_capacities, y_target, rng)
+                raw_counts.update(y_counts)
+        elif mode == "controlled_group_skew":
+            # Deterministic sensitivity design for root/server distribution.
+            # server_alpha is interpreted as skew strength rather than a
+            # Dirichlet concentration: 0.0 keeps the global sensitive-label
+            # group proportions, while values near 1.0 concentrate the clean
+            # root set on one stratum. This makes the x-axis an auditable
+            # distribution-shift level instead of a random Dirichlet draw.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            dominant = max(keys, key=lambda k: capacities[k])
+            one_hot = np.asarray([1.0 if k == dominant else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode == "controlled_positive_sensitive_skew":
+            # Fairness-stress root/server distribution design. server_alpha is
+            # again skew strength. Instead of drifting to the largest group, it
+            # drifts toward the sensitive=1,label=1 stratum when available.
+            # This produces an auditable root-data bias aligned with sensitive
+            # and label attributes, making AEOD/ASPD sensitivity easier to
+            # interpret than a random or majority-only skew.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            target_key = (1, 1) if (1, 1) in capacities else max(keys, key=lambda k: (k[0], k[1], capacities[k]))
+            one_hot = np.asarray([1.0 if k == target_key else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        elif mode == "controlled_target_group_skew":
+            # Targeted fairness sensitivity search. server_alpha is skew
+            # strength, while server_target_sensitive/server_target_label
+            # choose the sensitive-label stratum to over-represent in the
+            # clean root/server set. This lets us audit which root-data bias
+            # actually degrades AEOD/ASPD without hand-editing results.
+            skew = float(config.server_alpha if config.server_alpha is not None else 0.0)
+            skew = min(0.98, max(0.0, skew))
+            base = np.asarray([capacities[k] / max(1, len(train_df)) for k in keys], dtype=float)
+            requested = (
+                config.server_target_sensitive,
+                config.server_target_label,
+            )
+            if requested[0] is not None and requested[1] is not None and requested in capacities:
+                target_key = requested
+            else:
+                target_key = max(keys, key=lambda k: capacities[k])
+            one_hot = np.asarray([1.0 if k == target_key else 0.0 for k in keys], dtype=float)
+            probs = (1.0 - skew) * base + skew * one_hot
+            probs = probs / max(1e-12, probs.sum())
+            raw_counts = {k: int(round(float(p) * target)) for k, p in zip(keys, probs)}
+        else:
+            raise ValueError(f"Unsupported server_sampling: {mode}")
+        counts = _adjust_counts_to_total(raw_counts, capacities, target, rng)
+        parts = []
+        for k, count in counts.items():
+            if count > 0:
+                parts.append(groups[k].sample(n=count, replace=False, random_state=int(rng.integers(0, 2**31 - 1))))
+        server_df = pd.concat(parts).sort_index() if parts else train_df.sample(n=target, random_state=config.seed).sort_index()
+    global_group_counts = train_df.groupby([sensitive_col, label_col]).size().sort_index().to_dict()
+    server_group_counts_raw = server_df.groupby([sensitive_col, label_col]).size().sort_index().to_dict()
+    all_group_keys = sorted(set(global_group_counts) | set(server_group_counts_raw))
+    global_group_prob = {k: global_group_counts.get(k, 0) / max(1, len(train_df)) for k in all_group_keys}
+    server_group_prob = {k: server_group_counts_raw.get(k, 0) / max(1, len(server_df)) for k in all_group_keys}
+    group_tvd = 0.5 * sum(abs(server_group_prob[k] - global_group_prob[k]) for k in all_group_keys)
+    group_kl = sum(
+        server_group_prob[k] * math.log(max(server_group_prob[k], 1e-12) / max(global_group_prob[k], 1e-12))
+        for k in all_group_keys
+        if server_group_prob[k] > 0
+    )
+    max_group_abs_delta = max((abs(server_group_prob[k] - global_group_prob[k]) for k in all_group_keys), default=0.0)
+    global_sensitive_prob = train_df[sensitive_col].value_counts(normalize=True).sort_index().to_dict()
+    server_sensitive_prob = server_df[sensitive_col].value_counts(normalize=True).sort_index().to_dict()
+    all_sensitive_keys = sorted(set(global_sensitive_prob) | set(server_sensitive_prob))
+    sensitive_tvd = 0.5 * sum(abs(server_sensitive_prob.get(k, 0.0) - global_sensitive_prob.get(k, 0.0)) for k in all_sensitive_keys)
+    global_label_prob = train_df[label_col].value_counts(normalize=True).sort_index().to_dict()
+    server_label_prob = server_df[label_col].value_counts(normalize=True).sort_index().to_dict()
+    all_label_keys = sorted(set(global_label_prob) | set(server_label_prob))
+    label_tvd = 0.5 * sum(abs(server_label_prob.get(k, 0.0) - global_label_prob.get(k, 0.0)) for k in all_label_keys)
+    audit = {
+        "server_sampling": mode,
+        "server_alpha": config.server_alpha,
+        "server_target_sensitive": config.server_target_sensitive,
+        "server_target_label": config.server_target_label,
+        "server_rows": int(len(server_df)),
+        "server_sensitive_counts": {str(k): int(v) for k, v in server_df[sensitive_col].value_counts().sort_index().to_dict().items()},
+        "server_label_counts": {str(k): int(v) for k, v in server_df[label_col].value_counts().sort_index().to_dict().items()},
+        "server_group_counts": {f"{int(k[0])}|{int(k[1])}": int(v) for k, v in server_group_counts_raw.items()},
+        "global_group_counts": {f"{int(k[0])}|{int(k[1])}": int(v) for k, v in global_group_counts.items()},
+        "server_group_prob": {f"{int(k[0])}|{int(k[1])}": float(server_group_prob[k]) for k in all_group_keys},
+        "global_group_prob": {f"{int(k[0])}|{int(k[1])}": float(global_group_prob[k]) for k in all_group_keys},
+        "group_tvd": float(group_tvd),
+        "group_kl": float(group_kl),
+        "max_group_abs_delta": float(max_group_abs_delta),
+        "sensitive_tvd": float(sensitive_tvd),
+        "label_tvd": float(label_tvd),
+    }
+    return server_df, audit
+
+def apply_root_noise(root_df: pd.DataFrame, label_col: str, sensitive_col: str, config: ExperimentConfig):
+    """Flip only root values using independent nested permutations; never use global RNG."""
+    noisy = root_df.copy(deep=True)
+    def supports(frame):
+        return {f"{group}|{label}": int(((frame[sensitive_col] == group) & (frame[label_col] == label)).sum())
+                for group in (0, 1) for label in (0, 1)}
+    audit = {
+        "root_rows": len(root_df),
+        "clean_group_label_counts": supports(root_df),
+        "clean_root_sha256": hashlib.sha256(pd.util.hash_pandas_object(root_df, index=False).values.tobytes()).hexdigest(),
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+    }
+    for stream, (name, column, rate) in enumerate((
+        ("label", label_col, config.root_label_noise),
+        ("sensitive", sensitive_col, config.root_sensitive_noise),
+    )):
+        mask = np.zeros(len(root_df), dtype=bool)
+        count = int(math.floor(rate * len(root_df)))
+        if count:
+            if not root_df[column].isin([0, 1]).all():
+                raise ValueError(f"Root noise requires binary {column}")
+            rng = np.random.default_rng(np.random.SeedSequence([config.seed, 240923, stream]))
+            mask[rng.permutation(len(root_df))[:count]] = True
+            noisy.loc[mask, column] = 1 - noisy.loc[mask, column]
+        audit[name] = {"requested_rate": rate, "flipped_count": count,
+                       "actual_rate": count / len(root_df) if len(root_df) else 0.0,
+                       "mask_sha256": hashlib.sha256(mask.tobytes()).hexdigest()}
+    audit["observed_group_label_counts"] = supports(noisy)
+    return noisy, audit

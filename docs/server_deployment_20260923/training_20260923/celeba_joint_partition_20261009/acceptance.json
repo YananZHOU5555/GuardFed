@@ -1,0 +1,648 @@
+{
+  "created_utc": "2026-10-09T06:15:30.823065+00:00",
+  "status": "PASS",
+  "mode": "remote_readonly_cpu",
+  "partitions": 20,
+  "shared_seed_count": 10,
+  "clients_per_partition": 20,
+  "client_rows": 400,
+  "four_cell_counts": 1600,
+  "archived_benign_contracts": 20,
+  "prior_Sp_DFA_sensitive_count_matches": 800,
+  "original_client_total_matches": 400,
+  "all_client_train_label_memberships_matched": true,
+  "root_train_valid_hash_checks": 60,
+  "sample_disjoint_complete_partitions": 20,
+  "frozen_source_pins": {
+    "scripts/reproduce_paper_tables.py": {
+      "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "local_file": "sources/reproduce_paper_tables.py"
+    },
+    "src/celeba_data.py": {
+      "sha256": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "local_file": "sources/celeba_data.py"
+    }
+  },
+  "frozen_function_ast_records": [
+    {
+      "name": "create_client_data_dict",
+      "source_text_sha256": "c4dfca27a52b6393c66c217c56987a3aaa0bf7a010667d00d512d614451aa547",
+      "ast_sha256": "6b7e5bc2a88e25bf31608d2b79e14a492dda5ac9ff45a94c4571ea38dbb9720c",
+      "line": 1433,
+      "end_line": 1467
+    },
+    {
+      "name": "_adjust_counts_to_total",
+      "source_text_sha256": "ceb8a13385c399ad56863640959fb0b6635979b264496b5ce5dcfb3b44b01e64",
+      "ast_sha256": "b1067fd84288b5b84a5991f0fdc4a0e1c4b11308fc8713080c48ecb2f69c170c",
+      "line": 1470,
+      "end_line": 1485
+    },
+    {
+      "name": "sample_server_dataframe",
+      "source_text_sha256": "0b746a77bbb46684ab72c056e6620fc8b2b6de09bf8635e52e80f41b148d5f95",
+      "ast_sha256": "f35a8bc3eac52309c3fd098c5985d3618acbf696cdd9b68d20d7fe81b9e61ccd",
+      "line": 1488,
+      "end_line": 1668
+    },
+    {
+      "name": "apply_root_noise",
+      "source_text_sha256": "6905abdd4959d9541320d59aa02d763d19cad2ed3bc43e19bc00c8d4f88b66fa",
+      "ast_sha256": "3f3c25587d068e182a511fd8d7a05c1ed27fd78bfe06a10e4943a316ca911a8e",
+      "line": 1671,
+      "end_line": 1700
+    }
+  ],
+  "helper_script_sha256": "06d5815964b0d29352a7c419fdce8935f4a3585c9647e66a49d0fe4a76ff86d6",
+  "reference_contracts_sha256": "3dc66d6acb87f28a9d31c8f4132b4616c4090d6a34e6357b0fd04bd32ded591f",
+  "metadata_receipt": {
+    "metadata_path": "/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz",
+    "metadata_sha256": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+    "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "official_metadata": {
+      "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+    },
+    "label_read_strategy": "NPY headers then C-order train prefix only; no evaluation label entries requested",
+    "label_prefix_reads": [
+      {
+        "member": "Smiling.npy",
+        "shape": [
+          202599
+        ],
+        "dtype": "int64",
+        "requested_label_entries": 162770,
+        "requested_payload_bytes": 1302160,
+        "first_included_position": 0,
+        "last_included_position": 162769,
+        "evaluation_label_entries_requested": 0,
+        "train_prefix_sha256": "94ca9a4362a74ba36eb3fbca291258c3ae9937e0b28ce4f208380073f061b2e3"
+      },
+      {
+        "member": "Male.npy",
+        "shape": [
+          202599
+        ],
+        "dtype": "int64",
+        "requested_label_entries": 162770,
+        "requested_payload_bytes": 1302160,
+        "first_included_position": 0,
+        "last_included_position": 162769,
+        "evaluation_label_entries_requested": 0,
+        "train_prefix_sha256": "00dba75350ffcfa71278ca201d0882e41b8d44e8bf2483d8da8d10778512745f"
+      }
+    ],
+    "images_loaded": false,
+    "full_loader_executed": false,
+    "train_rows": 162770,
+    "total_id_rows": 202599,
+    "train_image_id_array_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+    "official_split_counts": {
+      "0": 162770,
+      "1": 19867,
+      "2": 19962
+    }
+  },
+  "train_only_export_sha256": "5471aab47706d110704bf91624726e3863f13639a29fb6ce69cf06b1b9a11abd",
+  "runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "torch": "2.11.0+cu128",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "cuda_visible_devices": ""
+  },
+  "protected_before_after": {
+    "before": {
+      "/workspace/GuardFed-celeba-expanded/scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "/workspace/GuardFed-celeba-expanded/src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+      "/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91001/result.json": "53d7549279d9d0196d91998810a4cfe42b661f5e2951b9d2830b7d7561a00163",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91002/result.json": "986651fc2026dd623545da81ee114209b0b11bb3ea85fe855b5b9a344538351d",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91003/result.json": "528ce14e8aa29c1a5af40b7807c0987855726f134af5472c092aef9fd75dde78",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91004/result.json": "4a468d2bd9f88488322775854cae00e3adb56dc825fcbcc5ec58cd8d839cabae",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91005/result.json": "bd2fcdfd42bd732a49ecf63a920515f0e6d849ea9bbe363c62bd7a2088d58826",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91005/result.json": "b532d4568b44db3e1017b8680f30204ff8441b6f0193bb071cc28d5b61ba941a",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91006/result.json": "cffaa297e067df97a0d9e08d3890b3133bc716c8440e8bb5439657847a5be86c",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91006/result.json": "b7e9c5169daeefe44d43ca9610d3dbc78a4f2bcaad50b479baa0ffc2c425dd98",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91007/result.json": "08ff78bb648ec67b19a183c4c66151ee03c5d79718a5928f70c6dd292f8a000d",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91007/result.json": "2cc382c0b67c3b279fdfe0dd7f2e5a729041e5db9e39b4e602bd66848aa78a4f",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91008/result.json": "0a96f8eacb922d810fe9126356328bf92ebacb1eb6bb4345bf11b52ddefd52f2",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91008/result.json": "f651de362af86ad056f65de12ab60e5d77c578905616b30bfe6bf031187cea6e",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91009/result.json": "25cec402ddc071f08c260dc2d688fe0c70357149d954c7dca5b35adff11a29b2",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91009/result.json": "393b872cf97561cec026776c28c7e59a80e5aefcb62ee686cfa66c45e88aefec",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91010/result.json": "bc5fbb02f7795382edb53a63264167f465bb8d2f814d347f45117e3a347d0faf",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91010/result.json": "8f8d5f9627065c5d00419a4f9cb531e2b3d14a9f4bd7247ebf3aefbda909eaed",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002/result.json": "f146c4123917254015bd06179e5e5dc2742c80f6dc70ca9bd4fde1f6466d101b",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91003/result.json": "cb3ebf04ecde883855825cbaf5ebea67911eb7d98c7cfc826ff394fa0cc7e1fa",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91004/result.json": "2ac06bfbb2ac19d747b28c36ce867f7a95699cb80c1fda1d7774bda15ebf7521",
+      "/workspace/GuardFed-celeba-tuning/results/revision_20260924/celeba_tuning_screen_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001/result.json": "11d664aa6158477f50ade3eabe15ac4489d5aae57c2169239a5b34d628778e8b"
+    },
+    "after": {
+      "/workspace/GuardFed-celeba-expanded/scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "/workspace/GuardFed-celeba-expanded/src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+      "/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91001/result.json": "53d7549279d9d0196d91998810a4cfe42b661f5e2951b9d2830b7d7561a00163",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91002/result.json": "986651fc2026dd623545da81ee114209b0b11bb3ea85fe855b5b9a344538351d",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91003/result.json": "528ce14e8aa29c1a5af40b7807c0987855726f134af5472c092aef9fd75dde78",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91004/result.json": "4a468d2bd9f88488322775854cae00e3adb56dc825fcbcc5ec58cd8d839cabae",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91005/result.json": "bd2fcdfd42bd732a49ecf63a920515f0e6d849ea9bbe363c62bd7a2088d58826",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91005/result.json": "b532d4568b44db3e1017b8680f30204ff8441b6f0193bb071cc28d5b61ba941a",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91006/result.json": "cffaa297e067df97a0d9e08d3890b3133bc716c8440e8bb5439657847a5be86c",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91006/result.json": "b7e9c5169daeefe44d43ca9610d3dbc78a4f2bcaad50b479baa0ffc2c425dd98",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91007/result.json": "08ff78bb648ec67b19a183c4c66151ee03c5d79718a5928f70c6dd292f8a000d",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91007/result.json": "2cc382c0b67c3b279fdfe0dd7f2e5a729041e5db9e39b4e602bd66848aa78a4f",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91008/result.json": "0a96f8eacb922d810fe9126356328bf92ebacb1eb6bb4345bf11b52ddefd52f2",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91008/result.json": "f651de362af86ad056f65de12ab60e5d77c578905616b30bfe6bf031187cea6e",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91009/result.json": "25cec402ddc071f08c260dc2d688fe0c70357149d954c7dca5b35adff11a29b2",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91009/result.json": "393b872cf97561cec026776c28c7e59a80e5aefcb62ee686cfa66c45e88aefec",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_IID_Benign_seed91010/result.json": "bc5fbb02f7795382edb53a63264167f465bb8d2f814d347f45117e3a347d0faf",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/GuardFed-AD2+_non-IID_Benign_seed91010/result.json": "8f8d5f9627065c5d00419a4f9cb531e2b3d14a9f4bd7247ebf3aefbda909eaed",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002/result.json": "f146c4123917254015bd06179e5e5dc2742c80f6dc70ca9bd4fde1f6466d101b",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91003/result.json": "cb3ebf04ecde883855825cbaf5ebea67911eb7d98c7cfc826ff394fa0cc7e1fa",
+      "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91004/result.json": "2ac06bfbb2ac19d747b28c36ce867f7a95699cb80c1fda1d7774bda15ebf7521",
+      "/workspace/GuardFed-celeba-tuning/results/revision_20260924/celeba_tuning_screen_v1/runs/GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001/result.json": "11d664aa6158477f50ade3eabe15ac4489d5aae57c2169239a5b34d628778e8b"
+    },
+    "unchanged": true
+  },
+  "global_train_joint_counts_Male_Smiling": {
+    "0|0": 43688,
+    "0|1": 50821,
+    "1|0": 41002,
+    "1|1": 27259
+  },
+  "client_pool_joint_counts_Male_Smiling_seed91001": {
+    "0|0": 39370,
+    "0|1": 45688,
+    "1|0": 36895,
+    "1|1": 24540
+  },
+  "checks": [
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91001",
+      "raw_result_sha256": "53d7549279d9d0196d91998810a4cfe42b661f5e2951b9d2830b7d7561a00163",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91002",
+      "raw_result_sha256": "986651fc2026dd623545da81ee114209b0b11bb3ea85fe855b5b9a344538351d",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91003",
+      "raw_result_sha256": "528ce14e8aa29c1a5af40b7807c0987855726f134af5472c092aef9fd75dde78",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91004",
+      "raw_result_sha256": "4a468d2bd9f88488322775854cae00e3adb56dc825fcbcc5ec58cd8d839cabae",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91005",
+      "raw_result_sha256": "bd2fcdfd42bd732a49ecf63a920515f0e6d849ea9bbe363c62bd7a2088d58826",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91006",
+      "raw_result_sha256": "cffaa297e067df97a0d9e08d3890b3133bc716c8440e8bb5439657847a5be86c",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91007",
+      "raw_result_sha256": "08ff78bb648ec67b19a183c4c66151ee03c5d79718a5928f70c6dd292f8a000d",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91008",
+      "raw_result_sha256": "0a96f8eacb922d810fe9126356328bf92ebacb1eb6bb4345bf11b52ddefd52f2",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91009",
+      "raw_result_sha256": "25cec402ddc071f08c260dc2d688fe0c70357149d954c7dca5b35adff11a29b2",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_IID_Benign_seed91010",
+      "raw_result_sha256": "bc5fbb02f7795382edb53a63264167f465bb8d2f814d347f45117e3a347d0faf",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91001",
+      "raw_result_sha256": "11d664aa6158477f50ade3eabe15ac4489d5aae57c2169239a5b34d628778e8b",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002",
+      "raw_result_sha256": "f146c4123917254015bd06179e5e5dc2742c80f6dc70ca9bd4fde1f6466d101b",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91003",
+      "raw_result_sha256": "cb3ebf04ecde883855825cbaf5ebea67911eb7d98c7cfc826ff394fa0cc7e1fa",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91004",
+      "raw_result_sha256": "2ac06bfbb2ac19d747b28c36ce867f7a95699cb80c1fda1d7774bda15ebf7521",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91005",
+      "raw_result_sha256": "b532d4568b44db3e1017b8680f30204ff8441b6f0193bb071cc28d5b61ba941a",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91006",
+      "raw_result_sha256": "b7e9c5169daeefe44d43ca9610d3dbc78a4f2bcaad50b479baa0ffc2c425dd98",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91007",
+      "raw_result_sha256": "2cc382c0b67c3b279fdfe0dd7f2e5a729041e5db9e39b4e602bd66848aa78a4f",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91008",
+      "raw_result_sha256": "f651de362af86ad056f65de12ab60e5d77c578905616b30bfe6bf031187cea6e",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91009",
+      "raw_result_sha256": "393b872cf97561cec026776c28c7e59a80e5aefcb62ee686cfa66c45e88aefec",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    },
+    {
+      "reference_id": "GuardFed-AD2+_non-IID_Benign_seed91010",
+      "raw_result_sha256": "8f8d5f9627065c5d00419a4f9cb531e2b3d14a9f4bd7247ebf3aefbda909eaed",
+      "train_hash_match": true,
+      "valid_id_hash_match": true,
+      "root_id_hash_match": true,
+      "root_sampling_audit_exact": true,
+      "root_noise_audit_exact": true,
+      "client_sample_counts_exact": 20,
+      "client_sensitive_margin_exact": 40,
+      "client_train_label_resolutions_exact": 20,
+      "sample_disjoint_complete": true
+    }
+  ],
+  "summary_across_10_seeds": {
+    "IID": {
+      "Smiling1_fraction_min": {
+        "n_seeds": 10,
+        "mean": 0.46975661245579586,
+        "sample_sd": 0.0036503952291362255,
+        "min": 0.462784949189783,
+        "max": 0.4741129366284689
+      },
+      "Smiling1_fraction_max": {
+        "n_seeds": 10,
+        "mean": 0.4900847023603297,
+        "sample_sd": 0.0035369881989832704,
+        "min": 0.4855221627555921,
+        "max": 0.49629731212287437
+      },
+      "Smiling1_fraction_population_sd": {
+        "n_seeds": 10,
+        "mean": 0.005498444554730668,
+        "sample_sd": 0.0011240667595399942,
+        "min": 0.0033596677781179032,
+        "max": 0.006963026573737181
+      },
+      "joint_tvd_mean": {
+        "n_seeds": 10,
+        "mean": 0.00736609594536373,
+        "sample_sd": 0.00072341125570781,
+        "min": 0.006277897378576772,
+        "max": 0.008354241398098095
+      },
+      "joint_tvd_max": {
+        "n_seeds": 10,
+        "mean": 0.013765555627050636,
+        "sample_sd": 0.0024656727553337863,
+        "min": 0.01007018439690889,
+        "max": 0.016917152617129255
+      },
+      "minimum_client_joint_support": {
+        "n_seeds": 10,
+        "mean": 1175.2,
+        "sample_sd": 6.47731082746193,
+        "min": 1161.0,
+        "max": 1185.0
+      },
+      "first4_sample_coverage": {
+        "n_seeds": 10,
+        "mean": 0.19964025584840234,
+        "sample_sd": 0.001024619330290489,
+        "min": 0.19817329155659313,
+        "max": 0.20155911886574784
+      },
+      "first4_Male0_Smiling0_coverage": {
+        "n_seeds": 10,
+        "mean": 0.19871840533210416,
+        "sample_sd": 0.002362082851396058,
+        "min": 0.19377479401891975,
+        "max": 0.20194436668108823
+      },
+      "first4_Male0_Smiling1_coverage": {
+        "n_seeds": 10,
+        "mean": 0.20005257067179594,
+        "sample_sd": 0.0013923250541391136,
+        "min": 0.19789616410794733,
+        "max": 0.20204799021855419
+      },
+      "first4_Male1_Smiling0_coverage": {
+        "n_seeds": 10,
+        "mean": 0.19969180061770958,
+        "sample_sd": 0.0018440699238229073,
+        "min": 0.1981047786652227,
+        "max": 0.20422821520531237
+      },
+      "first4_Male1_Smiling1_coverage": {
+        "n_seeds": 10,
+        "mean": 0.20027206710920945,
+        "sample_sd": 0.0025757868430460193,
+        "min": 0.19757654617167486,
+        "max": 0.2062090572486471
+      }
+    },
+    "non-IID": {
+      "Smiling1_fraction_min": {
+        "n_seeds": 10,
+        "mean": 0.4422442625343506,
+        "sample_sd": 0.004221471701249457,
+        "min": 0.4374734607218684,
+        "max": 0.44903988183161003
+      },
+      "Smiling1_fraction_max": {
+        "n_seeds": 10,
+        "mean": 0.5150117624972812,
+        "sample_sd": 0.006184065640913361,
+        "min": 0.5055081904396973,
+        "max": 0.5238095238095238
+      },
+      "Smiling1_fraction_population_sd": {
+        "n_seeds": 10,
+        "mean": 0.019642920938149323,
+        "sample_sd": 0.0020277034595823067,
+        "min": 0.01612595065610228,
+        "max": 0.0220920326593326
+      },
+      "joint_tvd_mean": {
+        "n_seeds": 10,
+        "mean": 0.1134079669594015,
+        "sample_sd": 0.017341455107677047,
+        "min": 0.08218764527138345,
+        "max": 0.13347228990751203
+      },
+      "joint_tvd_max": {
+        "n_seeds": 10,
+        "mean": 0.2867060625918547,
+        "sample_sd": 0.023434822469686627,
+        "min": 0.24900120369801515,
+        "max": 0.32365384440650596
+      },
+      "minimum_client_joint_support": {
+        "n_seeds": 10,
+        "mean": 431.5,
+        "sample_sd": 91.37134245605797,
+        "min": 278.0,
+        "max": 541.0
+      },
+      "first4_sample_coverage": {
+        "n_seeds": 10,
+        "mean": 0.18874075894411338,
+        "sample_sd": 0.031322037819695496,
+        "min": 0.15173421255623135,
+        "max": 0.24661246612466126
+      },
+      "first4_Male0_Smiling0_coverage": {
+        "n_seeds": 10,
+        "mean": 0.18214470333015242,
+        "sample_sd": 0.034297814752398674,
+        "min": 0.1413766827533655,
+        "max": 0.25391291069656174
+      },
+      "first4_Male0_Smiling1_coverage": {
+        "n_seeds": 10,
+        "mean": 0.18353676524861492,
+        "sample_sd": 0.033703079245455014,
+        "min": 0.14631850814218175,
+        "max": 0.252594777668524
+      },
+      "first4_Male1_Smiling0_coverage": {
+        "n_seeds": 10,
+        "mean": 0.19666030945068555,
+        "sample_sd": 0.05566941058338186,
+        "min": 0.15245191005147657,
+        "max": 0.3019697216343806
+      },
+      "first4_Male1_Smiling1_coverage": {
+        "n_seeds": 10,
+        "mean": 0.1971031682974432,
+        "sample_sd": 0.05614126669873988,
+        "min": 0.14964322120285423,
+        "max": 0.30902876673312446
+      }
+    }
+  },
+  "root_summary_across_10_unique_seeds": {
+    "minimum_support": {
+      "n_seeds": 10,
+      "mean": 2713.4,
+      "sample_sd": 28.206382256503577,
+      "min": 2666.0,
+      "max": 2759.0
+    },
+    "joint_tvd": {
+      "n_seeds": 10,
+      "mean": 0.0034859003501873835,
+      "sample_sd": 0.0021552862186583416,
+      "min": 0.0006143638262578743,
+      "max": 0.007495238680346544
+    }
+  },
+  "client_occurrence_totals_by_distribution": {
+    "IID": {
+      "empty_client": 0,
+      "missing_sensitive_group": 0,
+      "missing_label": 0,
+      "missing_joint_cell": 0
+    },
+    "non-IID": {
+      "empty_client": 0,
+      "missing_sensitive_group": 0,
+      "missing_label": 0,
+      "missing_joint_cell": 0
+    }
+  },
+  "partition_variable": "Male sensitive group, not target label Smiling",
+  "evaluation_labels_accessed": false,
+  "images_loaded": false,
+  "model_inference": false,
+  "training_started": false,
+  "old_results_modified": false,
+  "scope": "Clean pre-attack train partitions at frozen selected recipe; descriptive allocation evidence only.",
+  "limitations": [
+    "400 clients are nested in20 partitions sharing10 seeds; no400-independent-sample claims.",
+    "No predictions, final evaluation or evidence of method superiority.",
+    "Ordered client IDs and train labels are reconstructed; original result contracts stored only root/train/eval ID hashes and client totals.",
+    "New ordered client/joint hashes are replay receipts, not previously archived original client-ID hashes."
+  ]
+}

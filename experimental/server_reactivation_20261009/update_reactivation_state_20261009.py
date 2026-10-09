@@ -19,7 +19,7 @@ if formal:
 now = datetime.datetime.now(datetime.timezone.utc).isoformat()
 phase = 'FORMAL800_RUNNING' if formal else 'CU128_REAL_IMAGE_GATES_RUNNING'
 state['updated_unix'] = time.time()
-state['server_reactivation_20261009'].update(status=phase,
+state['server_reactivation_20261009'].update(status=phase, new_formal_training=len(live['active'])+live['queue_completed'] if formal else 0,
     new_formal_training_started=formal, exact_restore_acceptance='server_reactivation_20261009/restore_acceptance.json',
     cu130_gates_accepted=20, cu130_offserver_members_verified=149,
     cu128_environment='server_reactivation_20261009/cu128_environment.json',
@@ -29,9 +29,16 @@ state['latest_connection_check'].update(recorded_utc=live['checked_utc'],
     new_training_started=formal, next='Accept all20cu128 image gates, verify100Full full science-input identities and freeze before800 formal jobs' if not formal else 'Continue frozen800 missing mechanism jobs; strictly accept and incrementally back up new IDs only')
 state['celeba_mechanism_v1'].update(status=phase,
     real_image_cu130_gates_accepted=20, current_runtime='torch2.11.0+cu128 driver595.84',
-    queue_dispatched=formal, new_started=(8 if formal else 0),
+    queue_dispatched=formal, new_started=(len(live['active'])+live['queue_completed'] if formal else 0),
     preflight_queue_completed=live['queue_completed'] if not formal else 20,
-    scientific_results_completed=live['queue_completed'] if formal else 0)
+    queue_completed_observed=live['queue_completed'] if formal else 0,
+    scientific_results_strictly_accepted=state['celeba_mechanism_v1'].get('scientific_results_strictly_accepted',0))
+if formal:
+    state['celeba_mechanism_v1'].update(real_image_gates_passed=True,
+        real_image_cu128_gates_accepted=20, cross_runtime_three_round_exact=20,
+        full_reuse_strictly_accepted=100, new_total=800,
+        dispatch_receipt_sha256=sha(TRAIN/'celeba_mechanism_v1/dispatch_receipt.json'),
+        validation_only=True, test_started=False)
 state['active_services'] = ['guardfed_celeba_mechanism_formal' if formal else 'guardfed_celeba_mechanism_preflight']
 if formal:
     state['current_stage'] = 'celeba_mechanism_v1'
@@ -68,7 +75,7 @@ top = f'''# CURRENT: GuardFed mechanism {'formal800' if formal else 'cu128 prefl
 
 原三小时任务guardfed-training-health本地TOML为PAUSED且提示仍指旧阶段；当前没有原生automation_update工具，未修改调度器、未建立替代监督机制。服务器supervisor只管理已启动队列，不等于三小时聊天巡检已恢复。可审阅提示与限制见server_reactivation_20261009/MONITOR_HANDOFF.md。
 
-2454个历史新增完整训练及九方法900验证记录/备份保持原值。返修回复已逐字核24块原意见、34本地引用、178项SHA声明；新增260条生成器/PCA数值追溯已核，投稿Fig3原脚本/FD执行身份仍缺。其余8基线与正式最终评价仍未完成；准备代码/门检不当作论文科学结果。主入口REBUTTAL_COMPLETION_20261009.md。
+2454个历史新增完整训练及九方法900验证记录/备份保持原值。返修回复已逐字核24块原意见、40本地引用、209项SHA声明；新增260条生成器/PCA数值追溯与20份CelebA联合分组重建已核，投稿Fig3原脚本/FD执行身份仍缺。其余8基线与正式最终评价仍未完成；准备代码/门检不当作论文科学结果。主入口REBUTTAL_COMPLETION_20261009.md。
 
 '''
 running.write_text(top+history,encoding='utf-8')
