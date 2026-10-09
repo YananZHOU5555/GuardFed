@@ -1,0 +1,42 @@
+{
+  "status": "STARTED_NOT_ACCEPTED",
+  "utc": "2026-10-09T09:27:24.282197+00:00",
+  "service": "guardfed_celeba_flgmm_screen     RUNNING   pid 18899, uptime 0:00:03",
+  "package_sha256": "aec95ceb5e8c9b7aa9cec89e9d70d2700c2f242c29e918792088648d6269bad4",
+  "authorization_sha256": "63928fe9b2ef421a3aeb8b5d3a8db83ccdb5aa82e34248d31f215ea96ce4eac7",
+  "installed_config_sha256": "91b239c0c853feac585cab7491700ba16a4e0a593ab9dbacc6d7fbaf369928e0",
+  "installed_wrapper_sha256": "d8aacdfd953b36d4f788d3ce0e2113ff6e71fed9e5b780dc1a22276fee5d6614",
+  "formal_before": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 3:08:24",
+  "formal_after": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 3:08:28",
+  "steps": [
+    {
+      "command": [
+        "supervisorctl",
+        "reread"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_screen: available\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "update",
+        "guardfed_celeba_flgmm_screen"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_screen: added process group\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_flgmm_screen"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_screen: started\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "utc": "2026-10-09T09:28:52.874131+00:00",
+  "status": "RUNNING_NOT_ACCEPTED",
+  "service": "guardfed_celeba_flgmm_screen     RUNNING   pid 18899, uptime 0:01:32",
+  "package_sha256": "aec95ceb5e8c9b7aa9cec89e9d70d2700c2f242c29e918792088648d6269bad4",
+  "pending": 30,
+  "completed": 0,
+  "active": [
+    {
+      "id": "FLGMM_Tg10_L2.0_lr0.0005_IID_Benign_seed91001_screen",
+      "pid": 18911,
+      "gpu": 0,
+      "progress": {
+        "round": 2,
+        "metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "job_id": "FLGMM_Tg10_L2.0_lr0.0005_IID_Benign_seed91001_screen",
+        "pid": 18911,
+        "updated_unix": 1791538125.921196,
+        "elapsed_sec": 74.83883619308472
+      },
+      "environment": {
+        "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+        "torch": "2.11.0+cu128",
+        "cuda": "12.8",
+        "device": "cuda",
+        "cpu_threads": 1,
+        "gpu_name": "NVIDIA GeForce RTX 5090"
+      },
+      "nice": 10,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "/workspace/guardfed_checks/celeba_flgmm_screen_20261009/release_v2/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "FLGMM_Tg10_L2.0_lr0.0005_IID_Benign_seed91001_screen"
+      ],
+      "job_sha256": "9755a4b1d3fde9cb90fbb93b47f9a8155dfe3132cb7c80e0b1179af89aef88ed"
+    },
+    {
+      "id": "FLGMM_Tg10_L2.0_lr0.0005_IID_S-DFA_seed91001_screen",
+      "pid": 18912,
+      "gpu": 1,
+      "progress": {
+        "round": 1,
+        "metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "job_id": "FLGMM_Tg10_L2.0_lr0.0005_IID_S-DFA_seed91001_screen",
+        "pid": 18912,
+        "updated_unix": 1791538099.3579152,
+        "elapsed_sec": 49.52001476287842
+      },
+      "environment": {
+        "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+        "torch": "2.11.0+cu128",
+        "cuda": "12.8",
+        "device": "cuda",
+        "cpu_threads": 1,
+        "gpu_name": "NVIDIA GeForce RTX 5090"
+      },
+      "nice": 10,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "/workspace/guardfed_checks/celeba_flgmm_screen_20261009/release_v2/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "FLGMM_Tg10_L2.0_lr0.0005_IID_S-DFA_seed91001_screen"
+      ],
+      "job_sha256": "a67eb99b832262c32e4ebd9ea4168747bd5a78ce8f0382a241c29db8fd7193ba"
+    }
+  ],
+  "failures": [],
+  "formal_service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 3:09:57",
+  "formal_queue": {
+    "completed": 24,
+    "active": [
+      {
+        "id": "minus_U_IID_FedSA_seed91005",
+        "pid": 17907
+      },
+      {
+        "id": "minus_U_IID_FedSA_seed91006",
+        "pid": 17980
+      },
+      {
+        "id": "minus_U_IID_FedSA_seed91007",
+        "pid": 17986
+      },
+      {
+        "id": "minus_U_IID_FedSA_seed91008",
+        "pid": 18019
+      },
+      {
+        "id": "minus_U_IID_FedSA_seed91009",
+        "pid": 18020
+      },
+      {
+        "id": "minus_U_IID_FedSA_seed91010",
+        "pid": 18114
+      },
+      {
+        "id": "minus_U_IID_S-DFA_seed91001",
+        "pid": 18132
+      },
+      {
+        "id": "minus_U_IID_S-DFA_seed91002",
+        "pid": 18996
+      }
+    ],
+    "failed": []
+  },
+  "gpu": "0, 98 %, 5043 MiB, 64\n1, 97 %, 5041 MiB, 65",
+  "recovery": [
+    "GPU Recovery Action                                : None",
+    "GPU Recovery Action                                : None"
+  ],
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "receipt_hashes": {
+    "PREFLIGHT_V2.json": "429599188a0b10198f49690d12f6ae715090f3951ea4cb451e13856f805b8de8",
+    "START_V2_RECEIPT.json": "85c57c9e0cf35fa6289257bcc46b103ecca166932daa475c30222d739703e8f1",
+    "release_v2/EXECUTION_AUTHORIZATION.json": "63928fe9b2ef421a3aeb8b5d3a8db83ccdb5aa82e34248d31f215ea96ce4eac7"
+  }
+}

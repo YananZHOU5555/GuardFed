@@ -383,6 +383,58 @@ if hybrid_diagnosis.exists():
         failed_id=diagnosis['failed_id'], failed_stage=diagnosis['failed_stage'],
         archive_sha256=off['archive_sha256'], offserver_members_verified=off['members_verified'],
         original_failure_preserved=True, precise_writer_fix='PREPARATION_ONLY_NOT_EXECUTED')
+flscreen_root = CHECKS / 'FLGMM32_STARTUP_ROOT_VERIFICATION.json'
+flscreen_started = flscreen_root.exists()
+if flscreen_started:
+    proof = read(flscreen_root)
+    folder = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch'
+    observed = read(folder/'FIRST_PROGRESS_V2.json')
+    assert sha(folder/'FIRST_PROGRESS_V2.json') == proof['first_progress_sha256']
+    state['flgmm_screen32_20261009'] = dict(status='FROZEN_RUNNING_VALID_ONLY',
+        total=32, rounds=70, seed=91001, accepted70round_jobs=0,
+        observed_utc=observed['utc'], service_at_observation=observed['service'],
+        package_sha256=proof['package_sha256'], source_archive_members_offserver_verified=67,
+        startup_receipts_offserver_verified=4, startup_root_proof_sha256=sha(flscreen_root),
+        active_at_observation=[dict(id=r['id'],round=r['progress']['round'],gpu=r['gpu']) for r in observed['active']],
+        formal100_started=False,test_started=False,automatic_retry=False,
+        entry='tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md')
+    state['flgmm_gpu_canary_v3_20261009']['formal_screen_started'] = True
+    state['active_services'] = list(dict.fromkeys(state['active_services']+['guardfed_celeba_flgmm_screen']))
+remaining_root = CHECKS / 'REMAINING872_STARTUP_ROOT_VERIFICATION.json'
+remaining_started = remaining_root.exists()
+if remaining_started:
+    proof = read(remaining_root)
+    folder = ROOT / 'tmp/celeba_final_valid_replay_20261009/v4/remaining872_execution_20261009'
+    observed = read(folder/'live_start_sample.json')
+    assert sha(folder/'live_start_sample.json') == proof['live_sample_sha256']
+    state['final_evaluator_runtime_20261009'].update(status='REMAINING872_VALID_REPLAY_RUNNING',
+        full900_valid_replay_dispatched=True, reused_actual_acceptances=28, remaining_actual_dispatch=872,
+        new_bulk_actual_acceptances_offserver_verified=0, scientific_workers=11,threads_per_worker=8,
+        observed_worker_nice=10,observed_outer_nice=0,source_archive_members_offserver_verified=38,
+        startup_root_proof_sha256=sha(remaining_root), service_at_observation=observed['service'],
+        observed_effective_global_cpu_cores=observed['global_effective_cpu_cores'],
+        observed_cpu_quota_cores=observed['quota_cores'],test_started=False)
+    state['active_services'] = list(dict.fromkeys(state['active_services']+['guardfed_celeba_valid_remaining872_20261009']))
+    new_collections = list(folder.glob('cumulative_*_accepted.json'))
+    if new_collections:
+        collection_path = max(new_collections,key=lambda p:read(p)['accepted_n'])
+        collection = read(collection_path)
+        n = collection['accepted_n']
+        assert n == len(set(collection['accepted_ids'])) == len(collection['accepted']) and 28 <= n <= 900
+        assert collection['collector_source_sha256'] == '19066f63c341b9ee23b7c6f491802cfdde0c1c0c833c2fe64724a16de9bb2234'
+        assert collection['prepared_remaining_manifest_sha256'] == 'ad6eebf517f534fb8489acb241c51a9ec5328bb285406e55275f7dd9c0c3ed43'
+        assert len(collection['missing_ids']) == 900-n and not collection['test_inference_performed']
+        assert set(collected['accepted_ids']) <= set(collection['accepted_ids'])
+        assert sha(folder/f'collection_inputs_{n}.json') == collection['collection_inputs_sha256']
+        assert all(r['native_max_abs_difference'] == 0 and r['actual_three_views_verified'] for r in collection['accepted'])
+        state['final_evaluator_runtime_20261009'].update(actual_native_valid_image_replays_accepted=n,
+            actual_valid_three_view_replays_accepted=n,new_bulk_actual_acceptances_offserver_verified=n-28,
+            accepted_collection_path=collection_path.relative_to(ROOT).as_posix(),accepted_collection_sha256=sha(collection_path),
+            cumulative_unique_checkpoint_acceptance=collection_path.relative_to(ROOT).as_posix(),
+            cumulative_unique_checkpoint_acceptance_sha256=sha(collection_path),
+            distinct_checkpoint_sha256_count=collection['distinct_checkpoint_sha256_n'],
+            all900_native_realimage_valid_replayed=collection['all900_native_valid_replayed'],
+            all900_three_view_valid_replayed=collection['all900_three_views_valid_replayed'],missing900_models=900-n)
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -407,19 +459,21 @@ top = f'''# CURRENT: GuardFed mechanism {'formal800' if formal else 'cu128 prefl
 
 '''
 if (restore_dir / 'restore_acceptance.json').exists():
-    top += '''九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。900全批尚未启动，不称最终评价完成；详见validation900_restore_20261009/README.md。各基线真实图像门检的完整接受及备份状态分开记录，首轮证据不等于完整门检PASS。
+    top += '''九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。初始阶段仅2条重放；当前全批启动和接受数见下面最新执行更新，不称最终评价完成；详见validation900_restore_20261009/README.md。各基线真实图像门检的完整接受及备份状态分开记录，首轮证据不等于完整门检PASS。
 
 '''
 if first_verification.exists():
     top += f'''机制新结果已有{accepted['new_count']}项通过独立70轮严格验收，{len(backed_up)}项离机备份，100Full身份复核保持有效；{len(backup_entries)}份增量各SHA/member通过本机验收，原Full权重不重复打包。实时queue完成数与该已验收/备份分母分开。v2首备份因活动日志增长而在preflight拒绝，原检查保留；独立v3处理正常活动目录，新v4修正异常重检的诊断保全路径，经独立审查/回归通过。训练及封存v1/v2/v3不变，首5项归档保持有效。当前不是800或整个返修完成。
 
-CPU端另有Fed-NGA/Huber四条真实图像三轮探索门检已启动，CPU104–111、8线程、独立supervisor、无自动重试；仅首client梯度已实测（7351样本、optimizer0步、同点/符号oracle一致），尚无完整四项PASS。原加载器会物化全split标签元数据，包括test尾部；仅训练/验证像素参与运算，不称untouched test。执行附件见tmp/celeba_gradient_realimage_gate_20261009/EXECUTION_HANDOFF.md。九方法验证CPU重放正在1/2/4/8/11互斥有用任务测吞吐，未启动900全批。
+CPU端Fed-NGA/Huber四条真实图像三轮探索门检沿原源码/数据路径执行，完整接受和备份见下面更新；原加载器会物化全split标签元数据，包括test尾部，仅训练/验证像素参与运算，不称untouched test。执行附件见tmp/celeba_gradient_realimage_gate_20261009/EXECUTION_HANDOFF.md。
 
 '''
 if (phase1_dir / 'offserver_verification.json').exists():
     continuation = ('v3的8并发阶段因FedAA旧rawjob结构不兼容而拒收，0/8完成、7个同批worker中断；40个失败证据成员已离机验收。正在准备独立v4兼容修复，11并发和900全批未启动，原9条结果有效' if phase4_failure else '其余授权阶段依次严格接受/离机后自动推进，未启动900全批')
     if v4_semantic:
         continuation = 'v3的8并发失败证据及原9条有效重放保留；独立v4兼容修复已核900条历史语义身份/2700文件SHA并离机接受，覆盖FedAA/LASA原记录差异。仅原8/11并发有用任务阶段获授权，语义接受不计新图像推理，900全批与test未启动'
+    if remaining_started:
+        continuation = 'v3的8并发失败证据完整保留；v4覆盖900条语义身份与2700文件SHA，语义接受不计图像推理。基于已接受28个独立ID，剩余872补集已独立冻结并实际启动；11并发、每worker8线程/nice10，详见下面最新启动更新；test未启动'
     top += f'''九方法验证重放已有{len(replay_ids)}项吞吐阶段新任务严格接受并离机SHA/member验收，加之前2条共{replay_count}个实际重放；native误差0，三视图指标/混淆计数独立重算一致。已完成1/2/4/8/11计划中的前{len(measured_phases)}阶段，只报实测吞吐，不称已知最优或受控提速。{continuation}；阶段明细见tmp/celeba_final_valid_replay_20261009/v3/。该CPU重放只读train-root/valid语义标签，完整文件SHA读取包含test所在字节；它不调用会物化全split标签的原完整loader，不能与梯度gate的元数据边界混淆。
 
 '''
@@ -431,7 +485,7 @@ if flgmm_cpu_proof:
     top += 'FLGMM两条完整真实图像CPU三轮canary均已严格接受并离机验收54成员，CPU任务已退出。两条ACC均0.516686、AEOD/ASPD为0的恒定预测负结果保留；Tg1为管线覆盖，不计正式论文结果，不推断CPU/GPU等价。GPU四项跨卡重复门检另行接受；32项搜索尚未启动。凭据见TRAINING_STATE.json的flgmm_cpu_canary_20261009。\n\n'
 if flgmm_gpu_proof:
     top += 'FLGMM原v2四项GPU三轮canary均完成，各自身份通过，跨卡训练张量、指标、controller及Torch RNG逐位一致；整体门检按原冻结规则保留REPEAT_MISMATCH。实际差异限于被快照混入的SciPy导入期文档示例default_rng熵状态，原失败报告与121成员已离机核验。记录范围缺陷由独立v3修复；原v2门检不追改，32项搜索未启动；三轮canary不计正式性能结果。\n\n'
-if flgmm_v3_live:
+if flgmm_v3_live and not flgmm_v3_final_path.exists():
     top += f"独立v3修正已通过同core导入回归及42成员离机核验后，明确冻结仅4条GPU三轮canary。实测{flgmm_v3_live['observed_utc']}：{flgmm_v3_live['live_service_status']}，{sum(r['accepted'] for r in flgmm_v3_live['jobs'])}/4单项完成，尚不称完整跨卡cohort通过；旧v2失败证据原样保留，32项搜索仍未启动。源码/冻结与该实测凭据见TRAINING_STATE.json的flgmm_gpu_canary_v3_20261009。\n\n"
 if flgmm_v3_final_path.exists():
     top += '更新：FLGMM v3四项GPU门检已全部严格接受、两组跨卡重复精确，139内容成员+清单及四份旧模型引用离机核验，服务正常EXITED；此前3/4启动快照只作历史记录。32项新搜索包已准备，尚未启动，不计正式性能样本。\n\n'
@@ -441,6 +495,12 @@ if hybrid_diagnosis.exists():
     top += '更新：Hybrid第三条non-IID/S-DFA在result严格JSON记录层失败，已定位敏感组零方差使原攻击审计相关系数未定义；两条IID已接受，整体2/4未通过。46成员失败证据离机保留，第三条模型有限且三轮aggregate精确仍不能替代完整接受。仅准备限定字段null与独立原因记录的writer修复；未知NaN和主指标/训练状态仍必须拒绝，未重启队列。\n\n'
 if single_root_proof.exists():
     top += '机制统一评价更新：一条minus_U/IID/Benign/seed91002终轮checkpoint已完成raw/native/shared三视图重放，native误差0，9指标/24混淆计数/3规则独立重算一致，14成员离机及主代理核验。它与70轮科学训练验收分母分开；Full仅引用已有严格结果，未重复推理/备份，未运行test。两项工程失败及第三次受限恢复链完整保留。\n\n'
+if flscreen_started:
+    top += f"最新FLGMM搜索启动：{state['flgmm_screen32_20261009']['service_at_observation']}，32项×70轮valid-only、seed91001、两卡各1任务/CPU1/nice10。首批实际round2/1，无失败；66封存源/输入+seal和4启动凭据已离机及主代理核验。尚无完整70轮接受，不称阶段完成；前文‘32未启动’为门检历史观察。入口tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_HANDOFF.md。\n\n"
+if remaining_started:
+    top += f"最新九方法重放启动：{state['final_evaluator_runtime_20261009']['service_at_observation'].strip()}，只执行900既有模型减去已接受28的872补集，80批、每批至多11；11个真实CNNworker均nice10、8计算线程，outer nice0仅编排。38成员部署包、只读inspect及启动凭据离机并经主代理核验。首10秒全cgroup实用{state['final_evaluator_runtime_20261009']['observed_effective_global_cpu_cores']:.2f}/{state['final_evaluator_runtime_20261009']['observed_cpu_quota_cores']:.2f}核，throttle0，主800仍增长。新批仍待独立三视图和离机接受，不把RUNNING计入已接受；不训练旧模型、不运行test。入口tmp/celeba_final_valid_replay_20261009/v4/remaining872_prepared_v2_20261009/README.md。\n\n"
+    if new_collections:
+        top += f"最新九方法离机接受：唯一ID collector严格合并{n}/900实际三视图重放，尚缺{900-n}；其中原吞吐/门检28+新补集{n-28}，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该39项称完整最终评价。新collector路径{collection_path.relative_to(ROOT).as_posix()}。\n\n"
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

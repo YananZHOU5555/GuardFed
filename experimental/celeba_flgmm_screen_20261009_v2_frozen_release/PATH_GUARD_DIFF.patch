@@ -1,0 +1,81 @@
+--- v1/screen_common.py
++++ v2/screen_common.py
+@@ -54,9 +54,29 @@
+     return protocol, manifest
+ 
+ 
++def checked_repo_path(repo, name, expected, mapping):
++    relative = Path(name)
++    if relative.is_absolute() or '..' in relative.parts:
++        raise ValueError('Invalid frozen repository-relative path: ' + name)
++    if name not in mapping:
++        return under(repo, name)
++    rule = mapping[name]
++    actual = (repo / relative).resolve()
++    if actual != Path(rule['resolved_target']) or expected != rule['sha256']:
++        raise ValueError('Frozen data symlink target/SHA declaration changed: ' + name)
++    return actual
++
++
+ def repo_identity(repo, protocol):
++    mapping = read(HERE / 'REPO_SYMLINK_TARGETS.json')['entries']
++    permitted = {'data/celeba/' + name for name in [
++        'derived/rgb64_v1/manifest.json', 'derived/rgb64_v1/metadata.npz',
++        'derived/rgb64_v1/images.npy', 'derived/rgb64_v1/available.npy',
++        'list_attr_celeba.txt', 'list_eval_partition.txt']}
++    if set(mapping) != permitted:
++        raise ValueError('Only the six explicitly reviewed CelebA data targets are permitted')
+     for name, expected in protocol['source_hashes'].items():
+-        if digest(under(repo, name)) != expected:
++        if digest(checked_repo_path(repo, name, expected, mapping)) != expected:
+             raise ValueError('Repository source/data changed: ' + name)
+     return dict(protocol['source_hashes'])
+ 
+--- v1/test_lifecycle.py
++++ v2/test_lifecycle.py
+@@ -7,7 +7,7 @@
+ from unittest.mock import patch
+ 
+ import run_screen
+-from screen_common import HERE, authorized, digest, local_identity, read
++from screen_common import HERE, authorized, checked_repo_path, digest, local_identity, read, repo_identity
+ 
+ 
+ def rejects(call):
+@@ -34,6 +34,16 @@
+     assert run_screen.score(dict(accuracy=.8, aeod=.1, aspd=.2)) < .8
+     with tempfile.TemporaryDirectory() as folder:
+         root = Path(folder)
++        fixture = root / 'content'; fixture.write_bytes(b'fixture only')
++        assert repo_identity(root, {'source_hashes': {'content': digest(fixture)}})
++        rejects(lambda: repo_identity(root, {'source_hashes': {'content': '0' * 64}}))
++        rejects(lambda: repo_identity(root, {'source_hashes': {'../escape': '0' * 64}}))
++        rejects(lambda: repo_identity(root, {'source_hashes': {str(fixture.resolve()): '0' * 64}}))
++        rule = {'content': {'resolved_target': str(fixture.resolve()), 'sha256': digest(fixture)}}
++        assert checked_repo_path(root, 'content', digest(fixture), rule) == fixture.resolve()
++        rejects(lambda: checked_repo_path(root, 'content', '0' * 64, rule))
++        wrong_target = {'content': dict(rule['content'], resolved_target=str(root / 'other'))}
++        rejects(lambda: checked_repo_path(root, 'content', digest(fixture), wrong_target))
+         item = {'id': 'fixture_only'}
+         with patch.object(run_screen, 'HERE', root):
+             assert run_screen.inspect_output(item) == 'pending'
+--- v1/dispatch/guardfed_celeba_flgmm_screen.conf
++++ v2/dispatch/guardfed_celeba_flgmm_screen.conf
+@@ -1,7 +1,7 @@
+ [program:guardfed_celeba_flgmm_screen]
+ environment=PROC_NAME="%(program_name)s"
+ command=/opt/supervisor-scripts/guardfed_celeba_flgmm_screen.sh
+-directory=/workspace/guardfed_checks/celeba_flgmm_screen_20261009/release
++directory=/workspace/guardfed_checks/celeba_flgmm_screen_20261009/release_v2
+ autostart=false
+ autorestart=false
+ startretries=0
+--- v1/dispatch/guardfed_celeba_flgmm_screen.sh
++++ v2/dispatch/guardfed_celeba_flgmm_screen.sh
+@@ -4,5 +4,5 @@
+ . "${utils}/logging.sh"
+ . "${utils}/environment.sh"
+ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 GUARDFED_CPU_THREADS=1
+-cd /workspace/guardfed_checks/celeba_flgmm_screen_20261009/release
++cd /workspace/guardfed_checks/celeba_flgmm_screen_20261009/release_v2
+ pty nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -u run_screen.py --repo /workspace/GuardFed-celeba-expanded

@@ -1,0 +1,55 @@
+--- sealed-original/protocol.json
++++ prepared-new/source/protocol.json
+@@ -1,6 +1,6 @@
+ {
+   "status": "PREPARED_NOT_FROZEN",
+-  "version": "celeba_flgmm_author_code_screen_20261009_v1",
++  "version": "celeba_flgmm_author_code_screen_20261009_v2",
+   "base_config": {
+     "seed": 91001,
+     "num_clients": 20,
+@@ -177,6 +177,42 @@
+     "Upstream bounds_2 behavior retained",
+     "Explicit zero-standard-deviation extension",
+     "No full training resume guarantee",
+-    "No real-image gate yet"
+-  ]
++    "Three-round gates do not establish 70-round performance or CPU/GPU equivalence",
++    "Original loader materializes full-split metadata; no final test pixel evaluation or selection"
++  ],
++  "passed_gate": {
++    "GPU_ACCEPTANCE_sha256": "b07d90677630ee04838e32d2e46f775c37b4218d14ec7aaef5d11cbdcfc2abcf",
++    "OFFSERVER_VERIFICATION_sha256": "52624138ab8042f1ce8841dc2e904d2c61a01f84c79cafe7ab66a83150629c0f",
++    "gpu_canaries": 4,
++    "cpu_canaries": 2,
++    "negative_v2_preserved": true,
++    "paper_performance_samples": 0
++  },
++  "execution": {
++    "status": "NOT_AUTHORIZED_TO_START",
++    "max_workers": 2,
++    "physical_gpus": [
++      0,
++      1
++    ],
++    "cpu_threads_per_worker": 1,
++    "nice": 10,
++    "automatic_retry": false,
++    "partial_resume": false,
++    "final_test": false,
++    "formal100": false,
++    "python": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
++    "python_version": "3.12.3",
++    "torch": "2.11.0+cu128",
++    "cuda": "12.8",
++    "gpu": "NVIDIA GeForce RTX 5090",
++    "gate_driver": "595.84"
++  },
++  "score_provenance": {
++    "source": "evidence/original_verify_rank.py",
++    "sha256": "55de42102c20a8043dc1842c07c87e604fd8c10752d63e05d5b5612a7679895f",
++    "function": "score",
++    "extraction": "verbatim AST source segment; same weights, no source execution",
++    "function_sha256": "1b31c0322b06bc1901f2a2f49a2b7b3524fed0164b6191d8bb9a5ed7e5f24b27"
++  }
+ }

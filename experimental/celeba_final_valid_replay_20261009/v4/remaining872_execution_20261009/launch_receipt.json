@@ -1,0 +1,60 @@
+{
+  "status": "PARENT_AUTHORIZED_NORMAL_SERVICE_STARTED_NOT_SCIENTIFIC_COMPLETION",
+  "utc": "2026-10-09T09:29:57Z",
+  "program": "guardfed_celeba_valid_remaining872_20261009",
+  "commands": [
+    {
+      "command": [
+        "supervisorctl",
+        "reread"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_valid_remaining872_20261009: available\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "update",
+        "guardfed_celeba_valid_remaining872_20261009"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_valid_remaining872_20261009: added process group\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_valid_remaining872_20261009"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_valid_remaining872_20261009: started\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "status",
+        "guardfed_celeba_valid_remaining872_20261009"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_valid_remaining872_20261009   RUNNING   pid 19149, uptime 0:00:01\n",
+      "stderr": ""
+    }
+  ],
+  "source_manifest_sha256": "8f4d9504444210a0ad6622ed6afa825913c59dad1fde01685330433f91c5efe7",
+  "execution_manifest_sha256": "ad6eebf517f534fb8489acb241c51a9ec5328bb285406e55275f7dd9c0c3ed43",
+  "installed_config_sha256": "14c6b45c00dba32220800a0ce1298bcff0f36a6483f584b5b9417a96bee9fb34",
+  "inspect_receipt_sha256": "3de3a5a5a303561d7e589127bf0173bf28ca4a687294a92aeb3f8e851cfe8c7f",
+  "cpu_quota": "12287999 100000",
+  "workers_max": 11,
+  "cpu_slots": "16..103",
+  "outer_nice": 0,
+  "scientific_workers_expected_nice": 10,
+  "autostart": false,
+  "autorestart": false,
+  "new_test_inference": 0,
+  "new_training": 0,
+  "remaining872_complete": false
+}

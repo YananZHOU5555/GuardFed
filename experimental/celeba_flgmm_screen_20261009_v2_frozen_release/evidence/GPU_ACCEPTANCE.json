@@ -1,0 +1,187 @@
+{
+  "status": "PASS",
+  "evidence_stage": "GPU_CANARY_REAL_IMAGE_ONLY",
+  "formal_table_eligible": false,
+  "results": [
+    {
+      "id": "FLGMM_GPU_CANARY_v3_IID_Benign_seed91001_repeat1",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "7403b0127b60c6490ef7b34563c162bcd081d161a2b5479223a88ab135d73f39"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_v3_non-IID_S-DFA_seed91001_repeat1",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "5b0ba26c77588b634081f9a77a82cc5bb56ccc249eca804283cc75ac1e6e3f10"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_v3_IID_Benign_seed91001_repeat2",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "7403b0127b60c6490ef7b34563c162bcd081d161a2b5479223a88ab135d73f39"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_v3_non-IID_S-DFA_seed91001_repeat2",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "5b0ba26c77588b634081f9a77a82cc5bb56ccc249eca804283cc75ac1e6e3f10"
+    }
+  ],
+  "same_seed_gpu_repeats": {
+    "IID_Benign": {
+      "exact": true,
+      "checks": {
+        "model_tensors": true,
+        "final_metrics": true,
+        "trajectory_metrics": true,
+        "last10_metrics": true,
+        "round_summaries": true,
+        "attack_audit": true,
+        "evaluation_stats": true,
+        "diagnostics": true,
+        "round_001_rng_json": true,
+        "round_001_rng_tensors": true,
+        "round_001_training_rng_origins": true,
+        "round_001_imported_rng_use": true,
+        "round_002_rng_json": true,
+        "round_002_rng_tensors": true,
+        "round_002_training_rng_origins": true,
+        "round_002_imported_rng_use": true,
+        "round_003_rng_json": true,
+        "round_003_rng_tensors": true,
+        "round_003_training_rng_origins": true,
+        "round_003_imported_rng_use": true,
+        "final_rng_json": true,
+        "final_rng_tensors": true,
+        "final_training_rng_origins": true,
+        "final_imported_rng_use": true,
+        "round_001_state.json": true,
+        "round_002_state.json": true,
+        "round_003_state.json": true
+      },
+      "model": {
+        "exact": true,
+        "max_abs": 0.0,
+        "tensor_count": 8
+      },
+      "import_rng_disclosure": {
+        "scope": "Import-time evidence retained separately; any generator observed used enters training comparison",
+        "counts": [
+          12,
+          12
+        ],
+        "different_import_state_indices": [
+          2,
+          5,
+          8,
+          11
+        ]
+      }
+    },
+    "non-IID_S-DFA": {
+      "exact": true,
+      "checks": {
+        "model_tensors": true,
+        "final_metrics": true,
+        "trajectory_metrics": true,
+        "last10_metrics": true,
+        "round_summaries": true,
+        "attack_audit": true,
+        "evaluation_stats": true,
+        "diagnostics": true,
+        "round_001_rng_json": true,
+        "round_001_rng_tensors": true,
+        "round_001_training_rng_origins": true,
+        "round_001_imported_rng_use": true,
+        "round_002_rng_json": true,
+        "round_002_rng_tensors": true,
+        "round_002_training_rng_origins": true,
+        "round_002_imported_rng_use": true,
+        "round_003_rng_json": true,
+        "round_003_rng_tensors": true,
+        "round_003_training_rng_origins": true,
+        "round_003_imported_rng_use": true,
+        "final_rng_json": true,
+        "final_rng_tensors": true,
+        "final_training_rng_origins": true,
+        "final_imported_rng_use": true,
+        "round_001_state.json": true,
+        "round_002_state.json": true,
+        "round_003_state.json": true
+      },
+      "model": {
+        "exact": true,
+        "max_abs": 0.0,
+        "tensor_count": 8
+      },
+      "import_rng_disclosure": {
+        "scope": "Import-time evidence retained separately; any generator observed used enters training comparison",
+        "counts": [
+          12,
+          12
+        ],
+        "different_import_state_indices": [
+          2,
+          5,
+          8,
+          11
+        ]
+      }
+    }
+  },
+  "cpu_gpu": {
+    "IID_Benign": {
+      "model": {
+        "exact": false,
+        "max_abs": 0.014232834335416555,
+        "tensor_count": 8
+      },
+      "final_metric_gpu_minus_cpu": {
+        "accuracy": 0.0,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "trajectory_metrics_exact": true,
+      "selection_and_diagnostics_exact": false,
+      "controller_history_exact": false,
+      "limitation": "CPU eight threads vs GPU one thread; differences retained, no equivalence assumption"
+    },
+    "non-IID_S-DFA": {
+      "model": {
+        "exact": false,
+        "max_abs": 0.03750477731227875,
+        "tensor_count": 8
+      },
+      "final_metric_gpu_minus_cpu": {
+        "accuracy": 0.0,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "trajectory_metrics_exact": true,
+      "selection_and_diagnostics_exact": false,
+      "controller_history_exact": false,
+      "limitation": "CPU eight threads vs GPU one thread; differences retained, no equivalence assumption"
+    }
+  },
+  "cpu_backup_binding": {
+    "cpu_receipt_hashes": {
+      "LOCAL_ACCEPTANCE.json": "d7f4d12eca60673d86986dec69821d0cfec6a47a90147ab89add6543bd23f5c0",
+      "BACKUP_SHA256.json": "6c4bca8a356cfc4c1a85984197761b3f8b3e3ce506e82dbb2925989de5f1d441"
+    },
+    "inventory_sha256": "1cdc3c4ba272ce7a54f6d540ec09fdb1a5dc3895c9b6fb4ea702e4694acdab24",
+    "bound_members": 22
+  }
+}
