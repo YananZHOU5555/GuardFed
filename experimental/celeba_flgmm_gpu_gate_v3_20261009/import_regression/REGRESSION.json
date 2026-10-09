@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "real_gpu_runs": 0,
+  "real_image_training_runs": 0,
+  "import_generators_per_process": 12,
+  "training_registry_empty_at_boundary": true,
+  "explicit_training_generator_captured": true,
+  "directly_used_import_generator_captured": true,
+  "comparator": {
+    "import_only_differences_retained": {
+      "scope": "Import-time evidence retained separately; any generator observed used enters training comparison",
+      "counts": [
+        12,
+        12
+      ],
+      "different_import_state_indices": [
+        2,
+        5,
+        8,
+        11
+      ]
+    },
+    "unchanged_training_rng_passes": true,
+    "changed_training_rng_fails": true,
+    "fixture_scope": "Only comparator unit fixture; never passed to check_one or paper tables"
+  }
+}

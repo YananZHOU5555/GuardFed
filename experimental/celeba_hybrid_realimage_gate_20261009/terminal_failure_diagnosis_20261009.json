@@ -1,0 +1,113 @@
+{
+  "status": "TERMINAL_FAILURE_DIAGNOSTIC_NONFINITE_SERIALIZATION_LOCALIZED",
+  "utc": "2026-10-09T09:03:26.303844+00:00",
+  "scientific_table_records": 0,
+  "accepted_CANARY": 2,
+  "expected_CANARY": 4,
+  "failed_id": "non-IID_S-DFA_hybrid_seed91001_cpu_gate3",
+  "failed_stage": "result JSON serialization after round3 model save, before replay and acceptance",
+  "mandatory_nonfinite_result_paths_inferred_from_exact_job_and_frozen_source": [
+    "attack_audit[0].fflip_label_corr_after",
+    "attack_audit[1].fflip_label_corr_after",
+    "attack_audit[2].fflip_label_corr_after",
+    "attack_audit[3].fflip_label_corr_after"
+  ],
+  "causal_chain": [
+    "S-DFA assigns fflip+foe to all four malicious clients",
+    "all_unprivileged overwrites their sensitive vector with zeros",
+    "std(sensitive)==0 so client_runtime_data sets after-attack Pearson correlation to math.nan",
+    "apply_foe_if_needed adds audit fields without overwriting that correlation",
+    "run_experiment returns audits at attack_audit; strict gate writer allow_nan=False rejects result"
+  ],
+  "origin_kind": "undefined Pearson diagnostic, not a zero-valued correlation",
+  "runtime_in_memory_result_no_longer_available": true,
+  "complete_list_of_all_nonfinite_result_fields_not_proven": true,
+  "persisted_diagnostics_nonfinite_paths": [],
+  "persisted_progress_metric_nonfinite_paths": [],
+  "terminal_model_tensors": {
+    "features.0.weight": {
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "finite": true
+    },
+    "features.0.bias": {
+      "shape": [
+        32
+      ],
+      "finite": true
+    },
+    "features.3.weight": {
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "finite": true
+    },
+    "features.3.bias": {
+      "shape": [
+        64
+      ],
+      "finite": true
+    },
+    "features.6.weight": {
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "finite": true
+    },
+    "features.6.bias": {
+      "shape": [
+        128
+      ],
+      "finite": true
+    },
+    "classifier.weight": {
+      "shape": [
+        2,
+        128
+      ],
+      "finite": true
+    },
+    "classifier.bias": {
+      "shape": [
+        2
+      ],
+      "finite": true
+    }
+  },
+  "terminal_model_all_finite": true,
+  "aggregate_legacy_exact_all3": true,
+  "optimizer_state_not_persisted_cannot_directly_check": true,
+  "raw_frozen_CORE_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "job_sha256": "76a86069c7f18563c1d4cbdedd8f12463cc0cfa6a9f28fc0b278376b5cb23c75",
+  "artifact_SHA": {
+    "resource_before.json": "d4717a2a58c691d1153fdf0388d6a2127cfe3ceb0716fd245abf148bbe2e2c27",
+    "provenance.json": "f6803b2dc731a8fd9d295a969c0501ae704eb6533c7c4ca3be3420502396aab2",
+    "diagnostics.json": "ce50066b5324f6ec9c0065846eb0d84d384b9ee342e8a4398bd3bcd993c2d84f",
+    "progress.json": "f8eeb75af7001ff55fbeeee19de08e8dfab96e5ca1b13e7de9b9140fcc56cce4",
+    "model.pt": "c418ea3a7ccaf520b571755ad7376e2d70f8295d2ee65da57e8f83a11f687aab",
+    "failure.json": "1f42e983a6be69fc28d365715188a20f2bb4fa863592ef2e635009ce16a6c453"
+  },
+  "terminal_full_round_metrics": {
+    "accuracy": 0.5166859616449389,
+    "aeod": 0.0,
+    "aspd": 0.0
+  },
+  "no_test_inference": true,
+  "no_training_or_replay_performed_by_diagnosis": true,
+  "CPU_threads": 1,
+  "CPU_affinity": [
+    8
+  ],
+  "cuda_hidden": true,
+  "proposed_fix_for_review": "In a new execution-only writer wrapper, identify and preserve precisely undefined diagnostic paths as JSON null plus an explicit undefined-statistic sidecar; reject every nonfinite main metric, weight/control/model and every unrecognized path. Do not set0, enableallow_nan or edit frozen gate. Full failed result was not retained; recovery cannot claim full strict acceptance from checkpoint/progress alone."
+}

@@ -1,0 +1,51 @@
+{
+  "status": "FAILED_SAVING_AFTER_ROOT_VALID_INFERENCE_NO_ACCEPTED_RESULT",
+  "utc": "2026-10-09T08:43:50.086350+00:00",
+  "error_type": "FileNotFoundError",
+  "error": "[Errno 2] No such file or directory: '/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/runs/minus_U_IID_Benign_seed91002'",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/bridge.py\", line 244, in replay\n    inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, wall_seconds)\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 377, in replay_one\n    output.mkdir(exist_ok=False)\n  File \"/usr/lib/python3.12/pathlib.py\", line 1313, in mkdir\n    os.mkdir(self, mode)\nFileNotFoundError: [Errno 2] No such file or directory: '/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/runs/minus_U_IID_Benign_seed91002'\n",
+  "execution_boundary": {
+    "root_valid_extract_and_predict_reached": true,
+    "scoring_and_check_native_function_reached": true,
+    "native_metrics_value_not_persisted_do_not_claim_pass": true,
+    "output_mkdir_failed_before_prediction_npz_write": true,
+    "strict_acceptance_exists": false,
+    "target_output_exists": false,
+    "new_scientific_accepted_records": 0,
+    "final_test_inference": false
+  },
+  "source_before_after_equal": true,
+  "source_count": 35,
+  "artifact_before_after_equal": true,
+  "artifact_count": 7,
+  "approved_receipt_sha256": "34fc8399e0cc8271c95001289e9b05a1412bbdcb9ed3894bc43fa38e27969162",
+  "v2_source_sha256": "5d537f129c6d96f370bbd93b321e86be1e1fef628ba9589485ac9a14486c00c0",
+  "v2_seal_sha256": "cd249f5ef9fa6776039c94a667ec6f8777155ace163ec188f7d76934dd3ae5ea",
+  "all_three_seals_valid": true,
+  "runs_parent_exists": true,
+  "runs_parent_members": [
+    "minus_U_IID_Benign_seed91002.bridge_failure.json"
+  ],
+  "failure_handler_created_parent_via_save_new": true,
+  "failure_sentinel_blocks_replay_same_target": true,
+  "no_retry_executed": true,
+  "service": "guardfed_celeba_mechanism_valid_one   EXITED    Oct 09 08:41 AM\n",
+  "members": {
+    "run.log": {
+      "sha256": "7e880ab3974ee6576e8073c99f11d313a695afa1587440ec3b4dd4b017e4a3fd",
+      "bytes": 1035
+    },
+    "execution_failure.json": {
+      "sha256": "08fe72f543af69321f77500f2526a0ebf3e1112a2e4f895574822d47cfd58843",
+      "bytes": 863
+    },
+    "resource_before_approved_run.json": {
+      "sha256": "d2702401156181255214360fe7afec63db372b9ebf3f3c30372a1d9150690f34",
+      "bytes": 59435
+    },
+    "minus_U_IID_Benign_seed91002.bridge_failure.json": {
+      "sha256": "37d9aa641e1412dbc4b63e9f7040b0dc7d899cdac3a86f7c0395d95ca91f2691",
+      "bytes": 51256
+    }
+  }
+}

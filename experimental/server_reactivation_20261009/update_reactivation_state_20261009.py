@@ -204,6 +204,24 @@ if v4_semantic_path.exists():
         actual_native_valid_image_replays_accepted=replay_count,
         measured_throughput_phases=measured_phases,
         v4_phases_accepted=[p['phase'] for p in measured_phases if p.get('source_version') == 'v4'])
+    collected_paths = list((v4 / 'execution_20261009').glob('cumulative_*_accepted.json'))
+    if collected_paths:
+        collected_path = max(collected_paths, key=lambda p: read(p)['accepted_n'])
+        collected = read(collected_path)
+        assert collected['expected_n'] == 900 and collected['accepted_n'] >= replay_count
+        assert collected['accepted_n'] == len(collected['accepted']) == len(set(collected['accepted_ids']))
+        # Distinct scientific cells may legitimately save identical weight bytes.
+        assert 0 < collected['distinct_checkpoint_sha256_n'] <= collected['accepted_n']
+        assert sha(v4 / 'execution_20261009/collect_valid_replay.py') == collected['collector_source_sha256']
+        assert not collected['test_inference_performed'] and not collected['final_dispatch_created']
+        assert all(r['native_max_abs_difference'] == 0 and r['actual_three_views_verified'] for r in collected['accepted'])
+        replay_count = collected['accepted_n']
+        state['final_evaluator_runtime_20261009'].update(
+            actual_native_valid_image_replays_accepted=replay_count,
+            cumulative_unique_checkpoint_acceptance=collected_path.relative_to(ROOT).as_posix(),
+            cumulative_unique_checkpoint_acceptance_sha256=sha(collected_path),
+            distinct_checkpoint_sha256_count=collected['distinct_checkpoint_sha256_n'],
+            all900_native_realimage_valid_replayed=collected['all900_native_valid_replayed'])
 flgmm_cpu = ROOT / 'tmp/celeba_flgmm_realimage_gate_20261009'
 flgmm_cpu_proof_path = flgmm_cpu / 'OFFSERVER_VERIFICATION.json'
 flgmm_cpu_proof = None
@@ -243,6 +261,27 @@ if flgmm_gpu_proof_path.exists():
         'failure_scope': 'default_rng JSON includes entropy-seeded SciPy import-only documentation examples',
         'new_recording_boundary_fix': 'PREPARATION_ONLY_NOT_EXECUTED',
         'negative_report_unchanged': flgmm_gpu_proof['original_mismatch_report_unchanged']}
+flgmm_v3 = ROOT / 'tmp/celeba_flgmm_gpu_gate_v3_20261009'
+flgmm_v3_live_path = flgmm_v3 / 'dispatch/launch_observation.json'
+flgmm_v3_live = None
+if flgmm_v3_live_path.exists():
+    flgmm_v3_live = read(flgmm_v3_live_path)
+    assert sha(flgmm_v3 / 'FREEZE.json') == flgmm_v3_live['freeze_sha256']
+    assert sha(flgmm_v3 / 'PREPARED_PACKAGE_SHA.json') == flgmm_v3_live['prepared_sha256']
+    assert len(flgmm_v3_live['jobs']) == 4 and not flgmm_v3_live['queue_failed']
+    state['flgmm_gpu_canary_v3_20261009'] = {
+        'status': 'FOUR_CANARY_SCOPE_FROZEN_AND_LAUNCH_OBSERVED',
+        'observed_utc': flgmm_v3_live['observed_utc'],
+        'service_status_at_observation': flgmm_v3_live['live_service_status'],
+        'launch_pid': flgmm_v3_live['launch_pid'],
+        'freeze_sha256': flgmm_v3_live['freeze_sha256'],
+        'prepared_source_sha256': flgmm_v3_live['prepared_sha256'],
+        'individual_canaries_accepted_at_observation': sum(r['accepted'] for r in flgmm_v3_live['jobs']),
+        'jobs_at_observation': flgmm_v3_live['jobs'],
+        'live_receipt_sha256': sha(flgmm_v3_live_path),
+        'strict_four_cohort_accepted': False, 'scientific_table_records': 0,
+        'formal_screen_started': False, 'original_negative_gate_preserved': True}
+    state['flgmm_gpu_canary_20261009']['new_recording_boundary_fix'] = 'V3_FOUR_GPU_CANARIES_FROZEN_LAUNCH_OBSERVED'
 science_backup = CHECKS / 'mechanism_science_backups_20261009'
 first_verification = science_backup / 'incremental_new5_offserver_verification.json'
 if first_verification.exists():
@@ -291,6 +330,59 @@ if first_verification.exists():
         latest_science_backup_members_verified=backup_entries[-1]['members_verified'],
         science_acceptance_inspection=accepted_path.relative_to(TRAIN).as_posix(),
         backup_tool_version='evidence_v4.py; sealed v1/v2/v3 and original five-model archive unchanged')
+flgmm_v3_final_path = flgmm_v3 / 'FINAL_STATUS.json'
+if flgmm_v3_final_path.exists():
+    terminal = read(flgmm_v3_final_path)
+    root_proof_path = CHECKS / 'FLGMM_V3_ROOT_VERIFICATION.json'
+    root_proof = read(root_proof_path)
+    assert terminal['status'] == 'GATE_COMPLETE_ACCEPTED_BACKED_UP'
+    assert terminal['individual_canaries_accepted'] == 4 and terminal['failed'] == 0
+    assert root_proof['archive_sha256'] == terminal['archive_sha256']
+    assert sha(flgmm_v3/'GPU_ACCEPTANCE.json') == terminal['gpu_acceptance_sha256']
+    assert sha(flgmm_v3/'OFFSERVER_VERIFICATION.json') == terminal['offserver_verification_sha256']
+    state['flgmm_gpu_canary_v3_20261009'].update(status=terminal['status'],
+        terminal_observed_utc=terminal['observed_utc'], service_state='EXITED',
+        strict_four_cohort_accepted=True, canaries_accepted_and_backed_up=4,
+        cross_gpu_repeat_conditions_passed=2, archive_sha256=terminal['archive_sha256'],
+        terminal_receipt_sha256=sha(flgmm_v3_final_path), root_verification_sha256=sha(root_proof_path),
+        cpu_gpu_equivalence_claim=False, formal_screen_started=False)
+    state['flgmm_gpu_canary_20261009']['new_recording_boundary_fix'] = 'V3_FOUR_GPU_CANARIES_ACCEPTED_OFFSERVER_VERIFIED'
+single_dir = ROOT / 'tmp/celeba_mechanism_valid_replay_20261009/recovery_attempt03_20261009T085000Z'
+single_root_proof = CHECKS / 'MECHANISM_VALID_ONE_ROOT_VERIFICATION.json'
+if single_root_proof.exists():
+    proof = read(single_root_proof)
+    assert sha(single_dir/'FILES_SHA256.json') == proof['delivery_seal_sha256']
+    assert len(proof['accepted_new_ids']) == 1 and proof['archive_members_verified'] == 14
+    state['celeba_mechanism_v1'].update(mechanism_raw_native_shared_evaluation='ONE_STRICT_VALID_REPLAY_OFFSERVER_VERIFIED',
+        three_view_new_models_accepted=1, three_view_new_models_offserver_verified=1,
+        three_view_accepted_ids=proof['accepted_new_ids'], three_view_native_max_abs_difference=0,
+        three_view_root_proof_sha256=sha(single_root_proof),
+        three_view_scope_limit='One minus_U/IID/Benign checkpoint; no Full reinference, no test, no component necessity inference',
+        original_two_engineering_failures_preserved=True)
+gradient_dir = ROOT / 'tmp/celeba_gradient_realimage_gate_20261009/completed_four_backup_20261009'
+gradient_root_proof = CHECKS / 'GRADIENT_FOUR_ROOT_VERIFICATION.json'
+if gradient_root_proof.exists():
+    proof = read(gradient_root_proof)
+    assert sha(gradient_dir/'strict_delivery.json') == proof['delivery_sha256']
+    assert sha(gradient_dir/'offserver_verification.json') == proof['offserver_proof_sha256']
+    state['gradient_canaries_20261009'] = dict(status='FOUR_EXPLORATORY_CANARIES_STRICT_ACCEPTED_OFFSERVER_VERIFIED',
+        accepted=4, rounds=12, same_point_gradient_checks=240,
+        archive_sha256=proof['archive_sha256'], archive_members_verified=86,
+        root_verification_sha256=sha(gradient_root_proof), service_state='EXITED',
+        scientific_table_records=0, formal_protocol_status='PREPARED_NOT_FROZEN',
+        formal_decisions_unresolved=5, negative_constant_predictions_retained=True)
+hybrid_dir = ROOT / 'tmp/celeba_hybrid_realimage_gate_20261009'
+hybrid_diagnosis = hybrid_dir / 'terminal_failure_diagnosis_20261009.json'
+if hybrid_diagnosis.exists():
+    diagnosis = read(hybrid_diagnosis)
+    off = read(hybrid_dir/'terminal_failure_backup_20261009/offserver_verification.json')
+    assert off['pass'] and off['different_host_observed']
+    state['hybrid_canaries_20261009'] = dict(status=diagnosis['status'],
+        diagnosis_sha256=sha(hybrid_diagnosis), strict_individual_canaries=2, expected=4,
+        complete_cohort_accepted=False, scientific_table_records=0, service_state='EXITED',
+        failed_id=diagnosis['failed_id'], failed_stage=diagnosis['failed_stage'],
+        archive_sha256=off['archive_sha256'], offserver_members_verified=off['members_verified'],
+        original_failure_preserved=True, precise_writer_fix='PREPARATION_ONLY_NOT_EXECUTED')
 reply = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_20261009'
 state['rebuttal_draft_20261009'].update(sha256=sha(reply/'rebuttal_20261009.md'),verification_sha256=sha(reply/'verification.json'))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -338,7 +430,17 @@ if gate_live:
 if flgmm_cpu_proof:
     top += 'FLGMM两条完整真实图像CPU三轮canary均已严格接受并离机验收54成员，CPU任务已退出。两条ACC均0.516686、AEOD/ASPD为0的恒定预测负结果保留；Tg1为管线覆盖，不计正式论文结果，不推断CPU/GPU等价。GPU四项跨卡重复门检另行接受；32项搜索尚未启动。凭据见TRAINING_STATE.json的flgmm_cpu_canary_20261009。\n\n'
 if flgmm_gpu_proof:
-    top += 'FLGMM四项GPU三轮canary均完成，各自身份通过，跨卡训练张量、指标、controller及Torch RNG逐位一致；整体门检按冻结规则保留REPEAT_MISMATCH。实际差异限于被快照混入的SciPy导入期文档示例default_rng熵状态，原失败报告与121成员已离机核验。只准备独立记录边界修复，不放宽数值容差、不删除原失败、未启动32项搜索；不是正式性能结果。\n\n'
+    top += 'FLGMM原v2四项GPU三轮canary均完成，各自身份通过，跨卡训练张量、指标、controller及Torch RNG逐位一致；整体门检按原冻结规则保留REPEAT_MISMATCH。实际差异限于被快照混入的SciPy导入期文档示例default_rng熵状态，原失败报告与121成员已离机核验。记录范围缺陷由独立v3修复；原v2门检不追改，32项搜索未启动；三轮canary不计正式性能结果。\n\n'
+if flgmm_v3_live:
+    top += f"独立v3修正已通过同core导入回归及42成员离机核验后，明确冻结仅4条GPU三轮canary。实测{flgmm_v3_live['observed_utc']}：{flgmm_v3_live['live_service_status']}，{sum(r['accepted'] for r in flgmm_v3_live['jobs'])}/4单项完成，尚不称完整跨卡cohort通过；旧v2失败证据原样保留，32项搜索仍未启动。源码/冻结与该实测凭据见TRAINING_STATE.json的flgmm_gpu_canary_v3_20261009。\n\n"
+if flgmm_v3_final_path.exists():
+    top += '更新：FLGMM v3四项GPU门检已全部严格接受、两组跨卡重复精确，139内容成员+清单及四份旧模型引用离机核验，服务正常EXITED；此前3/4启动快照只作历史记录。32项新搜索包已准备，尚未启动，不计正式性能样本。\n\n'
+if gradient_root_proof.exists():
+    top += '更新：Fed-NGA/Huber四项三轮真实图像门检全部严格接受，240条同点client gradient与攻击符号oracle通过；86成员离机及主代理核验，服务EXITED。四项恒定预测负结果保留；五项正式协议选择仍未冻结，科学表记录0。此前2/4快照及“尚无完整四项PASS”为历史观察。\n\n'
+if hybrid_diagnosis.exists():
+    top += '更新：Hybrid第三条non-IID/S-DFA在result严格JSON记录层失败，已定位敏感组零方差使原攻击审计相关系数未定义；两条IID已接受，整体2/4未通过。46成员失败证据离机保留，第三条模型有限且三轮aggregate精确仍不能替代完整接受。仅准备限定字段null与独立原因记录的writer修复；未知NaN和主指标/训练状态仍必须拒绝，未重启队列。\n\n'
+if single_root_proof.exists():
+    top += '机制统一评价更新：一条minus_U/IID/Benign/seed91002终轮checkpoint已完成raw/native/shared三视图重放，native误差0，9指标/24混淆计数/3规则独立重算一致，14成员离机及主代理核验。它与70轮科学训练验收分母分开；Full仅引用已有严格结果，未重复推理/备份，未运行test。两项工程失败及第三次受限恢复链完整保留。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

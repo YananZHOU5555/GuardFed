@@ -1,0 +1,33 @@
+{
+  "status": "TERMINAL_FAILURE_DIAGNOSED_AND_OFFSERVER_SHA_VERIFIED",
+  "accepted_CANARY": 2,
+  "failed_CANARY": 1,
+  "unstarted_CANARY": 1,
+  "scientific_table_records": 0,
+  "old_failure_reclassified": false,
+  "failed_stage": "result JSON serialization after round3 model save, before replay and acceptance",
+  "mandatory_undefined_fields": [
+    "attack_audit[0].fflip_label_corr_after",
+    "attack_audit[1].fflip_label_corr_after",
+    "attack_audit[2].fflip_label_corr_after",
+    "attack_audit[3].fflip_label_corr_after"
+  ],
+  "source_cause": "Frozen all_unprivileged overwrite makes sensitive vector constant; Pearson after-attack correlation is undefined",
+  "model_all_finite": true,
+  "main_progress_metrics_finite": true,
+  "persisted_diagnostics_finite": true,
+  "all_three_round_legacy_exact": true,
+  "optimizer_state_directly_checked": false,
+  "complete_list_of_in_memory_nonfinite_result_fields_proven": false,
+  "original_setup_sha256": "6c7c2c03302e536a8ee9e80176cbbda5b80a5548a2b4910e5107cf3c04b0cb33",
+  "original_setup_members_all_unchanged": true,
+  "protected_source_data_original_diagnosis_refs": "Inside 46-member verified archive; original frozen scope remains unchanged",
+  "evidence": {
+    "terminal_failure_diagnosis_20261009.json": "3bd22dc4a98ac408706ef20348066b003c691ef455b08d1d0fa4248545394c85",
+    "terminal_failure_backup_20261009/hybrid_terminal_failure_evidence.tar.gz": "a84446ed2b37d38877a3d81c0226c5be40919b050054635eb00bf1e457436b2b",
+    "terminal_failure_backup_20261009/backup_receipt.json": "a391bd23c6d73239cd0896f00511126be4e91b51119a210a3afc8e999e31a542",
+    "terminal_failure_backup_20261009/offserver_verification.json": "193a7d62ca0f9065b1d48a573beeb1cbf6e5be5b1ec4e55dc06c57bd841a7902"
+  },
+  "preserved_limits": "Third checkpoint/progress alone cannot complete native replay or strict result acceptance; no test inference or training done by diagnosis",
+  "next_status": "Writer-only two-unaccepted-canary repair prepared separately; not approved and not running"
+}

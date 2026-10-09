@@ -1,0 +1,46 @@
+{
+  "status": "ACTUAL17_SOURCE_VERSION_COLLECTOR_AND_REFUSALS_PASS",
+  "collector_source_sha256": "19066f63c341b9ee23b7c6f491802cfdde0c1c0c833c2fe64724a16de9bb2234",
+  "actual_unique_accepted_n": 17,
+  "rejected_cases": [
+    {
+      "case": "duplicate_canonical_ID_across_proofs",
+      "error_type": "ValueError",
+      "error": "Duplicate canonical accepted checkpoint across proofs/aliases"
+    },
+    {
+      "case": "wrong_declared_source_version",
+      "error_type": "ValueError",
+      "error": "Wrong source-version strict acceptance"
+    },
+    {
+      "case": "static900_semantic_gate_is_not_actual900_replay",
+      "error_type": "ValueError",
+      "error": "Prepared/static/failed evidence is not accepted replay"
+    },
+    {
+      "case": "failure_attempt_is_not_accepted_replay",
+      "error_type": "ValueError",
+      "error": "Prepared/static/failed evidence is not accepted replay"
+    },
+    {
+      "case": "proof_bytes_tampered",
+      "error_type": "ValueError",
+      "error": "Offserver proof differs from externally reviewed SHA"
+    },
+    {
+      "case": "archive_sha_not_bound_to_proof",
+      "error_type": "ValueError",
+      "error": "Archive differs from reviewed proof"
+    }
+  ],
+  "original_job_and_inventory_alias_resolve_same_key": true,
+  "source_versions": [
+    "v2",
+    "v3",
+    "v4"
+  ],
+  "cumulative_receipt_sha256": "38ad8a6c53ef809f867805a98b6eab3bb1f9674d058b69a4c6fc4cdd1be586d7",
+  "new_image_inference": 0,
+  "all900_native_valid_replayed": false
+}

@@ -1,0 +1,52 @@
+{
+  "backup": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/diagnostic_backup_after_two_failures_20261009",
+  "receipt": {
+    "status": "DIAGNOSTIC_FAILURE_BACKUP_ONLY",
+    "archive_sha256": "0b16f21b5b8e4e7d691fc168567df3b35dcf2a63d3426973d42f9d48e5be597f",
+    "inventory_sha256": "ce22f7867def733ac2478e32f223187460ce3fb1211417a264969571033203e4",
+    "accepted_new_ids": [],
+    "source_host": "0becaeaa5515",
+    "members": 60,
+    "new_scientific_accepted_records": 0,
+    "root_valid_inference_occurred_second_attempt": true,
+    "copy_verification": "PENDING_OFFSERVER"
+  },
+  "preflight": {
+    "status": "READ_ONLY_RECOVERY_PREFLIGHT_BLOCKED_BY_PRESERVED_FAILURE",
+    "utc": "2026-10-09T08:45:12.654889+00:00",
+    "parent_exists": true,
+    "parent_is_empty": false,
+    "parent_members": [
+      "minus_U_IID_Benign_seed91002.bridge_failure.json"
+    ],
+    "target_output_exists": false,
+    "prediction_npz_exists": false,
+    "strict_acceptance_exists": false,
+    "source_SHA_unchanged": true,
+    "frozen_replay_mkdir_line": 377,
+    "required_directory_assumption": "replay_one requires output.parent already exists; target output must not exist",
+    "downstream_checks": [
+      {
+        "operation": "np.savez_compressed output/validation_predictions.npz",
+        "parent": "output created at line377",
+        "additional_missing_parent": false
+      },
+      {
+        "operation": "scientific receipt save(output/receipt.json)",
+        "parent": "same created output",
+        "additional_missing_parent": false
+      },
+      {
+        "operation": "bridge save_new receipt/failure and execute resource/strict receipts",
+        "parent": "save_new creates parents explicitly",
+        "additional_missing_parent": false
+      }
+    ],
+    "failure_sentinel_must_be_preserved": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/runs/minus_U_IID_Benign_seed91002.bridge_failure.json",
+    "same_target_retry_would_be_rejected": true,
+    "parent_creation_now_not_needed": true,
+    "no_failure_moved_or_deleted": true,
+    "no_third_execution_authorized_or_started": true,
+    "proposed_future_review": "If root later authorizes exact recovery after offserver verification, archive+move only the SHA-bound sentinel to an immutable failed_attempts history, preserve original bytes/path proof; leave target absent and parent present. Never bypass failure guard or change scientific source."
+  }
+}

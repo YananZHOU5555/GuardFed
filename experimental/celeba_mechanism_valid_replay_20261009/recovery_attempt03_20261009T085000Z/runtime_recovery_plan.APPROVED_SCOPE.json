@@ -1,0 +1,119 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_REQUIRES_ROOT_RECOVERY_REVIEW_AFTER_PHASE5",
+  "scope": "EXACT_UNSEALED_RUNTIME_HISTORY_MOVE_ONLY",
+  "scientific_source_changes": 0,
+  "frozen_members_changes": 0,
+  "APPROVED_receipt_changes": 0,
+  "planned_history": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/history/failed_attempt_02_20261009",
+  "planned_files": [
+    {
+      "source": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/run.log",
+      "destination": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/history/failed_attempt_02_20261009/run.log",
+      "sha256": "7e880ab3974ee6576e8073c99f11d313a695afa1587440ec3b4dd4b017e4a3fd",
+      "bytes": 1035,
+      "reason": "Wrapper truncates this on next start; preserve exact previous trace"
+    },
+    {
+      "source": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/execution_failure.json",
+      "destination": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/history/failed_attempt_02_20261009/execution_failure.json",
+      "sha256": "08fe72f543af69321f77500f2526a0ebf3e1112a2e4f895574822d47cfd58843",
+      "bytes": 863,
+      "reason": "Existing first-failure file suppresses a later top-level failure writer"
+    },
+    {
+      "source": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/resource_before_approved_run.json",
+      "destination": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/history/failed_attempt_02_20261009/resource_before_approved_run.json",
+      "sha256": "d2702401156181255214360fe7afec63db372b9ebf3f3c30372a1d9150690f34",
+      "bytes": 59435,
+      "reason": "save_new x-mode would reject an existing file"
+    },
+    {
+      "source": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/runs/minus_U_IID_Benign_seed91002.bridge_failure.json",
+      "destination": "/workspace/guardfed_checks/celeba_mechanism_valid_replay_20261009/execution_attachments_v2/history/failed_attempt_02_20261009/runs/minus_U_IID_Benign_seed91002.bridge_failure.json",
+      "sha256": "37d9aa641e1412dbc4b63e9f7040b0dc7d899cdac3a86f7c0395d95ca91f2691",
+      "bytes": 51256,
+      "reason": "bridge refuses existing sentinel before replay"
+    }
+  ],
+  "preconditions": {
+    "offserver_archive_and_all_members_SHA_pass": true,
+    "one_replay_service_exited": true,
+    "no_live_replay_PID": true,
+    "all_three_frozen_seals_match": true,
+    "APPROVED_receipt_SHA_match": "34fc8399e0cc8271c95001289e9b05a1412bbdcb9ed3894bc43fa38e27969162",
+    "history_destination_must_not_exist": true,
+    "each_source_must_match_listed_SHA_and_size": true,
+    "target_output_must_not_exist": true
+  },
+  "after_requirements": {
+    "all_four_destination_files_same_original_SHA_and_size": true,
+    "no_source_failure_bytes_deleted_without_history": true,
+    "runs_parent_exists_and_empty": true,
+    "target_output_absent": true,
+    "resource_before_absent": true,
+    "strict_acceptance_absent": true,
+    "resource_after_absent": true,
+    "all_three_seals_and_APPPROVED_receipt_unchanged": true
+  },
+  "other_conflict_paths_checked": [
+    "strict_acceptance.json",
+    "resource_after_approved_run.json",
+    "runs/minus_U_IID_Benign_seed91002",
+    "history/failed_attempt_02_20261009"
+  ],
+  "future_parent_assumptions": [
+    {
+      "operation": "np.savez_compressed output/validation_predictions.npz",
+      "parent": "output created at line377",
+      "additional_missing_parent": false
+    },
+    {
+      "operation": "scientific receipt save(output/receipt.json)",
+      "parent": "same created output",
+      "additional_missing_parent": false
+    },
+    {
+      "operation": "bridge save_new receipt/failure and execute resource/strict receipts",
+      "parent": "save_new creates parents explicitly",
+      "additional_missing_parent": false
+    }
+  ],
+  "fault_backup_archive_SHA": "0b16f21b5b8e4e7d691fc168567df3b35dcf2a63d3426973d42f9d48e5be597f",
+  "fault_backup_verified_member_count": 60,
+  "second_attempt_reached_root_valid_inference": true,
+  "no_accepted_prediction_files_or_metrics": true,
+  "third_start_authorized": false,
+  "third_start_executed": false,
+  "actual_remaining_conflict_precheck": {
+    "utc": "2026-10-09T08:47:27.178919+00:00",
+    "status": "READ_ONLY_CONFLICT_PATH_CHECK",
+    "paths": {
+      "strict_acceptance.json": {
+        "exists": false,
+        "is_dir": false
+      },
+      "resource_after_approved_run.json": {
+        "exists": false,
+        "is_dir": false
+      },
+      "runs/minus_U_IID_Benign_seed91002": {
+        "exists": false,
+        "is_dir": false
+      },
+      "history/failed_attempt_02_20261009": {
+        "exists": false,
+        "is_dir": false
+      }
+    },
+    "parent_exists": true,
+    "parent_members": [
+      "minus_U_IID_Benign_seed91002.bridge_failure.json"
+    ],
+    "target_absent": true,
+    "predictions_absent": true,
+    "service": "guardfed_celeba_mechanism_valid_one   EXITED    Oct 09 08:41 AM\n",
+    "no_move_performed": true,
+    "no_start_performed": true
+  },
+  "actual_precheck_sha256": "34b0272748df724120720228bfc37c5193b9ce5418bbd0f1297738ac93730bdf"
+}

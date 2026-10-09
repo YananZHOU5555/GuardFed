@@ -1,0 +1,112 @@
+{
+  "utc": "2026-10-09T08:42:00.646781+00:00",
+  "no_inference": true,
+  "accepted_canary_static_checks": {
+    "celeba_hybrid_realimage_gate_20261009": [
+      {
+        "id": "IID_Benign_hybrid_seed91001_cpu_gate3",
+        "acceptance_sha256": "1bcabb0977be4361844a46aa1f72be4cb33b44b65f9966f121de0d4e51165607",
+        "artifact_hashes": {
+          "result.json": "18e20d6c584023aa5eabdd70efbd9fe4b0bb59d411aec79efb74fb3e7d01961c",
+          "model.pt": "cf5a8288f98792e578fb879de7b50b2293b9aabedcd104dd1b75d39f62ae2efd",
+          "diagnostics.json": "2290d5a0da6e91c7b87032d9ecd5d6f0bb156b8b2d2950de4172c3022d1c109c",
+          "provenance.json": "60a4deb8b1e684b2a6fa64d8b8a3fcb8d76b6dee4e3d8d946650eab742f1838e",
+          "resource_before.json": "9e9d2983f914540f6069e7b7303cbdd2e2917989e862131f140f078f988c55a4",
+          "resource_after.json": "db821a2b60585f930cc61f91a4cb5c3f13481141f93ad3bc4215943882a265bc",
+          "rng_final.json": "baa1cfe17c6776fde6fbeaecf2aec489e30945a621f3da0ef435c761f9a25fb9",
+          "native_replay.json": "2525a8fae66641ee339dc0752c7123913dc3f439d9e4ad3a2541555e7f13eba7"
+        },
+        "all_declared_artifact_SHA_match": true,
+        "scope_SHA_match": true,
+        "job_SHA_match": true,
+        "full_result_metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "elapsed_seconds": 2899.4672899246216,
+        "evidence_boundary": "3round full-image CPU CANARY; not formal70 result"
+      },
+      {
+        "id": "IID_Benign_legacy_reference_seed91001_cpu_gate3",
+        "acceptance_sha256": "1b102bde3d09feb240a5058dc05eb72217bb833357f61f4827a4faddf284c530",
+        "artifact_hashes": {
+          "result.json": "b4fc5b655ead8ea88319ae13b663c3f10a7d2e593ac7483f513cfc20fb77903f",
+          "model.pt": "cf5a8288f98792e578fb879de7b50b2293b9aabedcd104dd1b75d39f62ae2efd",
+          "diagnostics.json": "ab64f26ce32fa229dfba85c30e6eb2c0ad9355dde4ec44601aaad8e1ab4634a4",
+          "provenance.json": "94d4f70f72e9727c9e10b241ac094ac28c08ad505773217fe24744da0d2c79d3",
+          "resource_before.json": "9ad59dfe3634a4676294ed668c790b472ec777d4422d1475e0f9806d1d6cce76",
+          "resource_after.json": "965e8723b7baff9c7204e867b32b9463ffa758b90838a3fc0f9387df9875cbad",
+          "rng_final.json": "baa1cfe17c6776fde6fbeaecf2aec489e30945a621f3da0ef435c761f9a25fb9",
+          "native_replay.json": "2525a8fae66641ee339dc0752c7123913dc3f439d9e4ad3a2541555e7f13eba7"
+        },
+        "all_declared_artifact_SHA_match": true,
+        "scope_SHA_match": true,
+        "job_SHA_match": true,
+        "full_result_metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "elapsed_seconds": 2853.3129138946533,
+        "evidence_boundary": "3round full-image CPU CANARY; not formal70 result"
+      }
+    ],
+    "celeba_gradient_realimage_gate_20261009": [
+      {
+        "id": "FedNGA_eta0.03_IID_Benign_seed91001_cpu_gate3",
+        "acceptance_sha256": "a3bf57b9fdfc64491d2bc1203d4324bbd6b8af0c0fac7524fa23dedf0235c2b8",
+        "artifact_hashes": {
+          "diagnostics.json": "c58552cc93f584cae9225bacf7300222058996a3fb17c9121e3a44ced7ecd28f",
+          "gradient_audit.json": "742939e136184bdf17e3b5fc8f6b0871749dd3c287810ccf9b33ee6ce8967ff2",
+          "identity_after.json": "11abe3d18f674283941b9a3cfbe0a86f88b193c2cb12b1f2651b60d24c4b6967",
+          "identity_before.json": "11abe3d18f674283941b9a3cfbe0a86f88b193c2cb12b1f2651b60d24c4b6967",
+          "job.json": "a5b962cc8767070469bf98962b89c3bd6ddf2863a928a8fab58665ff33babbec",
+          "model.pt": "e0b6f69f3337d3d346bfd721011f698cffa7588e04de80e7592bc4694d22d28d",
+          "native_replay.json": "22ddf6ee0a4f9d22fa5c1d872486efd20cd7d48a76b1770139eb3501a68cd607",
+          "provenance.json": "20b87514e53cd20f5f5f6ade981adb1618859a885fcf243eda9207be24488895",
+          "resource_after.json": "4d475fc246a70ddccc188c44031f3841387a54d69ec1b1454bf18e85c8453c2f",
+          "resource_before.json": "246d0a748d68e95fe5adbc05a95487990c9c6c1601881058eb9258d6a2fcd224",
+          "result.json": "0717931c81d24fe1048036b9eaf2f857e64e727bb0c0447b3f9d8b7a8c3e1e0b"
+        },
+        "all_declared_artifact_SHA_match": true,
+        "scope_SHA_match": true,
+        "job_SHA_match": true,
+        "full_result_metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "elapsed_seconds": 1716.6431629657745,
+        "evidence_boundary": "3round full-image CPU CANARY; not formal70 result"
+      },
+      {
+        "id": "FedNGA_eta0.03_non-IID_S-DFA_seed91001_cpu_gate3",
+        "acceptance_sha256": "f7c9aac03b73405c35c9b757a783f647f78a9fc977e0c297c82275862c10f78d",
+        "artifact_hashes": {
+          "diagnostics.json": "bc6c1eb939d8e8a389b75ed54964e8a35a4b9c1074fa8d975ea01f2ab303e324",
+          "gradient_audit.json": "6c1a3e8f412264831f4465746a4ee78fda9ed88effeeec9d91cd6a07ca55cd3b",
+          "identity_after.json": "11abe3d18f674283941b9a3cfbe0a86f88b193c2cb12b1f2651b60d24c4b6967",
+          "identity_before.json": "11abe3d18f674283941b9a3cfbe0a86f88b193c2cb12b1f2651b60d24c4b6967",
+          "job.json": "37272f112ce188218de079aa7231a6e4e19e9fc1797fb17b5d52983a8f13364a",
+          "model.pt": "79f7109abf3608691f3763cdfcb6cb247e721ba92c3753bf5df8aa389980c265",
+          "native_replay.json": "807799b1d8753e2169022eef946e525a9f06c35a610627e4b9ecbca72f14389c",
+          "provenance.json": "d012aef0cd91b2d61dd326bc337deedbf1375089cd80042273c28564c2d32386",
+          "resource_after.json": "c1a53ab0e2021782ffa81a3fd688a230bedd27207879732478544f8225930aa5",
+          "resource_before.json": "e2549a924e56b0f7ad99e26a7d0713cc9fa73fa49e3da332ba2e427f580cdc92",
+          "result.json": "431d87ef5cded700a00de82504291cbb8a86edf2358c59630c5e4112c3f0df24"
+        },
+        "all_declared_artifact_SHA_match": true,
+        "scope_SHA_match": true,
+        "job_SHA_match": true,
+        "full_result_metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "elapsed_seconds": 1366.450089931488,
+        "evidence_boundary": "3round full-image CPU CANARY; not formal70 result"
+      }
+    ]
+  }
+}

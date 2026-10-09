@@ -1,0 +1,38 @@
+{
+  "status": "STARTED_NOT_ACCEPTED",
+  "time": 1791535831.1340837,
+  "steps": [
+    {
+      "command": [
+        "supervisorctl",
+        "reread"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_gpu_gate_v3: available\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "update",
+        "guardfed_celeba_flgmm_gpu_gate_v3"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_gpu_gate_v3: added process group\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_flgmm_gpu_gate_v3"
+      ],
+      "exit_code": 0,
+      "stdout": "guardfed_celeba_flgmm_gpu_gate_v3: started\n",
+      "stderr": ""
+    }
+  ],
+  "freeze_sha256": "2e36a2ea76765ef07b843a851747ca062bf28eab5f710051e7d5b9395b94ea75",
+  "gate": "guardfed_celeba_flgmm_gpu_gate_v3   RUNNING   pid 17363, uptime 0:00:03",
+  "formal": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 2:31:35"
+}

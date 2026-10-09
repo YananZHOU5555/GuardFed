@@ -1,0 +1,40 @@
+{
+  "status": "PARENT_REVIEWED_SOURCE_AND_CONTINUOUS_EXECUTION_AUTHORIZATION",
+  "source_sha256": "43b16d20d2497b7762cd0f6039f7f4bfc8fddd4e4c32979a16291b26e394ae5e",
+  "semantic_receipt_sha256": "cc93d94d69478a4ee190abff76da4fb185791ece7e4e1d2ee75360482ead80b4",
+  "local_semantic_receipt_verified": true,
+  "semantic_offserver_verification_sha256": "0d7cb884450e24e09d449890cb1516d2c816a36eab7edf87b5d01a8b577cad5a",
+  "authorized_sequence": [
+    {
+      "phase": 4,
+      "workers": 8,
+      "new_attempt_required": true,
+      "cpu_slots": "16..79"
+    },
+    {
+      "phase": 5,
+      "workers": 11,
+      "cpu_slots": "16..103",
+      "prefer_mechanism_single_replay_exited": true,
+      "maximum_combined_budget_cpu": 122,
+      "quota_cpu": 122.88
+    }
+  ],
+  "advance_requires": [
+    "strict native <=1e-12",
+    "offserver archive/member SHA verification",
+    "no identity/metric/restore/resource error"
+  ],
+  "normal_supervisor": {
+    "autostart": false,
+    "autorestart": false
+  },
+  "fixed_threads_per_worker": 8,
+  "nice": 10,
+  "idle_io": true,
+  "finite_bound_worker_diagnostic_seconds": 15,
+  "old_failed_attempt_preserved": true,
+  "no900_bulk": true,
+  "no_test": true,
+  "authorization_source": "Parent explicit message: reviewed43b16d20 source; after cc93 local byte verification, restore original phase4 eight IDs then phase5 eleven IDs without per-stage confirmation."
+}
