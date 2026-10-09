@@ -1,0 +1,182 @@
+{
+  "status": "COMPLETE_OFFLINE_THREE_VIEW100_TABLE_DELIVERY_PENDING_ROOT_PROMOTION",
+  "table_path": "snapshot100/TABLES.md",
+  "data_path": "snapshot100/tables.json",
+  "records_path": "snapshot100/records.json",
+  "source_inputs_path": "FINAL_SOURCE_BINDINGS.json",
+  "prepared_input_pins_path": "INPUTS.json",
+  "prepared_seal_sha256": "8d085d2a1e39f0c37dcaaea962a593614c055f05591d05691de7cbea0795fe40",
+  "prepared_seal_unchanged": true,
+  "final_checks_path": "FINAL_CHECKS.json",
+  "root_adoption_sha256": "9050eb059a797c70f0ca977294989b5ae5757286dbc85b36d529012cb5ab72ee",
+  "source_inputs_sha256": "e52d3fe1036059542abea46bac1463ec51d527696cc61e9acef75aafe20af401",
+  "table_sha256": "8e5ce8d164f611846d7429429bea52d67dc8d437397b267be5fc120e23c7d8cf",
+  "data_sha256": "d5e4766656b6da8f7e14e9b75adbfe1a4a0e63798113c5cbbe3164b7a44e49f6",
+  "records_sha256": "d435d9f1280b6a0e9ddd6ce08ec280ddd09206e1d0d545f88de19e18d17179a3",
+  "final_checks_sha256": "23131f530a834e5251e43cecb80abd826abf4b947b503febdb8c15b08c53e117",
+  "complete_scenes": 10,
+  "paired_checkpoints": 100,
+  "records": 200,
+  "panels": 9,
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "JSON_rows": 270,
+  "display_cells": 810,
+  "mean_sd_scalars": 1620,
+  "independent_mean_sd_max_abs_difference": 1.4210854715202004e-14,
+  "receipt_metrics_from_group_counts": 1800,
+  "base_confusion_count_fields_checked": 4800,
+  "old_records_exact": 184,
+  "old_nine_scene_rows_exact": 243,
+  "old_display_cells_exact": 729,
+  "new8_archive_members_verified": 89,
+  "new8_native_max_abs_difference": 0,
+  "native_shared_full_views_including_counts_identical": 200,
+  "replay_devices": {
+    "Full": {
+      "cpu": 5,
+      "cuda:0": 95
+    },
+    "minus_U": {
+      "cpu": 100
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 98,
+      "2.11.0+cu130": 2
+    },
+    "minus_U": {
+      "2.11.0+cu128": 100
+    }
+  },
+  "new_scene_n10_paired_differences": {
+    "native": {
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "variant": "minus_U minus Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": -0.1208033422258012,
+        "sample_sd_ddof1": 0.7860960007954387
+      },
+      "aeod": {
+        "mean": 0.0034492794141115944,
+        "sample_sd_ddof1": 0.007556775382025813
+      },
+      "aspd": {
+        "mean": -0.004179898381014124,
+        "sample_sd_ddof1": 0.014209079018102094
+      }
+    },
+    "raw": {
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "variant": "minus_U minus Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": -0.15050083052297653,
+        "sample_sd_ddof1": 0.7577803412871574
+      },
+      "aeod": {
+        "mean": 0.0017517107388124065,
+        "sample_sd_ddof1": 0.011978371612301373
+      },
+      "aspd": {
+        "mean": 0.00139725328336055,
+        "sample_sd_ddof1": 0.010688733493370378
+      }
+    },
+    "shared_calibration": {
+      "distribution": "non-IID",
+      "attack": "Sp-DFA",
+      "variant": "minus_U minus Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": -0.1208033422258012,
+        "sample_sd_ddof1": 0.7860960007954387
+      },
+      "aeod": {
+        "mean": 0.0034492794141115944,
+        "sample_sd_ddof1": 0.007556775382025813
+      },
+      "aspd": {
+        "mean": -0.004179898381014124,
+        "sample_sd_ddof1": 0.014209079018102094
+      }
+    }
+  },
+  "native_boundary": {
+    "minus_U": 100,
+    "minus_C_partial": 4
+  },
+  "three_view_scope": [
+    "Full100",
+    "minus_U100"
+  ],
+  "other_variants_excluded": true,
+  "primary_endpoint_selected": false,
+  "final_test": false,
+  "new_CNN": 0,
+  "new_Full_inference": 0,
+  "new_threshold_fit": 0,
+  "new_training": 0,
+  "canonical_changes": false,
+  "Git_changes": false,
+  "source_before_after_unchanged": true,
+  "limitations": [
+    "Mixed Full CPU5/GPU95 versus control CPU100 replay: not uniform-device final fairness comparison.",
+    "Full training98cu128+2cu130 versus control100cu128; historical driver differences retained.",
+    "Seed91001 selection and previous validation exposure remain; 9/6 sensitivity panels are observed validation.",
+    "Native/shared identical values and confusion counts are not independent calibration evidence.",
+    "All negative outcomes retained, including positive raw ASPD difference for new non-IID Sp-DFA.",
+    "Full/minus_U ten-scene completion does not complete mechanism900 or choose native/shared primary endpoint."
+  ],
+  "standalone_verification_command": "python -B tmp/celeba_mechanism_three_view100_tables_20261009/verify_final.py",
+  "verification_rerun_limit": "FINAL_CHECKS.json uses exclusive creation; to repeat without changing source, run its source in-memory with write redirected or use root independent verifier."
+}

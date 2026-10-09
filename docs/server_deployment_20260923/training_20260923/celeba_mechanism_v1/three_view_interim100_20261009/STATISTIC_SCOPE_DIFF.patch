@@ -1,0 +1,69 @@
+--- tmp\celeba_mechanism_three_view92_tables_20261009\panels_draft.py
++++ tmp\celeba_mechanism_three_view100_tables_20261009\panels.py
+@@ -10,14 +10,14 @@
+ PANELS=[('All 10 seeds',list(range(91001,91011))),('Exclude selection seed: 9 seeds',list(range(91002,91011))),('Seeds 91005–91010: 6 seeds',list(range(91005,91011)))]
+ 
+ def panels(records, original):
+-    expected=[('IID',a) for a in original.ATTACKS]+[('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')]
++    expected=[(d,a) for d in ('IID','non-IID') for a in original.ATTACKS]
+     output=[];coverage={};paired={}
+     for view in source.VIEWS:
+         flat=[{k:r[k] for k in ('id','variant','distribution','attack','seed')} |
+             dict(accuracy_pct=100*r['views'][view]['accuracy'],aeod=r['views'][view]['aeod'],aspd=r['views'][view]['aspd']) for r in records]
+         summary=original.summarize(flat)
+         complete=[(r['distribution'],r['attack']) for r in summary['paired_per_scene'] if r['variant']=='minus_U' and r['complete']]
+-        source.need(complete==expected,'Only the exact nine complete ten-shared-seed scenes are publishable')
++        source.need(complete==expected,'Only the exact ten complete ten-shared-seed scenes are publishable')
+         coverage[view]=[{k:r[k] for k in ('variant','distribution','attack','n','expected_n','complete','seeds')} for r in summary['paired_per_scene'] if r['variant']=='minus_U']
+         paired[view]=summary['paired_per_seed']
+         for label,seeds in PANELS:
+--- tmp\celeba_mechanism_three_view92_tables_20261009\verify_numeric_draft.py
++++ tmp\celeba_mechanism_three_view100_tables_20261009\verify_numeric.py
+@@ -3,18 +3,18 @@
+ import math
+ 
+ def verify(records,panels):
+-    assert len(records)==184 and len({r['id'] for r in records})==184
++    assert len(records)==200 and len({r['id'] for r in records})==200
+     bycell={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+-    assert len(bycell)==184
+-    scenes={('IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']}|{('non-IID',a) for a in ['Benign','F Flip','FedSA','S-DFA']}
++    assert len(bycell)==200
++    scenes={('IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']}|{('non-IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']}
+     views=['native','raw','shared_calibration'];seedsets=[list(range(91001,91011)),list(range(91002,91011)),list(range(91005,91011))]
+     assert len(panels)==9 and {(p['view'],tuple(p['seeds'])) for p in panels}==set(itertools.product(views,map(tuple,seedsets)))
+     partial=[r for r in records if (r['distribution'],r['attack']) not in scenes]
+-    assert len(partial)==4 and {(r['variant'],r['distribution'],r['attack'],r['seed']) for r in partial}==set(itertools.product(['Full','minus_U'],['non-IID'],['Sp-DFA'],[91001,91002]))
++    assert not partial
+     errors=[]
+     for panel in panels:
+         rows=panel['rows'];seeds=panel['seeds'];view=panel['view']
+-        assert len(rows)==27 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_U','minus_U minus Full']}
++        assert len(rows)==30 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_U','minus_U minus Full']}
+         for row in rows:
+             assert row['n']==row['expected_n']==len(seeds) and row['complete'] and row['seeds']==seeds
+             for metric in ['accuracy_pct','aeod','aspd']:
+@@ -24,5 +24,21 @@
+                 xs=[value('minus_U',s)-value('Full',s) if row['variant']=='minus_U minus Full' else value(row['variant'],s) for s in seeds]
+                 mu=math.fsum(xs)/len(xs);sd=math.sqrt(math.fsum((x-mu)**2 for x in xs)/(len(xs)-1))
+                 errors.extend([abs(mu-row[metric]['mean']),abs(sd-row[metric]['sample_sd_ddof1'])])
+-    assert len(errors)==1458 and max(errors)<=1e-12
+-    return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':2}
++    assert len(errors)==1620 and max(errors)<=1e-12
++    metric_checks=0;count_checks=0
++    for record in records:
++        assert set(record['views'])=={'native','raw','shared_calibration'}
++        for view in record['views'].values():
++            groups=view['group_confusion_counts'];a,b=groups['0'],groups['1'];n=a['n']+b['n']
++            assert n==view['prediction_count']==19867
++            for group in (a,b):
++                assert all(isinstance(group[k],int) and group[k]>=0 for k in ('tp','fp','tn','fn'))
++                assert group['tp']+group['fn']==group['positives'] and group['fp']+group['tn']==group['negatives']
++                assert group['positives']+group['negatives']==group['n'];count_checks+=4
++            metrics=dict(accuracy=(a['tp']+a['tn']+b['tp']+b['tn'])/n,
++                aeod=abs(a['tp']/(a['tp']+a['fn'])-b['tp']/(b['tp']+b['fn'])),
++                aspd=abs((a['tp']+a['fp'])/a['n']-(b['tp']+b['fp'])/b['n']))
++            for key,value in metrics.items():assert abs(view[key]-value)<=1e-12;metric_checks+=1
++    assert metric_checks==1800 and count_checks==4800
++    return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':0,
++        'receipt_metrics_from_group_counts':metric_checks,'base_confusion_counts_structurally_checked':count_checks}

@@ -30,6 +30,13 @@ if paired_table and paired_table['complete_scenes'] == 9:
         'Native and shared outcomes coincide for all184 models. In the newly complete non-IID FedSA and S-DFA scenes, deletingU lowers raw accuracy by0.492 and0.453pp, with disparity tradeoffs retained. '
         'Complete-scene Full inference is5CPU/85GPU and its training88cu128/2cu130; controls use90CPU/cu128. Mixed devices, historical environments, validation selection and prior test exposure remain limitations. '
         'This is a descriptive validation comparison, not an isolated aggregation effect, a selected primary endpoint or evidence that every scoring term is indispensable. ')
+if paired_table and paired_table['complete_scenes'] == 10:
+    paired_note = ('The independently accepted ten-scene join contains100 complete Full–minus_U pairs and200 records, with all IID/non-IID, five scenarios and ten paired seeds complete. '
+        'Raw/native/shared fixed10/9/6-seed panels contain810 display cells;1620 mean/sampleSD scalars,1800 count-reconstructed metrics and every display cell pass root checks. '
+        'All243 prior nine-scene statistic rows and184 individual records remain exact. Native and shared views coincide for all200 models. '
+        'In the newly complete non-IID Sp-DFA scene, removingU lowers raw ACC by0.151pp and raises both disparity means; native ACC is lower by0.121pp butASPD also falls. '
+        'These view-dependent tradeoffs are retained. Full inference5CPU/95GPU and training98cu128/2cu130 versus controls100CPU/cu128, historical environments, validation selection and prior test exposure remain explicit. '
+        'Only the minus_U comparison is complete; the other seven variants, isolated-aggregation claims, primary-endpoint choice and final-test evaluation remain open. ')
 increments=main['incremental_science_backups']
 latest_increment=increments[-1]
 flgmm=state['flgmm_screen32_20261009']
@@ -131,7 +138,7 @@ if main.get('after71_valid_replay'):
     after71_note=(f'The separate after71 exact11 replay status is {after71["status"]}, with{after71["offserver_new_accepted"]} new offserver acceptances. '
         'It excludes all previously closed71 and Full inference, covering only non-IID FedSA91002–91009 and S-DFA91001–91003. '
         'Remote completion is not acceptance. Existing seven-scene mean/SD tables remain a separate sealed evidence snapshot; these IDs cannot create a complete eighth scene because FedSA91010 is outside the frozen replay scope. '
-        'The other seven variants have source-only metadata/recipe preparation, with no supplied terminal or empirical replay gate.')
+        'At that historical replay scope, the other seven variants had source-only preparation. Their later native terminals require separate acceptance; they do not enter this eleven-model replay.')
 after82_failure_note=''
 if main.get('after82_failed_attempt'):
     failure82=main['after82_failed_attempt']
@@ -144,6 +151,16 @@ if main.get('after82_v2_valid_replay'):
     after82_failure_note+=(f' The separately reviewed V2 service has actual startup evidence: {replay82["status"]}, '
         f'{replay82["offserver_new_accepted"]} new off-server acceptances; one8-thread CPU worker on112–119, nice10/idleI/O and CUDA hidden. '
         'Positive valid10 approvals and invalid-approval refusals pass; only cardinality and namespace/pins changed, and the failed original service is retained.')
+after92_note=''
+if main.get('after92_valid_replay'):
+    replay92=main['after92_valid_replay']
+    after92_note=(f'The final exact8 minus_U replay has actual source-bound Linux startup: {replay92["status"]}, '
+        f'{replay92["offserver_new_accepted"]} new off-server acceptances. It covers only non-IID Sp-DFA91003–91010, excluding the prior92, Full inference and the separately accepted C4. '
+        'One8-thread CPU worker on112–119, nice10/idleIO and hidden CUDA is actually observed. This startup does not establish100 accepted three-view models or a complete ten-scene three-view table. ')
+    if replay92['offserver_new_accepted'] == 8:
+        after92_note = (f'The final exact8 replay completed normally with no residual worker or failure; all8 are strictly accepted and backed up off server, closing100 minus_U three-view models. '
+            f'{replay92["archive_members_verified"]} archive members,72 metrics,192 counts and24 prediction rules passed checks, with zero native discrepancy. '
+            'The prior92 and Full were not reinferred; C4 is excluded. The complete ten-scene three-view table has its own independently accepted identity/statistics join, cited above.')
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
@@ -163,6 +180,8 @@ The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID 
 {after71_note}
 
 {after82_failure_note}
+
+{after92_note}
 
 The latest previously verified Git publication is `{published['commit']}`, with{published['committed_blobs_sha256_verified']} committed blob SHA checks against the remote branch. New completion evidence is published in a separate increment. Source preparation, approval, dispatch and completed scientific results are distinct. The native three-hour chat monitor remains PAUSED; supervisor-managed training does not restore it. Final test, the remaining baselines, complete mechanism comparisons and final manuscript claims remain unfinished.
 
