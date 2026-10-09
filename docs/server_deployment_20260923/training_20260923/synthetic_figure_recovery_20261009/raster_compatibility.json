@@ -1,0 +1,103 @@
+{
+  "kind": "Raster compatibility only, not provenance certification or exact digitization.",
+  "image": "page11_image_35.png",
+  "image_sha256": "e11ef6a0afe02e3289fe13df4fc77445c06d5c166aa8fd466a36d8621c073e44",
+  "calibration": {
+    "adult": {
+      "x_tick0": 76.0,
+      "x_px0": 142.0,
+      "x_px_per_unit": 88.6,
+      "y_tick0": 1.0,
+      "y_px0": 302.5,
+      "y_px_per_unit": 4200.0,
+      "crop": [
+        122,
+        261,
+        858,
+        997
+      ]
+    },
+    "compas": {
+      "x_tick0": 60.0,
+      "x_px0": 1045.0,
+      "x_px_per_unit": 97.2,
+      "y_tick0": 0.95,
+      "y_px0": 392.0,
+      "y_px_per_unit": 2910.0,
+      "crop": [
+        1022,
+        261,
+        1758,
+        997
+      ]
+    }
+  },
+  "axis_tick_uncertainty_px": 1,
+  "method_colour_palette": {
+    "none": [
+      0,
+      114,
+      178
+    ],
+    "ctgan": [
+      230,
+      159,
+      0
+    ],
+    "forest_diffusion": [
+      0,
+      158,
+      115
+    ],
+    "gaussian_copula": [
+      213,
+      94,
+      0
+    ],
+    "pca_gaussian": [
+      204,
+      121,
+      167
+    ],
+    "smote": [
+      240,
+      228,
+      66
+    ],
+    "tvae": [
+      0,
+      161,
+      200
+    ]
+  },
+  "colour_nearest_palette_cutoff_rgb_distance": 65,
+  "central_colour_tolerance_px": 2,
+  "marker_extent_tolerance_px": 22,
+  "two_occluded_centres": [
+    "adult/real10_none",
+    "compas/real5_forest_diffusion_synth5"
+  ],
+  "hypotheses": {
+    "ten_scenarios_half_sum": {
+      "within_2px": 24,
+      "within_22px": 26,
+      "max_distance_px": 20.745892286512237
+    },
+    "ten_scenarios_paper_sum": {
+      "within_2px": 3,
+      "within_22px": 6,
+      "max_distance_px": 674.6377669684648
+    },
+    "sdfa_only_half_sum": {
+      "within_2px": 7,
+      "within_22px": 13,
+      "max_distance_px": 232.9358225687881
+    },
+    "sdfa_only_paper_sum": {
+      "within_2px": 1,
+      "within_22px": 5,
+      "max_distance_px": 545.1982917743464
+    }
+  },
+  "interpretation": "Ten-scenario 1-minus-half-sum candidate agrees strongly with the 26 submitted marker locations. Two marker centres are occluded by other methods. Original plotting script/input receipt is still absent; do not turn this compatibility test into a file-SHA provenance claim."
+}

@@ -1,0 +1,146 @@
+{
+  "status": "PREPARED_NOT_FROZEN",
+  "execution_started": false,
+  "version": "celeba_logofair_dp_postprocessing_20261009_v1",
+  "candidates": [
+    {
+      "id": "LoGoFair-DP_00",
+      "settings": {
+        "global_delta": 0.02,
+        "local_delta": 0.02,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_01",
+      "settings": {
+        "global_delta": 0.02,
+        "local_delta": 0.02,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_02",
+      "settings": {
+        "global_delta": 0.02,
+        "local_delta": 0.06,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_03",
+      "settings": {
+        "global_delta": 0.02,
+        "local_delta": 0.06,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_04",
+      "settings": {
+        "global_delta": 0.06,
+        "local_delta": 0.02,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_05",
+      "settings": {
+        "global_delta": 0.06,
+        "local_delta": 0.02,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_06",
+      "settings": {
+        "global_delta": 0.06,
+        "local_delta": 0.06,
+        "post_lr": 0.001,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    },
+    {
+      "id": "LoGoFair-DP_07",
+      "settings": {
+        "global_delta": 0.06,
+        "local_delta": 0.06,
+        "post_lr": 0.005,
+        "post_rounds": 30,
+        "local_steps": 20,
+        "global_steps": 20,
+        "calibration": true,
+        "beta": 1000.0
+      }
+    }
+  ],
+  "seed": 91001,
+  "fit_seed": 1719,
+  "calibration": "clean accepted training-root only; validation labels never enter fitting",
+  "mapping_input": "Explicit int64 root/valid image-ID -> client-ID NPZ plus reviewed metadata JSON, both SHA-bound per job",
+  "decisions": {
+    "mapping_population": {
+      "status": "UNRESOLVED",
+      "options": [
+        "Declared virtual 20-cohort partition of existing root/central validation via a label/score-independent rule; preserves existing CNN/cache and global validation, changes local population interpretation",
+        "True per-training-client holdout and corresponding evaluation cohorts; needs new sample/protocol identity and possibly new FedAvg runs, unsupported by this central-cache worker"
+      ],
+      "constraint": "No true training-client claim for central CelebA IDs; no dummy single client or silent remapping"
+    },
+    "postprocessing_search": {
+      "status": "UNRESOLVED",
+      "proposed": "8 existing calibrated DP candidates, same four valid-only conditions, root-only fit, shared candidate score rule"
+    },
+    "tie_and_missing_population": {
+      "status": "UNRESOLVED",
+      "proposed": "Exact threshold ties, missing client/group/binary-label support and numerical divergence fail explicitly; no pooling, randomness or beta repair"
+    },
+    "real_mapping_gate": {
+      "status": "UNRESOLVED",
+      "proposed": "After selected mapping is approved, verify root/valid identity and one real score-only calibrated fit; current gate is synthetic RGB64 only"
+    }
+  },
+  "method_identity": "Pinned official local/global DP plus official BetaCalibration MLE; calibration-only corrected group priors; explicit reviewed virtual local populations; no EO claim",
+  "selection_rule": "Mean prior frozen score over four conditions for each candidate; exact tie candidate lexical. Keep all candidates/accuracy champions/Pareto; n=1, four conditions not independent seeds; no test selection.",
+  "score": "accuracy-.35*(.45*aeod+.45*aspd+.10*max(aeod,aspd))-.10*max(0,max(aeod,aspd)-.06)",
+  "limitations": [
+    "No client mapping generated; mapping hashes are null in draft jobs",
+    "No real LoGoFair or GPU/test evaluation launched",
+    "Model/root/cache/config/source identities must all match accepted external reference",
+    "Score-only CPU reuse can avoid CNN retraining; fresh actual CNN softmax extractor also provided"
+  ]
+}

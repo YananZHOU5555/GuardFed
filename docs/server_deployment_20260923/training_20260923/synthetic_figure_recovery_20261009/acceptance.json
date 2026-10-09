@@ -1,0 +1,104 @@
+{
+  "status": "PARTIAL_PROVENANCE_WITH_VERIFIED_NUMERICAL_RECOVERY",
+  "training_run": false,
+  "old_results_edited": false,
+  "numeric_audit": {
+    "record_count": 260,
+    "method_counts": {
+      "none": 20,
+      "gaussian_copula": 40,
+      "ctgan": 40,
+      "tvae": 40,
+      "smote": 40,
+      "pca_gaussian": 40,
+      "forest_diffusion": 40
+    },
+    "attack_counts": {
+      "Benign": 52,
+      "F Flip": 52,
+      "FedSA": 52,
+      "S-DFA": 52,
+      "Sp-DFA": 52
+    },
+    "seed_counts": {
+      "123": 260
+    },
+    "rounds": 70,
+    "last10_rounds": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "three_raw_csvs_matched": [
+      "archive_advisor_csv",
+      "local_advisor_csv",
+      "local_goal_csv"
+    ],
+    "raw_csv_max_abs_error": 0.0,
+    "records_without_joint_checkpoint_for_old_triplet": 250,
+    "pca_record_count": 40,
+    "pca_records_without_joint_checkpoint_for_old_triplet": 40,
+    "summary_settings": 26,
+    "summary_scenarios_per_setting": 10,
+    "summary_independent_seeds_per_setting": 1,
+    "summary_max_abs_error": 1.4210854715202004e-14,
+    "historical_selection": "Separately maximize ACC and minimize AEOD and ASPD over test rounds 61..70; not one common checkpoint in the indicated records.",
+    "checkpoint_limitation": "Metric-round identities are present; this task did not recover historical weight/checkpoint binary SHA. Numerical/record lineage is not generator or model byte identity."
+  },
+  "raster_compatibility": {
+    "ten_scenarios_half_sum": {
+      "within_2px": 24,
+      "within_22px": 26,
+      "max_distance_px": 20.745892286512237
+    },
+    "ten_scenarios_paper_sum": {
+      "within_2px": 3,
+      "within_22px": 6,
+      "max_distance_px": 674.6377669684648
+    },
+    "sdfa_only_half_sum": {
+      "within_2px": 7,
+      "within_22px": 13,
+      "max_distance_px": 232.9358225687881
+    },
+    "sdfa_only_paper_sum": {
+      "within_2px": 1,
+      "within_22px": 5,
+      "max_distance_px": 545.1982917743464
+    }
+  },
+  "pca_archived_candidate_implementation_sha256": "75ba1ffed74ae4ac0b56e876360e04e8e1700b4b3bb34d11cb8ee59f4c1470fe",
+  "archive_text_sources_checked": 118,
+  "archive_bytecode_checked": 0,
+  "archive_raster_assets_checked": 12,
+  "local_text_files_checked": 845,
+  "local_raster_assets_checked": 271,
+  "reachable_git_commits_checked": 24,
+  "git_source_blobs_checked": 202,
+  "archive_exact_submission_raster_matches": [],
+  "local_exact_submission_raster_matches": [],
+  "closed": [
+    "260 original numerical records with raw line/config/round identity",
+    "40 PCA-labelled records and archived candidate PCA-Gaussian source",
+    "26 candidate input points: 10 scenarios, one seed, exact summary arithmetic"
+  ],
+  "still_open": [
+    "Original Fig.3 plotting script and exact point-to-input source receipt",
+    "Historical executed ForestDiffusion implementation/dependency/fit/cache identity",
+    "Per-run immutable source/model/cache hashes for historical PCA and other generators",
+    "Historical checkpoint binary SHA; original records retain only metric/round identity in this recovery"
+  ],
+  "paper_description_conflicts": [
+    "Fig.3 prose says S-DFA; the strong raster-compatible candidate averages both distributions and all five attacks.",
+    "Eq.(32) says 1-(AEOD+ASPD); the strong raster-compatible candidate is 1-0.5*(AEOD+ASPD).",
+    "The strong raster-compatible candidate inherits independent extrema, not a common checkpoint for most records."
+  ],
+  "claim_boundary": "Conflicts are evidence-led discrepancies in the recovered candidate chain. Missing original script prevents absolute attribution of the submitted graphic to that chain. Do not claim full figure/generator provenance or repaired historical evaluation."
+}

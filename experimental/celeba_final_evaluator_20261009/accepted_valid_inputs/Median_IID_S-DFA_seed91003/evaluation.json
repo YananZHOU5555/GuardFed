@@ -1,0 +1,156 @@
+{
+  "id": "Median_IID_S-DFA_seed91003",
+  "method": "Median",
+  "distribution": "IID",
+  "attack": "S-DFA",
+  "seed": 91003,
+  "round": 70,
+  "evaluation_split": "valid",
+  "checkpoint_sha256": "ea908bbc1e350e7851cc4c0564a8e53a604cd524d8dcb71cee49415f340777c5",
+  "original_result_sha256": "fae9daf283470dd3735c46caf17408bd18df9c8a359106c25de58feab0d0ba17",
+  "manifest_sha256": "9942046a8de0c8893a2d03f4a5da5c80add92fc7513fbde182b0e5eb4a94b38d",
+  "cache_sha256": "39aea0f3507a7ffe736ad98905faaa1014e69affced29adcc944792de8857597",
+  "root_contract": {
+    "numerical_execution": {
+      "version": "celeba_deterministic_fp32_v1",
+      "deterministic_algorithms": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "cudnn_allow_tf32": false,
+      "matmul_allow_tf32": false,
+      "cublas_workspace_config": ":4096:8"
+    },
+    "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+    "image_shape": [
+      3,
+      64,
+      64
+    ],
+    "normalization": "uint8 divided by 255 per batch",
+    "augmentation": "none",
+    "target": "Smiling",
+    "sensitive": "Male",
+    "evaluation_split": "valid",
+    "official_split_sizes": {
+      "0": 162770,
+      "1": 19867,
+      "2": 19962
+    },
+    "actual_train_rows": 162770,
+    "actual_evaluation_rows": 19867,
+    "evidence_stage": "full_official_split",
+    "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+    "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+    "root_image_ids_sha256": "0714b84ec4bbfbb993a1f42d32cdf6ccf08a3edf7e8604200d6761223bb4441b",
+    "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "official_metadata": {
+      "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+    },
+    "train_eval_disjoint": true,
+    "root_client_disjoint": true,
+    "client_sample_counts": [
+      7286,
+      7333,
+      7233,
+      7375,
+      7232,
+      7297,
+      7263,
+      7271,
+      7270,
+      7163,
+      7392,
+      7429,
+      7367,
+      7418,
+      7311,
+      7532,
+      7343,
+      7315,
+      7266,
+      7397
+    ]
+  },
+  "raw": {
+    "accuracy": 0.8420999647656918,
+    "aeod": 0.05316482849709325,
+    "aspd": 0.07834759393633745,
+    "positive_rate": 0.4662505662656667,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "shared_calibration": {
+    "accuracy": 0.8386268686767001,
+    "aeod": 0.0266908963872996,
+    "aspd": 0.05582151803135016,
+    "positive_rate": 0.45331454170232044,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "native": {
+    "accuracy": 0.8420999647656918,
+    "aeod": 0.05316482849709325,
+    "aspd": 0.07834759393633745,
+    "positive_rate": 0.4662505662656667,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "thresholds": {
+    "0": 0.17432067,
+    "1": 0.0
+  },
+  "calibration_info": {
+    "server_calibration_metrics": {
+      "accuracy": 0.8362106039196412,
+      "aeod": 0.024224811125074686,
+      "aspd": 0.039468211181189816
+    },
+    "server_calibration_score": 9.976515594886065,
+    "server_calibration_risk": 0.03184651115313225,
+    "server_base_calibration_metrics": {
+      "accuracy": 0.8409412053818272,
+      "aeod": 0.05381982670139873,
+      "aspd": 0.06348683354919321
+    },
+    "server_base_calibration_risk": 0.05865333012529597,
+    "server_adaptive_lambda": 0.670954539246841,
+    "server_calibration_budget": 0.06,
+    "server_calibration_acc_floor": 0.8359412053818271,
+    "server_calibration_max_acc_drop": 0.005,
+    "server_calibration_objective": "acc_floor"
+  },
+  "native_replay_differences": {
+    "accuracy": 0.0,
+    "aeod": 0.0,
+    "aspd": 0.0
+  },
+  "canary_direct_replay": false,
+  "root_counts": {
+    "0": {
+      "n": 9451,
+      "positives": 5136
+    },
+    "1": {
+      "n": 6826,
+      "positives": 2759
+    }
+  },
+  "valid_counts": {
+    "0": {
+      "n": 11409,
+      "positives": 6157
+    },
+    "1": {
+      "n": 8458,
+      "positives": 3445
+    }
+  },
+  "torch_version": "2.11.0+cu128",
+  "gpu": "0",
+  "duration_sec": 1.7645173072814941,
+  "finished_unix": 1790592414.2367089
+}

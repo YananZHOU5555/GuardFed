@@ -1,0 +1,156 @@
+{
+  "id": "FLTrust+FairGuard_non-IID_S-DFA_seed91006",
+  "method": "FLTrust+FairGuard",
+  "distribution": "non-IID",
+  "attack": "S-DFA",
+  "seed": 91006,
+  "round": 70,
+  "evaluation_split": "valid",
+  "checkpoint_sha256": "471b17061652dc779f44c82bf4cfc82000ab21c26221957613351767404bba69",
+  "original_result_sha256": "571d5ded6e3c1154bbe76689cf09c6c3f095fb3820b9e3035bfc4a003a92e70c",
+  "manifest_sha256": "9942046a8de0c8893a2d03f4a5da5c80add92fc7513fbde182b0e5eb4a94b38d",
+  "cache_sha256": "3a5580cf01ea2965b19563f39265de46d5eef7a829adaae4bff5cd017832e76a",
+  "root_contract": {
+    "numerical_execution": {
+      "version": "celeba_deterministic_fp32_v1",
+      "deterministic_algorithms": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "cudnn_allow_tf32": false,
+      "matmul_allow_tf32": false,
+      "cublas_workspace_config": ":4096:8"
+    },
+    "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+    "image_shape": [
+      3,
+      64,
+      64
+    ],
+    "normalization": "uint8 divided by 255 per batch",
+    "augmentation": "none",
+    "target": "Smiling",
+    "sensitive": "Male",
+    "evaluation_split": "valid",
+    "official_split_sizes": {
+      "0": 162770,
+      "1": 19867,
+      "2": 19962
+    },
+    "actual_train_rows": 162770,
+    "actual_evaluation_rows": 19867,
+    "evidence_stage": "full_official_split",
+    "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+    "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+    "root_image_ids_sha256": "f8b60acfdd7e62c09787da55a173f9beb60dc07b9d262319b81acab7632fa479",
+    "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "official_metadata": {
+      "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+    },
+    "train_eval_disjoint": true,
+    "root_client_disjoint": true,
+    "client_sample_counts": [
+      6985,
+      4663,
+      5429,
+      5151,
+      6284,
+      8509,
+      7830,
+      8243,
+      7643,
+      9374,
+      8432,
+      6726,
+      10765,
+      6078,
+      6967,
+      5176,
+      5868,
+      7428,
+      7836,
+      11106
+    ]
+  },
+  "raw": {
+    "accuracy": 0.8223687522021442,
+    "aeod": 0.028339296865073638,
+    "aspd": 0.0638923223175043,
+    "positive_rate": 0.4826596869180047,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "shared_calibration": {
+    "accuracy": 0.8190466602909348,
+    "aeod": 0.0027189838792525123,
+    "aspd": 0.034202306671267,
+    "positive_rate": 0.4889011929330045,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "native": {
+    "accuracy": 0.8223687522021442,
+    "aeod": 0.028339296865073638,
+    "aspd": 0.0638923223175043,
+    "positive_rate": 0.4826596869180047,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "thresholds": {
+    "0": 0.04989713,
+    "1": -0.12338015
+  },
+  "calibration_info": {
+    "server_calibration_metrics": {
+      "accuracy": 0.8110831234256927,
+      "aeod": 0.0036927947429031827,
+      "aspd": 0.024078688222501143
+    },
+    "server_calibration_score": 9.994225089751554,
+    "server_calibration_risk": 0.013885741482702163,
+    "server_base_calibration_metrics": {
+      "accuracy": 0.8155065429747497,
+      "aeod": 0.021234794268662704,
+      "aspd": 0.05747252866830854
+    },
+    "server_base_calibration_risk": 0.03935366146848562,
+    "server_adaptive_lambda": 0.4071131153242149,
+    "server_calibration_budget": 0.06,
+    "server_calibration_acc_floor": 0.8105065429747497,
+    "server_calibration_max_acc_drop": 0.005,
+    "server_calibration_objective": "acc_floor"
+  },
+  "native_replay_differences": {
+    "accuracy": 0.0,
+    "aeod": 0.0,
+    "aspd": 0.0
+  },
+  "canary_direct_replay": false,
+  "root_counts": {
+    "0": {
+      "n": 9451,
+      "positives": 5078
+    },
+    "1": {
+      "n": 6826,
+      "positives": 2734
+    }
+  },
+  "valid_counts": {
+    "0": {
+      "n": 11409,
+      "positives": 6157
+    },
+    "1": {
+      "n": 8458,
+      "positives": 3445
+    }
+  },
+  "torch_version": "2.11.0+cu128",
+  "gpu": "1",
+  "duration_sec": 1.7761635780334473,
+  "finished_unix": 1790592626.0646029
+}

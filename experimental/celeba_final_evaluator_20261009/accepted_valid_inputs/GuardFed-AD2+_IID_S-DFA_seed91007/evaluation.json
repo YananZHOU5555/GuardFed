@@ -1,0 +1,156 @@
+{
+  "id": "GuardFed-AD2+_IID_S-DFA_seed91007",
+  "method": "GuardFed-AD2+",
+  "distribution": "IID",
+  "attack": "S-DFA",
+  "seed": 91007,
+  "round": 70,
+  "evaluation_split": "valid",
+  "checkpoint_sha256": "1173862e71a4c88e98af484db8418c61c2a0a643acaccc2c7975b4b3d40080f1",
+  "original_result_sha256": "8d5302617d38639dc627ab359f385674db9ac038dda887ddcf287ddb9d0b8dc6",
+  "manifest_sha256": "9942046a8de0c8893a2d03f4a5da5c80add92fc7513fbde182b0e5eb4a94b38d",
+  "cache_sha256": "41d4964189d05eaf0801168d67870d3863c18b4091dc321e63c469fe5ac9d9d3",
+  "root_contract": {
+    "numerical_execution": {
+      "version": "celeba_deterministic_fp32_v1",
+      "deterministic_algorithms": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "cudnn_allow_tf32": false,
+      "matmul_allow_tf32": false,
+      "cublas_workspace_config": ":4096:8"
+    },
+    "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+    "image_shape": [
+      3,
+      64,
+      64
+    ],
+    "normalization": "uint8 divided by 255 per batch",
+    "augmentation": "none",
+    "target": "Smiling",
+    "sensitive": "Male",
+    "evaluation_split": "valid",
+    "official_split_sizes": {
+      "0": 162770,
+      "1": 19867,
+      "2": 19962
+    },
+    "actual_train_rows": 162770,
+    "actual_evaluation_rows": 19867,
+    "evidence_stage": "full_official_split",
+    "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+    "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+    "root_image_ids_sha256": "1b90dbca172cde5e8400727845a8da589f8d6f3bb8f55957e41bd9d22a94f9e7",
+    "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "official_metadata": {
+      "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+    },
+    "train_eval_disjoint": true,
+    "root_client_disjoint": true,
+    "client_sample_counts": [
+      7292,
+      7321,
+      7126,
+      7292,
+      7271,
+      7326,
+      7396,
+      7412,
+      7232,
+      7246,
+      7327,
+      7340,
+      7363,
+      7273,
+      7374,
+      7402,
+      7329,
+      7419,
+      7380,
+      7372
+    ]
+  },
+  "raw": {
+    "accuracy": 0.8854884985151256,
+    "aeod": 0.0348189005964632,
+    "aspd": 0.09536158941281292,
+    "positive_rate": 0.4827603563698596,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "shared_calibration": {
+    "accuracy": 0.8809080384557306,
+    "aeod": 0.007589082293437799,
+    "aspd": 0.050179900329254734,
+    "positive_rate": 0.4806966326068355,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "native": {
+    "accuracy": 0.8809080384557306,
+    "aeod": 0.007589082293437799,
+    "aspd": 0.050179900329254734,
+    "positive_rate": 0.4806966326068355,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867,
+    "warnings": []
+  },
+  "thresholds": {
+    "0": 0.32962903,
+    "1": -0.20374079
+  },
+  "calibration_info": {
+    "server_calibration_metrics": {
+      "accuracy": 0.8754684524175217,
+      "aeod": 0.0021043581700382896,
+      "aspd": 0.04810447199044726
+    },
+    "server_calibration_score": 9.983650269443933,
+    "server_calibration_risk": 0.025104415080242776,
+    "server_base_calibration_metrics": {
+      "accuracy": 0.8799533083492044,
+      "aeod": 0.044144806043103335,
+      "aspd": 0.09223402599364972
+    },
+    "server_base_calibration_risk": 0.06818941601837653,
+    "server_adaptive_lambda": 0.8389234650835721,
+    "server_calibration_budget": 0.06,
+    "server_calibration_acc_floor": 0.8749533083492044,
+    "server_calibration_max_acc_drop": 0.005,
+    "server_calibration_objective": "acc_floor"
+  },
+  "native_replay_differences": {
+    "accuracy": 0.0,
+    "aeod": 0.0,
+    "aspd": 0.0
+  },
+  "canary_direct_replay": false,
+  "root_counts": {
+    "0": {
+      "n": 9451,
+      "positives": 5087
+    },
+    "1": {
+      "n": 6826,
+      "positives": 2731
+    }
+  },
+  "valid_counts": {
+    "0": {
+      "n": 11409,
+      "positives": 6157
+    },
+    "1": {
+      "n": 8458,
+      "positives": 3445
+    }
+  },
+  "torch_version": "2.11.0+cu128",
+  "gpu": "0",
+  "duration_sec": 3.045518636703491,
+  "finished_unix": 1790592491.2544165
+}

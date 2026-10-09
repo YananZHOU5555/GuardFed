@@ -1,0 +1,60 @@
+{
+  "archive_core_member": "./scripts/reproduce_paper_tables.py",
+  "core_sha256": "75ba1ffed74ae4ac0b56e876360e04e8e1700b4b3bb34d11cb8ee59f4c1470fe",
+  "function_receipts": [
+    {
+      "function": "_project_synthetic_columns",
+      "first_line": 341,
+      "last_line": 357,
+      "source_sha256": "48727d37d826955c16df0d8d9ee8afd969a921376ebb25c6cf4fe4e310c0e32c",
+      "ast_sha256": "560f078da5ddc090863fd8ca9768f22434643e2372c7f09ed1e12ef6e8a20b05",
+      "excerpt": "source_excerpts/_project_synthetic_columns.py.txt"
+    },
+    {
+      "function": "pca_gaussian_augment",
+      "first_line": 401,
+      "last_line": 415,
+      "source_sha256": "f60e4083568d9faba04ad1629afb4679fb1849c95ef1d542cd04c05cccd6804f",
+      "ast_sha256": "6258a7ca1b378c3992aeec19715b4875615bb8895908543d68e2c72ba796ba49",
+      "excerpt": "source_excerpts/pca_gaussian_augment.py.txt"
+    },
+    {
+      "function": "make_synthetic_root",
+      "first_line": 446,
+      "last_line": 472,
+      "source_sha256": "6ae6390f5527176449551be9a004bfadcc6dc0a54ae7b9189b5cc6c8eae7e7e1",
+      "ast_sha256": "7233599488c75e970493f9d1a5b2827520693b94cad5f0ebd20f4a989f337126",
+      "excerpt": "source_excerpts/make_synthetic_root.py.txt"
+    },
+    {
+      "function": "load_bundle",
+      "first_line": 1591,
+      "last_line": 1615,
+      "source_sha256": "ac89e199be419b71ae83211dcf9a8b36ff77560c16685564ad50929618ef5587",
+      "ast_sha256": "1371b5f2075049c036988f40135d2f85601db1b349727dfa256f2b909e00c7ca",
+      "excerpt": "source_excerpts/load_bundle.py.txt"
+    }
+  ],
+  "pca_calls": [
+    "_project_synthetic_columns",
+    "fit.mean",
+    "float",
+    "len",
+    "max",
+    "np.cov",
+    "np.diag",
+    "np.eye",
+    "np.nan_to_num",
+    "np.random.default_rng",
+    "np.trace",
+    "pd.DataFrame",
+    "rng.multivariate_normal",
+    "root_df.iloc[0:0][cols].copy",
+    "root_df[cols].astype",
+    "root_df[cols].astype(float).to_numpy"
+  ],
+  "pca_implementation_observed": "Fits root-column mean and full covariance, adds diagonal shrinkage, samples multivariate normal; diagonal fallback on LinAlgError; projects columns. No explicit PCA decomposition or dimension reduction is present.",
+  "record_link_limit": "Archive preserves this implementation and 40 PCA-labelled result records. Those records do not carry immutable per-run source/dependency/model/cache hashes; this source is a historical candidate, not a proved executed-source byte identity.",
+  "forest_implementation_in_this_core": false,
+  "executed_generator_reproduction_claim": false
+}

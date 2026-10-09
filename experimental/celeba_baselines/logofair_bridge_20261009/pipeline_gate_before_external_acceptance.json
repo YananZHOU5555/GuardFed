@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "evidence_stage": "actual_accepted_CNN_synthetic_images_and_IDs_only",
+  "scientific_results": 0,
+  "real_CelebA_fit": false,
+  "gpu_execution": false,
+  "referenced_accepted_FedAvg_models": 100,
+  "selected_external_artifacts_verified": 1,
+  "synthetic_root_images": 1600,
+  "synthetic_valid_images": 320,
+  "clients": 20,
+  "beta_calibrators": 40,
+  "post_rounds": 3,
+  "fresh_fit_replay": true,
+  "actual_CNN_softmax_extractor_pass": true,
+  "model_unmodified": true,
+  "serialized_prediction_replay": true,
+  "RNG_perturbation_and_permutation_prediction_replay": true,
+  "all_metrics_same_serialized_classifier": true,
+  "exact_ties_refused": true,
+  "checks": [
+    {
+      "check": "external checkpoint identity changed",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "external training config changed",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "synthetic IDs cannot authorize real mapping",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "mapping row/sample order changed",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "unknown evaluation client",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "fitted classifier state SHA changed",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "missing calibration sensitive group",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "missing beta-calibration binary-label support",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "nonfinite score",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "exact calibrated-score threshold tie",
+      "refused": true,
+      "error_type": "ValueError"
+    },
+    {
+      "check": "PREPARED execution before output",
+      "refused": true,
+      "error_type": "ValueError"
+    }
+  ],
+  "settings": {
+    "global_delta": 0.02,
+    "local_delta": 0.02,
+    "post_rounds": 3,
+    "local_steps": 3,
+    "global_steps": 3,
+    "post_lr": 0.005,
+    "beta": 1000.0,
+    "calibration": true
+  },
+  "environment": {
+    "torch": "2.8.0+cpu",
+    "numpy": "1.26.4",
+    "netcal": "1.3.6"
+  },
+  "bridge_sha256": "5c10ad1e517a90844cff49f7affd7b2aec41087a54f4d8227c7f563b92b80d2b",
+  "check_sha256": "cd808b1212cf312995dad7a00509b5e95768528f857e3a6835d05365ba218f15",
+  "accepted_checkpoint_sha256": "2bd941918aa225a41de864c78d65620c86c5851b39487bcaff4fe97d9e9dff4b",
+  "artifact_hashes": {
+    "post_state.pkl": "0c8eb91034710be15bab4b77a7481d3f6729fc310660f2725aad0d2e6ead85fa",
+    "scores_mapping_predictions.npz": "8f9ccae6911c6a546f453ddb62aa17f5278b2ed57826a8e8f3213b814868b848",
+    "mapping_metadata.json": "5b062ba22e7d6c6af9df3ea9c79dc27a706a177024419667bec67726105a70c4",
+    "result.json": "6f3e071589501d388373edfbeeb0dbc5f9f3db8af11d3514063456d1b5f71da5"
+  },
+  "limitation": "Synthetic label ranks support beta-fit gate only; no real image/map/postprocessing performance evidence. Protocol remains PREPARED and mapping unresolved."
+}

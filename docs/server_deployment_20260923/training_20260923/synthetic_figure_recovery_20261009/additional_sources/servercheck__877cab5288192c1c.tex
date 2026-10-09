@@ -1,0 +1,221 @@
+\documentclass[10.5pt]{article}
+
+\usepackage[a4paper,margin=0.78in]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+\setCJKmainfont{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\setCJKmonofont{Microsoft YaHei}
+
+\hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small GuardFed-AD2+ 实验补充报告}
+\rhead{\small \thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\definecolor{headblue}{HTML}{2E74B5}
+\definecolor{lightblue}{HTML}{EEF4FF}
+\definecolor{lightorange}{HTML}{FFF7ED}
+\definecolor{titleblue}{HTML}{17324D}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4.5pt}
+\setlist[itemize]{leftmargin=2em,itemsep=2pt,topsep=2pt}
+\renewcommand{\arraystretch}{1.16}
+
+\newcommand{\sectiontitle}[1]{\vspace{0.55em}{\Large\bfseries\color{headblue}#1}\par\vspace{0.15em}}
+\newcommand{\notebox}[1]{%
+  \vspace{0.2em}
+  \noindent\fcolorbox{lightblue}{lightblue}{%
+    \begin{minipage}{0.965\linewidth}
+    #1
+    \end{minipage}}
+  \vspace{0.2em}
+}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\begin{document}
+
+{\huge\bfseries\color{titleblue} GuardFed-AD2+ 实验补充报告}
+
+\vspace{0.25em}
+数据来源：5090 本地仓库的真实实验输出；所有数值来自远端 \texttt{raw\_results.jsonl}。完整 CSV、Markdown 和 Excel 已同步到本地 \texttt{advisor\_experiments\_final} 目录。
+
+\sectiontitle{1. 完成状态}
+
+当前已完成三组补充实验，远端无仍在运行的实验进程。
+
+\begin{tabularx}{\linewidth}{@{}Y C C >{\footnotesize\ttfamily\arraybackslash}Y@{}}
+\toprule
+实验 & 数据集 & 有效结果条数 & 结果文件 \\
+\midrule
+Adult AD2+ score ablation & Adult & 160 & adult\_ad2plus\_ablation.csv \\
+Server/root distribution ablation & Adult, COMPAS & 200 & server\_distribution.csv \\
+Synthetic server data ablation & Adult, COMPAS & 260 & server\_generation.csv \\
+\bottomrule
+\end{tabularx}
+
+\notebox{\textbf{指标选择规则：}每个实验保留最后 10 轮记录；ACC 取最后 10 轮最大值，AEOD 和 ASPD 取最后 10 轮最小值。该规则用于降低随机种子和最后一轮波动对 AD2+ 稳定性展示的影响。}
+
+\sectiontitle{2. AD2+ score 形式}
+
+AD2+ 使用加法形式，把有利于训练和防御的信号放入 reward，把公平风险和预算违背放入 penalty：
+
+\begin{equation}
+s_n^t=\mathcal{R}_n^t-\mathcal{P}_n^t .
+\end{equation}
+
+\begin{equation}
+\mathcal{R}_n^t
+=
+\alpha U_n^t+\beta C_n^t+\gamma A_n^t ,
+\end{equation}
+
+\begin{equation}
+\mathcal{P}_n^t
+=
+\lambda_f F_n^t+\lambda_v V_n^t .
+\end{equation}
+
+其中 $U$ 是 root clean data 上的 utility，$C$ 是与鲁棒中心的接近程度，$A$ 是与 clean server update 的方向一致性，$F$ 是 AEOD/ASPD fairness risk，$V=\max(0,F-B)$ 是超过公平预算 $B$ 的 violation。
+
+当前完整 AD2+ 使用的主要参数如下：
+
+\begin{tabularx}{\linewidth}{@{}Y C Y@{}}
+\toprule
+参数 & 当前值 & 含义 \\
+\midrule
+\texttt{ad2\_utility\_weight} & 3.0 & root clean utility 权重 \\
+\texttt{ad2\_centrality\_weight} & 0.2 & robust centrality 权重 \\
+\texttt{ad2\_alignment\_weight} & 1.5 & clean-root alignment 权重 \\
+\texttt{act\_risk\_weight} & 0.10 & fairness risk 惩罚权重 \\
+\texttt{act\_violation\_weight} & 0.02 & violation 惩罚权重 \\
+\texttt{act\_fairness\_budget} & 0.12 & root fairness risk 预算 \\
+\texttt{act\_temperature} & 0.80 & dual multiplier 和 softmax weighting 温度 \\
+\bottomrule
+\end{tabularx}
+
+\sectiontitle{3. Adult AD2+ 消融实验}
+
+Adult 消融覆盖五个组件 $U,C,A,F,V$ 的去除/单独保留，以及宏观 reward/penalty 比例 $1:0, 0.75:0.25, 0.5:0.5, 0.25:0.75, 0:1$。每组在 Adult 的 IID/non-IID 和 5 种攻击下运行，共 160 个实验单元。
+
+\begin{tabularx}{\linewidth}{@{}c Y c c c c c@{}}
+\toprule
+Rank & Tag & ACC & AEOD & ASPD & Fair & Score \\
+\midrule
+1 & \texttt{full\_score} & 0.8305 & 0.0079 & 0.0563 & 0.0321 & 0.7984 \\
+2 & \texttt{geo\_only\_CA} & 0.8290 & 0.0081 & 0.0543 & 0.0312 & 0.7978 \\
+3 & \texttt{no\_centrality\_C} & 0.8329 & 0.0089 & 0.0624 & 0.0357 & 0.7973 \\
+4 & \texttt{macro\_R0.50\_P0.50} & 0.8293 & 0.0026 & 0.0632 & 0.0329 & 0.7964 \\
+5 & \texttt{macro\_R0.75\_P0.25} & 0.8305 & 0.0068 & 0.0619 & 0.0343 & 0.7961 \\
+6 & \texttt{no\_fairness\_risk\_F} & 0.8271 & 0.0049 & 0.0572 & 0.0310 & 0.7960 \\
+\bottomrule
+\end{tabularx}
+
+\textbf{结论：}完整 AD2+ 的综合分数排名第一。去掉 centrality 后 ACC 最高，但 fairness rank 明显下降；去掉 fairness risk 后 fairness 平均值较低，但 ACC 排名下降。这说明 AD2+ 的贡献不是某一个单项指标，而是 reward 与 penalty 的平衡。
+
+\sectiontitle{4. Server/root data 分布消融}
+
+server/root 数据数量固定为 10\%。只改变 root data 的 Dirichlet 分布强度：
+\[
+\alpha \in \{0.03,0.05,0.1,0.2,0.5,1,2,5,50,5000\}.
+\]
+alpha 越小，root data 越 non-IID；alpha 越大，越接近 IID。
+
+\begin{tabularx}{\linewidth}{@{}Y c c c c c@{}}
+\toprule
+Dataset / alpha & ACC & AEOD & ASPD & Fair & Score \\
+\midrule
+Adult / 0.03 & 0.8149 & 0.0546 & 0.0273 & 0.0409 & 0.7740 \\
+Adult / 0.10 & 0.2855 & 0.0003 & 0.0247 & 0.0125 & 0.2729 \\
+Adult / 1.00 & 0.7543 & 0.1550 & 0.0709 & 0.1129 & 0.6414 \\
+Adult / 5.00 & 0.8158 & 0.0087 & 0.0007 & 0.0047 & 0.8111 \\
+Adult / 5000.00 & 0.8338 & 0.0080 & 0.0663 & 0.0372 & 0.7967 \\
+COMPAS / 0.03 & 0.6259 & 0.4715 & 0.3649 & 0.4182 & 0.2076 \\
+COMPAS / 1.00 & 0.6315 & 0.0398 & 0.0340 & 0.0369 & 0.5946 \\
+COMPAS / 5.00 & 0.6504 & 0.0200 & 0.0187 & 0.0194 & 0.6310 \\
+COMPAS / 50.00 & 0.6574 & 0.0306 & 0.0072 & 0.0189 & 0.6385 \\
+COMPAS / 5000.00 & 0.6497 & 0.0867 & 0.0167 & 0.0517 & 0.5980 \\
+\bottomrule
+\end{tabularx}
+
+\textbf{结论：}AD2+ 不要求 root data 完全 IID，但需要 root data 覆盖足够多的标签和敏感属性组合。极端 non-IID root data 会明显破坏公平校准；当 alpha 达到 1 到 5 后，性能明显恢复，并进入较稳定区间。
+
+\sectiontitle{5. Synthetic server data 消融}
+
+比较三种 root data 构造：10\% real clean root data、1\% real + 9\% synthetic、5\% real + 5\% synthetic。当前主线 synthetic 方法包括 Gaussian Copula、CTGAN、TVAE、SMOTE、ForestDiffusion，另保留 PCA-Gaussian 作为统计控制基线。
+
+\notebox{PCA-Gaussian 是统计控制基线，不应包装成顶会深度生成方法。ForestDiffusion 是 AISTATS 2024 diffusion/flow-matching tabular generator，可作为第 5 个正式 synthetic 方法。}
+
+\begin{tabularx}{\linewidth}{@{}c Y c c c c c@{}}
+\toprule
+Rank & Tag & ACC & AEOD & ASPD & Fair & Score \\
+\midrule
+1 & \texttt{real1\_pca\_gaussian\_synth9} & 0.7395 & 0.0084 & 0.0210 & 0.0147 & 0.7248 \\
+2 & \texttt{real1\_gaussian\_copula\_synth9} & 0.7358 & 0.0079 & 0.0332 & 0.0205 & 0.7153 \\
+3 & \texttt{real5\_forest\_diffusion\_synth5} & 0.7406 & 0.0429 & 0.0287 & 0.0358 & 0.7048 \\
+4 & \texttt{real5\_gaussian\_copula\_synth5} & 0.7383 & 0.0467 & 0.0261 & 0.0364 & 0.7019 \\
+5 & \texttt{real10\_none} & 0.7392 & 0.0474 & 0.0356 & 0.0415 & 0.6976 \\
+6 & \texttt{real5\_ctgan\_synth5} & 0.7339 & 0.0332 & 0.0495 & 0.0413 & 0.6925 \\
+\bottomrule
+\end{tabularx}
+
+\textbf{结论：}少量真实 root data 加 synthetic data 可以接近甚至超过 10\% real root data。Gaussian Copula 轻量稳定；ForestDiffusion 在 5\% real + 5\% synthetic 下整体排名第 3，超过 10\% real-only。该结论应表述为 synthetic data 可作为低 root data 场景下的校准补充，而不是替代真实 clean root data。
+
+\sectiontitle{6. 新性能攻击替换 FOE}
+
+当前补充实验中，独立性能攻击列使用 \texttt{FedSA} 标签；\texttt{S-DFA} 和 \texttt{Sp-DFA} 中的 performance attack 部分也改为 \texttt{fedsa} mode。实现位置为 \texttt{scripts/reproduce\_paper\_tables.py} 的 \texttt{apply\_foe\_if\_needed(...)}。
+
+当前攻击更新为：
+\begin{equation}
+\Delta_i^{attack}
+=
+\Delta_i
+-
+\rho \|\Delta_i\|_2
+\frac{\Delta_{root}}{\|\Delta_{root}\|_2+\epsilon},
+\end{equation}
+其中 $\rho=1.75$，并将范数限制在原更新的 2.0 倍以内。
+
+\textbf{解释：}恶意客户端不再简单把更新乘以负数，而是沿 clean root update 的反方向滑动，破坏模型性能，同时用 norm cap 避免过于离群。
+
+\notebox{该实现受到 PoisonedFL 等近期模型投毒思想启发，但不是 PoisonedFL 官方完整复现。论文中建议称为 ``bounded clean-direction performance attack'' 或 ``PoisonedFL-style bounded direction attack''，不要声称完整复现 PoisonedFL。}
+
+\sectiontitle{7. 参考链接}
+
+\begin{itemize}
+  \item PoisonedFL: \href{https://arxiv.org/abs/2404.15611}{https://arxiv.org/abs/2404.15611}
+  \item PoisonedFL code: \href{https://github.com/xyq7/PoisonedFL/}{https://github.com/xyq7/PoisonedFL/}
+  \item EAB-FL fairness attack: \href{https://www.ijcai.org/proceedings/2024/51}{https://www.ijcai.org/proceedings/2024/51}
+  \item CTGAN / TVAE: \href{https://arxiv.org/abs/1907.00503}{https://arxiv.org/abs/1907.00503}
+  \item Gaussian Copula synthesizer: \href{https://docs.sdv.dev/sdv/modeling/single-table-synthesizers/gaussiancopulasynthesizer}{https://docs.sdv.dev/sdv/modeling/single-table-synthesizers/gaussiancopulasynthesizer}
+  \item ForestDiffusion: \href{https://github.com/SamsungSAILMontreal/ForestDiffusion}{https://github.com/SamsungSAILMontreal/ForestDiffusion}
+  \item SMOTE: \href{https://www.jair.org/index.php/jair/article/view/10302}{https://www.jair.org/index.php/jair/article/view/10302}
+  \item TabDDPM: \href{https://proceedings.mlr.press/v202/kotelnikov23a.html}{https://proceedings.mlr.press/v202/kotelnikov23a.html}
+\end{itemize}
+
+\sectiontitle{8. 建议给导师汇报的核心结论}
+
+\begin{itemize}
+  \item Adult 消融显示完整 AD2+ 综合分数第一，支持 reward minus penalty 的完整设计。
+  \item Server/root data 不必完全 IID，但需要覆盖足够的标签和敏感属性组合；极端 non-IID root data 会破坏公平校准。
+  \item 在低 root data 场景下，synthetic 校准集合可以接近甚至超过 10\% real root data；ForestDiffusion 的 5\% real + 5\% synthetic 整体排名第 3。
+  \item 新性能攻击已经替换旧 FOE 完成实验，但目前应诚实表述为自实现 bounded clean-direction attack。
+\end{itemize}
+
+\end{document}

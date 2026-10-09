@@ -1,0 +1,1039 @@
+{
+  "checks": [
+    {
+      "detail": {
+        "dataset_loader_called": false,
+        "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed"
+      },
+      "name": "frozen_core_source_identity",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "actual": {
+          "accuracy": 0.75,
+          "aeod": 0.5,
+          "aspd": 0.25,
+          "constant_predictions": false,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 1,
+              "fp": 1,
+              "fpr": 0.5,
+              "n": 4,
+              "negatives": 2,
+              "positive_rate": 0.5,
+              "positives": 2,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 0.5
+            },
+            "1": {
+              "fn": 0,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 4,
+              "negatives": 3,
+              "positive_rate": 0.25,
+              "positives": 1,
+              "tn": 3,
+              "tp": 1,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.625,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.375,
+          "prediction_count": 8,
+          "warnings": []
+        },
+        "expected_accuracy": 0.75,
+        "expected_aeod": 0.5,
+        "expected_aspd": 0.25,
+        "labels": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "predictions": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "sensitive": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "name": "hand_computed_confusion_matrices",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "absent_group": {
+          "accuracy": 1.0,
+          "aeod": null,
+          "aspd": null,
+          "constant_predictions": false,
+          "fairness_status": "UNDEFINED_DENOMINATOR",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 0,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 0.5,
+              "positives": 1,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 1.0
+            },
+            "1": {
+              "fn": 0,
+              "fp": 0,
+              "fpr": null,
+              "n": 0,
+              "negatives": 0,
+              "positive_rate": null,
+              "positives": 0,
+              "tn": 0,
+              "tp": 0,
+              "tpr": null
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.5,
+          "prediction_count": 2,
+          "warnings": [
+            "AEOD denominator is zero for sensitive group 1",
+            "ASPD denominator is zero for sensitive group 1"
+          ]
+        },
+        "constant_all_zero_and_all_one": [
+          {
+            "accuracy": 0.5,
+            "aeod": 0.0,
+            "aspd": 0.0,
+            "constant_predictions": true,
+            "fairness_status": "DEFINED",
+            "group_confusion_counts": {
+              "0": {
+                "fn": 1,
+                "fp": 0,
+                "fpr": 0.0,
+                "n": 2,
+                "negatives": 1,
+                "positive_rate": 0.0,
+                "positives": 1,
+                "tn": 1,
+                "tp": 0,
+                "tpr": 0.0
+              },
+              "1": {
+                "fn": 1,
+                "fp": 0,
+                "fpr": 0.0,
+                "n": 2,
+                "negatives": 1,
+                "positive_rate": 0.0,
+                "positives": 1,
+                "tn": 1,
+                "tp": 0,
+                "tpr": 0.0
+              }
+            },
+            "majority_accuracy": 0.5,
+            "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+            "positive_rate": 0.0,
+            "prediction_count": 4,
+            "warnings": []
+          },
+          {
+            "accuracy": 0.5,
+            "aeod": 0.0,
+            "aspd": 0.0,
+            "constant_predictions": true,
+            "fairness_status": "DEFINED",
+            "group_confusion_counts": {
+              "0": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 1.0,
+                "n": 2,
+                "negatives": 1,
+                "positive_rate": 1.0,
+                "positives": 1,
+                "tn": 0,
+                "tp": 1,
+                "tpr": 1.0
+              },
+              "1": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 1.0,
+                "n": 2,
+                "negatives": 1,
+                "positive_rate": 1.0,
+                "positives": 1,
+                "tn": 0,
+                "tp": 1,
+                "tpr": 1.0
+              }
+            },
+            "majority_accuracy": 0.5,
+            "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+            "positive_rate": 1.0,
+            "prediction_count": 4,
+            "warnings": []
+          }
+        ],
+        "no_negative": {
+          "accuracy": 0.75,
+          "aeod": 0.5,
+          "aspd": 0.0,
+          "constant_predictions": false,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 1,
+              "fp": 0,
+              "fpr": null,
+              "n": 2,
+              "negatives": 0,
+              "positive_rate": 0.5,
+              "positives": 2,
+              "tn": 0,
+              "tp": 1,
+              "tpr": 0.5
+            },
+            "1": {
+              "fn": 0,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 0.5,
+              "positives": 1,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.75,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.5,
+          "prediction_count": 4,
+          "warnings": []
+        },
+        "no_positive": {
+          "accuracy": 0.75,
+          "aeod": null,
+          "aspd": 0.0,
+          "constant_predictions": false,
+          "fairness_status": "UNDEFINED_DENOMINATOR",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 0.5,
+              "n": 2,
+              "negatives": 2,
+              "positive_rate": 0.5,
+              "positives": 0,
+              "tn": 1,
+              "tp": 0,
+              "tpr": null
+            },
+            "1": {
+              "fn": 0,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 0.5,
+              "positives": 1,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.75,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.5,
+          "prediction_count": 4,
+          "warnings": [
+            "AEOD denominator is zero for sensitive group 0"
+          ]
+        }
+      },
+      "name": "undefined_denominators_and_constant_predictions",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "column_predictions": {
+          "exception": "ValueError",
+          "reason": "Nonempty prediction vector required"
+        },
+        "empty": {
+          "exception": "ValueError",
+          "reason": "Nonempty prediction vector required"
+        },
+        "nan_label": {
+          "exception": "ValueError",
+          "reason": "labels must be a complete binary vector"
+        },
+        "short_labels": {
+          "exception": "ValueError",
+          "reason": "labels must be a complete binary vector"
+        },
+        "unknown_prediction": {
+          "exception": "ValueError",
+          "reason": "predictions must be a complete binary vector"
+        },
+        "unknown_sensitive": {
+          "exception": "ValueError",
+          "reason": "sensitive must be a complete binary vector"
+        }
+      },
+      "name": "malformed_binary_vectors_rejected",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "margins": [
+          -1.0,
+          0.0,
+          1.0,
+          -1.0,
+          0.0,
+          1.0
+        ],
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "shared_calibration": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "rejections": {
+          "ad2_native_disabled": {
+            "exception": "ValueError",
+            "reason": "Current900 AD2+ native requires its original calibration"
+          },
+          "bool_threshold": {
+            "exception": "ValueError",
+            "reason": "Incomplete declared group thresholds"
+          },
+          "empty_fits": {
+            "exception": "ValueError",
+            "reason": "Nonempty known prediction views required"
+          },
+          "empty_prediction_score": {
+            "exception": "ValueError",
+            "reason": "Nonempty known prediction views required"
+          },
+          "inf_threshold": {
+            "exception": "ValueError",
+            "reason": "Out of range float values are not JSON compliant"
+          },
+          "infinite_margins": {
+            "exception": "ValueError",
+            "reason": "Finite complete target margins required"
+          },
+          "missing_threshold": {
+            "exception": "ValueError",
+            "reason": "Incomplete declared group thresholds"
+          },
+          "nan_margins": {
+            "exception": "ValueError",
+            "reason": "Finite complete target margins required"
+          },
+          "nan_threshold": {
+            "exception": "ValueError",
+            "reason": "Out of range float values are not JSON compliant"
+          },
+          "shared_recipe_drift": {
+            "exception": "ValueError",
+            "reason": "Shared calibration recipe differs from the prepared frozen-core recipe"
+          },
+          "short_sensitive": {
+            "exception": "ValueError",
+            "reason": "target sensitive must be a complete binary vector"
+          },
+          "signed_wrong_view_rule": {
+            "exception": "ValueError",
+            "reason": "Prediction rule contradicts the declared view"
+          },
+          "string_threshold": {
+            "exception": "ValueError",
+            "reason": "Incomplete declared group thresholds"
+          },
+          "tampered_finite_threshold": {
+            "exception": "ValueError",
+            "reason": "Prediction fit identity changed"
+          },
+          "views_['raw', 'raw']": {
+            "exception": "ValueError",
+            "reason": "Unknown method, repeated view, or incomplete declared view set"
+          },
+          "views_['unknown']": {
+            "exception": "ValueError",
+            "reason": "Unknown method, repeated view, or incomplete declared view set"
+          },
+          "views_[]": {
+            "exception": "ValueError",
+            "reason": "Unknown method, repeated view, or incomplete declared view set"
+          }
+        },
+        "sensitive": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "name": "ties_views_and_bad_fits",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "fits_identical_after_scoring_opposite_target_labels": true,
+        "original_core_margin_global_restored": true,
+        "predictions_unchanged_after_label_access": {
+          "native": {
+            "dtype": "|u1",
+            "sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+            "shape": [
+              4
+            ]
+          },
+          "raw": {
+            "dtype": "|u1",
+            "sha256": "6b1e73a0094b7b812d3b9e22cffb4f8239319847522c4fa103753b6950020f93",
+            "shape": [
+              4
+            ]
+          },
+          "shared_calibration": {
+            "dtype": "|u1",
+            "sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+            "shape": [
+              4
+            ]
+          }
+        },
+        "rejections": {
+          "ad2_calibration_base_weight": {
+            "exception": "ValueError",
+            "reason": "Invalid finite calibration setting: ad2_calibration_base_weight"
+          },
+          "ad2_calibration_objective": {
+            "exception": "ValueError",
+            "reason": "Unsupported calibration temperature or objective"
+          },
+          "ad2_calibration_quantiles": {
+            "exception": "ValueError",
+            "reason": "Invalid calibration integer: ad2_calibration_quantiles"
+          },
+          "ad2_calibration_temperature": {
+            "exception": "ValueError",
+            "reason": "Invalid finite calibration setting: ad2_calibration_temperature"
+          },
+          "empty_root": {
+            "exception": "ValueError",
+            "reason": "Finite complete root margins required"
+          },
+          "frozen_core_bytes_drift": {
+            "exception": "ValueError",
+            "reason": "Frozen calibration core bytes changed"
+          },
+          "missing_root_cell": {
+            "exception": "ValueError",
+            "reason": "Root calibration lacks a sensitive/label cell"
+          },
+          "nan_root": {
+            "exception": "ValueError",
+            "reason": "Finite complete root margins required"
+          },
+          "short_root_labels": {
+            "exception": "ValueError",
+            "reason": "root labels must be a complete binary vector"
+          }
+        }
+      },
+      "name": "root_only_fit_and_target_label_isolation",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "FLTrust": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "FLTrust+FairGuard": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "FairFed": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "FairGuard": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "FedAA": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "FedAvg": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "GuardFed-AD2+": {
+          "native_rule": "group_margin_greater_equal",
+          "predictions": {
+            "native": [
+              0,
+              1,
+              1,
+              1
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "LASA": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "Median": {
+          "native_rule": "argmax_margin_strictly_positive",
+          "predictions": {
+            "native": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "raw": [
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      "name": "current_nine_method_native_interfaces",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "changed_weights_rejected": {
+          "exception": "RuntimeError",
+          "reason": "Inference or calibration changed checkpoint weights"
+        },
+        "evidence_stage": "measured_synthetic_CPU_acceptance_only",
+        "fits": {
+          "native": {
+            "fit_data": "clean_train_root_only",
+            "fit_diagnostics": {
+              "server_adaptive_lambda": 0.1269280110429725,
+              "server_base_calibration_metrics": {
+                "accuracy": 0.5,
+                "aeod": 0.0,
+                "aspd": 0.0
+              },
+              "server_base_calibration_risk": 0.0,
+              "server_calibration_acc_floor": 0.47,
+              "server_calibration_budget": 0.06,
+              "server_calibration_max_acc_drop": 0.03,
+              "server_calibration_metrics": {
+                "accuracy": 0.75,
+                "aeod": 0.0,
+                "aspd": 0.0
+              },
+              "server_calibration_objective": "acc_floor",
+              "server_calibration_risk": 0.0,
+              "server_calibration_score": 10.0075
+            },
+            "fit_sha256": "f10169882cc8f7af208d240b1a0b75ef52cb71a8bad375bcfd34d65bac46370b",
+            "method": "GuardFed-AD2+",
+            "rule": "group_margin_greater_equal",
+            "thresholds": {
+              "0": -0.07899924,
+              "1": -0.07941141
+            },
+            "view": "native"
+          },
+          "raw": {
+            "fit_data": "none",
+            "fit_sha256": "403b7b187121326970b87cc37813296bf8a1e71078ccad2210b986ddd0b68747",
+            "method": "GuardFed-AD2+",
+            "rule": "argmax_margin_strictly_positive",
+            "thresholds": null,
+            "view": "raw"
+          },
+          "shared_calibration": {
+            "fit_data": "clean_train_root_only",
+            "fit_diagnostics": {
+              "server_adaptive_lambda": 0.1269280110429725,
+              "server_base_calibration_metrics": {
+                "accuracy": 0.5,
+                "aeod": 0.0,
+                "aspd": 0.0
+              },
+              "server_base_calibration_risk": 0.0,
+              "server_calibration_acc_floor": 0.495,
+              "server_calibration_budget": 0.06,
+              "server_calibration_max_acc_drop": 0.005,
+              "server_calibration_metrics": {
+                "accuracy": 0.75,
+                "aeod": 0.0,
+                "aspd": 0.0
+              },
+              "server_calibration_objective": "acc_floor",
+              "server_calibration_risk": 0.0,
+              "server_calibration_score": 10.0075
+            },
+            "fit_sha256": "b5e834ce59818b3c5b7cf4aecbd081d00ef8129f88ae31b7c4f533c50890d7dd",
+            "method": "GuardFed-AD2+",
+            "rule": "group_margin_greater_equal",
+            "thresholds": {
+              "0": -0.07899924,
+              "1": -0.07941141
+            },
+            "view": "shared_calibration"
+          }
+        },
+        "gpu_equivalence_checked": false,
+        "gradients_absent": true,
+        "input_dtype": "torch.uint8",
+        "model_class": "CelebACNN",
+        "optimizer_constructed": false,
+        "raw_matches_direct_argmax": true,
+        "real_celeba_images_evaluated": 0,
+        "root_margins": [
+          -0.07899945974349976,
+          -0.07872416079044342,
+          -0.07899582386016846,
+          -0.07888095825910568,
+          -0.0794467180967331,
+          -0.07885830849409103,
+          -0.07793579995632172,
+          -0.07762099802494049
+        ],
+        "root_pixels": {
+          "dtype": "|u1",
+          "sha256": "c4cfbf8c37a5e790859f0b5cd270b7c7a1117c97ef9e666cb51ef3805ae72f85",
+          "shape": [
+            8,
+            3,
+            64,
+            64
+          ]
+        },
+        "root_shape": [
+          8,
+          3,
+          64,
+          64
+        ],
+        "scores": {
+          "native": {
+            "accuracy": 0.6666666666666666,
+            "aeod": 0.0,
+            "aspd": 0.33333333333333337,
+            "constant_predictions": false,
+            "fairness_status": "DEFINED",
+            "group_confusion_counts": {
+              "0": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 0.5,
+                "n": 3,
+                "negatives": 2,
+                "positive_rate": 0.6666666666666666,
+                "positives": 1,
+                "tn": 1,
+                "tp": 1,
+                "tpr": 1.0
+              },
+              "1": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 1.0,
+                "n": 3,
+                "negatives": 1,
+                "positive_rate": 1.0,
+                "positives": 2,
+                "tn": 0,
+                "tp": 2,
+                "tpr": 1.0
+              }
+            },
+            "majority_accuracy": 0.5,
+            "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+            "positive_rate": 0.8333333333333334,
+            "prediction_count": 6,
+            "warnings": []
+          },
+          "raw": {
+            "accuracy": 0.5,
+            "aeod": 0.0,
+            "aspd": 0.0,
+            "constant_predictions": true,
+            "fairness_status": "DEFINED",
+            "group_confusion_counts": {
+              "0": {
+                "fn": 1,
+                "fp": 0,
+                "fpr": 0.0,
+                "n": 3,
+                "negatives": 2,
+                "positive_rate": 0.0,
+                "positives": 1,
+                "tn": 2,
+                "tp": 0,
+                "tpr": 0.0
+              },
+              "1": {
+                "fn": 2,
+                "fp": 0,
+                "fpr": 0.0,
+                "n": 3,
+                "negatives": 1,
+                "positive_rate": 0.0,
+                "positives": 2,
+                "tn": 1,
+                "tp": 0,
+                "tpr": 0.0
+              }
+            },
+            "majority_accuracy": 0.5,
+            "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+            "positive_rate": 0.0,
+            "prediction_count": 6,
+            "warnings": []
+          },
+          "shared_calibration": {
+            "accuracy": 0.6666666666666666,
+            "aeod": 0.0,
+            "aspd": 0.33333333333333337,
+            "constant_predictions": false,
+            "fairness_status": "DEFINED",
+            "group_confusion_counts": {
+              "0": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 0.5,
+                "n": 3,
+                "negatives": 2,
+                "positive_rate": 0.6666666666666666,
+                "positives": 1,
+                "tn": 1,
+                "tp": 1,
+                "tpr": 1.0
+              },
+              "1": {
+                "fn": 0,
+                "fp": 1,
+                "fpr": 1.0,
+                "n": 3,
+                "negatives": 1,
+                "positive_rate": 1.0,
+                "positives": 2,
+                "tn": 0,
+                "tp": 2,
+                "tpr": 1.0
+              }
+            },
+            "majority_accuracy": 0.5,
+            "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+            "positive_rate": 0.8333333333333334,
+            "prediction_count": 6,
+            "warnings": []
+          }
+        },
+        "target_margins": [
+          -0.07896341383457184,
+          -0.07752460986375809,
+          -0.07960602641105652,
+          -0.0793643370270729,
+          -0.07847663760185242,
+          -0.07819163799285889
+        ],
+        "target_pixels": {
+          "dtype": "|u1",
+          "sha256": "8ea08e1c718e71ae83a0be43bc45d7aed0427743349679d2c61507a22de84894",
+          "shape": [
+            6,
+            3,
+            64,
+            64
+          ]
+        },
+        "target_shape": [
+          6,
+          3,
+          64,
+          64
+        ],
+        "weights_before_and_after": {
+          "classifier.bias": {
+            "dtype": "<f4",
+            "sha256": "c166d641248289e612e0c4dc35e02f8fdcae91d3d36aa7661307f7bcf6d3f04e",
+            "shape": [
+              2
+            ]
+          },
+          "classifier.weight": {
+            "dtype": "<f4",
+            "sha256": "84ad12c002912f023046bbb18c893dfc6327d42df5582d5e9c4fd30359c63d55",
+            "shape": [
+              2,
+              128
+            ]
+          },
+          "features.0.bias": {
+            "dtype": "<f4",
+            "sha256": "cdc5bdd47a777ef5f0741e179b37f838d11c768b6a9ee615e9bfffa01a3eafa0",
+            "shape": [
+              32
+            ]
+          },
+          "features.0.weight": {
+            "dtype": "<f4",
+            "sha256": "cc8ececb8eeedf4edad7ebd31782b64227648586574e8fc487190c4b0b00d64d",
+            "shape": [
+              32,
+              3,
+              3,
+              3
+            ]
+          },
+          "features.3.bias": {
+            "dtype": "<f4",
+            "sha256": "1df7120619308e389fa7bae0f03120f18a846d52c2043afafcdc7dc3cfe04738",
+            "shape": [
+              64
+            ]
+          },
+          "features.3.weight": {
+            "dtype": "<f4",
+            "sha256": "10014841c9bf68fe7650f90b85905f6e443f35c37de94e1f9a378a0707362651",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ]
+          },
+          "features.6.bias": {
+            "dtype": "<f4",
+            "sha256": "3d064e4f8272754bd037eb347f779c67eacc69a422ddfedc15e2ae3f1b861f13",
+            "shape": [
+              128
+            ]
+          },
+          "features.6.weight": {
+            "dtype": "<f4",
+            "sha256": "c7ddcd80e1107568c91f641119401b70fce72b04bcfb2a10c39a8da47c968527",
+            "shape": [
+              128,
+              64,
+              3,
+              3
+            ]
+          }
+        },
+        "weights_unchanged": true
+      },
+      "name": "real_RGB64_CNN_synthetic_CPU_inference",
+      "status": "PASS"
+    },
+    {
+      "name": "freeze_gate_and_identity_drift_rejections",
+      "status": "FAIL",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_final_evaluator_20261009\\acceptance.py\", line 48, in check\n    detail = function()\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_final_evaluator_20261009\\acceptance.py\", line 487, in <lambda>\n    check(\"freeze_gate_and_identity_drift_rejections\", lambda: freeze_gate(core))\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_final_evaluator_20261009\\acceptance.py\", line 368, in freeze_gate\n    ev.require_dispatch(p, fixture_job, fixture_receipt, sources, fixture_observed)\n  File \"E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\celeba_final_evaluator_20261009\\evaluator.py\", line 283, in require_dispatch\n    raise ValueError(\"Model/job identity is inconsistent\")\nValueError: Model/job identity is inconsistent\n"
+    }
+  ],
+  "classification": "local_gate_overrestriction_found_by_all900_metadata_fixture",
+  "failed_attempt": {
+    "all900_native_replay_performed": false,
+    "checks_passed": 8,
+    "checks_total": 9,
+    "gpu_equivalence_claimed": false,
+    "limits": [
+      "Synthetic CPU images establish software behavior, not GPU equivalence or checkpoint replay.",
+      "Eight historical caches establish numerical regression only; native valid image replay of all900 remains required.",
+      "Trusted dispatch receipt and independently measured observed identities are caller responsibilities; no real dispatcher is provided."
+    ],
+    "new_training_count": 0,
+    "numpy": "2.2.6",
+    "protocol_decisions_frozen": false,
+    "protocol_status": "PREPARED_NOT_FROZEN",
+    "python": "3.10.4",
+    "real_celeba_image_inference_count": 0,
+    "real_dispatch_count": 0,
+    "runtime_device": "CPU",
+    "status": "FAIL",
+    "test_labels_read": false,
+    "torch": "2.8.0+cpu"
+  },
+  "impact": "Prior eight-cache exact-zero numerical regression remains valid; no real inference, labels, training or dispatch.",
+  "input_identity": {
+    "frozen_sources": {
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\scripts\\reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\src\\celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\src\\data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091"
+    },
+    "local_sources": {
+      "acceptance.py": "67a7649351713aa557f73e30aff8481cf4f05587e46e66087acc5c56c7224101",
+      "evaluator.py": "913e4b6d8418195441ffcb87f8ce0f35fcf5afa6895826606f7037e66c91dcd5"
+    },
+    "prepared_inputs": {
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\final_evaluation_prepared_20261009\\evaluation_jobs_draft.json": "d862449c681f17b4df9b34b4eb42deebfa5eb27a0748f21c0f7b5c27a41f133c",
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\final_evaluation_prepared_20261009\\model_inventory.json": "3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd",
+      "E:\\OneDrive\\\u6587\u6863\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\final_evaluation_prepared_20261009\\protocol.json": "8ef15af6adec686fecc3462a038edbc94a78456362292cba01f03a27817aa749"
+    }
+  },
+  "reason": "Reconstructing model_id from method/scenario/seed rejects genuine F-Flip slugs, recipe IDs and FedAA/LASA archived IDs; replace reconstruction with trusted inventory record identity checks."
+}

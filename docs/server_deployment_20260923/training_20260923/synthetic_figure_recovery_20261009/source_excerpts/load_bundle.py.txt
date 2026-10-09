@@ -1,0 +1,25 @@
+def load_bundle(dataset: str, alpha: float, config: ExperimentConfig, device: torch.device) -> Dict[str, Any]:
+    set_seed(config.seed); loader = DatasetLoader(dataset_name=dataset, seed=config.seed, device=str(device)); label_col = "income" if dataset == "adult" else "two_year_recid"
+    feature_cols = [col for col in loader.train_df.columns if col != label_col and (config.include_sensitive_feature or col != loader.sensitive_column)]
+    server_df, server_sampling_audit = sample_server_dataframe(loader.train_df, label_col, loader.sensitive_column, config)
+    client_df = loader.train_df.drop(server_df.index).reset_index(drop=True)
+    server_df = server_df.reset_index(drop=True)
+    np.random.seed(config.seed)
+    clients = create_client_data_dict(client_df, feature_cols, label_col, loader.sensitive_column, config.num_clients, alpha, device, config.seed)
+    n_synth = int(round(len(loader.train_df) * config.synthetic_ratio))
+    root_cols = list(dict.fromkeys(feature_cols + [loader.sensitive_column, label_col]))
+    root_hash = int(pd.util.hash_pandas_object(server_df[root_cols], index=False).sum()) if len(server_df) else 0
+    synth_key = (dataset, tuple(root_cols), config.synthetic_method, n_synth, config.seed, config.synthetic_epochs, root_hash)
+    if n_synth > 0 and config.synthetic_method != "none" and synth_key in SYNTH_ROOT_CACHE:
+        synth_df = SYNTH_ROOT_CACHE[synth_key].copy()
+    else:
+        synth_df = make_synthetic_root(config.synthetic_method, server_df, loader.train_df, feature_cols, label_col, loader.sensitive_column, n_synth, config.seed, config.synthetic_epochs)
+        if n_synth > 0 and config.synthetic_method != "none":
+            SYNTH_ROOT_CACHE[synth_key] = synth_df.copy()
+    root_df = pd.concat([server_df[root_cols], synth_df], ignore_index=True)
+    server_X = torch.tensor(root_df[feature_cols].values, dtype=torch.float32, device=device)
+    server_y = torch.tensor(root_df[label_col].values, dtype=torch.long, device=device)
+    server_sensitive = root_df[loader.sensitive_column].values.astype(int)
+    X_test = torch.tensor(loader.test_df[feature_cols].values, dtype=torch.float32, device=device); y_test = torch.tensor(loader.test_df[label_col].values, dtype=torch.long, device=device); test_sensitive = np.asarray(loader.test_df[loader.sensitive_column].values, dtype=int)
+    rw_weights = compute_reweighing_weights(loader.train_df, loader.sensitive_column, label_col) if config.use_reweighting else {(s, y): 1.0 for s in [0, 1] for y in [0, 1]}
+    return {"dataset": dataset, "loader": loader, "label_col": label_col, "sensitive_col": loader.sensitive_column, "feature_cols": feature_cols, "feature_includes_sensitive": loader.sensitive_column in feature_cols, "feature_includes_label": label_col in feature_cols, "server_X": server_X, "server_y": server_y, "server_sensitive": server_sensitive, "root_clean_rows": int(len(server_df)), "root_synthetic_rows": int(len(synth_df)), "server_sampling_audit": server_sampling_audit, "synthetic_method": config.synthetic_method, "clients": clients, "X_test": X_test, "y_test": y_test, "test_sensitive": test_sensitive, "num_features": len(feature_cols), "rw_weights": rw_weights, "train_rows": int(len(loader.train_df)), "test_rows": int(len(loader.test_df))}

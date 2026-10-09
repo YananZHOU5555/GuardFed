@@ -1,0 +1,17 @@
+def _project_synthetic_columns(out: pd.DataFrame, support: pd.DataFrame, label_col: str, sensitive_col: str) -> pd.DataFrame:
+    projected = out.copy()
+    for col in projected.columns:
+        if col not in support.columns:
+            continue
+        if col == label_col or col == sensitive_col or _integer_like(support[col]) or support[col].nunique(dropna=True) <= 20:
+            values = np.sort(support[col].dropna().unique())
+            if len(values) == 0:
+                continue
+            raw = projected[col].astype(float).to_numpy()
+            nearest_idx = np.abs(raw[:, None] - values[None, :]).argmin(axis=1)
+            projected[col] = values[nearest_idx].astype(int if _integer_like(support[col]) else float)
+        else:
+            lo = float(support[col].min())
+            hi = float(support[col].max())
+            projected[col] = projected[col].astype(float).clip(lo, hi)
+    return projected

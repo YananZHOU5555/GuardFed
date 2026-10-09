@@ -1,0 +1,1006 @@
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real10_none --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_noneCompared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real10_none
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_gaussian_copula_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method gaussian_copula --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_gaussian_copula_synth9
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_ctgan_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method ctgan --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_ctgan_synth9
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_tvae_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method tvae --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_tvae_synth9
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_smote_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method smote --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_smote_synth9
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_forest_diffusion_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method forest_diffusion --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=forest_diffusion|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_forest_diffusion_synth9
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.651188 AEOD=0.098492 ASPD=0.169587 time=9.9s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.651728 AEOD=0.054274 ASPD=0.123161 time=6.4s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.651728 AEOD=0.076575 ASPD=0.145894 time=6.6s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.646328 AEOD=0.091127 ASPD=0.155227 time=6.8s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.647948 AEOD=0.091245 ASPD=0.142361 time=6.6s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.652268 AEOD=0.074682 ASPD=0.147422 time=6.1s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.676026 AEOD=0.094617 ASPD=0.143817 time=6.0s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.649028 AEOD=0.045578 ASPD=0.102279 time=6.0s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.646868 AEOD=0.064182 ASPD=0.116736 time=6.0s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.642549 AEOD=0.066016 ASPD=0.102694 time=6.0s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_pca_gaussian_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method pca_gaussian --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.01+0.09|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real1_pca_gaussian_synth9
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_gaussian_copula_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method gaussian_copula --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=gaussian_copula|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_gaussian_copula_synth5
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_ctgan_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method ctgan --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=ctgan|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_ctgan_synth5
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_tvae_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method tvae --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=tvae|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_tvae_synth5
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_smote_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method smote --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=smote|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_smote_synth5
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_forest_diffusion_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method forest_diffusion --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.811342 AEOD=0.023038 ASPD=0.055993 time=29.6s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.793014 AEOD=0.010208 ASPD=0.035292 time=25.5s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.819178 AEOD=0.032741 ASPD=0.060411 time=25.8s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.806295 AEOD=0.035913 ASPD=0.062536 time=25.6s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.819111 AEOD=0.025878 ASPD=0.061639 time=25.6s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.814131 AEOD=0.007165 ASPD=0.066940 time=25.4s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.817451 AEOD=0.006447 ASPD=0.062644 time=25.4s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.821369 AEOD=0.054345 ASPD=0.083618 time=25.3s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.828873 AEOD=0.001282 ASPD=0.093698 time=25.1s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.827279 AEOD=0.009081 ASPD=0.091557 time=24.9s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.626890 AEOD=0.105176 ASPD=0.019929 time=6.1s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.649028 AEOD=0.148891 ASPD=0.033369 time=5.5s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.640389 AEOD=0.036853 ASPD=0.032956 time=5.7s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645788 AEOD=0.096539 ASPD=0.011475 time=5.6s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.625270 AEOD=0.092399 ASPD=0.014556 time=5.7s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.637149 AEOD=0.134102 ASPD=0.031163 time=5.6s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.145460 ASPD=0.045101 time=5.7s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.631749 AEOD=0.054156 ASPD=0.018770 time=5.6s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.629590 AEOD=0.061786 ASPD=0.010690 time=5.8s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645248 AEOD=0.125081 ASPD=0.027574 time=5.7s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_pca_gaussian_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method pca_gaussian --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] skip existing full|adult|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[2/20] skip existing full|adult|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[3/20] skip existing full|adult|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[4/20] skip existing full|adult|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[5/20] skip existing full|adult|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[6/20] skip existing full|adult|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[7/20] skip existing full|adult|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[8/20] skip existing full|adult|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[9/20] skip existing full|adult|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[10/20] skip existing full|adult|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[11/20] skip existing full|compas|IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[12/20] skip existing full|compas|IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+
+[13/20] skip existing full|compas|IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[14/20] skip existing full|compas|IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[15/20] skip existing full|compas|IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[16/20] skip existing full|compas|non-IID|GuardFed-AD2+|Benign|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[17/20] skip existing full|compas|non-IID|GuardFed-AD2+|F Flip|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[18/20] skip existing full|compas|non-IID|GuardFed-AD2+|FedSA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[19/20] skip existing full|compas|non-IID|GuardFed-AD2+|S-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+[20/20] skip existing full|compas|non-IID|GuardFed-AD2+|Sp-DFA|rounds=70|seed=123|clients=20|malicious=4|epochs=1|batch=256|lr=0.005|opt=adam|root=0.05+0.05|serversamp=stratified_sensitive|serveralpha=None|synth=pca_gaussian|synth_epochs=50|sensfeat=0|agg=count|fflip=invert|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=1.75|fedsa_norm=2.0|fg=server_aeod|actfb=0.12|acttemp=0.8|actkeep=1.0|actmetric=aeod_aspd|actdrop=0.005|actrisk=0.1|actviol=0.02|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=original|ad2normmode=root|ad2uw=3.0|ad2cw=0.2|ad2aw=1.5|ad2plus=fixed|suite=server_generation_ablation|tag=real5_pca_gaussian_synth5
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+adult_ad2plus_ablation: 160 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/adult_ad2plus_ablation.csv
+server_distribution_ablation: 200 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/server_distribution_ablation.csv
+server_generation_ablation: 260 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/server_generation_ablation.csv
+fedsa_smoke: 4 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/fedsa_smoke.csv

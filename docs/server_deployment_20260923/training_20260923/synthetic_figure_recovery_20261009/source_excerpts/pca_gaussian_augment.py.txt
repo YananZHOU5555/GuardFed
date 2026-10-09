@@ -1,0 +1,15 @@
+def pca_gaussian_augment(root_df: pd.DataFrame, reference_df: pd.DataFrame, cols: List[str], label_col: str, sensitive_col: str, n_synth: int, seed: int) -> pd.DataFrame:
+    if n_synth <= 0 or len(root_df) < 3:
+        return root_df.iloc[0:0][cols].copy()
+    rng = np.random.default_rng(seed)
+    fit = root_df[cols].astype(float).to_numpy()
+    mean = fit.mean(axis=0)
+    cov = np.cov(fit, rowvar=False)
+    cov = np.nan_to_num(cov, nan=0.0, posinf=0.0, neginf=0.0)
+    shrink = np.eye(len(cols)) * max(1e-6, float(np.trace(cov)) / max(1, len(cols)) * 1e-3)
+    try:
+        sampled = rng.multivariate_normal(mean, cov + shrink, size=n_synth)
+    except np.linalg.LinAlgError:
+        sampled = rng.multivariate_normal(mean, np.diag(np.diag(cov) + 1e-6), size=n_synth)
+    out = pd.DataFrame(sampled, columns=cols)
+    return _project_synthetic_columns(out, reference_df[cols], label_col, sensitive_col)

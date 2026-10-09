@@ -1,0 +1,1222 @@
+[
+  {
+    "detail": {
+      "both_hashes_wrong_rejected": {
+        "exception": "RuntimeError",
+        "reason": "Frozen calibration core unavailable; required SHA256 cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed; checked E:\\OneDrive\\\u6587\u6863\\GuardFed\\scripts\\reproduce_paper_tables.py=dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd; E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\scripts\\reproduce_paper_tables.py=dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "both_missing_rejected": {
+        "exception": "RuntimeError",
+        "reason": "Frozen calibration core unavailable; required SHA256 cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed; checked E:\\OneDrive\\\u6587\u6863\\GuardFed\\scripts\\reproduce_paper_tables.py=MISSING; E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\scripts\\reproduce_paper_tables.py=MISSING"
+      },
+      "candidate_paths": [
+        "E:\\OneDrive\\\u6587\u6863\\GuardFed\\scripts\\reproduce_paper_tables.py",
+        "E:\\OneDrive\\\u6587\u6863\\GuardFed\\tmp\\revision-publish-20260928\\scripts\\reproduce_paper_tables.py"
+      ],
+      "fallback_requires_exact_hash": true,
+      "root_preferred_when_exact_hash": true
+    },
+    "name": "frozen_core_root_resolution",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "dataset_loader_called": false,
+      "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed"
+    },
+    "name": "frozen_core_source_identity",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "actual": {
+        "accuracy": 0.75,
+        "aeod": 0.5,
+        "aspd": 0.25,
+        "constant_predictions": false,
+        "fairness_status": "DEFINED",
+        "group_confusion_counts": {
+          "0": {
+            "fn": 1,
+            "fp": 1,
+            "fpr": 0.5,
+            "n": 4,
+            "negatives": 2,
+            "positive_rate": 0.5,
+            "positives": 2,
+            "tn": 1,
+            "tp": 1,
+            "tpr": 0.5
+          },
+          "1": {
+            "fn": 0,
+            "fp": 0,
+            "fpr": 0.0,
+            "n": 4,
+            "negatives": 3,
+            "positive_rate": 0.25,
+            "positives": 1,
+            "tn": 3,
+            "tp": 1,
+            "tpr": 1.0
+          }
+        },
+        "majority_accuracy": 0.625,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.375,
+        "prediction_count": 8,
+        "warnings": []
+      },
+      "expected_accuracy": 0.75,
+      "expected_aeod": 0.5,
+      "expected_aspd": 0.25,
+      "labels": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "predictions": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "sensitive": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "name": "hand_computed_confusion_matrices",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "absent_group": {
+        "accuracy": 1.0,
+        "aeod": null,
+        "aspd": null,
+        "constant_predictions": false,
+        "fairness_status": "UNDEFINED_DENOMINATOR",
+        "group_confusion_counts": {
+          "0": {
+            "fn": 0,
+            "fp": 0,
+            "fpr": 0.0,
+            "n": 2,
+            "negatives": 1,
+            "positive_rate": 0.5,
+            "positives": 1,
+            "tn": 1,
+            "tp": 1,
+            "tpr": 1.0
+          },
+          "1": {
+            "fn": 0,
+            "fp": 0,
+            "fpr": null,
+            "n": 0,
+            "negatives": 0,
+            "positive_rate": null,
+            "positives": 0,
+            "tn": 0,
+            "tp": 0,
+            "tpr": null
+          }
+        },
+        "majority_accuracy": 0.5,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.5,
+        "prediction_count": 2,
+        "warnings": [
+          "AEOD denominator is zero for sensitive group 1",
+          "ASPD denominator is zero for sensitive group 1"
+        ]
+      },
+      "constant_all_zero_and_all_one": [
+        {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0,
+          "constant_predictions": true,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 1,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 0.0,
+              "positives": 1,
+              "tn": 1,
+              "tp": 0,
+              "tpr": 0.0
+            },
+            "1": {
+              "fn": 1,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 0.0,
+              "positives": 1,
+              "tn": 1,
+              "tp": 0,
+              "tpr": 0.0
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.0,
+          "prediction_count": 4,
+          "warnings": []
+        },
+        {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0,
+          "constant_predictions": true,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 1.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 1.0,
+              "positives": 1,
+              "tn": 0,
+              "tp": 1,
+              "tpr": 1.0
+            },
+            "1": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 1.0,
+              "n": 2,
+              "negatives": 1,
+              "positive_rate": 1.0,
+              "positives": 1,
+              "tn": 0,
+              "tp": 1,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 1.0,
+          "prediction_count": 4,
+          "warnings": []
+        }
+      ],
+      "no_negative": {
+        "accuracy": 0.75,
+        "aeod": 0.5,
+        "aspd": 0.0,
+        "constant_predictions": false,
+        "fairness_status": "DEFINED",
+        "group_confusion_counts": {
+          "0": {
+            "fn": 1,
+            "fp": 0,
+            "fpr": null,
+            "n": 2,
+            "negatives": 0,
+            "positive_rate": 0.5,
+            "positives": 2,
+            "tn": 0,
+            "tp": 1,
+            "tpr": 0.5
+          },
+          "1": {
+            "fn": 0,
+            "fp": 0,
+            "fpr": 0.0,
+            "n": 2,
+            "negatives": 1,
+            "positive_rate": 0.5,
+            "positives": 1,
+            "tn": 1,
+            "tp": 1,
+            "tpr": 1.0
+          }
+        },
+        "majority_accuracy": 0.75,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.5,
+        "prediction_count": 4,
+        "warnings": []
+      },
+      "no_positive": {
+        "accuracy": 0.75,
+        "aeod": null,
+        "aspd": 0.0,
+        "constant_predictions": false,
+        "fairness_status": "UNDEFINED_DENOMINATOR",
+        "group_confusion_counts": {
+          "0": {
+            "fn": 0,
+            "fp": 1,
+            "fpr": 0.5,
+            "n": 2,
+            "negatives": 2,
+            "positive_rate": 0.5,
+            "positives": 0,
+            "tn": 1,
+            "tp": 0,
+            "tpr": null
+          },
+          "1": {
+            "fn": 0,
+            "fp": 0,
+            "fpr": 0.0,
+            "n": 2,
+            "negatives": 1,
+            "positive_rate": 0.5,
+            "positives": 1,
+            "tn": 1,
+            "tp": 1,
+            "tpr": 1.0
+          }
+        },
+        "majority_accuracy": 0.75,
+        "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+        "positive_rate": 0.5,
+        "prediction_count": 4,
+        "warnings": [
+          "AEOD denominator is zero for sensitive group 0"
+        ]
+      }
+    },
+    "name": "undefined_denominators_and_constant_predictions",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "column_predictions": {
+        "exception": "ValueError",
+        "reason": "Nonempty prediction vector required"
+      },
+      "empty": {
+        "exception": "ValueError",
+        "reason": "Nonempty prediction vector required"
+      },
+      "nan_label": {
+        "exception": "ValueError",
+        "reason": "labels must be a complete binary vector"
+      },
+      "short_labels": {
+        "exception": "ValueError",
+        "reason": "labels must be a complete binary vector"
+      },
+      "unknown_prediction": {
+        "exception": "ValueError",
+        "reason": "predictions must be a complete binary vector"
+      },
+      "unknown_sensitive": {
+        "exception": "ValueError",
+        "reason": "sensitive must be a complete binary vector"
+      }
+    },
+    "name": "malformed_binary_vectors_rejected",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "margins": [
+        -1.0,
+        0.0,
+        1.0,
+        -1.0,
+        0.0,
+        1.0
+      ],
+      "predictions": {
+        "native": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "raw": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "shared_calibration": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "rejections": {
+        "ad2_native_disabled": {
+          "exception": "ValueError",
+          "reason": "Current900 AD2+ native requires its original calibration"
+        },
+        "bool_threshold": {
+          "exception": "ValueError",
+          "reason": "Incomplete declared group thresholds"
+        },
+        "empty_fits": {
+          "exception": "ValueError",
+          "reason": "Nonempty known prediction views required"
+        },
+        "empty_prediction_score": {
+          "exception": "ValueError",
+          "reason": "Nonempty known prediction views required"
+        },
+        "inf_threshold": {
+          "exception": "ValueError",
+          "reason": "Out of range float values are not JSON compliant"
+        },
+        "infinite_margins": {
+          "exception": "ValueError",
+          "reason": "Finite complete target margins required"
+        },
+        "missing_threshold": {
+          "exception": "ValueError",
+          "reason": "Incomplete declared group thresholds"
+        },
+        "nan_margins": {
+          "exception": "ValueError",
+          "reason": "Finite complete target margins required"
+        },
+        "nan_threshold": {
+          "exception": "ValueError",
+          "reason": "Out of range float values are not JSON compliant"
+        },
+        "shared_recipe_drift": {
+          "exception": "ValueError",
+          "reason": "Shared calibration recipe differs from the prepared frozen-core recipe"
+        },
+        "short_sensitive": {
+          "exception": "ValueError",
+          "reason": "target sensitive must be a complete binary vector"
+        },
+        "signed_wrong_view_rule": {
+          "exception": "ValueError",
+          "reason": "Prediction rule contradicts the declared view"
+        },
+        "string_threshold": {
+          "exception": "ValueError",
+          "reason": "Incomplete declared group thresholds"
+        },
+        "tampered_finite_threshold": {
+          "exception": "ValueError",
+          "reason": "Prediction fit identity changed"
+        },
+        "views_['raw', 'raw']": {
+          "exception": "ValueError",
+          "reason": "Unknown method, repeated view, or incomplete declared view set"
+        },
+        "views_['unknown']": {
+          "exception": "ValueError",
+          "reason": "Unknown method, repeated view, or incomplete declared view set"
+        },
+        "views_[]": {
+          "exception": "ValueError",
+          "reason": "Unknown method, repeated view, or incomplete declared view set"
+        }
+      },
+      "sensitive": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "name": "ties_views_and_bad_fits",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "fits_identical_after_scoring_opposite_target_labels": true,
+      "original_core_margin_global_restored": true,
+      "predictions_unchanged_after_label_access": {
+        "native": {
+          "dtype": "|u1",
+          "sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "shape": [
+            4
+          ]
+        },
+        "raw": {
+          "dtype": "|u1",
+          "sha256": "6b1e73a0094b7b812d3b9e22cffb4f8239319847522c4fa103753b6950020f93",
+          "shape": [
+            4
+          ]
+        },
+        "shared_calibration": {
+          "dtype": "|u1",
+          "sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "shape": [
+            4
+          ]
+        }
+      },
+      "rejections": {
+        "ad2_calibration_base_weight": {
+          "exception": "ValueError",
+          "reason": "Invalid finite calibration setting: ad2_calibration_base_weight"
+        },
+        "ad2_calibration_objective": {
+          "exception": "ValueError",
+          "reason": "Unsupported calibration temperature or objective"
+        },
+        "ad2_calibration_quantiles": {
+          "exception": "ValueError",
+          "reason": "Invalid calibration integer: ad2_calibration_quantiles"
+        },
+        "ad2_calibration_temperature": {
+          "exception": "ValueError",
+          "reason": "Invalid finite calibration setting: ad2_calibration_temperature"
+        },
+        "empty_root": {
+          "exception": "ValueError",
+          "reason": "Finite complete root margins required"
+        },
+        "frozen_core_bytes_drift": {
+          "exception": "ValueError",
+          "reason": "Frozen calibration core bytes changed"
+        },
+        "missing_root_cell": {
+          "exception": "ValueError",
+          "reason": "Root calibration lacks a sensitive/label cell"
+        },
+        "nan_root": {
+          "exception": "ValueError",
+          "reason": "Finite complete root margins required"
+        },
+        "short_root_labels": {
+          "exception": "ValueError",
+          "reason": "root labels must be a complete binary vector"
+        }
+      }
+    },
+    "name": "root_only_fit_and_target_label_isolation",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "FLTrust": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "FLTrust+FairGuard": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "FairFed": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "FairGuard": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "FedAA": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "FedAvg": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "GuardFed-AD2+": {
+        "native_rule": "group_margin_greater_equal",
+        "predictions": {
+          "native": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "LASA": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "Median": {
+        "native_rule": "argmax_margin_strictly_positive",
+        "predictions": {
+          "native": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    "name": "current_nine_method_native_interfaces",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "changed_weights_rejected": {
+        "exception": "RuntimeError",
+        "reason": "Inference or calibration changed checkpoint weights"
+      },
+      "evidence_stage": "measured_synthetic_CPU_acceptance_only",
+      "fits": {
+        "native": {
+          "fit_data": "clean_train_root_only",
+          "fit_diagnostics": {
+            "server_adaptive_lambda": 0.1269280110429725,
+            "server_base_calibration_metrics": {
+              "accuracy": 0.5,
+              "aeod": 0.0,
+              "aspd": 0.0
+            },
+            "server_base_calibration_risk": 0.0,
+            "server_calibration_acc_floor": 0.47,
+            "server_calibration_budget": 0.06,
+            "server_calibration_max_acc_drop": 0.03,
+            "server_calibration_metrics": {
+              "accuracy": 0.75,
+              "aeod": 0.0,
+              "aspd": 0.0
+            },
+            "server_calibration_objective": "acc_floor",
+            "server_calibration_risk": 0.0,
+            "server_calibration_score": 10.0075
+          },
+          "fit_sha256": "f10169882cc8f7af208d240b1a0b75ef52cb71a8bad375bcfd34d65bac46370b",
+          "method": "GuardFed-AD2+",
+          "rule": "group_margin_greater_equal",
+          "thresholds": {
+            "0": -0.07899924,
+            "1": -0.07941141
+          },
+          "view": "native"
+        },
+        "raw": {
+          "fit_data": "none",
+          "fit_sha256": "403b7b187121326970b87cc37813296bf8a1e71078ccad2210b986ddd0b68747",
+          "method": "GuardFed-AD2+",
+          "rule": "argmax_margin_strictly_positive",
+          "thresholds": null,
+          "view": "raw"
+        },
+        "shared_calibration": {
+          "fit_data": "clean_train_root_only",
+          "fit_diagnostics": {
+            "server_adaptive_lambda": 0.1269280110429725,
+            "server_base_calibration_metrics": {
+              "accuracy": 0.5,
+              "aeod": 0.0,
+              "aspd": 0.0
+            },
+            "server_base_calibration_risk": 0.0,
+            "server_calibration_acc_floor": 0.495,
+            "server_calibration_budget": 0.06,
+            "server_calibration_max_acc_drop": 0.005,
+            "server_calibration_metrics": {
+              "accuracy": 0.75,
+              "aeod": 0.0,
+              "aspd": 0.0
+            },
+            "server_calibration_objective": "acc_floor",
+            "server_calibration_risk": 0.0,
+            "server_calibration_score": 10.0075
+          },
+          "fit_sha256": "b5e834ce59818b3c5b7cf4aecbd081d00ef8129f88ae31b7c4f533c50890d7dd",
+          "method": "GuardFed-AD2+",
+          "rule": "group_margin_greater_equal",
+          "thresholds": {
+            "0": -0.07899924,
+            "1": -0.07941141
+          },
+          "view": "shared_calibration"
+        }
+      },
+      "gpu_equivalence_checked": false,
+      "gradients_absent": true,
+      "input_dtype": "torch.uint8",
+      "model_class": "CelebACNN",
+      "optimizer_constructed": false,
+      "raw_matches_direct_argmax": true,
+      "real_celeba_images_evaluated": 0,
+      "root_margins": [
+        -0.07899945974349976,
+        -0.07872416079044342,
+        -0.07899582386016846,
+        -0.07888095825910568,
+        -0.0794467180967331,
+        -0.07885830849409103,
+        -0.07793579995632172,
+        -0.07762099802494049
+      ],
+      "root_pixels": {
+        "dtype": "|u1",
+        "sha256": "c4cfbf8c37a5e790859f0b5cd270b7c7a1117c97ef9e666cb51ef3805ae72f85",
+        "shape": [
+          8,
+          3,
+          64,
+          64
+        ]
+      },
+      "root_shape": [
+        8,
+        3,
+        64,
+        64
+      ],
+      "scores": {
+        "native": {
+          "accuracy": 0.6666666666666666,
+          "aeod": 0.0,
+          "aspd": 0.33333333333333337,
+          "constant_predictions": false,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 0.5,
+              "n": 3,
+              "negatives": 2,
+              "positive_rate": 0.6666666666666666,
+              "positives": 1,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 1.0
+            },
+            "1": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 1.0,
+              "n": 3,
+              "negatives": 1,
+              "positive_rate": 1.0,
+              "positives": 2,
+              "tn": 0,
+              "tp": 2,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.8333333333333334,
+          "prediction_count": 6,
+          "warnings": []
+        },
+        "raw": {
+          "accuracy": 0.5,
+          "aeod": 0.0,
+          "aspd": 0.0,
+          "constant_predictions": true,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 1,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 3,
+              "negatives": 2,
+              "positive_rate": 0.0,
+              "positives": 1,
+              "tn": 2,
+              "tp": 0,
+              "tpr": 0.0
+            },
+            "1": {
+              "fn": 2,
+              "fp": 0,
+              "fpr": 0.0,
+              "n": 3,
+              "negatives": 1,
+              "positive_rate": 0.0,
+              "positives": 2,
+              "tn": 1,
+              "tp": 0,
+              "tpr": 0.0
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.0,
+          "prediction_count": 6,
+          "warnings": []
+        },
+        "shared_calibration": {
+          "accuracy": 0.6666666666666666,
+          "aeod": 0.0,
+          "aspd": 0.33333333333333337,
+          "constant_predictions": false,
+          "fairness_status": "DEFINED",
+          "group_confusion_counts": {
+            "0": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 0.5,
+              "n": 3,
+              "negatives": 2,
+              "positive_rate": 0.6666666666666666,
+              "positives": 1,
+              "tn": 1,
+              "tp": 1,
+              "tpr": 1.0
+            },
+            "1": {
+              "fn": 0,
+              "fp": 1,
+              "fpr": 1.0,
+              "n": 3,
+              "negatives": 1,
+              "positive_rate": 1.0,
+              "positives": 2,
+              "tn": 0,
+              "tp": 2,
+              "tpr": 1.0
+            }
+          },
+          "majority_accuracy": 0.5,
+          "metric_definition": "aeod is absolute TPR gap, not full equalized odds",
+          "positive_rate": 0.8333333333333334,
+          "prediction_count": 6,
+          "warnings": []
+        }
+      },
+      "target_margins": [
+        -0.07896341383457184,
+        -0.07752460986375809,
+        -0.07960602641105652,
+        -0.0793643370270729,
+        -0.07847663760185242,
+        -0.07819163799285889
+      ],
+      "target_pixels": {
+        "dtype": "|u1",
+        "sha256": "8ea08e1c718e71ae83a0be43bc45d7aed0427743349679d2c61507a22de84894",
+        "shape": [
+          6,
+          3,
+          64,
+          64
+        ]
+      },
+      "target_shape": [
+        6,
+        3,
+        64,
+        64
+      ],
+      "weights_before_and_after": {
+        "classifier.bias": {
+          "dtype": "<f4",
+          "sha256": "c166d641248289e612e0c4dc35e02f8fdcae91d3d36aa7661307f7bcf6d3f04e",
+          "shape": [
+            2
+          ]
+        },
+        "classifier.weight": {
+          "dtype": "<f4",
+          "sha256": "84ad12c002912f023046bbb18c893dfc6327d42df5582d5e9c4fd30359c63d55",
+          "shape": [
+            2,
+            128
+          ]
+        },
+        "features.0.bias": {
+          "dtype": "<f4",
+          "sha256": "cdc5bdd47a777ef5f0741e179b37f838d11c768b6a9ee615e9bfffa01a3eafa0",
+          "shape": [
+            32
+          ]
+        },
+        "features.0.weight": {
+          "dtype": "<f4",
+          "sha256": "cc8ececb8eeedf4edad7ebd31782b64227648586574e8fc487190c4b0b00d64d",
+          "shape": [
+            32,
+            3,
+            3,
+            3
+          ]
+        },
+        "features.3.bias": {
+          "dtype": "<f4",
+          "sha256": "1df7120619308e389fa7bae0f03120f18a846d52c2043afafcdc7dc3cfe04738",
+          "shape": [
+            64
+          ]
+        },
+        "features.3.weight": {
+          "dtype": "<f4",
+          "sha256": "10014841c9bf68fe7650f90b85905f6e443f35c37de94e1f9a378a0707362651",
+          "shape": [
+            64,
+            32,
+            3,
+            3
+          ]
+        },
+        "features.6.bias": {
+          "dtype": "<f4",
+          "sha256": "3d064e4f8272754bd037eb347f779c67eacc69a422ddfedc15e2ae3f1b861f13",
+          "shape": [
+            128
+          ]
+        },
+        "features.6.weight": {
+          "dtype": "<f4",
+          "sha256": "c7ddcd80e1107568c91f641119401b70fce72b04bcfb2a10c39a8da47c968527",
+          "shape": [
+            128,
+            64,
+            3,
+            3
+          ]
+        }
+      },
+      "weights_unchanged": true
+    },
+    "name": "real_RGB64_CNN_synthetic_CPU_inference",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "fixture_positive_gate": "PASS_IN_MEMORY_ONLY_NO_DISPATCH",
+      "real_decisions_all_null": true,
+      "real_dispatch_calls": 0,
+      "real_inventory_records": 900,
+      "real_prepared_protocol_unchanged": true,
+      "real_protocol_status": "PREPARED_NOT_FROZEN",
+      "rejection_count": 45,
+      "rejections": {
+        "duplicate_views": {
+          "exception": "ValueError",
+          "reason": "Complete predeclared views required"
+        },
+        "empty_sources": {
+          "exception": "ValueError",
+          "reason": "Evaluation source identity changed"
+        },
+        "empty_views": {
+          "exception": "ValueError",
+          "reason": "Complete predeclared views required"
+        },
+        "job_drift": {
+          "exception": "ValueError",
+          "reason": "Evaluation job identity changed"
+        },
+        "missing_decision": {
+          "exception": "ValueError",
+          "reason": "Final evaluation choices are unresolved"
+        },
+        "missing_job_target": {
+          "exception": "ValueError",
+          "reason": "Job target identity is incomplete or inconsistent"
+        },
+        "missing_observed": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "missing_target_order": {
+          "exception": "ValueError",
+          "reason": "Target sample identity has not been attested"
+        },
+        "model_id_drift": {
+          "exception": "ValueError",
+          "reason": "Model/job identity is inconsistent"
+        },
+        "not_terminal_round": {
+          "exception": "ValueError",
+          "reason": "Accepted terminal valid model required"
+        },
+        "observed_adapter_source_hashes_drift": {
+          "exception": "ValueError",
+          "reason": "Method adapter source identity is incomplete or changed"
+        },
+        "observed_checkpoint_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_config_canonical_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_data_source_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_model_id_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_model_inventory_record_drift": {
+          "exception": "ValueError",
+          "reason": "Job does not match its measured inventory record"
+        },
+        "observed_model_inventory_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_original_job_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_original_result_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_root_image_ids_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_target_image_ids_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_target_n_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_target_order_sha256_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "observed_target_split_drift": {
+          "exception": "ValueError",
+          "reason": "Observed model, data or target identity drifted"
+        },
+        "partial_backup": {
+          "exception": "ValueError",
+          "reason": "Incomplete checkpoint backup identity"
+        },
+        "partial_job_sources": {
+          "exception": "ValueError",
+          "reason": "Incomplete model source/data identity"
+        },
+        "partial_replay": {
+          "exception": "ValueError",
+          "reason": "Native valid replay has not been accepted"
+        },
+        "protocol_calibration_drift": {
+          "exception": "ValueError",
+          "reason": "Protocol model round, native interface or calibration recipe drifted"
+        },
+        "protocol_core_drift": {
+          "exception": "ValueError",
+          "reason": "Protocol model round, native interface or calibration recipe drifted"
+        },
+        "protocol_drift": {
+          "exception": "ValueError",
+          "reason": "Missing or changed frozen dispatch receipt"
+        },
+        "protocol_round_drift": {
+          "exception": "ValueError",
+          "reason": "Protocol model round, native interface or calibration recipe drifted"
+        },
+        "real_prepared_protocol": {
+          "exception": "ValueError",
+          "reason": "Prepared evaluation is not dispatchable"
+        },
+        "replay_excess_difference": {
+          "exception": "ValueError",
+          "reason": "Native valid replay has not been accepted"
+        },
+        "replay_failure": {
+          "exception": "ValueError",
+          "reason": "Native valid replay has not been accepted"
+        },
+        "replay_nan_difference": {
+          "exception": "ValueError",
+          "reason": "Native valid replay has not been accepted"
+        },
+        "replay_wrong_inventory": {
+          "exception": "ValueError",
+          "reason": "Native valid replay has not been accepted"
+        },
+        "source_drift": {
+          "exception": "ValueError",
+          "reason": "Evaluation source identity changed"
+        },
+        "unrecognised_view": {
+          "exception": "ValueError",
+          "reason": "Complete predeclared views required"
+        },
+        "unresolved_decision": {
+          "exception": "ValueError",
+          "reason": "Final evaluation choices are unresolved"
+        },
+        "wrong_attack": {
+          "exception": "ValueError",
+          "reason": "Evaluation is outside the current nine-method cohort"
+        },
+        "wrong_distribution_alpha": {
+          "exception": "ValueError",
+          "reason": "Evaluation is outside the current nine-method cohort"
+        },
+        "wrong_method": {
+          "exception": "ValueError",
+          "reason": "Evaluation is outside the current nine-method cohort"
+        },
+        "wrong_original_split": {
+          "exception": "ValueError",
+          "reason": "Accepted terminal valid model required"
+        },
+        "wrong_seed": {
+          "exception": "ValueError",
+          "reason": "Evaluation is outside the current nine-method cohort"
+        },
+        "wrong_source_method": {
+          "exception": "ValueError",
+          "reason": "Source method identity is inconsistent"
+        }
+      },
+      "synthetic_positive_gates_from_declared_job_metadata": 900
+    },
+    "name": "freeze_gate_and_identity_drift_rejections",
+    "status": "PASS"
+  },
+  {
+    "detail": {
+      "evidence_stage": "local_software_regression_against_previously_accepted_valid_caches",
+      "historical_cohort_size": 700,
+      "max_abs_difference": 1.1102230246251565e-16,
+      "not_new_scientific_results": true,
+      "real_image_inference_count": 0,
+      "selected_count": 8,
+      "status": "PASS",
+      "test_labels_read": false,
+      "tolerance": 1e-12
+    },
+    "name": "eight_accepted_validation_cache_regressions",
+    "status": "PASS"
+  }
+]

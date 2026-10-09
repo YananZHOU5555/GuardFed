@@ -1,0 +1,27 @@
+def make_synthetic_root(
+    method: str,
+    root_df: pd.DataFrame,
+    reference_df: pd.DataFrame,
+    feature_cols: List[str],
+    label_col: str,
+    sensitive_col: str,
+    n_synth: int,
+    seed: int,
+    epochs: int = 50,
+) -> pd.DataFrame:
+    cols = list(dict.fromkeys(feature_cols + [sensitive_col, label_col]))
+    if n_synth <= 0 or method == "none":
+        return root_df.iloc[0:0][cols].copy()
+    if method == "gaussian_copula":
+        return gaussian_copula_augment(root_df, reference_df, feature_cols, label_col, sensitive_col, n_synth, seed)[cols]
+    if method == "bootstrap":
+        return bootstrap_augment(root_df, cols, n_synth, seed)
+    if method == "noisy_bootstrap":
+        return noisy_bootstrap_augment(root_df, reference_df, cols, label_col, sensitive_col, n_synth, seed)
+    if method == "smote":
+        return smote_augment(root_df, reference_df, cols, label_col, sensitive_col, n_synth, seed)
+    if method == "pca_gaussian":
+        return pca_gaussian_augment(root_df, reference_df, cols, label_col, sensitive_col, n_synth, seed)
+    if method in {"ctgan", "tvae"}:
+        return ctgan_augment(root_df, reference_df, cols, label_col, sensitive_col, n_synth, seed, epochs, method)
+    raise ValueError(f"Unsupported synthetic_method: {method}")

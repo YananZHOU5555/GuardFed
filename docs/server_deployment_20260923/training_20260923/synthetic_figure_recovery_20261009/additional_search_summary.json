@@ -1,0 +1,834 @@
+{
+  "archives": [
+    {
+      "archive": "tmp/git_sync_assets/guardfed-windows-artifacts-20260923.tar.gz",
+      "source_files": 50,
+      "bytecode": 0,
+      "raster_images": 284,
+      "forest_sources": [
+        "outputs/guardfed_tables/advisor_experiments_final/GuardFed_AD2plus_advisor_experiment_report.tex"
+      ],
+      "plot_label_sources": [],
+      "exact_image_matches": [],
+      "forest_metadata_hits": [
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/GuardFed_AD2plus_advisor_experiment_report.md",
+          "bytes": 15741,
+          "sha256": "4f09a656c7ceae93a953557ee632905bcc72bdd40ea263c5834a96309af422ed",
+          "hits": [
+            {
+              "line": 164,
+              "text": "| ForestDiffusion | diffusion / flow matching | AISTATS 2024 tree-based diffusion/flow tabular generator |"
+            },
+            {
+              "line": 167,
+              "text": "注意：PCA-Gaussian 是控制基线，不应在论文中包装为高影响力深度生成方法。现在主线 synthetic 方法可以写成 Gaussian Copula、CTGAN、TVAE、SMOTE、ForestDiffusion；PCA-Gaussian 作为 sanity/control。"
+            },
+            {
+              "line": 175,
+              "text": "| 3 | `real5_forest_diffusion_synth5` | 0.05 | 0.05 | ForestDiffusion | 0.7406 | 0.0429 | 0.0287 | 0.0358 | 0.7048 |"
+            },
+            {
+              "line": 180,
+              "text": "| 8 | `real1_forest_diffusion_synth9` | 0.01 | 0.09 | ForestDiffusion | 0.7301 | 0.0285 | 0.0642 | 0.0463 | 0.6838 |"
+            },
+            {
+              "line": 196,
+              "text": "| 4 | `real5_forest_diffusion_synth5` | 0.8306 | 0.0069 | 0.0510 | 0.0290 | 0.8017 |"
+            },
+            {
+              "line": 206,
+              "text": "| 4 | `real5_forest_diffusion_synth5` | 0.6505 | 0.0789 | 0.0064 | 0.0427 | 0.6078 |"
+            },
+            {
+              "line": 216,
+              "text": "- 1% real + 9% synthetic 在 Gaussian Copula 和 PCA-Gaussian 控制组中较强；ForestDiffusion 则是 5% real + 5% synthetic 更稳定，说明扩散/flow 类方法对真实 root seed 的数量更敏感。"
+            },
+            {
+              "line": 218,
+              "text": "- Gaussian Copula 和 ForestDiffusion 在本任务中都很有竞争力；Gaussian Copula 更轻量稳定，ForestDiffusion 在 5% real + 5% synthetic 下整体排名第 3，超过 10% real-only。"
+            },
+            {
+              "line": 273,
+              "text": "- ForestDiffusion / Generating and Imputing Tabular Data via Diffusion and Flow-based XGBoost Models: https://github.com/SamsungSAILMontreal/ForestDiffusion"
+            },
+            {
+              "line": 279,
+              "text": "3. 低比例真实 root data 加 synthetic data 可以接近甚至超过 10% real root data，尤其是 Gaussian Copula、ForestDiffusion 和 PCA-Gaussian 控制组在当前实验中表现稳定。"
+            },
+            {
+              "line": 281,
+              "text": "5. 当前已补入 ForestDiffusion，能支撑“5 个 synthetic 方法 + 1 个控制基线”的版本；若要进一步增强说服力，可再补 TabDDPM 或 CTAB-GAN+，并把新攻击命名从 `FedSA` 调整成更准确的 `BCD` 或 `PoisonedFL-style BCD`。"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/advisor_experiments_summary.md",
+          "bytes": 7340,
+          "sha256": "b83fd0c0d0011cb495f8641c084d2f1fcaf9d990e7046327480f27dc0d7c91f5",
+          "hits": [
+            {
+              "line": 57,
+              "text": "| 3 | real5_forest_diffusion_synth5 | 0.0500 | 0.0500 | forest_diffusion | 0.7406 | 0.0429 | 0.0287 | 0.0358 | 0.7048 |"
+            },
+            {
+              "line": 62,
+              "text": "| 8 | real1_forest_diffusion_synth9 | 0.0100 | 0.0900 | forest_diffusion | 0.7301 | 0.0285 | 0.0642 | 0.0463 | 0.6838 |"
+            },
+            {
+              "line": 76,
+              "text": "| adult | 4 | real5_forest_diffusion_synth5 | 0.8306 | 0.0069 | 0.0510 | 0.0290 | 0.8017 |"
+            },
+            {
+              "line": 80,
+              "text": "| adult | 8 | real1_forest_diffusion_synth9 | 0.7990 | 0.0066 | 0.0088 | 0.0077 | 0.7914 |"
+            },
+            {
+              "line": 90,
+              "text": "| compas | 5 | real5_forest_diffusion_synth5 | 0.6505 | 0.0789 | 0.0064 | 0.0427 | 0.6078 |"
+            },
+            {
+              "line": 96,
+              "text": "| compas | 11 | real1_forest_diffusion_synth9 | 0.6612 | 0.0504 | 0.1195 | 0.0850 | 0.5762 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/server_generation_ablation.md",
+          "bytes": 25062,
+          "sha256": "935d50c3003e6466bed9dd48e86bfd0eb64931135e2cff560e5146bd0382fb4f",
+          "hits": [
+            {
+              "line": 45,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | Benign | 80.20 | 0.0165 | 0.0085 | 0.0125 | 0.7895 |"
+            },
+            {
+              "line": 46,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | F Flip | 79.95 | 0.0036 | 0.0096 | 0.0066 | 0.7929 |"
+            },
+            {
+              "line": 47,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | FedSA | 77.68 | 0.0033 | 0.0044 | 0.0039 | 0.7730 |"
+            },
+            {
+              "line": 48,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | S-DFA | 78.08 | 0.0011 | 0.0042 | 0.0026 | 0.7782 |"
+            },
+            {
+              "line": 49,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | Sp-DFA | 78.29 | 0.0011 | 0.0042 | 0.0027 | 0.7802 |"
+            },
+            {
+              "line": 50,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | Benign | 80.50 | 0.0115 | 0.0114 | 0.0114 | 0.7935 |"
+            },
+            {
+              "line": 51,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | F Flip | 80.77 | 0.0018 | 0.0138 | 0.0078 | 0.7999 |"
+            },
+            {
+              "line": 52,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | FedSA | 80.87 | 0.0108 | 0.0086 | 0.0097 | 0.7990 |"
+            },
+            {
+              "line": 53,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | S-DFA | 81.73 | 0.0040 | 0.0134 | 0.0087 | 0.8086 |"
+            },
+            {
+              "line": 54,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | Sp-DFA | 80.97 | 0.0120 | 0.0099 | 0.0110 | 0.7988 |"
+            },
+            {
+              "line": 55,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | Benign | 65.60 | 0.0714 | 0.1475 | 0.1095 | 0.5466 |"
+            },
+            {
+              "line": 56,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | F Flip | 65.77 | 0.0543 | 0.1232 | 0.0887 | 0.5689 |"
+            },
+            {
+              "line": 57,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | FedSA | 65.87 | 0.0629 | 0.1275 | 0.0952 | 0.5635 |"
+            },
+            {
+              "line": 58,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | S-DFA | 65.87 | 0.0511 | 0.1237 | 0.0874 | 0.5714 |"
+            },
+            {
+              "line": 59,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | Sp-DFA | 65.33 | 0.0229 | 0.1125 | 0.0677 | 0.5857 |"
+            },
+            {
+              "line": 60,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | Benign | 66.52 | 0.0706 | 0.1349 | 0.1028 | 0.5625 |"
+            },
+            {
+              "line": 61,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | F Flip | 67.93 | 0.0773 | 0.1256 | 0.1014 | 0.5778 |"
+            },
+            {
+              "line": 62,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | FedSA | 66.25 | 0.0456 | 0.1023 | 0.0739 | 0.5886 |"
+            },
+            {
+              "line": 63,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | S-DFA | 64.85 | 0.0101 | 0.0960 | 0.0531 | 0.5954 |"
+            },
+            {
+              "line": 64,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | Sp-DFA | 67.22 | 0.0382 | 0.1022 | 0.0702 | 0.6020 |"
+            },
+            {
+              "line": 165,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | Benign | 83.15 | 0.0113 | 0.0508 | 0.0311 | 0.8004 |"
+            },
+            {
+              "line": 166,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | F Flip | 82.95 | 0.0022 | 0.0353 | 0.0188 | 0.8108 |"
+            },
+            {
+              "line": 167,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | FedSA | 83.04 | 0.0142 | 0.0534 | 0.0338 | 0.7966 |"
+            },
+            {
+              "line": 168,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | S-DFA | 83.19 | 0.0080 | 0.0299 | 0.0189 | 0.8130 |"
+            },
+            {
+              "line": 169,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | Sp-DFA | 83.48 | 0.0096 | 0.0361 | 0.0228 | 0.8119 |"
+            },
+            {
+              "line": 170,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | Benign | 82.63 | 0.0005 | 0.0576 | 0.0291 | 0.7972 |"
+            },
+            {
+              "line": 171,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | F Flip | 83.03 | 0.0001 | 0.0600 | 0.0300 | 0.8002 |"
+            },
+            {
+              "line": 172,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | FedSA | 82.63 | 0.0161 | 0.0563 | 0.0362 | 0.7901 |"
+            },
+            {
+              "line": 173,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | S-DFA | 83.13 | 0.0011 | 0.0617 | 0.0314 | 0.7999 |"
+            },
+            {
+              "line": 174,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | Sp-DFA | 83.42 | 0.0056 | 0.0694 | 0.0375 | 0.7967 |"
+            },
+            {
+              "line": 175,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | Benign | 64.96 | 0.0739 | 0.0096 | 0.0418 | 0.6078 |"
+            },
+            {
+              "line": 176,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | F Flip | 65.66 | 0.1018 | 0.0013 | 0.0516 | 0.6050 |"
+            },
+            {
+              "line": 177,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | FedSA | 65.98 | 0.0307 | 0.0012 | 0.0159 | 0.6439 |"
+            },
+            {
+              "line": 178,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | S-DFA | 65.55 | 0.0892 | 0.0007 | 0.0449 | 0.6106 |"
+            },
+            {
+              "line": 179,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | Sp-DFA | 64.47 | 0.0725 | 0.0016 | 0.0370 | 0.6077 |"
+            },
+            {
+              "line": 180,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | Benign | 63.77 | 0.1209 | 0.0175 | 0.0692 | 0.5685 |"
+            },
+            {
+              "line": 181,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | F Flip | 64.42 | 0.0978 | 0.0111 | 0.0544 | 0.5897 |"
+            },
+            {
+              "line": 182,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | FedSA | 64.74 | 0.0489 | 0.0026 | 0.0257 | 0.6217 |"
+            },
+            {
+              "line": 183,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | S-DFA | 65.87 | 0.0419 | 0.0020 | 0.0220 | 0.6368 |"
+            },
+            {
+              "line": 184,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | Sp-DFA | 65.06 | 0.1111 | 0.0167 | 0.0639 | 0.5867 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/AD2plus_expanded_experiment_delivery_notes.md",
+          "bytes": 4406,
+          "sha256": "4c679424a88a3414570b688b6fdd17f4801b7b98cb8259a86c1c2723129aa66e",
+          "hits": [
+            {
+              "line": 34,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 | 12 |"
+            },
+            {
+              "line": 35,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 | 12 |"
+            },
+            {
+              "line": 36,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 | 12 |"
+            },
+            {
+              "line": 41,
+              "text": "| 10 | 3% real + 7% forest_diffusion | 82.44 | 0.0118 | 0.0850 | 0.7760 | 12 |"
+            },
+            {
+              "line": 50,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 | 12 |"
+            },
+            {
+              "line": 52,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 | 12 |"
+            },
+            {
+              "line": 56,
+              "text": "| 8 | 5% real + 5% forest_diffusion | 65.95 | 0.0383 | 0.0239 | 0.6284 | 12 |"
+            },
+            {
+              "line": 57,
+              "text": "| 9 | 3% real + 7% forest_diffusion | 66.01 | 0.0209 | 0.0494 | 0.6249 | 12 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/expanded_experiments_joint_report.md",
+          "bytes": 2417,
+          "sha256": "e083e562a98264b3cf7a34a8addc4f451155196589425096b936c51f26972903",
+          "hits": [
+            {
+              "line": 21,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 |"
+            },
+            {
+              "line": 22,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 |"
+            },
+            {
+              "line": 23,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 |"
+            },
+            {
+              "line": 30,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 |"
+            },
+            {
+              "line": 32,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/expanded_experiments_summary.md",
+          "bytes": 8813,
+          "sha256": "c47f67c94c22fef2c2246075b04382a4157324945f0da41f5ebef1cf03ffea1b",
+          "hits": [
+            {
+              "line": 31,
+              "text": "| adult     |                       6 | real9_forest_diffusion_synth1 |     0.8329 |      0.0059 |      0.0504 |       0.8048 |  12 |"
+            },
+            {
+              "line": 35,
+              "text": "| adult     |                      10 | real2_forest_diffusion_synth8 |     0.8284 |      0.0063 |      0.0455 |       0.8025 |  12 |"
+            },
+            {
+              "line": 36,
+              "text": "| adult     |                      11 | real7_forest_diffusion_synth3 |     0.8343 |      0.0068 |      0.0577 |       0.8021 |  12 |"
+            },
+            {
+              "line": 37,
+              "text": "| adult     |                      12 | real3_forest_diffusion_synth7 |     0.8304 |      0.0102 |      0.0485 |       0.8010 |  12 |"
+            },
+            {
+              "line": 39,
+              "text": "| compas    |                       2 | real2_forest_diffusion_synth8 |     0.6653 |      0.0107 |      0.0216 |       0.6491 |  12 |"
+            },
+            {
+              "line": 42,
+              "text": "| compas    |                       5 | real7_forest_diffusion_synth3 |     0.6631 |      0.0293 |      0.0142 |       0.6414 |  12 |"
+            },
+            {
+              "line": 45,
+              "text": "| compas    |                       8 | real3_forest_diffusion_synth7 |     0.6662 |      0.0174 |      0.0421 |       0.6364 |  12 |"
+            },
+            {
+              "line": 46,
+              "text": "| compas    |                       9 | real5_forest_diffusion_synth5 |     0.6623 |      0.0351 |      0.0220 |       0.6337 |  12 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/synthetic_joint_summary.md",
+          "bytes": 2607,
+          "sha256": "22ae23ea19efdb036abb16e3e594b3170e1885864b2d2330d9314887ee4d579a",
+          "hits": [
+            {
+              "line": 10,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 | 12 |"
+            },
+            {
+              "line": 11,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 | 12 |"
+            },
+            {
+              "line": 12,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 | 12 |"
+            },
+            {
+              "line": 17,
+              "text": "| 10 | 3% real + 7% forest_diffusion | 82.44 | 0.0118 | 0.0850 | 0.7760 | 12 |"
+            },
+            {
+              "line": 28,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 | 12 |"
+            },
+            {
+              "line": 30,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 | 12 |"
+            },
+            {
+              "line": 34,
+              "text": "| 8 | 5% real + 5% forest_diffusion | 65.95 | 0.0383 | 0.0239 | 0.6284 | 12 |"
+            },
+            {
+              "line": 35,
+              "text": "| 9 | 3% real + 7% forest_diffusion | 66.01 | 0.0209 | 0.0494 | 0.6249 | 12 |"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "tmp/git_sync_assets/guardfed-server-check.tar.gz",
+      "source_files": 121,
+      "bytecode": 0,
+      "raster_images": 0,
+      "forest_sources": [
+        "outputs/guardfed_tables/advisor_experiments_final/GuardFed_AD2plus_advisor_experiment_report.tex"
+      ],
+      "plot_label_sources": [],
+      "exact_image_matches": [],
+      "forest_metadata_hits": [
+        {
+          "member": "docs/SERVER_SETUP.md",
+          "bytes": 5666,
+          "sha256": "9443dc1ba0b7b2735035550dac76115e1a0f12843a95c003a85c68b6212d245e",
+          "hits": [
+            {
+              "line": 5,
+              "text": "发布版本只做运行路径、Python 解释器等迁移修复，并从编排脚本移除核心入口不支持的 `forest_diffusion` 选项；未重设攻击校准或研究协议。原始源码另存于 Release。`outputs/`、`.codex*` 中的旧材料仅供历史参考，不应直接覆盖当前源码或作为统一口径的最终结果。"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/GuardFed_AD2plus_advisor_experiment_report.md",
+          "bytes": 15741,
+          "sha256": "4f09a656c7ceae93a953557ee632905bcc72bdd40ea263c5834a96309af422ed",
+          "hits": [
+            {
+              "line": 164,
+              "text": "| ForestDiffusion | diffusion / flow matching | AISTATS 2024 tree-based diffusion/flow tabular generator |"
+            },
+            {
+              "line": 167,
+              "text": "注意：PCA-Gaussian 是控制基线，不应在论文中包装为高影响力深度生成方法。现在主线 synthetic 方法可以写成 Gaussian Copula、CTGAN、TVAE、SMOTE、ForestDiffusion；PCA-Gaussian 作为 sanity/control。"
+            },
+            {
+              "line": 175,
+              "text": "| 3 | `real5_forest_diffusion_synth5` | 0.05 | 0.05 | ForestDiffusion | 0.7406 | 0.0429 | 0.0287 | 0.0358 | 0.7048 |"
+            },
+            {
+              "line": 180,
+              "text": "| 8 | `real1_forest_diffusion_synth9` | 0.01 | 0.09 | ForestDiffusion | 0.7301 | 0.0285 | 0.0642 | 0.0463 | 0.6838 |"
+            },
+            {
+              "line": 196,
+              "text": "| 4 | `real5_forest_diffusion_synth5` | 0.8306 | 0.0069 | 0.0510 | 0.0290 | 0.8017 |"
+            },
+            {
+              "line": 206,
+              "text": "| 4 | `real5_forest_diffusion_synth5` | 0.6505 | 0.0789 | 0.0064 | 0.0427 | 0.6078 |"
+            },
+            {
+              "line": 216,
+              "text": "- 1% real + 9% synthetic 在 Gaussian Copula 和 PCA-Gaussian 控制组中较强；ForestDiffusion 则是 5% real + 5% synthetic 更稳定，说明扩散/flow 类方法对真实 root seed 的数量更敏感。"
+            },
+            {
+              "line": 218,
+              "text": "- Gaussian Copula 和 ForestDiffusion 在本任务中都很有竞争力；Gaussian Copula 更轻量稳定，ForestDiffusion 在 5% real + 5% synthetic 下整体排名第 3，超过 10% real-only。"
+            },
+            {
+              "line": 273,
+              "text": "- ForestDiffusion / Generating and Imputing Tabular Data via Diffusion and Flow-based XGBoost Models: https://github.com/SamsungSAILMontreal/ForestDiffusion"
+            },
+            {
+              "line": 279,
+              "text": "3. 低比例真实 root data 加 synthetic data 可以接近甚至超过 10% real root data，尤其是 Gaussian Copula、ForestDiffusion 和 PCA-Gaussian 控制组在当前实验中表现稳定。"
+            },
+            {
+              "line": 281,
+              "text": "5. 当前已补入 ForestDiffusion，能支撑“5 个 synthetic 方法 + 1 个控制基线”的版本；若要进一步增强说服力，可再补 TabDDPM 或 CTAB-GAN+，并把新攻击命名从 `FedSA` 调整成更准确的 `BCD` 或 `PoisonedFL-style BCD`。"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/advisor_experiments_summary.md",
+          "bytes": 7340,
+          "sha256": "b83fd0c0d0011cb495f8641c084d2f1fcaf9d990e7046327480f27dc0d7c91f5",
+          "hits": [
+            {
+              "line": 57,
+              "text": "| 3 | real5_forest_diffusion_synth5 | 0.0500 | 0.0500 | forest_diffusion | 0.7406 | 0.0429 | 0.0287 | 0.0358 | 0.7048 |"
+            },
+            {
+              "line": 62,
+              "text": "| 8 | real1_forest_diffusion_synth9 | 0.0100 | 0.0900 | forest_diffusion | 0.7301 | 0.0285 | 0.0642 | 0.0463 | 0.6838 |"
+            },
+            {
+              "line": 76,
+              "text": "| adult | 4 | real5_forest_diffusion_synth5 | 0.8306 | 0.0069 | 0.0510 | 0.0290 | 0.8017 |"
+            },
+            {
+              "line": 80,
+              "text": "| adult | 8 | real1_forest_diffusion_synth9 | 0.7990 | 0.0066 | 0.0088 | 0.0077 | 0.7914 |"
+            },
+            {
+              "line": 90,
+              "text": "| compas | 5 | real5_forest_diffusion_synth5 | 0.6505 | 0.0789 | 0.0064 | 0.0427 | 0.6078 |"
+            },
+            {
+              "line": 96,
+              "text": "| compas | 11 | real1_forest_diffusion_synth9 | 0.6612 | 0.0504 | 0.1195 | 0.0850 | 0.5762 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/advisor_experiments_final/server_generation_ablation.md",
+          "bytes": 25062,
+          "sha256": "935d50c3003e6466bed9dd48e86bfd0eb64931135e2cff560e5146bd0382fb4f",
+          "hits": [
+            {
+              "line": 45,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | Benign | 80.20 | 0.0165 | 0.0085 | 0.0125 | 0.7895 |"
+            },
+            {
+              "line": 46,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | F Flip | 79.95 | 0.0036 | 0.0096 | 0.0066 | 0.7929 |"
+            },
+            {
+              "line": 47,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | FedSA | 77.68 | 0.0033 | 0.0044 | 0.0039 | 0.7730 |"
+            },
+            {
+              "line": 48,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | S-DFA | 78.08 | 0.0011 | 0.0042 | 0.0026 | 0.7782 |"
+            },
+            {
+              "line": 49,
+              "text": "| real1_forest_diffusion_synth9 | adult | IID | Sp-DFA | 78.29 | 0.0011 | 0.0042 | 0.0027 | 0.7802 |"
+            },
+            {
+              "line": 50,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | Benign | 80.50 | 0.0115 | 0.0114 | 0.0114 | 0.7935 |"
+            },
+            {
+              "line": 51,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | F Flip | 80.77 | 0.0018 | 0.0138 | 0.0078 | 0.7999 |"
+            },
+            {
+              "line": 52,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | FedSA | 80.87 | 0.0108 | 0.0086 | 0.0097 | 0.7990 |"
+            },
+            {
+              "line": 53,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | S-DFA | 81.73 | 0.0040 | 0.0134 | 0.0087 | 0.8086 |"
+            },
+            {
+              "line": 54,
+              "text": "| real1_forest_diffusion_synth9 | adult | non-IID | Sp-DFA | 80.97 | 0.0120 | 0.0099 | 0.0110 | 0.7988 |"
+            },
+            {
+              "line": 55,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | Benign | 65.60 | 0.0714 | 0.1475 | 0.1095 | 0.5466 |"
+            },
+            {
+              "line": 56,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | F Flip | 65.77 | 0.0543 | 0.1232 | 0.0887 | 0.5689 |"
+            },
+            {
+              "line": 57,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | FedSA | 65.87 | 0.0629 | 0.1275 | 0.0952 | 0.5635 |"
+            },
+            {
+              "line": 58,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | S-DFA | 65.87 | 0.0511 | 0.1237 | 0.0874 | 0.5714 |"
+            },
+            {
+              "line": 59,
+              "text": "| real1_forest_diffusion_synth9 | compas | IID | Sp-DFA | 65.33 | 0.0229 | 0.1125 | 0.0677 | 0.5857 |"
+            },
+            {
+              "line": 60,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | Benign | 66.52 | 0.0706 | 0.1349 | 0.1028 | 0.5625 |"
+            },
+            {
+              "line": 61,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | F Flip | 67.93 | 0.0773 | 0.1256 | 0.1014 | 0.5778 |"
+            },
+            {
+              "line": 62,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | FedSA | 66.25 | 0.0456 | 0.1023 | 0.0739 | 0.5886 |"
+            },
+            {
+              "line": 63,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | S-DFA | 64.85 | 0.0101 | 0.0960 | 0.0531 | 0.5954 |"
+            },
+            {
+              "line": 64,
+              "text": "| real1_forest_diffusion_synth9 | compas | non-IID | Sp-DFA | 67.22 | 0.0382 | 0.1022 | 0.0702 | 0.6020 |"
+            },
+            {
+              "line": 165,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | Benign | 83.15 | 0.0113 | 0.0508 | 0.0311 | 0.8004 |"
+            },
+            {
+              "line": 166,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | F Flip | 82.95 | 0.0022 | 0.0353 | 0.0188 | 0.8108 |"
+            },
+            {
+              "line": 167,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | FedSA | 83.04 | 0.0142 | 0.0534 | 0.0338 | 0.7966 |"
+            },
+            {
+              "line": 168,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | S-DFA | 83.19 | 0.0080 | 0.0299 | 0.0189 | 0.8130 |"
+            },
+            {
+              "line": 169,
+              "text": "| real5_forest_diffusion_synth5 | adult | IID | Sp-DFA | 83.48 | 0.0096 | 0.0361 | 0.0228 | 0.8119 |"
+            },
+            {
+              "line": 170,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | Benign | 82.63 | 0.0005 | 0.0576 | 0.0291 | 0.7972 |"
+            },
+            {
+              "line": 171,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | F Flip | 83.03 | 0.0001 | 0.0600 | 0.0300 | 0.8002 |"
+            },
+            {
+              "line": 172,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | FedSA | 82.63 | 0.0161 | 0.0563 | 0.0362 | 0.7901 |"
+            },
+            {
+              "line": 173,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | S-DFA | 83.13 | 0.0011 | 0.0617 | 0.0314 | 0.7999 |"
+            },
+            {
+              "line": 174,
+              "text": "| real5_forest_diffusion_synth5 | adult | non-IID | Sp-DFA | 83.42 | 0.0056 | 0.0694 | 0.0375 | 0.7967 |"
+            },
+            {
+              "line": 175,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | Benign | 64.96 | 0.0739 | 0.0096 | 0.0418 | 0.6078 |"
+            },
+            {
+              "line": 176,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | F Flip | 65.66 | 0.1018 | 0.0013 | 0.0516 | 0.6050 |"
+            },
+            {
+              "line": 177,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | FedSA | 65.98 | 0.0307 | 0.0012 | 0.0159 | 0.6439 |"
+            },
+            {
+              "line": 178,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | S-DFA | 65.55 | 0.0892 | 0.0007 | 0.0449 | 0.6106 |"
+            },
+            {
+              "line": 179,
+              "text": "| real5_forest_diffusion_synth5 | compas | IID | Sp-DFA | 64.47 | 0.0725 | 0.0016 | 0.0370 | 0.6077 |"
+            },
+            {
+              "line": 180,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | Benign | 63.77 | 0.1209 | 0.0175 | 0.0692 | 0.5685 |"
+            },
+            {
+              "line": 181,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | F Flip | 64.42 | 0.0978 | 0.0111 | 0.0544 | 0.5897 |"
+            },
+            {
+              "line": 182,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | FedSA | 64.74 | 0.0489 | 0.0026 | 0.0257 | 0.6217 |"
+            },
+            {
+              "line": 183,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | S-DFA | 65.87 | 0.0419 | 0.0020 | 0.0220 | 0.6368 |"
+            },
+            {
+              "line": 184,
+              "text": "| real5_forest_diffusion_synth5 | compas | non-IID | Sp-DFA | 65.06 | 0.1111 | 0.0167 | 0.0639 | 0.5867 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/AD2plus_expanded_experiment_delivery_notes.md",
+          "bytes": 4406,
+          "sha256": "4c679424a88a3414570b688b6fdd17f4801b7b98cb8259a86c1c2723129aa66e",
+          "hits": [
+            {
+              "line": 34,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 | 12 |"
+            },
+            {
+              "line": 35,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 | 12 |"
+            },
+            {
+              "line": 36,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 | 12 |"
+            },
+            {
+              "line": 41,
+              "text": "| 10 | 3% real + 7% forest_diffusion | 82.44 | 0.0118 | 0.0850 | 0.7760 | 12 |"
+            },
+            {
+              "line": 50,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 | 12 |"
+            },
+            {
+              "line": 52,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 | 12 |"
+            },
+            {
+              "line": 56,
+              "text": "| 8 | 5% real + 5% forest_diffusion | 65.95 | 0.0383 | 0.0239 | 0.6284 | 12 |"
+            },
+            {
+              "line": 57,
+              "text": "| 9 | 3% real + 7% forest_diffusion | 66.01 | 0.0209 | 0.0494 | 0.6249 | 12 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/expanded_experiments_joint_report.md",
+          "bytes": 2417,
+          "sha256": "e083e562a98264b3cf7a34a8addc4f451155196589425096b936c51f26972903",
+          "hits": [
+            {
+              "line": 21,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 |"
+            },
+            {
+              "line": 22,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 |"
+            },
+            {
+              "line": 23,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 |"
+            },
+            {
+              "line": 30,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 |"
+            },
+            {
+              "line": 32,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/expanded_experiments_summary.md",
+          "bytes": 8813,
+          "sha256": "c47f67c94c22fef2c2246075b04382a4157324945f0da41f5ebef1cf03ffea1b",
+          "hits": [
+            {
+              "line": 31,
+              "text": "| adult     |                       6 | real9_forest_diffusion_synth1 |     0.8329 |      0.0059 |      0.0504 |       0.8048 |  12 |"
+            },
+            {
+              "line": 35,
+              "text": "| adult     |                      10 | real2_forest_diffusion_synth8 |     0.8284 |      0.0063 |      0.0455 |       0.8025 |  12 |"
+            },
+            {
+              "line": 36,
+              "text": "| adult     |                      11 | real7_forest_diffusion_synth3 |     0.8343 |      0.0068 |      0.0577 |       0.8021 |  12 |"
+            },
+            {
+              "line": 37,
+              "text": "| adult     |                      12 | real3_forest_diffusion_synth7 |     0.8304 |      0.0102 |      0.0485 |       0.8010 |  12 |"
+            },
+            {
+              "line": 39,
+              "text": "| compas    |                       2 | real2_forest_diffusion_synth8 |     0.6653 |      0.0107 |      0.0216 |       0.6491 |  12 |"
+            },
+            {
+              "line": 42,
+              "text": "| compas    |                       5 | real7_forest_diffusion_synth3 |     0.6631 |      0.0293 |      0.0142 |       0.6414 |  12 |"
+            },
+            {
+              "line": 45,
+              "text": "| compas    |                       8 | real3_forest_diffusion_synth7 |     0.6662 |      0.0174 |      0.0421 |       0.6364 |  12 |"
+            },
+            {
+              "line": 46,
+              "text": "| compas    |                       9 | real5_forest_diffusion_synth5 |     0.6623 |      0.0351 |      0.0220 |       0.6337 |  12 |"
+            }
+          ]
+        },
+        {
+          "member": "outputs/guardfed_tables/expanded_experiments_final/synthetic_joint_summary.md",
+          "bytes": 2607,
+          "sha256": "22ae23ea19efdb036abb16e3e594b3170e1885864b2d2330d9314887ee4d579a",
+          "hits": [
+            {
+              "line": 10,
+              "text": "| 3 | 7% real + 3% forest_diffusion | 82.54 | 0.0102 | 0.0802 | 0.7802 | 12 |"
+            },
+            {
+              "line": 11,
+              "text": "| 4 | 9% real + 1% forest_diffusion | 81.97 | 0.0065 | 0.0737 | 0.7796 | 12 |"
+            },
+            {
+              "line": 12,
+              "text": "| 5 | 2% real + 8% forest_diffusion | 81.89 | 0.0077 | 0.0712 | 0.7795 | 12 |"
+            },
+            {
+              "line": 17,
+              "text": "| 10 | 3% real + 7% forest_diffusion | 82.44 | 0.0118 | 0.0850 | 0.7760 | 12 |"
+            },
+            {
+              "line": 28,
+              "text": "| 2 | 7% real + 3% forest_diffusion | 66.13 | 0.0349 | 0.0227 | 0.6324 | 12 |"
+            },
+            {
+              "line": 30,
+              "text": "| 4 | 2% real + 8% forest_diffusion | 65.76 | 0.0140 | 0.0397 | 0.6307 | 12 |"
+            },
+            {
+              "line": 34,
+              "text": "| 8 | 5% real + 5% forest_diffusion | 65.95 | 0.0383 | 0.0239 | 0.6284 | 12 |"
+            },
+            {
+              "line": 35,
+              "text": "| 9 | 3% real + 7% forest_diffusion | 66.01 | 0.0209 | 0.0494 | 0.6249 | 12 |"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "primary_dependency_members": 3,
+  "primary_forest_dependency_hits": [],
+  "extra_local_source_files": 21,
+  "extra_local_hits": [],
+  "additional_git_blobs": 44,
+  "additional_git_plot_or_forest_hits": [],
+  "git_exact_image_matches": []
+}

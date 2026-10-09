@@ -1,0 +1,2798 @@
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real10_none --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.825619 AEOD=0.009128 ASPD=0.075150 time=25.7s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.822100 AEOD=0.004538 ASPD=0.071634 time=24.9s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.820572 AEOD=0.020082 ASPD=0.066689 time=24.8s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.823229 AEOD=0.035581 ASPD=0.065837 time=24.8s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.836709 AEOD=0.007169 ASPD=0.115534 time=24.9s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.820639 AEOD=0.039717 ASPD=0.061680 time=24.5s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.820971 AEOD=0.053648 ASPD=0.061622 time=24.9s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.819776 AEOD=0.084213 ASPD=0.048399 time=25.1s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.818979 AEOD=0.085669 ASPD=0.053808 time=25.4s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.832061 AEOD=0.043078 ASPD=0.084052 time=25.4s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645788 AEOD=0.107306 ASPD=0.025712 time=5.7s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.650648 AEOD=0.125022 ASPD=0.030896 time=5.8s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645248 AEOD=0.125732 ASPD=0.041793 time=5.9s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.626890 AEOD=0.077788 ASPD=0.033027 time=5.8s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.634989 AEOD=0.077936 ASPD=0.002478 time=5.7s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.635529 AEOD=0.109583 ASPD=0.072460 time=5.7s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.133836 ASPD=0.047748 time=5.8s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.652268 AEOD=0.108045 ASPD=0.011400 time=5.8s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.649028 AEOD=0.117717 ASPD=0.015156 time=5.9s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.644708 AEOD=0.108577 ASPD=0.033899 time=6.0s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_gaussian_copula_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method gaussian_copula --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.754300 AEOD=0.000000 ASPD=0.000000 time=26.8s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.754831 AEOD=0.000432 ASPD=0.000486 time=25.9s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.754300 AEOD=0.000000 ASPD=0.000000 time=26.3s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.776413 AEOD=0.005520 ASPD=0.017651 time=26.3s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.800252 AEOD=0.003791 ASPD=0.041665 time=26.2s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.794475 AEOD=0.051311 ASPD=0.025434 time=25.2s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.803174 AEOD=0.038174 ASPD=0.038187 time=25.4s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.810545 AEOD=0.009983 ASPD=0.054973 time=25.5s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.805897 AEOD=0.019357 ASPD=0.049734 time=25.3s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.800584 AEOD=0.114031 ASPD=0.016106 time=25.2s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.634449 AEOD=0.005975 ASPD=0.056883 time=5.6s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.637149 AEOD=0.004969 ASPD=0.052915 time=5.6s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.631749 AEOD=0.028098 ASPD=0.070398 time=5.6s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.640389 AEOD=0.056256 ASPD=0.094447 time=5.6s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.657667 AEOD=0.052115 ASPD=0.127602 time=5.5s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.653348 AEOD=0.032032 ASPD=0.101725 time=5.6s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.650648 AEOD=0.057794 ASPD=0.107854 time=5.7s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.652808 AEOD=0.070778 ASPD=0.128255 time=5.8s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.636609 AEOD=0.006034 ASPD=0.053082 time=5.7s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643629 AEOD=0.034043 ASPD=0.091025 time=5.7s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_ctgan_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method ctgan --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761804 AEOD=0.000342 ASPD=0.006199 time=26.8s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761671 AEOD=0.003932 ASPD=0.006606 time=25.2s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.760940 AEOD=0.003795 ASPD=0.004917 time=25.3s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.760343 AEOD=0.001796 ASPD=0.005239 time=25.5s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.759878 AEOD=0.000431 ASPD=0.004549 time=25.7s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761604 AEOD=0.005728 ASPD=0.006809 time=25.6s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.760940 AEOD=0.001363 ASPD=0.005115 time=25.3s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761007 AEOD=0.004978 ASPD=0.006224 time=25.6s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761737 AEOD=0.004250 ASPD=0.006704 time=25.8s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761339 AEOD=0.006568 ASPD=0.006717 time=25.3s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.664687 AEOD=0.376486 ASPD=0.403321 time=5.8s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.673326 AEOD=0.388199 ASPD=0.413814 time=5.5s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.658207 AEOD=0.267524 ASPD=0.326862 time=5.6s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.637689 AEOD=0.143774 ASPD=0.227229 time=5.7s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.646328 AEOD=0.168678 ASPD=0.232813 time=5.7s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.666307 AEOD=0.248654 ASPD=0.327804 time=5.9s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.672786 AEOD=0.331529 ASPD=0.386402 time=5.7s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.662527 AEOD=0.382609 ASPD=0.415976 time=5.8s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.663067 AEOD=0.383585 ASPD=0.435598 time=5.9s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.670086 AEOD=0.385626 ASPD=0.417570 time=5.9s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_tvae_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method tvae --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.763065 AEOD=0.008500 ASPD=0.008374 time=25.8s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.762800 AEOD=0.003319 ASPD=0.007270 time=24.9s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761604 AEOD=0.005728 ASPD=0.006809 time=25.0s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761737 AEOD=0.008477 ASPD=0.007309 time=25.0s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761737 AEOD=0.008477 ASPD=0.007309 time=24.6s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.762136 AEOD=0.008273 ASPD=0.007598 time=25.1s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761936 AEOD=0.007318 ASPD=0.007302 time=25.1s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.762069 AEOD=0.010068 ASPD=0.007801 time=24.7s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761538 AEOD=0.007523 ASPD=0.007013 time=25.0s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.761405 AEOD=0.006887 ASPD=0.006816 time=24.9s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.657667 AEOD=0.077137 ASPD=0.135934 time=5.7s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.578294 AEOD=0.003283 ASPD=0.014520 time=5.6s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.573974 AEOD=0.098314 ASPD=0.048231 time=5.6s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.571274 AEOD=0.041378 ASPD=0.035403 time=5.5s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.571814 AEOD=0.023987 ASPD=0.033975 time=5.6s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.572894 AEOD=0.149749 ASPD=0.080656 time=5.7s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.587473 AEOD=0.245164 ASPD=0.134827 time=5.6s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.589093 AEOD=0.277167 ASPD=0.152729 time=5.7s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.590713 AEOD=0.281988 ASPD=0.154787 time=5.6s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.591253 AEOD=0.336646 ASPD=0.187946 time=5.6s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_smote_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method smote --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.795471 AEOD=0.248180 ASPD=0.262405 time=26.8s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.807756 AEOD=0.280837 ASPD=0.247784 time=25.4s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.771499 AEOD=0.262044 ASPD=0.291079 time=25.2s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.776745 AEOD=0.079759 ASPD=0.161817 time=25.2s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.808354 AEOD=0.244318 ASPD=0.267996 time=25.0s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.808221 AEOD=0.288677 ASPD=0.240466 time=25.5s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.795471 AEOD=0.274201 ASPD=0.224145 time=25.2s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.793147 AEOD=0.348718 ASPD=0.294693 time=25.4s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.794608 AEOD=0.261611 ASPD=0.269992 time=25.7s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.804834 AEOD=0.323652 ASPD=0.257288 time=25.7s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.635529 AEOD=0.049187 ASPD=0.008525 time=5.7s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.650108 AEOD=0.020645 ASPD=0.064636 time=5.6s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.644168 AEOD=0.061195 ASPD=0.022396 time=5.7s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.123780 ASPD=0.028961 time=5.7s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.647948 AEOD=0.085980 ASPD=0.004070 time=5.6s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.647948 AEOD=0.025643 ASPD=0.068147 time=5.8s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.663067 AEOD=0.076486 ASPD=0.033472 time=5.8s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.667387 AEOD=0.031707 ASPD=0.116112 time=5.9s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.672786 AEOD=0.061905 ASPD=0.137748 time=5.8s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.649028 AEOD=0.092813 ASPD=0.016561 time=5.9s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real1_pca_gaussian_synth9 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.01 --synthetic-ratio 0.09 --synthetic-method pca_gaussian --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.802112 AEOD=0.159689 ASPD=0.017567 time=26.6s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.762268 AEOD=0.002569 ASPD=0.006889 time=26.1s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.814530 AEOD=0.178391 ASPD=0.026839 time=25.8s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.802311 AEOD=0.181619 ASPD=0.013559 time=26.3s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.763729 AEOD=0.009568 ASPD=0.009057 time=26.3s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.792815 AEOD=0.132961 ASPD=0.006440 time=26.2s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.816721 AEOD=0.053149 ASPD=0.055847 time=26.2s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.804303 AEOD=0.086853 ASPD=0.031537 time=26.5s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.801116 AEOD=0.035220 ASPD=0.036829 time=25.9s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.807623 AEOD=0.057082 ASPD=0.042535 time=26.2s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.659827 AEOD=0.002425 ASPD=0.086234 time=5.9s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.650648 AEOD=0.095859 ASPD=0.000670 time=5.8s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.660367 AEOD=0.036439 ASPD=0.049968 time=5.9s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.654428 AEOD=0.064360 ASPD=0.031499 time=5.9s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.655508 AEOD=0.037504 ASPD=0.104454 time=5.8s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.655508 AEOD=0.066962 ASPD=0.023275 time=6.0s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.653888 AEOD=0.013280 ASPD=0.061640 time=5.8s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.656587 AEOD=0.018308 ASPD=0.058889 time=6.0s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.652808 AEOD=0.034014 ASPD=0.047391 time=6.1s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.663067 AEOD=0.004259 ASPD=0.076957 time=6.0s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_gaussian_copula_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method gaussian_copula --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.807225 AEOD=0.031776 ASPD=0.056273 time=25.7s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.819908 AEOD=0.103372 ASPD=0.048812 time=25.7s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.817053 AEOD=0.011444 ASPD=0.088664 time=25.8s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.818713 AEOD=0.067693 ASPD=0.053551 time=25.9s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.816057 AEOD=0.071193 ASPD=0.048074 time=26.0s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.817983 AEOD=0.056920 ASPD=0.057490 time=25.4s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.807159 AEOD=0.004790 ASPD=0.052050 time=25.8s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.811475 AEOD=0.026878 ASPD=0.059059 time=25.9s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.817783 AEOD=0.076783 ASPD=0.050911 time=26.2s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.818580 AEOD=0.069556 ASPD=0.058637 time=25.1s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.644168 AEOD=0.113073 ASPD=0.019105 time=5.5s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.633909 AEOD=0.141556 ASPD=0.061307 time=5.5s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.637689 AEOD=0.092547 ASPD=0.019023 time=5.7s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.649028 AEOD=0.144011 ASPD=0.055390 time=5.7s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.635529 AEOD=0.119728 ASPD=0.026346 time=5.6s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.650648 AEOD=0.081041 ASPD=0.001774 time=5.6s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.646868 AEOD=0.125643 ASPD=0.023658 time=5.7s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.639309 AEOD=0.227536 ASPD=0.105183 time=5.8s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645248 AEOD=0.172937 ASPD=0.067726 time=5.7s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.640389 AEOD=0.079562 ASPD=0.008319 time=5.7s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_ctgan_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method ctgan --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.816322 AEOD=0.071034 ASPD=0.051603 time=30.0s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.801381 AEOD=0.055877 ASPD=0.031698 time=25.3s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.810811 AEOD=0.186025 ASPD=0.033080 time=25.6s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.802377 AEOD=0.063354 ASPD=0.030222 time=26.5s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.811940 AEOD=0.025399 ASPD=0.058594 time=25.3s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.812737 AEOD=0.007583 ASPD=0.056049 time=25.5s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.803772 AEOD=0.054581 ASPD=0.040337 time=26.2s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.823162 AEOD=0.091006 ASPD=0.064261 time=25.7s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.822432 AEOD=0.066190 ASPD=0.063788 time=25.5s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.784514 AEOD=0.062448 ASPD=0.013874 time=25.3s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.647408 AEOD=0.093641 ASPD=0.148214 time=6.1s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.656048 AEOD=0.119757 ASPD=0.168003 time=5.8s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.656587 AEOD=0.111091 ASPD=0.166027 time=5.9s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.642009 AEOD=0.107158 ASPD=0.146998 time=5.9s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.075954 ASPD=0.132030 time=5.8s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.659287 AEOD=0.066312 ASPD=0.128670 time=5.9s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.619330 AEOD=0.020556 ASPD=0.068952 time=5.8s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.605292 AEOD=0.058089 ASPD=0.070761 time=5.8s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.590173 AEOD=0.034428 ASPD=0.039073 time=5.7s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.638769 AEOD=0.096421 ASPD=0.138036 time=5.9s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_tvae_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method tvae --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.831994 AEOD=0.034147 ASPD=0.092500 time=28.9s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.831131 AEOD=0.099713 ASPD=0.180459 time=25.7s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.812139 AEOD=0.032375 ASPD=0.156360 time=26.9s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.834518 AEOD=0.001670 ASPD=0.128321 time=27.7s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.831197 AEOD=0.142802 ASPD=0.253284 time=27.6s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.831197 AEOD=0.025261 ASPD=0.139164 time=27.7s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.838768 AEOD=0.089258 ASPD=0.188218 time=27.4s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.832990 AEOD=0.041487 ASPD=0.143933 time=25.7s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.834650 AEOD=0.022852 ASPD=0.102305 time=25.5s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.817385 AEOD=0.114872 ASPD=0.236243 time=25.7s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.612311 AEOD=0.070541 ASPD=0.014972 time=6.0s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.604752 AEOD=0.073233 ASPD=0.019043 time=5.7s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.579374 AEOD=0.044188 ASPD=0.011924 time=5.9s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.611231 AEOD=0.092547 ASPD=0.030860 time=5.9s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.608531 AEOD=0.126915 ASPD=0.050797 time=6.0s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.610151 AEOD=0.118959 ASPD=0.046307 time=6.0s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.601512 AEOD=0.062496 ASPD=0.012621 time=6.1s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.600432 AEOD=0.062289 ASPD=0.016251 time=6.0s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.583153 AEOD=0.031618 ASPD=0.006993 time=6.0s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.597732 AEOD=0.026856 ASPD=0.010738 time=6.1s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_smote_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method smote --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.802577 AEOD=0.016809 ASPD=0.158396 time=27.3s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.836842 AEOD=0.153595 ASPD=0.213913 time=26.9s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.821768 AEOD=0.107167 ASPD=0.204212 time=26.1s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.757819 AEOD=0.004878 ASPD=0.036275 time=28.4s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.838236 AEOD=0.113960 ASPD=0.187087 time=25.7s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.815127 AEOD=0.107644 ASPD=0.203083 time=26.2s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.833521 AEOD=0.112962 ASPD=0.219760 time=25.8s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.831064 AEOD=0.130983 ASPD=0.207172 time=25.9s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.825486 AEOD=0.133370 ASPD=0.219052 time=25.9s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.838768 AEOD=0.137096 ASPD=0.216145 time=26.0s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.633909 AEOD=0.181514 ASPD=0.068568 time=5.9s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.638229 AEOD=0.143242 ASPD=0.049358 time=5.9s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.606371 AEOD=0.041763 ASPD=0.002930 time=5.9s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.638229 AEOD=0.193434 ASPD=0.109324 time=5.8s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.615011 AEOD=0.073203 ASPD=0.000808 time=5.8s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.632289 AEOD=0.107838 ASPD=0.030466 time=5.8s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.626890 AEOD=0.130819 ASPD=0.039176 time=5.9s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.603672 AEOD=0.034901 ASPD=0.001624 time=5.9s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.629050 AEOD=0.075303 ASPD=0.049483 time=5.8s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.630130 AEOD=0.096569 ASPD=0.014894 time=6.1s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+/home/yannan/workspace/GuardFed/.venv/bin/python /home/yannan/workspace/GuardFed/scripts/reproduce_paper_tables.py --full --rounds 70 --experiment-suite server_generation_ablation --experiment-tag real5_pca_gaussian_synth5 --server-ratio 0.10 --synthetic-ratio 0 --synthetic-method none --device cuda --methods GuardFed-AD2+ --ad2-plus-mode fixed --act-fairness-budget 0.12 --act-fairness-metric aeod_aspd --act-risk-weight 0.10 --act-violation-weight 0.02 --act-keep-ratio 1.0 --act-temperature 0.80 --ad2-utility-weight 3.0 --ad2-centrality-weight 0.2 --ad2-alignment-weight 1.5 --ad2-score-clip 5 --ad2-norm-mode root --ad2-calibration-objective original --sdfa-foe-mode fedsa --spdfa-foe-mode fedsa --datasets adult compas --distributions IID non-IID --attacks Benign F Flip FedSA S-DFA Sp-DFA --server-ratio 0.05 --synthetic-ratio 0.05 --synthetic-method pca_gaussian --synthetic-epochs 50
+Validation passed. Reports written under /home/yannan/workspace/GuardFed/results/paper_tables
+{
+  "adult": {
+    "rows": 30162,
+    "label_counts": {
+      "0": 22654,
+      "1": 7508
+    },
+    "label_positive_rate": 0.24892248524633645,
+    "sensitive_counts": {
+      "0": 9782,
+      "1": 20380
+    },
+    "sensitive_privileged_rate": 0.6756846362973278
+  },
+  "compas": {
+    "rows": 6172,
+    "label_counts": {
+      "0": 3363,
+      "1": 2809
+    },
+    "label_positive_rate": 0.4551198963058976,
+    "sensitive_counts": {
+      "0": 2997,
+      "1": 3175
+    },
+    "sensitive_privileged_rate": 0.5144199611147116
+  }
+}
+Running 20 full jobs on cuda
+[1/20] adult IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.789694 AEOD=0.026199 ASPD=0.026227 time=25.6s
+[2/20] adult IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.779600 AEOD=0.038541 ASPD=0.014423 time=25.6s
+[3/20] adult IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.770237 AEOD=0.004794 ASPD=0.012057 time=25.4s
+[4/20] adult IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.770104 AEOD=0.045905 ASPD=0.006225 time=25.4s
+[5/20] adult IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.805764 AEOD=0.048582 ASPD=0.038472 time=25.3s
+[6/20] adult non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.767448 AEOD=0.025134 ASPD=0.006919 time=25.1s
+[7/20] adult non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.803905 AEOD=0.014913 ASPD=0.047733 time=25.1s
+[8/20] adult non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.786108 AEOD=0.041971 ASPD=0.018858 time=25.2s
+[9/20] adult non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.777210 AEOD=0.044404 ASPD=0.012121 time=25.5s
+[10/20] adult non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 Adult Income 数据集
+============================================================
+[OK] Adult数据集加载完成
+   训练集: 30162 样本
+   测试集: 15059 样本
+   特征数: 13
+   敏感属性: sex (Male=1, Female=0)
+  -> ACC=0.770237 AEOD=0.034383 ASPD=0.008432 time=25.8s
+[11/20] compas IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.641469 AEOD=0.119965 ASPD=0.020896 time=5.7s
+[12/20] compas IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.107720 ASPD=0.017938 time=5.7s
+[13/20] compas IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.640929 AEOD=0.114167 ASPD=0.028368 time=5.8s
+[14/20] compas IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.645248 AEOD=0.153564 ASPD=0.039995 time=5.7s
+[15/20] compas IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.643089 AEOD=0.165158 ASPD=0.049020 time=5.8s
+[16/20] compas non-IID GuardFed-AD2+ Benign
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.629590 AEOD=0.122656 ASPD=0.029543 time=5.7s
+[17/20] compas non-IID GuardFed-AD2+ F Flip
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.630130 AEOD=0.110204 ASPD=0.021568 time=5.8s
+[18/20] compas non-IID GuardFed-AD2+ FedSA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.642009 AEOD=0.070245 ASPD=0.014487 time=5.9s
+[19/20] compas non-IID GuardFed-AD2+ S-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.638769 AEOD=0.126619 ASPD=0.033195 time=5.9s
+[20/20] compas non-IID GuardFed-AD2+ Sp-DFA
+
+============================================================
+加载 COMPAS 数据集
+============================================================
+[OK] COMPAS数据集加载完成
+   训练集: 4320 样本
+   测试集: 1852 样本
+   特征数: 8
+   敏感属性: race (African-American=1, Others=0)
+  -> ACC=0.632829 AEOD=0.140047 ASPD=0.040541 time=5.9s
+Compared 420 metric rows; failures/missing=0; selection=best_metric
+Wrote /home/yannan/workspace/GuardFed/results/paper_tables/comparison_table.csv
+Done. Raw results: /home/yannan/workspace/GuardFed/results/paper_tables/raw_results.jsonl
+adult_ad2plus_ablation: 160 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/adult_ad2plus_ablation.csv
+server_distribution_ablation: 200 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/server_distribution_ablation.csv
+server_generation_ablation: 220 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/server_generation_ablation.csv
+fedsa_smoke: 4 rows -> /home/yannan/workspace/GuardFed/results/paper_tables/advisor_experiments/fedsa_smoke.csv
