@@ -1,0 +1,243 @@
+{
+  "status": "PASS_LIMITED_V2_REVIEW",
+  "changed_inherited_files": [
+    "bind_stage.py",
+    "run_fullcoverage.py",
+    "screen_common.py"
+  ],
+  "inherited_byte_identical": 20,
+  "v2_sealed_members": 28,
+  "added_files": [
+    "V2_CHANGES.md",
+    "V2_LINEAGE.json",
+    "V2_SELF_CHECK.json",
+    "V2_SOURCE_DIFF.patch",
+    "check_v2.py"
+  ],
+  "queue_actual_run_AST_fixtures": [
+    {
+      "initial_strict_skips": 7,
+      "first_exit": 1,
+      "first_exit_zero_partial": false,
+      "launched": 2,
+      "reported_completed_new": 8,
+      "expected_strict_success": 8,
+      "pending": 87,
+      "failed": true,
+      "summary_calls": 0,
+      "failstop": true,
+      "real_processes": 0
+    },
+    {
+      "initial_strict_skips": 0,
+      "first_exit": 0,
+      "first_exit_zero_partial": true,
+      "launched": 2,
+      "reported_completed_new": 1,
+      "expected_strict_success": 1,
+      "pending": 94,
+      "failed": true,
+      "summary_calls": 0,
+      "failstop": true,
+      "real_processes": 0
+    },
+    {
+      "initial_strict_skips": 94,
+      "first_exit": 0,
+      "first_exit_zero_partial": false,
+      "launched": 2,
+      "reported_completed_new": 96,
+      "expected_strict_success": 96,
+      "pending": 0,
+      "failed": false,
+      "summary_calls": 1,
+      "failstop": false,
+      "real_processes": 0
+    }
+  ],
+  "optimization_refusals": 20,
+  "normal_help_positive": 5,
+  "entry_subprocesses": [
+    {
+      "entry": "bind_stage.py",
+      "mode": "normal",
+      "returncode": 0,
+      "stdout": "usage: bind_stage.py [-h] --old-release OLD_RELEASE --summary SUMMARY\n                     --final-root-proof FINAL_ROOT_PROOF --adoption ADOPTION\n                     --output OUTPUT --summary-sha256 SUMMARY_SHA256\n                     --final-root-proof-sha256 FINAL_ROOT_PROOF_SHA256\n                     --adoption-sha256 ADOPTION_SHA256 --source-seal-sha256\n                     SOURCE_SEAL_SHA256\n\nFuture explicit root-approved materialization. No defaults select a recipe or\nauthorize execution.\n\noptions:\n  -h, --help            show this help message and exit\n  --old-release OLD_RELEASE\n  --summary SUMMARY\n  --final-root-proof FINAL_ROOT_PROOF\n  --adoption ADOPTION\n  --output OUTPUT\n  --summary-sha256 SUMMARY_SHA256\n  --final-root-proof-sha256 FINAL_ROOT_PROOF_SHA256\n  --adoption-sha256 ADOPTION_SHA256\n  --source-seal-sha256 SOURCE_SEAL_SHA256\n",
+      "stderr": ""
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "-O",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\bind_stage.py\", line 12, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\bind_stage.py\", line 12, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "env1",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\bind_stage.py\", line 12, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "bind_stage.py",
+      "mode": "env2",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\bind_stage.py\", line 12, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "normal",
+      "returncode": 0,
+      "stdout": "usage: run_canaries.py [-h] --repo REPO\n\noptions:\n  -h, --help   show this help message and exit\n  --repo REPO\n",
+      "stderr": ""
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "-O",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_canaries.py\", line 9, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_canaries.py\", line 9, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "env1",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_canaries.py\", line 9, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_canaries.py",
+      "mode": "env2",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_canaries.py\", line 9, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "normal",
+      "returncode": 0,
+      "stdout": "usage: run_one.py [-h] --repo REPO --job-id JOB_ID [--canary]\n\noptions:\n  -h, --help       show this help message and exit\n  --repo REPO\n  --job-id JOB_ID\n  --canary\n",
+      "stderr": ""
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "-O",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_one.py\", line 8, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_one.py\", line 8, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "env1",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_one.py\", line 8, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_one.py",
+      "mode": "env2",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_one.py\", line 8, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "normal",
+      "returncode": 0,
+      "stdout": "usage: run_fullcoverage.py [-h] --repo REPO {run,summarize}\n\npositional arguments:\n  {run,summarize}\n\noptions:\n  -h, --help       show this help message and exit\n  --repo REPO\n",
+      "stderr": ""
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "-O",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_fullcoverage.py\", line 11, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_fullcoverage.py\", line 11, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "env1",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_fullcoverage.py\", line 11, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "run_fullcoverage.py",
+      "mode": "env2",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\run_fullcoverage.py\", line 11, in <module>\n    from screen_common import HERE,accepted,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "normal",
+      "returncode": 0,
+      "stdout": "usage: canary_reference.py [-h] --repo REPO --attack {Benign,S-DFA}\n\noptions:\n  -h, --help            show this help message and exit\n  --repo REPO\n  --attack {Benign,S-DFA}\n",
+      "stderr": ""
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "-O",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\canary_reference.py\", line 10, in <module>\n    from screen_common import HERE,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "-OO",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\canary_reference.py\", line 10, in <module>\n    from screen_common import HERE,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "env1",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\canary_reference.py\", line 10, in <module>\n    from screen_common import HERE,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    },
+    {
+      "entry": "canary_reference.py",
+      "mode": "env2",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\canary_reference.py\", line 10, in <module>\n    from screen_common import HERE,authorized,digest,local_identity,read,repo_identity,write_json\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_flgmm_fullcoverage_source_v2_20261009\\screen_common.py\", line 7, in <module>\n    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')\nRuntimeError: Optimized Python is forbidden: scientific identity/comparison assertions must execute\n"
+    }
+  ],
+  "science_worker_rng_comparator_acceptor_byte_identical": true,
+  "scientific_runs": 0,
+  "SSH": false,
+  "stage_bound": false,
+  "canaries_executed": false,
+  "source_before_after_unchanged": true
+}

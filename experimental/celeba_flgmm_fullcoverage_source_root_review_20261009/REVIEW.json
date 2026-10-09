@@ -1,0 +1,47 @@
+{
+  "status": "SOURCE_REVIEW_COMPLETE_TWO_P2_FIXES_BEFORE_BINDING",
+  "candidate_seal_sha256": "8ccb07808954aae391c127e1a2c1bc3c41e5fe6612fb72c8481fc209ff4c80f9",
+  "candidate_members_unchanged": 23,
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P2",
+      "path": "tmp/celeba_flgmm_fullcoverage_source_20261009/run_fullcoverage.py",
+      "line": 93,
+      "title": "Failed exits counted as completed_new",
+      "observed_inert_fixture": {
+        "failed": 1,
+        "strict_success": 1,
+        "reported_completed_new": 2
+      },
+      "scientific_summary_polluted": false,
+      "failure_stops_dispatch_and_drains_peers": true,
+      "minimal_fix": "Count only previously accepted skips and exit-zero children accepted by the original inspect."
+    },
+    {
+      "id": "F2",
+      "priority": "P2",
+      "path": "tmp/celeba_flgmm_fullcoverage_source_20261009/run_canaries.py",
+      "line": 52,
+      "related_path": "tmp/celeba_flgmm_fullcoverage_source_20261009/bind_stage.py",
+      "related_line": 61,
+      "title": "Optimization removes comparison assertions and the assertion intended to refuse optimization",
+      "observed_actual_server_optimization": false,
+      "default_nonoptimized_path_affected": false,
+      "minimal_fix": "Explicitly reject sys.flags.optimize at bind_stage and shared screen_common entry; preserve science and the original release."
+    }
+  ],
+  "other_substantive_defects_found": false,
+  "evidence": {
+    "CHECKS.json": "8a712fa4a095d3f8d7203b496f10f632de36adeddddf2ebe689548d406b8a3ad",
+    "OPTIMIZATION_PROBE.json": "5ddd64080f3205f8fd8df7730559b0119bcc9f8f702eb4c51dede0923469e403",
+    "PARTIAL_REFUSAL_PROBE.json": "e59267907ae7d735bb80e8900b4989d2b38f5f4ddafd88eb9eab23b3ba217dc0",
+    "PROBE_ATTEMPT1_FAILURE.json": "f04865dfa717fbdd3d3b93ebd70c0de8bf8e0f499d23b4b89a3cba15c9413f51",
+    "SOURCE_PINS.json": "30ea638437799b2cdb79d0ba91042ff9c5ebbf23c6728cac5f45da0048a57a67",
+    "REVIEW.md": "b7833a3eb07db7c7a8fb046aeded1d752bc7436c142b5422886b3cd532ad45c0",
+    "audit_source.py": "a4574761f8d3234cded06f48e6269cd73f6b536f5042038362eb1cb8b703ef66"
+  },
+  "scope": "Read-only source/metadata/AST review; no actual stage binding, recipe adoption, Linux resource check or scientific execution.",
+  "actual32_summary_independently_verified_here": false,
+  "no_SSH_no_CNN_no_training_no_Git_no_STATE_changes": true
+}

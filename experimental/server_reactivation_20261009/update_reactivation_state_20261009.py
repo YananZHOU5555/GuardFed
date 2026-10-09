@@ -1852,6 +1852,23 @@ if fl_summary_path.exists():
         pareto_candidates=len(fl_summary['three_metric_pareto']),score_gap_to_second=fl_summary['score_gap_to_second'],
         seed_n=1,sample_SD_reported=False,significance_claimed=False,formal100_started=False,final_test=False)
 
+fl_bound_path=ROOT/'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json'
+if fl_bound_path.exists():
+    fl_bound=read(fl_bound_path)
+    assert sha(fl_bound_path)=='fcecfc0a3582695edfd54c70db38e7dafdd5bf46dcdff8212b9dfc03fc7506fc'
+    assert fl_bound['status']=='ROOT_ACTUAL_BOUND96_PLUS4_METADATA_MEMBER_AND_SCOPE_PASS'
+    assert (fl_bound['planned_new'],fl_bound['reused'],fl_bound['planned_total'])==(96,4,100)
+    assert not fl_bound['formal100_started'] and not fl_bound['final_test']
+    state['flgmm_fullcoverage_v2_20261009']=dict(status='BOUND_METADATA_ACCEPTED_NOT_STARTED',
+        server='root@89.22.197.55:60350',stage='/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage',
+        root_bound_path=fl_bound_path.relative_to(ROOT).as_posix(),root_bound_sha256=sha(fl_bound_path),
+        package_sha256=fl_bound['package_sha256'],manifest_sha256=fl_bound['manifest_sha256'],
+        selected_recipe=fl_bound['selected_recipe'],planned_new=96,reused=4,planned_total=100,
+        prepared_new_canaries=5,original_references=2,canaries_started=0,new_accepted=0,
+        actual_metadata_archive_members=144,source_v2_minimal_engineering_repairs=True,
+        local_extract_failure_preserved=True,local_manual_safe_extraction_pass=True,repeated_remote_binding=0,
+        checkpoint_repacked=0,formal100_started=False,final_test=False)
+
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1945,6 +1962,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 |---|---|---|
 | CelebA机制消融 | 当前观测完成{live['queue_completed']}、活动{len(live['active'])}、等待{live['pending']}、失败{len(live['failed'])}；已独立严格验收并离机{main['scientific_results_offserver_verified']}/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
 | FLGMM验证搜索 | {flgmm.get('offserver_accepted70round_jobs', 0)}/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
+| FLGMM完整覆盖准备 | 已实际绑定96新+4复用、五新短程+两原参考；144元数据成员离机SHA与root范围核验通过，尚未启动canary/正式训练 | tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json |
 | 组合基线验证搜索 | {hybrid.get('offserver_accepted70round_jobs', 0)}/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | {baseline['actual_native_valid_image_replays_accepted']}/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | {baseline['accepted_collection_path']} |
 | 机制三视图评价 | 累计{main['three_view_new_models_offserver_verified']}份：minus_U完整100，{C_replay_note}；U论文表{main.get('latest_paired_three_view_table',{}).get('complete_scenes',0)}完整场景 | {main.get('latest_paired_three_view_table',{}).get('table_path','需独立配对')}；其他七variant未完成 |

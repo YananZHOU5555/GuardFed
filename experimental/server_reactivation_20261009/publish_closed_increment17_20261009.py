@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22,23,24,25,26,27,28),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -42,7 +42,10 @@ profiles={
         native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T193513Z'),
     27:dict(previous='9ed3ff9d5fa1eba3a42d858275c7e9994b028776',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=112,views=112,
-        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T195725Z')}
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T195725Z'),
+    28:dict(previous='f51525d5f98e1dd834977c402360e5d7fb577d73',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=120,views=112,
+        native_tag='root_delta_20261009T195854Z',native_delta=8,handoffs=[],live_tags=[],formal_tag='20261009T200421Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -590,6 +593,37 @@ if args.increment==27:
     for name in ('auxiliary_screens_20261009T195440Z.json','auxiliary_screens_20261009T195440Z.RAW.json'):
         copy(ROOT/CHECKS/name,CHECKS/name)
     copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
+if args.increment==28:
+    assert sha(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')=='24925c6771e895765bbe98f1e767df06292cbbed2d222e3c112af65ebc1c9519'
+    native_review=read(backup/tag/'ROOT_INDEPENDENT_REVIEW.json')
+    assert native_review['native_accepted']==120 and native_review['ledger_accepted_unique_ids']==120
+    bound=ROOT/'tmp/celeba_flgmm_fullcoverage_binding_20261009'
+    assert sha(bound/'ROOT_BOUND_ADOPTION.json')=='fcecfc0a3582695edfd54c70db38e7dafdd5bf46dcdff8212b9dfc03fc7506fc'
+    binding=read(bound/'ROOT_BOUND_ADOPTION.json')
+    assert (binding['planned_new'],binding['reused'],binding['planned_total'])==(96,4,100)
+    assert not binding['formal100_started'] and not binding['final_test'] and binding['repeated_remote_binding']==0
+    for directory in ('celeba_flgmm_fullcoverage_source_20261009','celeba_flgmm_fullcoverage_source_root_review_20261009',
+            'celeba_flgmm_fullcoverage_source_v2_20261009','celeba_flgmm_fullcoverage_source_v2_root_review_20261009'):
+        folder=ROOT/'tmp'/directory;seal=read(folder/'FILES_SHA256.json')
+        files=seal.get('files')
+        if files is not None:
+            for name,pin in files.items():copy(folder/name,Path('experimental')/directory/name,pin['sha256'])
+        else:
+            for pin in seal['members']:copy(folder/pin['path'],Path('experimental')/directory/pin['path'],pin['sha256'])
+        copy(folder/'FILES_SHA256.json',Path('experimental')/directory/'FILES_SHA256.json')
+    ops=ROOT/'tmp/celeba_flgmm_fullcoverage_root_operations_20261009'
+    for name,pin in read(ops/'FILES_SHA256.json')['files'].items():copy(ops/name,Path('experimental')/ops.name/name,pin['sha256'])
+    copy(ops/'FILES_SHA256.json',Path('experimental')/ops.name/'FILES_SHA256.json')
+    attempt=ROOT/binding['attempt_path']
+    for folder in (bound,attempt):
+        for path in folder.rglob('*'):
+            if path.is_file() and '__pycache__' not in path.parts:copy(path,Path('experimental')/path.relative_to(ROOT/'tmp'))
+    for name in ('adopt_flgmm_bound_metadata_root_20261009.py','celeba_flgmm_fullcoverage_v2_root_source_adoption_20261009.json',
+            'update_overview_closure100_root_20261009.py'):
+        copy(ROOT/'tmp'/name,Path('experimental/server_reactivation_20261009')/name)
+    for name in ('auxiliary_screens_20261009T200427Z.json','auxiliary_screens_20261009T200427Z.RAW.json'):
+        copy(ROOT/CHECKS/name,CHECKS/name)
+    copy(ROOT/'docs/返修实验总览.md',Path('docs/返修实验总览.md'))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -649,6 +683,13 @@ if args.increment==26:
 if args.increment==27:
     patterns += ['experimental/celeba_flgmm_final6_closure_20261009/** -text',
         'experimental/celeba_flgmm_summary32_root_independent_20261009/** -text']
+if args.increment==28:
+    patterns += ['experimental/celeba_flgmm_fullcoverage_source_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_source_root_review_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_source_v2_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_source_v2_root_review_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_root_operations_20261009/** -text',
+        'experimental/celeba_flgmm_fullcoverage_binding_20261009/** -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -697,6 +738,13 @@ if args.increment==27:
         FLGMM_summary_root_sha256=sha(final/'ROOT_SUMMARY_ADOPTION.json'),
         original_schema_failure_preserved=True,missing_legacy_host_flag_fabricated=False,
         formal100_started=False,main_manuscript_edited=False,primary_endpoint_selected=False)
+if args.increment==28:
+    receipt.update(increment_scope='native120_C_IID_FFlip10_and_FlGMM_actual_96plus4_metadata_binding',
+        new_mechanism_native_accepted=8,new_mechanism_three_view_accepted=0,new_FLGMM_training=0,
+        minus_U_native_complete=100,minus_C_native_partial=20,FLGMM_metadata_package_sha256=binding['package_sha256'],
+        FLGMM_actual_metadata_members=144,local_Python310_extract_failure_preserved=True,
+        repeated_remote_binding=0,canary_dispatch_in_this_increment=0,formal100_started=False,
+        main_manuscript_edited=False,primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']

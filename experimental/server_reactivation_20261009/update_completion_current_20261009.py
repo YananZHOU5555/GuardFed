@@ -50,6 +50,7 @@ flgmm=state['flgmm_screen32_20261009']
 fl_selection_note=('Numerical recipe-summary adoption remains a separate step.' if not flgmm.get('selected_recipe') else
     'Independent and root record-only reviews adopted the unchanged frozen-score choice Tg20/L2/lr0.001, with32 condition scores and32 candidate mean scalars exact. The score margin over second place is0.0000497792; all eight candidates, the different ACC champion(Tg20/L3/lr0.001) and six Pareto candidates remain retained. This is exposed seed91001 validation selection, not stable superiority or a final endpoint.')
 diagnostic=state.get('native_mismatch_GPU_diagnostic_20261009')
+fl_bound_note=('FLGMM coverage metadata has separately passed actual server binding and root144-member SHA/scope checks:96 new70-round jobs plus four explicit original references, five new3-round gates and two same-horizon original references. No canary or full-coverage training has started. The local Python3.10 extraction-API failure is retained; a new safe per-file local extraction passed without repeating any remote bind or checkpoint inference.' if state.get('flgmm_fullcoverage_v2_20261009') else '')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
@@ -185,6 +186,8 @@ FLGMM has{flgmm['offserver_accepted70round_jobs']}/32 full70-round validation-se
 Hybrid's CPU4 and separate CUDA4 pipeline gates are complete, strict and backed up off server. The CUDA increment has49 verified members; both same-GPU Hybrid/legacy pairs match terminal tensors, every-round metrics, attacks, diagnostic fields and RNG exactly, excluding only cumulative wall time as in the original comparator. All four CUDA terminals predict a constant negative class, withACC0.516686 and zero gaps. These negative short-run outcomes are preserved and cannot establish performance advantage, CPU/CUDA equivalence or70-round equivalence. {paragraph}
 
 The exact11 subsequent evaluation scope is native71 minus the closed60: non-IID F Flip seeds91001–91010 and FedSA91001. Its source review preserves scientific functions and passes42 refusals. {next11_note}
+
+{fl_bound_note}
 
 {after71_note}
 

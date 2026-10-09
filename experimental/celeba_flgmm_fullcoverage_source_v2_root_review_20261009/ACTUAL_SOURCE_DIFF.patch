@@ -1,0 +1,52 @@
+--- v1/bind_stage.py
++++ v2/bind_stage.py
+@@ -7,6 +7,9 @@
+ import shutil
+ import statistics
+ import sys
++
++if sys.flags.optimize:
++    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')
+ 
+ HERE = Path(__file__).resolve().parent
+ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+--- v1/run_fullcoverage.py
++++ v2/run_fullcoverage.py
+@@ -72,6 +72,7 @@
+             except (FileNotFoundError,PermissionError):continue
+             if str(HERE/'run_one.py') in argv and jobids.intersection(argv):raise ValueError('Duplicate worker exists')
+         pending=[i for i in manifest['jobs'] if inspect(i) is None]
++        completed_new=96-len(pending)  # Only original-checker accepted skips.
+         (HERE/'runs').mkdir(exist_ok=True);(HERE/'logs').mkdir(exist_ok=True)
+         failed=False
+         while pending or active:
+@@ -82,6 +83,8 @@
+                 log.close();del active[gpu]
+                 if code!=0 or inspect(item) is None:
+                     failed=True;write_json(HERE/('QUEUE_FAILURE_'+str(time.time_ns())+'.json'),dict(id=item['id'],returncode=code))
++                else:
++                    completed_new+=1
+             for gpu in (0,1):
+                 if failed or not pending:break
+                 if gpu in active:continue
+@@ -90,7 +93,7 @@
+                 env=dict(os.environ,CUDA_VISIBLE_DEVICES=str(gpu),GUARDFED_CPU_THREADS='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',CUBLAS_WORKSPACE_CONFIG=':4096:8')
+                 process=subprocess.Popen([sys.executable,'-B',str(HERE/'run_one.py'),'--repo',str(repo),'--job-id',item['id']],env=env,stdout=log,stderr=subprocess.STDOUT)
+                 active[gpu]=(process,item,log)
+-            write_json(HERE/'queue_progress.json',dict(updated_unix=time.time(),active=[dict(id=i['id'],pid=p.pid,gpu=g) for g,(p,i,l) in active.items()],pending=len(pending),completed_new=96-len(pending)-len(active),reused=4,failed=failed))
++            write_json(HERE/'queue_progress.json',dict(updated_unix=time.time(),active=[dict(id=i['id'],pid=p.pid,gpu=g) for g,(p,i,l) in active.items()],pending=len(pending),completed_new=completed_new,reused=4,failed=failed))
+             if failed and not active:raise RuntimeError('Queue stopped after preserved failure; no automatic retry')
+             if pending or active:time.sleep(2)
+         repo_identity(repo,protocol);summarize(manifest)
+--- v1/screen_common.py
++++ v2/screen_common.py
+@@ -2,6 +2,9 @@
+ import json
+ import sys
+ from pathlib import Path
++
++if sys.flags.optimize:
++    raise RuntimeError('Optimized Python is forbidden: scientific identity/comparison assertions must execute')
+ 
+ HERE = Path(__file__).resolve().parent
+ sys.path.insert(0, str(HERE / 'source'))

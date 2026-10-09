@@ -1,0 +1,78 @@
+{
+  "status": "PASS_LIMITED_V2_SOURCE_REVIEW_READY_FOR_ROOT_BINDING_AND_REAL_CANARIES",
+  "scope": "Only the two P2 engineering corrections from original review",
+  "v2_source_seal_sha256": "fc9cd4133345d74949d22cddca12868393b8ac6ac6920d2f1deb293611584c30",
+  "prior_source_seal_sha256": "8ccb07808954aae391c127e1a2c1bc3c41e5fe6612fb72c8481fc209ff4c80f9",
+  "p2_completed_new": "FIXED: strict accepted skips plus strict accepted exit-zero children only",
+  "p2_optimization_refusal": "FIXED: explicit guard reached before scientific execution in all five CLI entries",
+  "changed_inherited_files": [
+    "bind_stage.py",
+    "run_fullcoverage.py",
+    "screen_common.py"
+  ],
+  "unchanged_inherited_members": 20,
+  "v2_source_members": 28,
+  "scientific_body_rng_comparator_acceptor_unchanged": true,
+  "actual_run_ast_fixtures": [
+    {
+      "initial_strict_skips": 7,
+      "first_exit": 1,
+      "first_exit_zero_partial": false,
+      "launched": 2,
+      "reported_completed_new": 8,
+      "expected_strict_success": 8,
+      "pending": 87,
+      "failed": true,
+      "summary_calls": 0,
+      "failstop": true,
+      "real_processes": 0
+    },
+    {
+      "initial_strict_skips": 0,
+      "first_exit": 0,
+      "first_exit_zero_partial": true,
+      "launched": 2,
+      "reported_completed_new": 1,
+      "expected_strict_success": 1,
+      "pending": 94,
+      "failed": true,
+      "summary_calls": 0,
+      "failstop": true,
+      "real_processes": 0
+    },
+    {
+      "initial_strict_skips": 94,
+      "first_exit": 0,
+      "first_exit_zero_partial": false,
+      "launched": 2,
+      "reported_completed_new": 96,
+      "expected_strict_success": 96,
+      "pending": 0,
+      "failed": false,
+      "summary_calls": 1,
+      "failstop": false,
+      "real_processes": 0
+    }
+  ],
+  "normal_help_positive": 5,
+  "optimization_refusals": 20,
+  "actual_canary_executed": false,
+  "actual_stage_bound": false,
+  "deployment_authorization": false,
+  "scientific_cohort_acceptance": false,
+  "new_blocking_findings": [],
+  "checks": {
+    "path": "tmp/celeba_flgmm_fullcoverage_source_v2_root_review_20261009/CHECKS.json",
+    "sha256": "668785a26907f0d9821a54e2974ccfb338405e83251f58dbcac82887858ea3c3",
+    "bytes": 17907
+  },
+  "source_pins": {
+    "path": "tmp/celeba_flgmm_fullcoverage_source_v2_root_review_20261009/SOURCE_PINS.json",
+    "sha256": "3acd3f2c42f9be8686780136c79278e3f75ae4d5ef8868994f921381f3f90638",
+    "bytes": 8595
+  },
+  "limits": [
+    "No Linux/GPU/image execution or actual recipe/stage binding.",
+    "Real same-horizon comparisons, source/resource/legacy checks remain required at the original runtime gates."
+  ]
+}
