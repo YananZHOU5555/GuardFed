@@ -67,6 +67,7 @@ if main.get('C_three_view_two_scene_table'):
     views_row='| 机制三视图 | U100十场景完整；C20的IID Benign/F Flip各十seed三视图表已独立核验324统计/162单元/360计数指标，旧Benign精确保持，其余八C场景未齐 | [C两场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_two_scenes_20261009/snapshot/TABLES.md) |'
     native_row=native_row.replace('F Flip十seed数据齐备、独立配对表待核',
         'F Flip十seed的native表已随两场景三视图表独立验收')
+    views_row=views_row.replace('U100十场景完整；C20的',f'U100十场景完整；C累计{main["three_view_counts_by_variant"]["minus_C"]}离机，其中C20的')
 reply_row=('| 英文回复 | 24条原意见逐字、37数值pointer及37链接核验；完整稿纳入U100十场景与900校准解释，保留全部pending，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated100_20261009/manuscript_insertions_integrated_20261009.md) |')
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==2:
     reply_row=reply_row.replace('37数值pointer及37链接核验；完整稿纳入U100十场景与900校准解释',
@@ -89,8 +90,13 @@ if main.get('C_three_view_two_scene_table'):
     new_stage_note=new_stage_note.replace('F Flip配对表待独立验收。','两场景三视图论文表已独立采用，324统计/162单元/360计数指标，旧Benign精确保持。')
 if main.get('C_after20_valid_replay',{}).get('offserver_new_accepted')==5:
     new_stage_note+='另5项C/IID FedSA终轮三视图已严格离机采用，68归档成员、45指标/120计数/15规则通过，native偏差0；累计U100+C25，FedSA仍仅5/10、不计完整场景均值。'
+if main.get('C_after25_valid_replay'):
+    c3=main['C_after25_valid_replay']
+    new_stage_note+=f'后续准确3项FedSA（91002/04/07）状态{c3["status"]}，新增离机接受{c3["offserver_new_accepted"]}；原125与Full不重推。'
+    if c3['offserver_new_accepted']==3:
+        new_stage_note+='本批54归档成员、27指标/72计数/9规则通过，native偏差0；当前累计U100+C28，FedSA仍仅8/10、不计完整场景均值。'
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted'):
-    new_stage_note=new_stage_note.replace('新70轮离机接受仍0。','首个新70轮IID Benign seed91003已严格离机采用（17成员），累计1/96；4复用另计，不构成十seed场景均值。')
+    new_stage_note=new_stage_note.replace('新70轮离机接受仍0。',f'新增70轮已严格离机并经root采用，累计{state["flgmm_fullcoverage_v2_20261009"]["new_accepted"]}/96；4复用另计，不构成十seed场景均值。')
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)

@@ -1,0 +1,56 @@
+--- tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after10_20261009/verify_offserver.py
++++ tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after14_20261009/verify_offserver.py
+@@ -8,11 +8,11 @@
+ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+ r=read(B/'BACKUP_SHA256.json');a=read(B/'PARTIAL_ACCEPTANCE.json')
+-assert sha(B/'hybrid_after10_delta.tar.gz')==r['archive_sha256']=='1e1e9e502087191eeb2001a9e9776cc4d3f4f7c0e1d580abffde851af2786782'
++assert sha(B/'hybrid_after14_delta.tar.gz')==r['archive_sha256']=='371d5f625931e8797aa3e41dc72095ddd7957e2888df09af22b58ff5fee4e335'
+ assert sha(B/'MEMBERS.json')==r['inventory_sha256'] and sha(B/'PARTIAL_ACCEPTANCE.json')==r['acceptance_sha256']
+ m=read(B/'MEMBERS.json')['members'];out=B/'restored';assert not out.exists()
+-with tarfile.open(B/'hybrid_after10_delta.tar.gz') as t:
+- assert len(t.getnames())==len(set(t.getnames()))==r['member_count']==59 and set(t.getnames())==set(m)|{'MEMBERS.json'}
++with tarfile.open(B/'hybrid_after14_delta.tar.gz') as t:
++ assert len(t.getnames())==len(set(t.getnames()))==r['member_count']==23 and set(t.getnames())==set(m)|{'MEMBERS.json'}
+  for x in t.getmembers():
+   assert x.isfile() and not x.name.startswith('/') and '..' not in Path(x.name).parts
+   data=t.extractfile(x).read();expect={'sha256':r['inventory_sha256'],'size':(B/'MEMBERS.json').stat().st_size} if x.name=='MEMBERS.json' else m[x.name]
+@@ -34,6 +34,6 @@
+  assert read(p/'native_replay.json')['checkpoint_tensor_sha256']==body.tensor_sha(state)
+  records.append({'id':e['id'],'checkpoint_tensor_sha256':body.tensor_sha(state),'model_sha256':sha(p/'model.pt')})
+ assert not torch.cuda.is_initialized() and a['source_host']!=platform.node()
+-proof={'status':'ORIGINAL_SERVER_STRICT_PLUS_OFFSERVER_ALL_MEMBERS_AND_CPU_TENSORS_VERIFIED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'old_accepted':10,'accepted_new_ids':r['accepted_new_ids'],'accepted_new':len(records),'records':records,'archive_sha256':r['archive_sha256'],'inventory_sha256':r['inventory_sha256'],'server_acceptance_sha256':r['acceptance_sha256'],'member_count':59,'local_torch':torch.__version__,'local_CUDA_initialized':False,'original_full_checked_replayed_locally':False,'limitation':'Original checked asserts actual cu128 runtime/device; CPU host verified every byte and CPU tensor identities, separate record-layer replay pending root review.','source_seal_sha256':r['source_seal_sha256'],'source_members_verified':len(read(H/'FILES_SHA256.json')['files']),'different_host':True,'source_host':a['source_host'],'verification_host':platform.node()}
++proof={'status':'ORIGINAL_SERVER_STRICT_PLUS_OFFSERVER_ALL_MEMBERS_AND_CPU_TENSORS_VERIFIED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'old_accepted':14,'accepted_new_ids':r['accepted_new_ids'],'accepted_new':len(records),'records':records,'archive_sha256':r['archive_sha256'],'inventory_sha256':r['inventory_sha256'],'server_acceptance_sha256':r['acceptance_sha256'],'member_count':23,'local_torch':torch.__version__,'local_CUDA_initialized':False,'original_full_checked_replayed_locally':False,'limitation':'Original checked asserts actual cu128 runtime/device; CPU host verified every byte and CPU tensor identities, separate record-layer replay pending root review.','source_seal_sha256':r['source_seal_sha256'],'source_members_verified':len(read(H/'FILES_SHA256.json')['files']),'different_host':True,'source_host':a['source_host'],'verification_host':platform.node()}
+ with (B/'OFFSERVER_MEMBER_TENSOR_PROOF.json').open('x') as f:json.dump(proof,f,indent=2);f.write('\n')
+ print(json.dumps({'proof_sha256':sha(B/'OFFSERVER_MEMBER_TENSOR_PROOF.json'),'accepted_new':len(records),'runtime':proof['local_torch']}))
+--- tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after10_20261009/local_record_bridge_v2/bridge.py
++++ tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after14_20261009/local_record_bridge_v2/bridge.py
+@@ -2,23 +2,23 @@
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+ HERE=Path(__file__).resolve().parent;B=HERE.parent;H=B.parent
+-SERVER_SHA='2fcb8394c91b86b0cd86189b6f09d58deb4c12813cec8389160c26d290df596c'
+-ARCHIVE_SHA='1e1e9e502087191eeb2001a9e9776cc4d3f4f7c0e1d580abffde851af2786782'
+-INVENTORY_SHA='351988b6fdb2bf3780d7a1bafe15f97a03ae0472b4a8a26377b035d41fcfa237'
++SERVER_SHA='a8c66a443629f47b347035f6d298f25400e8056988e9bdbc2e444d4368b96066'
++ARCHIVE_SHA='371d5f625931e8797aa3e41dc72095ddd7957e2888df09af22b58ff5fee4e335'
++INVENTORY_SHA='5189dd42a74bfcc251c2376adf7fdf471d26b136f548e99b0ac109ea303c816e'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+ def need_file(p,expected):assert sha(p)==expected, 'Bound evidence/source/artifact SHA mismatch: '+str(p)
+ def check_runtime(server):
+  r=server['runtime'];assert server['status']=='PARTIAL_ORIGINAL_STRICT_ACCEPTED_OFFSERVER_PENDING' and server['no_CNN_training_or_test']
+- assert r['torch']=='2.11.0+cu128' and r['cuda_build']=='12.8' and r['CPU']==[106] and r['threads']==1
++ assert r['torch']=='2.11.0+cu128' and r['cuda_build']=='12.8' and r['CPU']==[110] and r['threads']==1
+  assert r['gpu_name_for_original_checker']=='NVIDIA GeForce RTX 5090'
+  assert server['source_data_verified_before_after'] and server['source_seal_sha256']==SEAL_SHA
+  return r
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after10_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after14_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])

@@ -69,6 +69,12 @@ if main.get('C_three_view_two_scene_table'):
     C_view_note=C_view_note.replace('with its separate complete paired table still pending.','with its separate complete paired table now independently adopted.').replace('only the F Flip paired-table review remains pending.','the F Flip paired-table review is now independently adopted.')
 if main.get('C_after20_valid_replay',{}).get('offserver_new_accepted')==5:
     C_view_note+=(' Another exact five IID FedSA C terminal checkpoints (91001/03/05/06/08) are now strictly accepted and off-server adopted, closing U100+C25=125. All68 archive members,45 saved-array metrics,120 confusion counts and15 rules passed, with zero native discrepancy. The prior120 and Full were not reinferred; FedSA has only5/10 pairs and is excluded from complete-scene means. ')
+    C_view_note=C_view_note.replace('20 accepted C terminal checkpoints.',f'{C_views} accepted C terminal checkpoints. The complete Benign/F Flip comparison uses20 of these checkpoints; remaining individual records are coverage only.')
+if main.get('C_after25_valid_replay'):
+    c3=main['C_after25_valid_replay']
+    C_view_note+=(f' The exact next three IID FedSA checkpoints (91002/04/07) have status {c3["status"]}, with{c3["offserver_new_accepted"]} new off-server acceptances; the prior125 and Full are excluded from inference. ')
+    if c3['offserver_new_accepted']==3:
+        C_view_note+=('All54 archive members,27 saved-array metrics,72 confusion counts and9 rules passed, with zero native discrepancy. This closes U100+C28=128; FedSA is still8/10 and supplies no complete-scene mean or sample SD. ')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
@@ -192,7 +198,7 @@ if main.get('after92_valid_replay'):
 fl_multiseed_status=('The100-job multi-seed coverage has not started.' if not state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started') else
     'The frozen100-cell multi-seed validation coverage is running as96 new jobs plus four explicitly reused results; new70-round acceptances are tracked separately from the completed search.')
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted'):
-    fl_multiseed_status+=(' Its first new70-round IID Benign seed91003 checkpoint is now independently root adopted after original strict/offserver and17-member archive checks; cumulative new coverage acceptance is1/96, with four prior results reused separately. This individual validation record does not provide a complete10-seed scene or final-test result.')
+    fl_multiseed_status+=(f' New70-round checkpoints have passed original strict/offserver checks and independent root archive/record adoption; cumulative new coverage acceptance is{state["flgmm_fullcoverage_v2_20261009"]["new_accepted"]}/96, with four prior results reused separately. These individual validation records do not provide a complete10-seed scene or final-test result.')
 reply_progress_note=('Its24 original comments,37 numeric pointers and37 links passed review;21 necessary paragraph updates leave206 prior paragraphs exact.' if not state['latest_rebuttal_draft'].get('complete_C_scenes') else
     'The latest copy also includes the separately adopted C20 two-scene comparison. All24 original comments and both previous full documents recover exactly by reversing ten edits;22 new C20 scalar pointers,12 scope/environment facts and41 links passed root checks. The prior37 numeric references are preserved.')
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
