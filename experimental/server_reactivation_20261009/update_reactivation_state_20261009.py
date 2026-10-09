@@ -617,6 +617,57 @@ if publication_proofs:
         committed_blobs_sha256_verified=verified['committed_blobs_sha256_verified'],
         proof_path=publication_proof.relative_to(TRAIN).as_posix(), proof_sha256=sha(publication_proof),
         earlier_publication_snapshot_is_historical=True)
+fifteen_final_path = ROOT/'tmp/celeba_mechanism_valid_incremental_v2_execution_20261009/FINAL_DELIVERY.json'
+fifteen_complete = fifteen_final_path.exists() and len(newly_accepted_ids) == 15
+if fifteen_complete:
+    final = read(fifteen_final_path)
+    assert sha(fifteen_final_path) == '8098ae66620adc85c3168aa16df78880f3462691708f5e91655b7e216d32cf16'
+    assert final['accepted_new'] == 15 and final['mechanism_replayed_from_this_snapshot_total'] == len(combined) == 23
+    assert final['remaining_workers'] == final['failures'] == final['new_training'] == final['new_Full_inference'] == final['new_test_inference'] == 0
+    assert 'EXITED' in final['service'] and set(final['selected_ids']) == set(newly_accepted_ids)
+    state['celeba_mechanism_v1']['incremental_fifteen_valid_replay'].update(
+        status=final['status'],terminal_service=final['service'],terminal_workers=0,failures=0,
+        final_delivery_sha256=sha(fifteen_final_path),final_delivery_verified_utc=final['verified_utc'])
+    state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_mechanism_valid_incremental15']
+hybrid_cuda_complete_root = CHECKS/'HYBRID_CUDA_FOUR_ROOT_VERIFICATION.json'
+if hybrid_cuda_complete_root.exists():
+    proof = read(hybrid_cuda_complete_root)
+    assert proof['status'] == 'ROOT_ARCHIVE_AND_PAIRED_CUDA_TENSORS_PASS' and proof['actual_cuda_canaries_accepted'] == 4
+    state['hybrid_cuda_gate_20261009'].update(status='FOUR_CUDA_CANARIES_STRICT_ACCEPTED_OFFSERVER',
+        terminal_service='EXITED',actual_cuda_canaries_accepted=4,incremental_members_verified=49,
+        incremental_archive_sha256=proof['archive_sha256'],root_complete_verification_sha256=sha(hybrid_cuda_complete_root),
+        paired_model_tensors_exact=True,constant_negative_prediction_preserved=True,startup_not_complete_gate=False,
+        scientific_table_records=0,CPU_CUDA_or_70_round_equivalence_claim=False)
+    state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_hybrid_cuda_four']
+baseline_failure_root = CHECKS/'BASELINE_VALID_CHUNK036_FAILURE_ROOT_VERIFICATION.json'
+if baseline_failure_root.exists():
+    proof = read(baseline_failure_root)
+    assert proof['status'] == 'ROOT_NATIVE_METRIC_MISMATCH_FAILURE_PRESERVED_OFFSERVER'
+    assert proof['failed_model_id'] == 'FairGuard_IID_F-Flip_seed91009' and proof['native_tolerance_unchanged'] == 1e-12
+    state['final_evaluator_runtime_20261009'].update(status='FAILSTOP_NATIVE_METRIC_MISMATCH_PRESERVED',
+        actual_service_terminal=proof['terminal_service'],failed_model_id=proof['failed_model_id'],
+        failed_chunk='chunk_036',failed_chunk_partial_strict_not_counted=10,
+        failure_root_proof_sha256=sha(baseline_failure_root),failure_archive_sha256=proof['archive_sha256'],
+        native_mismatch=proof['metric_differences'],native_tolerance_unchanged=1e-12,
+        numerical_cause_not_established=True,automatic_retry=False,original_source_or_metrics_changed=False)
+    state['active_services'] = [s for s in state['active_services'] if s != 'guardfed_celeba_valid_remaining872_20261009']
+hybrid_screen_root = CHECKS/'HYBRID_SCREEN32_STARTUP_ROOT_VERIFICATION.json'
+if hybrid_screen_root.exists():
+    proof = read(hybrid_screen_root)
+    assert proof['status']=='ROOT_HYBRID32_INCREMENTAL_SOURCE_AND_REAL_GPU_STARTUP_PASS'
+    assert proof['source_members_restorable']==69 and proof['new_members_verified']==73 and proof['scientific_accepted_records']==0
+    state['hybrid_screen32_20261009']=dict(status='RUNNING_AT_SOURCE_BOUND_FIRST_ROUND_OBSERVATION',
+        service=proof['service'],observed_service=proof['observed_service'],observed_unix=proof['observed_unix'],
+        source_seal_sha256=proof['source_seal_sha256'],scope_sha256=proof['scope_sha256'],
+        execution_approval_sha256=proof['execution_approval_sha256'],startup_archive_sha256=proof['archive_sha256'],
+        root_startup_verification_sha256=sha(hybrid_screen_root),startup_new_members_verified=73,
+        source_members_restorable=69,source_reused_members=20,first_round=1,snapshot_round=proof['snapshot_round'],
+        cpu_threads=1,cpus=[104],nice=10,physical_gpu=0,source_and_data_before_after_verified=True,
+        original_grid_unchanged=True,new_jobs=32,rounds=70,seed_n=1,seed=91001,validation_only=True,
+        scientific_70round_results_strict_accepted=0,formal100_started=False,test_started=False,automatic_retry=False,
+        entry='tmp/celeba_hybrid_screen_execution_20261009/execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md')
+    state['hybrid_cuda_gate_20261009']['formal_screen32_started']=True
+    state['active_services']=list(dict.fromkeys(state['active_services']+[proof['service']]))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -695,6 +746,14 @@ if fifteen_root.exists():
         top += f"机制三视图增量接受更新：本15中{len(newly_accepted_ids)}条新增已原严格接受、离机SHA/member闭合并由主代理独立重算预测规则/指标/混淆计数；合计{len(combined)}条新机制终轮三视图接受，native误差0。未重包原模型/重推理Full；其余任务仍以独立真实验收为准。\n\n"
 if hybrid_cuda_start_root.exists():
     top += 'Hybrid CUDA四项门检实际启动：独占新执行副本沿原5科学源/body/driver/writer，GPU0/CPU104单线程/nice10，真实首轮及cuda:0运行时身份已核。81成员source/startup离机及主代理核SHA，资源107名义计算线程含新机制15，低于122.88配额；不是实用率。全部四项严格接受及离机闭合前不称完整门检PASS；32搜索仍PREPARED，不运行test。凭据HYBRID_CUDA_STARTUP_ROOT_VERIFICATION.json。\n\n'
+if fifteen_complete:
+    top += '最新完成覆盖上述启动观察：exact15全部原strict接受、三条差集备份和主代理独立复算闭合，连旧8共23实际机制终轮三视图；服务EXITED、worker0、失败0，禁止重启。Full配对仍等待已有baseline真实重放凭据join，不能重推理或用旧校准代替。FINAL_DELIVERY.json绑定原15ID、149内容成员、135指标/360计数/45规则，native最大差0。\n\n'
+if hybrid_cuda_complete_root.exists():
+    top += '最新CUDA门检完成覆盖上述启动观察：4/4完整严格接受、49新增成员离机及主代理核验，两组同GPU模型张量/每轮指标/攻击/诊断/RNG精确；服务EXITED，禁止重启。四终轮均恒定负类ACC0.516686、AEOD/ASPD0，保留负结果，不称性能优势、CPU/CUDA或70轮等价。原32验证搜索已获root范围批准，仍须新scope/seal exact审批及实时资源预检才能派发；本门检不等于32搜索完成。凭据HYBRID_CUDA_FOUR_ROOT_VERIFICATION.json。\n\n'
+if baseline_failure_root.exists():
+    top += '最新故障覆盖前文baseline重放启动观察：原872服务已failstop EXITED。chunk036中FairGuard/IID/F Flip/seed91009的CPU native指标偏离原GPU记录，ACC差约−0.00503个百分点，AEOD差+0.00029028、ASPD差+0.00011823，超过原1e-12；模型/配置/数据SHA一致且权重未改，但根因未确定。65成员失败现场离机保全；036虽10/11单项strict，也不计该partial批。此前实际已离机接受的唯一ID继续有效，最新分母读collector；未放宽容差、未改旧指标、未重试或继续后续批。主800/FL32/另行批准Hybrid32不受影响。后续有界诊断必须保持原记录、源与选择规则，不能将近边界假设当已证实原因。凭据BASELINE_VALID_CHUNK036_FAILURE_ROOT_VERIFICATION.json。\n\n'
+if hybrid_screen_root.exists():
+    top += '最新Hybrid32已实际启动并覆盖前文准备观察：独立/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009，服务guardfed_celeba_hybrid_screen32，原8候选×四条件×70round valid-only/seed91001，GPU0/CPU104单线程/nice10/idleIO。首轮真实146493 client rows、随后round7，source69前后及28科学数据身份不变，73新增archive成员离机及主代理核验，20原source显式复用可重构69源；旧gate/model不重包。当前70轮接受0，不能称32完成；不自动100确认/test/retry。接续见该目录execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md及HYBRID_SCREEN32_STARTUP_ROOT_VERIFICATION.json。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

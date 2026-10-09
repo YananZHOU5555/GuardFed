@@ -1,0 +1,150 @@
+--- sealed_original_CPU_gate_prefix
++++ prepared_body.py
+@@ -1,4 +1,4 @@
+-"""Authorized CPU-only full-image canaries, separate from the sealed screen protocol."""
++"""Prepared CUDA pipeline/screen instrumentation derived from sealed CPU gate; no CLI dispatch."""
+ import argparse
+ import hashlib
+ import importlib.util
+@@ -13,7 +13,7 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ REPO = Path('/workspace/GuardFed-celeba-expanded')
+-SEALED = HERE / 'sealed_group_a_snapshot'
++SEALED = HERE / 'scientific_snapshot'
+ 
+ 
+ def digest(path):
+@@ -71,14 +71,12 @@
+ 
+ 
+ def verify_scope(scope):
+-    assert scope['status'] == 'FROZEN_BOUNDED_CPU_IMAGE_GATE_ONLY'
+-    assert scope['formal_screen_status'] == 'PREPARED_NOT_FROZEN'
+-    assert scope['max_concurrent_cpu_processes'] == 1 and scope['cpu_threads'] == 8
+-    assert len(scope['jobs']) == 4 and scope['test_evaluation_authorized'] is False
++    assert scope['status'] in ('FROZEN_BOUNDED_HYBRID_CUDA_GATE_ONLY', 'FROZEN_HYBRID_VALID_SCREEN_ONLY')
++    assert scope['test_evaluation_authorized'] is False and scope['max_processes'] == 1 and scope['cpu_threads'] == 1
+     for rel, expected in scope['protected_source_hashes'].items():
+         assert digest(REPO / rel) == expected, ('protected source/data drift', rel)
+     for rel, expected in scope['local_hashes'].items():
+-        assert digest(HERE / rel) == expected, ('gate/snapshot drift', rel)
++        assert digest(HERE / rel) == expected, ('prepared source drift', rel)
+     for entry in scope['jobs']:
+         assert digest(HERE / entry['job']) == entry['job_sha256']
+     assert digest('/etc/vast-agents-guide.md') == scope['guide_sha256']
+@@ -98,7 +96,7 @@
+         return None
+     assert not list(out.glob('failure*.json'))
+     receipt = read(out / 'acceptance.json')
+-    assert receipt['status'] == 'PASS' and receipt['scope_sha256'] == digest(HERE / 'scope.json')
++    assert receipt['status'] == 'PASS' and receipt['scope_sha256'] == digest(HERE / scope['scope_file'])
+     assert receipt['job_sha256'] == entry['job_sha256']
+     for name, expected in receipt['artifact_hashes'].items():
+         assert digest(out / name) == expected
+@@ -106,10 +104,11 @@
+     assert result['config'] == job['config'] and result['method'] == job['method']
+     assert result['dataset'] == 'celeba' and result['distribution'] == job['distribution']
+     assert result['attack'] == job['attack'] and result['seed'] == 91001 and result['alpha'] == job['config']['client_alpha']
+-    assert result['evidence_stage'] == 'real_image_cpu_pipeline_gate_only' and result['scientific_table_records'] == 0
+-    assert [r['round'] for r in result['trajectory_metrics']] == [1, 2, 3]
+-    assert [r['round'] for r in result['round_summaries']] == [1, 2, 3]
+-    assert [r['round'] for r in diag] == [1, 2, 3]
++    assert result['evidence_stage'] == scope['evidence_stage'] and result['scientific_table_records'] == 0
++    horizon = job['config']['rounds']; assert horizon == scope['rounds'] and horizon in (3, 70)
++    assert [r['round'] for r in result['trajectory_metrics']] == list(range(1, horizon + 1))
++    assert [r['round'] for r in result['round_summaries']] == list(range(1, horizon + 1))
++    assert [r['round'] for r in diag] == list(range(1, horizon + 1))
+     assert result['metrics'] == result['trajectory_metrics'][-1]['metrics']
+     assert all(math.isfinite(result['metrics'][k]) for k in ('accuracy', 'aeod', 'aspd'))
+     data = result['data_contract']; contract = data['image_data_contract']
+@@ -125,7 +124,9 @@
+     assert result['evaluation_stats']['prediction_count'] == 19867
+     assert prov['source_hashes'] == scope['protected_source_hashes'] and prov['local_hashes'] == scope['local_hashes']
+     assert prov['torch'] == torch.__version__ == '2.11.0+cu128'
+-    assert prov['cuda_build'] == torch.version.cuda == '12.8' and prov['device'] == 'cpu' and prov['cpu_threads'] == 8
++    assert prov['cuda_build'] == torch.version.cuda == '12.8' and prov['device'] == 'cuda:0' and prov['cpu_threads'] == 1
++    assert prov['cuda_device_count'] == 1 and prov['cuda_visible_devices'] == scope['runtime_cuda_visible_device']
++    assert prov['gpu_uuid'] == scope['runtime_gpu_uuid'] and prov['gpu_name'] == torch.cuda.get_device_name(0)
+     state = torch.load(out / 'model.pt', map_location='cpu', weights_only=True)
+     assert state and all(torch.isfinite(x).all() for x in state.values())
+     assert tensor_sha(state) == receipt['checkpoint_tensor_sha256']
+@@ -150,10 +151,12 @@
+     assert not out.exists(), ('partial output needs review', str(out))
+     out.mkdir()
+     started = time.time(); before = snapshot(); write(out / 'resource_before.json', before)
+-    prov = dict(scope_sha256=digest(HERE / 'scope.json'), job_sha256=entry['job_sha256'],
++    prov = dict(scope_sha256=digest(HERE / scope['scope_file']), job_sha256=entry['job_sha256'],
+         source_hashes=scope['protected_source_hashes'], local_hashes=scope['local_hashes'],
+         torch=torch.__version__, cuda_build=torch.version.cuda, python=sys.version,
+-        device='cpu', cpu_threads=torch.get_num_threads(), cpu_affinity=sorted(os.sched_getaffinity(0)), pid=os.getpid(), started_unix=started)
++        device='cuda:0', cpu_threads=torch.get_num_threads(), cpu_affinity=sorted(os.sched_getaffinity(0)), pid=os.getpid(), started_unix=started,
++        cuda_device_count=torch.cuda.device_count(), cuda_visible_devices=os.environ['CUDA_VISIBLE_DEVICES'],
++        gpu_name=torch.cuda.get_device_name(0), gpu_uuid=scope['runtime_gpu_uuid'])
+     write(out / 'provenance.json', prov)
+     diagnostics = []
+     original = core.aggregate_round
+@@ -170,12 +173,13 @@
+         if method not in ('CosineFairnessHybrid', 'GuardFed'):
+             raise ValueError('Unexpected method in bounded gate')
+         rng_before = torch.get_rng_state().clone()
++        cuda_rng_before = [x.clone() for x in torch.cuda.get_rng_state_all()]
+         delta, info = hybrid('CosineFairnessHybrid', updates, counts, fairness, server_update, config, **kwargs)
+         reference, legacy = original('GuardFed', updates, counts, fairness, server_update, config, **kwargs)
+         exact = all(torch.equal(delta[k], reference[k]) for k in delta)
+         trust_exact = info['trust_scores'] == legacy['trust_scores']
+         selected_exact = info['selected_clients'] == legacy['selected_clients']
+-        rng_exact = torch.equal(rng_before, torch.get_rng_state())
++        rng_exact = torch.equal(rng_before, torch.get_rng_state()) and all(torch.equal(x,y) for x,y in zip(cuda_rng_before,torch.cuda.get_rng_state_all()))
+         assert exact and trust_exact and selected_exact and rng_exact, 'Actual legacy path differs; preserve evidence'
+         weights = [1. / len(info['selected_clients']) if i in info['selected_clients'] else 0. for i in range(20)]
+         row = dict(round=len(diagnostics) + 1, legacy_delta_exact=exact, legacy_trust_exact=trust_exact,
+@@ -199,19 +203,19 @@
+         core.load_bundle = retained_bundle
+         config = core.ExperimentConfig(**job['config'])
+         result = core.run_experiment('celeba', job['distribution'], job['method'], job['attack'], config,
+-            'real_image_cpu_pipeline_gate_only', torch.device('cpu'), progress_callback=progress,
++            scope['evidence_stage'], torch.device('cuda:0'), progress_callback=progress,
+             checkpoint_path=out / 'model.pt')
+-        assert len(diagnostics) == 3
++        assert len(diagnostics) == scope['rounds']
+         assert not any(not math.isfinite(float(x['aeod'])) for r in diagnostics for x in r['root_metrics'])
+-        result.update(evidence_stage='real_image_cpu_pipeline_gate_only', scientific_table_records=0,
+-            revision_job=dict(job, job_sha256=entry['job_sha256'], scope_sha256=digest(HERE / 'scope.json')),
++        result.update(evidence_stage=scope['evidence_stage'], scientific_table_records=0,
++            revision_job=dict(job, job_sha256=entry['job_sha256'], scope_sha256=digest(HERE / scope['scope_file'])),
+             method_impl_note=worker.LABEL if job['method'] == 'CosineFairnessHybrid' else 'Unchanged frozen core legacy GuardFed reference; native argmax')
+         write(out / 'result.json', result)
+         write(out / 'resource_after.json', snapshot())
+         state = torch.load(out / 'model.pt', map_location='cpu', weights_only=True)
+         assert len(loaded_bundle) == 1
+         bundle = loaded_bundle[0]
+-        replay_model = core.make_model(bundle, config, torch.device('cpu'))
++        replay_model = core.make_model(bundle, config, torch.device('cuda:0'))
+         replay_model.load_state_dict(state)
+         replay = core.evaluate_for_reporting(job['method'], replay_model, bundle, config)
+         assert {k:replay[k] for k in core.METRICS} == result['metrics']
+@@ -224,12 +228,13 @@
+             root_group_label_total=len(ry), root_group_label_counts={f's{s}_y{y}':int(((rs == s) & (ry == y)).sum()) for s in (0, 1) for y in (0, 1)},
+             root_image_ids_sha256=contract['root_image_ids_sha256'], evaluation_image_ids_sha256=contract['evaluation_image_ids_sha256']))
+         write(out / 'rng_final.json', dict(torch_sha256=hashlib.sha256(torch.get_rng_state().numpy().tobytes()).hexdigest(),
++            cuda_rng_sha256=[hashlib.sha256(x.cpu().numpy().tobytes()).hexdigest() for x in torch.cuda.get_rng_state_all()],
+             numpy_state_sha256=hashlib.sha256(repr(np.random.get_state()).encode()).hexdigest()))
+         artifacts = ('result.json', 'model.pt', 'diagnostics.json', 'provenance.json', 'resource_before.json', 'resource_after.json', 'rng_final.json', 'native_replay.json')
+-        write(out / 'acceptance.json', dict(status='PASS', scope_sha256=digest(HERE / 'scope.json'),
++        write(out / 'acceptance.json', dict(status='PASS', scope_sha256=digest(HERE / scope['scope_file']),
+             job_sha256=entry['job_sha256'], artifact_hashes={n:digest(out / n) for n in artifacts},
+             checkpoint_tensor_sha256=tensor_sha(state), elapsed_seconds=time.time() - started,
+-            limitation='Full-image CPU three-round gate only; no CUDA equivalence, seventy-round scientific result or test evaluation'))
++            limitation=scope['claim_limit']))
+         assert checked(entry, scope) is not None
+     except BaseException as error:
+         write(out / 'failure.json', dict(error=repr(error), traceback=traceback.format_exc(), at_unix=time.time()))
+@@ -243,6 +248,7 @@
+ def compare(scope):
+     import torch
+     pairs = []
++    assert scope['kind'] == 'cuda_pipeline_gate' and len(scope['jobs']) == 4
+     for a, b in zip(scope['jobs'][::2], scope['jobs'][1::2]):
+         left = checked(a, scope); right = checked(b, scope)
+         assert left is not None and right is not None

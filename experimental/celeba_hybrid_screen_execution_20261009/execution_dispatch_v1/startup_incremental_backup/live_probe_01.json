@@ -1,0 +1,51 @@
+{
+  "at_unix": 1791544071.7590065,
+  "service": "guardfed_celeba_hybrid_screen32   RUNNING   pid 33737, uptime 0:01:11",
+  "workers": [
+    {
+      "pid": 33740,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-u",
+        "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/driver.py",
+        "run",
+        "--kind",
+        "screen",
+        "--approved",
+        "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/APPROVED_screen.json",
+        "--approved-sha256",
+        "c984c7bf910ce87156c4901f559eac30f7aebbad28858a942dd5343226c476ee"
+      ],
+      "cwd": "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009",
+      "cpus": [
+        104
+      ],
+      "nice": 10
+    }
+  ],
+  "first_id": "CosineFairness_lam5.0_tau0.1_lr0.0005_IID_Benign_seed91001_screen",
+  "round": 1,
+  "elapsed_seconds": 35.284979581832886,
+  "provenance": {
+    "device": "cuda:0",
+    "torch": "2.11.0+cu128",
+    "cuda_build": "12.8",
+    "cpu_threads": 1,
+    "cpu_affinity": [
+      104
+    ],
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "0",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0"
+  },
+  "diagnostic_rounds": 1,
+  "first_client_rows": 146493,
+  "first_root_metrics_keys": [
+    "accuracy",
+    "aeod",
+    "aspd"
+  ],
+  "screen_failure": null,
+  "first_failure": null
+}

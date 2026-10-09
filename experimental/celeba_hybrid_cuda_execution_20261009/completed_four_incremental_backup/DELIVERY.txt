@@ -1,0 +1,57 @@
+CUDA4 真实图像门检完成并严格离机验收：4/4，2组同GPU Hybrid/legacy 全部终轮模型张量、每轮指标/攻击/诊断/RNG exact。
+
+范围：IID Benign 与 non-IID S-DFA，seed91001，每项3轮，train162770/clean root16277/valid19867；GPU0 UUID GPU-da357477-30a7-fddc-344b-a20513b9a2d0，CPU104×1/nice10/idleIO，torch2.11.0+cu128。无正式32/100/test任务，screen32仍PREPARED。
+
+严格原checker和后验重复检查均通过。49成员新增科学归档SHA 6d8ab8f15e488479cc9c3342281261d34fe54a790f5595db3a6bb6b40ed76132，BlueBook逐member SHA/size通过；前置source/startup81归档1876769e6073b00ef1131d57a855611d60ab6863f144fefb3bbd20e7ac07d791已独立离机，不重复源备份。两链用backup_receipt中的source_backup_reference相连。
+
+负结果：4终轮均恒定预测class0，ACC=0.5166859616449389，AEOD=ASPD=0，positive_rate=0。不得将零公平差距称优越性。非IID两项各保留4个明确undefined correlation/null+sidecar；其他非finite仍拒收。该3轮门检不证明70轮性能、CPU/CUDA等价或正式多seed结论。
+
+科学snapshot5/body/driver/writer与准备封存字节不变；source63 seal 8c08bbabe0321adb4cf0f417a0784af58a7ddab3381a2b6c03e3123f79c3f112；原prepared64未动。主机制completed32保持，实际同一活跃worker轮次增长如下（不以RUNNING作证据）：
+[
+  {
+    "id": "minus_U_IID_S-DFA_seed91003",
+    "before": 48,
+    "after": 58
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91004",
+    "before": 45,
+    "after": 55
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91005",
+    "before": 42,
+    "after": 54
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91006",
+    "before": 41,
+    "after": 53
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91007",
+    "before": 39,
+    "after": 51
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91008",
+    "before": 36,
+    "after": 48
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91009",
+    "before": 40,
+    "after": 50
+  },
+  {
+    "id": "minus_U_IID_S-DFA_seed91010",
+    "before": 29,
+    "after": 39
+  }
+]
+
+Collector说明：首close_four.py从未执行、没有失败或训练重试。执行前静态阅读发现body.checked会调用torch.cuda.get_device_name(0)，独立close_four_v2仅把CUDA_VISIBLE_DEVICES空改0以保留真实GPU身份查询；模型仍CPU加载，无CNN训练/推理。旧collector原字节在startup81中保留，delta位于execution_attachments/collector_v2_delta.json。
+
+元数据边界：沿用原loader可物化含test尾部的Smiling/Male和split元数据；没有test图像/推理/拟合/选择，不能称untouched test。
+
+下一步仅供root审阅：原8候选×4条件×70轮valid-only32搜索，按原固定四条件综合均分选recipe、保留accuracy冠军/Pareto/全部候选；新scope/protocol和exact root收据冻结后才能派发。当前不自行冻结或运行32。

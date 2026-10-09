@@ -1,10 +1,10 @@
-# CURRENT EXECUTION: GuardFed mechanism formal800 — measured 2026-10-09T10:39:33.868625+00:00
+# CURRENT EXECUTION: GuardFed mechanism formal800 — measured 2026-10-09T11:03:07.922774+00:00
 
 用户重新提供89.22.197.55:60350并明确授权停止sglang，现使用实例52183675开展缺失返修实验。sglang已停止；两张5090实际CUDA张量检查通过。先读/etc/vast-agents-guide.md（SHA42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa）。旧完成GuardFed队列仍禁止重启；213.224.31.105:26712内部当前状态未知，不自动切回。
 
 源码五文件、全部RGB64缓存与官方标签/划分身份已核，100已验收Full对照及缺失历史依赖准确恢复（307成员验收，303新建+4原有相同）。20项cu130真实图像三轮门检全部严格接受，两套Full与原worker同horizon模型张量/全部指标/诊断精确一致；149备份成员及archive SHA在本机通过。原cu130门检完整保留在preflight_history/cu130_20261009，仅原job字节复制回空输出路径。
 
-当前使用独立/workspace/guardfed_envs/celeba-cu128-20261009/bin/python，torch2.11.0+cu128、driver595.84，未改原环境/驱动/方法/seed/指标。实测服务guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 4:20:37；完成32，活动8，等待760，失败0；资源与轮次见server_reactivation_20261009/latest_formal_live.json。800新机制正式队列已启动，70round valid-only，8并发；100Full显式复用；检查dispatch receipt与full identity acceptance。
+当前使用独立/workspace/guardfed_envs/celeba-cu128-20261009/bin/python，torch2.11.0+cu128、driver595.84，未改原环境/驱动/方法/seed/指标。实测服务guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 4:44:11；完成39，活动8，等待753，失败0；资源与轮次见server_reactivation_20261009/latest_formal_live.json。800新机制正式队列已启动，70round valid-only，8并发；100Full显式复用；检查dispatch receipt与full identity acceptance。
 
 正式机制设计800新+100复用，IID/non-IID×5场景×10共享seed，按原协议固定recipe。Full98cu128+2cu130且多数原产出driver570.211.01，环境混合须披露；短程门检不能证明70round等价，提供排除两条cu130的配对敏感性口径。PROTOCOL.md为不可改动的准备快照，当前执行事实优先读EXECUTION.md、dispatch receipt、本入口及状态JSON。
 
@@ -14,7 +14,7 @@
 
 九方法900终轮模型/result/raw-job已全部精确接入当前服务器：100Full复用现存路径，其他800恢复至独立artifact_store，共2700文件逐SHA核验，原历史output修改0。两条完整valid19867/root16277原图CPU重放已接受，native三指标误差0，raw/native/shared三个视图的18指标与48混淆计数经主代理独立复核；52封存文件及27归档成员离机通过。初始阶段仅2条重放；当前全批启动和接受数见下面最新执行更新，不称最终评价完成；详见validation900_restore_20261009/README.md。各基线真实图像门检的完整接受及备份状态分开记录，首轮证据不等于完整门检PASS。
 
-机制新结果已有31项通过独立70轮严格验收，31项离机备份，100Full身份复核保持有效；6份增量各SHA/member通过本机验收，原Full权重不重复打包。实时queue完成数与该已验收/备份分母分开。v2首备份因活动日志增长而在preflight拒绝，原检查保留；独立v3处理正常活动目录，新v4修正异常重检的诊断保全路径，经独立审查/回归通过。训练及封存v1/v2/v3不变，首5项归档保持有效。当前不是800或整个返修完成。
+机制新结果已有38项通过独立70轮严格验收，38项离机备份，100Full身份复核保持有效；7份增量各SHA/member通过本机验收，原Full权重不重复打包。实时queue完成数与该已验收/备份分母分开。v2首备份因活动日志增长而在preflight拒绝，原检查保留；独立v3处理正常活动目录，新v4修正异常重检的诊断保全路径，经独立审查/回归通过。训练及封存v1/v2/v3不变，首5项归档保持有效。当前不是800或整个返修完成。
 
 CPU端Fed-NGA/Huber四条真实图像三轮探索门检沿原源码/数据路径执行，完整接受和备份见下面更新；原加载器会物化全split标签元数据，包括test尾部，仅训练/验证像素参与运算，不称untouched test。执行附件见tmp/celeba_gradient_realimage_gate_20261009/EXECUTION_HANDOFF.md。
 
@@ -38,7 +38,7 @@ FLGMM原v2四项GPU三轮canary均完成，各自身份通过，跨卡训练张�
 
 最新九方法重放启动：guardfed_celeba_valid_remaining872_20261009   RUNNING   pid 19149, uptime 0:01:14，只执行900既有模型减去已接受28的872补集，80批、每批至多11；11个真实CNNworker均nice10、8计算线程，outer nice0仅编排。38成员部署包、只读inspect及启动凭据离机并经主代理核验。首10秒全cgroup实用50.39/122.88核，throttle0，主800仍增长。新批仍待独立三视图和离机接受，不把RUNNING计入已接受；不训练旧模型、不运行test。入口tmp/celeba_final_valid_replay_20261009/v4/remaining872_prepared_v2_20261009/README.md。
 
-最新九方法离机接受：唯一ID collector严格合并303/900实际三视图重放，尚缺597；其中原吞吐/门检28+新补集275，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该303项称完整最终评价。新collector路径tmp/celeba_final_valid_replay_20261009/v4/remaining872_execution_20261009/cumulative_303_accepted.json。
+最新九方法离机接受：唯一ID collector严格合并424/900实际三视图重放，尚缺476；其中原吞吐/门检28+新补集396，来源版本/原始config/checkpoint/数组/归档SHA均绑定，失败旧批不计样本。首11项64归档成员和99指标/264计数另经主代理独立重算全0；原模型不重复打包，不将该424项称完整最终评价。新collector路径tmp/celeba_final_valid_replay_20261009/v4/remaining872_execution_20261009/cumulative_424_accepted.json。
 
 受限任务启动历史：Hybrid两条原未接受non-IID三轮门检沿限定writer修复继续，首轮真实完成，原两条IID只引用，科学表记录0；原terminal失败和两项工程失败全部保留。原8机制终轮中另外7条valid三视图重放另行启动，明确排除已验收seed91002。两套各20成员启动附件经主代理独立核SHA与实际worker CPU/nice/CUDA身份，凭据BOUNDED_STARTUPS4_ROOT_VERIFICATION.json，启动不等于完成。当前接受数量见下面完成更新。
 
@@ -50,9 +50,17 @@ Hybrid CPU门检完成更新：两新non-IID加两原IID引用已全部严格接
 
 机制下一增量实际启动：guardfed_celeba_mechanism_valid_incremental15仅重放23真实终轮减去已闭合8的精确15，顺序fresh-child、单进程8线程、CPU112–119/nice10/CUDA隐藏；137原source/data/artifact身份预检通过，启动44成员离机及主代理核SHA，实际child CPU增长。原19准备包/科学函数不改；外部批准只适配独占新输出路径。启动快照远端strict完成2不当作离机新接受，不训练/推理Full或test；完整增量另行接受。凭据MECHANISM_FIFTEEN_STARTUP_ROOT_VERIFICATION.json。
 
-机制三视图增量接受更新：本15中9条新增已原严格接受、离机SHA/member闭合并由主代理独立重算预测规则/指标/混淆计数；合计17条新机制终轮三视图接受，native误差0。未重包原模型/重推理Full；其余任务仍以独立真实验收为准。
+机制三视图增量接受更新：本15中15条新增已原严格接受、离机SHA/member闭合并由主代理独立重算预测规则/指标/混淆计数；合计23条新机制终轮三视图接受，native误差0。未重包原模型/重推理Full；其余任务仍以独立真实验收为准。
 
 Hybrid CUDA四项门检实际启动：独占新执行副本沿原5科学源/body/driver/writer，GPU0/CPU104单线程/nice10，真实首轮及cuda:0运行时身份已核。81成员source/startup离机及主代理核SHA，资源107名义计算线程含新机制15，低于122.88配额；不是实用率。全部四项严格接受及离机闭合前不称完整门检PASS；32搜索仍PREPARED，不运行test。凭据HYBRID_CUDA_STARTUP_ROOT_VERIFICATION.json。
+
+最新完成覆盖上述启动观察：exact15全部原strict接受、三条差集备份和主代理独立复算闭合，连旧8共23实际机制终轮三视图；服务EXITED、worker0、失败0，禁止重启。Full配对仍等待已有baseline真实重放凭据join，不能重推理或用旧校准代替。FINAL_DELIVERY.json绑定原15ID、149内容成员、135指标/360计数/45规则，native最大差0。
+
+最新CUDA门检完成覆盖上述启动观察：4/4完整严格接受、49新增成员离机及主代理核验，两组同GPU模型张量/每轮指标/攻击/诊断/RNG精确；服务EXITED，禁止重启。四终轮均恒定负类ACC0.516686、AEOD/ASPD0，保留负结果，不称性能优势、CPU/CUDA或70轮等价。原32验证搜索已获root范围批准，仍须新scope/seal exact审批及实时资源预检才能派发；本门检不等于32搜索完成。凭据HYBRID_CUDA_FOUR_ROOT_VERIFICATION.json。
+
+最新故障覆盖前文baseline重放启动观察：原872服务已failstop EXITED。chunk036中FairGuard/IID/F Flip/seed91009的CPU native指标偏离原GPU记录，ACC差约−0.00503个百分点，AEOD差+0.00029028、ASPD差+0.00011823，超过原1e-12；模型/配置/数据SHA一致且权重未改，但根因未确定。65成员失败现场离机保全；036虽10/11单项strict，也不计该partial批。此前实际已离机接受的唯一ID继续有效，最新分母读collector；未放宽容差、未改旧指标、未重试或继续后续批。主800/FL32/另行批准Hybrid32不受影响。后续有界诊断必须保持原记录、源与选择规则，不能将近边界假设当已证实原因。凭据BASELINE_VALID_CHUNK036_FAILURE_ROOT_VERIFICATION.json。
+
+最新Hybrid32已实际启动并覆盖前文准备观察：独立/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009，服务guardfed_celeba_hybrid_screen32，原8候选×四条件×70round valid-only/seed91001，GPU0/CPU104单线程/nice10/idleIO。首轮真实146493 client rows、随后round7，source69前后及28科学数据身份不变，73新增archive成员离机及主代理核验，20原source显式复用可重构69源；旧gate/model不重包。当前70轮接受0，不能称32完成；不自动100确认/test/retry。接续见该目录execution_dispatch_v1/startup_incremental_backup/BACKUP_HANDOFF.md及HYBRID_SCREEN32_STARTUP_ROOT_VERIFICATION.json。
 
 # HISTORICAL PREPARATION SNAPSHOT — no execution at time of preparation
 

@@ -1,0 +1,51 @@
+{
+  "status": "ROOT_NATIVE_METRIC_MISMATCH_FAILURE_PRESERVED_OFFSERVER",
+  "verified_utc": "2026-10-09T11:15:04.892948+00:00",
+  "verification_host": "BlueBook",
+  "archive_sha256": "fe5c3786ead4d4878e6e6f16c89793e3d10163f75559ef7ad7e798798ccfb555",
+  "members_verified": 65,
+  "failed_model_id": "FairGuard_IID_F-Flip_seed91009",
+  "terminal_service": "guardfed_celeba_valid_remaining872_20261009 EXITED Oct09 11:02 AM",
+  "terminal_service_observed_by_root": "ssh -p60350 root@89.22.197.55 supervisorctl status; stdout inspected, exited services cause nonzero status",
+  "native_tolerance_unchanged": 1e-12,
+  "expected_metrics": {
+    "accuracy": 0.9040116776564152,
+    "aeod": 0.04282574048724552,
+    "aspd": 0.11859776792562177
+  },
+  "observed_cpu_metrics": {
+    "accuracy": 0.9039613429304878,
+    "aeod": 0.04311601624921935,
+    "aspd": 0.11871599918596698
+  },
+  "metric_differences": {
+    "accuracy": -5.03347259274145e-05,
+    "aeod": 0.0002902757619738239,
+    "aspd": 0.00011823126034521403
+  },
+  "confusion_counts": {
+    "0": {
+      "tp": 5620,
+      "fp": 434,
+      "tn": 4818,
+      "fn": 537
+    },
+    "1": {
+      "tp": 2996,
+      "fp": 488,
+      "tn": 4525,
+      "fn": 449
+    }
+  },
+  "failed_chunk_partial_strict_not_counted": 10,
+  "old_result_sha256": "d810b15d357a9d31a14f2edda7e18fb780d5f7329ae4202f313daef8da395944",
+  "weights_before_after_equal": true,
+  "closest_cpu_valid_margin": -2.60770320892334e-07,
+  "root_cause": "Unresolved; one near-zero CPU margin is only a candidate; original per-image GPU outputs absent",
+  "previous424_valid_results_not_invalidated": true,
+  "new_acceptances_from_failed_chunk": 0,
+  "new_CNN_inference": 0,
+  "retry_started": false,
+  "test_started": false,
+  "goal_complete": false
+}

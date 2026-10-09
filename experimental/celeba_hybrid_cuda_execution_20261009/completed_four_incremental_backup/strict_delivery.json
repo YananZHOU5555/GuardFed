@@ -1,0 +1,280 @@
+{
+  "status": "FOUR_CUDA_CANARIES_STRICT_ACCEPTED_BACKUP_PENDING",
+  "at_unix": 1791542725.794252,
+  "accepted_ids": [
+    "IID_Benign_hybrid_seed91001_cuda_gate3",
+    "IID_Benign_legacy_reference_seed91001_cuda_gate3",
+    "non-IID_S-DFA_hybrid_seed91001_cuda_gate3",
+    "non-IID_S-DFA_legacy_reference_seed91001_cuda_gate3"
+  ],
+  "new_CANARY": 4,
+  "scientific_table_records": 0,
+  "formal_multi_seed_records": 0,
+  "test_evaluated": false,
+  "CPU_CUDA_equivalence_claim": false,
+  "round70_equivalence_claim": false,
+  "core_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+  "body_sha256": "2c03c36c6b90c3043d2a80e28007de4b40554fe50521ab1049224a06bdfecebe",
+  "adapter_sha256": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+  "scientific_worker_sha256": "00e94c2cc37fe0f91bfdf1388bc13fee9781a564f564c165a0c6dce4c5206d04",
+  "writer_policy_sha256": "c58d0cd809fb78cfdf2723ca2e151707c7472c7975882a0ca267dca76d4a7983",
+  "source_seal_sha256": "8c08bbabe0321adb4cf0f417a0784af58a7ddab3381a2b6c03e3123f79c3f112",
+  "approval_sha256": "da49e151d2cc2766da90c3559fac972b504c40ef5d64152822706cb43a112c36",
+  "all_pairs_exact": true,
+  "pairs": [
+    {
+      "hybrid": "IID_Benign_hybrid_seed91001_cuda_gate3",
+      "legacy": "IID_Benign_legacy_reference_seed91001_cuda_gate3",
+      "all_metrics_model_attacks_diagnostics_rng_exact": true
+    },
+    {
+      "hybrid": "non-IID_S-DFA_hybrid_seed91001_cuda_gate3",
+      "legacy": "non-IID_S-DFA_legacy_reference_seed91001_cuda_gate3",
+      "all_metrics_model_attacks_diagnostics_rng_exact": true
+    }
+  ],
+  "records": [
+    {
+      "id": "IID_Benign_hybrid_seed91001_cuda_gate3",
+      "method": "CosineFairnessHybrid",
+      "distribution": "IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "rounds": 3,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "00da946fe6d29cf9b66bbee44647b31344f2281aac5afc9ff3b8ccd4b73009c0",
+      "checkpoint_tensor_sha256": "31f6cade64ed99dffe3f771cea6e747e912c4d95cb919cde3cb97e1a68a6615a",
+      "acceptance_sha256": "7c7313a7a50c4dcd4e680f12302bdd660437c80fea6c7f6f3610da3e5375e079",
+      "native_replay_sha256": "08127d06f55edbf05afbc247f592f126149f7e4299365ef5d1ded4fce8468414",
+      "gpu_uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+      "elapsed_seconds": 113.27860856056213
+    },
+    {
+      "id": "IID_Benign_legacy_reference_seed91001_cuda_gate3",
+      "method": "GuardFed",
+      "distribution": "IID",
+      "attack": "Benign",
+      "seed": 91001,
+      "rounds": 3,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "00da946fe6d29cf9b66bbee44647b31344f2281aac5afc9ff3b8ccd4b73009c0",
+      "checkpoint_tensor_sha256": "31f6cade64ed99dffe3f771cea6e747e912c4d95cb919cde3cb97e1a68a6615a",
+      "acceptance_sha256": "75f0c6f03a7beba2205031d19354acadb34ba1399e8152ca483d7795e696f627",
+      "native_replay_sha256": "08127d06f55edbf05afbc247f592f126149f7e4299365ef5d1ded4fce8468414",
+      "gpu_uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+      "elapsed_seconds": 107.01386952400208
+    },
+    {
+      "id": "non-IID_S-DFA_hybrid_seed91001_cuda_gate3",
+      "method": "CosineFairnessHybrid",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "rounds": 3,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "0d6f1dea48c0c0dc0f3679acc4ac8d4844a451a212390f8df3473011440b224a",
+      "checkpoint_tensor_sha256": "b012cb9997b21481ed4f57944536e461a82ee388df33af210e03f90c0bdcd704",
+      "acceptance_sha256": "2774bfd000cd399801c48e9393f0ad01ec50f2e335a670ab49b4253b4794d966",
+      "native_replay_sha256": "dc2bf566215b5ecf6f99ec5a2be761cafa782aa785e5cf7983d14d01f6270ff2",
+      "gpu_uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+      "elapsed_seconds": 107.45688700675964
+    },
+    {
+      "id": "non-IID_S-DFA_legacy_reference_seed91001_cuda_gate3",
+      "method": "GuardFed",
+      "distribution": "non-IID",
+      "attack": "S-DFA",
+      "seed": 91001,
+      "rounds": 3,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "0d6f1dea48c0c0dc0f3679acc4ac8d4844a451a212390f8df3473011440b224a",
+      "checkpoint_tensor_sha256": "b012cb9997b21481ed4f57944536e461a82ee388df33af210e03f90c0bdcd704",
+      "acceptance_sha256": "766d6a9e2ff4bded9f108e22b12fdc93e49c68f72cdae282842ebaa5f3e176b9",
+      "native_replay_sha256": "dc2bf566215b5ecf6f99ec5a2be761cafa782aa785e5cf7983d14d01f6270ff2",
+      "gpu_uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+      "elapsed_seconds": 113.2913727760315
+    }
+  ],
+  "protected_formal_progress": {
+    "before": {
+      "at_unix": 1791542238.9444022,
+      "completed": 32,
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_U_IID_S-DFA_seed91003",
+          "pid": 23585,
+          "round": 48,
+          "updated_unix": 1791542189.4776583
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91004",
+          "pid": 24077,
+          "round": 45,
+          "updated_unix": 1791542229.9297123
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91005",
+          "pid": 24436,
+          "round": 42,
+          "updated_unix": 1791542210.6397364
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91006",
+          "pid": 24471,
+          "round": 41,
+          "updated_unix": 1791542211.185696
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91007",
+          "pid": 24567,
+          "round": 39,
+          "updated_unix": 1791542211.4070175
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91008",
+          "pid": 24568,
+          "round": 36,
+          "updated_unix": 1791542213.0303931
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91009",
+          "pid": 24588,
+          "round": 40,
+          "updated_unix": 1791542230.0027254
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91010",
+          "pid": 25907,
+          "round": 29,
+          "updated_unix": 1791542231.729179
+        }
+      ],
+      "pending": 760,
+      "memory": {
+        "MemTotal": "1056260180 kB",
+        "MemAvailable": "859305768 kB"
+      },
+      "disk_free_bytes": 1061962924032,
+      "gpu": "0, 100 %, 5045 MiB, 68\n1, 100 %, 5045 MiB, 67",
+      "loadavg": "86.32 70.83 82.67 165/19433 29242",
+      "cpu_times": {
+        "user": 4.16,
+        "system": 1.24,
+        "children_user": 0.0,
+        "children_system": 0.09,
+        "elapsed": 5479933.13
+      },
+      "peak_rss_kib": 638884,
+      "cpu_affinity": [
+        104
+      ]
+    },
+    "after": {
+      "at_unix": 1791542723.832191,
+      "completed": 32,
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_U_IID_S-DFA_seed91003",
+          "pid": 23585,
+          "round": 58,
+          "updated_unix": 1791542694.2491157
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91004",
+          "pid": 24077,
+          "round": 55,
+          "updated_unix": 1791542690.2856965
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91005",
+          "pid": 24436,
+          "round": 54,
+          "updated_unix": 1791542686.9672573
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91006",
+          "pid": 24471,
+          "round": 53,
+          "updated_unix": 1791542709.9986331
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91007",
+          "pid": 24567,
+          "round": 51,
+          "updated_unix": 1791542687.1998339
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91008",
+          "pid": 24568,
+          "round": 48,
+          "updated_unix": 1791542688.3523877
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91009",
+          "pid": 24588,
+          "round": 50,
+          "updated_unix": 1791542691.9752283
+        },
+        {
+          "id": "minus_U_IID_S-DFA_seed91010",
+          "pid": 25907,
+          "round": 39,
+          "updated_unix": 1791542691.5796385
+        }
+      ],
+      "pending": 760,
+      "memory": {
+        "MemTotal": "1056260180 kB",
+        "MemAvailable": "877570716 kB"
+      },
+      "disk_free_bytes": 1061924106240,
+      "gpu": "0, 100 %, 5045 MiB, 67\n1, 100 %, 5045 MiB, 67",
+      "loadavg": "52.78 61.98 74.13 50/19097 30825",
+      "cpu_times": {
+        "user": 2.73,
+        "system": 0.59,
+        "children_user": 0.07,
+        "children_system": 0.05,
+        "elapsed": 5480418.0
+      },
+      "peak_rss_kib": 540492,
+      "cpu_affinity": [
+        104
+      ]
+    },
+    "real_growth": true
+  },
+  "source_data_before_after_verified": true,
+  "screen32_status": "PREPARED_NOT_FROZEN",
+  "metadata_boundary": "Original loader may materialize test-tail attributes; no test image inference/fitting/selection, not untouched-test claim.",
+  "service_terminal": "guardfed_celeba_hybrid_cuda_four   EXITED    Oct 09 10:44 AM",
+  "strict_checker_reused_sha256": "1aedc2dc67c7b0fd3d515e16e778a00b784ae119fec5a3b7b3a5df3467bcf47f",
+  "postexit_collector_sha256": "e8376eac043963a1600b50345f555b6e107e8f5274303a1e0ecf1547f5873b09",
+  "source_backup_reference": {
+    "status": "SOURCE_STARTUP_ARCHIVED_PENDING_OFFSERVER",
+    "accepted_new_ids": [],
+    "source_host": "0becaeaa5515",
+    "archive_sha256": "1876769e6073b00ef1131d57a855611d60ab6863f144fefb3bbd20e7ac07d791",
+    "inventory_sha256": "19aba0579ec1476b95e246576552a9a39a72cd4b37490692a5cfaa59c21b8a62",
+    "members": 80,
+    "source_seal_sha256": "8c08bbabe0321adb4cf0f417a0784af58a7ddab3381a2b6c03e3123f79c3f112"
+  }
+}

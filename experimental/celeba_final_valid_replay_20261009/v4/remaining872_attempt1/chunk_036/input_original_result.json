@@ -1,0 +1,7926 @@
+{
+  "run_id": "revision|celeba|IID|FairGuard|F Flip|rounds=70|seed=91009|clients=20|malicious=4|epochs=1|batch=64|lr=0.001|opt=adam|root=0.1+0.0|serversamp=stratified_sensitive|serveralpha=None|servertarget=None:None|synth=none|synth_epochs=50|sensfeat=0|agg=count|fflip=all_unprivileged|rw=1|foe=state|sdfafoe=fedsa|spdfafoe=fedsa|fedsa_gain=4.5|fedsa_norm=3.0|fg=server_aeod|actfb=0.06|acttemp=0.35|actkeep=0.8|actmetric=aeod_aspd|actdrop=0.005|actrisk=1.0|actviol=1.0|ad2calw=1.0|ad2calb=0.06|ad2calt=0.03|ad2calq=41|ad2clip=5.0|ad2normclip=2.5|ad2accdrop=0.03|ad2calobj=acc_floor|ad2calen=1|ad2normmode=adaptive|ad2uw=1.0|ad2cw=0.35|ad2aw=0.35|ad2plus=adaptive|suite=celeba_fullcoverage_v1|tag=FairGuard_IID_F-Flip_seed91009|celeba=rgb64_v1|trainlimit=0|evallimit=0|evalsplit=valid|compasprep=train_only|ablation=none|clientalpha=5000.0|fullrounddiag=1",
+  "mode": "revision",
+  "dataset": "celeba",
+  "distribution": "IID",
+  "alpha": 5000.0,
+  "method": "FairGuard",
+  "attack": "F Flip",
+  "seed": 91009,
+  "rounds": 70,
+  "num_clients": 20,
+  "num_malicious": 4,
+  "config": {
+    "seed": 91009,
+    "num_clients": 20,
+    "num_malicious": 4,
+    "local_epochs": 1,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "rounds": 70,
+    "device": "cuda",
+    "server_ratio": 0.1,
+    "synthetic_ratio": 0.0,
+    "server_sampling": "stratified_sensitive",
+    "server_alpha": null,
+    "server_target_sensitive": null,
+    "server_target_label": null,
+    "synthetic_method": "none",
+    "synthetic_epochs": 50,
+    "optimizer": "adam",
+    "include_sensitive_feature": false,
+    "aggregation_weighting": "count",
+    "fflip_mode": "all_unprivileged",
+    "foe_mode": "state",
+    "sdfa_foe_mode": "fedsa",
+    "spdfa_foe_mode": "fedsa",
+    "fedsa_gain": 4.5,
+    "fedsa_norm_ratio": 3.0,
+    "fairguard_mode": "server_aeod",
+    "use_reweighting": true,
+    "fairfed_beta": 1.0,
+    "trust_threshold": 0.2,
+    "guardfed_fairness_lambda": 20.0,
+    "act_fairness_budget": 0.06,
+    "act_temperature": 0.35,
+    "act_keep_ratio": 0.8,
+    "act_fairness_metric": "aeod_aspd",
+    "act_anchor_drop": 0.005,
+    "act_risk_weight": 1.0,
+    "act_violation_weight": 1.0,
+    "ad2_calibration_base_weight": 1.0,
+    "ad2_calibration_budget": 0.06,
+    "ad2_calibration_temperature": 0.03,
+    "ad2_calibration_quantiles": 41,
+    "ad2_score_clip": 5.0,
+    "ad2_norm_clip_scale": 2.5,
+    "ad2_calibration_max_acc_drop": 0.03,
+    "ad2_calibration_objective": "acc_floor",
+    "ad2_calibration_enabled": true,
+    "ad2_norm_mode": "adaptive",
+    "ad2_utility_weight": 1.0,
+    "ad2_centrality_weight": 0.35,
+    "ad2_alignment_weight": 0.35,
+    "ad2_plus_mode": "adaptive",
+    "experiment_suite": "celeba_fullcoverage_v1",
+    "experiment_tag": "FairGuard_IID_F-Flip_seed91009",
+    "ablation_component": "none",
+    "client_alpha": 5000.0,
+    "full_round_diagnostics": true,
+    "root_label_noise": 0.0,
+    "root_sensitive_noise": 0.0,
+    "compas_preprocessing_version": "train_only",
+    "celeba_cache_dir": "",
+    "celeba_train_limit": 0,
+    "celeba_eval_limit": 0,
+    "celeba_evaluation_split": "valid"
+  },
+  "metrics": {
+    "accuracy": 0.9040116776564152,
+    "aeod": 0.04282574048724552,
+    "aspd": 0.11859776792562177
+  },
+  "evaluation_stats": {
+    "positive_rate": 0.48014295062163387,
+    "majority_accuracy": 0.5166859616449389,
+    "prediction_count": 19867
+  },
+  "warnings": [],
+  "attack_audit": [
+    {
+      "client_id": 0,
+      "is_malicious": true,
+      "attack_types": [
+        "fflip"
+      ],
+      "samples": 7276,
+      "foe_mode": null,
+      "fflip_changed": 3051,
+      "fflip_ratio": 0.41932380428807037,
+      "fflip_mode": "all_unprivileged",
+      "fflip_requires_full_flip": false,
+      "fflip_overwrite_ratio": 1.0,
+      "fflip_label_corr_before": -0.13441739070995082,
+      "fflip_label_corr_after": NaN,
+      "label_changed_count": 0
+    },
+    {
+      "client_id": 1,
+      "is_malicious": true,
+      "attack_types": [
+        "fflip"
+      ],
+      "samples": 7363,
+      "foe_mode": null,
+      "fflip_changed": 3080,
+      "fflip_ratio": 0.41830775499117206,
+      "fflip_mode": "all_unprivileged",
+      "fflip_requires_full_flip": false,
+      "fflip_overwrite_ratio": 1.0,
+      "fflip_label_corr_before": -0.13085522278377593,
+      "fflip_label_corr_after": NaN,
+      "label_changed_count": 0
+    },
+    {
+      "client_id": 2,
+      "is_malicious": true,
+      "attack_types": [
+        "fflip"
+      ],
+      "samples": 7456,
+      "foe_mode": null,
+      "fflip_changed": 3090,
+      "fflip_ratio": 0.414431330472103,
+      "fflip_mode": "all_unprivileged",
+      "fflip_requires_full_flip": false,
+      "fflip_overwrite_ratio": 1.0,
+      "fflip_label_corr_before": -0.11984752948766021,
+      "fflip_label_corr_after": NaN,
+      "label_changed_count": 0
+    },
+    {
+      "client_id": 3,
+      "is_malicious": true,
+      "attack_types": [
+        "fflip"
+      ],
+      "samples": 7347,
+      "foe_mode": null,
+      "fflip_changed": 3077,
+      "fflip_ratio": 0.4188103988022322,
+      "fflip_mode": "all_unprivileged",
+      "fflip_requires_full_flip": false,
+      "fflip_overwrite_ratio": 1.0,
+      "fflip_label_corr_before": -0.14702126325562634,
+      "fflip_label_corr_after": NaN,
+      "label_changed_count": 0
+    },
+    {
+      "client_id": 4,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7260,
+      "foe_mode": null
+    },
+    {
+      "client_id": 5,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7336,
+      "foe_mode": null
+    },
+    {
+      "client_id": 6,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7266,
+      "foe_mode": null
+    },
+    {
+      "client_id": 7,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7280,
+      "foe_mode": null
+    },
+    {
+      "client_id": 8,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7239,
+      "foe_mode": null
+    },
+    {
+      "client_id": 9,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7227,
+      "foe_mode": null
+    },
+    {
+      "client_id": 10,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7364,
+      "foe_mode": null
+    },
+    {
+      "client_id": 11,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7327,
+      "foe_mode": null
+    },
+    {
+      "client_id": 12,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7353,
+      "foe_mode": null
+    },
+    {
+      "client_id": 13,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7368,
+      "foe_mode": null
+    },
+    {
+      "client_id": 14,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7280,
+      "foe_mode": null
+    },
+    {
+      "client_id": 15,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7328,
+      "foe_mode": null
+    },
+    {
+      "client_id": 16,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7312,
+      "foe_mode": null
+    },
+    {
+      "client_id": 17,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7461,
+      "foe_mode": null
+    },
+    {
+      "client_id": 18,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7375,
+      "foe_mode": null
+    },
+    {
+      "client_id": 19,
+      "is_malicious": false,
+      "attack_types": [],
+      "samples": 7275,
+      "foe_mode": null
+    }
+  ],
+  "round_summaries": [
+    {
+      "round": 1,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          12,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.0,
+      "fairness_max": 0.11848931788275849,
+      "fairness_mean": 0.02675143806642326
+    },
+    {
+      "round": 2,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          8,
+          9,
+          11,
+          12,
+          14,
+          18,
+          19
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.0,
+      "fairness_max": 0.15410477324536204,
+      "fairness_mean": 0.03682990622162091
+    },
+    {
+      "round": 3,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          2,
+          7,
+          8,
+          9,
+          11,
+          12,
+          14,
+          15
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.0,
+      "fairness_max": 0.17968619687899623,
+      "fairness_mean": 0.07975888207276163
+    },
+    {
+      "round": 4,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.008000004633319124,
+      "fairness_max": 0.25385057777489484,
+      "fairness_mean": 0.12455698229608765
+    },
+    {
+      "round": 5,
+      "aggregate": {
+        "selected_clients": [
+          7,
+          8,
+          11,
+          12,
+          15,
+          16
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.033311247845506604,
+      "fairness_max": 0.23730615351112927,
+      "fairness_mean": 0.1509591839335026
+    },
+    {
+      "round": 6,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          7,
+          9,
+          10,
+          11,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.060084303241470044,
+      "fairness_max": 0.23994077459829116,
+      "fairness_mean": 0.15825089886391014
+    },
+    {
+      "round": 7,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          7,
+          14,
+          15,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.07108177576588764,
+      "fairness_max": 0.21412276210686282,
+      "fairness_mean": 0.15246802430639214
+    },
+    {
+      "round": 8,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          7,
+          14,
+          15,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.04691727903701093,
+      "fairness_max": 0.19604760503734459,
+      "fairness_mean": 0.13496747120392164
+    },
+    {
+      "round": 9,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          7,
+          11,
+          14,
+          15,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03532587291732309,
+      "fairness_max": 0.18145902060900349,
+      "fairness_mean": 0.12313028198380191
+    },
+    {
+      "round": 10,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          7,
+          11,
+          14,
+          15
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.033067998591471026,
+      "fairness_max": 0.1698786186222362,
+      "fairness_mean": 0.11534563981503791
+    },
+    {
+      "round": 11,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          7,
+          11,
+          14,
+          15
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03102702151713399,
+      "fairness_max": 0.17284365327946322,
+      "fairness_mean": 0.11128426049910116
+    },
+    {
+      "round": 12,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          4,
+          5,
+          6,
+          7,
+          11,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.032598006282780756,
+      "fairness_max": 0.18554010601034154,
+      "fairness_mean": 0.11727967409233278
+    },
+    {
+      "round": 13,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          11,
+          13,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.043804846915136086,
+      "fairness_max": 0.20291302565005465,
+      "fairness_mean": 0.12758655040124542
+    },
+    {
+      "round": 14,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          2,
+          5,
+          6,
+          7,
+          13,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.05382092453249809,
+      "fairness_max": 0.19096224771577364,
+      "fairness_mean": 0.13680857847452602
+    },
+    {
+      "round": 15,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          2,
+          5,
+          6,
+          7,
+          13,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.0707681579776489,
+      "fairness_max": 0.19621237744870912,
+      "fairness_mean": 0.1358834783948329
+    },
+    {
+      "round": 16,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          2,
+          5,
+          6,
+          7,
+          11,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.08060092990714829,
+      "fairness_max": 0.19236093092647844,
+      "fairness_mean": 0.13337779389143206
+    },
+    {
+      "round": 17,
+      "aggregate": {
+        "selected_clients": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          13,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.06505151092536643,
+      "fairness_max": 0.2030734543247401,
+      "fairness_mean": 0.12426480808792187
+    },
+    {
+      "round": 18,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.05956739857664439,
+      "fairness_max": 0.17472912458068457,
+      "fairness_mean": 0.12150055541913005
+    },
+    {
+      "round": 19,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.06366672767203518,
+      "fairness_max": 0.16427693580073022,
+      "fairness_mean": 0.11371586981299923
+    },
+    {
+      "round": 20,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.05795355560909621,
+      "fairness_max": 0.13935923513167892,
+      "fairness_mean": 0.10187307717256333
+    },
+    {
+      "round": 21,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          9,
+          13,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.05047769520173473,
+      "fairness_max": 0.13221900077839766,
+      "fairness_mean": 0.0922276361269159
+    },
+    {
+      "round": 22,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          13,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.043435339714958165,
+      "fairness_max": 0.1306931908742146,
+      "fairness_mean": 0.08747169331597382
+    },
+    {
+      "round": 23,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          10,
+          14,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.0439887317678892,
+      "fairness_max": 0.12642793103767813,
+      "fairness_mean": 0.08180598381581627
+    },
+    {
+      "round": 24,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.045383650406805365,
+      "fairness_max": 0.1174694085104806,
+      "fairness_mean": 0.07728765788034916
+    },
+    {
+      "round": 25,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.04036200122319622,
+      "fairness_max": 0.10867073549307782,
+      "fairness_mean": 0.07370838989843764
+    },
+    {
+      "round": 26,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.04049810497247808,
+      "fairness_max": 0.10840200298385749,
+      "fairness_mean": 0.06811345434790668
+    },
+    {
+      "round": 27,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          8,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03005634116055378,
+      "fairness_max": 0.09782297709287024,
+      "fairness_mean": 0.062464757816409366
+    },
+    {
+      "round": 28,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          9,
+          10,
+          14,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02714864382749227,
+      "fairness_max": 0.10148590544322322,
+      "fairness_mean": 0.06060529101877419
+    },
+    {
+      "round": 29,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          9,
+          10,
+          14,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02890669885279029,
+      "fairness_max": 0.09429238792001038,
+      "fairness_mean": 0.061121254540652745
+    },
+    {
+      "round": 30,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          9,
+          10,
+          14,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.024873973719813924,
+      "fairness_max": 0.08944796319291282,
+      "fairness_mean": 0.06138665685175233
+    },
+    {
+      "round": 31,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.024843857145504744,
+      "fairness_max": 0.08359781863335614,
+      "fairness_mean": 0.05776641295383361
+    },
+    {
+      "round": 32,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          9,
+          10,
+          11,
+          14,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.030471023222195415,
+      "fairness_max": 0.08578879941434847,
+      "fairness_mean": 0.0595055292872102
+    },
+    {
+      "round": 33,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.022863402802231425,
+      "fairness_max": 0.08933357812702702,
+      "fairness_mean": 0.05822441654928925
+    },
+    {
+      "round": 34,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03154595325907672,
+      "fairness_max": 0.08500374140519307,
+      "fairness_mean": 0.05898926170376413
+    },
+    {
+      "round": 35,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.031221041755471912,
+      "fairness_max": 0.08851898270845304,
+      "fairness_mean": 0.058123164047296914
+    },
+    {
+      "round": 36,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          16,
+          17,
+          18,
+          19
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03233072168578688,
+      "fairness_max": 0.09276107594936711,
+      "fairness_mean": 0.058004985451377944
+    },
+    {
+      "round": 37,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03387709194358468,
+      "fairness_max": 0.09722672683803768,
+      "fairness_mean": 0.05728903629278871
+    },
+    {
+      "round": 38,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          9,
+          10,
+          11,
+          14,
+          15
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.029746777526548862,
+      "fairness_max": 0.09478265099987027,
+      "fairness_mean": 0.05431689238652998
+    },
+    {
+      "round": 39,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          6,
+          9,
+          10,
+          14
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.029916762421928533,
+      "fairness_max": 0.10166284031728967,
+      "fairness_mean": 0.05661986917823454
+    },
+    {
+      "round": 40,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02412453435142803,
+      "fairness_max": 0.09792027679448445,
+      "fairness_mean": 0.05432723047982653
+    },
+    {
+      "round": 41,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.028055905628556088,
+      "fairness_max": 0.10250407732082956,
+      "fairness_mean": 0.05622970027058586
+    },
+    {
+      "round": 42,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.029842339733491485,
+      "fairness_max": 0.09674515123153615,
+      "fairness_mean": 0.05750064866467741
+    },
+    {
+      "round": 43,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.03198438108123136,
+      "fairness_max": 0.09753629047204249,
+      "fairness_mean": 0.05721128340623087
+    },
+    {
+      "round": 44,
+      "aggregate": {
+        "selected_clients": [
+          2,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.025109404247826927,
+      "fairness_max": 0.0936254795485294,
+      "fairness_mean": 0.05686437811590709
+    },
+    {
+      "round": 45,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02361834423707776,
+      "fairness_max": 0.09959116750375296,
+      "fairness_mean": 0.057239966547435926
+    },
+    {
+      "round": 46,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.016128004707452237,
+      "fairness_max": 0.09248626220879586,
+      "fairness_mean": 0.05524262954760273
+    },
+    {
+      "round": 47,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.01485905443223312,
+      "fairness_max": 0.09227950034286558,
+      "fairness_mean": 0.055002565700465175
+    },
+    {
+      "round": 48,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          9,
+          10,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.021379582352614168,
+      "fairness_max": 0.09014614646848418,
+      "fairness_mean": 0.05335045441277314
+    },
+    {
+      "round": 49,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.019426348759197132,
+      "fairness_max": 0.08350486266842116,
+      "fairness_mean": 0.05237422855236577
+    },
+    {
+      "round": 50,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.016784488110903162,
+      "fairness_max": 0.0851925491595159,
+      "fairness_mean": 0.05195148161962304
+    },
+    {
+      "round": 51,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          9,
+          10,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.016768850658858026,
+      "fairness_max": 0.08275745037715221,
+      "fairness_mean": 0.051215884292121504
+    },
+    {
+      "round": 52,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.015009347721333666,
+      "fairness_max": 0.08639981837389032,
+      "fairness_mean": 0.05217501030913506
+    },
+    {
+      "round": 53,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.019317176177326423,
+      "fairness_max": 0.08599005921381841,
+      "fairness_mean": 0.052221372458624474
+    },
+    {
+      "round": 54,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.021379582352614168,
+      "fairness_max": 0.0885163764664455,
+      "fairness_mean": 0.05184345288841115
+    },
+    {
+      "round": 55,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.023871149711807482,
+      "fairness_max": 0.09077801536408625,
+      "fairness_mean": 0.05160731288340716
+    },
+    {
+      "round": 56,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02124232027355122,
+      "fairness_max": 0.0894051049910114,
+      "fairness_mean": 0.0507675672294605
+    },
+    {
+      "round": 57,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          9,
+          10,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.01878781946735364,
+      "fairness_max": 0.08537266944048039,
+      "fairness_mean": 0.052849187199992584
+    },
+    {
+      "round": 58,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          9,
+          10,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.016282062568341416,
+      "fairness_max": 0.09286503604722274,
+      "fairness_mean": 0.05075630247233907
+    },
+    {
+      "round": 59,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02174040207943362,
+      "fairness_max": 0.08793721157588452,
+      "fairness_mean": 0.05196581595066443
+    },
+    {
+      "round": 60,
+      "aggregate": {
+        "selected_clients": [
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.01643235585744196,
+      "fairness_max": 0.09492251932094076,
+      "fairness_mean": 0.05096493214504143
+    },
+    {
+      "round": 61,
+      "aggregate": {
+        "selected_clients": [
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.015907053301703278,
+      "fairness_max": 0.097623454788072,
+      "fairness_mean": 0.05147173038252682
+    },
+    {
+      "round": 62,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.021188168356283676,
+      "fairness_max": 0.09148951943214045,
+      "fairness_mean": 0.050102758330707785
+    },
+    {
+      "round": 63,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02267285755323689,
+      "fairness_max": 0.09352296736290011,
+      "fairness_mean": 0.05170969475693608
+    },
+    {
+      "round": 64,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          2,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.021138070593250236,
+      "fairness_max": 0.09325799942546842,
+      "fairness_mean": 0.04986942727542304
+    },
+    {
+      "round": 65,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.018903362863020523,
+      "fairness_max": 0.09167311470244832,
+      "fairness_mean": 0.04921185793780232
+    },
+    {
+      "round": 66,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          19
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.023721146005152183,
+      "fairness_max": 0.09991723733713886,
+      "fairness_mean": 0.04905780007691309
+    },
+    {
+      "round": 67,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.017961930333413645,
+      "fairness_max": 0.0903673874566785,
+      "fairness_mean": 0.0500342141659099
+    },
+    {
+      "round": 68,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.021621962859313948,
+      "fairness_max": 0.09951008441907438,
+      "fairness_mean": 0.04970382955408937
+    },
+    {
+      "round": 69,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          4,
+          5,
+          9,
+          10,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.02089945465833909,
+      "fairness_max": 0.08573696415664323,
+      "fairness_mean": 0.05092643215894137
+    },
+    {
+      "round": 70,
+      "aggregate": {
+        "selected_clients": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          16,
+          17,
+          18,
+          19
+        ],
+        "aggregation_weighting": "count",
+        "fairguard_mode": "server_aeod"
+      },
+      "client_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "malicious_mask": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "root_noise_audit": {
+        "root_rows": 16277,
+        "clean_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        },
+        "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+        "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+        "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+        "label": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "sensitive": {
+          "requested_rate": 0.0,
+          "flipped_count": 0,
+          "actual_rate": 0.0,
+          "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+        },
+        "observed_group_label_counts": {
+          "0|0": 4395,
+          "0|1": 5056,
+          "1|0": 4094,
+          "1|1": 2732
+        }
+      },
+      "fairness_min": 0.012383124525084721,
+      "fairness_max": 0.09018118594436308,
+      "fairness_mean": 0.05005270400504105
+    }
+  ],
+  "last10_metrics": [
+    {
+      "round": 61,
+      "metrics": {
+        "accuracy": 0.8982231841747622,
+        "aeod": 0.03500899185393902,
+        "aspd": 0.10609005294468171
+      }
+    },
+    {
+      "round": 62,
+      "metrics": {
+        "accuracy": 0.8981225147229074,
+        "aeod": 0.04186849522638525,
+        "aspd": 0.11369947655127671
+      }
+    },
+    {
+      "round": 63,
+      "metrics": {
+        "accuracy": 0.8996828912266572,
+        "aeod": 0.04158859150722993,
+        "aspd": 0.11484711461733621
+      }
+    },
+    {
+      "round": 64,
+      "metrics": {
+        "accuracy": 0.8997332259525846,
+        "aeod": 0.03761803207931402,
+        "aspd": 0.11242542046918153
+      }
+    },
+    {
+      "round": 65,
+      "metrics": {
+        "accuracy": 0.9002869079377863,
+        "aeod": 0.03622539674831737,
+        "aspd": 0.10970008058876496
+      }
+    },
+    {
+      "round": 66,
+      "metrics": {
+        "accuracy": 0.9011425982785524,
+        "aeod": 0.040963110179617845,
+        "aspd": 0.11358750453199107
+      }
+    },
+    {
+      "round": 67,
+      "metrics": {
+        "accuracy": 0.9014446066341169,
+        "aeod": 0.04154715048160451,
+        "aspd": 0.11483868951306231
+      }
+    },
+    {
+      "round": 68,
+      "metrics": {
+        "accuracy": 0.9018976191674636,
+        "aeod": 0.03843704629679179,
+        "aspd": 0.11408860652112196
+      }
+    },
+    {
+      "round": 69,
+      "metrics": {
+        "accuracy": 0.9020989580711734,
+        "aeod": 0.03575544891733551,
+        "aspd": 0.11096980494443154
+      }
+    },
+    {
+      "round": 70,
+      "metrics": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177
+      }
+    }
+  ],
+  "trajectory_metrics": [
+    {
+      "round": 1,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      }
+    },
+    {
+      "round": 2,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      }
+    },
+    {
+      "round": 3,
+      "metrics": {
+        "accuracy": 0.5357124880455026,
+        "aeod": 0.13354127707663033,
+        "aspd": 0.11759009229292396
+      }
+    },
+    {
+      "round": 4,
+      "metrics": {
+        "accuracy": 0.5533296421200986,
+        "aeod": 0.18042479644276646,
+        "aspd": 0.17420824383084954
+      }
+    },
+    {
+      "round": 5,
+      "metrics": {
+        "accuracy": 0.5684803946242513,
+        "aeod": 0.1888705151817241,
+        "aspd": 0.16858202551983775
+      }
+    },
+    {
+      "round": 6,
+      "metrics": {
+        "accuracy": 0.5968691800473146,
+        "aeod": 0.19274810338946574,
+        "aspd": 0.17399107718243206
+      }
+    },
+    {
+      "round": 7,
+      "metrics": {
+        "accuracy": 0.6179594302109025,
+        "aeod": 0.13782040477840013,
+        "aspd": 0.12176151375475475
+      }
+    },
+    {
+      "round": 8,
+      "metrics": {
+        "accuracy": 0.6243519404036845,
+        "aeod": 0.11087313035088386,
+        "aspd": 0.10372341731929102
+      }
+    },
+    {
+      "round": 9,
+      "metrics": {
+        "accuracy": 0.6353752453817889,
+        "aeod": 0.11660981294256512,
+        "aspd": 0.11193317882956377
+      }
+    },
+    {
+      "round": 10,
+      "metrics": {
+        "accuracy": 0.6426737806412645,
+        "aeod": 0.10435604582839969,
+        "aspd": 0.10226686912617122
+      }
+    },
+    {
+      "round": 11,
+      "metrics": {
+        "accuracy": 0.6439321487894498,
+        "aeod": 0.0786111268918076,
+        "aspd": 0.07393323309013694
+      }
+    },
+    {
+      "round": 12,
+      "metrics": {
+        "accuracy": 0.6699552020939246,
+        "aeod": 0.13377111211636106,
+        "aspd": 0.1356623140277406
+      }
+    },
+    {
+      "round": 13,
+      "metrics": {
+        "accuracy": 0.6791161222127146,
+        "aeod": 0.14352323679397327,
+        "aspd": 0.1508766118918824
+      }
+    },
+    {
+      "round": 14,
+      "metrics": {
+        "accuracy": 0.6972366235465848,
+        "aeod": 0.14256957460245023,
+        "aspd": 0.14769617129892998
+      }
+    },
+    {
+      "round": 15,
+      "metrics": {
+        "accuracy": 0.7150047817989631,
+        "aeod": 0.13283159361959063,
+        "aspd": 0.14128086373215626
+      }
+    },
+    {
+      "round": 16,
+      "metrics": {
+        "accuracy": 0.7127900538581567,
+        "aeod": 0.11687359284970233,
+        "aspd": 0.14280394226898852
+      }
+    },
+    {
+      "round": 17,
+      "metrics": {
+        "accuracy": 0.7410781698293653,
+        "aeod": 0.11236043414542496,
+        "aspd": 0.1298150947650133
+      }
+    },
+    {
+      "round": 18,
+      "metrics": {
+        "accuracy": 0.7670508884079126,
+        "aeod": 0.11717758799558631,
+        "aspd": 0.12671240762515668
+      }
+    },
+    {
+      "round": 19,
+      "metrics": {
+        "accuracy": 0.7826043187194845,
+        "aeod": 0.10063182241742619,
+        "aspd": 0.10724444767493135
+      }
+    },
+    {
+      "round": 20,
+      "metrics": {
+        "accuracy": 0.7987617657421855,
+        "aeod": 0.09247628514914408,
+        "aspd": 0.10571848822913449
+      }
+    },
+    {
+      "round": 21,
+      "metrics": {
+        "accuracy": 0.801228167312629,
+        "aeod": 0.08616635860913735,
+        "aspd": 0.09978719409436049
+      }
+    },
+    {
+      "round": 22,
+      "metrics": {
+        "accuracy": 0.8061609704535159,
+        "aeod": 0.07410612438483766,
+        "aspd": 0.09313133062905105
+      }
+    },
+    {
+      "round": 23,
+      "metrics": {
+        "accuracy": 0.8138621835204107,
+        "aeod": 0.08645319273872132,
+        "aspd": 0.10256598623534857
+      }
+    },
+    {
+      "round": 24,
+      "metrics": {
+        "accuracy": 0.8190466602909348,
+        "aeod": 0.07997721922231837,
+        "aspd": 0.10017582664107505
+      }
+    },
+    {
+      "round": 25,
+      "metrics": {
+        "accuracy": 0.8246841495948054,
+        "aeod": 0.07379849902396729,
+        "aspd": 0.0984004302212656
+      }
+    },
+    {
+      "round": 26,
+      "metrics": {
+        "accuracy": 0.8305229778023858,
+        "aeod": 0.07032556192309936,
+        "aspd": 0.09567316282621813
+      }
+    },
+    {
+      "round": 27,
+      "metrics": {
+        "accuracy": 0.8344994211506518,
+        "aeod": 0.0596234052689506,
+        "aspd": 0.09150617672063477
+      }
+    },
+    {
+      "round": 28,
+      "metrics": {
+        "accuracy": 0.8361101323803292,
+        "aeod": 0.05385258922726632,
+        "aspd": 0.08545015373587261
+      }
+    },
+    {
+      "round": 29,
+      "metrics": {
+        "accuracy": 0.8381235214174259,
+        "aeod": 0.05271223026500815,
+        "aspd": 0.08467141709901538
+      }
+    },
+    {
+      "round": 30,
+      "metrics": {
+        "accuracy": 0.8414959480545628,
+        "aeod": 0.05130578125880292,
+        "aspd": 0.08327310886409883
+      }
+    },
+    {
+      "round": 31,
+      "metrics": {
+        "accuracy": 0.8476367846177078,
+        "aeod": 0.04412135007223894,
+        "aspd": 0.08145435372807547
+      }
+    },
+    {
+      "round": 32,
+      "metrics": {
+        "accuracy": 0.8500025167362963,
+        "aeod": 0.05122280491625397,
+        "aspd": 0.08485585745063479
+      }
+    },
+    {
+      "round": 33,
+      "metrics": {
+        "accuracy": 0.8526702572104495,
+        "aeod": 0.046118769790859604,
+        "aspd": 0.08319483726190868
+      }
+    },
+    {
+      "round": 34,
+      "metrics": {
+        "accuracy": 0.8559420143957316,
+        "aeod": 0.04689973746945264,
+        "aspd": 0.08707021942018245
+      }
+    },
+    {
+      "round": 35,
+      "metrics": {
+        "accuracy": 0.8590627674032315,
+        "aeod": 0.0422069538418165,
+        "aspd": 0.08767967674792054
+      }
+    },
+    {
+      "round": 36,
+      "metrics": {
+        "accuracy": 0.8624855287662959,
+        "aeod": 0.046471230664095975,
+        "aspd": 0.09248260796294433
+      }
+    },
+    {
+      "round": 37,
+      "metrics": {
+        "accuracy": 0.8647002567071023,
+        "aeod": 0.045037154307474014,
+        "aspd": 0.09177707543013469
+      }
+    },
+    {
+      "round": 38,
+      "metrics": {
+        "accuracy": 0.8663109679367795,
+        "aeod": 0.03666752864628575,
+        "aspd": 0.08628762775406346
+      }
+    },
+    {
+      "round": 39,
+      "metrics": {
+        "accuracy": 0.8678713444405295,
+        "aeod": 0.04131203512916615,
+        "aspd": 0.08737098424347989
+      }
+    },
+    {
+      "round": 40,
+      "metrics": {
+        "accuracy": 0.8722504655962148,
+        "aeod": 0.04076594707476566,
+        "aspd": 0.0939871056732538
+      }
+    },
+    {
+      "round": 41,
+      "metrics": {
+        "accuracy": 0.8745658629888761,
+        "aeod": 0.04768763555847444,
+        "aspd": 0.10067957119058701
+      }
+    },
+    {
+      "round": 42,
+      "metrics": {
+        "accuracy": 0.8776866159963759,
+        "aeod": 0.050148119843297256,
+        "aspd": 0.10346969007077733
+      }
+    },
+    {
+      "round": 43,
+      "metrics": {
+        "accuracy": 0.8782402979815775,
+        "aeod": 0.04526180332579555,
+        "aspd": 0.1005996311483131
+      }
+    },
+    {
+      "round": 44,
+      "metrics": {
+        "accuracy": 0.8797503397594,
+        "aeod": 0.04727991998440417,
+        "aspd": 0.10236081991995588
+      }
+    },
+    {
+      "round": 45,
+      "metrics": {
+        "accuracy": 0.8813610509890774,
+        "aeod": 0.041415661266053894,
+        "aspd": 0.09952326967167024
+      }
+    },
+    {
+      "round": 46,
+      "metrics": {
+        "accuracy": 0.8828207580409725,
+        "aeod": 0.039763866301539275,
+        "aspd": 0.10008167895063452
+      }
+    },
+    {
+      "round": 47,
+      "metrics": {
+        "accuracy": 0.8844314692706499,
+        "aeod": 0.04126710532550182,
+        "aspd": 0.10002437166080119
+      }
+    },
+    {
+      "round": 48,
+      "metrics": {
+        "accuracy": 0.8851361554336337,
+        "aeod": 0.036850783784631136,
+        "aspd": 0.09731300107996776
+      }
+    },
+    {
+      "round": 49,
+      "metrics": {
+        "accuracy": 0.8866461972114562,
+        "aeod": 0.03927666316295919,
+        "aspd": 0.10021171364734871
+      }
+    },
+    {
+      "round": 50,
+      "metrics": {
+        "accuracy": 0.8881562389892788,
+        "aeod": 0.0381950476795736,
+        "aspd": 0.10014236457256304
+      }
+    },
+    {
+      "round": 51,
+      "metrics": {
+        "accuracy": 0.8893139376856093,
+        "aeod": 0.03461843729616876,
+        "aspd": 0.09925358343105106
+      }
+    },
+    {
+      "round": 52,
+      "metrics": {
+        "accuracy": 0.8905723058337948,
+        "aeod": 0.03819160604718386,
+        "aspd": 0.10277186759649143
+      }
+    },
+    {
+      "round": 53,
+      "metrics": {
+        "accuracy": 0.8918306739819801,
+        "aeod": 0.042093049953408235,
+        "aspd": 0.10412755288690811
+      }
+    },
+    {
+      "round": 54,
+      "metrics": {
+        "accuracy": 0.8922333517893996,
+        "aeod": 0.039618799139026106,
+        "aspd": 0.10546060542488428
+      }
+    },
+    {
+      "round": 55,
+      "metrics": {
+        "accuracy": 0.8935420546635123,
+        "aeod": 0.04085938975143166,
+        "aspd": 0.10516298058509849
+      }
+    },
+    {
+      "round": 56,
+      "metrics": {
+        "accuracy": 0.8945990839079881,
+        "aeod": 0.03929396561620657,
+        "aspd": 0.10490219614591995
+      }
+    },
+    {
+      "round": 57,
+      "metrics": {
+        "accuracy": 0.8941964061005688,
+        "aeod": 0.0392455941801525,
+        "aspd": 0.1051364928033961
+      }
+    },
+    {
+      "round": 58,
+      "metrics": {
+        "accuracy": 0.895555443700609,
+        "aeod": 0.032244418131933794,
+        "aspd": 0.10130421028678915
+      }
+    },
+    {
+      "round": 59,
+      "metrics": {
+        "accuracy": 0.8962601298635929,
+        "aeod": 0.03921796682973555,
+        "aspd": 0.10619022152759844
+      }
+    },
+    {
+      "round": 60,
+      "metrics": {
+        "accuracy": 0.8964614687673026,
+        "aeod": 0.03775621597704759,
+        "aspd": 0.10611485156033656
+      }
+    },
+    {
+      "round": 61,
+      "metrics": {
+        "accuracy": 0.8982231841747622,
+        "aeod": 0.03500899185393902,
+        "aspd": 0.10609005294468171
+      }
+    },
+    {
+      "round": 62,
+      "metrics": {
+        "accuracy": 0.8981225147229074,
+        "aeod": 0.04186849522638525,
+        "aspd": 0.11369947655127671
+      }
+    },
+    {
+      "round": 63,
+      "metrics": {
+        "accuracy": 0.8996828912266572,
+        "aeod": 0.04158859150722993,
+        "aspd": 0.11484711461733621
+      }
+    },
+    {
+      "round": 64,
+      "metrics": {
+        "accuracy": 0.8997332259525846,
+        "aeod": 0.03761803207931402,
+        "aspd": 0.11242542046918153
+      }
+    },
+    {
+      "round": 65,
+      "metrics": {
+        "accuracy": 0.9002869079377863,
+        "aeod": 0.03622539674831737,
+        "aspd": 0.10970008058876496
+      }
+    },
+    {
+      "round": 66,
+      "metrics": {
+        "accuracy": 0.9011425982785524,
+        "aeod": 0.040963110179617845,
+        "aspd": 0.11358750453199107
+      }
+    },
+    {
+      "round": 67,
+      "metrics": {
+        "accuracy": 0.9014446066341169,
+        "aeod": 0.04154715048160451,
+        "aspd": 0.11483868951306231
+      }
+    },
+    {
+      "round": 68,
+      "metrics": {
+        "accuracy": 0.9018976191674636,
+        "aeod": 0.03843704629679179,
+        "aspd": 0.11408860652112196
+      }
+    },
+    {
+      "round": 69,
+      "metrics": {
+        "accuracy": 0.9020989580711734,
+        "aeod": 0.03575544891733551,
+        "aspd": 0.11096980494443154
+      }
+    },
+    {
+      "round": 70,
+      "metrics": {
+        "accuracy": 0.9040116776564152,
+        "aeod": 0.04282574048724552,
+        "aspd": 0.11859776792562177
+      }
+    }
+  ],
+  "data_contract": {
+    "label_col": "Smiling",
+    "sensitive_col": "Male",
+    "feature_includes_label": false,
+    "feature_includes_sensitive": false,
+    "num_features": 3,
+    "train_rows": 162770,
+    "test_rows": 19867,
+    "root_clean_rows": 16277,
+    "root_synthetic_rows": 0,
+    "server_sampling": "stratified_sensitive",
+    "server_alpha": null,
+    "server_sampling_audit": {
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_target_sensitive": null,
+      "server_target_label": null,
+      "server_rows": 16277,
+      "server_sensitive_counts": {
+        "0": 9451,
+        "1": 6826
+      },
+      "server_label_counts": {
+        "0": 8489,
+        "1": 7788
+      },
+      "server_group_counts": {
+        "0|0": 4395,
+        "0|1": 5056,
+        "1|0": 4094,
+        "1|1": 2732
+      },
+      "global_group_counts": {
+        "0|0": 43688,
+        "0|1": 50821,
+        "1|0": 41002,
+        "1|1": 27259
+      },
+      "server_group_prob": {
+        "0|0": 0.2700129016403514,
+        "0|1": 0.31062235055599924,
+        "1|0": 0.25152055046998834,
+        "1|1": 0.167844197333661
+      },
+      "global_group_prob": {
+        "0|0": 0.2684032684155557,
+        "0|1": 0.3122258401425324,
+        "1|0": 0.2519014560422682,
+        "1|1": 0.16746943539964368
+      },
+      "group_tvd": 0.001984395158813046,
+      "group_kl": 9.648627865650706e-06,
+      "max_group_abs_delta": 0.0016096332247957368,
+      "sensitive_tvd": 6.143638262595674e-06,
+      "label_tvd": 0.0012287276525158042
+    },
+    "root_noise_audit": {
+      "root_rows": 16277,
+      "clean_group_label_counts": {
+        "0|0": 4395,
+        "0|1": 5056,
+        "1|0": 4094,
+        "1|1": 2732
+      },
+      "clean_root_sha256": "015223a68ca512c8e15fbe929f599b9c4ba1a62f024cc4501f82b79cd76b48b1",
+      "mask_scheme": "local_SeedSequence(seed,240923,stream)_permutation_prefix_floor(rate*n)",
+      "interpretation": "End-to-end root sensitivity: FedSA-inspired also uses the root update.",
+      "label": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "sensitive": {
+        "requested_rate": 0.0,
+        "flipped_count": 0,
+        "actual_rate": 0.0,
+        "mask_sha256": "028411c4146aec28bafe966b0d55780f1e80718fdcac86064c73079ed743129c"
+      },
+      "observed_group_label_counts": {
+        "0|0": 4395,
+        "0|1": 5056,
+        "1|0": 4094,
+        "1|1": 2732
+      }
+    },
+    "image_data_contract": {
+      "numerical_execution": {
+        "version": "celeba_deterministic_fp32_v1",
+        "deterministic_algorithms": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "cudnn_allow_tf32": false,
+        "matmul_allow_tf32": false,
+        "cublas_workspace_config": ":4096:8"
+      },
+      "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+      "image_shape": [
+        3,
+        64,
+        64
+      ],
+      "normalization": "uint8 divided by 255 per batch",
+      "augmentation": "none",
+      "target": "Smiling",
+      "sensitive": "Male",
+      "evaluation_split": "valid",
+      "official_split_sizes": {
+        "0": 162770,
+        "1": 19867,
+        "2": 19962
+      },
+      "actual_train_rows": 162770,
+      "actual_evaluation_rows": 19867,
+      "evidence_stage": "full_official_split",
+      "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+      "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+      "root_image_ids_sha256": "012322877bc962928024dfac212af726e036b160b9b78ef68bad540c812c1de6",
+      "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+      "official_metadata": {
+        "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+      },
+      "train_eval_disjoint": true,
+      "root_client_disjoint": true,
+      "client_sample_counts": [
+        7276,
+        7363,
+        7456,
+        7347,
+        7260,
+        7336,
+        7266,
+        7280,
+        7239,
+        7227,
+        7364,
+        7327,
+        7353,
+        7368,
+        7280,
+        7328,
+        7312,
+        7461,
+        7375,
+        7275
+      ]
+    },
+    "preprocessing_version": "rgb64_v1",
+    "synthetic_method": "none"
+  },
+  "attack_impl_note": "F Flip mode=all_unprivileged; labels are unchanged. FOE mode=state; S-DFA FOE mode=fedsa; Sp-DFA FOE mode=fedsa; FedSA mode uses foe_mode=fedsa.",
+  "method_impl_note": "All methods share identical preprocessing. sensitive_feature=False, aggregation_weighting=count, use_reweighting=True, fairguard_mode=server_aeod. FairGuard/GuardFed use root-data fairness filtering plus FLTrust-style cosine scoring; FLGMM/FLAURA/LayerGuard/SmartFL/FLTG/FedDNA/LASA/FedAA are core reproductions; GuardFed-AD2/AD2+ use adaptive dual-objective additive update weighting, norm scaling/clipping, and clean-server group-threshold calibration enabled=True.",
+  "duration_sec": 1898.7004158496857,
+  "revision_job": {
+    "id": "FairGuard_IID_F-Flip_seed91009",
+    "dataset": "celeba",
+    "distribution": "IID",
+    "method": "FairGuard",
+    "attack": "F Flip",
+    "config": {
+      "seed": 91009,
+      "num_clients": 20,
+      "num_malicious": 4,
+      "local_epochs": 1,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "rounds": 70,
+      "device": "cuda",
+      "server_ratio": 0.1,
+      "synthetic_ratio": 0.0,
+      "server_sampling": "stratified_sensitive",
+      "server_alpha": null,
+      "server_target_sensitive": null,
+      "server_target_label": null,
+      "synthetic_method": "none",
+      "synthetic_epochs": 50,
+      "optimizer": "adam",
+      "include_sensitive_feature": false,
+      "aggregation_weighting": "count",
+      "fflip_mode": "all_unprivileged",
+      "foe_mode": "state",
+      "sdfa_foe_mode": "fedsa",
+      "spdfa_foe_mode": "fedsa",
+      "fedsa_gain": 4.5,
+      "fedsa_norm_ratio": 3.0,
+      "fairguard_mode": "server_aeod",
+      "use_reweighting": true,
+      "fairfed_beta": 1.0,
+      "trust_threshold": 0.2,
+      "guardfed_fairness_lambda": 20.0,
+      "act_fairness_budget": 0.06,
+      "act_temperature": 0.35,
+      "act_keep_ratio": 0.8,
+      "act_fairness_metric": "aeod_aspd",
+      "act_anchor_drop": 0.005,
+      "act_risk_weight": 1.0,
+      "act_violation_weight": 1.0,
+      "ad2_calibration_base_weight": 1.0,
+      "ad2_calibration_budget": 0.06,
+      "ad2_calibration_temperature": 0.03,
+      "ad2_calibration_quantiles": 41,
+      "ad2_score_clip": 5.0,
+      "ad2_norm_clip_scale": 2.5,
+      "ad2_calibration_max_acc_drop": 0.03,
+      "ad2_calibration_objective": "acc_floor",
+      "ad2_calibration_enabled": true,
+      "ad2_norm_mode": "adaptive",
+      "ad2_utility_weight": 1.0,
+      "ad2_centrality_weight": 0.35,
+      "ad2_alignment_weight": 0.35,
+      "ad2_plus_mode": "adaptive",
+      "experiment_suite": "celeba_fullcoverage_v1",
+      "experiment_tag": "FairGuard_IID_F-Flip_seed91009",
+      "ablation_component": "none",
+      "client_alpha": 5000.0,
+      "full_round_diagnostics": true,
+      "root_label_noise": 0.0,
+      "root_sensitive_noise": 0.0,
+      "compas_preprocessing_version": "train_only",
+      "celeba_cache_dir": "",
+      "celeba_train_limit": 0,
+      "celeba_eval_limit": 0,
+      "celeba_evaluation_split": "valid"
+    },
+    "output": "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_F-Flip_seed91009",
+    "source_hashes": {
+      "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+      "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+      "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+      "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+      "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+      "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+      "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+      "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+      "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+      "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+      "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+      "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+      "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+      "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+      "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+      "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+      "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+      "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+    },
+    "evidence_stage": "fixed_recipe_validation_full_coverage",
+    "tuning_candidate": "lr0.001",
+    "reporting_label": "FairGuard-root adaptation (project implementation)",
+    "source_selection_job_id": "FairGuard_lr0.001_Benign_seed91001",
+    "visible_gpu": "1",
+    "cpu_threads": 1,
+    "torch_version": "2.11.0+cu128",
+    "python_version": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "checkpoint_sha256": "9bfe093da09b3821394db9a7ca97e2db13e995a4c1b59beff8ff8c3f77728376",
+    "finished_unix": 1790531596.8665366
+  }
+}
