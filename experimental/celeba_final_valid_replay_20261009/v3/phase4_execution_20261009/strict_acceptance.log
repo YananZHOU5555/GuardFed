@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py", line 517, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py", line 504, in main
+    return {'run': run, 'worker': worker, 'accept': accept, 'collect': collect}[args.command](args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py", line 362, in accept
+    bind_cpu(0)
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py", line 172, in bind_cpu
+    v2.require(0 <= slot < 12 and len(selected) == 8, 'Invalid coordinated eight-CPU worker slot')
+  File "/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py", line 58, in require
+    raise ValueError(message)
+ValueError: Invalid coordinated eight-CPU worker slot

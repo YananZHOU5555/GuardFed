@@ -1,0 +1,145 @@
+{
+  "id": "FairGuard_IID_Benign_seed91001",
+  "scope": "VALID_ONLY_IMPLEMENTATION_REPLAY_V3",
+  "status": "NATIVE_VALID_REPLAY_PASS",
+  "artifact_before": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt": {
+      "sha256": "1247fc49f19f9668181a5b9a05bec3854e83e169ed350d3690e6083da3a70c9d",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529046776994721,
+        "inode": 10774995030,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json": {
+      "sha256": "dc15f8c2c6a8a9ed3877a96132b078a3cbe0de4379be16a4a4dc55906392d263",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json",
+      "bytes": 182143,
+      "stat": {
+        "bytes": 182143,
+        "mtime_ns": 1791529046780994650,
+        "inode": 10774995031,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json": {
+      "sha256": "6d3c48bd1a09c519d13448eeb1fafb5bef76cff893f19bb86dcd15742523a3a1",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json",
+      "bytes": 4933,
+      "stat": {
+        "bytes": 4933,
+        "mtime_ns": 1791529042606069264,
+        "inode": 10773789121,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json"
+      }
+    }
+  },
+  "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001",
+  "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "batch_receipt_sha256": "ecde39f7b4bb50beea9e370378a1665bea58ff646140194054a50cbea30ae358",
+  "slot": 1,
+  "allowed_cpus": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "original_job_bytes_modified": false,
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "v3_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "receipt_sha256": "f2f0a39abec58bb1fffa2e957691c154ce8eae41f1e30a9d9e054b41d599a4c3",
+  "metadata_read_receipt": {
+    "strategy": "NPY headers then exactly train+valid scalar prefix; no full label-array load",
+    "prefix_reads": [
+      {
+        "member": "Smiling.npy",
+        "shape": [
+          202599
+        ],
+        "dtype": "<i8",
+        "requested_entries": 182637,
+        "requested_payload_bytes": 1461096,
+        "last_included_position": 182636,
+        "test_entries_requested_or_materialized": 0,
+        "train_valid_prefix_sha256": "b8904a23514541d745bdff8162eed1baa6423de4865916c5f336f00d61ee10d5"
+      },
+      {
+        "member": "Male.npy",
+        "shape": [
+          202599
+        ],
+        "dtype": "<i8",
+        "requested_entries": 182637,
+        "requested_payload_bytes": 1461096,
+        "last_included_position": 182636,
+        "test_entries_requested_or_materialized": 0,
+        "train_valid_prefix_sha256": "2aaf82aa3b591c0910c586b4de12cbc2ea9b90240f9426f4d92042b661ef7913"
+      }
+    ],
+    "train_n": 162770,
+    "valid_n": 19867,
+    "test_labels_accessed": false,
+    "full_loader_executed": false,
+    "valid_support": {
+      "0|0": 5252,
+      "0|1": 6157,
+      "1|0": 5013,
+      "1|1": 3445
+    },
+    "official_metadata": {
+      "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+    }
+  },
+  "native_max_abs_difference": 0.0,
+  "artifact_after": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt": {
+      "sha256": "1247fc49f19f9668181a5b9a05bec3854e83e169ed350d3690e6083da3a70c9d",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529046776994721,
+        "inode": 10774995030,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json": {
+      "sha256": "dc15f8c2c6a8a9ed3877a96132b078a3cbe0de4379be16a4a4dc55906392d263",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json",
+      "bytes": 182143,
+      "stat": {
+        "bytes": 182143,
+        "mtime_ns": 1791529046780994650,
+        "inode": 10774995031,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260926/celeba_fullcoverage_v1/runs/FairGuard_IID_Benign_seed91001/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json": {
+      "sha256": "6d3c48bd1a09c519d13448eeb1fafb5bef76cff893f19bb86dcd15742523a3a1",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json",
+      "bytes": 4933,
+      "stat": {
+        "bytes": 4933,
+        "mtime_ns": 1791529042606069264,
+        "inode": 10773789121,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FairGuard_IID_Benign_seed91001.json"
+      }
+    }
+  },
+  "artifacts_unchanged": true
+}

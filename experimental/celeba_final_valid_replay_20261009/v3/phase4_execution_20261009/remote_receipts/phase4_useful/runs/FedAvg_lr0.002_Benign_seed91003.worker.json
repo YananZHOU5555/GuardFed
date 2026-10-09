@@ -1,0 +1,103 @@
+{
+  "id": "FedAvg_lr0.002_Benign_seed91003",
+  "scope": "VALID_ONLY_IMPLEMENTATION_REPLAY_V3",
+  "status": "FAILED",
+  "artifact_before": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt": {
+      "sha256": "93a43056d0d2c344b00a96454dcd837c9407d32ae54b623de537ff2ef76a2545",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052923885032,
+        "inode": 4445949520,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json": {
+      "sha256": "acde40ffdcc3252e827b27f663e3f7dfdd219e9421a4f9300fd25af5fe71a9d5",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json",
+      "bytes": 184668,
+      "stat": {
+        "bytes": 184668,
+        "mtime_ns": 1791529052927884960,
+        "inode": 4445949521,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json": {
+      "sha256": "2490df8ed126bb1c93577d27eb8eaf0f7e1061def0a700a095ec7a83dba6c069",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json",
+      "bytes": 4484,
+      "stat": {
+        "bytes": 4484,
+        "mtime_ns": 1791529052916885156,
+        "inode": 10775170676,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json"
+      }
+    }
+  },
+  "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003",
+  "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "batch_receipt_sha256": "a848642e32586ec09094c5991f05f40b4e77cacbc8848ea20b8e883527435e5f",
+  "slot": 0,
+  "allowed_cpus": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "original_job_bytes_modified": false,
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "v3_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "error_type": "InterruptedError",
+  "error": "Batch stopped after another failed worker",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 237, in worker\n    r = inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, args.max_wall_seconds)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 362, in replay_one\n    root_X = torch.from_numpy(np.array(image_map[root_ids - 1], copy=True))\n                                       ~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/numpy/_core/memmap.py\", line 359, in __getitem__\n    res = super().__getitem__(index)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/numpy/_core/memmap.py\", line 311, in __array_finalize__\n    def __array_finalize__(self, obj):\n    \n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <lambda>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <genexpr>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\nInterruptedError: Batch stopped after another failed worker\n",
+  "artifact_after": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt": {
+      "sha256": "93a43056d0d2c344b00a96454dcd837c9407d32ae54b623de537ff2ef76a2545",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052923885032,
+        "inode": 4445949520,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json": {
+      "sha256": "acde40ffdcc3252e827b27f663e3f7dfdd219e9421a4f9300fd25af5fe71a9d5",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json",
+      "bytes": 184668,
+      "stat": {
+        "bytes": 184668,
+        "mtime_ns": 1791529052927884960,
+        "inode": 4445949521,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FedAvg_lr0.002_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json": {
+      "sha256": "2490df8ed126bb1c93577d27eb8eaf0f7e1061def0a700a095ec7a83dba6c069",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json",
+      "bytes": 4484,
+      "stat": {
+        "bytes": 4484,
+        "mtime_ns": 1791529052916885156,
+        "inode": 10775170676,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FedAvg_lr0.002_Benign_seed91003.json"
+      }
+    }
+  },
+  "artifacts_unchanged": true
+}

@@ -1,0 +1,103 @@
+{
+  "id": "FLTrust_lr0.0005_Benign_seed91003",
+  "scope": "VALID_ONLY_IMPLEMENTATION_REPLAY_V3",
+  "status": "FAILED",
+  "artifact_before": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt": {
+      "sha256": "5c013c883fe58618307088d90420159704b192caa260275e82d28b794f7dc89c",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052869885994,
+        "inode": 25863951278,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json": {
+      "sha256": "2bebed03c09095d8141458bc0ad59ffe5506bbd4449a794ad772004a5fac67ce",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json",
+      "bytes": 226811,
+      "stat": {
+        "bytes": 226811,
+        "mtime_ns": 1791529052873885923,
+        "inode": 25863951279,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json": {
+      "sha256": "f7b72a1682eeeec8368582bb0bf32cef9e08f5acae2535a480878c3a3068776f",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json",
+      "bytes": 4495,
+      "stat": {
+        "bytes": 4495,
+        "mtime_ns": 1791529052861886137,
+        "inode": 10775170672,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json"
+      }
+    }
+  },
+  "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003",
+  "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "batch_receipt_sha256": "a848642e32586ec09094c5991f05f40b4e77cacbc8848ea20b8e883527435e5f",
+  "slot": 2,
+  "allowed_cpus": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "original_job_bytes_modified": false,
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "v3_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "error_type": "InterruptedError",
+  "error": "Batch stopped after another failed worker",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 237, in worker\n    r = inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, args.max_wall_seconds)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 362, in replay_one\n    root_X = torch.from_numpy(np.array(image_map[root_ids - 1], copy=True))\n                                       ~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/numpy/_core/memmap.py\", line 359, in __getitem__\n    res = super().__getitem__(index)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/numpy/_core/memmap.py\", line 311, in __array_finalize__\n    def __array_finalize__(self, obj):\n    \n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <lambda>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <genexpr>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\nInterruptedError: Batch stopped after another failed worker\n",
+  "artifact_after": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt": {
+      "sha256": "5c013c883fe58618307088d90420159704b192caa260275e82d28b794f7dc89c",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052869885994,
+        "inode": 25863951278,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json": {
+      "sha256": "2bebed03c09095d8141458bc0ad59ffe5506bbd4449a794ad772004a5fac67ce",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json",
+      "bytes": 226811,
+      "stat": {
+        "bytes": 226811,
+        "mtime_ns": 1791529052873885923,
+        "inode": 25863951279,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust_lr0.0005_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json": {
+      "sha256": "f7b72a1682eeeec8368582bb0bf32cef9e08f5acae2535a480878c3a3068776f",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json",
+      "bytes": 4495,
+      "stat": {
+        "bytes": 4495,
+        "mtime_ns": 1791529052861886137,
+        "inode": 10775170672,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust_lr0.0005_Benign_seed91003.json"
+      }
+    }
+  },
+  "artifacts_unchanged": true
+}

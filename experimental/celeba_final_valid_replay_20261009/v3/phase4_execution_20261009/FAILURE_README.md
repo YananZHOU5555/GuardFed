@@ -1,0 +1,11 @@
+# Phase4 failed attempt, preserved
+
+0/8 accepted; phase5 was not started. FedAA's original rawjob has no `output`; sealed v3 reused the sealed v2 validator and raised `KeyError`. Its CNN inference had not started. The other seven workers were interrupted by the existing fail-fast runner, with no complete model receipts or prediction arrays. This 45.12679135007784 second failed batch is excluded from the throughput curve. The earlier nine accepted checkpoints remain valid.
+
+Read `strict_acceptance.json`, `failure_measurement.json`, `failure_offserver_verification.json`, `failure_archive_inventory.json`, and `resource_diagnostic.json`. The archive SHA is b201a2e5f309d8b6bbd454cd980a40557cf0bd6b8e6ac229a4f57375aee1cc39. All40 members were checked both remotely and offserver. The shared42 source/input identities and all24 model/result/rawjob artifact identities were unchanged. No successful-phase `offserver_verification.json` exists in this directory.
+
+The finite15.0057 second `/proc` sample caught imports before worker CPU-slot binding: eight runnable single-thread workers inherited CPU16, each used about0.125 core, with no actual disk reads, major faults or cgroup throttling. This is evidence of startup serialization, not a steady-state CNN bottleneck diagnosis. The sampler changed no training, recipe or thread settings. After failure the formal mechanism service remained running, with8 completed,8 active at40–62 rounds,0 failures; the later snapshot is not an exact in-run progression measurement.
+
+The first closure helper pre-bound its own affinity and caused the sealed read-only accept CLI's relative CPU-slot check to fail before inspection. Its source and `strict_acceptance.log` are preserved. `close_failure_v2.py` corrected only this helper launch context; `strict_acceptance_retry.log` and the strict0/8 rejection record preserve that outcome. No image inference was repeated. The generated terminal failure JSON is separately SHA-bound by the offserver verification and the local file manifest.
+
+Original phase4 files, sealed v2/v3 source and prior accepted proof bytes remain unchanged. Any schema bridge is a separate v4 package. No phase5,900 bulk, test evaluation, protocol freeze or scientific parameter change is authorized by this failure closure.

@@ -1,0 +1,16 @@
+{
+  "status": "FAILED_ATTEMPT_PRESERVED_NOT_ACCEPTED",
+  "phase": 4,
+  "accepted_n": 0,
+  "root_cause_id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_Benign_seed91003",
+  "root_cause": "'output'",
+  "root_cause_traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 237, in worker\n    r = inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, args.max_wall_seconds)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 350, in replay_one\n    result = validate_original(original, record, repo)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 120, in validate\n    return validated(proxy, actual_record, repo)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 278, in validate_original\n    require((job['id'], job['output'], job['distribution'], job['attack']) ==\n                        ~~~^^^^^^^^^^\nKeyError: 'output'\n",
+  "other_workers_interrupted": 7,
+  "source_unchanged": true,
+  "artifact_files_unchanged": 24,
+  "strict_returncode": 1,
+  "phase5_started": false,
+  "automatic_retry": false,
+  "prior_accepted_replays_still_valid": 9,
+  "failure_is_not_a_native_metric_mismatch": true
+}

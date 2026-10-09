@@ -1,0 +1,66 @@
+{
+  "status": "FAILURE_EVIDENCE_VERIFIED_OFFSERVER_NOT_ACCEPTED",
+  "phase": 4,
+  "archive_sha256": "b201a2e5f309d8b6bbd454cd980a40557cf0bd6b8e6ac229a4f57375aee1cc39",
+  "member_n": 40,
+  "all_member_sha_verified": true,
+  "accepted_n": 0,
+  "shared_sources_unchanged": 42,
+  "artifact_files_unchanged": 24,
+  "errors": [
+    {
+      "id": "FedAvg_lr0.002_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "Median_lr0.0005_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "FLTrust_lr0.0005_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "FairFed_lr0.001_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "FairGuard_lr0.001_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "FLTrust+FairGuard_lr0.001_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91003",
+      "error_type": "InterruptedError",
+      "error": "Batch stopped after another failed worker"
+    },
+    {
+      "id": "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_Benign_seed91003",
+      "error_type": "KeyError",
+      "error": "'output'"
+    }
+  ],
+  "strict_acceptance_sha256": "643fe449b5a91831fd32588014a43471f84dec27e4c6a76c2db69f897a12bfb4",
+  "failure_measurement_sha256": "3875b83bd08d69d485fb0fee4da88c0d2fce4bc3535761e51f7a25c2b2cba666",
+  "resource_diagnostic_sha256": "bb6b3ca09914d929cb6c0250b53efa07eb1b145e2ed545bcffa0cfa4c7bbb444",
+  "diagnostic_sample_seconds": 15.005710767116398,
+  "diagnostic_cgroup_throttled_usec_delta": 0,
+  "diagnostic_claim_limit": "Startup/import sample; not steady-state CNN utilization. No completed8-worker throughput point.",
+  "supplemental_stage_files": {
+    "strict_acceptance.json.failure.json": "e3c485d3ef2e251b6bd7df5d103ac4aded53861e74231ff71a54f0e3fa6789ff",
+    "strict_acceptance.log": "8d0991ea4fa1afd08c07e57dcbd4833e5164a2bf2bb6ed1078b6b112b8640f7e"
+  },
+  "phase5_started": false,
+  "prior_accepted_replays_valid": 9,
+  "all900_native_valid_replayed": false,
+  "formal_training_modified": false
+}

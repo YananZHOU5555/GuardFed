@@ -1,0 +1,103 @@
+{
+  "id": "FLTrust+FairGuard_lr0.001_Benign_seed91003",
+  "scope": "VALID_ONLY_IMPLEMENTATION_REPLAY_V3",
+  "status": "FAILED",
+  "artifact_before": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt": {
+      "sha256": "b275d97435cdc5758a876caf9585947d8d5a1f964337e6d2d3fa2bdc0c0054d6",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052882885763,
+        "inode": 27963939462,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json": {
+      "sha256": "ba173cba6fdaebea4bfc7c41e21a517a413d332e40c9ddbf701d30c65c9533ca",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json",
+      "bytes": 202489,
+      "stat": {
+        "bytes": 202489,
+        "mtime_ns": 1791529052887885673,
+        "inode": 27963939463,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json": {
+      "sha256": "e4e8c5ba00a46a419e9702208d201a74db050de29464dd33acabd8cfbe9631a8",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json",
+      "bytes": 4608,
+      "stat": {
+        "bytes": 4608,
+        "mtime_ns": 1791529052875885887,
+        "inode": 10775170673,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json"
+      }
+    }
+  },
+  "historical_output": "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003",
+  "runtime_read_output": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003",
+  "storage_map_sha256": "e160416101ccb82b42224c9ff1bb337de45ef72fa251197063d1c15e2910f949",
+  "batch_receipt_sha256": "a848642e32586ec09094c5991f05f40b4e77cacbc8848ea20b8e883527435e5f",
+  "slot": 5,
+  "allowed_cpus": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "original_job_bytes_modified": false,
+  "v2_source_sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+  "v3_source_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "error_type": "InterruptedError",
+  "error": "Batch stopped after another failed worker",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 237, in worker\n    r = inference(core, original, cnn, evaluator, record, repo, ids, y, s, output, args.max_wall_seconds)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py\", line 366, in replay_one\n    root_margins, valid_margins, fits, predictions = evaluator.extract_and_predict(\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/inputs/evaluator.py\", line 221, in extract_and_predict\n    root_margins = core.model_margins(model, root_bundle[\"server_X\"], config.batch_size)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/GuardFed-celeba-expanded/scripts/reproduce_paper_tables.py\", line 188, in model_margins\n    logits = model(xb)\n             ^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/GuardFed-celeba-expanded/src/celeba_data.py\", line 28, in forward\n    return self.classifier(self.features(x / 255.0).flatten(1))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/container.py\", line 253, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/conv.py\", line 553, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_envs/celeba-cu128-20261009/lib/python3.12/site-packages/torch/nn/modules/conv.py\", line 548, in _conv_forward\n    return F.conv2d(\n           ^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <lambda>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py\", line 236, in <genexpr>\n    signal.signal(signal.SIGTERM, lambda _s, _f: (_ for _ in ()).throw(InterruptedError('Batch stopped after another failed worker')))\nInterruptedError: Batch stopped after another failed worker\n",
+  "artifact_after": {
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt": {
+      "sha256": "b275d97435cdc5758a876caf9585947d8d5a1f964337e6d2d3fa2bdc0c0054d6",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt",
+      "bytes": 377457,
+      "stat": {
+        "bytes": 377457,
+        "mtime_ns": 1791529052882885763,
+        "inode": 27963939462,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/model.pt"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json": {
+      "sha256": "ba173cba6fdaebea4bfc7c41e21a517a413d332e40c9ddbf701d30c65c9533ca",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json",
+      "bytes": 202489,
+      "stat": {
+        "bytes": 202489,
+        "mtime_ns": 1791529052887885673,
+        "inode": 27963939463,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/original_outputs/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/runs/FLTrust+FairGuard_lr0.001_Benign_seed91003/result.json"
+      }
+    },
+    "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json": {
+      "sha256": "e4e8c5ba00a46a419e9702208d201a74db050de29464dd33acabd8cfbe9631a8",
+      "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json",
+      "bytes": 4608,
+      "stat": {
+        "bytes": 4608,
+        "mtime_ns": 1791529052875885887,
+        "inode": 10775170673,
+        "device": 54,
+        "resolved_path": "/workspace/guardfed_checks/celeba_validation900_restore_20261009/artifact_store/archived_jobs/FLTrust+FairGuard_lr0.001_Benign_seed91003.json"
+      }
+    }
+  },
+  "artifacts_unchanged": true
+}

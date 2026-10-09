@@ -1,0 +1,138 @@
+{
+  "status": "PASS_LOCAL_IDENTITIES_AND_REJECTION_ONLY",
+  "checks": [
+    "actual8_accepted_terminals_and100_reference_only_Full",
+    "20_corrupt_or_mixed_inventory_boundaries_refused",
+    "actual_sealed_native_function_accepts1e-13_refuses1e-11",
+    "prepared_no_CPU_no_GPU_no_Full_no_test_dispatch_boundaries_refused",
+    "Full_existing_batch_reference_join_and_duplicate_source_tolerance_refusals"
+  ],
+  "rejections": [
+    {
+      "case": "missing_actual_terminal",
+      "error": "This prepared bridge contains exactly8 unique accepted terminals"
+    },
+    {
+      "case": "duplicate_actual_terminal",
+      "error": "This prepared bridge contains exactly8 unique accepted terminals"
+    },
+    {
+      "case": "duplicate_Full_reference",
+      "error": "Duplicate/missing Full reference"
+    },
+    {
+      "case": "replay_Full_again",
+      "error": "Full reference differs from accepted baseline model/data"
+    },
+    {
+      "case": "mixed_Full_checkpoint",
+      "error": "Full reference differs from accepted baseline model/data"
+    },
+    {
+      "case": "mixed_new_checkpoint",
+      "error": "Mixed terminal checkpoint"
+    },
+    {
+      "case": "mixed_manifest_id",
+      "error": "Mixed manifest/acceptance record"
+    },
+    {
+      "case": "mixed_raw_job",
+      "error": "Original accepted file identity changed"
+    },
+    {
+      "case": "wrong_paired_root",
+      "error": "Paired Full root/train/valid/cache/model support differs"
+    },
+    {
+      "case": "wrong_valid_order",
+      "error": "Paired Full root/train/valid/cache/model support differs"
+    },
+    {
+      "case": "changed_nonintervention_recipe",
+      "error": "Non-intervention recipe differs from paired Full"
+    },
+    {
+      "case": "silently_remove_ablation",
+      "error": "Mask/seed/alpha changed"
+    },
+    {
+      "case": "changed_seed",
+      "error": "Mask/seed/alpha changed"
+    },
+    {
+      "case": "test_split_config",
+      "error": "Subset/test configuration refused"
+    },
+    {
+      "case": "missing_real_support",
+      "error": "Paired Full root/train/valid/cache/model support differs"
+    },
+    {
+      "case": "wrong_native_recipe",
+      "error": "Original clean root/native calibration required"
+    },
+    {
+      "case": "foreign_pending_ID",
+      "error": "Missing/foreign planned mechanism ID"
+    },
+    {
+      "case": "pending_as_new_checkpoint",
+      "error": "Unsafe/mixed artifact member"
+    },
+    {
+      "case": "relaxed_native_tolerance",
+      "error": "Metric tolerance or view scope changed"
+    },
+    {
+      "case": "fake_inference_claim",
+      "error": "Preparation cannot claim inference or copy Full weights"
+    },
+    {
+      "case": "no_approval",
+      "error": "No bounded mechanism valid replay approval"
+    },
+    {
+      "case": "unallocated_CPUs",
+      "error": "Explicit8 CPU budget required"
+    },
+    {
+      "case": "GPU_approval",
+      "error": "Only one eight-thread CPU worker can be prepared here"
+    },
+    {
+      "case": "finaltest_approval",
+      "error": "Approval changed split/tolerance/final scope"
+    },
+    {
+      "case": "foreign_Full_approval",
+      "error": "Approval contains pending/Full/foreign/duplicate IDs"
+    },
+    {
+      "case": "duplicate_baseline_accepted_ID",
+      "error": "Duplicate/foreign baseline acceptance IDs"
+    },
+    {
+      "case": "baseline_native_mismatch",
+      "error": "Native baseline tolerance/scope failed"
+    },
+    {
+      "case": "baseline_other_calibration_source",
+      "error": "Baseline native/raw/shared scientific source/split differs"
+    },
+    {
+      "case": "aggregate_label_without_batch_proof",
+      "error": "Provide a strict individual baseline batch acceptance; cumulative labels alone are insufficient"
+    }
+  ],
+  "rejection_count": 29,
+  "actual_terminal_records": 8,
+  "Full_reference_count": 100,
+  "pending_new_without_checkpoint": 792,
+  "image_inference_performed": false,
+  "new_training_performed": false,
+  "torch_or_numpy_imported": false,
+  "runtime_bridge_executed": false,
+  "sources_and_archives_unchanged": true,
+  "inventory_sha256": "be4d1d34b21443572a25e6a189710e8d75b108a8fcbdb58896a71f2ba1d88cc8"
+}

@@ -1,0 +1,145 @@
+{
+  "status": "REPEAT_MISMATCH",
+  "evidence_stage": "GPU_CANARY_REAL_IMAGE_ONLY",
+  "formal_table_eligible": false,
+  "results": [
+    {
+      "id": "FLGMM_GPU_CANARY_IID_Benign_seed91001_repeat1",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "7403b0127b60c6490ef7b34563c162bcd081d161a2b5479223a88ab135d73f39"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_non-IID_S-DFA_seed91001_repeat1",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "5b0ba26c77588b634081f9a77a82cc5bb56ccc249eca804283cc75ac1e6e3f10"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_IID_Benign_seed91001_repeat2",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "7403b0127b60c6490ef7b34563c162bcd081d161a2b5479223a88ab135d73f39"
+    },
+    {
+      "id": "FLGMM_GPU_CANARY_non-IID_S-DFA_seed91001_repeat2",
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "model_sha256": "5b0ba26c77588b634081f9a77a82cc5bb56ccc249eca804283cc75ac1e6e3f10"
+    }
+  ],
+  "same_seed_gpu_repeats": {
+    "IID_Benign": {
+      "exact": false,
+      "checks": {
+        "model_tensors": true,
+        "final_metrics": true,
+        "trajectory_metrics": true,
+        "last10_metrics": true,
+        "round_summaries": true,
+        "attack_audit": true,
+        "evaluation_stats": true,
+        "diagnostics": true,
+        "round_001_rng_json": false,
+        "round_001_rng_tensors": true,
+        "round_002_rng_json": false,
+        "round_002_rng_tensors": true,
+        "round_003_rng_json": false,
+        "round_003_rng_tensors": true,
+        "final_rng_json": false,
+        "final_rng_tensors": true,
+        "round_001_state.json": true,
+        "round_002_state.json": true,
+        "round_003_state.json": true
+      },
+      "model": {
+        "exact": true,
+        "max_abs": 0.0,
+        "tensor_count": 8
+      }
+    },
+    "non-IID_S-DFA": {
+      "exact": false,
+      "checks": {
+        "model_tensors": true,
+        "final_metrics": true,
+        "trajectory_metrics": true,
+        "last10_metrics": true,
+        "round_summaries": true,
+        "attack_audit": true,
+        "evaluation_stats": true,
+        "diagnostics": true,
+        "round_001_rng_json": false,
+        "round_001_rng_tensors": true,
+        "round_002_rng_json": false,
+        "round_002_rng_tensors": true,
+        "round_003_rng_json": false,
+        "round_003_rng_tensors": true,
+        "final_rng_json": false,
+        "final_rng_tensors": true,
+        "round_001_state.json": true,
+        "round_002_state.json": true,
+        "round_003_state.json": true
+      },
+      "model": {
+        "exact": true,
+        "max_abs": 0.0,
+        "tensor_count": 8
+      }
+    }
+  },
+  "cpu_gpu": {
+    "IID_Benign": {
+      "model": {
+        "exact": false,
+        "max_abs": 0.014232834335416555,
+        "tensor_count": 8
+      },
+      "final_metric_gpu_minus_cpu": {
+        "accuracy": 0.0,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "trajectory_metrics_exact": true,
+      "selection_and_diagnostics_exact": false,
+      "controller_history_exact": false,
+      "limitation": "CPU eight threads vs GPU one thread; differences retained, no equivalence assumption"
+    },
+    "non-IID_S-DFA": {
+      "model": {
+        "exact": false,
+        "max_abs": 0.03750477731227875,
+        "tensor_count": 8
+      },
+      "final_metric_gpu_minus_cpu": {
+        "accuracy": 0.0,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "trajectory_metrics_exact": true,
+      "selection_and_diagnostics_exact": false,
+      "controller_history_exact": false,
+      "limitation": "CPU eight threads vs GPU one thread; differences retained, no equivalence assumption"
+    }
+  },
+  "cpu_backup_binding": {
+    "cpu_receipt_hashes": {
+      "LOCAL_ACCEPTANCE.json": "d7f4d12eca60673d86986dec69821d0cfec6a47a90147ab89add6543bd23f5c0",
+      "BACKUP_SHA256.json": "6c4bca8a356cfc4c1a85984197761b3f8b3e3ce506e82dbb2925989de5f1d441"
+    },
+    "inventory_sha256": "1cdc3c4ba272ce7a54f6d540ec09fdb1a5dc3895c9b6fb4ea702e4694acdab24",
+    "bound_members": 22
+  }
+}

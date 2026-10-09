@@ -1,0 +1,67 @@
+{
+  "scope": "EXISTING_NINE_METHODS_VALID_ONLY_USEFUL_THROUGHPUT_phase4",
+  "phase": 4,
+  "ids": [
+    "FedAvg_lr0.002_Benign_seed91003",
+    "Median_lr0.0005_Benign_seed91003",
+    "FLTrust_lr0.0005_Benign_seed91003",
+    "FairFed_lr0.001_Benign_seed91003",
+    "FairGuard_lr0.001_Benign_seed91003",
+    "FLTrust+FairGuard_lr0.001_Benign_seed91003",
+    "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91003",
+    "FedAA-DDPG_policy0.001_keep16_local0.001_non-IID_Benign_seed91003"
+  ],
+  "workers": 8,
+  "cpu_slots": [
+    [
+      16,
+      23
+    ],
+    [
+      24,
+      31
+    ],
+    [
+      32,
+      39
+    ],
+    [
+      40,
+      47
+    ],
+    [
+      48,
+      55
+    ],
+    [
+      56,
+      63
+    ],
+    [
+      64,
+      71
+    ],
+    [
+      72,
+      79
+    ]
+  ],
+  "torch_threads_each": 8,
+  "nice": 10,
+  "ionice_class": 3,
+  "native_abs_tolerance": 1e-12,
+  "valid_n_each": 19867,
+  "original_root_n_each": 16277,
+  "prior_phase_strict_acceptance_sha256": "c641d0749634c64b0ebb5c99dd2ef28f9e25fcd785ca119bdb9ccd70ee2697ae",
+  "prior_phase_offserver_verification_sha256": "3bba9f5b1ee7a6bca5423cb5db8ecfa575a1845d8f22dd1db1d95c0d308a2ff4",
+  "continuous_authorization_sha256": "e814038e5e3b81bd8a99abff0c1b7e6cf55eb93f57c5b70573955e6255348b90",
+  "sealed_plan_sha256": "80686577e2a92da823865c20b14153a40692c173a00addd14fe586f2eeb9793c",
+  "sealed_runner_sha256": "abb4560dd1c6752b9017a739381d2c54e68f52e278075c8e225a1c67df35cc6e",
+  "test_image_inference": false,
+  "test_label_semantic_use": false,
+  "full_file_hash_reads_test_containing_bytes": true,
+  "original_full_celeba_loader_called": false,
+  "full900_bulk": false,
+  "advance_only_after_strict_acceptance_and_offserver_archive_member_SHA": true,
+  "additional_authorized_diagnostic": "One15-second read-only /proc/cgroup sample; no new model or changes to8threads"
+}

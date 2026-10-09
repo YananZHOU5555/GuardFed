@@ -1,0 +1,77 @@
+{
+  "time": 1791534406.1037354,
+  "formal_progress": [
+    {
+      "job_id": "minus_U_IID_F Flip_seed91004",
+      "pid": 12829,
+      "round": 69,
+      "updated_unix": 1791534361.1027417
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91005",
+      "pid": 12877,
+      "round": 61,
+      "updated_unix": 1791534374.736731
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91006",
+      "pid": 12962,
+      "round": 68,
+      "updated_unix": 1791534384.868397
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91007",
+      "pid": 14653,
+      "round": 12,
+      "updated_unix": 1791534398.2418723
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91008",
+      "pid": 14712,
+      "round": 9,
+      "updated_unix": 1791534403.588538
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91009",
+      "pid": 14756,
+      "round": 11,
+      "updated_unix": 1791534359.1807585
+    },
+    {
+      "job_id": "minus_U_IID_F Flip_seed91010",
+      "pid": 15298,
+      "round": 4,
+      "updated_unix": 1791534353.367122
+    },
+    {
+      "job_id": "minus_U_IID_FedSA_seed91001",
+      "pid": 15452,
+      "round": 1,
+      "updated_unix": 1791534350.0470967
+    }
+  ],
+  "gpu_workers": [
+    {
+      "pid": 15446,
+      "command": "  15446   15428 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -u /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/gpu_worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/jobs/FLGMM_GPU_CANARY_IID_Benign_seed91001_repeat1.json --out /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/runs/FLGMM_GPU_CANARY_IID_Benign_seed91001_repeat1",
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "0"
+      }
+    },
+    {
+      "pid": 15447,
+      "command": "  15447   15428 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -u /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/gpu_worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/jobs/FLGMM_GPU_CANARY_non-IID_S-DFA_seed91001_repeat1.json --out /workspace/guardfed_checks/celeba_flgmm_gpu_gate_20261009/runs/FLGMM_GPU_CANARY_non-IID_S-DFA_seed91001_repeat1",
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "1"
+      }
+    }
+  ],
+  "formal_service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 2:07:50",
+  "gate_service": "guardfed_celeba_flgmm_gpu_gate   RUNNING   pid 15424, uptime 0:03:57"
+}
