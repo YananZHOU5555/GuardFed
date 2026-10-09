@@ -1402,6 +1402,56 @@ if auxiliary_paths:
             observed_terminal_ids=[r['id'] for r in row['terminal_candidates']],
             active_rounds=[r['progress'].get('round') if r['progress'] else None for r in row['active_or_partial']],
             entry=auxiliary_path.relative_to(ROOT).as_posix(),sha256=sha(auxiliary_path))
+attribution_dir = ROOT / 'outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009'
+attribution_proof = attribution_dir / 'ROOT_REVIEW.json'
+if attribution_proof.exists():
+    proof = read(attribution_proof)
+    assert proof['status'] == 'ROOT_ACCEPTED900_DESCRIPTIVE_ATTRIBUTION_INPUT_GRID_AND_FSUM_STATISTICS_PASS'
+    assert proof['source_seal_sha256'] == sha(attribution_dir / 'FILES_SHA256.json')
+    assert proof['source_records_sha256'] == '983bca43dff7e94dd79a312f273c65ed3ea1d146fff3ebfbf3bd2a854e124529'
+    assert proof['scalar_checks'] == 2052 and proof['max_abs_difference'] < 1e-12
+    addendum = ROOT / 'docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md'
+    state['nine_method_view_attribution_20261009'] = dict(
+        status=proof['status'], entry=(attribution_dir / 'REPORT.md').relative_to(ROOT).as_posix(),
+        root_proof_sha256=sha(attribution_proof), source_seal_sha256=proof['source_seal_sha256'],
+        scalar_checks=proof['scalar_checks'], positive_mean_advantage_baseline_counts=proof['positive_mean_advantage_baseline_counts'],
+        within_seed_scenarios=10, independent_seeds=10, new_inference=0, test=False, primary_endpoint_selected=False,
+        reply_addendum=addendum.relative_to(ROOT).as_posix(), reply_addendum_sha256=sha(addendum))
+    state['latest_rebuttal_draft']['validation900_interpretation_addendum'] = addendum.relative_to(ROOT).as_posix()
+locator_dir = TRAIN / 'manuscript_source_locator_20261009'
+if (locator_dir / 'ROOT_REVIEW.json').exists():
+    locator = read(locator_dir / 'ROOT_REVIEW.json')
+    assert locator['status'] == 'ROOT_HISTORICAL_MANUSCRIPT_SOURCE_AND_SUBMITTED_VERSION_MISMATCH_PINS_PASS'
+    assert locator['report_sha256'] == sha(locator_dir / 'REPORT.md') and locator['evidence_sha256'] == sha(locator_dir / 'EVIDENCE.json')
+    state['manuscript_source_locator_20261009'] = dict(
+        entry=(locator_dir / 'REPORT.md').relative_to(ROOT).as_posix(), root_proof_sha256=sha(locator_dir / 'ROOT_REVIEW.json'),
+        historical_source='paper.md', historical_source_found=True, submitted_matching_source_found=False,
+        historical_project_complete=False, manuscript_edited=False, source_path_question_pending=True)
+figure_dir = ROOT / 'outputs/guardfed_figures/synthetic_terminal_candidate_20261009'
+if (figure_dir / 'ROOT_REVIEW.json').exists():
+    figure = read(figure_dir / 'ROOT_REVIEW.json')
+    assert figure['status'] == 'ROOT_HISTORICAL_TERMINAL_FIGURE_CANDIDATE_SOURCE_GRID_MEANS_AND_VISUAL_PASS_NOT_ADOPTED'
+    assert figure['source_seal_sha256'] == sha(figure_dir / 'FILES_SHA256.json')
+    assert figure['original_same_round_triplets_checked'] == 260 and figure['mean_scalars_checked'] == 78
+    assert not figure['author_adoption'] and not figure['original_figure_replaced']
+    state['synthetic_terminal_figure_candidate_20261009'] = dict(
+        status=figure['status'], entry=(figure_dir / 'README.md').relative_to(ROOT).as_posix(),
+        pdf=(figure_dir / 'fig3_terminal_candidate.pdf').relative_to(ROOT).as_posix(),
+        pdf_sha256=sha(figure_dir / 'fig3_terminal_candidate.pdf'), root_proof_sha256=sha(figure_dir / 'ROOT_REVIEW.json'),
+        original_same_round_triplets=260, points=26, independent_seed_n=1, historical_test_visible=True,
+        checkpoint_binary_identity_available=False, author_adoption=False, original_figure_replaced=False)
+display_dir = ROOT / 'outputs/guardfed_tables/celeba_nine_method_three_view_pdf_20261009'
+if (display_dir / 'ROOT_REVIEW.json').exists():
+    display = read(display_dir / 'ROOT_REVIEW.json')
+    assert display['status'] == 'ROOT_NINE_PANEL_DISPLAY_PDF_EXACT_VALUES_SOURCE_PINS_AND_ALL_PAGE_VISUAL_PASS'
+    assert display['source_seal_sha256'] == sha(display_dir / 'FILES_SHA256.json')
+    assert display['pdf_sha256'] == sha(display_dir / 'celeba_nine_method_three_view.pdf')
+    assert display['exact_mean_sd_pairs'] == 2430 and len(display['pages']) == 9
+    state['nine_method_three_view_pdf_20261009'] = dict(
+        status=display['status'], entry=(display_dir / 'README.md').relative_to(ROOT).as_posix(),
+        pdf=(display_dir / 'celeba_nine_method_three_view.pdf').relative_to(ROOT).as_posix(),
+        pdf_sha256=display['pdf_sha256'], root_proof_sha256=sha(display_dir / 'ROOT_REVIEW.json'),
+        pages=9, exact_mean_sd_pairs=2430, statistics_recomputed=False, new_inference=0, test=False)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -1486,6 +1536,14 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 {next11_note}
 
 {after71_note}
+
+九方法校准解释已独立复算2052标量：先每seed平均十场景，再跨seed统计；原native下GuardFed的ACC/AEOD/ASPD均值分别优于6/8、8/8、7/8基线，shared下为7/8、4/8、1/8。这是均值方向，不是显著性或seed胜率。原生公平性优势不能全部归因于聚合。全部正负差、10/9/6面板保留，入口outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009/REPORT.md；英文解释补稿rebuttal_validation900_addendum_20261009.md不替换原封存24意见稿，不改变主终点。
+
+九方法三视图论文表已编译为9页A3横向PDF：outputs/guardfed_tables/celeba_nine_method_three_view_pdf_20261009/celeba_nine_method_three_view.pdf。raw/native/shared各3页10/9/6种子，2430个均值±SD单元及4860个展示数字与原TeX精确一致，九页视觉/页界检查通过。仅label唯一化及wrapper排版，原67成员封条保持；本次无统计重算、推理或test。
+
+提交版源项目尚缺：paper.md虽是IEEEtran LaTeX，但属于不同标题、方法和表结构的历史稿；已核19输入SHA及三工作副本，未找到所查paper.bib/archi.png/inv.pdf，也未认证为提交PDF同版。正文未修改、完整构建未声称。有限检索记录manuscript_source_locator_20261009/REPORT.md；已询问提交版路径，其他训练继续。
+
+Fig3终轮修正候选已交付outputs/guardfed_figures/synthetic_terminal_candidate_20261009/fig3_terminal_candidate.pdf：260条第70轮完整三指标、26设置及78均值独立核验，全部13设置/数据集保留；只一个历史seed，不算场景SD，不用旧逐列最优或争议FairScore。图中明确历史test可见、ForestDiffusion执行身份缺失/PCA标签局限及checkpoint二进制SHA未恢复。候选未采用，不替换原图，不宣称P4关闭。
 
 ## Git与巡检
 

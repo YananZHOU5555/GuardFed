@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[a3paper,landscape,margin=12mm]{geometry}
+\usepackage{multirow,graphicx}
+\setlength{\parindent}{0pt}
+\setlength{\abovecaptionskip}{6pt}
+\setlength{\belowcaptionskip}{8pt}
+\makeatletter
+\renewenvironment{table*}[1][]{\par\begingroup\def\@captype{table}}{\par\endgroup}
+\makeatother
+\begin{document}
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Raw argmax}\hfill{\large Panel 1 / 9}\par\smallskip
+{\large 10 shared seeds: 91001--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/raw/celeba_iid_noniid_ten_seed.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Raw argmax}\hfill{\large Panel 2 / 9}\par\smallskip
+{\large 9 shared seeds: 91002--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/raw/celeba_iid_noniid_exclude_selection.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Raw argmax}\hfill{\large Panel 3 / 9}\par\smallskip
+{\large 6 shared seeds: 91005--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/raw/celeba_iid_noniid_matching_six.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Native method rules}\hfill{\large Panel 4 / 9}\par\smallskip
+{\large 10 shared seeds: 91001--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/native/celeba_iid_noniid_ten_seed.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Native method rules}\hfill{\large Panel 5 / 9}\par\smallskip
+{\large 9 shared seeds: 91002--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/native/celeba_iid_noniid_exclude_selection.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Native method rules}\hfill{\large Panel 6 / 9}\par\smallskip
+{\large 6 shared seeds: 91005--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/native/celeba_iid_noniid_matching_six.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Shared calibration}\hfill{\large Panel 7 / 9}\par\smallskip
+{\large 10 shared seeds: 91001--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/shared_calibration/celeba_iid_noniid_ten_seed.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Shared calibration}\hfill{\large Panel 8 / 9}\par\smallskip
+{\large 9 shared seeds: 91002--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/shared_calibration/celeba_iid_noniid_exclude_selection.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\newpage
+{\small GuardFed / CelebA nine-method validation tables / accepted 2026-10-09 snapshot}\par\medskip
+{\LARGE\bfseries Shared calibration}\hfill{\large Panel 9 / 9}\par\smallskip
+{\large 6 shared seeds: 91005--91010; round 70; validation split (19,867 images)}\par\medskip
+\input{fragments_unique/shared_calibration/celeba_iid_noniid_matching_six.tex}
+\par\medskip
+{\footnotesize\textbf{Decision rules.} Raw: margin $>0$ (ties class 0). Native: GuardFed-AD2+ uses its saved clean-root group thresholds; the eight baselines use argmax. Shared: all nine use saved clean-root group thresholds ($\geq$); no validation-label fitting.\par
+\textbf{Reading scope.} Validation was exposed to recipe selection, including seed 91001. Mixed CPU/GPU replay is not a uniform-device final comparison. The native/shared primary endpoint remains pending.}
+
+\end{document}

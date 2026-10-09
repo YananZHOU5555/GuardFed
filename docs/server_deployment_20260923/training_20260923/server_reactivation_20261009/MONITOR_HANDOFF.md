@@ -1,20 +1,22 @@
-# 当前交接 — 主队列实测2026-10-09 16:28 UTC；辅助队列16:34 UTC
+# 当前交接 — 主队列实测2026-10-09 17:01 UTC；辅助队列17:02 UTC
 
-先读RUNNING.md及TRAINING_STATE.json，当前服务器ssh -p60350 root@89.22.197.55（实例52183675），先遵守/etc/vast-agents-guide.md。用户已授权停止sglang，实测仍STOPPED，文件和模型保留。213.224.31.105内部状态未知，不自动切回。原完成/失败/退出队列禁止重启。
+先读RUNNING.md及TRAINING_STATE.json。当前服务器ssh -p60350 root@89.22.197.55，实例52183675，先遵守/etc/vast-agents-guide.md。用户已授权停止sglang，实测STOPPED，文件模型保留；213.224.31.105内部状态未知，不自动切换。旧已完成/退出队列禁止重启。
 
-- 主机制：86观测到终轮、82/800严格验收离机、8活动、706等待、0失败；100 Full显式复用。真实轮次62/62/69/57/67/52/2/1，双GPU100%、69/68℃、RecoveryNone、OOM0；CPU11.02/122.88核、RAM75.24GB、磁盘余1.061TB。凭据root_live_20261009T162838Z.json，SHA9448f72e928fe66467845a92dbf521bf05e71472228cfbc553de9d9634acdd98。86不是已接受82；固定70round/valid-only/8并发保持。
-- FLGMM：22观测终轮、19/32严格离机、2活动轮52/38；Hybrid：8观测终轮、6/32严格离机、1活动轮23；两服务RUNNING、无failure。凭据auxiliary_screens_20261009T163446Z.json，SHAee6737a73d28c2d8fc58d0c1e39f71631e56011fb8d7789f627fc4ed95e6491a。只按原冻结四条件score规则在全部32严格验收后选recipe；当前未选，不自动正式100/test。
-- 九方法旧checkpoint三视图：900/900严格离机，CPU434/GPU466，native原三指标偏差0；完成服务已EXITED。论文表outputs/guardfed_tables/celeba_nine_method_three_view_20261009覆盖IID/non-IID×五场景×固定10/9/6seed；root900receipt/8100计数指标/4860均值sampleSD核验通过。混合设备/训练环境及选择历史已披露；不是finaltest。
-- 机制三视图：82已接受。最新after71 exact11正常EXITED、无残留或失败，110archive成员/99指标/264计数/33规则通过，native偏差0。实际root证明tmp/celeba_mechanism_valid_incremental_after71_20261009/execution_candidate/backups/incremental_20261009T163050Z/ROOT_ADOPTION_REVIEW.json，SHAfb2bc745e7a6b6aa3d7d4cb898aefa31c6acbf73bee7a8e1a30ab667e03c204c；archiveac24b37547833d0765d4490a4484f303d17cbdba9e2729862b0dd79469ae33f0。原71不重跑，Full只引用旧900。原七场景表仍固定71来源/70完整pairs，不把这次partial记录称完整第八场景。FedSA91010不在该冻结11范围。
-- 首次备份在本机CreateProcess因Windows argv206失败，发生在SSH之前；原attempt/helper保留。只读确认无远端backup后，单独审阅的短argv/stdin运输已一次成功，无评价重跑或数值门槛变动。恢复证明ROOT_TRANSPORT_RECOVERY_REVIEW.json SHA7c9cf002a689d8d418cfa5694e1d5751e4ffdec6d158050380cce297f7cadefe。已闭合，不重试旧helper。
-- 其余七variant仅有源码/800配方映射准备：tmp/celeba_mechanism_remaining_variants_source_plan_20261009；未供应这些variant实际终轮/图像重放门检。后续先原evidence_v4严格接受、离机/root登记，再冻结实际accepted减已重放差集；不能动态扩大旧11，不重推理Full。下一有意义批次优先完整minus_U100实际终轮，不能把计划或未来hash计入分子。
-- 当前24原意见回复草稿：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated71_v2_20261009/rebuttal_integrated_20261009.md；v2只纠正P2six→seven并补900表的来源，原科学数值/负结果/P1–P6保留。主正文未应用、主终点及正式最终评价仍待作者、全返修未完。旧TableII实际n与缺失SD边界、COMPAS反例、Fig3/ForestDiffusion缺失来源保持。
+- 主机制：92观测终轮、82/800严格验收离机、8活动、700等待、0失败；100Full显式复用。真实轮次51/49/47/46/31/32/28/21；双GPU100%，70/69℃，RecoveryNone/OOM0，CPU11.02/122.88核、RAM75.23GB、磁盘余1.061TB。root_live_20261009T170115Z.json，SHA2bdc1b78924db460869b3e77b8c2ec253a3813659c503cf70f8d677ea72c8c02。92不是接受82，冻结70round/valid-only/8并发保持。
+- FLGMM：24观测终轮、19/32严格离机、2活动轮30/26；Hybrid：9观测终轮、6/32严格离机、1活动轮3。两服务RUNNING、无failure。auxiliary_screens_20261009T170231Z.json，SHA15dd20dff83dfb39f9695577c376d446124314fde6b28e8b5d467d946cfa7424。全部32严格验收后才按冻结四条件score规则选recipe，当前不选、不自动正式100/test。
+- 九方法旧checkpoint三视图：900/900严格离机，CPU434/GPU466，native原三指标偏差0；旧评价服务EXITED。outputs/guardfed_tables/celeba_nine_method_three_view_20261009保留IID/non-IID×五场景×10/9/6seed；900receipt/8100计数指标/4860统计核验通过。另nine_method_three_view_pdf_20261009已交付9页PDF，2430均值±SD单元精确对应原片段、九页视觉通过。不是finaltest。
+- 校准解释：outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009，2052统计复算通过；native均值优势方向ACC/AEOD/ASPD为6/8、8/8、7/8，shared为7/8、4/8、1/8，不能当显著性或全胜。英文新增解释稿rebuttal_validation900_addendum_20261009.md未替换封存24意见稿，也未代选主终点。
+- 机制三视图：82已接受。after71 exact11已正常闭合，110archive成员/99指标/264计数/33规则、native偏差0；archiveac24b37547833d0765d4490a4484f303d17cbdba9e2729862b0dd79469ae33f0。原71不重跑，Full只引用旧900；七场景表固定71来源/70完整pairs，不把partial记录称完整第八场景。已闭合运输修复不重试。
+- 其余七variant仅有源码/800配方映射准备，未供应这些variant实际终轮/图像重放门检。下一有意义批次优先完整minus_U100终轮；先原evidence_v4严格接受、离机/root登记，再冻结实际accepted减已重放差集。不能动态扩大旧11、重推理Full或把未来hash计入分子。
+- Fig.3：outputs/guardfed_figures/synthetic_terminal_candidate_20261009提供260同终轮记录/26设置的审阅候选；78均值核验通过，单seed、历史test暴露、ForestDiffusion执行/PCA标签/二进制身份限制保留。未采纳、未替换原图，P4仍开。提交版正文源项目未找到，paper.md仅是不同版本旧稿；源路径问题待回复，未编辑正文。
 
-三小时聊天任务guardfed-training-health仍PAUSED，本会话没有原生automation_update工具。supervisor持续训练不代表聊天巡检已恢复；不得编辑调度器内部、另建cron/Windows任务/聊天/外部消息或购买资源。原生工具可用时再恢复同一任务并实测状态；用户要求持续巡检，不因旧阶段结束自行暂停。
+上次实际Git提交d9130d3987ce38ed5a7a3a2083221b8f1bee95da（213blob及远端核验）。本轮新材料待独立增量发布，不冒充旧提交内容。24原意见稿仍禁止在全实验完成前提交。
 
-巡检只合并核实时SSH/service/worker/解释器、同任务真实round/log增长、failure/OOM/GPU RecoveryAction、实际cgroup-v2配额/内存/磁盘；健康无可行动变化安静，仅落简短状态。低瞬时占用不重启；SSH临时失败最多重试两次。外部中断恢复须source/data/protocol/config/jobhash匹配、无重复worker且严格跳过已接受项；部分输出/失败保留，数值逻辑错不循环重试、不改方法参数seed统计并发驱动实例。新增科学结果用原对应严格工具核同checkpoint全部指标、终轮和split/样本数/alpha/attack/seed身份；仅按accepted-ID差集备份并核archive/member SHA，不重包未变权重。重大变化、完成、有效恢复、故障或需用户操作时才通知。
+三小时聊天任务guardfed-training-health仍PAUSED，本会话没有原生automation_update工具。supervisor训练不代表聊天巡检恢复；不得编辑调度器内部、另建cron/Windows任务/聊天/外部消息或购买资源。用户要求持续巡检，原生工具可用时恢复同一任务并实测。
 
-非封存Python临时缓存删除曾被自动审批拒绝，唯一理由blocked by policy；缓存保留并排除封条/Git，不重试或绕过。
+巡检合并核SSH/service/worker/解释器、同任务round/log增长、failure/OOM/GPU RecoveryAction、实际cgroup-v2配额内存磁盘；健康无变化安静。瞬时低占用不重启；SSH临时失败最多重试两次。恢复须source/data/protocol/config/jobhash匹配、无重复worker、严格跳过已接受项；部分输出和失败保留，数值逻辑错误不循环重试、不改方法参数seed统计并发驱动实例。新科学结果用对应严格工具核同checkpoint全部指标、终轮及数据身份，仅accepted-ID差集备份并核archive/member SHA，不重包未变模型。
+
+非封存Python临时缓存删除曾被自动审批拒绝，唯一理由blocked by policy；保留并排除封条/Git，不重试或绕过。
 
 # Historical handoff snapshots
 

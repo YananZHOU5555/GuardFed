@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];REPO=ROOT/'tmp/revision-publish-20260928'
 TRAIN=Path('docs/server_deployment_20260923/training_20260923');CHECKS=TRAIN/'server_reactivation_20261009'
-parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21),default=17)
+parser=argparse.ArgumentParser();parser.add_argument('--increment',type=int,choices=(17,18,19,20,21,22),default=17)
 args=parser.parse_args()
 profiles={
     17:dict(previous='795f4b09c60c4a81de3d4aa67dad5beac5075827',start=10,end=18,prior_n=570,
@@ -24,7 +24,10 @@ profiles={
         live_tags=['20261009T152426Z'],formal_tag='20261009T154505Z'),
     21:dict(previous='1b16f4753852f994171329baf2e79fdb6f90281a',start=40,end=40,prior_n=900,
         prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=82,views=82,
-        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T162838Z')}
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T162838Z'),
+    22:dict(previous='d9130d3987ce38ed5a7a3a2083221b8f1bee95da',start=40,end=40,prior_n=900,
+        prior_sha='00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3',baseline=900,native=82,views=82,
+        native_tag=None,native_delta=0,handoffs=[],live_tags=[],formal_tag='20261009T170115Z')}
 profile=profiles[args.increment];PREVIOUS=profile['previous'];MAPPING={}
 def git(*args,**kwargs):return subprocess.check_output(['git','-c','core.longpaths=true',*args],cwd=REPO,**kwargs)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -276,6 +279,39 @@ if args.increment==21:
     for name in [*[r['path'] for r in read(reply_v2/'FILES_SHA256.json')['members']],'FILES_SHA256.json','ROOT_REVIEW.json']:
         copy(reply_v2/name,Path('experimental')/reply_v2.name/name)
         copy(reply_v2_canonical/name,reply_v2_canonical.relative_to(ROOT)/name,sha(reply_v2/name))
+if args.increment==22:
+    copy(ROOT/CHECKS/'auxiliary_screens_20261009T170231Z.json',CHECKS/'auxiliary_screens_20261009T170231Z.json',
+        '15dd20dff83dfb39f9695577c376d446124314fde6b28e8b5d467d946cfa7424')
+    # Canonical accepted artifacts only: descriptive analysis, candidate figure and display PDF.
+    for relative,seal_sha,root_sha,files_key in (
+            ('outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009',
+             '93f405b0df99166dc523ec5126a49cabafa4e2bcc5065966046e15ff05c4b5fb',
+             '81dce12481dfec62bf62555acedcd9c2735756665594896faf27ed48ac1d2082','files'),
+            ('outputs/guardfed_figures/synthetic_terminal_candidate_20261009',
+             '5004d983fb32f7534d447659999e84c2925f9d0fb20ef79df75be4df7fc95504',
+             '837412a3cbb6d2f74b5e560b884f704bf2ca2877ebfa11828075900880d283d3','files'),
+            ('outputs/guardfed_tables/celeba_nine_method_three_view_pdf_20261009',
+             'ab2923437aa0286c572b5a173821f6c256559a4f4f27e4caf82317691adcd9e2',
+             'b96103d3b588d8fc969d598c4b2aa2ca0991dbb96af6c4be07cf42282eb29f16',None)):
+        canonical=ROOT/relative
+        assert sha(canonical/'FILES_SHA256.json')==seal_sha
+        assert sha(canonical/'ROOT_REVIEW.json')==root_sha
+        assert read(canonical/'ROOT_REVIEW.json')['source_seal_sha256']==seal_sha
+        seal=read(canonical/'FILES_SHA256.json');members=seal[files_key] if files_key else seal
+        for name,row in members.items():
+            copy(canonical/name,Path(relative)/name,row['sha256'])
+        copy(canonical/'FILES_SHA256.json',Path(relative)/'FILES_SHA256.json',seal_sha)
+        copy(canonical/'ROOT_REVIEW.json',Path(relative)/'ROOT_REVIEW.json',root_sha)
+    locator=TRAIN/'manuscript_source_locator_20261009'
+    locator_root_sha='5fc32efc81e7931c7d7b70b8d542824d16a729b73808f553069aac5b726a9218'
+    assert sha(ROOT/locator/'ROOT_REVIEW.json')==locator_root_sha
+    locator_proof=read(ROOT/locator/'ROOT_REVIEW.json')
+    copy(ROOT/locator/'REPORT.md',locator/'REPORT.md',locator_proof['report_sha256'])
+    copy(ROOT/locator/'EVIDENCE.json',locator/'EVIDENCE.json',locator_proof['evidence_sha256'])
+    copy(ROOT/locator/'ROOT_REVIEW.json',locator/'ROOT_REVIEW.json',locator_root_sha)
+    for relative in ('docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md',
+            'docs/返修实验总览.md'):
+        copy(ROOT/relative,Path(relative))
 receipt_rel=TRAIN/f'publication_closed_increment{args.increment}_20261009.json'
 attributes=REPO/'.gitattributes';content=attributes.read_text();patterns=[receipt_rel.as_posix()+' -text']
 if args.increment==18:
@@ -300,6 +336,13 @@ if args.increment==21:
         'experimental/celeba_mechanism_after71_transport_v2_source_review_20261009/** -text',
         'experimental/guardfed_rebuttal_integrated71_v2_20261009/** -text',
         'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated71_v2_20261009/** -text']
+if args.increment==22:
+    patterns += ['outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009/** -text',
+        'outputs/guardfed_figures/synthetic_terminal_candidate_20261009/** -text',
+        'outputs/guardfed_tables/celeba_nine_method_three_view_pdf_20261009/** -text',
+        'docs/server_deployment_20260923/training_20260923/manuscript_source_locator_20261009/** -text',
+        'docs/server_deployment_20260923/revision_20260923/rebuttal_validation900_addendum_20261009.md -text',
+        'docs/返修实验总览.md -text']
 for pattern in patterns:
     if pattern not in content:content+='\n'+pattern+'\n'
 attributes.write_text(content,newline='\n')
@@ -310,6 +353,10 @@ receipt=dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(
     Hybrid_offserver_verified=state['hybrid_screen32_20261009']['offserver_accepted70round_jobs'],
     native_tolerance=1e-12,duplicated_old_models=0,test_started=False,scientific_goal_complete=False)
 if args.increment==19:receipt['next11_evaluation_started_with_no_new_offserver_acceptance']=True
+if args.increment==22:
+    receipt.update(increment_scope='accepted_evidence_descriptive_analysis_display_and_source_location_only',
+        new_scientific_experiments=0,synthetic_figure_candidate_adopted=False,main_manuscript_edited=False,
+        primary_endpoint_selected=False)
 with (ROOT/receipt_rel).open('x',encoding='utf8',newline='\n') as stream:
     json.dump(receipt,stream,ensure_ascii=False,indent=2);stream.write('\n')
 copy(ROOT/receipt_rel,receipt_rel);names=[*MAPPING,'.gitattributes']
