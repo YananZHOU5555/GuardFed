@@ -193,6 +193,13 @@ if remaining:
         l100=state['logofair100_fullcoverage_20261010']
         logo_recipe=f'已完整采用配置07，96新+4复用实际启动，本机原strict观测{l100["local_strict_closed_observed"]}/96、新独立接受0'
     new_stage_note+=f' 当前接续：原800−已验收180的准确620补集CPU评价已实际启动，远端闭合{remote_closed}，新增严格离机并经root采用{remaining.get("new_offserver_accepted",0)}，累计三视图{actual_views}；原180和Full不重复。Fed-NGA/Huber共64项搜索运行，严格离机{gradient.get("offserver_accepted",0)}；首个恒定负预测ACC0.516686/AEOD0/ASPD0完整保留。LoGoFair原30轮后处理搜索本机原strict闭合{logo.get("original_strict_closed",0)}/32，root采用{logo.get("root_adopted",0)}，{logo_recipe}。Huber恒等投影和LoGoFair虚拟20cohort已由作者决定，前者不继承理论保证，后者不称真实client公平性。新bulk仅F盘Yanan 2TB经实时连接/容量校验后写入；原档案保持。'
+if main.get('A_three_view_single_scene_table'):
+    A_table=main['A_three_view_single_scene_table']
+    A_link='server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md'
+    text+='\nA机制单场景：IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过。累计A12中F Flip仅2seed，不入均值。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A IID Benign表]('+A_link+')。\n'
+    new_stage_note+=' A IID Benign十seed三视图表已独立采用，F Flip仅两seed，A剩余九场景未完成。'
+if state.get('gradient200_fullcoverage_source_preparation_20261010'):
+    new_stage_note+=' 梯度200格192新+8复用源准备已独立通过；无实际recipe/jobs/启动，完整64离机接受及新增攻击真实门检仍待完成。'
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 text=text.replace('LoGoFair人口定义、梯度方法设置和最终主终点保留待决，不擅自代定。','Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。')
 text=text.replace('不代表其余七variant或全部800训练完成','不代表其余六variant或全部800训练完成')
@@ -254,6 +261,14 @@ if remaining:
 if state.get('logofair100_fullcoverage_20261010'):
     top=top.replace('100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；',
         '100输入及十个人口已实际绑定，原96项runner已启动；首项原strict与真实进程经root核验，完整100独立验收和统计仍未完成；')
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==12:
+    top=top.replace(f"Native累计{main['scientific_results_offserver_verified']}=U100完整+C{main['scientific_results_offserver_verified']-100}部分",f"Native累计{main['scientific_results_offserver_verified']}=U100+C100完整+A12部分")
+    top+='\n当前A12新增三视图已严格离机并核native212恢复链，累计212；IID Benign十seed完整、F Flip仅两seed不入均值，场景表须另行采用。旧200/Full不重推。\n'
+if main.get('A_three_view_single_scene_table'):
+    top=top.replace('场景表须另行采用','IID Benign十seed三视图表已独立采用')
+    top+='A表入口'+main['A_three_view_single_scene_table']['table_path']+'；162统计/81单元/216计数指标，10/9/6面板及负结果完整；不将该单场景称A完整100格。\n'
+if state.get('gradient200_fullcoverage_source_preparation_20261010'):
+    top+='梯度200格源准备独立审查通过，只含192新+8复用计划；没有实际recipe/jobs/启动，必须先闭合全部64及新攻击门检。\n'
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

@@ -127,6 +127,13 @@ if main.get('C_three_view_full100_table'):
         '1620 mean/sampleSD scalars,810 display cells,1800 count-derived metrics,4800 confusion counts and900 paired metric checks pass; old160/1296/648 and162 IID aggregate scalars remain exact. '
         'Separate nonIID5 and balanced10 aggregates each have162 checked scalars, averaging scenes within each seed first. Native/shared deletion contrasts show ACC+0.532038pp/AEOD−0.00111223/ASPD−0.00083292 under nonIID S-DFA and+0.680525pp/−0.000584879/+0.00478524 under Sp-DFA. '
         'All subsets and unfavorable effects remain. Full replay5CPU95GPU/training98cu1282cu130 versus C100CPU/cu128, selection history and previous test exposure are disclosed. Six other controls remain unfinished, with no necessity, causality, significance or universal-win claim. ')
+A_view_note=''
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==12:
+    A_view_note=(' An additional12 minus_A terminal replays have original strict/offserver checks and root adoption against the native212 restore chain:110 archive members,108 metrics,288 confusion counts,36 prediction rules and24 original model/result members. '
+        'IID Benign has ten matched seeds; IID F Flip has only two and is excluded from means. Its separate A table still requires source/statistical adoption. ')
+if main.get('A_three_view_single_scene_table'):
+    A_view_note=A_view_note.replace('Its separate A table still requires source/statistical adoption.',
+        'The IID Benign three-view table is independently adopted:162 statistics/81 cells/216 count-derived metrics, all10/9/6 panels retained. Native/shared paired deletion is ACC−0.429859pp, AEOD+0.002313 and ASPD−0.003142, with subset direction changes. Full2CPU8GPU versus A10CPU and commoncu128 training are disclosed; no necessity, causal or significance claim. Entry: '+main['A_three_view_single_scene_table']['table_path']+'.')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
@@ -265,7 +272,7 @@ The main mechanism queue has{main['queue_completed_observed']} terminal jobs obs
 
 The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
-The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight, the historical increment closed23 actual minus_U terminal checkpoints. Subsequent explicitly adopted increments bring the current total to{mechanism_views} strict, off-server raw/native/shared validation replays: complete U100 plus{C_view_note}Native discrepancies in these accepted increments are zero. {paired_note}This does not establish the complete mechanism comparison.
+The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight, the historical increment closed23 actual minus_U terminal checkpoints. Subsequent explicitly adopted increments bring the current total to{mechanism_views} strict, off-server raw/native/shared validation replays: complete U100 plus{C_view_note}{A_view_note}Native discrepancies in these accepted increments are zero. {paired_note}This does not establish the complete mechanism comparison.
 
 The accepted native mechanism data currently support{complete_native_scenes} complete Full–minus_U scenes, with ten paired seeds per scene and consistent additional nine-seed and six-seed panels. In non-IID Benign, Full hasACC88.594±1.168%, AEOD0.00696±0.00423 andASPD0.06511±0.00902; minus_U has87.290±1.870%,0.01300±0.00732 and0.05140±0.01598. Full therefore has higher mean accuracy and lower meanAEOD but higher meanASPD in this scene. These native end-to-end results retain calibration effects and do not establish an isolated aggregation cause or that every score term is necessary. The next37 replay scope is exactly the historical accepted60 minus the already closed23; source review and36 scientific no-CNN rejection checks plus32 execution rejection checks have passed. {next37_note}
 
@@ -318,6 +325,8 @@ if state.get('mechanism_remaining620_valid_20261010'):
     elif r.get('C100_replay_complete'):
         current+='The final19 C records are now root-adopted:173 archive members/171 metrics/456 confusion counts/57 prediction rules, zero native discrepancy, exact20 native200 record identities and40 original model/result member rehashes. Prior180 and first181 are unchanged; cumulative U100+C100=200. C100 statistical tables await separate review; six further mechanism controls and final evaluation remain unfinished.\n'
     else:current+='The cumulative181 includes one partial C-scene record beyond the C80 table, so no additional scene mean is reported.\n'
+if state.get('gradient200_fullcoverage_source_preparation_20261010'):
+    current+='\nFed-NGA/Huber200 coverage source preparation passes independent review only:192 new plus eight reuses are planned, with no selected recipe, actual jobs or dispatch. Actual complete64 offserver acceptance, source freeze and new-attack real-image gates remain prerequisites; the prepared source is not a scientific result.\n'
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')
 start=text.index('## Current accepted increment');end=text.index('## Historical accepted increment',start)
 p.write_text(text[:start]+current+text[end:],encoding='utf8')

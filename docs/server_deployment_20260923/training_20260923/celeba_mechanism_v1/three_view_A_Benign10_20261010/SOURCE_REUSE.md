@@ -1,0 +1,7 @@
+# Minimal source adaptation
+
+The old C-single-scene archive-reader `main/scope/adoption_gate` is replaced with a reader for the actual root-adopted A12 index (`new_records/new_bindings/new_artifacts`). This is an input-schema adaptation, not a new acceptance algorithm: original strict/offserver/root adoption and immutable bindings supply acceptance. Per-record checks preserve the original scientific receipt, same checkpoint, config/rawjob/result SHA, root/train/valid/client partition, terminal70, valid19867, source-before/after and native1e-12 contracts. Full records come from the unchanged original `full_record` function and the unchanged Full100 reference set.
+
+The C `panels.py` and `verify_numeric.py` modules are read without file mutation. An AST adapter changes only exact string constants `minus_C`→`minus_A` and `minus_C minus Full`→`minus_A minus Full`. Reverse normalization must reproduce the complete original AST. Counts, seed panels, pairing, metrics, arithmetic and sample-SD code remain unchanged. Original evidence_v4 `statistic/summarize` is imported from the pinned3d78db source.
+
+The original `receipt_identity`, `normalized`, `canonical` and `full_record` function source hashes are recorded in `SOURCE_BINDINGS.json`. Their source bodies are extracted unchanged. The old C, U and Full output packages are read-only. The table writer changes the displayed variant/title/limitations and adds source binding to the adopted A12 proof; it does not select a primary endpoint or rank seeds.
