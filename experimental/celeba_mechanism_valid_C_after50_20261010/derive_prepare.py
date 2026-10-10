@@ -1,0 +1,90 @@
+"""One-shot exact scope rebinding of the accepted after47 preparation source."""
+from pathlib import Path
+import ast,difflib,json,re
+D=Path(__file__).resolve().parent;old=D.with_name('celeba_mechanism_valid_C_after47_20261010')
+s=(old/'prepare.py').read_text('utf8');original=s
+# Simultaneous complete semantic replacements; never replace an isolated digit.
+changes={
+ 'native150 minus closed147 C3':'native156 minus closed150 C6',
+ 'C_after36':'C_after40','C_after40':'C_after47','C_after47':'C_after50',
+ 'C_AFTER40':'C_AFTER47','C_AFTER47':'C_AFTER50',
+ 'inventory_actual147_Full100refs.json':'inventory_actual150_Full100refs.json',
+ 'inventory_actual150_Full100refs.json':'inventory_actual156_Full100refs.json',
+ '22da16b734f2c6041d494e30c200d586ff79626ac0a5ec6b438bea405c7dc48b':'aa5073948bd1c0854b3a4d760ee58b892909f702c31950e5ee80f0cf83b2efc0',
+ '1ac84b16f00c30ed3effd230f539824bb426540e66ec4981a53fdee676c50ec8':'b647c5a6759e709ab4c4fdd9d7ba74361901f98973d67f69176569b1a14c8ef5',
+ 'c65a6e8a88ef1e97a687bbf259840582c3d1f4c26e8e09deb604e94a4cc5b10f':'fc5f9b31aef29b1f3c43537301c4eacac40cd4d789114a3238f41e5c6d58cab4',
+ 'incremental_20261009T233028Z':'incremental_20261009T235311Z',
+ '64732337f35f81bed49e40c60fa1d5229fb6a7557c45272505fee488c5ad20ea':'3859d49fb57c3ecc4b23244012431224d255b02590dab221b2d6464e28aa7dd8',
+ "adoption['cumulative_three_view_models']==147 and adoption['accepted_new']==7 and adoption['original140_unchanged']":"adoption['cumulative_three_view_models']==150 and adoption['accepted_new']==3 and adoption['original147_unchanged']",
+ 'NATIVE150_':'NATIVE156_',
+ "['total_new_strict_and_offserver']==150":"['total_new_strict_and_offserver']==156",
+ "review['ledger_accepted_unique_ids']==150":"review['ledger_accepted_unique_ids']==156",
+ 'original247_raw_json_record_bytes_exact':'original250_raw_json_record_bytes_exact',
+ "inspection['new_count']==150":"inspection['new_count']==156",
+ 'len(rows)==150 and len(closed)==147':'len(rows)==156 and len(closed)==150',
+ "if i.startswith('minus_C_')])==50":"if i.startswith('minus_C_')])==56",
+ "proof['members_verified']==54":"proof['members_verified']==78",
+ "schema='celeba_mechanism_valid_replay_inventory_C_after47'":"schema='celeba_mechanism_valid_replay_inventory_C_after50'",
+ "'actual_accepted_new':150":"'actual_accepted_new':156",
+ "'pending_new_without_checkpoint':650":"'pending_new_without_checkpoint':644",
+ 'exact3 native C minus closed U100+C47':'exact6 native C minus closed U100+C50',
+ "'actual_strict_offserver':150":"'actual_strict_offserver':156",
+ "'scope_bound_prior_and_new':150":"'scope_bound_prior_and_new':156",
+ "'actual_global_pending_native':650":"'actual_global_pending_native':644",
+ '650 not yet native accepted':'644 not yet native accepted',
+ 'PRIOR147_EXCLUDED':'PRIOR150_EXCLUDED',
+ 'prior140_root_adoption_sha256':'prior147_root_adoption_sha256',
+ 'len(records) == 147 and len({r[\'id\'] for r in records}) == 147':'len(records) == 150 and len({r[\'id\'] for r in records}) == 150',
+ 'len(records) == 150 and len({r[\'id\'] for r in records}) == 150':'len(records) == 156 and len({r[\'id\'] for r in records}) == 156',
+ 'exactly147 actual accepted terminals':'exactly150 actual accepted terminals',
+ 'exactly150 actual accepted terminals':'exactly156 actual accepted terminals',
+ 'Actual accepted147 snapshot':'Actual accepted150 snapshot',
+ 'Actual accepted150 snapshot':'Actual accepted156 snapshot',
+ 'Excluded-prior140/selected7':'Excluded-prior147/selected3',
+ 'Excluded-prior147/selected3':'Excluded-prior150/selected6',
+ '== 653':'== 650','== 650':'== 644',
+ 'Only adopted U100+C40 plus exact seven C terminals; no other scope':'Only adopted U100+C47 plus exact three C terminals; no other scope',
+ 'Only adopted U100+C47 plus exact three C terminals; no other scope':'Only adopted U100+C50 plus exact six C terminals; no other scope',
+ 'len(ids) == len(set(ids)) == 7':'len(ids) == len(set(ids)) == 3',
+ 'len(ids) == len(set(ids)) == 3':'len(ids) == len(set(ids)) == 6',
+ 'selected7_pairs':'selected3_pairs','selected3_pairs':'selected6_pairs',
+ "scope.pop('prior140_root_adoption')":"scope.pop('prior147_root_adoption')",
+ 'actual_native_accepted_records=150':'actual_native_accepted_records=156',
+ 'prior147_root_adoption=inv':'prior150_root_adoption=inv',
+ 'pending_native_count_without_model=650':'pending_native_count_without_model=644',
+ '==150\n':'==156\n',
+ 'require_approval_exact3_change':'require_approval_exact6_change',
+ 'original147_records_exact':'original150_records_exact',
+ 'native_archive_members_verified\':54':'native_archive_members_verified\':78',
+ "'members_verified_now_without_inference':54":"'members_verified_now_without_inference':78",
+ 'SELECTED_3.txt':'SELECTED_6.txt',
+ "'closed140':'closed147'":"'closed147':'closed150'",
+ "'Prior140':'Prior147'":"'Prior147':'Prior150'",
+ "'prior140':'prior147'":"'prior147':'prior150'",
+ "'prepared7 frozen':'prepared3 frozen'":"'prepared3 frozen':'prepared6 frozen'",
+ "'reviewed7 root':'reviewed3 root'":"'reviewed3 root':'reviewed6 root'",
+ "'Only7 IDs':'Only3 IDs'":"'Only3 IDs':'Only6 IDs'",
+ "'exact7-scope':'exact3-scope'":"'exact3-scope':'exact6-scope'",
+ "len(scope['excluded_prior_ids']) == 140":"len(scope['excluded_prior_ids']) == 147",
+ "len(scope['excluded_prior_ids']) == 147":"len(scope['excluded_prior_ids']) == 150",
+ 'Prepared exact7-terminal':'Prepared exact3-terminal',
+ 'Prepared exact3-terminal':'Prepared exact6-terminal',
+ 'len(chosen)==7':'len(chosen)==3','len(chosen)==3':'len(chosen)==6',
+ 'reviewed7 CPU':'reviewed3 CPU','reviewed3 CPU':'reviewed6 CPU',
+ 'Previously accepted C after36':'Previously accepted C after40',
+ 'Previously accepted C after40':'Previously accepted C after47',
+ 'eb1f6c3120febb138e32af25484ac790cf962cd15d5ea9921140119bc5a3317a':'64732337f35f81bed49e40c60fa1d5229fb6a7557c45272505fee488c5ad20ea',
+ 'len(prior|set(ids))<7':'len(prior|set(ids))<3',
+ 'len(prior|set(ids))<3':'len(prior|set(ids))<6',
+ 'ALL7_STRICT':'ALL3_STRICT','ALL3_STRICT':'ALL6_STRICT',
+ 'closed147_must_not_replay':'closed150_must_not_replay',
+ "'selected':3":"'selected':6"
+}
+used={k:s.count(k) for k in changes}
+s=re.sub('|'.join(re.escape(k) for k in sorted(changes,key=len,reverse=True)),lambda m:changes[m.group(0)],s)
+n=next(n for n in ast.parse(s).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SELECTED' for t in n.targets))
+s=s.replace(ast.get_source_segment(s,n),'SELECTED = '+repr([f'minus_C_non-IID_Benign_seed{x}' for x in range(91001,91007)]),1)
+ast.parse(s)
+with (D/'prepare.py').open('x',encoding='utf8',newline='\n') as f:f.write(s)
+with (D/'PREPARE_REBIND_SOURCE_DIFF.patch').open('x',encoding='utf8',newline='\n') as f:f.write(''.join(difflib.unified_diff(original.splitlines(True),s.splitlines(True),fromfile='sealed_C_after47/prepare.py',tofile='C_after50/prepare.py')))
+print(json.dumps(dict(status='PREPARE_SOURCE_DERIVED_NOT_EXECUTED',used={k:v for k,v in used.items() if v})))

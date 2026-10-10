@@ -93,7 +93,11 @@ if main.get('C_after47_valid_replay',{}).get('offserver_new_accepted')==3:
 if main.get('C_three_view_five_scene_table'):
     C_view_note=C_view_note.replace('The complete five-scene table needs its own independent adoption.',
         'The five-scene table is independently adopted:50 pairs/100 records,810 mean/sampleSD scalars,405 cells,900 count-derived metrics and162 seed-first cross-scene scalars. The old80 records/648 statistics/324 cells remain exact. All10/9/6 panels and negative results are retained; this is descriptive validation evidence, not a component-necessity or final-test conclusion.')
-if state.get('latest_rebuttal_addendum'):
+if main.get('C_after50_valid_replay'):
+    C56=main['C_after50_valid_replay']
+    C_view_note+=(' The six non-IID Benign terminal checkpoint replays are strictly accepted off server:75 archive members,54 metrics,144 confusion counts and18 prediction rules passed, with native discrepancies zero. C is cumulative56, but this scene is only6/10 and excluded from complete-scene means. ' if C56['offserver_new_accepted']==6 else
+        ' Six non-IID Benign terminal checkpoint replays have actually started; strict off-server acceptance remains0. The partial scene is excluded from complete-scene means. ')
+if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_draft'].get('complete_C_scenes')!=5:
     addendum=state['latest_rebuttal_addendum']
     C_view_note+=(f" A separate C{10*addendum['complete_C_scenes']} English author-review addendum for R3.2/R3.7 is source-checked at{addendum['scalar_pointer_checks']} scalar pointers,{addendum['display_cells_checked']} display values,{addendum['scope_fact_checks']} scope facts and{addendum['links_checked']} links; the frozen24-comment response and submitted manuscript remain unchanged. Entry: "+addendum['entry']+'. ')
 recovery=state.get('baseline_valid_recovery_prepared_20261009')
@@ -219,9 +223,11 @@ if main.get('after92_valid_replay'):
 fl_multiseed_status=('The100-job multi-seed coverage has not started.' if not state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started') else
     'The frozen100-cell multi-seed validation coverage is running as96 new jobs plus four explicitly reused results; new70-round acceptances are tracked separately from the completed search.')
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted'):
-    fl_multiseed_status+=(f' New70-round checkpoints have passed original strict/offserver checks and independent root archive/record adoption; cumulative new coverage acceptance is{state["flgmm_fullcoverage_v2_20261009"]["new_accepted"]}/96, with four prior results reused separately. These individual validation records do not provide a complete10-seed scene or final-test result.')
+    fl_multiseed_status+=(f' New70-round checkpoints have passed original strict/offserver checks and independent root archive/record adoption; cumulative new coverage acceptance is{state["flgmm_fullcoverage_v2_20261009"]["new_accepted"]}/96, with four prior results reused separately. No complete10-seed scene summary has yet been adopted; these acceptances are validation evidence, not final-test results.')
 reply_progress_note=('Its24 original comments,37 numeric pointers and37 links passed review;21 necessary paragraph updates leave206 prior paragraphs exact.' if not state['latest_rebuttal_draft'].get('complete_C_scenes') else
     'The latest copy also includes the separately adopted C20 two-scene comparison. All24 original comments and both previous full documents recover exactly by reversing ten edits;22 new C20 scalar pointers,12 scope/environment facts and41 links passed root checks. The prior37 numeric references are preserved.')
+if state['latest_rebuttal_draft'].get('complete_C_scenes')==5:
+    reply_progress_note='The complete copy includes all five IID C scenes. Its24 original comments remain verbatim and both previous full documents recover byte-exactly by reversing11 edits;38 C scalar pointers,19 scope/environment facts,24 direction checks and44 links passed root review. All unaffected text, prior numeric references, counterexamples and pending items remain intact.'
 current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
 
 The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
