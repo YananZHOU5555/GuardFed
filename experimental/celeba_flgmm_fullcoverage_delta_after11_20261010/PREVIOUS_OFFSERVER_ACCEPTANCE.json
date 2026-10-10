@@ -1,0 +1,156 @@
+{
+  "status": "PARTIAL_ACCEPTED_OFFSERVER_VERIFIED",
+  "accepted_new": 2,
+  "accepted_total": 11,
+  "accepted_job_ids": [
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91003_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91002_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91004_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91005_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91007_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91008_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91009_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91010_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91001_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91002_fullcoverage"
+  ],
+  "new_ids": [
+    "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91001_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91002_fullcoverage"
+  ],
+  "records": [
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91001_fullcoverage",
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "seed": 91001,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.8897166154930286,
+        "aeod": 0.05002035513403158,
+        "aspd": 0.11335946711557449
+      },
+      "evaluation_stats": {
+        "positive_rate": 0.47027734433986007,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "checkpoint_sha256": "30e54416f644ade8e7e4539429b4b5e4bb71bdb891585818b9717577581e1319",
+      "original_acceptance_sha256": "42cf69f74fd86b4ef606e2d357db7049a8b713be0d09aac38618dab370e11876",
+      "screen_identity_sha256": "5dc3e97362f6c24c60fd6bb4f078d53326d9c3942efa668a6ec183fd1eed5671",
+      "job_sha256": "a531d35829d0924a1b2ee655c606da06bc7c09d529671bff262e79fc7d2bb2c0",
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_source_hashes": {
+        "flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+        "worker.py": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+        "prepare_jobs.py": "91d33acf2ec25be1d1636a74ee960346548d85c4b17b0bfc1ab12fd5340f9f6c",
+        "protocol.json": "1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4",
+        "sources/flgmm_pinned.py": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+        "sources/flgmm_fedavg.py": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+        "sources/flgmm_license.txt": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+      }
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91002_fullcoverage",
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "seed": 91002,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.9051190416268183,
+        "aeod": 0.04875902043598879,
+        "aspd": 0.12411922685274107
+      },
+      "evaluation_stats": {
+        "positive_rate": 0.45044546232445765,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "checkpoint_sha256": "09655b14690a1cfb6c2792a74bdf81577071c1af208da94b1d3237192502fdeb",
+      "original_acceptance_sha256": "86fc830c006504a1d25f6b5531c7714a875dbcd67f583e88323e63f0c70ba619",
+      "screen_identity_sha256": "dbec7b7c4b8a98d943088746bc54a0dd0d8b7646f4a618d64a3511f421b4885c",
+      "job_sha256": "3a4ab140920dbc9bd1f80062014ce5cf11b480b6fcc2b9c1f3deeac925cf6f3f",
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_source_hashes": {
+        "flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+        "worker.py": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+        "prepare_jobs.py": "91d33acf2ec25be1d1636a74ee960346548d85c4b17b0bfc1ab12fd5340f9f6c",
+        "protocol.json": "1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4",
+        "sources/flgmm_pinned.py": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+        "sources/flgmm_fedavg.py": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+        "sources/flgmm_license.txt": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+      }
+    }
+  ],
+  "planned_new": 96,
+  "planned_total": 100,
+  "reused_separately": 4,
+  "package_sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+  "utc": "2026-10-10T00:09:24.898223+00:00",
+  "archive_sha256": "9ef317ff2330a69a3f680852da04a64bc5cc791ac9b4d22f3ca5617ec81ae6e4",
+  "archived_member_count": 27,
+  "inventory_sha256": "5eba3782345efcf391e24759bcb2e5a1873ebd074cf9eb971e3497ea6846e583",
+  "server_backup_receipt_sha256": "83f6cbfc6688dfb296b77f0337ffd032b3036875de187ad9deaf930cc7e0c088",
+  "previous_chain_sha256": "396543a8effb8f7e0a25ad6130c0f6bc8b957c88bfbe7e862aaa019e14a73684",
+  "original_checked_result_replayed_locally": true,
+  "source_host": "0becaeaa5515",
+  "verification_host": "BlueBook",
+  "verification_runtime": {
+    "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.8.0+cpu",
+    "cuda_initialized": false
+  },
+  "training_runtime_unchanged": true,
+  "source_data_rehashed_on_server_only": true,
+  "no_old_models_repackaged": true,
+  "CNN_calls": 0,
+  "final_test": false,
+  "canonical_ledger_not_modified": true
+}

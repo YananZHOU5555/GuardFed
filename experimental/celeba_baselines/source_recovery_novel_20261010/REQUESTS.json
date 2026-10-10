@@ -1,0 +1,86 @@
+{
+  "status": "BOUNDED_NOVEL_RETRIEVAL_FINISHED",
+  "requests": [
+    {
+      "request": 1,
+      "kind": "web.search_query",
+      "query": "\"SmartFL\" \"majority\" \"Algorithm 1\" Dong",
+      "response_file": "WEB_01_EXTRACT.json",
+      "outcome": "no new complete target specification; old/search-only and homonym hits not opened"
+    },
+    {
+      "request": 2,
+      "kind": "web.search_query",
+      "query": "\"FedDNA\" \"104358\" \"accepted manuscript\"",
+      "response_file": "WEB_01_EXTRACT.json",
+      "outcome": "no new complete target specification; old/search-only and homonym hits not opened"
+    },
+    {
+      "request": 3,
+      "kind": "web.search_query",
+      "query": "\"Enwei Guo\" \"aggregation\" reinforcement learning thesis",
+      "response_file": "WEB_01_EXTRACT.json",
+      "outcome": "new primary conference-platform lead"
+    },
+    {
+      "request": 4,
+      "kind": "web.search_query",
+      "query": "site:underline.io \"Adaptive Aggregation Weight Assignment\"",
+      "response_file": "WEB_02_EXTRACT.json",
+      "outcome": "new primary conference-platform lead"
+    },
+    {
+      "request": 5,
+      "kind": "web.search_query",
+      "query": "\"SmartFL\" \"Appendix C\" majority",
+      "response_file": "WEB_02_EXTRACT.json",
+      "outcome": "no new complete target specification; old/search-only and homonym hits not opened"
+    },
+    {
+      "request": 6,
+      "kind": "web.open",
+      "url": "https://underline.io/lecture/49564-intelligent-communication-over-realistic-wireless-networks-in-multi-agent-cooperative-games",
+      "response_file": "WEB_03_EXTRACT.json",
+      "outcome": "neighboring official conference presentation links exact FedWA poster"
+    },
+    {
+      "request": 7,
+      "kind": "web.click",
+      "url": "https://underline.io/lecture/49565-adaptive-aggregation-weight-assignment-for-federated-learning-a-deep-reinforcement-learning-approach",
+      "response_file": "WEB_04_EXTRACT.json",
+      "outcome": "exact FedWA official conference presentation; visible download only links previously held paper; embedded page data later supplies poster"
+    },
+    {
+      "request": 8,
+      "kind": "public_HTTP_GET",
+      "url": "https://underline.io/lecture/49565-adaptive-aggregation-weight-assignment-for-federated-learning-a-deep-reinforcement-learning-approach",
+      "response_file": "FEDWA_UNDERLINE_HTTP_RECEIPT.json",
+      "outcome": "HTTP200; raw HTML saved; embedded posterDocument URL/269457 bytes; target transcripts empty; no API follow-up"
+    },
+    {
+      "request": 9,
+      "kind": "web.open",
+      "url": "https://assets.underline.io/lecture/49565/poster_document/ab82b43fd5d98fdc68d8b39eb0b6269d.pdf",
+      "response_file": "WEB_05_EXTRACT.json",
+      "outcome": "tool unable to access URL; no paper text returned"
+    },
+    {
+      "request": 10,
+      "kind": "public_HTTP_GET",
+      "url": "https://assets.underline.io/lecture/49565/poster_document/ab82b43fd5d98fdc68d8b39eb0b6269d.pdf",
+      "response_file": "FEDWA_POSTER_HTTP_RECEIPT.json",
+      "outcome": "HTTP200 application/pdf; one-page original author poster recovered; no login/challenge bypass"
+    }
+  ],
+  "new_request_count": 10,
+  "web_tool_queries_or_open_actions": 8,
+  "ordinary_public_HTTP_GETs": 2,
+  "unique_direct_new_urls": [
+    "https://assets.underline.io/lecture/49565/poster_document/ab82b43fd5d98fdc68d8b39eb0b6269d.pdf",
+    "https://underline.io/lecture/49564-intelligent-communication-over-realistic-wireless-networks-in-multi-agent-cooperative-games",
+    "https://underline.io/lecture/49565-adaptive-aggregation-weight-assignment-for-federated-learning-a-deep-reinforcement-learning-approach"
+  ],
+  "intersection_with_109_prior_receipt_urls": [],
+  "old_hits_may_appear_in_search_results_but_were_not_opened": true,
+  "no_more_network_requests_authorized_by_this_delivery": true
+}

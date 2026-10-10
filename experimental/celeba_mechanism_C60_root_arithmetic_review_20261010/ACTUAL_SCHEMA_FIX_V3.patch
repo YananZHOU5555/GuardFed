@@ -1,0 +1,20 @@
+--- preserved/review_v2.py
++++ review_v3.py
+@@ -85,7 +85,7 @@
+     assert adopted['new_training'] == adopted['new_Full_inference'] == 0 and adopted['test_inference'] is False
+     records = read(snap/'records.json')['records']; tables = read(snap/'tables.json')
+     assert tables['primary_endpoint_selected'] is False and tables['final_test'] is False
+-    assert tables['new_inference'] == tables['new_training'] == bindings['new_inference'] == 0
++    assert tables['new_inference'] == handoff['training'] == bindings['new_inference'] == 0
+     by = {(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+     assert len(records) == len({r['id'] for r in records}) == len(by) == 120
+     assert set(by) == {(v,d,a,seed) for v in VARIANTS[:2] for d,a in CELLS for seed in range(91001,91011)}
+@@ -173,7 +173,7 @@
+     assert sha(handoff_path)==handoff_sha and sha(actual_seal)==delivery_sha
+     return dict(status='INDEPENDENT_C60_SIX_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION',
+         checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),actual_handoff_sha256=handoff_sha,
+-        actual_delivery_seal_sha256=delivery_sha,actual_members_verified=len(actual_files),source_prepared_seal_sha256=SOURCE_SEAL,
++        actual_delivery_seal_sha256=delivery_sha,actual_members_verified=len(actual_files),source_members_verified=len(source_files),source_prepared_seal_sha256=SOURCE_SEAL,
+         actual_C4_root_adoption_sha256=sha(adoption),source_connections=connections,
+         records_sha256=sha(snap/'records.json'),tables_sha256=sha(snap/'tables.json'),display_sha256=sha(snap/'TABLES.md'),
+         cross_scene_seed_first_sha256=sha(snap/'cross_scene_seed_first.json'),unique_records=120,paired_models=60,complete_scenes=6,

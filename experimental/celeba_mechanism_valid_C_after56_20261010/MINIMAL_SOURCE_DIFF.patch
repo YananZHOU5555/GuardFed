@@ -1,0 +1,320 @@
+--- sealed_C_after50/bridge.py
++++ C_after56/bridge.py
+@@ -16,10 +16,10 @@
+ 
+ sys.dont_write_bytecode = True
+ HERE = Path(__file__).resolve().parent
+-SCOPE = 'MECHANISM_TERMINAL_VALID_REPLAY_C_AFTER50'
+-ACCEPTED_IDS = ['minus_C_IID_Benign_seed91001', 'minus_C_IID_Benign_seed91002', 'minus_C_IID_Benign_seed91003', 'minus_C_IID_Benign_seed91004', 'minus_C_IID_Benign_seed91005', 'minus_C_IID_Benign_seed91006', 'minus_C_IID_Benign_seed91007', 'minus_C_IID_Benign_seed91008', 'minus_C_IID_Benign_seed91009', 'minus_C_IID_Benign_seed91010', 'minus_C_IID_F Flip_seed91001', 'minus_C_IID_F Flip_seed91002', 'minus_C_IID_F Flip_seed91003', 'minus_C_IID_F Flip_seed91004', 'minus_C_IID_F Flip_seed91005', 'minus_C_IID_F Flip_seed91006', 'minus_C_IID_F Flip_seed91007', 'minus_C_IID_F Flip_seed91008', 'minus_C_IID_F Flip_seed91009', 'minus_C_IID_F Flip_seed91010', 'minus_C_IID_FedSA_seed91001', 'minus_C_IID_FedSA_seed91002', 'minus_C_IID_FedSA_seed91003', 'minus_C_IID_FedSA_seed91004', 'minus_C_IID_FedSA_seed91005', 'minus_C_IID_FedSA_seed91006', 'minus_C_IID_FedSA_seed91007', 'minus_C_IID_FedSA_seed91008', 'minus_C_IID_FedSA_seed91009', 'minus_C_IID_FedSA_seed91010', 'minus_C_IID_S-DFA_seed91001', 'minus_C_IID_S-DFA_seed91002', 'minus_C_IID_S-DFA_seed91003', 'minus_C_IID_S-DFA_seed91004', 'minus_C_IID_S-DFA_seed91005', 'minus_C_IID_S-DFA_seed91006', 'minus_C_IID_S-DFA_seed91007', 'minus_C_IID_S-DFA_seed91008', 'minus_C_IID_S-DFA_seed91009', 'minus_C_IID_S-DFA_seed91010', 'minus_C_IID_Sp-DFA_seed91001', 'minus_C_IID_Sp-DFA_seed91002', 'minus_C_IID_Sp-DFA_seed91003', 'minus_C_IID_Sp-DFA_seed91004', 'minus_C_IID_Sp-DFA_seed91005', 'minus_C_IID_Sp-DFA_seed91006', 'minus_C_IID_Sp-DFA_seed91007', 'minus_C_IID_Sp-DFA_seed91008', 'minus_C_IID_Sp-DFA_seed91009', 'minus_C_IID_Sp-DFA_seed91010', 'minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006', 'minus_U_IID_Benign_seed91001', 'minus_U_IID_Benign_seed91002', 'minus_U_IID_Benign_seed91003', 'minus_U_IID_Benign_seed91004', 'minus_U_IID_Benign_seed91005', 'minus_U_IID_Benign_seed91006', 'minus_U_IID_Benign_seed91007', 'minus_U_IID_Benign_seed91008', 'minus_U_IID_Benign_seed91009', 'minus_U_IID_Benign_seed91010', 'minus_U_IID_F Flip_seed91001', 'minus_U_IID_F Flip_seed91002', 'minus_U_IID_F Flip_seed91003', 'minus_U_IID_F Flip_seed91004', 'minus_U_IID_F Flip_seed91005', 'minus_U_IID_F Flip_seed91006', 'minus_U_IID_F Flip_seed91007', 'minus_U_IID_F Flip_seed91008', 'minus_U_IID_F Flip_seed91009', 'minus_U_IID_F Flip_seed91010', 'minus_U_IID_FedSA_seed91001', 'minus_U_IID_FedSA_seed91002', 'minus_U_IID_FedSA_seed91003', 'minus_U_IID_FedSA_seed91004', 'minus_U_IID_FedSA_seed91005', 'minus_U_IID_FedSA_seed91006', 'minus_U_IID_FedSA_seed91007', 'minus_U_IID_FedSA_seed91008', 'minus_U_IID_FedSA_seed91009', 'minus_U_IID_FedSA_seed91010', 'minus_U_IID_S-DFA_seed91001', 'minus_U_IID_S-DFA_seed91002', 'minus_U_IID_S-DFA_seed91003', 'minus_U_IID_S-DFA_seed91004', 'minus_U_IID_S-DFA_seed91005', 'minus_U_IID_S-DFA_seed91006', 'minus_U_IID_S-DFA_seed91007', 'minus_U_IID_S-DFA_seed91008', 'minus_U_IID_S-DFA_seed91009', 'minus_U_IID_S-DFA_seed91010', 'minus_U_IID_Sp-DFA_seed91001', 'minus_U_IID_Sp-DFA_seed91002', 'minus_U_IID_Sp-DFA_seed91003', 'minus_U_IID_Sp-DFA_seed91004', 'minus_U_IID_Sp-DFA_seed91005', 'minus_U_IID_Sp-DFA_seed91006', 'minus_U_IID_Sp-DFA_seed91007', 'minus_U_IID_Sp-DFA_seed91008', 'minus_U_IID_Sp-DFA_seed91009', 'minus_U_IID_Sp-DFA_seed91010', 'minus_U_non-IID_Benign_seed91001', 'minus_U_non-IID_Benign_seed91002', 'minus_U_non-IID_Benign_seed91003', 'minus_U_non-IID_Benign_seed91004', 'minus_U_non-IID_Benign_seed91005', 'minus_U_non-IID_Benign_seed91006', 'minus_U_non-IID_Benign_seed91007', 'minus_U_non-IID_Benign_seed91008', 'minus_U_non-IID_Benign_seed91009', 'minus_U_non-IID_Benign_seed91010', 'minus_U_non-IID_F Flip_seed91001', 'minus_U_non-IID_F Flip_seed91002', 'minus_U_non-IID_F Flip_seed91003', 'minus_U_non-IID_F Flip_seed91004', 'minus_U_non-IID_F Flip_seed91005', 'minus_U_non-IID_F Flip_seed91006', 'minus_U_non-IID_F Flip_seed91007', 'minus_U_non-IID_F Flip_seed91008', 'minus_U_non-IID_F Flip_seed91009', 'minus_U_non-IID_F Flip_seed91010', 'minus_U_non-IID_FedSA_seed91001', 'minus_U_non-IID_FedSA_seed91002', 'minus_U_non-IID_FedSA_seed91003', 'minus_U_non-IID_FedSA_seed91004', 'minus_U_non-IID_FedSA_seed91005', 'minus_U_non-IID_FedSA_seed91006', 'minus_U_non-IID_FedSA_seed91007', 'minus_U_non-IID_FedSA_seed91008', 'minus_U_non-IID_FedSA_seed91009', 'minus_U_non-IID_FedSA_seed91010', 'minus_U_non-IID_S-DFA_seed91001', 'minus_U_non-IID_S-DFA_seed91002', 'minus_U_non-IID_S-DFA_seed91003', 'minus_U_non-IID_S-DFA_seed91004', 'minus_U_non-IID_S-DFA_seed91005', 'minus_U_non-IID_S-DFA_seed91006', 'minus_U_non-IID_S-DFA_seed91007', 'minus_U_non-IID_S-DFA_seed91008', 'minus_U_non-IID_S-DFA_seed91009', 'minus_U_non-IID_S-DFA_seed91010', 'minus_U_non-IID_Sp-DFA_seed91001', 'minus_U_non-IID_Sp-DFA_seed91002', 'minus_U_non-IID_Sp-DFA_seed91003', 'minus_U_non-IID_Sp-DFA_seed91004', 'minus_U_non-IID_Sp-DFA_seed91005', 'minus_U_non-IID_Sp-DFA_seed91006', 'minus_U_non-IID_Sp-DFA_seed91007', 'minus_U_non-IID_Sp-DFA_seed91008', 'minus_U_non-IID_Sp-DFA_seed91009', 'minus_U_non-IID_Sp-DFA_seed91010']
+-EXCLUDED_PRIOR_IDS = ['minus_C_IID_Benign_seed91001', 'minus_C_IID_Benign_seed91002', 'minus_C_IID_Benign_seed91003', 'minus_C_IID_Benign_seed91004', 'minus_C_IID_Benign_seed91005', 'minus_C_IID_Benign_seed91006', 'minus_C_IID_Benign_seed91007', 'minus_C_IID_Benign_seed91008', 'minus_C_IID_Benign_seed91009', 'minus_C_IID_Benign_seed91010', 'minus_C_IID_F Flip_seed91001', 'minus_C_IID_F Flip_seed91002', 'minus_C_IID_F Flip_seed91003', 'minus_C_IID_F Flip_seed91004', 'minus_C_IID_F Flip_seed91005', 'minus_C_IID_F Flip_seed91006', 'minus_C_IID_F Flip_seed91007', 'minus_C_IID_F Flip_seed91008', 'minus_C_IID_F Flip_seed91009', 'minus_C_IID_F Flip_seed91010', 'minus_C_IID_FedSA_seed91001', 'minus_C_IID_FedSA_seed91002', 'minus_C_IID_FedSA_seed91003', 'minus_C_IID_FedSA_seed91004', 'minus_C_IID_FedSA_seed91005', 'minus_C_IID_FedSA_seed91006', 'minus_C_IID_FedSA_seed91007', 'minus_C_IID_FedSA_seed91008', 'minus_C_IID_FedSA_seed91009', 'minus_C_IID_FedSA_seed91010', 'minus_C_IID_S-DFA_seed91001', 'minus_C_IID_S-DFA_seed91002', 'minus_C_IID_S-DFA_seed91003', 'minus_C_IID_S-DFA_seed91004', 'minus_C_IID_S-DFA_seed91005', 'minus_C_IID_S-DFA_seed91006', 'minus_C_IID_S-DFA_seed91007', 'minus_C_IID_S-DFA_seed91008', 'minus_C_IID_S-DFA_seed91009', 'minus_C_IID_S-DFA_seed91010', 'minus_C_IID_Sp-DFA_seed91001', 'minus_C_IID_Sp-DFA_seed91002', 'minus_C_IID_Sp-DFA_seed91003', 'minus_C_IID_Sp-DFA_seed91004', 'minus_C_IID_Sp-DFA_seed91005', 'minus_C_IID_Sp-DFA_seed91006', 'minus_C_IID_Sp-DFA_seed91007', 'minus_C_IID_Sp-DFA_seed91008', 'minus_C_IID_Sp-DFA_seed91009', 'minus_C_IID_Sp-DFA_seed91010', 'minus_U_IID_Benign_seed91001', 'minus_U_IID_Benign_seed91002', 'minus_U_IID_Benign_seed91003', 'minus_U_IID_Benign_seed91004', 'minus_U_IID_Benign_seed91005', 'minus_U_IID_Benign_seed91006', 'minus_U_IID_Benign_seed91007', 'minus_U_IID_Benign_seed91008', 'minus_U_IID_Benign_seed91009', 'minus_U_IID_Benign_seed91010', 'minus_U_IID_F Flip_seed91001', 'minus_U_IID_F Flip_seed91002', 'minus_U_IID_F Flip_seed91003', 'minus_U_IID_F Flip_seed91004', 'minus_U_IID_F Flip_seed91005', 'minus_U_IID_F Flip_seed91006', 'minus_U_IID_F Flip_seed91007', 'minus_U_IID_F Flip_seed91008', 'minus_U_IID_F Flip_seed91009', 'minus_U_IID_F Flip_seed91010', 'minus_U_IID_FedSA_seed91001', 'minus_U_IID_FedSA_seed91002', 'minus_U_IID_FedSA_seed91003', 'minus_U_IID_FedSA_seed91004', 'minus_U_IID_FedSA_seed91005', 'minus_U_IID_FedSA_seed91006', 'minus_U_IID_FedSA_seed91007', 'minus_U_IID_FedSA_seed91008', 'minus_U_IID_FedSA_seed91009', 'minus_U_IID_FedSA_seed91010', 'minus_U_IID_S-DFA_seed91001', 'minus_U_IID_S-DFA_seed91002', 'minus_U_IID_S-DFA_seed91003', 'minus_U_IID_S-DFA_seed91004', 'minus_U_IID_S-DFA_seed91005', 'minus_U_IID_S-DFA_seed91006', 'minus_U_IID_S-DFA_seed91007', 'minus_U_IID_S-DFA_seed91008', 'minus_U_IID_S-DFA_seed91009', 'minus_U_IID_S-DFA_seed91010', 'minus_U_IID_Sp-DFA_seed91001', 'minus_U_IID_Sp-DFA_seed91002', 'minus_U_IID_Sp-DFA_seed91003', 'minus_U_IID_Sp-DFA_seed91004', 'minus_U_IID_Sp-DFA_seed91005', 'minus_U_IID_Sp-DFA_seed91006', 'minus_U_IID_Sp-DFA_seed91007', 'minus_U_IID_Sp-DFA_seed91008', 'minus_U_IID_Sp-DFA_seed91009', 'minus_U_IID_Sp-DFA_seed91010', 'minus_U_non-IID_Benign_seed91001', 'minus_U_non-IID_Benign_seed91002', 'minus_U_non-IID_Benign_seed91003', 'minus_U_non-IID_Benign_seed91004', 'minus_U_non-IID_Benign_seed91005', 'minus_U_non-IID_Benign_seed91006', 'minus_U_non-IID_Benign_seed91007', 'minus_U_non-IID_Benign_seed91008', 'minus_U_non-IID_Benign_seed91009', 'minus_U_non-IID_Benign_seed91010', 'minus_U_non-IID_F Flip_seed91001', 'minus_U_non-IID_F Flip_seed91002', 'minus_U_non-IID_F Flip_seed91003', 'minus_U_non-IID_F Flip_seed91004', 'minus_U_non-IID_F Flip_seed91005', 'minus_U_non-IID_F Flip_seed91006', 'minus_U_non-IID_F Flip_seed91007', 'minus_U_non-IID_F Flip_seed91008', 'minus_U_non-IID_F Flip_seed91009', 'minus_U_non-IID_F Flip_seed91010', 'minus_U_non-IID_FedSA_seed91001', 'minus_U_non-IID_FedSA_seed91002', 'minus_U_non-IID_FedSA_seed91003', 'minus_U_non-IID_FedSA_seed91004', 'minus_U_non-IID_FedSA_seed91005', 'minus_U_non-IID_FedSA_seed91006', 'minus_U_non-IID_FedSA_seed91007', 'minus_U_non-IID_FedSA_seed91008', 'minus_U_non-IID_FedSA_seed91009', 'minus_U_non-IID_FedSA_seed91010', 'minus_U_non-IID_S-DFA_seed91001', 'minus_U_non-IID_S-DFA_seed91002', 'minus_U_non-IID_S-DFA_seed91003', 'minus_U_non-IID_S-DFA_seed91004', 'minus_U_non-IID_S-DFA_seed91005', 'minus_U_non-IID_S-DFA_seed91006', 'minus_U_non-IID_S-DFA_seed91007', 'minus_U_non-IID_S-DFA_seed91008', 'minus_U_non-IID_S-DFA_seed91009', 'minus_U_non-IID_S-DFA_seed91010', 'minus_U_non-IID_Sp-DFA_seed91001', 'minus_U_non-IID_Sp-DFA_seed91002', 'minus_U_non-IID_Sp-DFA_seed91003', 'minus_U_non-IID_Sp-DFA_seed91004', 'minus_U_non-IID_Sp-DFA_seed91005', 'minus_U_non-IID_Sp-DFA_seed91006', 'minus_U_non-IID_Sp-DFA_seed91007', 'minus_U_non-IID_Sp-DFA_seed91008', 'minus_U_non-IID_Sp-DFA_seed91009', 'minus_U_non-IID_Sp-DFA_seed91010']
+-REPLAY_IDS = ['minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006']
++SCOPE = 'MECHANISM_TERMINAL_VALID_REPLAY_C_AFTER56'
++ACCEPTED_IDS = ['minus_C_IID_Benign_seed91001', 'minus_C_IID_Benign_seed91002', 'minus_C_IID_Benign_seed91003', 'minus_C_IID_Benign_seed91004', 'minus_C_IID_Benign_seed91005', 'minus_C_IID_Benign_seed91006', 'minus_C_IID_Benign_seed91007', 'minus_C_IID_Benign_seed91008', 'minus_C_IID_Benign_seed91009', 'minus_C_IID_Benign_seed91010', 'minus_C_IID_F Flip_seed91001', 'minus_C_IID_F Flip_seed91002', 'minus_C_IID_F Flip_seed91003', 'minus_C_IID_F Flip_seed91004', 'minus_C_IID_F Flip_seed91005', 'minus_C_IID_F Flip_seed91006', 'minus_C_IID_F Flip_seed91007', 'minus_C_IID_F Flip_seed91008', 'minus_C_IID_F Flip_seed91009', 'minus_C_IID_F Flip_seed91010', 'minus_C_IID_FedSA_seed91001', 'minus_C_IID_FedSA_seed91002', 'minus_C_IID_FedSA_seed91003', 'minus_C_IID_FedSA_seed91004', 'minus_C_IID_FedSA_seed91005', 'minus_C_IID_FedSA_seed91006', 'minus_C_IID_FedSA_seed91007', 'minus_C_IID_FedSA_seed91008', 'minus_C_IID_FedSA_seed91009', 'minus_C_IID_FedSA_seed91010', 'minus_C_IID_S-DFA_seed91001', 'minus_C_IID_S-DFA_seed91002', 'minus_C_IID_S-DFA_seed91003', 'minus_C_IID_S-DFA_seed91004', 'minus_C_IID_S-DFA_seed91005', 'minus_C_IID_S-DFA_seed91006', 'minus_C_IID_S-DFA_seed91007', 'minus_C_IID_S-DFA_seed91008', 'minus_C_IID_S-DFA_seed91009', 'minus_C_IID_S-DFA_seed91010', 'minus_C_IID_Sp-DFA_seed91001', 'minus_C_IID_Sp-DFA_seed91002', 'minus_C_IID_Sp-DFA_seed91003', 'minus_C_IID_Sp-DFA_seed91004', 'minus_C_IID_Sp-DFA_seed91005', 'minus_C_IID_Sp-DFA_seed91006', 'minus_C_IID_Sp-DFA_seed91007', 'minus_C_IID_Sp-DFA_seed91008', 'minus_C_IID_Sp-DFA_seed91009', 'minus_C_IID_Sp-DFA_seed91010', 'minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006', 'minus_C_non-IID_Benign_seed91007', 'minus_C_non-IID_Benign_seed91008', 'minus_C_non-IID_Benign_seed91009', 'minus_C_non-IID_Benign_seed91010', 'minus_U_IID_Benign_seed91001', 'minus_U_IID_Benign_seed91002', 'minus_U_IID_Benign_seed91003', 'minus_U_IID_Benign_seed91004', 'minus_U_IID_Benign_seed91005', 'minus_U_IID_Benign_seed91006', 'minus_U_IID_Benign_seed91007', 'minus_U_IID_Benign_seed91008', 'minus_U_IID_Benign_seed91009', 'minus_U_IID_Benign_seed91010', 'minus_U_IID_F Flip_seed91001', 'minus_U_IID_F Flip_seed91002', 'minus_U_IID_F Flip_seed91003', 'minus_U_IID_F Flip_seed91004', 'minus_U_IID_F Flip_seed91005', 'minus_U_IID_F Flip_seed91006', 'minus_U_IID_F Flip_seed91007', 'minus_U_IID_F Flip_seed91008', 'minus_U_IID_F Flip_seed91009', 'minus_U_IID_F Flip_seed91010', 'minus_U_IID_FedSA_seed91001', 'minus_U_IID_FedSA_seed91002', 'minus_U_IID_FedSA_seed91003', 'minus_U_IID_FedSA_seed91004', 'minus_U_IID_FedSA_seed91005', 'minus_U_IID_FedSA_seed91006', 'minus_U_IID_FedSA_seed91007', 'minus_U_IID_FedSA_seed91008', 'minus_U_IID_FedSA_seed91009', 'minus_U_IID_FedSA_seed91010', 'minus_U_IID_S-DFA_seed91001', 'minus_U_IID_S-DFA_seed91002', 'minus_U_IID_S-DFA_seed91003', 'minus_U_IID_S-DFA_seed91004', 'minus_U_IID_S-DFA_seed91005', 'minus_U_IID_S-DFA_seed91006', 'minus_U_IID_S-DFA_seed91007', 'minus_U_IID_S-DFA_seed91008', 'minus_U_IID_S-DFA_seed91009', 'minus_U_IID_S-DFA_seed91010', 'minus_U_IID_Sp-DFA_seed91001', 'minus_U_IID_Sp-DFA_seed91002', 'minus_U_IID_Sp-DFA_seed91003', 'minus_U_IID_Sp-DFA_seed91004', 'minus_U_IID_Sp-DFA_seed91005', 'minus_U_IID_Sp-DFA_seed91006', 'minus_U_IID_Sp-DFA_seed91007', 'minus_U_IID_Sp-DFA_seed91008', 'minus_U_IID_Sp-DFA_seed91009', 'minus_U_IID_Sp-DFA_seed91010', 'minus_U_non-IID_Benign_seed91001', 'minus_U_non-IID_Benign_seed91002', 'minus_U_non-IID_Benign_seed91003', 'minus_U_non-IID_Benign_seed91004', 'minus_U_non-IID_Benign_seed91005', 'minus_U_non-IID_Benign_seed91006', 'minus_U_non-IID_Benign_seed91007', 'minus_U_non-IID_Benign_seed91008', 'minus_U_non-IID_Benign_seed91009', 'minus_U_non-IID_Benign_seed91010', 'minus_U_non-IID_F Flip_seed91001', 'minus_U_non-IID_F Flip_seed91002', 'minus_U_non-IID_F Flip_seed91003', 'minus_U_non-IID_F Flip_seed91004', 'minus_U_non-IID_F Flip_seed91005', 'minus_U_non-IID_F Flip_seed91006', 'minus_U_non-IID_F Flip_seed91007', 'minus_U_non-IID_F Flip_seed91008', 'minus_U_non-IID_F Flip_seed91009', 'minus_U_non-IID_F Flip_seed91010', 'minus_U_non-IID_FedSA_seed91001', 'minus_U_non-IID_FedSA_seed91002', 'minus_U_non-IID_FedSA_seed91003', 'minus_U_non-IID_FedSA_seed91004', 'minus_U_non-IID_FedSA_seed91005', 'minus_U_non-IID_FedSA_seed91006', 'minus_U_non-IID_FedSA_seed91007', 'minus_U_non-IID_FedSA_seed91008', 'minus_U_non-IID_FedSA_seed91009', 'minus_U_non-IID_FedSA_seed91010', 'minus_U_non-IID_S-DFA_seed91001', 'minus_U_non-IID_S-DFA_seed91002', 'minus_U_non-IID_S-DFA_seed91003', 'minus_U_non-IID_S-DFA_seed91004', 'minus_U_non-IID_S-DFA_seed91005', 'minus_U_non-IID_S-DFA_seed91006', 'minus_U_non-IID_S-DFA_seed91007', 'minus_U_non-IID_S-DFA_seed91008', 'minus_U_non-IID_S-DFA_seed91009', 'minus_U_non-IID_S-DFA_seed91010', 'minus_U_non-IID_Sp-DFA_seed91001', 'minus_U_non-IID_Sp-DFA_seed91002', 'minus_U_non-IID_Sp-DFA_seed91003', 'minus_U_non-IID_Sp-DFA_seed91004', 'minus_U_non-IID_Sp-DFA_seed91005', 'minus_U_non-IID_Sp-DFA_seed91006', 'minus_U_non-IID_Sp-DFA_seed91007', 'minus_U_non-IID_Sp-DFA_seed91008', 'minus_U_non-IID_Sp-DFA_seed91009', 'minus_U_non-IID_Sp-DFA_seed91010']
++EXCLUDED_PRIOR_IDS = ['minus_C_IID_Benign_seed91001', 'minus_C_IID_Benign_seed91002', 'minus_C_IID_Benign_seed91003', 'minus_C_IID_Benign_seed91004', 'minus_C_IID_Benign_seed91005', 'minus_C_IID_Benign_seed91006', 'minus_C_IID_Benign_seed91007', 'minus_C_IID_Benign_seed91008', 'minus_C_IID_Benign_seed91009', 'minus_C_IID_Benign_seed91010', 'minus_C_IID_F Flip_seed91001', 'minus_C_IID_F Flip_seed91002', 'minus_C_IID_F Flip_seed91003', 'minus_C_IID_F Flip_seed91004', 'minus_C_IID_F Flip_seed91005', 'minus_C_IID_F Flip_seed91006', 'minus_C_IID_F Flip_seed91007', 'minus_C_IID_F Flip_seed91008', 'minus_C_IID_F Flip_seed91009', 'minus_C_IID_F Flip_seed91010', 'minus_C_IID_FedSA_seed91001', 'minus_C_IID_FedSA_seed91002', 'minus_C_IID_FedSA_seed91003', 'minus_C_IID_FedSA_seed91004', 'minus_C_IID_FedSA_seed91005', 'minus_C_IID_FedSA_seed91006', 'minus_C_IID_FedSA_seed91007', 'minus_C_IID_FedSA_seed91008', 'minus_C_IID_FedSA_seed91009', 'minus_C_IID_FedSA_seed91010', 'minus_C_IID_S-DFA_seed91001', 'minus_C_IID_S-DFA_seed91002', 'minus_C_IID_S-DFA_seed91003', 'minus_C_IID_S-DFA_seed91004', 'minus_C_IID_S-DFA_seed91005', 'minus_C_IID_S-DFA_seed91006', 'minus_C_IID_S-DFA_seed91007', 'minus_C_IID_S-DFA_seed91008', 'minus_C_IID_S-DFA_seed91009', 'minus_C_IID_S-DFA_seed91010', 'minus_C_IID_Sp-DFA_seed91001', 'minus_C_IID_Sp-DFA_seed91002', 'minus_C_IID_Sp-DFA_seed91003', 'minus_C_IID_Sp-DFA_seed91004', 'minus_C_IID_Sp-DFA_seed91005', 'minus_C_IID_Sp-DFA_seed91006', 'minus_C_IID_Sp-DFA_seed91007', 'minus_C_IID_Sp-DFA_seed91008', 'minus_C_IID_Sp-DFA_seed91009', 'minus_C_IID_Sp-DFA_seed91010', 'minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006', 'minus_U_IID_Benign_seed91001', 'minus_U_IID_Benign_seed91002', 'minus_U_IID_Benign_seed91003', 'minus_U_IID_Benign_seed91004', 'minus_U_IID_Benign_seed91005', 'minus_U_IID_Benign_seed91006', 'minus_U_IID_Benign_seed91007', 'minus_U_IID_Benign_seed91008', 'minus_U_IID_Benign_seed91009', 'minus_U_IID_Benign_seed91010', 'minus_U_IID_F Flip_seed91001', 'minus_U_IID_F Flip_seed91002', 'minus_U_IID_F Flip_seed91003', 'minus_U_IID_F Flip_seed91004', 'minus_U_IID_F Flip_seed91005', 'minus_U_IID_F Flip_seed91006', 'minus_U_IID_F Flip_seed91007', 'minus_U_IID_F Flip_seed91008', 'minus_U_IID_F Flip_seed91009', 'minus_U_IID_F Flip_seed91010', 'minus_U_IID_FedSA_seed91001', 'minus_U_IID_FedSA_seed91002', 'minus_U_IID_FedSA_seed91003', 'minus_U_IID_FedSA_seed91004', 'minus_U_IID_FedSA_seed91005', 'minus_U_IID_FedSA_seed91006', 'minus_U_IID_FedSA_seed91007', 'minus_U_IID_FedSA_seed91008', 'minus_U_IID_FedSA_seed91009', 'minus_U_IID_FedSA_seed91010', 'minus_U_IID_S-DFA_seed91001', 'minus_U_IID_S-DFA_seed91002', 'minus_U_IID_S-DFA_seed91003', 'minus_U_IID_S-DFA_seed91004', 'minus_U_IID_S-DFA_seed91005', 'minus_U_IID_S-DFA_seed91006', 'minus_U_IID_S-DFA_seed91007', 'minus_U_IID_S-DFA_seed91008', 'minus_U_IID_S-DFA_seed91009', 'minus_U_IID_S-DFA_seed91010', 'minus_U_IID_Sp-DFA_seed91001', 'minus_U_IID_Sp-DFA_seed91002', 'minus_U_IID_Sp-DFA_seed91003', 'minus_U_IID_Sp-DFA_seed91004', 'minus_U_IID_Sp-DFA_seed91005', 'minus_U_IID_Sp-DFA_seed91006', 'minus_U_IID_Sp-DFA_seed91007', 'minus_U_IID_Sp-DFA_seed91008', 'minus_U_IID_Sp-DFA_seed91009', 'minus_U_IID_Sp-DFA_seed91010', 'minus_U_non-IID_Benign_seed91001', 'minus_U_non-IID_Benign_seed91002', 'minus_U_non-IID_Benign_seed91003', 'minus_U_non-IID_Benign_seed91004', 'minus_U_non-IID_Benign_seed91005', 'minus_U_non-IID_Benign_seed91006', 'minus_U_non-IID_Benign_seed91007', 'minus_U_non-IID_Benign_seed91008', 'minus_U_non-IID_Benign_seed91009', 'minus_U_non-IID_Benign_seed91010', 'minus_U_non-IID_F Flip_seed91001', 'minus_U_non-IID_F Flip_seed91002', 'minus_U_non-IID_F Flip_seed91003', 'minus_U_non-IID_F Flip_seed91004', 'minus_U_non-IID_F Flip_seed91005', 'minus_U_non-IID_F Flip_seed91006', 'minus_U_non-IID_F Flip_seed91007', 'minus_U_non-IID_F Flip_seed91008', 'minus_U_non-IID_F Flip_seed91009', 'minus_U_non-IID_F Flip_seed91010', 'minus_U_non-IID_FedSA_seed91001', 'minus_U_non-IID_FedSA_seed91002', 'minus_U_non-IID_FedSA_seed91003', 'minus_U_non-IID_FedSA_seed91004', 'minus_U_non-IID_FedSA_seed91005', 'minus_U_non-IID_FedSA_seed91006', 'minus_U_non-IID_FedSA_seed91007', 'minus_U_non-IID_FedSA_seed91008', 'minus_U_non-IID_FedSA_seed91009', 'minus_U_non-IID_FedSA_seed91010', 'minus_U_non-IID_S-DFA_seed91001', 'minus_U_non-IID_S-DFA_seed91002', 'minus_U_non-IID_S-DFA_seed91003', 'minus_U_non-IID_S-DFA_seed91004', 'minus_U_non-IID_S-DFA_seed91005', 'minus_U_non-IID_S-DFA_seed91006', 'minus_U_non-IID_S-DFA_seed91007', 'minus_U_non-IID_S-DFA_seed91008', 'minus_U_non-IID_S-DFA_seed91009', 'minus_U_non-IID_S-DFA_seed91010', 'minus_U_non-IID_Sp-DFA_seed91001', 'minus_U_non-IID_Sp-DFA_seed91002', 'minus_U_non-IID_Sp-DFA_seed91003', 'minus_U_non-IID_Sp-DFA_seed91004', 'minus_U_non-IID_Sp-DFA_seed91005', 'minus_U_non-IID_Sp-DFA_seed91006', 'minus_U_non-IID_Sp-DFA_seed91007', 'minus_U_non-IID_Sp-DFA_seed91008', 'minus_U_non-IID_Sp-DFA_seed91009', 'minus_U_non-IID_Sp-DFA_seed91010']
++REPLAY_IDS = ['minus_C_non-IID_Benign_seed91007', 'minus_C_non-IID_Benign_seed91008', 'minus_C_non-IID_Benign_seed91009', 'minus_C_non-IID_Benign_seed91010']
+ TOLERANCE = 1e-12
+ VIEWS = ['native', 'raw', 'shared_calibration']
+ BASELINE_INVENTORY_SHA = '3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd'
+@@ -28,7 +28,7 @@
+ EVALUATOR_SHA = '805eedf1fb08137cd86a543a80c83b9527e5c8937be02f7d2dca83a33b86e04c'
+ EVIDENCE_V4_SHA = '3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef'
+ MANIFEST_SHA = '498ed0e033ef6eb5532286820ec987af3b44ca6251d8a84c42ce9c3e5ff5ab2d'
+-INSPECTION_SHA = '9a56b5533c05727dc726fa013e3fdd9df035ec3be633747fff13477f55d83d44'
++INSPECTION_SHA = 'be2f7e00ef45349bd57050938195c5972c2688dd1b8b2e62706fdce4c6d6c6b3'
+ CORE_SHA = 'cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed'
+ TRAIN_IDS_SHA = '46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99'
+ VALID_IDS_SHA = '64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf'
+@@ -122,11 +122,11 @@
+     require(len(refs) == 100 and len({r['id'] for r in refs}) == 100 and {r['id'] for r in refs} == set(full), 'Duplicate/missing Full reference')
+     require(all(r == full_reference(full[r['id']]) for r in refs), 'Full reference differs from accepted baseline model/data')
+     records = inventory['records']
+-    require(len(records) == 156 and len({r['id'] for r in records}) == 156, 'This inventory contains exactly156 actual accepted terminals')
+-    require(set(r['id'] for r in records) == set(ACCEPTED_IDS), 'Actual accepted156 snapshot changed')
+-    require(inventory['excluded_prior_replay_ids'] == EXCLUDED_PRIOR_IDS and inventory['selected_replay_ids'] == REPLAY_IDS, 'Excluded-prior150/selected6 boundary changed')
++    require(len(records) == 160 and len({r['id'] for r in records}) == 160, 'This inventory contains exactly160 actual accepted terminals')
++    require(set(r['id'] for r in records) == set(ACCEPTED_IDS), 'Actual accepted160 snapshot changed')
++    require(inventory['excluded_prior_replay_ids'] == EXCLUDED_PRIOR_IDS and inventory['selected_replay_ids'] == REPLAY_IDS, 'Excluded-prior156/selected4 boundary changed')
+     require(not set(full).intersection(r['id'] for r in records), 'Full may not enter a new replay cohort')
+-    require(all(r['variant'] in ('minus_U', 'minus_C') and r['distribution'] in DISTRIBUTIONS for r in records), 'Only adopted U100+C50 plus exact six C terminals; no other scope')
++    require(all(r['variant'] in ('minus_U', 'minus_C') and r['distribution'] in DISTRIBUTIONS for r in records), 'Only adopted U100+C56 plus exact four C terminals; no other scope')
+     paired = {cell(r): r for r in full.values()}
+     for r in records:
+         validate_variant_metadata(r)
+@@ -161,7 +161,7 @@
+         require(all(files.get(r['runtime_paths'][k]) == r[k]['sha256'] for k in ('checkpoint', 'result', 'raw_job')), 'Original accepted file identity changed')
+         require(r['raw_job']['sha256'] == r['manifest_entry']['job_sha256'], 'Manifest job bytes differ')
+     missing = inventory['pending_new_ids_no_checkpoint']
+-    require(len(missing) == len(set(missing)) == 644 and not set(missing).intersection(r['id'] for r in records), 'Invalid pending cohort')
++    require(len(missing) == len(set(missing)) == 640 and not set(missing).intersection(r['id'] for r in records), 'Invalid pending cohort')
+     expected_ids = {f'{v}_{d}_{a}_seed{s}' for v, d, a, s in itertools.product(VARIANTS[1:], DISTRIBUTIONS, ATTACKS, range(91001, 91011))}
+     require(set(missing) | {r['id'] for r in records} == expected_ids, 'Missing/foreign planned mechanism ID')
+     require(inventory['new_image_inference_performed'] is False and inventory['full_weights_repacked'] == 0, 'Preparation cannot claim inference or copy Full weights')
+@@ -173,7 +173,7 @@
+             'No bounded mechanism valid replay approval')
+     require(approval.get('inventory_sha256') == inventory_sha and approval.get('bridge_sha256') == bridge_sha, 'Approval binds another inventory/source')
+     ids = approval.get('selected_ids', [])
+-    require(ids == REPLAY_IDS and len(ids) == len(set(ids)) == 6 and selected_id in ids, 'Approval contains pending/Full/foreign/duplicate IDs')
++    require(ids == REPLAY_IDS and len(ids) == len(set(ids)) == 4 and selected_id in ids, 'Approval contains pending/Full/foreign/duplicate IDs')
+     require(approval.get('device') == 'cpu' and approval.get('compute_threads') == 8 and approval.get('max_processes') == 1, 'Only one eight-thread CPU worker can be prepared here')
+     cpus = approval.get('allowed_cpus', [])
+     require(cpus == list(range(112, 120)), 'Explicit8 CPU budget required')
+--- sealed_C_after50/batch.py
++++ C_after56/batch.py
+@@ -1,4 +1,4 @@
+-"""Prepared exact6-terminal valid replay outer lifecycle; sealed bridge science reused."""
++"""Prepared exact4-terminal valid replay outer lifecycle; sealed bridge science reused."""
+ import argparse
+ import hashlib
+ import importlib.util
+@@ -11,15 +11,15 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ PREPARED = HERE.parent
+-REMOTE = Path('/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010/execution_candidate')
++REMOTE = Path('/workspace/guardfed_checks/celeba_mechanism_valid_C_after56_20261010/execution_candidate')
+ REPO = Path('/workspace/GuardFed-celeba-expanded')
+ CPUS = list(range(112, 120))
+-BRIDGE_SHA = 'cb2ddaed395f93d67330ad4f60235d129470e8f1551134c0ba99dee47643f27c'
+-INVENTORY_SHA = '2131f2386cb3a851f990d6ed4baa38f5ea90c9acadcd62fad50d24bf97277bcd'
+-OLD_SEAL_SHA = '6e79e65b34a1ff78628884993aa6089fdc8c5d07951ed97ce016ad9b3ca6aaf0'
+-SELECTED = ['minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006']
+-
+-BINDINGS_SHA = '47f1fd9e310dd9a27bf788e3c5a3806c38c92cd403a11d9638c2818e7952f651'
++BRIDGE_SHA = '5ebb0d4c2376ef436f9eb8b3d91cf70b93120b3930518a1633cd6341d76e72fa'
++INVENTORY_SHA = '302dd45e9f05c646671d31d26775607af7a4fe70876fa1e60643939f972742f4'
++OLD_SEAL_SHA = '2095ab384a7844355fc92453dbfa5d2922f88f378838e7b7eda2524578f3bbd6'
++SELECTED = ['minus_C_non-IID_Benign_seed91007', 'minus_C_non-IID_Benign_seed91008', 'minus_C_non-IID_Benign_seed91009', 'minus_C_non-IID_Benign_seed91010']
++
++BINDINGS_SHA = '802245c05e30b601de11228c70ef47a63e6a88ed8ac208cc86efa50b003af972'
+ DEPENDENCIES = {'v2': '/workspace/guardfed_checks/celeba_final_valid_replay_20261009/replay.py', 'v3': '/workspace/guardfed_checks/celeba_final_valid_replay_20261009/v3/replay_v3.py', 'evaluator': '/workspace/guardfed_checks/celeba_final_valid_replay_20261009/inputs/evaluator.py', 'evidence_v4': '/workspace/guardfed_checks/server_reactivation_20261009/evidence_v4.py', 'baseline_inventory': '/workspace/guardfed_checks/server_reactivation_20261009/model_inventory.json', 'manifest': '/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/manifest.json', 'protocol': '/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/PROTOCOL.md'}
+ SOURCE_REVIEW_SHA = 'b1ff1fad6f5fe08cebec3008b6df861396c2e11c289b8f05815debb78dc3ed14'
+ 
+@@ -64,7 +64,7 @@
+             require(digest(p)==row['sha256'] and p.stat().st_size==row['size'], 'Execution source changed')
+     scope=read(PREPARED / 'SCOPE.json')
+     require(scope['selected_ids']==SELECTED and scope['inventory_sha256']==INVENTORY_SHA
+-        and scope['bridge_sha256']==BRIDGE_SHA, 'Only prepared6 frozen identities')
++        and scope['bridge_sha256']==BRIDGE_SHA, 'Only prepared4 frozen identities')
+     require(digest(HERE / 'RUNTIME_BINDINGS.json') == BINDINGS_SHA, 'Runtime binding bytes changed')
+     return bind_scope(scope, read(HERE / 'RUNTIME_BINDINGS.json'))
+ 
+@@ -74,7 +74,7 @@
+     require(not set(bindings).intersection(scope), 'Runtime binding may not replace science scope fields')
+     require(bindings['outputs'] == {i: (REMOTE.parent / 'runs' / i).as_posix() for i in SELECTED}
+             and bindings['dependency_paths'] == DEPENDENCIES, 'Exact namespace/original dependency paths required')
+-    require(len(scope['excluded_prior_ids']) == 150 and not set(SELECTED).intersection(scope['excluded_prior_ids']), 'Prior150 must remain excluded')
++    require(len(scope['excluded_prior_ids']) == 156 and not set(SELECTED).intersection(scope['excluded_prior_ids']), 'Prior156 must remain excluded')
+     return dict(scope, **bindings)
+ 
+ 
+@@ -83,19 +83,19 @@
+     require(isinstance(ROOT_APPROVAL_SHA, str) and len(ROOT_APPROVAL_SHA) == 64 and set(ROOT_APPROVAL_SHA) <= set('0123456789abcdef'), 'External parent approval must bind an actual root review SHA')
+     require(digest(HERE / 'ROOT_APPROVED.json') == ROOT_APPROVAL_SHA, 'Root approval changed')
+     root=read(HERE / 'ROOT_APPROVED.json')
+-    require(root['status']=='ROOT_REVIEW_PASS_BOUNDED_C_AFTER50_VALID_REPLAY' and root['execution_authorized_within_existing_user_request'] is True
++    require(root['status']=='ROOT_REVIEW_PASS_BOUNDED_C_AFTER56_VALID_REPLAY' and root['execution_authorized_within_existing_user_request'] is True
+         and root['source_seal_sha256']==OLD_SEAL_SHA and root['scope_sha256']==digest(PREPARED/'SCOPE.json')
+         and root['execution_seal_sha256']==seal_sha
+         and root['inventory_sha256']==INVENTORY_SHA and root['bridge_sha256']==BRIDGE_SHA and root['selected_ids']==SELECTED,
+-        'Exact reviewed6 root authority required')
++        'Exact reviewed4 root authority required')
+     require(root.get('source_only_root_review_sha256') == SOURCE_REVIEW_SHA
+-            and root.get('closed150_must_not_replay') == scope['excluded_prior_ids'], 'Root reviewed source/prior150 boundary differs')
+-    require(approval.get('status')=='APPROVED_C_AFTER50_MECHANISM_VALID_REPLAY_ONLY'
++            and root.get('closed156_must_not_replay') == scope['excluded_prior_ids'], 'Root reviewed source/prior156 boundary differs')
++    require(approval.get('status')=='APPROVED_C_AFTER56_MECHANISM_VALID_REPLAY_ONLY'
+         and approval.get('root_approval_sha256')==ROOT_APPROVAL_SHA and approval.get('execution_seal_sha256')==seal_sha,
+         'Execution authority/seal changed')
+     require(approval.get('scope_sha256')==scope_sha and approval.get('selected_ids')==SELECTED
+         and approval.get('allowed_cpus')==CPUS and approval.get('compute_threads')==8 and approval.get('max_processes')==1,
+-        'Only6 IDs, one8-thread worker')
++        'Only4 IDs, one8-thread worker')
+     require(approval.get('outputs')=={i:(REMOTE/'runs'/i).as_posix() for i in SELECTED}
+         and approval.get('original_scope_outputs')==scope['outputs'] and approval.get('dependency_paths')==scope['dependency_paths'],
+         'Exact new owned output mapping/dependencies required')
+@@ -132,7 +132,7 @@
+ 
+ def worker(parent_path, parent_sha, identity, only_strict=False):
+     scope, parent = approved(parent_path, parent_sha)
+-    require(identity in SELECTED, 'Foreign/pending/Full or any closed150 ID refused')
++    require(identity in SELECTED, 'Foreign/pending/Full or any closed156 ID refused')
+     runtime_policy()
+     child_path = HERE / 'approvals' / (identity + '.json')
+     child = read(child_path)
+@@ -147,7 +147,7 @@
+     import fcntl
+     lock = (HERE / 'compute_worker.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+     bridge = load('sealed_original_mechanism_bridge', PREPARED / 'bridge.py', BRIDGE_SHA)
+-    runtime = bridge.bind_runtime(PREPARED / 'inventory_actual156_Full100refs.json', INVENTORY_SHA,
++    runtime = bridge.bind_runtime(PREPARED / 'inventory_actual160_Full100refs.json', INVENTORY_SHA,
+         child['dependency_paths'], REPO, identity, child_path, digest(child_path))
+     if not only_strict:
+         runtime['replay_one'](output, wall_seconds=1800)
+@@ -176,7 +176,7 @@
+     completed = []
+     try:
+         for identity in SELECTED:
+-            child = dict(status='APPROVED_BOUNDED_MECHANISM_VALID_REPLAY_ONLY', scope='MECHANISM_TERMINAL_VALID_REPLAY_C_AFTER50',
++            child = dict(status='APPROVED_BOUNDED_MECHANISM_VALID_REPLAY_ONLY', scope='MECHANISM_TERMINAL_VALID_REPLAY_C_AFTER56',
+                 inventory_sha256=INVENTORY_SHA, bridge_sha256=BRIDGE_SHA, selected_ids=SELECTED, selected_id=identity, device='cpu',
+                 compute_threads=8, max_processes=1, allowed_cpus=CPUS, target_split='valid', native_tolerance=1e-12,
+                 final_test_dispatch=False, output=parent['outputs'][identity], dependency_paths=parent['dependency_paths'],
+@@ -191,7 +191,7 @@
+                 strict_acceptance_sha256=digest(output / 'strict_acceptance.json'),
+                 native_difference=strict['native_comparison']['max_abs_difference']))
+             save_new(HERE / ('completed_' + identity + '.json'), completed[-1])
+-        save_new(HERE / 'batch_complete.json', dict(status='C_AFTER50_VALID_REPLAYS_STRICT_ACCEPTED_BACKUP_PENDING', records=completed,
++        save_new(HERE / 'batch_complete.json', dict(status='C_AFTER56_VALID_REPLAYS_STRICT_ACCEPTED_BACKUP_PENDING', records=completed,
+             new_training=0, new_Full_inference=0, final_protocol_status='PREPARED_NOT_FROZEN',
+             excluded_already_accepted=read(PREPARED/'SCOPE.json')['excluded_prior_ids'], resources_after=resource_snapshot()))
+     except BaseException as error:
+@@ -206,7 +206,7 @@
+     parser.add_argument('--approved', type=Path); parser.add_argument('--approved-sha256'); parser.add_argument('--id')
+     args = parser.parse_args()
+     if args.action == 'inspect':
+-        identities(); print('PREPARED_C_AFTER50 accepted-terminal valid replays; no inference or training')
++        identities(); print('PREPARED_C_AFTER56 accepted-terminal valid replays; no inference or training')
+     elif args.action == 'manage':
+         manage(args.approved, args.approved_sha256)
+     else:
+--- sealed_C_after50/install_once.py
++++ C_after56/install_once.py
+@@ -1,4 +1,4 @@
+-"""One-shot, reviewed6 CPU replay installation; no restart/retry path."""
++"""One-shot, reviewed4 CPU replay installation; no restart/retry path."""
+ import argparse,hashlib,json,math,os,shutil,socket,subprocess,sys,time,traceback
+ from pathlib import Path
+ from datetime import datetime,timezone
+@@ -6,27 +6,27 @@
+ sys.dont_write_bytecode=True
+ sys.path.insert(0,str(HERE))
+ import batch
+-SERVICE='guardfed_celeba_mechanism_valid_C_after50'
++SERVICE='guardfed_celeba_mechanism_valid_C_after56'
+ 
+ # These three newer roles are not counted by the unchanged legacy classifier.
+ RESERVATION = dict(recovery_GPU_worker=1, recovery_coordinator=1, Hybrid_GPU=1)
+ 
+ 
+ def prior_completed_service_stopped():
+-    service = 'guardfed_celeba_mechanism_valid_C_after47'
+-    original_batch = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after47_20261010/execution_candidate/batch.py'
++    service = 'guardfed_celeba_mechanism_valid_C_after50'
++    original_batch = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010/execution_candidate/batch.py'
+     result = subprocess.run(['supervisorctl', 'status', service], capture_output=True, text=True)
+     words = result.stdout.split()
+     batch.require(len(words) >= 2 and words[0] == service and words[1] == 'EXITED',
+-        'Previously accepted C after47 service must be EXITED: ' + result.stdout + result.stderr)
++        'Previously accepted C after50 service must be EXITED: ' + result.stdout + result.stderr)
+     for proc in Path('/proc').iterdir():
+         if not proc.name.isdigit(): continue
+         try:
+             argv = [s.decode(errors='replace') for s in (proc/'cmdline').read_bytes().split(b'\0') if s]
+-            batch.require(original_batch not in argv, 'Previously accepted C after47 worker remains: ' + proc.name)
++            batch.require(original_batch not in argv, 'Previously accepted C after50 worker remains: ' + proc.name)
+         except (FileNotFoundError, ProcessLookupError): continue
+     return dict(service=service, status=result.stdout.strip(), supervisor_returncode=result.returncode, original_batch_processes=0,
+-        prior_success_root_adoption_sha256='3859d49fb57c3ecc4b23244012431224d255b02590dab221b2d6464e28aa7dd8')
++        prior_success_root_adoption_sha256='a7231a724ea3a4d3443bbe196137b0c72db025cbc98d3ac66842334ab0fe9080')
+ 
+ 
+ def budget_snapshot(snapshot):
+@@ -75,13 +75,13 @@
+     cpu_before=fresh_cpu_scan()
+     from resource_extra import resource_snapshot
+     before=budget_snapshot(resource_snapshot())
+-    rows=batch.read(batch.PREPARED/'inventory_actual156_Full100refs.json')['records']
++    rows=batch.read(batch.PREPARED/'inventory_actual160_Full100refs.json')['records']
+     chosen=[r for r in rows if r['id'] in batch.SELECTED]
+-    batch.require(len(chosen)==6,'Wrong exact cohort')
++    batch.require(len(chosen)==4,'Wrong exact cohort')
+     bridge=batch.load('preflight_sealed_bridge',batch.PREPARED/'bridge.py',batch.BRIDGE_SHA)
+     deps=scope['dependency_paths'];pins={}
+     for key,sha in [('v2',bridge.V2_SHA),('v3',bridge.V3_SHA),('evaluator',bridge.EVALUATOR_SHA),('evidence_v4',bridge.EVIDENCE_V4_SHA),('baseline_inventory',bridge.BASELINE_INVENTORY_SHA),('manifest',bridge.MANIFEST_SHA)]:pins[deps[key]]=sha
+-    pins[deps['protocol']]=batch.read(batch.PREPARED/'inventory_actual156_Full100refs.json')['mechanism_protocol_sha256']
++    pins[deps['protocol']]=batch.read(batch.PREPARED/'inventory_actual160_Full100refs.json')['mechanism_protocol_sha256']
+     for row in chosen:
+         for rel,sha in row['source_hashes'].items():pins[str(batch.REPO/rel)]=sha
+         for p,sha in row['adapter_source_hashes'].items():pins[p]=sha
+@@ -92,7 +92,7 @@
+         batch.require(batch.digest(p)==sha,'Original source/data/terminal changed: '+p)
+         verified.append(dict(path=p,sha256=sha,size=Path(p).stat().st_size,resolved=str(Path(p).resolve())))
+     # Same read-only module imports check the exact original inventory contract.
+-    bridge.validate_inventory(batch.read(batch.PREPARED/'inventory_actual156_Full100refs.json'),batch.read(deps['baseline_inventory']))
++    bridge.validate_inventory(batch.read(batch.PREPARED/'inventory_actual160_Full100refs.json'),batch.read(deps['baseline_inventory']))
+     hardware=dict(gpu=subprocess.run(['nvidia-smi','--query-gpu=index,name,utilization.gpu,memory.used,temperature.gpu','--format=csv,noheader'],capture_output=True,text=True).stdout,
+         recovery=subprocess.run(['nvidia-smi','-q'],capture_output=True,text=True).stdout,
+         memory_current=int(Path('/sys/fs/cgroup/memory.current').read_text()),memory_max=Path('/sys/fs/cgroup/memory.max').read_text().strip(),
+--- sealed_C_after50/verify_saved_increment.py
++++ C_after56/verify_saved_increment.py
+@@ -9,7 +9,7 @@
+ def read(path):return json.loads(Path(path).read_text(encoding='utf-8-sig'))
+ 
+ def verify(saved, inventory, cache):
+-    assert sha(inventory)=='2131f2386cb3a851f990d6ed4baa38f5ea90c9acadcd62fad50d24bf97277bcd'
++    assert sha(inventory)=='302dd45e9f05c646671d31d26775607af7a4fe70876fa1e60643939f972742f4'
+     assert sha(cache)=='39e5fe16ea5f06c0a7594fd6b1c1cbc27cf1a71a261c1b4f0db7228cce380f64'
+     with np.load(cache,allow_pickle=False) as z:y,sensitive=z['valid_y'],z['valid_sensitive']
+     records={r['id']:r for r in read(inventory)['records']}
+@@ -65,7 +65,7 @@
+         independent_metric_checks=9*len(accepted),independent_confusion_count_checks=24*len(accepted),prediction_rule_checks=3*len(accepted),
+         new_training=0,new_Full_inference=0,test_inference=False,torch_imported='torch' in sys.modules,
+         root_fit_recomputed_by_original_strict_server_bridge=True,local_recompute_uses_only_common_valid_labels=True,
+-        verifier_sha256=sha(__file__),claim_limit='This exact6-scope subset of validation terminal replays; not final test or complete900 mechanism evidence.')
++        verifier_sha256=sha(__file__),claim_limit='This exact4-scope subset of validation terminal replays; not final test or complete900 mechanism evidence.')
+ 
+ if __name__=='__main__':
+     import argparse
+--- sealed_C_after50/verify_backup.py
++++ C_after56/verify_backup.py
+@@ -31,7 +31,7 @@
+         assert not set(receipt['accepted_new_ids'])&set(read(matches[0])['all_accepted_ids'])
+         assert set(receipt['all_accepted_ids'])==set(receipt['accepted_new_ids'])|set(read(matches[0])['all_accepted_ids'])
+     else:assert set(receipt['all_accepted_ids'])==set(receipt['accepted_new_ids'])
+-    proof=verify(extract/'runs',HERE.parent/'inventory_actual156_Full100refs.json',
++    proof=verify(extract/'runs',HERE.parent/'inventory_actual160_Full100refs.json',
+         HERE.parents[2]/'tmp/celeba_final_valid_replay_20261009/verification_inputs/original_valid_cache.npz')
+     proof.update(archive_sha256=receipt['archive_sha256'],inventory_sha256=receipt['inventory_sha256'],members_verified=len(inv['members']),
+         accepted_new_ids=receipt['accepted_new_ids'],all_accepted_ids=receipt['all_accepted_ids'],previous_backup_receipt_sha256=expected_previous,
+--- sealed_C_after50/backup_completed.py
++++ C_after56/backup_completed.py
+@@ -28,7 +28,7 @@
+     p=Path(p);batch.require(p.is_file() and not p.is_symlink() and name not in files,'Unsafe or duplicate member')
+     files[name]=dict(path=p,sha256=batch.digest(p),bytes=p.stat().st_size)
+ rows=[]
+-inv=batch.read(batch.PREPARED/'inventory_actual156_Full100refs.json');byid={r['id']:r for r in inv['records']}
++inv=batch.read(batch.PREPARED/'inventory_actual160_Full100refs.json');byid={r['id']:r for r in inv['records']}
+ for identity in ids:
+     out=Path(parent['outputs'][identity]);row=complete[identity];accept=batch.read(out/'strict_acceptance.json')
+     batch.require({p.name for p in out.iterdir()}=={'receipt.json','bridge_receipt.json','validation_predictions.npz','strict_acceptance.json'},'Unexpected output artifacts')
+@@ -55,7 +55,7 @@
+ if (HERE/'batch_complete.json').exists():add(HERE/'batch_complete.json','runtime/batch_complete.json')
+ if (HERE/'batch_failure.json').exists():add(HERE/'batch_failure.json','runtime/batch_failure.json')
+ add(__file__,'execution/backup_completed.py')
+-inventory=dict(status='PARTIAL_STRICT_ACCEPTED_REPLAY_INCREMENT' if len(prior|set(ids))<6 else 'ALL6_STRICT_ACCEPTED_REPLAY_INCREMENT',
++inventory=dict(status='PARTIAL_STRICT_ACCEPTED_REPLAY_INCREMENT' if len(prior|set(ids))<4 else 'ALL4_STRICT_ACCEPTED_REPLAY_INCREMENT',
+     utc=datetime.now(timezone.utc).isoformat(),accepted_new_ids=ids,all_accepted_ids=[i for i in batch.SELECTED if i in prior|set(ids)],
+     original_inventory_sha256=batch.INVENTORY_SHA,original_prepared_seal_sha256=batch.OLD_SEAL_SHA,
+     execution_seal_sha256=batch.digest(HERE/'EXECUTION_SOURCE_SHA256.json'),approval_sha256=parent_sha,
+--- sealed_C_after50/service.sh.template
++++ C_after56/service.sh.template
+@@ -3,7 +3,7 @@
+ . /opt/supervisor-scripts/utils/logging.sh
+ . /opt/supervisor-scripts/utils/environment.sh
+ set -u
+-stage=/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010/execution_candidate
++stage=/workspace/guardfed_checks/celeba_mechanism_valid_C_after56_20261010/execution_candidate
+ cd "$stage"
+ read -r approved_sha < "$stage/APPROVED.sha256"
+ [[ "$approved_sha" =~ ^[0-9a-f]{64}$ ]]
+--- sealed_C_after50/supervisor.conf.template
++++ C_after56/supervisor.conf.template
+@@ -1,6 +1,6 @@
+-[program:guardfed_celeba_mechanism_valid_C_after50]
++[program:guardfed_celeba_mechanism_valid_C_after56]
+ environment=PROC_NAME="%(program_name)s"
+-command=/opt/supervisor-scripts/guardfed_celeba_mechanism_valid_C_after50.sh
++command=/opt/supervisor-scripts/guardfed_celeba_mechanism_valid_C_after56.sh
+ autostart=false
+ autorestart=false
+ startsecs=0

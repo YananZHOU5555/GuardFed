@@ -1,0 +1,322 @@
+--- after50/deploy.py
++++ after56/deploy.py
+@@ -1,4 +1,4 @@
+-"""ROOT-only one-shot C_after50 deployment. Preparing/importing this file does not run it."""
++"""ROOT-only one-shot C_after56 deployment. Preparing/importing this file does not run it."""
+ from pathlib import Path, PurePosixPath
+ import argparse, datetime, hashlib, json, shlex, subprocess, sys, tarfile, traceback
+ 
+@@ -6,12 +6,12 @@
+ if sys.flags.optimize:
+     raise RuntimeError('Optimized Python is forbidden for root operation guards')
+ ROOT = Path(__file__).resolve().parents[2]
+-BASE = ROOT / 'tmp/celeba_mechanism_valid_C_after50_20261010'
++BASE = ROOT / 'tmp/celeba_mechanism_valid_C_after56_20261010'
+ EX = BASE / 'execution_candidate'
+-REMOTE = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010'
+-SCIENCE = '6e79e65b34a1ff78628884993aa6089fdc8c5d07951ed97ce016ad9b3ca6aaf0'
+-EXECUTION = '073bfde67b2286f6e29fe5f6e2c1f7580f74465b4b0a4e42c583ab0332aa6595'
+-PACKAGE = 'bfac98c1611424eead75d303e5d70a49596730a429c5a7339fb1be0a8d84b53e'
++REMOTE = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after56_20261010'
++SCIENCE = '2095ab384a7844355fc92453dbfa5d2922f88f378838e7b7eda2524578f3bbd6'
++EXECUTION = 'd1679c0bbd53bc66e4ea7ae792000d398efcafe5192bc5164ffd80e7a2eeb236'
++PACKAGE = '7b4c2daa7819f702fb1c59295d5abd8819083d8f4b711aac54232b10f29f5e73'
+ LINEAGE = 'b1ff1fad6f5fe08cebec3008b6df861396c2e11c289b8f05815debb78dc3ed14'
+ GUIDE = '42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ HOST = 'root@89.22.197.55'
+@@ -30,14 +30,14 @@
+     assert not sys.flags.optimize, 'Optimized Python is forbidden'
+     assert sha(path) == expected_sha, 'External source review SHA differs'
+     review = read(path)
+-    assert review['status'] == 'PASS_SOURCE_READY_FOR_ROOT_LINUX_PREFLIGHT_AND_EXACT6_APPROVAL'
++    assert review['status'] == 'PASS_SOURCE_READY_FOR_ROOT_LINUX_PREFLIGHT_AND_EXACT4_APPROVAL'
+     assert review['source_adoptable'] is True and review['actual_dispatch_authorized_by_this_review'] is False
+     assert review['science_seal_sha256'] == SCIENCE and review['execution_seal_sha256'] == EXECUTION
+-    assert review['package_sha256'] == '7191a84dfd2111c0dd7535735a8d016969dd71ec9d9f94c083567aec78de3ba2'
+-    assert review['native_accepted_snapshot'] == 156 and review['excluded_prior_three_view_ids'] == 150
+-    assert review['old150_records_exact'] and review['Full100_references_exact'] and review['Full100_actual900_source_records_exact']
+-    assert review['new_three_view_accepted'] == 0 and review['positive_approval_exact6'] is True
+-    assert review['exact_selected_ids'] == ['minus_C_non-IID_Benign_seed91001', 'minus_C_non-IID_Benign_seed91002', 'minus_C_non-IID_Benign_seed91003', 'minus_C_non-IID_Benign_seed91004', 'minus_C_non-IID_Benign_seed91005', 'minus_C_non-IID_Benign_seed91006']
++    assert review['package_sha256'] == '6fd1881566baf4b7de107752f07354bf8f591f117681e385a12fa1e92307235a'
++    assert review['native_accepted_snapshot'] == 160 and review['excluded_prior_three_view_ids'] == 156
++    assert review['old156_records_exact'] and review['Full100_references_exact'] and review['Full100_actual900_source_records_exact']
++    assert review['new_three_view_accepted'] == 0 and review['positive_approval_exact4'] is True
++    assert review['exact_selected_ids'] == ['minus_C_non-IID_Benign_seed91007', 'minus_C_non-IID_Benign_seed91008', 'minus_C_non-IID_Benign_seed91009', 'minus_C_non-IID_Benign_seed91010']
+     assert review['actual_worker_pre_science_bind_ids'] == review['exact_selected_ids']
+     return review
+ 
+@@ -56,8 +56,8 @@
+     assert sha(BASE / 'PACKAGE_SHA256.json') == review['package_sha256']
+     assert sha(ROOT / 'tmp/celeba_mechanism_valid_incremental_next11_20261009/root_source_review/ROOT_REVIEW.json') == LINEAGE
+     scope = read(BASE / 'SCOPE.json')
+-    assert scope['selected_ids'] == review['exact_selected_ids'] and len(scope['excluded_prior_ids']) == review['excluded_prior_three_view_ids'] == 150
+-    assert len(scope['selected_ids']) == 6 and not set(scope['selected_ids']).intersection(scope['excluded_prior_ids'])
++    assert scope['selected_ids'] == review['exact_selected_ids'] and len(scope['excluded_prior_ids']) == review['excluded_prior_three_view_ids'] == 156
++    assert len(scope['selected_ids']) == 4 and not set(scope['selected_ids']).intersection(scope['excluded_prior_ids'])
+     for name in ('ROOT_APPROVED.json', 'EXECUTION_DRAFT.json', 'root_deployment_source.tar.gz', 'deployment_receipt.json', 'ROOT_DEPLOYMENT_FAILURE.json'):
+         assert not (EX / name).exists(), 'Existing root attempt preserved: ' + name
+     members = {}
+@@ -73,22 +73,22 @@
+ guide=Path('/etc/vast-agents-guide.md').read_bytes()
+ assert hashlib.sha256(guide).hexdigest()==%r
+ assert not Path(%r).exists()
+-for service,expected in [('sglang','STOPPED'),('guardfed_celeba_mechanism_valid_C_after47','EXITED')]:
++for service,expected in [('sglang','STOPPED'),('guardfed_celeba_mechanism_valid_C_after50','EXITED')]:
+  s=subprocess.run(['supervisorctl','status',service],capture_output=True,text=True).stdout.strip()
+  assert len(s.split())>=2 and s.split()[0]==service and s.split()[1]==expected,s
+-print('FRESH_C_AFTER50_NAMESPACE_GUIDE_SHA_SGLANG_STOPPED_PRIOR_C_AFTER47_EXITED')
++print('FRESH_C_AFTER56_NAMESPACE_GUIDE_SHA_SGLANG_STOPPED_PRIOR_C_AFTER50_EXITED')
+ """ % (GUIDE, REMOTE)
+     pre = subprocess.run(ssh + ['python -B -'], input=preflight.encode(), capture_output=True, check=True, timeout=30)
+     # ROOT invocation creates fresh authority; b1ff is historical science lineage only.
+     authority = read(EX / 'ROOT_REVIEW_TEMPLATE.json')
+-    authority.update(status='ROOT_REVIEW_PASS_BOUNDED_C_AFTER50_VALID_REPLAY', execution_authorized_within_existing_user_request=True,
++    authority.update(status='ROOT_REVIEW_PASS_BOUNDED_C_AFTER56_VALID_REPLAY', execution_authorized_within_existing_user_request=True,
+         reviewed_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), execution_seal_sha256=EXECUTION,
+-        independent_C_after50_review_sha256=args.review_sha256, execution_review_sha256=args.review_sha256,
+-        scientific_source_review_sha256=LINEAGE, authorization='ROOT invocation: exact6 accepted-terminal valid-only replay under existing user request; original science and pending endpoint retained.')
++        independent_C_after56_review_sha256=args.review_sha256, execution_review_sha256=args.review_sha256,
++        scientific_source_review_sha256=LINEAGE, authorization='ROOT invocation: exact4 accepted-terminal valid-only replay under existing user request; original science and pending endpoint retained.')
+     assert authority['source_only_root_review_sha256'] == LINEAGE
+     save(EX / 'ROOT_APPROVED.json', authority)
+     draft = read(EX / 'APPROVED_TEMPLATE.json')
+-    draft.update(status='APPROVED_C_AFTER50_MECHANISM_VALID_REPLAY_ONLY', root_approval_sha256=sha(EX / 'ROOT_APPROVED.json'), execution_seal_sha256=EXECUTION)
++    draft.update(status='APPROVED_C_AFTER56_MECHANISM_VALID_REPLAY_ONLY', root_approval_sha256=sha(EX / 'ROOT_APPROVED.json'), execution_seal_sha256=EXECUTION)
+     save(EX / 'EXECUTION_DRAFT.json', draft)
+     members['root_independent_review/ROOT_INDEPENDENT_REVIEW.json'] = review_path
+     for name in ('ROOT_APPROVED.json', 'EXECUTION_DRAFT.json'):
+@@ -100,7 +100,7 @@
+             assert not rel.is_absolute() and '..' not in rel.parts and path.is_file() and not path.is_symlink()
+             bundle.add(path, arcname=BASE.name + '/' + name, recursive=False)
+     archive_sha = sha(archive)
+-    remote_archive = '/workspace/guardfed_checks/C_after50_source_root_' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '.tar.gz'
++    remote_archive = '/workspace/guardfed_checks/C_after56_source_root_' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '.tar.gz'
+     subprocess.run(['scp', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=15', '-P', '60350', str(archive), HOST + ':' + remote_archive], check=True, timeout=90)
+     code = """from pathlib import Path,PurePosixPath
+ import hashlib,json,subprocess,tarfile
+@@ -120,13 +120,13 @@
+     installed = json.loads(result.stdout)
+     receipt = dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), source_archive_sha256=archive_sha,
+         source_archive_members=len(members), source_archive_remote=remote_archive, science_seal_sha256=SCIENCE,
+-        execution_seal_sha256=EXECUTION, independent_C_after50_review_sha256=args.review_sha256, historical_science_lineage_sha256=LINEAGE,
++        execution_seal_sha256=EXECUTION, independent_C_after56_review_sha256=args.review_sha256, historical_science_lineage_sha256=LINEAGE,
+         root_approval_sha256=sha(EX / 'ROOT_APPROVED.json'), external_draft_sha256=sha(EX / 'EXECUTION_DRAFT.json'),
+         empty_namespace_prerequisite=pre.stdout.decode().strip(), remote_installation=installed,
+         new_independent_source_review_path=str(review_path), new_independent_source_review_sha256=args.review_sha256, root_remote_stdout_sha256=hashlib.sha256(result.stdout).hexdigest(), new_training=0, new_Full_inference=0, test_inference=False)
+     save(EX / 'deployment_receipt.json', receipt)
+     assert installed['returncode'] == 0, installed
+-    print(json.dumps(dict(status='C_AFTER50_INSTALLED_ACTUAL_STARTUP_OBSERVATION_PENDING', deployment_receipt_sha256=sha(EX / 'deployment_receipt.json'))))
++    print(json.dumps(dict(status='C_AFTER56_INSTALLED_ACTUAL_STARTUP_OBSERVATION_PENDING', deployment_receipt_sha256=sha(EX / 'deployment_receipt.json'))))
+ 
+ 
+ if __name__ == '__main__':
+--- after50/observe.py
++++ after56/observe.py
+@@ -1,12 +1,12 @@
+-"""Read-only actual-process observation of the frozen exact6 replay."""
++"""Read-only actual-process observation of the frozen exact4 replay."""
+ from pathlib import Path
+ import argparse, datetime, hashlib, json, subprocess, sys
+ 
+ if sys.flags.optimize:
+     raise RuntimeError('Optimized Python is forbidden for root operation guards')
+ ROOT = Path(__file__).resolve().parents[2]
+-EX = ROOT / 'tmp/celeba_mechanism_valid_C_after50_20261010/execution_candidate'
+-REMOTE = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010/execution_candidate'
++EX = ROOT / 'tmp/celeba_mechanism_valid_C_after56_20261010/execution_candidate'
++REMOTE = '/workspace/guardfed_checks/celeba_mechanism_valid_C_after56_20261010/execution_candidate'
+ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+ read = lambda p: json.loads(p.read_bytes())
+ parser = argparse.ArgumentParser(description=__doc__)
+@@ -15,7 +15,7 @@
+ deployment = read(EX / 'deployment_receipt.json')
+ assert deployment['remote_installation']['returncode'] == 0
+ scope = read(EX.parent / 'SCOPE.json')
+-assert len(scope['selected_ids']) == 6 and len(scope['excluded_prior_ids']) == 150
++assert len(scope['selected_ids']) == 4 and len(scope['excluded_prior_ids']) == 156
+ stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+ code = """from pathlib import Path
+ import datetime,hashlib,json,os,subprocess
+@@ -42,7 +42,7 @@
+  except (FileNotFoundError,ProcessLookupError,PermissionError):continue
+ files={name:dict(sha256=sha(H/name),data=read(H/name)) for name in ('APPROVED.json','preflight.json','start_receipt.json')}
+ print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+- service=subprocess.run(['supervisorctl','status','guardfed_celeba_mechanism_valid_C_after50'],capture_output=True,text=True).stdout.strip(),
++ service=subprocess.run(['supervisorctl','status','guardfed_celeba_mechanism_valid_C_after56'],capture_output=True,text=True).stdout.strip(),
+  processes=processes,files=files,completed=[read(p) for p in sorted(H.glob('completed_*.json'))],
+  approval_hash_file_sha256=sha(H/'APPROVED.sha256'),
+  batch_failure=read(H/'batch_failure.json') if (H/'batch_failure.json').exists() else None,
+@@ -69,7 +69,7 @@
+     assert all(cpus == list(range(112, 120)) for cpus in process['thread_affinities'].values())
+     assert process['environment'] == dict(CUDA_VISIBLE_DEVICES='', OMP_NUM_THREADS='8', MKL_NUM_THREADS='8', OPENBLAS_NUM_THREADS='1')
+ workers = [p for p in data['processes'] if 'worker' in p['argv']]
+-assert ('RUNNING' in data['service'] and len(workers) == 1) or (data['batch_complete'] and len(data['completed']) == 6 and not data['processes'])
++assert ('RUNNING' in data['service'] and len(workers) == 1) or (data['batch_complete'] and len(data['completed']) == 4 and not data['processes'])
+ for name, row in data['files'].items():
+     payload = (json.dumps(row['data'], indent=2, allow_nan=False) + '\n').encode()
+     assert hashlib.sha256(payload).hexdigest() == row['sha256']
+@@ -86,9 +86,9 @@
+     with approved_sha.open('xb') as stream:
+         stream.write((data['files']['APPROVED.json']['sha256'] + '\n').encode())
+ assert sha(approved_sha) == data['approval_hash_file_sha256']
+-data.update(status='ROOT_C_AFTER50_REAL_LINUX_' + ('PROGRESS' if args.progress else 'STARTUP') + '_AND_ALLOCATION_PASS',
++data.update(status='ROOT_C_AFTER56_REAL_LINUX_' + ('PROGRESS' if args.progress else 'STARTUP') + '_AND_ALLOCATION_PASS',
+     deployment_receipt_sha256=sha(EX / 'deployment_receipt.json'), execution_seal_sha256=deployment['execution_seal_sha256'],
+-    original150_not_rerun=True, new_training=0, new_Full_inference=0, scientific_offserver_new_accepted=0, test_inference=False)
++    original156_not_rerun=True, new_training=0, new_Full_inference=0, scientific_offserver_new_accepted=0, test_inference=False)
+ if args.progress:
+     data['source_startup_proof_sha256'] = sha(EX / 'ROOT_STARTUP_OBSERVATION.json')
+ target = EX / (f'ROOT_PROGRESS_{stamp}.json' if args.progress else 'ROOT_STARTUP_OBSERVATION.json')
+--- after50/backup.py
++++ after56/backup.py
+@@ -1,22 +1,22 @@
+-"""ROOT-only completed C_after50 exact6 transfer; original backup/verifier, no CNN."""
++"""ROOT-only completed C_after56 exact4 transfer; original backup/verifier, no CNN."""
+ from pathlib import Path
+ import argparse,datetime,hashlib,json,shlex,subprocess,sys
+ sys.dont_write_bytecode=True
+ if sys.flags.optimize:
+     raise RuntimeError('Optimized Python is forbidden for root operation guards')
+ ROOT=Path(__file__).resolve().parents[2]
+-BASE=ROOT/'tmp/celeba_mechanism_valid_C_after50_20261010';EX=BASE/'execution_candidate'
+-REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_C_after50_20261010/execution_candidate'
+-SCIENCE='6e79e65b34a1ff78628884993aa6089fdc8c5d07951ed97ce016ad9b3ca6aaf0'
+-EXECUTION='073bfde67b2286f6e29fe5f6e2c1f7580f74465b4b0a4e42c583ab0332aa6595'
++BASE=ROOT/'tmp/celeba_mechanism_valid_C_after56_20261010';EX=BASE/'execution_candidate'
++REMOTE='/workspace/guardfed_checks/celeba_mechanism_valid_C_after56_20261010/execution_candidate'
++SCIENCE='2095ab384a7844355fc92453dbfa5d2922f88f378838e7b7eda2524578f3bbd6'
++EXECUTION='d1679c0bbd53bc66e4ea7ae792000d398efcafe5192bc5164ffd80e7a2eeb236'
+ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ read=lambda p:json.loads(p.read_bytes())
+ 
+ def check_terminal(live,expected):
+     assert 'EXITED' in live['service'] and not live['processes'] and not live['batch_failure']
+-    assert live['batch_complete'] and len(live['completed'])==6
++    assert live['batch_complete'] and len(live['completed'])==4
+     ids=[row['id'] for row in live['completed']]
+-    assert len(ids)==len(set(ids))==len(expected)==6 and set(ids)==set(expected)
++    assert len(ids)==len(set(ids))==len(expected)==4 and set(ids)==set(expected)
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__)
+@@ -27,14 +27,14 @@
+     args=parser.parse_args()
+     assert not sys.flags.optimize and sha(BASE/'FILES_SHA256.json')==SCIENCE
+     assert sha(EX/'EXECUTION_SOURCE_SHA256.json')==EXECUTION
+-    assert sha(BASE/'inventory_actual156_Full100refs.json')=='2131f2386cb3a851f990d6ed4baa38f5ea90c9acadcd62fad50d24bf97277bcd'
++    assert sha(BASE/'inventory_actual160_Full100refs.json')=='302dd45e9f05c646671d31d26775607af7a4fe70876fa1e60643939f972742f4'
+     assert sha(EX/'ROOT_STARTUP_OBSERVATION.json')==args.startup_sha256
+     assert sha(EX/'deployment_receipt.json')==args.deployment_sha256
+     for folder,seal in ((BASE,BASE/'FILES_SHA256.json'),(EX,EX/'EXECUTION_SOURCE_SHA256.json')):
+         for row in read(seal)['members']:assert sha(folder/row['path'])==row['sha256']
+     assert not (EX/'BACKUP_LATEST.json').exists(), 'Already backed up; inspect existing evidence'
+     assert not (EX/'ROOT_BACKUP_ATTEMPT.json').exists(), 'Prior attempt preserved; no blind retry'
+-    expected=read(BASE/'SCOPE.json')['selected_ids'];assert len(expected)==len(set(expected))==6
++    expected=read(BASE/'SCOPE.json')['selected_ids'];assert len(expected)==len(set(expected))==4
+     latest=args.terminal_progress.resolve()
+     assert latest.parent==EX.resolve() and latest.name.startswith('ROOT_PROGRESS_') and not latest.name.endswith('.RAW.json')
+     assert sha(latest)==args.terminal_progress_sha256
+@@ -55,7 +55,7 @@
+ assert (H/'batch_complete.json').is_file() and not (H/'batch_failure.json').exists()
+ assert read(H/'batch_complete.json')==%r
+ complete=[read(p)['id'] for p in H.glob('completed_*.json')]
+-assert len(complete)==len(set(complete))==6 and set(complete)==set(%r)
++assert len(complete)==len(set(complete))==4 and set(complete)==set(%r)
+ assert not (H/'BACKUP_LATEST.json').exists()
+ result=subprocess.run(['taskset','-c','110','ionice','-c','3','nice','-n','10',
+  '/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(H/'backup_completed.py')],check=True,capture_output=True,text=True)
+--- after50/adopt.py
++++ after56/adopt.py
+@@ -1,18 +1,18 @@
+-"""ROOT-only bind actual C_after50 exact6 archive to source, actual terminal and prior150."""
++"""ROOT-only bind actual C_after56 exact4 archive to source, actual terminal and prior156."""
+ from pathlib import Path,PurePosixPath
+ import argparse,datetime,hashlib,json,sys,tarfile
+ sys.dont_write_bytecode=True
+ if sys.flags.optimize:
+     raise RuntimeError('Optimized Python is forbidden for root operation guards')
+ ROOT=Path(__file__).resolve().parents[2]
+-BASE=ROOT/'tmp/celeba_mechanism_valid_C_after50_20261010';EX=BASE/'execution_candidate'
++BASE=ROOT/'tmp/celeba_mechanism_valid_C_after56_20261010';EX=BASE/'execution_candidate'
+ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();read=lambda p:json.loads(p.read_bytes())
+ 
+ def check_terminal(live,expected):
+     assert 'EXITED' in live['service'] and not live['processes'] and not live['batch_failure']
+-    assert live['batch_complete'] and len(live['completed'])==6
++    assert live['batch_complete'] and len(live['completed'])==4
+     ids=[row['id'] for row in live['completed']]
+-    assert len(ids)==len(set(ids))==len(expected)==6 and set(ids)==set(expected)
++    assert len(ids)==len(set(ids))==len(expected)==4 and set(ids)==set(expected)
+ 
+ def expected_archive_names(expected,science,execution):
+     names={'backup_inventory.json','source/science/FILES_SHA256.json','runtime/batch_complete.json','execution/backup_completed.py'}
+@@ -39,20 +39,20 @@
+     DELTA=args.delta.resolve();assert not args.delta.is_symlink()
+     assert DELTA.parent==(EX/'backups').resolve() and DELTA.name.startswith('incremental_')
+     assert not (DELTA/'ROOT_ADOPTION_REVIEW.json').exists(), 'Existing adoption must be preserved'
+-    assert sha(BASE/'FILES_SHA256.json')=='6e79e65b34a1ff78628884993aa6089fdc8c5d07951ed97ce016ad9b3ca6aaf0'
+-    assert sha(EX/'EXECUTION_SOURCE_SHA256.json')=='073bfde67b2286f6e29fe5f6e2c1f7580f74465b4b0a4e42c583ab0332aa6595'
+-    assert sha(BASE/'inventory_actual156_Full100refs.json')=='2131f2386cb3a851f990d6ed4baa38f5ea90c9acadcd62fad50d24bf97277bcd'
++    assert sha(BASE/'FILES_SHA256.json')=='2095ab384a7844355fc92453dbfa5d2922f88f378838e7b7eda2524578f3bbd6'
++    assert sha(EX/'EXECUTION_SOURCE_SHA256.json')=='d1679c0bbd53bc66e4ea7ae792000d398efcafe5192bc5164ffd80e7a2eeb236'
++    assert sha(BASE/'inventory_actual160_Full100refs.json')=='302dd45e9f05c646671d31d26775607af7a4fe70876fa1e60643939f972742f4'
+     assert sha(EX/'ROOT_STARTUP_OBSERVATION.json')==args.startup_sha256
+     assert sha(EX/'deployment_receipt.json')==args.deployment_sha256
+     assert sha(DELTA/'backup_receipt.json')==args.receipt_sha256
+     assert sha(DELTA/'OFFSERVER_VERIFICATION.json')==args.proof_sha256
+     scope=read(BASE/'SCOPE.json');expected=scope['selected_ids']
+-    assert len(expected)==len(set(expected))==6
++    assert len(expected)==len(set(expected))==4
+     receipt=read(DELTA/'backup_receipt.json');proof=read(DELTA/'OFFSERVER_VERIFICATION.json')
+     assert receipt['accepted_new_ids']==receipt['all_accepted_ids']==proof['accepted_new_ids']==proof['all_accepted_ids']==expected
+     assert receipt['previous_backup_receipt_sha256'] is proof['previous_backup_receipt_sha256'] is None
+     assert proof['status']=='INCREMENTAL_INDEPENDENT_SAVED_ARRAYS_THREE_VIEWS_PASS'
+-    assert (proof['independent_metric_checks'],proof['independent_confusion_count_checks'],proof['prediction_rule_checks'])==(54,144,18)
++    assert (proof['independent_metric_checks'],proof['independent_confusion_count_checks'],proof['prediction_rule_checks'])==(36,96,12)
+     assert proof['source_seal_sha256']==sha(EX/'EXECUTION_SOURCE_SHA256.json')
+     progress=args.terminal_progress.resolve()
+     assert progress.parent==EX.resolve() and progress.name.startswith('ROOT_PROGRESS_') and not progress.name.endswith('.RAW.json')
+@@ -76,7 +76,7 @@
+         assert inventory['models_repacked']==inventory['new_training']==inventory['new_test_inference']==0
+         assert inventory['execution_seal_sha256']==sha(EX/'EXECUTION_SOURCE_SHA256.json')
+         assert inventory['accepted_new_ids']==inventory['all_accepted_ids']==expected
+-        assert inventory['original_inventory_sha256']==sha(BASE/'inventory_actual156_Full100refs.json')
++        assert inventory['original_inventory_sha256']==sha(BASE/'inventory_actual160_Full100refs.json')
+         assert inventory['original_prepared_seal_sha256']==sha(BASE/'FILES_SHA256.json')
+         for item in bundle:
+             rel=PurePosixPath(item.name);assert item.isfile() and not rel.is_absolute() and '..' not in rel.parts
+@@ -94,25 +94,25 @@
+         assert sha(EX/'EXECUTION_DRAFT.json')==deployment['external_draft_sha256']
+         assert inventory['approval_sha256']==sha(EX/'APPROVED.json')
+         assert json.loads(bundle.extractfile('runtime/batch_complete.json').read())==live['batch_complete']
+-    original={r['id']:r for r in read(BASE/'inventory_actual156_Full100refs.json')['records']}
+-    assert len(proof['records'])==6 and {r['id'] for r in proof['records']}==set(expected)
++    original={r['id']:r for r in read(BASE/'inventory_actual160_Full100refs.json')['records']}
++    assert len(proof['records'])==4 and {r['id'] for r in proof['records']}==set(expected)
+     for row in proof['records']:
+         assert row['checkpoint_sha256']==original[row['id']]['checkpoint']['sha256']
+         assert row['native_max_abs_difference']==0 and set(row['views'])=={'native','raw','shared_calibration'}
+-    prior=ROOT/'tmp/celeba_mechanism_valid_C_after47_20261010/execution_candidate/backups/incremental_20261009T235311Z/ROOT_ADOPTION_REVIEW.json'
+-    assert sha(prior)=='3859d49fb57c3ecc4b23244012431224d255b02590dab221b2d6464e28aa7dd8'
+-    assert read(prior)['cumulative_three_view_models']==150
+-    assert len(scope['excluded_prior_ids'])==len(set(scope['excluded_prior_ids']))==150
++    prior=ROOT/'tmp/celeba_mechanism_valid_C_after50_20261010/execution_candidate/backups/incremental_20261010T002635Z/ROOT_ADOPTION_REVIEW.json'
++    assert sha(prior)=='a7231a724ea3a4d3443bbe196137b0c72db025cbc98d3ac66842334ab0fe9080'
++    assert read(prior)['cumulative_three_view_models']==156
++    assert len(scope['excluded_prior_ids'])==len(set(scope['excluded_prior_ids']))==156
+     assert set(original)==set(scope['excluded_prior_ids'])|set(expected) and not set(expected)&set(scope['excluded_prior_ids'])
+-    result=dict(status='ROOT_C_AFTER50_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS',
++    result=dict(status='ROOT_C_AFTER56_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS',
+         checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=expected,
+-        prior_three_view_models=150,accepted_new=6,cumulative_three_view_models=156,
++        prior_three_view_models=156,accepted_new=4,cumulative_three_view_models=160,
+         archive_sha256=sha(archive),archive_members_verified=expected_members,content_members_verified=expected_members-1,
+         server_strict_bound_in_saved_receipts=True,offserver_verification_sha256=sha(DELTA/'OFFSERVER_VERIFICATION.json'),
+         backup_receipt_sha256=sha(DELTA/'backup_receipt.json'),previous_backup_receipt_sha256=None,
+         execution_seal_sha256=sha(EX/'EXECUTION_SOURCE_SHA256.json'),science_seal_sha256=sha(BASE/'FILES_SHA256.json'),
+         all_native_differences_zero=True,new_training=0,new_Full_inference=0,test_inference=False,
+-        original150_unchanged=True,prior150_root_adoption_sha256=sha(prior),new_CNN_inference_for_root_review=0,
++        original156_unchanged=True,prior156_root_adoption_sha256=sha(prior),new_CNN_inference_for_root_review=0,
+         negative_results_preserved=True,remote_terminal_proof_sha256=sha(progress),source_scope_complete=True,
+         startup_observation_sha256=sha(EX/'ROOT_STARTUP_OBSERVATION.json'),backup_attempt_sha256=sha(EX/'ROOT_BACKUP_ATTEMPT.json'))
+     target=DELTA/'ROOT_ADOPTION_REVIEW.json'

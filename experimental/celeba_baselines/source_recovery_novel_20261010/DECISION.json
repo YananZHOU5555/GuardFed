@@ -1,0 +1,88 @@
+{
+  "status": "THREE_TARGET_METHODS_STILL_REQUIRE_ALGORITHM_COMPLETE_PRIMARY_SPECIFICATION",
+  "created_utc": "2026-10-10T00:38:48.734107+00:00",
+  "input_pins": [
+    {
+      "path": "tmp/celeba_baselines/remaining_20261009/group_b/REPORT.md",
+      "sha256": "b9a4cda8b164b8c2ea30c05906d3e641b3f342c8be659150ab74942546b89620",
+      "bytes": 11753
+    },
+    {
+      "path": "tmp/celeba_baselines/remaining_20261009/group_b/SOURCE_RECOVERY_20261009.md",
+      "sha256": "8de69583346b279ff13a04d594238327ffb3b597c304a762febe77f39d5af3fa",
+      "bytes": 9125
+    },
+    {
+      "path": "tmp/celeba_baselines/source_recovery_followup_20261009/REPORT.md",
+      "sha256": "026cbb7ec14b2e74e31146a6a14f409d3f247d9288729e8c7a0b542ce338b88b",
+      "bytes": 7583
+    },
+    {
+      "path": "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.pdf",
+      "sha256": "3766b6d06c2568370e7be52c7f8ab4ae9417a373b7e66afb462296e0e1e29e48",
+      "bytes": 948118
+    },
+    {
+      "path": "tmp/celeba_baselines/remaining_20261009/group_b/sources/fedwa_primary.txt",
+      "sha256": "b0377ff24ab12ace562efc6804f3bfb33f49cfb6705840dedc651d9eac0b0d8b",
+      "bytes": 13854
+    }
+  ],
+  "new_requests10": true,
+  "previous_51_plus31_responses_and42_author_paths_not_replayed": true,
+  "prior109_urls_file": "PRIOR_PATHS_EXCLUDED.json",
+  "methods": {
+    "FedWA": {
+      "doi": "10.5555/3535850.3536051",
+      "new_primary_material": "official AAMAS2022 one-page author poster",
+      "new_primary_sha256": "d337f8c9c0199ed404e382b816036d90fd2bc1a9be09db1746b0b8b366cc97f0",
+      "confirmed_only": [
+        "global/local model parameters conceptually inform RL weight assignment",
+        "weighted global loss objective",
+        "broadcast/local training/upload/RL weight/global aggregation flow"
+      ],
+      "remaining_execution_blockers": [
+        "state feature extraction/dimensions/scaling/client order",
+        "action dimension and mapping/constraints to model aggregation weights; full-model versus update semantics",
+        "reward equation/data-access permission/timing",
+        "RL algorithm/network/optimizer/learning rate/exploration/replay/target/update schedule/initialization"
+      ],
+      "smallest_external_material_needed": "algorithm-complete FedWA specification or DOI-linked original source plus MDP/network/default configuration; resending the same three-page paper or this poster does not resolve the blockers",
+      "implementation_ready": false
+    },
+    "SmartFL": {
+      "doi": "10.1016/j.inffus.2025.103555",
+      "new_primary_material": null,
+      "remaining_execution_blockers": [
+        "pairwise normalized divergence equation, removal selection/order/ties/stopping and malicious-count dependence",
+        "model versus update vector, normalized pseudo-global construction",
+        "positive correlation recall and 90-degree equality/zero-norm boundaries",
+        "final weights/norm restoration/empty-set handling and Appendix C defaults"
+      ],
+      "smallest_external_material_needed": "target paper full algorithm section and Appendix C/supplement, or DOI-linked original aggregation source/defaults",
+      "implementation_ready": false
+    },
+    "FedDNA": {
+      "doi": "10.1016/j.jisa.2025.104358",
+      "new_primary_material": null,
+      "remaining_execution_blockers": [
+        "probe construction/data permission/size/preprocessing/fixed-versus-resampled behavior",
+        "activation layer, cross-probe reduction/normalization/distance fingerprint equations",
+        "client history reference/init/update/decay/absence and consistency equation",
+        "MAD score/center/multiplier/zero-MAD/equality handling",
+        "accepted-client weighting/full-model-versus-update/empty-set behavior and model/training defaults"
+      ],
+      "smallest_external_material_needed": "target full Sections 3/4 and appendix, or DOI-linked original Flower strategy/probe/model/default configuration",
+      "implementation_ready": false
+    }
+  },
+  "adaptation_choices_not_authorized": [
+    "invent RL state/reward/optimizer defaults",
+    "replace SmartFL by cosine top-n-f or ICLR2023 homonym",
+    "replace FedDNA fingerprints/history by parameter-distance MAD",
+    "treat author unrelated repositories as target code"
+  ],
+  "new_faithful_components": 0,
+  "formal_protocol_changed": false,
+  "next_step_gate": "obtain target algorithm-complete primary material; then map equations/defaults and component oracle before any common-pipeline adaptation; data/calibration/CNN interface adaptations remain explicit author decisions"
+}

@@ -1,0 +1,11 @@
+--- sealed/review.py
++++ review_v2.py
+@@ -44,7 +44,7 @@
+     assert sha(handoff_path) == handoff_sha
+     assert sha(BASE/'FILES_SHA256.json') == SOURCE_SEAL
+     source_files = read(BASE/'FILES_SHA256.json')['members']
+-    assert len(source_files) == 12
++    assert len(source_files) == 13
+     verify_files(BASE,{r['path']:dict(sha256=r['sha256'],bytes=r['size']) for r in source_files})
+     handoff = read(handoff_path)
+     assert handoff['unique_records'] == 120 and handoff['Full'] == handoff['minus_C'] == 60

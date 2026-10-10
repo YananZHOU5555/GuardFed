@@ -1,0 +1,47 @@
+--- original/verify_increment36.py
++++ prepared/verify_increment37.py
+@@ -1,4 +1,4 @@
+-"""Verify increment36 index receipt against committed bytes and optionally the remote branch. No publishing."""
++"""Verify increment37 index receipt against committed bytes and optionally the remote branch. No publishing."""
+ from pathlib import Path
+ import argparse, datetime, hashlib, json, subprocess, sys
+ 
+@@ -6,7 +6,7 @@
+ ROOT = HERE.parents[1]
+ REPO = ROOT / 'tmp/revision-publish-20260928'
+ TRAIN = Path('docs/server_deployment_20260923/training_20260923')
+-PARENT = 'fbe6027794ce045bdf79254b995c8d2b1de2fb56'
++PARENT = '277be091be761249372c1da17c97d2bf83ef62ef'
+ BRANCH = 'codex/revision-evidence-baselines-20260928'
+ def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+ def git(*args, input=None): return subprocess.check_output(['git', '-c', 'core.longpaths=true', *args], cwd=REPO, input=input)
+@@ -18,13 +18,16 @@
+     args = parser.parse_args(); assert not sys.flags.optimize
+     assert sha(args.receipt) == args.receipt_sha256
+     receipt = json.loads(args.receipt.read_bytes()); assert receipt['previous_commit'] == PARENT
+-    assert [receipt[k] for k in ('baseline_valid_replays_accepted', 'mechanism_offserver_verified', 'mechanism_three_view_offserver_verified', 'FLGMM_fullcoverage_new_offserver_verified', 'Hybrid_offserver_verified')] == [900, 156, 156, 11, 19]
++    assert [receipt[k] for k in ('baseline_valid_replays_accepted', 'mechanism_offserver_verified', 'mechanism_three_view_offserver_verified', 'FLGMM_fullcoverage_new_offserver_verified', 'Hybrid_offserver_verified')] == [900, 160, 160, 12, 19]
+     assert receipt['test_started'] is False and receipt['scientific_goal_complete'] is False
++    assert receipt['C60_table_included'] is True and receipt['C50_full_reply_republished'] is False
++    assert receipt['third_party_source_bodies_redistributed'] is False and len(receipt['source_recovery_subset']) == 8
++    assert receipt['transport_reader_failure_preserved'] is True and receipt['supplemental_transport_review_post_deployment'] is True
+     commit = git('rev-parse', 'HEAD').decode().strip()
+     assert git('rev-parse', 'HEAD^').decode().strip() == PARENT
+     assert git('branch', '--show-current').decode().strip() == BRANCH
+     assert not git('status', '--porcelain', '--untracked-files=all').strip()
+-    mapping = receipt['copied_sha256'].copy(); mapping[(TRAIN / 'publication_closed_increment36_20261010.json').as_posix()] = sha(args.receipt)
++    mapping = receipt['copied_sha256'].copy(); mapping[(TRAIN / 'publication_closed_increment37_20261010.json').as_posix()] = sha(args.receipt)
+     index = json.loads((args.receipt.parent / 'INDEX_VERIFICATION.json').read_bytes())
+     assert index['status'] == 'INDEX_BLOB_SHA_PASS_NOT_COMMITTED_OR_PUSHED' and index['receipt_sha256'] == sha(args.receipt)
+     assert {k: v for k, v in index['index_sha256'].items() if k != '.gitattributes'} == mapping
+@@ -39,8 +42,8 @@
+     changed = set(filter(None, git('diff', '--name-only', '-z', PARENT, commit).decode().split('\0'))); assert changed <= set(mapping)
+     result = dict(status='COMMITTED_BLOB_SHA_PASS_BEFORE_PUSH', verified_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), commit=commit, branch=BRANCH,
+         committed_blobs_sha256_verified=len(mapping), changed_paths=len(changed), publication_receipt_sha256=sha(args.receipt),
+-        baseline_valid_replays_accepted=900, mechanism_offserver_verified=156, mechanism_three_view_offserver_verified=156,
+-        FLGMM_offserver_verified=32, FLGMM_fullcoverage_new_offserver_verified=11, Hybrid_offserver_verified=19, test_started=False, scientific_goal_complete=False)
++        baseline_valid_replays_accepted=900, mechanism_offserver_verified=160, mechanism_three_view_offserver_verified=160,
++        FLGMM_offserver_verified=32, FLGMM_fullcoverage_new_offserver_verified=12, Hybrid_offserver_verified=19, test_started=False, scientific_goal_complete=False)
+     if args.remote:
+         remote = git('ls-remote', '--heads', 'origin', BRANCH).decode().split()
+         assert remote == [commit, 'refs/heads/' + BRANCH]; result['status'] = 'COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'
