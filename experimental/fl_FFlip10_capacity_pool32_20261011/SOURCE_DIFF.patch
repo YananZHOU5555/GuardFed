@@ -1,0 +1,428 @@
+--- cpu11/candidate.py
++++ pool32/candidate.py
+@@ -14,7 +14,7 @@
+ import types
+ 
+ HERE = Path(__file__).resolve().parent
+-CPUS = list(range(11, 19))
++CPUS = list(range(32, 64))
+ 
+ 
+ def require(ok, message):
+@@ -180,6 +180,10 @@
+ def runtime_nodes():
+     """Compile-only inspectable binding; no scientific imports or calls."""
+     text = (HERE / 'originals/replay.py').read_text(encoding='utf-8')
++    resource_assertion = "require(len(os.sched_getaffinity(0)) == 8, 'Process must be bound to its eight coordinated CPUs')"
++    original_gate = next(n for n in ast.parse(text).body if isinstance(n, ast.FunctionDef) and n.name == 'resource_gate')
++    require(text.count(resource_assertion) == 1 and resource_assertion in ast.get_source_segment(text, original_gate), 'Original operational resource assertion changed')
++    text = text.replace(resource_assertion, "require(sorted(os.sched_getaffinity(0)) == list(range(32, 64)), 'Process must use fixed32-core scheduling pool with eight compute threads')")
+     tree = ast.parse(text)
+     wanted = {'read', 'save', 'canonical', 'read_prefix', 'metadata', 'live_snapshot', 'resource_gate', 'replay_one'}
+     nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in wanted]
+@@ -234,9 +238,9 @@
+     require(p['status'] == 'ROOT_LINUX_FLGMM_EXACT10_PREFLIGHT_PASS' and p['cpu_affinity'] == CPUS, 'Linux preflight refused')
+     age = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime.fromisoformat(p['utc'])).total_seconds()
+     require(0 <= age <= 300 and p['no_duplicate_gate'] is True and p['resources_eligible'] is True, 'Stale/occupied preflight')
+-    require(set(CPUS) <= set(p['eligible_cpus']), 'Requested CPUs outside actual eligible mask')
+-    require(p['capacity_policy'] == 'sampled_cpu_busy_le20pct_cgroup_plus16_lt_quota_v2' and p['sample_monitored_cpu_count'] == 16, 'Wrong capacity policy/scope')
+-    require(p['sample_each_cpu_busy_fraction_max'] <= .20 and p['measured_cgroup_cores_with_gate_and_allowance'] < p['actual_quota_cores'], 'Insufficient sampled capacity')
++    require(set(CPUS + list(range(288, 320))) <= set(p['eligible_cpus']) and p['pool_topology_verified'] is True, 'Pool/siblings outside actual eligible mask or topology changed')
++    require(p['capacity_policy'] == 'sampled_32core_pool_atleast16_pairs_le20pct_cgroup_plus16_lt_quota_v3' and p['sample_monitored_cpu_count'] == 64, 'Wrong capacity policy/scope')
++    require(p['quiet_pairs'] >= 16 and p['measured_cgroup_cores_with_gate_and_allowance'] < p['actual_quota_cores'], 'Insufficient sampled capacity')
+     require(p['nominal_reserved_cores_including_gate'] <= p['actual_quota_cores'], 'Nominal reservations exceed measured quota')
+     for key in ('source_model_data_hashes_verified', 'selected_producers_quiescent', 'services_healthy',
+                 'gpu_health_verified', 'cgroup_and_memory_headroom_verified', 'storage_headroom_verified'):
+@@ -252,7 +256,7 @@
+         for task in (proc / 'task').glob('*'):
+             try:
+                 affinity = set(os.sched_getaffinity(int(task.name)))
+-                if len(affinity) <= 8 and affinity.intersection(CPUS):
++                if len(affinity) <= 8 and affinity.intersection(CPUS + list(range(288, 320))):
+                     conflicts.append([int(proc.name), int(task.name), sorted(affinity)])
+             except ProcessLookupError:
+                 pass
+@@ -267,13 +271,13 @@
+     m = read(HERE / 'MANIFEST.json')
+     validate_manifest(m)
+     authorize(a, m)
+-    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011/outputs'), 'Fresh fixed server output required')
++    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011/outputs'), 'Fresh fixed server output required')
+     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CUDA must be hidden before importing Torch')
+     for k, v in {'OMP_NUM_THREADS': '8', 'MKL_NUM_THREADS': '8', 'OPENBLAS_NUM_THREADS': '1', 'NUMEXPR_NUM_THREADS': '1'}.items():
+         require(os.environ.get(k) == v, 'Thread environment drift: ' + k)
+     import fcntl, signal, traceback
+     exclusive_cpus()
+-    lock = open('/tmp/guardfed_flgmm_FFlip10_capacity_cpu11_valid.lock', 'a')
++    lock = open('/tmp/guardfed_flgmm_FFlip10_capacity_pool32_valid.lock', 'a')
+     fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+     import numpy as np, pandas as pd, torch
+     torch.set_num_threads(8)
+--- cpu11/MANIFEST.json
++++ pool32/MANIFEST.json
+@@ -11,14 +11,38 @@
+   ],
+   "native_tolerance": 1e-12,
+   "cpu_affinity": [
+-    11,
+-    12,
+-    13,
+-    14,
+-    15,
+-    16,
+-    17,
+-    18
++    32,
++    33,
++    34,
++    35,
++    36,
++    37,
++    38,
++    39,
++    40,
++    41,
++    42,
++    43,
++    44,
++    45,
++    46,
++    47,
++    48,
++    49,
++    50,
++    51,
++    52,
++    53,
++    54,
++    55,
++    56,
++    57,
++    58,
++    59,
++    60,
++    61,
++    62,
++    63
+   ],
+   "threads": 8,
+   "new_scientific_acceptances": 0,
+@@ -4054,7 +4078,7 @@
+   },
+   "authorizations_and_runtime_facts_pending": [
+     "independent/root source review and explicit exact10 authorization",
+-    "fresh Linux CPU11-18 and SMT siblings sampled capacity (not exclusive cores), narrow reservation, quota/memory/GPU/storage preflight",
++    "fresh Linux fixed pool32-63 and SMT288-319 eligible/same-socket distinct-core topology; at least16 quiet physical pairs; no narrow reservation; quota/memory/GPU/storage preflight (sampled capacity, not exclusivity)",
+     "actual original server artifact/source/data SHA and selected-producer quiescence checks",
+     "actual replay receipts and unchanged Linux whole saved checker; F offserver arrays/members and root adoption"
+   ],
+--- cpu11/runtime/deploy_once.py
++++ pool32/runtime/deploy_once.py
+@@ -16,14 +16,14 @@
+  b=p.read_bytes();members[rel]={'base64':base64.b64encode(b).decode(),'sha256':sha(p),'bytes':len(b)}
+ assert members['source/originals/saved_science.py']['sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ old=R/'tmp/celeba_flgmm_closed47_root_execution_20261011/SOURCE_DEPLOYMENT_remote.py'
+-source=old.read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_FFlip10_capacity_cpu11_20261011')
++source=old.read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_FFlip10_capacity_pool32_20261011')
+ compile(source,'deploy_remote','exec')
+ (H/'DEPLOY_REMOTE.py').write_text(source)
+ code="import base64;exec(compile(base64.b64decode('"+base64.b64encode(source.encode()).decode()+"'),'<source-deploy>','exec'))"
+ cmd=['ssh','-p','60350','-o','BatchMode=yes','root@89.22.197.55','python3 -c "'+code+'"']
+ assert not (H/'DEPLOY_COMMAND.json').exists()
+ (H/'DEPLOY_COMMAND.json').write_text(json.dumps({'argv':cmd,'package_sha256':package,'members':len(members)},indent=2))
+-p=subprocess.run(cmd,input=json.dumps({'base':'/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011','members':members}).encode(),capture_output=True,timeout=60)
++p=subprocess.run(cmd,input=json.dumps({'base':'/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011','members':members}).encode(),capture_output=True,timeout=60)
+ (H/'DEPLOY.stdout').write_bytes(p.stdout);(H/'DEPLOY.stderr').write_bytes(p.stderr)
+ (H/'DEPLOY_EXIT.json').write_text(json.dumps({'exit':p.returncode})+'\n')
+ assert p.returncode==0,p.stderr.decode(errors='replace')
+--- cpu11/runtime/launch_once.py
++++ pool32/runtime/launch_once.py
+@@ -27,13 +27,13 @@
+ '''+s[b:]
+ fresh=remote(s,dict(read(H/'observer_payload.json'),previous_hashes=first['hashes']),'FRESH_OBSERVATION')
+ try:
+- assert fresh['source_model_data_hashes_verified'] and not fresh['narrow_cpu11_18_conflicts'] and not fresh['duplicate_gate']
++ assert fresh['source_model_data_hashes_verified'] and not fresh['narrow_pool32_and_siblings_conflicts'] and not fresh['duplicate_gate']
+  assert all(not x['failures'] and not x['live_producers'] for x in fresh['selected'])
+- rows=fresh['guardfed_processes'];cpus=set(range(11,19))
++ rows=fresh['guardfed_processes'];cpus=set(range(32,64))
+  active_conflict=[{'pid':r['pid'],'tid':t['tid']} for r in rows for t in r['threads'] if (t.get('delta_cpu_ticks_2s') or 0)>0 and t['last_cpu'] in cpus]
+  capacity=fresh['capacity_metrics']
+- assert capacity['targets']==sorted(cpus) and len(capacity['siblings'])==8
+- assert capacity['max_busy_fraction']<=.20, capacity
++ assert capacity['targets']==sorted(cpus) and capacity['siblings']==list(range(288,320)) and len(capacity['per_cpu'])==64 and fresh['pool_topology_verified'] is True
++ assert capacity['quiet_pairs']>=16 and len(capacity['physical_pairs'])==32, capacity
+  measured_with_allowance=capacity['cgroup_used_cores']+8+8
+  service=fresh['services'];assert service['returncode']==0 and len(service['stdout'].splitlines())==5 and all('RUNNING' in l for l in service['stdout'].splitlines())
+  old={x['id']:x for x in first['main_workers']};main_growth=[]
+@@ -55,18 +55,18 @@
+  assert fresh['disk']['free']>20*1024**3
+  assert fresh['gpu_recovery']['returncode']==0 and all(l.endswith('None') for l in fresh['gpu_recovery']['stdout'].strip().splitlines())
+  assert fresh['gpu']['returncode']==0 and all(int(l.split(',')[-1])<85 for l in fresh['gpu']['stdout'].strip().splitlines())
+- pre={'status':'ROOT_LINUX_FLGMM_EXACT10_PREFLIGHT_PASS','utc':fresh['utc'],'cpu_affinity':sorted(cpus),'eligible_cpus':fresh['eligible_cpus'],'actual_quota_cores':quota,'nominal_reserved_cores_including_gate':sum(components.values()),'nominal_budget_components':components,'nominal_budget_not_hard_peak_bound':True,'no_duplicate_gate':True,'resources_eligible':True,'resources_eligible_definition':'No narrow CPU reservation, duplicate or selected producer; nominal budget within quota; each target and SMT sibling sampled busy<=20%; cgroup measured usage+8 evaluator+8 IO allowance<quota; original source/data, memory, disk, GPU and service guards pass. This is sampled capacity, not exclusive cores.', 'capacity_policy':'sampled_cpu_busy_le20pct_cgroup_plus16_lt_quota_v2','sample_monitored_cpu_count':len(capacity['per_cpu']),'sample_each_cpu_busy_fraction_max':capacity['max_busy_fraction'],'measured_cgroup_cores_with_gate_and_allowance':measured_with_allowance,'capacity_sample':capacity,'wide_active_thread_observations':active_conflict,'source_model_data_hashes_verified':True,'selected_producers_quiescent':True,'services_healthy':True,'gpu_health_verified':True,'cgroup_and_memory_headroom_verified':True,'storage_headroom_verified':True,'original_hash_observation_sha256':ref['sha256'],'stat_resource_refresh_sha256':read(H/'FRESH_OBSERVATION_REF.json')['sha256'],'hashed_files':len(first['hashes']),'main_progressed_ids':main_growth,'package_sha256':sha(C/'FILES_SHA256.json'),'new_CNN':0,'new_fit':0,'test':False}
++ pre={'status':'ROOT_LINUX_FLGMM_EXACT10_PREFLIGHT_PASS','utc':fresh['utc'],'cpu_affinity':sorted(cpus),'eligible_cpus':fresh['eligible_cpus'],'actual_quota_cores':quota,'nominal_reserved_cores_including_gate':sum(components.values()),'nominal_budget_components':components,'nominal_budget_not_hard_peak_bound':True,'no_duplicate_gate':True,'resources_eligible':True,'resources_eligible_definition':'No narrow CPU reservation, duplicate or selected producer; nominal budget within quota; at least16 of32 distinct physical pairs have target and SMT sibling sampled busy<=20%; cgroup measured usage+8 evaluator+8 IO allowance<quota; original source/data, memory, disk, GPU and service guards pass. This is sampled capacity, not exclusive cores.', 'capacity_policy':'sampled_32core_pool_atleast16_pairs_le20pct_cgroup_plus16_lt_quota_v3','sample_monitored_cpu_count':len(capacity['per_cpu']),'sample_each_cpu_busy_fraction_max':capacity['max_busy_fraction'],'quiet_pairs':capacity['quiet_pairs'],'physical_pairs':capacity['physical_pairs'],'pool_topology_verified':fresh['pool_topology_verified'],'core_topology':fresh['core_topology'],'measured_cgroup_cores_with_gate_and_allowance':measured_with_allowance,'capacity_sample':capacity,'wide_active_thread_observations':active_conflict,'source_model_data_hashes_verified':True,'selected_producers_quiescent':True,'services_healthy':True,'gpu_health_verified':True,'cgroup_and_memory_headroom_verified':True,'storage_headroom_verified':True,'original_hash_observation_sha256':ref['sha256'],'stat_resource_refresh_sha256':read(H/'FRESH_OBSERVATION_REF.json')['sha256'],'hashed_files':len(first['hashes']),'main_progressed_ids':main_growth,'package_sha256':sha(C/'FILES_SHA256.json'),'new_CNN':0,'new_fit':0,'test':False}
+ except BaseException as error:
+- save('LAUNCH_REFUSAL.json',dict(status='CAPACITY_V2_LAUNCH_REFUSED_NO_RETRY',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),error=repr(error),observation_ref=read(H/'FRESH_OBSERVATION_REF.json'),resources_eligible=False,authorization_created=False,new_CNN=0,new_fit=0,new_training=0,new_three_views_accepted=0,retry_authorized=False))
++ save('LAUNCH_REFUSAL.json',dict(status='CAPACITY_POOL32_V3_LAUNCH_REFUSED_NO_RETRY',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),error=repr(error),observation_ref=read(H/'FRESH_OBSERVATION_REF.json'),resources_eligible=False,authorization_created=False,new_CNN=0,new_fit=0,new_training=0,new_three_views_accepted=0,retry_authorized=False))
+  raise
+ save('LINUX_PREFLIGHT.json',pre)
+ auth={'status':'ROOT_AUTHORIZED_FLGMM_CLOSED_EXACT10_THREE_VIEW','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'package_sha256':sha(C/'FILES_SHA256.json'),'manifest_sha256':sha(C/'MANIFEST.json'),'source_review_sha256':sha(C/'ROOT_SOURCE_REVIEW.json'),'linux_preflight_sha256':sha(H/'LINUX_PREFLIGHT.json'),'exact_ids':m['exact_ids'],'cpu_affinity':sorted(cpus),'device':'cpu','max_processes':1,'test':False,'delegated_root_authorization':'Parent root explicit exact10 execution authorization after native67 adoption and actual source review; prior61 unchanged.'}
+ save('AUTHORIZATION.json',auth)
+-base='/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011';program='guardfed_flgmm_FFlip10_capacity_cpu11_valid'
++base='/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011';program='guardfed_flgmm_FFlip10_capacity_pool32_valid'
+ args=['--package-sha256',auth['package_sha256'],'--authorization',base+'/AUTHORIZATION.json','--authorization-sha256',sha(H/'AUTHORIZATION.json'),'--preflight',base+'/LINUX_PREFLIGHT.json','--preflight-sha256',auth['linux_preflight_sha256'],'--source-review',base+'/ROOT_SOURCE_REVIEW.json','--source-review-sha256',auth['source_review_sha256'],'--output',base+'/outputs/attempt001']
+-config='[program:'+program+']\ncommand=/usr/bin/env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/taskset -c 11-18 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 '+m['server_python']+' -B '+base+'/source/candidate.py '+' '.join(args)+'\ndirectory='+base+'\nautostart=false\nautorestart=false\nstartretries=0\nstartsecs=1\nstopasgroup=true\nkillasgroup=true\nstdout_logfile='+base+'/execution/stdout.log\nstderr_logfile='+base+'/execution/stderr.log\nstdout_logfile_maxbytes=0\nstderr_logfile_maxbytes=0\n'
++config='[program:'+program+']\ncommand=/usr/bin/env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/taskset -c 32-63 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 '+m['server_python']+' -B '+base+'/source/candidate.py '+' '.join(args)+'\ndirectory='+base+'\nautostart=false\nautorestart=false\nstartretries=0\nstartsecs=1\nstopasgroup=true\nkillasgroup=true\nstdout_logfile='+base+'/execution/stdout.log\nstderr_logfile='+base+'/execution/stderr.log\nstdout_logfile_maxbytes=0\nstderr_logfile_maxbytes=0\n'
+ payload={'base':base,'program':program,'package':auth['package_sha256'],'source_review_sha256':auth['source_review_sha256'],'config':config,'config_sha256':hashlib.sha256(config.encode()).hexdigest(),'files':{}}
+ for name in ['LINUX_PREFLIGHT.json','AUTHORIZATION.json']:
+  b=(H/name).read_bytes();payload['files'][name]={'sha256':sha(H/name),'bytes':len(b),'base64':base64.b64encode(b).decode()}
+-s=(R/'tmp/celeba_flgmm_closed47_root_execution_20261011/START_RECEIPT_remote.py').read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_FFlip10_capacity_cpu11_20261011').replace('guardfed_flgmm_closed47_valid',program).replace('FINITE47','FINITE10')
++s=(R/'tmp/celeba_flgmm_closed47_root_execution_20261011/START_RECEIPT_remote.py').read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_FFlip10_capacity_pool32_20261011').replace('guardfed_flgmm_closed47_valid',program).replace('FINITE47','FINITE10')
+ result=remote(s,payload,'START_RECEIPT');print(json.dumps({'status':result['status'],'utc':result['utc'],'cpu_budget':sum(components.values()),'quota':quota}))
+--- cpu11/runtime/observation_storage.py
++++ pool32/runtime/observation_storage.py
+@@ -2,7 +2,7 @@
+ import datetime,hashlib,json,subprocess
+ from pathlib import Path
+ H=Path(__file__).resolve().parent
+-F=Path('F:/YananResearchStorage/GuardFed/fl_FFlip10_capacity_cpu11_20261011/runtime')
++F=Path('F:/YananResearchStorage/GuardFed/fl_FFlip10_capacity_pool32_20261011/runtime')
+ sha=lambda b:hashlib.sha256(b).hexdigest()
+ def save(p,v):
+  with p.open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+--- cpu11/runtime/observer.py
++++ pool32/runtime/observer.py
+@@ -38,7 +38,7 @@
+     return dict(monotonic=time.monotonic(),proc_stat=rows,cgroup_cpu_stat=cpu_stat,usage_usec=values['usage_usec'])
+ 
+ def capacity_metrics(start,end,targets,siblings):
+-    assert targets==list(range(11,19)) and len(siblings)==len(set(siblings))==8 and not set(targets)&set(siblings)
++    assert targets==list(range(32,64)) and siblings==list(range(288,320))
+     monitored=sorted(targets+siblings)
+     assert set(start['proc_stat'])==set(end['proc_stat'])==set(map(str,monitored))
+     seconds=end['monotonic']-start['monotonic']; assert 2.0<=seconds<=10.0
+@@ -51,7 +51,9 @@
+         assert min(delta)>=0 and sum(delta)>0
+         total=sum(delta); busy=total-delta[3]
+         rows.append(dict(cpu=cpu,total_ticks=total,busy_ticks=busy,busy_fraction=busy/total))
+-    return dict(interval_seconds=seconds,targets=targets,siblings=siblings,per_cpu=rows,
++    by_cpu={row['cpu']:row for row in rows}
++    pairs=[dict(target=cpu,sibling=cpu+256,target_busy=by_cpu[cpu]['busy_fraction'],sibling_busy=by_cpu[cpu+256]['busy_fraction'],quiet=by_cpu[cpu]['busy_fraction']<=.20 and by_cpu[cpu+256]['busy_fraction']<=.20) for cpu in targets]
++    return dict(interval_seconds=seconds,targets=targets,siblings=siblings,per_cpu=rows,physical_pairs=pairs,quiet_pairs=sum(pair['quiet'] for pair in pairs),
+                 max_busy_fraction=max(x['busy_fraction'] for x in rows),
+                 cgroup_used_cores=usage/(seconds*1e6),
+                 definition='first8 proc/stat fields only; user/nice already include guest, guest columns excluded; only idle is free, iowait and steal conservatively busy')
+@@ -70,7 +72,7 @@
+                     st=(t/'stat').read_text().rsplit(')',1)[1].split()
+                     item={'tid':int(t.name),'affinity':affinity,'state':st[0],'cpu_ticks':int(st[11])+int(st[12]),'last_cpu':int(st[36])}
+                     threads.append(item)
+-                    if len(affinity)<=8 and set(affinity)&set(range(11,19)): all_narrow.append({'pid':pid,'argv':argv,'thread':item})
++                    if len(affinity)<=8 and set(affinity)&(set(range(32,64))|set(range(288,320))): all_narrow.append({'pid':pid,'argv':argv,'thread':item})
+                 except (OSError,ValueError): pass
+             if argv and any('guardfed' in a.lower() or 'celeba' in a.lower() for a in argv):
+                 env={}
+@@ -121,13 +123,18 @@
+ gpu_recovery=cmd(['nvidia-smi','--query-gpu=index,gpu_recovery_action','--format=csv,noheader'])
+ cg={n:(P('/sys/fs/cgroup')/n).read_text().strip() for n in ['cpu.max','cpu.stat','memory.current','memory.max','memory.events','cpuset.cpus.effective']}
+ disk=shutil.disk_usage('/workspace')
+-targets=list(range(11,19)); sibling_map={}
+-for cpu in targets:
+-    pair=cpu_set((P('/sys/devices/system/cpu')/('cpu'+str(cpu))/'topology/thread_siblings_list').read_text())
+-    assert cpu in pair and len(pair)==2
+-    sibling_map[str(cpu)]=sorted(pair)
+-siblings=sorted(set().union(*(set(v) for v in sibling_map.values()))-set(targets))
+-assert len(siblings)==8 and all(len(set(v)&set(targets))==1 for v in sibling_map.values())
++targets=list(range(32,64)); siblings=list(range(288,320)); sibling_map={}; core_topology={}
++assert set(targets+siblings)<=set(eligible), 'Fixed pool or SMT sibling outside actual eligible mask'
++for cpu in targets+siblings:
++    topology=P('/sys/devices/system/cpu')/('cpu'+str(cpu))/'topology'
++    pair=cpu_set((topology/'thread_siblings_list').read_text())
++    target=cpu if cpu in targets else cpu-256
++    assert pair=={target,target+256}, 'Fixed pool SMT topology drift'
++    core_topology[str(cpu)]={'socket':int((topology/'physical_package_id').read_text()),'core':int((topology/'core_id').read_text())}
++    if cpu in targets:sibling_map[str(cpu)]=sorted(pair)
++assert len({core_topology[str(cpu)]['socket'] for cpu in targets+siblings})==1, 'Pool not one socket'
++assert len({core_topology[str(cpu)]['core'] for cpu in targets})==32, 'Pool reuses physical cores'
++assert all(core_topology[str(cpu)]==core_topology[str(cpu+256)] for cpu in targets), 'SMT physical identity drift'
+ before,narrow=processes()
+ capacity_start=capacity_snapshot(targets+siblings); time.sleep(2); capacity_end=capacity_snapshot(targets+siblings)
+ capacity=capacity_metrics(capacity_start,capacity_end,targets,siblings)
+@@ -150,7 +157,7 @@
+                 progress=read(out/'progress.json') if (out/'progress.json').exists() else None
+                 workers.append({'pid':r['pid'],'job_path':str(jp),'id':job['id'],'progress':progress})
+         except (OSError,KeyError,ValueError): pass
+-duplicate=[r for r in after if any(any(marker+'/source/candidate.py' in a for marker in ('fl_three_view_FFlip10_20261011','fl_three_view_FFlip10_cpu136_20261011','fl_FFlip10_capacity_guard_v2_20261011','fl_FFlip10_capacity_cpu11_20261011')) for a in r['argv'])]
++duplicate=[r for r in after if any(any(marker+'/source/candidate.py' in a for marker in ('fl_three_view_FFlip10_20261011','fl_three_view_FFlip10_cpu136_20261011','fl_FFlip10_capacity_guard_v2_20261011','fl_FFlip10_capacity_cpu11_20261011','fl_FFlip10_capacity_pool32_20261011')) for a in r['argv'])]
+ lock_lines=[x for x in P('/proc/locks').read_text().splitlines() if 'guardfed' in x]
+-result={'status':'READONLY_OBSERVATION_NOT_PREFLIGHT_DECISION','started_utc':started,'hash_end_utc':hash_end,'utc':utc(),'guide_sha256':guide,'eligible_cpus':eligible,'observer_affinity':sorted(os.sched_getaffinity(0)),'observer_nice':os.getpriority(os.PRIO_PROCESS,0),'hashes':hashes,'unique_inodes_hashed':len(seen),'source_model_data_hashes_verified':all(x['match'] for x in hashes),'services':services,'supervisor_configs':configs,'gpu':gpu,'gpu_health':gpu_health,'gpu_recovery':gpu_recovery,'cgroup':cg,'disk':dict(total=disk.total,used=disk.used,free=disk.free),'guardfed_processes':after,'capacity_start':capacity_start,'capacity_end':capacity_end,'capacity_metrics':capacity,'sibling_topology':sibling_map,'narrow_cpu11_18_conflicts':narrow+narrow_after,'selected':selected,'duplicate_gate':duplicate,'main_queue':queue,'main_workers':workers,'no_remote_writes':True,'Torch_imported':False,'CNN':0,'fit':0,'training':0}
++result={'status':'READONLY_OBSERVATION_NOT_PREFLIGHT_DECISION','started_utc':started,'hash_end_utc':hash_end,'utc':utc(),'guide_sha256':guide,'eligible_cpus':eligible,'observer_affinity':sorted(os.sched_getaffinity(0)),'observer_nice':os.getpriority(os.PRIO_PROCESS,0),'hashes':hashes,'unique_inodes_hashed':len(seen),'source_model_data_hashes_verified':all(x['match'] for x in hashes),'services':services,'supervisor_configs':configs,'gpu':gpu,'gpu_health':gpu_health,'gpu_recovery':gpu_recovery,'cgroup':cg,'disk':dict(total=disk.total,used=disk.used,free=disk.free),'guardfed_processes':after,'capacity_start':capacity_start,'capacity_end':capacity_end,'capacity_metrics':capacity,'sibling_topology':sibling_map,'core_topology':core_topology,'pool_topology_verified':True,'narrow_pool32_and_siblings_conflicts':narrow+narrow_after,'selected':selected,'duplicate_gate':duplicate,'main_queue':queue,'main_workers':workers,'no_remote_writes':True,'Torch_imported':False,'CNN':0,'fit':0,'training':0}
+ print(json.dumps(result,ensure_ascii=False))
+--- cpu11/runtime/observer_payload.json
++++ pool32/runtime/observer_payload.json
+@@ -13,14 +13,38 @@
+     ],
+     "native_tolerance": 1e-12,
+     "cpu_affinity": [
+-      11,
+-      12,
+-      13,
+-      14,
+-      15,
+-      16,
+-      17,
+-      18
++      32,
++      33,
++      34,
++      35,
++      36,
++      37,
++      38,
++      39,
++      40,
++      41,
++      42,
++      43,
++      44,
++      45,
++      46,
++      47,
++      48,
++      49,
++      50,
++      51,
++      52,
++      53,
++      54,
++      55,
++      56,
++      57,
++      58,
++      59,
++      60,
++      61,
++      62,
++      63
+     ],
+     "threads": 8,
+     "new_scientific_acceptances": 0,
+@@ -4056,7 +4080,7 @@
+     },
+     "authorizations_and_runtime_facts_pending": [
+       "independent/root source review and explicit exact10 authorization",
+-      "fresh Linux CPU11-18 and SMT siblings sampled capacity (not exclusive cores), narrow reservation, quota/memory/GPU/storage preflight",
++      "fresh Linux fixed pool32-63 and SMT288-319 eligible/same-socket distinct-core topology; at least16 quiet physical pairs; no narrow reservation; quota/memory/GPU/storage preflight (sampled capacity, not exclusivity)",
+       "actual original server artifact/source/data SHA and selected-producer quiescence checks",
+       "actual replay receipts and unchanged Linux whole saved checker; F offserver arrays/members and root adoption"
+     ],
+--- cpu11/saved_v2/audit_saved.py
++++ pool32/saved_v2/audit_saved.py
+@@ -4,7 +4,7 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+-ACTUAL = ROOT / 'tmp/fl_FFlip10_capacity_cpu11_20261011/actual/saved001'
++ACTUAL = ROOT / 'tmp/fl_FFlip10_capacity_pool32_20261011/actual/saved001'
+ HISTORICAL = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001'
+ PREPARED = HERE
+ OUTPUT = ACTUAL / 'SAVED_OUTPUTS_AUDIT_NO_REFIT.json'
+--- cpu11/saved_v2/contract.py
++++ pool32/saved_v2/contract.py
+@@ -4,8 +4,8 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+-CANDIDATE = ROOT/'tmp/fl_FFlip10_capacity_cpu11_20261011'
+-PACKAGE = '74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f'
++CANDIDATE = ROOT/'tmp/fl_FFlip10_capacity_pool32_20261011'
++PACKAGE = '699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39'
+ SAVED_SOURCE_SHA = 'd512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ IDS = json.loads((HERE/'FIXED_IDS.json').read_bytes())['exact_ids']
+ FROOT = Path('F:/YananResearchStorage/GuardFed')
+--- cpu11/saved_v2/linux_saved_remote.py
++++ pool32/saved_v2/linux_saved_remote.py
+@@ -5,31 +5,31 @@
+ ap.add_argument('--gate-result-sha256',required=True)
+ ap.add_argument('--allow-original-cached-root-refit',action='store_true',required=True)
+ a=ap.parse_args()
+-saved=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011/source/originals/saved_science.py')
++saved=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011/source/originals/saved_science.py')
+ payload={'saved_check_source':saved.read_text(encoding='utf-8'),'source_sha256':hashlib.sha256(saved.read_bytes()).hexdigest()}
+ assert hashlib.sha256(payload['saved_check_source'].encode()).hexdigest()==payload['source_sha256']
+ assert payload['source_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+-base=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011'); output=base/'LINUX_SAVED_CHECK.json'
++base=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011'); output=base/'LINUX_SAVED_CHECK.json'
+ assert not output.exists() and not (base/'LINUX_SAVED_FAILURE.json').exists()
+ assert os.environ['CUDA_VISIBLE_DEVICES']=='' and os.getpriority(os.PRIO_PROCESS,0)>=10 and len(os.sched_getaffinity(0))==1
+ quota,period=pathlib.Path('/sys/fs/cgroup/cpu.max').read_text().split();assert quota=='max' or int(quota)/int(period)>=32
+ spec=importlib.util.spec_from_file_location('root_exact3_source',base/'source/candidate.py');c=importlib.util.module_from_spec(spec);sys.modules[spec.name]=c;spec.loader.exec_module(c)
+-c.package_check('74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f')
++c.package_check('699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39')
+ m=c.read(base/'source/MANIFEST.json');c.validate_manifest(m)
+ out=base/'outputs/attempt001'
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()==a.gate_result_sha256
+ gate=c.read(out/'GATE_RESULT.json')
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert gate['status']=='FLGMM_EXACT10_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
+-assert gate['package_sha256']=='74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f'
++assert gate['package_sha256']=='699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39'
+ assert len(gate['receipts'])==10 and [r['id'] for r in gate['receipts']]==m['exact_ids']
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_capacity_cpu11_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_capacity_cpu11_valid','EXITED'],status.stdout
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_capacity_pool32_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_capacity_pool32_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   cmd=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_FFlip10_capacity_cpu11_20261011' in token for token in cmd),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_FFlip10_capacity_pool32_20261011' in token for token in cmd),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -68,7 +68,7 @@
+   comp=ns['check_saved'](record,base/'outputs/attempt001'/row['id'],r,proof,types.SimpleNamespace(repo=repo),None,core,None,ev,ids,y,s)
+   assert measure()==before
+   results.append({'id':row['id'],'native_comparison':comp,'root_receipt_exact':True,'cached_root_fit_exact':True,'saved_predictions_metrics_counts_exact':True,'checkpoint_sha256':r['checkpoint_sha256'],'array_sha256':r['prediction_arrays_sha256'],'receipt_sha256':c.sha(base/'outputs/attempt001'/row['id']/'receipt.json')})
+- report={'status':'LINUX_ORIGINAL_FLGMM10_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f','cached_root_refits':10,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
++ report={'status':'LINUX_ORIGINAL_FLGMM10_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39','cached_root_refits':10,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
+  output.write_text(json.dumps(report,indent=2)+'\n');sys.stdout.write(output.read_text())
+ except BaseException:
+  import traceback
+--- cpu11/saved_v2/transport_remote.py
++++ pool32/saved_v2/transport_remote.py
+@@ -1,20 +1,20 @@
+ 
+ import datetime,hashlib,io,json,os,pathlib,subprocess,sys,zipfile
+-base=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_cpu11_20261011')
++base=pathlib.Path('/workspace/guardfed_checks/fl_FFlip10_capacity_pool32_20261011')
+ out=base/'outputs/attempt001'
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()=='__GATE_RESULT_SHA256__'
+ gate=json.loads((out/'GATE_RESULT.json').read_text())
+ ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage']
+ assert gate['status']=='FLGMM_EXACT10_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
+-assert gate['package_sha256']=='74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f'
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_capacity_cpu11_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_capacity_cpu11_valid','EXITED'],status.stdout
++assert gate['package_sha256']=='699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39'
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_capacity_pool32_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_capacity_pool32_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   command=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_FFlip10_capacity_cpu11_20261011' in token for token in command),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_FFlip10_capacity_pool32_20261011' in token for token in command),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -30,7 +30,7 @@
+ assert linux['original_check_saved_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ assert all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in linux['records'])
+ assert linux['new_CNN']==0 and linux['new_training']==0 and linux['test'] is False
+-assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f'
++assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39'
+ files={'bundle/GATE_RESULT.json':out/'GATE_RESULT.json','bundle/metadata_receipt.json':out/'metadata_receipt.json','LINUX_SAVED_CHECK.json':proof}
+ for ident in ids:
+  for name in ['receipt.json','validation_predictions.npz']:files['bundle/'+ident+'/'+name]=out/ident/name

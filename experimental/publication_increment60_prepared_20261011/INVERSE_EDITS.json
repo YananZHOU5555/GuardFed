@@ -1,0 +1,2916 @@
+{
+  "parent_source": "tmp/publish_guardfed_increment59_20261011.py",
+  "parent_sha256": "706977ccf02801e63a1b1df9b1769dabab6626ce978bbedd63f6738a50125769",
+  "reverse_apply_in_descending_new_start": [
+    {
+      "new_start": 11,
+      "new_end": 16,
+      "old_text": "",
+      "new_text": "root-"
+    },
+    {
+      "new_start": 17,
+      "new_end": 20,
+      "old_text": "do",
+      "new_text": "cce"
+    },
+    {
+      "new_start": 25,
+      "new_end": 30,
+      "old_text": "",
+      "new_text": "curre"
+    },
+    {
+      "new_start": 31,
+      "new_end": 31,
+      "old_text": "a",
+      "new_text": ""
+    },
+    {
+      "new_start": 32,
+      "new_end": 34,
+      "old_text": "ive320/views3",
+      "new_text": " F"
+    },
+    {
+      "new_start": 38,
+      "new_end": 52,
+      "old_text": "",
+      "new_text": "uthor drafts a"
+    },
+    {
+      "new_start": 54,
+      "new_end": 54,
+      "old_text": " two F IID scenes; FL native67, all other cutoffs unchanged;",
+      "new_text": ""
+    },
+    {
+      "new_start": 63,
+      "new_end": 65,
+      "old_text": "m",
+      "new_text": "op"
+    },
+    {
+      "new_start": 66,
+      "new_end": 108,
+      "old_text": "",
+      "new_text": "rational evidence; no new scientific accep"
+    },
+    {
+      "new_start": 110,
+      "new_end": 110,
+      "old_text": "data o",
+      "new_text": ""
+    },
+    {
+      "new_start": 111,
+      "new_end": 113,
+      "old_text": "ly",
+      "new_text": "ce"
+    },
+    {
+      "new_start": 394,
+      "new_end": 417,
+      "old_text": "",
+      "new_text": "27ebed940ce822f87976e0d"
+    },
+    {
+      "new_start": 418,
+      "new_end": 419,
+      "old_text": "1",
+      "new_text": "7"
+    },
+    {
+      "new_start": 420,
+      "new_end": 422,
+      "old_text": "",
+      "new_text": "90"
+    },
+    {
+      "new_start": 423,
+      "new_end": 424,
+      "old_text": "5b",
+      "new_text": "7"
+    },
+    {
+      "new_start": 427,
+      "new_end": 427,
+      "old_text": "25",
+      "new_text": ""
+    },
+    {
+      "new_start": 428,
+      "new_end": 428,
+      "old_text": "f02db5fdb7d8deec4e25ac5",
+      "new_text": ""
+    },
+    {
+      "new_start": 430,
+      "new_end": 434,
+      "old_text": "07d",
+      "new_text": "f36a"
+    },
+    {
+      "new_start": 644,
+      "new_end": 644,
+      "old_text": ",help='Actual root-accepted increment59 entry semantic review JSON under this repository'",
+      "new_text": ""
+    },
+    {
+      "new_start": 731,
+      "new_end": 738,
+      "old_text": "F20",
+      "new_text": "compact"
+    },
+    {
+      "new_start": 739,
+      "new_end": 746,
+      "old_text": "r",
+      "new_text": "selecti"
+    },
+    {
+      "new_start": 747,
+      "new_end": 748,
+      "old_text": "ot",
+      "new_text": "n"
+    },
+    {
+      "new_start": 773,
+      "new_end": 773,
+      "old_text": ",help='Actual adopted canonical two-scene F20 ROOT_VERIFICATION.json; no prepared proof'",
+      "new_text": ""
+    },
+    {
+      "new_start": 798,
+      "new_end": 805,
+      "old_text": "F20",
+      "new_text": "compact"
+    },
+    {
+      "new_start": 806,
+      "new_end": 813,
+      "old_text": "r",
+      "new_text": "selecti"
+    },
+    {
+      "new_start": 814,
+      "new_end": 815,
+      "old_text": "ot",
+      "new_text": "n"
+    },
+    {
+      "new_start": 860,
+      "new_end": 1370,
+      "old_text": "",
+      "new_text": "\n\ndef pinned_json(path,sha):\n    assert re.fullmatch('[0-9a-f]{64}',sha)\n    assert path.is_file() and not path.is_symlink() and path.stat().st_size<2_000_000 and H(path.read_bytes())==sha,path\n    return json.loads(path.read_bytes())\n\ndef repo_path(rel):\n    assert isinstance(rel,str) and '\\\\' not in rel and ':' not in rel and not rel.startswith('/')\n    p=R/rel\n    assert p.relative_to(R).as_posix()==rel and '..' not in p.relative_to(R).parts and p.resolve().is_relative_to(R.resolve()),rel\n    return p\n"
+    },
+    {
+      "new_start": 1509,
+      "new_end": 1554,
+      "old_text": "",
+      "new_text": "scope_path=(R/a.compact_selection).resolve()\n"
+    },
+    {
+      "new_start": 1561,
+      "new_end": 1664,
+      "old_text": "",
+      "new_text": "scope_path==R/'tmp/publication_increment60_prepared_20261011/COMPACT_SELECTION.json'\nentry=pinned_json("
+    },
+    {
+      "new_start": 1679,
+      "new_end": 1679,
+      "old_text": ".is_file() and not semantic_review.is_symlink() and semantic_review.stat().st_size<2_000_000\nassert re.fullmatch('[0-9a-f]{64}'",
+      "new_text": ""
+    },
+    {
+      "new_start": 1705,
+      "new_end": 1835,
+      "old_text": "",
+      "new_text": "\nselection=pinned_json(scope_path,a.compact_selection_sha256)\nassert entry['status']=='PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW'"
+    },
+    {
+      "new_start": 1840,
+      "new_end": 2039,
+      "old_text": "H(",
+      "new_text": "entry['root_accepted'] is True\nassert selection['status']=='ROOT_CLOSED_INCREMENT60_COMPACT_SELECTION' and selection['root_accepted'] is True\nassert selection['parent_commit']==PARENT and selection['"
+    },
+    {
+      "new_start": 2054,
+      "new_end": 2057,
+      "old_text": ".re",
+      "new_text": "_sh"
+    },
+    {
+      "new_start": 2058,
+      "new_end": 2063,
+      "old_text": "d_bytes())",
+      "new_text": "256']"
+    },
+    {
+      "new_start": 2089,
+      "new_end": 2089,
+      "old_text": "=='71519a3620bca13467415142ca3d6d575227eee10f10da9ec5a05c7b47c65189'",
+      "new_text": ""
+    },
+    {
+      "new_start": 2099,
+      "new_end": 2102,
+      "old_text": "man",
+      "new_text": "lec"
+    },
+    {
+      "new_start": 2104,
+      "new_end": 2113,
+      "old_text": "c",
+      "new_text": "on['STATE"
+    },
+    {
+      "new_start": 2114,
+      "new_end": 2116,
+      "old_text": "review.rel",
+      "new_text": "sh"
+    },
+    {
+      "new_start": 2117,
+      "new_end": 2122,
+      "old_text": "tive_to(R).as_posix()",
+      "new_text": "256']"
+    },
+    {
+      "new_start": 2124,
+      "new_end": 2124,
+      "old_text": "'tmp/",
+      "new_text": ""
+    },
+    {
+      "new_start": 2129,
+      "new_end": 2136,
+      "old_text": "",
+      "new_text": "['STATE"
+    },
+    {
+      "new_start": 2137,
+      "new_end": 2150,
+      "old_text": "incr",
+      "new_text": "sha256']\nstat"
+    },
+    {
+      "new_start": 2151,
+      "new_end": 2154,
+      "old_text": "men",
+      "new_text": "_pa"
+    },
+    {
+      "new_start": 2155,
+      "new_end": 2158,
+      "old_text": "59_independent_review_20261011",
+      "new_text": "h=T"
+    },
+    {
+      "new_start": 2159,
+      "new_end": 2161,
+      "old_text": "",
+      "new_text": "'T"
+    },
+    {
+      "new_start": 2162,
+      "new_end": 2163,
+      "old_text": "OOT_",
+      "new_text": "A"
+    },
+    {
+      "new_start": 2165,
+      "new_end": 2173,
+      "old_text": "D",
+      "new_text": "ING_STAT"
+    },
+    {
+      "new_start": 2174,
+      "new_end": 2174,
+      "old_text": "PENDENT_REVIEW",
+      "new_text": ""
+    },
+    {
+      "new_start": 2181,
+      "new_end": 2204,
+      "old_text": "F20",
+      "new_text": "state=pinned_json(state"
+    },
+    {
+      "new_start": 2209,
+      "new_end": 2225,
+      "old_text": "=(R/",
+      "new_text": ",entry['STATE_sh"
+    },
+    {
+      "new_start": 2226,
+      "new_end": 2226,
+      "old_text": ".F",
+      "new_text": ""
+    },
+    {
+      "new_start": 2227,
+      "new_end": 2231,
+      "old_text": "0_root).resolve(",
+      "new_text": "56']"
+    },
+    {
+      "new_start": 2233,
+      "new_end": 2234,
+      "old_text": "",
+      "new_text": "m"
+    },
+    {
+      "new_start": 2235,
+      "new_end": 2238,
+      "old_text": "",
+      "new_text": "in="
+    },
+    {
+      "new_start": 2239,
+      "new_end": 2239,
+      "old_text": "ser",
+      "new_text": ""
+    },
+    {
+      "new_start": 2240,
+      "new_end": 2240,
+      "old_text": " F20_p",
+      "new_text": ""
+    },
+    {
+      "new_start": 2242,
+      "new_end": 2244,
+      "old_text": "h==(T/",
+      "new_text": "e["
+    },
+    {
+      "new_start": 2264,
+      "new_end": 2327,
+      "old_text": "/",
+      "new_text": "']\nassert (main['scientific_results_offserver_verified'],main['"
+    },
+    {
+      "new_start": 2338,
+      "new_end": 2477,
+      "old_text": "",
+      "new_text": "new_models_offserver_verified'])==(320,320)\nassert main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_"
+    },
+    {
+      "new_start": 2478,
+      "new_end": 2503,
+      "old_text": "",
+      "new_text": "':20}\nassert state['flgmm"
+    },
+    {
+      "new_start": 2504,
+      "new_end": 2584,
+      "old_text": "IID",
+      "new_text": "fullcoverage_v2_20261009']['new_accepted']==67\nassert state['FLGMM_after48_valid"
+    },
+    {
+      "new_start": 2586,
+      "new_end": 2594,
+      "old_text": "",
+      "new_text": "hree_vie"
+    },
+    {
+      "new_start": 2595,
+      "new_end": 2595,
+      "old_text": "o_scenes20",
+      "new_text": ""
+    },
+    {
+      "new_start": 2604,
+      "new_end": 2613,
+      "old_text": "/ROOT",
+      "new_text": "']['FLGMM"
+    },
+    {
+      "new_start": 2614,
+      "new_end": 2615,
+      "old_text": "VERIFICATION.js",
+      "new_text": "t"
+    },
+    {
+      "new_start": 2616,
+      "new_end": 2622,
+      "old_text": "n').",
+      "new_text": "tal_th"
+    },
+    {
+      "new_start": 2624,
+      "new_end": 2637,
+      "old_text": "",
+      "new_text": "e_view_record"
+    },
+    {
+      "new_start": 2638,
+      "new_end": 2644,
+      "old_text": "olve()",
+      "new_text": "']==61"
+    },
+    {
+      "new_start": 2652,
+      "new_end": 2681,
+      "old_text": "",
+      "new_text": "state['FLGMM_after48_valid_th"
+    },
+    {
+      "new_start": 2683,
+      "new_end": 2854,
+      "old_text": ".",
+      "new_text": "e_view_20261011']['six_scene_table']['complete_scene_records']==60\nassert state['gradient64_validation_search_20261010']['offserver_accepted']==46\nassert state['hybrid100_"
+    },
+    {
+      "new_start": 2858,
+      "new_end": 2905,
+      "old_text": "",
+      "new_text": "coverage_20261010']['new_accepted']==12\nassert "
+    },
+    {
+      "new_start": 2907,
+      "new_end": 2913,
+      "old_text": "",
+      "new_text": "in['A_"
+    },
+    {
+      "new_start": 2914,
+      "new_end": 2929,
+      "old_text": "",
+      "new_text": "hree_view_ten_s"
+    },
+    {
+      "new_start": 2930,
+      "new_end": 2939,
+      "old_text": "h(",
+      "new_text": "ene_table"
+    },
+    {
+      "new_start": 2940,
+      "new_end": 2941,
+      "old_text": "",
+      "new_text": "]"
+    },
+    {
+      "new_start": 2942,
+      "new_end": 2961,
+      "old_text": "",
+      "new_text": "'paired_models']==1"
+    },
+    {
+      "new_start": 2962,
+      "new_end": 2964,
+      "old_text": "-9a-f]{64}',a.",
+      "new_text": "0\n"
+    },
+    {
+      "new_start": 2968,
+      "new_end": 2972,
+      "old_text": "root_sha256) and a.F20_root_sha256=",
+      "new_text": "ROOT"
+    },
+    {
+      "new_start": 3040,
+      "new_end": 3040,
+      "old_text": "\ndef pinned_json(path,sha):\n    ",
+      "new_text": ""
+    },
+    {
+      "new_start": 3047,
+      "new_end": 3047,
+      "old_text": "p",
+      "new_text": ""
+    },
+    {
+      "new_start": 3048,
+      "new_end": 3051,
+      "old_text": "th.",
+      "new_text": "ny("
+    },
+    {
+      "new_start": 3053,
+      "new_end": 3053,
+      "old_text": "_f",
+      "new_text": ""
+    },
+    {
+      "new_start": 3054,
+      "new_end": 3060,
+      "old_text": "l",
+      "new_text": "nstanc"
+    },
+    {
+      "new_start": 3062,
+      "new_end": 3068,
+      "old_text": "",
+      "new_text": "v,dict"
+    },
+    {
+      "new_start": 3074,
+      "new_end": 3083,
+      "old_text": "n",
+      "new_text": "v.get('ro"
+    },
+    {
+      "new_start": 3085,
+      "new_end": 3086,
+      "old_text": " ",
+      "new_text": "_"
+    },
+    {
+      "new_start": 3087,
+      "new_end": 3091,
+      "old_text": "ath.is",
+      "new_text": "roof"
+    },
+    {
+      "new_start": 3093,
+      "new_end": 3099,
+      "old_text": "ymlink(",
+      "new_text": "ha256'"
+    },
+    {
+      "new_start": 3100,
+      "new_end": 3110,
+      "old_text": "",
+      "new_text": "==F20_ROOT"
+    },
+    {
+      "new_start": 3115,
+      "new_end": 3115,
+      "old_text": "H",
+      "new_text": ""
+    },
+    {
+      "new_start": 3116,
+      "new_end": 3123,
+      "old_text": "",
+      "new_text": "v.get('"
+    },
+    {
+      "new_start": 3125,
+      "new_end": 3126,
+      "old_text": "th.",
+      "new_text": "i"
+    },
+    {
+      "new_start": 3128,
+      "new_end": 3128,
+      "old_text": "a",
+      "new_text": ""
+    },
+    {
+      "new_start": 3130,
+      "new_end": 3152,
+      "old_text": "by",
+      "new_text": "models'),v.get('comple"
+    },
+    {
+      "new_start": 3154,
+      "new_end": 3155,
+      "old_text": "",
+      "new_text": "_"
+    },
+    {
+      "new_start": 3156,
+      "new_end": 3162,
+      "old_text": "(",
+      "new_text": "cenes'"
+    },
+    {
+      "new_start": 3166,
+      "new_end": 3169,
+      "old_text": "sha",
+      "new_text": "(20"
+    },
+    {
+      "new_start": 3170,
+      "new_end": 3172,
+      "old_text": "path\n",
+      "new_text": "2)"
+    },
+    {
+      "new_start": 3173,
+      "new_end": 3176,
+      "old_text": "",
+      "new_text": "for"
+    },
+    {
+      "new_start": 3177,
+      "new_end": 3178,
+      "old_text": "",
+      "new_text": "v"
+    },
+    {
+      "new_start": 3179,
+      "new_end": 3180,
+      "old_text": " retur",
+      "new_text": "i"
+    },
+    {
+      "new_start": 3182,
+      "new_end": 3185,
+      "old_text": "jso",
+      "new_text": "mai"
+    },
+    {
+      "new_start": 3187,
+      "new_end": 3189,
+      "old_text": "",
+      "new_text": "va"
+    },
+    {
+      "new_start": 3190,
+      "new_end": 3191,
+      "old_text": "oads(path.read_byt",
+      "new_text": "u"
+    },
+    {
+      "new_start": 3197,
+      "new_end": 3231,
+      "old_text": "",
+      "new_text": "accepted=entry['current_accepted']"
+    },
+    {
+      "new_start": 3232,
+      "new_end": 3387,
+      "old_text": "TAB",
+      "new_text": "assert (accepted['native_new'],accepted['three_view_models'],accepted['F_paired_models'],accepted['F_complete_scenes'])==(320,320,20,2)\nassert (accepted['F"
+    },
+    {
+      "new_start": 3388,
+      "new_end": 3388,
+      "old_text": "E",
+      "new_text": ""
+    },
+    {
+      "new_start": 3389,
+      "new_end": 3399,
+      "old_text": "ROOT=",
+      "new_text": "native_new"
+    },
+    {
+      "new_start": 3400,
+      "new_end": 3484,
+      "old_text": "",
+      "new_text": "],accepted['FL_three_view_total'],accepted['FL_complete_table_records'],accepted['gr"
+    },
+    {
+      "new_start": 3486,
+      "new_end": 3514,
+      "old_text": "",
+      "new_text": "ient_accepted'],accepted['Hy"
+    },
+    {
+      "new_start": 3515,
+      "new_end": 3559,
+      "old_text": "",
+      "new_text": "rid_native_new'])==(67,61,60,46,12)\nassert a"
+    },
+    {
+      "new_start": 3560,
+      "new_end": 3560,
+      "old_text": "7f81",
+      "new_text": ""
+    },
+    {
+      "new_start": 3561,
+      "new_end": 3561,
+      "old_text": "5952",
+      "new_text": ""
+    },
+    {
+      "new_start": 3562,
+      "new_end": 3591,
+      "old_text": "85",
+      "new_text": "pted['by_variant']==main['thr"
+    },
+    {
+      "new_start": 3593,
+      "new_end": 3610,
+      "old_text": "1",
+      "new_text": "_view_counts_by_v"
+    },
+    {
+      "new_start": 3611,
+      "new_end": 3640,
+      "old_text": "38",
+      "new_text": "riant']\nassert state['latest_"
+    },
+    {
+      "new_start": 3641,
+      "new_end": 3661,
+      "old_text": "f4",
+      "new_text": "ive_queue_readonly_o"
+    },
+    {
+      "new_start": 3662,
+      "new_end": 3666,
+      "old_text": "5515d98",
+      "new_text": "serv"
+    },
+    {
+      "new_start": 3667,
+      "new_end": 3675,
+      "old_text": "8706",
+      "new_text": "tion']=="
+    },
+    {
+      "new_start": 3676,
+      "new_end": 3685,
+      "old_text": "4",
+      "new_text": "ntry['lat"
+    },
+    {
+      "new_start": 3686,
+      "new_end": 3753,
+      "old_text": "60",
+      "new_text": "st_observation_only']\nassert entry['latest_observation_only']['new_"
+    },
+    {
+      "new_start": 3755,
+      "new_end": 3771,
+      "old_text": "",
+      "new_text": "ceptance']==0 an"
+    },
+    {
+      "new_start": 3772,
+      "new_end": 3773,
+      "old_text": "2",
+      "new_text": " "
+    },
+    {
+      "new_start": 3774,
+      "new_end": 3781,
+      "old_text": "5",
+      "new_text": "ntry['l"
+    },
+    {
+      "new_start": 3782,
+      "new_end": 3793,
+      "old_text": "259425",
+      "new_text": "test_observ"
+    },
+    {
+      "new_start": 3794,
+      "new_end": 3807,
+      "old_text": "d",
+      "new_text": "tion_only']['"
+    },
+    {
+      "new_start": 3808,
+      "new_end": 3834,
+      "old_text": "f1237",
+      "new_text": "ounts_are_observation_only"
+    },
+    {
+      "new_start": 3835,
+      "new_end": 3844,
+      "old_text": "",
+      "new_text": "] is True"
+    },
+    {
+      "new_start": 3845,
+      "new_end": 3845,
+      "old_text": "DETAIL",
+      "new_text": ""
+    },
+    {
+      "new_start": 3847,
+      "new_end": 3850,
+      "old_text": "_",
+      "new_text": "ITO"
+    },
+    {
+      "new_start": 3851,
+      "new_end": 3853,
+      "old_text": "OOT='195eb98c26cc2a4f0c3576cbb7a6b57a73fbc0d4ccc17a683f9817569e164c54'\nC",
+      "new_text": "IA"
+    },
+    {
+      "new_start": 3854,
+      "new_end": 3854,
+      "old_text": "EAR",
+      "new_text": ""
+    },
+    {
+      "new_start": 3862,
+      "new_end": 3864,
+      "old_text": "",
+      "new_text": "0b"
+    },
+    {
+      "new_start": 3865,
+      "new_end": 3866,
+      "old_text": "",
+      "new_text": "9"
+    },
+    {
+      "new_start": 3867,
+      "new_end": 3880,
+      "old_text": "",
+      "new_text": "6155a6dbb9e4c"
+    },
+    {
+      "new_start": 3881,
+      "new_end": 3898,
+      "old_text": "",
+      "new_text": "3f42d788b66579b73"
+    },
+    {
+      "new_start": 3899,
+      "new_end": 3899,
+      "old_text": "c87b07",
+      "new_text": ""
+    },
+    {
+      "new_start": 3902,
+      "new_end": 3906,
+      "old_text": "c6",
+      "new_text": "e843"
+    },
+    {
+      "new_start": 3907,
+      "new_end": 3907,
+      "old_text": "3",
+      "new_text": ""
+    },
+    {
+      "new_start": 3909,
+      "new_end": 3910,
+      "old_text": "93553875",
+      "new_text": "1"
+    },
+    {
+      "new_start": 3911,
+      "new_end": 3911,
+      "old_text": "bce33bf034b8b3d",
+      "new_text": ""
+    },
+    {
+      "new_start": 3913,
+      "new_end": 3917,
+      "old_text": "5",
+      "new_text": "2202"
+    },
+    {
+      "new_start": 3918,
+      "new_end": 3920,
+      "old_text": "",
+      "new_text": "92"
+    },
+    {
+      "new_start": 3921,
+      "new_end": 3921,
+      "old_text": "d37e6b70535",
+      "new_text": ""
+    },
+    {
+      "new_start": 3923,
+      "new_end": 3925,
+      "old_text": "6c",
+      "new_text": "ab"
+    },
+    {
+      "new_start": 3927,
+      "new_end": 3940,
+      "old_text": "revision",
+      "new_text": "EDITORIAL_REL"
+    },
+    {
+      "new_start": 3941,
+      "new_end": 3941,
+      "old_text": "R/",
+      "new_text": ""
+    },
+    {
+      "new_start": 3991,
+      "new_end": 3991,
+      "old_text": "'\ndetailed=pinned_json(revision",
+      "new_text": ""
+    },
+    {
+      "new_start": 3992,
+      "new_end": 3992,
+      "old_text": "'",
+      "new_text": ""
+    },
+    {
+      "new_start": 4012,
+      "new_end": 4013,
+      "old_text": "A100_reader_",
+      "new_text": "F"
+    },
+    {
+      "new_start": 4014,
+      "new_end": 4014,
+      "old_text": "0261011/ROOT_REVIEW.json',DETAILED_ROOT)\nclear=pinned_json(revision/'rebuttal_clear_A10",
+      "new_text": ""
+    },
+    {
+      "new_start": 4030,
+      "new_end": 4040,
+      "old_text": "",
+      "new_text": "EDITORIAL_"
+    },
+    {
+      "new_start": 4052,
+      "new_end": 4073,
+      "old_text": ",CLEAR",
+      "new_text": "\nlatest=state['latest"
+    },
+    {
+      "new_start": 4074,
+      "new_end": 4090,
+      "old_text": "ROOT)",
+      "new_text": "rebuttal_draft']"
+    },
+    {
+      "new_start": 4098,
+      "new_end": 4101,
+      "old_text": "d",
+      "new_text": "lat"
+    },
+    {
+      "new_start": 4102,
+      "new_end": 4103,
+      "old_text": "",
+      "new_text": "s"
+    },
+    {
+      "new_start": 4104,
+      "new_end": 4104,
+      "old_text": "ailed",
+      "new_text": ""
+    },
+    {
+      "new_start": 4122,
+      "new_end": 4126,
+      "old_text": "",
+      "new_text": "F20_"
+    },
+    {
+      "new_start": 4137,
+      "new_end": 4142,
+      "old_text": "A100_",
+      "new_text": "EDITO"
+    },
+    {
+      "new_start": 4143,
+      "new_end": 4144,
+      "old_text": "EADER_REBUTT",
+      "new_text": "I"
+    },
+    {
+      "new_start": 4184,
+      "new_end": 4184,
+      "old_text": " and detailed['root_editorial_review'] is True",
+      "new_text": ""
+    },
+    {
+      "new_start": 4192,
+      "new_end": 4192,
+      "old_text": "c",
+      "new_text": ""
+    },
+    {
+      "new_start": 4193,
+      "new_end": 4195,
+      "old_text": "",
+      "new_text": "at"
+    },
+    {
+      "new_start": 4196,
+      "new_end": 4198,
+      "old_text": "ar",
+      "new_text": "st"
+    },
+    {
+      "new_start": 4200,
+      "new_end": 4203,
+      "old_text": "s",
+      "new_text": "roo"
+    },
+    {
+      "new_start": 4204,
+      "new_end": 4212,
+      "old_text": "",
+      "new_text": "_proof_p"
+    },
+    {
+      "new_start": 4214,
+      "new_end": 4215,
+      "old_text": "us",
+      "new_text": "h"
+    },
+    {
+      "new_start": 4219,
+      "new_end": 4219,
+      "old_text": "'ROOT_CLEAR_A100_COMPLETE24_",
+      "new_text": ""
+    },
+    {
+      "new_start": 4229,
+      "new_end": 4229,
+      "old_text": "CANDIDATE_ADOPTED_FOR_AUTHOR_",
+      "new_text": ""
+    },
+    {
+      "new_start": 4231,
+      "new_end": 4232,
+      "old_text": "VIEW'",
+      "new_text": "L"
+    },
+    {
+      "new_start": 4237,
+      "new_end": 4237,
+      "old_text": "c",
+      "new_text": ""
+    },
+    {
+      "new_start": 4238,
+      "new_end": 4240,
+      "old_text": "",
+      "new_text": "at"
+    },
+    {
+      "new_start": 4241,
+      "new_end": 4243,
+      "old_text": "ar",
+      "new_text": "st"
+    },
+    {
+      "new_start": 4250,
+      "new_end": 4258,
+      "old_text": "",
+      "new_text": "proof_sh"
+    },
+    {
+      "new_start": 4259,
+      "new_end": 4262,
+      "old_text": "doption",
+      "new_text": "256"
+    },
+    {
+      "new_start": 4264,
+      "new_end": 4269,
+      "old_text": " is ",
+      "new_text": "==EDI"
+    },
+    {
+      "new_start": 4270,
+      "new_end": 4280,
+      "old_text": "rue",
+      "new_text": "ORIAL_ROOT"
+    },
+    {
+      "new_start": 4281,
+      "new_end": 4281,
+      "old_text": "for adopted in (detailed,clear):\n    ",
+      "new_text": ""
+    },
+    {
+      "new_start": 4288,
+      "new_end": 4289,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4290,
+      "new_end": 4290,
+      "old_text": "dop",
+      "new_text": ""
+    },
+    {
+      "new_start": 4292,
+      "new_end": 4322,
+      "old_text": "",
+      "new_text": "st['comments_verbatim']==24 an"
+    },
+    {
+      "new_start": 4323,
+      "new_end": 4330,
+      "old_text": "",
+      "new_text": " latest"
+    },
+    {
+      "new_start": 4364,
+      "new_end": 4365,
+      "old_text": "(",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4366,
+      "new_end": 4379,
+      "old_text": "d",
+      "new_text": "test['F20_inc"
+    },
+    {
+      "new_start": 4380,
+      "new_end": 4381,
+      "old_text": "",
+      "new_text": "r"
+    },
+    {
+      "new_start": 4382,
+      "new_end": 4385,
+      "old_text": "",
+      "new_text": "ora"
+    },
+    {
+      "new_start": 4388,
+      "new_end": 4413,
+      "old_text": "",
+      "new_text": "'] is True\nassert (latest"
+    },
+    {
+      "new_start": 4415,
+      "new_end": 4425,
+      "old_text": "",
+      "new_text": "F_paired_m"
+    },
+    {
+      "new_start": 4426,
+      "new_end": 4428,
+      "old_text": "rigina",
+      "new_text": "de"
+    },
+    {
+      "new_start": 4429,
+      "new_end": 4429,
+      "old_text": "_comment",
+      "new_text": ""
+    },
+    {
+      "new_start": 4433,
+      "new_end": 4434,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4435,
+      "new_end": 4435,
+      "old_text": "dop",
+      "new_text": ""
+    },
+    {
+      "new_start": 4437,
+      "new_end": 4439,
+      "old_text": "d",
+      "new_text": "st"
+    },
+    {
+      "new_start": 4441,
+      "new_end": 4442,
+      "old_text": "A",
+      "new_text": "F"
+    },
+    {
+      "new_start": 4461,
+      "new_end": 4462,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4463,
+      "new_end": 4463,
+      "old_text": "dop",
+      "new_text": ""
+    },
+    {
+      "new_start": 4465,
+      "new_end": 4467,
+      "old_text": "d",
+      "new_text": "st"
+    },
+    {
+      "new_start": 4469,
+      "new_end": 4472,
+      "old_text": "A_p",
+      "new_text": "rem"
+    },
+    {
+      "new_start": 4474,
+      "new_end": 4506,
+      "old_text": "",
+      "new_text": "ning_control_variants'],latest['"
+    },
+    {
+      "new_start": 4508,
+      "new_end": 4554,
+      "old_text": "",
+      "new_text": "maining_control_runs'],latest['remaining_metho"
+    },
+    {
+      "new_start": 4556,
+      "new_end": 4557,
+      "old_text": "m",
+      "new_text": "c"
+    },
+    {
+      "new_start": 4558,
+      "new_end": 4559,
+      "old_text": "d",
+      "new_text": "v"
+    },
+    {
+      "new_start": 4560,
+      "new_end": 4564,
+      "old_text": "l",
+      "new_text": "rage"
+    },
+    {
+      "new_start": 4572,
+      "new_end": 4572,
+      "old_text": "4,1",
+      "new_text": ""
+    },
+    {
+      "new_start": 4574,
+      "new_end": 4580,
+      "old_text": "1",
+      "new_text": "2,5,48"
+    },
+    {
+      "new_start": 4581,
+      "new_end": 4583,
+      "old_text": "0",
+      "new_text": ",7"
+    },
+    {
+      "new_start": 4585,
+      "new_end": 4585,
+      "old_text": "    ",
+      "new_text": ""
+    },
+    {
+      "new_start": 4592,
+      "new_end": 4593,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4594,
+      "new_end": 4604,
+      "old_text": "d",
+      "new_text": "test['auth"
+    },
+    {
+      "new_start": 4605,
+      "new_end": 4650,
+      "old_text": "p",
+      "new_text": "r_review_only'] is True\nassert latest['submit"
+    },
+    {
+      "new_start": 4653,
+      "new_end": 4653,
+      "old_text": "['A100",
+      "new_text": ""
+    },
+    {
+      "new_start": 4654,
+      "new_end": 4655,
+      "old_text": "t",
+      "new_text": "m"
+    },
+    {
+      "new_start": 4656,
+      "new_end": 4660,
+      "old_text": "ble_",
+      "new_text": "nusc"
+    },
+    {
+      "new_start": 4661,
+      "new_end": 4663,
+      "old_text": "oo",
+      "new_text": "ip"
+    },
+    {
+      "new_start": 4665,
+      "new_end": 4671,
+      "old_text": "sha256",
+      "new_text": "edited"
+    },
+    {
+      "new_start": 4673,
+      "new_end": 4682,
+      "old_text": "==TABLE_ROOT",
+      "new_text": " is False"
+    },
+    {
+      "new_start": 4687,
+      "new_end": 4688,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 4689,
+      "new_end": 4703,
+      "old_text": "do",
+      "new_text": "test['manuscri"
+    },
+    {
+      "new_start": 4705,
+      "new_end": 4711,
+      "old_text": "",
+      "new_text": "_appli"
+    },
+    {
+      "new_start": 4713,
+      "new_end": 4769,
+      "old_text": "",
+      "new_text": "'] is False and latest['final_test'] is False and latest"
+    },
+    {
+      "new_start": 4806,
+      "new_end": 4869,
+      "old_text": "",
+      "new_text": "editorial=pinned_json(repo_path(EDITORIAL_REL),EDITORIAL_ROOT)\n"
+    },
+    {
+      "new_start": 4876,
+      "new_end": 5087,
+      "old_text": "",
+      "new_text": "editorial['status']==latest['status'] and editorial['root_editorial_review'] is True and editorial['root_read_all_changed_passages'] is True\nassert editorial['original_comments']==24 and editorial['quotes_and_or"
+    },
+    {
+      "new_start": 5089,
+      "new_end": 5126,
+      "old_text": "",
+      "new_text": "r_exact'] is True and editorial['F20_"
+    },
+    {
+      "new_start": 5128,
+      "new_end": 5129,
+      "old_text": "i",
+      "new_text": "b"
+    },
+    {
+      "new_start": 5131,
+      "new_end": 5165,
+      "old_text": "",
+      "new_text": "_root_sha256']==F20_ROOT\nassert (e"
+    },
+    {
+      "new_start": 5166,
+      "new_end": 5294,
+      "old_text": "",
+      "new_text": "itorial['F_paired_models'],editorial['F_complete_scenes'])==(20,2) and editorial['fixed_seed_panels']==[10,9,6]\nassert editorial"
+    },
+    {
+      "new_start": 5329,
+      "new_end": 5329,
+      "old_text": "detail",
+      "new_text": ""
+    },
+    {
+      "new_start": 5331,
+      "new_end": 5338,
+      "old_text": "",
+      "new_text": "itorial"
+    },
+    {
+      "new_start": 5374,
+      "new_end": 5374,
+      "old_text": "detail",
+      "new_text": ""
+    },
+    {
+      "new_start": 5376,
+      "new_end": 5383,
+      "old_text": "",
+      "new_text": "itorial"
+    },
+    {
+      "new_start": 5406,
+      "new_end": 5407,
+      "old_text": "\n",
+      "new_text": " "
+    },
+    {
+      "new_start": 5408,
+      "new_end": 5411,
+      "old_text": "ss",
+      "new_text": "nd "
+    },
+    {
+      "new_start": 5412,
+      "new_end": 5416,
+      "old_text": "",
+      "new_text": "dito"
+    },
+    {
+      "new_start": 5417,
+      "new_end": 5425,
+      "old_text": "t c",
+      "new_text": "ial['who"
+    },
+    {
+      "new_start": 5427,
+      "new_end": 5428,
+      "old_text": "a",
+      "new_text": "_"
+    },
+    {
+      "new_start": 5429,
+      "new_end": 5431,
+      "old_text": "['s",
+      "new_text": "eb"
+    },
+    {
+      "new_start": 5432,
+      "new_end": 5432,
+      "old_text": "bmi",
+      "new_text": ""
+    },
+    {
+      "new_start": 5434,
+      "new_end": 5436,
+      "old_text": "ed",
+      "new_text": "al"
+    },
+    {
+      "new_start": 5437,
+      "new_end": 5439,
+      "old_text": "",
+      "new_text": "co"
+    },
+    {
+      "new_start": 5440,
+      "new_end": 5440,
+      "old_text": "anuscript_ap",
+      "new_text": ""
+    },
+    {
+      "new_start": 5442,
+      "new_end": 5442,
+      "old_text": "i",
+      "new_text": ""
+    },
+    {
+      "new_start": 5443,
+      "new_end": 5445,
+      "old_text": "d",
+      "new_text": "te"
+    },
+    {
+      "new_start": 5456,
+      "new_end": 5456,
+      "old_text": " and clear['test'] is False and clear['detailed_A100_root_sha256']==DETAILED_ROOT",
+      "new_text": ""
+    },
+    {
+      "new_start": 5461,
+      "new_end": 5462,
+      "old_text": "nam",
+      "new_text": "r"
+    },
+    {
+      "new_start": 5463,
+      "new_end": 5464,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 5465,
+      "new_end": 5469,
+      "old_text": "",
+      "new_text": "dige"
+    },
+    {
+      "new_start": 5470,
+      "new_end": 5471,
+      "old_text": "ha",
+      "new_text": "t"
+    },
+    {
+      "new_start": 5475,
+      "new_end": 5475,
+      "old_text": "detail",
+      "new_text": ""
+    },
+    {
+      "new_start": 5477,
+      "new_end": 5484,
+      "old_text": "",
+      "new_text": "itorial"
+    },
+    {
+      "new_start": 5486,
+      "new_end": 5497,
+      "old_text": "",
+      "new_text": "source_and_"
+    },
+    {
+      "new_start": 5506,
+      "new_end": 5506,
+      "old_text": "_sha256",
+      "new_text": ""
+    },
+    {
+      "new_start": 5531,
+      "new_end": 5540,
+      "old_text": "",
+      "new_text": "repo_path"
+    },
+    {
+      "new_start": 5543,
+      "new_end": 5543,
+      "old_text": "vision/'rebutta",
+      "new_text": ""
+    },
+    {
+      "new_start": 5544,
+      "new_end": 5544,
+      "old_text": "_integrated_A100_reader_20261011'/name",
+      "new_text": ""
+    },
+    {
+      "new_start": 5561,
+      "new_end": 5565,
+      "old_text": "",
+      "new_text": "dige"
+    },
+    {
+      "new_start": 5566,
+      "new_end": 5567,
+      "old_text": "ha",
+      "new_text": "t"
+    },
+    {
+      "new_start": 5577,
+      "new_end": 5586,
+      "old_text": "",
+      "new_text": "repo_path"
+    },
+    {
+      "new_start": 5587,
+      "new_end": 5595,
+      "old_text": "R/",
+      "new_text": "latest['"
+    },
+    {
+      "new_start": 5600,
+      "new_end": 5608,
+      "old_text": "['",
+      "new_text": "_reader_"
+    },
+    {
+      "new_start": 5632,
+      "new_end": 5640,
+      "old_text": "",
+      "new_text": "latest['"
+    },
+    {
+      "new_start": 5645,
+      "new_end": 5649,
+      "old_text": "['",
+      "new_text": "_rea"
+    },
+    {
+      "new_start": 5650,
+      "new_end": 5651,
+      "old_text": "",
+      "new_text": "e"
+    },
+    {
+      "new_start": 5652,
+      "new_end": 5652,
+      "old_text": "aft",
+      "new_text": ""
+    },
+    {
+      "new_start": 5662,
+      "new_end": 5677,
+      "old_text": "",
+      "new_text": "for key in ('en"
+    },
+    {
+      "new_start": 5678,
+      "new_end": 5684,
+      "old_text": "",
+      "new_text": "ry','m"
+    },
+    {
+      "new_start": 5685,
+      "new_end": 5854,
+      "old_text": "",
+      "new_text": "nuscript_candidate','clear_reader_entry'):\n    assert latest[key] in editorial['source_and_documents']\nprevious_rel='docs/server_deployment_20260923/training_20260923/pu"
+    },
+    {
+      "new_start": 5856,
+      "new_end": 5868,
+      "old_text": "",
+      "new_text": "ication_clos"
+    },
+    {
+      "new_start": 5869,
+      "new_end": 5915,
+      "old_text": "",
+      "new_text": "d_increment59_verified_20261011.json'\nprevious"
+    },
+    {
+      "new_start": 5928,
+      "new_end": 5948,
+      "old_text": "T/'c",
+      "new_text": "repo_path(previous_r"
+    },
+    {
+      "new_start": 5950,
+      "new_end": 5953,
+      "old_text": "",
+      "new_text": "),'"
+    },
+    {
+      "new_start": 5954,
+      "new_end": 5958,
+      "old_text": "b",
+      "new_text": "2964"
+    },
+    {
+      "new_start": 5959,
+      "new_end": 5959,
+      "old_text": "_mech",
+      "new_text": ""
+    },
+    {
+      "new_start": 5960,
+      "new_end": 5962,
+      "old_text": "nism_v1/three_view_A_ten_scenes100_20",
+      "new_text": "9d"
+    },
+    {
+      "new_start": 5964,
+      "new_end": 5979,
+      "old_text": "",
+      "new_text": "9bb84404ef7d0b9"
+    },
+    {
+      "new_start": 5980,
+      "new_end": 6002,
+      "old_text": "",
+      "new_text": "498191a336b22cf9b5eaad"
+    },
+    {
+      "new_start": 6005,
+      "new_end": 6017,
+      "old_text": "/ROOT_VERIFICATION.json",
+      "new_text": "12b2685baddd"
+    },
+    {
+      "new_start": 6018,
+      "new_end": 6018,
+      "old_text": ",TABLE_ROOT",
+      "new_text": ""
+    },
+    {
+      "new_start": 6027,
+      "new_end": 6038,
+      "old_text": "",
+      "new_text": "previous['s"
+    },
+    {
+      "new_start": 6040,
+      "new_end": 6040,
+      "old_text": "ble['roo",
+      "new_text": ""
+    },
+    {
+      "new_start": 6041,
+      "new_end": 6043,
+      "old_text": "_adoption",
+      "new_text": "us"
+    },
+    {
+      "new_start": 6045,
+      "new_end": 6053,
+      "old_text": " is ",
+      "new_text": "=='COMMI"
+    },
+    {
+      "new_start": 6054,
+      "new_end": 6090,
+      "old_text": "rue",
+      "new_text": "TED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'"
+    },
+    {
+      "new_start": 6095,
+      "new_end": 6095,
+      "old_text": "(table['",
+      "new_text": ""
+    },
+    {
+      "new_start": 6098,
+      "new_end": 6143,
+      "old_text": "",
+      "new_text": "vious['commit']==PARENT\nentry_paths={\n 'docs/"
+    },
+    {
+      "new_start": 6148,
+      "new_end": 6150,
+      "old_text": "",
+      "new_text": "r_"
+    },
+    {
+      "new_start": 6151,
+      "new_end": 6160,
+      "old_text": "",
+      "new_text": "eployment"
+    },
+    {
+      "new_start": 6161,
+      "new_end": 6171,
+      "old_text": "",
+      "new_text": "20260923/t"
+    },
+    {
+      "new_start": 6172,
+      "new_end": 6172,
+      "old_text": "ecords'],table['p",
+      "new_text": ""
+    },
+    {
+      "new_start": 6174,
+      "new_end": 6210,
+      "old_text": "",
+      "new_text": "ning_20260923/RUNNING.md',\n 'docs/se"
+    },
+    {
+      "new_start": 6211,
+      "new_end": 6212,
+      "old_text": "",
+      "new_text": "v"
+    },
+    {
+      "new_start": 6213,
+      "new_end": 6214,
+      "old_text": "d",
+      "new_text": "r"
+    },
+    {
+      "new_start": 6215,
+      "new_end": 6215,
+      "old_text": "mo",
+      "new_text": ""
+    },
+    {
+      "new_start": 6217,
+      "new_end": 6217,
+      "old_text": "ls'],table['com",
+      "new_text": ""
+    },
+    {
+      "new_start": 6219,
+      "new_end": 6222,
+      "old_text": "ete_sc",
+      "new_text": "oym"
+    },
+    {
+      "new_start": 6224,
+      "new_end": 6226,
+      "old_text": "es'])==(",
+      "new_text": "t_"
+    },
+    {
+      "new_start": 6228,
+      "new_end": 6230,
+      "old_text": "",
+      "new_text": "26"
+    },
+    {
+      "new_start": 6231,
+      "new_end": 6277,
+      "old_text": ",",
+      "new_text": "923/training_20260923/REBUTTAL_COMPLETION_2026"
+    },
+    {
+      "new_start": 6280,
+      "new_end": 6285,
+      "old_text": "",
+      "new_text": "9.md'"
+    },
+    {
+      "new_start": 6286,
+      "new_end": 6286,
+      "old_text": "10)",
+      "new_text": ""
+    },
+    {
+      "new_start": 6287,
+      "new_end": 6292,
+      "old_text": "a",
+      "new_text": " 'doc"
+    },
+    {
+      "new_start": 6293,
+      "new_end": 6313,
+      "old_text": "",
+      "new_text": "/返修实验总览.md',\n 'docs/"
+    },
+    {
+      "new_start": 6316,
+      "new_end": 6323,
+      "old_text": "t tab",
+      "new_text": "ver_dep"
+    },
+    {
+      "new_start": 6324,
+      "new_end": 6327,
+      "old_text": "",
+      "new_text": "oym"
+    },
+    {
+      "new_start": 6328,
+      "new_end": 6328,
+      "old_text": "['test'] is False and table['primary_endpoi",
+      "new_text": ""
+    },
+    {
+      "new_start": 6331,
+      "new_end": 6334,
+      "old_text": "selected'] is False\nNATIVE_ROOT='749577f73d151c958f",
+      "new_text": "202"
+    },
+    {
+      "new_start": 6335,
+      "new_end": 6335,
+      "old_text": "dc646a1e15714db7c72a8b",
+      "new_text": ""
+    },
+    {
+      "new_start": 6337,
+      "new_end": 6342,
+      "old_text": "9",
+      "new_text": "23/tr"
+    },
+    {
+      "new_start": 6343,
+      "new_end": 6349,
+      "old_text": "75f",
+      "new_text": "ining_"
+    },
+    {
+      "new_start": 6350,
+      "new_end": 6351,
+      "old_text": "2298b58b8c728bb'\nREPLAY_ROOT='b427a751a127242d75a6f474",
+      "new_text": "0"
+    },
+    {
+      "new_start": 6353,
+      "new_end": 6353,
+      "old_text": "f6",
+      "new_text": ""
+    },
+    {
+      "new_start": 6354,
+      "new_end": 6354,
+      "old_text": "067b15345ef47b8704ba000b28",
+      "new_text": ""
+    },
+    {
+      "new_start": 6356,
+      "new_end": 6356,
+      "old_text": "5185",
+      "new_text": ""
+    },
+    {
+      "new_start": 6357,
+      "new_end": 6357,
+      "old_text": "17'\nF20_ROOT=a.F20_root_sha256\nnative=pinned_json(T",
+      "new_text": ""
+    },
+    {
+      "new_start": 6358,
+      "new_end": 6358,
+      "old_text": "'",
+      "new_text": ""
+    },
+    {
+      "new_start": 6387,
+      "new_end": 6388,
+      "old_text": "mechanism_science_backups_20261009/root_delta_20261010T194755Z/ROOT_DELTA_VERIFICATI",
+      "new_text": "M"
+    },
+    {
+      "new_start": 6390,
+      "new_end": 6402,
+      "old_text": "",
+      "new_text": "ITOR_HANDOFF"
+    },
+    {
+      "new_start": 6403,
+      "new_end": 6405,
+      "old_text": "json",
+      "new_text": "md"
+    },
+    {
+      "new_start": 6407,
+      "new_end": 6407,
+      "old_text": "NATIVE_ROOT)",
+      "new_text": ""
+    },
+    {
+      "new_start": 6408,
+      "new_end": 6408,
+      "old_text": "assert",
+      "new_text": ""
+    },
+    {
+      "new_start": 6409,
+      "new_end": 6409,
+      "old_text": "native[",
+      "new_text": ""
+    },
+    {
+      "new_start": 6410,
+      "new_end": 6410,
+      "old_text": "root_a",
+      "new_text": ""
+    },
+    {
+      "new_start": 6412,
+      "new_end": 6413,
+      "old_text": "pted'] i",
+      "new_text": "c"
+    },
+    {
+      "new_start": 6414,
+      "new_end": 6415,
+      "old_text": " True and native['total_new_strict_and_off",
+      "new_text": "/"
+    },
+    {
+      "new_start": 6421,
+      "new_end": 6422,
+      "old_text": "']==320 an",
+      "new_text": "_"
+    },
+    {
+      "new_start": 6423,
+      "new_end": 6423,
+      "old_text": " native['old412_records_exact'] is True and native['test'] is False\nassert native['root_checked_archive_members']==94 and native['previous_ledger_sha256']=='9baf997fcb87ec7da604af076945aab5637ef828b6cf8bccb560a4d93c2a26c2'\nassert native['ledger_sha256']=='0674614906f4667f03fae0033aa5f6dfdd87b8275db5d38a7dcd90643dc3fb32'\nassert native['new_ids']==[f'minus_F_IID_F Flip_seed{s}' for s in range(91003,91011)]\nr",
+      "new_text": ""
+    },
+    {
+      "new_start": 6426,
+      "new_end": 6444,
+      "old_text": "",
+      "new_text": "oyment_20260923/tr"
+    },
+    {
+      "new_start": 6445,
+      "new_end": 6445,
+      "old_text": "y=p",
+      "new_text": ""
+    },
+    {
+      "new_start": 6447,
+      "new_end": 6448,
+      "old_text": "",
+      "new_text": "i"
+    },
+    {
+      "new_start": 6449,
+      "new_end": 6450,
+      "old_text": "ed",
+      "new_text": "g"
+    },
+    {
+      "new_start": 6451,
+      "new_end": 6459,
+      "old_text": "json(R/'tmp",
+      "new_text": "20260923"
+    },
+    {
+      "new_start": 6477,
+      "new_end": 6478,
+      "old_text": "remaining_F_FFlip10_root_adoption_2026101",
+      "new_text": "v"
+    },
+    {
+      "new_start": 6480,
+      "new_end": 6485,
+      "old_text": "ROOT_ADOP",
+      "new_text": "EXECU"
+    },
+    {
+      "new_start": 6490,
+      "new_end": 6490,
+      "old_text": "json',REPLAY_ROOT)\nassert replay['status']=='ROOT_F_FFLIP10_EXACT10_SAVED_ARRAYS_REPLAY320_ADOPTED'\nassert (replay['prior_accepted'],replay['new_accepted'],replay['cumulative_accepted'],replay['remaining620_new_accepted'])==(310,10,320,140) and replay['original310_unchanged'] is True\nassert replay['native_root_sha256']==NATIVE_ROOT and replay['test'] is False\nassert replay['accepted_new_ids']==[f'minus_F_IID_F Flip_seed{s}' for s in range(91001,91011)]\nassert (replay['archive_members'],replay['independent_metrics'],replay['independent_counts'],replay['prediction_rules'],replay['native_max_abs_difference'])==(92,90,240,30,0)\nassert replay['new_scene_table_created'] is False and replay['Full_inference']==replay['new_CNN']==replay['new_fit']==0\nF20=pinned_json(F20_path,F20_ROOT)\nassert F20['root_adoption'] is True and F20['status']=='ROOT_F20_TWO_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED'\nassert (F20['preserved_records'],F20['paired_models'],F20['complete_scenes'])==(40,20,2) and F20['seed_panels']==[10,9,6]\nassert F20['source_acceptance_sha256']==REPLAY_ROOT and F20['source_native_root_sha256']==NATIVE_ROOT\nassert F20['actual_root_command_exit']==0 and F20['new_CNN']==F20['new_fits']==F20['new_training']==0 and not F20['test'] and not F20['whole_rebuttal_complete']\nf20_names={'records.json','tables.json','TABLES.",
+      "new_text": ""
+    },
+    {
+      "new_start": 6492,
+      "new_end": 6492,
+      "old_text": "','coverage.json','paired_per_seed.json','checks.json','SOURCE_BINDINGS.json','ROOT_BINDING.json','ROOT_SOURCE_REVIEW.json','FILES_SHA256.json','ACTUAL_HANDOFF.json','OUTPUTS_SHA256.json','ROOT_VERIFY_COMMAND.json','ROOT_VERIFY.stdout','ROOT_VERIFY.stderr','ROOT_VERIFY.stdout.json','ROOT_VERIFY.stderr.txt','ROOT_VERIFY_EXIT.json",
+      "new_text": ""
+    },
+    {
+      "new_start": 6506,
+      "new_end": 6511,
+      "old_text": "F20",
+      "new_text": "entry"
+    },
+    {
+      "new_start": 6513,
+      "new_end": 6517,
+      "old_text": "f",
+      "new_text": "entr"
+    },
+    {
+      "new_start": 6518,
+      "new_end": 6518,
+      "old_text": "l",
+      "new_text": ""
+    },
+    {
+      "new_start": 6520,
+      "new_end": 6520,
+      "old_text": "_sha256",
+      "new_text": ""
+    },
+    {
+      "new_start": 6523,
+      "new_end": 6523,
+      "old_text": "<",
+      "new_text": ""
+    },
+    {
+      "new_start": 6524,
+      "new_end": 6530,
+      "old_text": "f20",
+      "new_text": "=entry"
+    },
+    {
+      "new_start": 6531,
+      "new_end": 6532,
+      "old_text": "n",
+      "new_text": "p"
+    },
+    {
+      "new_start": 6533,
+      "new_end": 6535,
+      "old_text": "me",
+      "new_text": "th"
+    },
+    {
+      "new_start": 6536,
+      "new_end": 6536,
+      "old_text": " and {'records.json','tables.json','TABLES.md','checks.json'}<=set(F20['files_sha256'])",
+      "new_text": ""
+    },
+    {
+      "new_start": 6541,
+      "new_end": 6542,
+      "old_text": "nam",
+      "new_text": "r"
+    },
+    {
+      "new_start": 6543,
+      "new_end": 6544,
+      "old_text": "",
+      "new_text": "l"
+    },
+    {
+      "new_start": 6552,
+      "new_end": 6557,
+      "old_text": "F20",
+      "new_text": "entry"
+    },
+    {
+      "new_start": 6559,
+      "new_end": 6563,
+      "old_text": "f",
+      "new_text": "entr"
+    },
+    {
+      "new_start": 6564,
+      "new_end": 6564,
+      "old_text": "l",
+      "new_text": ""
+    },
+    {
+      "new_start": 6566,
+      "new_end": 6566,
+      "old_text": "_sha256",
+      "new_text": ""
+    },
+    {
+      "new_start": 6591,
+      "new_end": 6595,
+      "old_text": "(F20",
+      "new_text": "repo"
+    },
+    {
+      "new_start": 6600,
+      "new_end": 6601,
+      "old_text": ".pa",
+      "new_text": "("
+    },
+    {
+      "new_start": 6603,
+      "new_end": 6604,
+      "old_text": "nt/name",
+      "new_text": "l"
+    },
+    {
+      "new_start": 6624,
+      "new_end": 6624,
+      "old_text": "\nchecks=json.loads((F20_path.parent/'checks.json').read_bytes())\nassert (checks",
+      "new_text": ""
+    },
+    {
+      "new_start": 6626,
+      "new_end": 6628,
+      "old_text": "me",
+      "new_text": "sh"
+    },
+    {
+      "new_start": 6629,
+      "new_end": 6629,
+      "old_text": "n_sd_scalars'],checks['display_mean_sd_cells'],checks['receipt_metrics_from_group_counts'],checks['base_confusion_counts_structurally_checked'],checks['table_record_count'])==(3",
+      "new_text": ""
+    },
+    {
+      "new_start": 6630,
+      "new_end": 6631,
+      "old_text": "4,1",
+      "new_text": "5"
+    },
+    {
+      "new_start": 6632,
+      "new_end": 6632,
+      "old_text": "2,360,960,40)\nassert checks['old20_record_JSON_bytes_and_order_exact",
+      "new_text": ""
+    },
+    {
+      "new_start": 6639,
+      "new_end": 6639,
+      "old_text": "checks['old162_scalars_exact'] and checks['old81_cells_preserved'] and checks['native_shared_metrics_and_counts_exact']\nassert checks['max_abs_difference']<=1e-12 and checks['partial_pairs_excluded']==0 and checks['new_threshold_fits']==checks['new_CNN']==checks['new_training']==0 and checks['test'] is False\nFL=",
+      "new_text": ""
+    },
+    {
+      "new_start": 6642,
+      "new_end": 6642,
+      "old_text": "ned_json(R/'tmp/fl_native_after63_20261011/ROOT_ADOPTION_REVIEW.json','a11cd9ed94ab136b49dd41975d45f684d88236b6918c295461089a98adbc7db0')\nassert (FL",
+      "new_text": ""
+    },
+    {
+      "new_start": 6644,
+      "new_end": 6647,
+      "old_text": "accep",
+      "new_text": "his"
+    },
+    {
+      "new_start": 6648,
+      "new_end": 6648,
+      "old_text": "ed_bef",
+      "new_text": ""
+    },
+    {
+      "new_start": 6650,
+      "new_end": 6650,
+      "old_text": "e'],FL['accepted_new'],FL['accepted_total'],FL['reused_separatel",
+      "new_text": ""
+    },
+    {
+      "new_start": 6651,
+      "new_end": 6651,
+      "old_text": "'])==(63,4,67,4) and FL['old63_ordered_prefix",
+      "new_text": ""
+    },
+    {
+      "new_start": 6667,
+      "new_end": 6917,
+      "old_text": "",
+      "new_text": "\nfor pin in entry['source_pins'].values():\n    assert H(repo_path(pin['path']).read_bytes())==pin['sha256']\n# Root closes this complete input set only after the actual current entry review.\nselected=selection['files'];assert isinstance(selected,dict)"
+    },
+    {
+      "new_start": 6922,
+      "new_end": 6924,
+      "old_text": "FL['fina",
+      "new_text": "se"
+    },
+    {
+      "new_start": 6925,
+      "new_end": 6927,
+      "old_text": "_",
+      "new_text": "ec"
+    },
+    {
+      "new_start": 6929,
+      "new_end": 6935,
+      "old_text": "st'] ",
+      "new_text": "d\nrequ"
+    },
+    {
+      "new_start": 6936,
+      "new_end": 6937,
+      "old_text": "s Fals",
+      "new_text": "r"
+    },
+    {
+      "new_start": 6938,
+      "new_end": 6938,
+      "old_text": "\ngra",
+      "new_text": ""
+    },
+    {
+      "new_start": 6939,
+      "new_end": 6940,
+      "old_text": "i",
+      "new_text": "="
+    },
+    {
+      "new_start": 6943,
+      "new_end": 6946,
+      "old_text": "=",
+      "new_text": "ry_"
+    },
+    {
+      "new_start": 6947,
+      "new_end": 6957,
+      "old_text": "inn",
+      "new_text": "aths|{stat"
+    },
+    {
+      "new_start": 6958,
+      "new_end": 6958,
+      "old_text": "d",
+      "new_text": ""
+    },
+    {
+      "new_start": 6959,
+      "new_end": 6961,
+      "old_text": "json(R/'",
+      "new_text": "pa"
+    },
+    {
+      "new_start": 6962,
+      "new_end": 6964,
+      "old_text": "mp/g",
+      "new_text": "h."
+    },
+    {
+      "new_start": 6965,
+      "new_end": 6965,
+      "old_text": "adi",
+      "new_text": ""
+    },
+    {
+      "new_start": 6966,
+      "new_end": 6967,
+      "old_text": "nt_n",
+      "new_text": "l"
+    },
+    {
+      "new_start": 6973,
+      "new_end": 6979,
+      "old_text": "",
+      "new_text": "to(R)."
+    },
+    {
+      "new_start": 6980,
+      "new_end": 7035,
+      "old_text": "",
+      "new_text": "s_posix(),EDITORIAL_REL,previous_rel,'tmp/publish_guard"
+    },
+    {
+      "new_start": 7036,
+      "new_end": 7047,
+      "old_text": "",
+      "new_text": "ed_incremen"
+    },
+    {
+      "new_start": 7048,
+      "new_end": 7050,
+      "old_text": "er42",
+      "new_text": "60"
+    },
+    {
+      "new_start": 7059,
+      "new_end": 7059,
+      "old_text": "/ROOT_ADOPTION_REVIEW",
+      "new_text": ""
+    },
+    {
+      "new_start": 7060,
+      "new_end": 7080,
+      "old_text": "j",
+      "new_text": "py'}|set(editorial['"
+    },
+    {
+      "new_start": 7082,
+      "new_end": 7088,
+      "old_text": "",
+      "new_text": "urce_a"
+    },
+    {
+      "new_start": 7089,
+      "new_end": 7100,
+      "old_text": "",
+      "new_text": "d_documents"
+    },
+    {
+      "new_start": 7101,
+      "new_end": 7107,
+      "old_text": ",",
+      "new_text": "])|{p["
+    },
+    {
+      "new_start": 7108,
+      "new_end": 7124,
+      "old_text": "",
+      "new_text": "path'] for p in "
+    },
+    {
+      "new_start": 7125,
+      "new_end": 7136,
+      "old_text": "5875",
+      "new_text": "ntry['sourc"
+    },
+    {
+      "new_start": 7137,
+      "new_end": 7169,
+      "old_text": "4",
+      "new_text": "_pins'].values()}\nassert require"
+    },
+    {
+      "new_start": 7170,
+      "new_end": 7173,
+      "old_text": "6a5",
+      "new_text": "<=s"
+    },
+    {
+      "new_start": 7174,
+      "new_end": 7180,
+      "old_text": "15",
+      "new_text": "t(sele"
+    },
+    {
+      "new_start": 7181,
+      "new_end": 7183,
+      "old_text": "95",
+      "new_text": "te"
+    },
+    {
+      "new_start": 7184,
+      "new_end": 7184,
+      "old_text": "7fb94686411a106b1db39681341c92e51e9e821867f1e6'",
+      "new_text": ""
+    },
+    {
+      "new_start": 7193,
+      "new_end": 7215,
+      "old_text": "",
+      "new_text": "scope_path.relative_to"
+    },
+    {
+      "new_start": 7216,
+      "new_end": 7287,
+      "old_text": "g",
+      "new_text": "R).as_posix() not in selected,'Selection cannot pin itself'\npaths=[]\nfo"
+    },
+    {
+      "new_start": 7288,
+      "new_end": 7580,
+      "old_text": "",
+      "new_text": " rel,pin in selected.items():\n    p=repo_path(rel)\n    assert set(pin)=={'sha256','bytes'} and re.fullmatch('[0-9a-f]{64}',pin['sha256'])\n    assert isinstance(pin['bytes'],int) and not isinstance(pin['bytes'],bool) and pin['bytes']>=0\n    assert p.is_file() and not p.is_symlink() and H(p.re"
+    },
+    {
+      "new_start": 7582,
+      "new_end": 7594,
+      "old_text": "",
+      "new_text": "_bytes())==p"
+    },
+    {
+      "new_start": 7595,
+      "new_end": 7715,
+      "old_text": "",
+      "new_text": "n['sha256'] and p.stat().st_size==pin['bytes'],rel\n    paths.append(p)\n# Exactly the closed list plus these two independ"
+    },
+    {
+      "new_start": 7718,
+      "new_end": 7786,
+      "old_text": "",
+      "new_text": "ly hash-bound input JSONs; no glob or directory expansion.\npaths += "
+    },
+    {
+      "new_start": 7787,
+      "new_end": 7819,
+      "old_text": "'",
+      "new_text": "semantic_review,scope_path]\ncomp"
+    },
+    {
+      "new_start": 7821,
+      "new_end": 7882,
+      "old_text": "",
+      "new_text": "t_limit=lambda p:2_000_000\nallowed={'.py','.json','.md','.pat"
+    },
+    {
+      "new_start": 7883,
+      "new_end": 7898,
+      "old_text": "",
+      "new_text": "h','.txt','.std"
+    },
+    {
+      "new_start": 7899,
+      "new_end": 7932,
+      "old_text": "p",
+      "new_text": "rr','.stdout','.sha256','.csv','."
+    },
+    {
+      "new_start": 7934,
+      "new_end": 7939,
+      "old_text": "",
+      "new_text": "x','."
+    },
+    {
+      "new_start": 7940,
+      "new_end": 7967,
+      "old_text": "_b",
+      "new_text": "iff'}\npaths=list(dict.fromk"
+    },
+    {
+      "new_start": 7968,
+      "new_end": 7979,
+      "old_text": "",
+      "new_text": "ys(paths))\n"
+    },
+    {
+      "new_start": 7982,
+      "new_end": 8002,
+      "old_text": "",
+      "new_text": " p in paths:\n    ass"
+    },
+    {
+      "new_start": 8003,
+      "new_end": 8240,
+      "old_text": "",
+      "new_text": "rt p.is_file() and p.suffix in allowed and p.resolve().is_relative_to(R.resolve())\nassert sum(p.stat().st_size for p in paths)<100_000_000\nfor p in paths:\n    assert p.stat().st_size<compact_limit(p) and not p.is_symlink()\ndestinations=["
+    },
+    {
+      "new_start": 8241,
+      "new_end": 8245,
+      "old_text": "],g",
+      "new_text": "expe"
+    },
+    {
+      "new_start": 8246,
+      "new_end": 8246,
+      "old_text": "ad",
+      "new_text": ""
+    },
+    {
+      "new_start": 8247,
+      "new_end": 8248,
+      "old_text": "",
+      "new_text": "m"
+    },
+    {
+      "new_start": 8251,
+      "new_end": 8254,
+      "old_text": "[",
+      "new_text": "al/"
+    },
+    {
+      "new_start": 8255,
+      "new_end": 8261,
+      "old_text": "",
+      "new_text": "+p.rel"
+    },
+    {
+      "new_start": 8262,
+      "new_end": 8265,
+      "old_text": "cc",
+      "new_text": "tiv"
+    },
+    {
+      "new_start": 8266,
+      "new_end": 8266,
+      "old_text": "pted_new'],gradient['accepted",
+      "new_text": ""
+    },
+    {
+      "new_start": 8269,
+      "new_end": 8320,
+      "old_text": "",
+      "new_text": "(R).as_posix()[4:] if p.relative_to(R).as_posix().s"
+    },
+    {
+      "new_start": 8322,
+      "new_end": 8339,
+      "old_text": "",
+      "new_text": "rtswith('tmp/') e"
+    },
+    {
+      "new_start": 8340,
+      "new_end": 8385,
+      "old_text": "'",
+      "new_text": "se p.relative_to(R).as_posix() for p in paths"
+    },
+    {
+      "new_start": 8386,
+      "new_end": 8410,
+      "old_text": "",
+      "new_text": "\nassert len(destinations"
+    },
+    {
+      "new_start": 8413,
+      "new_end": 8416,
+      "old_text": "",
+      "new_text": "len"
+    },
+    {
+      "new_start": 8417,
+      "new_end": 8435,
+      "old_text": "42",
+      "new_text": "set(destinations))"
+    },
+    {
+      "new_start": 8436,
+      "new_end": 8471,
+      "old_text": "4,46)",
+      "new_text": "'Publication destination collision'"
+    },
+    {
+      "new_start": 8483,
+      "new_end": 8493,
+      "old_text": "gr",
+      "new_text": "(T/'public"
+    },
+    {
+      "new_start": 8494,
+      "new_end": 8494,
+      "old_text": "dien",
+      "new_text": ""
+    },
+    {
+      "new_start": 8495,
+      "new_end": 8495,
+      "old_text": "['screen64_complete'] and not gradient['method_champ",
+      "new_text": ""
+    },
+    {
+      "new_start": 8501,
+      "new_end": 8506,
+      "old_text": "a",
+      "new_text": "osed_"
+    },
+    {
+      "new_start": 8507,
+      "new_end": 8511,
+      "old_text": "",
+      "new_text": "ncre"
+    },
+    {
+      "new_start": 8512,
+      "new_end": 8512,
+      "old_text": "'] and not gradi",
+      "new_text": ""
+    },
+    {
+      "new_start": 8515,
+      "new_end": 8522,
+      "old_text": "['",
+      "new_text": "60_veri"
+    },
+    {
+      "new_start": 8524,
+      "new_end": 8524,
+      "old_text": "nal_test']\nhybrid=pinn",
+      "new_text": ""
+    },
+    {
+      "new_start": 8526,
+      "new_end": 8526,
+      "old_text": "_json(R/'tmp/celeba_hybrid_native12_root_adoption",
+      "new_text": ""
+    },
+    {
+      "new_start": 8535,
+      "new_end": 8535,
+      "old_text": "/ROOT_ADOPTION",
+      "new_text": ""
+    },
+    {
+      "new_start": 8541,
+      "new_end": 8551,
+      "old_text": "",
+      "new_text": ").exists()"
+    },
+    {
+      "new_start": 8553,
+      "new_end": 8554,
+      "old_text": "181e4219f967811a25446f682d94f4db511a5d7917b0650aabff380eba4c4ab1')\nassert (hybrid['prior_accepted'],hybrid['",
+      "new_text": "O"
+    },
+    {
+      "new_start": 8556,
+      "new_end": 8562,
+      "old_text": "w_a",
+      "new_text": " publi"
+    },
+    {
+      "new_start": 8563,
+      "new_end": 8563,
+      "old_text": "cepted'],hybrid['cumul",
+      "new_text": ""
+    },
+    {
+      "new_start": 8566,
+      "new_end": 8572,
+      "old_text": "v",
+      "new_text": "on att"
+    },
+    {
+      "new_start": 8573,
+      "new_end": 8574,
+      "old_text": "_acce",
+      "new_text": "m"
+    },
+    {
+      "new_start": 8576,
+      "new_end": 8581,
+      "old_text": "ed",
+      "new_text": " only"
+    },
+    {
+      "new_start": 8582,
+      "new_end": 8582,
+      "old_text": "],hybrid['reused_separate'])==(9,3,12,4)\nassert not hybrid['whole100_complete'] and not hybrid['final_test'] and not hybrid['table_adopted']",
+      "new_text": ""
+    },
+    {
+      "new_start": 9496,
+      "new_end": 9496,
+      "old_text": "\nstate=json.loads((T/'TRAINING_STATE.json').read_bytes())\nassert state['celeba_mechanism_v1']['scientific_results_offserver_verified']==320\nassert state['celeba_mechanism_v1']['three_view_new_models_offserver_verified']==320\nassert state['flgmm_fullcoverage_v2_20261009']['new_accepted']==67\nassert state['gradient64_validation_search_20261010']['offserver_accepted']==46\nassert state['hybrid100_fullcoverage_20261010']['new_accepted']==12\nassert state['FLGMM_after48_valid_three_view_20261011']['FLGMM_total_three_view_records']==61\nassert state['FLGMM_after48_valid_three_view_20261011']['six_scene_table']['complete_scene_records']==60\nassert state['celeba_mechanism_v1']['A_three_view_ten_scene_table']['paired_models']==100\nassert state['celeba_mechanism_v1']['A_three_view_ten_scene_table']['root_proof_sha256']==TABLE_ROOT\nassert state['latest_rebuttal_draft']['A100_incorporated'] and state['latest_rebuttal_draft']['clear_A100_incorporated']\nassert state['latest_rebuttal_draft']['root_proof_sha256']==DETAILED_ROOT and state['latest_rebuttal_draft']['clear_reader_root_sha256']==CLEAR_ROOT\nassert any(isinstance(v,dict) and v.get('root_proof_sha256')==F20_ROOT and (v.get('paired_models'),v.get('complete_scenes'))==(20,2) for v in state['celeba_mechanism_v1'].values())\nentry=pinned_json(semantic_review,a.semantic_review_sha256)\nassert entry['status']=='PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW'\nassert H((T/'TRAINING_STATE.json').read_bytes())==entry['STATE_sha256']\naccepted=entry['current_accepted']\nassert (accepted['native_new'],accepted['three_view_models'],accepted['F_paired_models'],accepted['F_complete_scenes'])==(320,320,20,2)\nassert (accepted['FL_native_new'],accepted['FL_three_view_total'],accepted['FL_complete_table_records'],accepted['gradient_accepted'],accepted['Hybrid_native_new'])==(67,61,60,46,12)\nassert state['celeba_mechanism_v1']['three_view_counts_by_variant']==accepted['by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':20}\nassert state['latest_five_queue_readonly_observation']==entry['latest_observation_only']\nassert entry['latest_observation_only']['sha256']=='78a5ef2b40184bcd652678cb22620dd10811b98c5db53833427b2795373969a5'\nassert entry['latest_observation_only']['growth_proof_sha256']=='1ff95525cce03031a5a1d155dcc34319b2a5f601e5d0655331c0ecd8bc686929'\nassert (entry['latest_observation_only']['FLGMM_terminal'],entry['latest_observation_only']['gradient_terminal'],entry['latest_observation_only']['Hybrid_terminal'])==(69,53,15)\nassert entry['latest_observation_only']['new_acceptance']==0 and entry['latest_observation_only']['counts_are_observation_only'] is True\nfor rel,pin in entry['entries'].items():\n    assert H((R/rel).read_bytes())==pin['sha256'] and pin['history_exact'] is True\nfor pin in entry['source_pins'].values():\n    assert H((R/pin['path']).read_bytes())==pin['sha256']\n# Current entry writer is the actual executed969c source, not the historical three generators.\nassert H((R/'tmp/update_increment59_entries_20261011.py').read_bytes())=='969c567f5a7277a2da8576db7acb654aaf4292cab4cd7d346dc90576f4344305'\nupdate=pinned_json(R/'tmp/entry_increment59_actual_20261011/UPDATE_PROOF.json','ca824b30d6bcaa307ff567b26fcdfe13cffba4fadf4bdc00b6fd26d9da6a103f')\nassert update['status']=='CURRENT_ENTRIES_UPDATED_FROM_ACTUAL320_F20_FL67_PROOFS' and update['STATE_sha256']==entry['STATE_sha256']\nassert update['entries']=={rel:{k:v for k,v in pin.items() if k!='prefix_sha256'} for rel,pin in entry['entries'].items()}\nactual_exit=pinned_json(R/'tmp/entry_increment59_execution_20261011/EXIT.json','27b45bd8cb2e6679ec05e2c6464d29884687fd7ff013763aee6a7feaa1eba028')\nassert actual_exit['exit_code']==0 and actual_exit['source_sha256']=='969c567f5a7277a2da8576db7acb654aaf4292cab4cd7d346dc90576f4344305'\nfor stream in ('stdout','stderr'):\n    assert H((R/'tmp/entry_increment59_execution_20261011'/stream).read_bytes())==actual_exit[stream+'_sha256']\ndeployment=pinned_json(R/'tmp/fl_three_view_FFlip10_cpu136_20261011/runtime/SOURCE_DEPLOYMENT.json','1070c5f7640477c55faa247c352612b22d76ad1c34b4043d7ae08dbedbf13f85')\nassert deployment['status']=='ROOT_SMALL_SOURCE_DEPLOYED_BYTES_VERIFIED_NOT_STARTED' and deployment['new_inference']==deployment['new_fit']==deployment['new_training']==0\nrefusal=pinned_json(R/'tmp/fl_three_view_FFlip10_cpu136_20261011/runtime/LAUNCH_REFUSAL.json','a974849e5b617dbdf708a1ebc60ccc9b6328b7d5e99ed6fbcdde6fcac5ec3f0a')\nassert refusal['status']=='CPU136_LAUNCH_REFUSED_ACTIVE_WIDE_THREAD_NO_RETRY' and refusal['no_new_CNN_fit_training'] and not refusal['retry_authorized'] and not any(refusal['gate_status_files_present'].values())\nprevious=pinned_json(T/'publication_closed_increment58_verified_20261011.json','efa2025fb3e499f1ee7241878ebd37dbe091410e56bf440e8d3ae519092c8815')\nassert previous['commit']==PARENT and previous['status']=='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'\npaths=[T/n for n in ['RUNNING.md','TRAINING_STATE.json','REBUTTAL_COMPLETION_20261009.md','publication_closed_increment58_verified_20261011.json']]\npaths.append(T/'celeba_mechanism_v1/EXECUTION.md')\npaths += [R/'docs/返修实验总览.md',T/'server_reactivation_20261009/MONITOR_HANDOFF.md']\npaths += [R/'tmp/update_increment59_entries_20261011.py',R/'tmp/publish_guardfed_increment59_20261011.py']\npaths += [semantic_review,F20_path]\nscope_path=R/'tmp/publication_increment59_source_prepared_20261011/COMPACT_SELECTION.json'\nselection=pinned_json(scope_path,'7868b3bcc811d1ca73064be8fd358a0544549bbb849a71994a2e3556949b122e')\nfor rel,pin in selection['files'].items():\n    p=R/rel\n    assert p.is_file() and H(p.read_bytes())==pin['sha256'] and p.stat().st_size==pin['bytes'],rel\n    paths.append(p)\n# Actual semantic source pins must be members of this closed selection or the exact F20 root; no arbitrary extra paths.\nfor pin in entry['source_pins'].values():\n    assert pin['path'] in selection['files'] or pin['path']==F20_path.relative_to(R).as_posix()\n    paths.append(R/pin['path'])\n# Publish one canonical F20 output copy, exactly the root-pinned names; no candidate output duplicates.\npaths += [F20_path.parent/name for name in F20['files_sha256']]\nsource_dir=R/'tmp/publication_increment59_source_prepared_20261011'\npaths += [source_dir/name for name in ['COMPACT_SELECTION.json','SOURCE_DIFF.patch','SOURCE_CHECK.json','INVERSE_EDITS.json','README.md','HANDOFF.json','FILES_SHA256.json']]\ncompact_limit=lambda p:2_000_000\nallowed={'.py','.json','.md','.patch','.txt','.stderr','.stdout','.sha256','.csv','.tex','.diff'}\npaths=list(dict.fromkeys(paths))\nfor p in paths:\n    assert p.is_file() and p.suffix in allowed and p.resolve().is_relative_to(R.resolve())\nassert sum(p.stat().st_size for p in paths)<100_000_000",
+      "new_text": ""
+    },
+    {
+      "new_start": 10418,
+      "new_end": 11111,
+      "old_text": "",
+      "new_text": "# No source mutation may pass from the closed selection into a commit.\nfor dest,pin in pins.items():\n    if dest=='.gitattributes':continue\n    rel=pin['source']\n    expected=selected.get(rel)\n    if expected is not None:\n        assert (pin['sha256'],pin['bytes'])==(expected['sha256'],expected['bytes']),rel\n    else:\n        assert rel in {semantic_review.relative_to(R).as_posix(),scope_path.relative_to(R).as_posix()}\n        expected_sha=a.semantic_review_sha256 if rel==semantic_review.relative_to(R).as_posix() else a.compact_selection_sha256\n        assert pin['sha256']==expected_sha,rel\nassert H(state_path.read_bytes())==entry['STATE_sha256'],'Current STATE drifted before commit'\n"
+    },
+    {
+      "new_start": 11130,
+      "new_end": 11141,
+      "old_text": "Acce",
+      "new_text": "Publish ado"
+    },
+    {
+      "new_start": 11143,
+      "new_end": 11145,
+      "old_text": "",
+      "new_text": "ed"
+    },
+    {
+      "new_start": 11146,
+      "new_end": 11147,
+      "old_text": "native3",
+      "new_text": "F"
+    },
+    {
+      "new_start": 11152,
+      "new_end": 11153,
+      "old_text": "",
+      "new_text": "s"
+    },
+    {
+      "new_start": 11154,
+      "new_end": 11161,
+      "old_text": "l",
+      "new_text": "onse dr"
+    },
+    {
+      "new_start": 11162,
+      "new_end": 11163,
+      "old_text": "y320 ",
+      "new_text": "f"
+    },
+    {
+      "new_start": 11164,
+      "new_end": 11164,
+      "old_text": "wo paired F scene",
+      "new_text": ""
+    },
+    {
+      "new_start": 11170,
+      "new_end": 11177,
+      "old_text": "FL67",
+      "new_text": "bounded"
+    },
+    {
+      "new_start": 11178,
+      "new_end": 11182,
+      "old_text": "n",
+      "new_text": "oper"
+    },
+    {
+      "new_start": 11185,
+      "new_end": 11191,
+      "old_text": "",
+      "new_text": "onal e"
+    },
+    {
+      "new_start": 11192,
+      "new_end": 11197,
+      "old_text": "",
+      "new_text": "idenc"
+    },
+    {
+      "new_start": 12242,
+      "new_end": 12242,
+      "old_text": "FLGMM_table_complete_scenes=6,",
+      "new_text": ""
+    },
+    {
+      "new_start": 12282,
+      "new_end": 12288,
+      "old_text": "Hybri",
+      "new_text": "UCA_mo"
+    },
+    {
+      "new_start": 12289,
+      "new_end": 12289,
+      "old_text": "_nativ",
+      "new_text": ""
+    },
+    {
+      "new_start": 12290,
+      "new_end": 12290,
+      "old_text": "_comp",
+      "new_text": ""
+    },
+    {
+      "new_start": 12291,
+      "new_end": 12291,
+      "old_text": "ete_scene",
+      "new_text": ""
+    },
+    {
+      "new_start": 12293,
+      "new_end": 12294,
+      "old_text": "1,A_checkpoint_records=1",
+      "new_text": "3"
+    },
+    {
+      "new_start": 12295,
+      "new_end": 12295,
+      "old_text": "0,A_table_pairs=100,A_table_scenes=10,F_checkpoint_records=2",
+      "new_text": ""
+    },
+    {
+      "new_start": 12331,
+      "new_end": 12331,
+      "old_text": "F_table_records=40,",
+      "new_text": ""
+    },
+    {
+      "new_start": 12353,
+      "new_end": 12355,
+      "old_text": "A10",
+      "new_text": "F2"
+    },
+    {
+      "new_start": 12357,
+      "new_end": 12357,
+      "old_text": "detail",
+      "new_text": ""
+    },
+    {
+      "new_start": 12359,
+      "new_end": 12362,
+      "old_text": "_",
+      "new_text": "ito"
+    },
+    {
+      "new_start": 12363,
+      "new_end": 12365,
+      "old_text": "ep",
+      "new_text": "ia"
+    },
+    {
+      "new_start": 12366,
+      "new_end": 12366,
+      "old_text": "y",
+      "new_text": ""
+    },
+    {
+      "new_start": 12379,
+      "new_end": 12388,
+      "old_text": "state['latest",
+      "new_text": "EDITORIAL"
+    },
+    {
+      "new_start": 12389,
+      "new_end": 12393,
+      "old_text": "rebuttal_draft']['root_proof_sha256'],A100_clear_reply_root_sha256=state['latest_rebuttal_draft']['clear_reader_root_sha256']",
+      "new_text": "ROOT"
+    },
+    {
+      "new_start": 12425,
+      "new_end": 12430,
+      "old_text": "native320_root",
+      "new_text": "STATE"
+    },
+    {
+      "new_start": 12438,
+      "new_end": 12447,
+      "old_text": "N",
+      "new_text": "entry['ST"
+    },
+    {
+      "new_start": 12449,
+      "new_end": 12449,
+      "old_text": "IV",
+      "new_text": ""
+    },
+    {
+      "new_start": 12450,
+      "new_end": 12450,
+      "old_text": "_ROOT,replay320_root",
+      "new_text": ""
+    },
+    {
+      "new_start": 12457,
+      "new_end": 12459,
+      "old_text": "=REPLAY_ROOT",
+      "new_text": "']"
+    },
+    {
+      "new_start": 12500,
+      "new_end": 12552,
+      "old_text": "",
+      "new_text": "_sha256,compact_selection_sha256=a.compact_selection"
+    },
+    {
+      "new_start": 12633,
+      "new_end": 12638,
+      "old_text": "",
+      "new_text": "scien"
+    },
+    {
+      "new_start": 12639,
+      "new_end": 12647,
+      "old_text": "",
+      "new_text": "ific_acc"
+    },
+    {
+      "new_start": 12648,
+      "new_end": 12651,
+      "old_text": "rmi",
+      "new_text": "pta"
+    },
+    {
+      "new_start": 12652,
+      "new_end": 12653,
+      "old_text": "al_r",
+      "new_text": "c"
+    },
+    {
+      "new_start": 12655,
+      "new_end": 12661,
+      "old_text": "",
+      "new_text": "=0,man"
+    },
+    {
+      "new_start": 12662,
+      "new_end": 12667,
+      "old_text": "l",
+      "new_text": "scrip"
+    },
+    {
+      "new_start": 12668,
+      "new_end": 12668,
+      "old_text": "s",
+      "new_text": ""
+    },
+    {
+      "new_start": 12670,
+      "new_end": 12670,
+      "old_text": "do",
+      "new_text": ""
+    },
+    {
+      "new_start": 12671,
+      "new_end": 12674,
+      "old_text": "t",
+      "new_text": "pli"
+    },
+    {
+      "new_start": 12677,
+      "new_end": 12681,
+      "old_text": "Tru",
+      "new_text": "Fals"
+    },
+    {
+      "new_start": 12763,
+      "new_end": 12765,
+      "old_text": "59",
+      "new_text": "60"
+    }
+  ]
+}

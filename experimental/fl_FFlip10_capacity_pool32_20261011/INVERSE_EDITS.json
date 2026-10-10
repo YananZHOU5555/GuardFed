@@ -1,0 +1,275 @@
+{
+  "parent_namespace": "fl_FFlip10_capacity_cpu11_20261011",
+  "new_namespace": "fl_FFlip10_capacity_pool32_20261011",
+  "parent_package_sha256": "74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f",
+  "new_package_sha256": "699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39",
+  "edits": {
+    "candidate.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 1
+      },
+      {
+        "before": "guardfed_flgmm_FFlip10_capacity_cpu11_valid",
+        "after": "guardfed_flgmm_FFlip10_capacity_pool32_valid",
+        "count": 1
+      },
+      {
+        "before": "range(11, 19)",
+        "after": "range(32, 64)",
+        "count": 1
+      },
+      {
+        "before": "require(set(CPUS) <= set(p['eligible_cpus']), 'Requested CPUs outside actual eligible mask')",
+        "after": "require(set(CPUS + list(range(288, 320))) <= set(p['eligible_cpus']) and p['pool_topology_verified'] is True, 'Pool/siblings outside actual eligible mask or topology changed')",
+        "count": 1
+      },
+      {
+        "before": "p['sample_monitored_cpu_count'] == 16",
+        "after": "p['sample_monitored_cpu_count'] == 64",
+        "count": 1
+      },
+      {
+        "before": "p['sample_each_cpu_busy_fraction_max'] <= .20",
+        "after": "p['quiet_pairs'] >= 16",
+        "count": 1
+      },
+      {
+        "before": "affinity.intersection(CPUS)",
+        "after": "affinity.intersection(CPUS + list(range(288, 320)))",
+        "count": 1
+      },
+      {
+        "before": "sampled_cpu_busy_le20pct_cgroup_plus16_lt_quota_v2",
+        "after": "sampled_32core_pool_atleast16_pairs_le20pct_cgroup_plus16_lt_quota_v3",
+        "count": 1
+      },
+      {
+        "before": "    text = (HERE / 'originals/replay.py').read_text(encoding='utf-8')\n    tree = ast.parse(text)",
+        "after": "    text = (HERE / 'originals/replay.py').read_text(encoding='utf-8')\n    resource_assertion = \"require(len(os.sched_getaffinity(0)) == 8, 'Process must be bound to its eight coordinated CPUs')\"\n    original_gate = next(n for n in ast.parse(text).body if isinstance(n, ast.FunctionDef) and n.name == 'resource_gate')\n    require(text.count(resource_assertion) == 1 and resource_assertion in ast.get_source_segment(text, original_gate), 'Original operational resource assertion changed')\n    text = text.replace(resource_assertion, \"require(sorted(os.sched_getaffinity(0)) == list(range(32, 64)), 'Process must use fixed32-core scheduling pool with eight compute threads')\")\n    tree = ast.parse(text)",
+        "count": 1
+      }
+    ],
+    "BOUND_EXACT10.json": [],
+    "MANIFEST.json": [
+      {
+        "before": "    11,\n    12,\n    13,\n    14,\n    15,\n    16,\n    17,\n    18",
+        "after": "    32,\n    33,\n    34,\n    35,\n    36,\n    37,\n    38,\n    39,\n    40,\n    41,\n    42,\n    43,\n    44,\n    45,\n    46,\n    47,\n    48,\n    49,\n    50,\n    51,\n    52,\n    53,\n    54,\n    55,\n    56,\n    57,\n    58,\n    59,\n    60,\n    61,\n    62,\n    63",
+        "count": 1
+      },
+      {
+        "before": "fresh Linux CPU11-18 and SMT siblings sampled capacity (not exclusive cores), narrow reservation, quota/memory/GPU/storage preflight",
+        "after": "fresh Linux fixed pool32-63 and SMT288-319 eligible/same-socket distinct-core topology; at least16 quiet physical pairs; no narrow reservation; quota/memory/GPU/storage preflight (sampled capacity, not exclusivity)",
+        "count": 1
+      }
+    ],
+    "PROOF_PINS.json": [],
+    "SKIP_AND_REUSE.json": [],
+    "ACCEPTED_NATIVE_IDENTITIES.json": [],
+    "SOURCE_PINS.json": [],
+    "STORAGE_CHECK.json": [],
+    "originals/accept_result.py": [],
+    "originals/bridge.py": [],
+    "originals/celeba_data.py": [],
+    "originals/core.py": [],
+    "originals/evaluator.py": [],
+    "originals/replay.py": [],
+    "originals/saved_science.py": [],
+    "originals/SOURCE_REUSE.json": [],
+    "proofs/0_members.json": [],
+    "proofs/0_offserver.json": [],
+    "proofs/0_receipt.json": [],
+    "proofs/0_root.json": [],
+    "proofs/0_strict.json": [],
+    "proofs/1_members.json": [],
+    "proofs/1_offserver.json": [],
+    "proofs/1_receipt.json": [],
+    "proofs/1_root.json": [],
+    "proofs/1_strict.json": [],
+    "proofs/2_members.json": [],
+    "proofs/2_offserver.json": [],
+    "proofs/2_receipt.json": [],
+    "proofs/2_root.json": [],
+    "proofs/2_strict.json": [],
+    "runtime/deploy_once.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 2
+      }
+    ],
+    "runtime/launch_once.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 2
+      },
+      {
+        "before": "guardfed_flgmm_FFlip10_capacity_cpu11_valid",
+        "after": "guardfed_flgmm_FFlip10_capacity_pool32_valid",
+        "count": 1
+      },
+      {
+        "before": "range(11,19)",
+        "after": "range(32,64)",
+        "count": 1
+      },
+      {
+        "before": "narrow_cpu11_18_conflicts",
+        "after": "narrow_pool32_and_siblings_conflicts",
+        "count": 1
+      },
+      {
+        "before": "taskset -c 11-18",
+        "after": "taskset -c 32-63",
+        "count": 1
+      },
+      {
+        "before": "capacity['targets']==sorted(cpus) and len(capacity['siblings'])==8",
+        "after": "capacity['targets']==sorted(cpus) and capacity['siblings']==list(range(288,320)) and len(capacity['per_cpu'])==64 and fresh['pool_topology_verified'] is True",
+        "count": 1
+      },
+      {
+        "before": "assert capacity['max_busy_fraction']<=.20, capacity",
+        "after": "assert capacity['quiet_pairs']>=16 and len(capacity['physical_pairs'])==32, capacity",
+        "count": 1
+      },
+      {
+        "before": "each target and SMT sibling sampled busy<=20%",
+        "after": "at least16 of32 distinct physical pairs have target and SMT sibling sampled busy<=20%",
+        "count": 1
+      },
+      {
+        "before": "'sample_each_cpu_busy_fraction_max':capacity['max_busy_fraction'],",
+        "after": "'sample_each_cpu_busy_fraction_max':capacity['max_busy_fraction'],'quiet_pairs':capacity['quiet_pairs'],'physical_pairs':capacity['physical_pairs'],'pool_topology_verified':fresh['pool_topology_verified'],'core_topology':fresh['core_topology'],",
+        "count": 1
+      },
+      {
+        "before": "sampled_cpu_busy_le20pct_cgroup_plus16_lt_quota_v2",
+        "after": "sampled_32core_pool_atleast16_pairs_le20pct_cgroup_plus16_lt_quota_v3",
+        "count": 1
+      },
+      {
+        "before": "CAPACITY_V2_LAUNCH_REFUSED_NO_RETRY",
+        "after": "CAPACITY_POOL32_V3_LAUNCH_REFUSED_NO_RETRY",
+        "count": 1
+      }
+    ],
+    "runtime/OBSERVATION_REF.json": [],
+    "runtime/observation_storage.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 1
+      }
+    ],
+    "runtime/observer.py": [
+      {
+        "before": "assert targets==list(range(11,19)) and len(siblings)==len(set(siblings))==8 and not set(targets)&set(siblings)",
+        "after": "assert targets==list(range(32,64)) and siblings==list(range(288,320))",
+        "count": 1
+      },
+      {
+        "before": "    return dict(interval_seconds=seconds,targets=targets,siblings=siblings,per_cpu=rows,\n",
+        "after": "    by_cpu={row['cpu']:row for row in rows}\n    pairs=[dict(target=cpu,sibling=cpu+256,target_busy=by_cpu[cpu]['busy_fraction'],sibling_busy=by_cpu[cpu+256]['busy_fraction'],quiet=by_cpu[cpu]['busy_fraction']<=.20 and by_cpu[cpu+256]['busy_fraction']<=.20) for cpu in targets]\n    return dict(interval_seconds=seconds,targets=targets,siblings=siblings,per_cpu=rows,physical_pairs=pairs,quiet_pairs=sum(pair['quiet'] for pair in pairs),\n",
+        "count": 1
+      },
+      {
+        "before": "targets=list(range(11,19)); sibling_map={}\nfor cpu in targets:\n    pair=cpu_set((P('/sys/devices/system/cpu')/('cpu'+str(cpu))/'topology/thread_siblings_list').read_text())\n    assert cpu in pair and len(pair)==2\n    sibling_map[str(cpu)]=sorted(pair)\nsiblings=sorted(set().union(*(set(v) for v in sibling_map.values()))-set(targets))\nassert len(siblings)==8 and all(len(set(v)&set(targets))==1 for v in sibling_map.values())",
+        "after": "targets=list(range(32,64)); siblings=list(range(288,320)); sibling_map={}; core_topology={}\nassert set(targets+siblings)<=set(eligible), 'Fixed pool or SMT sibling outside actual eligible mask'\nfor cpu in targets+siblings:\n    topology=P('/sys/devices/system/cpu')/('cpu'+str(cpu))/'topology'\n    pair=cpu_set((topology/'thread_siblings_list').read_text())\n    target=cpu if cpu in targets else cpu-256\n    assert pair=={target,target+256}, 'Fixed pool SMT topology drift'\n    core_topology[str(cpu)]={'socket':int((topology/'physical_package_id').read_text()),'core':int((topology/'core_id').read_text())}\n    if cpu in targets:sibling_map[str(cpu)]=sorted(pair)\nassert len({core_topology[str(cpu)]['socket'] for cpu in targets+siblings})==1, 'Pool not one socket'\nassert len({core_topology[str(cpu)]['core'] for cpu in targets})==32, 'Pool reuses physical cores'\nassert all(core_topology[str(cpu)]==core_topology[str(cpu+256)] for cpu in targets), 'SMT physical identity drift'",
+        "count": 1
+      },
+      {
+        "before": "set(affinity)&set(range(11,19))",
+        "after": "set(affinity)&(set(range(32,64))|set(range(288,320)))",
+        "count": 1
+      },
+      {
+        "before": "narrow_cpu11_18_conflicts",
+        "after": "narrow_pool32_and_siblings_conflicts",
+        "count": 1
+      },
+      {
+        "before": "('fl_three_view_FFlip10_20261011','fl_three_view_FFlip10_cpu136_20261011','fl_FFlip10_capacity_guard_v2_20261011','fl_FFlip10_capacity_cpu11_20261011')",
+        "after": "('fl_three_view_FFlip10_20261011','fl_three_view_FFlip10_cpu136_20261011','fl_FFlip10_capacity_guard_v2_20261011','fl_FFlip10_capacity_cpu11_20261011','fl_FFlip10_capacity_pool32_20261011')",
+        "count": 1
+      },
+      {
+        "before": "'sibling_topology':sibling_map,",
+        "after": "'sibling_topology':sibling_map,'core_topology':core_topology,'pool_topology_verified':True,",
+        "count": 1
+      }
+    ],
+    "runtime/observer_payload.json": [
+      {
+        "before": "      11,\n      12,\n      13,\n      14,\n      15,\n      16,\n      17,\n      18",
+        "after": "      32,\n      33,\n      34,\n      35,\n      36,\n      37,\n      38,\n      39,\n      40,\n      41,\n      42,\n      43,\n      44,\n      45,\n      46,\n      47,\n      48,\n      49,\n      50,\n      51,\n      52,\n      53,\n      54,\n      55,\n      56,\n      57,\n      58,\n      59,\n      60,\n      61,\n      62,\n      63",
+        "count": 1
+      },
+      {
+        "before": "fresh Linux CPU11-18 and SMT siblings sampled capacity (not exclusive cores), narrow reservation, quota/memory/GPU/storage preflight",
+        "after": "fresh Linux fixed pool32-63 and SMT288-319 eligible/same-socket distinct-core topology; at least16 quiet physical pairs; no narrow reservation; quota/memory/GPU/storage preflight (sampled capacity, not exclusivity)",
+        "count": 1
+      }
+    ],
+    "saved_v2/audit_saved.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 1
+      }
+    ],
+    "saved_v2/check_linux.py": [],
+    "saved_v2/contract.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 1
+      },
+      {
+        "before": "74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f",
+        "after": "699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39",
+        "count": 1
+      }
+    ],
+    "saved_v2/FIXED_IDS.json": [],
+    "saved_v2/linux_saved_remote.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 3
+      },
+      {
+        "before": "guardfed_flgmm_FFlip10_capacity_cpu11_valid",
+        "after": "guardfed_flgmm_FFlip10_capacity_pool32_valid",
+        "count": 2
+      },
+      {
+        "before": "74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f",
+        "after": "699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39",
+        "count": 3
+      }
+    ],
+    "saved_v2/saved_science.py": [],
+    "saved_v2/transport.py": [],
+    "saved_v2/transport_remote.py": [
+      {
+        "before": "fl_FFlip10_capacity_cpu11_20261011",
+        "after": "fl_FFlip10_capacity_pool32_20261011",
+        "count": 2
+      },
+      {
+        "before": "guardfed_flgmm_FFlip10_capacity_cpu11_valid",
+        "after": "guardfed_flgmm_FFlip10_capacity_pool32_valid",
+        "count": 2
+      },
+      {
+        "before": "74023838ca591c56eab96a80f3607cb91f2f48c499c80edc80891eb4356bba8f",
+        "after": "699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39",
+        "count": 2
+      }
+    ],
+    "saved_v2/verify_arrays.py": []
+  }
+}
