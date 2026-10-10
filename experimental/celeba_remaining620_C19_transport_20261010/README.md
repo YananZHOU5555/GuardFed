@@ -1,0 +1,13 @@
+C余19已单次原CLI export并完成原CLI离机核验，待root采用。本目录为精简命令/身份/证明索引，全部新归档、数组、解压内容和原完整证明位于F，不写STATE/Git或采用计数。
+
+准确新ID：minus_C_non-IID_S-DFA_seed91002..91010九份、minus_C_non-IID_Sp-DFA_seed91001..91010十份，按原620 manifest顺序；不含first S-DFA91001、其他variant、旧180或Full。实际tag `C19_20261010T050336880929Z`，新归档SHA `80478eeeada706bafac9d7a9ed85d53c210f118106b7587935702df4e86045d1`，4,149,347B，173成员。
+
+F实际目录：`F:/YananResearchStorage/GuardFed/remaining620_C19_transport_20261010/C19_20261010T050336880929Z`。RAW_STORAGE_INDEX给出archive/receipt、完整OFFSERVER证明和成员清单的绝对路径/SHA。SCP前及离机解压前均由原storage helper核fresh Yanan 2TB、Healthy及容量；没有内盘fallback。只下载本批archive/receipt，未重包任何旧模型。
+
+原export在CPU110、单线程、nice10、idleIO完成；执行前实核全部线程的窄CPU110 owner为空、无重复exporter、19 selected worker全退出。原queue18和transport9源成员、实际root批准、三个原验证依赖SHA吻合。原CLI离机真实通过19×(9指标/24计数/3预测规则)=171/456/57，native最大差0。原strict的root校准/数据/权重守卫保持，不做CNN、fit或训练。
+
+NATIVE200_CHECKPOINT_BINDINGS逐ID保留原native200 inspection对应的完整accepted_v4_row一致性、checkpoint/result/rawjob SHA、config canonical、source/data及Full引用。ROOT_READY_CHAIN_LINK连接实际first本地receipt SHA `71e1c6782e175f81b89776d2004bde255d7d09f3bfa99117d5af6e2545bb00fe`，first+新19共20唯一ID，并链接原first失败和授权恢复，原文件未改变。accepted_offserver/root_adopted始终0；本批运输及核验不等于root接受。
+
+原export/SCP/verify均只执行一次，全部exit0。自写compact finalizer先把original_job路径str当dict读取，随后在写HANDOFF时遇到dict重复status；两项辅助错误分别保留FINALIZE_FIELD_ERROR/FINALIZE_HANDOFF_ERROR。修正仅限本目录元数据接线，未重跑或修改原CLI、归档、receipt及saved-array证明；第二次错误后只补写尚不存在的HANDOFF，已写native绑定和chain字节保持。finalize.py是可审实现记录，已有exclusive输出，不应重新执行覆盖。
+
+保留所有负结果、混合训练/重放环境、valid选择历史、历史test元数据暴露、AEOD绝对TPR差和主终点待决限制。没有追后续620进度或声称全机制/论文完成。root可从HANDOFF/RAW_STORAGE_INDEX及原OFFSERVER证明独立采用；无需重新运行科学核验。

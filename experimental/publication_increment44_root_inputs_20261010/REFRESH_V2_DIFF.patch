@@ -1,0 +1,20 @@
+--- refresh_inputs.py
++++ refresh_inputs_v2.py
+@@ -52,7 +52,7 @@
+     spec['parent_recovery_references'].append(dict(source=original,destination=p.destination(original),sha256=H(b),bytes=len(b),parent_commit=p.PARENT))
+     state_name=T+'/TRAINING_STATE.json';state=json.loads((ROOT/state_name).read_bytes())
+     facts={**p.REQUIRED_FACTS['current_state'],'/hybrid_screen32_20261009/offserver_accepted70round_jobs':27,
+-           '/flgmm_fullcoverage_v2_20261009/new_accepted':22,'/logofair32_validation_search_20261010/offserver_accepted':32}
++           '/flgmm_fullcoverage_v2_20261009/new_accepted':22,'/logofair32_validation_search_20261010/root_adopted':32}
+     # ROOT current schema is inspected; avoid inventing observed==accepted semantics.
+     for k,v in facts.items():assert p.pointer(state,k)==v,(k,v)
+     spec['bindings']['current_state']=bind(state_name,files[state_name]['sha256'],facts)
+@@ -69,7 +69,7 @@
+         spec['optional_bindings']['logofair100_startup']=dict(path=startup,sha256=startup_sha,expect={'/status':status})
+     else:assert startup_sha is None
+     for name in extra:add(name)
+-    add(HERE.relative_to(ROOT).as_posix()+'/refresh_inputs.py')
++    add(HERE.relative_to(ROOT).as_posix()+'/'+Path(__file__).name)
+     spec.update(status='SOURCE_PREPARED_ACTUAL_INPUT_SNAPSHOT_NOT_PUBLISHED',files=sorted(files.values(),key=lambda e:e['source']),allowed_paths=sorted(files))
+     spec['hybrid27_omitted_delivery_members']=omitted
+     spec['input_preparation']=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),fixed_source_files_rechecked=fixed,

@@ -1,0 +1,65 @@
+{
+  "status": "EXACT4_ORIGINAL_SERVER_STRICT_OFFSERVER_TENSORS_RECORD_PASS_ROOT_PENDING",
+  "utc": "2026-10-10T05:29:14.069509+00:00",
+  "previous_accepted": 23,
+  "accepted_new": 4,
+  "total_if_root_adopts": 27,
+  "planned": 32,
+  "accepted_new_ids": [
+    "CosineFairness_lam5.0_tau0.2_lr0.001_non-IID_S-DFA_seed91001_screen",
+    "CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91001_screen",
+    "CosineFairness_lam20.0_tau0.1_lr0.001_IID_S-DFA_seed91001_screen",
+    "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91001_screen"
+  ],
+  "snapshot_utc": "2026-10-10T05:21:31.378877+00:00",
+  "snapshot_terminal": 27,
+  "snapshot_active": [
+    {
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91001_screen",
+      "round": 64
+    }
+  ],
+  "snapshot_service": "guardfed_celeba_hybrid_screen32   RUNNING   pid 33737, uptime 18:14:51",
+  "ready_sha256": "c26b1e065540ff1d0d20fe3dd6289fc48a192f8639e5b6c83859273b48523096",
+  "archive_path": "F:/YananResearchStorage/GuardFed/celeba_hybrid_delta_after23_20261010/hybrid_after23_delta.tar.gz",
+  "archive_sha256": "011157b30ca5df8220646b7b356464657b8b1b5754ca0aba02c32ab870a89ac8",
+  "archive_bytes": 2170339,
+  "archive_members": 59,
+  "receipt_sha256": "e1df6cd10673764c00e6cbbda7410756a2e13dda47d5c2b0a9e3c3d10848d1e7",
+  "inventory_sha256": "48a9b2d654282925090f6bf444b65a7e28d23d54e158024688d10452a455a87c",
+  "server_strict_sha256": "ff0917e34294bd913f4f72985af562f8c11e9ba5bdc78bfe6642db84fb20fe24",
+  "offserver_sha256": "833a0ff525394a19b48de60178d57eba43cd5641ec9aa85ed2ab8dc22f19c225",
+  "record_sha256": "0a2531a919975f16302d9b710ec467abd73c30f9a44af190cc7fa7a367868fd1",
+  "RAW_STORAGE_INDEX_sha256": "631584a12318e66a7d3882ac3f7f796733373b263e270a9f0c0a12bb210e266c",
+  "server_runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "torch": "2.11.0+cu128",
+    "cuda_build": "12.8",
+    "CPU": [
+      106
+    ],
+    "threads": 1,
+    "gpu_name_for_original_checker": "NVIDIA GeForce RTX 5090",
+    "cuda_context_initialized_for_original_device_metadata": true
+  },
+  "local_runtime": "2.8.0+cpu",
+  "all_bulk_on_F": true,
+  "source_members_unchanged": 69,
+  "old23_models_not_repacked": true,
+  "accepted_offserver_by_root": 0,
+  "root_adopted": false,
+  "selected_recipe": null,
+  "formal100_started": false,
+  "test": false,
+  "new_CNN": 0,
+  "new_training": 0,
+  "negative_results_preserved": true,
+  "limits": [
+    "Frozen32 exploratory screen uses one seed91001 and four conditions per candidate. Partial27 does not permit final recipe selection or formal100/test claims.",
+    "Server strict cu128/RTX5090 device-name CUDA metadata is retained. Local torch2.8cpu member/tensor/record checks do not reproduce server runtime or run CNN inference.",
+    "No prediction/probability arrays are supplied. No independent saved-array metric recomputation is claimed; original strict/native_replay/result equality and writer/null checks are retained.",
+    "Shared active-service log is a labelled prefix. Only the four frozen, producer-quiescent terminal result/model/config sets are backed up; no later arrivals are accepted.",
+    "First local record gate stopped on an auxiliary self-inclusive FILES seal before scientific checked replay. The failed seal/log remain; an explicit-three-member metadata seal in a new directory passed, then original record body ran once. Successful server strict/SCP/archive verification were not retried.",
+    "All new raw archives/models/logs/restored artifacts are on freshly checked F. Root must adopt the compact delivery and reference absolute F raw paths. LATEST/STATE/RUNNING/Git/queue/recipe remain unchanged."
+  ]
+}

@@ -1,0 +1,129 @@
+--- adopted_C80/panels.py
++++ prepared_C100/panels.py
+@@ -10,14 +10,14 @@
+ PANELS=[('All 10 seeds',list(range(91001,91011))),('Exclude selection seed: 9 seeds',list(range(91002,91011))),('Seeds 91005–91010: 6 seeds',list(range(91005,91011)))]
+ 
+ def panels(records, original):
+-    expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]
++    expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA'),('non-IID','Sp-DFA')]
+     output=[];coverage={};paired={}
+     for view in source.VIEWS:
+         flat=[{k:r[k] for k in ('id','variant','distribution','attack','seed')} |
+             dict(accuracy_pct=100*r['views'][view]['accuracy'],aeod=r['views'][view]['aeod'],aspd=r['views'][view]['aspd']) for r in records]
+         summary=original.summarize(flat)
+         complete=[(r['distribution'],r['attack']) for r in summary['paired_per_scene'] if r['variant']=='minus_C' and r['complete']]
+-        source.need(complete==expected,'Only five IID plus non-IID Benign/F Flip/FedSA10 scenes are publishable')
++        source.need(complete==expected,'Only all ten complete IID/non-IID scenes are publishable')
+         coverage[view]=[{k:r[k] for k in ('variant','distribution','attack','n','expected_n','complete','seeds')} for r in summary['paired_per_scene'] if r['variant']=='minus_C']
+         paired[view]=summary['paired_per_seed']
+         for label,seeds in PANELS:
+@@ -57,3 +57,29 @@
+                 rows.append(dict(distribution='IID',attack='Five-scene equal mean within seed',variant=variant,**original.statistic(selected,len(seeds))))
+             output.append(dict(view=view,label=label,seeds=seeds,rows=rows))
+     return output
++
++
++def aggregate_balanced_panels(records, original):
++    """Each seed contributes once, after an equal mean over its ten balanced IID/non-IID scenes."""
++    import math
++    scenes=[(d,a) for d in ['IID','non-IID'] for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']]
++    by={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
++    need(len(by)==200 and len(records)==200,'Exact Full100/C100 required')
++    output=[]
++    for view in source.VIEWS:
++        within={}
++        for variant in ['Full','minus_C']:
++            for seed in range(91001,91011):
++                rs=[by[variant,dist,attack,seed] for dist,attack in scenes]
++                need(len(rs)==10,'All ten paired scenes required')
++                within[variant,seed]={m:math.fsum((100*r['views'][view]['accuracy'] if m=='accuracy_pct' else r['views'][view][m]) for r in rs)/10 for m in ['accuracy_pct','aeod','aspd']}
++        for label,seeds in PANELS:
++            rows=[]
++            for variant in ['Full','minus_C','minus_C minus Full']:
++                selected=[]
++                for seed in seeds:
++                    values={m:within['minus_C',seed][m]-within['Full',seed][m] for m in ['accuracy_pct','aeod','aspd']} if variant.endswith(' minus Full') else within[variant,seed]
++                    selected.append(dict(seed=seed,**values))
++                rows.append(dict(distribution='Balanced IID/non-IID',attack='Ten-scene equal mean within seed',variant=variant,**original.statistic(selected,len(seeds))))
++            output.append(dict(view=view,label=label,seeds=seeds,rows=rows))
++    return output
+--- adopted_C80/verify_numeric.py
++++ prepared_C100/verify_numeric.py
+@@ -3,10 +3,10 @@
+ import math
+ 
+ def verify(records,panels):
+-    assert len(records)==160 and len({r['id'] for r in records})==160
++    assert len(records)==200 and len({r['id'] for r in records})==200
+     bycell={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+-    assert len(bycell)==160
+-    scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')}
++    assert len(bycell)==200
++    scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA'),('non-IID','Sp-DFA')}
+     views=['native','raw','shared_calibration'];seedsets=[list(range(91001,91011)),list(range(91002,91011)),list(range(91005,91011))]
+     assert len(panels)==9 and {(p['view'],tuple(p['seeds'])) for p in panels}==set(itertools.product(views,map(tuple,seedsets)))
+     partial=[r for r in records if (r['distribution'],r['attack']) not in scenes]
+@@ -14,7 +14,7 @@
+     errors=[]
+     for panel in panels:
+         rows=panel['rows'];seeds=panel['seeds'];view=panel['view']
+-        assert len(rows)==24 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_C','minus_C minus Full']}
++        assert len(rows)==30 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_C','minus_C minus Full']}
+         for row in rows:
+             assert row['n']==row['expected_n']==len(seeds) and row['complete'] and row['seeds']==seeds
+             for metric in ['accuracy_pct','aeod','aspd']:
+@@ -24,7 +24,7 @@
+                 xs=[value('minus_C',s)-value('Full',s) if row['variant']=='minus_C minus Full' else value(row['variant'],s) for s in seeds]
+                 mu=math.fsum(xs)/len(xs);sd=math.sqrt(math.fsum((x-mu)**2 for x in xs)/(len(xs)-1))
+                 errors.extend([abs(mu-row[metric]['mean']),abs(sd-row[metric]['sample_sd_ddof1'])])
+-    assert len(errors)==1296 and max(errors)<=1e-12
++    assert len(errors)==1620 and max(errors)<=1e-12
+     metric_checks=0;count_checks=0
+     for record in records:
+         assert set(record['views'])=={'native','raw','shared_calibration'}
+@@ -39,7 +39,7 @@
+                 aeod=abs(a['tp']/(a['tp']+a['fn'])-b['tp']/(b['tp']+b['fn'])),
+                 aspd=abs((a['tp']+a['fp'])/a['n']-(b['tp']+b['fp'])/b['n']))
+             for key,value in metrics.items():assert abs(view[key]-value)<=1e-12;metric_checks+=1
+-    assert metric_checks==1440 and count_checks==3840
++    assert metric_checks==1800 and count_checks==4800
+     return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':0,
+         'receipt_metrics_from_group_counts':metric_checks,'base_confusion_counts_structurally_checked':count_checks}
+ 
+@@ -64,15 +64,24 @@
+     assert len(errors)==162 and max(errors)<=1e-12
+     return dict(mean_sd_scalars=162,max_abs_difference=max(errors),n_is_seed_count=True,scene_count_per_seed=5)
+ 
+-def main():
+- import argparse,json
+- from pathlib import Path
+- import build as b
+- p=argparse.ArgumentParser();p.add_argument('--snapshot',type=Path,required=True);a=p.parse_args()
+- bindings=b.read(a.snapshot/'SOURCE_BINDINGS.json');b.verify_future_binding(bindings['actual_C10_binding']);b.verify_inputs()
+- for n,pin in b.read(a.snapshot/'FILES_SHA256.json')['files'].items():b.need(b.sha(a.snapshot/n)==pin['sha256'],'Snapshot changed '+n)
+- records=b.read(a.snapshot/'records.json')['records'];tables=b.read(a.snapshot/'tables.json');result=verify(records,tables['panels'])
+- result['display_mean_sd_cells']=b.displayed_cells((a.snapshot/'TABLES.md').read_text('utf8'),tables['panels']);b.need(result['display_mean_sd_cells']==648,'Display scope changed')
+- aggregate=a.snapshot/'cross_scene_seed_first.json';b.need(aggregate.read_bytes()==(b.OLD/'snapshot/cross_scene_seed_first.json').read_bytes(),'Old IID aggregate changed')
+- result['preserved_IID_seed_first']=verify_aggregate([r for r in records if r['distribution']=='IID'],b.read(aggregate)['panels']);result['status']='INDEPENDENT_STDLIB_NUMERIC_AND_DISPLAY_PASS_PENDING_ROOT_REVIEW';print(json.dumps(result,indent=2))
+-if __name__=='__main__':main()
++
++def verify_balanced_aggregate(records,panels):
++    by={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
++    scenes=[(d,a) for d in ['IID','non-IID'] for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']]; errors=[]
++    assert len(by)==200 and len(panels)==9
++    expected_seeds=[tuple(range(91001,91011)),tuple(range(91002,91011)),tuple(range(91005,91011))]
++    assert {(p['view'],tuple(p['seeds'])) for p in panels}==set(itertools.product(['native','raw','shared_calibration'],expected_seeds))
++    for panel in panels:
++        seeds=panel['seeds'];view=panel['view'];assert seeds in [list(range(91001,91011)),list(range(91002,91011)),list(range(91005,91011))]
++        assert len(panel['rows'])==3 and {r['variant'] for r in panel['rows']}=={'Full','minus_C','minus_C minus Full'}
++        for row in panel['rows']:
++            assert row['n']==row['expected_n']==len(seeds) and row['seeds']==seeds and row['complete']
++            for metric in ['accuracy_pct','aeod','aspd']:
++                def one(variant,seed):
++                    xs=[by[variant,d,a,seed]['views'][view]['accuracy']*100 if metric=='accuracy_pct' else by[variant,d,a,seed]['views'][view][metric] for d,a in scenes]
++                    return math.fsum(xs)/10
++                xs=[one('minus_C',seed)-one('Full',seed) if row['variant']=='minus_C minus Full' else one(row['variant'],seed) for seed in seeds]
++                mu=math.fsum(xs)/len(xs);sd=math.sqrt(math.fsum((x-mu)**2 for x in xs)/(len(xs)-1))
++                errors.extend([abs(mu-row[metric]['mean']),abs(sd-row[metric]['sample_sd_ddof1'])])
++    assert len(errors)==162 and max(errors)<=1e-12
++    return dict(mean_sd_scalars=162,max_abs_difference=max(errors),n_is_seed_count=True,scene_count_per_seed=10)

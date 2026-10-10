@@ -105,6 +105,8 @@ if main.get('C_three_view_seven_scene_table'):
     views_row='| 机制三视图 | U100十场景完整；C70七场景70对/140记录表独立采用：五IID及non-IID Benign/F Flip，1134统计/567单元/1260指标/3360计数通过，旧120/972/486/162保持；其余三non-IID C场景及六变体未完成 | [C七场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/snapshot/TABLES.md) |'
     native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100完整、C70七场景native随三视图表验收，10/9/6面板和全部取舍保留；未运行最终test | [U十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md)、[C七场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/snapshot/TABLES.md) |')
     reply_row=reply_row.replace('正文未应用、最终test未运行','C70另表已验收、尚未合入该封存全文；正文未应用、最终test未运行')
+if state['latest_rebuttal_draft'].get('complete_C_scenes')==10:
+    reply_row='| 英文回复 | 完整C100作者审阅稿已纳入U/C各十场景与900校准解释；24原意见逐字、14处可逆修改、90数值pointer/45单元/54方向/60链接经root复核通过。六个其他变体与P1–P6、最终评价/正文未完成 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md) |'
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
 new_stage_note=''
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
@@ -162,6 +164,24 @@ if main.get('C_three_view_eight_scene_table'):
     new_stage_note=(f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32。新增十项non-IID FedSA终轮三视图正常退出、103成员严格离机，累计U100+C80=180，旧170/Full不重推。C80八场景表已独立采用，1296统计/648单元/1440指标/3840计数/720配对指标通过，旧140记录/1134统计/567单元和162 IID汇总保持，不计算八场景总均值。删除C的native/shared FedSA差ACC+0.410pp、AEOD+0.00190、ASPD−0.0000093，9/6面板ASPD变号及全部负结果保留。Full5CPU/75GPU对C80CPU，环境与选择史披露；剩余两non-IID C场景及六变体未完成。完整英文稿仍为C60，C70/C80尚未合入，正文未应用、test未运行。')
 elif main.get('C_after70_valid_replay',{}).get('offserver_new_accepted')==10:
     new_stage_note+=('后续non-IID FedSA准确十项终轮三视图也已正常退出、0残留worker，103成员/90指标/240计数/30规则与根验收通过，native偏差0，累计U100+C80=180；旧170与Full不重推。第八场景表尚待独立统计采用，C checkpoint覆盖只余non-IID S-DFA/Sp-DFA。')
+gradient=state.get('gradient64_validation_search_20261010',{})
+remaining=state.get('mechanism_remaining620_valid_20261010',{})
+logo=state.get('logofair32_validation_search_20261010',{})
+if remaining:
+    actual_views=main['three_view_new_models_offserver_verified']
+    views_row=views_row.replace('U100十场景完整；',f'累计{actual_views}份已严格离机；U100十场景完整；')
+    C_current='C100全部十场景评价已严格离机；完整十场景统计表待独立采用，六变体余项由620补集CPU队列等待原checkpoint后评价' if remaining.get('C100_replay_complete') else f'另C非IID S-DFA严格采用{actual_views-180}份，未齐10seed、不入场景均值；余项由准确620补集CPU队列等待原checkpoint后评价'
+    if remaining.get('C100_table_adopted'):
+        views_row='| 机制三视图 | U100及C100均已完整IID/non-IID×五场景×十seed独立采用；C表1620统计/810展示/1800指标/4800计数及全部配对、seed-first汇总通过，旧C80保持，10/9/6面板及负结果保留；其他六变体与最终评价未完成 | [C完整十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/TABLES.md) |'
+        C_current='C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100'
+    views_row=views_row.replace('其余两non-IID C场景及六变体未完成',C_current)
+    text='\n'.join(views_row if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
+    if remaining.get('C100_table_adopted'):
+        text='\n'.join((f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100/C100十场景均有配对表，其他六变体仍在训练；保留全部性能取舍、未运行最终test | [C十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/TABLES.md) |') if line.startswith('| 机制native消融 |') else line for line in text.split('\n'))
+        new_stage_note=f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid{hy_accepted}/32。U/C完整十场景三视图均已独立采用，各100对模型；C新增1620统计/810展示/1800指标/4800计数/900配对指标及两个新seed-first汇总通过，旧C80保持。non-IID S-DFA删除C的十seed三项均值更好，Sp-DFA保留准确率–ASPD取舍；无必要性/因果/显著性主张。其他六变体与最终评价/正文仍缺，完整回复已纳入C100。'
+    remote_closed=remaining.get('latest_measured_observation',{}).get('remote_strict_closed',0)
+    logo_recipe='已完整采用配置07（准确率冠军不同、8项恒定预测均保留），100覆盖待实际输入/映射绑定' if logo.get('root_adopted',0)==32 else '未完整选recipe'
+    new_stage_note+=f' 当前接续：原800−已验收180的准确620补集CPU评价已实际启动，远端闭合{remote_closed}，新增严格离机并经root采用{remaining.get("new_offserver_accepted",0)}，累计三视图{actual_views}；原180和Full不重复。Fed-NGA/Huber共64项搜索运行，严格离机{gradient.get("offserver_accepted",0)}；首个恒定负预测ACC0.516686/AEOD0/ASPD0完整保留。LoGoFair原30轮后处理搜索本机原strict闭合{logo.get("original_strict_closed",0)}/32，root采用{logo.get("root_adopted",0)}，{logo_recipe}。Huber恒等投影和LoGoFair虚拟20cohort已由作者决定，前者不继承理论保证，后者不称真实client公平性。新bulk仅F盘Yanan 2TB经实时连接/容量校验后写入；原档案保持。'
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
@@ -196,6 +216,28 @@ top=f'''# GuardFed 当前巡检交接
 '''
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
     top=top.replace('未启动formal100/test','FLGMM96新+4复用已启动、组合100未启动；test未启动').replace('formal100/test未启动','FLGMM96新+4复用已启动、组合100未启动；test未启动')
+if remaining:
+    ro=remaining.get('latest_measured_observation',{})
+    top=f'''# GuardFed 当前巡检交接
+
+主机制实测{live['checked_utc']}；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
+
+- 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。先遵守/etc/vast-agents-guide.md。sglang已按用户授权停止，文件保留；213.224.31.105不自动切回。
+- 主机制guardfed_celeba_mechanism_formal：{live['queue_completed']}观测终轮，{main['scientific_results_offserver_verified']}/800新增严格离机，100Full显式复用；{len(live['active'])}活动/{live['pending']}等待/{len(live['failed'])}失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
+- 最新三视图累计{main['three_view_new_models_offserver_verified']}：U100完整、C80八场景表已独立验收；{C_current}。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
+- 准确620补集服务{remaining['actual_service']}已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新{ro.get('utc')}远端原strict闭合{ro.get('remote_strict_closed',0)}，本阶段root离机采用{remaining.get('new_offserver_accepted',0)}。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
+- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机{gradient.get('offserver_accepted',0)}。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
+- LoGoFair原32项搜索原strict闭合{logo.get('original_strict_closed',0)}/32，root采用{logo.get('root_adopted',0)}；{logo_recipe}。原child不能重复启动，选参与原summary/独立完整32复核绑定。100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；明确虚拟cohort人口适配而非真实client公平性。
+- FLGMM96新+4复用完整覆盖严格离机{state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted',0)}/96；Hybrid原搜索严格离机{hy_accepted}/32，完整32闭合/择优前不启动Hybrid100。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
+- Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
+- 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
+- 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与8方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
+- Git已验证{published['commit']}，{published['committed_blobs_sha256_verified']}blob；Git43接受cutoff为native188/三视图180，之后本地采用200及新文件不算已推送。
+- 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
+
+后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。
+
+'''
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

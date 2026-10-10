@@ -1,0 +1,56 @@
+{
+  "status": "SAVED_C100_NUMERIC_AND_OLD_OUTPUT_REGRESSION_PASS",
+  "command": "python -B tmp/celeba_mechanism_C100_table_20261010/verify_saved.py --snapshot tmp/celeba_mechanism_C100_table_20261010/snapshot",
+  "exit_code": 0,
+  "verified_utc": "2026-10-10T05:13:46.406738+00:00",
+  "snapshot_seal_sha256": "00a6a877e861391d587f360ac4c7252a51f22d00520784f52631266507a9da8b",
+  "checks": {
+    "mean_sd_scalars": 1620,
+    "max_abs_difference": 1.4210854715202004e-14,
+    "partial_pairs_excluded": 0,
+    "receipt_metrics_from_group_counts": 1800,
+    "base_confusion_counts_structurally_checked": 4800,
+    "display_mean_sd_cells": 810,
+    "old160_records_bytes_exact": true,
+    "old1296_statistics_exact": true,
+    "old648_cells_exact": true,
+    "old162_IID_seed_first_bytes_exact": true,
+    "preserved_IID_seed_first": {
+      "mean_sd_scalars": 162,
+      "max_abs_difference": 1.4210854715202004e-14,
+      "n_is_seed_count": true,
+      "scene_count_per_seed": 5
+    },
+    "nonIID_seed_first": {
+      "mean_sd_scalars": 162,
+      "max_abs_difference": 1.4210854715202004e-14,
+      "n_is_seed_count": true,
+      "scene_count_per_seed": 5
+    },
+    "balanced_seed_first": {
+      "mean_sd_scalars": 162,
+      "max_abs_difference": 1.4210854715202004e-14,
+      "n_is_seed_count": true,
+      "scene_count_per_seed": 10
+    },
+    "replay_runtime": {
+      "Full": {
+        "cpu": 5,
+        "cuda:0": 95
+      },
+      "minus_C": {
+        "cpu": 100
+      }
+    },
+    "training_torch": {
+      "Full": {
+        "2.11.0+cu128": 98,
+        "2.11.0+cu130": 2
+      },
+      "minus_C": {
+        "2.11.0+cu128": 100
+      }
+    }
+  },
+  "no_inference": true
+}

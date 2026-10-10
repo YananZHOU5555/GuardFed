@@ -1,0 +1,47 @@
+"""One read-only exact19/CPU110/source/previous-chain snapshot; no science imports."""
+from pathlib import Path
+import datetime,hashlib,json,os
+Q=Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010')
+T=Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010')
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+read=lambda p:json.loads(Path(p).read_bytes())
+assert sha('/etc/vast-agents-guide.md')=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+assert sha(Q/'FILES_SHA256.json')=='a3461e20592cd2bda3d53c7215fed377bbaa693360ba1abe02aa87fe8aa6fc03'
+assert sha(T/'FILES_SHA256.json')=='1a021b707575292c33959c19fcfa2fa1ee8c7f285d20576c562e4843d1488fb3'
+for base in (Q,T):
+    for n,v in read(base/'FILES_SHA256.json')['files'].items():assert sha(base/n)==v['sha256'] and (base/n).stat().st_size==v['bytes']
+assert sha(Q/'ROOT_APPROVED.json')=='55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c'
+for dep in read(T/'INPUTS.json')['dependencies'].values():assert sha(dep['remote'])==dep['sha256']
+plan=read(Q/'PLAN.json')
+ids=[f'minus_C_non-IID_S-DFA_seed{s}' for s in range(91002,91011)]+[f'minus_C_non-IID_Sp-DFA_seed{s}' for s in range(91001,91011)]
+assert len(ids)==19 and ids==[i for i in plan['remaining620_ids'] if i in set(ids)]
+latest=read(T/'exports/TRANSPORT_LATEST.json')
+assert latest['receipt']=='/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010/exports/first_20261010T043359656187Z/backup_receipt.json'
+assert latest['receipt_sha256']==sha(latest['receipt'])=='71e1c6782e175f81b89776d2004bde255d7d09f3bfa99117d5af6e2545bb00fe'
+assert latest['all_transported_ids']==['minus_C_non-IID_S-DFA_seed91001'] and latest['accepted_offserver']==0
+owners=[];active=[];duplicate=[]
+for proc in Path('/proc').iterdir():
+    if not proc.name.isdigit() or int(proc.name)==os.getpid():continue
+    try:
+        if (proc/'stat').read_text().rsplit(')',1)[1].split()[0] in ('Z','X'):continue
+        argv=[s.decode(errors='replace') for s in (proc/'cmdline').read_bytes().split(b'\0') if s]
+        if str(T/'transport.py') in argv and 'export' in argv:duplicate.append(int(proc.name))
+        if str(Q/'evaluate_remaining.py') in argv and 'worker' in argv and '--id' in argv:active.append(argv[argv.index('--id')+1])
+        for thread in (proc/'task').iterdir():
+            cpus=os.sched_getaffinity(int(thread.name))
+            if len(cpus)<=16 and 110 in cpus:owners.append(dict(pid=int(proc.name),tid=int(thread.name),cpus=sorted(cpus)))
+    except (OSError,ValueError):pass
+assert not owners and not duplicate and not set(active)&set(ids),(owners,duplicate,active)
+closed=[]
+for identity in ids:
+    task=Q/'attempt1/tasks'/identity;out=Q/'attempt1/runs'/identity
+    assert {p.name for p in out.iterdir()}=={'receipt.json','bridge_receipt.json','validation_predictions.npz','strict_acceptance.json'}
+    remote=read(task/'REMOTE_COMPLETE.json');binding=read(task/'binding.json');strict=read(out/'strict_acceptance.json')
+    assert remote['status']=='REMOTE_STRICT_CLOSED_PENDING_OFFSERVER' and remote['accepted_offserver']==0
+    assert strict['status']=='MECHANISM_VALID_THREE_VIEWS_ACCEPTED' and strict['native_comparison']['max_abs_difference']<=1e-12
+    assert remote['id']==binding['id']==strict['id']==identity
+    closed.append(dict(id=identity,checkpoint_sha256=binding['checkpoint_sha256'],binding_sha256=sha(task/'binding.json'),strict_sha256=sha(out/'strict_acceptance.json')))
+print(json.dumps(dict(status='EXACT19_CLOSED_NO_SELECTED_WORKER_CPU110_AVAILABLE',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    selected_ids=ids,closed=closed,restricted_CPU110_thread_owners=owners,other_active_replay_ids=active,duplicate_exporters=duplicate,
+    previous_receipt=latest,source_seal_sha256=sha(Q/'FILES_SHA256.json'),transport_seal_sha256=sha(T/'FILES_SHA256.json'),
+    source_members_verified=True,original_archive_verifier_exact=True,accepted_offserver=0,root_adopted=0)))

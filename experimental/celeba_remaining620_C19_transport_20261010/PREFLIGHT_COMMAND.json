@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "taskset -c 110 nice -n 10 ionice -c 3 python -B -"
+  ],
+  "script_sha256": "f8095b97edd08225a43b87d63008f166afc0354a7e5dacc7631e309eb5773516",
+  "returncode": 0,
+  "automatic_retry": false
+}

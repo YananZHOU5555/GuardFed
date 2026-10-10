@@ -1,0 +1,10 @@
+{
+  "status": "PRESERVED_LOCAL_HANDOFF_DICT_CONSTRUCTION_ERROR_AFTER_COMPLETE_IDENTITY_JOIN",
+  "error": "TypeError: dict() got multiple values for keyword argument 'status'",
+  "stage": "All19 native200 row/config/checkpoint joins passed, compact native bindings and ROOT_READY_CHAIN_LINK were written; HANDOFF was not written.",
+  "minimal_fix": "Use dict(ix, status=...) to replace the inherited index status. Execute only the previously unwritten HANDOFF statement; preserve earlier compact proofs exactly.",
+  "original_export_SCP_verifier_reexecuted": false,
+  "scientific_sources_archives_receipts_saved_proofs_modified": false,
+  "accepted_offserver": 0,
+  "root_adopted": 0
+}

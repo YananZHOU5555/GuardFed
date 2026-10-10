@@ -1,0 +1,26 @@
+--- E:\OneDrive\文档\GuardFed\tmp\celeba_hybrid_screen_execution_20261009\accepted_delta_after22_20261010\local_record_bridge_v2\bridge.py
++++ E:\OneDrive\文档\GuardFed\tmp\celeba_hybrid_delta_after23_20261010\local_record_bridge_v2\bridge.py
+@@ -1,10 +1,10 @@
+ """PREPARED CPU record-layer replay; actual CUDA runtime comes only from pinned server proof."""
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+-HERE=Path(__file__).resolve().parent;B=HERE.parent;H=Path('E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_screen_execution_20261009')
+-SERVER_SHA='197c4b0f6d71ebc1890586406dd43d0fe514ad457bedb5beb0dfe24abfa01a4f'
+-ARCHIVE_SHA='06bbab6b219b3314d8becbb1901f0d0b24c5d084be60cf2bf59e420aea579853'
+-INVENTORY_SHA='48bcfd5d07edf815eafe59ab32569b06c3b14becc5c3025fa835761a37b36db7'
++HERE=Path(__file__).resolve().parent;B=Path('F:/YananResearchStorage/GuardFed/celeba_hybrid_delta_after23_20261010');H=Path('E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_screen_execution_20261009')
++SERVER_SHA='ff0917e34294bd913f4f72985af562f8c11e9ba5bdc78bfe6642db84fb20fe24'
++ARCHIVE_SHA='011157b30ca5df8220646b7b356464657b8b1b5754ca0aba02c32ab870a89ac8'
++INVENTORY_SHA='48a9b2d654282925090f6bf444b65a7e28d23d54e158024688d10452a455a87c'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+@@ -18,7 +18,7 @@
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after22_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after23_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])

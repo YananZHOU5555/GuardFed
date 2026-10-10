@@ -1,0 +1,20 @@
+--- E:\OneDrive\文档\GuardFed\tmp\celeba_hybrid_screen_execution_20261009\accepted_delta_after22_20261010\run_record_checks.py
++++ E:\OneDrive\文档\GuardFed\tmp\celeba_hybrid_delta_after23_20261010\run_record_checks.py
+@@ -2,7 +2,7 @@
+ from pathlib import Path
+ import copy,hashlib,json,sys,traceback
+ sys.dont_write_bytecode=True
+-B=Path(__file__).resolve().parent;bridge_dir=B/'local_record_bridge_v2';sys.path.insert(0,str(bridge_dir))
++B=Path('F:/YananResearchStorage/GuardFed/celeba_hybrid_delta_after23_20261010');bridge_dir=Path(__file__).resolve().parent/'local_record_bridge_v2';sys.path.insert(0,str(bridge_dir))
+ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+ def save(name,value):
+  with (B/name).open('x',encoding='utf8',newline='\n') as f:json.dump(value,f,indent=2,allow_nan=False);f.write('\n')
+@@ -11,7 +11,7 @@
+  import bridge
+  proof=bridge.replay();server=json.loads((B/'PARTIAL_ACCEPTANCE.json').read_bytes())
+  expected={r['id']:r for r in server['records']}
+- assert len(proof['records'])==len(expected)==1 and {r['id'] for r in proof['records']}==set(server['accepted_new_ids'])
++ assert len(proof['records'])==len(expected)==4 and {r['id'] for r in proof['records']}==set(server['accepted_new_ids'])
+  for row in proof['records']:
+   assert row['metrics']==expected[row['id']]['metrics'] and row['checkpoint_sha256']==expected[row['id']]['model_sha256']
+  refused=[]

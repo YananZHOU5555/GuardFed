@@ -1,0 +1,11 @@
+--- original32/bridge.py
++++ future_bound100/bridge.py
+@@ -226,7 +226,7 @@
+     candidate = next((row for row in protocol["candidates"] if row["id"] == job["candidate"]), None)
+     if candidate is None or job["settings"] != candidate["settings"] or job["method"] != "LoGoFair-DP-official-adapted":
+         raise ValueError("Unknown calibrated DP candidate")
+-    if job["evaluation_split"] != "valid" or job["seed"] != 91001 or job["fit_seed"] != 1719:
++    if job["evaluation_split"] != "valid" or job["seed"] not in protocol["seeds"] or job["fit_seed"] != 1719:
+         raise ValueError("Expected fixed single-seed valid-only postprocessing screen")
+     if set(job["local_hashes"]) != LOCAL_FILES:
+         raise ValueError("Missing postprocessing source identities")
