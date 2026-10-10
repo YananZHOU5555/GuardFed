@@ -1,0 +1,49 @@
+--- before.py
++++ current.py
+@@ -2619,13 +2619,13 @@
+         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
+     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
+     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
+-    if FL96_latest['accepted_total'] in (28,32,38,44,54,57,59):
++    if FL96_latest['accepted_total'] in (28,32,38,44,54,57,59,63):
+         current_count=FL96_latest['accepted_total']
+-        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',38:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',44:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',54:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6',57:'66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee',59:'fd57869ac5567172d971a64504e5a89669af81ffc6a754451e4055516d1722f9'}[current_count]
++        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',38:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',44:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',54:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6',57:'66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee',59:'fd57869ac5567172d971a64504e5a89669af81ffc6a754451e4055516d1722f9',63:'1b137d080aa48b3cff8705aa60d8cd090d52595988dd31c26f1f25f8ae0ca553'}[current_count]
+         assert FL96_current['status'] == 'ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
+         previous = read(ROOT/FL96_current['previous_root_adoption_path'])
+-        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',38:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',44:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',54:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',57:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6',59:'66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee'}[current_count]
+-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32),38:(32,6,38),44:(38,6,44),54:(44,10,54),57:(54,3,57),59:(57,2,59)}[current_count]
++        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',38:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',44:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',54:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',57:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6',59:'66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee',63:'fd57869ac5567172d971a64504e5a89669af81ffc6a754451e4055516d1722f9'}[current_count]
++        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32),38:(32,6,38),44:(38,6,44),54:(44,10,54),57:(54,3,57),59:(57,2,59),63:(59,4,63)}[current_count]
+         batch = Path(FL96_current['archive_local_path']).parent
+         off = read(batch/'OFFSERVER_ACCEPTANCE.json')
+         assert sha(batch/'OFFSERVER_ACCEPTANCE.json') == FL96_current['offserver_acceptance_sha256'] == FL96_latest['next_collector_previous_sha256']
+@@ -3289,6 +3289,19 @@
+     assert sha(gradient42.parent/'ROOT_READY_HANDOFF.json')==proof['handoff_sha256']
+     assert (proof['archive_members_root_verified'],proof['raw_files_root_verified'],len(proof['constant_negative_ids']))==(125,128,3)
+     prior.update(offserver_accepted=42,root_adoption_path=gradient42.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient42),accepted_ids=proof['accepted_ids'],latest_delta_constant_negative_ids=proof['constant_negative_ids'],FedNGA_screen32_accepted=True,Huber_screen_accepted=10,recipe_selected=False)
++gradient46=ROOT/'tmp/gradient_native_after42_20261011/ROOT_ADOPTION_REVIEW.json'
++if gradient46.exists():
++    proof=read(gradient46);prior=state['gradient64_validation_search_20261010']
++    assert sha(gradient46)=='e5875e4d6a5e15c95d7fb94686411a106b1db39681341c92e51e9e821867f1e6'
++    assert proof['status']=='ROOT_GRADIENT64_EXACT4_ORIGINAL_STRICT_OFFSERVER_ADOPTED'
++    assert (proof['accepted_before'],proof['accepted_new'],proof['accepted_total'])==(42,4,46)
++    assert proof['previous_root_sha256']==prior['root_adoption_sha256'] and proof['accepted_ids'][:42]==prior['accepted_ids']
++    assert len(set(proof['accepted_ids']))==46 and all(x.startswith('Huber_') for x in proof['accepted_new_ids'])
++    assert proof['all_negative_results_retained'] and not proof['final_test'] and not proof['screen64_complete']
++    assert sha(gradient46.parent/'OFFSERVER_ACCEPTANCE.json')==proof['offserver_sha256']
++    assert sha(gradient46.parent/'ROOT_READY_HANDOFF.json')==proof['handoff_sha256']
++    assert (proof['archive_members_root_verified'],proof['raw_files_root_verified'],len(proof['constant_negative_ids']))==(132,135,4)
++    prior.update(offserver_accepted=46,root_adoption_path=gradient46.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient46),accepted_ids=proof['accepted_ids'],latest_delta_constant_negative_ids=proof['constant_negative_ids'],FedNGA_screen32_accepted=True,Huber_screen_accepted=14,recipe_selected=False)
+ replay251=ROOT/'tmp/celeba_mechanism_remaining620_after240_root_adoption_20261010/ROOT_ADOPTION.json'
+ if replay251.exists():
+     proof=read(replay251); remaining=state['mechanism_remaining620_valid_20261010']; main=state['celeba_mechanism_v1']
+@@ -4022,7 +4035,7 @@
+ five=state.get('latest_five_queue_readonly_observation',{})
+ fl=state['flgmm_fullcoverage_v2_20261009'];gradient=state['gradient64_validation_search_20261010'];hy=state['hybrid100_fullcoverage_20261010']
+ hy_scene_note=('组合基线IID Benign十seed native验证表已独立及root采用，固定10/9/6面板、18个均值/样本SD标量和9个展示格核验；来源为9新增+1screen复用。仅此场景齐备，其他九场景和三视图未齐。入口'+hy['native_IID_Benign_table']['table_path']+'。' if hy.get('native_IID_Benign_table') else '')
+-hub_negative_note=(f"Huber已验收{gradient['Huber_screen_accepted']}个终轮候选均恒负预测，ACC=0.5166859616449389、AEOD=ASPD=0，作为退化负结果保留，不据零差距称有效或选冠军。" if gradient.get('Huber_screen_accepted') in (7,10) else '')
++hub_negative_note=(f"Huber已验收{gradient['Huber_screen_accepted']}个终轮候选均恒负预测，ACC=0.5166859616449389、AEOD=ASPD=0，作为退化负结果保留，不据零差距称有效或选冠军。" if gradient.get('Huber_screen_accepted') in (7,10,14) else '')
+ fl47_note=''
+ if state.get('FLGMM_closed47_valid_three_view_20261011'):
+     e=state['FLGMM_closed47_valid_three_view_20261011']

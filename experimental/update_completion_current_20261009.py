@@ -4,6 +4,10 @@ import json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 TRAIN=ROOT/'docs/server_deployment_20260923/training_20260923'
 state=json.loads((TRAIN/'TRAINING_STATE.json').read_bytes())
+latest_observation=state['latest_five_queue_readonly_observation']
+assert hashlib.sha256((ROOT/latest_observation['path']).read_bytes()).hexdigest()==latest_observation['sha256']=='b84763754dd5b969a2069cd8798755a185c15f1d3a27c33db514cba371a10a2c'
+assert hashlib.sha256((ROOT/latest_observation['growth_proof_path']).read_bytes()).hexdigest()==latest_observation['growth_proof_sha256']=='333fd6ee69973b716781f5d0d52a96561503b15992b8cebf81ba9438cda44067'
+assert latest_observation['counts_are_observation_only'] is True and latest_observation['new_acceptance']==0
 fl47_current=state.get('FLGMM_closed47_valid_three_view_20261011',{})
 if fl47_current.get('complementary_adopted'):
     fl47_proof=ROOT/'tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
@@ -81,6 +85,63 @@ if gradient42:
     assert sum(i.startswith('FedNGA_') for i in gradient42_proof['accepted_ids'])==32
     assert set(gradient39_proof['constant_negative_ids']+gradient42_proof['constant_negative_ids'])=={i for i in gradient42_proof['accepted_ids'] if i.startswith('Huber_')}
     assert len(gradient39_proof['constant_negative_ids'])+len(gradient42_proof['constant_negative_ids'])==10
+# Actual new root adoptions only; later observed terminals do not increase these counts.
+if main['scientific_results_offserver_verified']==304:
+    native304_root=TRAIN/'server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T181112Z/ROOT_DELTA_VERIFICATION.json'
+    assert hashlib.sha256(native304_root.read_bytes()).hexdigest()=='f1d25b2150d0a6f8a949fdd0745b2163e4aacfea20333e3012e8cd9dcf16f76a'
+    native304_proof=json.loads(native304_root.read_bytes())
+    assert native304_proof['root_adopted'] is True and native304_proof['total_new_strict_and_offserver']==304
+    assert native304_proof['old400_records_exact'] is True and native304_proof['test'] is False
+if state.get('flgmm_fullcoverage_v2_20261009',{}).get('new_accepted')==63:
+    FL63_root=ROOT/'tmp/fl_native_after59_20261011/ROOT_ADOPTION_REVIEW.json'
+    assert hashlib.sha256(FL63_root.read_bytes()).hexdigest()=='1b137d080aa48b3cff8705aa60d8cd090d52595988dd31c26f1f25f8ae0ca553'
+    FL63_proof=json.loads(FL63_root.read_bytes())
+    assert FL63_proof['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
+    assert (FL63_proof['accepted_before'],FL63_proof['accepted_new'],FL63_proof['accepted_total'],FL63_proof['reused_separately'])==(59,4,63,4)
+    assert FL63_proof['old59_ordered_prefix_exact'] is True and FL63_proof['final_test'] is False
+gradient46=state.get('gradient64_validation_search_20261010',{}).get('offserver_accepted')==46
+if gradient46:
+    gradient46_root=ROOT/'tmp/gradient_native_after42_20261011/ROOT_ADOPTION_REVIEW.json'
+    assert hashlib.sha256(gradient46_root.read_bytes()).hexdigest()=='e5875e4d6a5e15c95d7fb94686411a106b1db39681341c92e51e9e821867f1e6'
+    gradient46_proof=json.loads(gradient46_root.read_bytes())
+    gradient42_root=ROOT/'tmp/gradient_native_after39_20261011/ROOT_ADOPTION_REVIEW.json'
+    assert hashlib.sha256(gradient42_root.read_bytes()).hexdigest()==gradient46_proof['previous_root_sha256']=='7eec0792793dab9777fda31ca55c779dd68827e9827186f45dbe706cb9fea1ea'
+    gradient42_proof=json.loads(gradient42_root.read_bytes())
+    gradient39_root=ROOT/'tmp/gradient_native_after32_20261011/ROOT_ADOPTION_REVIEW.json'
+    assert hashlib.sha256(gradient39_root.read_bytes()).hexdigest()==gradient42_proof['previous_root_sha256']
+    gradient39_proof=json.loads(gradient39_root.read_bytes())
+    assert (gradient46_proof['accepted_before'],gradient46_proof['accepted_new'],gradient46_proof['accepted_total'])==(42,4,46)
+    assert not gradient46_proof['screen64_complete'] and not gradient46_proof['method_champion_claim'] and not gradient46_proof['final_test']
+    assert gradient46_proof['accepted_ids']==gradient42_proof['accepted_ids']+gradient46_proof['accepted_new_ids']==state['gradient64_validation_search_20261010']['accepted_ids']
+    assert sum(i.startswith('FedNGA_') for i in gradient46_proof['accepted_ids'])==32
+    negatives=gradient39_proof['constant_negative_ids']+gradient42_proof['constant_negative_ids']+gradient46_proof['constant_negative_ids']
+    assert len(negatives)==len(set(negatives))==14 and set(negatives)=={i for i in gradient46_proof['accepted_ids'] if i.startswith('Huber_')}
+hybrid12=state.get('hybrid100_fullcoverage_20261010',{}).get('new_accepted')==12
+if hybrid12:
+    hybrid12_root=ROOT/'tmp/celeba_hybrid_native12_root_adoption_20261011/ROOT_ADOPTION.json'
+    assert hashlib.sha256(hybrid12_root.read_bytes()).hexdigest()=='181e4219f967811a25446f682d94f4db511a5d7917b0650aabff380eba4c4ab1'
+    hybrid12_proof=json.loads(hybrid12_root.read_bytes())
+    assert hybrid12_proof['status']=='ROOT_HYBRID_EXACT3_ORIGINAL_STRICT_OFFSERVER_CHAIN_ADOPTED'
+    assert (hybrid12_proof['prior_accepted'],hybrid12_proof['new_accepted'],hybrid12_proof['cumulative_accepted'],hybrid12_proof['reused_separate'])==(9,3,12,4)
+    hybrid9_root=ROOT/hybrid12_proof['previous_root_path']
+    assert hashlib.sha256(hybrid9_root.read_bytes()).hexdigest()==hybrid12_proof['previous_root_sha256']=='1434b40de5116bf3d53bc5a6ae2bd3b90f4e54222f23ad099ff72b1fd3ef1775'
+    hybrid9_proof=json.loads(hybrid9_root.read_bytes())
+    assert hybrid12_proof['accepted_ids']==hybrid9_proof['accepted_ids']+hybrid12_proof['accepted_new_ids']
+    assert hybrid12_proof['accepted_new_ids']==[f'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed{s}_fullcoverage' for s in (91001,91002,91003)]
+    assert hybrid12_proof['rounds']==70 and hybrid12_proof['evaluation_split']=='valid' and hybrid12_proof['n_eval']==19867
+    assert hybrid12_proof['all_metrics_same_terminal_checkpoint'] is True and hybrid12_proof['source_data_before_after_exact'] is True
+    assert hybrid12_proof['whole100_complete'] is False and hybrid12_proof['final_test'] is False and hybrid12_proof['table_adopted'] is False
+views304=main['three_view_new_models_offserver_verified']==304
+if views304:
+    views304_root=ROOT/'tmp/celeba_mechanism_remaining_after300_root_adoption_20261011/ROOT_ADOPTION.json'
+    assert hashlib.sha256(views304_root.read_bytes()).hexdigest()=='748ae37ec6d343a667aabfa89362ef14660de4d8fc1a6ef4bde3b8ea4e94c5d4'
+    views304_proof=json.loads(views304_root.read_bytes())
+    assert views304_proof['status']=='ROOT_AFTER300_EXACT4_SAVED_ARRAYS_REPLAY304_ADOPTED'
+    assert (views304_proof['prior_accepted'],views304_proof['new_accepted'],views304_proof['cumulative_accepted'],views304_proof['remaining620_new_accepted'])==(300,4,304,124)
+    assert views304_proof['accepted_new_ids']==[f'minus_F_IID_Benign_seed{s}' for s in (91001,91002,91003,91004)]
+    assert views304_proof['original300_unchanged'] is True and views304_proof['native_root_sha256']=='f1d25b2150d0a6f8a949fdd0745b2163e4aacfea20333e3012e8cd9dcf16f76a'
+    assert (views304_proof['independent_metrics'],views304_proof['independent_counts'],views304_proof['prediction_rules'],views304_proof['native_max_abs_difference'])==(36,96,12,0) and views304_proof['archive_members']==38
+    assert views304_proof['new_scene_table_created'] is False and views304_proof['test'] is False and views304_proof['Full_inference']==views304_proof['new_CNN']==views304_proof['new_fit']==0
 accepted=main['scientific_results_offserver_verified'];replayed=baseline['actual_native_valid_image_replays_accepted']
 mechanism_views=main['three_view_new_models_offserver_verified']
 C_views=main.get('three_view_counts_by_variant',{}).get('minus_C',0)
@@ -367,14 +428,14 @@ if state['latest_rebuttal_draft'].get('complete_C_scenes')==5:
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==6:
     reply_progress_note='The complete author-review copy now includes the five IID scenes and non-IID Benign C evidence. All24 original comments remain verbatim;10 reversible edits recover both C50 documents exactly. Root checks cover36 scalar pointers,18 new mean/SD cells,27 directions and50 links. Prior numbers and negative outcomes remain intact. Four non-IID C attack scenes, six other controls and P1–P6 remain incomplete; the submitted manuscript and final test remain pending.'
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==10:
-    reply_progress_note='The complete C100 author-review copy incorporates allIID/non-IID/five-scenario U/C evidence. All24 original comments remain verbatim;14 reversible edits restore the previous C60 documents exactly. Root reran the original writing checker for90 scalar pointers,45 cells,54 directions and60 links, with all prior numeric displays preserved. Six other image controls and P1–P6 remain unfinished, including final evaluation and submitted-manuscript integration.'
+    reply_progress_note='The complete C100 author-review copy incorporates allIID/non-IID/five-scenario U/C evidence. All24 original comments remain verbatim;14 reversible edits restore the previous C60 documents exactly. Root reran the original writing checker for90 scalar pointers,45 cells,54 directions and60 links, with all prior numeric displays preserved. At that historical C100 reply cutoff, six other image controls and P1–P6 remained unfinished, including final evaluation and submitted-manuscript integration.'
 if state['latest_rebuttal_draft'].get('A_complete_scenes')==2:
     reply_progress_note='The latest complete author-review copy integrates U/C100, paired A20 in two IID scenes, LoGoFair100 and the ten-method native1000 table. Root and independent semantic reviews retain all24 original comments and old numbers;25 reversible edits restore both C100 documents exactly. The original checker passed23 added mean/SD cells,59 source facts,54 directions,six tradeoff means and82 links. Seven method cohorts,six image controls,P1-P6,final evaluation and submitted-manuscript integration remain incomplete.'
 if state['latest_rebuttal_draft'].get('A_complete_scenes')==4:
     reply_progress_note='The latest complete author-review copy integrates U/C100, paired A40 in four IID scenes, LoGoFair100 and the ten-method native1000 table. Root and independent semantic reviews preserve all24 original comments and old numbers; eight reversible spans restore both prior full documents exactly. Checks cover59 mean/SD cells,118 scalar pointers,69 source facts,108 directions and88 links. A40 tradeoffs and all10/9/6 panels remain. Seven method cohorts,six image controls,P1-P6,final evaluation and submitted-manuscript integration remain incomplete.'
-current=f'''## Current accepted increment — measured {state['last_health_check']['checked_utc']}
+current=f'''## Current accepted increment — observed {latest_observation['utc']}
 
-The main mechanism queue has{main['queue_completed_observed']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. The queue continues with eight workers and no observed failures. These counts do not establish all800 controls or the whole rebuttal.
+The main mechanism queue has{latest_observation['main_terminal']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. At that observation the queue has{latest_observation['main_active']} active workers and{latest_observation['main_failures']} failures. The separate resource sample at{state['last_health_check']['checked_utc']} is historical and is not a fresh resource measurement. These counts do not establish all800 controls or the whole rebuttal.
 
 The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
@@ -417,6 +478,8 @@ if state.get('gradient64_validation_search_20261010'):
     current+=f"\nThe new Fed-NGA32+Huber32 validation search actually started with one physicalGPU1 worker, CPU105, nice10/idleIO. Root verifies startup round{g['root_startup']['observed_round']}, physicalGPU UUID and original scientific/job bytes. The latest actual snapshot separately observes{observed.get('terminal70_observed',0)}/64 terminal70 jobs; {g['offserver_accepted']} offserver acceptances are root-adopted. The first Fed-NGA candidate is constant-negative, withACC0.516686 and zero gaps; it is retained without a champion claim. Two earlier resource-preflight engineering failures occurred before training and are preserved. Entry: {g['root_startup_path']}.\n"
     if gradient42:
         current+='The42 accepted search records comprise32 Fed-NGA and10 Huber checkpoints; all10 Huber records are constant-negative (ACC0.5166859616449389, AEOD0, ASPD0). These negative results are retained; the n=1 search is incomplete and no gradient recipe has been selected. Root evidence: '+str(gradient42_root.relative_to(ROOT))+'.\n'
+    if gradient46:
+        current+='The46 accepted search records comprise32 Fed-NGA and14 Huber checkpoints; all14 Huber records are constant-negative (ACC0.5166859616449389, AEOD0, ASPD0). Zero disparity from constant predictions is retained as a degenerate negative result, not useful fairness or a method champion. The n=1 search remains incomplete and no gradient recipe has been selected. Root evidence: '+str(gradient46_root.relative_to(ROOT))+'.\n'
 if state.get('logofair32_validation_search_20261010'):
     l=state['logofair32_validation_search_20261010']
     current+=f"\nThe original8×4 LoGoFair validation-only search uses30 post-rounds per job from four accepted FedAvg models/margin caches, with zero CNN calls or new training. {l['original_strict_closed']}/32 are locally closed by the original strict bridge, root-adopted{l['root_adopted']}; no recipe is selected before the complete search. All outputs stay on checked F storage. The earlier real-score3-round gate passed40 Beta fits and exact serialized replay, but its constant-negative prediction is preserved as interface evidence only.\n"
@@ -434,7 +497,7 @@ if state.get('mechanism_remaining620_valid_20261010'):
     r=state['mechanism_remaining620_valid_20261010']
     current+=f"\nThe finite remaining620 CPU terminal-validation queue actually started under {r['actual_service']}, excluding prior180 and Full reinference. A single eight-thread CPU evaluator on112–119, nice10/idleIO with hidden CUDA, binds only completed original70-round producers. The latest actual snapshot observes{r.get('latest_measured_observation',{}).get('remote_strict_closed',r['remote_strict_closed_at_startup'])} remote closures, of which{r['new_offserver_accepted']} newly adopted offserver records have original archive and saved-array verification plus exact accepted native model/result restore-chain identity. The root wrapper taskset syntax failure occurred before Python and is preserved. The first transport failed at a missing pinned verifier path, then its unchanged49-member archive passed one explicitly reviewed recovery,9 metrics/24 counts/3 rules and native discrepancy0; no scientific work was rerun. Entry: {r['root_startup_path']}.\n"
     if r.get('C100_table_adopted'):
-        current+='C100 complete ten-scene statistics and three-view tables are separately root-adopted; the exact oldC80 snapshot remains preserved. Entry: '+main['C_three_view_full100_table']['table_path']+'. Other six controls, frozen final evaluation and submitted manuscript remain unfinished.\n'
+        current+='C100 complete ten-scene statistics and three-view tables are separately root-adopted; the exact oldC80 snapshot remains preserved. Entry: '+main['C_three_view_full100_table']['table_path']+'. Other '+('five' if A100 else 'six')+' controls, frozen final evaluation and submitted manuscript remain unfinished.\n'
     elif r.get('C100_replay_complete'):
         current+='The final19 C records are now root-adopted:173 archive members/171 metrics/456 confusion counts/57 prediction rules, zero native discrepancy, exact20 native200 record identities and40 original model/result member rehashes. Prior180 and first181 are unchanged; cumulative U100+C100=200. C100 statistical tables await separate review; six further mechanism controls and final evaluation remain unfinished.\n'
     else:current+='The cumulative181 includes one partial C-scene record beyond the C80 table, so no additional scene mean is reported.\n'
@@ -459,6 +522,8 @@ if state.get('hybrid100_fullcoverage_20261010'):
         hybrid_note=hybrid_note.replace('New70-round acceptance remains0 at this startup boundary.',f"At startup new70-round acceptance was0; the original strict/offserver/root chain now accepts{h['new_accepted']}/96, with four reuse separate.")
         if h['new_accepted']==9:
             hybrid_note+='The latest exact8 IID Benign91003–91010 increment passes272 archive-member hashes and64 terminal tensor identities. The prior accepted seed91002 remains exact. At this native-increment acceptance cutoff, a full ten-seed IID Benign table required separate statistical adoption; subsequent table acceptance is reported separately. Other scenarios, whole100 coverage and final test remain incomplete. Entry: '+h['latest_delta_root_path']+'.\n'
+        elif hybrid12:
+            hybrid_note+='The latest exact3 IID F Flip91001–91003 increment is root-adopted, retaining the previous nine formal records:215 archive-member hashes and24 terminal tensor identities pass. These three records form a partial scene and supply no ten-seed F Flip mean or SD; the separately adopted IID Benign table is unchanged. Other scenarios, whole100 coverage and final test remain incomplete. Entry: '+h['latest_delta_root_path']+'.\n'
         else:
             hybrid_note+='First IID Benign91002 record passes188 archive-member hashes and eight saved terminal tensor identity checks,70 complete rounds and valid19867 with all metrics from one checkpoint. No single-seed scenario SD or runtime-equivalence claim. Entry: '+h['first_delta_root_path']+'.\n'
     if h.get('native_IID_Benign_table'):
@@ -472,6 +537,8 @@ if main.get('three_view_new_models_offserver_verified')==251:
 if mechanism_views==295:
     assert main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':95}
     current+='\nCurrent295 root-adopted mechanism three-view checkpoints comprise U100/C100/A95. Non-IID S-DFA now has all10 A seeds; Sp-DFA has only5 and is excluded from complete-scene means. A90 statistics are adopted only when the separately hash-checked A90 STATE entry exists; the historical A80 table remains retained. No new fitting or inference was used for this transport. Entry: '+state['mechanism_remaining620_valid_20261010']['root_adoption_path']+'.\n'
+if views304:
+    current+='Current304 root-adopted mechanism three-view checkpoints comprise U100/C100/A100 and four F IID Benign seeds91001–91004; original300 and Full are unchanged. The exact increment passes38 members/36 metrics/96 counts/12 rules with zero native discrepancy and no new fitting or inference. F remains a partial4/10 scene: no new scene mean, SD or table is adopted. Other five controls, complete17-method coverage and final evaluation remain unfinished. Entry: '+str(views304_root.relative_to(ROOT))+'.\n'
 if state.get('celeba_native_ten_method_PDF_20261010'):
     pinfo=state['celeba_native_ten_method_PDF_20261010']
     current+='\nThe ten-method native validation table PDF passes all three page visual checks and exact matching of900 mean/sampleSD pairs(1800 numbers) to the accepted source. Pages contain10/9/6 seed panels and both distributions/five scenarios. This is a display artifact, not final test evidence or complete17-method coverage. Entry: '+pinfo['pdf_path']+'.\n'

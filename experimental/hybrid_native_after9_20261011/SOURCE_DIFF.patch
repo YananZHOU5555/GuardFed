@@ -1,0 +1,33 @@
+--- after1/execute_transport.py
++++ after9/execute_transport.py
+@@ -2,8 +2,8 @@
+ import json,hashlib,subprocess,sys,base64,datetime,traceback,importlib.util
+ sys.dont_write_bytecode=True
+ H=Path(__file__).resolve().parent;ROOT=H.parents[1]
+-F=Path('F:/YananResearchStorage/GuardFed/hybrid_native_after1_20261011')
+-REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/native_after1_20261011'
++F=Path('F:/YananResearchStorage/GuardFed/hybrid_native_after9_20261011')
++REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/native_after9_20261011'
+ SSH=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55']
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+@@ -14,14 +14,14 @@
+  (H/(n+'.stdout')).write_bytes(p.stdout);(H/(n+'.stderr')).write_bytes(p.stderr);save(n+'_COMMAND.json',dict(command=cmd,returncode=p.returncode,start=start,finish=datetime.datetime.now(datetime.timezone.utc).isoformat(),stdin_sha256=hashlib.sha256(code.encode()).hexdigest() if code else None));p.check_returncode();return p.stdout
+ 
+ def check():
+- assert sha(H/'PRIOR_ROOT_ADOPTION.json')=='04d62c367609d1c6d079ff538f45a575bff368944d4833f47fd1cf28159c5fa4'
+- assert read(H/'PRIOR_ROOT_ADOPTION.json')['cumulative_accepted']==1
++ assert sha(H/'PRIOR_ROOT_ADOPTION.json')=='1434b40de5116bf3d53bc5a6ae2bd3b90f4e54222f23ad099ff72b1fd3ef1775'
++ assert read(H/'PRIOR_ROOT_ADOPTION.json')['cumulative_accepted']==9
+  assert len(sys.argv)==3 and len(sys.argv[2])==64 and all(c in '0123456789abcdef' for c in sys.argv[2])
+  assert sha(H/'FILES_SHA256.json')==sys.argv[2]
+  for n,v in read(H/'FILES_SHA256.json')['files'].items():assert sha(H/n)==v['sha256']
+- assert read(H/'DELTA_SCOPE.json')['ids']==['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91003_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91004_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91005_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91006_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91007_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91008_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91009_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91010_fullcoverage']
+- assert read(H/'DELTA_SCOPE.json')['accepted_before']==1
+- assert read(H/'PRIOR_OFFSERVER.json')['accepted_ids']==read(H/'PRIOR_ROOT_ADOPTION.json')['accepted_new_ids']
++ assert read(H/'DELTA_SCOPE.json')['ids']==['CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91001_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91002_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91003_fullcoverage']
++ assert read(H/'DELTA_SCOPE.json')['accepted_before']==9
++ assert read(H/'PRIOR_OFFSERVER.json')['accepted_ids']==read(H/'PRIOR_ROOT_ADOPTION.json')['accepted_ids']
+ def collect():
+  names=list(read(H/'FILES_SHA256.json')['files'])+['FILES_SHA256.json']
+  payload={n:base64.b64encode((H/n).read_bytes()).decode() for n in names};pins={n:sha(H/n) for n in names}

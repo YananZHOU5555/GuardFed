@@ -1,0 +1,428 @@
+# GuardFed 返修实验总览
+
+当前更新：2026-10-10T18:17:26.732274+00:00五队列只读观测；资源样本时间单列，验收数字各按实际凭据。下方10月4日内容为历史快照。当前事实以[RUNNING.md](server_deployment_20260923/training_20260923/RUNNING.md)、[TRAINING_STATE.json](server_deployment_20260923/training_20260923/TRAINING_STATE.json)及各自实际凭据为准。
+
+**返修尚未全部完成。主机制训练健康推进：305项观测到终轮，304/800项新增结果已严格验收并离机备份，8项活动、487项等待、0项当前失败；另100份Full checkpoint显式复用。九方法900份旧checkpoint的三视图验证集评价已全部严格验收备份，原生指标与原结果差值为零。**
+
+| 当前事项 | 实测或验收边界 | 入口 |
+|---|---|---|
+| 服务器与资源（2026-10-10T17:33:53.592547+00:00历史采样） | `ssh -p60350 root@89.22.197.55`，实例52183675；sglang已停止，文件模型保留。双5090利用率100%/100%，64/62℃，Recovery None；CPU12.01/122.88核，RAM78.08GB，余量1.060TB，OOM0 | [实测凭据](server_deployment_20260923/training_20260923/server_reactivation_20261009/latest_formal_live.json) |
+| 九方法论文表 | IID/non-IID×五场景全部齐备；raw/native/shared各有10/9/6种子面板。9页PDF、2,430个均值±SD单元与原TeX精确核对，九页视觉检查通过 | [直接看论文表PDF](../outputs/guardfed_tables/celeba_nine_method_three_view_pdf_20261009/celeba_nine_method_three_view.pdf)、[原始表入口](../outputs/guardfed_tables/celeba_nine_method_three_view_20261009/README.md) |
+| 校准解释 | 900条记录、2,052统计标量独立复算；每seed先平均十场景，再跨seed统计。全部正负差保留，无新推理、拟合或test | [配对分析](../outputs/guardfed_tables/celeba_nine_method_view_attribution_20261009/REPORT.md) |
+| 机制native消融 | 304/800新增严格离机；U100/C100/A100均有完整十场景配对表，其他五控制与七方法覆盖未齐；保留性能取舍、未运行最终test | [A十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_ten_scenes100_20261011/TABLES.md) |
+| 机制三视图 | U100/C100完整；A100十完整场景、100配对/200记录，固定10/9/6面板。A80/A90历史表和负结果保留，其余控制/完整17方法/最终评价未完成 | [A十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_ten_scenes100_20261011/TABLES.md) |
+| FLGMM / 组合控制 | 已严格验收离机32/32与32/32；两份只读快照分别为2026-10-10T04:01:20.872727+00:00/2026-10-10T08:24:25.595310+00:00，观测分别32/32终轮、0/0活动、0/0等待、失败0。FLGMM已按冻结规则选Tg20/L2/lr0.001，n=1；FLGMM七项短程严格离机后已启动96新+4复用，新增已严格离机63/96、双GPU各1线程；组合已按冻结规则选λ20/τ0.1/lr0.001；七项短程严格离机后96新+4复用已启动，实际首轮通过，新增70轮接受12/96，valid-only | TRAINING_STATE对应搜索记录及备份链 |
+| LoGoFair完整覆盖 | 96新+4复用全部100格已严格及root采用；两分布五场景十模型seed、固定fit1719，保存预测300指标误差0、1027哈希/198统计/99展示通过，1恒定预测保留；虚拟20组非真实client，valid-only | [完整LoGoFair表](server_deployment_20260923/training_20260923/celeba_logofair100_accepted_20261010/TABLES.md) |
+| 英文回复 | 24条原意见作者审阅稿已按实际root纳入A100十场景；历史证据、负结果及P1/P3–P6保留，正文未应用 | [优先阅读清晰版](server_deployment_20260923/revision_20260923/rebuttal_clear_A100_20261011/rebuttal_clear_20261011.md)、[详细证据版](server_deployment_20260923/revision_20260923/rebuttal_integrated_A100_reader_20261011/rebuttal_integrated_20261011.md)、[正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_A100_reader_20261011/manuscript_insertions_integrated_20261011.md) |
+| Fig.3审阅候选 | 260条原始第70轮三指标、26个设置、78个均值复核通过；单历史seed，保留COMPAS反例及来源限制。尚未采纳或替换原图 | [候选PDF](../outputs/guardfed_figures/synthetic_terminal_candidate_20261009/fig3_terminal_candidate.pdf) |
+| 正文源文件 | 找到旧IEEEtran源paper.md，但标题、方法和表结构与提交稿不同，依赖未齐；提交版源项目路径待作者提供 | [源文件核对报告](server_deployment_20260923/training_20260923/manuscript_source_locator_20261009/REPORT.md) |
+| Git / 三小时巡检 | 最近证据发布已推送d821984，302份blob与实际远端核验通过；聊天任务当前PAUSED，supervisor训练持续运行 | [发布核验](server_deployment_20260923/training_20260923/publication_closed_increment56_verified_20261011.json)、[巡检交接](server_deployment_20260923/training_20260923/server_reactivation_20261009/MONITOR_HANDOFF.md) |
+
+九方法结果需如实解释：原生视图下GuardFed跨场景均值的ACC/AEOD/ASPD分别优于6/8、8/8、7/8基线；统一校准后为7/8、4/8、1/8。这是均值方向计数，不是seed胜率或显著性，不能把原生公平性优势全部归因于聚合，也不能称所有方法和指标都获胜。原生准确率88.4199±0.6225%，AEOD0.0097±0.0030，ASPD0.0610±0.0047；统一校准准确率仍比FLTrust低0.8445个百分点。三视图、全部种子和负结果平行保留，不择优换统计口径。
+
+原after82精确10项评价因旧11项审批断言在CNN前停止，0完成/空输出，现场保留且不重启。独立V2仅修数量与namespace，正向/拒收门检后一次运行，10项完整严格验收离机，服务正常EXITED、0残留；原82及主训练不变。FLGMM增量备份也保留一次读取旧链字段的工程失败，独立V2绑定实际来源后7项验收通过；两次均未改变科学计算或训练。
+
+历史U100消融阶段：当前机制消融也体现取舍：旧七场景方向保持；新non-IID FedSA/S-DFA删除U的native准确率分别下降0.601/0.453个百分点，公平性存在取舍。删除U的三视图独立完成十场景，旧184记录/243统计行精确保持；不代表其余六variant或全部800训练完成。不能据此宣称每个模块不可或缺。混合CPU/GPU、历史训练环境、验证集选择和历史test暴露均已披露，当前900条不是最终test评价。
+
+仍需完成：800项机制训练及对应三视图、剩余7方法忠实实现和完整多种子覆盖、作者确定的最终评价协议、正式正文及最终rebuttal。Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。旧Table II480个原值已追溯实际重复数，缺少依据的标准差不补造；Fig.3候选也没有补齐原执行身份。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| A机制单场景 | IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过；累计A12中F Flip仅2seed不入均值。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张 | [A IID Benign表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md) |
+
+
+历史A20单场景入口截止：A机制单场景：IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过。累计A12中F Flip仅2seed，不入均值。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A IID Benign表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md)。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+历史A20单场景入口截止：A机制单场景：IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过。A20中Benign和F Flip各10seed已严格采用，新增两场景表仍待独立统计核验；原Benign表保持。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A IID Benign表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md)。
+
+
+历史A20单场景入口截止：A机制单场景：IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过。A20两完整IID场景表已独立采用：324统计/162展示/360计数指标/960基础计数通过；旧24记录及Benign162统计/81展示保持。F Flip native/shared删除A差约+0.001pp/+0.00001/−0.00088，9/6方向变化保留；其他八A场景未齐。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A IID Benign表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md)。
+
+
+
+
+
+
+十方法native千格论文表已独立采用，IID/non-IID各五场景、10/9/6seed面板；900场景显示与270先seed内汇总显示通过，原九方法全部810统计对象不变。仍缺七方法覆盖，LoGo使用原DP后处理native而非底座cache；不称1000三视图或final。入口：[十方法IID/non-IID表](../outputs/guardfed_tables/celeba_ten_method_native_20261010/TABLES.md)。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+历史A50表采用截止：最新A50五IID场景表已独立采用：50配对、972统计/486单元及900指标/2400计数通过，旧A40字节和统计保持；五IID先seed内汇总，non-IID单例不入均值。Sp-DFA公平性方向相反及所有10/9/6面板保留，五non-IID A场景仍待齐。入口docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md。
+最新24原意见完整英文稿已清晰度复核，27可逆改动保持2292数字字串/88链接/11整表；阶段时间线后置，首回应前1876→242词。尚为A40/LoGo100作者审阅截止，A50单独交付待纳入；正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_reader_20261010/rebuttal_integrated_20261010.md。
+
+
+
+
+最新24原意见完整英文稿已清晰度复核，27可逆改动保持2292数字字串/88链接/11整表；阶段时间线后置，首回应前1876→242词。A50已用16新增可逆编辑及12组JSON均值/SD指针纳入，五IID/Sp-DFA取舍、六seed方向反转及non-IID未齐边界保留；正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A50_reader_20261010/rebuttal_integrated_20261010.md。
+新增CNN三条真实图像valid接口门检已实际启动，37源码/数据/模型身份匹配、实际quota122.87999/名义预算76，CPU120–127八低优先级线程/单进程。仅三条已验收checkpoint接口，非全100/最终终点；离机科学采用仍0，见tmp/celeba_added_cnn_exact3_root_execution_20261010/START_RECEIPT.json。
+
+
+
+
+新增三条代表CNN接口已采用（FLGMM/组合/NGA搜索一配置）：Linux完整原检查与F盘原数组/校准重拟合块通过，27指标/72计数/9规则、native差0；Windows完整检查的FL审计group_kl约2.2e-19差异保留，不放宽容差、不称其全文通过。不是完整100格或最终test。入口tmp/celeba_added_cnn_exact3_root_execution_20261010/ROOT_SCIENTIFIC_ADOPTION.json。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。A60已用21处新增可逆编辑及6组JSON均值/SD指针纳入；旧2457数字字串/98链接保留，五IID+non-IID Benign的指标取舍、其余四non-IID未齐边界明确；仍为作者审阅，正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A60_reader_20261011/rebuttal_integrated_20261011.md。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。A80已按实际采用记录纳入，具体编辑与证据以回复入口为准；仍为作者审阅，正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A80_reader_20261011/rebuttal_integrated_20261011.md。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+历史增量（发布54截止，当前见下）：最新累计机制288份终轮三视图（U100/C100/A88）已严格离机并root采用；新增A的non-IID S-DFA仅8seed，排除完整场景均值，A80八场景表保持。 FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索39/64已采用（Fed-NGA32、Huber7）；7项Huber均恒负预测，ACC51.668596%、两gap为0，作为退化负结果保留，搜索未完不选recipe。
+
+
+
+
+历史增量（发布54截止，当前见下）：最新累计机制288份终轮三视图（U100/C100/A88）已严格离机并root采用；新增A的non-IID S-DFA仅8seed，排除完整场景均值，A80八场景表保持。 FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索39/64已采用（Fed-NGA32、Huber7）；7项Huber均恒负预测，ACC51.668596%、两gap为0，作为退化负结果保留，搜索未完不选recipe。
+
+
+
+
+
+
+
+
+历史295增量截止（当前A100见上）：最新累计机制295份终轮三视图（U100/C100/A95）已严格离机并root采用；non-IID S-DFA十seed齐，Sp-DFA仅5seed排除完整均值；A90仅在STATE实际采用字段及根SHA通过后显示，A80历史表保留。 FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。当前FL新增native接受另列59/96，不回写FL61来源57+4；机制当前三视图295另列。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索42/64已root采用（Fed-NGA32、Huber10）；10项Huber均恒负，ACC0.5166859616449389、AEOD0、ASPD0，全部退化负结果保留；n=1搜索未完、不选recipe。凭据tmp\gradient_native_after39_20261011\ROOT_ADOPTION_REVIEW.json。
+
+
+
+历史A90回复截止：最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。A90九场景已按实际root凭据纳入作者审阅回复及正文候选：13处可逆编辑、6组JSON均值/SD对和9个固定方向面板核验，历史A80证据保持；仍为作者审阅，正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A90_reader_20261011/rebuttal_integrated_20261011.md。
+
+
+
+
+
+
+
+
+最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。A100十场景已按实际root纳入作者审阅回复及正文候选，A80/A90历史和全部反例保留；仍为作者审阅，正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A100_reader_20261011/rebuttal_integrated_20261011.md。
+
+ FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。当前FL新增native接受另列59/96，不回写FL61来源57+4；机制当前三视图300另列。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索42/64已root采用（Fed-NGA32、Huber10）；10项Huber均恒负，ACC0.5166859616449389、AEOD0、ASPD0，全部退化负结果保留；n=1搜索未完、不选recipe。凭据tmp\gradient_native_after39_20261011\ROOT_ADOPTION_REVIEW.json。
+
+
+
+
+
+
+
+
+
+
+
+
+ FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。当前FL新增native接受另列63/96，不回写FL61来源57+4；机制当前三视图304另列。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 当前机制三视图304＝U100＋C100＋A100＋F4；准确新增F IID Benign91001–04，旧300/Full保持，38成员/36指标/96计数/12规则、native差0，无新fit/inference。F仅partial4/10，不生成场景均值/SD或新表；其余五controls/完整17方法/最终评价未齐。凭据tmp\celeba_mechanism_remaining_after300_root_adoption_20261011\ROOT_ADOPTION.json。 组合基线当前12/96新增已采用；原IID Benign十seed表仍由9新增＋1screen复用构成，通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索46/64已root采用（Fed-NGA32、Huber14）；14项Huber均恒负，ACC0.5166859616449389、AEOD0、ASPD0，零gap仅作退化负结果保留，不作有效公平性/冠军证据；n=1搜索未完、不选recipe。凭据tmp\gradient_native_after42_20261011\ROOT_ADOPTION_REVIEW.json。
+
+A机制对照：原IID Benign十共享seed表保持；162统计/81单元/216计数指标通过。A100十完整场景表已按实际root采用：五IID＋五non-IID、100配对/200记录、2106均值与样本SD统计/1053展示单元，固定10/9/6面板。A80/A90历史表、全部负结果及预测规则依赖取舍保留；raw FedSA删除A后三均值改善，native/shared准确率微升而两gap变差，不作必要性或显著性主张。实际replay设备{"Full": {"cpu": 5, "cuda:0": 95}, "minus_A": {"cpu": 100}}；训练Torch{"Full": {"2.11.0+cu128": 98, "2.11.0+cu130": 2}, "minus_A": {"2.11.0+cu128": 100}}。验证集选择和历史test暴露不变；只闭合A表，其余控制、完整17方法、P1/P3–P6、最终评价与投稿正文仍未完成。A100已纳入另行root采用的作者审阅回复，正文未应用。IID Benign删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A机制三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_ten_scenes100_20261011/TABLES.md)。
+
+当前新增执行：FLGMM新增严格离机63/96，4复用另计；Hybrid32/32。U/C完整十场景三视图均已独立采用，各100对模型；C新增1620统计/810展示/1800指标/4800计数/900配对指标及两个新seed-first汇总通过，旧C80保持。non-IID S-DFA删除C的十seed三项均值更好，Sp-DFA保留准确率–ASPD取舍；无必要性/因果/显著性主张。在C100表采用时其他六变体与最终评价/正文仍缺；本次A100闭合其中一项，完整回复已纳入C100。 当前接续：原800−已验收180的准确620补集CPU评价已实际启动，远端闭合124，新增严格离机并经root采用124，累计三视图304；原180和Full不重复。Fed-NGA/Huber共64项搜索运行，严格离机46；首个恒定负预测ACC0.516686/AEOD0/ASPD0完整保留。LoGoFair原30轮后处理搜索本机原strict闭合32/32，root采用32，固定配置07完整100格已独立采用（96新+4复用），10/9/6表及1恒定预测保留。Huber恒等投影和LoGoFair虚拟20cohort已由作者决定，前者不继承理论保证，后者不称真实client公平性。新bulk仅F盘Yanan 2TB经实时连接/容量校验后写入；原档案保持。 A IID Benign十seed三视图表已独立采用。A100十完整场景表已按实际root采用：五IID＋五non-IID、100配对/200记录、2106均值与样本SD统计/1053展示单元，固定10/9/6面板。A80/A90历史表、全部负结果及预测规则依赖取舍保留；raw FedSA删除A后三均值改善，native/shared准确率微升而两gap变差，不作必要性或显著性主张。实际replay设备{"Full": {"cpu": 5, "cuda:0": 95}, "minus_A": {"cpu": 100}}；训练Torch{"Full": {"2.11.0+cu128": 98, "2.11.0+cu130": 2}, "minus_A": {"2.11.0+cu128": 100}}。验证集选择和历史test暴露不变；只闭合A表，其余控制、完整17方法、P1/P3–P6、最终评价与投稿正文仍未完成。A100已纳入另行root采用的作者审阅回复，正文未应用。 两项适配决定的英文局部补丁已根核，24原评论/全部旧数字保持、两个替换段可逆；正文未应用，最终主终点未定。 梯度200格192新+8复用源准备已独立通过；无实际recipe/jobs/启动，完整64离机接受及新增攻击真实门检仍待完成。 新攻击14项共同三轮门检仅源码独审通过，实际图像门检0，正式70轮验收不变。 新增五方法三视图接线须原strict身份桥，LoGo原生须保留DP状态/虚拟映射，不能用FedAvg raw cache冒充；底座raw/shared须明确标诊断，主终点未定。 组合32项搜索已完整严格离机并独立采用，正常EXITED且0worker；冻结规则选λ20/τ0.1/lr0.001，同时为准确率冠军/唯一三指标Pareto候选。n=1不报跨seed SD或显著性，组合v3接线与七个真实三轮门检已严格离机并采用；96新+4复用验证覆盖已实际启动，70轮新增接受12，不把短程算正式样本。 Hybrid正式新增严格离机累计12/96，4screen复用另计；最新IID F Flip三项仅partial3/10，不作十seed场景均值，原IID Benign十seed表与负结果保持。
+
+FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json；历史hold：tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_VALIDATION_HOLD.json。
+
+ FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。当前FL新增native接受另列63/96，不回写FL61来源57+4；机制当前三视图304另列。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 当前机制三视图304＝U100＋C100＋A100＋F4；准确新增F IID Benign91001–04，旧300/Full保持，38成员/36指标/96计数/12规则、native差0，无新fit/inference。F仅partial4/10，不生成场景均值/SD或新表；其余五controls/完整17方法/最终评价未齐。凭据tmp\celeba_mechanism_remaining_after300_root_adoption_20261011\ROOT_ADOPTION.json。 组合基线当前12/96新增已采用；原IID Benign十seed表仍由9新增＋1screen复用构成，通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索46/64已root采用（Fed-NGA32、Huber14）；14项Huber均恒负，ACC0.5166859616449389、AEOD0、ASPD0，零gap仅作退化负结果保留，不作有效公平性/冠军证据；n=1搜索未完、不选recipe。凭据tmp\gradient_native_after42_20261011\ROOT_ADOPTION_REVIEW.json。
+以下为 2026-10-04 的历史整理，保留当时数量与路径，不能用于判断当前服务器、活动队列或调度器状态。
+
+更新：2026-10-04，Australia/Sydney。稿件 TDSC-2026-07-3058。
+
+**当前结论：九方法 CelebA 双分布、五场景、十种子表已完整，900/900条；七方法共享校准已完成。FedAA/LASA固定recipe完整覆盖200/200条已验收及备份（192新增＋8复用）。整个返修尚未完成。2026-10-03 19:10:58 UTC实测服务器在线、队列正常结束、0worker、0当前失败；三小时巡检继续。**
+
+本文是查找当前材料的总入口。既有计划、分析和表格保留其生成时的快照；状态冲突时，以本总览引用的验收记录及最新实时检查为准。规划数量不表示已经启动。
+
+## 1. 服务器、监控与代码
+
+| 项目 | 已核对状态 |
+|---|---|
+| 当前 SSH | `ssh -p 26712 root@213.224.31.105`；需要访问本地8080时加 `-L 8080:localhost:8080` |
+| 实例与仓库 | 实例52514165；`/workspace/GuardFed-celeba-expanded` |
+| 2026-10-03 19:10:58 UTC实测 | SSH连通；项目目录存在；两张RTX5090利用率0%、26℃、Recovery None；无GuardFed训练worker；磁盘剩余约2.046TB |
+| 最近队列 | `guardfed_celeba_baseline_fullcoverage`正常结束；200项完成严格验收与备份，九方法900条表已交付 |
+| 每3小时巡检 | 10月2日整理时发现调度器实际PAUSED，与此前ACTIVE记录不一致；已按用户继续巡检的要求修正，ACTIVE及下次运行时间已读取核实。正常空闲保持安静 |
+| Git发布入口 | [返修证据分支](https://github.com/YananZHOU5555/GuardFed/tree/codex/revision-evidence-baselines-20260928)。启动源码/协议快照commit `b493110`；当前实际验收/备份和论文表以本地本入口为准，模型和数据走独立恢复链 |
+| 旧服务器 | `89.22.197.55:60350`仅归档，禁止重新启动旧队列 |
+
+监控启用不表示训练已启动。后续队列须有明确的执行范围、冻结协议和manifest；当前训练范围以最新RUNNING和TRAINING_STATE的celeba_baseline_fullcoverage_v1入口为准；10项门检已通过，短程horizon检查错误已保留证据并用同horizon模型一致性修正。
+
+## 2. 已完成实验及计数
+
+| 实验阶段 | 已完成范围 | 数量和统计口径 | 当前证据入口 |
+|---|---|---|---|
+| 首轮正式补充 | Adult/COMPAS逐项消融、强异质性、root噪声/群体占比、ACSIncome；原CelebA图像实验 | 1,390次新增训练＝1,150表格＋240图像；已验收 | [首轮结果分析](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/补充实验结果分析_20260924.md) |
+| CelebA初次专属调参 | 原四方法non-IID Benign/S-DFA候选搜索 | 40次新增，单种子valid-only | [初次调参结果](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_tuning_v1/final/结果分析.md) |
+| 扩展调参 | Median、公平root适配、组合及更细参数候选 | 82次新增；与旧40合并为122条；单种子valid-only | [扩展结果](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_expanded_v2/final/结果分析.md) |
+| 配对种子检查 | 七方法×Benign/S-DFA；增加91002–91004 | 42次新增＋14条复用＝56条、4种子；不把复用再计为训练 | [四种子结果](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_seedcheck_v1/final/结果分析.md) |
+| 完整覆盖阶段A | 七方法×IID/non-IID×五场景×10种子 | 700条＝644新增＋56复用；70轮、valid19867；均值±sampleSD | [完整论文表入口](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_fullcoverage_final_20260928/README.md) |
+| CelebA统一校准 | 复用阶段A全部终轮模型，统一train-root拟合校准 | 700模型、1,400组raw/shared输出；0次新增训练 | [校准对照报告](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_shared_calibration_v1/final/analysis.md) |
+| FedAA/LASA集成门检 | 真实图像3轮pilot、FedAA恢复、新worker回归 | 管线验证，不加入论文性能样本数 | [门检记录](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_screen_v1/preflight/acceptance.json) |
+| FedAA/LASA调参 | 两方法×8候选×IID/non-IID×Benign/S-DFA | 64次新增、70轮、seed91001、valid-only；全部验收，529项汇总复核一致 | [候选及结果分析](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_screen_v1/final/结果分析.md) |
+| FedAA/LASA完整覆盖 | 固定recipe、两分布×五场景×10种子 | 200条＝192新增＋8复用；70轮、valid19867；严格验收与增量备份完成 | [最终结果](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_fullcoverage_v1/final/结果分析.md) |
+
+按上述阶段的新增清单合计：1,390＋40＋82＋42＋644＋64＋192＝**2,454次新增完整训练**。此数不含历史论文训练、短程门检或离线校准输出；也不把700/200/900等包含复用的记录再次相加。它是阶段计数汇总，不表示全部结果支持方法获胜。
+
+首轮1,150次表格补充构成：Adult消融120、Adult强异质性180、Adult root噪声120；COMPAS强异质性180、消融140、root噪声130；root群体比例160；ACSIncome120。
+
+## 3. 现在可以直接查看的论文表
+
+| 表格 | 覆盖与用途 | 文件 |
+|---|---|---|
+| IID主表 | 九方法×五场景，每格10种子 | [三页PDF第1页](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/celeba_iid_noniid_ten_seed.pdf)、[LaTeX](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/celeba_iid_ten_seed.tex) |
+| non-IID主表 | 同方法、场景和种子口径 | 三页PDF第2页；[LaTeX](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/celeba_noniid_ten_seed.tex) |
+| 双分布合并表 | 对应完整900条 | 三页PDF第3页；[表格与来源入口](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/README.md) |
+| 排除选择种子的九种子表 | 91002–91010，九方法全部同种子 | [表格](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/celeba_iid_noniid_exclude_selection.md) |
+| 同口径六种子子集表 | 91005–91010；不宣称从未观察 | [表格](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_nine_method_final_20261004/celeba_iid_noniid_matching_six.md) |
+| 同校准归因表 | 全部七方法，同模型raw/shared，10/9/6种子汇总 | [报告](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_shared_calibration_v1/final/analysis.md) |
+| 两新增方法调参表 | 全部16候选、三指标Pareto、综合评分/准确率冠军、逐场景值 | [报告](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_screen_v1/final/结果分析.md) |
+
+**IID/non-IID在九方法层面已经齐；正文17行的完整比较仍未齐。** 新主表使用全部配对10seed结果，附9/6seed同口径子集；原七方法700条快照保持原样，两个新增方法不再用单种子调参值冒充十种子结果。独立复核900条网格、200条新增原始身份及1944统计标量通过；五份LaTeX编译、三页PDF视觉检查通过。
+
+## 4. 结果应怎样解读
+
+原生阶段A表比较完整GuardFed流程与各基线原生输出，其中GuardFed包含组阈值校准。统一校准对照控制了这一差异，结果更适合解释公平性来源。以下先在每个种子内平均两分布×五场景，再跨10种子汇总。
+
+九方法原生输出汇总中，GuardFed ACC88.420±0.623%，FedAA88.623±1.044%，LASA87.752±1.221%；GuardFed两项公平差值对这两者均更低，但准确率较FedAA低0.204个百分点、较LASA高0.668个百分点。对FLTrust原生输出准确率仍低1.209个百分点；FairGuard的ASPD均值更低但ACC约74.04%。不支持“三指标全面击败所有方法”。新增两方法尚未纳入七方法共享校准归因对照，不混合两种校准口径。
+
+| 同一共享校准口径 | ACC (%) | AEOD | ASPD |
+|---|---:|---:|---:|
+| GuardFed-AD2+ | 88.420 ± 0.623 | 0.00967 ± 0.00297 | 0.06105 ± 0.00466 |
+| FLTrust | 89.264 ± 0.719 | 0.00924 ± 0.00287 | 0.07125 ± 0.00666 |
+
+GuardFed的ASPD均值较低，准确率较低，AEOD均值没有明确优势。支持“效用与公平性权衡、部分公平收益仍在”，不能写“三项指标全面击败所有方法”或把全部公平收益归因于聚合。
+
+COMPAS逐项消融已有负证据：12个消融条件ACC均值均高于Full，其中6个条件三指标均值同时更好。应解释数据与分布依赖，不能以Full最佳seed对比消融平均值证明组件不可或缺。
+
+补充统计须保留：AEOD实际是绝对TPR差，非完整equalized odds；验证集选择历史；14条cu130与其余cu128环境差异；迁移首轮一致不证明70轮训练完全一致；所有指标取同一checkpoint。旧表中的选seed/选轮/oracle-best必须如实标注。
+
+## 5. 回复reviewer还差什么
+
+| 审稿关切 | 实验或证据当前状态 | 尚需完成的稿件/回复工作 |
+|---|---|---|
+| 新图像和新表格任务；CNN覆盖 | CelebA与ACSIncome已有验收结果 | 写入数据、模型层级、训练协议和正负结果；不能只说“已训练” |
+| 逐项消融及Adult/COMPAS差异 | 表格六项消融、260个同checkpoint校准对照已有 | 解释组件贡献依赖数据/分布；图像机制消融另待补 |
+| 更强non-IID | α=1/0.5/0.1的360次补充已完成 | 展示真实客户端组/标签分布、稀疏支持及效用代价 |
+| root标签/属性噪声及少数组不足 | 噪声和固定reservoir群体占比实验完成 | 写清root来源、合成生成器训练及服务器可见信息；承认零群体支持失效边界 |
+| 理论范围与分数分离 | 严格margin诊断已有 | 定理限定分离前提，不用平均差代替严格最小间隔，不宣称完整鲁棒性保证 |
+| DFA创新定位 | 攻击评价已有，创新定位仍是写作任务 | 明确协调双目标威胁模型；若坚持协同增益主张，再设计同预算分量对照 |
+| Table II完整值、标准差、N/E | 480格数值来源已对齐，44个隐藏值全部恢复，IID/non-IID四页表已交付；真实n为294格n=1、180格n=10、6格n=3 | 见[Table II追溯报告](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/table2_trace_20261002/追溯报告.md)和[完整表PDF](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/table2_recovered_20261002/table2_complete_review.pdf)。包含同终轮修正候选；单seed无SD，历史方法差异选轮与FedWA/Cosine身份混用须校正，不能称整表10seed或最终忠实对照 |
+| 基线实现与完整比较 | 九方法900条完整；FedAA/LASA有界调参和多种子覆盖均完成 | 补其余8方法可信实现及覆盖；披露项目适配和校准差异 |
+| 多属性、公平定义、root现实性、扩展规模 | 仍需文字与相关工作整理 | 区分多组/交叉组扩展与已测实证；20参与客户端不能包装为百万客户端实验 |
+| 符号、root更新、方法/攻击实现、代码与局限 | 有草稿与实现审计 | 方法按5090真实AD2+流程写，含候选选择、硬筛选、范数机制、组阈值；逐条落稿并填写位置 |
+
+回复草稿：[rebuttal_draft_20260928.md](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/rebuttal_draft_20260928.md)。其中TODO代表未完成修改，不能作为提交版。已有证据应先落稿；不是每个缺口都要再开训练。
+
+## 6. 下一步执行顺序
+
+| 顺序 | 交付 | 数量及当前边界 |
+|---|---|---|
+| 1 | 旧表来源/统计整理，同时将已有实验和真实方法写进正文、逐条回复 | 主要是整理和写作，可与后续训练准备并行；原结果保留 |
+| 2 | 固定FedAA/LASA所选配置，补齐两分布×五场景×10种子 | 已完成200/200＝8复用＋192新增，验收/备份及九方法论文表已交付 |
+| 3 | 补余下8行可信实现、门检、有界调参及完整评价 | LoGoFair、Fed-NGA、FedWA、Huber-BRFL、FLGMM、SmartFL、FedDNA、cosine＋fairness hybrid。规格和忠实度逐项验收，不能用旧lite/core分支直接顶替原法 |
+| 4 | CelebA机制消融：六评分/范数项、硬筛选、候选选择 | 原建议8变体×2分布×3场景×10seed＝480新增，Full60格可复用；五场景版本需800新增。数量是方案，不是审稿人指定或已启动 |
+| 5 | 方法、选择规则和评价协议冻结后的最终评价 | 披露此前验证集选择和旧test暴露；现有valid结果不能更名为独立test |
+
+正文完整方法矩阵目标17×2×5×10＝1,700格。已有九方法900格，另8方法对应800格。部分后处理可复用CNN，不能机械把1,700格全当新增训练；缺口数量不表示新队列已经冻结或启动。
+
+建议下一阶段先完成余8方法规格与忠实度验收；cosine hybrid已有可审计机制，LoGoFair保持本地/全局校准路径；Fed-NGA/Huber核严格梯度语义；FLGMM解决跨轮状态和论文/代码差异；FedWA/SmartFL/FedDNA先补齐具体规格。无需为凑方法名称填未经验证的替代实现。
+
+## 7. 备份与恢复入口
+
+| 产物 | 已核对备份记录 | 使用方式 |
+|---|---|---|
+| 阶段A644新增＋56复用 | [最终恢复链](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/restore_chain_final.json) | 七个增量覆盖644新增；56复用由此前调参/种子阶段恢复 |
+| 共享校准700及管线门检 | [备份收据](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_shared_calibration_v1/sharedcal_backup.json) | 原模型走阶段A链；归档保留margin缓存、评价、源码和pilot证据，2,904内容成员已核SHA |
+| FedAA/LASA64调参 | [恢复链](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_screen_v1/restore_chain.json) | 40＋24无重复覆盖全部64；模型/完整状态/原始结果/配置/日志已核SHA |
+| FedAA/LASA200完整覆盖 | [恢复链](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_baseline_fullcoverage_v1/restore_chain.json) | 24＋40＋48＋40＋40覆盖192新增，8复用引用64调参链；全部archive/member SHA已核 |
+| 首轮正式补充与各历史阶段 | [训练状态入口](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/TRAINING_STATE.json) | 各阶段独立验收和归档；不得用一个早期1,150结果归档声称包含后来240图像 |
+
+大数据集、模型和缓存保存在已校验的本地/服务器归档中。Git主要保留源码、配置、协议、报告和论文表；Git提交本身不能代替模型备份。
+
+整理范围：新增本总入口，给旧计划/表格说明补当前状态提示，更新运行入口与实际巡检状态。原始训练结果、模型、历史表格和冻结实验协议保持原样。

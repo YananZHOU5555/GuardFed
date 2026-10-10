@@ -1,0 +1,30 @@
+--- first_source
++++ time_labels_fixed
+@@ -3518,6 +3518,9 @@
+     pin=proof['snapshots'][-1];five_snapshot=ROOT/pin['path'];assert sha(five_snapshot)==pin['sha256']
+     obs=read(five_snapshot)
+     state['latest_five_queue_readonly_observation']=dict(path=pin['path'],sha256=pin['sha256'],utc=obs['utc'],growth_proof_path=growth.relative_to(ROOT).as_posix(),growth_proof_sha256=sha(growth),counts_are_observation_only=True,main_terminal=len(obs['main_mechanism']['queue']['completed']),main_active=obs['main_mechanism']['worker_count'],main_pending=obs['main_mechanism']['queue']['pending'],main_failures=len(obs['main_mechanism']['queue']['failed']),FLGMM_terminal=len(obs['FLGMM']['terminal_ids']),gradient_terminal=len(obs['gradient64']['terminal_ids']),remaining620_closed=obs['remaining620']['remote_closed_n'],Hybrid_terminal=len(obs['Hybrid96']['terminal_records']),new_acceptance=0)
++    measured=state['latest_five_queue_readonly_observation']
++    state['celeba_mechanism_v1'].update(queue_completed_observed=measured['main_terminal'],queue_observation_utc=measured['utc'],queue_observation_path=measured['path'],queue_active_observed=measured['main_active'],queue_pending_observed=measured['main_pending'],queue_failures_observed=measured['main_failures'])
++    state['last_health_check_scope']='Historical main-only resource sample at its checked_utc; latest queue observations are in latest_five_queue_readonly_observation, which does not add scientific acceptance.'
+     for key,stage in [('flgmm_fullcoverage_v2_20261009','FLGMM'),('gradient64_validation_search_20261010','gradient64')]:
+         o=obs[stage];state[key]['latest_measured_observation']=dict(checked_utc=obs['utc'],terminal70_observed=len(o['terminal_ids']),active_rounds=[r['round'] for r in o['active']],snapshot_path=pin['path'],snapshot_sha256=pin['sha256'],acceptance_unchanged_by_observation=True)
+     state['mechanism_remaining620_valid_20261010']['latest_measured_observation']=dict(utc=obs['utc'],remote_strict_closed=obs['remaining620']['remote_closed_n'],snapshot_path=pin['path'],snapshot_sha256=pin['sha256'],source_bound=True,acceptance_unchanged_by_observation=True)
+@@ -4091,7 +4094,7 @@
+ 
+ ## 当前队列
+ 
+-以下“已验收”均经过原strict、离机SHA和root核验；实时完成文件与验收数量分列。主机制实测时间{live['checked_utc']}；五队列合并观测{five.get('utc','见STATE')}。
++以下“已验收”均经过原strict、离机SHA和root核验；实时完成文件与验收数量分列。最新五队列合并观测{five.get('utc','见STATE')}；下列历史主资源采样时间为{live['checked_utc']}。
+ 
+ | 阶段 | 已验收 | 实测活动/剩余边界 |
+ |---|---:|---|
+@@ -4101,7 +4104,7 @@
+ | Fed-NGA/Huber搜索 | {gradient['offserver_accepted']}/64 | 观测终轮{five.get('gradient_terminal','见STATE')}，单worker推进；所有候选/恒定预测保留，未选recipe |
+ | 组合基线完整覆盖 | {hy['new_accepted']}/96新增，4复用另计 | 观测终轮{five.get('Hybrid_terminal','见STATE')}，单worker推进；7个三轮门检不计正式样本 |
+ 
+-五队列已按真实worker身份、轮次增长、来源和错误检查核验；详见{five.get('growth_proof_path','STATE')}。最近主资源采样为CPU{live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核、RAM{live['memory_used_bytes']/1e9:.2f}GB、磁盘余{live['disk_free_bytes']/1e12:.3f}TB；GPU瞬时利用率/显存/温度和Recovery原值见server_reactivation_20261009/latest_formal_live.json。这是该采样时刻的值，不代表连续占用；不因瞬时低利用率重启健康任务。冻结8并发/FP32/参数/seed不变。
++五队列已按真实worker身份、轮次增长、来源和错误检查核验；详见{five.get('growth_proof_path','STATE')}。历史主资源采样（{live['checked_utc']}）为CPU{live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核、RAM{live['memory_used_bytes']/1e9:.2f}GB、磁盘余{live['disk_free_bytes']/1e12:.3f}TB；该时刻GPU瞬时利用率/显存/温度和Recovery原值见server_reactivation_20261009/latest_formal_live.json。最新五队列资源原值随观测JSON保存，两个采样时间分列，不代表连续占用；不因瞬时低利用率重启健康任务。冻结8并发/FP32/参数/seed不变。
+ 
+ {fl47_note}
+ 

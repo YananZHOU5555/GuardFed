@@ -1,0 +1,13 @@
+--- overview_generator_before
++++ overview_generator_history_label
+@@ -153,6 +153,10 @@
+ before,history=overview.read_bytes().split(marker,1)
+ assert sha(marker+history)=='08b94e001b4ff78474706db0a63cc2c1b626fe5664c01edfafbaefb53fe9b029'
+ text=before.decode('utf8')
++# Label only the preserved unmarked publication56 cutoff line; keep its body exact.
++for old_cutoff_line in text.splitlines(keepends=True):
++    if old_cutoff_line.startswith(' FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；') and '当前FL新增native接受另列59/96' in old_cutoff_line and '机制当前三视图300另列' in old_cutoff_line:
++        text=text.replace(old_cutoff_line,'历史发布56截止（native300/三视图300，当前见本页最新段）：'+old_cutoff_line,1)
+ published=state['latest_publication_verification']
+ text=re.sub(r'当前更新：[^。]+。', f'当前更新：{latest_observation["utc"]}五队列只读观测；资源样本时间单列，验收数字各按实际凭据。', text, count=1)
+ text=re.sub(r'主机制训练健康推进：\d+项观测到终轮，\d+/800项新增结果已严格验收并离机备份，\d+项活动、\d+项等待、\d+项当前失败',
