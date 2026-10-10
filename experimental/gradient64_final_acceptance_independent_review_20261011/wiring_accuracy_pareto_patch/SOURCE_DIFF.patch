@@ -1,0 +1,27 @@
+--- original/wiring.py
++++ patched/wiring.py
+@@ -136,8 +136,24 @@
+     need(cumulative == final['accepted_ids'] and len(rows) == 64, 'All64 adopted chain required')
+     records = [rows[e['id']] for e in manifest['jobs']]
+     winners, rank = m.selected(records, protocol, manifest, score)  # Original formula/tie, only after all64.
++    candidate_metric_means = {}; accuracy_champions = {}; pareto_candidates = {}
++    for method in m.METHODS:
++        means = {}
++        for _, candidate in rank[method]:
++            condition_rows = sorted((r for r in records if r['candidate'] == candidate),
++                                    key=lambda r: (r['distribution'], r['attack']))
++            means[candidate] = {metric: sum(r['metrics'][metric] for r in condition_rows) / 4
++                                for metric in ('accuracy', 'aeod', 'aspd')}
++        candidate_metric_means[method] = means
++        accuracy_champions[method] = min(means, key=lambda candidate: (-means[candidate]['accuracy'], candidate))
++        pareto_candidates[method] = sorted(candidate for candidate, value in means.items()
++            if not any(other != candidate and rival['accuracy'] >= value['accuracy']
++                       and rival['aeod'] <= value['aeod'] and rival['aspd'] <= value['aspd']
++                       and (rival['accuracy'] > value['accuracy'] or rival['aeod'] < value['aeod']
++                            or rival['aspd'] < value['aspd']) for other, rival in means.items()))
+     save(out, dict(status='COMPLETE64_ADOPTED_METADATA_AND_SELECTION_PROPOSAL_NOT_ROOT_SELECTION_ADOPTION', records=records,
+         selected_candidates=winners, all_candidate_ranks=rank, native_root_path=str(root_path.resolve()), native_root_sha256=root_sha,
++        all_candidate_metric_means=candidate_metric_means, accuracy_champions=accuracy_champions, pareto_candidates=pareto_candidates,
+         accepted_batch_bindings=bindings, volume_read_guard=volume, test=False, execution_authorized=False,
+         limits=['n=1; no SD/significance', 'constant and negative results retained', 'root selection receipt still required',
+                 'output locators are original Linux runs; consumer must recheck their saved artifact hashes']))

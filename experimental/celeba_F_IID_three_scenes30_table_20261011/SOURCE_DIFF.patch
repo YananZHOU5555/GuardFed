@@ -1,0 +1,274 @@
+--- F20/binding.py
++++ F30/binding.py
+@@ -1,4 +1,4 @@
+-"""Exact accepted310 + ten F Flip records -> two F scenes; metadata gates only."""
++"""Exact accepted320 + ten FedSA records -> three F scenes; metadata gates only."""
+ import argparse
+ import hashlib
+ import json
+@@ -6,25 +6,25 @@
+ 
+ H=Path(__file__).resolve().parent
+ R=H.parents[1]
+-PARENT_ROOT='tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/ROOT_ADOPTION.json'
+-PARENT_ROOT_SHA='6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f'
+-PARENT_INDEX='tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/MECHANISM310_INDEX.json'
+-PARENT_INDEX_SHA='d22d828d8978f965d5e7d3c45eac7d91e7f669aeb620a7df3ae9b9999b52f9aa'
+-IDS=[f'minus_F_IID_F Flip_seed{s}' for s in range(91001,91011)]
++PARENT_ROOT='tmp/celeba_mechanism_remaining_F_FFlip10_root_adoption_20261011/ROOT_ADOPTION.json'
++PARENT_ROOT_SHA='b427a751a127242d75a6f47426f60067b15345ef47b8704ba000b28925185317'
++PARENT_INDEX='tmp/celeba_mechanism_remaining_F_FFlip10_root_adoption_20261011/MECHANISM320_INDEX.json'
++PARENT_INDEX_SHA='b4e3e1074fc7c0b48adb899d6021ce55fc393c2b10578c9b52cf01f353944bef'
++IDS=[f'minus_F_IID_FedSA_seed{s}' for s in range(91001,91011)]
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+ def need(ok,message):
+     if not ok:raise ValueError(message)
+ 
+ def validate_scope(root,index,prior,native):
+-    need((root['prior_accepted'],root['new_accepted'],root['cumulative_accepted'])==(310,10,320),'Exact310+10 replay320 required')
+-    need(root['status'].startswith('ROOT_') and root['status'].endswith('_ADOPTED') and root['original310_unchanged'] is True,'Actual adopted replay root required')
+-    need(root['accepted_new_ids']==index['new_ids']==IDS,'Exactly ten IID F Flip seeds required')
+-    need(len(prior['all_ids'])==len(set(prior['all_ids']))==310,'Parent310 scope differs')
+-    need(index['all_ids']==prior['all_ids']+IDS and len(set(index['all_ids']))==320,'Old310 order or exact320 scope differs')
+-    need(index['prior_index_sha256']==PARENT_INDEX_SHA and index['prior_adoption_sha256']==PARENT_ROOT_SHA,'Accepted310 parent pins differ')
++    need((root['prior_accepted'],root['new_accepted'],root['cumulative_accepted'])==(320,10,330),'Exact320+10 replay330 required')
++    need(root['status'].startswith('ROOT_') and root['status'].endswith('_ADOPTED') and root['original320_unchanged'] is True,'Actual adopted replay root required')
++    need(root['accepted_new_ids']==index['new_ids']==IDS,'Exactly ten IID FedSA seeds required')
++    need(len(prior['all_ids'])==len(set(prior['all_ids']))==320,'Parent320 scope differs')
++    need(index['all_ids']==prior['all_ids']+IDS and len(set(index['all_ids']))==330,'Old320 order or exact330 scope differs')
++    need(index['prior_index_sha256']==PARENT_INDEX_SHA and index['prior_adoption_sha256']==PARENT_ROOT_SHA,'Accepted320 parent pins differ')
+     need(root['native_max_abs_difference']==0 and root['Full_inference']==root['new_CNN']==root['new_training']==0 and root.get('new_fit',0)==0 and root['test'] is False,'Forbidden science or native discrepancy')
+-    need(native['root_adopted'] is True and native['status']=='ROOT_ORIGINAL_STRICT_DELTA_ARCHIVE_AND_OFFSERVER_PASS' and native['total_new_strict_and_offserver']>=320 and native['test'] is False,'Actual native must cover320; larger native is not table scope')
++    need(native['root_adopted'] is True and native['status']=='ROOT_ORIGINAL_STRICT_DELTA_ARCHIVE_AND_OFFSERVER_PASS' and native['total_new_strict_and_offserver']>=330 and native['test'] is False,'Actual native must cover330; larger native is not table scope')
+     need([x['id'] for x in index['new_records']]==IDS,'Exact ordered accepted records required')
+     for key in ('new_bindings','new_binding_files','new_artifacts'):
+         need(set(index[key])==set(IDS),'Missing/extra exact-delta metadata: '+key)
+@@ -33,16 +33,16 @@
+ def load():
+     parser=argparse.ArgumentParser();parser.add_argument('--binding-sha256',required=True);args=parser.parse_args()
+     bp=H/'ROOT_BINDING.json'
+-    need(bp.is_file(),'Actual adopted replay320 is not bound; numeric generation forbidden')
++    need(bp.is_file(),'Actual adopted replay330 is not bound; numeric generation forbidden')
+     need(sha(bp)==args.binding_sha256,'Root binding SHA differs')
+-    b=read(bp);need(b['root_adopted'] is True and b['status']=='ACTUAL_REPLAY320_BOUND_FOR_F_IID_TWO_SCENES20','Actual root authorization binding required')
++    b=read(bp);need(b['root_adopted'] is True and b['status']=='ACTUAL_REPLAY330_BOUND_FOR_F_IID_THREE_SCENES30','Actual root authorization binding required')
+     need(sha(H/'FILES_SHA256.json')==b['source_seal_sha256'],'Reviewed source seal differs')
+     for name,pin in read(H/'FILES_SHA256.json')['files'].items():
+         p=(H/name).resolve();need(p.is_relative_to(H.resolve()) and sha(p)==pin['sha256'] and p.stat().st_size==pin['bytes'],'Frozen table source differs: '+name)
+     source=read(H/'SOURCE_INPUTS.json')
+     for name,pin in source['files'].items():
+         p=R/name;need(sha(p)==pin['sha256'] and p.stat().st_size==pin['bytes'],'Source/input drift: '+name)
+-    need(sha(R/PARENT_ROOT)==PARENT_ROOT_SHA and sha(R/PARENT_INDEX)==PARENT_INDEX_SHA,'Actual parent310 drift')
++    need(sha(R/PARENT_ROOT)==PARENT_ROOT_SHA and sha(R/PARENT_INDEX)==PARENT_INDEX_SHA,'Actual parent320 drift')
+     pins=dict(source);pins['files']=dict(source['files'])
+     for key in ('adoption','index','native_root'):
+         p=(R/b[key]).resolve();need(p.is_relative_to(R.resolve()) and sha(p)==b[key+'_sha256'],'Actual external pin differs: '+key)
+--- F20/build.py
++++ F30/build.py
+@@ -1,4 +1,4 @@
+-"""Read adopted FFlip10 receipts; preserve old FBenign10 and reuse original two-scene statistics."""
++"""Read adopted FedSA10 receipts; preserve old F20 and reuse original scene statistics."""
+ import ast
+ import copy
+ from collections import Counter
+@@ -14,7 +14,7 @@
+ sys.dont_write_bytecode = True
+ H = Path(__file__).resolve().parent
+ R = H.parents[1]
+-OLD = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_Benign10_20261011'
++OLD = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_two_scenes20_20261011'
+ VIEWS = ('native', 'raw', 'shared_calibration')
+ FULL = R/'outputs/guardfed_tables/celeba_nine_method_three_view_20261009'
+ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+@@ -90,7 +90,7 @@
+         need(receipt['views']==accepted[rid]['views'] and receipt['prediction_arrays_sha256']==accepted[rid]['prediction_arrays_sha256'], 'Adopted array/receipt views differ')
+         fid=row['paired_full']['id']; full=original_full['full_record'](byid[fid],refs[fid])
+         need(row['paired_full']==bridge['paired_full_reference'] and row['data_contract']==full['data_contract'], 'Paired root/train/valid/client partition mismatch')
+-        need(full['seed']==row['seed'] and full['distribution']==row['distribution']=='IID' and full['attack']==row['attack']=='F Flip' and row['actual_alpha']==5000, 'Exact paired seed/IID F Flip/alpha5000 required')
++        need(full['seed']==row['seed'] and full['distribution']==row['distribution']=='IID' and full['attack']==row['attack']=='FedSA' and row['actual_alpha']==5000, 'Exact paired seed/IID FedSA/alpha5000 required')
+         fulls[fid]=full
+         provenance=dict(root_adoption=pins['adoption'],root_adoption_sha256=pins['files'][pins['adoption']]['sha256'],accepted_index=pins['index'],
+             binding=bp,artifacts=artifacts,prediction_arrays_sha256=receipt['prediction_arrays_sha256'],record_source_root=index['record_source_roots'][rid])
+@@ -98,25 +98,25 @@
+         links.append(dict(id=rid,Full=fid,checkpoint_sha256=row['checkpoint']['sha256'],Full_checkpoint_sha256=full['checkpoint_sha256'],
+             data_contract_canonical_sha256=scientific['canonical'](row['data_contract']),terminal_round=70,evaluation_split='valid'))
+     old_records=read(OLD/'records.json')['records']
+-    need(len(old_records)==20, 'Old Benign20 scope differs')
++    need(len(old_records)==40, 'Old two-scene40 scope differs')
+     records=old_records+[fulls[k] for k in sorted(fulls)]+records
+-    need(len(records)==len({r['id'] for r in records})==40, 'Exact two-scene40 scope required')
++    need(len(records)==len({r['id'] for r in records})==60, 'Exact three-scene60 scope required')
+     spec=importlib.util.spec_from_file_location('original_evidence_statistics',R/pins['evidence']);evidence=importlib.util.module_from_spec(spec);spec.loader.exec_module(evidence)
+     panels_module=variant_module(R/pins['C_panels']); numeric=variant_module(R/pins['C_numeric'])
+     panels,coverage,paired=panels_module.panels(records,evidence);checks=numeric.verify(records,panels)
+-    need(checks['mean_sd_scalars']==324 and checks['receipt_metrics_from_group_counts']==360, 'Required arithmetic incomplete')
++    need(checks['mean_sd_scalars']==486 and checks['receipt_metrics_from_group_counts']==540, 'Required arithmetic incomplete')
+     old_panels=read(OLD/'tables.json')['panels']
+     need(len(old_panels)==len(panels)==9, 'Old panel count differs')
+     for current,previous in zip(panels,old_panels):
+         need({k:current[k] for k in ('view','label','seeds')}=={k:previous[k] for k in ('view','label','seeds')}, 'Old panel identity differs')
+-        need([row for row in current['rows'] if row['attack']=='Benign']==previous['rows'], 'Old162 Benign scalars changed')
++        need([row for row in current['rows'] if row['attack'] in ('Benign','F Flip')]==previous['rows'], 'Old324 two-scene scalars changed')
+     fragments=dict(json=json)
+     function(R/pins['record_fragment_source'],['record_fragments'],fragments)
+     serialized=json.dumps(dict(records=records),indent=2,ensure_ascii=False,allow_nan=False)+'\n'
+-    need(fragments['record_fragments'](serialized)[:20]==fragments['record_fragments']((OLD/'records.json').read_text('utf8')), 'Old20 object bytes/order changed')
++    need(fragments['record_fragments'](serialized)[:40]==fragments['record_fragments']((OLD/'records.json').read_text('utf8')), 'Old40 object bytes/order changed')
+     displayed=list(records);counts={v:dict(Counter(r['replay_runtime']['device'] for r in displayed if r['variant']==v)) for v in ('Full','minus_F')}
+     torches={v:dict(Counter(r['training_torch'] for r in displayed if r['variant']==v)) for v in ('Full','minus_F')}
+-    text=['# CelebA Full–minus_F: IID Benign and F Flip, three views','',
++    text=['# CelebA Full–minus_F: IID Benign, F Flip and FedSA, three views','',
+         'Validation only (19,867 images), round70; IID is frozen Dirichlet alpha5000. Ten paired model seeds per scene; each model uses the same checkpoint across raw/native/shared views. Mean ± sample SD (ddof=1); paired difference = minus_F − Full. ACC is percent; ΔACC is percentage points. AEOD and ASPD are lower-is-better disparities. Formal primary endpoint remains pending.','']
+     display_checks=0
+     for panel in panels:
+@@ -125,23 +125,23 @@
+             values=[f"{row[m]['mean']:.{3 if m=='accuracy_pct' else 5}f} ± {row[m]['sample_sd_ddof1']:.{3 if m=='accuracy_pct' else 5}f}" for m in evidence.METRICS]
+             text.append('| '+' | '.join([row['distribution']+' / '+row['attack']+' / '+row['variant'],str(row['n']),*values])+' |');display_checks+=len(values)
+         text.append('')
+-    need(display_checks==162, 'Incomplete displayed cells')
++    need(display_checks==243, 'Incomplete displayed cells')
+     text += ['AEOD = absolute TPR gap, not full equalized odds. Raw uses margin > 0 (ties predict0); native retains the original root-only calibration recipe; shared_calibration uses the frozen common root-only rule. Native/shared metrics and counts are compared below, not treated as independent evidence of calibration gain. No threshold is refitted by this builder.',
+         f'Complete-scene replay devices: Full {counts["Full"]}; minus_F {counts["minus_F"]}. Training Torch: Full {torches["Full"]}; minus_F {torches["minus_F"]}. Historical/current driver provenance is retained per source record. The broader Full100 history includes98 cu128 and2 cu130 records; that fact does not turn these selected scenes into a unified-device comparison.',
+         'Seed91001 participated in recipe selection; validation was exposed during development, and historical test exposure remains disclosed. The9/6 panels apply identical predefined seeds to both variants and are descriptive subsets, not untouched confirmation sets.',
+-        'Only IID Benign and IID F Flip seeds91001–91010 enter this two-scene table. No cross-scene aggregate is computed or published; scenes are not independent seeds. The other eight minus_F scenes and other control coverages remain incomplete. This is not F100 or all mechanism controls. No significance, necessity, causal-isolation, final-test or whole-rebuttal-completion claim is made.','']
+-    checks.update(display_mean_sd_cells=162,table_record_count=40,preserved_records=40,paired_models=20,old20_record_JSON_bytes_and_order_exact=True,old162_scalars_exact=True,old81_cells_preserved=True,
++        'Only IID Benign, IID F Flip and IID FedSA seeds91001–91010 enter this three-scene table. No cross-scene aggregate is computed or published; scenes are not independent seeds. The other seven minus_F scenes and other control coverages remain incomplete. This is not F100 or all mechanism controls. No significance, necessity, causal-isolation, final-test or whole-rebuttal-completion claim is made.','']
++    checks.update(display_mean_sd_cells=243,table_record_count=60,preserved_records=60,paired_models=30,old40_record_JSON_bytes_and_order_exact=True,old324_scalars_exact=True,old162_cells_preserved=True,
+         native_shared_metrics_and_counts_exact=all(r['views']['native']==r['views']['shared_calibration'] for r in records),
+         original_full_record_and_receipt_identity_sources_unmodified=True,variant_only_AST_rebind=True,new_threshold_fits=0,new_CNN=0,new_training=0,test=False)
+     with (H/'records.json').open('x',encoding='utf8',newline='\n') as f:f.write(serialized)
+-    write('tables.json',dict(status='ACTUAL_TWO_F_SCENE_TABLE_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=2,paired_models=20,
+-        displayed_records=40,preserved_records=40,partial_other_scene_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,
++    write('tables.json',dict(status='ACTUAL_THREE_F_SCENE_TABLE_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=3,paired_models=30,
++        displayed_records=60,preserved_records=60,partial_other_scene_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,
+         primary_endpoint_selected=False,final_test=False,new_threshold_fits=0,new_inference=0,new_training=0))
+     write('coverage.json',coverage);write('paired_per_seed.json',paired);write('checks.json',checks)
+-    write('SOURCE_BINDINGS.json',dict(input_pins=pins['files'],actual_F20_root_adoption=pins['adoption'],actual_F20_root_adoption_sha256=pins['files'][pins['adoption']]['sha256'],
++    write('SOURCE_BINDINGS.json',dict(input_pins=pins['files'],actual_F30_root_adoption=pins['adoption'],actual_F30_root_adoption_sha256=pins['files'][pins['adoption']]['sha256'],
+         accepted_index=pins['index'],accepted_index_sha256=pins['files'][pins['index']]['sha256'],original_function_source_sha256=funcs,
+         variant_change='Only exact minus_C/minus_C minus Full string constants become minus_F/minus_F minus Full; statistics/independent arithmetic AST unchanged',paired_identity_links=links))
+     with (H/'TABLES.md').open('x',encoding='utf8',newline='\n') as f:f.write('\n'.join(text))
+-    print(json.dumps(dict(status='ACTUAL_F20_TWO_SCENE_TABLE_BUILT_ROOT_REVIEW_PENDING',records=40,displayed_models=40,stats=324,cells=162,metrics_from_counts=360,count_checks=960,replay_devices=counts,training_torch=torches)))
++    print(json.dumps(dict(status='ACTUAL_F30_THREE_SCENE_TABLE_BUILT_ROOT_REVIEW_PENDING',records=60,displayed_models=60,stats=486,cells=243,metrics_from_counts=540,count_checks=1440,replay_devices=counts,training_torch=torches)))
+ 
+ if __name__=='__main__': main()
+--- F20/verify_numeric.py
++++ F30/verify_numeric.py
+@@ -3,10 +3,10 @@
+ import math
+ 
+ def verify(records,panels):
+-    assert len(records)==40 and len({r['id'] for r in records})==40
++    assert len(records)==60 and len({r['id'] for r in records})==60
+     bycell={(r['variant'],r['distribution'],r['attack'],r['seed']):r for r in records}
+-    assert len(bycell)==40
+-    scenes={('IID','Benign'),('IID','F Flip')}
++    assert len(bycell)==60
++    scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA')}
+     views=['native','raw','shared_calibration'];seedsets=[list(range(91001,91011)),list(range(91002,91011)),list(range(91005,91011))]
+     assert len(panels)==9 and {(p['view'],tuple(p['seeds'])) for p in panels}==set(itertools.product(views,map(tuple,seedsets)))
+     partial=[r for r in records if (r['distribution'],r['attack']) not in scenes]
+@@ -14,7 +14,7 @@
+     errors=[]
+     for panel in panels:
+         rows=panel['rows'];seeds=panel['seeds'];view=panel['view']
+-        assert len(rows)==6 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_C','minus_C minus Full']}
++        assert len(rows)==9 and {(r['distribution'],r['attack'],r['variant']) for r in rows}=={(d,a,v) for d,a in scenes for v in ['Full','minus_C','minus_C minus Full']}
+         for row in rows:
+             assert row['n']==row['expected_n']==len(seeds) and row['complete'] and row['seeds']==seeds
+             for metric in ['accuracy_pct','aeod','aspd']:
+@@ -24,7 +24,7 @@
+                 xs=[value('minus_C',s)-value('Full',s) if row['variant']=='minus_C minus Full' else value(row['variant'],s) for s in seeds]
+                 mu=math.fsum(xs)/len(xs);sd=math.sqrt(math.fsum((x-mu)**2 for x in xs)/(len(xs)-1))
+                 errors.extend([abs(mu-row[metric]['mean']),abs(sd-row[metric]['sample_sd_ddof1'])])
+-    assert len(errors)==324 and max(errors)<=1e-12
++    assert len(errors)==486 and max(errors)<=1e-12
+     metric_checks=0;count_checks=0
+     for record in records:
+         assert set(record['views'])=={'native','raw','shared_calibration'}
+@@ -39,7 +39,7 @@
+                 aeod=abs(a['tp']/(a['tp']+a['fn'])-b['tp']/(b['tp']+b['fn'])),
+                 aspd=abs((a['tp']+a['fp'])/a['n']-(b['tp']+b['fp'])/b['n']))
+             for key,value in metrics.items():assert abs(view[key]-value)<=1e-12;metric_checks+=1
+-    assert metric_checks==360 and count_checks==960
++    assert metric_checks==540 and count_checks==1440
+     return {'mean_sd_scalars':len(errors),'max_abs_difference':max(errors),'partial_pairs_excluded':0,
+         'receipt_metrics_from_group_counts':metric_checks,'base_confusion_counts_structurally_checked':count_checks}
+ 
+--- F20/verify_saved.py
++++ F30/verify_saved.py
+@@ -16,34 +16,34 @@
+     need(not sys.flags.optimize,'Optimized Python forbidden')
+     pins,root,index=load()
+     records=read(H/'records.json')['records'];tables=read(H/'tables.json')
+-    need(len(records)==40 and len({r['id'] for r in records})==40,'Exact40 saved records required')
+-    need(records[:20]==read(OLD/'records.json')['records'], 'Old20 objects/order changed')
+-    need([r['id'] for r in records[20:] if r['variant']=='minus_F']==IDS,'Exact new F Flip seed order differs')
+-    need((tables['complete_scenes'],tables['paired_models'],tables['displayed_records'],tables['preserved_records'])==(2,20,40,40),'Wrong scene/pair cardinality')
++    need(len(records)==60 and len({r['id'] for r in records})==60,'Exact60 saved records required')
++    need(records[:40]==read(OLD/'records.json')['records'], 'Old40 objects/order changed')
++    need([r['id'] for r in records[40:] if r['variant']=='minus_F']==IDS,'Exact new FedSA seed order differs')
++    need((tables['complete_scenes'],tables['paired_models'],tables['displayed_records'],tables['preserved_records'])==(3,30,60,60),'Wrong scene/pair cardinality')
+     numeric=variant_module(R/pins['C_numeric'])
+     checks=numeric.verify(records,tables['panels'])
+-    need(checks['mean_sd_scalars']==324 and checks['receipt_metrics_from_group_counts']==360 and checks['base_confusion_counts_structurally_checked']==960,'Original numeric verification incomplete')
++    need(checks['mean_sd_scalars']==486 and checks['receipt_metrics_from_group_counts']==540 and checks['base_confusion_counts_structurally_checked']==1440,'Original numeric verification incomplete')
+     source=read(H/'SOURCE_BINDINGS.json')
+-    need(source['actual_F20_root_adoption_sha256']==pins['files'][pins['adoption']]['sha256'] and source['accepted_index_sha256']==pins['files'][pins['index']]['sha256'],'Actual adoption binding differs')
++    need(source['actual_F30_root_adoption_sha256']==pins['files'][pins['adoption']]['sha256'] and source['accepted_index_sha256']==pins['files'][pins['index']]['sha256'],'Actual adoption binding differs')
+     accepted={r['id']:r for r in index['new_records']}
+     original_full=dict(need=need,FULL=FULL,sha=sha)
+     function(R/pins['full_record_source'],['full_record'],original_full)
+     baseline={r['id']:r for r in read(FULL/'records_three_views_900.json')['records']}
+     refs={r['id']:r for r in read(R/pins['original_full_reference_inventory'])['full_references']}
+     for r in records:
+-        need((r['distribution'],r['attack']) in [('IID','Benign'),('IID','F Flip')] and set(r['views'])=={'raw','native','shared_calibration'},'Other scene/view cannot enter table')
+-        if r['variant']=='minus_F' and r['attack']=='Benign':
+-            need(r in read(OLD/'records.json')['records'],'Old Benign record changed')
++        need((r['distribution'],r['attack']) in [('IID','Benign'),('IID','F Flip'),('IID','FedSA')] and set(r['views'])=={'raw','native','shared_calibration'},'Other scene/view cannot enter table')
++        if r['variant']=='minus_F' and r['attack'] in ('Benign','F Flip'):
++            need(r in read(OLD/'records.json')['records'],'Old two-scene record changed')
+         elif r['variant']=='minus_F':
+             need(r['views']==accepted[r['id']]['views'] and r['checkpoint_sha256']==accepted[r['id']]['checkpoint_sha256'],'Accepted F checkpoint/views differ')
+         else:
+             need(r['variant']=='Full' and r==original_full['full_record'](baseline[r['id']],refs[r['id']]),'Original Full record differs')
+     for current,previous in zip(tables['panels'],read(OLD/'tables.json')['panels']):
+         need({k:current[k] for k in ('view','label','seeds')}=={k:previous[k] for k in ('view','label','seeds')},'Old panel identity changed')
+-        need([r for r in current['rows'] if r['attack']=='Benign']==previous['rows'],'Old Benign162 scalars changed')
++        need([r for r in current['rows'] if r['attack'] in ('Benign','F Flip')]==previous['rows'],'Old two-scene324 scalars changed')
+     fragments=dict(json=json)
+     function(R/pins['record_fragment_source'],['record_fragments'],fragments)
+-    need(fragments['record_fragments']((H/'records.json').read_text('utf8'))[:20]==fragments['record_fragments']((OLD/'records.json').read_text('utf8')),'Old20 serialized bytes/order changed')
++    need(fragments['record_fragments']((H/'records.json').read_text('utf8'))[:40]==fragments['record_fragments']((OLD/'records.json').read_text('utf8')),'Old40 serialized bytes/order changed')
+     paired=read(H/'paired_per_seed.json')
+     full_by_seed={(r['distribution'],r['attack'],r['seed']):r for r in records if r['variant']=='Full'}
+     for view in ('native','raw','shared_calibration'):
+@@ -60,7 +60,7 @@
+             values=[f"{row[m]['mean']:.{3 if m=='accuracy_pct' else 5}f} ± {row[m]['sample_sd_ddof1']:.{3 if m=='accuracy_pct' else 5}f}" for m in ('accuracy_pct','aeod','aspd')]
+             lines.append('| '+' | '.join([row['distribution']+' / '+row['attack']+' / '+row['variant'],str(row['n']),*values])+' |');cells+=len(values)
+     actual=[line for line in (H/'TABLES.md').read_text('utf8').splitlines() if line.startswith('| IID / ')]
+-    need(actual==lines and cells==162,'Saved Markdown cell/order differs')
++    need(actual==lines and cells==243,'Saved Markdown cell/order differs')
+     need(not tables['primary_endpoint_selected'] and not tables['final_test'] and tables['new_threshold_fits']==tables['new_inference']==tables['new_training']==0,'Unpermitted claim')
+     print(json.dumps(dict(status='PASS_ORIGINAL_FSUM_COUNTS_AND_SAVED_DISPLAY_SCOPE',**checks,display_cells=cells,root_adopted_by_this_checker=False,fit=0,CNN=0,test=False),indent=2))
+ 
+--- F20/panels.py
++++ F30/panels.py
+@@ -10,14 +10,14 @@
+ PANELS=[('All 10 seeds',list(range(91001,91011))),('Exclude selection seed: 9 seeds',list(range(91002,91011))),('Seeds 91005–91010: 6 seeds',list(range(91005,91011)))]
+ 
+ def panels(records, original):
+-    expected=[('IID','Benign'),('IID','F Flip')]
++    expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA')]
+     output=[];coverage={};paired={}
+     for view in source.VIEWS:
+         flat=[{k:r[k] for k in ('id','variant','distribution','attack','seed')} |
+             dict(accuracy_pct=100*r['views'][view]['accuracy'],aeod=r['views'][view]['aeod'],aspd=r['views'][view]['aspd']) for r in records]
+         summary=original.summarize(flat)
+         complete=[(r['distribution'],r['attack']) for r in summary['paired_per_scene'] if r['variant']=='minus_C' and r['complete']]
+-        source.need(complete==expected,'Only exact C IID Benign10 and F Flip10 scenes are publishable')
++        source.need(complete==expected,'Only exact IID Benign10, F Flip10 and FedSA10 scenes are publishable')
+         coverage[view]=[{k:r[k] for k in ('variant','distribution','attack','n','expected_n','complete','seeds')} for r in summary['paired_per_scene'] if r['variant']=='minus_C']
+         paired[view]=summary['paired_per_seed']
+         for label,seeds in PANELS:

@@ -1,0 +1,43 @@
+{
+  "status": "SOURCE_ONLY_SUMMARY64_ACCURACY_AND_PARETO_PATCH_COMPILE_AND_INVERSE_PASS_NOT_EXECUTED",
+  "utc": "2026-10-10T22:04:05.960563+00:00",
+  "source_path": "tmp/gradient64_to_fullcoverage_readiness_20261011/wiring.py",
+  "original_sha256": "68bb409600664d5d0bc0d101a63c2cba6af349f676882bdf19f34b7edd6c276c",
+  "patched_sha256": "fbabc934ba878c90d9d12ef5db785afe056f03da1eaae3318d1a12aa8ea2933d",
+  "original_bytes": 14007,
+  "patched_bytes": 15283,
+  "original_snapshot_path": "tmp/gradient64_final_acceptance_independent_review_20261011/wiring_accuracy_pareto_patch/wiring_original.py",
+  "full_diff_path": "tmp/gradient64_final_acceptance_independent_review_20261011/wiring_accuracy_pareto_patch/SOURCE_DIFF.patch",
+  "insertions": 2,
+  "deleted_or_replaced_original_bytes": 0,
+  "two_span_inverse_to_original_raw_bytes_exact": true,
+  "original_EOL_preserved": "\\n",
+  "compiled_no_execution": true,
+  "only_modified_function": "summary64",
+  "all_other_function_AST_exact": true,
+  "original_selection_call_and_output_rank_fields_raw_exact": true,
+  "original_guard_prefix_raw_exact": true,
+  "original_score_average_and_lexical_tie_source_unchanged": true,
+  "new_fields": [
+    "all_candidate_metric_means",
+    "accuracy_champions",
+    "pareto_candidates"
+  ],
+  "new_semantics": "Within each method retain all8 candidates; each accuracy/AEOD/ASPD is original sorted four-condition arithmetic mean. ACC champion maximizes mean ACC with exact ID-lexical tie. Pareto maximizes ACC/minimizes AEOD+ASPD, requiring at least one strict improvement; exact equal vectors are all retained.",
+  "negative_constant_records_and_all64_records_unchanged": true,
+  "old_readiness_seal_sha256": "c91f4ddb0711a4aaaebf8841fb2b9e1bf57d6a1bc2af9b658696871ef2afe7e0",
+  "old_seal_scope": "Old seal still authenticates original source snapshot and other8 members. It does not authenticate patched current wiring.py; original seal is not rewritten. This proof + explicit new source SHA must be root-reviewed for subsequent use.",
+  "old_other8_member_hashes_unchanged": {
+    "coverage_contract.py": true,
+    "HANDOFF.json": true,
+    "INPUT_MAPPING.json": true,
+    "README.md": true,
+    "run96_queue.py": true,
+    "RUNNER_REBINDS.json": true,
+    "SOURCE_CHECK.json": true,
+    "SOURCE_DIFF.patch": true
+  },
+  "summary_or_selection_execution": false,
+  "SSH_science_STATE_canonical_Git_operations": false,
+  "root_runtime_approval_still_required": true
+}

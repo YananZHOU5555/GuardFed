@@ -1,0 +1,67 @@
+{
+  "source_sha256": "3fdd65d769204d52af9e5c433f30cd1cb755337e470de2419f7d20798ec3e5c7",
+  "parent_sha256": "1da5e2a3ec1bf589663d434b4d8074452c14b9cba4a27f46636751efb8ae3b81",
+  "restored_original_bytes_exact": true,
+  "edits": [
+    {
+      "new_start": 0,
+      "new_end": 1,
+      "original_text": "\"\"\"Publish already root-adopted FL71/Hybrid10 evidence and current entries; no scientific execution.\"\"\"\n"
+    },
+    {
+      "new_start": 7,
+      "new_end": 8,
+      "original_text": "PARENT='798ce6ca670a1ca8cd573c6bfaf4850d46f6d258'\n"
+    },
+    {
+      "new_start": 31,
+      "new_end": 32,
+      "original_text": "assert scope_path==R/'tmp/publication_increment61_source_prepared_20261011/COMPACT_SELECTION.json'\n"
+    },
+    {
+      "new_start": 35,
+      "new_end": 36,
+      "original_text": "assert selection['status']=='ROOT_CLOSED_INCREMENT61_COMPACT_SELECTION' and selection['root_accepted'] is True\n"
+    },
+    {
+      "new_start": 41,
+      "new_end": 43,
+      "original_text": "assert (main['scientific_results_offserver_verified'],main['three_view_new_models_offserver_verified'])==(320,320)\nassert main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':20}\n"
+    },
+    {
+      "new_start": 58,
+      "new_end": 59,
+      "original_text": "assert (accepted['native_new'],accepted['three_view_models'],accepted['F_paired_models'],accepted['F_complete_scenes'])==(320,320,20,2)\n"
+    },
+    {
+      "new_start": 80,
+      "new_end": 126,
+      "original_text": ""
+    },
+    {
+      "new_start": 147,
+      "new_end": 149,
+      "original_text": "previous_rel='docs/server_deployment_20260923/training_20260923/publication_closed_increment60_verified_20261011.json'\nprevious=pinned_json(repo_path(previous_rel),'742bc2d70734080d62be02328b44e50843e5f064307e3d444d26a96831a49350')\n"
+    },
+    {
+      "new_start": 163,
+      "new_end": 164,
+      "original_text": "required=entry_paths|{state_path.relative_to(R).as_posix(),EDITORIAL_REL,previous_rel,'tmp/publication_increment61_source_prepared_20261011/publish_guardfed_increment61_20261011.py'}|set(editorial['source_and_documents'])|{p['path'] for p in entry['source_pins'].values()}\n"
+    },
+    {
+      "new_start": 193,
+      "new_end": 194,
+      "original_text": "assert not (T/'publication_closed_increment61_verified_20261011.json').exists(),'One publication attempt only'\n"
+    },
+    {
+      "new_start": 232,
+      "new_end": 233,
+      "original_text": "git('commit','-m','Publish adopted FLGMM and Hybrid validation evidence with current entries')\n"
+    },
+    {
+      "new_start": 242,
+      "new_end": 244,
+      "original_text": "proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=dict(native=320,three_view=320,FLGMM_native_new=67,FLGMM_three_views=71,FLGMM_table_complete_scene_records=70,FLGMM_table_scenes=7,Hybrid_three_views=10,Hybrid_new_three_views=9,Hybrid_prior_seed91002_reused=1,gradient_search=46,Hybrid_native_new=12,UCA_models=300,F_table_pairs=20,F_table_scenes=2,reviewer_comments=24),F20_editorial_root_sha256=EDITORIAL_ROOT,F20_table_root_sha256=F20_ROOT,STATE_sha256=entry['STATE_sha256'],semantic_review_sha256=a.semantic_review_sha256,compact_selection_sha256=a.compact_selection_sha256,latest_observation_sha256=entry['latest_observation_only']['sha256'],new_scientific_acceptances=0,scientific_acceptances_created_by_publisher=0,new_adopted_views_published=dict(FLGMM=10,Hybrid=9),FLGMM_root_sha256=FL_ROOT_SHA,FLGMM_table_root_sha256=FL_TABLE_SHA,Hybrid_root_sha256=hybrid['root_proof_sha256'],manuscript_applied=False,final_test=False,whole_rebuttal_complete=False)\n(T/'publication_closed_increment61_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\\n',encoding='utf8')\n"
+    }
+  ]
+}

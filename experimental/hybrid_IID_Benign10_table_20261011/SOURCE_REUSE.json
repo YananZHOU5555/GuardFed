@@ -1,0 +1,58 @@
+{
+  "status": "ORIGINAL_STATISTIC_AND_COUNT_LOOP_REUSED_NO_SCIENTIFIC_RUNTIME",
+  "builder_original_function": {
+    "path": "tmp/celeba_mechanism_evidence_20261009/evidence_v4.py",
+    "file_sha256": "3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef",
+    "function": "statistic",
+    "function_source_sha256": "ab2243eedd0ff9486ddaa3c4b9451c175954de3624179beed04af406a40711a6",
+    "reuse": "compile unmodified AST node, no original module import; input rows are three saved metrics for fixed seeds"
+  },
+  "numeric_original_loop": {
+    "path": "tmp/celeba_F_IID_two_scenes20_table_20261011/verify_numeric.py",
+    "file_sha256": "30a1d9df0387e398566b0e676763fc8896b090d98839be58ff1457e57acdf7ca",
+    "function": "verify",
+    "loop_target": "record",
+    "loop_source_sha256": "7e2facca2bf5e2512391e605dd59f303c75d54800c40380e3c044a6a783103e0",
+    "reuse": "compile original per-record group confusion-count loop without scope-specific Full/minus_F panel logic"
+  },
+  "independent_mean_SD": "stdlib math.fsum and sample variance denominator n-1; 54 actual scalar checks <= original 1e-12",
+  "adapter_only": "Hybrid accepted receipt identity, phase and same-checkpoint fixed one-scene panel metadata; no change to fit, prediction, saved-array checker or acceptance functions",
+  "old_native_directory": "outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011",
+  "old_native_seal_sha256": "00501f093e1cf1d6fd7f8971e713ba6af950dfa4c0c6354ec58bce45732b12d3",
+  "old_native_8_sealed_member_hashes_unchanged": {
+    "COVERAGE.json": {
+      "sha256": "6be432b55098ae74dacebe62f00b115c8d287992a79c60b4c3c18add24e79000",
+      "bytes": 3098
+    },
+    "ENVIRONMENT_SCOPE.json": {
+      "sha256": "06c0cc3f344d6c1eefe879110af4cee50be2e0415e223c51c2512b398139d1e6",
+      "bytes": 1155
+    },
+    "HANDOFF.json": {
+      "sha256": "a40fe4b6ab99567c0e6075ba59117c5e98b444e9b3265dc8681244225d8269a2",
+      "bytes": 1166
+    },
+    "INPUTS.json": {
+      "sha256": "d3f8ab1a8f5586faaeb93511aeacd55aaf123df55fa56664279d4e6728ad61be",
+      "bytes": 1300
+    },
+    "records.json": {
+      "sha256": "040bbf915a69bdfbc67e798da7b7e4c13f398f713f646cd4381a7c2bd20d2964",
+      "bytes": 12114
+    },
+    "tables.json": {
+      "sha256": "21807f75be1b75d864be81fccd71f0c1bb2ff17c053c9a3bfffa85070d8eaa97",
+      "bytes": 7045
+    },
+    "TABLES.md": {
+      "sha256": "96d7821e54873f2924a10c11f19e878098c018504c8783676cf4461bd57365e1",
+      "bytes": 1918
+    },
+    "VERIFICATION.json": {
+      "sha256": "a58d28a8d081fa0b361449804b104dde1ebfd769040997ee5a38f2acff5b7d6a",
+      "bytes": 1434
+    }
+  },
+  "this_agent_authored_table_and_numeric_entry": true,
+  "independent_algorithm_check_not_second_person_review": true
+}
