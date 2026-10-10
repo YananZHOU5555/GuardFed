@@ -1,0 +1,167 @@
+{
+  "status": "REVERSIBLE_A50_INTEGRATION_FOR_AUTHOR_REVIEW",
+  "input_reader_root": {
+    "path": "E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_reader_20261010/ROOT_REVIEW.json",
+    "sha256": "0b46e6ba9a8f30f0b2523cbe7c6947ef47a402e0af55a3ce578e18036c94a511",
+    "bytes": 2333
+  },
+  "input_A50_root": {
+    "path": "E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/ROOT_VERIFICATION.json",
+    "sha256": "2ab91a854691624c79124a5eccbb43efe30541474cb7ef542b76db300554f7c4",
+    "bytes": 3399
+  },
+  "documents": [
+    {
+      "source": "E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_reader_20261010/rebuttal_integrated_20261010.md",
+      "source_sha256": "52baa4c5ec2a1b0ba1abe667c809afba2f12892c3397c8a71c9439dc494ea773",
+      "candidate": "E:/OneDrive/文档/GuardFed/tmp/rebuttal_A50_reader_integration_20261010/rebuttal_integrated_A50_reader_20261010.md",
+      "candidate_sha256": "055c68bd89af9ba9f690817fefd9fb7ee472a34eb66ef6994bc48342964857a7",
+      "operations": [
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 57912,
+          "before": "**A40 extension: four complete IID scenes.**",
+          "after": "**Historical A40 extension: four complete IID scenes.**",
+          "document_sha256_before": "52baa4c5ec2a1b0ba1abe667c809afba2f12892c3397c8a71c9439dc494ea773",
+          "document_sha256_after": "b00991e7b779d4d62f52f2d84b73fc00b1cf0ac825de4f5eff784073365102b3"
+        },
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 60791,
+          "before": "**A40 fixed-panel direction check.**",
+          "after": "**Historical A40 fixed-panel direction check.**",
+          "document_sha256_before": "b00991e7b779d4d62f52f2d84b73fc00b1cf0ac825de4f5eff784073365102b3",
+          "document_sha256_after": "eef627da2bb50cd75e74ab10fefba0b2cced7211d38cc32774158b877a3c6fc7"
+        },
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 62089,
+          "before": "**Current A40 comparability and coverage boundary.**",
+          "after": "**Historical A40 comparability and coverage boundary.**",
+          "document_sha256_before": "eef627da2bb50cd75e74ab10fefba0b2cced7211d38cc32774158b877a3c6fc7",
+          "document_sha256_after": "5fef3cecb5e645f358159d6e771a8e95516fb39680a7dc23c212d24d00234c3e"
+        },
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 76167,
+          "before": "The A40 comparison in R3.2 adds",
+          "after": "The historical A40 comparison in R3.2 adds",
+          "document_sha256_before": "5fef3cecb5e645f358159d6e771a8e95516fb39680a7dc23c212d24d00234c3e",
+          "document_sha256_after": "1a37fd4f33e3cb672b572006d4106a58b3b3e98b0f2ba295d7ff2a40c6c3c88b"
+        },
+        {
+          "reason": "Add adopted A50 Sp-DFA and seed-first evidence with explicit scope",
+          "offset_codepoints": 63129,
+          "before": "### R3.3 — Sensitive attributes and fairness definitions",
+          "after": "**Current A50 extension: all five IID scenes.** The [accepted A50 table](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md) and [root verification](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/ROOT_VERIFICATION.json) add IID Sp-DFA to the historical A40 comparison above, completing Benign, F Flip, FedSA, S-DFA and Sp-DFA with 50 minus_A models paired to 50 Full checkpoints. Each scene has ten matched seeds; all three views retain each model’s same round-70 checkpoint and the same 19,867 validation images. Only the A score contribution is removed; geometric hard filtering and prediction calibration remain enabled. The single available non-IID Benign minus_A record (seed 91001) is excluded from every displayed average. All five non-IID A scenes and the other five incomplete image-control variants remain pending.\n\n**Added IID Sp-DFA evidence.** The ten-seed paired differences, minus_A−Full, are -0.230 ± 0.746 / -0.00950 ± 0.00897 / +0.00117 ± 0.01870 for native and shared calibration, and -0.266 ± 0.612 / +0.00731 ± 0.02104 / +0.00145 ± 0.01756 for raw, in ΔACC / ΔAEOD / ΔASPD order. Values are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. Accuracy decreases refer to the paired mean: in each view, four seeds have positive accuracy differences and six have negative differences. Deletion lowers native/shared mean AEOD but raises mean ASPD; under raw prediction it raises both disparity means. Raw ASPD reverses sign in the fixed six-seed panel, whereas native/shared ASPD remains positive. The complete fixed 10/9/6-seed panels are retained in the linked table, without selecting a favorable subset.\n\n**Five-IID seed-first summary.** We first average the five scenes within each seed, then summarize across the ten seeds; the sampling unit is the seed, not 50 independent scene–seed observations. The paired ΔACC / ΔAEOD / ΔASPD summaries are -0.177 ± 0.454 / -0.00048 ± 0.00533 / -0.00190 ± 0.00941 for native/shared calibration and -0.134 ± 0.400 / +0.00310 ± 0.00449 / +0.00167 ± 0.00275 for raw, with the same units and sample-SD convention. The [per-scene values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/tables.json) and [seed-first values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/IID_SEED_FIRST.json) also retain the fixed nine- and six-seed summaries. Raw aggregate ASPD is positive in the ten- and nine-seed panels and negative in the six-seed panel. These descriptive averages do not establish significance, component necessity or an isolated causal mechanism.\n\n**Current A50 comparability and scope.** Full replay comprises three CPU and 47 GPU checkpoints; all 50 minus_A replays use CPU. Both training cohorts contain 50 cu128 checkpoints. The A40 device counts above describe that historical subset only; mixed replay devices and driver provenance do not establish device equivalence. Native and shared-calibration metrics and group counts coincide within each of the 100 records, so these views are not independent confirmations. Root-only calibration, configuration-selection seed 91001, validation exposure and prior official-test exposure remain disclosed; the fixed sensitivity panels do not restore an untouched evaluation. U100/C100 and the baseline comparisons remain separate. Five non-IID A scenes remain incomplete, and the final primary endpoint and final test remain pending.\n\n### R3.3 — Sensitive attributes and fairness definitions",
+          "document_sha256_before": "1a37fd4f33e3cb672b572006d4106a58b3b3e98b0f2ba295d7ff2a40c6c3c88b",
+          "document_sha256_after": "b0be4ac61af833a25e569b9cf4c61514910c1824aae00926eb0dc35375bd2dcf"
+        },
+        {
+          "reason": "Current evidence history points to A50; retain A40 unchanged below",
+          "offset_codepoints": 105650,
+          "before": "The later [accepted A40 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md) adds IID FedSA/S-DFA, giving four IID scenes with ten paired seeds and fixed 10/9/6 sensitivity panels. Six A scenes remain outside this accepted table; U100 and C100 are unchanged.\n\n",
+          "after": "The [accepted A50 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md) now covers all five IID scenes with 50 matched Full/minus_A pairs and fixed 10/9/6-seed panels. Five non-IID A scenes remain incomplete; the single available non-IID Benign minus_A record is excluded from the displayed averages. U100 and C100 are unchanged.\n\n",
+          "document_sha256_before": "b0be4ac61af833a25e569b9cf4c61514910c1824aae00926eb0dc35375bd2dcf",
+          "document_sha256_after": "2fc399a16b2556e7b35fe13cb7ac220e29c2944b924f611ec4f0ef18395386bc"
+        },
+        {
+          "reason": "Move unchanged A40 snapshot into historical lineage",
+          "offset_codepoints": 109081,
+          "before": "The separately [accepted A20 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md) retains the first IID Benign/F Flip results.\n\n",
+          "after": "The separately [accepted A20 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md) retains the first IID Benign/F Flip results.\n\nThe later [accepted A40 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md) adds IID FedSA/S-DFA, giving four IID scenes with ten paired seeds and fixed 10/9/6 sensitivity panels. Six A scenes remain outside this accepted table; U100 and C100 are unchanged.\n\n",
+          "document_sha256_before": "2fc399a16b2556e7b35fe13cb7ac220e29c2944b924f611ec4f0ef18395386bc",
+          "document_sha256_after": "f8e3edf921acaaca32594cfceb222f6a7dff71bbccd4ea1ff0ae5ad3b1eb16f6"
+        },
+        {
+          "reason": "Add concise current A50 answer to the Associate Editor",
+          "offset_codepoints": 4074,
+          "before": "**Revision material supplied.** The companion insertion text",
+          "after": "The A-deletion extension now completes all five IID scenes with 50 matched Full/minus_A pairs, including IID Sp-DFA. Raw and native/shared prediction show different accuracy–disparity trade-offs; all five non-IID A scenes remain pending. R3.2 gives the paired and seed-first summaries, and R3.7 explains their limits.\n\n**Revision material supplied.** The companion insertion text",
+          "document_sha256_before": "f8e3edf921acaaca32594cfceb222f6a7dff71bbccd4ea1ff0ae5ad3b1eb16f6",
+          "document_sha256_after": "a4612fb336a56528c6e382a364c46e6a66057efe1968d94790ec8d0e9749acc8"
+        },
+        {
+          "reason": "Interpret added A50 result without claiming universal or causal benefit",
+          "offset_codepoints": 80498,
+          "before": "The tabular COMPAS counterexamples above remain unchanged.",
+          "after": "The new A50 IID Sp-DFA comparison reinforces this boundary: deletion lowers native/shared mean AEOD but raises mean ASPD, while both raw disparity means rise in the ten-seed panel. Raw ASPD reverses sign in the fixed six-seed panel. Its accuracy loss is a paired-mean result, with four positive and six negative seed-level differences in each view. The five-IID seed-first summary in R3.2 preserves these view and panel distinctions; it does not include the single non-IID Benign A record or complete the five non-IID scenes. The tabular COMPAS counterexamples above remain unchanged.",
+          "document_sha256_before": "a4612fb336a56528c6e382a364c46e6a66057efe1968d94790ec8d0e9749acc8",
+          "document_sha256_after": "8b69a6ee77217cdacbf30e006255103ae8ded78ce8023a33c2cff279cbcc0d9d"
+        },
+        {
+          "reason": "Update only P2 completed/pending scope to adopted A50",
+          "offset_codepoints": 94869,
+          "before": "| P2 — CelebA mechanisms; still pending | U100 and C100 each have accepted/offserver same-checkpoint raw/native/shared results for all ten scenes and fixed 10/9/6-seed panels. C100 preserves all earlier C50/C60 values and adds the remaining non-IID attacks. A40 now covers IID Benign, F Flip, FedSA and S-DFA with 40 paired checkpoints; complete IID Sp-DFA, all five non-IID A scenes and the other five incomplete image controls. Preserve Full/source/partition identities, all unfavorable effects and calibration/device/runtime/selection boundaries. | R3.2; R3.7; mechanism attribution |",
+          "after": "| P2 — CelebA mechanisms; still pending | U100 and C100 each have accepted/offserver same-checkpoint raw/native/shared results for all ten scenes and fixed 10/9/6-seed panels. C100 preserves all earlier C50/C60 values and adds the remaining non-IID attacks. The historical A40 comparison covers IID Benign, F Flip, FedSA and S-DFA with 40 paired checkpoints. A50 adds IID Sp-DFA, completing all five IID scenes with 50 paired checkpoints; complete all five non-IID A scenes and the other five incomplete image controls. Preserve Full/source/partition identities, all unfavorable effects and calibration/device/runtime/selection boundaries. | R3.2; R3.7; mechanism attribution |",
+          "document_sha256_before": "8b69a6ee77217cdacbf30e006255103ae8ded78ce8023a33c2cff279cbcc0d9d",
+          "document_sha256_after": "055c68bd89af9ba9f690817fefd9fb7ee472a34eb66ef6994bc48342964857a7"
+        }
+      ]
+    },
+    {
+      "source": "E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_reader_20261010/manuscript_insertions_integrated_20261010.md",
+      "source_sha256": "71ab79d282977565a9514b397b0ef82f7d452788c2f43e0a3828c5485a2ad278",
+      "candidate": "E:/OneDrive/文档/GuardFed/tmp/rebuttal_A50_reader_integration_20261010/manuscript_insertions_integrated_A50_reader_20261010.md",
+      "candidate_sha256": "0e05635ee03bf98f8cf208bdbcf8d28f99f2ca89cdf292e344ad7be607428eaa",
+      "operations": [
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 54302,
+          "before": "**A40 extension: four complete IID scenes.**",
+          "after": "**Historical A40 extension: four complete IID scenes.**",
+          "document_sha256_before": "71ab79d282977565a9514b397b0ef82f7d452788c2f43e0a3828c5485a2ad278",
+          "document_sha256_after": "4f164a0049564170eb517bcbc5b392189438362fe16487c2f3b3a5da1549938a"
+        },
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 57181,
+          "before": "**A40 fixed-panel direction check.**",
+          "after": "**Historical A40 fixed-panel direction check.**",
+          "document_sha256_before": "4f164a0049564170eb517bcbc5b392189438362fe16487c2f3b3a5da1549938a",
+          "document_sha256_after": "a73fa337ea7c30ddb6e93609b047cb0d49a5464583df53592adc8d89950e8ba4"
+        },
+        {
+          "reason": "Mark existing A40 evidence as historical; no scientific value changed",
+          "offset_codepoints": 58479,
+          "before": "**Current A40 comparability and coverage boundary.**",
+          "after": "**Historical A40 comparability and coverage boundary.**",
+          "document_sha256_before": "a73fa337ea7c30ddb6e93609b047cb0d49a5464583df53592adc8d89950e8ba4",
+          "document_sha256_after": "210d0c584f591b03544022bfbfa1406cfd71d886cf6115faa5e76b625ab46a87"
+        },
+        {
+          "reason": "Add adopted A50 Sp-DFA and seed-first evidence with explicit scope",
+          "offset_codepoints": 59519,
+          "before": "**Root/heterogeneity paragraph.**",
+          "after": "**Current A50 extension: all five IID scenes.** The [accepted A50 table](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md) and [root verification](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/ROOT_VERIFICATION.json) add IID Sp-DFA to the historical A40 comparison above, completing Benign, F Flip, FedSA, S-DFA and Sp-DFA with 50 minus_A models paired to 50 Full checkpoints. Each scene has ten matched seeds; all three views retain each model’s same round-70 checkpoint and the same 19,867 validation images. Only the A score contribution is removed; geometric hard filtering and prediction calibration remain enabled. The single available non-IID Benign minus_A record (seed 91001) is excluded from every displayed average. All five non-IID A scenes and the other five incomplete image-control variants remain pending.\n\n**Added IID Sp-DFA evidence.** The ten-seed paired differences, minus_A−Full, are -0.230 ± 0.746 / -0.00950 ± 0.00897 / +0.00117 ± 0.01870 for native and shared calibration, and -0.266 ± 0.612 / +0.00731 ± 0.02104 / +0.00145 ± 0.01756 for raw, in ΔACC / ΔAEOD / ΔASPD order. Values are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. Accuracy decreases refer to the paired mean: in each view, four seeds have positive accuracy differences and six have negative differences. Deletion lowers native/shared mean AEOD but raises mean ASPD; under raw prediction it raises both disparity means. Raw ASPD reverses sign in the fixed six-seed panel, whereas native/shared ASPD remains positive. The complete fixed 10/9/6-seed panels are retained in the linked table, without selecting a favorable subset.\n\n**Five-IID seed-first summary.** We first average the five scenes within each seed, then summarize across the ten seeds; the sampling unit is the seed, not 50 independent scene–seed observations. The paired ΔACC / ΔAEOD / ΔASPD summaries are -0.177 ± 0.454 / -0.00048 ± 0.00533 / -0.00190 ± 0.00941 for native/shared calibration and -0.134 ± 0.400 / +0.00310 ± 0.00449 / +0.00167 ± 0.00275 for raw, with the same units and sample-SD convention. The [per-scene values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/tables.json) and [seed-first values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/IID_SEED_FIRST.json) also retain the fixed nine- and six-seed summaries. Raw aggregate ASPD is positive in the ten- and nine-seed panels and negative in the six-seed panel. These descriptive averages do not establish significance, component necessity or an isolated causal mechanism.\n\n**Current A50 comparability and scope.** Full replay comprises three CPU and 47 GPU checkpoints; all 50 minus_A replays use CPU. Both training cohorts contain 50 cu128 checkpoints. The A40 device counts above describe that historical subset only; mixed replay devices and driver provenance do not establish device equivalence. Native and shared-calibration metrics and group counts coincide within each of the 100 records, so these views are not independent confirmations. Root-only calibration, configuration-selection seed 91001, validation exposure and prior official-test exposure remain disclosed; the fixed sensitivity panels do not restore an untouched evaluation. U100/C100 and the baseline comparisons remain separate. Five non-IID A scenes remain incomplete, and the final primary endpoint and final test remain pending.\n\n**Root/heterogeneity paragraph.**",
+          "document_sha256_before": "210d0c584f591b03544022bfbfa1406cfd71d886cf6115faa5e76b625ab46a87",
+          "document_sha256_after": "8793c290b888766d07c825c8ac3ad9e3ab7571772d06479897bbcae30b9dc971"
+        },
+        {
+          "reason": "Current evidence history points to A50; retain A40 unchanged below",
+          "offset_codepoints": 71475,
+          "before": "The later [accepted A40 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md) adds IID FedSA/S-DFA, giving four IID scenes with ten paired seeds and fixed 10/9/6 sensitivity panels. Six A scenes remain outside this accepted table; U100 and C100 are unchanged.\n\n",
+          "after": "The [accepted A50 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md) now covers all five IID scenes with 50 matched Full/minus_A pairs and fixed 10/9/6-seed panels. Five non-IID A scenes remain incomplete; the single available non-IID Benign minus_A record is excluded from the displayed averages. U100 and C100 are unchanged.\n\n",
+          "document_sha256_before": "8793c290b888766d07c825c8ac3ad9e3ab7571772d06479897bbcae30b9dc971",
+          "document_sha256_after": "6921ec6aeb47134fbb7c0b40d5db23e6dc7639f9195fe41833514ac09e1e692f"
+        },
+        {
+          "reason": "Move unchanged A40 snapshot into historical lineage",
+          "offset_codepoints": 74906,
+          "before": "The separately [accepted A20 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md) retains the first IID Benign/F Flip results.\n\n",
+          "after": "The separately [accepted A20 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md) retains the first IID Benign/F Flip results.\n\nThe later [accepted A40 comparison](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md) adds IID FedSA/S-DFA, giving four IID scenes with ten paired seeds and fixed 10/9/6 sensitivity panels. Six A scenes remain outside this accepted table; U100 and C100 are unchanged.\n\n",
+          "document_sha256_before": "6921ec6aeb47134fbb7c0b40d5db23e6dc7639f9195fe41833514ac09e1e692f",
+          "document_sha256_after": "0e05635ee03bf98f8cf208bdbcf8d28f99f2ca89cdf292e344ad7be607428eaa"
+        }
+      ]
+    }
+  ],
+  "historical_scope_normalization": {
+    "**Historical A40 extension: four complete IID scenes.**": "**A40 extension: four complete IID scenes.**",
+    "**Historical A40 fixed-panel direction check.**": "**A40 fixed-panel direction check.**",
+    "**Historical A40 comparability and coverage boundary.**": "**Current A40 comparability and coverage boundary.**",
+    "The historical A40 comparison in R3.2 adds": "The A40 comparison in R3.2 adds"
+  },
+  "new_science_block": "**Current A50 extension: all five IID scenes.** The [accepted A50 table](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md) and [root verification](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/ROOT_VERIFICATION.json) add IID Sp-DFA to the historical A40 comparison above, completing Benign, F Flip, FedSA, S-DFA and Sp-DFA with 50 minus_A models paired to 50 Full checkpoints. Each scene has ten matched seeds; all three views retain each model’s same round-70 checkpoint and the same 19,867 validation images. Only the A score contribution is removed; geometric hard filtering and prediction calibration remain enabled. The single available non-IID Benign minus_A record (seed 91001) is excluded from every displayed average. All five non-IID A scenes and the other five incomplete image-control variants remain pending.\n\n**Added IID Sp-DFA evidence.** The ten-seed paired differences, minus_A−Full, are -0.230 ± 0.746 / -0.00950 ± 0.00897 / +0.00117 ± 0.01870 for native and shared calibration, and -0.266 ± 0.612 / +0.00731 ± 0.02104 / +0.00145 ± 0.01756 for raw, in ΔACC / ΔAEOD / ΔASPD order. Values are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. Accuracy decreases refer to the paired mean: in each view, four seeds have positive accuracy differences and six have negative differences. Deletion lowers native/shared mean AEOD but raises mean ASPD; under raw prediction it raises both disparity means. Raw ASPD reverses sign in the fixed six-seed panel, whereas native/shared ASPD remains positive. The complete fixed 10/9/6-seed panels are retained in the linked table, without selecting a favorable subset.\n\n**Five-IID seed-first summary.** We first average the five scenes within each seed, then summarize across the ten seeds; the sampling unit is the seed, not 50 independent scene–seed observations. The paired ΔACC / ΔAEOD / ΔASPD summaries are -0.177 ± 0.454 / -0.00048 ± 0.00533 / -0.00190 ± 0.00941 for native/shared calibration and -0.134 ± 0.400 / +0.00310 ± 0.00449 / +0.00167 ± 0.00275 for raw, with the same units and sample-SD convention. The [per-scene values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/tables.json) and [seed-first values](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/IID_SEED_FIRST.json) also retain the fixed nine- and six-seed summaries. Raw aggregate ASPD is positive in the ten- and nine-seed panels and negative in the six-seed panel. These descriptive averages do not establish significance, component necessity or an isolated causal mechanism.\n\n**Current A50 comparability and scope.** Full replay comprises three CPU and 47 GPU checkpoints; all 50 minus_A replays use CPU. Both training cohorts contain 50 cu128 checkpoints. The A40 device counts above describe that historical subset only; mixed replay devices and driver provenance do not establish device equivalence. Native and shared-calibration metrics and group counts coincide within each of the 100 records, so these views are not independent confirmations. Root-only calibration, configuration-selection seed 91001, validation exposure and prior official-test exposure remain disclosed; the fixed sensitivity panels do not restore an untouched evaluation. U100/C100 and the baseline comparisons remain separate. Five non-IID A scenes remain incomplete, and the final primary endpoint and final test remain pending.\n\n",
+  "new_scientific_measurements": 0
+}

@@ -1,0 +1,98 @@
+{
+  "status": "ACTUAL_SAVED_8_TENSOR_IDENTITY_PASS_NO_FORWARD",
+  "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91002_fullcoverage",
+  "tensor_count": 8,
+  "checkpoint_sha256": "100d00e77e5f22ff875088033705deae324016de5fd56e1adb430b151dc37df2",
+  "original_tensor_sha": "e87549f2a783ede066987ef43d9c230ba3ad9486de7981391a294cc99ed785e0",
+  "original_tensor_sha_function_source_sha256": "9d7e4d44d49de4393d2ab8b607e32c427af95c381c25fa6bb7ae8175a830cbe4",
+  "tensors": [
+    {
+      "name": "features.0.weight",
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "torch.float32",
+      "elements": 864,
+      "finite": true
+    },
+    {
+      "name": "features.0.bias",
+      "shape": [
+        32
+      ],
+      "dtype": "torch.float32",
+      "elements": 32,
+      "finite": true
+    },
+    {
+      "name": "features.3.weight",
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "dtype": "torch.float32",
+      "elements": 18432,
+      "finite": true
+    },
+    {
+      "name": "features.3.bias",
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32",
+      "elements": 64,
+      "finite": true
+    },
+    {
+      "name": "features.6.weight",
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "dtype": "torch.float32",
+      "elements": 73728,
+      "finite": true
+    },
+    {
+      "name": "features.6.bias",
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32",
+      "elements": 128,
+      "finite": true
+    },
+    {
+      "name": "classifier.weight",
+      "shape": [
+        2,
+        128
+      ],
+      "dtype": "torch.float32",
+      "elements": 256,
+      "finite": true
+    },
+    {
+      "name": "classifier.bias",
+      "shape": [
+        2
+      ],
+      "dtype": "torch.float32",
+      "elements": 2,
+      "finite": true
+    }
+  ],
+  "original_strict_already_checked_finiteness_and_tensor_digest": true,
+  "CNN_calls": 0,
+  "model_instantiation": 0,
+  "training": 0,
+  "fit": 0,
+  "CUDA_initialized": false
+}

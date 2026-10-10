@@ -1,0 +1,150 @@
+{
+  "status": "PREPARED_SCOPE_AND_ADOPTED_CHAIN_WIRING_NO_RESULTS",
+  "original": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/build.py",
+  "original_sha256": "812962ce111885839f7254d8e2d3a6908387c6b02fab507001b139375420f328",
+  "replacements": [
+    {
+      "before": "\"\"\"Read actual adopted A20 receipts; reuse the accepted A identity and C arithmetic.\"\"\"",
+      "after": "\"\"\"Read actual adopted A40 receipts; preserve original identity loop and arithmetic.\"\"\""
+    },
+    {
+      "before": "OLD = H.parent/'three_view_A_Benign10_20261010'",
+      "after": "OLD = H.parent/'three_view_A_Benign10_20261010'\nPREV = H.parent/'three_view_A_IID_two_scenes20_20261010'"
+    },
+    {
+      "before": "SCENES = [('IID', 'Benign'), ('IID', 'F Flip')]",
+      "after": "SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA')]"
+    },
+    {
+      "before": "    adopted = read(path(args.adoption)); new = read(path(args.index)); prior = read(path(pins['index']))\n    new_ids = [f'minus_A_IID_F Flip_seed{s}' for s in range(91003,91011)]\n    old_ids = [f'minus_A_IID_Benign_seed{s}' for s in range(91001,91011)] + [f'minus_A_IID_F Flip_seed{s}' for s in (91001,91002)]\n    need(adopted['status']=='ROOT_A20_SAVED_ARRAYS_AND_NATIVE220_RESTORE_CHAIN_ADOPTED'\n        and adopted['accepted_new_ids']==new['new_ids']==new_ids and adopted['new_accepted']==8\n        and adopted['prior_accepted']==212 and adopted['cumulative_accepted']==220\n        and adopted['original212_unchanged'] and adopted['native_max_abs_difference']==0, 'Actual exact8 root adoption required')\n    need(adopted['Full_inference']==adopted['new_CNN']==adopted['new_training']==0 and adopted['test'] is False, 'Forbidden science operation')\n    need(adopted['records_index_sha256']==args.index_sha256 and new['prior_index_path']==pins['index']\n        and new['prior_index_sha256']==input_files[pins['index']]['sha256']\n        and new['prior_adoption_path']==pins['adoption'] and new['prior_adoption_sha256']==input_files[pins['adoption']]['sha256'], 'Broken actual212→220 chain')\n    need(new['all_ids']==prior['all_ids']+new_ids and len(set(new['all_ids']))==220, 'Original212 ID prefix or new8 changed')\n    prior_adopted = read(path(pins['adoption']))\n    need(prior_adopted['status']=='ROOT_A12_SAVED_ARRAYS_AND_NATIVE212_RESTORE_CHAIN_ADOPTED'\n        and prior_adopted['accepted_new_ids']==prior['new_ids']==old_ids and prior_adopted['original200_unchanged'], 'Original A12 adoption changed')\n    for name in ['build.py','ROOT_VERIFICATION.json','FILES_SHA256.json','records.json','tables.json','TABLES.md']:\n        p = OLD/name; input_files[p.relative_to(R).as_posix()] = dict(sha256=sha(p),bytes=p.stat().st_size)\n    need(sha(OLD/'ROOT_VERIFICATION.json')=='c3d65134f0e6eeda36fd37c64b6ac0df3794828af054d920d46775670a54df9d', 'Original table adoption changed')\n    need(sha(OLD/'FILES_SHA256.json')=='c96af519a0fc8ef3eff780f2990c89d40022b6fc1eba25cc73675e3079fcdbb5', 'Original table seal changed')\n    for name,pin in read(OLD/'FILES_SHA256.json')['files'].items():\n        need(sha(OLD/name)==pin['sha256'] and (OLD/name).stat().st_size==pin['bytes'], 'Original sealed A table drift: '+name)\n",
+      "after": "    adopted = read(path(args.adoption)); new = read(path(args.index))\n    new_ids = [f'minus_A_IID_S-DFA_seed{seed}' for seed in range(91007,91011)]\n    need(adopted['status']=='ROOT_A40_SAVED_ARRAYS_AND_NATIVE243_RESTORE_CHAIN_ADOPTED'\n        and adopted['accepted_new_ids']==new['new_ids']==new_ids\n        and adopted['new_accepted']==4 and adopted['prior_accepted']==236\n        and adopted['cumulative_accepted']==240 and adopted['original236_unchanged']\n        and adopted['native_max_abs_difference']==0, 'Actual exact4 root adoption required')\n    need(adopted['Full_inference']==adopted['new_CNN']==adopted['new_training']==0\n        and adopted.get('new_fit',0)==0 and adopted['test'] is False, 'Forbidden science operation')\n    need(adopted['records_index_sha256']==args.index_sha256, 'Newest root/index binding differs')\n    # Follow five SHA-bound adopted increments; stop at the original A12 index.\n    # Every leaf is independently root-adopted; no runtime status label counts.\n    batches=[]; current=(args.adoption,args.adoption_sha256,args.index,args.index_sha256)\n    visited=set()\n    while True:\n        ap,asha,ip,isha=current\n        need(ip not in visited and len(visited)<5, 'Cycle or unexpected A-chain depth')\n        visited.add(ip)\n        for name,expected in [(ap,asha),(ip,isha)]:\n            need(sha(path(name))==expected, 'Adopted chain pin changed: '+name)\n            input_files[name]=dict(sha256=expected,bytes=path(name).stat().st_size)\n        root=read(path(ap)); index=read(path(ip)); ids=index['new_ids']\n        need(root['records_index_sha256']==isha and root['accepted_new_ids']==ids\n            and root['new_accepted']==len(ids) and root['cumulative_accepted']==len(index['all_ids'])\n            and root['native_max_abs_difference']==0 and root['Full_inference']==root['new_CNN']==root['new_training']==0\n            and root.get('new_fit',0)==0 and root['test'] is False, 'Unadopted/incompatible chain leaf')\n        need(root['status'].startswith('ROOT_A') and root['status'].endswith('_ADOPTED'), 'Not a root adoption')\n        batches.append((index,ids,ap,ip,root))\n        if ip==pins['index']:\n            need(ap==pins['adoption'] and isha==input_files[pins['index']]['sha256']\n                and asha==input_files[pins['adoption']]['sha256'], 'Original A12 anchor changed')\n            break\n        prior=read(path(index['prior_index_path']))\n        need(sha(path(index['prior_index_path']))==index['prior_index_sha256']\n            and index['all_ids']==prior['all_ids']+ids and len(set(index['all_ids']))==len(index['all_ids'])\n            and root['prior_accepted']==len(prior['all_ids']), 'Broken adopted prefix')\n        current=(index['prior_adoption_path'],index['prior_adoption_sha256'],\n                 index['prior_index_path'],index['prior_index_sha256'])\n    batches.reverse()\n    need([len(x[1]) for x in batches]==[12,8,8,8,4]\n        and [len(x[0]['all_ids']) for x in batches]==[212,220,228,236,240], 'Wrong exact five A increments')\n    wanted=[f'minus_A_{distribution}_{attack}_seed{seed}' for distribution,attack in SCENES for seed in range(91001,91011)]\n    need([rid for _,ids,_,_,_ in batches for rid in ids]==wanted, 'Four complete IID scenes required')\n    need(sha(PREV/'ROOT_VERIFICATION.json')=='dbc2f8fe481c2a049f4e556a500c29d3122fc8392d69e4ab2bc131c0e3f4b3c0', 'Original A20 root adoption changed')\n    for name in ['build.py','ROOT_VERIFICATION.json','FILES_SHA256.json','records.json','tables.json','TABLES.md']:\n        p=PREV/name; input_files[p.relative_to(R).as_posix()]=dict(sha256=sha(p),bytes=p.stat().st_size)\n    for name,pin in read(PREV/'FILES_SHA256.json')['files'].items():\n        need(sha(PREV/name)==pin['sha256'] and (PREV/name).stat().st_size==pin['bytes'], 'Original A20 sealed file drift: '+name)\n"
+    },
+    {
+      "before": "    for index, ids, adoption_path, index_path in [(prior,old_ids,pins['adoption'],pins['index']),(new,new_ids,args.adoption,args.index)]:",
+      "after": "    for index, ids, adoption_path, index_path, batch_root in batches:"
+    },
+    {
+      "before": "        if index is new: need(index['native_inspection_sha256']==adopted['native_inspection_sha256'], 'Newest native snapshot differs from root proof')",
+      "after": "        need(index['native_inspection_sha256']==batch_root['native_inspection_sha256'], 'Native snapshot differs from root proof')"
+    },
+    {
+      "before": "    need(len(records)==len({r['id'] for r in records})==40 and len(links)==20, 'Exactly20 A +20 paired Full required')",
+      "after": "    need(len(records)==len({r['id'] for r in records})==80 and len(links)==40, 'Exactly40 A +40 paired Full required')"
+    },
+    {
+      "before": "expected=[('IID','Benign'),('IID','F Flip')]",
+      "after": "expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA')]"
+    },
+    {
+      "before": "Only the exact two A IID ten-shared-seed scenes are publishable",
+      "after": "Only the exact four A IID ten-shared-seed scenes are publishable"
+    },
+    {
+      "before": "assert len(records)==40 and len({r['id'] for r in records})==40",
+      "after": "assert len(records)==80 and len({r['id'] for r in records})==80"
+    },
+    {
+      "before": "'assert len(bycell)==40'",
+      "after": "'assert len(bycell)==80'"
+    },
+    {
+      "before": "scenes={('IID','Benign'),('IID','F Flip')}",
+      "after": "scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA')}"
+    },
+    {
+      "before": "'assert len(rows)==6'",
+      "after": "'assert len(rows)==12'"
+    },
+    {
+      "before": "'assert len(errors)==324'",
+      "after": "'assert len(errors)==648'"
+    },
+    {
+      "before": "'assert metric_checks==360 and count_checks==960'",
+      "after": "'assert metric_checks==720 and count_checks==1920'"
+    },
+    {
+      "before": "old_records=read(OLD/'records.json')['records']",
+      "after": "old_records=read(PREV/'records.json')['records']"
+    },
+    {
+      "before": "record_fragments((OLD/'records.json').read_text(encoding='utf8'))",
+      "after": "record_fragments((PREV/'records.json').read_text(encoding='utf8'))"
+    },
+    {
+      "before": "old_panels=read(OLD/'tables.json')['panels']; old_cells=0",
+      "after": "old_panels=read(PREV/'tables.json')['panels']; old_cells=0"
+    },
+    {
+      "before": "need([r for r in current['rows'] if r['attack']=='Benign']==previous['rows'], 'Old Benign162 statistics changed')",
+      "after": "need([r for r in current['rows'] if r['attack'] in ('Benign','F Flip')]==previous['rows'], 'Old A20 324 statistics changed')"
+    },
+    {
+      "before": "display in (OLD/'TABLES.md').read_text(encoding='utf8')",
+      "after": "display in (PREV/'TABLES.md').read_text(encoding='utf8')"
+    },
+    {
+      "before": "need(old_cells==81 and checks['mean_sd_scalars']==324, 'Required original/new checks incomplete')",
+      "after": "need(old_cells==162 and checks['mean_sd_scalars']==648, 'Required original/new checks incomplete')"
+    },
+    {
+      "before": "# CelebA Full–minus_A: two complete IID scenes, three views",
+      "after": "# CelebA Full–minus_A: four complete IID scenes, three views"
+    },
+    {
+      "before": "IID Benign and IID F Flip only. Validation",
+      "after": "IID Benign, F Flip, FedSA and S-DFA only. Validation"
+    },
+    {
+      "before": "need(cells==162, 'Display cell count incomplete')",
+      "after": "need(cells==324, 'Display cell count incomplete')"
+    },
+    {
+      "before": "Actual replay devices across20 pairs",
+      "after": "Actual replay devices across40 pairs"
+    },
+    {
+      "before": "these20 actual source records",
+      "after": "these40 actual source records"
+    },
+    {
+      "before": "These are two of ten minus_A scenes; the other eight scenes remain outside this delivery.",
+      "after": "These are four of ten minus_A scenes; the other six scenes remain outside this delivery."
+    },
+    {
+      "before": "table_record_count=40,preserved_records=40,paired_models=20,complete_scenes=2",
+      "after": "table_record_count=80,preserved_records=80,paired_models=40,complete_scenes=4"
+    },
+    {
+      "before": "old24_record_JSON_bytes_and_order_exact=True,old162_scalars_exact=True,old81_display_cells_exact=True",
+      "after": "old40_record_JSON_bytes_and_order_exact=True,old324_scalars_exact=True,old162_display_cells_exact=True"
+    },
+    {
+      "before": "status='ACTUAL_TWO_A_IID_SCENE_TABLE_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=2,paired_models=20",
+      "after": "status='ACTUAL_FOUR_A_IID_SCENE_TABLE_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=4,paired_models=40"
+    },
+    {
+      "before": "displayed_records=40,preserved_records=40",
+      "after": "displayed_records=80,preserved_records=80"
+    },
+    {
+      "before": "actual_A20_root_adoption=args.adoption,actual_A20_root_adoption_sha256=args.adoption_sha256",
+      "after": "actual_A40_root_adoption=args.adoption,actual_A40_root_adoption_sha256=args.adoption_sha256"
+    },
+    {
+      "before": "original24_provenance_kept=True",
+      "after": "original40_provenance_kept=True"
+    },
+    {
+      "before": "remaining_A_scenes=8",
+      "after": "remaining_A_scenes=6"
+    },
+    {
+      "before": "status='ACTUAL_A20_TWO_IID_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=40,pairs=20,stats=324,cells=162,metrics=360,counts=960",
+      "after": "status='ACTUAL_A40_FOUR_IID_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=80,pairs=40,stats=648,cells=324,metrics=720,counts=1920"
+    }
+  ],
+  "inverse_source_exact": true,
+  "numeric_source_functions_unchanged": true,
+  "actual_A40_external_root_proof_required": true
+}

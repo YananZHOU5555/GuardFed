@@ -1,0 +1,125 @@
+{
+  "status": "ROOT_FIVE_LIVE_QUEUES_IDENTITY_AND_PROGRESS_VERIFIED",
+  "utc": "2026-10-10T12:34:41.989784+00:00",
+  "observed_utc": "2026-10-10T12:33:43.308311+00:00",
+  "snapshots": [
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T113833Z.raw.json",
+      "sha256": "480ac705d3fdbcefc6feb9be3f5ba0906b159a9b1625953b3b9631a9116e9bbe"
+    },
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T123338Z.raw.json",
+      "sha256": "a62f9cd234d93c8d244e047c57d0f7f034d89e969a4746152e9fb84df7404f2e"
+    }
+  ],
+  "growth": {
+    "FLGMM": {
+      "terminal_before": 44,
+      "terminal_now": 47,
+      "new_terminal": [
+        "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91007_fullcoverage",
+        "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91008_fullcoverage",
+        "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91009_fullcoverage"
+      ],
+      "active_now": [
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91010_fullcoverage",
+          "round": 66
+        },
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91002_fullcoverage",
+          "round": 19
+        }
+      ]
+    },
+    "gradient64": {
+      "terminal_before": 24,
+      "terminal_now": 28,
+      "new_terminal": [
+        "FedNGA_eta1_IID_Benign_seed91001_screen",
+        "FedNGA_eta1_IID_S-DFA_seed91001_screen",
+        "FedNGA_eta1_non-IID_Benign_seed91001_screen",
+        "FedNGA_eta1_non-IID_S-DFA_seed91001_screen"
+      ],
+      "active_now": []
+    },
+    "Hybrid96": {
+      "terminal_before": 2,
+      "terminal_now": 4,
+      "new_terminal": [
+        "CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91004_fullcoverage",
+        "CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91005_fullcoverage"
+      ],
+      "active_now": [
+        {
+          "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91006_fullcoverage",
+          "pid": 89116,
+          "gpu": 0
+        }
+      ]
+    },
+    "main": {
+      "terminal_before": 252,
+      "terminal_now": 260,
+      "new_terminal": [
+        "minus_A_non-IID_Benign_seed91003",
+        "minus_A_non-IID_Benign_seed91004",
+        "minus_A_non-IID_Benign_seed91005",
+        "minus_A_non-IID_Benign_seed91006",
+        "minus_A_non-IID_Benign_seed91007",
+        "minus_A_non-IID_Benign_seed91008",
+        "minus_A_non-IID_Benign_seed91009",
+        "minus_A_non-IID_Benign_seed91010"
+      ],
+      "workers": [
+        {
+          "pid": 88437,
+          "job": "minus_A_non-IID_F Flip_seed91001.json",
+          "round": 50
+        },
+        {
+          "pid": 88438,
+          "job": "minus_A_non-IID_F Flip_seed91002.json",
+          "round": 50
+        },
+        {
+          "pid": 88582,
+          "job": "minus_A_non-IID_F Flip_seed91003.json",
+          "round": 42
+        },
+        {
+          "pid": 88642,
+          "job": "minus_A_non-IID_F Flip_seed91004.json",
+          "round": 40
+        },
+        {
+          "pid": 88781,
+          "job": "minus_A_non-IID_F Flip_seed91005.json",
+          "round": 31
+        },
+        {
+          "pid": 88881,
+          "job": "minus_A_non-IID_F Flip_seed91006.json",
+          "round": 25
+        },
+        {
+          "pid": 88949,
+          "job": "minus_A_non-IID_F Flip_seed91007.json",
+          "round": 24
+        },
+        {
+          "pid": 89028,
+          "job": "minus_A_non-IID_F Flip_seed91008.json",
+          "round": 17
+        }
+      ]
+    }
+  },
+  "main_workers": 8,
+  "remaining620_closed": 80,
+  "source_changes": [],
+  "failures": [],
+  "source_data_scope": "resolved paths/size/mtime only; prior09:41 full SHA retained as historical evidence",
+  "new_scientific_acceptance": 0,
+  "claim": "Observed terminal-set growth with correct source/worker identities, not scientific result acceptance; gradient active metadata was sampled during handover."
+}

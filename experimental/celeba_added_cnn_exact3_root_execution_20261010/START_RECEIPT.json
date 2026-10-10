@@ -1,0 +1,54 @@
+{
+  "status": "ROOT_EXACT3_SUPERVISOR_STARTED_NOT_SCIENTIFIC_ACCEPTANCE",
+  "utc": "2026-10-10T12:06:58.456988+00:00",
+  "program": "guardfed_added_cnn_exact3_gate",
+  "commands": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_added_cnn_exact3_gate: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "add",
+        "guardfed_added_cnn_exact3_gate"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_added_cnn_exact3_gate: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_added_cnn_exact3_gate"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_added_cnn_exact3_gate: started\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "status",
+        "guardfed_added_cnn_exact3_gate"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_added_cnn_exact3_gate   RUNNING   pid 88771, uptime 0:00:02\n",
+      "stderr": ""
+    }
+  ],
+  "config_sha256": "1ef219cdd844668280ec1d5d051b8253d871d75c2fca21133f22a76f0c83fcc3",
+  "authorization_sha256": "47a4b70a5e777fd3971e4d1225fbfc679aa2bcd9509357d29b193c67565e2ce9",
+  "linux_preflight_sha256": "05e1333c3af28677a001d881396545cc9b6145049801f51001378ba62bd083fb",
+  "package_sha256": "49c42b90214eae57d456f8ded1d2a4ff2de2762a78d6bcf5c4ae1a5766de9434",
+  "autostart": false,
+  "autorestart": false,
+  "startretries": 0,
+  "new_scientific_acceptances": 0
+}

@@ -1,0 +1,183 @@
+{
+  "status": "READONLY_GROWTH_AND_NOMINAL_BUDGET_PASS_NOT_FRESH_DISPATCH_TICKET",
+  "observed_utc": "2026-10-10T12:01:12.357590+00:00",
+  "prior_snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T113833Z.raw.json",
+  "prior_snapshot_sha256": "480ac705d3fdbcefc6feb9be3f5ba0906b159a9b1625953b3b9631a9116e9bbe",
+  "prior_utc": "2026-10-10T11:38:30.209589+00:00",
+  "completed_previous": 252,
+  "completed_current": 255,
+  "active": 8,
+  "failed": 0,
+  "growth": [
+    {
+      "id": "minus_A_non-IID_Benign_seed91003",
+      "previous_round": 50,
+      "current_round": 70,
+      "terminal_in_queue": true
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91004",
+      "previous_round": 50,
+      "current_round": 70,
+      "terminal_in_queue": true
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91005",
+      "previous_round": 43,
+      "current_round": 70,
+      "terminal_in_queue": true
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91006",
+      "previous_round": 41,
+      "current_round": 69,
+      "terminal_in_queue": false
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91007",
+      "previous_round": 37,
+      "current_round": 63,
+      "terminal_in_queue": false
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91008",
+      "previous_round": 32,
+      "current_round": 59,
+      "terminal_in_queue": false
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91009",
+      "previous_round": 30,
+      "current_round": 57,
+      "terminal_in_queue": false
+    },
+    {
+      "id": "minus_A_non-IID_Benign_seed91010",
+      "previous_round": 24,
+      "current_round": 51,
+      "terminal_in_queue": false
+    }
+  ],
+  "actual_quota_cores": 122.87999,
+  "eligible_mask": "0-511",
+  "budget_components": {
+    "main_8_workers_all_6_OS_threads_each": 48,
+    "FLGMM_shared_affinity_102_103": 2,
+    "Hybrid_affinity_104": 1,
+    "gradient_affinity_105": 1,
+    "remaining620_reservation_112_119_even_currently_waiting": 8,
+    "exact3_proposed_120_127": 8,
+    "coordinator_and_io_conservative_allowance": 8
+  },
+  "nominal_reserved_cores_including_gate": 76,
+  "nominal_not_hard_peak_bound": true,
+  "dormant_main_coordinator_threads": 319,
+  "dormant_main_coordinator_cpu_ticks_2s": 0,
+  "budget_explanation": "Main workers currently each have six OS threads, compute env1; budget counts all6 rather than measured about1. Auxiliary fixed masks cap their physical concurrent cores. Reserve remaining620 8 even waiting, proposed8, and8 control/IO allowance. The 319 dormant coordinator library threads are disclosed, not counted as 319 reserved cores; this nominal reservation is not a hard bound on transient wakeups.",
+  "narrow_conflicts": [],
+  "active_wide_threads": [
+    {
+      "pid": 87374,
+      "tid": 87374,
+      "last_cpu": 64,
+      "delta_cpu_ticks": 204
+    },
+    {
+      "pid": 87400,
+      "tid": 87400,
+      "last_cpu": 56,
+      "delta_cpu_ticks": 204
+    },
+    {
+      "pid": 87400,
+      "tid": 87408,
+      "last_cpu": 75,
+      "delta_cpu_ticks": 1
+    },
+    {
+      "pid": 87503,
+      "tid": 87503,
+      "last_cpu": 403,
+      "delta_cpu_ticks": 185
+    },
+    {
+      "pid": 87503,
+      "tid": 87510,
+      "last_cpu": 402,
+      "delta_cpu_ticks": 20
+    },
+    {
+      "pid": 87565,
+      "tid": 87565,
+      "last_cpu": 82,
+      "delta_cpu_ticks": 185
+    },
+    {
+      "pid": 87565,
+      "tid": 87594,
+      "last_cpu": 81,
+      "delta_cpu_ticks": 18
+    },
+    {
+      "pid": 87811,
+      "tid": 87811,
+      "last_cpu": 162,
+      "delta_cpu_ticks": 187
+    },
+    {
+      "pid": 87811,
+      "tid": 87837,
+      "last_cpu": 165,
+      "delta_cpu_ticks": 18
+    },
+    {
+      "pid": 88437,
+      "tid": 88437,
+      "last_cpu": 435,
+      "delta_cpu_ticks": 198
+    },
+    {
+      "pid": 88437,
+      "tid": 88449,
+      "last_cpu": 179,
+      "delta_cpu_ticks": 6
+    },
+    {
+      "pid": 88438,
+      "tid": 88438,
+      "last_cpu": 224,
+      "delta_cpu_ticks": 178
+    },
+    {
+      "pid": 88438,
+      "tid": 88448,
+      "last_cpu": 392,
+      "delta_cpu_ticks": 1
+    },
+    {
+      "pid": 88438,
+      "tid": 88450,
+      "last_cpu": 481,
+      "delta_cpu_ticks": 27
+    },
+    {
+      "pid": 88582,
+      "tid": 88582,
+      "last_cpu": 203,
+      "delta_cpu_ticks": 188
+    },
+    {
+      "pid": 88582,
+      "tid": 88611,
+      "last_cpu": 35,
+      "delta_cpu_ticks": 1
+    },
+    {
+      "pid": 88582,
+      "tid": 88612,
+      "last_cpu": 200,
+      "delta_cpu_ticks": 17
+    }
+  ],
+  "all_thread_cpus_free_definition": "No narrow affinity reservation overlap and no sampled active wide thread last_cpu120..127. Wide allowed masks include120..127 and can migrate later; this is not CPU exclusivity."
+}

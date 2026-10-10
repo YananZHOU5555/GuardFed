@@ -1,0 +1,100 @@
+{
+  "status": "ROOT_READY_A50_READER_CANDIDATES_FOR_AUTHOR_REVIEW",
+  "author_review_only": true,
+  "root_adopted": false,
+  "manuscript_applied": false,
+  "input_reader_root_sha256": "0b46e6ba9a8f30f0b2523cbe7c6947ef47a402e0af55a3ce578e18036c94a511",
+  "input_A50_root_sha256": "2ab91a854691624c79124a5eccbb43efe30541474cb7ef542b76db300554f7c4",
+  "documents": [
+    {
+      "candidate": "rebuttal_integrated_A50_reader_20261010.md",
+      "sha256": "055c68bd89af9ba9f690817fefd9fb7ee472a34eb66ef6994bc48342964857a7",
+      "bytes": 114216,
+      "edit_operations": 10,
+      "forward_and_inverse_bytes_exact": true,
+      "original_comment_count": 24,
+      "original_comment_text_and_order_exact": true,
+      "all_old_number_string_occurrences_preserved": 1308,
+      "added_number_string_occurrences": 86,
+      "all_old_links_preserved": 46,
+      "added_link_occurrences": 5,
+      "all_old_external_URLs_preserved": true,
+      "all_old_scientific_tables_exact": true,
+      "only_P2_pending_row_updated": true,
+      "all_old_prose_preserved_except_declared_historical_labels": true,
+      "front_matter_exact": true
+    },
+    {
+      "candidate": "manuscript_insertions_integrated_A50_reader_20261010.md",
+      "sha256": "0e05635ee03bf98f8cf208bdbcf8d28f99f2ca89cdf292e344ad7be607428eaa",
+      "bytes": 78966,
+      "edit_operations": 6,
+      "forward_and_inverse_bytes_exact": true,
+      "original_comment_count": 0,
+      "original_comment_text_and_order_exact": true,
+      "all_old_number_string_occurrences_preserved": 984,
+      "added_number_string_occurrences": 79,
+      "all_old_links_preserved": 42,
+      "added_link_occurrences": 5,
+      "all_old_external_URLs_preserved": true,
+      "all_old_scientific_tables_exact": true,
+      "only_P2_pending_row_updated": false,
+      "all_old_prose_preserved_except_declared_historical_labels": true
+    }
+  ],
+  "actual_check_status": "PASS_A50_READER_INTEGRATION_FOR_AUTHOR_REVIEW",
+  "read_only_reproduction_exact_to_saved_SELF_CHECK": true,
+  "checker_command": "python -B tmp/rebuttal_A50_reader_integration_20261010/build_and_check.py --check",
+  "checks": {
+    "original_checker_actually_executed": true,
+    "original_comments_exact_order": 24,
+    "old_number_string_occurrences_retained": 2292,
+    "old_link_occurrences_retained": 88,
+    "old_scientific_tables_exact": true,
+    "only_old_P2_table_row_updated": true,
+    "exact_reversible_edit_operations": 16,
+    "mean_SD_pairs_bound_to_adopted_JSON_pointers": 12,
+    "front_matter_exact": true,
+    "new_local_link_targets_SHA_checked": 4,
+    "raw_ASPD_six_seed_reversal_in_SpDFA_and_aggregate": true,
+    "SpDFA_each_view_ACC_positive4_negative6": true
+  },
+  "scope": {
+    "IID_complete_scenes": 5,
+    "matched_pairs": 50,
+    "nonIID_scene_averages": 0,
+    "excluded_partial_id": "minus_A_non-IID_Benign_seed91001",
+    "all_five_nonIID_A_scenes_pending": true,
+    "native_shared_recordwise_equal_not_independent_confirmation": true,
+    "Full_replay": {
+      "CPU": 3,
+      "GPU": 47
+    },
+    "minus_A_replay": {
+      "CPU": 50
+    },
+    "training_cohorts_each_50_cu128": true,
+    "old_A40_numbers_and_environment_historical_only": true
+  },
+  "artifact_SHA256": {
+    "build_and_check.py": "9ef3d3b56516ca35e4e5b95491427e4eb349f81b9e5418cf913c1eb73d83b2a7",
+    "EDIT_MANIFEST.json": "46bf696dc762fd6579b46eb6ff8220c2f1fbacbdf807437dc7fe5e4cf61bdaa3",
+    "FACT_BINDINGS.json": "ceeea3948628ccedc4dd9e7f1dc2e76f32659a64ecaa69bce0b9284ca8e52ca7",
+    "manuscript_insertions_integrated_A50_reader_20261010.md": "0e05635ee03bf98f8cf208bdbcf8d28f99f2ca89cdf292e344ad7be607428eaa",
+    "README.md": "68ce95de68ec25946d769724f03844457c69d599df53b2d0ac1ec21067525e3c",
+    "rebuttal_integrated_A50_reader_20261010.md": "055c68bd89af9ba9f690817fefd9fb7ee472a34eb66ef6994bc48342964857a7",
+    "SELF_CHECK.json": "95b2321241aa7cf3b9734d08e7db2a05026ba527a1bee2c39703aae0a67bc8d7",
+    "SOURCE_PINS.json": "cc59816ab5cd1a715181d68ed8cae2cefd749ecf8f44ab966d30a69a14b7a7c9"
+  },
+  "blocking": [],
+  "limitations": [
+    "Author-review drafts only; root review/adoption remains separate.",
+    "Five non-IID A scenes and other controls remain incomplete.",
+    "Prior validation selection and official-test exposure remain disclosed; final endpoint/final test pending.",
+    "No scientific verifier rerun; adopted tables and paired metadata only.",
+    "External URLs preserved, not reopened."
+  ],
+  "new_CNN_fit_training_SSH_bulk_writes": 0,
+  "canonical_STATE_Git_changes": 0,
+  "science_recomputed": false
+}

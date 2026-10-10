@@ -1,0 +1,178 @@
+--- sealed50/publish_increment50.py
++++ actual_scope50/publish_increment50.py
+@@ -30,7 +30,7 @@
+ ACCEPTED={'native':251,'three_view':251,'FL_new':44,'FL_reuse':4,'gradient_screen':23,
+           'Hybrid_screen':32,'Hybrid_formal_new_accepted':1,'Hybrid_reuse':4}
+ ROLES={'native243','native251','replay240','replay251','A40','A50','reader_clarity','Hybrid1',
+-       'FL44','gradient23','nativePDF','cnn_bridge','exact3_metadata','exact3_independent','current_state'}
++       'FL44','gradient23','nativePDF','cnn_bridge','exact3_metadata','exact3_independent','current_state','exact3_scientific'}
+ FACTS={'native243':{'/total_new_strict_and_offserver':243},'native251':{'/total_new_strict_and_offserver':251},
+  'replay240':{'/cumulative_accepted':240},'replay251':{'/cumulative_accepted':251},
+  'A40':{'/paired_models':40,'/complete_scenes':4},'A50':{'/paired_models':50,'/complete_scenes':5},
+@@ -40,6 +40,7 @@
+  'cnn_bridge':{'/source_adopted':True,'/new_three_view_scientific_results':0,'/science_dispatch_authorized':False},
+  'exact3_metadata':{'/source_members_verified':38,'/new_CNN':0,'/new_fit':0,'/new_acceptance':0,'/SSH':0},
+  'exact3_independent':{'/source_adoptable':True,'/runtime_pass_claimed':False,'/science_dispatch_authorized':False},
++ 'exact3_scientific':{'/interface_records_accepted': 3, '/mechanism_three_view_cutoff_unchanged': 251, '/final_test': False, '/cross_platform_audit_failure_preserved': True, '/root_adoption': True, '/Linux_whole_original_saved_check_pass': True, '/Windows_whole_saved_check_pass': False, '/Windows_original_array_refit_block_pass': True},
+  'current_state':{'/celeba_mechanism_v1/scientific_results_strictly_accepted':251,
+                   '/celeba_mechanism_v1/three_view_new_models_accepted':251}}
+ ns.update(ACCEPTED=ACCEPTED,ROLES=ROLES)
+@@ -73,14 +74,44 @@
+     return ns['original_destination'](name)
+ 
+ 
++def closed_scope(d):
++    prepared=read(HERE/'PREPARED_MANIFEST.json')
++    assert d['scope']==prepared['scope'] and d['accepted']==ACCEPTED
++    assert d['test_started'] is False and d['goal_complete'] is False
++    packet=read(HERE/'FILES_SHA256.json')['files']
++    own=HERE.relative_to(ROOT).as_posix()+'/'
++    fixed={e['source']:e for e in prepared['files']+prepared['parent_recovery_references']}
++    for name,pin in packet.items():
++        fixed[own+name]=dict(source=own+name,destination=destination(own+name),**pin)
++    seal=HERE/'FILES_SHA256.json'
++    fixed[own+seal.name]=dict(source=own+seal.name,destination=destination(own+seal.name),
++                            sha256=sha(seal.read_bytes()),bytes=seal.stat().st_size)
++    allowed=set(fixed)|set(prepared['pending_mutable'])
++    files={e['source']:e for e in d['files']};refs={e['source']:e for e in d['parent_recovery_references']}
++    assert not set(files)&set(refs) and set(files)|set(refs)==allowed
++    assert len(files)==len(d['files']) and len(refs)==len(d['parent_recovery_references'])
++    assert set(d['allowed_paths'])==allowed and len(d['allowed_paths'])==len(allowed)
++    for name,e in fixed.items():
++        actual=(files|refs)[name]
++        assert all(actual[k]==e[k] for k in ('source','destination','sha256','bytes')), 'Closed file differs: '+name
++    assert set(d['bindings'])==ROLES
++    for role,pin in d['bindings'].items():
++        assert pin and pin['path'] in files, 'Every role proof must be a real snapshot file: '+role
++        assert files[pin['path']]['sha256']==pin['sha256']
++        if role!='current_state':assert pin==prepared['bindings'][role], 'Closed role binding differs: '+role
++        else:assert pin['path']==prepared['pending_mutable'][0], 'Exact current-state file required'
++    assert d['exact3_interface_records_separate']==3
++
++
+ def plan(d):
+     assert d['status']=='ROOT_FINAL_CLOSED50_INPUTS_READY' and not d['pending_mutable'], 'Root final mutable freeze required'
+     assert d['parent']==PARENT and d['branch']==BRANCH and d['accepted']==ACCEPTED
+-    assert d['scope']=='CLOSED251_COMPACT_NO_BULK_SOURCE_ONLY_EXACT3'
++    assert d['scope']=='CLOSED251_COMPACT_EXACT3_INTERFACE3_WITH_PRESERVED_CROSS_PLATFORM_AUDIT_FAILURE'
+     assert set(d['bindings'])==ROLES and d['test_started'] is False and d['goal_complete'] is False
+     allowed=d['allowed_paths']; entries=d['files']; refs=d['parent_recovery_references']
+     assert len(allowed)==len(set(allowed)) and len({e['source'] for e in entries})==len(entries)
+-    available={e['source']:e for e in entries+refs}
++    closed_scope(d)
++    available={e['source']:e for e in entries}
+     for role,pin in d['bindings'].items():
+         assert pin and pin['sha256'] and pin['expect'], 'Missing actual role: '+role
+         _,b=source(pin['path'],allowed)
+@@ -102,7 +133,7 @@
+     assert len({e['destination'] for e in files})==len(files)
+     assert sum(e['bytes'] for e in files)<ns['LIMIT']
+     return dict(schema='publication50_frozen_bytes_v1',parent=PARENT,branch=BRANCH,origin=ORIGIN,
+-        scope=d['scope'],accepted=ACCEPTED,test_started=False,goal_complete=False,bindings=d['bindings'],
++        scope=d['scope'],exact3_interface_records_separate=3,accepted=ACCEPTED,test_started=False,goal_complete=False,bindings=d['bindings'],
+         allowed_paths=allowed,files=files,total_bytes=sum(e['bytes'] for e in files),parent_recovery_references=refs)
+ 
+ 
+@@ -116,6 +147,7 @@
+         assert sha(content)==e['sha256']
+         q=snapshot/e['source'];q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(content)
+         assert sha(q.read_bytes())==e['sha256']
++    assert all((snapshot/pin['path']).is_file() for pin in d['bindings'].values())
+     ns['save'](out/'SOURCE_SNAPSHOT.json',{'source_root':str(snapshot),'files':d['files'],'parent':PARENT})
+     d.update(source_root=str(snapshot),source_snapshot_sha256=sha((out/'SOURCE_SNAPSHOT.json').read_bytes()))
+     ns['save'](out/'FROZEN_INPUTS.json',d)
+@@ -136,6 +168,7 @@
+ 
+ def stage(path,expected,name):
+     d=read(path); assert sha(path.read_bytes())==expected
++    closed_scope(d)
+     storage(d['total_bytes']*3)
+     root=Path(d['source_root']).resolve()
+     assert root.is_relative_to(ns['OUTPUT_ROOT'].resolve()) and root.name=='source' and not root.is_symlink()
+@@ -152,6 +185,7 @@
+         assert attr.is_file() and attr.read_bytes()==git('show',PARENT+':.gitattributes'), 'Parent attributes must be present byte-exact'
+         for role,pin in d['bindings'].items():
+             assert pin and pin['expect'] and all(pin['expect'].get(k)==v for k,v in FACTS[role].items())
++            assert (root/pin['path']).is_file(), 'Role must exist in F source snapshot: '+role
+             _,b=frozen_source(pin['path'],d['allowed_paths'])
+             assert sha(b)==pin['sha256']
+             for k,v in pin['expect'].items():assert pointer(json.loads(b),k)==v
+--- sealed50/finalize_spec.py
++++ actual_scope50/finalize_spec.py
+@@ -1,22 +1,33 @@
+-"""Future root-only final binding. Refuses missing exact eight mutable hashes."""
++"""Root binds only the exact eight mutable files; extras are already closed."""
+ from pathlib import Path
+ import argparse,json
+ import publish_increment50 as p
+ HERE=Path(__file__).resolve().parent
+ 
+ 
++def validate_actual(actual,prepared):
++    assert set(actual)=={'status','parent','accepted','mutable_files'}, 'No arbitrary extra names or fields'
++    assert actual['status']=='ROOT_CLOSED50_MUTABLE_BINDINGS_READY'
++    assert actual['parent']==p.PARENT and actual['accepted']==p.ACCEPTED
++    assert set(actual['mutable_files'])==set(prepared['pending_mutable']), 'Exact eight mutable files'
++    for pin in actual['mutable_files'].values():
++        assert set(pin)=={'sha256','bytes'}
++        assert isinstance(pin['sha256'],str) and len(pin['sha256'])==64 and all(c in '0123456789abcdef' for c in pin['sha256'])
++        assert type(pin['bytes']) is int and 0<pin['bytes']<p.ns['LIMIT']
++
++
+ def finalize(actual_path,actual_sha,output):
+     assert output.parent.resolve()==HERE and not output.exists(), 'Fresh owned final spec only'
+     raw=actual_path.read_bytes();assert p.sha(raw)==actual_sha
+     actual=json.loads(raw);d=p.read(HERE/'PREPARED_MANIFEST.json')
+-    assert actual['parent']==p.PARENT and actual['accepted']==p.ACCEPTED
+-    assert set(actual['mutable_files'])==set(d['pending_mutable']), 'Exact eight root-frozen mutable inputs required'
++    validate_actual(actual,d)
+     entries={e['source']:e for e in d['files']}
+     refs={e['source']:e for e in d['parent_recovery_references']}
+     allowed=set(d['allowed_paths'])
+ 
+     def add(name,pin):
+-        allowed.add(name);_,b=p.source(name,sorted(allowed))
++        assert name in allowed, 'Exact closed source paths only'
++        _,b=p.source(name,sorted(allowed))
+         assert p.sha(b)==pin['sha256'] and len(b)==pin['bytes'], 'Actual source changed: '+name
+         entries[name]=dict(source=name,destination=p.destination(name),sha256=pin['sha256'],bytes=pin['bytes'])
+         refs.pop(name,None)
+@@ -24,29 +35,24 @@
+     for name,pin in actual['mutable_files'].items():add(name,pin)
+     state=d['pending_mutable'][0]
+     d['bindings']['current_state']=dict(path=state,sha256=actual['mutable_files'][state]['sha256'],expect=p.FACTS['current_state'])
+-    # Publish this source packet exactly after it has been sealed; no self-referential final spec.
++    # This packet's sealed members are the sole additional permitted names.
+     seal=HERE/'FILES_SHA256.json';packet=p.read(seal)
+-    for rel,pin in packet['files'].items():
+-        name=HERE.relative_to(p.ROOT).as_posix()+'/'+rel
+-        add(name,pin)
+-    name=seal.relative_to(p.ROOT).as_posix()
+-    add(name,{'sha256':p.sha(seal.read_bytes()),'bytes':seal.stat().st_size})
+-    for extra in actual.get('adopted_extras',[]):
+-        root=extra['root_binding'];allowed.add(root['path'])
+-        _,b=p.source(root['path'],sorted(allowed));assert p.sha(b)==root['sha256'] and root['expect']
+-        for k,v in root['expect'].items():assert p.pointer(json.loads(b),k)==v
+-        add(root['path'],{'sha256':root['sha256'],'bytes':len(b)})
+-        for e in extra['files']:add(e['source'],e)
++    own=HERE.relative_to(p.ROOT).as_posix()+'/'
++    allowed.update(own+rel for rel in packet['files']);allowed.add(own+seal.name)
++    for rel,pin in packet['files'].items():add(own+rel,pin)
++    add(own+seal.name,{'sha256':p.sha(seal.read_bytes()),'bytes':seal.stat().st_size})
++    role_paths={pin['path'] for pin in d['bindings'].values()}
++    assert role_paths<=set(entries), 'All16 role proofs must be carried as files'
+     p.storage()
+     parent_paths=set(p.git('ls-tree','-r','--name-only','-z',p.PARENT).decode().split('\0'))-{''}
+     for name,e in list(entries.items()):
+-        if e['destination'] in parent_paths:
++        if name not in role_paths and e['destination'] in parent_paths:
+             old=p.git('show',p.PARENT+':'+e['destination'])
+             if p.sha(old)==e['sha256'] and len(old)==e['bytes']:
+                 refs[name]=dict(e,parent_commit=p.PARENT);del entries[name]
+     d.update(status='ROOT_FINAL_CLOSED50_INPUTS_READY',pending_mutable=[],files=sorted(entries.values(),key=lambda e:e['source']),
+              parent_recovery_references=sorted(refs.values(),key=lambda e:e['source']),allowed_paths=sorted(allowed),
+-             root_actual_input_sha256=actual_sha,adopted_extras=actual.get('adopted_extras',[]))
++             root_actual_input_sha256=actual_sha)
+     result=p.plan(d)
+     p.ns['save'](output,d)
+     return {'status':'ROOT_ACTUAL_SPEC_READY_NOT_FROZEN_OR_STAGED','path':str(output),'sha256':p.sha(output.read_bytes()),

@@ -1,0 +1,70 @@
+{
+  "status": "ROOT_A50_FIVE_COMPLETE_IID_SCENE_THREE_VIEW_TABLE_ADOPTED",
+  "utc": "2026-10-10T11:49:59.592335+00:00",
+  "root_adoption": true,
+  "canonical_table": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md",
+  "source_candidate": "tmp/celeba_mechanism_A50_IID_candidate_20261010",
+  "source_seal_sha256": "0600c7ac5d04f8be45c9acf20cc00bb6162f618b46340fd11b6a3619dbf52f70",
+  "source_acceptance_path": "tmp/celeba_mechanism_remaining620_after240_root_adoption_20261010/ROOT_ADOPTION.json",
+  "source_acceptance_sha256": "edd16e71d6fef9f6e2fc7fd15a7b824d2dfb2a7f809290990878b23477a1e838",
+  "source_index_sha256": "fd1531be09ccaa90190e174dc46296632023db38fdfc11ed249c1e188310c5e6",
+  "preserved_records": 100,
+  "paired_models": 50,
+  "complete_scenes": 5,
+  "mean_SD_scalars_recomputed": 972,
+  "per_scene_scalars": 810,
+  "seed_first_scalars": 162,
+  "display_cells": 486,
+  "metrics_from_group_counts": 900,
+  "base_integer_confusion_counts_checked": 2400,
+  "old80_record_bytes_order_exact": true,
+  "old648_scalars_exact": true,
+  "old324_cells_exact": true,
+  "actual_root_command": "python -B tmp/celeba_mechanism_A50_IID_candidate_20261010/verify_saved.py",
+  "actual_root_command_exit": 0,
+  "actual_root_verifier_sha256": "f7eeafd71a79e3e64af7e61921adf5bfa9299d1b791b2ecd270a71a65da3e20a",
+  "actual_root_output_matches_saved": true,
+  "independent_review_path": "tmp/celeba_mechanism_A50_independent_review_20261010/REVIEW.json",
+  "independent_review_sha256": "fe1f4707e5d22110d6cd1db9f7ad0aa2dec1e85da3da5ad3517d7313ce3f5b24",
+  "replay_devices": {
+    "Full": {
+      "cpu": 3,
+      "cuda:0": 47
+    },
+    "minus_A": {
+      "cpu": 50
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 50
+    },
+    "minus_A": {
+      "2.11.0+cu128": 50
+    }
+  },
+  "files_sha256": {
+    "records.json": "62b45ae8b970b76e9ed5932626dd6e69f448f164bad433d3c05ebeb8d66de9e7",
+    "tables.json": "0b7d14bef8db67f5f99eca32d74e11517930bd4d2a8a022fb060c8e88656aa94",
+    "IID_SEED_FIRST.json": "ce6088b23dd0e2181e83393510075a919dc52719d4b654f70a29205d398b5baf",
+    "TABLES.md": "0a970407555503daa5666e1b09221c18163c738e7413030c921fb4931caa4f55",
+    "TABLES.tex": "a9a12eb9232410c068d8d0db0c05159e87b1aff3313539f3e1b8707a9ff302e5",
+    "SUMMARY.json": "cad6fb493365df1e88ada8c56cdb9ab72198ec33e18b96d6281b84f21f2e9389",
+    "SOURCE_BINDINGS.json": "f062b500cf5e4c4834a1dd3204e80c2b621f7833b505806ccbfc32765eaabda5",
+    "SAVED_VERIFICATION.json": "a572489df503d8f52730ce00b886599863de39f66d01ec9a46a0db807bda940c",
+    "DIRECTIONS.json": "e141aedc183c7af502035f51ee6417cd3ea1ea8b5f8a36b327ee56386b0dfa38",
+    "REPORT.md": "e8b46fde36b80b4569576b2f78b464a964ea75bcc0db876f233e633b4f2d3478"
+  },
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "aggregate_scope": "Five IID scenes; mean within seed first",
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "test": false,
+  "primary_endpoint_selected": false,
+  "limitations": "Validation only; mixed replay devices, prior selection/test exposure and all tradeoffs retained. Five non-IID A scenes and other controls remain incomplete. No necessity, significance, causal-isolation or final-test claim. TeX is an uncompiled fragment; sources/checker stay at the sealed candidate path."
+}

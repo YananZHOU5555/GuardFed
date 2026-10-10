@@ -1,0 +1,218 @@
+--- tmp\celeba_hybrid_seven_canary_closure_20261010\v2\collect_once.py
++++ collect_once.py
+@@ -1,12 +1,12 @@
+-"""Future CPU107-only quiescent seven-canary acceptance/archive; no service mutations."""
++"""Future CPU107-only quiescent first-fullcoverage acceptance/archive; no service mutations."""
+ from pathlib import Path
+ import argparse,hashlib,json,os,subprocess,sys,tarfile,time,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+-from verify_saved import sha,verify,PACKAGE
++from verify_saved import sha,verify,PACKAGE,IDS,DELTA
+ HERE=Path(__file__).resolve().parent
+ STAGE=Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage')
+ REPO=Path('/workspace/GuardFed-celeba-expanded')
+-SERVICE='guardfed_celeba_hybrid_fullcoverage_canary'
++SERVICE='guardfed_celeba_hybrid_fullcoverage'
+ def save(p,v):
+  with p.open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+ def main():
+@@ -15,7 +15,8 @@
+  assert sha(HERE/'FILES_SHA256.json')==a.source_seal_sha256
+  seal=json.loads((HERE/'FILES_SHA256.json').read_bytes())
+  for n,pin in seal['files'].items():assert sha(HERE/n)==pin['sha256']
+- expected=Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/seven_canary_closure/output')
++ expected=Path(DELTA['remote_output'])
++ assert expected.is_relative_to(STAGE.parent) and expected.name=='output'
+  assert a.out==expected and a.out.parent.resolve()==a.out.parent and not a.out.exists() and not a.out.is_symlink()
+  a.out.mkdir()
+  try:
+@@ -27,7 +28,7 @@
+    try:
+     argv=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+     if not argv[0]:continue
+-    assert not any(str(STAGE) in arg for arg in argv),'Stage producer still present'
++    assert not (str(STAGE/'run_one.py') in argv and any(ID in argv for ID in IDS)),'Selected producer still present'
+     for task in (proc/'task').iterdir():
+      try:aff=os.sched_getaffinity(int(task.name))
+      except ProcessLookupError:continue
+@@ -38,13 +39,21 @@
+      owners.append({'pid':int(proc.name),'argv':argv,'declared_threads':threads})
+    except (ProcessLookupError,FileNotFoundError):continue
+   r=subprocess.run(['supervisorctl','status',SERVICE],capture_output=True,text=True,timeout=30)
+-  assert r.stdout.split()[1]=='EXITED',r.stdout
++  assert r.stdout.split()[1]=='RUNNING',r.stdout
+   raw={n:Path('/sys/fs/cgroup',n).read_text() for n in ('cpu.max','memory.current','memory.max','memory.events')}
+   quota,period=raw['cpu.max'].split();assert quota!='max' and nominal<=int(quota)/int(period)
+   assert raw['memory.max'].strip()!='max' and int(raw['memory.max'])-int(raw['memory.current'])>=8*1024**3
+-  save(a.out/'PREFLIGHT.json',{'time_unix':time.time(),'service':{'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr},'python_owners':owners,'nominal_cpu_threads':nominal,'raw_cgroup':raw,'no_producer':True})
++  save(a.out/'PREFLIGHT.json',{'time_unix':time.time(),'service':{'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr},'python_owners':owners,'nominal_cpu_threads':nominal,'raw_cgroup':raw,'selected_producer_quiescent':True,'other_producers_permitted':True})
+   assert sha(STAGE/'PACKAGE_SHA256.json')==PACKAGE
+   bound=json.loads((HERE/'ROOT_BOUND_ADOPTION.json').read_bytes());assert bound['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED' and bound['package_sha256']==PACKAGE and (bound['new'],bound['reused'],bound['canaries'])==(96,4,7)
++  closure=json.loads((HERE/'ROOT_SEVEN_CANARY_CLOSURE.json').read_bytes());startup=json.loads((HERE/'ROOT_COVERAGE_STARTUP.json').read_bytes())
++  assert closure['status']=='ROOT_SEVEN_HYBRID_CANARIES_OFFSERVER_ADOPTED' and closure['package_sha256']==PACKAGE
++  assert startup['status']=='ROOT_ACTUAL_HYBRID96_VALID_COVERAGE_STARTUP_AND_ROUNDS_VERIFIED' and startup['package_sha256']==PACKAGE
++  assert sha(HERE/'ROOT_SEVEN_CANARY_CLOSURE.json')==startup['canary_closure_sha256']
++  assert sha(STAGE/'GATE_ACCEPTANCE.json')==closure['gate_sha256'] and sha(STAGE/'EXECUTION_AUTHORIZATION.json')==startup['authorization_sha256']
++  q=json.loads((STAGE/'queue_progress.json').read_bytes());assert not q['failed']
++  for ID in IDS:
++   progress=json.loads((STAGE/'runs'/ID/'progress.json').read_bytes());assert progress['round']==70 and progress['id']==ID and not Path('/proc',str(progress['pid'])).exists()
+   sys.path.insert(0,str(STAGE));import common as sc
+   protocol,manifest=sc.local_identity();sc.repo_identity(REPO,protocol);before=sc.read(STAGE/'full_scope.json')['protected_source_hashes']
+   import torch
+@@ -58,9 +67,11 @@
+   paths={('stage/'+name):STAGE/name for name in json.loads((STAGE/'PACKAGE_SHA256.json').read_bytes())['files']}
+   paths['stage/PACKAGE_SHA256.json']=STAGE/'PACKAGE_SHA256.json'
+   for name in ('GATE_ACCEPTANCE.json','EXECUTION_AUTHORIZATION.json'):paths['stage/'+name]=STAGE/name
+-  for folder in ('gate_runs','gate_logs'):
+-   for path in (STAGE/folder).rglob('*'):
++  for ID in IDS:
++   for path in (STAGE/'runs'/ID).rglob('*'):
+     if path.is_file():paths['stage/'+path.relative_to(STAGE).as_posix()]=path
++   log=STAGE/'logs'/(ID+'.log')
++   if log.is_file():paths['stage/'+log.relative_to(STAGE).as_posix()]=log
+   legacy=Path(sc.read(STAGE/'BINDINGS.json')['original_screen'])/'driver.py'
+   paths['legacy_source/driver.py']=legacy
+   auth=sc.read(STAGE/'EXECUTION_AUTHORIZATION.json');resource=Path(auth['resource_receipt_path'])
+@@ -73,13 +84,13 @@
+   for name in seal['files']:paths['closure_source/'+name]=HERE/name
+   paths['closure_source/FILES_SHA256.json']=HERE/'FILES_SHA256.json'
+   inventory={n:{'sha256':sha(path),'bytes':path.stat().st_size} for n,path in sorted(paths.items())}
+-  save(a.out/'MEMBERS.json',{'files':inventory,'package_sha256':PACKAGE,'scope':'seven_same_horizon_3round_canaries'})
+-  archive=a.out/'seven_canaries.tar.gz'
++  save(a.out/'MEMBERS.json',{'files':inventory,'package_sha256':PACKAGE,'scope':'fixed_delta_70round_valid_only'})
++  archive=a.out/'delta.tar.gz'
+   with tarfile.open(archive,'x:gz',dereference=True) as tar:
+    for n,path in sorted(paths.items()):
+     assert sha(path)==inventory[n]['sha256'];tar.add(path,arcname=n,recursive=False);assert sha(path)==inventory[n]['sha256']
+    tar.add(a.out/'MEMBERS.json',arcname='MEMBERS.json',recursive=False)
+-  save(a.out/'BACKUP_RECEIPT.json',{'status':'REMOTE_STRICT_BACKUP_READY_NOT_OFFSERVER','archive_sha256':sha(archive),'inventory_sha256':sha(a.out/'MEMBERS.json'),'content_members':len(paths),'archive_members':len(paths)+1,'package_sha256':PACKAGE,'gate_sha256':result['gate_sha256'],'source_seal_sha256':a.source_seal_sha256,'scope':'seven_same_horizon_3round_canaries','formal_table_samples':0,'CNN_calls':0})
++  save(a.out/'BACKUP_RECEIPT.json',{'status':'REMOTE_STRICT_BACKUP_READY_NOT_OFFSERVER','archive_sha256':sha(archive),'inventory_sha256':sha(a.out/'MEMBERS.json'),'content_members':len(paths),'archive_members':len(paths)+1,'package_sha256':PACKAGE,'gate_sha256':result['gate_sha256'],'source_seal_sha256':a.source_seal_sha256,'scope':'fixed_delta_70round_valid_only','formal_table_samples':len(IDS),'CNN_calls':0,'accepted_new_ids':IDS,'delta_scope_sha256':sha(HERE/'DELTA_SCOPE.json'),'reused_models_repacked':0,'canary_models_repacked':0})
+   print(json.dumps(sc.read(a.out/'BACKUP_RECEIPT.json')))
+  except BaseException as e:
+   save(a.out/'FAILURE.json',{'error':repr(e),'traceback':traceback.format_exc(),'automatic_retry':False});raise
+--- tmp\celeba_hybrid_seven_canary_closure_20261010\v2\verify_saved.py
++++ verify_saved.py
+@@ -22,18 +22,30 @@
+  assert restored==original
+  return text
+ 
++DELTA=read(Path(__file__).resolve().parent/'DELTA_SCOPE.json')
++IDS=DELTA['ids']
++assert IDS and len(IDS)==len(set(IDS)) and DELTA['no_later_completions'] is True
++assert all(isinstance(x,str) and '/' not in x and '\\' not in x for x in IDS)
++
+ def verify(stage,server_runtime,legacy_source=None,offserver=False):
+  stage=Path(stage).resolve();assert sha(stage/'PACKAGE_SHA256.json')==PACKAGE and sha(stage/'run_canaries.py')==CANARIES
+  package=read(stage/'PACKAGE_SHA256.json')
+  for n,h in package['files'].items():assert sha(stage/n)==h
+- assert not (stage/'GATE_FAILURE.json').exists() and not list((stage/'gate_runs').rglob('failure*.json'))
+- binding=read(stage/'BINDINGS.json');manifest=read(stage/'manifest.json');scope=read(stage/'gate_scope.json')
+- gate=read(stage/'GATE_ACCEPTANCE.json')
+- assert gate['status']=='SEVEN_HYBRID_CANARIES_STRICT_PASS_BACKUP_PENDING' and gate['package_sha256']==PACKAGE and gate['scientific70records']==0 and gate['test'] is False
+- assert gate['accepted_ids']==[e['id'] for e in manifest['preflight_jobs']] and len(gate['accepted_ids'])==len(set(gate['accepted_ids']))==7
+- assert scope['rounds']==3 and scope['jobs']==manifest['preflight_jobs']
+- actual={q.relative_to(stage).as_posix():sha(q) for name in ('gate_runs','gate_logs') for q in (stage/name).rglob('*') if q.is_file()}
+- assert actual==gate['artifact_hashes'],'Exact final output/log inventory mismatch'
++ binding=read(stage/'BINDINGS.json');manifest=read(stage/'manifest.json');scope=read(stage/'full_scope.json')
++ assert scope['rounds']==70 and scope['jobs']==manifest['jobs'] and len(scope['jobs'])==96
++ selected=[e for e in scope['jobs'] if e['id'] in IDS]
++ assert [e['id'] for e in selected]==IDS and not set(IDS)&{e['id'] for e in manifest['reused_jobs']}
++ prior=[]
++ if DELTA['accepted_before']:
++  assert DELTA['prior_offserver_path']=='PRIOR_OFFSERVER.json'
++  prior_path=Path(__file__).resolve().parent/DELTA['prior_offserver_path']
++  assert sha(prior_path)==DELTA['prior_offserver_sha256']
++  previous=read(prior_path);assert previous['status']=='PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON'
++  prior=previous['accepted_ids'];assert len(prior)==DELTA['accepted_before'] and not set(prior)&set(IDS)
++ else:assert DELTA['accepted_before']==0 and DELTA['prior_offserver_path'] is None and DELTA['prior_offserver_sha256'] is None
++ assert all(not list((stage/e['output']).rglob('failure*.json')) for e in selected)
++ gate=read(stage/'GATE_ACCEPTANCE.json');assert gate['package_sha256']==PACKAGE
++ assert gate['status']=='SEVEN_HYBRID_CANARIES_STRICT_PASS_BACKUP_PENDING'
+  assert server_runtime['torch']=='2.11.0+cu128' and server_runtime['cuda_build']=='12.8' and server_runtime['threads']==1
+  assert server_runtime['gpu_uuid']==binding['gpu_uuid'] and server_runtime['gpu_index']==0 and server_runtime['gpu_name_for_original_checker']=='NVIDIA GeForce RTX 5090'
+  sys.path.insert(0,str(stage))
+@@ -43,7 +55,7 @@
+  if not offserver:assert torch.__version__==server_runtime['torch'] and torch.version.cuda==server_runtime['cuda_build']
+  protocol=read(stage/'ORIGINAL_PROTOCOL.json')
+  identity.validate_grid([read(stage/e['job']) for e in manifest['jobs']],[read(stage/e['job']) for e in manifest['preflight_jobs']],manifest['reused_jobs'])
+- for e in manifest['preflight_jobs']:assert sha(stage/e['job'])==e['job_sha256'];identity.validate_job(read(stage/e['job']),protocol,binding['selected_recipe'])
++ for e in selected:assert sha(stage/e['job'])==e['job_sha256'];identity.validate_job(read(stage/e['job']),protocol,binding['selected_recipe'])
+  bindings=dict(binding)
+  if legacy_source is not None:bindings['original_screen']=str(Path(legacy_source).resolve())
+  old=Path(bindings['original_screen']);assert sha(old/'driver.py')==DRIVER
+@@ -54,10 +66,9 @@
+  scope=dict(scope,runtime_cuda_visible_device='0',runtime_gpu_uuid=binding['gpu_uuid'])
+  _,checked,compare=factory(body,scope)
+  records=[]
+- for entry in scope['jobs']:
++ for entry in selected:
+   result=checked(entry,scope);assert result is not None
+   prov=read(stage/entry['output']/'provenance.json');assert prov['gpu_uuid']==server_runtime['gpu_uuid'] and prov['gpu_name']==server_runtime['gpu_name_for_original_checker']
+   records.append(dict(id=entry['id'],metrics=result['metrics'],checkpoint_sha256=sha(stage/entry['output']/'model.pt'),acceptance_sha256=sha(stage/entry['output']/'acceptance.json')))
+- pairs=compare(dict(scope,jobs=scope['jobs'][:4]));assert len(pairs)==2 and pairs==gate['pairs']
+  assert not torch.cuda.is_initialized()
+- return dict(status='PASS_SAVED_ORIGINAL_COMPARISON',package_sha256=PACKAGE,original_compare_source_sha256='69902e93528ab7f26b1347046d832b1cfd67ccb3f915de806452def1f4b1375b',canary_runner_sha256=CANARIES,gate_sha256=sha(stage/'GATE_ACCEPTANCE.json'),accepted_new=7,same_horizon_pairs=2,total_runs=7,rounds=3,pair_ids=pairs,records=records,artifact_count=len(actual),formal_table_samples=0,CNN_calls=0,server_runtime=server_runtime,local_verification_runtime=dict(python=sys.version,torch=torch.__version__,cuda_build=torch.version.cuda),local_CUDA_initialized=False,runtime_statement='Original saved scientific/writer checks and exact pair function; current-host runtime queries bound to actual server receipt. Not training/runtime equivalence.')
++ return dict(status='PASS_SAVED_ORIGINAL_FULLCOVERAGE_RECORD',package_sha256=PACKAGE,original_checked_source_sha256=hashlib.sha256(ast.get_source_segment((stage/'body.py').read_text('utf8'),next(n for n in ast.parse((stage/'body.py').read_text('utf8')).body if isinstance(n,ast.FunctionDef) and n.name=='checked')).encode()).hexdigest(),gate_sha256=sha(stage/'GATE_ACCEPTANCE.json'),accepted_new=len(IDS),accepted_new_ids=IDS,accepted_before=len(prior),accepted_ids=prior+IDS,rounds=70,records=records,formal_table_samples=len(IDS),reused_models_repacked=0,canary_models_repacked=0,CNN_calls=0,server_runtime=server_runtime,local_verification_runtime=dict(python=sys.version,torch=torch.__version__,cuda_build=torch.version.cuda),local_CUDA_initialized=False,runtime_statement='Original saved scientific/writer checker; three host queries bound to actual server receipt, no runtime equivalence claim.')
+--- tmp\celeba_hybrid_seven_canary_closure_20261010\v2\restore_verify.py
++++ restore_verify.py
+@@ -3,17 +3,19 @@
+ import argparse,hashlib,json,os,sys,tarfile,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+ os.environ.update(CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
+-from verify_saved import sha,verify,PACKAGE
++from verify_saved import sha,verify,PACKAGE,IDS,DELTA
+ from storage import guard
+ def write(p,v):
+  with p.open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+ def main():
+  p=argparse.ArgumentParser();p.add_argument('--archive',type=Path,required=True);p.add_argument('--receipt',type=Path,required=True);p.add_argument('--receipt-sha256',required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
++ assert a.archive.resolve().is_relative_to(Path(DELTA['local_bulk_root']).resolve()) and a.out.resolve().is_relative_to(Path(DELTA['local_bulk_root']).resolve())
+  storage=guard(a.archive,a.out)
+  assert sha(a.receipt)==a.receipt_sha256
+  receipt=json.loads(a.receipt.read_bytes())
+  assert receipt['status']=='REMOTE_STRICT_BACKUP_READY_NOT_OFFSERVER' and receipt['package_sha256']==PACKAGE
+- assert receipt['scope']=='seven_same_horizon_3round_canaries' and receipt['formal_table_samples']==0
++ assert receipt['scope']=='fixed_delta_70round_valid_only' and receipt['formal_table_samples']==len(IDS) and receipt['accepted_new_ids']==IDS
++ assert sha(Path(__file__).resolve().parent/'DELTA_SCOPE.json')==receipt['delta_scope_sha256']
+  assert sha(a.archive)==receipt['archive_sha256']
+  assert not a.out.exists() and not a.out.is_symlink();a.out.mkdir()
+  try:
+@@ -33,13 +35,14 @@
+     with target.open('xb') as output:
+      for chunk in iter(lambda:source.read(8*1024**2),b''):output.write(chunk)
+     if member.name!='MEMBERS.json':assert sha(target)==pins[member.name]['sha256']
++  assert sha(a.out/'closure_source/DELTA_SCOPE.json')==receipt['delta_scope_sha256']
+   remote=json.loads((a.out/'evidence/REMOTE_STRICT.json').read_bytes())
+-  assert remote['status']=='PASS_SAVED_ORIGINAL_COMPARISON' and remote['source_data_before']==remote['source_data_after']
++  assert remote['status']=='PASS_SAVED_ORIGINAL_FULLCOVERAGE_RECORD' and remote['source_data_before']==remote['source_data_after']
+   assert remote['gate_sha256']==receipt['gate_sha256'] and remote['package_sha256']==PACKAGE
+   assert remote['server_runtime']['CPU']==[107] and remote['local_CUDA_initialized'] is False
+   local=verify(a.out/'stage',remote['server_runtime'],a.out/'legacy_source',offserver=True)
+-  for key in ('package_sha256','original_compare_source_sha256','canary_runner_sha256','gate_sha256','accepted_new','same_horizon_pairs','total_runs','rounds','pair_ids','artifact_count','formal_table_samples','records'):assert local[key]==remote[key],key
+-  write(a.out/'OFFSERVER_VERIFICATION.json',{'status':'PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON','receipt_sha256':a.receipt_sha256,'archive_sha256':sha(a.archive),'inventory_sha256':receipt['inventory_sha256'],'member_count':len(names),'local':local,'remote_runtime':remote['local_verification_runtime'],'training_runtime_unchanged':True,'source_data_rehashed_on_server_only':True,'CNN_calls':0,'formal_table_samples':0,'storage_guard':storage})
++  for key in ('package_sha256','original_checked_source_sha256','gate_sha256','accepted_new','accepted_new_ids','accepted_before','accepted_ids','rounds','formal_table_samples','records'):assert local[key]==remote[key],key
++  write(a.out/'OFFSERVER_VERIFICATION.json',{'status':'PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON','receipt_sha256':a.receipt_sha256,'archive_sha256':sha(a.archive),'inventory_sha256':receipt['inventory_sha256'],'member_count':len(names),'local':local,'remote_runtime':remote['local_verification_runtime'],'training_runtime_unchanged':True,'source_data_rehashed_on_server_only':True,'CNN_calls':0,'formal_table_samples':len(IDS),'accepted_ids':local['accepted_ids'],'accepted_total':len(local['accepted_ids']),'storage_guard':storage})
+   print(json.dumps({'status':'PASS','proof_sha256':sha(a.out/'OFFSERVER_VERIFICATION.json'),'archive_sha256':sha(a.archive)}))
+  except BaseException as e:
+   write(a.out/'LOCAL_FAILURE.json',{'error':repr(e),'traceback':traceback.format_exc(),'automatic_retry':False});raise
+--- tmp\celeba_hybrid_seven_canary_closure_20261010\v2\storage.py
++++ storage.py
+@@ -1,14 +1,15 @@
+ """Fresh F-volume guard before downloading or restoring bulk; no internal-drive fallback."""
+ from pathlib import Path
+ import json,subprocess
+-BASE=Path('F:/YananResearchStorage/GuardFed/hybrid_seven_canary_20261010')
++BASE=Path(json.loads((Path(__file__).resolve().parent/'DELTA_SCOPE.json').read_bytes())['local_bulk_root'])
++assert BASE.resolve().is_relative_to(Path('F:/YananResearchStorage/GuardFed').resolve())
+ def guard(archive,out):
+     for p in (Path(archive),Path(out)):
+         if not p.resolve().is_relative_to(BASE.resolve()):raise ValueError('Bulk must stay in dedicated F directory')
+     r=subprocess.run(['powershell','-NoProfile','-Command',"Get-Volume -DriveLetter F | Select-Object FileSystemLabel,Size,SizeRemaining,HealthStatus | ConvertTo-Json -Compress"],capture_output=True,text=True,check=True)
+     volume=json.loads(r.stdout)
+     if volume['FileSystemLabel']!='Yanan 2TB' or volume['HealthStatus']!='Healthy':raise ValueError('Expected healthy Yanan 2TB F volume')
+-    # Seven small CNN models plus full stage artifacts; conservative fixed free-space floor.
++    # Selected closed CNN records plus frozen stage identity; conservative fixed free-space floor.
+     if volume['SizeRemaining']<5*1024**3:raise ValueError('F free space below5GiB; no fallback')
+     return volume
+-if __name__=='__main__':print(json.dumps(guard(BASE/'seven_canaries.tar.gz',BASE/'verified')))
++if __name__=='__main__':print(json.dumps(guard(BASE/'delta.tar.gz',BASE/'verified')))
