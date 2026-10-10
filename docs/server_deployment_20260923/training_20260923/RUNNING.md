@@ -1,50 +1,54 @@
 # CURRENT: GuardFed返修实验
 
-本段更新时间：2026-10-10T22:00:44.639533+00:00。服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。sglang已按授权停止，文件保留。
+本段更新时间：2026-10-10T22:42:03.307776+00:00。服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。sglang已按授权停止，文件保留。
 
 ## 已接纳结果与实时观测
 
-| 阶段 | 原strict、离机SHA及root验收 | 分批实测（UTC见格内，不代替验收） |
+| 阶段 | 原strict、离机SHA及root验收 | 22:39:26 UTC实测（不代替验收） |
 |---|---:|---|
-| 机制训练 | 333/800新增；100 Full另复用 | 21:44:05：完成336、活动8、等待456、失败0；活动第9–27轮 |
-| 机制三视图 | 330终轮checkpoint：U100/C100/A100/F30 | 21:44:05：remaining620远端闭合156，与离机接受150单列 |
-| FLGMM完整覆盖 | 67/96新增；4screen另复用 | 21:44:05：新增终轮73，另复用4screen；三视图接受71，七完整场景表70，另保留一个未齐场景记录 |
-| Fed-NGA/Huber搜索 | 46/64 | 21:44:05：终轮59/64；未完成全部搜索或选择recipe |
-| 组合基线覆盖 | 12/96新增；4screen另复用 | 21:44:05：新增终轮17，另复用4screen；IID Benign三视图十seed表已接纳 |
+| 机制训练 | 341/800新增；100 Full另复用 | 完成344、活动8、等待448、失败0；活动第5–23轮 |
+| 机制三视图 | 340终轮checkpoint：U100/C100/A100/F40 | remaining620远端闭合164，离机接受160另列 |
+| FLGMM完整覆盖 | 67/96新增；4screen另复用 | 新增终轮77；三视图接受71，七完整场景表70，另保留一个未齐场景记录 |
+| Fed-NGA/Huber搜索 | 46/64 | 终轮62/64；未完成全部搜索或选择recipe |
+| 组合基线覆盖 | 12/96新增；4screen另复用 | 新增终轮19；IID Benign三视图十seed表已接纳 |
 
-21:44:05资源实测：双GPU利用率100/100%，温度64/62°C，RecoveryAction None；cgroup内存77.30/519.17GB、OOM0，磁盘余1.060TB。五队列服务、worker身份与相对增长通过；small source/data hash未变，大图像只核stat及历史全量SHA。增长记录：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T2144.json。两采样间整个cgroup平均使用13.69/122.88 CPU核，不能称GuardFed专属效率或持续占用。这是一次采样，不能称连续占用或完成全部实验；固定方法、seed、并发、FP32和统计口径不变。
+同次资源实测：双GPU利用率100/100%，温度66/62°C，显存6040/6020MiB，RecoveryAction None；cgroup内存76.45/519.17GB、OOM0，磁盘余1.060TB。五队列服务与worker身份通过，small source/data hash未变，大图像只核stat及历史全量SHA。记录：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json。瞬时采样不证明持续占用或完成全部实验，冻结方法、seed、并发、FP32和统计口径保持。
 
-机制native已另接纳13项：去F的IID FedSA完整10seed，加S-DFA的91002/91003/91004三项部分结果；总333/800。134归档成员SHA及终轮/配置/源码/数据/checkpoint身份通过，旧420记录不变；其中FedSA10三视图已增量接纳，累计330；另外三项S-DFA native仍不计作三视图完成。native333及views330均在Git61截止后形成，下一增量发布待纳入；F盘与服务器原件已保留。
+本批机制native新接纳8项：补齐去F的IID S-DFA十seed，并接纳Sp-DFA seed91001，总341/800。94归档成员SHA及终轮/配置/源码/数据/checkpoint身份通过，旧433记录和47条恢复链前缀不变，当前48条链已索引。S-DFA10保存数组随后核验并接纳，三视图330→340；Sp-DFA一项native尚不计为三视图完成。原始大文件留服务器及F盘，增量证据待Git63发布。
 
-## 新补齐的三个场景F消融表
+## 新补齐的四个IID场景F消融表
 
-docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_three_scenes30_20261011/TABLES.md
+docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_four_scenes40_20261011/TABLES.md
 
-IID Benign/F Flip/FedSA三个完整场景，每场景10共享seed；raw/native/shared三视图、固定10/9/6面板。60记录/30配对，独立核算486均值SD标量、243展示格、540计数派生指标、1440基础计数；旧40对象、324标量及162展示值原样保留。表格制作没有新增推理、拟合或训练。
+IID Benign/F Flip/FedSA/S-DFA各10共享seed；raw/native/shared三视图及固定10/9/6面板。80记录/40配对，root独立核648均值SD标量、324展示格、720计数派生指标和1920基础计数；旧60记录、486标量、243展示值原样保留。表格制作没有新增拟合、CNN推理或训练。
 
-F Flip十seed native：Full为ACC88.391±0.626%、AEOD0.01068±0.00958、ASPD0.06068±0.01026；去F为88.325±1.212%、0.01439±0.00651、0.06600±0.01819。9/6seed的准确率差值反向，AEOD/ASPD差值仍支持Full；Benign存在另一组取舍。全部方向和负结果保留，不称F在所有指标不可或缺、显著或因果隔离。现为三个IID场景，其他七个F场景和四类其他控制未齐。FedSA十seed去F较Full的配对均值为ACC+0.136pp、AEOD+0.00322、ASPD+0.00393；六seed native/shared的ASPD差值反转为−0.00560。全部结果保留。native/shared相同不作独立确认；混合设备与选择历史仍披露。
+S-DFA十seed native：Full为ACC88.689±0.809%、AEOD0.00769±0.00463、ASPD0.06377±0.00697；去F为88.412±1.202%、0.01054±0.00697、0.06941±0.01477。去F减Full配对均值为ACC−0.277pp、AEOD+0.00284、ASPD+0.00564；raw/native/shared的10/9/6九个面板三指标均值方向均支持Full，不作显著性、普遍必要性或单独因果主张。
 
-FL新增10记录已通过原生指标复核、Linux原校准检查、F盘归档及成员SHA、Windows零拟合计数审计，并由root采用；旧61记录原样保留。七完整场景表按同一10/9/6种子面板展示，另保留一个未齐场景记录。non-IID F Flip十seed native为ACC89.28±0.98%、AEOD0.0525±0.0077、ASPD0.1185±0.0068；共享校准为88.90±1.04%、0.0091±0.0073、0.0713±0.0111，存在准确率代价。旧Windows重拟合失败、五次资源拒绝和采样审计浮点差异均保留，不宣称跨平台逐位重校准一致。表：outputs/guardfed_tables/celeba_flgmm_seven_scenes70_20261011/TABLES.md。
+其他场景的取舍保留：F Flip的9/6seed准确率差值反向；FedSA十seed去F准确率均值+0.136pp，六seed native/shared的ASPD差值−0.00560；Benign也有取舍。native/shared相同不作独立确认，混合设备、环境和选择史均披露。F仍缺六场景60项，另四类机制控制400项：共460三视图未接纳；native未接纳459项，不能称这些任务全部尚未训练。
 
-Hybrid IID Benign三视图现已补齐十共享seed：八个既有覆盖checkpoint、一个原screen seed91001及一个已验收seed91002显式复用。原screen身份及选择史保持，不改名为正式训练；同一checkpoint全部指标。新九项通过Linux原校准检查、F盘归档及Windows零拟合审计，原Windows首次Linux resource导入失败及采样审计微小差异保留。仅这一场景齐备，其他场景和完整100覆盖仍在继续。三视图表：outputs/guardfed_tables/celeba_hybrid_three_view_IID_Benign10_20261011/TABLES.md。十seed native ACC88.027%、AEOD0.02920、ASPD0.09251；shared为87.708%、0.02321、0.03383，存在准确率代价。Hybrid为项目控制，不称外部原方法。
+FL七完整场景表70及单列部分记录已接纳，表：outputs/guardfed_tables/celeba_flgmm_seven_scenes70_20261011/TABLES.md。non-IID F Flip十seed native ACC89.28±0.98%、AEOD0.0525±0.0077、ASPD0.1185±0.0068；shared为88.90±1.04%、0.0091±0.0073、0.0713±0.0111，存在准确率代价。旧Windows全量重拟合失败、五次资源拒绝、Linux原校准通过及Windows零拟合计数审计均保留，不称跨平台逐位一致。
+
+Hybrid IID Benign三视图十seed表已接纳，表：outputs/guardfed_tables/celeba_hybrid_three_view_IID_Benign10_20261011/TABLES.md。原screen seed91001身份与选择史、已验收seed91002及八个覆盖checkpoint显式保留；其余场景继续。native ACC88.027%、AEOD0.02920、ASPD0.09251；shared87.708%、0.02321、0.03383，有准确率代价。Hybrid为项目控制，不称外部原方法；原Windows resource导入失败及采样审计微小差异保留。
 
 ## 返修边界与接续
 
-十方法native验证表1000格，IID/non-IID各五场景已交付；九方法三视图900记录与2052项共享校准归因已接纳。U/C/A各100配对、十场景表已接纳。尚缺七方法完整覆盖、剩余机制控制、冻结最终评价和提交版正文/rebuttal收尾。FedWA/SmartFL/FedDNA忠实规格、最终主终点/测试边界、提交版LaTeX源及Fig3执行来源仍待解决；已有作者问题不重复询问。
+十方法native验证表1000格，IID/non-IID各五场景已交付；九方法三视图900记录和2052项归因已接纳。U/C/A各100配对、十场景表已接纳。尚缺七方法完整覆盖、其余机制控制、冻结最终评价及提交版正文/rebuttal收尾。FedWA/SmartFL/FedDNA忠实规格、最终主终点/测试边界、提交版LaTeX源及Fig3执行来源仍待解决；已有作者问题不重复询问。
 
-24条原意见的最新清晰英文作者审阅稿：docs/server_deployment_20260923/revision_20260923/rebuttal_clear_F20_20261011/rebuttal_clear_20261011.md；详细回复及正文插入候选：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/rebuttal_integrated_20261011.md、docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/manuscript_insertions_integrated_20261011.md。三份作者候选已对齐A100及F20，原话与顺序保留；单独新增F30/Hybrid证据补充稿：docs/server_deployment_20260923/revision_20260923/rebuttal_F30_addendum_20261011.md。未把原24条旧截止稿暗改称F30，未应用提交版正文，不代表返修完成。清晰候选、详细稿及正文插入候选均已在Git798ce6；本次FL71/七场景表70及Hybrid10证据已在Gita3fd1aa。旧TableII480原值已追溯重复数；缺证据的SD不补造。Fig3核260终轮记录/78均值，ForestDiffusion执行及checkpoint来源缺口仍在。
+24条原意见统一英文工作稿：docs/server_deployment_20260923/revision_20260923/rebuttal_working_20261011.md；已root核原话与顺序、F30/Hybrid数值及链接，供作者审阅。该稿内容截止native333/views330/F30；本次F40为单独新证据表，尚未写进该稿。F20旧稿、正文插入候选及F30补充稿保持各自截止；未应用提交版正文，不能称整份返修完成。
 
-Huber采用已同意的恒等投影，明确CNN项目适配且不继承原理论。当前已验收14条Huber搜索结果均恒负预测，ACC0.5166859616449389、AEOD/ASPD0，保留为退化负结果，不据此称公平性获胜。LoGoFair采用固定图像ID20虚拟cohort，仅人口适配，不称真实client公平性；其100个native结果已接纳。
+Huber按用户同意采用恒等投影，标为CNN项目适配且不继承原约束域理论。已验收14条Huber搜索结果均恒负预测，ACC0.5166859616449389、AEOD/ASPD0，作为退化负结果保留，不称公平性获胜。LoGoFair采用固定图像ID20虚拟cohort，标为人口适配，不称真实client公平性；其100个native结果已接纳。
 
-最终候选partition2的19962个image_id元数据已核，未读标签/像素或模型、未作最终推理；validation选择史、旧test暴露、cu128/cu130及driver差异保持披露。新CPU位置不证明跨平台或跨socket数值等价。下一步继续冻结队列；按完整场景增量接纳，FL exact10及七场景表已闭合，继续其剩余覆盖；NGA/Huber须64全验收后按冻结规则选recipe及真实门检，不能以部分结果启动192覆盖。
+最终候选partition2的19962个image_id元数据已核，未读标签/像素或作最终模型推理；validation选择史、旧test暴露、cu128/cu130及driver差异披露。NGA/Huber须64项完整验收后按冻结四条件评分规则选recipe，再过真实图像门检，不能以62项观测启动192覆盖。FL下一批non-IID FedSA10已终轮，先按原strict和离机核验接纳，不把77终轮当77验收。
+
+CPU有界诊断：tmp/cpu_throughput_readonly_20261011/ROOT_DIAGNOSIS.json。15.18秒四采样观察约12个活动单线程worker及12.09/122.88核的cgroup平均用量，双GPU均100%；未采到磁盘读取或新增配额节流，符合冻结worker/thread结构。尚不能据此证明具体算子瓶颈或最优吞吐；未改数值、并发或实例设置，利用空闲CPU处理已闭合证据。
 
 ## 保存、Git与巡检
 
 大文件只写F:/YananResearchStorage/GuardFed，写前核F为Yanan 2TB/Healthy且容量足；E仅代码、配置、索引与精简报告。模型/原始数组/归档不进Git，服务器大文件优先原地保留。
 
-最近已验证推送a3fd1aa9667cf1e177860872192001f8c4111f40，截止以publication_closed_increment61_verified_20261011.json为准（240提交文件哈希及远端分支通过）。本地本段的推送指针刷新发生在该提交之后，不能称已包含在其内。三小时聊天任务guardfed-training-health仍PAUSED，本会话无automation_update接口；未建替代cron/Windows任务。supervisor训练与聊天巡检分开。
+最近已验证推送fb1f31031aad89206f252969a6c26af6cde9efa4，截止以publication_closed_increment62_verified_20261011.json为准（245提交文件哈希及远端分支通过）。本次341/340/F40、统一工作稿和入口刷新在该提交之后，待Git63实际发布，不能提前称已上传。三小时聊天任务guardfed-training-health仍PAUSED，本会话无automation_update接口；未建替代cron/Windows任务。supervisor训练与聊天巡检分开。
 
-入口写入器：tmp/update_increment62_entries_20261011.py。旧生成器只保留历史截止，不再用于当前入口。下方历史原字节保留。
+入口写入器：tmp/update_increment63_F40_entries_20261011.py。旧生成器只保留历史截止，下方历史原字节保留。
 
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
