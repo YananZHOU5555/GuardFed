@@ -1,0 +1,4158 @@
+{
+  "at_unix": 1791605960.0130758,
+  "service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_gradient_screen64_v2a   RUNNING   pid 78631, uptime 0:04:39\n",
+    "stderr": ""
+  },
+  "gpu_compute_apps": {
+    "returncode": 0,
+    "stdout": "33740, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 996\n77811, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1004\n77812, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1002\n78486, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 998\n78668, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1002\n78716, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1002\n78276, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 998\n78288, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1002\n78306, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1004\n78318, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1004\n78332, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1004\n78641, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 996\n",
+    "stderr": ""
+  },
+  "processes": [
+    {
+      "pid": 78631,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "-u",
+        "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/run_queue.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--out",
+        "/workspace/celeba_gradient_screen64_v2_results_20261010",
+        "--resource-preflight",
+        "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/ROOT_RESOURCE_20261010T041443809547Z.json",
+        "--resource-sha256",
+        "699bf0ad1531c0651e74236a6109557170467e40f0cb3efde9c19061773094b1"
+      ],
+      "threads": [
+        {
+          "tid": 78631,
+          "cpus": [
+            105
+          ]
+        }
+      ],
+      "nice": 10,
+      "io": "idle"
+    },
+    {
+      "pid": 78641,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/run_queue.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--out",
+        "/workspace/celeba_gradient_screen64_v2_results_20261010/FedNGA_eta0.001_IID_Benign_seed91001_screen",
+        "--single-job",
+        "FedNGA_eta0.001_IID_Benign_seed91001_screen"
+      ],
+      "threads": [
+        {
+          "tid": 78641,
+          "cpus": [
+            105
+          ]
+        },
+        {
+          "tid": 78642,
+          "cpus": [
+            105
+          ]
+        },
+        {
+          "tid": 78643,
+          "cpus": [
+            105
+          ]
+        },
+        {
+          "tid": 78644,
+          "cpus": [
+            105
+          ]
+        },
+        {
+          "tid": 78645,
+          "cpus": [
+            105
+          ]
+        },
+        {
+          "tid": 78646,
+          "cpus": [
+            105
+          ]
+        }
+      ],
+      "nice": 10,
+      "io": "idle"
+    }
+  ],
+  "resource_proof_path": "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/ROOT_RESOURCE_20261010T041443809547Z.json",
+  "resource_proof": {
+    "status": "ROOT_GRADIENT64_V2_RESOURCE_PREFLIGHT_PASS",
+    "utc": "2026-10-10T04:14:43.809143+00:00",
+    "at_unix": 1791605683.8091812,
+    "measured_cgroup_cpu_cores": 11.01300837103601,
+    "cpu105_system_samples": [
+      {
+        "at": 1248711.622165913,
+        "usage_usec": 3553793193709,
+        "cpu105_ticks": [
+          11825628,
+          1127260,
+          5680453,
+          105920759,
+          8711,
+          0,
+          26133,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "at": 1248712.624641134,
+        "usage_usec": 3553804233977,
+        "cpu105_ticks": [
+          11825628,
+          1127260,
+          5680453,
+          105920860,
+          8711,
+          0,
+          26133,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "cpu_ids": [
+      105
+    ],
+    "cpu_threads": 1,
+    "max_workers": 1,
+    "cuda_visible_device": "1",
+    "nice": 10,
+    "idle_io": true,
+    "no_restricted_cpu105_owner": true,
+    "no_duplicate_worker": true,
+    "no_restricted_CPU_overlap": true,
+    "source_data_hashes_verified": true,
+    "existing_nominal_compute_threads": 14,
+    "actual_quota_cores": 122.87999,
+    "gpu_free_memory_mib": 27071,
+    "gpu_uuid": "GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae",
+    "gpu_used_mib": 5041,
+    "gpu_temperature_c": 63,
+    "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+    "package_seal_sha256": "11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced",
+    "author_decisions_sha256": "aee89e8210b5aa83d8ee814d5afde4bb655f3ba559bb53ae6ebcd1ca0d46851d",
+    "test_authorized": false,
+    "automatic_retry_authorized": false,
+    "all_project_process_threads": [
+      {
+        "pid": 9183,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "-u",
+          "deployment/celeba_mechanism_20261009/runner.py",
+          "run",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--stage",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1"
+        ],
+        "tasks": [
+          {
+            "tid": 9183,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9189,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9190,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9191,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9192,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9193,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9194,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9195,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9196,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9197,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9198,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9199,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9200,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9201,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9202,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9203,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9204,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9205,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9206,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9207,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9208,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9209,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9210,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9211,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9212,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9213,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9214,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9215,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9216,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9217,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9218,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9219,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9220,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9221,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9222,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9223,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9224,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9225,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9226,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9227,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9228,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9229,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9230,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9231,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9232,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9233,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9234,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9235,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9236,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9237,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9238,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9239,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9240,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9241,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9242,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9243,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9244,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9245,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9246,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9247,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9248,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9249,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9250,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 9251,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11453,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11454,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11455,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11456,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11457,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11458,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11459,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11460,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11461,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11462,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11463,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11464,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11465,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11466,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11467,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11468,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11469,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11470,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11471,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11472,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11473,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11474,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11475,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11476,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11477,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11478,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11479,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11480,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11481,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11482,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11483,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11484,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11485,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11486,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11487,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11488,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11489,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11490,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11491,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11492,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11493,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11494,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11495,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11496,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11497,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11498,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11499,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11500,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11501,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11502,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11503,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11504,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11505,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11506,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11507,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11508,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11509,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11510,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11511,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11512,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11513,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11514,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11515,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11516,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11517,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11518,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11519,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11520,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11521,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11522,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11523,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11524,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11525,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11526,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11527,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11528,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11529,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11530,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11531,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11532,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11533,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11534,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11535,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11536,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11537,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11538,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11539,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11540,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11541,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11542,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11543,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11544,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11545,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11546,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11547,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11548,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11549,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11550,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11551,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11552,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11553,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11554,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11555,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11556,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11557,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11558,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11559,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11560,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11561,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11562,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11563,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11564,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11565,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11566,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11567,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11568,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11569,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11570,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11571,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11572,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11573,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11574,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11575,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11576,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11577,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11578,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11579,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11580,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11581,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11582,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11583,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11584,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11585,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11586,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11587,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11588,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11589,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11590,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11591,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11592,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11593,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11594,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11595,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11596,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11597,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11598,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11599,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11600,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11601,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11602,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11603,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11604,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11605,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11606,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11607,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11608,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11609,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11610,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11611,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11612,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11613,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11614,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11615,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11616,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11617,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11618,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11619,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11620,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11621,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11622,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11623,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11624,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11625,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11626,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11627,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11628,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11629,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11630,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11631,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11632,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11633,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11634,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11635,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11636,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11637,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11638,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11639,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11640,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11641,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11642,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11643,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11644,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11645,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11646,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11647,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11648,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11649,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11650,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11651,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11652,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11653,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11654,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11655,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11656,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11657,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11658,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11659,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11660,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11661,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11662,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11663,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11664,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11665,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11666,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11667,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11668,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11669,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11670,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11671,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11672,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11673,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11674,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11675,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11676,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11677,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11678,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11679,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11680,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11681,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11682,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11683,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11684,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11685,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11686,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11687,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11688,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11689,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11690,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11691,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11692,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11693,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11694,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11695,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11696,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11697,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11698,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11699,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11700,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11701,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11702,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11703,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11704,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11705,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11706,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 11707,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {},
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 33740,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "-u",
+          "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/driver.py",
+          "run",
+          "--kind",
+          "screen",
+          "--approved",
+          "/workspace/guardfed_checks/celeba_hybrid_screen_execution_20261009/APPROVED_screen.json",
+          "--approved-sha256",
+          "c984c7bf910ce87156c4901f559eac30f7aebbad28858a942dd5343226c476ee"
+        ],
+        "tasks": [
+          {
+            "tid": 33740,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 33741,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 33748,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 33749,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 33750,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 33751,
+            "cpu_count": 1,
+            "cpus": [
+              104
+            ],
+            "broad_cpu_span": null
+          }
+        ],
+        "selected_thread_env": {},
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 66870,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "-B",
+          "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_fullcoverage.py",
+          "run",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded"
+        ],
+        "tasks": [
+          {
+            "tid": 66870,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          }
+        ],
+        "selected_thread_env": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "GUARDFED_CPU_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 77729,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91003.json"
+        ],
+        "tasks": [
+          {
+            "tid": 77729,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77730,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77731,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77732,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77733,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77734,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 77739,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91004.json"
+        ],
+        "tasks": [
+          {
+            "tid": 77739,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77740,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77741,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77742,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77743,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77744,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 77811,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91005.json"
+        ],
+        "tasks": [
+          {
+            "tid": 77811,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77813,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77816,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77817,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77818,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77819,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 77812,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91006.json"
+        ],
+        "tasks": [
+          {
+            "tid": 77812,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77820,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77821,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77822,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77823,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 77824,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78276,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "-B",
+          "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_one.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job-id",
+          "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91006_fullcoverage"
+        ],
+        "tasks": [
+          {
+            "tid": 78276,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78277,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78278,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78279,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78280,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78281,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          }
+        ],
+        "selected_thread_env": {
+          "CUDA_VISIBLE_DEVICES": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78288,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91007.json"
+        ],
+        "tasks": [
+          {
+            "tid": 78288,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78291,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78292,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78293,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78294,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78295,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78306,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91008.json"
+        ],
+        "tasks": [
+          {
+            "tid": 78306,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78309,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78310,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78311,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78312,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78313,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78318,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91009.json"
+        ],
+        "tasks": [
+          {
+            "tid": 78318,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78321,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78322,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78323,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78324,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78325,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78332,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "/workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job",
+          "/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_C_non-IID_Sp-DFA_seed91010.json"
+        ],
+        "tasks": [
+          {
+            "tid": 78332,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78333,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78336,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78337,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78338,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          },
+          {
+            "tid": 78339,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "GUARDFED_CPU_THREADS": "1",
+          "CUDA_VISIBLE_DEVICES": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78486,
+        "argv": [
+          "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+          "-B",
+          "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_one.py",
+          "--repo",
+          "/workspace/GuardFed-celeba-expanded",
+          "--job-id",
+          "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91007_fullcoverage"
+        ],
+        "tasks": [
+          {
+            "tid": 78486,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78487,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78490,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78491,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78492,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          },
+          {
+            "tid": 78493,
+            "cpu_count": 2,
+            "cpus": [
+              102,
+              103
+            ],
+            "broad_cpu_span": null
+          }
+        ],
+        "selected_thread_env": {
+          "CUDA_VISIBLE_DEVICES": "0",
+          "GUARDFED_CPU_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "nominal_compute_threads": 1
+      },
+      {
+        "pid": 78633,
+        "argv": [
+          "python3",
+          "/usr/local/bin/log-tee",
+          "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/queue_attempt2.log"
+        ],
+        "tasks": [
+          {
+            "tid": 78633,
+            "cpu_count": 512,
+            "cpus": null,
+            "broad_cpu_span": [
+              0,
+              511
+            ]
+          }
+        ],
+        "selected_thread_env": {},
+        "nominal_compute_threads": 1
+      }
+    ],
+    "source_data_checks": [
+      {
+        "name": "scripts/reproduce_paper_tables.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/scripts/reproduce_paper_tables.py",
+        "bytes": 122793,
+        "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed"
+      },
+      {
+        "name": "src/data_loader.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/src/data_loader.py",
+        "bytes": 14748,
+        "sha256": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091"
+      },
+      {
+        "name": "scripts/run_revision_ablation.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/scripts/run_revision_ablation.py",
+        "bytes": 13272,
+        "sha256": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1"
+      },
+      {
+        "name": "data/adult/adult.data",
+        "resolved": "/workspace/GuardFed-celeba-expanded/data/adult/adult.data",
+        "bytes": 3974305,
+        "sha256": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d"
+      },
+      {
+        "name": "data/adult/adult.test",
+        "resolved": "/workspace/GuardFed-celeba-expanded/data/adult/adult.test",
+        "bytes": 2003132,
+        "sha256": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074"
+      },
+      {
+        "name": "src/celeba_data.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/src/celeba_data.py",
+        "bytes": 7170,
+        "sha256": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce"
+      },
+      {
+        "name": "scripts/build_celeba_cache.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/scripts/build_celeba_cache.py",
+        "bytes": 5723,
+        "sha256": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be"
+      },
+      {
+        "name": "data/celeba/derived/rgb64_v1/manifest.json",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/manifest.json",
+        "bytes": 5448,
+        "sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643"
+      },
+      {
+        "name": "data/celeba/derived/rgb64_v1/metadata.npz",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/metadata.npz",
+        "bytes": 5065973,
+        "sha256": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091"
+      },
+      {
+        "name": "data/celeba/derived/rgb64_v1/images.npy",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/images.npy",
+        "bytes": 2489536640,
+        "sha256": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f"
+      },
+      {
+        "name": "data/celeba/derived/rgb64_v1/available.npy",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/available.npy",
+        "bytes": 202727,
+        "sha256": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca"
+      },
+      {
+        "name": "data/celeba/list_attr_celeba.txt",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/list_attr_celeba.txt",
+        "bytes": 26721026,
+        "sha256": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0"
+      },
+      {
+        "name": "data/celeba/list_eval_partition.txt",
+        "resolved": "/workspace/GuardFed-revision/data/celeba/list_eval_partition.txt",
+        "bytes": 2836386,
+        "sha256": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+      },
+      {
+        "name": "deployment/prepare_celeba_expanded.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/prepare_celeba_expanded.py",
+        "bytes": 3943,
+        "sha256": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab"
+      },
+      {
+        "name": "deployment/prepare_seedcheck.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/prepare_seedcheck.py",
+        "bytes": 4360,
+        "sha256": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5"
+      },
+      {
+        "name": "deployment/CELEBA_SEEDCHECK_PROTOCOL.md",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/CELEBA_SEEDCHECK_PROTOCOL.md",
+        "bytes": 3920,
+        "sha256": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8"
+      },
+      {
+        "name": "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json",
+        "resolved": "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json",
+        "bytes": 66122,
+        "sha256": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0"
+      },
+      {
+        "name": "deployment/run_celeba_migration.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/run_celeba_migration.py",
+        "bytes": 1089,
+        "sha256": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419"
+      },
+      {
+        "name": "deployment/prepare_fullcoverage.py",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/prepare_fullcoverage.py",
+        "bytes": 9811,
+        "sha256": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b"
+      },
+      {
+        "name": "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md",
+        "resolved": "/workspace/GuardFed-celeba-expanded/deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md",
+        "bytes": 8093,
+        "sha256": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444"
+      },
+      {
+        "name": "results/revision_20260925/celeba_seedcheck_v1/manifest.json",
+        "resolved": "/workspace/GuardFed-celeba-expanded/results/revision_20260925/celeba_seedcheck_v1/manifest.json",
+        "bytes": 74255,
+        "sha256": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      }
+    ],
+    "main_service": {
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 21:55:46\n",
+      "stderr": ""
+    },
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "main_queue": {
+      "completed": 192,
+      "active": [
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91003",
+          "pid": 77729
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91004",
+          "pid": 77739
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91005",
+          "pid": 77811
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91006",
+          "pid": 77812
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91007",
+          "pid": 78288
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91008",
+          "pid": 78306
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91009",
+          "pid": 78318
+        },
+        {
+          "id": "minus_C_non-IID_Sp-DFA_seed91010",
+          "pid": 78332
+        }
+      ],
+      "failed": []
+    },
+    "recovery_actions": [
+      "GPU Recovery Action                                : None",
+      "GPU Recovery Action                                : None"
+    ],
+    "memory_headroom_bytes": 443205115904,
+    "disk_free_bytes": 1060690821120,
+    "scope": "All project threads inspected; restricted <=16-core masks reserve CPUs, broad masks are eligible scheduling sets; no CPU exclusivity/idle claim"
+  },
+  "rows": [
+    {
+      "id": "FedNGA_eta0.001_IID_Benign_seed91001_screen",
+      "progress": {
+        "round": 18,
+        "metrics": {
+          "accuracy": 0.5166859616449389,
+          "aeod": 0.0,
+          "aspd": 0.0
+        },
+        "job_id": "FedNGA_eta0.001_IID_Benign_seed91001_screen",
+        "pid": 78641,
+        "updated_unix": 1791605947.9789307
+      },
+      "provenance": {
+        "job_sha256": "b968ad1b0e91b7d98e5cd96d78a2cbe0f12f195ae95d9c76b4dd558ae2acf0e4",
+        "source_hashes": {
+          "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+          "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+          "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+          "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+          "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+          "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+          "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+          "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+          "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+          "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+          "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+          "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+          "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+          "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+          "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+          "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+          "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+          "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+          "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+          "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+        },
+        "local_hashes": {
+          "accept_result.py": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+          "prepare.py": "2dff355bfecbb191a3a8e2cec64769b5721f57d699a77d6cebd1783e6dbe84a9",
+          "protocol.json": "c5010a3438365c4e2350618c0ae763a9122f8c0b5b433692842e268a5b4aa496",
+          "worker.py": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4"
+        },
+        "component_hashes": {
+          "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+          "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+        },
+        "started_unix": 1791605685.4437718,
+        "resume_supported": false,
+        "environment": {
+          "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+          "torch": "2.11.0+cu128",
+          "cuda": "12.8",
+          "device": "cuda",
+          "gpu_name": "NVIDIA GeForce RTX 5090"
+        }
+      },
+      "diagnostics_rounds": 18,
+      "result": false,
+      "accepted": false
+    }
+  ],
+  "failure_paths": [],
+  "log_tail": [
+    "{\"path\": \"/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/ROOT_RESOURCE_20261010T041443809547Z.json\", \"sha256\": \"699bf0ad1531c0651e74236a6109557170467e40f0cb3efde9c19061773094b1\", \"at_unix\": 1791605683.8091812, \"nominal\": 14, \"quota\": 122.87999, \"gpu_free_mib\": 27071, \"processes\": 14, \"project_threads\": 387}"
+  ],
+  "queue": null,
+  "scientific_offserver_accepted": 0
+}

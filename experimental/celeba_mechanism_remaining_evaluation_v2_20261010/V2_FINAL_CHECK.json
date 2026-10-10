@@ -1,0 +1,53 @@
+{
+  "status": "FINAL_NO_CNN_SUPERVISOR_RC_AND_ERROR_CONTEXT_PASS",
+  "cases": [
+    {
+      "case": "RUNNING0",
+      "accepted": true,
+      "guard_inputs": {
+        "progress_sha256": "TEST_ONLY_SHA",
+        "service": "guardfed_celeba_mechanism_formal RUNNING",
+        "service_stderr": "TEST_ONLY_RETAINED_STDERR",
+        "service_returncode": 0,
+        "completed_n": 180,
+        "active": [],
+        "failed": [],
+        "observed_unix": 1791605362.1395414
+      }
+    },
+    {
+      "case": "EXITED3_complete800",
+      "accepted": true,
+      "guard_inputs": {
+        "progress_sha256": "TEST_ONLY_SHA",
+        "service": "guardfed_celeba_mechanism_formal EXITED",
+        "service_stderr": "TEST_ONLY_RETAINED_STDERR",
+        "service_returncode": 3,
+        "completed_n": 800,
+        "active": [],
+        "failed": [],
+        "observed_unix": 1791605362.1405425
+      }
+    },
+    {
+      "case": "EXITED3_partial799",
+      "accepted": false,
+      "guard_inputs": {
+        "error": "Producer service/connection error: {\"active\": [], \"completed_n\": 799, \"failed\": [], \"service\": \"guardfed_celeba_mechanism_formal EXITED\", \"service_returncode\": 3, \"service_stderr\": \"TEST_ONLY_RETAINED_STDERR\"}"
+      }
+    },
+    {
+      "case": "UNKNOWN3",
+      "accepted": false,
+      "guard_inputs": {
+        "error": "Producer service/connection error: {\"active\": [], \"completed_n\": 800, \"failed\": [], \"service\": \"guardfed_celeba_mechanism_formal UNKNOWN\", \"service_returncode\": 3, \"service_stderr\": \"TEST_ONLY_RETAINED_STDERR\"}"
+      }
+    }
+  ],
+  "source_sha256": "85294c235341e73442901a4bc29756d63c650562b5ddf0e003db92eb32106d3c",
+  "original_science_projection_bytes_exact": true,
+  "original_plan_bytes_exact": true,
+  "CNN": 0,
+  "SSH": 0,
+  "Torch_imported": false
+}

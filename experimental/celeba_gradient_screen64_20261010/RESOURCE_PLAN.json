@@ -1,0 +1,46 @@
+{
+  "status": "PREPARED_NOT_DISPATCHED",
+  "scientific_protocol": "snapshot/gradient_bridge_20261010/protocol.json",
+  "jobs": 64,
+  "methods": {
+    "Fed-NGA-gradient": 32,
+    "Huber-BRFL-gradient": 32
+  },
+  "max_workers": 1,
+  "cuda_visible_device": "1",
+  "cpu_ids": [
+    105
+  ],
+  "cpu_threads": 1,
+  "nice": 10,
+  "idle_io": true,
+  "protected_cpu_ids": [
+    102,
+    103,
+    104,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "resource_preflight_actual": null,
+  "actual_dispatch": false,
+  "actual_new_accepted": 0,
+  "no_auto_retry": true,
+  "local_large_artifacts_root": "F:/YananResearchStorage/GuardFed/",
+  "local_large_artifacts_require_volume_label": "Yanan 2TB",
+  "local_large_artifacts_require_capacity_check": true,
+  "outputs_allowed": "server /workspace only, or prechecked F volume; E is code/config/small indices/reports only",
+  "required_before_root_dispatch": [
+    "read current /etc/vast-agents-guide.md",
+    "verify all-thread CPU105 idle/no overlap and cgroup capacity",
+    "verify GPU1 actual UUID/free memory/no duplicate worker",
+    "rehash actual frozen core/data/components, six exact registered shared targets",
+    "external fresh resource-preflight path/SHA; unique new output namespace"
+  ],
+  "protected_main_queue": "existing main8; actual all-thread CPU ownership must be inspected by root, no guessed CPU IDs"
+}

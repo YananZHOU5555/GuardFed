@@ -1,0 +1,11 @@
+--- original/prepare.py
++++ snapshot/prepare.py
+@@ -36,7 +36,7 @@
+     assert len(records) == len({row["id"] for row in records}) == 64
+     write_json(output / "manifest.json", dict(status=protocol["status"], execution_started=False,
+         protocol_sha256=digest(HERE / "protocol.json"), jobs=records,
+-        limitation="Proposed recipes only; unresolved objective/reference/step/projection decisions, real-image gate, and freeze remain"))
++        limitation="Frozen validation-only 64-job search; resource preflight and root dispatch remain required; n=1, no test or automatic retry"))
+     print(json.dumps(dict(status=protocol["status"], prepared_jobs=len(records))))
+ 
+ 

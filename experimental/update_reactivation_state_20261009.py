@@ -2617,14 +2617,14 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16,18):
-        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617',18:'99de692986c2623b6a351801195094ac35a82e173d4f1c502b9471455c56e3d7'}[FL96_latest['accepted_total']]
+    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16,18,22):
+        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617',18:'99de692986c2623b6a351801195094ac35a82e173d4f1c502b9471455c56e3d7',22:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc'}[FL96_latest['accepted_total']]
         assert FL96_current['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         FL96_previous_path=ROOT/FL96_current['previous_root_adoption_path'];FL96_previous=read(FL96_previous_path)
-        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',16:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',18:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617'}[FL96_latest['accepted_total']]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2,16:2,18:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
+        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',16:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',18:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617',22:'99de692986c2623b6a351801195094ac35a82e173d4f1c502b9471455c56e3d7'}[FL96_latest['accepted_total']]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2,16:2,18:2,22:4}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
         assert FL96_current['accepted_total']==FL96_current['accepted_before']+FL96_current['accepted_new']
-        FL96_current_batch=FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
+        FL96_current_batch=Path(FL96_current['archive_local_path']).parent if FL96_current.get('archive_local_path') else FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')==FL96_current['offserver_acceptance_sha256']==FL96_latest['next_collector_previous_sha256']
         assert sha(FL96_current_batch/'accepted_delta.tar.gz')==FL96_current['archive_sha256']
         assert FL96_off['accepted_job_ids']==FL96_current['accepted_job_ids']==FL96_previous.get('accepted_job_ids',FL96_previous['accepted_new_ids'])+FL96_current['accepted_new_ids']
@@ -2647,6 +2647,60 @@ elif state['celeba_mechanism_v1'].get('C_three_view_seven_scene_table'):
 if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_addendum']['complete_C_scenes']>state['latest_rebuttal_draft'].get('complete_C_scenes',0):
     addendum=state['latest_rebuttal_addendum']
     reply_progress_note+=(f"；C{10*addendum['complete_C_scenes']}英文独立补稿已另核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，入口"+addendum['entry']+'；原24意见完整稿保持封存')
+storage_policy=TRAIN/'LOCAL_STORAGE_20261010.json'
+if storage_policy.exists():
+    state['local_storage_policy_20261010']=read(storage_policy)
+C80_addendum=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_C80_addendum_20261010'
+if (C80_addendum/'ROOT_REVIEW.json').exists():
+    C80_root=read(C80_addendum/'ROOT_REVIEW.json')
+    assert C80_root['status']=='ROOT_C80_ADDENDUM_SOURCE_NUMERICS_AND_SCOPE_REVIEW_PASS'
+    assert sha(C80_addendum/'ADDENDUM.md')==C80_root['addendum_sha256']=='d9285007dc737f8397a1d605efc78e8bd6042c5466353b10cb5a5b3216fdb503'
+    assert sha(C80_addendum/'FILES_SHA256.json')==C80_root['seal_sha256']=='7cb403a74d49766438373faa2cf1bf989c54cc8c2c5486322dd496bd59217d73'
+    state['latest_rebuttal_addendum']=dict(status=C80_root['status'],entry=(C80_addendum/'ADDENDUM.md').relative_to(ROOT).as_posix(),root_proof_path=(C80_addendum/'ROOT_REVIEW.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C80_addendum/'ROOT_REVIEW.json'),complete_C_scenes=8,scalar_pointer_checks=15,display_cells_checked=15,scope_fact_checks=14,links_checked=4,author_review_only=True,whole_rebuttal_complete=False,manuscript_applied=False)
+    reply_progress_note+='；C80独立英文四段增补已核15数值pointer/4链接并保存，24意见完整C60稿不变，尚未最终整合或提交'
+author_decisions = TRAIN/'AUTHOR_DECISIONS_20261010.json'
+if author_decisions.exists():
+    assert sha(author_decisions)=='aee89e8210b5aa83d8ee814d5afde4bb655f3ba559bb53ae6ebcd1ca0d46851d'
+    state['author_decisions_20261010']=dict(record=read(author_decisions),path=author_decisions.relative_to(ROOT).as_posix(),sha256=sha(author_decisions))
+logofair_gate=ROOT/'tmp/celeba_logofair_real_gate_20261010/ROOT_REVIEW.json'
+if logofair_gate.exists():
+    assert sha(logofair_gate)=='729030cfb8cc76b8f553f35fb859117f5a4f0655d4cd780879714d74b883b5ed'
+    state['logofair_real_score_gate_20261010']=dict(root_review=read(logofair_gate),root_review_path=logofair_gate.relative_to(ROOT).as_posix(),root_review_sha256=sha(logofair_gate),scientific_results=0)
+gradient_failure=ROOT/'tmp/celeba_gradient_screen64_root_operations_20261010/LATEST_OBSERVATION.json'
+if gradient_failure.exists():
+    actual=read(gradient_failure)
+    state['gradient64_first_preflight_20261010']=dict(observation_path=gradient_failure.relative_to(ROOT).as_posix(),observation_sha256=sha(gradient_failure),service=actual['service'],actual_resource_pass=actual['resource_proof'] is not None,actual_new_training=len(actual['rows']),scientific_offserver_accepted=0,failure_preserved=True)
+gradient_startup=ROOT/'tmp/celeba_gradient_screen64_v2_root_operations_20261010/ROOT_STARTUP_REVIEW.json'
+if gradient_startup.exists():
+    verified=read(gradient_startup)
+    assert verified['status']=='ROOT_ACTUAL_GRADIENT64_SINGLE_GPU_WORKER_AND_ROUND_PROGRESS_VERIFIED'
+    assert verified['actual_workers']==1 and verified['actual_CPU']==[105] and verified['physical_GPU']==1
+    state['gradient64_validation_search_20261010']=dict(status=verified['status'],root_startup_path=gradient_startup.relative_to(ROOT).as_posix(),root_startup_sha256=sha(gradient_startup),root_startup=verified,source_seal_sha256='11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced',jobs=64,actual_training_started=True,offserver_accepted=0,test=False)
+    observation=gradient_startup.parent/'LATEST_ATTEMPT2_OBSERVATION.json'
+    if observation.exists():
+        measured=read(observation)
+        assert not measured['failure_paths']
+        rows=[dict(id=r['id'],round=r['progress']['round'] if r['progress'] else None,result_exists=r['result'],server_acceptance_exists=r['accepted']) for r in measured['rows']]
+        immutable=[p for p in observation.parent.glob('ATTEMPT2_OBSERVATION_*.json') if sha(p)==sha(observation)]
+        assert len(immutable)==1
+        state['gradient64_validation_search_20261010']['latest_measured_observation']=dict(path=immutable[0].relative_to(ROOT).as_posix(),sha256=sha(observation),at_unix=measured['at_unix'],rows=rows,terminal70_observed=sum(r['round']==70 for r in rows),offserver_accepted=0)
+logofair_execution=ROOT/'tmp/celeba_logofair_screen32_root_execution_20261010'
+if (logofair_execution/'queue_LIVE_HANDLE.json').exists():
+    handle=read(logofair_execution/'queue_LIVE_HANDLE.json')
+    actual_out=Path('F:/YananResearchStorage/GuardFed/logofair_screen32_20261010/attempt001')
+    progress=read(actual_out/'PROGRESS.json') if (actual_out/'PROGRESS.json').exists() else None
+    failure=read(actual_out/'QUEUE_FAILURE.json') if (actual_out/'QUEUE_FAILURE.json').exists() else None
+    state['logofair32_validation_search_20261010']=dict(status='EXPLICIT_FAILURE_PRESERVED' if failure else 'LOCAL_POSTPROCESSING_STARTED_OBSERVE_ORIGINAL_STRICT_PROGRESS',handle=handle,handle_sha256=sha(logofair_execution/'queue_LIVE_HANDLE.json'),source_seal_sha256='accd5cb8582a344f870188f1e70661b6dc9dc948cc88c9e6f6651e451607bc49',jobs=32,original_strict_closed=len(progress['records']) if progress else 0,root_adopted=0,new_CNN_calls=0,new_training=0,test=False,output=str(actual_out),failure=failure)
+remaining620_startup=ROOT/'tmp/celeba_mechanism_remaining620_root_operations_20261010/ROOT_STARTUP_REVIEW_V2.json'
+if remaining620_startup.exists():
+    verified=read(remaining620_startup)
+    assert verified['status']=='ROOT_ACTUAL_REMAINING620_CPU_QUEUE_AND_FIRST_REMOTE_STRICT_CLOSURE_VERIFIED'
+    assert sha(ROOT/verified['observation_path'])==verified['observation_sha256']
+    assert verified['source_seal_sha256']=='a3461e20592cd2bda3d53c7215fed377bbaa693360ba1abe02aa87fe8aa6fc03'
+    state['mechanism_remaining620_valid_20261010']=dict(status=verified['status'],root_startup_path=remaining620_startup.relative_to(ROOT).as_posix(),root_startup_sha256=sha(remaining620_startup),actual_service=verified['actual_service'],observed_utc=verified['observed_utc'],root_approval_sha256=verified['root_approval_sha256'],remote_strict_closed_at_startup=verified['remote_strict_closed'],new_offserver_accepted=0,selected_count=620,original180_excluded=True,Full_inference=0,new_training=0,test=False,automatic_retry=False,source_seal_sha256=verified['source_seal_sha256'],first_wrapper_failure_preserved=True)
+    transport_failure=remaining620_startup.parent/'FIRST_TRANSPORT_COMMAND.json'
+    if transport_failure.exists() and read(transport_failure)['returncode']:
+        state['mechanism_remaining620_valid_20261010']['first_transport_failure']=dict(path=transport_failure.relative_to(ROOT).as_posix(),sha256=sha(transport_failure),cause='Pinned archive-verifier remote path missing; same hash tool exists at canonical reactivation path. Finite recovery separately reviewed, not blind export retry.',scientific_outputs_unchanged=True)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -2827,7 +2881,7 @@ top = f'''# CURRENT: GuardFed返修实验 — 实测 {live['checked_utc']}
 
 {gpu_recovery_paragraph} native1e-12、原model/source/data/map/root/valid、同checkpoint全部视图与失败保留规则不变；混合CPU/GPU来源不能冒充统一设备的最终公平比较。入口tmp/celeba_valid_gpu_recovery_implementation_20261009/README.md。监控不自动启动准备包。
 
-LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID哈希20组，root/valid顺序相同，80个root(label,Male)格最小116人；未解码valid标签/score、未拟合或评价。虚拟群体不是原训练client，人口定义仍待用户裁定；原32草案的mapping SHA仍null。入口tmp/celeba_logofair_population_proposal_20261009/REPORT.md。
+LoGoFair原映射提案保留：四条件共用固定image-ID哈希20组，80个root(label,Male)格最小116人。用户2026-10-10委托主代理决定，现已采用该虚拟cohort，明确不能称真实训练client公平性。实际真实分数3post-round接口门检通过40个Beta拟合、19,867验证样本及序列化重载预测exact，但恒定负预测保留，只作流程证据、科学结果0；原32草案不改，新搜索包独立冻结，尚不能称32项完成。门检及root审查入口tmp/celeba_logofair_real_gate_20261010/ROOT_REVIEW.json。
 
 ## 已完成证据与剩余交付
 
@@ -2835,7 +2889,7 @@ LoGoFair虚拟人口映射提案已独立核验：四条件共用固定image-ID�
 
 原20项cu130与另20项cu128真实图像三轮门检已严格接受、离机，两套Full与原worker短程张量/指标/诊断精确。Fed-NGA/Huber四条真实图像三轮门检含240梯度/攻击oracle已接受；FLGMM的CPU2/GPU4及组合基线的CPU4/CUDA4门检已接受。所有恒定负类和工程/数值失败保留。三轮门检不证明70轮跨环境等价或科学性能优势；门检服务已EXITED，不重启。
 
-完整17行比较仍缺8方法的完整多seed结果：LoGoFair、Fed-NGA、FedWA、Huber、FLGMM、SmartFL、FedDNA及组合控制。梯度方法正式协议、LoGoFair人口和最终评价主终点/测试边界仍待裁定；FedWA/SmartFL/FedDNA忠实规格仍缺，不能用简化旧分支冒充。主机制800、完整机制三视图、冻结最终评价、正文及最终回复仍未完成。Fig3原脚本/ForestDiffusion执行身份仍缺；已核数值与缺失来源明确区分。
+完整17行比较仍缺8方法的完整多seed结果：LoGoFair、Fed-NGA、FedWA、Huber、FLGMM、SmartFL、FedDNA及组合控制。用户2026-10-10已接受Huber的R^p恒等投影CNN适配，仅报告经验结果、不继承原理论保证；LoGoFair人口亦已决定，梯度五个常规字段按原算法落实，不再把H/L写成待决。64搜索源包已冻结、独立审查并实际启动；此前宽CPU调度mask及日志tee误判均为训练前工程失败，已保留并修复，最新实测须读STATE新增凭据。最终评价主终点/测试边界仍待冻结；FedWA/SmartFL/FedDNA忠实规格仍缺，不能用简化旧分支冒充。主机制800、完整机制三视图、正文及最终回复仍未完成。Fig3原脚本/ForestDiffusion执行身份仍缺；已核数值与缺失来源明确区分。
 
 已接受native场景的10/9/6种子中期论文表：{state['celeba_mechanism_v1']['latest_interim_paper_table']['table_path']}。仅展示{interim['complete_paired_scenes']}个齐备的Full–minus_U配对场景，保留所有指标及取舍，不补造未完成场景，不以Full最佳seed对比消融均值。在IID Sp-DFA场景，Full准确率较高、去U的两个公平性差距更低，不能声称每项不可或缺。AEOD为绝对TPR差，不是完整equalized odds；Full98cu128+2cu130、多数旧driver570.211.01和当前driver595.84差异、seed91001选择历史均披露。native含各方法原校准，不能据此单独证明聚合机制。native100十场景表已单独核验540统计标量，旧九场景54展示行不变；所有十场景删除U的ACC/ASPD均更低，AEOD八场景更高、两场景更低。non-IID FedSA/S-DFA删除U后ACC分别下降0.601/0.453个百分点，公平性方向存在取舍。九场景三视图已由另一份root凭据独立闭合，数量与来源见下方；不从native表推断评价完成。
 
@@ -2878,6 +2932,17 @@ if main.get('C_after25_valid_replay'):
     top+=(f"\n历史3项C/IID FedSA增量（seed91002/04/07）终轮valid三视图评价：{C3['status']}，新增严格离机接受{C3['offserver_new_accepted']}。"
         '固定CPU112–119/8线程、nice10/idleIO/CUDA隐藏；原125与Full不重推。来源入口tmp/celeba_mechanism_valid_C_after25_20261009/execution_candidate。'
         '该批次闭合时FedSA为8/10；最新覆盖以本页当前表与STATE为准，原科学计算及1e-12保持。\n\n')
+if state.get('gradient64_validation_search_20261010'):
+    entry=state['gradient64_validation_search_20261010']
+    observed=entry.get('latest_measured_observation',{})
+    top+='\n新增梯度搜索已实际启动：Fed-NGA32+Huber32，70round/valid-only/n=1；新服务guardfed_celeba_gradient_screen64_v2a，1 worker/CPU105/GPU1/nice10/idle，启动时round '+str(entry['root_startup']['observed_round'])+'及physical GPU UUID已核。最新实测终轮70任务'+str(observed.get('terminal70_observed',0))+'/64，终轮严格离机接受0，二者分开记录。前两次root预检把宽调度mask、日志tee误判资源/重复worker的工程错误均在训练前退出并保留；科学source/64jobs原字节不变，既有800队列未改。实际凭据入口'+entry['root_startup_path']+'。\n'
+if state.get('logofair32_validation_search_20261010'):
+    entry=state['logofair32_validation_search_20261010']
+    top+='\nLoGoFair32原30post-round搜索已在F启动，4个原接受模型/cache已实际提取并核SHA；已原strict闭合'+str(entry['original_strict_closed'])+'/32，root adopted0；不重训CNN、不评价test、不选未齐recipe，保留恒定预测与全部候选。输出'+entry['output']+'。\n'
+if state.get('mechanism_remaining620_valid_20261010'):
+    entry=state['mechanism_remaining620_valid_20261010']
+    top+='\n剩余620机制终轮valid三视图评价已实际启动'+entry['actual_service']+'，排除原180与Full重复推理；CPU112–119单进程8计算线程/nice10/idleIO/CUDA隐藏，首条原strict闭合native差0且绑定原已接受checkpoint。启动时remote闭合'+str(entry['remote_strict_closed_at_startup'])+'，新离机接受0；不把服务运行或服务器闭合计入论文表。首次taskset包装语法错误发生在Python执行前，失败字节保留。首条运输在归档写完后因原验证工具路径缺失停止，已有预测/权重不受影响；有限恢复须另有实际凭据，不盲重试。入口'+entry['root_startup_path']+'。\n'
+top+='\n本机存储：2026-10-10用户指定F:/YananResearchStorage/GuardFed/；大文件写入前实核F卷标Yanan 2TB与容量，无内置盘回退。代码/配置/索引/精简报告保留E，服务器大文件优先原地保留；已存在E证据未删除或宣称全量迁移。记录LOCAL_STORAGE_20261010.json。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

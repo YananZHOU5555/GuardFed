@@ -1,0 +1,28 @@
+{
+  "at_unix": 1791605271.404437,
+  "service": {
+    "returncode": 3,
+    "stdout": "guardfed_celeba_gradient_screen64   EXITED    Oct 10 04:07 AM\n",
+    "stderr": ""
+  },
+  "processes": [],
+  "resource_proof_path": null,
+  "resource_proof": null,
+  "rows": [],
+  "failure_paths": [],
+  "log_tail": [
+    "Traceback (most recent call last):",
+    "  File \"/workspace/guardfed_checks/celeba_gradient_screen64_20261010/root_operations/root_launch.py\", line 8, in <module>",
+    "    namespace = runpy.run_path(str(BASE / 'root_operations/remote_preflight.py'))",
+    "                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "  File \"<frozen runpy>\", line 286, in run_path",
+    "  File \"<frozen runpy>\", line 98, in _run_module_code",
+    "  File \"<frozen runpy>\", line 88, in _run_code",
+    "  File \"/workspace/guardfed_checks/celeba_gradient_screen64_20261010/root_operations/remote_preflight.py\", line 95, in <module>",
+    "    assert not overlaps, 'CPU105 overlaps an existing project compute thread'",
+    "           ^^^^^^^^^^^^",
+    "AssertionError: CPU105 overlaps an existing project compute thread"
+  ],
+  "queue": null,
+  "scientific_offserver_accepted": 0
+}

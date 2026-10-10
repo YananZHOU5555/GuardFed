@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "approved": true,
+  "semantics": "declared_virtual_partition",
+  "true_training_client_identity": false,
+  "domain_utf8_with_null": "GuardFed/LoGoFair/virtual-cohort/v1\\0",
+  "domain_hex": "47756172644665642f4c6f476f466169722f7669727475616c2d636f686f72742f763100",
+  "rule": "int.from_bytes(SHA256(domain bytes + ASCII canonical positive decimal image_id), big) mod 20",
+  "cohorts": 20,
+  "mapping_sha256": "7f92ca141193e52e9e6a6526148531c7f4499f811ac6eddb34327677f9abf895",
+  "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+  "valid_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+  "input_fields_for_mapping": [
+    "image_id"
+  ],
+  "not_mapping_inputs": [
+    "label",
+    "Male",
+    "score",
+    "attack",
+    "distribution",
+    "seed"
+  ],
+  "domain_selection": "Single fixed proposal; no search or selection by support/performance",
+  "population_meaning": "20 virtual image-ID hash cohorts within the same clean root and central validation; not original federated training clients",
+  "execution_authorized": true,
+  "author_decision_sha256": "aee89e8210b5aa83d8ee814d5afde4bb655f3ba559bb53ae6ebcd1ca0d46851d",
+  "evidence_stage": "validation_postprocessing_screen",
+  "approval_scope": "Exact32 original8 candidates x four existing seed91001 FedAvg references; fixed20 virtual cohorts; no real-client fairness or test"
+}

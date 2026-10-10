@@ -1,0 +1,42 @@
+{
+  "utc": "2026-10-10T04:29:35.370668+00:00",
+  "commands": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "update",
+        "guardfed_celeba_mechanism_remaining620_valid_v2"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_mechanism_remaining620_valid_v2"
+      ],
+      "returncode": 7,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2: ERROR (spawn error)\n",
+      "stderr": ""
+    }
+  ],
+  "source_seal_sha256": "a3461e20592cd2bda3d53c7215fed377bbaa693360ba1abe02aa87fe8aa6fc03",
+  "root_approval_sha256": "55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c",
+  "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+  "restricted_CPU112_119_owners_before_install": [],
+  "queue_service": "guardfed_celeba_mechanism_remaining620_valid_v2",
+  "automatic_retry": false,
+  "new_training": 0,
+  "test": false
+}

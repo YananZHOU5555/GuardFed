@@ -1,0 +1,11 @@
+[program:guardfed_celeba_mechanism_remaining620_valid_v2]
+command=/usr/bin/taskset -c112-119 /usr/bin/nice -n10 /usr/bin/ionice -c3 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -u /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/evaluate_remaining.py manage --review /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/ROOT_APPROVED.json --review-sha256 ACTUAL_EXTERNAL_ROOT_APPROVAL_SHA
+directory=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010
+autostart=false
+autorestart=false
+startsecs=1
+startretries=0
+stopasgroup=true
+killasgroup=true
+stdout_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/supervisor.stdout.log
+stderr_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/supervisor.stderr.log

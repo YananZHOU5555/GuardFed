@@ -1,0 +1,62 @@
+{
+  "status": "NO_CNN_SUPERVISOR_COMPATIBILITY_AND_ZERO_RETRY_PASS",
+  "original29_seal_sha256": "101b0c2798456990885bd1db8305f7f47b6af49dca33c63b99edcc58e13e65f0",
+  "original29_members_unchanged": true,
+  "original_guard_other_functions_source_exact": true,
+  "original_science_projection_bytes_exact": true,
+  "original_PLAN_bytes_exact": true,
+  "cases": [
+    {
+      "case": "rc0_RUNNING",
+      "accepted": true,
+      "expected": true,
+      "guard_proof": {
+        "progress_sha256": "TEST_ONLY_SHA",
+        "service": "guardfed_celeba_mechanism_formal RUNNING pid1",
+        "service_stderr": "TEST_ONLY_CAPTURED_STDERR",
+        "service_returncode": 0,
+        "completed_n": 180,
+        "active": [],
+        "failed": [],
+        "observed_unix": 1791605302.4214475
+      }
+    },
+    {
+      "case": "rc3_EXITED800",
+      "accepted": true,
+      "expected": true,
+      "guard_proof": {
+        "progress_sha256": "TEST_ONLY_SHA",
+        "service": "guardfed_celeba_mechanism_formal EXITED Oct10",
+        "service_stderr": "TEST_ONLY_CAPTURED_STDERR",
+        "service_returncode": 3,
+        "completed_n": 800,
+        "active": [],
+        "failed": [],
+        "observed_unix": 1791605302.422449
+      }
+    },
+    {
+      "case": "rc3_EXITED_partial",
+      "accepted": false,
+      "expected": false,
+      "guard_proof": {
+        "error": "Producer service/connection error"
+      }
+    },
+    {
+      "case": "rc3_unknown",
+      "accepted": false,
+      "expected": false,
+      "guard_proof": {
+        "error": "Producer service/connection error"
+      }
+    }
+  ],
+  "startretries": 0,
+  "stderr_retained": true,
+  "CNN": 0,
+  "Torch_imported": false,
+  "SSH": 0,
+  "accepted_offserver": 0
+}

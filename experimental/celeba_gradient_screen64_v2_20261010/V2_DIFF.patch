@@ -1,0 +1,98 @@
+--- v1/check_prepared.py
++++ v2/check_prepared.py
+@@ -68,8 +68,8 @@
+     import run_queue
+     old_digest = run_queue.digest
+     run_queue.digest = lambda p: "MOCK_PACKAGE_NOT_REAL" if Path(p).name == "FILES_SHA256.json" else old_digest(p)
+-    mock = dict(status="ROOT_GRADIENT64_RESOURCE_PREFLIGHT_PASS", at_unix=1000, cpu_ids=[105], cpu_threads=1,
+-        max_workers=1, cuda_visible_device="1", nice=10, idle_io=True, all_threads_cpu105_idle=True,
++    mock = dict(status="ROOT_GRADIENT64_V2_RESOURCE_PREFLIGHT_PASS", at_unix=1000, cpu_ids=[105], cpu_threads=1,
++        max_workers=1, cuda_visible_device="1", nice=10, idle_io=True, no_restricted_cpu105_owner=True,
+         no_duplicate_worker=True, no_restricted_CPU_overlap=True, source_data_hashes_verified=True,
+         existing_nominal_compute_threads=20, actual_quota_cores=128, gpu_free_memory_mib=8192,
+         gpu_uuid="MOCK_GPU_NOT_REAL", guide_sha256=run_queue.GUIDE_SHA, package_seal_sha256="MOCK_PACKAGE_NOT_REAL",
+--- v1/COMMANDS.md
++++ v2/COMMANDS.md
+@@ -1,23 +1,25 @@
+ # 根审阅后使用；本交付未执行
+ 
+-本机已执行：
++原V1科学metadata检查已封存；本V2仅实际执行部署predicate回归，未重跑科学门检。下列完整检查入口已同步新字段，可按需使用：
+ ```powershell
+-python -B tmp/celeba_gradient_screen64_20261010/check_prepared.py
++python -B tmp/celeba_gradient_screen64_v2_20261010/check_prepared.py
+ ```
+ 
+ 部署保留整个目录的 snapshot sibling布局；`--repo`是原冻结core的逻辑仓库根。不要把共享cache/原权重重新打包。
+ 
+ 实际Linux入口（占位参数必须由root真实预检提供；当前没有可执行审批文件）：
+ ```bash
+-CUDA_VISIBLE_DEVICES=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 105 nice -n 10 ionice -c 3 python -B /workspace/celeba_gradient_screen64_20261010/run_queue.py \
++CUDA_VISIBLE_DEVICES=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 105 nice -n 10 ionice -c 3 python -B /workspace/celeba_gradient_screen64_v2_20261010/run_queue.py \
+   --repo <actual-frozen-core-logical-repo> \
+-  --out /workspace/celeba_gradient_screen64_results_20261010 \
++  --out /workspace/celeba_gradient_screen64_v2_results_20261010 \
+   --resource-preflight <actual-root-resource-preflight.json> \
+   --resource-sha256 <actual-sha256>
+ ```
+ 
+-预检JSON由root实际测量后提供：status=`ROOT_GRADIENT64_RESOURCE_PREFLIGHT_PASS`; at_unix(≤90s); cpu_ids=[105]; cpu_threads=max_workers=1; cuda_visible_device="1"; nice≥10; idle_io=true; all_threads_cpu105_idle/no_duplicate_worker/no_restricted_CPU_overlap/source_data_hashes_verified=true; existing_nominal_compute_threads/actual_quota_cores; gpu_free_memory_mib≥4096及gpu_uuid; guide_sha256; 本包FILES_SHA256.json的package_seal_sha256; AUTHOR_DECISIONS.json的author_decisions_sha256; test_authorized=automatic_retry_authorized=false。不要从本机MOCK fixture复制成actual PASS。
++预检JSON由root实际测量后提供：status=`ROOT_GRADIENT64_V2_RESOURCE_PREFLIGHT_PASS`; at_unix(≤90s); cpu_ids=[105]; cpu_threads=max_workers=1; cuda_visible_device="1"; nice≥10; idle_io=true; no_restricted_cpu105_owner/no_duplicate_worker/no_restricted_CPU_overlap/source_data_hashes_verified=true; existing_nominal_compute_threads/actual_quota_cores; gpu_free_memory_mib≥4096及gpu_uuid; guide_sha256; 本包FILES_SHA256.json的package_seal_sha256; AUTHOR_DECISIONS.json的author_decisions_sha256; test_authorized=automatic_retry_authorized=false。不要从本机MOCK fixture复制成actual PASS。
+ 
+ `--single-job`是串行入口的内部子进程模式，仅由已过资源门的parent调用。直接科学worker入口同原法存在，但root实际派发应走上述queue资源门。已有输出/任何失败拒绝覆盖，失败即停止，不自动重试。
+ 
+ 完成项由原 `snapshot/gradient_bridge_20261010/accept_result.py::checked_result(job_path, output)` 严格核验；后续离机原archive/member/hash验证与root采用尚未执行。64全部严格离机前不汇总选recipe。
++
++V2 CPU规则：扫描所有进程的所有线程，只排斥 affinity 核数≤16 且与 CPU105 重叠的既有限制性 reservation。较大mask仅表示线程可在这些CPU调度，不能据此宣称CPU105独占或空闲。root实际预检必须另外记录 broad-mask 线程信息、CPU实际测量和全工作负载预算，再产生上述 fresh proof；本包没有实际资源PASS。
+--- v1/README.md
++++ v2/README.md
+@@ -10,10 +10,14 @@
+ 
+ 唯一额外运行适配在 `run_queue.bind_shared_inputs`：复用原门检6个注册共享数据目标的逻辑名称、确切物理路径、大小、SHA；原guard拒绝越出repo的其他路径，未放宽到任意symlink。worker/checker科学函数不改。`run_queue.py`只串行调度一个子worker，每项使用独立进程，避免重复设置Torch interop线程的生命周期问题；原checked通过才记录server完成。离机接受仍为0，后续原严格备份/异机验收由root安排。
+ 
+-建议最多1 worker：物理GPU1/CPU105/1thread/nice10/idleIO。FL102–103、Hybrid104、CPU评价112–119及现有main8均受保护。RESOURCE_PLAN只是计划；root须读当前guide、逐线程核CPU105空闲/cgroup容量、GPU1 UUID/可用显存、无重复worker和actual source/data hash，再提供真实外部预检文件及SHA。没有生成实际预检PASS或派发审批。
++建议最多1 worker：物理GPU1/CPU105/1thread/nice10/idleIO。FL102–103、Hybrid104、CPU评价112–119及现有main8均受保护。RESOURCE_PLAN只是计划；root须读当前guide、扫描所有线程，核无≤16核限制性affinity reservation与CPU105重叠/cgroup容量、GPU1 UUID/可用显存、无重复worker和actual source/data hash，再提供真实外部预检文件及SHA。没有生成实际预检PASS或派发审批。
+ 
+ 选择口径仍为**每候选每条件先算原frozen_score，再平均四条件；每方法最高，精确并列candidate字典序**。原frozen_score.py原字节复用；保留全候选/ACC冠军/三指标Pareto。n=1，无SD/显著性；四条件不是独立seed，不保证某法胜出，不自动采用recipe或启动100。现有loader materialize过test属性/划分元数据，不能称untouched test；没有test图像评价/拟合/选参。
+ 
+ 本地只生成代码/config/小证据；模型、数组、日志、归档仅服务器或先验卷标Yanan 2TB/容量后的F:/YananResearchStorage/GuardFed。本包源入口拒绝Windows模型输出；E不存新模型或原始大产物。
+ 
+ `SELF_CHECK.json`实际通过：64身份/32+32/16候选×四条件、原worker/checker/component字节、旧源hash、原checker missing-result/失败拒收、原metadata变异拒收和少量资源MOCK正反边界；没有CNN、模型写入或真实资源检查。原完整structural gate继续作为未变checker回归依据，不重复整套科学门检。
++
++## V2仅部署资源语义修复
++
++V1首次实际root资源预检把主800的大affinity mask误作CPU105独占冲突，训练worker0、结果0；原失败封条不改，具体原观察及SHA见V2_LINEAGE.json。大mask为可调度集合，不表示CPU独占或空闲。V2只改部署predicate字段/status与对应fixture/CLI/资源说明，全部64job及科学snapshot原字节。外部root预检仍必须实测并记录所有受限线程、broad-mask线程、CPU测量和预算；不凭本地MOCK允许运行。SELF_CHECK.json是V1历史科学metadata证据，V2实际有限回归见V2_CHECK.json。
+--- v1/RESOURCE_PLAN.json
++++ v2/RESOURCE_PLAN.json
+@@ -37,10 +37,12 @@
+   "outputs_allowed": "server /workspace only, or prechecked F volume; E is code/config/small indices/reports only",
+   "required_before_root_dispatch": [
+     "read current /etc/vast-agents-guide.md",
+-    "verify all-thread CPU105 idle/no overlap and cgroup capacity",
++    "scan all threads; reject only <=16-core restricted-affinity reservations intersecting CPU105; record broad-mask threads, actual CPU measurement and cgroup budget; no exclusivity/idle claim",
+     "verify GPU1 actual UUID/free memory/no duplicate worker",
+     "rehash actual frozen core/data/components, six exact registered shared targets",
+     "external fresh resource-preflight path/SHA; unique new output namespace"
+   ],
+-  "protected_main_queue": "existing main8; actual all-thread CPU ownership must be inspected by root, no guessed CPU IDs"
++  "protected_main_queue": "existing main8; actual all-thread CPU ownership must be inspected by root, no guessed CPU IDs",
++  "resource_preflight_status": "ROOT_GRADIENT64_V2_RESOURCE_PREFLIGHT_PASS",
++  "resource_owner_field": "no_restricted_cpu105_owner"
+ }
+--- v1/run_queue.py
++++ v2/run_queue.py
+@@ -32,12 +32,12 @@
+ 
+ 
+ def validate_resources(proof, now):
+-    require(proof["status"] == "ROOT_GRADIENT64_RESOURCE_PREFLIGHT_PASS", "Actual root preflight required")
++    require(proof["status"] == "ROOT_GRADIENT64_V2_RESOURCE_PREFLIGHT_PASS", "Actual root preflight required")
+     require(0 <= now - proof["at_unix"] <= 90, "Stale resource preflight")
+     require(proof["cpu_ids"] == [105] and proof["cpu_threads"] == proof["max_workers"] == 1
+             and proof["cuda_visible_device"] == "1" and proof["nice"] >= 10 and proof["idle_io"] is True,
+             "Only CPU105/thread1/GPU1/nice10/idleIO allocation")
+-    require(proof["all_threads_cpu105_idle"] is True and proof["no_duplicate_worker"] is True
++    require(proof["no_restricted_cpu105_owner"] is True and proof["no_duplicate_worker"] is True
+             and proof["no_restricted_CPU_overlap"] is True and proof["source_data_hashes_verified"] is True,
+             "Actual ownership/source checks required")
+     require(proof["existing_nominal_compute_threads"] + 1 <= proof["actual_quota_cores"]

@@ -1,0 +1,45 @@
+--- sealed_v1/evaluate_remaining.py
++++ v2/evaluate_remaining.py
+@@ -13,7 +13,7 @@
+ from bridge_adapter import SCOPE, CPUS, canonical, construct_record, digest, inventory, load, project, read, require
+ 
+ HERE = Path(__file__).resolve().parent
+-REMOTE = Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010')
++REMOTE = Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010')
+ REPO = Path('/workspace/GuardFed-celeba-expanded')
+ RUNTIME = REMOTE / 'attempt1'
+ GUIDE_SHA = '42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+@@ -96,9 +96,11 @@
+     require(not snapshot['failed'] and len(completed) == len(set(completed)) and set(completed) <= ids, 'Producer queue failure/duplicate/foreign ID')
+     require(len(active) <= 8 and len({r['id'] for r in active}) == len(active)
+             and {r['id'] for r in active} <= ids and not set(completed) & {r['id'] for r in active}, 'Producer active identity invalid')
+-    require(observed.returncode == 0 and len(words) >= 2 and words[0] == 'guardfed_celeba_mechanism_formal'
+-            and (words[1] == 'RUNNING' or (words[1] == 'EXITED' and len(completed) == 800 and not active)), 'Producer service/connection error')
+-    return snapshot, dict(progress_sha256=digest(path), service=observed.stdout.strip(), service_returncode=observed.returncode,
++    require(len(words) >= 2 and words[0] == 'guardfed_celeba_mechanism_formal'
++            and ((words[1] == 'RUNNING' and observed.returncode == 0)
++                 or (words[1] == 'EXITED' and observed.returncode in (0, 3) and len(completed) == 800 and not active)),
++            'Producer service/connection error')
++    return snapshot, dict(progress_sha256=digest(path), service=observed.stdout.strip(), service_stderr=observed.stderr.strip(), service_returncode=observed.returncode,
+                           completed_n=len(completed), active=active, failed=snapshot['failed'], observed_unix=time.time())
+ 
+ 
+--- sealed_v1/supervisor.conf.template
++++ v2/supervisor.conf.template
+@@ -1,10 +1,11 @@
+-[program:guardfed_celeba_mechanism_remaining620_valid]
+-command=/usr/bin/taskset -c112-119 /usr/bin/nice -n10 /usr/bin/ionice -c3 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -u /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010/evaluate_remaining.py manage --review /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010/ROOT_APPROVED.json --review-sha256 ACTUAL_EXTERNAL_ROOT_APPROVAL_SHA
+-directory=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010
++[program:guardfed_celeba_mechanism_remaining620_valid_v2]
++command=/usr/bin/taskset -c112-119 /usr/bin/nice -n10 /usr/bin/ionice -c3 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -u /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/evaluate_remaining.py manage --review /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/ROOT_APPROVED.json --review-sha256 ACTUAL_EXTERNAL_ROOT_APPROVAL_SHA
++directory=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010
+ autostart=false
+ autorestart=false
+ startsecs=1
++startretries=0
+ stopasgroup=true
+ killasgroup=true
+-stdout_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010/supervisor.stdout.log
+-stderr_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010/supervisor.stderr.log
++stdout_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/supervisor.stdout.log
++stderr_logfile=/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/supervisor.stderr.log

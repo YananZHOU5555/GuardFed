@@ -1,0 +1,48 @@
+{
+  "status": "PASS_TWO_OPERATIONAL_FIXES_SOURCE_ONLY",
+  "source_adoptable": true,
+  "source_seal_sha256": "a3461e20592cd2bda3d53c7215fed377bbaa693360ba1abe02aa87fe8aa6fc03",
+  "sealed_members_verified": 18,
+  "prior_review_sha256": "7c82393419ca183d69955ebcbd182fe68438c02f32d74562212da91b987f6adc",
+  "findings": [],
+  "resolved": [
+    "Exact original target RUNNING requires rc0; EXITED permits rc0/3 only with800 unique valid completed IDs and0active/failures. Unknown/partial reject; stdout/stderr/returncode retained.",
+    "Supervisor autostart=false/autorestart=false/startretries=0; independent V2 namespace and approval template match."
+  ],
+  "independent_actual_metadata_calls": [
+    {
+      "state": "RUNNING",
+      "returncode": 0,
+      "completed": 180,
+      "accepted": true
+    },
+    {
+      "state": "EXITED",
+      "returncode": 3,
+      "completed": 800,
+      "accepted": true
+    },
+    {
+      "state": "EXITED",
+      "returncode": 3,
+      "completed": 799,
+      "accepted": false
+    },
+    {
+      "state": "UNKNOWN",
+      "returncode": 3,
+      "completed": 800,
+      "accepted": false
+    }
+  ],
+  "all_other_runtime_functions_source_exact": true,
+  "original_science_projection_plan_constructor_bindings_ids_bytes_exact": true,
+  "CPU_8thread112_119_policy_unchanged": true,
+  "old620_audit_not_repeated": true,
+  "reviewer_initial_path_separator_check_failure_preserved": true,
+  "SSH": false,
+  "Torch_imported": false,
+  "CNN": false,
+  "actual_Linux_preflight": false,
+  "offserver_transport_review_separate": true
+}

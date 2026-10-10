@@ -1,0 +1,55 @@
+{
+  "status": "SOURCE_PREPARED_NOT_DEPLOYED_NOT_APPROVED_NOT_ACCEPTED",
+  "scope": "MECHANISM_REMAINING620_TERMINAL_VALID_ONLY",
+  "remaining620_variant_counts": {
+    "minus_C": 20,
+    "minus_A": 100,
+    "minus_F": 100,
+    "minus_V": 100,
+    "minus_N": 100,
+    "no_hard_screen": 100,
+    "fixed_balanced": 100
+  },
+  "remaining620_ids_file": "REMAINING_620_IDS.txt",
+  "plan_sha256": "b604b9adc449a4452710c448753bbd61586efd02dfe606051e9bb08da77198f6",
+  "future_checkpoint_sha256s_all_null": true,
+  "excluded_accepted_U100_C80": 180,
+  "Full_reference_only": 100,
+  "original_manifest_sha256": "498ed0e033ef6eb5532286820ec987af3b44ca6251d8a84c42ce9c3e5ff5ab2d",
+  "prior180_adoption_sha256": "3fc1e49e927a971a577d648dd9a7ff44ec7ac81552ea250026349d4f2e06d615",
+  "source_files_seal": "FILES_SHA256.json",
+  "source_diff": "SCIENTIFIC_METADATA_DIFF.patch",
+  "original_scientific_functions_reused_without_change": 11,
+  "original_strict_acceptor": "evidence_v4.accept_new -> worker.checked -> runner.checked_result",
+  "checks": {
+    "SELF_CHECK.json": "6376f07c87b09205187cb1075dc33931a4ba4ba525d504929be932a5df6d893f",
+    "SOURCE_CHECK.json": "d5266d4bdf61a3be9ce6fbe1850648e38cc5ee45cabd58d21822e9801baefbae"
+  },
+  "checks_actual": {
+    "positive_actual_terminal_metadata": true,
+    "metadata_scheduler_refusals": 13,
+    "real_coordinator_failstop_fixtures": 2,
+    "Torch_imported": false,
+    "CNN": 0,
+    "original_input_pins": 13,
+    "old180_and_Full100_metadata_regression": true,
+    "atomic_once_binding_refusal": true
+  },
+  "first_check_tool_failure_preserved": "SOURCE_CHECK_FIRST_FAILURE.json",
+  "local_storage_receipt": "LOCAL_STORAGE.json",
+  "local_large_writes": 0,
+  "SSH": 0,
+  "training": 0,
+  "test_inference": 0,
+  "new_offserver_accepted": 0,
+  "shared_STATE_or_Git_changed": false,
+  "deployment_pending": [
+    "root independent source review and external SHA approval",
+    "actual Linux source/data/resource and protected-queue preflight",
+    "separately reviewed thin metadata export/transport to original offserver archive verifier; earlier static backup_completed.py is not a direct namespace match"
+  ],
+  "recovery": "No automatic resume/retry; preserve partial and remote successes, independent root acceptance and fresh complement required",
+  "runtime_command": "taskset -c112-119 nice -n10 ionice -c3 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -u /workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_20261010/evaluate_remaining.py manage --review ROOT_APPROVED.json --review-sha256 ACTUAL_ROOT_SHA",
+  "formal_primary_endpoint": "PENDING_USER_AUTHOR_DECISION",
+  "source_only_boundary": true
+}

@@ -1,0 +1,17 @@
+--- original/prepare_reuse.py
++++ snapshot/prepare_reuse.py
+@@ -86,7 +86,7 @@
+             rows.append(dict(id=identity, job=path.name, job_sha256=digest(path)))
+     assert len(rows) == 32
+     write_json(output / "manifest.json", dict(status=protocol["status"], execution_started=False, jobs=rows,
+-        protocol_sha256=digest(HERE / "protocol.json"), limitation="Mapping unresolved and null-hash-bound draft, not executable"))
++        protocol_sha256=digest(HERE / "protocol.json"), limitation="Frozen32 source only; approved virtual mapping SHA-bound; actual run/strict acceptance pending"))
+ 
+ 
+ def extract_canary(entries):
+@@ -145,4 +145,4 @@
+     prepare_jobs(entries, protocol, args.out, args.mapping, args.mapping_meta)
+     if args.extract_canary:
+         extract_canary(entries)
+-    print(json.dumps(dict(status="PREPARED_NOT_FROZEN", referenced_fedavg_checkpoints=len(entries), draft_postprocessing_jobs=32)))
++    print(json.dumps(dict(status=protocol["status"], referenced_fedavg_checkpoints=len(entries), prepared_postprocessing_jobs=32)))

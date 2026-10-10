@@ -1,0 +1,54 @@
+{
+  "utc": "2026-10-10T04:30:45.276998+00:00",
+  "commands": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2a: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "update",
+        "guardfed_celeba_mechanism_remaining620_valid_v2a"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2a: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_celeba_mechanism_remaining620_valid_v2a"
+      ],
+      "returncode": 0,
+      "stdout": "guardfed_celeba_mechanism_remaining620_valid_v2a: started\n",
+      "stderr": ""
+    }
+  ],
+  "preserved_first_failure": {
+    "status": "PRESERVED_WRAPPER_TASKSET_SYNTAX_FAILURE_BEFORE_PYTHON",
+    "utc": "2026-10-10T04:30:43.163674+00:00",
+    "service": "guardfed_celeba_mechanism_remaining620_valid_v2   FATAL     Exited too quickly (process log may have details)",
+    "returncode": 3,
+    "log": "/usr/bin/taskset: invalid option -- '1'\nTry 'taskset --help' for more information.\n",
+    "attempt_namespace_absent": true,
+    "new_training": 0,
+    "CNN": 0,
+    "queue_source_unchanged": true,
+    "approval_sha256": "55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c",
+    "old_wrapper_sha256": "7ec9a87a20414d2450840cfdb3c076287fa5eed17ceada14bdb63bdb7629da5d",
+    "repair": "Separate taskset option -c from CPU-list argument; new wrapper and service only",
+    "fixed_taskset_syntax_exit": 0
+  },
+  "actual_service": "guardfed_celeba_mechanism_remaining620_valid_v2a",
+  "root_approval_sha256": "55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c",
+  "restricted_owners_before_start": [],
+  "science_source_changed": false,
+  "automatic_retry": false
+}

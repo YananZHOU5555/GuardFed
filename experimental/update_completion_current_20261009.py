@@ -289,6 +289,18 @@ The bounded manuscript locator found historical IEEEtran source in paper.md, but
 A concrete historical Fig3 correction candidate now plots original round70 ACC against AEOD and ASPD, retaining all26 settings and260 same-round records;78 mean checks and PDF/PNG review pass. It is explicitly a single-seed author-review candidate, not an adopted replacement or recovery of original plotting/execution/checkpoint identities. No FairScore, metric-wise extrema, test-based round selection or scene-as-seed SD is used. Historical test exposure, unresolved ForestDiffusion execution and PCA-label limitations remain in the caption and figure. P4 remains open.
 
 '''
+if state.get('author_decisions_20261010'):
+    current+='\nThe2026-10-10 author accepts Huber identity projection on R^p as a CNN empirical adaptation, without inherited theoretical guarantees. The author delegates LoGoFair population definition; root selects fixed image-ID20 virtual cohorts, root-only DP fitting, explicitly not true training-client fairness. These H/L choices are resolved; original prepared records remain preserved.\n'
+if state.get('gradient64_validation_search_20261010'):
+    g=state['gradient64_validation_search_20261010']
+    observed=g.get('latest_measured_observation',{})
+    current+=f"\nThe new Fed-NGA32+Huber32 validation search actually started with one physicalGPU1 worker, CPU105, nice10/idleIO. Root verifies startup round{g['root_startup']['observed_round']}, physicalGPU UUID and original scientific/job bytes. The latest actual snapshot separately observes{observed.get('terminal70_observed',0)}/64 terminal70 jobs; zero offserver acceptances are yet adopted. Two earlier resource-preflight engineering failures occurred before training and are preserved. Entry: {g['root_startup_path']}.\n"
+if state.get('logofair32_validation_search_20261010'):
+    l=state['logofair32_validation_search_20261010']
+    current+=f"\nThe original8×4 LoGoFair validation-only search is executing30 post-rounds per job from four accepted FedAvg models/margin caches, with zero CNN calls or new training. {l['original_strict_closed']}/32 are locally closed by the original strict bridge, root-adopted0; no recipe is selected before the complete search. All outputs stay on checked F storage. The earlier real-score3-round gate passed40 Beta fits and exact serialized replay, but its constant-negative prediction is preserved as interface evidence only.\n"
+if state.get('mechanism_remaining620_valid_20261010'):
+    r=state['mechanism_remaining620_valid_20261010']
+    current+=f"\nThe finite remaining620 CPU terminal-validation queue actually started under {r['actual_service']}, excluding prior180 and Full reinference. A single eight-thread CPU evaluator on112–119, nice10/idleIO with hidden CUDA, binds only completed original70-round producers. Its first original strict closure has zero native discrepancy and exact identity with the accepted native archive row; startup-time remote strict closure count is{r['remote_strict_closed_at_startup']}, with zero newly adopted offserver records. The root wrapper taskset syntax failure occurred before Python and is preserved. The first transport stopped after writing its archive because a pinned verifier path was absent; predictions and training are unaffected, and one separately reviewed recovery must close the existing archive rather than rerun scientific work. Entry: {r['root_startup_path']}.\n"
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')
 start=text.index('## Current accepted increment');end=text.index('## Historical accepted increment',start)
 p.write_text(text[:start]+current+text[end:],encoding='utf8')

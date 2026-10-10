@@ -1,0 +1,74 @@
+{
+  "status": "PASS_SOURCE_ONLY_REVIEW_RUNTIME_INPUT_STAGING_PENDING",
+  "source_adoptable": true,
+  "source_seal_sha256": "accd5cb8582a344f870188f1e70661b6dc9dc948cc88c9e6f6651e451607bc49",
+  "sealed_members_verified": 57,
+  "input_source_pins_verified": 16,
+  "candidate_grid": {
+    "jobs": 32,
+    "candidates": 8,
+    "conditions_per_candidate": 4,
+    "post_rounds": 30,
+    "training_seed": 91001,
+    "fit_seed": 1719,
+    "original_FedAvg_rounds": 70
+  },
+  "original_bridge_adapter_official_source_exact": true,
+  "original_four_reuse_entries_exact": true,
+  "all16_reference_archive_member_SHA_metadata_bound": true,
+  "large_archives_rehashed_or_unpacked": false,
+  "approved_mapping": {
+    "cohorts": 20,
+    "input": "fixed image_id SHA256 domain",
+    "true_training_clients": false,
+    "root_only_fit": true
+  },
+  "gate": {
+    "post_rounds": 3,
+    "Beta_fits": 40,
+    "constant_negative_retained": true,
+    "interface_only": true,
+    "not32scientific_results": true
+  },
+  "storage_and_lifecycle": {
+    "F_volume_label_health_capacity_before_bulk": true,
+    "no_internal_fallback": true,
+    "no_existing_stage_or_attempt_overwrite": true,
+    "input_exclusive_started_marker": true,
+    "fresh_one_thread_CPU_child_per_job": true,
+    "CUDA_hidden": true,
+    "child_error_stops_queue": true,
+    "no_automatic_retry": true
+  },
+  "summary_predicates": {
+    "original_frozen_score_bytes_exact": true,
+    "full32_only": true,
+    "per_condition_score_then_mean4": true,
+    "lexical_exact_tie": true,
+    "all_candidates_ACCchampion_Pareto_negative_retained": true,
+    "seed_n": 1,
+    "SD_or_significance": false,
+    "independent_mock_tie_Pareto_pass": true,
+    "refusals": [
+      "partial31",
+      "duplicateID"
+    ]
+  },
+  "findings": [],
+  "root_execution_requirements": [
+    "Fresh F volume label Yanan2TB, health and capacity before actual input stage and each bulk step.",
+    "Actual stage must rehash original archives and member bytes; this source review intentionally only checked frozen archive metadata and file presence, not large archive contents.",
+    "Use queue wrapper rather than direct bridge to retain F-only path/volume/exclusive-marker guards. Preserve any partial stage/output or failure and do not retry automatically.",
+    "Actual32 original strict closure and root result review required before recipe adoption; one constant-negative3round gate provides no other-candidate or30round convergence guarantee."
+  ],
+  "review_limits": {
+    "SSH": false,
+    "CNN": false,
+    "Torch_imported": false,
+    "Beta_fit": false,
+    "stage_inputs": false,
+    "archive_unpack": false,
+    "source_modified": false,
+    "actual_runtime_resource_claim": false
+  }
+}

@@ -1,0 +1,39 @@
+--- sealed_C_after70/validate_inventory
++++ remaining620_projection/validate_inventory
+@@ -11,11 +11,11 @@
+     require(len(refs) == 100 and len({r['id'] for r in refs}) == 100 and {r['id'] for r in refs} == set(full), 'Duplicate/missing Full reference')
+     require(all(r == full_reference(full[r['id']]) for r in refs), 'Full reference differs from accepted baseline model/data')
+     records = inventory['records']
+-    require(len(records) == 180 and len({r['id'] for r in records}) == 180, 'This inventory contains exactly180 actual accepted terminals')
+-    require(set(r['id'] for r in records) == set(ACCEPTED_IDS), 'Actual accepted180 snapshot changed')
+-    require(inventory['excluded_prior_replay_ids'] == EXCLUDED_PRIOR_IDS and inventory['selected_replay_ids'] == REPLAY_IDS, 'Excluded-prior170/selected10 boundary changed')
++    require(len(records) == 1 and len({r['id'] for r in records}) == 1, 'This per-ID inventory contains one original-strict accepted terminal')
++    require(set(r['id'] for r in records) == set(ACCEPTED_IDS), 'Once-bound terminal identity changed')
++    require(inventory['excluded_prior_replay_ids'] == EXCLUDED_PRIOR_IDS and inventory['selected_replay_ids'] == REPLAY_IDS, 'Excluded-prior180/selected1 boundary changed')
+     require(not set(full).intersection(r['id'] for r in records), 'Full may not enter a new replay cohort')
+-    require(all(r['variant'] in ('minus_U', 'minus_C') and r['distribution'] in DISTRIBUTIONS for r in records), 'Only adopted U100+C70 plus exact ten C terminals; no other scope')
++    require(all(r['variant'] in VARIANTS[1:] and r['distribution'] in DISTRIBUTIONS for r in records), 'Only frozen620 controls may be bound; Full/prior180 remain excluded')
+     paired = {cell(r): r for r in full.values()}
+     for r in records:
+         validate_variant_metadata(r)
+@@ -50,8 +50,8 @@
+         require(all(files.get(r['runtime_paths'][k]) == r[k]['sha256'] for k in ('checkpoint', 'result', 'raw_job')), 'Original accepted file identity changed')
+         require(r['raw_job']['sha256'] == r['manifest_entry']['job_sha256'], 'Manifest job bytes differ')
+     missing = inventory['pending_new_ids_no_checkpoint']
+-    require(len(missing) == len(set(missing)) == 620 and not set(missing).intersection(r['id'] for r in records), 'Invalid pending cohort')
++    require(len(missing) == len(set(missing)) == 619 and not set(missing).intersection(r['id'] for r in records), 'Invalid pending cohort')
+     expected_ids = {f'{v}_{d}_{a}_seed{s}' for v, d, a, s in itertools.product(VARIANTS[1:], DISTRIBUTIONS, ATTACKS, range(91001, 91011))}
+-    require(set(missing) | {r['id'] for r in records} == expected_ids, 'Missing/foreign planned mechanism ID')
++    require(set(missing) | {r['id'] for r in records} | set(EXCLUDED_PRIOR_IDS) == expected_ids, 'Missing/foreign planned mechanism ID')
+     require(inventory['new_image_inference_performed'] is False and inventory['full_weights_repacked'] == 0, 'Preparation cannot claim inference or copy Full weights')
+     return records--- sealed_C_after70/require_approval
++++ remaining620_projection/require_approval
+@@ -3,7 +3,7 @@
+             'No bounded mechanism valid replay approval')
+     require(approval.get('inventory_sha256') == inventory_sha and approval.get('bridge_sha256') == bridge_sha, 'Approval binds another inventory/source')
+     ids = approval.get('selected_ids', [])
+-    require(ids == REPLAY_IDS and len(ids) == len(set(ids)) == 10 and selected_id in ids, 'Approval contains pending/Full/foreign/duplicate IDs')
++    require(ids == REPLAY_IDS and len(ids) == len(set(ids)) == 1 and selected_id in ids, 'Approval contains pending/Full/foreign/duplicate IDs')
+     require(approval.get('device') == 'cpu' and approval.get('compute_threads') == 8 and approval.get('max_processes') == 1, 'Only one eight-thread CPU worker can be prepared here')
+     cpus = approval.get('allowed_cpus', [])
+     require(cpus == list(range(112, 120)), 'Explicit8 CPU budget required')

@@ -1,0 +1,64 @@
+{
+  "status": "CHANGES_REQUIRED_TWO_OPERATIONAL_BLOCKERS",
+  "source_adoptable": false,
+  "source_seal_sha256": "101b0c2798456990885bd1db8305f7f47b6af49dca33c63b99edcc58e13e65f0",
+  "source_members_verified": 29,
+  "input_pins_verified": 13,
+  "exact_complement": {
+    "manifest": 800,
+    "excluded": 180,
+    "remaining": 620,
+    "Full_reference_only": 100,
+    "future_checkpoint_sha256s_all_null": true
+  },
+  "original180_inventory_validated": true,
+  "unchanged_whole_scientific_functions": 11,
+  "original_constructor_source_exact": true,
+  "strict_binding_order": "producer_exit -> original_v4_strict -> all_terminal/source_hashes -> immutable_binding -> original_replay -> original_saved_array_accept",
+  "CPU_bootstrap": "Original v3/v2 once before original strict tensor operations; subsequent v3 uses cached replay. Source reviewed, real Linux not exercised.",
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "evaluate_remaining.py",
+      "line": 99,
+      "title": "Normal completed producer EXITED can stop remaining evaluation",
+      "evidence": "Actual training_snapshot function given all800 completed, empty active/failure and exact service EXITED with supervisorctl rc3 rejects; same metadata rc0 passes. No subprocess executed.",
+      "impact": "When original800 producer finishes before all620 CPU replays, this intended healthy terminal state cannot pass the common non-running status return code.",
+      "minimal_fix": "Retain returncode/stdout/stderr. Accept exact target EXITED only with all800 genuine completed IDs and no active/failure, using expected status command rc0/3; keep RUNNING rc0 and other errors fail-closed. Add one direct predicate fixture for this transition."
+    },
+    {
+      "priority": "P2",
+      "file": "supervisor.conf.template",
+      "line": 1,
+      "title": "Startup retries not explicitly disabled",
+      "evidence": "autostart=false and autorestart=false are present; startretries is absent. Supervisor startup BACKOFF retry policy is distinct from autorestart.",
+      "impact": "Early preflight/runtime failure may start the same attempt again, contrary to preserved-failure/no-automatic-retry contract.",
+      "minimal_fix": "Set startretries=0 in a separately versioned deployment template/package; retain old sealed evidence."
+    }
+  ],
+  "existing_fixture_coverage_reviewed": {
+    "actual_native188_terminal_metadata": true,
+    "metadata_refusals": 13,
+    "coordinator_failstop_fixtures": 2,
+    "atomic_duplicate_binding": true,
+    "not_real_Linux_or_CNN": true
+  },
+  "independent_read_only_transition_fixture": {
+    "all800_EXITED_rc3_rejected": "Producer service/connection error",
+    "same_EXITED_rc0_accepted": true
+  },
+  "deployment_requirements": [
+    "Independently reviewed thin offserver export/transport is required; source explicitly does not claim offserver accepted results.",
+    "Root actual source/data/manifest identity, producer health, old replay EXITED0workers, sglangSTOPPED, all-thread CPU112..119 ownership, fresh quota/RAM/reserved-workload and isolatedcu128 checks remain required.",
+    "All variants retain original variant-ledger checks; only a real accepted terminal may receive a once-only binding, and first numerical/identity/child error must stop without retry.",
+    "No Full or old180 inference; no mean from partial scenarios; local large arrays/archives only freshly verified F Yanan2TB storage."
+  ],
+  "review_boundaries": {
+    "SSH": false,
+    "Torch_imported": false,
+    "CNN": false,
+    "source_modified": false,
+    "actual_resource_preflight": false,
+    "new_scientific_records": 0
+  }
+}

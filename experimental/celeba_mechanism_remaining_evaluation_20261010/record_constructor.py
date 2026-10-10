@@ -1,0 +1,12 @@
+record = {'id': model_id, 'variant': job['variant'], 'method': job['method'], 'source_method': result['method'],
+                      'distribution': job['distribution'], 'actual_alpha': result['alpha'], 'attack': job['attack'], 'seed': result['seed'],
+                      'terminal_round': 70, 'original_split': 'valid', 'original_n_eval': 19867,
+                      'config': job['config'], 'config_canonical_sha256': b.canonical(job['config']),
+                      'source_hashes': job['source_hashes'], 'adapter_source_hashes': job['adapter_hashes'],
+                      'protocol_sha256': job['protocol_sha256'], 'data_contract': result['data_contract']['image_data_contract'],
+                      'original_remote_output': job['output'], 'original_job': entry['job'],
+                      'runtime_paths': {'checkpoint': job['output'] + '/model.pt', 'result': job['output'] + '/result.json', 'raw_job': entry['job']},
+                      'training_torch': result['revision_job']['torch_version'], 'prior_validation_metrics': result['metrics'],
+                      'native_prediction_rule': 'root_fitted_group_thresholds_from_original_recipe',
+                      'paired_full': b.full_reference(control), 'manifest_entry': copy.deepcopy(entry),
+                      'accepted_v4_row': copy.deepcopy(row), **refs}
