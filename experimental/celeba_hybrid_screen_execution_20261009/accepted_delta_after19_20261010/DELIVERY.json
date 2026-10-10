@@ -1,0 +1,57 @@
+{
+  "status": "EXACT2_SERVER_STRICT_OFFSERVER_TENSORS_RECORD_CHECKS_PASS_ROOT_PENDING",
+  "checked_utc": "2026-10-10T01:11:43.966365+00:00",
+  "old_accepted": 19,
+  "accepted_new": 2,
+  "accepted_total_if_root_adopts": 21,
+  "planned": 32,
+  "selected_ids": [
+    "CosineFairness_lam5.0_tau0.1_lr0.001_non-IID_S-DFA_seed91001_screen",
+    "CosineFairness_lam5.0_tau0.2_lr0.001_IID_Benign_seed91001_screen"
+  ],
+  "snapshot_utc": "2026-10-10T01:07:51.133870+00:00",
+  "snapshot_terminal": 21,
+  "snapshot_active_rounds": [
+    25
+  ],
+  "snapshot_service": "guardfed_celeba_hybrid_screen32   RUNNING   pid 33737, uptime 14:01:11",
+  "snapshot_cpu_quota": 122.87999,
+  "snapshot_nominal_threads": 13,
+  "archive_sha256": "a49637ceb7d89ae41e0b84a353b2918f613fe37332e7f223a5f726e8b8d98e64",
+  "archive_members": 35,
+  "archive_bytes": 1098588,
+  "archive_inventory_sha256": "7a8ce005e6c6be731f74ca5bd23834c8e6ad7e2dd7180d96096302f654a0a87d",
+  "server_strict_sha256": "96555b4c6ea58ed74a8dafa910cc8a84bad3ba7eb96c479bd35e95a60a03c855",
+  "offserver_proof_sha256": "699279e6fb4f57cf1b48decd0f721c81b82c588d7e109f4216334dacbea7a5e2",
+  "record_bridge_sha256": "80167b8dac3ac7680a4016c79d850457cc9bfafd5837c30e96f234b6f9a69334",
+  "root_ready_sha256": "bf84dca052deff7a630d26b05452feeb3950531d7fa5e4992a4aa3e1e097ba34",
+  "backup_receipt_sha256": "284834a25c6debad918b9650470c19ce13b9c1176be65af5841269e196bf6aea",
+  "remote_collector_receipt_sha256": "598e007f24c7e512aae62f9cc912fabad0bf7fde1b8273d79657d44ef69a82c4",
+  "source_members_not_repackaged": 69,
+  "server_runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "torch": "2.11.0+cu128",
+    "cuda_build": "12.8",
+    "CPU": [
+      106
+    ],
+    "threads": 1,
+    "gpu_name_for_original_checker": "NVIDIA GeForce RTX 5090",
+    "cuda_context_initialized_for_original_device_metadata": true
+  },
+  "local_runtime": "2.8.0+cpu",
+  "shared_log_prefix_only": true,
+  "canonical_latest_chain_unchanged": true,
+  "new_CNN_training_test": false,
+  "no_recipe_selection": true,
+  "no_later_arrivals": true,
+  "automatic_retry": false,
+  "nulls_and_negative_results_preserved": true,
+  "limits": [
+    "Fixed32 screen uses one seed91001 and four conditions per candidate. Partial21 is not a complete search, recipe selection, across-seed sample SD, significance or formal100 result.",
+    "Original GPU-trained provenance and server strict cu128/RTX5090 device-name metadata are retained. Local torch2.8cpu is a separate record/tensor check, not an equal-runtime reproduction.",
+    "Archives provide native_replay.json and checkpoint tensors, not prediction/probability arrays. No independent saved-array metric recomputation is claimed. Original strict result/native-replay equality and writer/null checks passed.",
+    "Shared active service log is a labelled prefix; selected result/model/config bytes are terminal and SHA-stable. No later arrival is included.",
+    "Root adoption/copy is still required. LATEST, canonical chain, STATE, RUNNING, Git, service, queue and recipe are unchanged."
+  ]
+}

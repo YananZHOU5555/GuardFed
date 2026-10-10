@@ -1,0 +1,15 @@
+{
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 107 ionice -c 3 nice -n 10 python -B -"
+  ],
+  "exit_code": 0,
+  "utc": "2026-10-10T01:16:46.035127+00:00"
+}

@@ -1,0 +1,12 @@
+--- original/collect_delta.py
++++ fixed_exact2/collect_delta.py
+@@ -56,6 +56,9 @@
+     assert set(previous['accepted_job_ids'])<={x['id'] for x in manifest['jobs']}
+     prior_count=len(previous['accepted_job_ids'])
+     wanted=[row['id'] for row in snapshot['flgmm']['rows'] if row['terminal_acceptance'] and row['progress']['round']==70 and row['id'] not in previous['accepted_job_ids']]
++    # Parent-authorized fixed snapshot exact2 only; later terminal IDs remain unaccepted.
++    authorized_ids=['FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91005_fullcoverage']
++    wanted=[identity for identity in wanted if identity in authorized_ids]
+     if not wanted:
+         write_json(BATCH/'NO_NEW_TERMINAL.json',dict(status='NO_NEW_TERMINAL_IN_THIS_SNAPSHOT',snapshot_sha256=digest(BATCH/'live_snapshot.json'),prior_accepted_new=prior_count,backup_created=False));return
+     assert len(wanted)==len(set(wanted)) and not set(wanted)&set(previous['accepted_job_ids']), 'Only this single fresh snapshot delta beyond the pinned offserver chain is authorized'

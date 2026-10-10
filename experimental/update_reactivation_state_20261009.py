@@ -2414,6 +2414,35 @@ if (rebuttal_C50_dir/'ROOT_REVIEW.json').exists():
         source_seal_sha256=writing['source_seal_sha256'],complete_C_scenes=5,new_C_scalar_pointer_checks=writing['C_scalar_pointer_checks'],
         new_C_scope_environment_checks=writing['C_scope_fact_pointer_checks'],links_checked=writing['links_checked'],changed_passages=writing['changed_spans'],
         author_review_only=True,manuscript_applied=False,whole_rebuttal_complete=False)
+rebuttal_C60_dir=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C60_20261010'
+if (rebuttal_C60_dir/'ROOT_REVIEW.json').exists():
+    writing=read(rebuttal_C60_dir/'ROOT_REVIEW.json')
+    assert sha(rebuttal_C60_dir/'ROOT_REVIEW.json')=='b2e3958ed4000fe0365929c94408c411cd47c70e637c5151bb40603ad097098a'
+    assert writing['status']=='ROOT_C60_COMPLETE_AUTHOR_REVIEW_TEXT_REVERSIBLE_DELTA_AND_SOURCE_POINTERS_PASS'
+    assert sha(rebuttal_C60_dir/'FILES_SHA256.json')==writing['source_seal_sha256']=='e8e67d7e8b63e50b14b44a57c09fcad749824f7647f8916f1bd20e9ea893f3ac'
+    C60_files=read(rebuttal_C60_dir/'FILES_SHA256.json')['files'];assert len(C60_files)==11
+    for name,pin in C60_files.items():
+        assert sha(rebuttal_C60_dir/name)==pin['sha256'] and (rebuttal_C60_dir/name).stat().st_size==pin['bytes']
+    assert sha(rebuttal_C60_dir/'rebuttal_integrated_20261009.md')==writing['rebuttal_sha256']=='ee946d604ff56ed047071a53da12ff9ad9a23c32f9f7b3a3c5a83feeaabdc200'
+    assert sha(rebuttal_C60_dir/'manuscript_insertions_integrated_20261009.md')==writing['insertions_sha256']=='200ff6fa300f78bdaf9ae177c601b76343349973e758b9a1ce9fcbb9db20aa48'
+    assert writing['root_C60_table_sha256']==state['celeba_mechanism_v1']['C_three_view_six_scene_table']['root_proof_sha256']=='f2465c5e81291deca92535adcd0b0a29c49b3f76c2330927aa3db50925a9c742'
+    assert writing['prior_C50_reply_root_sha256']==state['latest_rebuttal_draft']['root_proof_sha256']=='64b083fb61cb8bff17304031af01a0d692d03fdc16e956de0dcd154f5a524691'
+    assert tuple(writing[k] for k in ('original_comments_verbatim','complete_C_scenes','prior_documents_reverse_diff_exact','forward_diff_exact','changed_spans','C_scalar_pointer_checks','new_numeric_cells','direction_checks','links_checked'))==(24,6,2,2,10,36,18,27,50)
+    assert writing['remaining_nonIID_C_scenes']==4 and writing['remaining_other_image_controls']==6
+    assert writing['original_numeric_displays_preserved'] and writing['all_negative_results_retained'] and writing['author_review_only']
+    assert not writing['manuscript_applied'] and not writing['final_test'] and not writing['whole_rebuttal_complete'] and writing['primary_endpoint']=='PENDING_AUTHOR'
+    assert writing['new_inference']==writing['new_training']==0
+    state['prior_rebuttal_C50_draft']=dict(state['latest_rebuttal_draft'])
+    state['latest_rebuttal_draft'].update(status=writing['status'],
+        entry=(rebuttal_C60_dir/'rebuttal_integrated_20261009.md').relative_to(ROOT).as_posix(),
+        manuscript_candidate=(rebuttal_C60_dir/'manuscript_insertions_integrated_20261009.md').relative_to(ROOT).as_posix(),
+        root_proof_path=(rebuttal_C60_dir/'ROOT_REVIEW.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(rebuttal_C60_dir/'ROOT_REVIEW.json'),
+        source_seal_sha256=writing['source_seal_sha256'],complete_C_scenes=6,new_C_scalar_pointer_checks=36,new_C_numeric_cells=18,
+        original_comments_verbatim=24,direction_checks=27,links_checked=50,changed_passages=10,
+        author_review_only=True,manuscript_applied=False,final_test=False,whole_rebuttal_complete=False)
+    state['latest_rebuttal_draft'].pop('new_C_scope_environment_checks',None)
+    state['celeba_mechanism_v1']['C_three_view_six_scene_table']['incorporated_into_full_rebuttal']=True
+    state['celeba_mechanism_v1']['three_view_scope_limit']=state['celeba_mechanism_v1']['three_view_scope_limit'].replace('C60 table separate from C50 author-review prose','C60 evidence incorporated into the full author-review response; submitted manuscript not applied')
 FL96_base=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
 if (FL96_base/'LATEST_BACKUP.json').exists():
     FL96_latest=read(FL96_base/'LATEST_BACKUP.json')
@@ -2431,12 +2460,12 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12):
-        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0'}[FL96_latest['accepted_total']]
+    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14):
+        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b'}[FL96_latest['accepted_total']]
         assert FL96_current['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         FL96_previous_path=ROOT/FL96_current['previous_root_adoption_path'];FL96_previous=read(FL96_previous_path)
-        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80'}[FL96_latest['accepted_total']]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
+        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0'}[FL96_latest['accepted_total']]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
         assert FL96_current['accepted_total']==FL96_current['accepted_before']+FL96_current['accepted_new']
         FL96_current_batch=FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')==FL96_current['offserver_acceptance_sha256']==FL96_latest['next_collector_previous_sha256']
@@ -2452,7 +2481,9 @@ reply_progress_note=('最新版本纳入U100十场景及900校准归因，24原�
     '最新版本纳入U100十场景、C的IID Benign/F Flip两场景及900校准归因，24原意见逐字保持，新增22数值pointer、12范围/环境事实和41链接复核')
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==5:
     reply_progress_note='最新完整稿纳入U100十场景、C的IID五场景及900校准归因；24原意见逐字保持，11处可逆修改、38个C数值pointer、19个范围/环境事实、24项方向与44链接通过核验；两份旧完整文档可逐字恢复，全部反例及待完成项保留'
-if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_draft'].get('complete_C_scenes')!=5:
+if state['latest_rebuttal_draft'].get('complete_C_scenes')==6:
+    reply_progress_note='最新完整C60作者审阅稿纳入五IID及non-IID Benign，U100/900旧证据保持；24原意见逐字、10处可逆修改、36数值pointer/18展示值/27方向/50链接通过，原C50两全文可逐字恢复；其他四non-IID C场景及六变体待完成，正文未应用、最终test未运行'
+if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_addendum']['complete_C_scenes']>state['latest_rebuttal_draft'].get('complete_C_scenes',0):
     addendum=state['latest_rebuttal_addendum']
     reply_progress_note+=(f"；C{10*addendum['complete_C_scenes']}英文独立补稿已另核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，入口"+addendum['entry']+'；原24意见完整稿保持封存')
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -2562,6 +2593,8 @@ if main.get('C_after56_valid_replay',{}).get('offserver_new_accepted')==4:
     C_replay_note='minus_C累计60已严格离机；新增准确4项non-IID Benign通过61归档成员/36指标/96计数/12规则，native偏差0，原156与Full不重推；该场景10/10已齐，六场景表须独立采用；其他四个non-IID C场景及六变体未完成'
 if main.get('C_three_view_six_scene_table'):
     C_replay_note='minus_C六场景60对/120记录表已独立采用：五IID及non-IID Benign，972统计/486单元/1080计数指标/2880计数通过；旧100记录/810统计/405展示和162个IID seed-first标量保持，未计算不平衡六场景总均值；10/9/6面板、负结果及混合设备/环境/选择史保留；C60表独立于C50全文作者审阅稿，其他四个non-IID C场景及六变体未完成'
+if main.get('C_three_view_six_scene_table',{}).get('incorporated_into_full_rebuttal'):
+    C_replay_note=C_replay_note.replace('C60表独立于C50全文作者审阅稿','C60证据已纳入完整英文作者审阅稿，原C50稿保持、提交版正文未应用')
 C_latest_table=main.get('C_three_view_five_scene_table',main.get('C_three_view_four_scene_table',main.get('C_three_view_three_scene_table',main.get('C_three_view_two_scene_table',{})))).get('table_path','待独立核验')
 C_other_scenes=5 if main.get('C_three_view_five_scene_table') else (6 if main.get('C_three_view_four_scene_table') else (7 if main.get('C_three_view_three_scene_table') else 8))
 if main.get('C_three_view_six_scene_table'):

@@ -1,0 +1,31 @@
+--- parent/bridge.py
++++ owned/bridge.py
+@@ -2,23 +2,23 @@
+ from pathlib import Path
+ import hashlib,json,sys,os,types,ast
+ HERE=Path(__file__).resolve().parent;B=HERE.parent;H=Path('E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_screen_execution_20261009')
+-SERVER_SHA='92d06e16cb5423af1b634f50153bd820d1ad94a0d226e34f946cbad6125b3ed3'
+-ARCHIVE_SHA='576b1013f56b593087bf000fb215e3b19fefc27bbf5b47e7a46eea65b484380e'
+-INVENTORY_SHA='c6364fbdc773632a76c5d04d379383b7a5afd96348033e889705317bcd0136b7'
++SERVER_SHA='96555b4c6ea58ed74a8dafa910cc8a84bad3ba7eb96c479bd35e95a60a03c855'
++ARCHIVE_SHA='a49637ceb7d89ae41e0b84a353b2918f613fe37332e7f223a5f726e8b8d98e64'
++INVENTORY_SHA='7a8ce005e6c6be731f74ca5bd23834c8e6ad7e2dd7180d96096302f654a0a87d'
+ SEAL_SHA='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+ def need_file(p,expected):assert sha(p)==expected, 'Bound evidence/source/artifact SHA mismatch: '+str(p)
+ def check_runtime(server):
+  r=server['runtime'];assert server['status']=='PARTIAL_ORIGINAL_STRICT_ACCEPTED_OFFSERVER_PENDING' and server['no_CNN_training_or_test']
+- assert r['torch']=='2.11.0+cu128' and r['cuda_build']=='12.8' and r['CPU']==[110] and r['threads']==1
++ assert r['torch']=='2.11.0+cu128' and r['cuda_build']=='12.8' and r['CPU']==[106] and r['threads']==1
+  assert r['gpu_name_for_original_checker']=='NVIDIA GeForce RTX 5090'
+  assert server['source_data_verified_before_after'] and server['source_seal_sha256']==SEAL_SHA
+  return r
+ 
+ def replay():
+  # All original checks remain; only three CURRENT-HOST runtime queries become bound original-server observations.
+- need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after18_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
++ need_file(B/'PARTIAL_ACCEPTANCE.json',SERVER_SHA);need_file(B/'hybrid_after19_delta.tar.gz',ARCHIVE_SHA);need_file(B/'MEMBERS.json',INVENTORY_SHA);need_file(H/'FILES_SHA256.json',SEAL_SHA)
+  server=read(B/'PARTIAL_ACCEPTANCE.json');runtime=check_runtime(server);reuse=read(HERE/'SOURCE_REUSE.json');restore=B/'restored'
+  for name,expected in read(H/'FILES_SHA256.json')['files'].items():need_file(H/name,expected)
+  for name,row in read(B/'MEMBERS.json')['members'].items():need_file(restore/name,row['sha256'])

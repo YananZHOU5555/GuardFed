@@ -31,7 +31,7 @@ hy_accepted=state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']
 aux_row=(f'| FLGMM / 组合控制 | 已严格验收离机{fl_accepted}/32与{hy_accepted}/32；{fo["checked_utc"]}只读实测分别'
     f'{fo["observed_complete"]}/{ho["observed_complete"]}终轮、{fo["active"]}/{ho["active"]}活动、{fo["pending"]}/{ho["pending"]}等待、失败0。FLGMM已按冻结规则选Tg20/L2/lr0.001，n=1；组合未选recipe，100项确认未启动 | TRAINING_STATE对应搜索记录及备份链 |')
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
-    aux_row=aux_row.replace('组合未选recipe，100项确认未启动','FLGMM七项短程严格离机后已启动96新+4复用、双GPU各1线程；组合未选recipe/100项未启动')
+    aux_row=aux_row.replace('组合未选recipe，100项确认未启动',f'FLGMM七项短程严格离机后已启动96新+4复用，新增已严格离机{state["flgmm_fullcoverage_v2_20261009"].get("new_accepted",0)}/96、双GPU各1线程；组合未选recipe/100项未启动')
 text='\n'.join(resource_row if line.startswith('| 服务器与资源 |') else aux_row if line.startswith('| FLGMM / 组合控制 |') else line for line in text.split('\n'))
 text=text.replace('18:08 UTC实测；18:12 UTC验收','18:29 UTC实测；18:36 UTC验收')
 text=text.replace('69/65℃','68/66℃').replace('CPU11.02/122.88核，RAM75.14GB','CPU17.61/122.88核，RAM76.11GB')
@@ -79,7 +79,7 @@ if state['latest_rebuttal_draft'].get('complete_C_scenes')==2:
     reply_row=reply_row.replace('37数值pointer及37链接核验；完整稿纳入U100十场景与900校准解释',
         '新增C20的22数值pointer/12范围环境事实与41链接核验；完整稿纳入U100十场景、C两场景与900校准解释').replace(
         'rebuttal_integrated100_20261009/','rebuttal_integrated_C20_20261009/')
-if state.get('latest_rebuttal_addendum'):
+if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_addendum']['complete_C_scenes']>state['latest_rebuttal_draft'].get('complete_C_scenes',0):
     reply_row='| 英文回复 | 24原意见完整C20稿封存保留；C30独立英文补稿已核98数值pointer/49展示值/25范围事实/9链接，保留反例与未完成边界；均为作者审阅稿，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C20_20261009/rebuttal_integrated_20261009.md)、[C30新增回复](server_deployment_20260923/revision_20260923/rebuttal_C30_addendum_20261009/C30_REVIEWER_ADDENDUM.md) |'
     if state['latest_rebuttal_addendum']['complete_C_scenes']==4:
         addendum=state['latest_rebuttal_addendum']
@@ -99,13 +99,15 @@ if main.get('C_after56_valid_replay',{}).get('offserver_new_accepted')==4:
 if main.get('C_three_view_six_scene_table'):
     views_row='| 机制三视图 | U100完整；C60六场景60对/120记录表独立采用：五IID及non-IID Benign，972统计/486单元/1080计数指标/2880计数通过；旧100记录/810统计/405单元/162个IID seed-first标量保持。其余四个non-IID C场景及六变体未完成 | [C六场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_six_scenes_20261010/snapshot/TABLES.md) |'
     native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100完整、C60六场景native随三视图表独立验收，10/9/6面板及全部负结果保留；未运行最终test | [U十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md)、[C六场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_six_scenes_20261010/snapshot/TABLES.md) |')
+if state['latest_rebuttal_draft'].get('complete_C_scenes')==6:
+    reply_row='| 英文回复 | 完整C60作者审阅稿已纳入五IID及non-IID Benign；24原意见逐字、10处可逆修改、36数值pointer/18展示值/27方向/50链接通过，旧C50两全文可逐字恢复；保留负结果及P1–P6，正文未应用、最终test未运行 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C60_20261010/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_C60_20261010/manuscript_insertions_integrated_20261009.md) |'
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
 new_stage_note=''
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
     new_stage_note+='FLGMM七项短程检查队列已实际启动，完成验收仍待原科学检查和离机备份；96新+4复用的70轮覆盖未启动。'
     if state['flgmm_fullcoverage_v2_20261009'].get('formal100_started'):
         new_stage_note=new_stage_note.replace('FLGMM七项短程检查队列已实际启动，完成验收仍待原科学检查和离机备份；96新+4复用的70轮覆盖未启动。',
-            'FLGMM七项短程已通过原严格、全状态/RNG比较及315成员离机核验；96新+4复用70轮valid完整覆盖已启动，双GPU worker首轮已实测，新70轮离机接受仍0。')
+            f'FLGMM七项短程已通过原严格、全状态/RNG比较及315成员离机核验；96新+4复用70轮valid完整覆盖已启动，双GPU worker首轮已实测，新增70轮离机接受{state["flgmm_fullcoverage_v2_20261009"].get("new_accepted",0)}/96。')
 if main.get('C_after12_valid_replay'):
     new_stage_note+='新增8项C/IID F Flip终轮valid三视图CPU评价已实际启动，旧112和Full不重推；新增验收与完整F Flip表仍待完成。'
     if main['C_after12_valid_replay']['offserver_new_accepted']==8:
@@ -145,6 +147,8 @@ if main.get('C_after56_valid_replay',{}).get('offserver_new_accepted')==4:
     new_stage_note=(f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32、尚未选recipe。最新准确4项non-IID Benign三视图已正常退出并严格离机，61归档/60内容成员、36指标/96计数/12规则通过，native偏差0，累计U100+C60=160；原156和Full不重推。五IID及non-IID Benign各10seed齐备，六场景表须另核。四个其他non-IID C场景及六变体未完成；未重训/运行test。')
 if main.get('C_three_view_six_scene_table'):
     new_stage_note=new_stage_note.replace('六场景表须另核。','六场景表已独立采用：120记录/972均值样本SD标量/486单元/1080指标/2880计数；旧100记录/810统计/405展示及162个IID seed-first标量保持。全部10/9/6面板、负结果、混合CPU/GPU与环境/选择史保留，不计算不平衡六场景总均值。C60表是独立入口，完整英文作者审阅稿仍为C50，未纳入C60、未应用正文。')
+if main.get('C_three_view_six_scene_table',{}).get('incorporated_into_full_rebuttal'):
+    new_stage_note=new_stage_note.replace('C60表是独立入口，完整英文作者审阅稿仍为C50，未纳入C60、未应用正文。','C60证据已纳入完整英文作者审阅稿，24原意见及C50旧值保持；10处可逆修改/36数值pointer/27方向/50链接通过，提交版正文未应用。')
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
