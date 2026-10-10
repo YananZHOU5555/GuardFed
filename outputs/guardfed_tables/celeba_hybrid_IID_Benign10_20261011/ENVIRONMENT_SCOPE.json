@@ -1,0 +1,29 @@
+{
+  "recipe": {
+    "id": "CosineFairness_lam20.0_tau0.1_lr0.001",
+    "learning_rate": 0.001,
+    "adapter": {
+      "fairness_lambda": 20.0,
+      "threshold": 0.1
+    }
+  },
+  "selection_seed": 91001,
+  "selection_conditions": "Original four exposed-valid screen conditions;fixed winner reused without reselection",
+  "prior_official_test_exposure": true,
+  "new_final_test_evaluation": false,
+  "training_runtime_reported_exactly_for_records_with_provenance": 8,
+  "unreported_runtime_for_reuse91001_and_prior91002": "Not reread or inferred here;their accepted checkpoint/source/runtime checks remain in original root chains.",
+  "server_saved_check": "Original cu128 CPU-tensor record checker,CUDA hidden",
+  "local_saved_check": "Windows torch2.8.0+cpu;source/runtime metadata bridge,no numerical-runtime equivalence",
+  "prediction_arrays_supplied": false,
+  "prediction_arrays_recomputed": false,
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "negative_results_retained": true,
+  "paired_comparison": false,
+  "significance_claim": false,
+  "necessity_claim": false,
+  "whole_method100_claim": false,
+  "final_endpoint_adoption": false
+}

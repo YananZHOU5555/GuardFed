@@ -4,19 +4,23 @@
 
 ## 当前队列
 
-以下“已验收”均经过原strict、离机SHA和root核验；实时完成文件与验收数量分列。主机制实测时间2026-10-10T15:24:46.051570+00:00；五队列合并观测2026-10-10T14:53:34.284692+00:00。
+以下“已验收”均经过原strict、离机SHA和root核验；实时完成文件与验收数量分列。主机制实测时间2026-10-10T16:20:28.452575+00:00；五队列合并观测2026-10-10T16:06:17.914070+00:00。
 
 | 阶段 | 已验收 | 实测活动/剩余边界 |
 |---|---:|---|
-| 机制训练 | 280/800新增，100 Full另复用 | 观测完成283、活动8、等待509、失败0；固定70轮/8并发 |
-| 机制三视图 | 280终轮checkpoint | U100/C100各十场景；A80的完整场景以接受索引及已采用表为准；远端闭合不等于离机验收 |
-| FLGMM完整覆盖 | 54/96新增，4复用另计 | 观测终轮54，2个worker有轮次增长 |
-| Fed-NGA/Huber搜索 | 32/64 | 观测终轮35，单worker推进；所有候选/恒定预测保留，未选recipe |
-| 组合基线完整覆盖 | 1/96新增，4复用另计 | 观测终轮7，单worker推进；7个三轮门检不计正式样本 |
+| 机制训练 | 288/800新增，100 Full另复用 | 观测完成289、活动8、等待503、失败0；固定70轮/8并发 |
+| 机制三视图 | 288终轮checkpoint | U100/C100各十场景；A88的完整场景以接受索引及已采用表为准；远端闭合不等于离机验收 |
+| FLGMM完整覆盖 | 57/96新增，4复用另计 | 观测终轮57，2个worker有轮次增长 |
+| Fed-NGA/Huber搜索 | 39/64 | 观测终轮39，单worker推进；所有候选/恒定预测保留，未选recipe |
+| 组合基线完整覆盖 | 9/96新增，4复用另计 | 观测终轮9，单worker推进；7个三轮门检不计正式样本 |
 
-五队列已按真实worker身份、轮次增长、来源和错误检查核验；详见docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T1453.json。最近主资源采样为CPU12.03/122.88核、RAM78.22GB、磁盘余1.060TB；GPU瞬时利用率/显存/温度和Recovery原值见server_reactivation_20261009/latest_formal_live.json。这是该采样时刻的值，不代表连续占用；不因瞬时低利用率重启健康任务。冻结8并发/FP32/参数/seed不变。
+五队列已按真实worker身份、轮次增长、来源和错误检查核验；详见docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T1606.json。最近主资源采样为CPU19.98/122.88核、RAM79.13GB、磁盘余1.060TB；GPU瞬时利用率/显存/温度和Recovery原值见server_reactivation_20261009/latest_formal_live.json。这是该采样时刻的值，不代表连续占用；不因瞬时低利用率重启健康任务。冻结8并发/FP32/参数/seed不变。
 
-FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json；历史hold：tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_VALIDATION_HOLD.json。
+FLGMM三视图累计61个valid终轮checkpoint：此前48原记录保持，新增13完成Linux原whole检查/root-only拟合、F盘30成员SHA和Windows零拟合保存输出审计（117指标/312计数/39规则，native差0）。新增一条root审计group_kl差−2.168404344971009e−19保留；原Windows47重拟合和whole仍FAIL，新13未在Windows重拟合，不称跨平台逐位等价。来源57新增native训练＋4screen复用；与机制288分列，未新增训练或test。FL100及17方法未齐。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。 六完整场景（五IID＋non-IID Benign）各十seed的三视图表已独立及root采用，固定10/9/6面板，324统计标量/162展示格、549计数派生指标核验；61条全保留，non-IID S-DFA的单条screen不进完整场景统计。IID alpha5000/non-IID alpha5，验证集选择史和校准取舍披露。表格：outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。
+
+组合基线IID Benign十seed native验证表已独立及root采用，固定10/9/6面板、18个均值/样本SD标量和9个展示格核验；来源为9新增+1screen复用。仅此场景齐备，其他九场景和三视图未齐。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。
+
+Huber首批7个终轮候选均恒负预测，ACC=0.5166859616449389、AEOD=ASPD=0，作为退化负结果保留，不据零差距称有效或选冠军。
 
 ## 已交付与尚缺
 
@@ -36,11 +40,11 @@ Huber采用作者接受的恒等投影，明确CNN项目适配且不继承原理
 
 本机大文件只写F:/YananResearchStorage/GuardFed，写前核F为Yanan 2TB且容量足；服务器大文件优先原地保留。E只保留代码、索引、配置与精简报告，不删除科学原始证据。
 
-最近验证推送817f6fd395564b044ed05e360771817f2f4585de（分支codex/revision-evidence-baselines-20260928）；发布截止以publication_closed_increment52_verified_20261011.json为准，后续本机新增不自动算已推送。
+最近验证推送bfd6b1b976c8db13cac3948f1586147705b59d72（分支codex/revision-evidence-baselines-20260928）；发布截止以publication_closed_increment53_verified_20261011.json为准，后续本机新增不自动算已推送。
 
 三小时聊天任务guardfed-training-health仍PAUSED；本会话无automation_update接口，未建立替代cron/Windows任务。supervisor运行训练不等于聊天定时巡检恢复。后续接续读TRAINING_STATE.json和server_reactivation_20261009/MONITOR_HANDOFF.md。
 
-工程失败、恢复和旧批次完整时间线：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/entry_history/detailed_current_cdaee88779cf8956.md。下方历史原字节保留；当前事实以本段、STATE和实测凭据为准。
+工程失败、恢复和旧批次完整时间线：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/entry_history/detailed_current_cb045bac81e71501.md。下方历史原字节保留；当前事实以本段、STATE和实测凭据为准。
 
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 

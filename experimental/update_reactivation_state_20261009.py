@@ -2619,13 +2619,13 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (28,32,38,44,54):
+    if FL96_latest['accepted_total'] in (28,32,38,44,54,57):
         current_count=FL96_latest['accepted_total']
-        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',38:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',44:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',54:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6'}[current_count]
+        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',38:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',44:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',54:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6',57:'66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee'}[current_count]
         assert FL96_current['status'] == 'ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         previous = read(ROOT/FL96_current['previous_root_adoption_path'])
-        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',38:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',44:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',54:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510'}[current_count]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32),38:(32,6,38),44:(38,6,44),54:(44,10,54)}[current_count]
+        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',38:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',44:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051',54:'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510',57:'ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6'}[current_count]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32),38:(32,6,38),44:(38,6,44),54:(44,10,54),57:(54,3,57)}[current_count]
         batch = Path(FL96_current['archive_local_path']).parent
         off = read(batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(batch/'OFFSERVER_ACCEPTANCE.json') == FL96_current['offserver_acceptance_sha256'] == FL96_latest['next_collector_previous_sha256']
@@ -3182,6 +3182,28 @@ if hybrid_first1.exists():
         accepted_ids=proof['accepted_new_ids'],first_delta_root_path=hybrid_first1.relative_to(ROOT).as_posix(),first_delta_root_sha256=sha(hybrid_first1),
         first_delta_archive_sha256=proof['archive_sha256'],first_delta_offserver_sha256=proof['offserver_sha256'],first_delta_utc=proof['utc'],
         limits='One of96 new70-round validation records accepted from original strict and188-member offserver restore chain; four reuse separate, seven gates zero formal samples. No scenario mean or runtime equivalence claim. Remaining95, final evaluation and manuscript incomplete.')
+hybrid9=ROOT/'tmp/celeba_hybrid_native9_root_adoption_20261011/ROOT_ADOPTION.json'
+if hybrid9.exists():
+    proof=read(hybrid9)
+    assert sha(hybrid9)=='1434b40de5116bf3d53bc5a6ae2bd3b90f4e54222f23ad099ff72b1fd3ef1775'
+    assert proof['status']=='ROOT_HYBRID_EXACT8_ORIGINAL_STRICT_OFFSERVER_CHAIN_ADOPTED'
+    assert (proof['prior_accepted'],proof['new_accepted'],proof['cumulative_accepted'],proof['archive_members'],proof['saved_tensor_count'])==(1,8,9,272,64)
+    assert proof['previous_root_sha256']==sha(hybrid_first1) and proof['accepted_ids'][:1]==state['hybrid100_fullcoverage_20261010']['accepted_ids']
+    assert len(set(proof['accepted_ids']))==9 and proof['archive_all_members_rehashed'] and proof['all_metrics_same_terminal_checkpoint']
+    assert sha(Path(proof['offserver_path']))==proof['offserver_sha256'] and not proof['final_test']
+    state['hybrid100_fullcoverage_20261010'].update(status='FORMAL96_RUNNING_NATIVE9_STRICT_OFFSERVER_ROOT_ADOPTED',new_accepted=9,
+        accepted_ids=proof['accepted_ids'],latest_delta_root_path=hybrid9.relative_to(ROOT).as_posix(),latest_delta_root_sha256=sha(hybrid9),
+        latest_delta_archive_sha256=proof['archive_sha256'],latest_delta_offserver_sha256=proof['offserver_sha256'],latest_delta_utc=proof['utc'],
+        limits='Nine of96 new70-round validation records accepted; exact8 increment passes original strict and272-member offserver chain. Four reuse and seven short gates separate. IID Benign ten-seed table requires separate statistical adoption; other scenarios and final test incomplete.')
+hybrid_scene=ROOT/'outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/ROOT_VERIFICATION.json'
+if hybrid_scene.exists():
+    proof=read(hybrid_scene)
+    assert sha(hybrid_scene)=='6de83f1f9b643980ec6cefaf21fd3d1c12af864b6abe24bea127b827144e5d6f'
+    assert proof['root_adopted'] and proof['native_root_sha256']==sha(hybrid9)
+    assert (proof['complete_scenes'],proof['individual_records'],proof['mean_SD_scalars_recomputed'],proof['display_cells_checked'])==(1,10,18,9)
+    assert proof['seed_panels']==[10,9,6] and proof['ddof']==1 and not proof['final_test'] and not proof['whole100_complete']
+    for name,digest in proof['files_sha256'].items():assert sha(hybrid_scene.parent/name)==digest
+    state['hybrid100_fullcoverage_20261010']['native_IID_Benign_table']=dict(root_proof_path=hybrid_scene.relative_to(ROOT).as_posix(),root_proof_sha256=sha(hybrid_scene),table_path=proof['table_path'],complete_scenes=1,individual_records=10,seed_panels=[10,9,6],same_terminal_checkpoint=True,whole100_complete=False,final_test=False)
 A40_table=TRAIN/'celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010'
 if (A40_table/'ROOT_VERIFICATION.json').exists():
     proof=read(A40_table/'ROOT_VERIFICATION.json')
@@ -3241,6 +3263,19 @@ if gradient32.exists():
     assert sha(gradient32.parent/'OFFSERVER_ACCEPTANCE.json')==proof['offserver_sha256']
     assert proof['archive_members_root_verified']==167 and proof['raw_files_root_verified']==170 and len(proof['constant_negative_ids'])==3
     prior.update(offserver_accepted=32,root_adoption_path=gradient32.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient32),accepted_ids=proof['accepted_ids'],latest_delta_constant_negative_ids=proof['constant_negative_ids'],FedNGA_screen32_accepted=True,Huber_screen_accepted=0)
+gradient39=ROOT/'tmp/gradient_native_after32_20261011/ROOT_ADOPTION_REVIEW.json'
+if gradient39.exists():
+    proof=read(gradient39);prior=state['gradient64_validation_search_20261010']
+    assert sha(gradient39)=='850b91b68e01f98f53a82f26897a43a486857b69fd4335c2e8e8e79fba9e1e3b'
+    assert proof['status']=='ROOT_GRADIENT64_EXACT7_ORIGINAL_STRICT_OFFSERVER_ADOPTED'
+    assert (proof['accepted_before'],proof['accepted_new'],proof['accepted_total'])==(32,7,39)
+    assert proof['previous_root_sha256']==prior['root_adoption_sha256'] and proof['accepted_ids'][:32]==prior['accepted_ids']
+    assert len(set(proof['accepted_ids']))==39 and all(x.startswith('Huber_') for x in proof['accepted_new_ids'])
+    assert proof['all_negative_results_retained'] and not proof['final_test'] and not proof['screen64_complete']
+    assert sha(gradient39.parent/'OFFSERVER_ACCEPTANCE.json')==proof['offserver_sha256']
+    assert sha(gradient39.parent/'ROOT_READY_HANDOFF.json')==proof['handoff_sha256']
+    assert (proof['archive_members_root_verified'],proof['raw_files_root_verified'],len(proof['constant_negative_ids']))==(153,156,7)
+    prior.update(offserver_accepted=39,root_adoption_path=gradient39.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient39),accepted_ids=proof['accepted_ids'],latest_delta_constant_negative_ids=proof['constant_negative_ids'],FedNGA_screen32_accepted=True,Huber_screen_accepted=7,recipe_selected=False)
 replay251=ROOT/'tmp/celeba_mechanism_remaining620_after240_root_adoption_20261010/ROOT_ADOPTION.json'
 if replay251.exists():
     proof=read(replay251); remaining=state['mechanism_remaining620_valid_20261010']; main=state['celeba_mechanism_v1']
@@ -3348,10 +3383,24 @@ if (A80_table/'ROOT_VERIFICATION.json').exists():
     for name,digest in proof['files_sha256'].items():assert sha(A80_table/name)==digest
     main.update(A_three_view_eight_scene_table=dict(status=proof['status'],table_path=proof['canonical_table'],root_proof_path=(A80_table/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(A80_table/'ROOT_VERIFICATION.json'),complete_scenes=8,complete_IID_scenes=5,complete_nonIID_scenes=['Benign','F Flip','FedSA'],paired_models=80,seed_panels=[10,9,6],mean_SD_scalars=1458,display_cells=729,final_test=False,incorporated_into_full_rebuttal=False),three_view_scope_limit='U100/C100 cover all ten scenes; A80 table covers five IID plus non-IID Benign/F Flip/FedSA, each ten paired seeds. Old120 records/972 statistics/486 cells and IID aggregate bytes are preserved. Raw FedSA deletion improves all three ten-seed means; native/shared tradeoffs and all negative results remain. Non-IID A S-DFA/Sp-DFA, other controls, remaining baseline coverage, final evaluation and submitted manuscript are incomplete.')
     remaining['A_eight_scene_table_adopted']=True
-growth=CHECKS/'ROOT_FIVE_QUEUE_GROWTH_20261010T1453.json'
+replay288=ROOT/'tmp/celeba_mechanism_remaining620_after280_root_adoption_20261011/ROOT_ADOPTION.json'
+if replay288.exists():
+    proof=read(replay288);remaining=state['mechanism_remaining620_valid_20261010'];main=state['celeba_mechanism_v1']
+    assert sha(replay288)=='7f53a03f055e86fbe2e4fd8a9b92edffa819ec261978813bcb714130b144a5e7'
+    assert proof['status']=='ROOT_AFTER280_EXACT8_SAVED_ARRAYS_NATIVE288_ADOPTED'
+    assert (proof['prior_accepted'],proof['new_accepted'],proof['cumulative_accepted'],proof['remaining620_new_accepted'])==(280,8,288,108)
+    index=read(ROOT/proof['records_index_path']);assert sha(ROOT/proof['records_index_path'])==proof['records_index_sha256']=='15676070f43acab92b7d72aea2235432c459a95a3c6d33c08368f23ad19bb48d'
+    assert index['all_ids'][:280]==main['three_view_accepted_ids'] and index['all_ids'][280:]==proof['accepted_new_ids'] and len(set(index['all_ids']))==288
+    assert (proof['independent_metrics'],proof['independent_counts'],proof['prediction_rules'],proof['native_members_rehashed'])==(72,192,24,16)
+    assert proof['original280_unchanged'] and proof['native_max_abs_difference']==0 and not proof['new_scene_table_created'] and not proof['test']
+    assert remaining['new_offserver_accepted']==100
+    remaining.update(new_offserver_accepted=108,root_adoption_path=replay288.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(replay288),accepted_ids=remaining['accepted_ids']+proof['accepted_new_ids'],latest_accepted_new_ids=proof['accepted_new_ids'],A_complete_scenes=proof['complete_A_scenes'],A_partial_scenes=proof['partial_A_scenes'])
+    assert len(remaining['accepted_ids'])==len(set(remaining['accepted_ids']))==108
+    main.update(three_view_new_models_accepted=288,three_view_new_models_offserver_verified=288,three_view_accepted_ids=index['all_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':100,'minus_A':88},three_view_root_proof_sha256=sha(replay288),latest_three_view_index=proof['records_index_path'],latest_three_view_index_sha256=proof['records_index_sha256'],three_view_scope_limit='288 original strict/offserver/native-identity replays adopted: U100/C100/A88. A80 eight-scene table remains the complete-scene table; eight additional non-IID S-DFA seeds are coverage only, excluded from complete-scene means. Old280 remain exact; other controls, final evaluation and submitted manuscript incomplete.')
+growth=CHECKS/'ROOT_FIVE_QUEUE_GROWTH_20261010T1606.json'
 if growth.exists():
     proof=read(growth)
-    assert sha(growth)=='2c88213c0e8ddb970b3aa429e706e2d42c51cd3fd43635db76bb98fa2a85d266'
+    assert sha(growth)=='c91d71a96ee01496a49954c4a9cf44075aa174cba3ee62f29af25018fe729de0'
     assert proof['status']=='ROOT_FIVE_LIVE_QUEUES_IDENTITY_AND_PROGRESS_VERIFIED' and not proof['source_changes'] and not proof['failures']
     pin=proof['snapshots'][-1];five_snapshot=ROOT/pin['path'];assert sha(five_snapshot)==pin['sha256']
     obs=read(five_snapshot)
@@ -3503,6 +3552,28 @@ if split_metadata.exists():
     assert proof['no_pixels_models_fit_inference_or_metrics'] and proof['prepared_protocol_unchanged']
     assert not any(proof[k] for k in ('protocol_frozen','primary_endpoint_selected','final_evaluation_started'))
     state['final_split_metadata_20261011']=dict(proof,root_proof_path=split_metadata.relative_to(ROOT).as_posix(),root_proof_sha256=sha(split_metadata))
+fl61=ROOT/'tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
+if fl61.exists():
+    proof=read(fl61)
+    assert sha(fl61)=='d6c7bdadb05ffcf8786221ed15a16125cd0fe84d1745fc15f9b7e6cc0a2f68d6'
+    assert proof['root_adoption'] and proof['status']=='ROOT_FLGMM_AFTER48_EXACT13_COMPLEMENTARY_EVIDENCE_ADOPTED_PRIOR_WINDOWS47_FAIL_PRESERVED'
+    assert (proof['new_three_view_records_accepted'],proof['FLGMM_total_three_view_records'],proof['native_training_records'],proof['original_screen_reuse_separate'])==(13,61,57,4)
+    assert proof['prior_root_sha256']==state['FLGMM_closed47_valid_three_view_20261011']['root_proof_sha256']
+    assert proof['Linux_whole_original_saved_check_pass'] and proof['Linux_original_root_refit_records_new']==13 and proof['Windows_saved_outputs_audit_pass'] and proof['Windows_saved_outputs_audit_fit_calls']==0
+    assert not any(proof[k] for k in ('Windows_new13_refit_executed','Windows_original47_exact_refit_pass','Windows_whole_saved_check_pass','cross_platform_bitwise_recalibration_claimed','mechanism_scope_modified','test','full100_complete'))
+    for pin in proof['proof_files'].values():assert sha(ROOT/pin['path'])==pin['sha256']
+    assert len(proof['new_records'])==13 and len({r['id'] for r in proof['records']+proof['prior_interface_explicitly_reused']})==61
+    state['FLGMM_after48_valid_three_view_20261011']=dict(status=proof['status'],root_proof_path=fl61.relative_to(ROOT).as_posix(),root_proof_sha256=sha(fl61),new_three_view_records_accepted=13,FLGMM_total_three_view_records=61,native_training_records=57,original_screen_reuse_separate=4,Linux_original_root_refit_records_new=13,Windows_saved_outputs_audit_fit_calls=0,metric_values_checked_new=117,integer_base_counts_checked_new=312,prediction_rules_checked_new=39,archive_members=30,archive_sha256=proof['archive_sha256'],new_exact_ids=[r['id'] for r in proof['new_records']],new_root_audit_difference_records=sum(bool(r['preserved_root_audit_differences']) for r in proof['new_records']),original_Windows47_failure_preserved=True,Windows_new13_refit_executed=False,Windows_whole_saved_check_pass=False,full100_complete=False,final_test=False)
+fl_six=ROOT/'outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/ROOT_VERIFICATION.json'
+if fl_six.exists():
+    proof=read(fl_six)
+    assert sha(fl_six)=='a7ed22f1f6366135b361433581ad59a76aa52271ba0516cd0bb11efc18e9eef0'
+    assert proof['root_adoption'] and proof['source_root61_sha256']==sha(fl61)
+    assert (proof['records_preserved'],proof['complete_scene_records'],proof['retained_partial_records'],proof['scenes'])==(61,60,1,6)
+    assert (proof['metric_count'],proof['base_integer_count'],proof['statistical_scalars'],proof['Markdown_cells'],proof['CSV_cells'])==(549,1464,324,162,162)
+    assert proof['caption_only_body_equality'] and proof['prior_Windows47_exact_refit_failure_preserved'] and not proof['final_test']
+    for name,digest in proof['adopted_outputs'].items():assert sha(fl_six.parent/name)==digest
+    state['FLGMM_after48_valid_three_view_20261011']['six_scene_table']=dict(root_proof_path=fl_six.relative_to(ROOT).as_posix(),root_proof_sha256=sha(fl_six),table_path=(fl_six.parent/'TABLES.md').relative_to(ROOT).as_posix(),complete_scene_records=60,retained_partial_records=1,scenes=6,views=['raw','native','shared_calibration'],fixed_seed_panels=[10,9,6],sample_SD_ddof=1,validation_only=True,full100_complete=False,final_test=False)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -3824,6 +3895,8 @@ else:detail.write_bytes(top.encode('utf8'))
 A_current=main.get('A_three_view_eight_scene_table',main.get('A_three_view_six_scene_table',main.get('A_three_view_five_scene_table',main.get('A_three_view_four_scene_table',{}))))
 five=state.get('latest_five_queue_readonly_observation',{})
 fl=state['flgmm_fullcoverage_v2_20261009'];gradient=state['gradient64_validation_search_20261010'];hy=state['hybrid100_fullcoverage_20261010']
+hy_scene_note=('组合基线IID Benign十seed native验证表已独立及root采用，固定10/9/6面板、18个均值/样本SD标量和9个展示格核验；来源为9新增+1screen复用。仅此场景齐备，其他九场景和三视图未齐。入口'+hy['native_IID_Benign_table']['table_path']+'。' if hy.get('native_IID_Benign_table') else '')
+hub_negative_note=('Huber首批7个终轮候选均恒负预测，ACC=0.5166859616449389、AEOD=ASPD=0，作为退化负结果保留，不据零差距称有效或选冠军。' if gradient.get('offserver_accepted')==39 else '')
 fl47_note=''
 if state.get('FLGMM_closed47_valid_three_view_20261011'):
     e=state['FLGMM_closed47_valid_three_view_20261011']
@@ -3837,6 +3910,12 @@ if state.get('FLGMM_closed47_valid_three_view_20261011'):
                 fl47_note+=f" 两环境相同输入的逐运算实测在math.log1p首次分歧并各自复现保存系数；尚未单独隔离OS/libm/Python因素。此比较无拟合/推理/新采用，见{d['operation_trace_path']}。"
     if e.get('complementary_adopted'):
         fl47_note='FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口'+e['root_proof_path']+'；历史hold：'+e['validation_hold_path']+'。'
+if state.get('FLGMM_after48_valid_three_view_20261011'):
+    e=state['FLGMM_after48_valid_three_view_20261011']
+    fl47_note='FLGMM三视图累计61个valid终轮checkpoint：此前48原记录保持，新增13完成Linux原whole检查/root-only拟合、F盘30成员SHA和Windows零拟合保存输出审计（117指标/312计数/39规则，native差0）。新增一条root审计group_kl差−2.168404344971009e−19保留；原Windows47重拟合和whole仍FAIL，新13未在Windows重拟合，不称跨平台逐位等价。来源57新增native训练＋4screen复用；与机制288分列，未新增训练或test。FL100及17方法未齐。入口'+e['root_proof_path']+'。'
+    if e.get('six_scene_table'):
+        t=e['six_scene_table']
+        fl47_note+=' 六完整场景（五IID＋non-IID Benign）各十seed的三视图表已独立及root采用，固定10/9/6面板，324统计标量/162展示格、549计数派生指标核验；61条全保留，non-IID S-DFA的单条screen不进完整场景统计。IID alpha5000/non-IID alpha5，验证集选择史和校准取舍披露。表格：'+t['table_path']+'。'
 top=f'''# CURRENT: GuardFed返修实验
 
 服务器：ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded。用户已授权停止sglang，文件保留；不自动切回213实例。先遵守/etc/vast-agents-guide.md。
@@ -3856,6 +3935,10 @@ top=f'''# CURRENT: GuardFed返修实验
 五队列已按真实worker身份、轮次增长、来源和错误检查核验；详见{five.get('growth_proof_path','STATE')}。最近主资源采样为CPU{live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核、RAM{live['memory_used_bytes']/1e9:.2f}GB、磁盘余{live['disk_free_bytes']/1e12:.3f}TB；GPU瞬时利用率/显存/温度和Recovery原值见server_reactivation_20261009/latest_formal_live.json。这是该采样时刻的值，不代表连续占用；不因瞬时低利用率重启健康任务。冻结8并发/FP32/参数/seed不变。
 
 {fl47_note}
+
+{hy_scene_note}
+
+{hub_negative_note}
 
 ## 已交付与尚缺
 

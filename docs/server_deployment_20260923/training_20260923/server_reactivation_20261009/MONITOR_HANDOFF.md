@@ -1,18 +1,18 @@
 # GuardFed 当前巡检交接
 
-主机制实测2026-10-10T15:24:46.051570+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
+主机制实测2026-10-10T16:20:28.452575+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
 
 - 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。先遵守/etc/vast-agents-guide.md。sglang已按用户授权停止，文件保留；213.224.31.105不自动切回。
-- 主机制guardfed_celeba_mechanism_formal：283观测终轮，280/800新增严格离机，100Full显式复用；8活动/509等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
-- 最新三视图累计280：U100完整；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
-- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T14:53:34.284692+00:00远端原strict闭合99，本阶段root离机采用100。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
-- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机32。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
+- 主机制guardfed_celeba_mechanism_formal：289观测终轮，288/800新增严格离机，100Full显式复用；8活动/503等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
+- 最新三视图累计288：U100完整；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
+- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T16:06:17.914070+00:00远端原strict闭合108，本阶段root离机采用108。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
+- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机39。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
 - LoGoFair原32项搜索原strict闭合32/32，root采用32；固定配置07完整100格已独立采用（96新+4复用），10/9/6表及1恒定预测保留。原child不能重复启动，选参与原summary/独立完整32复核绑定。100格完整原strict及保存预测/独立哈希/统计已采用；96新+4复用、1恒定结果及10/9/6面板保留；明确虚拟cohort人口适配而非真实client公平性。
-- FLGMM96新+4复用完整覆盖严格离机54/96；Hybrid原搜索严格离机32/32，完整32已独立采用、冻结规则选λ20/τ0.1/lr0.001；100格已实际绑定96新+4复用；七真实三轮门检已严格离机root采用、254成员及两组同轮数对照通过，正式96新增70轮valid队列已实际启动、另4显式复用；首worker启动时round1；当前新增70轮严格离机接受1。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
+- FLGMM96新+4复用完整覆盖严格离机57/96；Hybrid原搜索严格离机32/32，完整32已独立采用、冻结规则选λ20/τ0.1/lr0.001；100格已实际绑定96新+4复用；七真实三轮门检已严格离机root采用、254成员及两组同轮数对照通过，正式96新增70轮valid队列已实际启动、另4显式复用；首worker启动时round1；当前新增70轮严格离机接受9。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
 - Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
 - 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
 - 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与余7方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
-- Git已验证817f6fd395564b044ed05e360771817f2f4585de，321blob；该提交接受cutoff为native280/三视图280；之后新增或变更文件另行核验同步。
+- Git已验证bfd6b1b976c8db13cac3948f1586147705b59d72，19blob；该提交接受cutoff为native280/三视图280；之后新增或变更文件另行核验同步。
 - 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
 
 后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。
@@ -26,7 +26,8 @@ A两完整IID场景论文表已独立采用，Benign/F Flip各十共享seed，32
 新增攻击14项共同三轮门检source-only已独审、实际图像0；完整64/冻结192仍是前置，不从源码派发。
 新增五方法三视图仅接线范围审查：四CNN用各自原strict，LoGo native保留DP/虚拟映射，cache valid_native_prediction是FedAvg raw而非LoGo native；任何backbone替换诊断须明示，主终点未定。
 历史A40四完整IID场景表已独立采用；后续A80见下方。原范围为，Benign/F Flip/FedSA/S-DFA各十seed；648统计/324展示/720计数指标/1920计数检查，旧A20的40对象字节/顺序、324统计/162展示保持。其他六A场景未齐；native/shared S-DFA删除A准确率/AEOD变差、ASPD变好，FedSA有不同取舍，全部10/9/6面板保留。入口docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md。
-Hybrid最新原strict/严格离机并root采用新增1/96：IID Benign91002、70终轮、valid19867、188归档成员及8张量摘要身份通过；4复用与7三轮门检分列，无场景均值/SD或运行时等价主张。入口tmp/celeba_hybrid_first1_root_adoption_20261010/ROOT_ADOPTION.json。
+Hybrid累计9/96新增原strict/离机root采用；最新8项IID Benign91003–91010通过272归档成员和64终轮张量摘要身份检查。4复用与7三轮门检分列；IID Benign完整十seed表须独立统计采用，其他场景和最终评价未完成。入口tmp/celeba_hybrid_native9_root_adoption_20261011/ROOT_ADOPTION.json。
+组合基线IID Benign十seed native表已独立及root采用，9新增＋1screen复用，固定10/9/6面板、18均值/样本SD标量和9展示格；仅一场景齐备，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。
 十方法native验证表PDF三页已核900组均值sampleSD/1800数值及视觉布局，10/9/6seed面板、双分布五场景，仍非17方法完整表或finaltest。入口outputs/guardfed_tables/celeba_ten_method_native_pdf_20261010/celeba_ten_method_native.pdf。
 四CNN身份桥源码及64门检root通过，原17函数保持；现仅注册FL6/Hybrid1/NGA8旧精确chunk，缺Huber70轮proof拒收，没有新科学评价/fit/训练/test。
 当前24意见reader稿保留全部数字/表/quotes/P1–P6，27可逆改动仅重排和导航；作者审阅，正文未应用。入口docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A80_reader_20261011/rebuttal_integrated_20261011.md。
@@ -34,6 +35,8 @@ Hybrid最新原strict/严格离机并root采用新增1/96：IID Benign91002、70
 最新A80已root采用：五IID＋non-IID Benign/F Flip/FedSA共8场景、各10配对seed，80对/160记录、1458均值与样本SD统计/729展示单元，10/9/6面板完整。旧A60的120对象字节/顺序、972统计/486单元和IID seed-first聚合原字节保持。新增raw FedSA删除A后三项均值更好，native/shared准确率微升而两项gap变差，保留全部负结果和视图取舍，不作必要性/显著性主张。Full5CPU75GPU/79cu128＋1cu130与A80CPU/cu128、选择史和历史test暴露均披露；两项non-IID A场景S-DFA/Sp-DFA、其余控制和最终评价仍未齐。A80已纳入实际root采用的回复稿，详见回复入口。入口docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_eight_scenes80_20261011/TABLES.md。
 FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json；历史hold：tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_VALIDATION_HOLD.json。
 官方最终评价候选partition2仅ID元数据已实核19962张/有序SHA，三分区完整互斥且train/valid身份保持。只解码image_id/split，metadata压缩包整体哈希；未解码标签/读取像素模型/拟合/test推理。旧准备协议原字节未改，主终点和最终协议仍未定；历史test暴露不抹除。入口docs/server_deployment_20260923/training_20260923/final_split_metadata_20261011/ROOT_METADATA_VERIFICATION.json。
+
+最新累计机制288份终轮三视图（U100/C100/A88）已严格离机并root采用；新增A的non-IID S-DFA仅8seed，排除完整场景均值，A80八场景表保持。 FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json。 FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口outputs/guardfed_tables/celeba_flgmm_six_scenes60_20261011/TABLES.md。 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011/TABLES.md。 梯度搜索39/64已采用（Fed-NGA32、Huber7）；7项Huber均恒负预测，ACC51.668596%、两gap为0，作为退化负结果保留，搜索未完不选recipe。
 # Historical handoff snapshots
 
 # Existing three-hour chat monitor: update required

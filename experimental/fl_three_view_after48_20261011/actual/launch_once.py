@@ -1,0 +1,63 @@
+"""Single fresh-resource authorization/start; original finite supervisor launcher."""
+from pathlib import Path
+import base64,datetime,hashlib,json,subprocess,sys
+H=Path(__file__).resolve().parent;C=H.parent;R=C.parents[1]
+read=lambda p:json.loads(Path(p).read_bytes())
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(name,v):
+ with (H/name).open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+def remote(source,payload,name,timeout=90):
+ compile(source,name,'exec');(H/(name+'_remote.py')).write_text(source,encoding='utf8')
+ code="import base64;exec(compile(base64.b64decode('"+base64.b64encode(source.encode()).decode()+"'),'<"+name+">','exec'))"
+ cmd=['ssh','-p','60350','-o','BatchMode=yes','-o','ConnectTimeout=20','root@89.22.197.55','nice -n 10 ionice -c 3 python3 -c "'+code+'"']
+ save(name+'_COMMAND.json',{'argv':cmd,'source_sha256':hashlib.sha256(source.encode()).hexdigest()})
+ p=subprocess.run(cmd,input=json.dumps(payload).encode(),capture_output=True,timeout=timeout)
+ (H/(name+'.stdout')).write_bytes(p.stdout);(H/(name+'.stderr')).write_bytes(p.stderr)
+ assert p.returncode==0,p.stderr.decode(errors='replace')
+ j=json.loads(p.stdout);save(name+'.json',j);return j
+assert not (H/'AUTHORIZATION.json').exists()
+m=read(C/'MANIFEST.json');first=read(H/'OBSERVATION.json')
+s=(H/'observer.py').read_text();a=s.index('hashes=[];seen={}');b=s.index('hash_end=utc()',a)
+s=s[:a]+'''hashes=[];seen={}
+for previous in PAYLOAD['previous_hashes']:
+ p=P(previous['path']); st=p.stat()
+ assert str(p.resolve())==previous['resolved'] and st.st_size==previous['bytes'] and st.st_mtime_ns==previous['mtime_ns'], 'Previously hashed input stat changed'
+ hashes.append(dict(previous, stat_refreshed=True))
+'''+s[b:]
+fresh=remote(s,dict(read(H/'observer_payload.json'),previous_hashes=first['hashes']),'FRESH_OBSERVATION')
+assert fresh['source_model_data_hashes_verified'] and not fresh['narrow_cpu120_127_conflicts'] and not fresh['duplicate_gate']
+assert all(not x['failures'] and not x['live_producers'] for x in fresh['selected'])
+rows=fresh['guardfed_processes'];cpus=set(range(120,128))
+active_conflict=[{'pid':r['pid'],'tid':t['tid']} for r in rows for t in r['threads'] if (t.get('delta_cpu_ticks_2s') or 0)>0 and t['last_cpu'] in cpus]
+assert not active_conflict,active_conflict
+service=fresh['services'];assert service['returncode']==0 and len(service['stdout'].splitlines())==5 and all('RUNNING' in l for l in service['stdout'].splitlines())
+old={x['id']:x for x in first['main_workers']};main_growth=[]
+for x in fresh['main_workers']:
+ if x['id'] not in old:main_growth.append(x['id'])
+ elif x.get('progress')!=old[x['id']].get('progress'):main_growth.append(x['id'])
+assert main_growth or len(fresh['main_queue']['completed'])>len(first['main_queue']['completed']),'No actual main progress'
+main=[r for r in rows if any('/deployment/celeba_mechanism_20261009/worker.py' in a for a in r['argv'])]
+assert 0<len(main)<=8 and all(r['env'].get('OMP_NUM_THREADS')=='1' and r['env'].get('MKL_NUM_THREADS')=='1' for r in main)
+components={'main_all_current_OS_threads':sum(len(r['threads']) for r in main),'FL_shared_affinity':2,'Hybrid':1,'gradient':1,'remaining620_reserved':8,'finite13':8,'coordinator_IO_allowance':8}
+quota,period=fresh['cgroup']['cpu.max'].split();assert quota!='max';quota=int(quota)/int(period)
+assert sum(components.values())<=quota
+for marker,mask in [('celeba_flgmm_fullcoverage_v2_20261009',set([102,103])),('celeba_hybrid_fullcoverage_v3_20261010',set([104])),('celeba_gradient_screen64_v2_20261010',set([105])),('celeba_mechanism_remaining_evaluation_v2_20261010',set(range(112,120)))]:
+ rr=[r for r in rows if any(marker in x for x in r['argv']) and any('python' in x for x in r['argv']) and not any('log-tee' in x for x in r['argv'])]
+ assert rr,marker
+ assert all(set(t['affinity'])<=mask for r in rr for t in r['threads']),(marker,rr)
+assert int(fresh['cgroup']['memory.max'])-int(fresh['cgroup']['memory.current'])>32*1024**3
+assert fresh['disk']['free']>20*1024**3
+assert fresh['gpu_recovery']['returncode']==0 and all(l.endswith('None') for l in fresh['gpu_recovery']['stdout'].strip().splitlines())
+assert fresh['gpu']['returncode']==0 and all(int(l.split(',')[-1])<85 for l in fresh['gpu']['stdout'].strip().splitlines())
+pre={'status':'ROOT_LINUX_FLGMM_EXACT13_PREFLIGHT_PASS','utc':fresh['utc'],'cpu_affinity':sorted(cpus),'eligible_cpus':fresh['eligible_cpus'],'actual_quota_cores':quota,'nominal_reserved_cores_including_gate':sum(components.values()),'nominal_budget_components':components,'nominal_budget_not_hard_peak_bound':True,'no_duplicate_gate':True,'all_thread_cpus_free':True,'all_thread_cpus_free_definition':'No narrow reservation overlap or sampled active wide-thread last_cpu120..127. Wide masks can migrate; coordinator dormant numerical pool is not a reservation.','source_model_data_hashes_verified':True,'selected_producers_quiescent':True,'services_healthy':True,'gpu_health_verified':True,'cgroup_and_memory_headroom_verified':True,'storage_headroom_verified':True,'original_hash_observation_sha256':sha(H/'OBSERVATION.json'),'stat_resource_refresh_sha256':sha(H/'FRESH_OBSERVATION.json'),'hashed_files':len(first['hashes']),'main_progressed_ids':main_growth,'package_sha256':sha(C/'FILES_SHA256.json'),'new_CNN':0,'new_fit':0,'test':False}
+save('LINUX_PREFLIGHT.json',pre)
+auth={'status':'ROOT_AUTHORIZED_FLGMM_CLOSED_EXACT13_THREE_VIEW','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'package_sha256':sha(C/'FILES_SHA256.json'),'manifest_sha256':sha(C/'MANIFEST.json'),'source_review_sha256':sha(C/'ROOT_SOURCE_REVIEW.json'),'linux_preflight_sha256':sha(H/'LINUX_PREFLIGHT.json'),'exact_ids':m['exact_ids'],'cpu_affinity':sorted(cpus),'device':'cpu','max_processes':1,'test':False,'delegated_root_authorization':'Parent root explicit exact13 execution authorization after native57 adoption and actual source review; prior48 unchanged.'}
+save('AUTHORIZATION.json',auth)
+base='/workspace/guardfed_checks/fl_three_view_after48_20261011';program='guardfed_flgmm_after48_exact13_valid'
+args=['--package-sha256',auth['package_sha256'],'--authorization',base+'/AUTHORIZATION.json','--authorization-sha256',sha(H/'AUTHORIZATION.json'),'--preflight',base+'/LINUX_PREFLIGHT.json','--preflight-sha256',auth['linux_preflight_sha256'],'--source-review',base+'/ROOT_SOURCE_REVIEW.json','--source-review-sha256',auth['source_review_sha256'],'--output',base+'/outputs/attempt001']
+config='[program:'+program+']\ncommand=/usr/bin/env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/taskset -c 120-127 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 '+m['server_python']+' -B '+base+'/source/candidate.py '+' '.join(args)+'\ndirectory='+base+'\nautostart=false\nautorestart=false\nstartretries=0\nstartsecs=1\nstopasgroup=true\nkillasgroup=true\nstdout_logfile='+base+'/execution/stdout.log\nstderr_logfile='+base+'/execution/stderr.log\nstdout_logfile_maxbytes=0\nstderr_logfile_maxbytes=0\n'
+payload={'base':base,'program':program,'package':auth['package_sha256'],'source_review_sha256':auth['source_review_sha256'],'config':config,'config_sha256':hashlib.sha256(config.encode()).hexdigest(),'files':{}}
+for name in ['LINUX_PREFLIGHT.json','AUTHORIZATION.json']:
+ b=(H/name).read_bytes();payload['files'][name]={'sha256':sha(H/name),'bytes':len(b),'base64':base64.b64encode(b).decode()}
+s=(R/'tmp/celeba_flgmm_closed47_root_execution_20261011/START_RECEIPT_remote.py').read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_three_view_after48_20261011').replace('guardfed_flgmm_closed47_valid',program).replace('FINITE47','FINITE13')
+result=remote(s,payload,'START_RECEIPT');print(json.dumps({'status':result['status'],'utc':result['utc'],'cpu_budget':sum(components.values()),'quota':quota}))

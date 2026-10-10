@@ -299,6 +299,21 @@ if A80:
         current_reply='| 英文回复 | 24条原意见完整作者审阅稿已纳入A80、U/C100及既有基线和校准解释；清晰版保留原话、关键反例及P1–P6，详细版保留全部证据。最终评价及提交版正文尚未完成 | [优先阅读清晰版]('+reply.get('clear_reader_entry',reply['entry']).removeprefix('docs/')+')、[详细证据版]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
         text='\n'.join(current_reply if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
     text='\n'.join(current_views if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
+increment_note=''
+if main['three_view_new_models_offserver_verified']==288:
+    increment_note+='最新累计机制288份终轮三视图（U100/C100/A88）已严格离机并root采用；新增A的non-IID S-DFA仅8seed，排除完整场景均值，A80八场景表保持。'
+if state.get('FLGMM_after48_valid_three_view_20261011'):
+    e=state['FLGMM_after48_valid_three_view_20261011']
+    increment_note+=' FLGMM后续13已采用，累计61＝57新增native训练＋4screen复用；Linux原whole13、F30及Windows零fit保存审计117指标/312计数/39规则通过，native差0。新一条root审计KL微差−2.168404344971009e−19保留，Windows新13未refit、原47refit/whole仍失败，不称跨平台逐位等价。入口'+e['root_proof_path']+'。'
+if state.get('FLGMM_after48_valid_three_view_20261011',{}).get('six_scene_table'):
+    t=state['FLGMM_after48_valid_three_view_20261011']['six_scene_table']
+    increment_note+=' FLGMM六完整场景（五IID＋non-IID Benign）各10seed三视图表已root采用：固定10/9/6面板、324均值/样本SD标量、162展示格、549计数派生指标通过；61条全保留，唯一未齐场景的screen单条不进统计。IID alpha5000/non-IID alpha5；仍是验证集且保留校准准确率/公平性取舍，非FL100或最终评价。入口'+t['table_path']+'。'
+if state.get('hybrid100_fullcoverage_20261010',{}).get('native_IID_Benign_table'):
+    h=state['hybrid100_fullcoverage_20261010']['native_IID_Benign_table']
+    increment_note+=' 组合基线9/96新增已采用；IID Benign十seed（含1复用）native表通过18统计/9展示格和10/9/6固定面板核验，非完整100或三视图。入口'+h['table_path']+'。'
+if state.get('gradient64_validation_search_20261010',{}).get('offserver_accepted')==39:
+    increment_note+=' 梯度搜索39/64已采用（Fed-NGA32、Huber7）；7项Huber均恒负预测，ACC51.668596%、两gap为0，作为退化负结果保留，搜索未完不选recipe。'
+if increment_note:text+='\n'+increment_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
 handoff=CHECKS/'MONITOR_HANDOFF.md'
@@ -390,7 +405,13 @@ if main.get('A_three_view_four_scene_table'):
 if state.get('hybrid100_fullcoverage_20261010',{}).get('new_accepted',0):
     h=state['hybrid100_fullcoverage_20261010']
     top=top.replace('首worker实测round1，新增70轮接受0','首worker启动时round1；当前新增70轮严格离机接受'+str(h['new_accepted']))
-    top+='Hybrid最新原strict/严格离机并root采用新增1/96：IID Benign91002、70终轮、valid19867、188归档成员及8张量摘要身份通过；4复用与7三轮门检分列，无场景均值/SD或运行时等价主张。入口'+h['first_delta_root_path']+'。\n'
+    if h['new_accepted']==9:
+        top+='Hybrid累计9/96新增原strict/离机root采用；最新8项IID Benign91003–91010通过272归档成员和64终轮张量摘要身份检查。4复用与7三轮门检分列；IID Benign完整十seed表须独立统计采用，其他场景和最终评价未完成。入口'+h['latest_delta_root_path']+'。\n'
+    else:
+        top+='Hybrid首项原strict/严格离机root采用：IID Benign91002、70终轮、valid19867、188归档成员及8张量摘要身份通过；4复用与7三轮门检分列，无单seed场景SD或运行时等价主张。入口'+h['first_delta_root_path']+'。\n'
+if state.get('hybrid100_fullcoverage_20261010',{}).get('native_IID_Benign_table'):
+    h=state['hybrid100_fullcoverage_20261010']['native_IID_Benign_table']
+    top+='组合基线IID Benign十seed native表已独立及root采用，9新增＋1screen复用，固定10/9/6面板、18均值/样本SD标量和9展示格；仅一场景齐备，非完整100或三视图。入口'+h['table_path']+'。\n'
 if main.get('three_view_new_models_offserver_verified')==251:
     top+='最新三视图251=U100+C100+A51：准确11新增经101归档成员/99指标/264计数/33规则及22native成员核验，旧240保持。A五IID场景各十seed齐，non-IID Benign仅一seed；场景统计采用情况以最新A50入口为准。\n'
 if state.get('celeba_native_ten_method_PDF_20261010'):
@@ -427,6 +448,7 @@ if state.get('final_split_metadata_20261011'):
 top=top.replace('最新A40四完整IID场景表已独立采用','历史A40四完整IID场景表已独立采用；后续A50/A60见下方。原范围为')
 if A80:
     top=top.replace('后续A50/A60见下方','后续A80见下方')
+if increment_note:top+='\n'+increment_note+'\n'
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

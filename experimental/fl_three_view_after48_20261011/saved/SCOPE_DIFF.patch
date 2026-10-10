@@ -1,0 +1,279 @@
+--- original47/contract.py
++++ exact13/contract.py
+@@ -4,8 +4,8 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+-CANDIDATE = ROOT/'tmp/celeba_flgmm_three_view_closed_batch_preparation_20261011'
+-PACKAGE = '43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023'
++CANDIDATE = ROOT/'tmp/fl_three_view_after48_20261011'
++PACKAGE = 'fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734'
+ SAVED_SOURCE_SHA = 'd512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ IDS = json.loads((HERE/'FIXED_IDS.json').read_bytes())['exact_ids']
+ FROOT = Path('F:/YananResearchStorage/GuardFed')
+@@ -42,16 +42,16 @@
+     return p
+ 
+ def linux_proof(value):
+-    need(value['status']=='LINUX_ORIGINAL_FLGMM47_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED', 'Whole Linux check has not passed')
+-    need([r['id'] for r in value['records']]==IDS and len(set(IDS))==47, 'Exact47 order/membership differs')
++    need(value['status']=='LINUX_ORIGINAL_FLGMM13_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED', 'Whole Linux check has not passed')
++    need([r['id'] for r in value['records']]==IDS and len(set(IDS))==13, 'Exact13 order/membership differs')
+     need(value['original_check_saved_sha256']==SAVED_SOURCE_SHA, 'Original whole checker differs')
+     need(value['package_sha256']==PACKAGE, 'Whole Linux source package differs')
+     digest_arg(value['gate_result_sha256'])
+     need(all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in value['records']), 'Incomplete whole saved proof')
+-    need(value['cached_root_refits']==47 and value['new_CNN']==value['new_training']==0 and value['test'] is False, 'Scientific scope differs')
++    need(value['cached_root_refits']==13 and value['new_CNN']==value['new_training']==0 and value['test'] is False, 'Scientific scope differs')
+ 
+ def gate_proof(value):
+-    need(value['status']=='FLGMM_EXACT47_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and value['package_sha256']==PACKAGE, 'Wrong/unfinished gate')
+-    need([r['id'] for r in value['receipts']]==IDS, 'Gate exact47 differs')
++    need(value['status']=='FLGMM_EXACT13_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and value['package_sha256']==PACKAGE, 'Wrong/unfinished gate')
++    need([r['id'] for r in value['receipts']]==IDS, 'Gate exact13 differs')
+ 
+ def utc(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
+--- original47/check_linux.py
++++ exact13/check_linux.py
+@@ -27,6 +27,6 @@
+     proof=json.loads(c.stdout);linux_proof(proof)
+     need(proof['gate_result_sha256']==a.gate_result_sha256,'Whole Linux proof/gate differs')
+     (out/'LINUX_SAVED_CHECK.json').write_bytes(c.stdout)
+-    print(json.dumps({'status':proof['status'],'records':47,'linux_proof_sha256':sha(out/'LINUX_SAVED_CHECK.json')}))
++    print(json.dumps({'status':proof['status'],'records':13,'linux_proof_sha256':sha(out/'LINUX_SAVED_CHECK.json')}))
+ 
+ if __name__=='__main__':main()
+--- original47/linux_saved_remote.py
++++ exact13/linux_saved_remote.py
+@@ -5,31 +5,31 @@
+ ap.add_argument('--gate-result-sha256',required=True)
+ ap.add_argument('--allow-original-cached-root-refit',action='store_true',required=True)
+ a=ap.parse_args()
+-saved=pathlib.Path('/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011/source/originals/saved_science.py')
++saved=pathlib.Path('/workspace/guardfed_checks/fl_three_view_after48_20261011/source/originals/saved_science.py')
+ payload={'saved_check_source':saved.read_text(encoding='utf-8'),'source_sha256':hashlib.sha256(saved.read_bytes()).hexdigest()}
+ assert hashlib.sha256(payload['saved_check_source'].encode()).hexdigest()==payload['source_sha256']
+ assert payload['source_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+-base=pathlib.Path('/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011'); output=base/'LINUX_SAVED_CHECK.json'
++base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_after48_20261011'); output=base/'LINUX_SAVED_CHECK.json'
+ assert not output.exists() and not (base/'LINUX_SAVED_FAILURE.json').exists()
+ assert os.environ['CUDA_VISIBLE_DEVICES']=='' and os.getpriority(os.PRIO_PROCESS,0)>=10 and len(os.sched_getaffinity(0))==1
+ quota,period=pathlib.Path('/sys/fs/cgroup/cpu.max').read_text().split();assert quota=='max' or int(quota)/int(period)>=32
+ spec=importlib.util.spec_from_file_location('root_exact3_source',base/'source/candidate.py');c=importlib.util.module_from_spec(spec);sys.modules[spec.name]=c;spec.loader.exec_module(c)
+-c.package_check('43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023')
++c.package_check('fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734')
+ m=c.read(base/'source/MANIFEST.json');c.validate_manifest(m)
+ out=base/'outputs/attempt001'
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()==a.gate_result_sha256
+ gate=c.read(out/'GATE_RESULT.json')
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+-assert gate['status']=='FLGMM_EXACT47_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
+-assert gate['package_sha256']=='43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023'
+-assert len(gate['receipts'])==47 and [r['id'] for r in gate['receipts']]==m['exact_ids']
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_closed47_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_closed47_valid','EXITED'],status.stdout
++assert gate['status']=='FLGMM_EXACT13_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
++assert gate['package_sha256']=='fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734'
++assert len(gate['receipts'])==13 and [r['id'] for r in gate['receipts']]==m['exact_ids']
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_after48_exact13_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_after48_exact13_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   cmd=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'celeba_flgmm_three_view_closed_batch_20261011' in token for token in cmd),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_after48_20261011' in token for token in cmd),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -43,7 +43,7 @@
+ for rel,h in m['runtime_repo_hashes'].items():
+  if not rel.endswith('images.npy'):assert c.sha(repo/rel)==h,rel
+ core=c.load('_exact3_root_core',repo/'scripts/reproduce_paper_tables.py');ids,y,s,metadata=rt.metadata(repo)
+-assert gate['status']=='FLGMM_EXACT47_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
++assert gate['status']=='FLGMM_EXACT13_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
+ node=next(n for n in ast.parse(payload['saved_check_source']).body if isinstance(n,ast.FunctionDef) and n.name=='check_saved')
+ assert hashlib.sha256(ast.get_source_segment(payload['saved_check_source'],node).encode()).hexdigest()=='ed8dc5eb2332ef8df176166087a91fb5f2b5043cc0e4669f7c985ca5b7452cfc'
+ results=[]
+@@ -68,9 +68,9 @@
+   comp=ns['check_saved'](record,base/'outputs/attempt001'/row['id'],r,proof,types.SimpleNamespace(repo=repo),None,core,None,ev,ids,y,s)
+   assert measure()==before
+   results.append({'id':row['id'],'native_comparison':comp,'root_receipt_exact':True,'cached_root_fit_exact':True,'saved_predictions_metrics_counts_exact':True,'checkpoint_sha256':r['checkpoint_sha256'],'array_sha256':r['prediction_arrays_sha256'],'receipt_sha256':c.sha(base/'outputs/attempt001'/row['id']/'receipt.json')})
+- report={'status':'LINUX_ORIGINAL_FLGMM47_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023','cached_root_refits':47,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
++ report={'status':'LINUX_ORIGINAL_FLGMM13_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734','cached_root_refits':13,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
+  output.write_text(json.dumps(report,indent=2)+'\n');sys.stdout.write(output.read_text())
+ except BaseException:
+  import traceback
+- report={'status':'LINUX_FLGMM47_WHOLE_SAVED_FAILED_PRESERVED_NO_RETRY','traceback':traceback.format_exc(),'completed':len(results)}
++ report={'status':'LINUX_FLGMM13_WHOLE_SAVED_FAILED_PRESERVED_NO_RETRY','traceback':traceback.format_exc(),'completed':len(results)}
+  (base/'LINUX_SAVED_FAILURE.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report));sys.exit(1)
+--- original47/transport.py
++++ exact13/transport.py
+@@ -1,4 +1,4 @@
+-"""Root-only one-shot transport; original exact3 ZIP/member checks, exact47 scope."""
++"""Root-only one-shot transport; original exact3 ZIP/member checks, exact13 scope."""
+ from pathlib import Path
+ import argparse, hashlib, json, shlex, subprocess, zipfile
+ from contract import HERE, IDS, digest_arg, fpath, gate_proof, linux_proof, need, read, save, sha, utc, volume
+@@ -21,7 +21,7 @@
+     remote=(HERE/'transport_remote.py').read_text(encoding='utf-8')
+     for marker,value in [('__GATE_RESULT_SHA256__',a.gate_result_sha256),('__LINUX_PROOF_SHA256__',a.linux_proof_sha256)]:
+         need(remote.count(marker)==(2 if marker=='__GATE_RESULT_SHA256__' else 1),'Template binding differs');remote=remote.replace(marker,value)
+-    archive=dest/'flgmm47_saved_arrays_and_receipts.zip'
++    archive=dest/'flgmm13_saved_arrays_and_receipts.zip'
+     if not a.verify_existing:
+         save(out/'TRANSPORT_COMMAND.json',{'utc':utc(),'CPU':110,'threads':1,'gate_result_sha256':a.gate_result_sha256,'linux_proof_sha256':a.linux_proof_sha256,'remote_source_sha256':hashlib.sha256(remote.encode()).hexdigest(),'destination':dest.as_posix(),'storage':vol})
+         (out/'TRANSPORT_REMOTE_BOUND.py').write_text(remote,encoding='utf-8')
+@@ -49,7 +49,7 @@
+     remote_report=candidates[0]
+     need(sha(archive)==remote_report['archive_sha256'] and archive.stat().st_size==remote_report['archive_bytes'],'Archive transport SHA/size differs')
+     expected={'bundle/GATE_RESULT.json','bundle/metadata_receipt.json','LINUX_SAVED_CHECK.json'}|{'bundle/'+i+'/'+n for i in IDS for n in ('receipt.json','validation_predictions.npz')}
+-    need(remote_report['members']==len(expected)+1==98,'Archive layout differs')
++    need(remote_report['members']==len(expected)+1==30,'Archive layout differs')
+     extract=dest/'verified_extract';extract.mkdir()
+     with zipfile.ZipFile(archive) as z:
+         need(len(z.namelist())==len(expected)+1 and set(z.namelist())==expected|{'TRANSPORT_MANIFEST.json'},'Missing/duplicate/extra ZIP member')
+@@ -65,7 +65,7 @@
+     need(sha(extract/'LINUX_SAVED_CHECK.json')==a.linux_proof_sha256 and sha(extract/'bundle/GATE_RESULT.json')==a.gate_result_sha256,'External gate/Linux proof SHA differs')
+     linux_proof(read(extract/'LINUX_SAVED_CHECK.json'));gate_proof(read(extract/'bundle/GATE_RESULT.json'))
+     need(read(extract/'LINUX_SAVED_CHECK.json')['gate_result_sha256']==a.gate_result_sha256,'Whole Linux proof belongs to another gate')
+-    save(out/'TRANSPORT_VERIFICATION.json',dict(status='FLGMM47_F_TRANSPORT_ALL_MEMBERS_SHA_PASS_NOT_SCIENTIFIC_ACCEPTANCE',utc=utc(),storage=vol,archive_path=archive.as_posix(),archive_sha256=sha(archive),archive_bytes=archive.stat().st_size,members=manifest['members'],member_count=98,verified_extract=extract.as_posix(),gate_result_sha256=a.gate_result_sha256,linux_proof_sha256=a.linux_proof_sha256,explicit_existing_archive_verification=a.verify_existing,redownload=False,new_CNN=0,new_fit=0,new_training=0,test=False,root_adopted=False))
+-    print(json.dumps({'status':'TRANSPORT_PASS_NOT_ADOPTED','archive_sha256':sha(archive),'members':98,'proof_sha256':sha(out/'TRANSPORT_VERIFICATION.json')}))
++    save(out/'TRANSPORT_VERIFICATION.json',dict(status='FLGMM13_F_TRANSPORT_ALL_MEMBERS_SHA_PASS_NOT_SCIENTIFIC_ACCEPTANCE',utc=utc(),storage=vol,archive_path=archive.as_posix(),archive_sha256=sha(archive),archive_bytes=archive.stat().st_size,members=manifest['members'],member_count=30,verified_extract=extract.as_posix(),gate_result_sha256=a.gate_result_sha256,linux_proof_sha256=a.linux_proof_sha256,explicit_existing_archive_verification=a.verify_existing,redownload=False,new_CNN=0,new_fit=0,new_training=0,test=False,root_adopted=False))
++    print(json.dumps({'status':'TRANSPORT_PASS_NOT_ADOPTED','archive_sha256':sha(archive),'members':30,'proof_sha256':sha(out/'TRANSPORT_VERIFICATION.json')}))
+ 
+ if __name__=='__main__':main()
+--- original47/transport_remote.py
++++ exact13/transport_remote.py
+@@ -1,20 +1,20 @@
+ 
+ import datetime,hashlib,io,json,os,pathlib,subprocess,sys,zipfile
+-base=pathlib.Path('/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011')
++base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_after48_20261011')
+ out=base/'outputs/attempt001'
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()=='__GATE_RESULT_SHA256__'
+ gate=json.loads((out/'GATE_RESULT.json').read_text())
+-ids=['FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91010_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91010_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91010_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91010_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91001_screen', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91001_screen', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91001_screen', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen']
+-assert gate['status']=='FLGMM_EXACT47_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
+-assert gate['package_sha256']=='43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023'
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_closed47_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_closed47_valid','EXITED'],status.stdout
++ids=['FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91010_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage']
++assert gate['status']=='FLGMM_EXACT13_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
++assert gate['package_sha256']=='fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734'
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_after48_exact13_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_after48_exact13_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   command=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'celeba_flgmm_three_view_closed_batch_20261011' in token for token in command),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_after48_20261011' in token for token in command),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -25,12 +25,12 @@
+ proof=base/'LINUX_SAVED_CHECK.json'
+ assert hashlib.sha256(proof.read_bytes()).hexdigest()=='__LINUX_PROOF_SHA256__'
+ linux=json.loads(proof.read_text())
+-assert linux['status']=='LINUX_ORIGINAL_FLGMM47_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED'
+-assert len(linux['records'])==47 and [r['id'] for r in linux['records']]==ids
++assert linux['status']=='LINUX_ORIGINAL_FLGMM13_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED'
++assert len(linux['records'])==13 and [r['id'] for r in linux['records']]==ids
+ assert linux['original_check_saved_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ assert all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in linux['records'])
+ assert linux['new_CNN']==0 and linux['new_training']==0 and linux['test'] is False
+-assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023'
++assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='fb1e22aa70ad7f8d3f16c9f0a7c0a152d0e354f77177650d82da984b50ae6734'
+ files={'bundle/GATE_RESULT.json':out/'GATE_RESULT.json','bundle/metadata_receipt.json':out/'metadata_receipt.json','LINUX_SAVED_CHECK.json':proof}
+ for ident in ids:
+  for name in ['receipt.json','validation_predictions.npz']:files['bundle/'+ident+'/'+name]=out/ident/name
+@@ -46,7 +46,7 @@
+ for row in linux['records']:
+  assert row['receipt_sha256']==observed['bundle/'+row['id']+'/receipt.json']['sha256'] and row['array_sha256']==observed['bundle/'+row['id']+'/validation_predictions.npz']['sha256']
+ for rel,path in files.items():assert hashlib.sha256(path.read_bytes()).hexdigest()==observed[rel]['sha256']
+-report={'status':'FLGMM47_SAVED_ARRAY_TRANSPORT_SOURCE_MEMBERS_UNCHANGED_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'members':observed,'exact_ids':ids,'service':status.stdout,'test':False,'new_CNN':0,'new_fit':0,'model_or_images_downloaded':False}
++report={'status':'FLGMM13_SAVED_ARRAY_TRANSPORT_SOURCE_MEMBERS_UNCHANGED_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'members':observed,'exact_ids':ids,'service':status.stdout,'test':False,'new_CNN':0,'new_fit':0,'model_or_images_downloaded':False}
+ bio=io.BytesIO()
+ with zipfile.ZipFile(bio,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+  for rel,b in payload.items():z.writestr(rel,b)
+--- original47/verify_arrays.py
++++ exact13/verify_arrays.py
+@@ -22,13 +22,13 @@
+     need(not a.output.resolve().is_relative_to(HERE),'Prepared source stays immutable')
+     need(sha(a.transport_proof)==a.transport_proof_sha256,'Actual transport proof differs')
+     transport=read(a.transport_proof)
+-    need(transport['status']=='FLGMM47_F_TRANSPORT_ALL_MEMBERS_SHA_PASS_NOT_SCIENTIFIC_ACCEPTANCE' and transport['member_count']==98,'Transport not verified')
++    need(transport['status']=='FLGMM13_F_TRANSPORT_ALL_MEMBERS_SHA_PASS_NOT_SCIENTIFIC_ACCEPTANCE' and transport['member_count']==30,'Transport not verified')
+     need(transport['linux_proof_sha256']==a.linux_proof_sha256,'Wrong whole Linux proof binding')
+     extract=fpath(transport['verified_extract']);metadata=fpath(a.metadata_npz)
+     need(sha(extract/'LINUX_SAVED_CHECK.json')==a.linux_proof_sha256,'Linux proof SHA differs')
+     linux_proof(read(extract/'LINUX_SAVED_CHECK.json'))
+     expected={'bundle/GATE_RESULT.json','bundle/metadata_receipt.json','LINUX_SAVED_CHECK.json'}|{'bundle/'+i+'/'+n for i in IDS for n in ('receipt.json','validation_predictions.npz')}
+-    need(set(transport['members'])==expected,'Exact47 member inventory differs')
++    need(set(transport['members'])==expected,'Exact13 member inventory differs')
+     for rel,pin in transport['members'].items():
+         path=extract/rel
+         need(path.resolve().is_relative_to(extract) and sha(path)==pin['sha256'] and path.stat().st_size==pin['bytes'],'Transport member changed: '+rel)
+@@ -90,11 +90,11 @@
+             need(ctx['before']==ctx['second']==after,'Local original artifacts changed across check')
+             differences=diff_ns['diff'](actual_root,receipt['root_reconstruction'])
+             rows.append({'id':row['id'],'array_sha256':sha(run/'validation_predictions.npz'),'receipt_sha256':sha(run/'receipt.json'),'native_comparison':scope['comparison'],'root_ID_partition_original_assertions_pass':True,'root_fit_parameters_and_diagnostics_exact':True,'all_saved_predictions_and_counts_and_metrics_exact':True,'local_full_root_receipt_exact':not differences,'preserved_root_receipt_differences':differences,'artifact_observations':{'before':ctx['before'],'second_before':ctx['second'],'after':after}})
+-        report={'status':'FLGMM47_WINDOWS_ORIGINAL_ARRAY_BLOCK_PASS_WHOLE_NOT_EXECUTED_NO_ADOPTION','utc':utc(),'records':rows,'cached_root_refits':47,'original_saved_check_sha256':SAVED_SOURCE_SHA,'exact_saved_array_AST_block_sha256':block_sha,'linux_whole_proof_sha256':a.linux_proof_sha256,'transport_proof_sha256':a.transport_proof_sha256,'Windows_whole_check_executed':False,'Windows_whole_check_pass':None,'prior_exact3_Windows_whole_failure_preserved':True,'native_tolerance_unchanged':1e-12,'new_CNN':0,'new_training':0,'test':False,'root_adopted':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu'},'F_volume':vol}
+-        save(a.output,report);print(json.dumps({'status':report['status'],'records':47,'proof_sha256':sha(a.output)}))
++        report={'status':'FLGMM13_WINDOWS_ORIGINAL_ARRAY_BLOCK_PASS_WHOLE_NOT_EXECUTED_NO_ADOPTION','utc':utc(),'records':rows,'cached_root_refits':13,'original_saved_check_sha256':SAVED_SOURCE_SHA,'exact_saved_array_AST_block_sha256':block_sha,'linux_whole_proof_sha256':a.linux_proof_sha256,'transport_proof_sha256':a.transport_proof_sha256,'Windows_whole_check_executed':False,'Windows_whole_check_pass':None,'prior_exact3_Windows_whole_failure_preserved':True,'native_tolerance_unchanged':1e-12,'new_CNN':0,'new_training':0,'test':False,'root_adopted':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu'},'F_volume':vol}
++        save(a.output,report);print(json.dumps({'status':report['status'],'records':13,'proof_sha256':sha(a.output)}))
+     except BaseException:
+         import traceback
+-        save(a.output.with_suffix('.failure.json'),{'status':'FLGMM47_WINDOWS_ARRAY_CHECK_FAILED_PRESERVED','utc':utc(),'completed':len(rows),'traceback':traceback.format_exc(),'root_adopted':False})
++        save(a.output.with_suffix('.failure.json'),{'status':'FLGMM13_WINDOWS_ARRAY_CHECK_FAILED_PRESERVED','utc':utc(),'completed':len(rows),'traceback':traceback.format_exc(),'root_adopted':False})
+         raise
+ 
+ if __name__=='__main__':main()
+--- original47/audit_saved.py
++++ exact13/audit_saved.py
+@@ -1,11 +1,12 @@
+-"""Exact47 saved-output audit. Zero refit; Windows exact-refit failure remains."""
++"""Exact13 saved-output audit after accepted48. Zero refit; Windows exact-refit failure remains."""
+ from pathlib import Path
+ import argparse, ast, copy, datetime, hashlib, importlib.util, json, math, sys, traceback
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[1]
+-ACTUAL = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001'
+-PREPARED = ROOT / 'tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/attempt_v2'
++ROOT = HERE.parents[2]
++ACTUAL = ROOT / 'tmp/fl_three_view_after48_20261011/actual/saved001'
++HISTORICAL = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001'
++PREPARED = HERE
+ OUTPUT = ACTUAL / 'SAVED_OUTPUTS_AUDIT_NO_REFIT.json'
+ STARTED = ACTUAL / 'SAVED_OUTPUTS_AUDIT_NO_REFIT.started.json'
+ FAILED = ACTUAL / 'SAVED_OUTPUTS_AUDIT_NO_REFIT.failure.json'
+@@ -95,7 +96,7 @@
+     for rel, pin in pins['files'].items():
+         check_pin(ROOT / rel, pin)
+     need(not any(p.exists() for p in (OUTPUT, STARTED, FAILED)), 'Preserve original audit attempt; no retry')
+-    need(read(ACTUAL / 'OFFSERVER_ARRAY_REFIT_CHECK.failure.json')['completed'] == 4, 'Original failed refit must remain preserved')
++    need(read(HISTORICAL / 'OFFSERVER_ARRAY_REFIT_CHECK.failure.json')['completed'] == 4, 'Original failed refit must remain preserved')
+     save(STARTED, {'scope': 'SAVED_OUTPUTS_AUDIT_NO_REFIT', 'source_seal_sha256': args.source_seal_sha256, 'fit_calls': 0})
+     rows = []
+     try:
+@@ -111,7 +112,7 @@
+         ns = dict(verifier.__dict__)
+         exec(compile(ast.Module(body=prefix, type_ignores=[]), '<unchanged original metadata/source/member setup>', 'exec'), ns)
+         expected_ids = pins['exact_ids']
+-        need(len(expected_ids) == len(set(expected_ids)) == 47, 'Require exact47')
++        need(len(expected_ids) == len(set(expected_ids)) == 13, 'Require exact13')
+         need([r['id'] for r in ns['manifest']['records']] == [r['id'] for r in ns['gate']['receipts']] == expected_ids, 'Frozen scope differs')
+         linux = read(ACTUAL / 'LINUX_SAVED_CHECK.json')
+         need([r['id'] for r in linux['records']] == expected_ids, 'Linux whole proof scope differs')
+@@ -155,7 +156,7 @@
+                   'threshold_group_key_restoration_only': True, 'seven_original_saved_output_statements_unchanged': True,
+                   'original_predict_score_native_functions_unchanged': True, 'native_tolerance': 1e-12,
+                   'fit_calls': 0, 'new_CNN': 0, 'new_training': 0, 'test': False, 'root_adopted': False,
+-                  'metric_values_checked': 423, 'integer_base_counts_checked': 1128, 'prediction_rules_checked': 141,
++                  'metric_values_checked': 117, 'integer_base_counts_checked': 312, 'prediction_rules_checked': 39,
+                   'runtime': {'python': sys.version, 'numpy': ns['np'].__version__, 'pandas': ns['pd'].__version__, 'torch': ns['torch'].__version__, 'device': 'cpu'},
+                   'scope': 'Independent saved-output consistency only. Original Linux whole check supplies root-refit evidence. Windows exact refit remains failed; no acceptance or cross-platform recalibration equivalence is inferred.'}
+         save(OUTPUT, report)

@@ -1,0 +1,245 @@
+--- original47/prepare.py
++++ after48/prepare.py
+@@ -15,10 +15,10 @@
+ ROOT = HERE.parent.parent
+ OLD = ROOT / 'tmp/celeba_added_cnn_three_view_gate_preparation_20261010'
+ BRIDGE = ROOT / 'tmp/celeba_added_cnn_three_view_bridge_20261010'
+-ROOT44 = ROOT / 'tmp/celeba_flgmm_fullcoverage_delta_after38_20261010/ROOT_ADOPTION_REVIEW.json'
+-ROOT44_SHA = 'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510'
+-EXACT3 = ROOT / 'tmp/celeba_added_cnn_exact3_root_execution_20261010/ROOT_SCIENTIFIC_ADOPTION.json'
+-EXACT3_SHA = '631d7ee2acf1cbe3453d849523e262f29ff5b354b5ddb56c60e5779e94364456'
++ROOT57 = ROOT / 'tmp/fl_native_after54_20261011/ROOT_ADOPTION_REVIEW.json'
++ROOT57_SHA = '66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee'
++PRIOR48 = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
++PRIOR48_SHA = '22fc113add73814ae40accf563ce5f63bd63d50bcf53b7262bdb2b996b016dfe'
+ PREFIX = 'FLGMM_Tg20_L2.0_lr0.001'
+ 
+ 
+@@ -201,109 +201,64 @@
+         roots.append({'root': rp, 'accepted_new_ids': ids, 'strict': sp, 'offserver': offp,
+                       'members': mp, 'backup_receipt': bp, 'archive_sha256': receipt['archive_sha256']})
+ 
+-    remember(ROOT44, ROOT44_SHA)
+-    latest = read(ROOT44)
+-    assert latest['accepted_total'] == 44 and latest['reused_separately'] == 4
+-    accepted44 = latest['accepted_job_ids']
+-    assert len(accepted44) == len(set(accepted44)) == 44
+-    chain_roots = []
+-    p = ROOT44
+-    while True:
+-        j = read(p)
+-        chain_roots.append(p)
+-        q = j.get('previous_root_adoption_path')
+-        if not q:
+-            break
+-        p = ROOT / q
+-        assert sha(p) == j['previous_root_adoption_sha256']
+-    for number, p in enumerate(reversed(chain_roots)):
++    bound = read(HERE / 'BOUND_EXACT13.json')
++    assert bound['prior_three_view_root_sha256'] == PRIOR48_SHA
++    remember(PRIOR48, PRIOR48_SHA)
++    prior = read(PRIOR48)
++    prior_ids = [x['id'] for x in prior['records']] + [x['id'] for x in prior['prior_interface_explicitly_reused']]
++    assert len(prior_ids) == len(set(prior_ids)) == 48 and prior['root_adoption'] is True
++    remember(ROOT57, ROOT57_SHA)
++    latest = read(ROOT57)
++    assert latest['accepted_total'] == 57 and latest['reused_separately'] == 4
++    selected = bound['exact_ids']
++    expected = [PREFIX + '_IID_Sp-DFA_seed' + str(s) + '_fullcoverage' for s in range(91007,91011)]
++    expected += [PREFIX + '_non-IID_Benign_seed' + str(s) + '_fullcoverage' for s in range(91002,91011)]
++    assert selected == expected and not set(selected).intersection(prior_ids)
++    assert [rid for rid in latest['accepted_job_ids'] if rid not in set(prior_ids)] == selected
++    for number, entry in enumerate(bound['sources']):
++        p = ROOT / entry['root']
++        remember(p, entry['root_sha256'])
+         j = read(p)
+         index = p.parent / 'RAW_STORAGE_INDEX.json'
+-        batch = Path(read(index)['raw_storage_root']) if index.exists() else p.parent / 'batch'
+-        if index.exists():
+-            remember(index, j.get('raw_storage_index_sha256'))
++        remember(index, entry['raw_index_sha256'])
++        assert j['raw_storage_index_sha256'] == entry['raw_index_sha256']
++        batch = Path(read(index)['raw_storage_root'])
+         register(p, batch, j['accepted_new_ids'], number)
+-    assert set(records) == set(accepted44)
+-    stage = ROOT / 'tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage'
+-    adoption = read(ROOT / 'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json')
+-    remember(ROOT / 'tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json', 'fcecfc0a3582695edfd54c70db38e7dafdd5bf46dcdff8212b9dfc03fc7506fc')
+-    bound_pin = remember(stage / 'manifest.json', adoption['manifest_sha256'])
+-    bound = read(stage / 'manifest.json')
+-    reuse4 = bound['reused_jobs']
+-    assert len(reuse4) == 4
+-    screen_chain = ROOT / 'tmp/celeba_flgmm_screen_20261009_v2_dispatch/BACKUP_CHAIN_accepted_delta_after19_v2_20261009.json'
+-    sc = read(screen_chain)
+-    screen_root = ROOT / sc['root_adoption_path']
+-    remember(screen_chain, '3844e24261b7e3a89a550b0fcb0016bbf2fb1b8a579f6e51b6a3e5afff23032b')
+-    ids4 = [x['id'] for x in reuse4]
+-    register(screen_chain, screen_root.parent, ids4, len(chain_roots), screen=True, root_adoption=screen_root)
+-    for x in reuse4:
+-        assert all(inventory[x['id']][k] == v for k, v in x['accepted_record'].items() if k not in ('accuracy', 'aeod', 'aspd', 'score'))
+-        assert inventory[x['id']]['job_sha256'] == x['job_sha256']
+-    assert len(records) == len(inventory) == 48
+-    models = [r['identity']['checkpoint']['sha256'] for r in records.values()]
+-    equal_weight_groups = {}
+-    for rid, r in records.items():
+-        equal_weight_groups.setdefault(r['identity']['checkpoint']['sha256'], []).append(rid)
+-    # Check actual accepted checkpoint identities, never ID substring aliases.
+-    exactpin = remember(EXACT3, EXACT3_SHA)
+-    exact = read(EXACT3)
+-    assert exact['root_adoption'] is True and exact['Linux_whole_original_saved_check_pass'] is True
+-    old900 = ROOT / 'tmp/celeba_nine_method_three_view_tables_20261009/records_three_views_900.json'
+-    n900pin = remember(old900)
+-    old900doc = read(old900)
+-    assert old900doc['final_collector_sha256'] == '00e0cc89784832f8fc8293ce39e2c8ec6247f0e5d0fc37288cd3032133a9e6a3'
+-    n900 = old900doc['records']
+-    assert len(n900) == 900 and all(x['method'] != 'FLGMM' for x in n900)
+-    accepted_views = {(x['id'], x['checkpoint_sha256']): {'id': x['id'], 'source': n900pin} for x in n900}
+-    for x in exact['records']:
+-        accepted_views[(x['id'], x['checkpoint_sha256'])] = {'id': x['id'], 'source': exactpin, 'actual_record': x}
+-    skips = []
+-    ordered = accepted44 + ids4
+-    for rid in ordered:
+-        r = records[rid]
+-        h = r['identity']['checkpoint']['sha256']
+-        if (rid, h) in accepted_views:
+-            proof = accepted_views[(rid, h)]
+-            assert proof['id'] == rid and proof['source']['sha256'] == EXACT3_SHA
+-            skips.append({'id': rid, 'checkpoint_sha256': h, 'reason': 'ACTUAL_ROOT_ADOPTED_EXACT3_THREE_VIEW_INTERFACE', 'accepted_proof': proof})
+-    assert len(skips) == 1 and skips[0]['id'] == PREFIX + '_IID_S-DFA_seed91005_fullcoverage'
+-    selected = [rid for rid in ordered if rid not in {x['id'] for x in skips}]
+-    assert len(selected) == 47 and all(rid in selected for rid in ids4)
++    assert list(records) == selected and len(records) == 13
++    for x in bound['records']:
++        assert records[x['id']]['identity']['checkpoint']['sha256'] == x['checkpoint_sha256']
++    ordered = selected
+     # Registry contains only this finite pending batch. Original checker is unchanged.
+     registry = {'status': 'FROZEN_EXTERNAL_ROOT_STRICT_OFFSERVER_IDENTITIES_NO_NEW_REPLAY',
+         'chains_by_id': {rid: chains[rid] for rid in selected}, 'chains': {'FLGMM': {'registered_ids': selected}}}
+     save('PROOF_PINS.json', registry)
+-    manifest = {'scope': 'FLGMM_CLOSED44_PLUS4_MINUS_ADOPTED1_EXACT47_THREE_VIEW_CANDIDATE',
++    manifest = {'scope': 'FLGMM_NATIVE57_PLUS4_MINUS_ADOPTED48_EXACT13_THREE_VIEW_CANDIDATE',
+         'status': 'PREPARED_NOT_EXECUTED_NOT_DISPATCH_AUTHORIZED', 'bridge_root_review_sha256': 'be5e6c949254960f55b765ec976f1e681a26450416f156ca237965dedc87fe69',
+         'server_repo': '/workspace/GuardFed-celeba-expanded', 'server_python': '/workspace/guardfed_envs/celeba-cu128-20261009/bin/python',
+         'views': ['native', 'raw', 'shared_calibration'], 'native_tolerance': 1e-12, 'cpu_affinity': list(range(120,128)), 'threads': 8,
+-        'new_scientific_acceptances': 0, 'dispatch_authorized': False, 'root_accepted_new_training_records': 44,
+-        'separately_reused_screen_checkpoints': 4, 'previous_three_view_accepted_in_scope': 1, 'pending_three_view_records': 47,
++        'new_scientific_acceptances': 0, 'dispatch_authorized': False, 'root_accepted_new_training_records': 57,
++        'separately_reused_screen_checkpoints': 4, 'previous_three_view_accepted_in_scope': 48, 'pending_three_view_records': 13,
+         'exact_ids': selected, 'records': [records[rid] for rid in selected], 'path_map': mapping,
+-        'runtime_repo_hashes': shared, 'proof_registry_sha256': sha(HERE / 'PROOF_PINS.json'), 'FL44_root_pin': pin(ROOT44),
+-        'authorizations_and_runtime_facts_pending': ['independent/root source review and explicit exact47 authorization',
++        'runtime_repo_hashes': shared, 'proof_registry_sha256': sha(HERE / 'PROOF_PINS.json'), 'FL57_root_pin': pin(ROOT57), 'prior48_root_pin': pin(PRIOR48),
++        'authorizations_and_runtime_facts_pending': ['independent/root source review and explicit exact13 authorization',
+             'fresh Linux CPU120-127 eligible/all-thread freedom and quota/memory/GPU/storage preflight',
+             'actual original server artifact/source/data SHA and selected-producer quiescence checks',
+             'actual replay receipts and unchanged Linux whole saved checker; F offserver arrays/members and root adoption'],
+         'no_final_primary_endpoint_choice': True, 'test': False, 'new_bulk_copies': 0}
+     save('MANIFEST.json', manifest)
+-    save('SKIP_AND_REUSE.json', {'strict_training_scope': 48, 'root44': pin(ROOT44), 'bound_reuse_manifest': bound_pin,
+-        'screen_reuse_ids': ids4, 'screen_reuse_three_view_already_accepted': [], 'screen_reuse_to_evaluate': ids4,
+-        'skip': skips, 'pending_exact_ids': selected, 'old900_methods': sorted(set(x['method'] for x in n900)),
+-        'old900_record_checkpoint_intersection': [], 'observed_but_unaccepted_training_ids_included': 0,
+-        'distinct_checkpoint_bytes': len(set(models)), 'equal_weight_distinct_scenario_records_retained': {h: ids for h, ids in equal_weight_groups.items() if len(ids)>1},
+-        'other_three_view_scope': 'Mechanism accepted indexes are Full/minus-control identities; root confirms no other added-CNN acceptance beyond exact3.',
+-        'future_coverage_or_recipe_selection': False})
++    save('SKIP_AND_REUSE.json', {'strict_training_scope': 61, 'root57': pin(ROOT57),
++        'prior48_root': pin(PRIOR48), 'prior48_ids': prior_ids, 'pending_exact_ids': selected,
++        'prior48_unchanged': True, 'observed_but_unaccepted_training_ids_included': 0,
++        'screen_reuse_pending': 0, 'future_coverage_or_recipe_selection': False})
+     save('ACCEPTED_NATIVE_IDENTITIES.json', {'records': [inventory[rid] for rid in ordered], 'root_chain': roots,
+         'identity_only_not_three_view_acceptance': True, 'checkpoint_hashes_read_from_original_root_bound_member_indexes': True,
+         'large_model_or_archive_rehashes_performed': 0})
+     save('SOURCE_PINS.json', {'files': sources, 'runtime_source_data_hashes': shared,
+-        'FL_fullcoverage_package_sha256': latest['source_package_sha256'], 'screen_reuse_package_sha256': read(screen_root.parent/'PARTIAL_ACCEPTANCE.json')['package_sha256']})
++        'FL_fullcoverage_package_sha256': latest['source_package_sha256']})
+     save('STORAGE_CHECK.json', {'utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'volume': volume,
+         'operation': 'Read existing compact JSON/source; write compact preparation only on E', 'new_bulk_writes': 0,
+         'future_bulk_location': 'Original Linux server or F:/YananResearchStorage/GuardFed/ after fresh volume/capacity guard'})
+-    print(json.dumps({'strict_scope': 48, 'skipped': 1, 'pending_exact': 47, 'reused_screen_pending': 4,
++    print(json.dumps({'strict_scope': 61, 'prior_accepted': 48, 'pending_exact': 13, 'reused_screen_pending': 0,
+                       'root_chunks': len(roots), 'manifest_sha256': sha(HERE/'MANIFEST.json'), 'new_CNN': 0, 'new_fit': 0}))
+ 
+ 
+--- original47/candidate.py
++++ after48/candidate.py
+@@ -1,4 +1,4 @@
+-"""Exact47 already-accepted FLGMM valid three-view candidate. No deployment or implicit authorization."""
++"""Exact13 already-accepted FLGMM valid three-view candidate. No deployment or implicit authorization."""
+ from __future__ import annotations
+ 
+ import argparse
+@@ -53,13 +53,15 @@
+ 
+ def validate_manifest(m):
+     expected = [('FLGMM', rid) for rid in m['exact_ids']]
+-    require(len(expected) == len(set(m['exact_ids'])) == 47, 'Frozen exact47 only')
+-    require([(r['method'], r['id']) for r in m['records']] == expected, 'Exact47 order drift')
+-    require(m['scope'] == 'FLGMM_CLOSED44_PLUS4_MINUS_ADOPTED1_EXACT47_THREE_VIEW_CANDIDATE', 'Wrong scope')
+-    require(m['root_accepted_new_training_records'] == 44 and m['separately_reused_screen_checkpoints'] == 4
+-            and m['previous_three_view_accepted_in_scope'] == 1 and m['pending_three_view_records'] == 47, 'Wrong closed scope')
+-    require(m['FL44_root_pin']['sha256'] == 'f61a7fa480a62a9394d67a64533568b43e6491ee01d8e1f02005f35a42b6a510', 'Wrong root44')
+-    require('FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91005_fullcoverage' not in m['exact_ids'], 'Existing three-view checkpoint refused')
++    require(len(expected) == len(set(m['exact_ids'])) == 13, 'Frozen exact13 only')
++    require([(r['method'], r['id']) for r in m['records']] == expected, 'Exact13 order drift')
++    require(m['scope'] == 'FLGMM_NATIVE57_PLUS4_MINUS_ADOPTED48_EXACT13_THREE_VIEW_CANDIDATE', 'Wrong scope')
++    require(m['root_accepted_new_training_records'] == 57 and m['separately_reused_screen_checkpoints'] == 4
++            and m['previous_three_view_accepted_in_scope'] == 48 and m['pending_three_view_records'] == 13, 'Wrong closed scope')
++    require(m['FL57_root_pin']['sha256'] == '66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee', 'Wrong root57')
++    require(m['prior48_root_pin']['sha256'] == '22fc113add73814ae40accf563ce5f63bd63d50bcf53b7262bdb2b996b016dfe', 'Wrong prior48')
++    expected_ids = ['FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed'+str(s)+'_fullcoverage' for s in range(91007,91011)] + ['FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed'+str(s)+'_fullcoverage' for s in range(91002,91011)]
++    require(m['exact_ids'] == expected_ids, 'Exact13 ID whitelist changed')
+     require(m['proof_registry_sha256'] == sha(HERE / 'PROOF_PINS.json'), 'Registry changed')
+     registry = read(HERE / 'PROOF_PINS.json')['chains_by_id']
+     require(set(registry) == set(m['exact_ids']), 'Only source-bound accepted exact IDs')
+@@ -196,7 +198,7 @@
+             if node.value == 'model_inventory_record_sha256':
+                 node.value = 'external_identity_record_sha256'
+             if isinstance(node.value, str) and node.value.startswith('Two bounded valid-only canaries'):
+-                node.value = 'Exactly47 accepted FLGMM checkpoints; finite partial coverage, not full100, method ranking, final primary endpoint, test, or CUDA equivalence'
++                node.value = 'Exactly13 accepted FLGMM checkpoints; finite partial coverage, not full100, method ranking, final primary endpoint, test, or CUDA equivalence'
+             return node
+ 
+     nodes = Bind().visit(ast.Module(body=nodes, type_ignores=[]))
+@@ -219,7 +221,7 @@
+ def authorize(a, m):
+     require(sha(a.authorization) == a.authorization_sha256, 'Authorization SHA mismatch')
+     auth = read(a.authorization)
+-    require(auth['status'] == 'ROOT_AUTHORIZED_FLGMM_CLOSED_EXACT47_THREE_VIEW', 'No actual root authorization')
++    require(auth['status'] == 'ROOT_AUTHORIZED_FLGMM_CLOSED_EXACT13_THREE_VIEW', 'No actual root authorization')
+     require(auth['package_sha256'] == a.package_sha256 and auth['manifest_sha256'] == sha(HERE / 'MANIFEST.json'), 'Unbound authorization')
+     require(auth['exact_ids'] == [r['id'] for r in m['records']] and auth['cpu_affinity'] == CPUS, 'Authorization scope drift')
+     require(auth['device'] == 'cpu' and auth['max_processes'] == 1 and auth['test'] is False, 'Unauthorized runtime')
+@@ -229,7 +231,7 @@
+     require(review['source_adoptable'] is True and review['package_sha256'] == a.package_sha256, 'Candidate source not root adopted')
+     require(sha(a.preflight) == a.preflight_sha256, 'Linux preflight SHA changed')
+     p = read(a.preflight)
+-    require(p['status'] == 'ROOT_LINUX_FLGMM_EXACT47_PREFLIGHT_PASS' and p['cpu_affinity'] == CPUS, 'Linux preflight refused')
++    require(p['status'] == 'ROOT_LINUX_FLGMM_EXACT13_PREFLIGHT_PASS' and p['cpu_affinity'] == CPUS, 'Linux preflight refused')
+     age = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime.fromisoformat(p['utc'])).total_seconds()
+     require(0 <= age <= 300 and p['no_duplicate_gate'] is True and p['all_thread_cpus_free'] is True, 'Stale/occupied preflight')
+     require(set(CPUS) <= set(p['eligible_cpus']), 'Requested CPUs outside actual eligible mask')
+@@ -263,13 +265,13 @@
+     m = read(HERE / 'MANIFEST.json')
+     validate_manifest(m)
+     authorize(a, m)
+-    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011/outputs'), 'Fresh fixed server output required')
++    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/fl_three_view_after48_20261011/outputs'), 'Fresh fixed server output required')
+     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CUDA must be hidden before importing Torch')
+     for k, v in {'OMP_NUM_THREADS': '8', 'MKL_NUM_THREADS': '8', 'OPENBLAS_NUM_THREADS': '1', 'NUMEXPR_NUM_THREADS': '1'}.items():
+         require(os.environ.get(k) == v, 'Thread environment drift: ' + k)
+     import fcntl, signal, traceback
+     exclusive_cpus()
+-    lock = open('/tmp/guardfed_flgmm_closed_exact47_valid.lock', 'a')
++    lock = open('/tmp/guardfed_flgmm_after48_exact13_valid.lock', 'a')
+     fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+     import numpy as np, pandas as pd, torch
+     torch.set_num_threads(8)
+@@ -321,7 +323,7 @@
+             receipts.append(rt.replay_one(core, None, cnn, ev, record, repo, ids, y, s, a.output / row['id'], 1800))
+         check_inputs()
+         package_check(a.package_sha256)
+-        rt.save(a.output / 'GATE_RESULT.json', {'status': 'FLGMM_EXACT47_THREE_VIEW_PASS_NOT_ROOT_ADOPTED', 'receipts': receipts,
++        rt.save(a.output / 'GATE_RESULT.json', {'status': 'FLGMM_EXACT13_THREE_VIEW_PASS_NOT_ROOT_ADOPTED', 'receipts': receipts,
+                   'root_adopted_new': 0, 'full100_complete': False, 'test': False, 'package_sha256': a.package_sha256})
+     except BaseException:
+         rt.save(a.output / 'FAILURE.json', {'status': 'FAILED_PRESERVED_NO_RETRY', 'traceback': traceback.format_exc(), 'completed': len(receipts)})

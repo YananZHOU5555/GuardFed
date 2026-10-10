@@ -1,0 +1,94 @@
+--- first1/collect_once.py
++++ after1/collect_once.py
+@@ -1,4 +1,4 @@
+-"""Future CPU107-only quiescent first-fullcoverage acceptance/archive; no service mutations."""
++"""Future CPU108-only quiescent first-fullcoverage acceptance/archive; no service mutations."""
+ from pathlib import Path
+ import argparse,hashlib,json,os,subprocess,sys,tarfile,time,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+@@ -20,7 +20,7 @@
+  assert a.out==expected and a.out.parent.resolve()==a.out.parent and not a.out.exists() and not a.out.is_symlink()
+  a.out.mkdir()
+  try:
+-  assert os.sched_getaffinity(0)=={107} and os.getpriority(os.PRIO_PROCESS,0)>=10
++  assert os.sched_getaffinity(0)=={108} and os.getpriority(os.PRIO_PROCESS,0)>=10
+   assert all(os.environ.get(n)=='1' for n in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS')) and os.environ.get('CUDA_VISIBLE_DEVICES')==''
+   owners=[];nominal=1
+   for proc in Path('/proc').iterdir():
+@@ -32,7 +32,7 @@
+     for task in (proc/'task').iterdir():
+      try:aff=os.sched_getaffinity(int(task.name))
+      except ProcessLookupError:continue
+-     assert not (len(aff)<=16 and 107 in aff),('CPU107 occupied',proc.name,task.name)
++     assert not (len(aff)<=16 and 108 in aff),('CPU108 occupied',proc.name,task.name)
+     if 'python' in Path(argv[0]).name:
+      env=dict(x.split('=',1) for x in (proc/'environ').read_text().split('\0') if '=' in x)
+      threads=max([int(env[k]) for k in ('GUARDFED_CPU_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS') if env.get(k,'').isdigit()] or [1]);nominal+=threads
+--- first1/restore_verify.py
++++ after1/restore_verify.py
+@@ -39,7 +39,7 @@
+   remote=json.loads((a.out/'evidence/REMOTE_STRICT.json').read_bytes())
+   assert remote['status']=='PASS_SAVED_ORIGINAL_FULLCOVERAGE_RECORD' and remote['source_data_before']==remote['source_data_after']
+   assert remote['gate_sha256']==receipt['gate_sha256'] and remote['package_sha256']==PACKAGE
+-  assert remote['server_runtime']['CPU']==[107] and remote['local_CUDA_initialized'] is False
++  assert remote['server_runtime']['CPU']==[108] and remote['local_CUDA_initialized'] is False
+   local=verify(a.out/'stage',remote['server_runtime'],a.out/'legacy_source',offserver=True)
+   for key in ('package_sha256','original_checked_source_sha256','gate_sha256','accepted_new','accepted_new_ids','accepted_before','accepted_ids','rounds','formal_table_samples','records'):assert local[key]==remote[key],key
+   write(a.out/'OFFSERVER_VERIFICATION.json',{'status':'PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON','receipt_sha256':a.receipt_sha256,'archive_sha256':sha(a.archive),'inventory_sha256':receipt['inventory_sha256'],'member_count':len(names),'local':local,'remote_runtime':remote['local_verification_runtime'],'training_runtime_unchanged':True,'source_data_rehashed_on_server_only':True,'CNN_calls':0,'formal_table_samples':len(IDS),'accepted_ids':local['accepted_ids'],'accepted_total':len(local['accepted_ids']),'storage_guard':storage})
+--- first1/execute_transport.py
++++ after1/execute_transport.py
+@@ -2,8 +2,8 @@
+ import json,hashlib,subprocess,sys,base64,datetime,traceback,importlib.util
+ sys.dont_write_bytecode=True
+ H=Path(__file__).resolve().parent;ROOT=H.parents[1]
+-F=Path('F:/YananResearchStorage/GuardFed/hybrid_fullcoverage_first_delta_20261010')
+-REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/first_delta'
++F=Path('F:/YananResearchStorage/GuardFed/hybrid_native_after1_20261011')
++REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/native_after1_20261011'
+ SSH=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55']
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+@@ -14,12 +14,16 @@
+  (H/(n+'.stdout')).write_bytes(p.stdout);(H/(n+'.stderr')).write_bytes(p.stderr);save(n+'_COMMAND.json',dict(command=cmd,returncode=p.returncode,start=start,finish=datetime.datetime.now(datetime.timezone.utc).isoformat(),stdin_sha256=hashlib.sha256(code.encode()).hexdigest() if code else None));p.check_returncode();return p.stdout
+ 
+ def check():
+- assert sha(H/'ACTUAL_ROOT_APPROVAL.json')=='32cf2c69c55d855975114c5c9a78cc8f9f3ade7f57a0808e1f54820406a35e67'
+- assert sha(H/'FILES_SHA256.json')=='a098241183b2c6ca4041e19a5844c7f281d4494e220cea5488d1e91f9832ceb6'
++ assert sha(H/'PRIOR_ROOT_ADOPTION.json')=='04d62c367609d1c6d079ff538f45a575bff368944d4833f47fd1cf28159c5fa4'
++ assert read(H/'PRIOR_ROOT_ADOPTION.json')['cumulative_accepted']==1
++ assert len(sys.argv)==3 and len(sys.argv[2])==64 and all(c in '0123456789abcdef' for c in sys.argv[2])
++ assert sha(H/'FILES_SHA256.json')==sys.argv[2]
+  for n,v in read(H/'FILES_SHA256.json')['files'].items():assert sha(H/n)==v['sha256']
+- assert read(H/'DELTA_SCOPE.json')['ids']==['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91002_fullcoverage']
++ assert read(H/'DELTA_SCOPE.json')['ids']==['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91003_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91004_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91005_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91006_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91007_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91008_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91009_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91010_fullcoverage']
++ assert read(H/'DELTA_SCOPE.json')['accepted_before']==1
++ assert read(H/'PRIOR_OFFSERVER.json')['accepted_ids']==read(H/'PRIOR_ROOT_ADOPTION.json')['accepted_new_ids']
+ def collect():
+- names=list(read(H/'FILES_SHA256.json')['files'])+['FILES_SHA256.json','ACTUAL_ROOT_APPROVAL.json']
++ names=list(read(H/'FILES_SHA256.json')['files'])+['FILES_SHA256.json']
+  payload={n:base64.b64encode((H/n).read_bytes()).decode() for n in names};pins={n:sha(H/n) for n in names}
+  code='''from pathlib import Path
+ import os,subprocess,hashlib,json,base64,sys,datetime
+@@ -33,11 +37,11 @@
+   for t in (p/'task').iterdir():
+    try:aff=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+-   if len(aff)<=16 and 107 in aff:busy.append({'pid':p.name,'tid':t.name,'cpus':sorted(aff),'argv':a})
++   if len(aff)<=16 and 108 in aff:busy.append({'pid':p.name,'tid':t.name,'cpus':sorted(aff),'argv':a})
+  except (FileNotFoundError,ProcessLookupError):continue
+ main=subprocess.run(['supervisorctl','status','guardfed_celeba_mechanism_formal'],capture_output=True,text=True)
+ q=json.loads(Path('/workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/formal_queue_progress.json').read_bytes())
+-pre=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),guide_sha256=hashlib.sha256(G).hexdigest(),main_service=main.stdout,main_workers=workers,main_queue=q,CPU107_owners=busy)
++pre=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),guide_sha256=hashlib.sha256(G).hexdigest(),main_service=main.stdout,main_workers=workers,main_queue=q,CPU108_owners=busy)
+ print(json.dumps({'preflight':pre}),flush=True)
+ assert not busy and main.returncode==0 and 'RUNNING' in main.stdout and 1<=len(workers)<=8 and not q['failed']
+ b=Path(%r);assert not b.exists() and not b.is_symlink();b.mkdir()
+@@ -46,7 +50,7 @@
+  raw=base64.b64decode(value);assert hashlib.sha256(raw).hexdigest()==pins[n]
+  with (b/n).open('xb') as f:f.write(raw)
+ (b/'ACTUAL_PRELAUNCH.json').write_text(json.dumps(pre,indent=2)+'\\n')
+-cmd=['env','CUDA_VISIBLE_DEVICES=','OMP_NUM_THREADS=1','MKL_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','PYTHONDONTWRITEBYTECODE=1','taskset','-c','107','ionice','-c','3','nice','-n','10','/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(b/'collect_once.py'),'--out',str(b/'output'),'--source-seal-sha256','a098241183b2c6ca4041e19a5844c7f281d4494e220cea5488d1e91f9832ceb6']
++cmd=['env','CUDA_VISIBLE_DEVICES=','OMP_NUM_THREADS=1','MKL_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','PYTHONDONTWRITEBYTECODE=1','taskset','-c','108','ionice','-c','3','nice','-n','10','/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(b/'collect_once.py'),'--out',str(b/'output'),'--source-seal-sha256',pins['FILES_SHA256.json']]
+ p=subprocess.run(cmd,capture_output=True);(b/'COLLECT.stdout').write_bytes(p.stdout);(b/'COLLECT.stderr').write_bytes(p.stderr);sys.stdout.buffer.write(p.stdout);sys.stderr.buffer.write(p.stderr);sys.exit(p.returncode)
+ '''%(REMOTE,payload,pins)
+  output=run('COLLECT',SSH+['python -B -'],code)

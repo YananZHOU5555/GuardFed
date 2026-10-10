@@ -1,0 +1,7 @@
+# Actual FL96 after54: root adoption pending
+
+One frozen snapshot 2026-10-10T15:55:19.936838+00:00 selected exactly 3 new terminal IDs, cumulative 57/96 plus four separate reused references. Original server strict/member/archive and unchanged offserver scientific record checks passed; complete70-round valid-only identities, source/data/checkpoints and ordered prior54 are bound in ROOT_READY_HANDOFF.json. Later completions are excluded.
+
+Original after14 collector is directly materialized with the accepted exact-completeness guards and frozen three-ID literal; original per-job science bytes remain exact. Original transport, preflight, tensor and close readers are reused with counts/namespace/CPU110 metadata only. CPU110 one thread, nice10, idleIO, CUDA hidden was verified free and released. The saved tensor check constructs the original CNN state layout without any forward/data/optimizer calls. Server cu128 and local CPU Torch runtimes differ and are recorded. Prediction arrays are absent and were not regenerated. All negative results and failures are preserved. No recipe selection, final test, training or inference was performed.
+
+Archive/models/raw/logprefix/restored files were written directly to a freshly label/health/capacity-checked F:/YananResearchStorage/GuardFed/, with no E fallback. RAW_STORAGE_INDEX.json binds every actual F member. E contains only small code, index, receipts and reports. Shared LATEST/STATE/Git/queue/source/data were not changed. Root must independently review and adopt.

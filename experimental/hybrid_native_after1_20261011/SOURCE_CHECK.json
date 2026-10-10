@@ -1,0 +1,35 @@
+{
+  "status": "PASS_LOCAL_METADATA_REBIND_AND_COMPILE_NOT_SCIENTIFIC_ACCEPTANCE",
+  "compiled": [
+    "collect_once.py",
+    "execute_transport.py",
+    "prepare_entry.py",
+    "restore_verify.py",
+    "storage.py",
+    "verify_saved.py"
+  ],
+  "verify_saved_byte_exact": true,
+  "storage_byte_exact": true,
+  "collect_once_and_restore_inverse_CPU_binding_exact": true,
+  "changes": {
+    "collect_once.py": {
+      "original_sha256": "0d4397cb838bc2f00000d966c9d81ffc014bc1c309e3934c8fd1650bb405693e",
+      "new_sha256": "6249d4d6d18420d154e5538cb79a7a8aec43e5b0978f5e2e8d80642795fe37be",
+      "only_CPU107_to_CPU108": true
+    },
+    "restore_verify.py": {
+      "original_sha256": "75b7f5136306ab2ad319f5a2cad3e023189d9b7527da291863b553fcc3069f32",
+      "new_sha256": "cdf9aea283b383cb97b49874d7fbef64f70709d8d76a5de71234c2d27f26b859",
+      "only_CPU107_to_CPU108": true
+    },
+    "execute_transport.py": {
+      "original_sha256": "b35d373202735e762a3ded46e896cc10aa02008ef70f4c3f7485fa9abde74577",
+      "new_sha256": "9b552cca5dcbb219ba37cd5a3398aef02a26419f6fd7de08ea74d70c2f8ad5cb",
+      "changes": "E/F/remote namespace;CPU108;exact8;actual parent1;external CLI source seal"
+    }
+  },
+  "exact8": true,
+  "accepted_before": 1,
+  "root_adopted_by_this_package": false,
+  "execution_authority": "Parent bounded explicit task:exact8 collection once,CPU108,no shared writes"
+}
