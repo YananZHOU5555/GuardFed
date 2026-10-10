@@ -1,0 +1,888 @@
+{
+  "status": "INDEPENDENT_C70_SEVEN_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION",
+  "checked_utc": "2026-10-10T02:00:10.229260+00:00",
+  "snapshot_seal_sha256": "cf81e43fd957b098ce8f72821b2530c4db6854cca8726c03d0f8e4c1a8084d2e",
+  "source_members_verified": 12,
+  "snapshot_content_members_verified": 8,
+  "source_prepared_seal_sha256": "758d49ac894a423f151f64cb0619f630bb6fdb697d9e8d16949b163ba09f336e",
+  "actual_C10_root_adoption_sha256": "7e687f5a050aa0496b9a8c2b3606bd8787c138de6679e436dee3eb5b60df2dc8",
+  "source_connections": {
+    "prior_C60_proof_sha256": "7273c2f3340a1c62c3bb9874117b5bff0bbe447751e0621d2c737de8ff9189ec",
+    "prior120_record_provenance_reused": true,
+    "nonIID_F_Flip10_chain": [
+      {
+        "root_adoption_sha256": "7e687f5a050aa0496b9a8c2b3606bd8787c138de6679e436dee3eb5b60df2dc8",
+        "archive_sha256": "d53eb99f1a5189966332e369ab09a3ebdabcc8c412fd9f0ca9aa0ab07130d693",
+        "archive_members": 103,
+        "scientific_receipts_connected": 10,
+        "accepted_ids": [
+          "minus_C_non-IID_F Flip_seed91001",
+          "minus_C_non-IID_F Flip_seed91002",
+          "minus_C_non-IID_F Flip_seed91003",
+          "minus_C_non-IID_F Flip_seed91004",
+          "minus_C_non-IID_F Flip_seed91005",
+          "minus_C_non-IID_F Flip_seed91006",
+          "minus_C_non-IID_F Flip_seed91007",
+          "minus_C_non-IID_F Flip_seed91008",
+          "minus_C_non-IID_F Flip_seed91009",
+          "minus_C_non-IID_F Flip_seed91010"
+        ]
+      }
+    ],
+    "new_C_scientific_receipts_connected": 10,
+    "new_Full_table_references_verified": 10,
+    "Full900_records_sha256": "983bca43dff7e94dd79a312f273c65ed3ea1d146fff3ebfbf3bd2a854e124529",
+    "old900_models_rechecked": false,
+    "old_checkpoint_tensors_rechecked": false,
+    "archive_member_content_verification_reused_from_root_adoption": true,
+    "prediction_arrays_recomputed": false,
+    "new_inference": 0,
+    "threshold_refits": 0,
+    "models_repacked": 0
+  },
+  "records_sha256": "1f0c5655e8e8019e2af3f6a4c7402726972e3d7f5b0aeaad6d77559d604ccaac",
+  "tables_sha256": "4fd6539d7b51ce7ccf386cea288609e817eb9e87ebef694b07bba1e6c4b6d553",
+  "display_sha256": "4f5ecb23514c7cc580a61c98325eeade12647b6dcfc30591dbf0fa7fc8ea15b6",
+  "cross_scene_seed_first_sha256": "7f80df55d025f1928e78e35df5eed94f6010a5facaa321b37fc24d308df6e9dc",
+  "unique_records": 140,
+  "paired_models": 70,
+  "complete_scenes": 7,
+  "mean_SD_scalars_recomputed": 1134,
+  "display_cells": 567,
+  "count_metrics_recomputed": 1260,
+  "confusion_count_checks": 3360,
+  "paired_seed_metric_checks": 630,
+  "cross_scene_mean_SD_scalars_recomputed": 162,
+  "max_abs_difference": 1.4210854715202004e-14,
+  "cross_scene_max_abs_difference": 1.4210854715202004e-14,
+  "count_metric_max_abs_difference": 0.0,
+  "old120_record_JSON_bytes_and_order_exact": true,
+  "old972_scalars_exact": true,
+  "old486_display_cells_exact": true,
+  "old162_IID_aggregate_bytes_exact": true,
+  "native_shared_identical_records": 140,
+  "replay_devices": {
+    "Full": {
+      "cpu": 5,
+      "cuda:0": 65
+    },
+    "minus_C": {
+      "cpu": 70
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 69,
+      "2.11.0+cu130": 1
+    },
+    "minus_C": {
+      "2.11.0+cu128": 70
+    }
+  },
+  "all_scene_paired_directions": [
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.0830522977802417,
+        "aeod": 0.0029156142382689375,
+        "aspd": -0.0014220477538226417
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5179443297931229,
+        "aeod": 0.0013941769937246607,
+        "aspd": 0.010980604207855654
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.2793577288971633,
+        "aeod": -0.0002359404012990174,
+        "aspd": 0.0009882326060820569
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.07701213066895037,
+        "aeod": 0.0004994515782359654,
+        "aspd": 0.00021927240633682344
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.04177782251975657,
+        "aeod": -0.00667788418812717,
+        "aspd": 0.008102358529700949
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5944531132027961,
+        "aeod": -0.0008089533359436519,
+        "aspd": 0.002670681368753458
+      }
+    },
+    {
+      "view": "native",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.9427694166205285,
+        "aeod": -0.003083089727835242,
+        "aspd": 0.011765725477853145
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.16051184823520417,
+        "aeod": 0.004253124257046788,
+        "aspd": 0.001324651613993323
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6163207552445963,
+        "aeod": 0.00025436125411302,
+        "aspd": 0.011749979502597584
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.21923569515052557,
+        "aeod": 0.00026282127893734804,
+        "aspd": -0.002334390631529083
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.15380055144488836,
+        "aeod": 0.0014614732171984108,
+        "aspd": 0.0002614004608795733
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.1342259358064458,
+        "aeod": -0.006534193154729386,
+        "aspd": 0.011057740372663735
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6593849096491655,
+        "aeod": -0.0007371903241308134,
+        "aspd": 0.0033194150887075396
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 1.0016610459556068,
+        "aeod": -0.0036994300379127073,
+        "aspd": 0.013178897683122574
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.33892048791128104,
+        "aeod": -0.00031563226362211577,
+        "aspd": 0.004460842274289584
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6652572943406933,
+        "aeod": -0.0029076607672530175,
+        "aspd": 0.021202246420890348
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.1484874414858813,
+        "aeod": 0.0001582365138495708,
+        "aspd": -0.005928055702934439
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.02181171456854732,
+        "aeod": 0.0005125989282693996,
+        "aspd": 0.006458897722916431
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.0662740558044348,
+        "aeod": -0.006218188964319342,
+        "aspd": 0.00778725410293422
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5184476770523977,
+        "aeod": -4.565270361837441e-06,
+        "aspd": 0.002638093935912587
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 1.0436066508951214,
+        "aeod": -0.00424433421267828,
+        "aspd": 0.014093928257753444
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.01409372325967979,
+        "aeod": -0.004827893629043412,
+        "aspd": -0.0038264046332809167
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5295213167564257,
+        "aeod": 0.004654449500291447,
+        "aspd": 0.007028619923773649
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.23506317008103822,
+        "aeod": -0.0013203799090702017,
+        "aspd": 0.0014151905687082023
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.03473096088991952,
+        "aeod": 0.0020015213900988703,
+        "aspd": 0.00143933942539875
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.0966426737806401,
+        "aeod": 0.005228080042940286,
+        "aspd": 0.0039179097633403655
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.641264408315297,
+        "aeod": 0.0010467607049500448,
+        "aspd": 0.001983590798509399
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.9211254844717359,
+        "aeod": -0.0004588686034256217,
+        "aspd": 0.0045665464166974755
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.18120501333869912,
+        "aeod": -0.002941134178167647,
+        "aspd": -0.001250910937772508
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6174393047096487,
+        "aeod": 0.0048644356978788045,
+        "aspd": 0.008016662311565972
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.15827474930509944,
+        "aeod": -0.002769874988334747,
+        "aspd": -0.000719497226623104
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.13702230946908067,
+        "aeod": 0.003152713374856576,
+        "aspd": 0.0006729467119880748
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.1979832553145068,
+        "aeod": 0.007233478376923058,
+        "aspd": 0.005744877907941654
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6968563167284683,
+        "aeod": 0.0013922948346414893,
+        "aspd": 0.00217474659267975
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.9552412431558742,
+        "aeod": -0.0008550387318532563,
+        "aspd": 0.004889115529605668
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.31878659754031463,
+        "aeod": -0.00416352656999136,
+        "aspd": -0.006165084733301389
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6358953708830342,
+        "aeod": 0.007793097232636807,
+        "aspd": 0.009876963217694277
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.20553346420362098,
+        "aeod": 0.0003317717908565461,
+        "aspd": 0.0024094969184740487
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.06962970419959191,
+        "aeod": 0.002589451208142579,
+        "aspd": 0.0009498242863154224
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.019294978272173562,
+        "aeod": 0.007216010913903522,
+        "aspd": 0.0044730032335335845
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5494874247076424,
+        "aeod": 0.004759078267985162,
+        "aspd": 0.004390413722223994
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 1.0419288266975382,
+        "aeod": 0.0033739469528156576,
+        "aspd": 0.010063388080344895
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.0830522977802417,
+        "aeod": 0.0029156142382689375,
+        "aspd": -0.0014220477538226417
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5179443297931229,
+        "aeod": 0.0013941769937246607,
+        "aspd": 0.010980604207855654
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.2793577288971633,
+        "aeod": -0.0002359404012990174,
+        "aspd": 0.0009882326060820569
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.07701213066895037,
+        "aeod": 0.0004994515782359654,
+        "aspd": 0.00021927240633682344
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.04177782251975657,
+        "aeod": -0.00667788418812717,
+        "aspd": 0.008102358529700949
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5944531132027961,
+        "aeod": -0.0008089533359436519,
+        "aspd": 0.002670681368753458
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.9427694166205285,
+        "aeod": -0.003083089727835242,
+        "aspd": 0.011765725477853145
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.16051184823520417,
+        "aeod": 0.004253124257046788,
+        "aspd": 0.001324651613993323
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6163207552445963,
+        "aeod": 0.00025436125411302,
+        "aspd": 0.011749979502597584
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.21923569515052557,
+        "aeod": 0.00026282127893734804,
+        "aspd": -0.002334390631529083
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.15380055144488836,
+        "aeod": 0.0014614732171984108,
+        "aspd": 0.0002614004608795733
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.1342259358064458,
+        "aeod": -0.006534193154729386,
+        "aspd": 0.011057740372663735
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6593849096491655,
+        "aeod": -0.0007371903241308134,
+        "aspd": 0.0033194150887075396
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 1.0016610459556068,
+        "aeod": -0.0036994300379127073,
+        "aspd": 0.013178897683122574
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.33892048791128104,
+        "aeod": -0.00031563226362211577,
+        "aspd": 0.004460842274289584
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.6652572943406933,
+        "aeod": -0.0029076607672530175,
+        "aspd": 0.021202246420890348
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "FedSA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.1484874414858813,
+        "aeod": 0.0001582365138495708,
+        "aspd": -0.005928055702934439
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "S-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.02181171456854732,
+        "aeod": 0.0005125989282693996,
+        "aspd": 0.006458897722916431
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": -0.0662740558044348,
+        "aeod": -0.006218188964319342,
+        "aspd": 0.00778725410293422
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.5184476770523977,
+        "aeod": -4.565270361837441e-06,
+        "aspd": 0.002638093935912587
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "distribution": "non-IID",
+      "attack": "F Flip",
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 1.0436066508951214,
+        "aeod": -0.00424433421267828,
+        "aspd": 0.014093928257753444
+      }
+    }
+  ],
+  "all_seed_first_paired_directions": [
+    {
+      "view": "native",
+      "n": 10,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.135803090552173,
+        "aeod": -0.0004209163558393248,
+        "aspd": 0.003773683999230569
+      }
+    },
+    {
+      "view": "native",
+      "n": 9,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.19529873659838082,
+        "aeod": -6.048262948676399e-05,
+        "aspd": 0.004411876263721027
+      }
+    },
+    {
+      "view": "native",
+      "n": 6,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.08607238133588406,
+        "aeod": -0.0017541293106151012,
+        "aspd": 0.00679623696361923
+      }
+    },
+    {
+      "view": "raw",
+      "n": 10,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.16248049529370262,
+        "aeod": 0.0011471554790433984,
+        "aspd": 0.0019949310095880137
+      }
+    },
+    {
+      "view": "raw",
+      "n": 9,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.20357600263977657,
+        "aeod": 0.001907923656631209,
+        "aspd": 0.0024928157534200223
+      }
+    },
+    {
+      "view": "raw",
+      "n": 6,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.09446150232378632,
+        "aeod": 0.0027533609151096177,
+        "aspd": 0.002308840584543189
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 10,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.135803090552173,
+        "aeod": -0.0004209163558393248,
+        "aspd": 0.003773683999230569
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 9,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.19529873659838082,
+        "aeod": -6.048262948676399e-05,
+        "aspd": 0.004411876263721027
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "n": 6,
+      "minus_C_minus_Full_mean": {
+        "accuracy_pct": 0.08607238133588406,
+        "aeod": -0.0017541293106151012,
+        "aspd": 0.00679623696361923
+      }
+    }
+  ],
+  "AEOD_definition": "absolute TPR gap; not full equalized odds",
+  "n_is_seed_count": true,
+  "seed_first_scenes_per_seed": 5,
+  "primary_endpoint": "PENDING_AUTHOR",
+  "other_three_nonIID_C_scenes_complete": false,
+  "six_other_image_controls_complete": false,
+  "whole_mechanism_complete": false,
+  "whole_rebuttal_complete": false,
+  "reviewer_authored_C10_evaluator_source": true,
+  "reviewer_authored_C70_table_builder": false,
+  "reviewer_authored_C70_numeric_verifier": false,
+  "source_review_sha256": "c7a568751c59d601d7f6ebf9cd78495781b044f63c1b947ccc017130b2869a86",
+  "auxiliary_fixture_target_correction_sha256": "635ede863610095d1ab61c25602e25ec77ef318482e1ec23fd954b79ff74b0df",
+  "prior_independent_C60_reader_sha256": "0a6ba5e3a033006a5bf1b7054bb3b4bfc8ad3bc1a084f8f5a0190d1eb5fa1979",
+  "review_source_sha256": "fbe27a120011d1266d23dd3bcdff93d9de0a5df746f2a571215c1ec09b138fb4",
+  "canonical_modified": false,
+  "adoption_performed": false,
+  "new_CNN": 0,
+  "new_training": 0,
+  "new_Full_inference": 0,
+  "test": false,
+  "limitations": [
+    "Frozen descriptive10/9/6 subsets retain recipe-selectionseed91001 and prior valid/official-test exposure history.",
+    "Mixed replay devices and historical training environment remain; no causal necessity, significance or final-test claim.",
+    "Seven-scene rows remain separate; the preserved seed-first aggregate covers only five IID scenes.",
+    "Saved count metrics recomputed; no checkpoint inference, threshold refit or prediction-array recomputation.",
+    "Reviewer authored the reused exact10 evaluator source; reviewer did not author this C70 table builder/numeric verifier."
+  ]
+}

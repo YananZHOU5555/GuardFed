@@ -2287,6 +2287,31 @@ if (C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
         CPU_affinity=list(range(112,120)),compute_threads=8,nice=10,IO='idle',CUDA_visible='',
         new_training=0,new_Full_inference=0,final_test=False)
     state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_C_after60']))
+    C70_roots=list((C70_replay_dir/'backups').glob('incremental_*/ROOT_ADOPTION_REVIEW.json'))
+    if C70_roots:
+        assert len(C70_roots)==1
+        C70_path=C70_roots[0];C70_proof=read(C70_path);C70_delta=C70_path.parent
+        assert sha(C70_path)=='7e687f5a050aa0496b9a8c2b3606bd8787c138de6679e436dee3eb5b60df2dc8'
+        expected60=[f'minus_C_non-IID_F Flip_seed{s}' for s in range(91001,91011)]
+        assert C70_proof['status']=='ROOT_C_AFTER60_INCREMENT_ARCHIVE_MEMBER_AND_SAVED_ARRAY_CHECKS_PASS'
+        assert (C70_proof['archive_members_verified'],C70_proof['content_members_verified'])==(103,102)
+        assert (C70_proof['prior_three_view_models'],C70_proof['accepted_new'],C70_proof['cumulative_three_view_models'])==(160,10,170)
+        assert C70_proof['accepted_new_ids']==expected60
+        assert C70_proof['original160_unchanged'] and C70_proof['all_native_differences_zero'] and C70_proof['new_Full_inference']==0 and not C70_proof['test_inference']
+        assert C70_proof['prior160_root_adoption_sha256']==state['celeba_mechanism_v1']['C_after56_valid_replay']['root_adoption_sha256']
+        assert C70_proof['startup_observation_sha256']==sha(C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json')
+        C70_arrays=read(C70_delta/'OFFSERVER_VERIFICATION.json')
+        assert (C70_arrays['independent_metric_checks'],C70_arrays['independent_confusion_count_checks'],C70_arrays['prediction_rule_checks'])==(90,240,30)
+        for key,name in [('archive_sha256','incremental_valid_three_views.tar.gz'),('offserver_verification_sha256','OFFSERVER_VERIFICATION.json'),('backup_receipt_sha256','backup_receipt.json')]:
+            assert sha(C70_delta/name)==C70_proof[key]
+        prior_ids=state['celeba_mechanism_v1']['three_view_accepted_ids']
+        assert len(prior_ids)==160 and not set(prior_ids)&set(expected60)
+        state['celeba_mechanism_v1'].update(three_view_new_models_accepted=170,three_view_new_models_offserver_verified=170,
+            three_view_accepted_ids=prior_ids+expected60,three_view_counts_by_variant={'minus_U':100,'minus_C':70})
+        state['celeba_mechanism_v1']['C_after60_valid_replay'].update(status='EXACT10_COMPLETE_STRICT_OFFSERVER_ROOT_ADOPTED',offserver_new_accepted=10,
+            root_adoption_path=C70_path.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(C70_path),
+            archive_members_verified=103,all_native_differences_zero=True,service_terminal='EXITED')
+        state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_C_after60']
 C30_dir=TRAIN/'celeba_mechanism_v1/three_view_C_three_scenes_20261009'
 if (C30_dir/'ROOT_VERIFICATION.json').exists():
     C30=read(C30_dir/'ROOT_VERIFICATION.json')
@@ -2464,6 +2489,25 @@ if (rebuttal_C60_dir/'ROOT_REVIEW.json').exists():
         semantic=read(semantic_path)
         assert semantic['status']=='INDEPENDENT_C60_AFFECTED_PROSE_SEMANTIC_PASS_NO_CANONICAL_EDIT' and not semantic['findings'] and not semantic['required_corrections']
         state['latest_rebuttal_draft']['C60_affected_prose_semantic_review']=dict(proof_path=semantic_path.relative_to(ROOT).as_posix(),proof_sha256=sha(semantic_path),topics_checked=8,scope='Ten introduced or affected C60 spans and related reviewer blocks only; no numerical re-audit or submission-readiness claim')
+C70_table_dir=TRAIN/'celeba_mechanism_v1/three_view_C_seven_scenes_20261010'
+if (C70_table_dir/'ROOT_VERIFICATION.json').exists():
+    C70=read(C70_table_dir/'ROOT_VERIFICATION.json')
+    assert sha(C70_table_dir/'ROOT_VERIFICATION.json')=='abab0188adfa2d857316b23a282fd104c50dd282ca00ffed628b78b2accaea70'
+    assert C70['status']=='ROOT_C70_SEVEN_SCENE_THREE_VIEW_TABLES_ADOPTED'
+    assert sha(C70_table_dir/'ACTUAL_FILES_SHA256.json')=='c06dd986ecbb62f6a7d3cbf0ac307900404de4204eb5ae1511cf5deb881690dc'
+    C70_files=read(C70_table_dir/'ACTUAL_FILES_SHA256.json')['files'];assert len(C70_files)==35
+    for name,pin in C70_files.items():
+        assert sha(C70_table_dir/name)==pin['sha256'] and (C70_table_dir/name).stat().st_size==pin['bytes']
+    assert C70['C10_root_adoption_sha256']==state['celeba_mechanism_v1']['C_after60_valid_replay']['root_adoption_sha256']
+    assert (C70['unique_records'],C70['paired_models'],C70['complete_scenes'],C70['mean_SD_scalars_recomputed'],C70['display_cells'],C70['count_metrics_recomputed'],C70['confusion_count_checks'])==(140,70,7,1134,567,1260,3360)
+    assert all(C70[k] for k in ('old120_records_preserved','old972_scalars_preserved','old486_cells_preserved','old162_IID_aggregate_bytes_exact','all_negative_results_retained'))
+    assert C70['new_CNN']==C70['new_training']==C70['new_Full_inference']==0 and not C70['test'] and not C70['whole_rebuttal_complete']
+    state['celeba_mechanism_v1']['C_three_view_seven_scene_table']=dict(status=C70['status'],
+        root_proof_path=(C70_table_dir/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(C70_table_dir/'ROOT_VERIFICATION.json'),
+        actual_seal_sha256=sha(C70_table_dir/'ACTUAL_FILES_SHA256.json'),table_path=C70['canonical_table'],paired_models=70,unique_records=140,complete_scenes=7,
+        mean_SD_scalars=1134,display_cells=567,count_metrics=1260,confusion_count_checks=3360,cross_scene_mean_SD_scalars=162,aggregate_scope=C70['aggregate_scope'],
+        replay_devices=C70['replay_devices'],IID_complete_scenes=5,nonIID_complete_scenes=['Benign','F Flip'],other_C_scenes_complete=False,final_test=False,incorporated_into_full_rebuttal=False)
+    state['celeba_mechanism_v1']['three_view_scope_limit']='U100 ten scenes and C70 seven scenes independently adopted; three non-IID C scenes and six variants remain incomplete. Original five-IID-scene aggregate only. Full author-review response incorporates C60; C70 separate table not yet incorporated; submitted manuscript not applied; no final test.'
 FL96_base=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
 if (FL96_base/'LATEST_BACKUP.json').exists():
     FL96_latest=read(FL96_base/'LATEST_BACKUP.json')
@@ -2504,6 +2548,8 @@ if state['latest_rebuttal_draft'].get('complete_C_scenes')==5:
     reply_progress_note='最新完整稿纳入U100十场景、C的IID五场景及900校准归因；24原意见逐字保持，11处可逆修改、38个C数值pointer、19个范围/环境事实、24项方向与44链接通过核验；两份旧完整文档可逐字恢复，全部反例及待完成项保留'
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==6:
     reply_progress_note='最新完整C60作者审阅稿纳入五IID及non-IID Benign，U100/900旧证据保持；24原意见逐字、10处可逆修改、36数值pointer/18展示值/27方向/50链接通过，原C50两全文可逐字恢复；其他四non-IID C场景及六变体待完成，正文未应用、最终test未运行'
+if state['celeba_mechanism_v1'].get('C_three_view_seven_scene_table'):
+    reply_progress_note+='；后续C70七场景表已独立采用，新增non-IID F Flip尚未合入该封存全文；当前仅三non-IID C场景及六变体仍缺，不把旧稿范围当实时进度'
 if state.get('latest_rebuttal_addendum') and state['latest_rebuttal_addendum']['complete_C_scenes']>state['latest_rebuttal_draft'].get('complete_C_scenes',0):
     addendum=state['latest_rebuttal_addendum']
     reply_progress_note+=(f"；C{10*addendum['complete_C_scenes']}英文独立补稿已另核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，入口"+addendum['entry']+'；原24意见完整稿保持封存')
@@ -2617,11 +2663,18 @@ if main.get('C_three_view_six_scene_table'):
 if main.get('C_three_view_six_scene_table',{}).get('incorporated_into_full_rebuttal'):
     C_replay_note=C_replay_note.replace('C60表独立于C50全文作者审阅稿','C60证据已纳入完整英文作者审阅稿，原C50稿保持、提交版正文未应用')
 if main.get('C_after60_valid_replay',{}).get('execution_started'):
-    C_replay_note+='；新增十项non-IID F Flip三视图已实测启动，CPU112–119单进程8线程，旧160与Full复用；该批严格离机接受仍0，不计入已完成论文表'
+    if main['C_after60_valid_replay']['offserver_new_accepted']==10:
+        C_replay_note+='；新增十项non-IID F Flip三视图已正常EXITED、严格验收并离机，103归档成员/90指标/240计数/30规则通过、native偏差0，累计C70；旧160与Full不重推，第七场景表须单独统计验收'
+    else:
+        C_replay_note+='；新增十项non-IID F Flip三视图已实测启动，CPU112–119单进程8线程，旧160与Full复用；该批严格离机接受仍0，不计入已完成论文表'
+if main.get('C_three_view_seven_scene_table'):
+    C_replay_note='minus_C七场景70对/140记录表已独立采用：五IID及non-IID Benign/F Flip，各10seed；1134统计/567单元/1260计数指标/3360计数与630配对指标通过；旧120记录/972统计/486单元及162个IID seed-first标量保持，不计算不平衡七场景总均值。新增F Flip删除C的native/shared差为ACC+0.943pp、AEOD−0.00308、ASPD+0.01177；全部10/9/6面板及负结果保留。Full5CPU/65GPU、C70CPU与训练环境/选择史披露；其他三non-IID C场景及六变体未完成。最新完整英文稿仍封存C60，尚未合入第七场景，正文未应用、未运行test'
 C_latest_table=main.get('C_three_view_five_scene_table',main.get('C_three_view_four_scene_table',main.get('C_three_view_three_scene_table',main.get('C_three_view_two_scene_table',{})))).get('table_path','待独立核验')
 C_other_scenes=5 if main.get('C_three_view_five_scene_table') else (6 if main.get('C_three_view_four_scene_table') else (7 if main.get('C_three_view_three_scene_table') else 8))
 if main.get('C_three_view_six_scene_table'):
     C_latest_table=main['C_three_view_six_scene_table']['table_path'];C_other_scenes=4
+if main.get('C_three_view_seven_scene_table'):
+    C_latest_table=main['C_three_view_seven_scene_table']['table_path'];C_other_scenes=3
 
 after92_note=''
 if main.get('after92_valid_replay'):
