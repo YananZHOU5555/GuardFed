@@ -3407,6 +3407,15 @@ if A80_reader.exists():
     assert sha(ROOT/proof['root_command_path'])==proof['root_command_sha256']
     state['latest_rebuttal_draft'].update(status=proof['status'],entry=proof['entry'],manuscript_candidate=proof['manuscript_candidate'],root_proof_path=A80_reader.relative_to(ROOT).as_posix(),root_proof_sha256=sha(A80_reader),A80_incorporated=True,A_complete_scenes=8,A_paired_models=80,A_nonIID_complete_scenes=3,A80_reversible_edits=17,A80_mean_SD_pointer_pairs=12,source_seal_sha256=proof['source_seal_sha256'],author_review_only=True,whole_rebuttal_complete=False,manuscript_applied=False)
     main['A_three_view_eight_scene_table']['incorporated_into_full_rebuttal']=True
+clear_reader=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_clear_20261011'
+if (clear_reader/'EDITORIAL_CHECK.json').exists():
+    check=read(clear_reader/'EDITORIAL_CHECK.json')
+    assert check['status']=='CLEAR_AUTHOR_REVIEW_DRAFT_EDITORIAL_CHECK_PASS'
+    assert check['original_comments']==check['response_sections']==24 and check['quotation_lines_exact_and_ordered']
+    assert check['source_sha256']==sha(A80_reader.parent/'rebuttal_integrated_20261011.md')
+    assert check['draft_sha256']==sha(clear_reader/'rebuttal_clear_20261011.md') and check['R3_independent_review']
+    assert not check['final_test'] and not check['submitted_manuscript_applied'] and not check['whole_rebuttal_complete']
+    state['latest_rebuttal_draft'].update(clear_reader_entry=(clear_reader/'rebuttal_clear_20261011.md').relative_to(ROOT).as_posix(),clear_reader_sha256=check['draft_sha256'],clear_reader_check_path=(clear_reader/'EDITORIAL_CHECK.json').relative_to(ROOT).as_posix(),clear_reader_check_sha256=sha(clear_reader/'EDITORIAL_CHECK.json'),clear_reader_words=check['draft_words'],detailed_evidence_entry=state['latest_rebuttal_draft']['entry'])
 exact3_dir=ROOT/'tmp/celeba_added_cnn_exact3_root_execution_20261010'
 if (exact3_dir/'START_RECEIPT.json').exists():
     started=read(exact3_dir/'START_RECEIPT.json');review=read(exact3_dir/'ROOT_SOURCE_REVIEW.json')
@@ -3853,7 +3862,7 @@ top=f'''# CURRENT: GuardFed返修实验
 - 十方法native验证表已接受1000格，IID/non-IID各五场景，10/9/6种子；三页PDF：{state['celeba_native_ten_method_PDF_20261010']['pdf_path']}。仍缺其余7方法完整覆盖，不能称17方法完成。
 - 九方法三视图900记录与2052项校准归因已接受；native和共享校准的优势方向不同，准确率代价及负结果保留。这仍是验证集证据。
 - U/C各100对三视图表已接受。A最新{A_current.get('paired_models',0)}对、{A_current.get('complete_scenes',0)}个完整场景：{A_current.get('table_path','见STATE')}。{'A80范围为五IID及non-IID Benign/F Flip/FedSA；五IID seed-first聚合原字节保持，non-IID单列；S-DFA/Sp-DFA尚未齐。' if main.get('A_three_view_eight_scene_table') else 'A60范围为五IID及non-IID Benign；五IID seed-first聚合保持原字节，non-IID单列，其他四non-IID场景未齐。'}删除项存在指标取舍，不声称每项不可或缺。
-- 24条原意见完整英文作者审阅稿：{state['latest_rebuttal_draft']['entry']}。{'A80八场景及预测规则依赖解释已纳入，17处可逆编辑/12组新增均值SD指针及6项解释符号核验通过；' if state['latest_rebuttal_draft'].get('A80_incorporated') else ('A60六场景（五IID+non-IID Benign）及五IID seed-first取舍已纳入，21处可逆编辑/6组新增均值SD指针通过；' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A50五IID配对及seed-first取舍已纳入；')}原意见/旧数字/整表保留；正文插入稿尚未应用到提交版源项目。
+- 24条原意见完整英文作者审阅稿，优先阅读清晰版：{state['latest_rebuttal_draft'].get('clear_reader_entry',state['latest_rebuttal_draft']['entry'])}。详细证据版：{state['latest_rebuttal_draft']['entry']}。{'A80八场景及预测规则依赖解释已纳入；' if state['latest_rebuttal_draft'].get('A80_incorporated') else '已有配对消融及seed-first取舍已纳入；'}原意见/旧数字/整表保留在详细版；清晰版保留关键结论、反例与全部未完成边界。正文插入稿尚未应用到提交版源项目。
 - 旧TableII的480个原值已追溯真实重复数；缺依据的SD不补造。Fig3终轮候选已核260记录/78均值，但执行来源缺口仍保留。
 
 Huber采用作者接受的恒等投影，明确CNN项目适配且不继承原理论；LoGoFair采用固定图像ID的20虚拟cohort，不能称真实client公平性。LoGoFair100已接受，cache原始预测不冒充其DP后处理native。新增CNN三视图身份桥源码/64门检已通过。FLGMM、组合及一个NGA搜索checkpoint的三条真实图像接口已核验采用：Linux完整原检查、F盘原保存数组/校准重拟合块通过，27指标/72基础计数/9规则和原native差0；Windows完整检查的FL审计group_kl约2.2e-19差异保留，不改容差，不称Windows全文检查通过。仅3代表接口，不是三方法100格齐备或最终test。入口tmp/celeba_added_cnn_exact3_root_execution_20261010/ROOT_SCIENTIFIC_ADOPTION.json。

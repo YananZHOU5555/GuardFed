@@ -12,7 +12,7 @@
 - Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
 - 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
 - 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与余7方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
-- Git已验证4c92f3d93c1a5bba01b1323c5303b80b4a0fb19e，403blob；该提交接受cutoff为native272/三视图260；之后新增或变更文件另行核验同步。
+- Git已验证817f6fd395564b044ed05e360771817f2f4585de，321blob；该提交接受cutoff为native280/三视图280；之后新增或变更文件另行核验同步。
 - 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
 
 后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。

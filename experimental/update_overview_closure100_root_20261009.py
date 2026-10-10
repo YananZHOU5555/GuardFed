@@ -296,7 +296,7 @@ if A80:
     current_views='| 机制三视图 | U100、C100各十场景完整；A80覆盖五IID及non-IID Benign/F Flip/FedSA，每场景10配对seed，保留10/9/6面板与全部负结果。A剩余两场景及其他控制未齐 | [A八场景表]('+A80['table_path'].removeprefix('docs/')+') |'
     if state['latest_rebuttal_draft'].get('A80_incorporated'):
         reply=state['latest_rebuttal_draft']
-        current_reply='| 英文回复 | 24条原意见完整作者审阅稿已纳入A80、U/C100及既有基线和校准解释；新增12组均值SD及预测规则依赖解释通过核验。保留旧表、负结果与未完成项；最终评价及提交版正文尚未完成 | [完整回复草稿]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
+        current_reply='| 英文回复 | 24条原意见完整作者审阅稿已纳入A80、U/C100及既有基线和校准解释；清晰版保留原话、关键反例及P1–P6，详细版保留全部证据。最终评价及提交版正文尚未完成 | [优先阅读清晰版]('+reply.get('clear_reader_entry',reply['entry']).removeprefix('docs/')+')、[详细证据版]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
         text='\n'.join(current_reply if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
     text='\n'.join(current_views if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
 overview.write_bytes(text.encode('utf8')+marker+history)

@@ -23,7 +23,7 @@ FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋�
 - 十方法native验证表已接受1000格，IID/non-IID各五场景，10/9/6种子；三页PDF：outputs/guardfed_tables/celeba_ten_method_native_pdf_20261010/celeba_ten_method_native.pdf。仍缺其余7方法完整覆盖，不能称17方法完成。
 - 九方法三视图900记录与2052项校准归因已接受；native和共享校准的优势方向不同，准确率代价及负结果保留。这仍是验证集证据。
 - U/C各100对三视图表已接受。A最新80对、8个完整场景：docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_eight_scenes80_20261011/TABLES.md。A80范围为五IID及non-IID Benign/F Flip/FedSA；五IID seed-first聚合原字节保持，non-IID单列；S-DFA/Sp-DFA尚未齐。删除项存在指标取舍，不声称每项不可或缺。
-- 24条原意见完整英文作者审阅稿：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A80_reader_20261011/rebuttal_integrated_20261011.md。A80八场景及预测规则依赖解释已纳入，17处可逆编辑/12组新增均值SD指针及6项解释符号核验通过；原意见/旧数字/整表保留；正文插入稿尚未应用到提交版源项目。
+- 24条原意见完整英文作者审阅稿，优先阅读清晰版：docs/server_deployment_20260923/revision_20260923/rebuttal_clear_20261011/rebuttal_clear_20261011.md。详细证据版：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A80_reader_20261011/rebuttal_integrated_20261011.md。A80八场景及预测规则依赖解释已纳入；原意见/旧数字/整表保留在详细版；清晰版保留关键结论、反例与全部未完成边界。正文插入稿尚未应用到提交版源项目。
 - 旧TableII的480个原值已追溯真实重复数；缺依据的SD不补造。Fig3终轮候选已核260记录/78均值，但执行来源缺口仍保留。
 
 Huber采用作者接受的恒等投影，明确CNN项目适配且不继承原理论；LoGoFair采用固定图像ID的20虚拟cohort，不能称真实client公平性。LoGoFair100已接受，cache原始预测不冒充其DP后处理native。新增CNN三视图身份桥源码/64门检已通过。FLGMM、组合及一个NGA搜索checkpoint的三条真实图像接口已核验采用：Linux完整原检查、F盘原保存数组/校准重拟合块通过，27指标/72基础计数/9规则和原native差0；Windows完整检查的FL审计group_kl约2.2e-19差异保留，不改容差，不称Windows全文检查通过。仅3代表接口，不是三方法100格齐备或最终test。入口tmp/celeba_added_cnn_exact3_root_execution_20261010/ROOT_SCIENTIFIC_ADOPTION.json。
@@ -36,11 +36,11 @@ Huber采用作者接受的恒等投影，明确CNN项目适配且不继承原理
 
 本机大文件只写F:/YananResearchStorage/GuardFed，写前核F为Yanan 2TB且容量足；服务器大文件优先原地保留。E只保留代码、索引、配置与精简报告，不删除科学原始证据。
 
-最近验证推送4c92f3d93c1a5bba01b1323c5303b80b4a0fb19e（分支codex/revision-evidence-baselines-20260928）；发布截止以publication_closed_increment51_verified_20261011.json为准，后续本机新增不自动算已推送。
+最近验证推送817f6fd395564b044ed05e360771817f2f4585de（分支codex/revision-evidence-baselines-20260928）；发布截止以publication_closed_increment52_verified_20261011.json为准，后续本机新增不自动算已推送。
 
 三小时聊天任务guardfed-training-health仍PAUSED；本会话无automation_update接口，未建立替代cron/Windows任务。supervisor运行训练不等于聊天定时巡检恢复。后续接续读TRAINING_STATE.json和server_reactivation_20261009/MONITOR_HANDOFF.md。
 
-工程失败、恢复和旧批次完整时间线：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/entry_history/detailed_current_75642c805e801021.md。下方历史原字节保留；当前事实以本段、STATE和实测凭据为准。
+工程失败、恢复和旧批次完整时间线：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/entry_history/detailed_current_cdaee88779cf8956.md。下方历史原字节保留；当前事实以本段、STATE和实测凭据为准。
 
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
