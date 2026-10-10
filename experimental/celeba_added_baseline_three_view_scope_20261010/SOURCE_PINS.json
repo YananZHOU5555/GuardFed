@@ -1,0 +1,419 @@
+{
+  "status": "SOURCE_COMPATIBILITY_REVIEW_ONLY",
+  "sources": {
+    "accepted900_root": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/outputs/guardfed_tables/celeba_nine_method_three_view_20261009/ROOT_REVIEW.json",
+      "sha256": "5fd4c507bb4fd1cfa7d2f87cda33c2d0f9d131a1b06da7ec0533c76b474f59ea",
+      "bytes": 1144
+    },
+    "replay_cpu": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_final_valid_replay_20261009/replay.py",
+      "sha256": "8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803",
+      "bytes": 34113,
+      "function_lines": {
+        "require": 56,
+        "digest": 61,
+        "canonical": 69,
+        "array_sha": 73,
+        "read": 77,
+        "save": 81,
+        "load": 87,
+        "inside": 95,
+        "validate_inventory": 103,
+        "prepare": 124,
+        "read_prefix": 153,
+        "metadata": 175,
+        "support": 199,
+        "rebuild_root": 203,
+        "adapter_paths": 226,
+        "input_paths": 244,
+        "hash_pins": 266,
+        "validate_original": 275,
+        "check_native": 292,
+        "live_snapshot": 302,
+        "resource_gate": 333,
+        "replay_one": 347,
+        "run": 409,
+        "main": 505
+      }
+    },
+    "replay_schema_v4": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_final_valid_replay_20261009/v4/replay_v4.py",
+      "sha256": "43b16d20d2497b7762cd0f6039f7f4bfc8fddd4e4c32979a16291b26e394ae5e",
+      "bytes": 13997,
+      "function_lines": {
+        "expected_paths": 26,
+        "normalized_views": 37,
+        "mapped_functions": 85,
+        "read_inputs": 114,
+        "source_pins": 129,
+        "inspect": 138,
+        "common_args": 166,
+        "worker": 173,
+        "disabled_collect": 185,
+        "main": 189
+      }
+    },
+    "evaluator": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_final_valid_replay_20261009/inputs/evaluator.py",
+      "sha256": "805eedf1fb08137cd86a543a80c83b9527e5c8937be02f7d2dca83a33b86e04c",
+      "bytes": 19796,
+      "function_lines": {
+        "digest": 40,
+        "canonical_sha": 48,
+        "vector_identity": 52,
+        "weights_identity": 58,
+        "check_binary": 62,
+        "group_metrics": 69,
+        "thresholds_from_root": 109,
+        "_seal_fit": 151,
+        "fit_views": 156,
+        "predict_views": 177,
+        "evaluate_frozen_predictions": 211,
+        "extract_and_predict": 218,
+        "require_dispatch": 231
+      }
+    },
+    "gpu_recovery": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_valid_gpu_resource_gate_fix_20261009/release/recovery.py",
+      "sha256": "b14df67e107935e23c65a729ae4c8489fc770d0a00d569a8e0635a4203fa1f51",
+      "bytes": 41256,
+      "function_lines": {
+        "need": 33,
+        "main_health": 38,
+        "sha": 53,
+        "read": 61,
+        "save": 65,
+        "load": 71,
+        "validate_review": 79,
+        "contract": 103,
+        "bind_cpu": 121,
+        "bootstrap": 136,
+        "scientific_args": 154,
+        "original_inputs": 158,
+        "source_pins": 165,
+        "resource_preflight": 172,
+        "GPU_gate": 206,
+        "receipt_guard": 221,
+        "worker": 237,
+        "run_chunk": 279,
+        "accept": 320,
+        "backup": 332,
+        "diagnostic_guard": 352,
+        "reviewed_import": 368,
+        "main": 415,
+        "preserve_outer_failure": 441
+      }
+    },
+    "original_core": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_shared_calibration_20260928/reproduce_paper_tables.py",
+      "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "bytes": 122793,
+      "function_lines": {
+        "make_model": 130,
+        "set_seed": 137,
+        "choose_device": 149,
+        "compute_metrics": 155,
+        "evaluate_model": 176,
+        "model_margins": 183,
+        "metrics_from_group_thresholds": 193,
+        "threshold_candidates": 201,
+        "calibration_risk": 210,
+        "fit_group_thresholds": 216,
+        "evaluate_model_calibrated": 265,
+        "evaluate_for_reporting": 276,
+        "clone_state": 281,
+        "state_delta": 284,
+        "zero_like": 287,
+        "vectorize": 290,
+        "devectorize": 293,
+        "update_norm": 302,
+        "cosine_between": 305,
+        "apply_update": 310,
+        "weighted_ce": 315,
+        "make_optimizer": 320,
+        "gaussian_copula_augment": 328,
+        "_integer_like": 376,
+        "_project_synthetic_columns": 383,
+        "bootstrap_augment": 402,
+        "noisy_bootstrap_augment": 408,
+        "smote_augment": 422,
+        "pca_gaussian_augment": 443,
+        "ctgan_augment": 460,
+        "make_synthetic_root": 488,
+        "compute_reweighing_weights": 517,
+        "attack_types_for_client": 524,
+        "client_runtime_data": 532,
+        "train_local_model": 608,
+        "train_server_update": 619,
+        "evaluate_state_on_server": 629,
+        "fairguard_select": 633,
+        "weighted_average": 640,
+        "median_update": 648,
+        "update_distance": 661,
+        "robust_median_mad": 665,
+        "sigmoid": 674,
+        "select_top_scores": 682,
+        "softmax_weights": 689,
+        "flgmm_select_from_distances": 699,
+        "flgmm_aggregate": 726,
+        "flaura_aggregate": 735,
+        "layerguard_aggregate": 750,
+        "smartfl_aggregate": 770,
+        "fltg_aggregate": 794,
+        "feddna_aggregate": 819,
+        "sparsify_tensor": 847,
+        "sparsify_update": 856,
+        "lasa_aggregate": 860,
+        "fed_nga_aggregate": 888,
+        "huber_brfl_aggregate": 906,
+        "adaaggrl_aggregate": 932,
+        "fedamm_aggregate": 952,
+        "fedaa_aggregate": 991,
+        "act_fairness_risks": 1030,
+        "normalize_scores": 1054,
+        "guardfed_act_aggregate": 1065,
+        "clone_config_with": 1181,
+        "ad2plus_candidate_overrides": 1188,
+        "finite_metric": 1223,
+        "ad2plus_root_loss": 1231,
+        "guardfed_ad2plus_adaptive_aggregate": 1237,
+        "fltrust_aggregate": 1306,
+        "aggregate_round": 1319,
+        "apply_foe_if_needed": 1374,
+        "validate_attack_audit": 1416,
+        "create_client_data_dict": 1433,
+        "_adjust_counts_to_total": 1470,
+        "sample_server_dataframe": 1488,
+        "apply_root_noise": 1671,
+        "load_bundle": 1703,
+        "run_experiment": 1736,
+        "make_run_id": 1765,
+        "load_completed": 1777,
+        "append_result": 1786,
+        "make_jobs": 1790,
+        "write_summary_tables": 1807,
+        "write_reproduction_report": 1829,
+        "run_validation": 1838,
+        "main": 1842
+      }
+    },
+    "fl_coverage_common": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_flgmm_fullcoverage_source_v2_20261009/screen_common.py",
+      "sha256": "e518a742a275d47b9594f261cd2cde675607be66fdb58fd8d11d8b9a3aa4be73",
+      "bytes": 7864,
+      "function_lines": {
+        "read": 14,
+        "under": 18,
+        "local_identity": 25,
+        "checked_repo_path": 64,
+        "repo_identity": 77,
+        "authorized": 91,
+        "accepted": 124
+      }
+    },
+    "fl_original_worker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_baselines/remaining_20261009/group_b/worker.py",
+      "sha256": "a3fe21a5a334b63de9c2167ed28293cd7f38d4411edf11de7d226d895b550fdc",
+      "bytes": 11300,
+      "function_lines": {
+        "digest": 22,
+        "write_json": 30,
+        "aggregation_wrapper": 43,
+        "load_core": 87,
+        "validate_job": 97,
+        "run": 126
+      }
+    },
+    "fl_original_checker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_baselines/remaining_20261009/group_b/accept_result.py",
+      "sha256": "000b2711673431bd83487eeee0d79913e71805d221bb25829646538f630a06c5",
+      "bytes": 4267,
+      "function_lines": {
+        "checked_result": 10
+      }
+    },
+    "hybrid_body": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_hybrid_screen_execution_20261009/body.py",
+      "sha256": "2c03c36c6b90c3043d2a80e28007de4b40554fe50521ab1049224a06bdfecebe",
+      "bytes": 16670,
+      "function_lines": {
+        "digest": 19,
+        "read": 27,
+        "write": 31,
+        "tensor_sha": 39,
+        "snapshot": 48,
+        "verify_scope": 73,
+        "modules": 85,
+        "checked": 92,
+        "run_one": 145,
+        "compare": 248
+      }
+    },
+    "hybrid_coverage_runtime": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_hybrid_fullcoverage_implementation_20261010/runtime.py",
+      "sha256": "b4d96aaf34a996caaefd1f119f23ef40dce6b9b6f23a2e2585e302e66790af47",
+      "bytes": 2460,
+      "function_lines": {
+        "load": 5,
+        "functions": 7,
+        "unchanged_science_segments": 31
+      }
+    },
+    "hybrid_coverage_common": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_hybrid_fullcoverage_implementation_20261010/common.py",
+      "sha256": "aa6a409f3e6cceb44fd043719da12996a51c6398e04991f86a0828449cb9d702",
+      "bytes": 6414,
+      "function_lines": {
+        "digest": 6,
+        "read": 11,
+        "write_json": 12,
+        "local_identity": 14,
+        "repo_identity": 28,
+        "authorized": 32,
+        "scoped_functions": 60,
+        "accepted": 67
+      }
+    },
+    "gradient_worker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_gradient_screen64_v2_20261010/snapshot/gradient_bridge_20261010/worker.py",
+      "sha256": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4",
+      "bytes": 21209,
+      "function_lines": {
+        "digest": 36,
+        "vector_digest": 44,
+        "write_json": 48,
+        "load_module": 63,
+        "load_components": 71,
+        "load_core": 79,
+        "parameters_vector": 85,
+        "require_parameter_only_model": 89,
+        "validate_adapter": 94,
+        "attack_gradient": 115,
+        "aggregate_gradients": 160,
+        "root_reference": 186,
+        "train_pipeline": 206,
+        "validate_job": 286,
+        "verify_hashes": 312,
+        "run": 322
+      }
+    },
+    "gradient_checker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_gradient_screen64_v2_20261010/snapshot/gradient_bridge_20261010/accept_result.py",
+      "sha256": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+      "bytes": 8281,
+      "function_lines": {
+        "checked_result": 11
+      }
+    },
+    "gradient_coverage_prepare": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_gradient_fullcoverage_prepare_20261010/prepare.py",
+      "sha256": "7f179f38d6c3b4dddd37522d67f2e1e0065fc421e5e3fb6ddf2e4419ad3735ec",
+      "bytes": 10477,
+      "function_lines": {
+        "inputs": 16,
+        "selected": 24,
+        "render": 54,
+        "grid": 81,
+        "bind": 96
+      }
+    },
+    "logofair_bridge": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_logofair_screen32_20261010/snapshot/logofair_bridge_20261010/bridge.py",
+      "sha256": "c1dfa5b5881407c16b0c7c37cfa17cb27c62f9d9fe125a51bdca0c77a0865e81",
+      "bytes": 24354,
+      "function_lines": {
+        "digest": 34,
+        "array_digest": 42,
+        "write_json": 46,
+        "load_module": 53,
+        "load_core": 61,
+        "official_adapter": 69,
+        "verify_external": 79,
+        "model_scores": 122,
+        "scores_from_accepted_margins": 144,
+        "validate_mapping": 152,
+        "fit_predict": 174,
+        "save_post": 195,
+        "load_post": 208,
+        "validate_job": 223,
+        "run": 237,
+        "checked_output": 299
+      }
+    },
+    "logofair100_metadata": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_logofair_fullcoverage_20261010/metadata.py",
+      "sha256": "59162579c2c00ac8952ed524627b118ab4b5e1ad585730d25eeb2d76a928c05b",
+      "bytes": 10607,
+      "function_lines": {
+        "pinned": 15,
+        "verify_sources": 19,
+        "selection": 26,
+        "verify_index": 41,
+        "bridge_source": 59,
+        "bind": 65
+      }
+    },
+    "logofair100_summary": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_logofair100_summary_20261010/summary100.py",
+      "sha256": "d8b702281d45d5da75b24222e44d5b8f699f8c975da503b636d2088443af7414",
+      "bytes": 17941,
+      "function_lines": {
+        "read": 18,
+        "need": 19,
+        "sha": 23,
+        "load": 30,
+        "pinned": 37,
+        "f_read_path": 42,
+        "sources": 48,
+        "grid": 57,
+        "record_identity": 73,
+        "original_statistic": 86,
+        "saved_metric_error": 95,
+        "describe": 102,
+        "run": 119
+      }
+    },
+    "baseline_scope": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_fullcoverage_v1/BASELINE_AND_MECHANISM_PLAN.md",
+      "sha256": "9eda3bddc20feb807270fbee4ae5b398da3ec88e7a76b9768c0d1735c99d225f",
+      "bytes": 13363
+    },
+    "fl_actual_coverage_worker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage/source/worker.py",
+      "sha256": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+      "bytes": 12523,
+      "function_lines": {
+        "digest": 22,
+        "write_json": 30,
+        "aggregation_wrapper": 43,
+        "load_core": 87,
+        "validate_job": 97,
+        "run": 138
+      }
+    },
+    "fl_actual_coverage_checker": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage/source/accept_result.py",
+      "sha256": "a1b39bc0334c81aeba0c7cd9cec73e40c0a9eaf47b66132e614f36c7db935cd0",
+      "bytes": 4668,
+      "function_lines": {
+        "checked_result": 10
+      }
+    },
+    "fl_bound_root": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_BOUND_ADOPTION.json",
+      "sha256": "fcecfc0a3582695edfd54c70db38e7dafdd5bf46dcdff8212b9dfc03fc7506fc",
+      "bytes": 1811
+    },
+    "native_cpu_failure": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_final_valid_replay_20261009/v4/remaining872_attempt1/chunk_036/failure_offserver_verification.json",
+      "sha256": "8e37410b4ec83f57d5550da962997f449cfd8a07934627327344a4d6eddc5bdc",
+      "bytes": 19792
+    },
+    "native_gpu_saved_receipt": {
+      "path": "E:/OneDrive/\u6587\u6863/GuardFed/tmp/celeba_native_mismatch_diagnostic_execution_20261009/attempt2_backup/verified_extract/runs/FairGuard_IID_F-Flip_seed91009/receipt.json",
+      "sha256": "2b5a4bbf0679a83ea6c64788b23b9c4a565317a1dc8f0174be0c76d1c8deebd1",
+      "bytes": 21385
+    }
+  }
+}

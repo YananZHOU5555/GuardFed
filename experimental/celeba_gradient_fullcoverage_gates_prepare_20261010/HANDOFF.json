@@ -1,0 +1,56 @@
+{
+  "status": "SOURCE_PREPARED_NOT_BOUND_NOT_EXECUTED",
+  "created_utc": "2026-10-10T07:04:12.139944+00:00",
+  "scope": {
+    "methods": [
+      "Fed-NGA-gradient",
+      "Huber-BRFL-gradient"
+    ],
+    "jobs": 14,
+    "rounds_each": 3,
+    "total_rounds": 42,
+    "scientific_table_records": 0,
+    "model_seed": 91002,
+    "distribution": "non-IID",
+    "alpha": 5.0,
+    "max_workers": 1,
+    "threads": 8,
+    "device": "cpu",
+    "screen_coverage_pairs": 6,
+    "fflip_benign_null_pairs": 2
+  },
+  "actual": {
+    "selected_recipe": null,
+    "real_jobs_bound": 0,
+    "real_image_gates_run": 0,
+    "torch_imported_in_checks": false,
+    "execution_authorized": false
+  },
+  "source_reuse": {
+    "original_gate_sha256": "4c57c10fe00d5c21424f1265d067ec7c8bd5a6183c134cba31509351f69b7833",
+    "screen_worker_sha256": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4",
+    "coverage_source_seal_sha256": "ea5a565d35c4f8df7d108679d1010baec92993da8f4b181a14ccde359334ed39",
+    "whole_science_functions_exact": 14,
+    "formal_checker_rounds": 70
+  },
+  "checks": {
+    "self_check_sha256": "d380cc8d1cb717a2b22a728937edd562f58fcf1f325cb64e28a88b4c9c3c14ed",
+    "source_diff_sha256": "4bcb19b0fc0db80b1d5c2456f4c9293d3f1219c58670bdf90e2c71a8cb61f76a",
+    "metadata_refusals": 21,
+    "final_python_syntax_files": 4
+  },
+  "required_actual_inputs": [
+    "all64 strict/offserver root-adopted summary",
+    "root approved frozen192 source and two exact96+4 manifests",
+    "installed original component/data identities",
+    "root approved exact14 scope and fresh per-child measured resources"
+  ],
+  "limits": [
+    "CPU3 only; not GPU/70round equivalence",
+    "No permission to launch192 from a gate PASS",
+    "FFlip metadata-only null must remain disclosed",
+    "Root reference is adversary input, identity R^p Huber has no additional theoretical guarantee",
+    "Existing gate/worker sources and old evidence unchanged",
+    "No SSH/Git/STATE/model/array/archive operations performed"
+  ]
+}

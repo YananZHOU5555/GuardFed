@@ -200,6 +200,10 @@ if main.get('A_three_view_single_scene_table'):
     new_stage_note+=' A IID Benign十seed三视图表已独立采用，F Flip仅两seed，A剩余九场景未完成。'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     new_stage_note+=' 梯度200格192新+8复用源准备已独立通过；无实际recipe/jobs/启动，完整64离机接受及新增攻击真实门检仍待完成。'
+if state.get('gradient200_new_attack_gates_source_20261010'):
+    new_stage_note+=' 新攻击14项共同三轮门检仅源码独审通过，实际图像门检0，正式70轮验收不变。'
+if state.get('added_baseline_three_view_scope_20261010'):
+    new_stage_note+=' 新增五方法三视图接线仅源码审查；四CNN须原strict身份桥，LoGo原生须保留DP状态/虚拟映射，不能用FedAvg raw cache冒充；底座raw/shared须明确标诊断，主终点未定。'
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 text=text.replace('LoGoFair人口定义、梯度方法设置和最终主终点保留待决，不擅自代定。','Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。')
 text=text.replace('不代表其余七variant或全部800训练完成','不代表其余六variant或全部800训练完成')
@@ -269,6 +273,10 @@ if main.get('A_three_view_single_scene_table'):
     top+='A表入口'+main['A_three_view_single_scene_table']['table_path']+'；162统计/81单元/216计数指标，10/9/6面板及负结果完整；不将该单场景称A完整100格。\n'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     top+='梯度200格源准备独立审查通过，只含192新+8复用计划；没有实际recipe/jobs/启动，必须先闭合全部64及新攻击门检。\n'
+if state.get('gradient200_new_attack_gates_source_20261010'):
+    top+='新增攻击14项共同三轮门检source-only已独审、实际图像0；完整64/冻结192仍是前置，不从源码派发。\n'
+if state.get('added_baseline_three_view_scope_20261010'):
+    top+='新增五方法三视图仅接线范围审查：四CNN用各自原strict，LoGo native保留DP/虚拟映射，cache valid_native_prediction是FedAvg raw而非LoGo native；任何backbone替换诊断须明示，主终点未定。\n'
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

@@ -327,6 +327,10 @@ if state.get('mechanism_remaining620_valid_20261010'):
     else:current+='The cumulative181 includes one partial C-scene record beyond the C80 table, so no additional scene mean is reported.\n'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     current+='\nFed-NGA/Huber200 coverage source preparation passes independent review only:192 new plus eight reuses are planned, with no selected recipe, actual jobs or dispatch. Actual complete64 offserver acceptance, source freeze and new-attack real-image gates remain prerequisites; the prepared source is not a scientific result.\n'
+if state.get('gradient200_new_attack_gates_source_20261010'):
+    current+='\nThe14 common-three-round new-attack gate sources pass independent source review only; actual image gates remain0. The formal70-round checker is unchanged.\n'
+if state.get('added_baseline_three_view_scope_20261010'):
+    current+='\nAdded-baseline three-view compatibility is source-reviewed, without new evaluation or fit. Four CNN methods need their original strict-identity bridges. LoGoFair native must retain its fitted DP state and virtual mapping; the cache valid_native_prediction denotes FedAvg raw, not LoGoFair native. Any backbone raw/shared replacement diagnostic requires explicit labelling, and the final primary endpoint remains undecided.\n'
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')
 start=text.index('## Current accepted increment');end=text.index('## Historical accepted increment',start)
 p.write_text(text[:start]+current+text[end:],encoding='utf8')

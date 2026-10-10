@@ -1,0 +1,60 @@
+--- accepted_gate/run_one
++++ coverage_gate/run_one
+@@ -88,7 +88,7 @@
+                 require(float(error) <= adapter['tolerance'] + rounding_bound, 'Actual fixed-Ti stationarity oracle failed')
+                 info['pilot_fp32_stationarity_l2'] = float(error); info['pilot_fp32_rounding_bound'] = rounding_bound
+             info.update(pilot_aggregation_oracle_pass=True, pilot_effective_weights=weights.tolist(), pilot_root_adam_calls=root_calls[0])
+-            require(root_calls[0] == int(job['attack'] == 'S-DFA'), 'Undeclared root optimizer call')
++            require(root_calls[0] == int(job['attack'] in {'FedSA', 'S-DFA', 'Sp-DFA'}), 'Undeclared root optimizer call')
+             records.extend(pending); pending.clear(); root_calls[0] = 0
+             return step, info
+ 
+@@ -96,7 +96,7 @@
+         for name in ('train_local_model', 'evaluate_state_on_server', 'evaluate_model_calibrated'):
+             setattr(core, name, forbidden)
+         components.empirical_gradient = real_gradient; worker.attack_gradient = real_attack; worker.aggregate_gradients = real_aggregate
+-        config = core.ExperimentConfig(**job['config']); core.set_seed(91001, deterministic_image=True)
++        config = core.ExperimentConfig(**job['config']); core.set_seed(job['config']['seed'], deterministic_image=True)
+         def progress(item):
+             write(out / 'progress.json', dict(item, job_id=job['id'], pid=os.getpid(), elapsed_seconds=time.time() - started,
+                 updated_unix=time.time(), resource=snapshot()))
+@@ -124,7 +124,7 @@
+         write(out / 'acceptance.json', dict(status='PASS', scope_sha256=digest(HERE / 'scope.json'),
+             job_sha256=entry['job_sha256'], dispatch_receipt=receipt, checkpoint_tensor_sha256=tensor_sha(state),
+             artifact_hashes={name: digest(out / name) for name in sorted(ARTIFACTS)}, elapsed_seconds=time.time() - started,
+-            limitation='Full-image exploratory CPU three-round gate only; formal five decisions unresolved; no test/GPU/70-round result'))
++            limitation='Same-horizon exploratory CPU3 coverage interface gate only; selected recipe and frozen192 bound; no test/GPU/70-round result'))
+         require(checked(entry, scope, receipt) is not None, 'Pilot acceptance failed')
+     except BaseException as error:
+         write(out / 'failure.json', dict(error=repr(error), traceback=traceback.format_exc(), at_unix=time.time(),
+--- accepted_gate/checked
++++ coverage_gate/checked
+@@ -18,7 +18,7 @@
+     for field in ('dataset', 'method', 'distribution', 'attack'):
+         require(result[field] == job[field], 'Condition mismatch: ' + field)
+     require((result['seed'], result['rounds'], result['alpha'], result['num_clients'], result['num_malicious']) ==
+-            (91001, 3, job['config']['client_alpha'], 20, 4), 'Endpoint/client identity mismatch')
++            (job['config']['seed'], 3, job['config']['client_alpha'], 20, 4), 'Endpoint/client identity mismatch')
+     for field in ('trajectory_metrics', 'round_summaries'):
+         require([x['round'] for x in result[field]] == [1, 2, 3], 'Incomplete or duplicate rounds')
+     require(result['metrics'] == result['trajectory_metrics'][-1]['metrics'] and
+@@ -61,7 +61,7 @@
+         weights = info['pilot_effective_weights']
+         require(len(weights) == 20 and all(math.isfinite(x) and 0 <= x <= 1 for x in weights) and
+                 math.isclose(sum(weights), 1., abs_tol=1e-12), 'Invalid actual aggregation weights')
+-        root = info['root_threat_reference']; attacked = job['attack'] == 'S-DFA'
++        root = info['root_threat_reference']; attacked = job['attack'] in {'FedSA', 'S-DFA', 'Sp-DFA'}
+         require(root['used'] == attacked and info['pilot_root_adam_calls'] == int(attacked), 'Undeclared root access')
+         if attacked:
+             require(root['mode'] == 'frozen_root_localadam_delta' and root['root_rows'] == 16277 and
+@@ -77,9 +77,7 @@
+                     all(b <= a + 1e-10 * max(1., abs(a)) for a, b in zip(trace, trace[1:])), 'Huber objective trace failed')
+     require(not result['warnings'] and [x['client_id'] for x in result['attack_audit']] == list(range(20)) and
+             not any(x.get('label_changed_count', 0) for x in result['attack_audit']), 'Attack/label audit failed')
+-    if job['attack'] == 'S-DFA':
+-        require(all(x['attack_types'] == ['fflip', 'foe'] and x['foe_mode'] == 'fedsa' and
+-                    'gradient sign-conjugacy' in x['foe_impl'] for x in result['attack_audit'][:4]), 'S-DFA semantics changed')
++    check_attack_assignment(job['attack'], result['attack_audit'])
+     state = torch.load(out / 'model.pt', map_location='cpu', weights_only=True)
+     require(state and all(torch.isfinite(x).all() for x in state.values()), 'Nonfinite terminal checkpoint')
+     replay = read(out / 'native_replay.json')

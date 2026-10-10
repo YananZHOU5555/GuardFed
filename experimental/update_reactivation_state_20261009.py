@@ -2619,20 +2619,21 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] == 28:
-        assert sha(FL96_current_path) == 'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c'
+    if FL96_latest['accepted_total'] in (28,32):
+        current_count=FL96_latest['accepted_total']
+        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3'}[current_count]
         assert FL96_current['status'] == 'ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         previous = read(ROOT/FL96_current['previous_root_adoption_path'])
-        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == '31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc'
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == (22,6,28)
+        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c'}[current_count]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32)}[current_count]
         batch = Path(FL96_current['archive_local_path']).parent
         off = read(batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(batch/'OFFSERVER_ACCEPTANCE.json') == FL96_current['offserver_acceptance_sha256'] == FL96_latest['next_collector_previous_sha256']
         assert sha(batch/'accepted_delta.tar.gz') == FL96_current['archive_sha256']
         assert off['accepted_job_ids'] == FL96_current['accepted_job_ids'] == previous['accepted_job_ids']+FL96_current['accepted_new_ids']
-        assert len(set(off['accepted_job_ids'])) == 28 and FL96_current['source_package_sha256'] == FL96_root['source_package_sha256']
-        state['flgmm_fullcoverage_v2_20261009'].update(new_accepted=28,accepted_new_ids=off['accepted_job_ids'],
-            coverage_verified_cells_including_reuse=32,latest_backup=FL96_latest,archive_members_verified=67,
+        assert len(set(off['accepted_job_ids'])) == current_count and FL96_current['source_package_sha256'] == FL96_root['source_package_sha256']
+        state['flgmm_fullcoverage_v2_20261009'].update(new_accepted=current_count,accepted_new_ids=off['accepted_job_ids'],
+            coverage_verified_cells_including_reuse=current_count+4,latest_backup=FL96_latest,archive_members_verified=FL96_current['archive_members_verified'],
             latest_full70_root_adoption_path=FL96_current_path.relative_to(ROOT).as_posix(),latest_full70_root_adoption_sha256=sha(FL96_current_path))
     elif FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16,18,22):
         assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617',18:'99de692986c2623b6a351801195094ac35a82e173d4f1c502b9471455c56e3d7',22:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc'}[FL96_latest['accepted_total']]
@@ -2875,6 +2876,22 @@ if (aux_dir/'FILES_SHA256.json').exists():
     measured=read(aux_dir/'FINDINGS.json')
     assert measured['source_and_failure_clean'] and not measured['collect_performed']
     state['auxiliary_readonly_observation_20261010']=dict(path=(aux_dir/'FINDINGS.json').relative_to(ROOT).as_posix(),sha256=sha(aux_dir/'FINDINGS.json'),utc=measured['utc'],FL_observed_terminal=measured['FL_observed_terminal'],FL_accepted=measured['FL_accepted'],Hybrid_observed_terminal=measured['Hybrid_observed_terminal'],Hybrid_accepted=measured['Hybrid_accepted'],observation_is_atomic=False,acceptance_unchanged=True)
+gates_dir=ROOT/'tmp/celeba_gradient_fullcoverage_gates_review_20261010'
+if (gates_dir/'REVIEW.json').exists():
+    assert sha(gates_dir/'FILES_SHA256.json')=='76c3d10fdb67d45a2d06d96dfbdf6f241faf6f8c271aa5e4222012da0f2f11a4'
+    for name,pin in read(gates_dir/'FILES_SHA256.json')['files'].items():
+        assert sha(gates_dir/name)==pin['sha256'] and (gates_dir/name).stat().st_size==pin['bytes']
+    proof=read(gates_dir/'REVIEW.json')
+    assert sha(gates_dir/'REVIEW.json')=='47291c77f49777d64a1949ce09fef0e57def822ddecf741be883860f4a8abb68'
+    assert proof['source_adoptable'] and not proof['actual_execution_authorized']
+    state['gradient200_new_attack_gates_source_20261010']=dict(status=proof['status'],review_path=(gates_dir/'REVIEW.json').relative_to(ROOT).as_posix(),review_sha256=sha(gates_dir/'REVIEW.json'),source_seal_sha256=proof['source_seal_sha256'],planned_gate_jobs=14,rounds=3,actual_jobs=0,actual_image_gates_passed=0,dispatch=False,test=False)
+scope_dir=ROOT/'tmp/celeba_added_baseline_three_view_scope_20261010'
+if (scope_dir/'REVIEW.json').exists():
+    assert sha(scope_dir/'FILES_SHA256.json')=='1cc32cee3f41abcc644510251a79f5751a60fdf8185533c9f0352ba89c150564'
+    for name,pin in read(scope_dir/'FILES_SHA256.json')['files'].items():
+        assert sha(scope_dir/name)==pin['sha256'] and (scope_dir/name).stat().st_size==pin['bytes']
+    assert sha(scope_dir/'REVIEW.json')=='acdb0a0646d47b8773ce8ce9ec672eee157cb5f0b9ccccfd4ed05eb5ec0ceac1'
+    state['added_baseline_three_view_scope_20261010']=dict(status='SOURCE_COMPATIBILITY_REVIEW_ONLY',report_path=(scope_dir/'REPORT.md').relative_to(ROOT).as_posix(),review_sha256=sha(scope_dir/'REVIEW.json'),new_evaluations=0,new_fits=0,dispatch=False,test=False,limitation='Four CNN methods need private identity bridges to their original strict checkers; LoGoFair native must preserve fitted DP state and virtual mapping. Its cache valid_native_prediction is FedAvg raw, not LoGo native. Backbone raw/shared diagnostics must be explicitly labelled; final primary endpoint remains undecided.')
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -3139,6 +3156,10 @@ if main.get('A_three_view_single_scene_table'):
     top+='A单场景已核162统计/81展示单元/216计数指标，入口'+main['A_three_view_single_scene_table']['table_path']+'；native/shared删除差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142。9/6面板方向变化与Full2CPU8GPU对A10CPU保留，不作必要性/因果/显著性主张。\n'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     top+='Fed-NGA/Huber完整200格的192新+8复用源准备已独立审查通过，仅为source-only：未选recipe、未生成实际jobs、未启动。须等待全部64搜索严格离机、冻结实际配置及新增攻击真实图像门检；不从准备文件推断实验完成。\n'
+if state.get('gradient200_new_attack_gates_source_20261010'):
+    top+='新增攻击14项共同三轮门检源码已独立审查通过，实际图像门检仍0；仅source-only，不授权派发192。原正式70轮验收未放宽。\n'
+if state.get('added_baseline_three_view_scope_20261010'):
+    top+='新增五方法三视图接线仅完成源码范围审查：四CNN标签须接各自原strict，LoGo原生必须保留DP后处理与虚拟映射。其cache的valid_native_prediction是FedAvg原始预测，不得冒充LoGo native；backbone raw/shared仅可标为诊断。没有新增评价/拟合，最终主终点未定。\n'
 top+='\n本机存储：2026-10-10用户指定F:/YananResearchStorage/GuardFed/；大文件写入前实核F卷标Yanan 2TB与容量，无内置盘回退。代码/配置/索引/精简报告保留E，服务器大文件优先原地保留；已存在E证据未删除或宣称全量迁移。记录LOCAL_STORAGE_20261010.json。\n\n'
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
