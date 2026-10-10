@@ -303,11 +303,18 @@ if first_verification.exists():
         mechanism_raw_native_shared_evaluation='PENDING')
     # Count each model once from the actually verified off-server chain.
     ledger = read(science_backup / 'verified_ledger.json')
-    verified_proofs = {read(p)['archive_sha256']: read(p)
-                       for p in science_backup.glob('*offserver_verification.json')}
+    proof_paths = list(science_backup.glob('*offserver_verification.json'))
+    proof_paths += list(science_backup.glob('root_delta_*/OFFSERVER_VERIFICATION.json'))
+    verified_proofs = {read(p)['archive_sha256']: read(p) for p in proof_paths}
     backed_up, previous, backup_entries = set(), None, []
     for entry in ledger['entries']:
         local_receipt = science_backup / Path(entry['receipt']).name
+        if not local_receipt.exists():
+            # New batches keep their actual original files together; do not
+            # duplicate model archives merely to fit the historical flat layout.
+            batch_name = Path(entry['archive']).name.removesuffix('.tar.gz')
+            local_receipt = science_backup / batch_name / Path(entry['receipt']).name
+            assert local_receipt.resolve().is_relative_to(science_backup.resolve())
         assert sha(local_receipt) == entry['receipt_sha256']
         record = read(local_receipt)
         proof = verified_proofs[record['archive_sha256']]
@@ -321,6 +328,7 @@ if first_verification.exists():
         backup_entries.append({'archive_sha256':record['archive_sha256'],
             'new_ids':sorted(ids),'members_verified':proof['members_verified']})
     inspections = [(p, read(p)) for p in science_backup.glob('mechanism_inspection_*/inspection.json')]
+    inspections += [(p, read(p)) for p in science_backup.glob('root_delta_*/inspection/inspection.json')]
     accepted_path, accepted = max(((p,d) for p,d in inspections if d['status'] != 'INVALID'), key=lambda item:item[1]['new_count'])
     assert backed_up <= set(accepted['accepted_new_ids'])
     state['celeba_mechanism_v1'].update(scientific_results_strictly_accepted=accepted['new_count'],
@@ -2525,12 +2533,12 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16):
-        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617'}[FL96_latest['accepted_total']]
+    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16,18):
+        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617',18:'99de692986c2623b6a351801195094ac35a82e173d4f1c502b9471455c56e3d7'}[FL96_latest['accepted_total']]
         assert FL96_current['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         FL96_previous_path=ROOT/FL96_current['previous_root_adoption_path'];FL96_previous=read(FL96_previous_path)
-        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',16:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b'}[FL96_latest['accepted_total']]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2,16:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
+        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',16:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',18:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617'}[FL96_latest['accepted_total']]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2,16:2,18:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
         assert FL96_current['accepted_total']==FL96_current['accepted_before']+FL96_current['accepted_new']
         FL96_current_batch=FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')==FL96_current['offserver_acceptance_sha256']==FL96_latest['next_collector_previous_sha256']

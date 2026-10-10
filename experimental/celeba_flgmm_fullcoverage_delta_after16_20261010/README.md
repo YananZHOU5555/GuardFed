@@ -1,0 +1,9 @@
+# Actual FLGMM fullcoverage delta after16 — root adoption pending
+
+Exactly two new70-round valid-only records from the fixed02:14:12UTC snapshot: IID F Flip seeds91008/91009. Prior16 ordered IDs remain unchanged; cumulative new18/96, with four old reuse references separate. No future completion, recipe selection, final100 summary or paper table is inferred.
+
+The thin collector entry SHA-binds the already sealed after14 collector on the server and changes only its existing authorized-ID literal. Its scientific per-ID loop and archive/strict body remain byte-identical. The original offserver verifier is invoked directly from the existing prepared directory. SOURCE_REUSE.json records both original and effective source SHA; the previous root chain preserves the parent source. No duplicate large collector/test suite was created.
+
+Actual guide SHA, all-thread CPU107 owner, original frozen source96jobs+4reuse/data/config/job/checkpoint/producer-quiescence and70-round valid identities passed. CPU107/one thread/nice10/idleIO/CUDA hidden were used and subsequently released. The server verifies stable source/data and every new archive member; local verification checks original strict records, safe member recovery and SHA plus complete state tensor shape/dtype/finiteness. Archive27members contains only these two new results, closed logs and bounded metadata/helpers; no prior16/old reuse models are repackaged.
+
+Server training/checker runtime and local verification runtime remain distinct: the local CPU Torch verification does not recreate the server cu128 training environment. Saved tensor checks run no CNN forward, optimizer or data load; prediction arrays are not supplied/recomputed. Negative metrics and all actual errors would be retained. Commands were each run once, without automatic retries. Shared LATEST/STATE/Git and queue/recipe are unchanged. Root must independently review ROOT_READY_HANDOFF.json/ROOT_READY_CHAIN_LINK.json before adopting.

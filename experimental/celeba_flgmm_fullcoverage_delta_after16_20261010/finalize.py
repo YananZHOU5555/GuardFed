@@ -1,0 +1,42 @@
+"""Seal actual fixed-delta evidence; no shared-chain writes."""
+from pathlib import Path
+import datetime,hashlib,json
+H=Path(__file__).resolve().parent;R=H.parents[1];B=R/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();read=lambda p:json.loads(Path(p).read_bytes())
+def save(n,v):
+ with (H/n).open('x',encoding='utf8',newline='\n') as f:json.dump(v,f,ensure_ascii=False,indent=2);f.write('\n')
+auth=read(H/'AUTHORIZED_SNAPSHOT.json');prior=read(H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json');latest=read(H/'PREVIOUS_LATEST.json')
+proof=read(H/'batch/OFFSERVER_ACCEPTANCE.json');receipt=read(H/'batch/BACKUP_SHA256.json');server=read(H/'batch/PARTIAL_ACCEPTANCE.json')
+tensor=read(H/'SAVED_TENSOR_STATE_CHECK.json');closed=read(H/'COLLECTOR_CLOSED.json');reuse=read(H/'SOURCE_REUSE.json')
+assert all(read(H/(n+'_COMMAND.json'))['exit_code']==0 for n in ['GUIDE','OWNER','PREFLIGHT','COLLECT','SERVER_SHA','SCP','VERIFY','CLOSED'])
+assert sha(B/'LATEST_BACKUP.json')==sha(H/'PREVIOUS_LATEST.json') and read(B/'LATEST_BACKUP.json')==latest
+assert sha(R/latest['root_adoption_path'])==auth['prior_root_sha256']
+assert sha(H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')==receipt['previous_chain_sha256']==auth['prior_offserver_sha256']
+assert prior['accepted_total']==16 and proof['accepted_new']==2 and proof['accepted_total']==18
+assert proof['accepted_job_ids'][:16]==prior['accepted_job_ids'] and len(set(proof['accepted_job_ids']))==18
+assert proof['new_ids']==receipt['accepted_new_ids']==auth['authorized_ids']
+assert proof['package_sha256']==auth['source_hashes']['PACKAGE_SHA256.json']
+assert server['before_source_data']==server['after_source_data'] and (server['helper_cpu'],server['helper_threads'],server['helper_nice'])==(107,1,10)
+assert receipt['archived_member_count']==27 and sha(H/'batch/accepted_delta.tar.gz')==receipt['archive_sha256']
+assert tensor['CNN_forward_calls']==tensor['optimizer_calls']==tensor['data_loads']==0 and [x['id'] for x in tensor['records']]==proof['new_ids']
+assert closed['CPU107_released'] and not closed['queue']['failed']
+assert reuse['per_ID_scientific_loop_bytes_exact'] and reuse['scientific_body_unchanged']
+assert sha(H/'collect_delta.py')==reuse['thin_entry_sha256']==server['collector_sha256']
+ready=dict(status='ROOT_READY_FL96_INCREMENT_STRICT_OFFSERVER_PASS_NOT_ADOPTED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=proof['new_ids'],prior_accepted_new=16,accepted_new=2,accepted_new_cumulative=18,planned_new=96,separately_reused70round=4,planned_total=100,single_fixed_authorization_snapshot=True,authorization_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),source_package_sha256=proof['package_sha256'],collector_sha256=sha(H/'collect_delta.py'),thin_entry_parent_collector_sha256=reuse['parent_collector_sha256'],effective_collector_sha256=reuse['effective_collector_sha256'],original_strict_and_archive_body_unchanged=True,source_reuse_sha256=sha(H/'SOURCE_REUSE.json'),verifier_sha256=reuse['original_verifier_sha256'],offserver_acceptance_path=(H/'batch/OFFSERVER_ACCEPTANCE.json').relative_to(R).as_posix(),offserver_acceptance_sha256=sha(H/'batch/OFFSERVER_ACCEPTANCE.json'),archive_path=(H/'batch/accepted_delta.tar.gz').relative_to(R).as_posix(),archive_sha256=receipt['archive_sha256'],archive_bytes=receipt['archive_size'],archive_members=receipt['archived_member_count'],member_manifest_path=(H/'batch/MEMBERS.json').relative_to(R).as_posix(),inventory_sha256=receipt['inventory_sha256'],server_backup_receipt_sha256=sha(H/'batch/BACKUP_SHA256.json'),server_strict_sha256=receipt['acceptance_sha256'],previous_root_path=latest['root_adoption_path'],previous_root_sha256=latest['root_adoption_sha256'],previous_actual_offserver_sha256=receipt['previous_chain_sha256'],previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),old16_ordered_prefix_exact=True,full_saved_tensor_check_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),tensor_count=sum(x['tensor_count'] for x in tensor['records']),tensor_elements=sum(x['elements'] for x in tensor['records']),records=proof['records'],source_data_before_after_exact=True,helper_CPU=107,helper_threads=1,nice=10,IO='idle',CUDA_VISIBLE_DEVICES='',server_verification_runtime=server['acceptance_runtime'],local_verification_runtime=proof['verification_runtime'],resource_preflight_sha256=sha(H/'PREFLIGHT.json'),resource_after_sha256=sha(H/'COLLECTOR_CLOSED.json'),CPU107_released=True,no_old_models_repacked=True,CNN_forward_calls=0,training_calls=0,final_test=False,recipe_selection_performed=False,root_adoption_required=True,LATEST_STATE_Git_unchanged=True,scientific_complete=False,prediction_arrays_recomputed=False)
+save('ROOT_READY_HANDOFF.json',ready)
+save('ROOT_READY_CHAIN_LINK.json',dict(status='ROOT_REVIEW_PENDING_CHAIN_LINK_NO_CANONICAL_WRITE',previous_latest_path=B.relative_to(R).as_posix()+'/LATEST_BACKUP.json',previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),previous_root_path=latest['root_adoption_path'],previous_root_sha256=latest['root_adoption_sha256'],previous_offserver_path=latest['next_collector_previous_path'],previous_offserver_sha256=receipt['previous_chain_sha256'],proposed_next_collector_previous_path=ready['offserver_acceptance_path'],proposed_next_collector_previous_sha256=ready['offserver_acceptance_sha256'],accepted_before=16,accepted_new=2,accepted_total=18,accepted_job_ids=proof['accepted_job_ids'],new_ids=proof['new_ids'],archive_sha256=receipt['archive_sha256'],member_manifest_sha256=receipt['inventory_sha256'],source_package_sha256=proof['package_sha256'],handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),old16_ordered_prefix_exact=True,reused4_repacked=False,root_adoption_required=True))
+text='''# Actual FLGMM fullcoverage delta after16 — root adoption pending
+
+Exactly two new70-round valid-only records from the fixed02:14:12UTC snapshot: IID F Flip seeds91008/91009. Prior16 ordered IDs remain unchanged; cumulative new18/96, with four old reuse references separate. No future completion, recipe selection, final100 summary or paper table is inferred.
+
+The thin collector entry SHA-binds the already sealed after14 collector on the server and changes only its existing authorized-ID literal. Its scientific per-ID loop and archive/strict body remain byte-identical. The original offserver verifier is invoked directly from the existing prepared directory. SOURCE_REUSE.json records both original and effective source SHA; the previous root chain preserves the parent source. No duplicate large collector/test suite was created.
+
+Actual guide SHA, all-thread CPU107 owner, original frozen source96jobs+4reuse/data/config/job/checkpoint/producer-quiescence and70-round valid identities passed. CPU107/one thread/nice10/idleIO/CUDA hidden were used and subsequently released. The server verifies stable source/data and every new archive member; local verification checks original strict records, safe member recovery and SHA plus complete state tensor shape/dtype/finiteness. Archive27members contains only these two new results, closed logs and bounded metadata/helpers; no prior16/old reuse models are repackaged.
+
+Server training/checker runtime and local verification runtime remain distinct: the local CPU Torch verification does not recreate the server cu128 training environment. Saved tensor checks run no CNN forward, optimizer or data load; prediction arrays are not supplied/recomputed. Negative metrics and all actual errors would be retained. Commands were each run once, without automatic retries. Shared LATEST/STATE/Git and queue/recipe are unchanged. Root must independently review ROOT_READY_HANDOFF.json/ROOT_READY_CHAIN_LINK.json before adopting.
+'''
+with (H/'README.md').open('x',encoding='utf8',newline='\n') as f:f.write(text)
+files={p.relative_to(H).as_posix():dict(sha256=sha(p),bytes=p.stat().st_size) for p in sorted(H.rglob('*')) if p.is_file() and 'restored' not in p.relative_to(H).parts and '__pycache__' not in p.parts}
+save('DELIVERY_FILES_SHA256.json',dict(status='ACTUAL_INCREMENT_OFFSERVER_PASS_ROOT_PENDING',files=files,derived_restored_tree_excluded=True,root_adoption_not_performed=True))
+for n,p in files.items():assert sha(H/n)==p['sha256'] and (H/n).stat().st_size==p['bytes']
+print(json.dumps(dict(accepted_new=2,total_new=18,archive_sha256=receipt['archive_sha256'],members=27,handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),chain_link_sha256=sha(H/'ROOT_READY_CHAIN_LINK.json'),delivery_seal_sha256=sha(H/'DELIVERY_FILES_SHA256.json'),files=len(files))))

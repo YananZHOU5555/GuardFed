@@ -1,0 +1,23 @@
+--- tmp\celeba_hybrid_delta_after21_20261010\verify_offserver.py
++++ verify_offserver.py
+@@ -8,10 +8,10 @@
+ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+ r=read(B/'BACKUP_SHA256.json');a=read(B/'PARTIAL_ACCEPTANCE.json')
+-assert sha(B/'hybrid_after21_delta.tar.gz')==r['archive_sha256']=='6349e621a9b18b2aa5347574e3fca4f05f62ae3fcf7e8cdc435fa228250832ba'
++assert sha(B/'hybrid_after22_delta.tar.gz')==r['archive_sha256']=='06bbab6b219b3314d8becbb1901f0d0b24c5d084be60cf2bf59e420aea579853'
+ assert sha(B/'MEMBERS.json')==r['inventory_sha256'] and sha(B/'PARTIAL_ACCEPTANCE.json')==r['acceptance_sha256']
+ m=read(B/'MEMBERS.json')['members'];out=B/'restored';assert not out.exists()
+-with tarfile.open(B/'hybrid_after21_delta.tar.gz') as t:
++with tarfile.open(B/'hybrid_after22_delta.tar.gz') as t:
+  assert len(t.getnames())==len(set(t.getnames()))==r['member_count']==23 and set(t.getnames())==set(m)|{'MEMBERS.json'}
+  for x in t.getmembers():
+   assert x.isfile() and not x.name.startswith('/') and '..' not in Path(x.name).parts
+@@ -34,6 +34,6 @@
+  assert read(p/'native_replay.json')['checkpoint_tensor_sha256']==body.tensor_sha(state)
+  records.append({'id':e['id'],'checkpoint_tensor_sha256':body.tensor_sha(state),'model_sha256':sha(p/'model.pt')})
+ assert not torch.cuda.is_initialized() and a['source_host']!=platform.node()
+-proof={'status':'ORIGINAL_SERVER_STRICT_PLUS_OFFSERVER_ALL_MEMBERS_AND_CPU_TENSORS_VERIFIED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'old_accepted':21,'accepted_new_ids':r['accepted_new_ids'],'accepted_new':len(records),'records':records,'archive_sha256':r['archive_sha256'],'inventory_sha256':r['inventory_sha256'],'server_acceptance_sha256':r['acceptance_sha256'],'member_count':23,'local_torch':torch.__version__,'local_CUDA_initialized':False,'original_full_checked_replayed_locally':False,'limitation':'Original checked asserts actual cu128 runtime/device; CPU host verified every byte and CPU tensor identities, separate record-layer replay pending root review.','source_seal_sha256':r['source_seal_sha256'],'source_members_verified':len(read(H/'FILES_SHA256.json')['files']),'different_host':True,'source_host':a['source_host'],'verification_host':platform.node()}
++proof={'status':'ORIGINAL_SERVER_STRICT_PLUS_OFFSERVER_ALL_MEMBERS_AND_CPU_TENSORS_VERIFIED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'old_accepted':22,'accepted_new_ids':r['accepted_new_ids'],'accepted_new':len(records),'records':records,'archive_sha256':r['archive_sha256'],'inventory_sha256':r['inventory_sha256'],'server_acceptance_sha256':r['acceptance_sha256'],'member_count':23,'local_torch':torch.__version__,'local_CUDA_initialized':False,'original_full_checked_replayed_locally':False,'limitation':'Original checked asserts actual cu128 runtime/device; CPU host verified every byte and CPU tensor identities, separate record-layer replay pending root review.','source_seal_sha256':r['source_seal_sha256'],'source_members_verified':len(read(H/'FILES_SHA256.json')['files']),'different_host':True,'source_host':a['source_host'],'verification_host':platform.node()}
+ with (B/'OFFSERVER_MEMBER_TENSOR_PROOF.json').open('x') as f:json.dump(proof,f,indent=2);f.write('\n')
+ print(json.dumps({'proof_sha256':sha(B/'OFFSERVER_MEMBER_TENSOR_PROOF.json'),'accepted_new':len(records),'runtime':proof['local_torch']}))

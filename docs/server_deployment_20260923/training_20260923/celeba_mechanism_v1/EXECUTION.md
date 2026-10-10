@@ -1,4 +1,4 @@
-# CURRENT EXECUTION: GuardFed返修实验 — 实测 2026-10-10T02:06:18.910647+00:00
+# CURRENT EXECUTION: GuardFed返修实验 — 实测 2026-10-10T02:30:59.781426+00:00
 
 当前服务器：ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。用户明确授权停止sglang，模型/文件保留。213.224.31.105:26712当前内部状态未知，不自动切换。先遵守/etc/vast-agents-guide.md，既有SHA为42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。
 
@@ -6,10 +6,10 @@
 
 | 阶段 | 实际状态与分母 | 接续入口 |
 |---|---|---|
-| CelebA机制消融 | 当前观测完成172、活动8、等待620、失败0；已独立严格验收并离机170/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
+| CelebA机制消融 | 当前观测完成180、活动8、等待612、失败0；已独立严格验收并离机180/800新增，另100 Full显式复用 | server_reactivation_20261009/latest_formal_live.json；celeba_mechanism_v1/EXECUTION.md及dispatch receipt |
 | FLGMM验证搜索 | 32/32已严格验收并离机；最新来源绑定终轮/活动读STATE对应快照，不把未验收完成项计作接受 | tmp/celeba_flgmm_screen_20261009_v2_dispatch/LATEST_BACKUP.json及accepted_delta_after6_20261009/ROOT_ADOPTION_REVIEW.json |
-| FLGMM完整覆盖 | 96新+4复用；状态ROOT_ACTUAL_FLGMM96_VALID_COVERAGE_STARTUP_AND_ROUNDS_VERIFIED，短程5新+2参考已核；新增70轮离机接受16/96 | tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_SEVEN_CANARY_CLOSURE.json及ROOT_COVERAGE_STARTUP.json |
-| 组合基线验证搜索 | 22/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
+| FLGMM完整覆盖 | 96新+4复用；状态ROOT_ACTUAL_FLGMM96_VALID_COVERAGE_STARTUP_AND_ROUNDS_VERIFIED，短程5新+2参考已核；新增70轮离机接受18/96 | tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_SEVEN_CANARY_CLOSURE.json及ROOT_COVERAGE_STARTUP.json |
+| 组合基线验证搜索 | 23/32项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe | tmp/celeba_hybrid_screen_execution_20261009/LATEST_BACKUP.json |
 | 九方法旧checkpoint三视图评价 | 900/900已严格验收并离机；原CPU872服务因native偏差failstop EXITED，不重启 | tmp/celeba_valid_gpu_remaining440_v2_evidence_20261009/chunk_039/cumulative_900_accepted.json |
 | 机制三视图评价 | 累计170份：minus_U完整100，minus_C七场景70对/140记录表已独立采用：五IID及non-IID Benign/F Flip，各10seed；1134统计/567单元/1260计数指标/3360计数与630配对指标通过；旧120记录/972统计/486单元及162个IID seed-first标量保持，不计算不平衡七场景总均值。新增F Flip删除C的native/shared差为ACC+0.943pp、AEOD−0.00308、ASPD+0.01177；全部10/9/6面板及负结果保留。Full5CPU/65GPU、C70CPU与训练环境/选择史披露；其他三non-IID C场景及六变体未完成。最新完整英文稿仍封存C60，尚未合入第七场景，正文未应用、未运行test；U论文表10完整场景 | U表：celeba_mechanism_v1/three_view_interim100_20261009/snapshot100/TABLES.md；C表：docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/snapshot/TABLES.md；其他七variant未完成 |
 
@@ -21,7 +21,7 @@
 
 主机制服务guardfed_celeba_mechanism_formal，固定70round/valid-only/8并发，IID(alpha5000)/non-IID(alpha5)×5场景×10共享seed；100 Full身份已复核，旧权重不重训/重复打包。FLGMM原搜索服务已正常EXITED、0worker，32/32严格离机，冻结规则选Tg20/L2/lr0.001，32评分与32候选均值标量经独立及root复核；前两分差0.00004978，仅n=1搜索不作SD或显著性结论。其后5新+2参考短程已严格离机，FLGMM完整覆盖启动状态True，新96项仍待逐项严格验收，不把短程计入论文样本。组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe，组合100项尚未启动。全程不运行test。
 
-主机制最近实测CPU 11.42/122.88核，RAM 75.60GB，磁盘余1.061TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
+主机制最近实测CPU 11.02/122.88核，RAM 75.77GB，磁盘余1.061TB；GPU/温度/RecoveryAction与近期错误读同一实时JSON。只在真实轮次/日志、进程身份和资源证据支持时判断健康，低瞬时占用不重启。服务标签与完成文件不代替验收。
 
 ## 当前恢复与研究选择
 
@@ -63,7 +63,7 @@ Fig3终轮修正候选已交付outputs/guardfed_figures/synthetic_terminal_candi
 
 ## Git与巡检
 
-最近已验证推送：3601c9dfca63dc1c6203aceb2c7fc066faa630fa，分支codex/revision-evidence-baselines-20260928，253份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment39_verified_20261010.json。
+最近已验证推送：59ec6455c1402ff3bfdac454cbf8de9daf0d216d，分支codex/revision-evidence-baselines-20260928，78份committed blob逐SHA及远端分支核验；后续本机变化未自动算作已推送。记录publication_closed_increment40_verified_20261010.json。
 
 三小时聊天任务guardfed-training-health仍PAUSED；本会话没有原生automation_update工具，未编辑调度器或建立替代cron/Windows任务。supervisor持续运行训练不等于聊天巡检恢复。待原生接口可用时按server_reactivation_20261009/MONITOR_HANDOFF.md恢复同一任务；不从历史计划自动派发新队列。
 
