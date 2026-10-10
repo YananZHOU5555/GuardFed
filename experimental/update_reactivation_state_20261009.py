@@ -2272,6 +2272,21 @@ if (C60_replay_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
             archive_members_verified=C60_proof['archive_members_verified'],all_native_differences_zero=True,service_terminal='EXITED')
         state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_mechanism_valid_C_after56']
     state['celeba_mechanism_v1']['C_after56_valid_replay']=C60_stage
+C70_replay_dir=ROOT/'tmp/celeba_mechanism_valid_C_after60_20261010/execution_candidate'
+if (C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json').exists():
+    C70_start=read(C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json')
+    assert sha(C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json')=='dedd8aa9c83901a3415c509b1c6994e4495af1c7e810e0feff674c6f7e295e0e'
+    assert C70_start['status']=='ROOT_C_AFTER60_REAL_LINUX_STARTUP_AND_ALLOCATION_PASS'
+    assert C70_start['execution_seal_sha256']=='12c1b612d9c9697f6a537344ebace5aaa7c1bf5d7bbe760a3866168adca89896'
+    assert C70_start['deployment_receipt_sha256']==sha(C70_replay_dir/'deployment_receipt.json')
+    assert C70_start['original160_not_rerun'] and not C70_start['test_inference']
+    state['celeba_mechanism_v1']['C_after60_valid_replay']=dict(status='ACTUAL_STARTUP_VERIFIED_ACCEPTANCE_PENDING',
+        selected_count=10,prior_three_view_models=160,offserver_new_accepted=0,execution_started=True,
+        startup_root_proof_path=(C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json').relative_to(ROOT).as_posix(),
+        startup_root_proof_sha256=sha(C70_replay_dir/'ROOT_STARTUP_OBSERVATION.json'),
+        CPU_affinity=list(range(112,120)),compute_threads=8,nice=10,IO='idle',CUDA_visible='',
+        new_training=0,new_Full_inference=0,final_test=False)
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_mechanism_valid_C_after60']))
 C30_dir=TRAIN/'celeba_mechanism_v1/three_view_C_three_scenes_20261009'
 if (C30_dir/'ROOT_VERIFICATION.json').exists():
     C30=read(C30_dir/'ROOT_VERIFICATION.json')
@@ -2443,6 +2458,12 @@ if (rebuttal_C60_dir/'ROOT_REVIEW.json').exists():
     state['latest_rebuttal_draft'].pop('new_C_scope_environment_checks',None)
     state['celeba_mechanism_v1']['C_three_view_six_scene_table']['incorporated_into_full_rebuttal']=True
     state['celeba_mechanism_v1']['three_view_scope_limit']=state['celeba_mechanism_v1']['three_view_scope_limit'].replace('C60 table separate from C50 author-review prose','C60 evidence incorporated into the full author-review response; submitted manuscript not applied')
+    semantic_path=rebuttal_C60_dir/'semantic_review/ROOT_SEMANTIC_REVIEW.json'
+    if semantic_path.exists():
+        assert sha(semantic_path)=='db60632721bdf3ba8da18589ab095566d45f6fbedb43c6a026867ea451b40104'
+        semantic=read(semantic_path)
+        assert semantic['status']=='INDEPENDENT_C60_AFFECTED_PROSE_SEMANTIC_PASS_NO_CANONICAL_EDIT' and not semantic['findings'] and not semantic['required_corrections']
+        state['latest_rebuttal_draft']['C60_affected_prose_semantic_review']=dict(proof_path=semantic_path.relative_to(ROOT).as_posix(),proof_sha256=sha(semantic_path),topics_checked=8,scope='Ten introduced or affected C60 spans and related reviewer blocks only; no numerical re-audit or submission-readiness claim')
 FL96_base=ROOT/'tmp/celeba_flgmm_fullcoverage_incremental_20261009'
 if (FL96_base/'LATEST_BACKUP.json').exists():
     FL96_latest=read(FL96_base/'LATEST_BACKUP.json')
@@ -2460,12 +2481,12 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14):
-        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b'}[FL96_latest['accepted_total']]
+    if FL96_latest['accepted_total'] in (2,3,5,7,9,11,12,14,16):
+        assert sha(FL96_current_path)=={2:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',3:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',5:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',7:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',9:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',11:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',12:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',14:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b',16:'9d587b8261c2d1340339e1905db133bc113aeff7b7150db95cbe260103c77617'}[FL96_latest['accepted_total']]
         assert FL96_current['status']=='ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         FL96_previous_path=ROOT/FL96_current['previous_root_adoption_path'];FL96_previous=read(FL96_previous_path)
-        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0'}[FL96_latest['accepted_total']]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
+        assert sha(FL96_previous_path)==FL96_current['previous_root_adoption_sha256']=={2:sha(FL96_first_path),3:'d3accbbaeaa6ff34e526c9c9a6daac46c4dad9eb1a69014328295140fb2f20cb',5:'c9aacd305eedf737f313ddcef9ab0b2c2c7ededc9b5aea2230f9205ee45be638',7:'51ae9a0798d763b8bac6ef92022ae028f60bdc059ac9d0f0f7d114b597450288',9:'4403439d39196206e169f14428d68b59b779e1cdd4a5a9fb7d0dd0a3b13dabcf',11:'ecaaa936289589c2b8b28ff42fa81e7e4eb09206fce49a187781be9ed4143577',12:'6feb41c9f2f06980d29865ca03d59e5d2cffeeb2a6f0d6f0209f065cf80caf80',14:'67c355f4cd4fae1d2f015b327fee4b662499987ef9f0307043a1c22ca303a5b0',16:'801ec992899529dc7b38e68acfde3b101d2b90a7966def64f0bbf901cf88793b'}[FL96_latest['accepted_total']]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total'])==(FL96_previous['accepted_total'],{2:1,3:1,5:2,7:2,9:2,11:2,12:1,14:2,16:2}[FL96_latest['accepted_total']],FL96_latest['accepted_total'])
         assert FL96_current['accepted_total']==FL96_current['accepted_before']+FL96_current['accepted_new']
         FL96_current_batch=FL96_current_path.parent/'batch';FL96_off=read(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(FL96_current_batch/'OFFSERVER_ACCEPTANCE.json')==FL96_current['offserver_acceptance_sha256']==FL96_latest['next_collector_previous_sha256']
@@ -2595,6 +2616,8 @@ if main.get('C_three_view_six_scene_table'):
     C_replay_note='minus_C六场景60对/120记录表已独立采用：五IID及non-IID Benign，972统计/486单元/1080计数指标/2880计数通过；旧100记录/810统计/405展示和162个IID seed-first标量保持，未计算不平衡六场景总均值；10/9/6面板、负结果及混合设备/环境/选择史保留；C60表独立于C50全文作者审阅稿，其他四个non-IID C场景及六变体未完成'
 if main.get('C_three_view_six_scene_table',{}).get('incorporated_into_full_rebuttal'):
     C_replay_note=C_replay_note.replace('C60表独立于C50全文作者审阅稿','C60证据已纳入完整英文作者审阅稿，原C50稿保持、提交版正文未应用')
+if main.get('C_after60_valid_replay',{}).get('execution_started'):
+    C_replay_note+='；新增十项non-IID F Flip三视图已实测启动，CPU112–119单进程8线程，旧160与Full复用；该批严格离机接受仍0，不计入已完成论文表'
 C_latest_table=main.get('C_three_view_five_scene_table',main.get('C_three_view_four_scene_table',main.get('C_three_view_three_scene_table',main.get('C_three_view_two_scene_table',{})))).get('table_path','待独立核验')
 C_other_scenes=5 if main.get('C_three_view_five_scene_table') else (6 if main.get('C_three_view_four_scene_table') else (7 if main.get('C_three_view_three_scene_table') else 8))
 if main.get('C_three_view_six_scene_table'):

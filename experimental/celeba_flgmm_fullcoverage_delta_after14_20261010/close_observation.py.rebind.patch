@@ -1,0 +1,11 @@
+--- after12/close_observation.py
++++ after14/close_observation.py
+@@ -7,7 +7,7 @@
+  if not p.name.isdigit() or int(p.name)==os.getpid():continue
+  try:
+   argv=(p/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  if any('celeba_flgmm_fullcoverage_delta_after12_20261010/collect_delta.py' in x for x in argv):collectors.append(dict(pid=int(p.name),argv=argv))
++  if any('celeba_flgmm_fullcoverage_delta_after14_20261010/collect_delta.py' in x for x in argv):collectors.append(dict(pid=int(p.name),argv=argv))
+   for t in (p/'task').iterdir():
+    try:aff=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue

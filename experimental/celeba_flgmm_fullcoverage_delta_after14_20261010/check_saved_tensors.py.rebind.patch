@@ -1,0 +1,11 @@
+--- after12/check_saved_tensors.py
++++ after14/check_saved_tensors.py
+@@ -7,7 +7,7 @@
+ try:
+  import torch
+  torch.set_num_threads(1)
+- proof=read(H/'batch/OFFSERVER_ACCEPTANCE.json');assert proof['accepted_new']==2 and proof['accepted_total']==14
++ proof=read(H/'batch/OFFSERVER_ACCEPTANCE.json');assert proof['accepted_new']==2 and proof['accepted_total']==16
+  cnn=R/'tmp/revision-publish-20260928/src/celeba_data.py'
+  assert sha(cnn)==proof['records'][0]['source_hashes']['src/celeba_data.py']=='0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce'
+  tree=ast.parse(cnn.read_text(encoding='utf8'));cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='CelebACNN')

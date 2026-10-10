@@ -1,0 +1,11 @@
+--- after12/preflight.py
++++ after14/preflight.py
+@@ -24,7 +24,7 @@
+   if str(stage/'run_one.py') in argv:workers.append(dict(pid=int(proc.name),argv=argv))
+  except (FileNotFoundError,ProcessLookupError):continue
+ assert not list(stage.glob('*FAILURE*.json')) and 1<=len(workers)<=2
+-q=read(stage/'queue_progress.json');active={r['id'] for r in q['active']};ids=['FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed'+str(x)+'_fullcoverage' for x in (91004,91005)];rows=[]
++q=read(stage/'queue_progress.json');active={r['id'] for r in q['active']};ids=['FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed'+str(x)+'_fullcoverage' for x in (91006,91007)];rows=[]
+ for identity_id in ids:
+  item=next(r for r in manifest['jobs'] if r['id']==identity_id);out=stage/'runs'/identity_id
+  assert identity_id not in active and all((out/n).is_file() for n in ('result.json','acceptance.json','screen_identity.json','model.pt','job.json'))
