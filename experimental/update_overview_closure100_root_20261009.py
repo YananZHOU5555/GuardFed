@@ -6,7 +6,30 @@ TRAIN=ROOT/'docs/server_deployment_20260923/training_20260923'
 CHECKS=TRAIN/'server_reactivation_20261009'
 sha=lambda b:hashlib.sha256(b).hexdigest()
 state=json.loads((TRAIN/'TRAINING_STATE.json').read_bytes())
+fl47_current=state.get('FLGMM_closed47_valid_three_view_20261011',{})
+if fl47_current.get('complementary_adopted'):
+    fl47_proof=ROOT/'tmp/celeba_flgmm_closed47_root_execution_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
+    assert hashlib.sha256(fl47_proof.read_bytes()).hexdigest()==fl47_current['root_proof_sha256']=='22fc113add73814ae40accf563ce5f63bd63d50bcf53b7262bdb2b996b016dfe'
+    a47=json.loads(fl47_proof.read_bytes())
+    assert a47['status']==fl47_current['status']=='ROOT_FLGMM_CLOSED47_COMPLEMENTARY_EVIDENCE_ADOPTED_WINDOWS_REFIT_FAILED_PRESERVED'
+    assert fl47_current['root_proof_path']==fl47_proof.relative_to(ROOT).as_posix() and a47['root_adoption']
+    assert a47['new_three_view_records_accepted']==fl47_current['root_new_three_view_acceptances']==47 and a47['FLGMM_total_three_view_records']==fl47_current['FLGMM_total_three_view_records']==48
+    assert a47['exact_ids']==fl47_current['exact_ids'] and len(set(a47['exact_ids']))==47 and len(a47['prior_interface_explicitly_reused'])==1
+    assert a47['native_training_acceptance_unchanged_by_this_action']==fl47_current['source_native_training_records']==44 and a47['original_screen_reuse_separate']==fl47_current['separate_screen_reuse']==4
+    assert a47['mechanism_three_view_cutoff_unchanged']==260 and state['celeba_mechanism_v1']['three_view_new_models_offserver_verified']>=260
+    assert a47['Linux_whole_original_saved_check_pass'] and a47['Linux_root_fit_verified'] and a47['Linux_original_root_refit_records']==47
+    assert a47['Windows_saved_outputs_audit_pass'] and a47['Windows_saved_outputs_audit_fit_calls']==0
+    assert not any(a47[k] for k in ('Windows_exact_refit_pass','Windows_whole_saved_check_pass','Windows_original_array_refit_block_pass','previous_Windows_exact_refit_condition_satisfied','cross_platform_bitwise_recalibration_claimed','test'))
+    assert not fl47_current['validation_hold'] and fl47_current['original_validation_hold_preserved']
+    assert hashlib.sha256((ROOT/fl47_current['validation_hold_path']).read_bytes()).hexdigest()==fl47_current['validation_hold_sha256']=='a87f1dac4b42d6ec1754d88b772c44a5c0d7c95ca3bb3d684cc7a97a34dfa6f1'
 main=state['celeba_mechanism_v1']; live=json.loads((CHECKS/'latest_formal_live.json').read_bytes())
+A80=main.get('A_three_view_eight_scene_table')
+if A80:
+    A80_root=ROOT/A80['root_proof_path']
+    assert hashlib.sha256(A80_root.read_bytes()).hexdigest()==A80['root_proof_sha256']=='d2245e4d9de68b415931dccc7d1f70c39a871c226c59d9973675dfc1d3cc1bc7'
+    A80_proof=json.loads(A80_root.read_bytes())
+    assert A80_proof['root_adoption'] and A80_proof['complete_scenes']==8 and A80_proof['paired_models']==80
+    assert A80_proof['mean_SD_scalars_recomputed']==1458 and A80_proof['display_cells']==729
 assert main['scientific_results_offserver_verified']>=104 and main['three_view_new_models_offserver_verified']>=100
 assert main['latest_paired_three_view_table']['complete_scenes']==10
 overview=ROOT/'docs/返修实验总览.md'
@@ -212,9 +235,13 @@ if main.get('A_three_view_single_scene_table'):
     if main.get('A_three_view_four_scene_table'):
         A_link='server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_four_scenes40_20261010/TABLES.md'
         A_coverage_note='A40四完整IID场景表已独立采用：Benign/F Flip/FedSA/S-DFA各10seed，648统计/324展示/720计数指标/1920基础计数通过；旧A20的40对象字节/顺序、324统计/162展示保持。S-DFA native/shared删除A差约−0.361pp/+0.00542/−0.00804，FedSA约+0.134pp/−0.00065/+0.00141；9/6方向变化和取舍保留，其他六A场景未齐。'
-    if main.get('A_three_view_six_scene_table'):
+    if main.get('A_three_view_six_scene_table') and not A80:
         A_link='server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_six_scenes60_20261011/TABLES.md'
         A_coverage_note='最新A60已采用：五IID+non-IID Benign各十共享seed，120记录/1134统计/567单元；原A50记录及IID聚合字节保持，剩余四non-IID场景未齐。'
+    if A80:
+        A_link=A80['table_path'].removeprefix('docs/')
+        A_coverage_note='最新A80已root采用：五IID＋non-IID Benign/F Flip/FedSA共8场景、各10配对seed，80对/160记录、1458均值与样本SD统计/729展示单元，10/9/6面板完整。旧A60的120对象字节/顺序、972统计/486单元和IID seed-first聚合原字节保持。新增raw FedSA删除A后三项均值更好，native/shared准确率微升而两项gap变差，保留全部负结果和视图取舍，不作必要性/显著性主张。Full5CPU75GPU/79cu128＋1cu130与A80CPU/cu128、选择史和历史test暴露均披露；两项non-IID A场景S-DFA/Sp-DFA、其余控制和最终评价仍未齐。'
+        text='\n'.join(line for line in text.split('\n') if not line.startswith(('A机制对照：','当前新增执行：')))
     text+='\nA机制对照：原IID Benign十共享seed表保持；162统计/81单元/216计数指标通过。'+A_coverage_note+'IID Benign删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A机制三视图表]('+A_link+')。\n'
     new_stage_note+=' A IID Benign十seed三视图表已独立采用。'+A_coverage_note
 if main.get('three_view_counts_by_variant',{}).get('minus_A')==28:
@@ -241,17 +268,37 @@ if state.get('celeba_native_ten_method_table_20261010'):
     text+='\n十方法native千格论文表已独立采用，IID/non-IID各五场景、10/9/6seed面板；900场景显示与270先seed内汇总显示通过，原九方法全部810统计对象不变。仍缺七方法覆盖，LoGo使用原DP后处理native而非底座cache；不称1000三视图或final。入口：[十方法IID/non-IID表](../'+state['celeba_native_ten_method_table_20261010']['table_path']+')。\n'
 text=text.replace('LoGoFair人口定义、梯度方法设置和最终主终点保留待决，不擅自代定。','Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。')
 text=text.replace('不代表其余七variant或全部800训练完成','不代表其余六variant或全部800训练完成')
-if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table'):
+if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table') and not A80:
     text+='\n最新A50五IID场景表已独立采用：50配对、972统计/486单元及900指标/2400计数通过，旧A40字节和统计保持；五IID先seed内汇总，non-IID单例不入均值。Sp-DFA公平性方向相反及所有10/9/6面板保留，五non-IID A场景仍待齐。入口'+main['A_three_view_five_scene_table']['table_path']+'。\n'
     if state.get('added_CNN_exact3_valid_interface_20261010',{}).get('root_scientific_acceptances')==3:
         text+='新增三条代表CNN接口已采用（FLGMM/组合/NGA搜索一配置）：Linux完整原检查与F盘原数组/校准重拟合块通过，27指标/72计数/9规则、native差0；Windows完整检查的FL审计group_kl约2.2e-19差异保留，不放宽容差、不称其全文通过。不是完整100格或最终test。入口'+state['added_CNN_exact3_valid_interface_20261010']['root_proof_path']+'。\n'
 if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
-    text+='最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。'+('A60已用21处新增可逆编辑及6组JSON均值/SD指针纳入；旧2457数字字串/98链接保留，五IID+non-IID Benign的指标取舍、其余四non-IID未齐边界明确；' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A50五IID配对与seed-first取舍已纳入；')+'仍为作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
-if state.get('FLGMM_closed47_valid_three_view_20261011') and not state['FLGMM_closed47_valid_three_view_20261011'].get('validation_hold'):
+    text+='最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。'+('A80已按实际采用记录纳入，具体编辑与证据以回复入口为准；' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'A60已用21处新增可逆编辑及6组JSON均值/SD指针纳入；旧2457数字字串/98链接保留，五IID+non-IID Benign的指标取舍、其余四non-IID未齐边界明确；' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A50五IID配对与seed-first取舍已纳入；')+'仍为作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
+if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
     e=state['FLGMM_closed47_valid_three_view_20261011']
     text+='FLGMM有限47终轮模型正在CPU补三视图评价，原训练不重跑；'+e['observed_utc']+'观测回放'+str(e['receipts_observed'])+'/47，新增科学采用0，完整原检查与离机验收待完成。入口'+e['start_receipt_path']+'。\n'
 if state.get('added_CNN_exact3_valid_interface_20261010',{}).get('root_scientific_acceptances')!=3 and state.get('added_CNN_exact3_valid_interface_20261010'):
     text+='新增CNN三条真实图像valid接口门检已实际启动，37源码/数据/模型身份匹配、实际quota122.87999/名义预算76，CPU120–127八低优先级线程/单进程。仅三条已验收checkpoint接口，非全100/最终终点；离机科学采用仍0，见'+state['added_CNN_exact3_valid_interface_20261010']['start_receipt_path']+'。\n'
+if fl47_current.get('complementary_adopted'):
+    # Only current pre-history FL47 status lines are replaced; historical suffix bytes stay exact.
+    text='\n'.join(line for line in text.split('\n') if not line.startswith(('FLGMM有限47终轮模型正在CPU补三视图评价','FLGMM有限47条valid终轮三视图已按互补证据root采用')))
+    text+='FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口'+fl47_current['root_proof_path']+'；历史hold：'+fl47_current['validation_hold_path']+'。\n'
+# Refresh the derived current entry without accumulating identical status lines.
+text=re.sub(r'96新\+4复用验证覆盖已实际启动，70轮新增接受\d+，不把短程算正式样本。',
+    f"96新+4复用验证覆盖已实际启动，70轮新增接受{state['hybrid100_fullcoverage_20261010']['new_accepted']}，不把短程算正式样本。",text)
+seen=set();current_lines=[]
+for line in text.split('\n'):
+    if line and line in seen:continue
+    if line:seen.add(line)
+    current_lines.append(line)
+text='\n'.join(current_lines)
+if A80:
+    current_views='| 机制三视图 | U100、C100各十场景完整；A80覆盖五IID及non-IID Benign/F Flip/FedSA，每场景10配对seed，保留10/9/6面板与全部负结果。A剩余两场景及其他控制未齐 | [A八场景表]('+A80['table_path'].removeprefix('docs/')+') |'
+    if state['latest_rebuttal_draft'].get('A80_incorporated'):
+        reply=state['latest_rebuttal_draft']
+        current_reply='| 英文回复 | 24条原意见完整作者审阅稿已纳入A80、U/C100及既有基线和校准解释；新增12组均值SD及预测规则依赖解释通过核验。保留旧表、负结果与未完成项；最终评价及提交版正文尚未完成 | [完整回复草稿]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
+        text='\n'.join(current_reply if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
+    text='\n'.join(current_views if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
 handoff=CHECKS/'MONITOR_HANDOFF.md'
@@ -265,7 +312,7 @@ top=f'''# GuardFed 当前巡检交接
 - 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo/workspace/GuardFed-celeba-expanded。先读/etc/vast-agents-guide.md，SHA42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa。用户授权sglang停止，文件/模型保留；213.224.31.105不自动切回。
 - 主机制guardfed_celeba_mechanism_formal：{live['queue_completed']}观测终轮，{main['scientific_results_offserver_verified']}/800严格验收离机，100Full显式复用；{len(live['active'])}活动/{live['pending']}等待/{len(live['failed'])}失败，轮次{'/'.join(str(r.get('progress',{}).get('round')) for r in live['active'])}。实测JSON latest_formal_live.json SHA{sha((CHECKS/'latest_formal_live.json').read_bytes())}。
 - 双5090利用率{gpu_usage}、{gpu_temps}℃、RecoveryNone；CPU{live['cpu_used_cores_2sec']:.2f}/{live['cpu_quota_cores']:.2f}核，RAM{live['memory_used_bytes']/1e9:.2f}GB，余量{live['disk_free_bytes']/1e12:.3f}TB，OOM0/近期错误0。冻结8并发，不因低CPU或交接瞬时低GPU重启。
-- Native累计{main['scientific_results_offserver_verified']}=U100完整+C{main['scientific_results_offserver_verified']-100}部分；当前差集与恢复链见STATE.incremental_science_backups。只打包已验收ID差集，不重复旧Full/权重。
+- Native新增累计{main['scientific_results_offserver_verified']}；各variant构成以STATE的已验收ID索引为准；当前差集与恢复链见STATE.incremental_science_backups。只打包已验收ID差集，不重复旧Full/权重。
 - C1单项评价门检严格离机{main.get('C1_valid_gate',{}).get('offserver_new_accepted',0)}，ROOT d045665b066dafc25f9970adfdffef9c9a8a388575ec87b9b54d5dcabfa65cab；9指标/24计数/3规则、40归档成员核验，native偏差0。原U100与Full不重推，C1不计作C十seed完整场景。
 - C补集准确11已实际启动，状态{main.get('C_after1_valid_replay',{}).get('status','未启动')}，新增离机接受{main.get('C_after1_valid_replay',{}).get('offserver_new_accepted',0)}；独立namespace tmp/celeba_mechanism_valid_C_after1_20261009。观测/备份/采用分别用tmp/observe_mechanism_C_after1_root_20261009.py、backup_mechanism_C_after1_root_20261009.py、adopt_mechanism_C_after1_root_20261009.py；只在正常终态11/0worker后备份验收，不重推旧101/Full。C单场景native表已核54统计，ROOT77d046d695d9a36988b7ecbae0a37256389eb92413a70d74d0a838805a6d8872；9/6方向变化保留；C IID Benign三视图表状态{main.get("C_three_view_single_scene_table",{}).get("status","待独立采用")}，其余C场景未齐。
 - 删除U三视图已100/100严格离机，after92最后8正常EXITED/0残留失败，ROOT9050eb059a797c70f0ca977294989b5ae5757286dbc85b36d529012cb5ab72ee，archive235837afdd336df8db7e3f224c6598f6f9b0a216a2deb10dcf11f3cf54987577。原92/Full不重推，C4排除；全部旧闭合服务禁止重启。
@@ -350,7 +397,7 @@ if state.get('celeba_native_ten_method_PDF_20261010'):
     top+='十方法native验证表PDF三页已核900组均值sampleSD/1800数值及视觉布局，10/9/6seed面板、双分布五场景，仍非17方法完整表或finaltest。入口'+state['celeba_native_ten_method_PDF_20261010']['pdf_path']+'。\n'
 if state.get('added_CNN_three_view_bridge_20261010'):
     top+='四CNN身份桥源码及64门检root通过，原17函数保持；现仅注册FL6/Hybrid1/NGA8旧精确chunk，缺Huber70轮proof拒收，没有新科学评价/fit/训练/test。\n'
-if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table'):
+if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table') and not A80:
     top+='最新A50五IID表已root/独审采用，972统计/486单元；五nonIID未齐，旧A40保持，'+('已纳入最新24意见reader稿。' if state['latest_rebuttal_draft'].get('A50_incorporated') else 'A50尚未纳入最新reader稿。')+'入口'+main['A_three_view_five_scene_table']['table_path']+'。\n'
 if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
     top+='当前24意见reader稿保留全部数字/表/quotes/P1–P6，27可逆改动仅重排和导航；作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
@@ -358,22 +405,28 @@ if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
         top+='A50五IID配对和seed-first取舍经16新增可逆编辑纳入；12组mean/SD源指针通过，原24意见/旧数值/表/负结果保留。五non-IID A场景及其余机制尚未齐。\n'
 if state.get('added_CNN_exact3_valid_interface_20261010',{}).get('root_scientific_acceptances')==3:
     top+='新增FLGMM/组合/NGA搜索一配置共3代表CNN接口已采用：Linux完整原检查及F盘原数组/校准重拟合块通过，27指标/72基础计数/9规则、native差0；Windows完整检查的FL group_kl约2.2e-19差异及原失败完整保留，不改容差、不称Windows全文通过。不是方法100格完成或finaltest。入口'+state['added_CNN_exact3_valid_interface_20261010']['root_proof_path']+'。\n'
-if main.get('A_three_view_six_scene_table'):
+if main.get('A_three_view_six_scene_table') and not A80:
     a=main['A_three_view_six_scene_table']
     top+='最新A60六完整场景表已root采用：五IID+non-IID Benign各10seed，120记录/1134统计/567单元，原A50及IID聚合原字节保持。A60表采用时native264/三视图260分列，当前接受数见本页主表；新增Benign删除A准确率−0.540pp、AEOD+0.00488、ASPD−0.00582，10/9/6与负结果保留。Full59cu128+1cu130、5CPU55GPU；A60为cu128/CPU。剩余四non-IID A场景/其他控制/最终评价未齐。'+('A60已纳入最新24意见reader稿和正文插入候选；21可逆编辑/6组均值SD源指针核验，原24原话、2457旧数字字串/98链接/整表保留。' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A60尚未纳入A50 reader稿。')+'入口'+a['table_path']+'。\n'
-if state.get('FLGMM_closed47_valid_three_view_20261011') and not state['FLGMM_closed47_valid_three_view_20261011'].get('validation_hold'):
+if A80:
+    top+='最新A80已root采用：五IID＋non-IID Benign/F Flip/FedSA共8场景、各10配对seed，80对/160记录、1458均值与样本SD统计/729展示单元，10/9/6面板完整。旧A60的120对象字节/顺序、972统计/486单元和IID seed-first聚合原字节保持。新增raw FedSA删除A后三项均值更好，native/shared准确率微升而两项gap变差，保留全部负结果和视图取舍，不作必要性/显著性主张。Full5CPU75GPU/79cu128＋1cu130与A80CPU/cu128、选择史和历史test暴露均披露；两项non-IID A场景S-DFA/Sp-DFA、其余控制和最终评价仍未齐。'+('A80已纳入实际root采用的回复稿，详见回复入口。' if state['latest_rebuttal_draft'].get('A80_incorporated') else '当前回复稿仍为A60，A80表采用不等于已纳入回复。')+'入口'+A80['table_path']+'。\n'
+if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
     e=state['FLGMM_closed47_valid_three_view_20261011']
     top+='新增有限47项FLGMM三视图评价实际启动：CPU120–127/8线程单进程，valid-only，精确44已验收新训练+4screen复用−1已采用接口。'+e['observed_utc']+'回放结果观测'+str(e['receipts_observed'])+'/47，当前新增科学采用0。后续须原Linux whole checker及F盘严格成员/数组离机核验，旧Windows whole审计差异保留；不得盲重启或改容差，不并入机制260。票据'+e['start_receipt_path']+'。\n'
-if state.get('FLGMM_closed47_valid_three_view_20261011',{}).get('validation_hold'):
+if fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
     e=state['FLGMM_closed47_valid_three_view_20261011']
     top+='FLGMM47回放与Linux整个原检查通过，F盘98成员验证通过；Windows原数组块第5项Benign91006在Root-only threshold fit changed处失败，原失败及前4循环通过保留、47新增采用0。未改容差或重试失败命令，不影响原native验收和训练。入口'+e['validation_hold_path']+'。\n'
     if e.get('single_failed_record_diagnostic'):
         top+='单失败记录诊断实测：shared校准诊断server_adaptive_lambda相差一个浮点末位（−1.1102230246251565e−16）及派生fit SHA不同；实际阈值/三视图预测/全部指标计数/root receipt一致。首诊断键类型比较器失败另行保留；未证明平台原因，仍不采用47或称其Windows块通过。入口'+e['single_failed_record_diagnostic']['root_review_path']+'。\n'
         if e['single_failed_record_diagnostic'].get('operation_trace_path'):
             top+='零拟合逐运算实测在两已有runtime的math.log1p首次分歧，同输入/exp且各自复现保存系数；尚未单独隔离OS/libm/Python因素。该诊断不增加科学采用。入口'+e['single_failed_record_diagnostic']['operation_trace_path']+'。\n'
+if fl47_current.get('complementary_adopted'):
+    top+='FLGMM有限47条valid终轮三视图已按互补证据root采用：新增47＋此前单列1＝48，来源为44条新训练native验收＋4条screen复用；该FL批验收时机制三视图为260；当前机制接受数另列，不合并计数。Linux完整原检查承担47条root-only重拟合验收，F盘98成员运输核验通过；Windows保存输出审计47条通过、0次拟合，独立复核423指标/1128基础计数/141规则，native差0。Windows原始重拟合及whole仍FAIL，原hold/失败/单记录诊断与逐运算证据保留，不能称双平台重拟合逐位一致；4条root审计group_kl差−2.168404344971009e−19保留。未改容差、未新增训练/CNN/test，不代表完整100格或17方法完成。入口'+fl47_current['root_proof_path']+'；历史hold：'+fl47_current['validation_hold_path']+'。\n'
 if state.get('final_split_metadata_20261011'):
     top+='官方最终评价候选partition2仅ID元数据已实核19962张/有序SHA，三分区完整互斥且train/valid身份保持。只解码image_id/split，metadata压缩包整体哈希；未解码标签/读取像素模型/拟合/test推理。旧准备协议原字节未改，主终点和最终协议仍未定；历史test暴露不抹除。入口'+state['final_split_metadata_20261011']['root_proof_path']+'。\n'
 top=top.replace('最新A40四完整IID场景表已独立采用','历史A40四完整IID场景表已独立采用；后续A50/A60见下方。原范围为')
+if A80:
+    top=top.replace('后续A50/A60见下方','后续A80见下方')
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

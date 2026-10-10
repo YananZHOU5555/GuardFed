@@ -1,0 +1,93 @@
+{
+  "status": "ROOT_A80_EIGHT_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
+  "utc": "2026-10-10T15:27:42.851058+00:00",
+  "root_adoption": true,
+  "canonical_table": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_eight_scenes80_20261011/TABLES.md",
+  "source_candidate": "tmp/celeba_mechanism_A80_candidate_20261011",
+  "source_seal_sha256": "eecc5fc844a3d61b3d8081aa81d65b582fb6c887f5c9d28a1f9f76be4b60c418",
+  "source_handoff_sha256": "841642445e2806691408f5c9e99f101a0c4b2d183f9e9e3c1fe680b7e4826931",
+  "source_acceptance_path": "tmp/celeba_mechanism_remaining620_after260_root_adoption_20261011/ROOT_ADOPTION.json",
+  "source_acceptance_sha256": "3da6be148e4ba649a35f2b6b130022051019d7446f519472efdf3bd4a851473a",
+  "source_index_sha256": "ed61c7424a510a70a1f695579341a41cea125b3024067cad874f66af4e1e53b2",
+  "preserved_records": 160,
+  "paired_models": 80,
+  "complete_scenes": 8,
+  "complete_IID_scenes": 5,
+  "complete_nonIID_scenes": [
+    "Benign",
+    "F Flip",
+    "FedSA"
+  ],
+  "mean_SD_scalars_recomputed": 1458,
+  "per_scene_scalars": 1296,
+  "seed_first_scalars": 162,
+  "display_cells": 729,
+  "metrics_from_group_counts": 1440,
+  "base_integer_confusion_counts_checked": 3840,
+  "old120_record_bytes_order_exact": true,
+  "old972_scalars_exact": true,
+  "old486_cells_exact": true,
+  "IID_seed_first_JSON_bytes_exact": true,
+  "actual_root_command": "python -B tmp/celeba_mechanism_A80_candidate_20261011/verify_saved.py",
+  "actual_root_command_exit": 0,
+  "actual_root_verifier_sha256": "33291b297f35e404b0bdfa49ea3c440a34e7ffaf6ad6a58257c4edbc0165975c",
+  "actual_root_output_matches_saved": true,
+  "independent_scope_review_agent": "/root/baseline_fidelity_v2",
+  "independent_scope_review_received_in_current_turn": true,
+  "independent_scope_review_time_note": "Exact delivery time was not independently measured; review is recorded in the current chat turn.",
+  "independent_scope_review_status": "PASS",
+  "independent_scope_review_limit": "Review received in this chat: new40 records,20 paired identities and324 independently recomputed new-scene scalars; preserved old120 records/972 scalars/IID aggregate bytes and distribution labels. Original full checker was replayed by root, not by this reviewer.",
+  "replay_devices": {
+    "Full": {
+      "cpu": 5,
+      "cuda:0": 75
+    },
+    "minus_A": {
+      "cpu": 80
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 79,
+      "2.11.0+cu130": 1
+    },
+    "minus_A": {
+      "2.11.0+cu128": 80
+    }
+  },
+  "files_sha256": {
+    "records.json": "e483bfba8cd69ebcfabfe73a03772951650026f9f2c964926e5af75b5f8b0b1f",
+    "tables.json": "53f3bc0e446303ba0585f1b1e5a407f6db9bf7126dd24dbb38e3bba06dcde44f",
+    "IID_SEED_FIRST.json": "ce6088b23dd0e2181e83393510075a919dc52719d4b654f70a29205d398b5baf",
+    "TABLES.md": "7225539e472759b4f981619aca23b9e5b180091f91192e7af669754b5dc9855a",
+    "TABLES.tex": "a7eaee2749e84cab72f3bd8476c965180584a58b2e184ad9e69521242a934942",
+    "SUMMARY.json": "f35339385479af00d0562986e9459f2d61e5f81601a99cbb8359406342482d91",
+    "SOURCE_BINDINGS.json": "b3afee034ae793575c9544089b97fea457ab7652ecd3948f0abf92c4e350ff96",
+    "SAVED_VERIFICATION.json": "5e7033686977510726deb0deb03a89af8f88bc36ccfb01d8e9fbd1f3ebfecdb1",
+    "DIRECTIONS.json": "77ae61c35cd20ac303e215c2aaedb3ea67f43833c6067233a7f6319410c2431d",
+    "ADDED20_FOCUSED_REVIEW.json": "239a27b872ef8ee92107569ced2724a606ac1295b8e221b97b14a22c2d647755",
+    "ROOT_READY_REPORT.md": "e6c283d335550a19841787f8ea0dc1dcb858a63b048e63f178405ae50d3c9920",
+    "ROOT_READY_SUMMARY.json": "bfb154e2bc645e22e17c902d49ba6245df2ae2990e730b3d4282f3f10d874600",
+    "README_CURRENT.md": "c29f961b4e98d91a64b9000196efd442756b701ff99240b96311b47cdfc621ba",
+    "REPORT.md": "bb8e55e38ecd74da7cbe3768f86d71a7eae017700c2607821ae13fe8e98dc217"
+  },
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "aggregate_scope": "Original five IID scenes only; mean within seed first; non-IID Benign/F Flip/FedSA reported separately",
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "test": false,
+  "primary_endpoint_selected": false,
+  "tex_compiled": false,
+  "incorporated_into_full_rebuttal": false,
+  "limitations": [
+    "Validation-only; selection seed91001 and historical official-test exposure disclosed.",
+    "Native/shared equality is not independent confirmation or added calibration gain.",
+    "Mixed CPU/GPU and cu128/cu130 provenance; no full-trajectory equivalence claim.",
+    "Two non-IID A scenes, other controls, full17 baseline coverage, final endpoint and submitted-manuscript integration remain incomplete."
+  ]
+}

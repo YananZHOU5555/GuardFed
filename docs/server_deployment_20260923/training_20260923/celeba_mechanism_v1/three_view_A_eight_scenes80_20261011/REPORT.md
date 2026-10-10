@@ -1,0 +1,15 @@
+当前状态：A80八场景表已由ROOT实际采用。下列交接报告中的pending描述保留为采用前历史，当前身份和范围以ROOT_VERIFICATION.json为准。
+
+# A80 root-ready delivery — actual root saved verifier PASS
+
+This is the current status entry. The source-preparation README/HANDOFF/FILES and the pre-root-verifier REPORT/README_CURRENT/ACTUAL_HANDOFF/ACTUAL_FILES remain unchanged historical stage records; their earlier pending statements do not describe this delivery.
+
+Root executed the original scoped `verify_saved.py` once, exit0, at2026-10-10T15:24:26Z. `SAVED_VERIFICATION.json` is the exact stdout byte copy (SHA5e7033686977510726deb0deb03a89af8f88bc36ccfb01d8e9fbd1f3ebfecdb1), bound to `ROOT_VERIFY_COMMAND.json` (SHAe7b7fcf1b808f347f58d0fb088fcb11659f90de1b657be1056ff709f0025f101) and empty stderr. The candidate agent did not rerun that verifier. Build and finish each previously ran once with exit0; all command/log evidence is retained. Root table adoption remains a separate final action.
+
+The actual original verifier confirms1458 mean/sampleSD scalars,729 display cells,1440 count-derived metrics and3840 base-count checks. All old120 A60 serialized record objects/order,972 scene statistics/486 cells and original IID aggregate bytes remain exact. There are80 paired terminal70 checkpoints in eight complete scenes, with fixed10/9/6 seed panels and all three views; eighteen TeX tables are uncompiled fragments.
+
+A separate bounded check covers only the new40 records/20 pairs: exact variant/distribution/attack/seed and paired checkpoint links against accepted index280, shared full/minus_A data contracts, valid19867, all three views,360 metric values reconstructed from counts, and108 new statistic scalars per view (324 total) independently using stdlib mean/sample SD. Maximum difference is1.4210854715202004e-14 under unchanged1e-12 checking tolerance. `ADDED20_FOCUSED_REVIEW.json` records that evidence. The old120 records/statistics were not independently recalculated again by this focused check.
+
+New results preserve the view-dependent tradeoffs reported in REPORT.md: raw FedSA deletion improves all three means, whereas native/shared deletion slightly raises accuracy and worsens both disparity means. All10/9/6 panels, negative results and exact native/shared equality remain; identical native/shared values are not independent confirmation. Full5CPU/75GPU and79cu128+1cu130 versus minus_A80CPU/cu128 remain disclosed. This is validation evidence with selection/history limitations, not A100, final-test evidence, significance, component necessity or whole-rebuttal completion. No new inference, fit, training or test was performed for these tables.
+
+Final machine handoff: `DELIVERY_HANDOFF.json`; final member seal: `DELIVERY_FILES_SHA256.json`. Do not rerun build/finish/verifier; root may now review these receipts and adopt the compact table outputs.

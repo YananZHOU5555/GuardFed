@@ -1,0 +1,243 @@
+--- A60 mapped/build.py
++++ A80 mapped/build.py
+@@ -1,4 +1,4 @@
+-"""Read actual adopted A60 receipts; display five IID scenes plus non-IID Benign; preserve original identity loop and arithmetic."""
++"""Read actual adopted A80 receipts; display five IID plus three non-IID scenes; preserve original identity loop and arithmetic."""
+ import argparse
+ import ast
+ from collections import Counter
+@@ -13,10 +13,10 @@
+ H = Path(__file__).resolve().parent
+ R = H.parents[1]
+ OLD = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010'
+-PREV = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010'
++PREV = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_six_scenes60_20261011'
+ FULL = R/'outputs/guardfed_tables/celeba_nine_method_three_view_20261009'
+ VIEWS = ('native', 'raw', 'shared_calibration')
+-SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign')]
++SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign'), ('non-IID', 'F Flip'), ('non-IID', 'FedSA')]
+ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read = lambda p: json.loads(Path(p).read_bytes())
+ 
+@@ -72,23 +72,23 @@
+         need(sha(path(name))==expected, 'Actual external closure SHA mismatch: '+name)
+         input_files[name] = dict(sha256=expected, bytes=path(name).stat().st_size)
+     adopted = read(path(args.adoption)); new = read(path(args.index))
+-    new_ids = [f'minus_A_non-IID_Benign_seed{seed}' for seed in range(91002,91011)]
++    new_ids = [f'minus_A_non-IID_{attack}_seed{seed}' for attack in ('F Flip','FedSA') for seed in range(91001,91011)]
+     need(adopted['status']==read(H/'ROOT_BINDING.json')['root_status']
+         and adopted['accepted_new_ids']==new['new_ids']==new_ids
+-        and adopted['new_accepted']==9 and adopted['prior_accepted']==251
+-        and adopted['cumulative_accepted']==260 and adopted['original251_unchanged']
+-        and adopted['native_max_abs_difference']==0, 'Actual exact9 root adoption required')
++        and adopted['new_accepted']==20 and adopted['prior_accepted']==260
++        and adopted['cumulative_accepted']==280 and adopted['original260_unchanged']
++        and adopted['native_max_abs_difference']==0, 'Actual exact20 root adoption required')
+     need(adopted['Full_inference']==adopted['new_CNN']==adopted['new_training']==0
+         and adopted.get('new_fit',0)==0 and adopted['test'] is False, 'Forbidden science operation')
+     need(adopted['records_index_sha256']==args.index_sha256, 'Newest root/index binding differs')
+-    # Follow seven SHA-bound adopted increments; stop at the original A12 index.
++    # Follow eight SHA-bound adopted increments; stop at the original A12 index.
+     # Every leaf is independently root-adopted; no runtime status label counts.
+     batches=[]; current=(args.adoption,args.adoption_sha256,args.index,args.index_sha256)
+     visited=set()
+     while True:
+         ap,asha,ip,isha=current
+         ap=str(ap).replace('\\','/'); ip=str(ip).replace('\\','/')  # Preserve existing record provenance path spelling.
+-        need(ip not in visited and len(visited)<7, 'Cycle or unexpected A-chain depth')
++        need(ip not in visited and len(visited)<8, 'Cycle or unexpected A-chain depth')
+         visited.add(ip)
+         for name,expected in [(ap,asha),(ip,isha)]:
+             need(sha(path(name))==expected, 'Adopted chain pin changed: '+name)
+@@ -111,15 +111,15 @@
+         current=(index['prior_adoption_path'],index['prior_adoption_sha256'],
+                  index['prior_index_path'],index['prior_index_sha256'])
+     batches.reverse()
+-    need([len(x[1]) for x in batches]==[12,8,8,8,4,11,9]
+-        and [len(x[0]['all_ids']) for x in batches]==[212,220,228,236,240,251,260], 'Wrong exact seven A increments')
++    need([len(x[1]) for x in batches]==[12,8,8,8,4,11,9,20]
++        and [len(x[0]['all_ids']) for x in batches]==[212,220,228,236,240,251,260,280], 'Wrong exact eight A increments')
+     wanted=[f'minus_A_{distribution}_{attack}_seed{seed}' for distribution,attack in SCENES for seed in range(91001,91011)]
+-    need([rid for _,ids,_,_,_ in batches for rid in ids if rid in set(wanted)]==wanted, 'Five complete IID scenes plus non-IID Benign required')
+-    need(sha(PREV/'ROOT_VERIFICATION.json')=='2ab91a854691624c79124a5eccbb43efe30541474cb7ef542b76db300554f7c4', 'Original A50 root adoption changed')
++    need([rid for _,ids,_,_,_ in batches for rid in ids if rid in set(wanted)]==wanted, 'Five complete IID scenes plus non-IID Benign/F Flip/FedSA required')
++    need(sha(PREV/'ROOT_VERIFICATION.json')=='71eda2082961dff461b9507b534168757be7d579dee856f202383e5607bda204', 'Original A60 root adoption changed')
+     for name in ['ROOT_VERIFICATION.json','records.json','tables.json','TABLES.md','IID_SEED_FIRST.json']:
+         p=PREV/name; input_files[p.relative_to(R).as_posix()]=dict(sha256=sha(p),bytes=p.stat().st_size)
+     for name,pin in read(PREV/'ROOT_VERIFICATION.json')['files_sha256'].items():
+-        need(sha(PREV/name)==pin, 'Original root-adopted A50 file drift: '+name)
++        need(sha(PREV/name)==pin, 'Original root-adopted A60 file drift: '+name)
+     storage = runpy.run_path(str(R/'tmp/guardfed_local_storage.py'))['check_bulk_storage'](0)
+     scientific = dict(need=need,VIEWS=VIEWS,json=json,hashlib=hashlib)
+     funcs = old['function'](path(pins['receipt_identity_source']), ['receipt_identity','normalized'], scientific)
+@@ -148,37 +148,37 @@
+         shared.update(index=index,ids=[rid for rid in ids if rid in set(wanted)],accepted=accepted,native_rows={r['id']:r for r in native['records']},pins=local_pins)
+         exec(loop_code,shared)
+     records=[fulls[k] for k in sorted(fulls)]+records
+-    need(len(records)==len({r['id'] for r in records})==120 and len(links)==60, 'Exactly60 A +60 paired Full required')
++    need(len(records)==len({r['id'] for r in records})==160 and len(links)==80, 'Exactly80 A +80 paired Full required')
+     changes={}
+-    panels_module=scoped_module(old,pins['C_panels'],[("expected=[('IID','Benign')]","expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign')]"),
+-        ('Only the exact C IID Benign ten-shared-seed scene is publishable','Only five A IID scenes plus non-IID Benign with ten shared seeds are publishable')],changes)
++    panels_module=scoped_module(old,pins['C_panels'],[("expected=[('IID','Benign')]","expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]"),
++        ('Only the exact C IID Benign ten-shared-seed scene is publishable','Only five A IID scenes plus non-IID Benign/F Flip/FedSA with ten shared seeds are publishable')],changes)
+     numeric=scoped_module(old,pins['C_numeric'],[
+-        ("assert len(records)==24 and len({r['id'] for r in records})==24","assert len(records)==120 and len({r['id'] for r in records})==120"),
+-        ('assert len(bycell)==24','assert len(bycell)==120'),("scenes={('IID','Benign')}","scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign')}"),
++        ("assert len(records)==24 and len({r['id'] for r in records})==24","assert len(records)==160 and len({r['id'] for r in records})==160"),
++        ('assert len(bycell)==24','assert len(bycell)==160'),("scenes={('IID','Benign')}","scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')}"),
+         ("assert len(partial)==4 and {(r['variant'],r['distribution'],r['attack'],r['seed']) for r in partial}=={(v,'IID','F Flip',s) for v in ['Full','minus_C'] for s in [91001,91002]}",'assert not partial'),
+-        ('assert len(rows)==3','assert len(rows)==18'),('assert len(errors)==162','assert len(errors)==972'),
+-        ('assert metric_checks==216 and count_checks==576','assert metric_checks==1080 and count_checks==2880'),("'partial_pairs_excluded':2","'partial_pairs_excluded':0")],changes)
++        ('assert len(rows)==3','assert len(rows)==24'),('assert len(errors)==162','assert len(errors)==1296'),
++        ('assert metric_checks==216 and count_checks==576','assert metric_checks==1440 and count_checks==3840'),("'partial_pairs_excluded':2","'partial_pairs_excluded':0")],changes)
+     spec=importlib.util.spec_from_file_location('accepted_original_evidence_statistics',path(pins['evidence'])); evidence=importlib.util.module_from_spec(spec);spec.loader.exec_module(evidence)
+     panels,coverage,paired=panels_module.panels(records,evidence); checks=numeric.verify(records,panels)
+     old_records=read(PREV/'records.json')['records']; old_ids_set={r['id'] for r in old_records}
+     old_projection=[r for r in records if r['id'] in old_ids_set]
+-    need(old_projection==old_records, 'Old100 records/order changed')
++    need(old_projection==old_records, 'Old120 records/order changed')
+     serialized=json.dumps(dict(records=records),indent=2,ensure_ascii=False,allow_nan=False)+'\n'
+-    need([x for x in record_fragments(serialized) if x[0] in old_ids_set]==record_fragments((PREV/'records.json').read_text(encoding='utf8')), 'Old100 serialized object bytes/order changed')
++    need([x for x in record_fragments(serialized) if x[0] in old_ids_set]==record_fragments((PREV/'records.json').read_text(encoding='utf8')), 'Old120 serialized object bytes/order changed')
+     old_panels=read(PREV/'tables.json')['panels']; old_cells=0
+     for current,previous in zip(panels,old_panels):
+         need({k:current[k] for k in ('view','label','seeds')}=={k:previous[k] for k in ('view','label','seeds')}, 'Old seed panel changed')
+-        need([r for r in current['rows'] if r['distribution']=='IID']==previous['rows'], 'Old A50 810 per-scene statistics changed')
++        need([r for r in current['rows'] if r['distribution']=='IID' or (r['distribution']=='non-IID' and r['attack']=='Benign')]==previous['rows'], 'Old A60 972 per-scene statistics changed')
+         for row in previous['rows']:
+             for metric in evidence.METRICS:
+                 digits=3 if metric=='accuracy_pct' else 5
+                 display=f"{row[metric]['mean']:.{digits}f} ± {row[metric]['sample_sd_ddof1']:.{digits}f}"
+                 need(display in (PREV/'TABLES.md').read_text(encoding='utf8'), 'Original display cell mismatch'); old_cells+=1
+-    need(old_cells==405 and checks['mean_sd_scalars']==972, 'Required original/new checks incomplete')
++    need(old_cells==486 and checks['mean_sd_scalars']==1296, 'Required original/new checks incomplete')
+     counts={v:dict(Counter(r['replay_runtime']['device'] for r in records if r['variant']==v)) for v in ('Full','minus_A')}
+     torches={v:dict(Counter(r['training_torch'] for r in records if r['variant']==v)) for v in ('Full','minus_A')}
+-    text=['# CelebA Full–minus_A: five IID scenes plus non-IID Benign, three views','',
+-        'IID Benign, F Flip, FedSA, S-DFA and Sp-DFA plus non-IID Benign only; the other four non-IID scenes are incomplete. Validation (19,867 images), round70; ten paired model seeds per scene, with the same checkpoint across raw/native/shared views. Mean ± sample SD (ddof=1). Paired difference = minus_A − Full; ACC is percent and ΔACC is percentage points. AEOD and ASPD are lower-is-better disparities. Formal primary endpoint remains pending.','']
++    text=['# CelebA Full–minus_A: five IID plus three non-IID scenes, three views','',
++        'IID Benign, F Flip, FedSA, S-DFA and Sp-DFA plus non-IID Benign, F Flip and FedSA only; non-IID S-DFA and Sp-DFA remain incomplete. Validation (19,867 images), round70; ten paired model seeds per scene, with the same checkpoint across raw/native/shared views. Mean ± sample SD (ddof=1). Paired difference = minus_A − Full; ACC is percent and ΔACC is percentage points. AEOD and ASPD are lower-is-better disparities. Formal primary endpoint remains pending.','']
+     cells=0
+     for panel in panels:
+         text += ['## '+panel['view']+' — '+panel['label'],'','| Scene / variant or paired difference | n | ACC (%) / ΔACC (pp) | AEOD | ASPD |','|---|---:|---:|---:|---:|']
+@@ -186,28 +186,28 @@
+             values=[f"{row[m]['mean']:.{3 if m=='accuracy_pct' else 5}f} ± {row[m]['sample_sd_ddof1']:.{3 if m=='accuracy_pct' else 5}f}" for m in evidence.METRICS]
+             text.append('| '+' | '.join([row['distribution']+' / '+row['attack']+' / '+row['variant'],str(row['n']),*values])+' |'); cells+=len(values)
+         text.append('')
+-    need(cells==486, 'Display cell count incomplete')
++    need(cells==648, 'Display cell count incomplete')
+     text += ['AEOD is the absolute TPR gap, not full equalized odds. Raw uses margin > 0 (ties predict0). Native retains each original root-only calibration recipe; shared_calibration uses the frozen common root-only rule. The three views are parallel descriptions, with no endpoint selected or threshold refitted by this builder.',
+-        f'Actual replay devices across60 pairs: Full {counts["Full"]}; minus_A {counts["minus_A"]}. Training Torch: Full {torches["Full"]}; minus_A {torches["minus_A"]}. Per-record configuration, source, checkpoint, environment and driver provenance remain in records.json. Broader Full100 history includes98 cu128 and2 cu130 records; these60 actual source records, not that broader count, define this table.',
++        f'Actual replay devices across80 pairs: Full {counts["Full"]}; minus_A {counts["minus_A"]}. Training Torch: Full {torches["Full"]}; minus_A {torches["minus_A"]}. Per-record configuration, source, checkpoint, environment and driver provenance remain in records.json. Broader Full100 history includes98 cu128 and2 cu130 records; these80 actual source records, not that broader count, define this table.',
+         'Seed91001 participated in recipe selection; validation was exposed during development, and historical test exposure remains disclosed. The9/6 panels apply identical predefined seeds to both variants and are descriptive subsets, not untouched confirmation sets. No final test was run for this table.',
+-        'All negative and constant outcomes are retained. These are all five IID minus_A scenes plus the complete ten-seed non-IID Benign scene; the other four non-IID scenes remain outside this delivery. No mixed-distribution six-scene aggregate is reported. The separate five-IID-scene aggregate first averages within each model seed, and scenes are not treated as independent model seeds. This is not A100 or completion of all mechanism controls. No significance, necessity, causal-isolation or whole-rebuttal-completion claim is made.','']
+-    checks.update(display_mean_sd_cells=cells,table_record_count=120,preserved_records=120,paired_models=60,complete_scenes=6,
+-        old100_record_JSON_bytes_and_order_exact=True,old810_scalars_exact=True,old405_display_cells_exact=True,
++        'All negative and constant outcomes are retained. These are all five IID minus_A scenes plus complete ten-seed non-IID Benign, F Flip and FedSA; non-IID S-DFA and Sp-DFA remain outside this delivery. No mixed-distribution eight-scene aggregate is reported. The separate five-IID-scene aggregate first averages within each model seed, and scenes are not treated as independent model seeds. This is not A100 or completion of all mechanism controls. No significance, necessity, causal-isolation or whole-rebuttal-completion claim is made.','']
++    checks.update(display_mean_sd_cells=cells,table_record_count=160,preserved_records=160,paired_models=80,complete_scenes=8,
++        old120_record_JSON_bytes_and_order_exact=True,old972_scalars_exact=True,old486_display_cells_exact=True,
+         native_shared_metrics_and_counts_exact=all(r['views']['native']==r['views']['shared_calibration'] for r in records),
+         original_per_record_scientific_loop_source_sha256=loop_sha,scope_only_reversible_adapter=True,new_threshold_fits=0,new_CNN=0,new_training=0,test=False)
+     write('INPUTS.json',dict(original_A_inputs=pins,adoption=args.adoption,index=args.index,files=input_files))
+     with (H/'records.json').open('x',encoding='utf8',newline='\n') as f:f.write(serialized)
+-    write('tables.json',dict(status='ACTUAL_A60_FIVE_IID_PLUS_NONIID_BENIGN_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=6,paired_models=60,
+-        displayed_records=120,preserved_records=120,partial_F_Flip_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,
++    write('tables.json',dict(status='ACTUAL_A80_FIVE_IID_PLUS_THREE_NONIID_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=8,paired_models=80,
++        displayed_records=160,preserved_records=160,partial_F_Flip_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,
+         primary_endpoint_selected=False,final_test=False,new_threshold_fits=0,new_inference=0,new_training=0))
+     write('coverage.json',coverage);write('paired_per_seed.json',paired);write('checks.json',checks)
+-    write('SOURCE_BINDINGS.json',dict(input_pins=input_files,actual_A60_root_adoption=args.adoption,actual_A60_root_adoption_sha256=args.adoption_sha256,
++    write('SOURCE_BINDINGS.json',dict(input_pins=input_files,actual_A80_root_adoption=args.adoption,actual_A80_root_adoption_sha256=args.adoption_sha256,
+         accepted_index=args.index,accepted_index_sha256=args.index_sha256,original_function_source_sha256=funcs,
+         original_per_record_scientific_loop_source_sha256=loop_sha,scope_only_reversible_rebindings=changes,
+         original_variant_AST_rebind='Exact minus_C/minus_C minus Full string constants only become minus_A/minus_A minus Full',
+-        original100_provenance_kept=True,paired_identity_links=links,fresh_F_volume=storage,
+-        limits=dict(new_CNN=0,new_training=0,new_fit=0,new_predictions=0,test=False,root_table_adopted=False,complete_scenes=SCENES,remaining_A_scenes=4,excluded_partial_id=None)))
++        original120_provenance_kept=True,paired_identity_links=links,fresh_F_volume=storage,
++        limits=dict(new_CNN=0,new_training=0,new_fit=0,new_predictions=0,test=False,root_table_adopted=False,complete_scenes=SCENES,remaining_A_scenes=2,excluded_partial_id=None)))
+     with (H/'TABLES.md').open('x',encoding='utf8',newline='\n') as f:f.write('\n'.join(text))
+-    print(json.dumps(dict(status='ACTUAL_A60_SIX_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=120,pairs=60,stats=972,cells=486,metrics=1080,counts=2880,max_abs_difference=checks['max_abs_difference'],replay_devices=counts,training_torch=torches)))
++    print(json.dumps(dict(status='ACTUAL_A80_EIGHT_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=160,pairs=80,stats=1296,cells=648,metrics=1440,counts=3840,max_abs_difference=checks['max_abs_difference'],replay_devices=counts,training_torch=torches)))
+ 
+ if __name__=='__main__': main()
+--- A60 mapped/finish.py
++++ A80 mapped/finish.py
+@@ -40,12 +40,12 @@
+     spec = importlib.util.spec_from_file_location('original_stats', R/'tmp/celeba_mechanism_evidence_20261009/evidence_v4.py')
+     evidence = importlib.util.module_from_spec(spec); spec.loader.exec_module(evidence)
+     records = read(H/'records.json')['records']; tables = read(H/'tables.json')
+-    need(len(records)==120, 'Exactly six paired scenes required')
++    need(len(records)==160, 'Exactly eight paired scenes required')
+     iid_records=[r for r in records if r['distribution']=='IID']
+-    need(len(iid_records)==100 and len([r for r in records if r['distribution']=='non-IID' and r['attack']=='Benign'])==20, 'Only original five IID scenes plus non-IID Benign')
++    need(len(iid_records)==100 and all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA')), 'Only original five IID scenes plus non-IID Benign/F Flip/FedSA')
+     aggregate = panels.aggregate_panels(iid_records, evidence)
+     aggregate_check = numeric.verify_aggregate(iid_records, aggregate)
+-    need(aggregate==read(base['PREV']/'IID_SEED_FIRST.json')['panels'], 'Original A50 IID aggregate statistics changed')
++    need(aggregate==read(base['PREV']/'IID_SEED_FIRST.json')['panels'], 'Original A60 IID aggregate statistics changed')
+     # Both functions are original source; variant_module only changes exact variant string constants.
+     source_functions = {}
+     for p, names in [(panel_path,['aggregate_panels']), (check_path,['verify_aggregate'])]:
+@@ -59,7 +59,7 @@
+     checks = read(H/'checks.json')
+     put('FOCUSED_CHECKS.json',dict(status='PASS',per_scene=checks,seed_first=aggregate_check,
+         total_statistic_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],
+-        scene_display_cells=486,aggregate_display_cells=81,
++        scene_display_cells=648,aggregate_display_cells=81,
+         source_functions=source_functions,source_pins=pins,
+         variant_only_AST_inverse_exact=True,independent_reviewer=False,
+         excluded_partial_id=None,new_inference=0,new_fit=0,new_training=0,test=False))
+@@ -82,7 +82,7 @@
+         label=(panel['view']+'; '+panel['label']).replace('_',r'\_')
+         is_aggregate=panel['rows'][0]['attack'].startswith('Five-scene')
+         tex += [r'\begin{table*}[t]',r'\centering',r'\small',
+-            r'\caption{'+('Five IID scenarios, seed-first mean. ' if is_aggregate else 'CelebA, five IID scenarios plus non-IID Benign. ')+label+
++            r'\caption{'+('Five IID scenarios, seed-first mean. ' if is_aggregate else 'CelebA, five IID scenarios plus non-IID Benign, F Flip and FedSA. ')+label+
+             r'. Mean $\pm$ sample SD across paired model seeds; validation only.}',
+             r'\begin{tabular}{llrrrr}',r'\toprule',
+             r'Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\',r'\midrule']
+@@ -103,6 +103,6 @@
+     put('DIRECTIONS.json',dict(difference='minus_A minus Full',positive_ACC='higher accuracy after deleting A',
+         positive_gap='larger disparity after deleting A',all_directions=directions,significance_claim=False))
+     print(json.dumps(dict(status='PASS',per_scene_scalars=checks['mean_sd_scalars'],aggregate_scalars=aggregate_check['mean_sd_scalars'],
+-        total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],total_display_cells=486+81,aggregate_max_error=aggregate_check['max_abs_difference'])))
++        total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],total_display_cells=648+81,aggregate_max_error=aggregate_check['max_abs_difference'])))
+ 
+ if __name__=='__main__':main()
+--- A60 mapped/verify_saved.py
++++ A80 mapped/verify_saved.py
+@@ -25,12 +25,12 @@
+     aggregate = read(H/'IID_SEED_FIRST.json')['panels']
+     result = dict(per_scene=numeric.verify(records,panels),seed_first=aggregate_numeric.verify_aggregate([r for r in records if r['distribution']=='IID'],aggregate))
+     previous=read(base['PREV']/'records.json')['records']; previous_ids={r['id'] for r in previous}
+-    assert [r for r in records if r['id'] in previous_ids]==previous and len(previous)==100
++    assert [r for r in records if r['id'] in previous_ids]==previous and len(previous)==120
+     fragments=base['record_fragments']
+     assert [r for r in fragments((H/'records.json').read_text(encoding='utf8')) if r[0] in previous_ids]==fragments((base['PREV']/'records.json').read_text(encoding='utf8'))
+     old_panels=read(base['PREV']/'tables.json')['panels']
+     for panel,prior in zip(panels,old_panels):
+-        assert [row for row in panel['rows'] if row['distribution']=='IID']==prior['rows']
++        assert [row for row in panel['rows'] if row['distribution']=='IID' or (row['distribution']=='non-IID' and row['attack']=='Benign')]==prior['rows']
+     md=(H/'TABLES.md').read_text(encoding='utf8'); tex=(H/'TABLES.tex').read_text(encoding='utf8')
+     cells=0
+     for panel in panels+aggregate:
+@@ -40,14 +40,14 @@
+                 mean=f"{row[metric]['mean']:.{digits}f}"; sd=f"{row[metric]['sample_sd_ddof1']:.{digits}f}"
+                 assert mean+' ± '+sd in md and '$'+mean+r' \pm '+sd+'$' in tex
+                 cells+=1
+-    assert cells==567 and tex.count(r'\begin{table*}')==18 and tex.count(r'\end{table*}')==18
+-    assert len(records)==120 and len([r for r in records if r['distribution']=='IID'])==100
+-    assert len([r for r in records if r['distribution']=='non-IID' and r['attack']=='Benign'])==20
++    assert cells==729 and tex.count(r'\begin{table*}')==18 and tex.count(r'\end{table*}')==18
++    assert len(records)==160 and len([r for r in records if r['distribution']=='IID'])==100
++    assert all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA'))
+     assert bindings['limits']['excluded_partial_id'] is None
+     assert sha(H/'IID_SEED_FIRST.json')==sha(base['PREV']/'IID_SEED_FIRST.json')
+     assert aggregate==read(base['PREV']/'IID_SEED_FIRST.json')['panels']
+     result.update(status='PASS',all_scalars=result['per_scene']['mean_sd_scalars']+result['seed_first']['mean_sd_scalars'],all_display_cells=cells,
+-        old100_object_bytes_order_exact=True,old810_scalars_and405_cells_exact=True,old_IID_seed_first_JSON_bytes_exact=True,
++        old120_object_bytes_order_exact=True,old972_scalars_and486_cells_exact=True,old_IID_seed_first_JSON_bytes_exact=True,
+         tex_fragment_tables=18,tex_compiled=False,new_inference=0,new_fit=0)
+     print(json.dumps(result,ensure_ascii=False,indent=2))
+ 

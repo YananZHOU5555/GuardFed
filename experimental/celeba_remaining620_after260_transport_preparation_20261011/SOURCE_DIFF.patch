@@ -1,0 +1,127 @@
+--- after251/remote_preflight.py
++++ after260/remote_preflight.py
+@@ -13,13 +13,13 @@
+ assert sha(Q/'ROOT_APPROVED.json')=='55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c'
+ for dep in read(T/'INPUTS.json')['dependencies'].values():assert sha(dep['remote'])==dep['sha256']
+ plan=read(Q/'PLAN.json')
+-candidate_ids=['minus_A_non-IID_Benign_seed91002', 'minus_A_non-IID_Benign_seed91003', 'minus_A_non-IID_Benign_seed91004', 'minus_A_non-IID_Benign_seed91005', 'minus_A_non-IID_Benign_seed91006', 'minus_A_non-IID_Benign_seed91007', 'minus_A_non-IID_Benign_seed91008', 'minus_A_non-IID_Benign_seed91009', 'minus_A_non-IID_Benign_seed91010']
++candidate_ids=['minus_A_non-IID_F Flip_seed91001', 'minus_A_non-IID_F Flip_seed91002', 'minus_A_non-IID_F Flip_seed91003', 'minus_A_non-IID_F Flip_seed91004', 'minus_A_non-IID_F Flip_seed91005', 'minus_A_non-IID_F Flip_seed91006', 'minus_A_non-IID_F Flip_seed91007', 'minus_A_non-IID_F Flip_seed91008', 'minus_A_non-IID_F Flip_seed91009', 'minus_A_non-IID_F Flip_seed91010', 'minus_A_non-IID_FedSA_seed91001', 'minus_A_non-IID_FedSA_seed91002', 'minus_A_non-IID_FedSA_seed91003', 'minus_A_non-IID_FedSA_seed91004', 'minus_A_non-IID_FedSA_seed91005', 'minus_A_non-IID_FedSA_seed91006', 'minus_A_non-IID_FedSA_seed91007', 'minus_A_non-IID_FedSA_seed91008', 'minus_A_non-IID_FedSA_seed91009', 'minus_A_non-IID_FedSA_seed91010']
+ ids=list(candidate_ids)
+-assert len(ids)==9 and ids==[i for i in plan['remaining620_ids'] if i in set(ids)]
++assert len(ids)==20 and ids==[i for i in plan['remaining620_ids'] if i in set(ids)]
+ latest=read(T/'exports/TRANSPORT_LATEST.json')
+-assert latest['receipt']=='/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010/exports/after240_20261010T112307001485Z/backup_receipt.json'
+-assert latest['receipt_sha256']==sha(latest['receipt'])=='cbcbbed0d17aad648aa0c783119c04738e2bef312ef0ba4c4762d6174c500100'
+-assert latest['all_transported_ids']==['minus_C_non-IID_S-DFA_seed91001', 'minus_C_non-IID_S-DFA_seed91002', 'minus_C_non-IID_S-DFA_seed91003', 'minus_C_non-IID_S-DFA_seed91004', 'minus_C_non-IID_S-DFA_seed91005', 'minus_C_non-IID_S-DFA_seed91006', 'minus_C_non-IID_S-DFA_seed91007', 'minus_C_non-IID_S-DFA_seed91008', 'minus_C_non-IID_S-DFA_seed91009', 'minus_C_non-IID_S-DFA_seed91010', 'minus_C_non-IID_Sp-DFA_seed91001', 'minus_C_non-IID_Sp-DFA_seed91002', 'minus_C_non-IID_Sp-DFA_seed91003', 'minus_C_non-IID_Sp-DFA_seed91004', 'minus_C_non-IID_Sp-DFA_seed91005', 'minus_C_non-IID_Sp-DFA_seed91006', 'minus_C_non-IID_Sp-DFA_seed91007', 'minus_C_non-IID_Sp-DFA_seed91008', 'minus_C_non-IID_Sp-DFA_seed91009', 'minus_C_non-IID_Sp-DFA_seed91010', 'minus_A_IID_Benign_seed91001', 'minus_A_IID_Benign_seed91002', 'minus_A_IID_Benign_seed91003', 'minus_A_IID_Benign_seed91004', 'minus_A_IID_Benign_seed91005', 'minus_A_IID_Benign_seed91006', 'minus_A_IID_Benign_seed91007', 'minus_A_IID_Benign_seed91008', 'minus_A_IID_Benign_seed91009', 'minus_A_IID_Benign_seed91010', 'minus_A_IID_F Flip_seed91001', 'minus_A_IID_F Flip_seed91002', 'minus_A_IID_F Flip_seed91003', 'minus_A_IID_F Flip_seed91004', 'minus_A_IID_F Flip_seed91005', 'minus_A_IID_F Flip_seed91006', 'minus_A_IID_F Flip_seed91007', 'minus_A_IID_F Flip_seed91008', 'minus_A_IID_F Flip_seed91009', 'minus_A_IID_F Flip_seed91010', 'minus_A_IID_FedSA_seed91001', 'minus_A_IID_FedSA_seed91002', 'minus_A_IID_FedSA_seed91003', 'minus_A_IID_FedSA_seed91004', 'minus_A_IID_FedSA_seed91005', 'minus_A_IID_FedSA_seed91006', 'minus_A_IID_FedSA_seed91007', 'minus_A_IID_FedSA_seed91008', 'minus_A_IID_FedSA_seed91009', 'minus_A_IID_FedSA_seed91010', 'minus_A_IID_S-DFA_seed91001', 'minus_A_IID_S-DFA_seed91002', 'minus_A_IID_S-DFA_seed91003', 'minus_A_IID_S-DFA_seed91004', 'minus_A_IID_S-DFA_seed91005', 'minus_A_IID_S-DFA_seed91006', 'minus_A_IID_S-DFA_seed91007', 'minus_A_IID_S-DFA_seed91008', 'minus_A_IID_S-DFA_seed91009', 'minus_A_IID_S-DFA_seed91010', 'minus_A_IID_Sp-DFA_seed91001', 'minus_A_IID_Sp-DFA_seed91002', 'minus_A_IID_Sp-DFA_seed91003', 'minus_A_IID_Sp-DFA_seed91004', 'minus_A_IID_Sp-DFA_seed91005', 'minus_A_IID_Sp-DFA_seed91006', 'minus_A_IID_Sp-DFA_seed91007', 'minus_A_IID_Sp-DFA_seed91008', 'minus_A_IID_Sp-DFA_seed91009', 'minus_A_IID_Sp-DFA_seed91010', 'minus_A_non-IID_Benign_seed91001'] and latest['accepted_offserver']==0
++assert latest['receipt']=='/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010/exports/after251_20261010T130333282821Z/backup_receipt.json'
++assert latest['receipt_sha256']==sha(latest['receipt'])=='4ab3d3e4c3d94795fbe20b2056edc001aa6908321fd8b3ba72b7178a55156266'
++assert latest['all_transported_ids']==['minus_C_non-IID_S-DFA_seed91001', 'minus_C_non-IID_S-DFA_seed91002', 'minus_C_non-IID_S-DFA_seed91003', 'minus_C_non-IID_S-DFA_seed91004', 'minus_C_non-IID_S-DFA_seed91005', 'minus_C_non-IID_S-DFA_seed91006', 'minus_C_non-IID_S-DFA_seed91007', 'minus_C_non-IID_S-DFA_seed91008', 'minus_C_non-IID_S-DFA_seed91009', 'minus_C_non-IID_S-DFA_seed91010', 'minus_C_non-IID_Sp-DFA_seed91001', 'minus_C_non-IID_Sp-DFA_seed91002', 'minus_C_non-IID_Sp-DFA_seed91003', 'minus_C_non-IID_Sp-DFA_seed91004', 'minus_C_non-IID_Sp-DFA_seed91005', 'minus_C_non-IID_Sp-DFA_seed91006', 'minus_C_non-IID_Sp-DFA_seed91007', 'minus_C_non-IID_Sp-DFA_seed91008', 'minus_C_non-IID_Sp-DFA_seed91009', 'minus_C_non-IID_Sp-DFA_seed91010', 'minus_A_IID_Benign_seed91001', 'minus_A_IID_Benign_seed91002', 'minus_A_IID_Benign_seed91003', 'minus_A_IID_Benign_seed91004', 'minus_A_IID_Benign_seed91005', 'minus_A_IID_Benign_seed91006', 'minus_A_IID_Benign_seed91007', 'minus_A_IID_Benign_seed91008', 'minus_A_IID_Benign_seed91009', 'minus_A_IID_Benign_seed91010', 'minus_A_IID_F Flip_seed91001', 'minus_A_IID_F Flip_seed91002', 'minus_A_IID_F Flip_seed91003', 'minus_A_IID_F Flip_seed91004', 'minus_A_IID_F Flip_seed91005', 'minus_A_IID_F Flip_seed91006', 'minus_A_IID_F Flip_seed91007', 'minus_A_IID_F Flip_seed91008', 'minus_A_IID_F Flip_seed91009', 'minus_A_IID_F Flip_seed91010', 'minus_A_IID_FedSA_seed91001', 'minus_A_IID_FedSA_seed91002', 'minus_A_IID_FedSA_seed91003', 'minus_A_IID_FedSA_seed91004', 'minus_A_IID_FedSA_seed91005', 'minus_A_IID_FedSA_seed91006', 'minus_A_IID_FedSA_seed91007', 'minus_A_IID_FedSA_seed91008', 'minus_A_IID_FedSA_seed91009', 'minus_A_IID_FedSA_seed91010', 'minus_A_IID_S-DFA_seed91001', 'minus_A_IID_S-DFA_seed91002', 'minus_A_IID_S-DFA_seed91003', 'minus_A_IID_S-DFA_seed91004', 'minus_A_IID_S-DFA_seed91005', 'minus_A_IID_S-DFA_seed91006', 'minus_A_IID_S-DFA_seed91007', 'minus_A_IID_S-DFA_seed91008', 'minus_A_IID_S-DFA_seed91009', 'minus_A_IID_S-DFA_seed91010', 'minus_A_IID_Sp-DFA_seed91001', 'minus_A_IID_Sp-DFA_seed91002', 'minus_A_IID_Sp-DFA_seed91003', 'minus_A_IID_Sp-DFA_seed91004', 'minus_A_IID_Sp-DFA_seed91005', 'minus_A_IID_Sp-DFA_seed91006', 'minus_A_IID_Sp-DFA_seed91007', 'minus_A_IID_Sp-DFA_seed91008', 'minus_A_IID_Sp-DFA_seed91009', 'minus_A_IID_Sp-DFA_seed91010', 'minus_A_non-IID_Benign_seed91001', 'minus_A_non-IID_Benign_seed91002', 'minus_A_non-IID_Benign_seed91003', 'minus_A_non-IID_Benign_seed91004', 'minus_A_non-IID_Benign_seed91005', 'minus_A_non-IID_Benign_seed91006', 'minus_A_non-IID_Benign_seed91007', 'minus_A_non-IID_Benign_seed91008', 'minus_A_non-IID_Benign_seed91009', 'minus_A_non-IID_Benign_seed91010'] and latest['accepted_offserver']==0
+ assert os.sched_getaffinity(0)=={111} and os.getpriority(os.PRIO_PROCESS,0)>=10
+ assert os.environ.get('CUDA_VISIBLE_DEVICES')=='' and all(os.environ.get(k)=='1' for k in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS'))
+ owners=[];active=[];duplicate=[]
+@@ -43,7 +43,7 @@
+ if not ids:
+     print(json.dumps(dict(status='NO_NEW_CLOSED_INTERSECTION_NO_COLLECTION',candidate_ids=candidate_ids,selected_ids=[],notready=notready,actual_remote_closed=len(allclosed),accepted_offserver=0)))
+     sys.exit(0)
+-assert ids==candidate_ids and not notready, 'Exact9 batch is not entirely closed; do not export a partial batch'
++assert ids==candidate_ids and not notready, 'Exact20 batch is not entirely closed; do not export a partial batch'
+ assert set(latest['all_transported_ids'])<=set(allclosed)
+ failures=[str(p) for p in (Q/'attempt1').rglob('*FAILURE*.json')]+[str(p) for p in (Q/'attempt1').rglob('failure*.json')]
+ assert not failures,failures
+--- after251/export_once.py
++++ after260/export_once.py
+@@ -7,8 +7,8 @@
+ execution=verify_native_inputs()
+ assert pre['selected_ids']==execution['exact_candidate_ids']
+ assert pre['candidate_ids']==execution['exact_candidate_ids']
+-assert pre['status']=='BOUNDED_CLOSED_INTERSECTION_NO_SELECTED_WORKER_CPU111_AVAILABLE' and len(pre['selected_ids'])==9
+-tag='after251_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
++assert pre['status']=='BOUNDED_CLOSED_INTERSECTION_NO_SELECTED_WORKER_CPU111_AVAILABLE' and len(pre['selected_ids'])==20
++tag='after260_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+ remote='/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010'
+ queue='/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010'
+ cmd=['taskset','-c','111','nice','-n','10','ionice','-c','3','/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',remote+'/transport.py','export',
+--- after251/download_verify_once.py
++++ after260/download_verify_once.py
+@@ -8,7 +8,7 @@
+ read=lambda p:json.loads(Path(p).read_bytes())
+ save=lambda p,d:Path(p).write_text(json.dumps(d,indent=2)+'\n',encoding='utf8')
+ assert not (HERE/'DOWNLOAD_STARTED.json').exists() and not (HERE/'OFFSERVER_COMMAND.json').exists()
+-receipt=read(HERE/'EXPORT.stdout.json');export=read(HERE/'EXPORT_COMMAND.json');tag=export['tag'];N=len(receipt['accepted_new_ids']);assert N==9
++receipt=read(HERE/'EXPORT.stdout.json');export=read(HERE/'EXPORT_COMMAND.json');tag=export['tag'];N=len(receipt['accepted_new_ids']);assert N==20
+ remote_receipt=str(Path(receipt['archive']).with_name('backup_receipt.json')).replace('\\','/')
+ remote_code="from pathlib import Path\nimport hashlib,json\na=Path("+repr(receipt['archive'])+");r=Path("+repr(remote_receipt)+")\nprint(json.dumps(dict(archive_bytes=a.stat().st_size,archive_sha256=hashlib.sha256(a.read_bytes()).hexdigest(),receipt_bytes=r.stat().st_size,receipt_sha256=hashlib.sha256(r.read_bytes()).hexdigest(),receipt=json.loads(r.read_bytes()))))\n"
+ cmd=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55','env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 111 nice -n 10 ionice -c 3 python -B -']
+@@ -17,7 +17,7 @@
+ (HERE/'REMOTE_ARTIFACTS.stdout.json').write_bytes(r.stdout);(HERE/'REMOTE_ARTIFACTS.stderr.txt').write_bytes(r.stderr);r.check_returncode()
+ meta=json.loads(r.stdout);assert meta['receipt']==receipt and meta['archive_sha256']==receipt['archive_sha256']
+ volume=check_bulk_storage(meta['archive_bytes']*3+meta['receipt_bytes'])
+-dest=STORAGE_ROOT/'remaining620_after251_transport_20261010'/tag;dest.mkdir(parents=True,exist_ok=False)
++dest=STORAGE_ROOT/'rem620_a260'/tag;dest.mkdir(parents=True,exist_ok=False)
+ save(HERE/'DOWNLOAD_STARTED.json',dict(destination=str(dest),fresh_F_volume=volume,utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),automatic_retry=False))
+ scp=['scp','-q','-o','BatchMode=yes','-o','ConnectTimeout=15','-P','60350','root@89.22.197.55:'+receipt['archive'],'root@89.22.197.55:'+remote_receipt,str(dest)]
+ save(HERE/'SCP_COMMAND.json',dict(argv=scp,automatic_retry=False))
+@@ -26,8 +26,8 @@
+ (HERE/'SCP.stdout.txt').write_bytes(r.stdout);(HERE/'SCP.stderr.txt').write_bytes(r.stderr);save(HERE/'SCP_EXIT.json',dict(returncode=r.returncode,automatic_retry=False));r.check_returncode()
+ archive=dest/'incremental_valid_three_views.tar.gz';local_receipt=dest/'backup_receipt.json'
+ assert sha(archive)==receipt['archive_sha256'] and sha(local_receipt)==meta['receipt_sha256']
+-first=read(ROOT/'tmp/celeba_remaining620_after240_transport_20261010/RAW_STORAGE_INDEX.json')
+-assert sha(first['receipt'])==first['receipt_sha256']=='cbcbbed0d17aad648aa0c783119c04738e2bef312ef0ba4c4762d6174c500100'
++first=read(ROOT/'tmp/celeba_remaining620_after251_transport_20261010/RAW_STORAGE_INDEX.json')
++assert sha(first['receipt'])==first['receipt_sha256']=='4ab3d3e4c3d94795fbe20b2056edc001aa6908321fd8b3ba72b7178a55156266'
+ transport=ROOT/'tmp/celeba_mechanism_remaining_evaluation_transport_20261010'
+ for dep in read(transport/'INPUTS.json')['dependencies'].values():assert sha(ROOT/dep['local_relative'])==dep['sha256']
+ cache=ROOT/'tmp/celeba_final_valid_replay_20261009/verification_inputs/original_valid_cache.npz'
+@@ -54,4 +54,4 @@
+  archive_member_manifest_sha256=sha(dest/'verification/verified_extract/backup_inventory.json'),accepted_new_ids=receipt['accepted_new_ids'],
+  all_transported_ids=receipt['all_transported_ids'],previous_local_receipt=first['receipt'],previous_receipt_sha256=first['receipt_sha256'],
+  archive_members=d['archive_member_verification']['members_verified'],metrics=9*N,counts=24*N,rules=3*N,accepted_offserver=0,root_adopted=0))
+-print(json.dumps(dict(step='original_offserver_complete',proof=str(proof),proof_sha256=sha(proof),new=N,cumulative=71+N,members=d['archive_member_verification']['members_verified'],metrics=9*N,counts=24*N,rules=3*N,accepted_offserver=0)),flush=True)
++print(json.dumps(dict(step='original_offserver_complete',proof=str(proof),proof_sha256=sha(proof),new=N,cumulative=80+N,members=d['archive_member_verification']['members_verified'],metrics=9*N,counts=24*N,rules=3*N,accepted_offserver=0)),flush=True)
+--- after251/join_saved.py
++++ after260/join_saved.py
+@@ -16,14 +16,14 @@
+  with (H/n).open('x',encoding='utf8') as f:json.dump(x,f,ensure_ascii=False,indent=2,allow_nan=False);f.write('\n')
+ def main():
+  E=read(H/'EXECUTION_INPUTS.json');P=read(H/'PREPARED.json');pre=read(H/'PREFLIGHT.stdout.json');raw=read(H/'RAW_STORAGE_INDEX.json');expected=pre['selected_ids'];N=len(expected)
+- assert N==9 and expected==P['candidate_ids'] and raw['accepted_new_ids']==expected
++ assert N==20 and expected==P['candidate_ids'] and raw['accepted_new_ids']==expected
+  assert (raw['metrics'],raw['counts'],raw['rules'])==(9*N,24*N,3*N)
+  prior_proof=pin(P['prior_root_path'],P['prior_root_sha256']);prior=pin(P['prior_index_path'],P['prior_index_sha256'])
+- assert prior_proof['cumulative_accepted']==len(prior['all_ids'])==251 and not set(expected)&set(prior['all_ids'])
++ assert prior_proof['cumulative_accepted']==len(prior['all_ids'])==260 and not set(expected)&set(prior['all_ids'])
+  currentproof=pin(E['native_root_path'],E['native_root_sha256']);inspection=pin(E['native_inspection_path'],E['native_inspection_sha256']);ledger=pin(E['native_ledger_path'],E['native_ledger_sha256'])
+- assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']>=260 and currentproof['inspection_sha256']==E['native_inspection_sha256']
+- previousroot=R/prior_proof['native_root_path'];previousproof=pin(previousroot,prior_proof['native_root_sha256']);oldinspection=pin(previousroot.parent/'inspection/inspection.json',previousproof['inspection_sha256']);oldledger=pin(previousroot.parent/'verified_ledger.json',previousproof['ledger_sha256'])
+- assert len(oldinspection['records'])==351 and len(inspection['records'])==100+currentproof['total_new_strict_and_offserver']
++ assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']==280 and currentproof['inspection_sha256']==E['native_inspection_sha256']
++ previousroot=Path(P['native272_root_path']);previousproof=pin(previousroot,P['native272_root_sha256']);oldinspection=pin(previousroot.parent/'inspection/inspection.json',previousproof['inspection_sha256']);oldledger=pin(previousroot.parent/'verified_ledger.json',previousproof['ledger_sha256'])
++ assert len(oldinspection['records'])==372 and len(inspection['records'])==100+currentproof['total_new_strict_and_offserver']
+  assert [row for row in inspection['records'] if row['id'] not in currentproof['new_ids']]==oldinspection['records']
+  assert ledger['entries'][:-1]==oldledger['entries'] and len(ledger['entries'])==len(oldledger['entries'])+1
+  native_rows={row['id']:row for row in inspection['records']}
+@@ -41,7 +41,8 @@
+  baseline=pin(R/'docs/server_deployment_20260923/training_20260923/final_evaluation_prepared_20261009/model_inventory.json','3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd');full_rows={x['id']:x for x in baseline['records']}
+  extract=Path(raw['offserver_verification']).parent/'verified_extract';bindings={};binding_files={};artifacts={};member_checks=[];native_archives=[];archives_by_id={}
+  with contextlib.ExitStack() as stack:
+-  for proof,path in ((currentproof,Path(E['native_root_path'])),):
++  for root_pin in E['native_archive_roots']:
++   path=Path(root_pin['path']);proof=pin(path,root_pin['sha256'])
+    ap=Path(proof['archive_local_path']);assert sha(ap)==proof['archive_sha256']
+    archive=stack.enter_context(tarfile.open(ap,'r:gz'));inv=json.load(archive.extractfile('backup_inventory.json'));assert inv['accepted_new_ids']==proof['new_ids']
+    native_archives.append(dict(path=str(ap),sha256=sha(ap),root_verification_path=str(path.relative_to(R)),root_verification_sha256=sha(path)))
+@@ -105,11 +106,11 @@
+           ('delegated_approval', runtime / 'APPROVED.json'), ('bound_inventory', runtime / 'inventory.json'), ('remote_complete', runtime / 'REMOTE_COMPLETE.json'))}
+ 
+  assert len(member_checks)==2*N
+- allids=prior['all_ids']+expected;assert len(allids)==len(set(allids))==251+N and allids[:251]==prior['all_ids']
++ allids=prior['all_ids']+expected;assert len(allids)==len(set(allids))==260+N and allids[:260]==prior['all_ids']
+  index=dict(status='PROPOSED_REPLAY_ID_INDEX_PENDING_ROOT_ADOPTION',prior_index_path=str(Path(P['prior_index_path']).relative_to(R)),prior_index_sha256=P['prior_index_sha256'],prior_adoption_path=str(Path(P['prior_root_path']).relative_to(R)),prior_adoption_sha256=P['prior_root_sha256'],all_ids=allids,new_ids=expected,new_records=records,new_bindings=bindings,new_binding_files=binding_files,new_artifacts=artifacts,new_archive=raw,native_inspection_path=str(Path(E['native_inspection_path']).relative_to(R)),native_inspection_sha256=E['native_inspection_sha256'],native_archives=native_archives,native_members_rehashed=2*N,Full_inference=0,test=False,root_adopted=False)
+  save('MECHANISM_INDEX.json',index)
+- save('NATIVE_IDENTITY_JOIN.json',dict(status='SAVED_ARRAY_EXACT9_NATIVE_IDENTITY_JOIN_PASS_PENDING_ROOT',new_ids=expected,prior251_objects_and_order_unchanged=True,old351_native_records_exact=True,old_native_ledger_entries_exact=True,native_model_result_members_rehashed=2*N,native_member_checks=member_checks,new_source_config_data_checkpoint_receipt_identities_exact=N,Full_reference_joins=N,Full_weights_repacked=0,metrics=9*N,counts=24*N,rules=3*N,native_max_abs_difference=max(v['native_max_abs_difference'] for v in records),index_sha256=sha(H/'MECHANISM_INDEX.json'),root_adopted=False))
+- print(json.dumps(dict(index_sha256=sha(H/'MECHANISM_INDEX.json'),join_sha256=sha(H/'NATIVE_IDENTITY_JOIN.json'),N=N,cumulative=251+N)))
++ save('NATIVE_IDENTITY_JOIN.json',dict(status='SAVED_ARRAY_EXACT20_NATIVE_IDENTITY_JOIN_PASS_PENDING_ROOT',new_ids=expected,prior260_objects_and_order_unchanged=True,old372_native_records_exact=True,old_native_ledger_entries_exact=True,native_model_result_members_rehashed=2*N,native_member_checks=member_checks,new_source_config_data_checkpoint_receipt_identities_exact=N,Full_reference_joins=N,Full_weights_repacked=0,metrics=9*N,counts=24*N,rules=3*N,native_max_abs_difference=max(v['native_max_abs_difference'] for v in records),index_sha256=sha(H/'MECHANISM_INDEX.json'),root_adopted=False))
++ print(json.dumps(dict(index_sha256=sha(H/'MECHANISM_INDEX.json'),join_sha256=sha(H/'NATIVE_IDENTITY_JOIN.json'),N=N,cumulative=260+N)))
+ if __name__=='__main__':
+  try:main()
+  except BaseException as e:save('JOIN_FAILURE.json',dict(error=repr(e),traceback=traceback.format_exc(),no_retry=True));raise

@@ -1,0 +1,241 @@
+{
+  "utc": "2026-10-10T15:09:34.636742+00:00",
+  "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+  "package_sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+  "source_data_verified": {
+    "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+    "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+    "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+    "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+    "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+    "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+    "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+    "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+    "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+    "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+    "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+    "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+    "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+    "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+    "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+    "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+    "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+    "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+    "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+    "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+  },
+  "scope_jobs": 96,
+  "reuse_references": 4,
+  "service": "guardfed_celeba_flgmm_fullcoverage   RUNNING   pid 66870, uptime 18:35:56\n",
+  "actual_workers": [
+    {
+      "pid": 91719,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage"
+      ]
+    },
+    {
+      "pid": 92019,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage"
+      ]
+    }
+  ],
+  "restricted_processes": [
+    {
+      "pid": 66870,
+      "affinity": [
+        102,
+        103
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 78631,
+      "affinity": [
+        105
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 78909,
+      "affinity": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 85890,
+      "affinity": [
+        104
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 91719,
+      "affinity": [
+        102,
+        103
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 91939,
+      "affinity": [
+        105
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 92019,
+      "affinity": [
+        102,
+        103
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 92182,
+      "affinity": [
+        104
+      ],
+      "executable": "python"
+    }
+  ],
+  "CPU110_free": true,
+  "collector": {
+    "pid": 92256,
+    "CPU": 110,
+    "threads": 1,
+    "nice": 10,
+    "IO": "idle"
+  },
+  "authorized_terminal_rows": [
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91007_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "47e507b0f21fac095eefb2555d2189fde40b8d40b6985975b7531b55bd5cbfbe",
+      "model_sha256": "274e6d95d686584d8196f4c5621517baba937e1edb1a194d523a47c70193ae59",
+      "result_sha256": "502530de5392c29026329f92e81f0e5e900baafca92ee76fb4ea8665b96ce082"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91008_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "47702da726574e83ce08658ff118d43896929e119671a38944c5cf22ff9a23c7",
+      "model_sha256": "6c0215567b5ef572ff3f0dc222542eed312ee7b66d6edccac6bff741d5900250",
+      "result_sha256": "42400744f3c9da2c446e61489cefb817e814fa4a12b79968acc27ab271b650cb"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91009_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "2f72d1bc3c1ba60b1d9335e8a11ac7d5cb75a4dcf5e1b4fcf3df6059582fe46e",
+      "model_sha256": "27ce8ebdcf3b1316d0165fbeffd07c9b25659625cdda7f129d5864325b7103d9",
+      "result_sha256": "58c981c35049b60db979cf4cae1a7821d9b61cf8ff5774f1f5974355750fa770"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91010_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "58dafda634d6a65c818ae323879a3b7d9f47b7b43f71f409ae1b263888196704",
+      "model_sha256": "38691737d572a6b835945a79abf170fac98b4c31e9ec1a70dbedf17b60a77eae",
+      "result_sha256": "0f87c9df44f98868403e51efb049a59d6fa0d73422a5f4daf31337e812b9813d"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91002_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "96c91cb8bd7e0d7e07bd8963c09f42ed363d2ba7d59b606f2ca6734ad4fe3b33",
+      "model_sha256": "8ee19f88885fbd2334e815c3c3abf12331170792ed42c6b09cba72120a54107d",
+      "result_sha256": "26f2a4294d6f98be89a9efa6352f433c5d1681c6be6acb687d50b6149fbf87f1"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91003_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "7f24137a586b097fc3c82fbab73ecbd231fc5ff169cda7a331735c5063f22b20",
+      "model_sha256": "3e50c5837bb000f7b39db815124d6f5a2627467e2b0e9d9ee50abed7bdab9842",
+      "result_sha256": "76ccfb8957cf3c496e7f95c893f470a105a945aac5b3d0d002f09d3af922bb64"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91004_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "558b2981923b6d39567d47cc6cb306857997d33bf35d61db6bb46f85d8d4a9f7",
+      "model_sha256": "fb73cae820c3799db14a8b24b23583c8a7c65aa154d3a126164137640002ad1f",
+      "result_sha256": "ec5c9a502855f1e688e793314a9b44a2eef72ebeef668d14b186d3f362c43f0a"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91005_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "fd623339afe96ca0ca59ff215dc0bbf03f9f0cf4c1991e797b7ef5232e863bc9",
+      "model_sha256": "6ef62c1229393b1be66014b73b547741913357463faed55ca5ae2aa8b66c28fc",
+      "result_sha256": "35ea5748cb97a887b98c82a1ef93eb7b833384e90845297fdccf88b70659d49f"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91006_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "b97562a8739acbc6db90a1d491c1adf3c790b13edb8ab7441a785ce0fd5e33e2",
+      "model_sha256": "105a2bd37ee8e7016cdad39fa6784767d02ee10cd03bd6c3c39eb20e3a5a5412",
+      "result_sha256": "f2a45aa832e74948a26fc21742f8bec3605149cd565f0d32c56cb2a8671abea3"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91007_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "c89c4254bd29789188c14b74fbb5d0cbfb62fc39dd7c255f2b15bebf076b431c",
+      "model_sha256": "d165c71015c101493c512d639f1b8e2efa431eb7f90bff0f7c2e1126309f91fd",
+      "result_sha256": "6d981b90ff97ac5a8e4bb25cbc5d1b26db7a3ad114c6604acd801393f10e0d28"
+    }
+  ],
+  "queue": {
+    "updated_unix": 1791644973.24239,
+    "active": [
+      {
+        "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage",
+        "pid": 91719,
+        "gpu": 1
+      },
+      {
+        "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage",
+        "pid": 92019,
+        "gpu": 0
+      }
+    ],
+    "pending": 39,
+    "completed_new": 55,
+    "reused": 4,
+    "failed": false
+  },
+  "cpu_max": "12287999 100000",
+  "cpu_stat": "usage_usec 4067851351729\nuser_usec 3237438762913\nsystem_usec 830412588815\ncore_sched.force_idle_usec 0\nnr_periods 12879558\nnr_throttled 755\nthrottled_usec 4598154965\nnr_bursts 0\nburst_usec 0\n",
+  "memory_current": "78080671744",
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "disk_free_bytes": 1060125605888,
+  "gpu": "0, 100, 6040, 32607\n1, 100, 6046, 32607\n",
+  "scientific_acceptance_performed": false
+}

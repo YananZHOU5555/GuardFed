@@ -1,0 +1,61 @@
+"""Reversible A80 scope bridge over sealed A60; no new scientific arithmetic."""
+import argparse
+import ast
+import hashlib
+import json
+from pathlib import Path
+import runpy
+import sys
+H=Path(__file__).resolve().parent
+R=H.parents[1]
+A60=R/'tmp/celeba_mechanism_A60_candidate_20261010'
+A60_SEAL='ba26052defbb44aca625bdc34e14d8761b4e3c225c5743258f55898c3264c1ec'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def need(ok,message):
+    if not ok:raise ValueError(message)
+def mapped(name):
+    need(sha(A60/'FILES_SHA256.json')==A60_SEAL,'A60 source seal drift')
+    sealed=json.loads((A60/'FILES_SHA256.json').read_bytes())['files']
+    for member in ('source_adapter.py','SOURCE_ADAPTATIONS.json',name):
+        p=A60/member;pin=sealed[member]
+        need(sha(p)==pin['sha256'] and p.stat().st_size==pin['bytes'],'A60 source drift: '+member)
+    source=runpy.run_path(str(A60/'source_adapter.py'))['mapped'](name)
+    contract=json.loads((H/'SOURCE_ADAPTATIONS.json').read_bytes())[name]
+    need(hashlib.sha256(source.encode()).hexdigest()==contract['A60_mapped_source_sha256'],'A60 mapped source drift')
+    text=source
+    for before,after in contract['replacements']:
+        need(text.count(before)==1,'Non-unique scope replacement: '+before)
+        text=text.replace(before,after,1)
+    inverse=text
+    for before,after in reversed(contract['replacements']):
+        need(inverse.count(after)==1,'Non-unique scope inverse: '+after)
+        inverse=inverse.replace(after,before,1)
+    need(inverse==source,'Original A60 mapped source not byte exact')
+    ast.parse(text)
+    return text
+def namespace(name,filename):
+    scope={'__file__':filename,'__name__':'A80_scoped_source_no_main'}
+    exec(compile(mapped(name),filename+' [exact A60 scope bridge]','exec'),scope)
+    return {k:v for k,v in scope.items() if k not in ('__file__','__name__','__builtins__')}
+def preflight(name):
+    need(not sys.flags.optimize,'Optimized Python forbidden')
+    p=H/'ROOT_BINDING.json'
+    need(p.is_file(),'Actual root-adopted MECHANISM280 inputs not bound; no generation authorized')
+    b=json.loads(p.read_bytes())
+    need(b['status']=='ACTUAL_ROOT280_BOUND_FOR_A80_TABLE' and b['root_adopted'] is True,'Actual root280 adoption required')
+    for key in ('adoption','index'):
+        need(sha(R/b[key])==b[key+'_sha256'],'Actual root/index pin drift')
+    root=json.loads((R/b['adoption']).read_bytes());index=json.loads((R/b['index']).read_bytes())
+    ids=[f'minus_A_non-IID_{attack}_seed{seed}' for attack in ('F Flip','FedSA') for seed in range(91001,91011)]
+    need(b['expected_new_ids']==root['accepted_new_ids']==index['new_ids']==ids,'Exact20 endpoint IDs required')
+    need(root['status']==b['root_status'] and root['status'].startswith('ROOT_A') and root['status'].endswith('_ADOPTED'),'Actual root status mismatch')
+    need(root['prior_accepted']==260 and root['new_accepted']==20 and root['cumulative_accepted']==len(index['all_ids'])==280 and root['original260_unchanged'],'Root260-to280 prefix required')
+    need(root['records_index_sha256']==b['index_sha256'],'Root/index identity mismatch')
+    if name=='build.py':
+        parser=argparse.ArgumentParser()
+        for key in ('adoption','adoption-sha256','index','index-sha256'):parser.add_argument('--'+key,required=True)
+        args=vars(parser.parse_args())
+        need(all(args[k]==b[k] for k in args),'CLI differs from ROOT_BINDING')
+    else:
+        proof=json.loads((H/'SOURCE_BINDINGS.json').read_bytes())
+        need(proof['actual_A80_root_adoption_sha256']==b['adoption_sha256'] and proof['accepted_index_sha256']==b['index_sha256'],'Generated source/root binding mismatch')

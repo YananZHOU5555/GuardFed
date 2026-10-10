@@ -1,0 +1,123 @@
+--- increment_body.py.txt.before_interpretation
++++ increment_body.py.txt
+@@ -1,3 +1,18 @@
++def interpretation_guard(panels):
++    expected={
++        ('F Flip','native'):['lower','lower','higher'],
++        ('F Flip','shared_calibration'):['lower','lower','higher'],
++        ('F Flip','raw'):['lower','higher','higher'],
++        ('FedSA','native'):['higher','higher','higher'],
++        ('FedSA','shared_calibration'):['higher','higher','higher'],
++        ('FedSA','raw'):['higher','lower','lower'],
++    }
++    selected=[p for p in panels if p['seed_count']==10]
++    require(len(selected)==6 and {(p['attack'],p['view']) for p in selected}==set(expected),'Six ten-seed interpretation bindings')
++    for p in selected:
++        require(p['directions']==expected[(p['attack'],p['view'])],'Actual A80 signs must support interpretation')
++    return selected
++
+ def build():
+     root, table = read('A80_root'), read('tables')
+     require(root['root_adoption'] and root['paired_models']==80 and root['preserved_records']==160, 'Require actual adopted A80')
+@@ -34,12 +49,15 @@
+                 directions.append(dict(attack=attack,view=view,seed_count=n,seeds_pointer=f'/panels/{i}/seeds',mean_pointers=paths,directions=words))
+                 clauses.append(f"{view.replace('_',' ')} ({n} seeds): {' / '.join(words)}")
+         evidence.append(f"**Added non-IID {attack} evidence.** The ten-seed paired differences, minus_A−Full, are {native} for native/shared calibration and {raw} for raw, in ΔACC / ΔAEOD / ΔASPD order. Across the fixed panels, the corresponding paired-mean directions are: {'; '.join(clauses)}. These directions describe panel means, not every seed, significance or component necessity.\n\n")
++    interpretation=interpretation_guard(directions)
+     def counts(mapping):return ', '.join(f'{key}: {value}' for key,value in mapping.items())
+     devices='; '.join(f'{variant} ({counts(values)})' for variant,values in root['replay_devices'].items())
+     training='; '.join(f'{variant} ({counts(values)})' for variant,values in root['training_torch'].items())
+     block=f"""**Current A80 extension: three complete non-IID A scenes.** The [accepted A80 table]({BASE}TABLES.md) and [root verification]({BASE}ROOT_VERIFICATION.json) retain all six A60 scenes and add non-IID F Flip and FedSA, giving eight complete scenes and 80 Full/minus_A pairs (160 records). Each scene uses ten matched seeds. All three prediction views use the same terminal round-70 checkpoint for each model and the same 19,867 validation images. Deleting A removes its score contribution while geometric hard filtering and prediction calibration remain enabled.
+ 
+-"""+''.join(evidence)+f"""**Interpretation and fixed sensitivity panels.** Values above are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. The linked [saved values]({BASE}tables.json) retain all fixed 10/9/6-seed panels and unfavorable effects. Lower AEOD/ASPD means smaller measured disparity, while lower ACC means less utility; neither an apparent trade-off nor a small gap by itself establishes an indispensable component or a causal mechanism. Native/shared equality is a property of these saved records, not independent confirmation or an additional calibration gain. AEOD remains the absolute TPR gap, not full equalized odds.
++"""+''.join(evidence)+f"""**Prediction-rule-dependent evidence.** In the ten-seed paired means for non-IID F Flip, deleting A lowers ACC and AEOD but raises ASPD under native and shared calibration: the utility loss accompanies an improvement in one disparity measure and a deterioration in the other. Under raw prediction, the same deletion lowers ACC and raises both gaps. For non-IID FedSA, raw prediction instead improves in all three paired-mean metrics after deleting A (higher ACC and lower AEOD/ASPD), providing a counterexample to a universal benefit from A. Native and shared calibration yield a small mean ACC increase but larger gaps in that scene. These contrasts show that the observed utility–disparity trade-offs depend on the prediction rule. They describe ten-seed paired means, not all individual seeds or statistically significant effects, and do not establish that A is indispensable. The linked table and saved values retain the separate 9- and 6-seed sensitivity panels.
++
++**Interpretation and fixed sensitivity panels.** Values above are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. The linked [saved values]({BASE}tables.json) retain all fixed 10/9/6-seed panels and unfavorable effects. Lower AEOD/ASPD means smaller measured disparity, while lower ACC means less utility; neither an apparent trade-off nor a small gap by itself establishes an indispensable component or a causal mechanism. Native/shared equality is a property of these saved records, not independent confirmation or an additional calibration gain. AEOD remains the absolute TPR gap, not full equalized odds.
+ 
+ **Preserved aggregation and evaluation boundary.** The [five-IID seed-first aggregate]({BASE}IID_SEED_FIRST.json) remains byte-identical to its earlier accepted version: scenes are averaged within each seed before the across-seed mean and sample SD. The three non-IID scenes are reported separately and do not enter that aggregate; no mean over the imbalanced eight-scene set is supplied. The nine-seed panel excludes configuration-selection seed 91001, and the six-seed panel retains 91005–91010, identically for Full and minus_A. Root-only calibration, exposed validation and prior official-test exposure remain disclosed. These subsets do not restore an untouched confirmation set.
+ 
+@@ -93,6 +111,7 @@
+     save('EDIT_MANIFEST.json',manifest)
+     paths=('/paired_models','/preserved_records','/complete_scenes','/complete_IID_scenes','/complete_nonIID_scenes','/replay_devices','/training_torch','/seed_panels','/IID_seed_first_JSON_bytes_exact','/aggregate_scope','/test','/primary_endpoint_selected')
+     save('FACT_BINDINGS.json',dict(mean_sd_pairs=facts,new_nonIID_direction_panels=directions,
++        interpretation_ten_seed_bindings=interpretation,
+         scope=[dict(source='A80_root',pointer=p,expected=pointer(root,p)) for p in paths],
+         native_shared_equality=dict(source='summary',pointer='/native_shared_metrics_and_counts_exact',expected=True),source_statistics_recomputed=False))
+ 
+@@ -116,11 +135,12 @@
+         words=['lower' if pointer(table,p)<0 else 'higher' if pointer(table,p)>0 else 'unchanged' for p in panel['mean_pointers'].values()]
+         require(words==panel['directions'],'Actual fixed-panel directions')
+         require(len(pointer(table,panel['seeds_pointer']))==panel['seed_count'],'Fixed panel seed identity')
++    require(interpretation_guard(facts['new_nonIID_direction_panels'])==facts['interpretation_ten_seed_bindings'],'Six actual ten-seed interpretation facts')
+     for fact in facts['scope']+[facts['native_shared_equality']]:require(pointer(root if fact['source']=='A80_root' else summary,fact['pointer'])==fact['expected'],'Root/scope fact')
+     globals()['bindings']=facts
+     result=check_documents_original()
+     result.update(status='PASS_A80_READER_INTEGRATION_AUTHOR_REVIEW_ONLY',original_document_checks_actually_executed_once=True,
+-        original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=12,fixed_10_9_6_direction_panels_bound=18,
++        original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=12,fixed_10_9_6_direction_panels_bound=18,explicit_ten_seed_interpretation_sign_bindings=6,
+         root_reader_sha256=PINS['reader_root']['sha256'],A80_root_sha256=PINS['A80_root']['sha256'],
+         source_statistics_recomputed=False,self_check=True,independent_review=False,canonical_written=False,
+         manuscript_applied=False,author_review=True,primary_endpoint_selected=False,final_test=False,new_CNN_fit_training_SSH_Git_bulk_writes=0,
+--- build_and_check.py.before_interpretation
++++ build_and_check.py
+@@ -54,6 +54,21 @@
+             "old_cohort_checks_rerun": False}
+ 
+ REUSE=original_checks()
++
++def interpretation_guard(panels):
++    expected={
++        ('F Flip','native'):['lower','lower','higher'],
++        ('F Flip','shared_calibration'):['lower','lower','higher'],
++        ('F Flip','raw'):['lower','higher','higher'],
++        ('FedSA','native'):['higher','higher','higher'],
++        ('FedSA','shared_calibration'):['higher','higher','higher'],
++        ('FedSA','raw'):['higher','lower','lower'],
++    }
++    selected=[p for p in panels if p['seed_count']==10]
++    require(len(selected)==6 and {(p['attack'],p['view']) for p in selected}==set(expected),'Six ten-seed interpretation bindings')
++    for p in selected:
++        require(p['directions']==expected[(p['attack'],p['view'])],'Actual A80 signs must support interpretation')
++    return selected
+ 
+ def build():
+     root, table = read('A80_root'), read('tables')
+@@ -91,12 +106,15 @@
+                 directions.append(dict(attack=attack,view=view,seed_count=n,seeds_pointer=f'/panels/{i}/seeds',mean_pointers=paths,directions=words))
+                 clauses.append(f"{view.replace('_',' ')} ({n} seeds): {' / '.join(words)}")
+         evidence.append(f"**Added non-IID {attack} evidence.** The ten-seed paired differences, minus_A−Full, are {native} for native/shared calibration and {raw} for raw, in ΔACC / ΔAEOD / ΔASPD order. Across the fixed panels, the corresponding paired-mean directions are: {'; '.join(clauses)}. These directions describe panel means, not every seed, significance or component necessity.\n\n")
++    interpretation=interpretation_guard(directions)
+     def counts(mapping):return ', '.join(f'{key}: {value}' for key,value in mapping.items())
+     devices='; '.join(f'{variant} ({counts(values)})' for variant,values in root['replay_devices'].items())
+     training='; '.join(f'{variant} ({counts(values)})' for variant,values in root['training_torch'].items())
+     block=f"""**Current A80 extension: three complete non-IID A scenes.** The [accepted A80 table]({BASE}TABLES.md) and [root verification]({BASE}ROOT_VERIFICATION.json) retain all six A60 scenes and add non-IID F Flip and FedSA, giving eight complete scenes and 80 Full/minus_A pairs (160 records). Each scene uses ten matched seeds. All three prediction views use the same terminal round-70 checkpoint for each model and the same 19,867 validation images. Deleting A removes its score contribution while geometric hard filtering and prediction calibration remain enabled.
+ 
+-"""+''.join(evidence)+f"""**Interpretation and fixed sensitivity panels.** Values above are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. The linked [saved values]({BASE}tables.json) retain all fixed 10/9/6-seed panels and unfavorable effects. Lower AEOD/ASPD means smaller measured disparity, while lower ACC means less utility; neither an apparent trade-off nor a small gap by itself establishes an indispensable component or a causal mechanism. Native/shared equality is a property of these saved records, not independent confirmation or an additional calibration gain. AEOD remains the absolute TPR gap, not full equalized odds.
++"""+''.join(evidence)+f"""**Prediction-rule-dependent evidence.** In the ten-seed paired means for non-IID F Flip, deleting A lowers ACC and AEOD but raises ASPD under native and shared calibration: the utility loss accompanies an improvement in one disparity measure and a deterioration in the other. Under raw prediction, the same deletion lowers ACC and raises both gaps. For non-IID FedSA, raw prediction instead improves in all three paired-mean metrics after deleting A (higher ACC and lower AEOD/ASPD), providing a counterexample to a universal benefit from A. Native and shared calibration yield a small mean ACC increase but larger gaps in that scene. These contrasts show that the observed utility–disparity trade-offs depend on the prediction rule. They describe ten-seed paired means, not all individual seeds or statistically significant effects, and do not establish that A is indispensable. The linked table and saved values retain the separate 9- and 6-seed sensitivity panels.
++
++**Interpretation and fixed sensitivity panels.** Values above are means ± sample SD (ddof=1); ΔACC is in percentage points and disparity differences are absolute gaps. The linked [saved values]({BASE}tables.json) retain all fixed 10/9/6-seed panels and unfavorable effects. Lower AEOD/ASPD means smaller measured disparity, while lower ACC means less utility; neither an apparent trade-off nor a small gap by itself establishes an indispensable component or a causal mechanism. Native/shared equality is a property of these saved records, not independent confirmation or an additional calibration gain. AEOD remains the absolute TPR gap, not full equalized odds.
+ 
+ **Preserved aggregation and evaluation boundary.** The [five-IID seed-first aggregate]({BASE}IID_SEED_FIRST.json) remains byte-identical to its earlier accepted version: scenes are averaged within each seed before the across-seed mean and sample SD. The three non-IID scenes are reported separately and do not enter that aggregate; no mean over the imbalanced eight-scene set is supplied. The nine-seed panel excludes configuration-selection seed 91001, and the six-seed panel retains 91005–91010, identically for Full and minus_A. Root-only calibration, exposed validation and prior official-test exposure remain disclosed. These subsets do not restore an untouched confirmation set.
+ 
+@@ -150,6 +168,7 @@
+     save('EDIT_MANIFEST.json',manifest)
+     paths=('/paired_models','/preserved_records','/complete_scenes','/complete_IID_scenes','/complete_nonIID_scenes','/replay_devices','/training_torch','/seed_panels','/IID_seed_first_JSON_bytes_exact','/aggregate_scope','/test','/primary_endpoint_selected')
+     save('FACT_BINDINGS.json',dict(mean_sd_pairs=facts,new_nonIID_direction_panels=directions,
++        interpretation_ten_seed_bindings=interpretation,
+         scope=[dict(source='A80_root',pointer=p,expected=pointer(root,p)) for p in paths],
+         native_shared_equality=dict(source='summary',pointer='/native_shared_metrics_and_counts_exact',expected=True),source_statistics_recomputed=False))
+ 
+@@ -173,11 +192,12 @@
+         words=['lower' if pointer(table,p)<0 else 'higher' if pointer(table,p)>0 else 'unchanged' for p in panel['mean_pointers'].values()]
+         require(words==panel['directions'],'Actual fixed-panel directions')
+         require(len(pointer(table,panel['seeds_pointer']))==panel['seed_count'],'Fixed panel seed identity')
++    require(interpretation_guard(facts['new_nonIID_direction_panels'])==facts['interpretation_ten_seed_bindings'],'Six actual ten-seed interpretation facts')
+     for fact in facts['scope']+[facts['native_shared_equality']]:require(pointer(root if fact['source']=='A80_root' else summary,fact['pointer'])==fact['expected'],'Root/scope fact')
+     globals()['bindings']=facts
+     result=check_documents_original()
+     result.update(status='PASS_A80_READER_INTEGRATION_AUTHOR_REVIEW_ONLY',original_document_checks_actually_executed_once=True,
+-        original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=12,fixed_10_9_6_direction_panels_bound=18,
++        original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=12,fixed_10_9_6_direction_panels_bound=18,explicit_ten_seed_interpretation_sign_bindings=6,
+         root_reader_sha256=PINS['reader_root']['sha256'],A80_root_sha256=PINS['A80_root']['sha256'],
+         source_statistics_recomputed=False,self_check=True,independent_review=False,canonical_written=False,
+         manuscript_applied=False,author_review=True,primary_endpoint_selected=False,final_test=False,new_CNN_fit_training_SSH_Git_bulk_writes=0,
