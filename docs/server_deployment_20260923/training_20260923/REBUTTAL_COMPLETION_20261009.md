@@ -1,18 +1,18 @@
 # CURRENT: GuardFed返修实验
 
-本段更新时间：2026-10-10T20:48:56.046439+00:00。服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。sglang已按授权停止，文件保留。
+本段更新时间：2026-10-10T21:31:01.351227+00:00。服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。sglang已按授权停止，文件保留。
 
 ## 已接纳结果与实时观测
 
-| 阶段 | 原strict、离机SHA及root验收 | 最近实测（2026-10-10T20:39:34.249713+00:00，不代替验收） |
+| 阶段 | 原strict、离机SHA及root验收 | 分批实测（UTC见格内，不代替验收） |
 |---|---:|---|
-| 机制训练 | 320/800新增；100 Full另复用 | 完成327、活动8、等待465、失败0，活动第8–69轮 |
-| 机制三视图 | 320终轮checkpoint：U100/C100/A100/F20 | remaining620远端闭合147，与离机接受140单列 |
-| FLGMM完整覆盖 | 67/96新增；4screen另复用 | 终轮71；三视图仍61，六场景表60，未把新native计作已评价 |
-| Fed-NGA/Huber搜索 | 46/64 | 终轮55；未完成全部搜索或选择recipe |
-| 组合基线覆盖 | 12/96新增；4screen另复用 | 终轮16；IID Benign十seed native表已接纳 |
+| 机制训练 | 320/800新增；100 Full另复用 | 21:15:50：完成328、活动8、等待464、失败0，活动第44–65轮 |
+| 机制三视图 | 320终轮checkpoint：U100/C100/A100/F20 | 20:39:34：remaining620远端闭合147，与离机接受140单列 |
+| FLGMM完整覆盖 | 67/96新增；4screen另复用 | 20:39:34：终轮71；三视图接受71，七完整场景表70，另保留一个未齐场景记录 |
+| Fed-NGA/Huber搜索 | 46/64 | 20:39:34：终轮55；未完成全部搜索或选择recipe |
+| 组合基线覆盖 | 12/96新增；4screen另复用 | 20:39:34：终轮16；IID Benign十seed native及三视图结果已接纳 |
 
-该实测双GPU均100%，温度65/63°C，RecoveryAction None；cgroup内存77.41/519.17GB、OOM0，磁盘余1.060TB。源码/数据身份未变，五队列真实终轮集合增长通过：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T2039.json。这是一次采样，不能称连续占用或完成全部实验；固定方法、seed、并发、FP32和统计口径不变。
+21:15:50资源实测：双GPU利用率100/99%，温度64/61°C，RecoveryAction None；cgroup内存77.46/519.17GB、OOM0，磁盘余1.060TB。源码/数据身份未变，当前五队列服务及worker身份已核：tmp/hybrid_screen91001_single_replay_prepared_20261011/runtime/FRESH_OBSERVATION_REF.json；此前完整五队列增长记录保留。这是一次采样，不能称连续占用或完成全部实验；固定方法、seed、并发、FP32和统计口径不变。
 
 ## 新补齐的F消融表
 
@@ -22,25 +22,27 @@ IID Benign/F Flip两完整场景，每场景10共享seed；raw/native/shared三�
 
 F Flip十seed native：Full为ACC88.391±0.626%、AEOD0.01068±0.00958、ASPD0.06068±0.01026；去F为88.325±1.212%、0.01439±0.00651、0.06600±0.01819。9/6seed的准确率差值反向，AEOD/ASPD差值仍支持Full；Benign存在另一组取舍。全部方向和负结果保留，不称F在所有指标不可或缺、显著或因果隔离。仅两个IID场景，其他八个F场景和其余控制未齐。native/shared相同不作独立确认；混合设备与选择历史仍披露。
 
-FL exact10评价保留五次未启动的资源拒绝记录：原CPU120–127两次、CPU136–143宽mask tick门一次、修正容量门后CPU136–143及CPU11–18各一次。后两次实测出现系统层CPU忙碌，不能定位具体所有者；容器cgroup使用约12核、配额122.87999核。固定八核全空闲要求会随共享宿主负载迁移而过期。本次只调整运行调度：8 Torch线程在32–63的32核池内调度，单进程、FP32、方法/seed/recipe及native1e-12容差不变；原科学17函数、Linux whole及Windows零fit saved审计保持。实际fresh容量门及supervisor启动已通过（2026-10-10T20:47:55.793929+00:00），证据为tmp/fl_FFlip10_capacity_pool32_20261011/runtime/START_RECEIPT.json。这是已启动事实，不是新科学结果；FL三视图仍接受61。完成后须原whole检查、F盘离机SHA及root采用，不能直接据RUNNING补表。采样余量不保证持续独占或跨CPU数值等价，不重启健康训练、不改其他服务。
+FL新增10记录已通过原生指标复核、Linux原校准检查、F盘归档及成员SHA、Windows零拟合计数审计，并由root采用；旧61记录原样保留。七完整场景表按同一10/9/6种子面板展示，另保留一个未齐场景记录。non-IID F Flip十seed native为ACC89.28±0.98%、AEOD0.0525±0.0077、ASPD0.1185±0.0068；共享校准为88.90±1.04%、0.0091±0.0073、0.0713±0.0111，存在准确率代价。旧Windows重拟合失败、五次资源拒绝和采样审计浮点差异均保留，不宣称跨平台逐位重校准一致。表：outputs/guardfed_tables/celeba_flgmm_seven_scenes70_20261011/TABLES.md。
+
+Hybrid IID Benign三视图现已补齐十共享seed：八个既有覆盖checkpoint、一个原screen seed91001及一个已验收seed91002显式复用。原screen身份及选择史保持，不改名为正式训练；同一checkpoint全部指标。新九项通过Linux原校准检查、F盘归档及Windows零拟合审计，原Windows首次Linux resource导入失败及采样审计微小差异保留。仅这一场景齐备，其他场景和完整100覆盖仍在继续。
 
 ## 返修边界与接续
 
 十方法native验证表1000格，IID/non-IID各五场景已交付；九方法三视图900记录与2052项共享校准归因已接纳。U/C/A各100配对、十场景表已接纳。尚缺七方法完整覆盖、剩余机制控制、冻结最终评价和提交版正文/rebuttal收尾。FedWA/SmartFL/FedDNA忠实规格、最终主终点/测试边界、提交版LaTeX源及Fig3执行来源仍待解决；已有作者问题不重复询问。
 
-24条原意见的最新清晰英文作者审阅稿：docs/server_deployment_20260923/revision_20260923/rebuttal_clear_F20_20261011/rebuttal_clear_20261011.md；详细回复及正文插入候选：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/rebuttal_integrated_20261011.md、docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/manuscript_insertions_integrated_20261011.md。三份作者候选已对齐A100及F20，原话与顺序保留，F20取舍和固定面板反转已写入；未应用提交版正文，不代表返修完成。清晰候选已在Git27ebed9，后新增详细稿及本地采用记录尚未算已推送。旧TableII480原值已追溯重复数；缺证据的SD不补造。Fig3核260终轮记录/78均值，ForestDiffusion执行及checkpoint来源缺口仍在。
+24条原意见的最新清晰英文作者审阅稿：docs/server_deployment_20260923/revision_20260923/rebuttal_clear_F20_20261011/rebuttal_clear_20261011.md；详细回复及正文插入候选：docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/rebuttal_integrated_20261011.md、docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/manuscript_insertions_integrated_20261011.md。三份作者候选已对齐A100及F20，原话与顺序保留，F20取舍和固定面板反转已写入；未应用提交版正文，不代表返修完成。清晰候选、详细稿及正文插入候选均已在Git798ce6；本次新FL/Hybrid证据待下一增量推送。旧TableII480原值已追溯重复数；缺证据的SD不补造。Fig3核260终轮记录/78均值，ForestDiffusion执行及checkpoint来源缺口仍在。
 
 Huber采用已同意的恒等投影，明确CNN项目适配且不继承原理论。当前已验收14个Huber候选均恒负预测，ACC0.5166859616449389、AEOD/ASPD0，保留为退化负结果，不据此称公平性获胜。LoGoFair采用固定图像ID20虚拟cohort，仅人口适配，不称真实client公平性；其100个native结果已接纳。
 
-最终候选partition2的19962个image_id元数据已核，未读标签/像素或模型、未作最终推理；validation选择史、旧test暴露、cu128/cu130及driver差异保持披露。新CPU位置不证明跨平台或跨socket数值等价。下一步继续冻结队列；按完整场景增量接纳，完成FL exact10评价后再补其七场景表；NGA/Huber须64全验收后按冻结规则选recipe及真实门检，不能以部分结果启动192覆盖。
+最终候选partition2的19962个image_id元数据已核，未读标签/像素或模型、未作最终推理；validation选择史、旧test暴露、cu128/cu130及driver差异保持披露。新CPU位置不证明跨平台或跨socket数值等价。下一步继续冻结队列；按完整场景增量接纳，FL exact10及七场景表已闭合，继续其剩余覆盖；NGA/Huber须64全验收后按冻结规则选recipe及真实门检，不能以部分结果启动192覆盖。
 
 ## 保存、Git与巡检
 
 大文件只写F:/YananResearchStorage/GuardFed，写前核F为Yanan 2TB/Healthy且容量足；E仅代码、配置、索引与精简报告。模型/原始数组/归档不进Git，服务器大文件优先原地保留。
 
-最近已验证推送27ebed940ce822f87976e0d37b90576e9a43f36a，截止以publication_closed_increment59_verified_20261011.json为准（314提交文件哈希及远端分支通过）。本地本段的推送指针刷新发生在该提交之后，不能称已包含在其内。三小时聊天任务guardfed-training-health仍PAUSED，本会话无automation_update接口；未建替代cron/Windows任务。supervisor训练与聊天巡检分开。
+最近已验证推送798ce6ca670a1ca8cd573c6bfaf4850d46f6d258，截止以publication_closed_increment60_verified_20261011.json为准（120提交文件哈希及远端分支通过）。本地本段的推送指针刷新发生在该提交之后，不能称已包含在其内。三小时聊天任务guardfed-training-health仍PAUSED，本会话无automation_update接口；未建替代cron/Windows任务。supervisor训练与聊天巡检分开。
 
-入口写入器：tmp/update_increment60_entries_20261011.py。旧生成器只保留历史截止，不再用于当前入口。下方历史原字节保留。
+入口写入器：tmp/update_increment61_entries_20261011.py。旧生成器只保留历史截止，不再用于当前入口。下方历史原字节保留。
 
 ## Historical accepted increment — 2026-10-09 09:52 UTC
 

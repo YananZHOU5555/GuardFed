@@ -1,0 +1,11 @@
+{
+  "source_sha256": "1da5e2a3ec1bf589663d434b4d8074452c14b9cba4a27f46636751efb8ae3b81",
+  "parent_sha256": "30736efdbc1f06d4852abd486488c8727ef677a682ebf5a4101cd96af23a05af",
+  "restored_original_bytes_exact": true,
+  "remove_exact_text": "NDIFF_ALLOWED_PATHS={\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/check_linux.py.ndiff',\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/contract.py.ndiff',\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/linux_saved_remote.py.ndiff',\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/transport.py.ndiff',\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/transport_remote.py.ndiff',\n    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/windows_runtime_wrapper.py.ndiff',\n}\n",
+  "replace_exact": {
+    "new": "assert p.is_file() and (p.suffix in allowed or p.relative_to(R).as_posix() in NDIFF_ALLOWED_PATHS) and p.resolve().is_relative_to(R.resolve())",
+    "original": "assert p.is_file() and p.suffix in allowed and p.resolve().is_relative_to(R.resolve())"
+  },
+  "v1_to_increment60_inverse_retained": "source_v1/INVERSE_EDITS.json"
+}

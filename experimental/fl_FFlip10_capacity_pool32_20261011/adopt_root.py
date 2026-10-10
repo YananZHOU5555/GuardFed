@@ -1,0 +1,79 @@
+"""Prepared root-only exact10 complementary join. Never trains, fits or evaluates."""
+from pathlib import Path
+import argparse,datetime,hashlib,json,math,subprocess,zipfile
+H=Path(__file__).resolve().parent;R=H.parents[1];A=H/'actual/saved001'
+read=lambda p:json.loads(Path(p).read_bytes())
+def sha(p):
+ h=hashlib.sha256()
+ with Path(p).open('rb') as f:
+  for b in iter(lambda:f.read(1024**2),b''):h.update(b)
+ return h.hexdigest()
+def need(ok,msg):
+ if not ok:raise ValueError(msg)
+def check_seal(directory,expected):
+ need(sha(directory/'FILES_SHA256.json')==expected,'Source seal differs')
+ for rel,pin in read(directory/'FILES_SHA256.json')['files'].items():
+  p=(directory/rel).resolve();need(p.is_relative_to(directory.resolve()) and sha(p)==pin['sha256'] and p.stat().st_size==pin['bytes'],'Source member differs: '+rel)
+def main():
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--inputs-sha256',required=True);p.add_argument('--allow-complementary-root-adoption',action='store_true',required=True);args=p.parse_args()
+ need(__debug__,'No -O');need(sha(H/'ROOT_INPUTS.json')==args.inputs_sha256,'Root inputs pin changed')
+ inputs=read(H/'ROOT_INPUTS.json');need(inputs['adoption_source_sha256']==sha(__file__),'Root join source changed')
+ expected_files={'candidate_seal':H/'FILES_SHA256.json','candidate_manifest':H/'MANIFEST.json','candidate_root_review':H/'ROOT_SOURCE_REVIEW.json','saved_static_seal':H/'saved_v2/STATIC_SOURCE_SHA256.json','saved_root_review':H/'ROOT_SOURCE_REVIEW.json','audit_source_seal':H/'saved_v2/FILES_SHA256.json','audit_source_pins':H/'saved_v2/SOURCE_PINS.json','Linux_original_whole':A/'LINUX_SAVED_CHECK.json','F_transport':A/'TRANSPORT_VERIFICATION.json','Windows_zero_fit_audit':A/'SAVED_OUTPUTS_AUDIT_NO_REFIT.json','Linux_command':A/'LINUX_CHECK_COMMAND.json','Linux_exit':A/'LINUX_CHECK_EXIT.json','transport_command':A/'TRANSPORT_COMMAND.json','transport_exit':A/'TRANSPORT_SSH_EXIT.json','Windows_command':A/'WINDOWS_AUDIT_COMMAND.json','Windows_exit':A/'WINDOWS_AUDIT_EXIT.json','prior61_root':R/'tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json','native67_root':R/'tmp/fl_native_after63_20261011/ROOT_ADOPTION_REVIEW.json','prior_Windows47_failure':R/'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_ARRAY_REFIT_CHECK.failure.json'}
+ need(set(inputs['files'])==set(expected_files) and all(inputs['files'][role]['path']==path.relative_to(R).as_posix() for role,path in expected_files.items()),'Closed actual evidence roles/paths differ')
+ output=H/'ROOT_SCIENTIFIC_ADOPTION.json';need(not output.exists() and not (H/'ROOT_ADOPTION.failure.json').exists(),'Preserve original root adoption attempt')
+ for role,pin in inputs['files'].items():
+  path=R/pin['path'];need(sha(path)==pin['sha256'] and path.stat().st_size==pin['bytes'],'Actual evidence changed: '+role)
+ check_seal(H,'699e24a9421e684f446346d0eb46252020806ee3250a3d677a3d90c7c821de39')
+ check_seal(H/'saved_v2',inputs['files']['audit_source_seal']['sha256'])
+ oldpath=R/'tmp/fl_three_view_after48_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
+ need(sha(oldpath)=='d6c7bdadb05ffcf8786221ed15a16125cd0fe84d1745fc15f9b7e6cc0a2f68d6','Prior61 differs');old=read(oldpath)
+ need(old['root_adoption'] is True and old['FLGMM_total_three_view_records']==61 and old['Linux_whole_original_saved_check_pass'] and old['Windows_saved_outputs_audit_pass'] and old['Windows_original47_exact_refit_pass'] is False and old['Windows_whole_saved_check_pass'] is False,'Prior complementary role differs')
+ prior=old['records']+old['prior_interface_explicitly_reused'];need(len(prior)==len({x['id'] for x in prior})==61,'Prior61 identities differ')
+ nativepath=R/'tmp/fl_native_after63_20261011/ROOT_ADOPTION_REVIEW.json'
+ need(sha(nativepath)=='a11cd9ed94ab136b49dd41975d45f684d88236b6918c295461089a98adbc7db0','Native67 differs');native=read(nativepath)
+ need(native['accepted_total']==67 and native['reused_separately']==4 and native['final_test'] is False,'Native scope differs')
+ m=read(H/'MANIFEST.json');ids=m['exact_ids'];expected=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed'+str(s)+'_fullcoverage' for s in range(91001,91011)]
+ need(inputs['exact_ids']==ids==expected and ids==[i for i in native['accepted_job_ids'] if i not in {r['id'] for r in prior}],'Exact native-minus61 difference differs')
+ need(m['native_tolerance']==1e-12 and m['test'] is False and m['views']==['native','raw','shared_calibration'],'Scientific policy differs')
+ linux=read(A/'LINUX_SAVED_CHECK.json');t=read(A/'TRANSPORT_VERIFICATION.json');audit=read(A/'SAVED_OUTPUTS_AUDIT_NO_REFIT.json')
+ need(linux['status']=='LINUX_ORIGINAL_FLGMM10_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED' and linux['cached_root_refits']==10 and linux['original_check_saved_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745','Original Linux whole proof differs')
+ need(t['status']=='FLGMM10_F_TRANSPORT_ALL_MEMBERS_SHA_PASS_NOT_SCIENTIFIC_ACCEPTANCE' and t['member_count']==24 and t['linux_proof_sha256']==sha(A/'LINUX_SAVED_CHECK.json'),'F transport proof differs')
+ need(audit['status']=='SAVED_OUTPUTS_AUDIT_NO_REFIT_PASS_NOT_ROOT_ADOPTED' and audit['linux_whole_proof_sha256']==sha(A/'LINUX_SAVED_CHECK.json') and audit['transport_proof_sha256']==sha(A/'TRANSPORT_VERIFICATION.json'),'Windows saved-output proof differs')
+ need(audit['fit_calls']==audit['new_CNN']==audit['new_training']==0 and audit['test'] is False and audit['Windows_whole_check_pass'] is False and audit['Windows_exact_recalibration_claimed'] is False,'Windows evidence relabelled')
+ need(audit['metric_values_checked']==90 and audit['integer_base_counts_checked']==240 and audit['prediction_rules_checked']==30,'Audit denominator differs')
+ failure=R/'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_ARRAY_REFIT_CHECK.failure.json'
+ need(sha(failure)==audit['original_Windows_refit_failure_sha256']=='c93d11ee41400659f74597beb1ca0cab19a64b647c805ee0534051fb55f41812' and read(failure)['completed']==4,'Original Windows47 failure changed')
+ volume=json.loads(subprocess.check_output(['powershell','-NoProfile','-Command','Get-Volume -DriveLetter F | Select-Object FileSystemLabel,HealthStatus,SizeRemaining | ConvertTo-Json -Compress'],text=True));need(volume['FileSystemLabel']=='Yanan 2TB' and volume['HealthStatus']=='Healthy','F missing/unhealthy')
+ froot=Path('F:/YananResearchStorage/GuardFed').resolve();archive=Path(t['archive_path']).resolve();extract=Path(t['verified_extract']).resolve()
+ need(archive.is_relative_to(froot) and extract.is_relative_to(froot) and sha(archive)==t['archive_sha256'] and archive.stat().st_size==t['archive_bytes'],'F archive identity differs')
+ members={'bundle/GATE_RESULT.json','bundle/metadata_receipt.json','LINUX_SAVED_CHECK.json'}|{'bundle/'+i+'/'+n for i in ids for n in ('receipt.json','validation_predictions.npz')}
+ need(set(t['members'])==members,'Minimum exact24 scope differs')
+ with zipfile.ZipFile(archive) as z:need(len(z.namelist())==24 and set(z.namelist())==members|{'TRANSPORT_MANIFEST.json'},'F archive member scope differs')
+ for rel,pin in t['members'].items():
+  path=extract/rel;need(path.resolve().is_relative_to(extract) and sha(path)==pin['sha256'] and path.stat().st_size==pin['bytes'],'Saved output member differs')
+ gate=read(extract/'bundle/GATE_RESULT.json');need(sha(extract/'bundle/GATE_RESULT.json')==t['gate_result_sha256']==linux['gate_result_sha256'],'Gate identity differs')
+ need(gate['status']=='FLGMM_EXACT10_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and gate['package_sha256']==linux['package_sha256']==sha(H/'FILES_SHA256.json'),'Gate source differs')
+ need([x['id'] for x in gate['receipts']]==[x['id'] for x in linux['records']]==[x['id'] for x in audit['records']]==ids,'Exact10 proof order differs')
+ exact_differences=inputs['exact_root_receipt_differences']
+ need(set(exact_differences)==set(ids),'Every exact ID needs a root-reviewed differences list')
+ for rid,diffs in exact_differences.items():
+  need(isinstance(diffs,list) and len(diffs)<=1,'At most the exact group-KL diagnostic may differ')
+  for d in diffs:
+   need(set(d)=={'path','local','saved','kind','local_hex','saved_hex','difference'} and d['path']=='/server_sampling_audit/group_kl' and d['kind']=='scalar','Only explicit group-KL diagnostic allowed')
+   need(all(type(d[k]) is float and math.isfinite(d[k]) for k in ('local','saved','difference')),'Nonfinite/nonfloat diagnostic refused')
+   need(d['local'].hex()==d['local_hex'] and d['saved'].hex()==d['saved_hex'] and d['local']-d['saved']==d['difference'],'Diagnostic hex/value mismatch; no tolerance substitution')
+ rows=[]
+ for row,g,l,w in zip(m['records'],gate['receipts'],linux['records'],audit['records']):
+  rid=row['id'];need(row['terminal_round']==70 and row['split']=='valid' and row['n_eval']==19867,'Nonterminal/test/subset')
+  need(g['checkpoint_sha256']==l['checkpoint_sha256']==w['checkpoint_sha256']==row['identity']['checkpoint']['sha256'],'Different checkpoint')
+  need(g['weights_before']==g['weights_after'] and l['root_receipt_exact'] and l['cached_root_fit_exact'] and l['saved_predictions_metrics_counts_exact'],'Linux/weight check incomplete')
+  need(w['saved_fit_payload_hashes_exact'] and w['saved_threshold_predictions_metrics_counts_exact'] and w['root_valid_ID_partition_exact'] and w['fit_calls']==0,'Windows saved checks incomplete')
+  need(g['prediction_arrays_sha256']==l['array_sha256']==w['array_sha256']==t['members']['bundle/'+rid+'/validation_predictions.npz']['sha256'],'Array identity differs')
+  need(l['receipt_sha256']==w['receipt_sha256']==t['members']['bundle/'+rid+'/receipt.json']['sha256'],'Receipt identity differs')
+  need(g['native_comparison']==l['native_comparison']==w['native_comparison'] and g['native_comparison']['accepted'],'Native result differs')
+  need(w['root_receipt_differences']==inputs['exact_root_receipt_differences'][rid],'Root audit differences outside reviewed exact values')
+  rows.append({'id':rid,'method':'FLGMM','distribution':row['distribution'],'attack':row['attack'],'seed':row['seed'],'checkpoint_sha256':g['checkpoint_sha256'],'array_sha256':w['array_sha256'],'receipt_sha256':w['receipt_sha256'],'native_comparison':w['native_comparison'],'native_max_abs_difference':w['native_comparison']['max_abs_difference'],'Windows_full_root_receipt_exact':not w['root_receipt_differences'],'preserved_root_audit_differences':w['root_receipt_differences']})
+ result={'status':'ROOT_FLGMM_AFTER61_EXACT10_COMPLEMENTARY_EVIDENCE_ADOPTED_PRIOR_WINDOWS47_FAIL_PRESERVED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'root_adoption':True,'new_records':rows,'records':old['records']+rows,'prior_interface_explicitly_reused':old['prior_interface_explicitly_reused'],'prior61_objects_order_unchanged':True,'new_three_view_records_accepted':10,'FLGMM_total_three_view_records':71,'native_training_records':67,'original_screen_reuse_separate':4,'Linux_whole_original_saved_check_pass':True,'Linux_root_fit_verified':True,'Linux_original_root_refit_records_new':10,'Windows_saved_outputs_audit_pass':True,'Windows_saved_outputs_audit_fit_calls':0,'Windows_new10_refit_executed':False,'Windows_original47_exact_refit_pass':False,'Windows_whole_saved_check_pass':False,'original_Windows47_failure_sha256':sha(failure),'cross_platform_bitwise_recalibration_claimed':False,'prior_root_sha256':sha(oldpath),'native_root_sha256':sha(nativepath),'proof_files':inputs['files'],'inputs_sha256':args.inputs_sha256,'adoption_source_sha256':sha(__file__),'metric_values_checked_new':90,'integer_base_counts_checked_new':240,'prediction_rules_checked_new':30,'archive_sha256':t['archive_sha256'],'archive_members':24,'storage':volume,'mechanism_scope_modified':False,'new_fit':0,'new_CNN':0,'new_training':0,'test':False,'full100_complete':False,'final_primary_endpoint_decided':False,'scope':'New10 terminal-valid endpoints only, plus unchanged prior61. Linux whole supplies original root-fit evidence; Windows independently audits saved outputs without refitting. Historical Windows47 refit failure remains.'}
+ with output.open('x',encoding='utf8') as f:json.dump(result,f,indent=2,allow_nan=False);f.write('\n')
+ print(json.dumps({'status':result['status'],'new':10,'total':71,'root_sha256':sha(output)}))
+if __name__=='__main__':main()

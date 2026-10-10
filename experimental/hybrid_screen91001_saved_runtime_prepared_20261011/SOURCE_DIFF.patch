@@ -1,0 +1,218 @@
+--- original/contract.py
++++ screen1/contract.py
+@@ -4,8 +4,8 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[1]
+-CANDIDATE = ROOT/'tmp/hybrid_missing8_pool32_runtime_prepared_20261011'
+-PACKAGE = 'f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239'
++CANDIDATE = ROOT/'tmp/hybrid_screen91001_single_replay_prepared_20261011'
++PACKAGE = '9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d'
+ SAVED_SOURCE_SHA = 'd512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ IDS = json.loads((HERE/'FIXED_IDS.json').read_bytes())['exact_ids']
+ FROOT = Path('F:/YananResearchStorage/GuardFed')
+@@ -42,17 +42,17 @@
+     return p
+ 
+ def linux_proof(value):
+-    need(value['status']=='HYBRID_MISSING8_LINUX_ORIGINAL_WHOLE_SAVED_PASS_NOT_ADOPTED', 'Whole Linux check has not passed')
+-    need([r['id'] for r in value['records']]==IDS and len(set(IDS))==8, 'Exact8 order/membership differs')
++    need(value['status']=='HYBRID_SCREEN91001_LINUX_ORIGINAL_WHOLE_SAVED_PASS_NOT_ADOPTED', 'Whole Linux check has not passed')
++    need([r['id'] for r in value['records']]==IDS and len(set(IDS))==1, 'Exact1 order/membership differs')
+     need(value['original_check_saved_sha256']==SAVED_SOURCE_SHA, 'Original whole checker differs')
+     need(value['package_sha256']==PACKAGE, 'Whole Linux source package differs')
+     digest_arg(value['gate_result_sha256'])
+     need(all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in value['records']), 'Incomplete whole saved proof')
+-    need(value['cached_root_refits']==8 and value['new_CNN']==value['new_training']==0 and value['test'] is False, 'Scientific scope differs')
+-    need(value['exact_ids']==IDS and value['fit_calls']==8 and value['native_tolerance']==1e-12 and value['root_adopted'] is False, 'Wrong whole-check scope/role')
++    need(value['cached_root_refits']==1 and value['new_CNN']==value['new_training']==0 and value['test'] is False, 'Scientific scope differs')
++    need(value['exact_ids']==IDS and value['fit_calls']==1 and value['native_tolerance']==1e-12 and value['root_adopted'] is False, 'Wrong whole-check scope/role')
+ 
+ def gate_proof(value):
+-    need(value['status']=='HYBRID_MISSING8_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and value['package_sha256']==PACKAGE, 'Wrong/unfinished gate')
+-    need([r['id'] for r in value['receipts']]==IDS and value['root_adopted_new']==0 and value['test'] is False, 'Gate exact8 differs')
++    need(value['status']=='HYBRID_SCREEN91001_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and value['package_sha256']==PACKAGE, 'Wrong/unfinished gate')
++    need([r['id'] for r in value['receipts']]==IDS and value['root_adopted_new']==0 and value['test'] is False, 'Gate exact1 differs')
+ 
+ def utc(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
+--- original/check_linux.py
++++ screen1/check_linux.py
+@@ -17,7 +17,7 @@
+     need(a.post_replay_preflight.startswith('/workspace/guardfed_checks/') and '\n' not in a.post_replay_preflight,'Actual Linux preflight path required')
+     source=(HERE/'linux_saved_remote.py').read_text(encoding='utf-8')
+     cmd='env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 110 ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -c '+shlex.quote(source)+' --gate-result-sha256 '+a.gate_result_sha256+' --post-replay-preflight '+shlex.quote(a.post_replay_preflight)+' --post-replay-preflight-sha256 '+a.post_replay_preflight_sha256+' --allow-original-cached-root-refit'
+-    save(out/'LINUX_CHECK_COMMAND.json',{'utc':utc(),'source_sha256':hashlib.sha256(source.encode()).hexdigest(),'gate_result_sha256':a.gate_result_sha256,'CPU':110,'threads':1,'post_replay_preflight':a.post_replay_preflight,'post_replay_preflight_sha256':a.post_replay_preflight_sha256,'package_sha256':'f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239','allow_original_cached_root_refit':True,'single_attempt':True,'new_CNN':0,'new_training':0,'test':False})
++    save(out/'LINUX_CHECK_COMMAND.json',{'utc':utc(),'source_sha256':hashlib.sha256(source.encode()).hexdigest(),'gate_result_sha256':a.gate_result_sha256,'CPU':110,'threads':1,'post_replay_preflight':a.post_replay_preflight,'post_replay_preflight_sha256':a.post_replay_preflight_sha256,'package_sha256':'9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d','allow_original_cached_root_refit':True,'single_attempt':True,'new_CNN':0,'new_training':0,'test':False})
+     try:
+         c=subprocess.run(['ssh','-p','60350','-o','BatchMode=yes','-o','ConnectTimeout=15','root@89.22.197.55',cmd],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=7200)
+     except subprocess.TimeoutExpired as e:
+@@ -30,6 +30,6 @@
+     proof=json.loads(c.stdout);linux_proof(proof)
+     need(proof['gate_result_sha256']==a.gate_result_sha256,'Whole Linux proof/gate differs')
+     (out/'LINUX_SAVED_CHECK.json').write_bytes(c.stdout)
+-    print(json.dumps({'status':proof['status'],'records':8,'linux_proof_sha256':sha(out/'LINUX_SAVED_CHECK.json')}))
++    print(json.dumps({'status':proof['status'],'records':1,'linux_proof_sha256':sha(out/'LINUX_SAVED_CHECK.json')}))
+ 
+ if __name__=='__main__':main()
+--- original/linux_saved_remote.py
++++ screen1/linux_saved_remote.py
+@@ -1,10 +1,10 @@
+ """One future root call of the running package's unchanged whole checker; no CNN."""
+ import argparse,contextlib,datetime,hashlib,io,json,os,pathlib,runpy,shutil,subprocess,sys
+ P=pathlib.Path
+-base=P('/workspace/guardfed_checks/celeba_hybrid_three_view_missing8_20261011')
+-PACKAGE='f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239'
++base=P('/workspace/guardfed_checks/celeba_hybrid_screen91001_single_20261011')
++PACKAGE='9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d'
+ GUIDE='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+-CHECK='1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924'
++CHECK='9408f64db4fb68d53eee4d882d69f3d0a3a0025baedbcb163823b3794a328934'
+ sha=lambda p:hashlib.sha256(P(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(P(p).read_bytes())
+ ap=argparse.ArgumentParser(description=__doc__)
+@@ -17,7 +17,7 @@
+ assert sha('/etc/vast-agents-guide.md')==GUIDE and sha(base/'source/FILES_SHA256.json')==PACKAGE and sha(base/'source/check_saved.py')==CHECK
+ assert a.post_replay_preflight.is_absolute() and a.post_replay_preflight.is_relative_to('/workspace/guardfed_checks') and sha(a.post_replay_preflight)==a.post_replay_preflight_sha256
+ pre=read(a.post_replay_preflight)
+-assert all(pre[k] is True for k in ('fl_evaluation_service_exited','cpu110_all_thread_free','hybrid_replay_service_exited','source_model_data_hashes_verified','gpu_health_verified','cgroup_and_memory_headroom_verified','storage_headroom_verified'))
++assert all(pre[k] is True for k in ('fl_evaluation_service_exited','cpu110_all_thread_free','hybrid_replay_service_exited','previous_Hybrid8_service_exited','previous_replay_workers_absent','source_model_data_hashes_verified','gpu_health_verified','cgroup_and_memory_headroom_verified','storage_headroom_verified'))
+ assert pre['guide_sha256']==GUIDE and pre['package_sha256']==PACKAGE and pre['gate_result_sha256']==a.gate_result_sha256
+ age=(datetime.datetime.now(datetime.timezone.utc)-datetime.datetime.fromisoformat(pre['utc'])).total_seconds();assert 0<=age<=300
+ assert os.sched_getaffinity(0)=={110} and os.getpriority(os.PRIO_PROCESS,0)>=10 and os.environ['CUDA_VISIBLE_DEVICES']==''
+@@ -26,14 +26,14 @@
+ memory_max=P('/sys/fs/cgroup/memory.max').read_text().strip();memory_current=int(P('/sys/fs/cgroup/memory.current').read_text())
+ assert memory_max=='max' or memory_current+512*1024**2<int(memory_max)
+ assert shutil.disk_usage(base).free>1024**3
+-for name in ('guardfed_hybrid_missing8_valid','guardfed_flgmm_FFlip10_capacity_pool32_valid'):
++for name in ('guardfed_hybrid_screen91001_valid','guardfed_hybrid_missing8_valid','guardfed_flgmm_FFlip10_capacity_pool32_valid'):
+  q=subprocess.run(['supervisorctl','status',name],capture_output=True,text=True)
+  assert q.returncode==3 and q.stdout.split()[:2]==[name,'EXITED'],q.stdout
+ for proc in P('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   command=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(P(token).name=='candidate.py' and any(ns in token for ns in ('celeba_hybrid_three_view_missing8_20261011','fl_FFlip10_capacity_pool32_20261011')) for token in command),'Live replay worker'
++  assert not any(P(token).name=='candidate.py' and any(ns in token for ns in ('celeba_hybrid_screen91001_single_20261011','celeba_hybrid_three_view_missing8_20261011','fl_FFlip10_capacity_pool32_20261011')) for token in command),'Live replay worker'
+   assert not any(P(token).name=='check_saved.py' for token in command),'Existing saved checker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+--- original/transport.py
++++ screen1/transport.py
+@@ -1,4 +1,4 @@
+-"""Root-only one-shot transport; original exact3 ZIP/member checks, exact8 Hybrid scope."""
++"""Root-only one-shot transport; original exact3 ZIP/member checks, exact1 Hybrid scope."""
+ from pathlib import Path
+ import argparse, hashlib, json, shlex, subprocess, zipfile
+ from contract import HERE, IDS, PACKAGE, digest_arg, fpath, gate_proof, linux_proof, need, read, save, sha, utc, volume
+@@ -21,7 +21,7 @@
+     remote=(HERE/'transport_remote.py').read_text(encoding='utf-8')
+     for marker,value in [('__GATE_RESULT_SHA256__',a.gate_result_sha256),('__LINUX_PROOF_SHA256__',a.linux_proof_sha256)]:
+         need(remote.count(marker)==(2 if marker=='__GATE_RESULT_SHA256__' else 1),'Template binding differs');remote=remote.replace(marker,value)
+-    archive=dest/'hybrid_missing8_saved_arrays_and_receipts.zip'
++    archive=dest/'hybrid_screen91001_saved_arrays_and_receipts.zip'
+     if not a.verify_existing:
+         save(out/'TRANSPORT_COMMAND.json',{'utc':utc(),'CPU':110,'threads':1,'gate_result_sha256':a.gate_result_sha256,'linux_proof_sha256':a.linux_proof_sha256,'remote_source_sha256':hashlib.sha256(remote.encode()).hexdigest(),'destination':dest.as_posix(),'storage':vol})
+         (out/'TRANSPORT_REMOTE_BOUND.py').write_text(remote,encoding='utf-8')
+@@ -49,7 +49,7 @@
+     remote_report=candidates[0]
+     need(sha(archive)==remote_report['archive_sha256'] and archive.stat().st_size==remote_report['archive_bytes'],'Archive transport SHA/size differs')
+     expected={'bundle/GATE_RESULT.json','bundle/metadata_receipt.json','LINUX_SAVED_CHECK.json'}|{'bundle/'+i+'/'+n for i in IDS for n in ('receipt.json','validation_predictions.npz')}
+-    need(remote_report['members']==len(expected)+1==20,'Archive layout differs')
++    need(remote_report['members']==len(expected)+1==6,'Archive layout differs')
+     extract=dest/'verified_extract';extract.mkdir()
+     with zipfile.ZipFile(archive) as z:
+         need(len(z.namelist())==len(expected)+1 and set(z.namelist())==expected|{'TRANSPORT_MANIFEST.json'},'Missing/duplicate/extra ZIP member')
+@@ -65,7 +65,7 @@
+     need(sha(extract/'LINUX_SAVED_CHECK.json')==a.linux_proof_sha256 and sha(extract/'bundle/GATE_RESULT.json')==a.gate_result_sha256,'External gate/Linux proof SHA differs')
+     linux_proof(read(extract/'LINUX_SAVED_CHECK.json'));gate_proof(read(extract/'bundle/GATE_RESULT.json'))
+     need(read(extract/'LINUX_SAVED_CHECK.json')['gate_result_sha256']==a.gate_result_sha256,'Whole Linux proof belongs to another gate')
+-    save(out/'TRANSPORT_VERIFICATION.json',dict(status='HYBRID_MISSING8_F_SAVED_MEMBERS_SHA_PASS',package_sha256=PACKAGE,utc=utc(),storage=vol,archive_path=archive.as_posix(),archive_sha256=sha(archive),archive_bytes=archive.stat().st_size,members=manifest['members'],member_count=20,verified_extract=extract.as_posix(),gate_result_sha256=a.gate_result_sha256,linux_proof_sha256=a.linux_proof_sha256,explicit_existing_archive_verification=a.verify_existing,redownload=False,new_CNN=0,new_fit=0,new_training=0,test=False,root_adopted=False))
+-    print(json.dumps({'status':'TRANSPORT_PASS_NOT_ADOPTED','archive_sha256':sha(archive),'members':20,'proof_sha256':sha(out/'TRANSPORT_VERIFICATION.json')}))
++    save(out/'TRANSPORT_VERIFICATION.json',dict(status='HYBRID_SCREEN91001_F_SAVED_MEMBERS_SHA_PASS',package_sha256=PACKAGE,utc=utc(),storage=vol,archive_path=archive.as_posix(),archive_sha256=sha(archive),archive_bytes=archive.stat().st_size,members=manifest['members'],member_count=6,verified_extract=extract.as_posix(),gate_result_sha256=a.gate_result_sha256,linux_proof_sha256=a.linux_proof_sha256,explicit_existing_archive_verification=a.verify_existing,redownload=False,new_CNN=0,new_fit=0,new_training=0,test=False,root_adopted=False))
++    print(json.dumps({'status':'TRANSPORT_PASS_NOT_ADOPTED','archive_sha256':sha(archive),'members':6,'proof_sha256':sha(out/'TRANSPORT_VERIFICATION.json')}))
+ 
+ if __name__=='__main__':main()
+--- original/transport_remote.py
++++ screen1/transport_remote.py
+@@ -1,25 +1,27 @@
+ 
+ import datetime,hashlib,io,json,os,pathlib,subprocess,sys,zipfile
+-base=pathlib.Path('/workspace/guardfed_checks/celeba_hybrid_three_view_missing8_20261011')
++base=pathlib.Path('/workspace/guardfed_checks/celeba_hybrid_screen91001_single_20261011')
+ out=base/'outputs/attempt001'
+ assert hashlib.sha256(pathlib.Path('/etc/vast-agents-guide.md').read_bytes()).hexdigest()=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+-assert hashlib.sha256((base/'source/FILES_SHA256.json').read_bytes()).hexdigest()=='f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239'
+-assert hashlib.sha256((base/'source/check_saved.py').read_bytes()).hexdigest()=='1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924'
++assert hashlib.sha256((base/'source/FILES_SHA256.json').read_bytes()).hexdigest()=='9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d'
++assert hashlib.sha256((base/'source/check_saved.py').read_bytes()).hexdigest()=='9408f64db4fb68d53eee4d882d69f3d0a3a0025baedbcb163823b3794a328934'
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()=='__GATE_RESULT_SHA256__'
+ gate=json.loads((out/'GATE_RESULT.json').read_text())
+-ids=['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91003_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91004_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91005_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91006_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91007_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91008_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91009_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91010_fullcoverage']
+-assert gate['status']=='HYBRID_MISSING8_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
+-assert gate['package_sha256']=='f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239' and gate['root_adopted_new']==0 and gate['test'] is False
+-status=subprocess.run(['supervisorctl','status','guardfed_hybrid_missing8_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_hybrid_missing8_valid','EXITED'],status.stdout
++ids=['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91001_screen']
++assert gate['status']=='HYBRID_SCREEN91001_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
++assert gate['package_sha256']=='9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d' and gate['root_adopted_new']==0 and gate['test'] is False
++status=subprocess.run(['supervisorctl','status','guardfed_hybrid_screen91001_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_hybrid_screen91001_valid','EXITED'],status.stdout
+ fl_status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_capacity_pool32_valid'],capture_output=True,text=True)
+ assert fl_status.returncode==3 and fl_status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_capacity_pool32_valid','EXITED'],fl_status.stdout
++previous_status=subprocess.run(['supervisorctl','status','guardfed_hybrid_missing8_valid'],capture_output=True,text=True)
++assert previous_status.returncode==3 and previous_status.stdout.split()[:2]==['guardfed_hybrid_missing8_valid','EXITED'],previous_status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   command=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and any(ns in token for ns in ('celeba_hybrid_three_view_missing8_20261011','fl_FFlip10_capacity_pool32_20261011')) for token in command),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and any(ns in token for ns in ('celeba_hybrid_screen91001_single_20261011','celeba_hybrid_three_view_missing8_20261011','fl_FFlip10_capacity_pool32_20261011')) for token in command),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -30,12 +32,12 @@
+ proof=base/'LINUX_SAVED_CHECK.json'
+ assert hashlib.sha256(proof.read_bytes()).hexdigest()=='__LINUX_PROOF_SHA256__'
+ linux=json.loads(proof.read_text())
+-assert linux['status']=='HYBRID_MISSING8_LINUX_ORIGINAL_WHOLE_SAVED_PASS_NOT_ADOPTED'
+-assert len(linux['records'])==8 and [r['id'] for r in linux['records']]==ids
++assert linux['status']=='HYBRID_SCREEN91001_LINUX_ORIGINAL_WHOLE_SAVED_PASS_NOT_ADOPTED'
++assert len(linux['records'])==1 and [r['id'] for r in linux['records']]==ids
+ assert linux['original_check_saved_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ assert all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in linux['records'])
+-assert linux['new_CNN']==0 and linux['new_training']==0 and linux['test'] is False and linux['cached_root_refits']==8
+-assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239'
++assert linux['new_CNN']==0 and linux['new_training']==0 and linux['test'] is False and linux['cached_root_refits']==1
++assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d'
+ files={'bundle/GATE_RESULT.json':out/'GATE_RESULT.json','bundle/metadata_receipt.json':out/'metadata_receipt.json','LINUX_SAVED_CHECK.json':proof}
+ for ident in ids:
+  for name in ['receipt.json','validation_predictions.npz']:files['bundle/'+ident+'/'+name]=out/ident/name
+@@ -51,7 +53,7 @@
+ for row in linux['records']:
+  assert row['receipt_sha256']==observed['bundle/'+row['id']+'/receipt.json']['sha256'] and row['array_sha256']==observed['bundle/'+row['id']+'/validation_predictions.npz']['sha256']
+ for rel,path in files.items():assert hashlib.sha256(path.read_bytes()).hexdigest()==observed[rel]['sha256']
+-report={'status':'HYBRID_MISSING8_SAVED_ARRAY_TRANSPORT_SOURCE_MEMBERS_UNCHANGED_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'members':observed,'exact_ids':ids,'service':status.stdout,'test':False,'new_CNN':0,'new_fit':0,'model_or_images_downloaded':False}
++report={'status':'HYBRID_SCREEN91001_SAVED_ARRAY_TRANSPORT_SOURCE_MEMBERS_UNCHANGED_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'members':observed,'exact_ids':ids,'service':status.stdout,'test':False,'new_CNN':0,'new_fit':0,'model_or_images_downloaded':False}
+ bio=io.BytesIO()
+ with zipfile.ZipFile(bio,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+  for rel,b in payload.items():z.writestr(rel,b)
+--- original/windows_runtime_wrapper.py
++++ screen1/windows_runtime_wrapper.py
+@@ -8,13 +8,13 @@
+ import ast,hashlib,json,runpy,sys,types
+ 
+ R=Path(__file__).resolve().parents[2]
+-C=R/'tmp/hybrid_missing8_pool32_runtime_prepared_20261011'
++C=R/'tmp/hybrid_screen91001_single_replay_prepared_20261011'
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ assert sys.platform=='win32' and '--mode' in sys.argv
+ assert sys.argv[sys.argv.index('--mode')+1]=='windows-saved-output'
+ assert '--allow-saved-output-zero-fit' in sys.argv and '--allow-original-cached-root-refit' not in sys.argv
+-assert sha(C/'FILES_SHA256.json')=='f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239'
+-assert sha(C/'check_saved.py')=='1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924'
++assert sha(C/'FILES_SHA256.json')=='9be2ce96b4548144903e9e928567efa96565326917e2363f1ad11712ca44015d'
++assert sha(C/'check_saved.py')=='9408f64db4fb68d53eee4d882d69f3d0a3a0025baedbcb163823b3794a328934'
+ assert sha(C/'originals/replay.py')=='8476d651bd281d97d6fed42feac5569b45ab0e881b047a7962201e6c0b300803'
+ source=(C/'check_saved.py').read_text(encoding='utf8')
+ rt_fields=[n.attr for n in ast.walk(ast.parse(source)) if isinstance(n,ast.Attribute) and isinstance(n.value,ast.Name) and n.value.id=='rt']

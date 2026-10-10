@@ -1,0 +1,48 @@
+"""Pure metadata/compile guard fixtures; never call adoption or saved science."""
+from pathlib import Path
+import ast,copy,difflib,hashlib,json,runpy
+H=Path(__file__).resolve().parent;R=H.parents[1]
+P=R/'tmp/fl_FFlip10_capacity_pool32_20261011/adopt_root.py';N=H/'adopt_root.py'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(name,value):
+ with (H/name).open('x',encoding='utf8',newline='\n') as f:json.dump(value,f,indent=2,ensure_ascii=False,allow_nan=False);f.write('\n')
+def function(raw,name):
+ node=next(n for n in ast.parse(raw).body if isinstance(n,ast.FunctionDef) and n.name==name)
+ return b''.join(raw.splitlines(keepends=True)[node.lineno-1:node.end_lineno])
+def main():
+ assert sha(P)=='49b520aa1b341fe0aec007c5d6b71bad3baea5d6c0aef98bb456618f92242e0'
+ original=P.read_bytes();current=N.read_bytes();compile(current,str(N),'exec')
+ ns=runpy.run_path(str(N),run_name='source_only_metadata_fixtures')
+ pins={}
+ for role,path in ns['expected_files']().items():
+  assert path.is_file(),(role,str(path))
+  pins[role]={'path':ns['pin_path'](path),'sha256':sha(path),'bytes':path.stat().st_size}
+ diagnostic=json.loads((ns['A']/'ROOT_EXACT_DIAGNOSTIC_DIFFERENCES.json').read_bytes())
+ screen_diagnostic=json.loads((ns['SA']/'ROOT_EXACT_DIAGNOSTIC_DIFFERENCES.json').read_bytes())
+ template={'status':'ACTUAL_INPUT_PIN_TEMPLATE_REQUIRES_ROOT_REVIEW_AND_EXPLICIT_ADOPTION','adoption_source_sha256':sha(N),'exact_ids':ns['IDS'],'screen_exact_ids':[ns['SCREEN_ID']],'files':pins,'exact_root_receipt_differences':diagnostic['exact_differences'],'screen_exact_root_receipt_differences':screen_diagnostic['exact_differences']}
+ ns['validate_inputs'](template)
+ cases=[]
+ for label,change in [('wrong_exact_ID',lambda x:x['exact_ids'].reverse()),('unexpected_evidence_role',lambda x:x['files'].update(extra=x['files']['candidate_seal'])),('unreviewed_exact_difference',lambda x:x['exact_root_receipt_differences'][ns['IDS'][2]].clear())]:
+  trial=copy.deepcopy(template);change(trial)
+  try:ns['validate_inputs'](trial)
+  except ValueError as e:cases.append({'case':label,'refused':True,'reason':str(e)})
+  else:raise AssertionError('Guard admitted '+label)
+ raw_functions={name:function(original,name)==function(current,name) for name in ['sha','need','check_seal']}
+ assert all(raw_functions.values())
+ parent_text=original.decode('utf8');new_text=current.decode('utf8')
+ archive_loop=" for rel,pin in t['members'].items():\n  path=extract/rel;need(path.resolve().is_relative_to(extract) and sha(path)==pin['sha256'] and path.stat().st_size==pin['bytes'],'Saved output member differs')"
+ assert archive_loop in parent_text and new_text.count(archive_loop)==2
+ old_row=next(n for n in ast.walk(ast.parse(original)) if isinstance(n,ast.For) and isinstance(n.target,ast.Tuple) and [x.id for x in n.target.elts]==['row','g','l','w'])
+ new_rows=[n for n in ast.walk(ast.parse(current)) if isinstance(n,ast.For) and isinstance(n.target,ast.Tuple) and [x.id for x in n.target.elts]==['row','g','l','w']]
+ def calls(loop):return [ast.dump(n,include_attributes=False) for n in loop.body if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Name) and n.value.func.id=='need']
+ unchanged=[len(set(calls(old_row)) & set(calls(loop))) for loop in new_rows]
+ assert len(new_rows)==2 and unchanged==[6,6],unchanged
+ # Standard ndiff inverse checks the complete source, including newline bytes.
+ nd=list(difflib.ndiff(parent_text.splitlines(keepends=True),new_text.splitlines(keepends=True)))
+ assert ''.join(difflib.restore(nd,1)).encode('utf8')==original
+ diff=''.join(difflib.unified_diff(parent_text.splitlines(keepends=True),new_text.splitlines(keepends=True),fromfile=str(P),tofile=str(N)))
+ (H/'SOURCE_DIFF.patch').write_bytes(diff.encode('utf8'))
+ save('ROOT_INPUTS.template.json',template)
+ save('SOURCE_CHECK.json',{'status':'PREPARED_FIXED_HYBRID8_PLUS_SCREEN1_SOURCE_AND_METADATA_GUARDS_PASS_NO_ADOPTION','parent_source':str(P),'parent_source_sha256':sha(P),'source_sha256':sha(N),'compiled':['adopt_root.py','check_source.py'],'actual_evidence_roles':len(pins),'all_actual_role_files_hashed':True,'original_utility_functions_raw_bytes_exact':raw_functions,'original_member_SHA_loop_raw_exact_in_both_fixed_batches':True,'original_per_record_guard_AST_statements_unchanged_per_batch':unchanged,'changed_per_record_guard':'Original FL saved_threshold_predictions_metrics_counts_exact is rebound to actual Hybrid saved_predictions_metrics_counts_exact; method, counts, phases and source proof schema rebound. No numeric formula or tolerance replacement.','complete_source_inverse_to_parent_raw_bytes_exact':True,'metadata_positive_fixture':True,'refusal_fixtures':cases,'exact8_actual_Windows_report_sha256':pins['Windows_zero_fit_audit']['sha256'],'screen_actual_Windows_report_sha256':pins['screen_Windows_zero_fit_audit']['sha256'],'diagnostic_maps_bound_exactly':True,'adoption_executed':False,'arrays_or_models_read':False,'CNN_or_fit_or_scientific_checks_executed':False,'source_preparation_schema_correction':'Old exact3 root lists SCIENCE_STDERR.txt rather than PRESERVED_WINDOWS_FAILURE.json. Fixed failure document SHA and its stderr SHA are explicitly linked; no old evidence changed.'})
+ print(json.dumps({'status':'SOURCE_ONLY_PASS','source_sha256':sha(N),'source_check_sha256':sha(H/'SOURCE_CHECK.json'),'actual_roles':len(pins)}))
+if __name__=='__main__':main()

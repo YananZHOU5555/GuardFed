@@ -1,0 +1,127 @@
+{
+  "candidate_parent": {
+    "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_pool32_runtime_prepared_20261011/candidate.py",
+    "sha256": "0d1dc5f52f67c87e4759c1468a2701a5a0144af41a899202a2658e0fdc158cd6",
+    "bytes": 15494
+  },
+  "candidate_replacements": [
+    [
+      "IDS = ['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed%d_fullcoverage' % n for n in range(91003, 91011)]",
+      "IDS = ['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91001_screen']"
+    ],
+    [
+      "celeba_hybrid_three_view_missing8_20261011",
+      "celeba_hybrid_screen91001_single_20261011"
+    ],
+    [
+      "guardfed_hybrid_missing8_valid",
+      "guardfed_hybrid_screen91001_valid"
+    ],
+    [
+      "HYBRID_MISSING8",
+      "HYBRID_SCREEN91001"
+    ],
+    [
+      "_hybrid_missing8",
+      "_hybrid_screen91001"
+    ],
+    [
+      "HYBRID_ADOPTED_BENIGN_MISSING8_CANARY_FIRST_SOURCE_ONLY",
+      "HYBRID_ADOPTED_SCREEN91001_SINGLE_SOURCE_ONLY"
+    ],
+    [
+      "m['previously_accepted_skip_ids'] == [IDS[0].replace('91003', '91002')]",
+      "m['previously_accepted_skip_ids'] == [] and m['phase'] == 'screen' and m['selection_seed'] is True"
+    ],
+    [
+      "1434b40de5116bf3d53bc5a6ae2bd3b90f4e54222f23ad099ff72b1fd3ef1775",
+      "26bab727c431679b2913ac76cefe7dc28729c49d660bb3c8141489426bd28e6d"
+    ],
+    [
+      "    require(m['existing_replay_root_pin']['sha256'] == '631d7ee2acf1cbe3453d849523e262f29ff5b354b5ddb56c60e5779e94364456', 'Prior replay root changed')\n",
+      ""
+    ],
+    [
+      "91003 + IDS.index(row['id'])",
+      "91001"
+    ],
+    [
+      "p['FL_replay_runtime_verified'] is True",
+      "p['FL_replay_service_exited'] is True and p['previous_Hybrid8_service_exited'] is True and p['previous_replay_workers_absent'] is True"
+    ],
+    [
+      "Exactly8 adopted Hybrid IID Benign checkpoints; first91003 canary then seven sequentially; not full100, test, ranking, final-primary or CUDA equivalence",
+      "Exactly1 adopted Hybrid screen91001 checkpoint; selection history retained, not new formal training, full100, test, ranking, final-primary or CUDA equivalence"
+    ],
+    [
+      "Canary failed; remaining seven forbidden",
+      "Single native canary failed; stop without retry"
+    ],
+    [
+      "Prepared exact8 Hybrid replay. First91003 must pass before the remaining seven.",
+      "Prepared single accepted Hybrid screen91001 replay. No new formal training."
+    ],
+    [
+      "Exact8 order required",
+      "Exact1 screen identity required"
+    ],
+    [
+      "Native8 root changed",
+      "Original screen native root changed"
+    ]
+  ],
+  "saved_parent": {
+    "path": "E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_three_view_missing8_prepared_20261011/check_saved.py",
+    "sha256": "1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924",
+    "bytes": 18374
+  },
+  "saved_replacements": [
+    [
+      "HYBRID_MISSING8",
+      "HYBRID_SCREEN91001"
+    ],
+    [
+      "guardfed_hybrid_missing8_valid",
+      "guardfed_hybrid_screen91001_valid"
+    ],
+    [
+      "'hybrid_three_view_missing8' in t",
+      "'hybrid_screen91001_single' in t"
+    ],
+    [
+      "Exact19 saved members required",
+      "Exact5 saved members required"
+    ],
+    [
+      "linux['cached_root_refits'] == 8",
+      "linux['cached_root_refits'] == 1"
+    ],
+    [
+      "Whole exact8 incomplete",
+      "Whole exact1 incomplete"
+    ],
+    [
+      "cached_root_refits=8 if linux_mode else 0, fit_calls=8 if linux_mode else 0",
+      "cached_root_refits=1 if linux_mode else 0, fit_calls=1 if linux_mode else 0"
+    ],
+    [
+      "records=8, fit_calls=",
+      "records=1, fit_calls="
+    ],
+    [
+      "pre['hybrid_replay_service_exited'] is True",
+      "pre['hybrid_replay_service_exited'] is True and pre['previous_Hybrid8_service_exited'] is True and pre['previous_replay_workers_absent'] is True"
+    ]
+  ],
+  "private_bridge_parent": {
+    "path": "E:/OneDrive/文档/GuardFed/tmp/celeba_hybrid_three_view_bridge_20261011/bridge.py",
+    "sha256": "db54596162dffdb58aa634b35239f78c06d6832ab60ab0aa12b3fd0dde545ca0",
+    "bytes": 11013
+  },
+  "private_bridge_scope": "identity_record binds original screen proof schema; science delegation unchanged",
+  "input_review": {
+    "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_screen91001_identity_gap_review_20261011/MINIMAL_INPUT_PINS.json",
+    "sha256": "a71896812f2065856c4991a181ad9fc935a5a57aca0282b690eb2790a6e0c848",
+    "bytes": 20750
+  }
+}

@@ -1,0 +1,100 @@
+--- tmp/celeba_flgmm_seven_scenes70_20261011/build.py
++++ tmp/fl_seven_scene_table_prepared_20261011/build.py
+@@ -1,6 +1,7 @@
+ """Build descriptive FLGMM tables from 71 root-adopted compact saved receipts only."""
+ from pathlib import Path
+ import argparse
++from input_contract import validate_binding, validate_new_rows
+ from collections import defaultdict,Counter
+ from statistics import mean,stdev
+ import ast,copy,csv,datetime,hashlib,json,subprocess
+@@ -29,14 +30,15 @@
+  volume=json.loads(subprocess.check_output(['powershell','-NoProfile','-Command','Get-Volume -DriveLetter F | Select-Object FileSystemLabel,HealthStatus,SizeRemaining | ConvertTo-Json -Compress'],text=True));need(volume['FileSystemLabel']=='Yanan 2TB' and volume['HealthStatus']=='Healthy','Required F evidence volume unavailable')
+  ap=argparse.ArgumentParser();ap.add_argument('--binding-sha256',required=True);args=ap.parse_args()
+  need(sha(H/'ROOT_BINDING.json')==args.binding_sha256,'Actual adopted71 binding differs')
+- binding=read(H/'ROOT_BINDING.json');need(binding['root_adopted'] is True,'Root71 adoption required before build')
++ binding=read(H/'ROOT_BINDING.json');validate_binding(binding)
+  root=read(R/binding['root71'],binding['root71_sha256']);old=read(ROOT61,ROOT61_SHA)
+  need(root['root_adoption'] is True and root['FLGMM_total_three_view_records']==71 and root['new_three_view_records_accepted']==10,'Actual71 adoption required')
+  need(root['Linux_whole_original_saved_check_pass'] and root['Windows_saved_outputs_audit_pass'] and root['Windows_saved_outputs_audit_fit_calls']==0 and root['Windows_whole_saved_check_pass'] is False,'Complementary evidence incomplete')
+  need(root['records'][:60]==old['records'] and root['prior_interface_explicitly_reused']==old['prior_interface_explicitly_reused'],'Prior61 root objects/order differ')
+  expected=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed'+str(seed)+'_fullcoverage' for seed in range(91001,91011)]
+- need([r['id'] for r in root['new_records']]==expected and root['records']==old['records']+root['new_records'],'Exact new10 root list required')
++ validate_new_rows(root['new_records']);need([r['id'] for r in root['new_records']]==expected and root['records']==old['records']+root['new_records'],'Exact new10 root list required')
+  oldroot=read(OLD_TABLE/'ROOT_VERIFICATION.json','a7ed22f1f6366135b361433581ad59a76aa52271ba0516cd0bb11efc18e9eef0')
++ for name in ('records61.json','tables.json','TABLES.md','cells.csv','CAPTION.md'):need(sha(OLD_TABLE/name)==oldroot['adopted_outputs'][name],'Prior adopted table bytes changed')
+  olddata=read(OLD_TABLE/'records61.json','aecacb19c1b984a44c0f0f805e9921f52b2cde0b5fda063a7d4183c2d0c67b6b')
+  oldtables=read(OLD_TABLE/'tables.json','c20b22f8d42b2672aee2ff8706efeb18c2ed2ee1a5c9581b62bf9f4fc04dcaf1')
+  need([r['root_adoption_record'] for r in olddata['records']]==old['records']+old['prior_interface_explicitly_reused'],'Accepted old table root/order differs')
+@@ -75,18 +77,24 @@
+  summaries=[]
+  for view in VIEWS:
+   groups=defaultdict(list)
+-  for r in complete:groups['FLGMM',r['distribution'],r['attack']].append(dict(r,**{k:r['views'][view][k] for k,_,_,_ in METRICS}))
++  for r in complete:
++   if r['id'] not in expected:continue
++   groups['FLGMM',r['distribution'],r['attack']].append(dict(r,**{k:r['views'][view][k] for k,_,_,_ in METRICS}))
+   fn_ns={'groups':groups,'mean':mean,'stdev':stdev,'metrics':METRICS};exec(compile(ast.Module(body=[fn],type_ignores=[]),'<unchanged original values_for>','exec'),fn_ns)
+   for panel,ss in seeds.items():
+    cells=[]
+-   for d,a in SCENES:
++   for d,a in SCENES[-1:]:
+     rows=sorted([r for r in groups['FLGMM',d,a] if r['seed'] in ss],key=lambda r:r['seed']);need([r['seed'] for r in rows]==ss,'Panel seed membership differs')
+     display=fn_ns['values_for']('FLGMM',d,a,ss,True)
+     cells.append({'distribution':d,'attack':a,'n':len(ss),'ids':[r['id'] for r in rows],'metrics':{k:{'mean':mean(r[k] for r in rows),'sample_sd':stdev(r[k] for r in rows),'display':display[i]} for i,(k,_,_,_) in enumerate(METRICS)}})
+-   summaries.append({'view':view,'panel':panel,'seeds':ss,'n':len(ss),'scenes':cells})
++   prior=next(p for p in oldtables['panels'] if p['view']==view and p['panel']==panel)
++   need(prior['seeds']==ss and prior['n']==len(ss),'Old fixed panel changed')
++   summaries.append(dict(copy.deepcopy(prior),scenes=copy.deepcopy(prior['scenes'])+cells))
+  protocol=R/'tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage/source/protocol.json';p=read(protocol,'1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4')
+  need(p['selected_recipe']['id']=='FLGMM_Tg20_L2.0_lr0.001','Recipe source differs')
+  O.mkdir(parents=True)
++ for name in ('records61.json','tables.json','TABLES.md','cells.csv','CAPTION.md'):
++  (O/('PREVIOUS60_'+name)).write_bytes((OLD_TABLE/name).read_bytes())
+  need(ordered[:61]==olddata['records'],'Old61 normalized objects/order changed')
+  for newpan,oldpan in zip(summaries,oldtables['panels']):need(dict(newpan,scenes=newpan['scenes'][:6])==oldpan,'Old six scene statistics/order changed')
+  write('records71.json',{'root71_sha256':binding['root71_sha256'],'prior61_sha256':ROOT61_SHA,'old61_order_preserved_then_exact10_appended':True,'records':ordered,'table_records':70,'retained_partial_ids':[PARTIAL]})
+@@ -113,6 +121,6 @@
+   for pan in summaries:
+    for cell in pan['scenes']:
+     for k,_,_,_ in METRICS:w.writerow([pan['view'],pan['panel'],pan['n'],cell['distribution'],cell['attack'],k,cell['metrics'][k]['mean'],cell['metrics'][k]['sample_sd'],cell['metrics'][k]['display']])
+- write('SOURCE_BINDINGS.json',{'root71':{'path':str(R/binding['root71']),'sha256':binding['root71_sha256']},'prior61_sha256':ROOT61_SHA,'prior61_table_records_sha256':'aecacb19c1b984a44c0f0f805e9921f52b2cde0b5fda063a7d4183c2d0c67b6b','prior_six_scene_tables_sha256':'c20b22f8d42b2672aee2ff8706efeb18c2ed2ee1a5c9581b62bf9f4fc04dcaf1','old61_objects_order_unchanged':True,'old324_statistics_162_cells_unchanged':True,'sources':pins,'renderer':{'path':renderer.as_posix(),'sha256':sha(renderer),'values_for_source_sha256':hashlib.sha256(fn_text.encode()).hexdigest()},'panel_source':{'path':seed_source.as_posix(),'sha256':sha(seed_source)},'environment':env,'selection_rule':p['selection_rule'],'selected_recipe':p['selected_recipe'],'limitations':notes,'partial_retained_excluded':PARTIAL,'arrays_read':False,'new_fit':0,'new_CNN':0,'test':False,'builder_sha256':sha(__file__),'F_volume':volume})
++ write('SOURCE_BINDINGS.json',{'root71':{'path':str(R/binding['root71']),'sha256':binding['root71_sha256']},'prior61_sha256':ROOT61_SHA,'prior61_table_records_sha256':'aecacb19c1b984a44c0f0f805e9921f52b2cde0b5fda063a7d4183c2d0c67b6b','prior_six_scene_tables_sha256':'c20b22f8d42b2672aee2ff8706efeb18c2ed2ee1a5c9581b62bf9f4fc04dcaf1','old61_objects_order_unchanged':True,'old324_statistics_162_cells_unchanged':True,'new_scene_statistical_scalars':54,'new_scene_display_cells':27,'old_scene_statistics_recomputed':False,'sources':pins,'renderer':{'path':renderer.as_posix(),'sha256':sha(renderer),'values_for_source_sha256':hashlib.sha256(fn_text.encode()).hexdigest()},'panel_source':{'path':seed_source.as_posix(),'sha256':sha(seed_source)},'environment':env,'selection_rule':p['selection_rule'],'selected_recipe':p['selected_recipe'],'limitations':notes,'partial_retained_excluded':PARTIAL,'arrays_read':False,'new_fit':0,'new_CNN':0,'test':False,'builder_sha256':sha(__file__),'input_contract_sha256':sha(H/'input_contract.py'),'F_volume':volume})
+  print(json.dumps({'status':'FLGMM_SEVEN_SCENE_TABLE_BUILT_NOT_ROOT_TABLE_ADOPTED','records':71,'complete_records':70,'retained_partial':1,'mean_SD_pairs':189,'numeric_scalars':378,'panels':9,'new_fit':0,'new_CNN':0}))
+ if __name__=='__main__':main()
+--- tmp/celeba_flgmm_seven_scenes70_20261011/verify.py
++++ tmp/fl_seven_scene_table_prepared_20261011/verify.py
+@@ -23,7 +23,7 @@
+  need(partial==data['retained_partial_ids']==['FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen'],'Partial boundary differs')
+  need(sum(r['included_complete_scene'] for r in rows)==70,'Complete70 boundary differs')
+  verified_metrics=0;verified_counts=0;max_count_delta=0.;environments={};raw_native=0
+- for r in rows:
++ for r in rows[61:]:
+   receipt=read(r['receipt_path']);need(sha(r['receipt_path'])==r['receipt_sha256'] and receipt['checkpoint_sha256']==r['checkpoint_sha256'] and receipt['views']==r['views'] and receipt['fits']==r['fits'],'Saved accepted receipt differs')
+   need(r['terminal_round']==70 and r['evaluation_split']=='valid' and r['valid_n']==19867 and r['same_checkpoint_all_views'],'Round/split mismatch')
+   need(receipt['weights_before']==receipt['weights_after'] and receipt['valid_n']==19867,'Weight/count differs')
+@@ -51,6 +51,11 @@
+   need([(c['distribution'],c['attack']) for c in pan['scenes']]==scene_list,'Scene labels/order differ')
+   md_rows={k:[] for k in ['accuracy','aeod','aspd']}
+   for cell in pan['scenes']:
++   if (cell['distribution'],cell['attack'])!=('non-IID','F Flip'):
++    for metric in ['accuracy','aeod','aspd']:
++     actual=cell['metrics'][metric];display=actual['display'];md_rows[metric].append(display)
++     csv_expect.append([pan['view'],pan['panel'],str(cell['n']),cell['distribution'],cell['attack'],metric,str(actual['mean']),str(actual['sample_sd']),display])
++    continue
+    chosen=sorted([r for r in rows if (r['distribution'],r['attack'])==(cell['distribution'],cell['attack']) and r['seed'] in pan['seeds']],key=lambda r:r['seed'])
+    need([r['seed'] for r in chosen]==pan['seeds'] and [r['id'] for r in chosen]==cell['ids'],'Selected seed identity/order differs')
+    n=len(chosen);need(n==pan['n']==cell['n'],'Cell n differs')
+@@ -66,9 +71,10 @@
+  actual_display=[line for line in md.splitlines() if line.startswith(('| ACC (%) ↑ |','| AEOD ↓ |','| ASPD ↓ |'))];need(actual_display==expected_display,'Markdown labels/value/order differs')
+  with (O/'cells.csv').open(encoding='utf8',newline='') as f:csv_rows=list(csv.reader(f))
+  need(csv_rows[1:]==csv_expect,'CSV value/order differs')
+- need(verified_metrics==639 and verified_counts==1704 and scalars==378 and len(csv_expect)==189,'Verification denominator changed')
++ need(verified_metrics==90 and verified_counts==240 and scalars==54 and len(csv_expect)==189,'Verification denominator changed')
+  for newpan,oldpan in zip(table['panels'],read(OLD_TABLE/'tables.json')['panels']):need(dict(newpan,scenes=newpan['scenes'][:6])==oldpan,'Old324 statistics/162 cells/order changed')
+- report={'status':'INDEPENDENT_RECEIPT_COUNTS_FSUM_SAMPLE_SD_DISPLAY_PASS','records':71,'complete_scene_records':70,'retained_partial_records':1,'scene_count':7,'panels':9,'mean_SD_pairs':189,'statistical_scalars':378,'metrics_recomputed_from_counts':639,'integer_base_counts_verified':1704,'native_raw_equal_records':raw_native,'max_count_metric_absolute_difference':max_count_delta,'max_fsum_statistics_absolute_difference':max_stats_delta,'Markdown_cells_verified':189,'CSV_cells_verified':189,'partial_record_excluded_from_all_panels':True,'all_adopted_records_retained':True,'source_identity_pins_verified':len(b['sources']),'environment':[dict(zip(['training_torch','training_device','inference_torch','inference_device','n'],(*k,v))) for k,v in environments.items()],'arrays_read':False,'new_inference':0,'new_fit':0,'new_training':0,'test':False,'root_table_adopted':False,'verifier_sha256':sha(__file__),'outputs_sha256':{name:sha(O/name) for name in ['records71.json','tables.json','TABLES.md','cells.csv','SOURCE_BINDINGS.json']}}
++ for name in ('records61.json','tables.json','TABLES.md','cells.csv','CAPTION.md'):need((O/('PREVIOUS60_'+name)).read_bytes()==(OLD_TABLE/name).read_bytes(),'Old table bytes differ')
++ report={'status':'INDEPENDENT_RECEIPT_COUNTS_FSUM_SAMPLE_SD_DISPLAY_PASS','records':71,'complete_scene_records':70,'retained_partial_records':1,'scene_count':7,'panels':9,'mean_SD_pairs':189,'statistical_scalars':378,'new_scene_statistical_scalars_recomputed':54,'old324_statistics_preserved_not_recomputed':True,'metrics_recomputed_from_counts':90,'integer_base_counts_verified':240,'native_raw_equal_records':raw_native,'max_count_metric_absolute_difference':max_count_delta,'max_fsum_statistics_absolute_difference':max_stats_delta,'Markdown_cells_verified':189,'CSV_cells_verified':189,'partial_record_excluded_from_all_panels':True,'all_adopted_records_retained':True,'source_identity_pins_verified':len(b['sources']),'environment_scope':'new10 only; prior61 retained in source table','environment':[dict(zip(['training_torch','training_device','inference_torch','inference_device','n'],(*k,v))) for k,v in environments.items()],'arrays_read':False,'new_inference':0,'new_fit':0,'new_training':0,'test':False,'root_table_adopted':False,'verifier_sha256':sha(__file__),'outputs_sha256':{name:sha(O/name) for name in ['records71.json','tables.json','TABLES.md','cells.csv','SOURCE_BINDINGS.json']}}
+  with (O/'VERIFICATION.json').open('x',encoding='utf8') as f:json.dump(report,f,indent=2);f.write('\n')
+  print(json.dumps(report))
+ if __name__=='__main__':main()

@@ -1,0 +1,10 @@
+--- source_v1_unexecuted/adopt_root.py
++++ adopt_root.py
+@@ -54,6 +54,7 @@
+  # Fixed second batch only. The original member/per-record checks below remain
+  # the same; this is not a dynamic inventory or a future fullcoverage runner.
+  check_seal(S,SCREEN_PACKAGE)
++ need(sha(S/'check_saved.py')=='9408f64db4fb68d53eee4d882d69f3d0a3a0025baedbcb163823b3794a328934','Screen outer saved consumer differs')
+  m=read(S/'MANIFEST.json');ids=[SCREEN_ID]
+  need(m['exact_ids']==[r['id'] for r in m['records']]==ids and m['source_role']=='accepted_screen_reuse' and m['selection_seed'] is True and m['phase']=='screen' and m['new_formal_training']==0,'Screen identity/selection history differs')
+  need(m['native_tolerance']==1e-12 and m['views']==['native','raw','shared_calibration'] and m['device']=='cpu' and m['dtype']=='float32' and m['threads']==8,'Screen scientific policy differs')

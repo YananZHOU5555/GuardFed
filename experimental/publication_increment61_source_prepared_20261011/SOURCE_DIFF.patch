@@ -1,0 +1,21 @@
+--- source_v1/publish_guardfed_increment61_20261011.py
++++ publish_guardfed_increment61_20261011.py
+@@ -129,9 +129,17 @@
+ paths += [semantic_review,scope_path]
+ compact_limit=lambda p:2_000_000
+ allowed={'.py','.json','.md','.patch','.txt','.stderr','.stdout','.sha256','.csv','.tex','.diff'}
++NDIFF_ALLOWED_PATHS={
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/check_linux.py.ndiff',
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/contract.py.ndiff',
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/linux_saved_remote.py.ndiff',
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/transport.py.ndiff',
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/transport_remote.py.ndiff',
++    'tmp/hybrid_screen91001_saved_runtime_prepared_20261011/windows_runtime_wrapper.py.ndiff',
++}
+ paths=list(dict.fromkeys(paths))
+ for p in paths:
+-    assert p.is_file() and p.suffix in allowed and p.resolve().is_relative_to(R.resolve())
++    assert p.is_file() and (p.suffix in allowed or p.relative_to(R).as_posix() in NDIFF_ALLOWED_PATHS) and p.resolve().is_relative_to(R.resolve())
+ assert sum(p.stat().st_size for p in paths)<100_000_000
+ for p in paths:
+     assert p.stat().st_size<compact_limit(p) and not p.is_symlink()
