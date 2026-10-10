@@ -33,6 +33,9 @@ aux_row=(f'| FLGMM / 组合控制 | 已严格验收离机{fl_accepted}/32与{hy_
 aux_row=aux_row.replace(f'{fo["checked_utc"]}只读实测分别',f'两份只读快照分别为{fo["checked_utc"]}/{ho["checked_utc"]}，观测分别')
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
     aux_row=aux_row.replace('组合未选recipe，100项确认未启动',f'FLGMM七项短程严格离机后已启动96新+4复用，新增已严格离机{state["flgmm_fullcoverage_v2_20261009"].get("new_accepted",0)}/96、双GPU各1线程；组合未选recipe/100项未启动')
+if state.get('hybrid100_fullcoverage_20261010',{}).get('formal100_started'):
+    h=state['hybrid100_fullcoverage_20261010']
+    aux_row=aux_row.replace('组合未选recipe/100项未启动',f'组合已按冻结规则选λ20/τ0.1/lr0.001；七项短程严格离机后96新+4复用已启动，实际首轮通过，新增70轮接受{h.get("new_accepted",0)}/96，valid-only')
 text='\n'.join(resource_row if line.startswith('| 服务器与资源 |') else aux_row if line.startswith('| FLGMM / 组合控制 |') else line for line in text.split('\n'))
 text=text.replace('18:08 UTC实测；18:12 UTC验收','18:29 UTC实测；18:36 UTC验收')
 text=text.replace('69/65℃','68/66℃').replace('CPU11.02/122.88核，RAM75.14GB','CPU17.61/122.88核，RAM76.11GB')
@@ -206,6 +209,10 @@ if main.get('A_three_view_single_scene_table'):
         A_coverage_note='A20两完整IID场景表已独立采用：324统计/162展示/360计数指标/960基础计数通过；旧24记录及Benign162统计/81展示保持。F Flip native/shared删除A差约+0.001pp/+0.00001/−0.00088，9/6方向变化保留；其他八A场景未齐。'
     text+='\nA机制对照：原IID Benign十共享seed表保持；162统计/81单元/216计数指标通过。'+A_coverage_note+'Benign删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A机制三视图表]('+A_link+')。\n'
     new_stage_note+=' A IID Benign十seed三视图表已独立采用。'+A_coverage_note
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==28:
+    new_stage_note+=' A28新增准确八项IID FedSA已严格离机并独立连接native228、根采用：74成员/72指标/192计数/24规则及16原model/result哈希通过，native差0；FedSA仅8/10不生成场景均值，原A20表保持。'
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==36:
+    new_stage_note+=' 最新A36已严格离机并独立连接native236、根采用：本批74成员/72指标/192计数/24规则及16原model/result哈希通过，native差0，旧228前缀不变。IID FedSA十seed记录齐备；S-DFA仅6/10不入完整场景均值；原A20两场景表保持，新增场景统计尚未采用。'
 if state.get('author_adaptation_reply_patch_20261010'):
     new_stage_note+=' 两项适配决定的英文局部补丁已根核，24原评论/全部旧数字保持、两个替换段可逆；正文未应用，最终主终点未定。'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
@@ -214,6 +221,12 @@ if state.get('gradient200_new_attack_gates_source_20261010'):
     new_stage_note+=' 新攻击14项共同三轮门检仅源码独审通过，实际图像门检0，正式70轮验收不变。'
 if state.get('added_baseline_three_view_scope_20261010'):
     new_stage_note+=' 新增五方法三视图接线仅源码审查；四CNN须原strict身份桥，LoGo原生须保留DP状态/虚拟映射，不能用FedAvg raw cache冒充；底座raw/shared须明确标诊断，主终点未定。'
+if state['hybrid_screen32_20261009'].get('status')=='ROOT_HYBRID32_SUMMARY_ADOPTED':
+    new_stage_note+= ' 组合32项搜索已完整严格离机并独立采用，正常EXITED且0worker；冻结规则选λ20/τ0.1/lr0.001，同时为准确率冠军/唯一三指标Pareto候选。n=1不报跨seed SD或显著性，组合100格接线待记录状态接口修复及七个真实短程门检。'
+    new_stage_note=new_stage_note.replace('、未选完整recipe','、已完整选recipe').replace('、尚未选完整recipe','、已完整选recipe').replace('、尚未选recipe','、已完整选recipe')
+if state.get('hybrid100_fullcoverage_20261010',{}).get('formal100_started'):
+    new_stage_note=new_stage_note.replace('组合100格接线待记录状态接口修复及七个真实短程门检。',
+        '组合v3接线与七个真实三轮门检已严格离机并采用；96新+4复用验证覆盖已实际启动，70轮新增接受0，不把短程算正式样本。')
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 if state.get('celeba_native_ten_method_table_20261010'):
     text=text.replace('剩余8方法忠实实现和完整多种子覆盖','剩余7方法忠实实现和完整多种子覆盖')
@@ -281,6 +294,17 @@ if state.get('logofair100_fullcoverage_20261010'):
 if state.get('celeba_native_ten_method_table_20261010'):
     top=top.replace('8方法覆盖仍未齐','余7方法覆盖仍未齐')
     top+='十方法native千格表已独立采用，IID/non-IID各五场景、10/9/6面板；原九方法810统计对象保持，1800统计/900显示及540先seed内汇总统计/270显示通过；这不改变原900三视图范围，不是finaltest或完整17方法。入口'+state['celeba_native_ten_method_table_20261010']['table_path']+'。\n'
+if state['hybrid_screen32_20261009'].get('status')=='ROOT_HYBRID32_SUMMARY_ADOPTED':
+    top=top.replace('完整32闭合/择优前不启动Hybrid100','完整32已独立采用、冻结规则选λ20/τ0.1/lr0.001；100格待记录接线修复及七个真实短程门检')
+if state.get('hybrid100_fullcoverage_20261010'):
+    top=top.replace('100格待记录接线修复及七个真实短程门检','100格已实际绑定96新+4复用；七真实三轮门检已启动、首任务实测round2，正式96尚未启动')
+    h=state['hybrid100_fullcoverage_20261010']
+    if h['canaries_offserver_adopted']==7:
+        top=top.replace('七真实三轮门检已启动、首任务实测round2，正式96尚未启动','七真实三轮门检已严格离机root采用、254成员及两组同轮数对照通过，正式96尚未启动')
+        top+='组合七门服务已正常EXITED；三轮终轮权重/RNG摘要和记录通过不等于70轮等价，科学样本0。入口'+h['canary_closure_path']+'。\n'
+    if h['formal100_started']:
+        top=top.replace('正式96尚未启动','正式96新增70轮valid队列已实际启动、另4显式复用；首worker实测round1，新增70轮接受0')
+        top+='组合完整覆盖CPU104/GPU0单worker、一计算线程，真实worker/GPU UUID/源码数据配置与第一轮已核；旧canary AUTH原字节保存，无自动重试、不test。入口'+h['coverage_start_path']+'。\n'
 if main.get('three_view_counts_by_variant',{}).get('minus_A')==12:
     top=top.replace(f"Native累计{main['scientific_results_offserver_verified']}=U100完整+C{main['scientific_results_offserver_verified']-100}部分",f"Native累计{main['scientific_results_offserver_verified']}=U100+C100完整+A12部分")
     top+='\n当前A12新增三视图已严格离机并核native212恢复链，累计212；IID Benign十seed完整、F Flip仅两seed不入均值，场景表须另行采用。旧200/Full不重推。\n'

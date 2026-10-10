@@ -1,0 +1,464 @@
+{
+  "status": "READONLY_ACTUAL_HYBRID96_STARTUP_OBSERVATION_NOT_ACCEPTANCE",
+  "checked_utc": "2026-10-10T09:42:21.128532+00:00",
+  "service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_hybrid_fullcoverage   RUNNING   pid 85890, uptime 0:00:24\n",
+    "stderr": ""
+  },
+  "package_sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+  "authorization_sha256": "3d836cf25d62961e32bf80b2139f4f1c75c8b57f513509b5e30559ee41619604",
+  "workers": [],
+  "coordinators": [
+    {
+      "pid": 85890,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/run_fullcoverage.py",
+        "run",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded"
+      ]
+    }
+  ],
+  "terminal_records": [],
+  "failure_files": [],
+  "gate_acceptance": {
+    "status": "SEVEN_HYBRID_CANARIES_STRICT_PASS_BACKUP_PENDING",
+    "accepted_ids": [
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary",
+      "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary"
+    ],
+    "pairs": [
+      {
+        "hybrid": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+        "legacy": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy",
+        "all_metrics_model_attacks_diagnostics_rng_exact": true
+      },
+      {
+        "hybrid": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary",
+        "legacy": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy",
+        "all_metrics_model_attacks_diagnostics_rng_exact": true
+      }
+    ],
+    "artifact_hashes": {
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/resource_before.json": "5ee68f76eed4fda6b731dd8e8d20dbfbc6a919e4058139ecb2f0e6bab82e6dd5",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/provenance.json": "41868bf9e37a60db6308b47cd71c38eba0538e69579497cad9ca8799f01622e4",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/diagnostics.json": "15239c7e23e493a55578f497567a18b86d6452cec0a7f460f3c440432b713053",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/progress.json": "c3cd3e95b0a2fc9fa110f73e1eb3e8d45ea253c2afc6eee889ff609b36301c5e",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/model.pt": "bef0b81a67274d91f6c6af480629eb163c4b0070823ef6e6f1f55c357214f570",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/result.json": "88cc0d44f47c86a67cb55ff3bab15c5419c45505a9398586451c7c718871f8ef",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/undefined_diagnostics.json": "5b53c7cde5951e80a568c50c8ea0c8768cab08b669a1fbbfe63473946906f49d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/resource_after.json": "7c419dd77f48420ff7525598cb5c0b7f4403ae2c88504ccfcf9660cffe2adaf2",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/native_replay.json": "a6d3d1185e8cb54bf9f48a086826df0055ec30e9772a472221648c61df238be0",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary/acceptance.json": "b0c5b82f280f1171e51efc2e261c4065b374f3c7928fa55abef5928583f52211",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/resource_before.json": "4827ed713b2e026124f8b074e5aa3febf15b7a69317828b3682981c76b0cfee7",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/provenance.json": "44e0f40e90d4efdb2f3151495c448a8b164e3db0c911b10164e88f56443feeea",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/diagnostics.json": "d238a60270ccdc827b7a13d9cb29305574c14c8e710210198fcb10c46f4612b4",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/progress.json": "49f9e26dc9c3ba2cdc662e453242596edee93918caca153f1d78704c91a808d9",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/model.pt": "bef0b81a67274d91f6c6af480629eb163c4b0070823ef6e6f1f55c357214f570",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/result.json": "3b42f6abc6da7c1da2a477aa8caa258bc199a585dc80b62c8427cc0398d26228",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/undefined_diagnostics.json": "b9aefca3247e8d9c227fa950db503c598054478239e0d1b91273aeae530857fd",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/resource_after.json": "162618fe3e3608a9ba5ad2cecc2fb7af272ca8860cd7123c7b5f67e314104620",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/native_replay.json": "a6d3d1185e8cb54bf9f48a086826df0055ec30e9772a472221648c61df238be0",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy/acceptance.json": "cc7f729628e702e2aef99369e534306b3168c9d0dfa7a8969468ecc82086e15a",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/resource_before.json": "788a7a6d16dacfef37175d18a89a9e819be8aaa043c07701d1ec1d43d33d49e4",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/provenance.json": "d531c72b856101c71e159159bd57e99ce18fc9a296aa85648640947d173f0d07",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/diagnostics.json": "675e5d1292e9ba6c8ccf51634145639483129129773f476e5cfeea169fb52088",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/progress.json": "0160db09f366cb4683c1c760d3108311e6c2bae0cf12b51350491f99aebc2890",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/model.pt": "44f32708166f106f66d35c681da4ddcfa36e002e85d2bfdf17d9b221127adb76",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/result.json": "4fe6d8ce84ca3facd437489a0cd838ad4771d604367fdd2bece78ac1ab847061",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/undefined_diagnostics.json": "9fdc66f8743f72a20146e3aba0b526a406d27e48f654b64f978e0fff061a8fd3",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/resource_after.json": "2533b65178ab5e87a131b38ba31a1fd6bb5a8e408ac3ff45e4b26cec683c63a7",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/native_replay.json": "44c162cc0655eeb6e074c57f3026671f0faa7d8fde74cc31a92496609d338117",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary/acceptance.json": "71d68f733cb905ffef0937e95c63c45d47ebbc93ffb492b5466718fb78916b4a",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/resource_before.json": "57ed1b82712fde658ba165f2c4323e2ce9f9ac43eba5240ec1c8add420bbfed4",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/provenance.json": "1e960e66325bd0f04b0200ee5527c0305de816a4596a20643f45b87bdead581b",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/diagnostics.json": "ce089771e78c3c69bc44a42782b954000f855b5777614d0fb72332b725fef01f",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/progress.json": "64b9e21293af654d669fd972a1b551f1b7919eec09cc8f5fd6e824a926ef4076",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/model.pt": "44f32708166f106f66d35c681da4ddcfa36e002e85d2bfdf17d9b221127adb76",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/result.json": "f1c8cff18a515d7d51030cea77ae161c4968fb328e1c3a214de6e73d54643b7f",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/undefined_diagnostics.json": "fce3ddc435eb9a8eb382d73da8805fbbbef71a36d22557d23a1da17334f605c0",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/resource_after.json": "66303daa85103fca771bbc73e69f53312f8f7e57ac762946ee040a1b33bfc65a",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/native_replay.json": "44c162cc0655eeb6e074c57f3026671f0faa7d8fde74cc31a92496609d338117",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy/acceptance.json": "07a69cf3a62ca26a3b8adf9f576056bc9b819319654060d39de8b95a141e5e1e",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/resource_before.json": "870e4a2441ed391698b74eb603ae0408e2e16386c5833f37c49e431433288e39",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/provenance.json": "84d5fe3596b5ddedb619aa6303e88e3a3a4c1973393751d140ddae50a52c5664",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/diagnostics.json": "ac278d65e0ba2cd9a021de4a16090dcdb4d17ce7c83d849149b56a3b00a00493",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/progress.json": "64dce5189940665e4a5ad4cab5914c6f25f4466ef473e9cdb6914587c9e61133",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/model.pt": "4b0e632ad3264dd7ace3a89e657cb444b9b36f63bceb40796c0307ea8e34e4ee",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/result.json": "6a414584d39c94233c3f88f26b91ade583cf3b555a263e800fc5df667b9da9cc",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/undefined_diagnostics.json": "8ef2f8d1a3d46fb04568fb372aee97056847637601026bc78a20cef96cc6fe9a",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/resource_after.json": "ddcfacfa1c851466347e6efd010ec9da644c460f5690c45494b6e8ac28954bf2",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/native_replay.json": "6a2d6ca4dd1eb2b94ea824205220070e2bd040b736d0dac23c25eb29f0ca036f",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary/acceptance.json": "813444055bc071878ba8a48ab35e3eb8cfe774bbaa88ad0c766f66467c266de3",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/resource_before.json": "8fd641687a706862f1eaacb607fed1483e127bdbc1db42f1dcb3ae4059f3a2f8",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/provenance.json": "1ac0f5050dcc82dec0c52c20d59c4903ef286772f78ff5767324f54d1c2ffcb1",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/diagnostics.json": "6017db88aeaa8f2469c459c15eedf42c1a6db2a4b946addff79b1cd6b68284ee",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/progress.json": "f00a38dd4d0bfa68c6062d2837f414dfbe79e593581308977779fbb58d446c6d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/model.pt": "44f32708166f106f66d35c681da4ddcfa36e002e85d2bfdf17d9b221127adb76",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/result.json": "75eef6b0fd8e9de922190c1fd9be9fefdd2f1c29ec13272acbd04c8877a975f1",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/undefined_diagnostics.json": "2a2d10b67e7da368d8bed980c105db4a5815742fbec0bc7636fb8e05fc072b77",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/resource_after.json": "0abe2213df5c0c65d49a3fae14ca2fce709cdeadb10922562f8f574b092f6bd9",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/native_replay.json": "44c162cc0655eeb6e074c57f3026671f0faa7d8fde74cc31a92496609d338117",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary/acceptance.json": "6ceac89a5a7a2b60d22d019a37f1b6161616a73900c53dd2ec4ee39865296a3c",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/resource_before.json": "f189e4841390c1686e55889f0bd712f67076dd2a5888e6775b16213b5a639cdc",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/provenance.json": "3d795ad9913e39595defae3a44f278d1c0136601825dc5667cd9daa31650df69",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/diagnostics.json": "da6b6b2d0ddd426da2cef70eb31e1c458dce63a98f5162bdacb1898343fd975a",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/progress.json": "b7270db85639db324736a02ff0cbd1864f04156b2b36a32213a3ae6e779b6100",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/model.pt": "18d9c8754a0b5a3f4c5c8f336f4c5aadc56a65fb6ac9a2587b91504a551a3a85",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/result.json": "439bb349e941a31807f7843bc3cda38c7ee61af3dfdbc63977eff512b7192cfe",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/undefined_diagnostics.json": "77f972f3fb3cc90f979798acedaa3fb03860c7f56eab4179652538ece413bf52",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/resource_after.json": "77b00b5294111f3d647ab137faee3194c5dbdbc92ca8d59da2caf5aee604cdec",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/native_replay.json": "b6ca7c4df23814f5ad4feedfc4cc4b327ce3b56584f6b7ef9f40a0251cb3251e",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+      "gate_runs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary/acceptance.json": "d2b4f426d63f537e19409e59b702629301a96f9783a430dc848a69f7f58a1d15",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary.log": "f5e840f6127171ee2a719a582f0b437d03780afa8c3e017331821b1593380e8b",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy.log": "d9af5d2bbc0235d33b077a67afaeb68ee6df7cdf0d5579a97b3043f9fc2ada73",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary.log": "520855ec4a19b59e9245fc6e116cb1502678001760ca74edfe1dde527198e3ed",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy.log": "3532cb2ad569f42ab338215a899fbea2d80068989055e35173c9491f429ebb99",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_F Flip_seed91002_canary.log": "af1ed43163099af42534f22c0148d76e8cc645897e2d106b39081b34ee88ff75",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_FedSA_seed91002_canary.log": "f4509ae583178e90821a22da1b668dd7a1fe88049ff704e8568db5c43cfea303",
+      "gate_logs/CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Sp-DFA_seed91002_canary.log": "041154b604e12f65874bd9d7d8f23b990dcb54fc808d358d0927febaabb0d6c2"
+    },
+    "package_sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+    "resources_before": {
+      "at_unix": 1791623750.6912608,
+      "completed": 236,
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_A_IID_S-DFA_seed91007",
+          "pid": 84783,
+          "round": 20,
+          "updated_unix": 1791623722.1649706
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91008",
+          "pid": 84811,
+          "round": 23,
+          "updated_unix": 1791623729.0325994
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91009",
+          "pid": 84846,
+          "round": 20,
+          "updated_unix": 1791623718.057332
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91010",
+          "pid": 84887,
+          "round": 15,
+          "updated_unix": 1791623703.9564698
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91001",
+          "pid": 84940,
+          "round": 14,
+          "updated_unix": 1791623735.8619275
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91002",
+          "pid": 84982,
+          "round": 13,
+          "updated_unix": 1791623730.240608
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91003",
+          "pid": 84989,
+          "round": 12,
+          "updated_unix": 1791623732.7511764
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91004",
+          "pid": 84999,
+          "round": 9,
+          "updated_unix": 1791623725.9189942
+        }
+      ],
+      "pending": 556,
+      "memory": {
+        "MemTotal": "1056260180 kB",
+        "MemAvailable": "853600080 kB"
+      },
+      "disk_free_bytes": 1060424867840,
+      "gpu": "0, 100 %, 5039 MiB, 68\n1, 100 %, 6036 MiB, 67",
+      "loadavg": "88.62 130.97 141.20 32/7077 85187",
+      "cpu_times": {
+        "user": 1.77,
+        "system": 0.27,
+        "children_user": 0.0,
+        "children_system": 0.03,
+        "elapsed": 5561444.86
+      },
+      "peak_rss_kib": 36868,
+      "cpu_affinity": [
+        104
+      ]
+    },
+    "resources_after": {
+      "at_unix": 1791624872.7970078,
+      "completed": 236,
+      "failed": [],
+      "active": [
+        {
+          "id": "minus_A_IID_S-DFA_seed91007",
+          "pid": 84783,
+          "round": 39,
+          "updated_unix": 1791624852.1096022
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91008",
+          "pid": 84811,
+          "round": 42,
+          "updated_unix": 1791624820.671627
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91009",
+          "pid": 84846,
+          "round": 40,
+          "updated_unix": 1791624818.1264298
+        },
+        {
+          "id": "minus_A_IID_S-DFA_seed91010",
+          "pid": 84887,
+          "round": 34,
+          "updated_unix": 1791624831.8817072
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91001",
+          "pid": 84940,
+          "round": 32,
+          "updated_unix": 1791624834.16097
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91002",
+          "pid": 84982,
+          "round": 33,
+          "updated_unix": 1791624835.102296
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91003",
+          "pid": 84989,
+          "round": 32,
+          "updated_unix": 1791624868.046521
+        },
+        {
+          "id": "minus_A_IID_Sp-DFA_seed91004",
+          "pid": 84999,
+          "round": 26,
+          "updated_unix": 1791624835.6913497
+        }
+      ],
+      "pending": 556,
+      "memory": {
+        "MemTotal": "1056260180 kB",
+        "MemAvailable": "846221392 kB"
+      },
+      "disk_free_bytes": 1060410048512,
+      "gpu": "0, 90 %, 5041 MiB, 62\n1, 99 %, 6038 MiB, 59",
+      "loadavg": "160.76 171.56 159.24 151/7046 85682",
+      "cpu_times": {
+        "user": 6.51,
+        "system": 1.31,
+        "children_user": 1067.38,
+        "children_system": 47.06,
+        "elapsed": 5562567.0
+      },
+      "peak_rss_kib": 558912,
+      "cpu_affinity": [
+        104
+      ]
+    },
+    "scientific70records": 0,
+    "test": false
+  },
+  "main_service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 3:23:25\n",
+    "stderr": ""
+  },
+  "main_completed": 236,
+  "main_active": [
+    {
+      "id": "minus_A_IID_S-DFA_seed91007",
+      "pid": 84783,
+      "progress": {
+        "round": 47,
+        "metrics": {
+          "accuracy": 0.8692807167664972,
+          "aeod": 0.005819894662476122,
+          "aspd": 0.04226971189936235
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91007",
+        "pid": 84783,
+        "elapsed_sec": 2787.2584278583527,
+        "updated_unix": 1791625301.410027
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91008",
+      "pid": 84811,
+      "progress": {
+        "round": 52,
+        "metrics": {
+          "accuracy": 0.8834247747521015,
+          "aeod": 0.007104330728614827,
+          "aspd": 0.06870030030470692
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91008",
+        "pid": 84811,
+        "elapsed_sec": 2701.6372089385986,
+        "updated_unix": 1791625306.0843525
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91009",
+      "pid": 84846,
+      "progress": {
+        "round": 50,
+        "metrics": {
+          "accuracy": 0.8722001308702874,
+          "aeod": 0.003846707807531713,
+          "aspd": 0.04889066247869556
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91009",
+        "pid": 84846,
+        "elapsed_sec": 2634.639068841934,
+        "updated_unix": 1791625304.0923448
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91010",
+      "pid": 84887,
+      "progress": {
+        "round": 42,
+        "metrics": {
+          "accuracy": 0.8358081240247647,
+          "aeod": 0.022872428823624058,
+          "aspd": 0.05519906552432613
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91010",
+        "pid": 84887,
+        "elapsed_sec": 2478.865067958832,
+        "updated_unix": 1791625289.0848594
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91001",
+      "pid": 84940,
+      "progress": {
+        "round": 40,
+        "metrics": {
+          "accuracy": 0.8122514722907334,
+          "aeod": 0.0014474657209877506,
+          "aspd": 0.00666672387032663
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91001",
+        "pid": 84940,
+        "elapsed_sec": 2399.059046268463,
+        "updated_unix": 1791625303.0784009
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91002",
+      "pid": 84982,
+      "progress": {
+        "round": 43,
+        "metrics": {
+          "accuracy": 0.8738108420999647,
+          "aeod": 0.0062586792193529694,
+          "aspd": 0.04586867187879057
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91002",
+        "pid": 84982,
+        "elapsed_sec": 2207.1491770744324,
+        "updated_unix": 1791625302.9524903
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91003",
+      "pid": 84989,
+      "progress": {
+        "round": 41,
+        "metrics": {
+          "accuracy": 0.8393818895656113,
+          "aeod": 0.0015178070295577273,
+          "aspd": 0.04481106739936269
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91003",
+        "pid": 84989,
+        "elapsed_sec": 2180.15305018425,
+        "updated_unix": 1791625304.3490934
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91004",
+      "pid": 84999,
+      "progress": {
+        "round": 34,
+        "metrics": {
+          "accuracy": 0.8022348618311773,
+          "aeod": 0.02300174933931265,
+          "aspd": 0.0037010249880302104
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91004",
+        "pid": 84999,
+        "elapsed_sec": 2145.9483046531677,
+        "updated_unix": 1791625297.4309652
+      }
+    }
+  ],
+  "main_failures": [],
+  "gpu": {
+    "returncode": 0,
+    "stdout": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 100 %, 5043 MiB, 68\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 100 %, 6040 MiB, 68\n",
+    "stderr": ""
+  },
+  "stdout_tail": [],
+  "stderr_tail": [],
+  "formal100_started": false,
+  "test": false,
+  "physical_gpu_processes": {
+    "returncode": 0,
+    "stdout": "84811, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1004\n84846, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1004\n84982, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1002\n84989, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 1004\n85702, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 998\n84783, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1004\n84887, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1004\n84940, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1002\n84999, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 1002\n85720, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 994\n85816, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 998\n",
+    "stderr": ""
+  },
+  "queue_progress": null,
+  "new_execution_authorization": {
+    "status": "AUTHORIZED",
+    "scope": "96_new_70round_valid_only",
+    "package_sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+    "resource_review_utc": "2026-10-10T09:41:55.299434+00:00",
+    "no_duplicate_workers_verified": true,
+    "max_workers": 1,
+    "cpu_threads_per_worker": 1,
+    "allowed_cpus": [
+      104
+    ],
+    "gpu_index": 0,
+    "automatic_retry": false,
+    "final_test": false,
+    "resource_receipt_path": "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/fullcoverage_operations/RESOURCE.json",
+    "resource_receipt_sha256": "de42f5fc02fddbfd28641021f149adaa32b082061457920719266bec1c5037f6",
+    "root_approval_sha256": "85c0ba22167d0ec2cc2463fe033af2afbeade68656e44a8024c2be31dbbd4698",
+    "gate_acceptance_sha256": "b2ecf51b006d8aa3dc04705ae28b0b16bcb98483bbbe6fddc0a463f7994a7253",
+    "gate_root_closure_path": "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/fullcoverage_operations/ROOT_CLOSURE.json",
+    "gate_root_closure_sha256": "eda03511ec037be8d06401886355b3c49929de3523bed272ca8df94e5799b05a",
+    "planned_new": 96,
+    "reused": 4,
+    "planned_total": 100
+  }
+}

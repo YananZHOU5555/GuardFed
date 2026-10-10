@@ -1,0 +1,26 @@
+--- original_after14_collector
++++ effective_exact6_collector
+@@ -42,6 +42,7 @@
+     assert digest(RELEASE/'PACKAGE_SHA256.json')==PACKAGE
+     assert len(manifest['jobs'])==96 and len(manifest['reused_jobs'])==4
+     queue_snapshot=read(RELEASE/'queue_progress.json')
++    assert not queue_snapshot['failed'], 'Frozen queue failure forbids collection'
+     active={row['id'] for row in queue_snapshot['active']}
+     rows=[]
+     for item in manifest['jobs']:
+@@ -57,12 +58,14 @@
+     prior_count=len(previous['accepted_job_ids'])
+     wanted=[row['id'] for row in snapshot['flgmm']['rows'] if row['terminal_acceptance'] and row['progress']['round']==70 and row['id'] not in previous['accepted_job_ids']]
+     # Parent-authorized fixed snapshot exact2 only; later terminal IDs remain unaccepted.
+-    authorized_ids=['FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91007_fullcoverage']
++    authorized_ids=['FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91010_fullcoverage']
+     wanted=[identity for identity in wanted if identity in authorized_ids]
++    assert wanted==authorized_ids, 'All six authorized outputs must be terminal, unique and ordered'
+     if not wanted:
+         write_json(BATCH/'NO_NEW_TERMINAL.json',dict(status='NO_NEW_TERMINAL_IN_THIS_SNAPSHOT',snapshot_sha256=digest(BATCH/'live_snapshot.json'),prior_accepted_new=prior_count,backup_created=False));return
+     assert len(wanted)==len(set(wanted)) and not set(wanted)&set(previous['accepted_job_ids']), 'Only this single fresh snapshot delta beyond the pinned offserver chain is authorized'
+     queue=read(RELEASE/'queue_progress.json')
++    assert not queue['failed'], 'Queue failure forbids collection'
+     assert not set(wanted)&{row['id'] for row in queue['active']}
+     assert not list(RELEASE.glob('*FAILURE*.json'))
+     protocol,manifest=local_identity()

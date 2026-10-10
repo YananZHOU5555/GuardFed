@@ -1,0 +1,17 @@
+{
+  "status": "CURRENT_STATE_GENERATOR_METADATA_KEY_RECOVERED",
+  "observed_error": "KeyError: snapshot_unix",
+  "failed_expression": "auth['snapshot_unix']",
+  "actual_source_schema": "AUTHORIZED_SNAPSHOT.json contains snapshot_utc, not snapshot_unix",
+  "correction": "Use root_accepted_utc=proof['utc'] for the acceptance event; retain the separately SHA-bound original observation snapshot",
+  "failure_before_canonical_write": true,
+  "scientific_acceptance_changed": false,
+  "training_or_evaluation_changed": false,
+  "subsequent_commands_exit_zero": [
+    "python -B tmp/update_reactivation_state_20261009.py",
+    "python -B tmp/update_completion_current_20261009.py",
+    "python -B tmp/update_overview_closure100_root_20261009.py"
+  ],
+  "verified_acceptance": {"native": 236, "three_view": 236, "gradient64": 18},
+  "whole_rebuttal_complete": false
+}

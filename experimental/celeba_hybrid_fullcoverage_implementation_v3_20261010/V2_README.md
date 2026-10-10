@@ -1,0 +1,11 @@
+# Hybrid100 v2：实际32摘要状态兼容
+
+本包只修复独立审查确认的记录接口阻断，尚未绑定stage、生成job、运行图像门检或训练。原SUMMARY32保留原状态及原字节；实际root采用证明通过外部路径/SHA传入。
+
+相对原19成员，仅metadata_contract.py与bind_stage.py改变，其余17成员字节完全相同。原科学worker/checker/NaN writer/RNG、原score/rank、coverage_layout和完整选择校验循环不变。binder仅新增三个proof参数；原审批、源、四旧模型引用、资源和执行守卫未改变。V2_SOURCE_DIFF.patch给出完整变更。
+
+真实ROOT32采用6fcbdc41c7af01815e15995e0cb3688672404bf3b96844dc8d9bffa21028587f与原SUMMARY32 46b5f8fdca9536166ed868e50d4c7bc2578f8a1100ffea97878cf044c95748ae已通过元数据smoke；原排名选择CosineFairness_lam20.0_tau0.1_lr0.001。11项边界拒收通过。没有调用bind_stage.bind，没有导入Torch/NumPy；未创建103个实际任务，也没有运行七gate或96新训练。
+
+PARENT_SOURCE_SEAL.json是原版封条；复制的README/HANDOFF/SELF_CHECK/FINAL_INTERFACE_CHECK/SOURCE_REUSE_CHECK及SOURCE_PINS.metadata_helper_source_sha256是原版历史字节，不能读作v2新执行证据。v2唯一新检查入口check_v2.py，实际结果V2_CHECK.json；v2当前封条为FILES_SHA256.json，本说明和V2_HANDOFF优先解释本次状态。该历史helper SHA不是运行时校验v2helper的字段；binder通过新全成员封条校验它。
+
+真实绑定仍由root在独立复审后执行原bind_stage.py CLI（--help无科学运行），提供新封条绑定审批。源已支持真实摘要，但部署源路径、原四结果、运行环境与实时资源仍须实际校验。三轮gate不证明70轮等价；valid选择史与n=1限制不变；没有新执行授权。

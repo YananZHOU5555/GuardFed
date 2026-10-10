@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "python -B -"
+  ],
+  "code": "from pathlib import Path\nimport datetime,hashlib,json,os\np=Path('/etc/vast-agents-guide.md');guide=p.read_bytes();assert hashlib.sha256(guide).hexdigest()=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'\nowners=[]\nfor proc in Path('/proc').glob('[0-9]*'):\n if proc.name==str(os.getpid()):continue\n try:\n  for task in (proc/'task').iterdir():\n   try:cpus=set(os.sched_getaffinity(int(task.name)))\n   except ProcessLookupError:continue\n   if len(cpus)<=16 and 111 in cpus:owners.append(dict(pid=int(proc.name),tid=int(task.name),cpus=sorted(cpus)))\n except (FileNotFoundError,ProcessLookupError,PermissionError):continue\nassert not owners,owners\nprint(json.dumps(dict(status='READONLY_GUIDE_AND_CPU111_UNOCCUPIED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),guide_sha256=hashlib.sha256(guide).hexdigest(),guide=guide.decode('utf8'),CPU111_restricted_all_thread_owners=owners,no_Torch_CNN_or_writes=True)))\n",
+  "automatic_retry": false
+}

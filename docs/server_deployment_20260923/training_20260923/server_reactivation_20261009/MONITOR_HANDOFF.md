@@ -1,23 +1,25 @@
 # GuardFed 当前巡检交接
 
-主机制实测2026-10-10T08:15:11.156368+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
+主机制实测2026-10-10T09:58:13.005173+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
 
 - 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。先遵守/etc/vast-agents-guide.md。sglang已按用户授权停止，文件保留；213.224.31.105不自动切回。
-- 主机制guardfed_celeba_mechanism_formal：228观测终轮，220/800新增严格离机，100Full显式复用；8活动/564等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
-- 最新三视图累计220：U100完整；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
-- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T07:27:02.553935+00:00远端原strict闭合40，本阶段root离机采用40。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
-- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机10。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
+- 主机制guardfed_celeba_mechanism_formal：236观测终轮，236/800新增严格离机，100Full显式复用；8活动/556等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
+- 最新三视图累计236：U100完整；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
+- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T09:41:39.473165+00:00远端原strict闭合56，本阶段root离机采用56。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
+- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机18。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
 - LoGoFair原32项搜索原strict闭合32/32，root采用32；固定配置07完整100格已独立采用（96新+4复用），10/9/6表及1恒定预测保留。原child不能重复启动，选参与原summary/独立完整32复核绑定。100格完整原strict及保存预测/独立哈希/统计已采用；96新+4复用、1恒定结果及10/9/6面板保留；明确虚拟cohort人口适配而非真实client公平性。
-- FLGMM96新+4复用完整覆盖严格离机32/96；Hybrid原搜索严格离机27/32，完整32闭合/择优前不启动Hybrid100。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
+- FLGMM96新+4复用完整覆盖严格离机38/96；Hybrid原搜索严格离机32/32，完整32已独立采用、冻结规则选λ20/τ0.1/lr0.001；100格已实际绑定96新+4复用；七真实三轮门检已严格离机root采用、254成员及两组同轮数对照通过，正式96新增70轮valid队列已实际启动、另4显式复用；首worker实测round1，新增70轮接受0。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
 - Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
 - 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
 - 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与余7方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
-- Git已验证d7ecf9f266f4d7ff6824b8cf1efd6483768b7281，93blob；该提交接受cutoff为native218/三视图212；之后新增或变更文件另行核验同步。
+- Git已验证ebf8436126687e044262fabb90a0848f39275f52，207blob；该提交接受cutoff为native220/三视图220；之后新增或变更文件另行核验同步。
 - 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
 
 后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。
 
 十方法native千格表已独立采用，IID/non-IID各五场景、10/9/6面板；原九方法810统计对象保持，1800统计/900显示及540先seed内汇总统计/270显示通过；这不改变原900三视图范围，不是finaltest或完整17方法。入口outputs/guardfed_tables/celeba_ten_method_native_20261010/TABLES.md。
+组合七门服务已正常EXITED；三轮终轮权重/RNG摘要和记录通过不等于70轮等价，科学样本0。入口tmp/celeba_hybrid_fullcoverage_root_binding_v3_20261010/ROOT_SEVEN_CANARY_CLOSURE.json。
+组合完整覆盖CPU104/GPU0单worker、一计算线程，真实worker/GPU UUID/源码数据配置与第一轮已核；旧canary AUTH原字节保存，无自动重试、不test。入口tmp/celeba_hybrid_fullcoverage_root_binding_v3_20261010/ROOT_COVERAGE_STARTUP.json。
 A表入口docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md；162统计/81单元/216计数指标，10/9/6面板及负结果完整；不将该单场景称A完整100格。
 A两完整IID场景论文表已独立采用，Benign/F Flip各十共享seed，324统计/162单元/360计数指标/960计数检查；旧24记录和原Benign162统计/81展示保持，其他八A场景未齐。入口docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md。
 梯度200格源准备独立审查通过，只含192新+8复用计划；没有实际recipe/jobs/启动，必须先闭合全部64及新攻击门检。

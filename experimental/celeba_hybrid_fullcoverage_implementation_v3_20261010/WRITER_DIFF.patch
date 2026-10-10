@@ -1,0 +1,58 @@
+--- original/writer_policy.py
++++ prepared/writer_policy.py
+@@ -10,21 +10,28 @@
+ 
+ def sanitize_result(value, job, job_sha256, expected_job_sha256):
+     require(job_sha256 == expected_job_sha256, 'Frozen repair job SHA mismatch')
+-    require(job['method'] in {'CosineFairnessHybrid', 'GuardFed'} and job['attack'] == 'S-DFA'
+-            and job['distribution'] in {'IID', 'non-IID'}, 'Only SHA-bound IID/non-IID S-DFA controls')
++    require(job['method'] in {'CosineFairnessHybrid', 'GuardFed'} and job['attack'] in {'F Flip', 'S-DFA', 'Sp-DFA'}
++            and job['distribution'] in {'IID', 'non-IID'}, 'Only SHA-bound F Flip/S-DFA/Sp-DFA controls')
+     cfg = job['config']
+     require(cfg['fflip_mode'] == 'all_unprivileged' and cfg['num_malicious'] == 4
+-            and cfg['num_clients'] == 20 and cfg['rounds'] in (3, 70) and cfg['seed'] == 91001
++            and cfg['num_clients'] == 20 and cfg['rounds'] in (3, 70) and type(cfg['seed']) is int and 91001 <= cfg['seed'] <= 91010
+             and cfg['celeba_evaluation_split'] == 'valid', 'Undefined-correlation cause/config differs')
+     require(value['config'] == cfg and value['method'] == job['method'] and value['attack'] == job['attack'],
+             'Result identity differs from frozen job')
+     audits = value['attack_audit']
+     require(isinstance(audits, list) and len(audits) == 20, 'Incomplete client audit')
+-    expected_paths = {('attack_audit', i, 'fflip_label_corr_after') for i in range(4)}
+-    for i in range(4):
++    count = 2 if job['attack'] == 'Sp-DFA' else 4
++    expected_types = ['fflip', 'foe'] if job['attack'] == 'S-DFA' else ['fflip']
++    expected_paths = {('attack_audit', i, 'fflip_label_corr_after') for i in range(count)}
++    for i, audit in enumerate(audits):
++        types = ([] if i >= 4 else (['fflip', 'foe'] if job['attack'] == 'S-DFA' else
++                 ['fflip'] if job['attack'] == 'F Flip' or i < 2 else ['foe']))
++        require(audit['client_id'] == i and audit['is_malicious'] is (i < 4)
++                and audit['attack_types'] == types, 'Frozen attack assignment differs')
++    for i in range(count):
+         audit = audits[i]
+         require(audit['client_id'] == i and audit['is_malicious'] is True and audit['samples'] > 1
+-                and audit['attack_types'] == ['fflip', 'foe'] and audit['fflip_mode'] == 'all_unprivileged'
++                and audit['attack_types'] == expected_types and audit['fflip_mode'] == 'all_unprivileged'
+                 and audit['fflip_overwrite_ratio'] == 1.0 and audit['fflip_requires_full_flip'] is False
+                 and audit['label_changed_count'] == 0, 'Not the frozen zero-variance sensitive overwrite')
+         number = audit['fflip_label_corr_after']
+@@ -50,8 +57,8 @@
+         return item
+ 
+     sanitized = visit(value)
+-    require({tuple(row['path']) for row in changed} == expected_paths and len(changed) == 4,
+-            'Exactly four mandatory undefined diagnostics required')
++    require({tuple(row['path']) for row in changed} == expected_paths and len(changed) == count,
++            'Exact attack-specific mandatory undefined diagnostics required')
+     return sanitized, changed
+ 
+ 
+@@ -61,7 +68,8 @@
+     require(sidecar['original_gate_sha256'] == original_gate_sha256 and sidecar['original_core_sha256'] == original_core_sha256,
+             'Undefined producer source changed')
+     rows = sidecar['undefined_values']
+-    require(len(rows) == 4 and {tuple(row['path']) for row in rows} == {('attack_audit', i, 'fflip_label_corr_after') for i in range(4)},
++    count = 2 if job['attack'] == 'Sp-DFA' else 4
++    require(len(rows) == count and {tuple(row['path']) for row in rows} == {('attack_audit', i, 'fflip_label_corr_after') for i in range(count)},
+             'Unknown/missing/duplicate undefined path')
+     # Reconstruct only the recorded NaN representation, then repeat every cause and
+     # nonfinite boundary check. Finite values and the original input are preserved.

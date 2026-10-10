@@ -1,0 +1,55 @@
+--- parent/metadata_contract.py
++++ v2/metadata_contract.py
+@@ -1,6 +1,6 @@
+ """Source-only Hybrid100 metadata helpers. No binding, output jobs, inference or dispatch."""
+ from pathlib import Path
+-import ast,hashlib,math,sys
++import ast,hashlib,json,math,sys
+ 
+ HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1]
+ SCREEN=ROOT/'tmp/celeba_hybrid_screen_execution_20261009'
+@@ -21,13 +21,18 @@
+     env={'require':require};exec(compile(ast.Module(body=functions,type_ignores=[]),str(source)+':score_rank_only','exec'),env)
+     return env['rank']
+ 
+-def check_complete_summary(summary,protocol,scope):
+-    """Repeat only the original frozen selection on a future complete32 summary.
+-
+-    This does not establish strict/offserver/root adoption. Future binder must
+-    SHA-bind those actual proofs before calling it. No currently observed24 are read.
+-    """
+-    require(summary['status']=='32_VALID_ONLY_TERMINALS_STRICT_ACCEPTED_SUMMARIZED_BACKUP_PENDING','Complete original summary schema required')
++def check_complete_summary(summary,protocol,scope,*,summary_path=None,root_path=None,root_sha256=None):
++    """Original frozen ranking; actual summary status requires SHA-bound root adoption."""
++    adopted=None
++    if summary['status']=='ALL32_ORIGINAL_STRICT_OFFSERVER_VERIFIED_ORIGINAL_FROZEN_RANK_ROOT_PENDING':
++        require(summary_path is not None and root_path is not None and root_sha256 is not None,'Actual summary requires external root proof and SHA')
++        require(sha(root_path)==root_sha256,'External root adoption SHA changed')
++        adopted=json.loads(Path(root_path).read_text('utf8'))
++        require(adopted['status']=='ROOT_HYBRID32_SUMMARY_ADOPTED' and adopted['accepted_total']==32 and adopted['all32_offserver_verified'] is True and adopted['final_test'] is False,'Actual complete32 valid-only root adoption required')
++        require(json.loads(Path(summary_path).read_text('utf8'))==summary and sha(summary_path)==adopted['summary_sha256'],'Original summary bytes/SHA changed')
++        require(adopted['source_seal_sha256']==summary['source_seal_sha256']==sha(SCREEN/'FILES_SHA256.json')=='2c496ae11369465d27ed223f8552321ec8cd424e5fd87e9f2d34e5ea8531e06f','Original screen source seal changed')
++    else:
++        require(summary['status']=='32_VALID_ONLY_TERMINALS_STRICT_ACCEPTED_SUMMARIZED_BACKUP_PENDING','Complete original summary schema required')
+     require(summary['seed_n']==1 and summary['final_test_evaluated'] is False,'Single-seed valid screen only')
+     records=[r for candidate in summary['all_candidates'] for r in candidate['records']]
+     require({r['id'] for r in records}=={e['id'] for e in scope['jobs']} and len(records)==32,'Exact original32 IDs required')
+@@ -36,6 +41,7 @@
+         require(all(len(r[k])==64 and set(r[k])<=set('0123456789abcdef') for k in ('checkpoint_sha256','acceptance_sha256')),'Original model/strict identity required')
+     ranked=original_rank()(records,protocol['candidates'])
+     require(all(summary[k]==value for k,value in ranked.items()),'Original ranking/accuracy/Pareto/all-negative records changed')
++    if adopted is not None:require(adopted['selected_recipe']==ranked['selected_recipe'],'Root winner differs from original frozen ranking')
+     return ranked['selected_recipe']
+ 
+ def coverage_layout(candidate_id,protocol,scope,screen_jobs):
+--- parent/bind_stage.py
++++ v2/bind_stage.py
+@@ -26,7 +26,7 @@
+             require((row['candidate'],row['distribution'],row['attack'])==(e['tuning_candidate'],e['distribution'],e['attack']),'Every summary record must retain its original candidate/condition identity')
+     # Metadata-only source pins; no worker or torch import here.
+     helper=HERE/'metadata_contract.py';spec=importlib.util.spec_from_file_location('hybrid100_metadata',helper);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.SCREEN=old
+-    chosen=m.check_complete_summary(summary,protocol,scope);require(chosen==approval['selected_recipe'],'Approved winner differs from original frozen ranking')
++    chosen=m.check_complete_summary(summary,protocol,scope,summary_path=args.summary,root_path=args.root32,root_sha256=args.root32_sha256);require(chosen==approval['selected_recipe'],'Approved winner differs from original frozen ranking')
+     require(root['selected_recipe']==chosen,'Root-adopted winner differs from original frozen ranking')
+     require(summary['source_seal_sha256']==digest(old/'FILES_SHA256.json'),'Summary source identity changed')
+     jobs={e['id']:read(old/e['job']) for e in scope['jobs']};layout=m.coverage_layout(chosen,protocol,scope,jobs)

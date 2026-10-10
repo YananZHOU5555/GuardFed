@@ -1,0 +1,18 @@
+--- A36/join.py
++++ A36/join_v2.py
+@@ -78,7 +78,7 @@
+     assert native_proof['new_ids'] == EXPECTED and native_proof['total_new_strict_and_offserver'] == 236
+     assert native_proof['inspection_sha256'] == sha(inspection_path) and native_proof['ledger_sha256'] == sha(ledger_path)
+     assert sha(native_folder / 'OFFSERVER_VERIFICATION.json') == native_proof['offserver_proof_sha256']
+-    old_inspection_path = ROOT / prior_proof['native_inspection_path']
++    old_inspection_path = (ROOT / prior_proof['native_root_path']).parent / 'inspection/inspection.json'
+     old_inspection = pin(old_inspection_path, prior_proof['native_inspection_sha256'])
+     old_ledger_path = old_inspection_path.parent.parent / 'verified_ledger.json'
+     old_ledger = pin(old_ledger_path, native_proof['previous_ledger_sha256'])
+@@ -185,5 +185,5 @@
+         run()
+     except BaseException as exc:
+         failure = dict(status='STOPPED_NO_ADOPTION', error=repr(exc), traceback=traceback.format_exc())
+-        if not (HERE / 'FAILURE_V2.json').exists(): save('FAILURE_V2.json', failure)
++        if not (HERE / 'FAILURE_V3.json').exists(): save('FAILURE_V3.json', failure)
+         raise

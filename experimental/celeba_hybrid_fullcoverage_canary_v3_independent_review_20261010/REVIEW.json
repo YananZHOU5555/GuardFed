@@ -1,0 +1,56 @@
+{
+  "status": "PASS_SOURCE_READY_FOR_ROOT_ACTUAL_PREFLIGHT_AND_EXACT7_CANARY_AUTHORIZATION",
+  "utc": "2026-10-10T09:15:09.089146+00:00",
+  "source_adoptable": true,
+  "actual_dispatch_authorized_by_this_review": false,
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "N1",
+      "severity": "P3",
+      "blocking": false,
+      "file": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_hybrid_fullcoverage_canary_operations_20261010\\v3\\remote_launch.py",
+      "line": 157,
+      "related_file": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_hybrid_fullcoverage_canary_operations_20261010\\v3\\main_health.py",
+      "related_line": 18,
+      "problem": "When main_health refuses a snapshot, it attaches resource_guard_inputs to the exception. The outer failure JSON saves repr/traceback only, so that instantaneous service/queue input is not preserved.",
+      "impact": "Fail-stop remains intact and no service starts through a failed guard. A subsequent health investigation cannot reconstruct the exact rejected snapshot from this failure JSON alone.",
+      "minimal_correction": "In a future separately sealed version, add getattr(e, resource_guard_inputs, None) to the failure receipt. No change to the health predicate or scientific body is needed."
+    }
+  ],
+  "source_seal_path": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_hybrid_fullcoverage_canary_operations_20261010\\v3\\FILES_SHA256.json",
+  "source_seal_sha256": "04dbe344603a5243dbfa6a00bc89c31ea5208792d88e9371ad7f9873775d17ab",
+  "source_members_verified": 7,
+  "source_pins": {
+    "HEALTH_LINEAGE.json": "a49a2bc1cfcdd270e4d0cc02298a2ca5ff9b2a9d44f659a650555dd747f1be7c",
+    "launch.py": "4322500d8f3b983ad027369da5baf4fba11089c33d0ad13e7f7f06a733c67320",
+    "main_health.py": "14c6f2a489c93c98ddf96270426fd33d1ccfa8289524108ac0083225158421c5",
+    "README.md": "b68061edcae667bd62d451ca17add88947c46bbaed6c254844386d612887eae8",
+    "remote_launch.py": "490f5767ccf7e5ac3c9ca5a46303e6686e46f02f7d7040e28a6c9d5d1b34948e",
+    "SOURCE_CHECK.json": "c1db51779d57e94ec652c5ee2185ed6258b5aa3361c8cd08cbbffb04998a7970",
+    "SOURCE_DIFF.patch": "38e5d66b71fe07c90c191b003821d88c029c38a0f65e5ad20a4842091b380f1a"
+  },
+  "checks_path": "E:\\OneDrive\\文档\\GuardFed\\tmp\\celeba_hybrid_fullcoverage_canary_v3_independent_review_20261010\\CHECKS.json",
+  "checks_sha256": "9fcfa2680f63670cc06fed52e51f85faa4791ab5bcfc27fda19cbf12275f769f",
+  "actual_memory_AST_checks": 33,
+  "external_actual_package_and_source_seal_and_root_review_required": true,
+  "actual_bound_proof_read_or_created": false,
+  "seven_sequential_canaries": true,
+  "worker_CPU104_GPU0_one_thread": true,
+  "outer_CPU107_nice10": true,
+  "protected_main_1_to_8_with_growth_and_zero_failure": true,
+  "protected_FL102103_gradient105_remaining112119_not_mutated": true,
+  "restricted_all_thread_CPU104_and107_conflict_guards": true,
+  "resource_quota_RAM_GPU_UUID_recovery_disk_and_guide_guards": true,
+  "automatic_retry": false,
+  "automatic_96_start": false,
+  "source_or_STATE_or_Git_changed": false,
+  "SSH": false,
+  "Torch": false,
+  "CNN": false,
+  "limits": [
+    "This is launcher source review and in-memory fixtures, not actual bound metadata, host resource verification or real-image canary acceptance.",
+    "The original25-member scientific implementation was not re-audited; only connected identity and sequential-child entry were read.",
+    "Root must supply and verify actual approval, bound offserver/root/package/source/baseline SHA pins and run the existing fresh Linux resource guards."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "status": "SOURCE_ONLY_NO_SSH_NO_TORCH_CHECKS_PASS",
+  "checks": [
+    {
+      "name": "exact original7 closure contract",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "six IDs partial",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong gate status",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong root status",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong package",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong gate SHA",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong CPU105",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "actual authorization accepted by unchanged common.authorized",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "common refuses max_workers2",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "common refuses automatic retry",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "common refuses wrong allowed CPU",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "common refuses missing gate root path",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "held canary lock refuses without retry",
+      "expected": false,
+      "actual": false
+    }
+  ],
+  "check_n": 13,
+  "unchanged_common_authorized_sha256": "aa6a409f3e6cceb44fd043719da12996a51c6398e04991f86a0828449cb9d702",
+  "original_main_health_sha256": "14c6f2a489c93c98ddf96270426fd33d1ccfa8289524108ac0083225158421c5",
+  "new_authorization_fields": [
+    "allowed_cpus",
+    "automatic_retry",
+    "cpu_threads_per_worker",
+    "final_test",
+    "gate_acceptance_sha256",
+    "gate_root_closure_path",
+    "gate_root_closure_sha256",
+    "gpu_index",
+    "max_workers",
+    "no_duplicate_workers_verified",
+    "package_sha256",
+    "planned_new",
+    "planned_total",
+    "resource_receipt_path",
+    "resource_receipt_sha256",
+    "resource_review_utc",
+    "reused",
+    "root_approval_sha256",
+    "scope",
+    "status"
+  ],
+  "main_health_bytes_exact": true,
+  "existing_unlocked_canary_lock_file_accepted": true,
+  "old_authorization_preserved_before_atomic_replace": true,
+  "source_parsed": 3,
+  "actual_proof_created": false,
+  "SSH": false,
+  "process_started": false,
+  "Torch": false,
+  "CNN": false
+}

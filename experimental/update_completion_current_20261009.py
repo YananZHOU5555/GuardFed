@@ -141,6 +141,10 @@ if main.get('three_view_counts_by_variant',{}).get('minus_A')==20:
 if main.get('A_three_view_two_scene_table'):
     A_view_note=A_view_note.replace('The original Benign table remains adopted; the new two-scene statistics await separate root arithmetic review.',
         'The new two-scene three-view table is independently adopted:324 mean/sampleSD scalars,162 display cells,360 count-derived metrics and960 integer-count checks. Old24 records and Benign162 scalars/81 display values remain exact. IID F Flip native/shared deletion is approximately ACC+0.001pp, AEOD+0.00001 and ASPD−0.00088; all10/9/6 panels and direction changes remain, without necessity, causal or significance claims. Entry: '+main['A_three_view_two_scene_table']['table_path']+'.')
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==28:
+    A_view_note=' An additional28 minus_A replays are root-adopted, including the retained20 paired IID Benign/F Flip checkpoints and their independent two-scene table. Eight further IID FedSA records pass exact native228 recovery-chain joining,74 archive members,72 metrics,192 counts,24 rules and16 original model/result hashes. FedSA is only8/10 seeds, so no extra scene mean or table is produced; prior220 remain exact. '
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==36:
+    A_view_note=' Cumulative36 minus_A terminal replays are root-adopted, retaining the20 paired IID Benign/F Flip checkpoints and their independently adopted two-scene table. The latest exact8 pass original strict/offserver74-member,72-metric,192-count,24-rule checks and native236 restore-chain joining with16 original model/result hashes; the prior228 index remains exact. IID FedSA now has ten paired checkpoints at record level, whereas S-DFA has only6/10 and is excluded from complete-scene means. No additional A scenario table has been adopted; A100 and remaining controls are incomplete. '
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
     'The new GPU worker and strict acceptance entry are being implemented separately; '
@@ -211,6 +215,8 @@ if screen and screen.get('offserver_accepted70round_jobs'):
     paragraph += (f"The first{screen['offserver_accepted70round_jobs']}/32 terminal jobs have original server strict acceptance and linked off-server backups, including53 members in the original four-job increment and35 in the next two-job increment, with an independent CPU record-layer replay. "
         "Only three current-host runtime metadata queries are bound to the original server receipt; all scientific checks and null diagnostic policies are unchanged. Local torch2.8 CPU is disclosed separately from server torch2.11 cu128 and no local CNN inference or CUDA context was used. "
         "The still-running shared service log is saved as a prefix, not a closed per-job log; terminal artifacts were checked before and after backup. No final recipe is selected from this partial snapshot. ")
+if screen.get('status')=='ROOT_HYBRID32_SUMMARY_ADOPTED':
+    paragraph='The original32-item Hybrid search has exited normally with zero workers. All32 terminals have original strict acceptance and off-server verification; an independent review checks the exact27+5 chain and frozen score/rank, with maximum independent difference1.11e-16. The frozen selection is CosineFairness_lam20.0_tau0.1_lr0.001, also the accuracy champion and sole three-metric Pareto candidate. All eight candidates remain. This is n=1 validation search, without sampleSD or significance. The100-cell coverage has not started; the actual-summary status interface requires a record-layer repair and seven new real-image short-run gates remain prerequisites. The immutable SUMMARY32 and its score/rank are unchanged.'
 paragraph=paragraph.rstrip()
 next37_status=main.get('next37_valid_replay',{})
 next37_note='Dispatch and new off-server acceptance require their own actual receipts.'
@@ -344,6 +350,18 @@ if state.get('gradient200_new_attack_gates_source_20261010'):
     current+='\nThe14 common-three-round new-attack gate sources pass independent source review only; actual image gates remain0. The formal70-round checker is unchanged.\n'
 if state.get('added_baseline_three_view_scope_20261010'):
     current+='\nAdded-baseline three-view compatibility is source-reviewed, without new evaluation or fit. Four CNN methods need their original strict-identity bridges. LoGoFair native must retain its fitted DP state and virtual mapping; the cache valid_native_prediction denotes FedAvg raw, not LoGoFair native. Any backbone raw/shared replacement diagnostic requires explicit labelling, and the final primary endpoint remains undecided.\n'
+if state.get('hybrid100_fullcoverage_20261010'):
+    h=state['hybrid100_fullcoverage_20261010']
+    hybrid_note='\nHybrid100 actual v3 metadata is bound and root-adopted:96 new jobs, four explicit original screen reuses and seven pipeline gates. All147 returned metadata members pass identity/grid checks. The Python3.10 summary replays exactly on server3.12 with explicit sequential summation; original values/ranking/tolerances are retained and the earlier pre-job binding failure is preserved. '
+    if h['canaries_offserver_adopted']==7:
+        hybrid_note+='All seven real three-round gates have passed the original saved comparison and254-member offserver/root checks, including two same-horizon implementation pairs. They supply zero70-round scientific samples; saved terminal weights/final RNG summaries do not imply per-round weights or universal70-round equivalence. Entry: '+h['canary_closure_path']+'. '
+    else:
+        hybrid_note+='The seven three-round gates have actually started onCPU104/GPU0, with observed first-job round2. Gate closure remains pending. '
+    if h['formal100_started']:
+        hybrid_note+='The frozen96-new70-round validation queue has actually started, with oneCPU104/GPU0 worker observed at round1 and physically mapped to the boundGPU UUID. The four original records are reused and the old canary authorization retained byte-for-byte. New70-round acceptance remains0 at this startup boundary. No test or automatic retry. Entry: '+h['coverage_start_path']+'.\n'
+    else:
+        hybrid_note+='The formal96 queue has not started.\n'
+    current+=hybrid_note
 p=TRAIN/'REBUTTAL_COMPLETION_20261009.md';text=p.read_text(encoding='utf8')
 if state.get('author_adaptation_reply_patch_20261010'):
     current+='\nThe author-approved Huber identity-projection and delegated LoGoFair virtual-cohort definitions now have root-reviewed, reversible English response/manuscript patches. All24 original comments and original numbers are retained; no scientific acceptance or manuscript application is implied. Entry: '+state['author_adaptation_reply_patch_20261010']['reply_patch']+'.\n'

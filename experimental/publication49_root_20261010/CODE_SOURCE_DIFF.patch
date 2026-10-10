@@ -1,0 +1,88 @@
+--- original48/reused_plan_scope
++++ Git49/reused_plan_scope
+@@ -1,6 +1,6 @@
+ def plan(spec):
+     assert spec['parent'] == PARENT and spec['branch'] == BRANCH
+-    assert spec['scope'] == 'CLOSED220_REPLAY220_GRADIENT10_LOGO100_A20_NO_BULK'
++    assert spec['scope'] == 'CLOSED236_REPLAY236_FL38_GRADIENT18_HYBRID32_STARTUP_NO_BULK'
+     assert spec['accepted'] == ACCEPTED and set(spec['bindings']) == ROLES
+     assert set(spec['optional_bindings']) == OPTIONAL
+     assert spec['test_started'] is False and spec['goal_complete'] is False
+@@ -31,7 +31,7 @@
+             assert ref['parent_commit']==PARENT and destination(ref['source'])==ref['destination']
+             original=git('show',PARENT+':'+ref['destination'])
+             assert sha(original)==ref['sha256'] and len(original)==ref['bytes']
+-    return dict(schema='publication48_v2_frozen_bytes_v1',parent=PARENT,branch=BRANCH,origin=ORIGIN,
++    return dict(schema='publication49_frozen_bytes_v1',parent=PARENT,branch=BRANCH,origin=ORIGIN,
+         scope=spec['scope'],accepted=ACCEPTED,test_started=False,goal_complete=False,
+         bindings=spec['bindings'],optional_bindings=spec['optional_bindings'],allowed_paths=allowed,
+         files=files,total_bytes=sum(e['bytes'] for e in files),parent_recovery_references=spec['parent_recovery_references'])--- original48/reused_stage_schema
++++ Git49/reused_stage_schema
+@@ -1,7 +1,7 @@
+ def stage(path, expected, name):
+     b = path.read_bytes(); assert sha(b) == expected
+     d = json.loads(b)
+-    assert d['schema'] == 'publication48_v2_frozen_bytes_v1' and d['parent'] == PARENT and d['branch'] == BRANCH and d['origin'] == ORIGIN
++    assert d['schema'] == 'publication49_frozen_bytes_v1' and d['parent'] == PARENT and d['branch'] == BRANCH and d['origin'] == ORIGIN
+     assert d['accepted'] == ACCEPTED and set(d['bindings']) == ROLES
+     assert d['test_started'] is False and d['goal_complete'] is False
+     assert d['total_bytes'] == sum(x['bytes'] for x in d['files']) < LIMIT
+@@ -26,7 +26,7 @@
+             target.write_bytes(content)
+         attr = CHECKOUT / '.gitattributes'
+         prior = attr.read_bytes() if attr.exists() else b''
+-        patterns = ('\n# Git48 sealed evidence/source bytes\n' + ''.join(json.dumps('/' + x['destination'], ensure_ascii=False) + ' -text\n' for x in d['files'])).encode('utf8')
++        patterns = ('\n# Git49 sealed evidence/source bytes\n' + ''.join(json.dumps('/' + x['destination'], ensure_ascii=False) + ' -text\n' for x in d['files'])).encode('utf8')
+         attr.write_bytes(prior + patterns)
+         paths = [x['destination'] for x in d['files']] + ['.gitattributes']
+         for start in range(0, len(paths), 40):
+--- original48/reused_prepare_metadata
++++ Git49/reused_prepare_metadata
+@@ -1,21 +1,21 @@
+ def build(extras):
+-    configure({'native':220,'three_view':220})
+-    receipt=Path('F:/YananResearchStorage/GuardFed/git_publication/increment47/stage001/STAGE_RECEIPT.json')
+-    assert H(receipt.read_bytes())=='466f5dfc114d3462a0b89fb7ef6786769f0af0bec2010b809d34970aaeb2c79e'
++    configure(ACCEPTED)
++    receipt=PARENT_RECEIPT
++    assert H(receipt.read_bytes())==PARENT_RECEIPT_SHA
+     parent=json.loads((ROOT/EXPLICIT[-2]).read_bytes());assert parent['commit']==PARENT and parent['receipt_sha256']==H(receipt.read_bytes())
+     blobs={}; previous_commit=None
+-    for number,expected in [(45,'7e09337e152a0f16a7b0242a24b26f2e501aa56ed7a949255733ba35de0b5f08'),(46,'775aa77d1249e4cd739f528244f2aaf826a17ff42475940214a44619f3a5a85c'),(47,'466f5dfc114d3462a0b89fb7ef6786769f0af0bec2010b809d34970aaeb2c79e')]:
++    for number,expected in [(45,'7e09337e152a0f16a7b0242a24b26f2e501aa56ed7a949255733ba35de0b5f08'),(46,'775aa77d1249e4cd739f528244f2aaf826a17ff42475940214a44619f3a5a85c'),(47,'466f5dfc114d3462a0b89fb7ef6786769f0af0bec2010b809d34970aaeb2c79e'),(48,PARENT_RECEIPT_SHA)]:
+         prior_receipt=Path(f'F:/YananResearchStorage/GuardFed/git_publication/increment{number}/stage001/STAGE_RECEIPT.json')
+-        actual=json.loads((ROOT/f'tmp/publication{number}_root_20261010/REMOTE_VERIFICATION.json').read_bytes())
++        actual=json.loads((ROOT/parent_proof(number)).read_bytes())
+         assert H(prior_receipt.read_bytes())==actual['receipt_sha256']==expected
+         if previous_commit is not None:assert actual['parent']==previous_commit
+         previous_commit=actual['commit']
+         blobs.update({r['path']:r for r in json.loads(prior_receipt.read_bytes())['blobs']})
+     assert previous_commit==PARENT
+     for name,sha in PINS.items():assert H((ROOT/name).read_bytes())==sha,name
+-    for directory,name in ((TRANSPORT,'FILES_SHA256.json'),(BINDING,'FILES_SHA256.json'),(AUTHOR,'FILES_SHA256.json'),(GRADIENT,'DELIVERY_FILES_SHA256.json'),(LOGOREVIEW,'FILES_SHA256.json'),(LOGOSUMMARY,'FILES_SHA256.json'),(A20,'FILES_SHA256.json'),(A20REVIEW,'FILES_SHA256.json'),(A20FAILURE,'FILES_SHA256.json')):
++    for directory,name in SEALED:
+         seal=ROOT/directory/name
+-        for name,pin in json.loads(seal.read_bytes())['files'].items():
++        for name,pin in seal_files(seal).items():
+             b=(seal.parent/name).read_bytes();assert H(b)==pin['sha256'] and len(b)==pin['bytes']
+     names=set(MUTABLE+EXPLICIT+extras);omitted=[]
+     for directory in [ROOT/n for n in DIRECTORIES]:
+@@ -32,16 +32,15 @@
+             refs.append(dict(e,destination=destination,parent_commit=PARENT))
+         else:files.append(e)
+     selected={r['source']:r for r in files}
+-    paths={'current_state':MUTABLE[0],'native220':NATIVE+'/ROOT_DELTA_VERIFICATION.json',
+-      'replay220':ADOPTION+'/ROOT_ADOPTION.json','gradient10':GRADIENT+'/ROOT_ADOPTION_REVIEW.json','authorpatch':AUTHOR+'/ROOT_REVIEW.json','logofair100':LOGO+'/ROOT_ADOPTION.json','A20table':A20+'/ROOT_VERIFICATION.json'}
++    paths=ROLE_PATHS
+     bindings={}
+     for role,n in paths.items():
+         d=json.loads((ROOT/n).read_bytes());expect=base.REQUIRED_FACTS[role]
+         for k,v in expect.items():assert base.pointer(d,k)==v,(role,k)
+         bindings[role]=dict(path=n,sha256=selected[n]['sha256'],expect=expect)
+     return dict(status='SOURCE_PREPARED_ACTUAL_LIST_NOT_PUBLISHED',parent=PARENT,branch=BRANCH,
+-      scope='CLOSED220_REPLAY220_GRADIENT10_LOGO100_A20_NO_BULK',accepted={'native':220,'three_view':220},
++      scope=SCOPE,accepted=ACCEPTED,
+       bindings=bindings,optional_bindings={},test_started=False,goal_complete=False,
+       allowed_paths=sorted(selected),files=files,parent_recovery_references=refs,
+       omitted_bulk_or_logs=omitted,large_artifacts_git_restore=False,
+-      limitation='Only new native2, replay A8, gradient5, root-adopted LoGo100 and A20 table; future full reply/ten-method table only actual root extras; bulk excluded')+      limitation='Actual native236/replay236/FL38/gradient18/Hybrid32 plus bound source, seven canaries and96 startup; compact only, no formal96 accepted results')

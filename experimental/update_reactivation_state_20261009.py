@@ -2619,13 +2619,13 @@ if (FL96_base/'LATEST_BACKUP.json').exists():
         first_full70_root_adoption_path=FL96_root_path.relative_to(ROOT).as_posix(),first_full70_root_adoption_sha256=sha(FL96_root_path))
     FL96_current_path=ROOT/FL96_latest['root_adoption_path'];FL96_current=read(FL96_current_path)
     assert sha(FL96_current_path)==FL96_latest['root_adoption_sha256']
-    if FL96_latest['accepted_total'] in (28,32):
+    if FL96_latest['accepted_total'] in (28,32,38):
         current_count=FL96_latest['accepted_total']
-        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3'}[current_count]
+        assert sha(FL96_current_path) == {28:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',32:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3',38:'5e95872f3216a9842e95c534ba87629b2211c298d72a95d810bdaf9428021051'}[current_count]
         assert FL96_current['status'] == 'ROOT_FL96_LINKED_DELTA_ARCHIVE_SOURCE_CHECKPOINT_AND_ORIGINAL_STRICT_BINDING_PASS'
         previous = read(ROOT/FL96_current['previous_root_adoption_path'])
-        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c'}[current_count]
-        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32)}[current_count]
+        assert sha(ROOT/FL96_current['previous_root_adoption_path']) == FL96_current['previous_root_adoption_sha256'] == {28:'31a1e0d16f14a1855acad3654d656ccb84377b7e6bd8fc3d9c10bf560658c8bc',32:'e51007c549f8cc95970ce06cb61b4a477c11eff5d00e05a9aeac9ffb30dd449c',38:'ae1e65bf764f3ed3e6657e95fa3798617788c8659ac30eb542035a0031663cf3'}[current_count]
+        assert (FL96_current['accepted_before'],FL96_current['accepted_new'],FL96_current['accepted_total']) == {28:(22,6,28),32:(28,4,32),38:(32,6,38)}[current_count]
         batch = Path(FL96_current['archive_local_path']).parent
         off = read(batch/'OFFSERVER_ACCEPTANCE.json')
         assert sha(batch/'OFFSERVER_ACCEPTANCE.json') == FL96_current['offserver_acceptance_sha256'] == FL96_latest['next_collector_previous_sha256']
@@ -2960,6 +2960,47 @@ if (A20_table/'ROOT_VERIFICATION.json').exists():
         three_view_scope_limit='U100/C100 ten-scene tables and A IID Benign/F Flip two-scene table independently adopted. All10/9/6 panels, old24 records and Benign162 statistics/81 cells retained. Eight other A scenes, other controls, final evaluation and submitted manuscript remain incomplete; no necessity or significance claim.')
     state['mechanism_remaining620_valid_20261010']['A_two_scene_table_adopted']=True
 
+root_A28=ROOT/'tmp/celeba_mechanism_remaining620_A28_root_adoption_20261010/ROOT_ADOPTION.json'
+if root_A28.exists():
+    proof=read(root_A28)
+    assert sha(root_A28)=='f6761dd1c2b844724aee91d235d71f6474511ac8aec63f3dc4fe0308272e0966'
+    assert proof['status']=='ROOT_A28_SAVED_ARRAYS_AND_NATIVE228_RESTORE_CHAIN_ADOPTED'
+    assert (proof['prior_accepted'],proof['new_accepted'],proof['cumulative_accepted'])==(220,8,228)
+    assert (proof['archive_members'],proof['independent_metrics'],proof['independent_counts'],proof['prediction_rules'])==(74,72,192,24)
+    assert proof['native_members_rehashed']==16 and proof['native_max_abs_difference']==0 and not proof['test']
+    index_path=ROOT/proof['records_index_path'];index=read(index_path)
+    assert sha(index_path)==proof['records_index_sha256']=='765ea715defea1e54aebbee0115f38c926ee022f47f520d151d1417c6c8592a9'
+    assert index['all_ids'][:220]==state['celeba_mechanism_v1']['three_view_accepted_ids']
+    assert proof['accepted_new_ids']==[f'minus_A_IID_FedSA_seed{s}' for s in range(91001,91009)]
+    assert sha(ROOT/proof['independent_review_path'])==proof['independent_review_sha256']
+    remaining=state['mechanism_remaining620_valid_20261010'];assert remaining['new_offserver_accepted']==40
+    remaining.update(new_offserver_accepted=48,root_adoption_path=root_A28.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(root_A28),
+        accepted_ids=remaining['accepted_ids']+proof['accepted_new_ids'],A_partial_scenes=proof['partial_A_scenes'])
+    state['celeba_mechanism_v1'].update(three_view_new_models_accepted=228,three_view_new_models_offserver_verified=228,
+        three_view_accepted_ids=index['all_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':100,'minus_A':28},three_view_root_proof_sha256=sha(root_A28),
+        three_view_scope_limit='U100/C100 ten-scene and A20 two-IID-scene tables remain adopted. Eight IID FedSA checkpoints are additionally root-adopted with exact native228 recovery identity, but do not create a ten-seed scene mean. A100, remaining controls, final evaluation and submitted manuscript remain incomplete.')
+
+root_A36=ROOT/'tmp/celeba_mechanism_remaining620_A36_root_adoption_20261010/ROOT_ADOPTION.json'
+if root_A36.exists():
+    proof=read(root_A36)
+    assert sha(root_A36)=='1513441c17a3d6439df4a2944c6fcf6a0e6bb6aa2280d2176d7bc1527a78c36b'
+    assert proof['status']=='ROOT_A36_SAVED_ARRAYS_AND_NATIVE236_RESTORE_CHAIN_ADOPTED'
+    assert (proof['prior_accepted'],proof['new_accepted'],proof['cumulative_accepted'])==(228,8,236)
+    assert (proof['archive_members'],proof['independent_metrics'],proof['independent_counts'],proof['prediction_rules'])==(74,72,192,24)
+    assert proof['native_members_rehashed']==16 and proof['native_max_abs_difference']==0 and not proof['test']
+    index_path=ROOT/proof['records_index_path'];index=read(index_path)
+    assert sha(index_path)==proof['records_index_sha256']=='f378bab97b5a2fba436370f4508f122198559d05920dac2ac9075d83ef7f6e59'
+    assert index['all_ids'][:228]==state['celeba_mechanism_v1']['three_view_accepted_ids']
+    expected=[f'minus_A_IID_FedSA_seed{s}' for s in (91009,91010)]+[f'minus_A_IID_S-DFA_seed{s}' for s in range(91001,91007)]
+    assert proof['accepted_new_ids']==expected
+    assert sha(ROOT/proof['independent_review_path'])==proof['independent_review_sha256']
+    remaining=state['mechanism_remaining620_valid_20261010'];assert remaining['new_offserver_accepted']==48
+    remaining.update(new_offserver_accepted=56,root_adoption_path=root_A36.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(root_A36),
+        accepted_ids=remaining['accepted_ids']+expected,A_partial_scenes=proof['partial_A_scenes'],A_complete_data_scenes=proof['complete_A_scenes'])
+    state['celeba_mechanism_v1'].update(three_view_new_models_accepted=236,three_view_new_models_offserver_verified=236,
+        three_view_accepted_ids=index['all_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':100,'minus_A':36},three_view_root_proof_sha256=sha(root_A36),
+        three_view_scope_limit='U100/C100 ten-scene and A20 two-IID-scene tables remain adopted. A IID FedSA ten paired checkpoints are now complete at record level, while S-DFA is6/10 and excluded from complete-scene means. No additional A scene table has been adopted; A100, remaining controls, final evaluation and submitted manuscript remain incomplete.')
+
 reply_A20_LoGo100=ROOT/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A20_LoGo100_20261010'
 if (reply_A20_LoGo100/'ROOT_REVIEW.json').exists():
     proof=read(reply_A20_LoGo100/'ROOT_REVIEW.json')
@@ -3011,6 +3052,102 @@ if (scope_dir/'REVIEW.json').exists():
         assert sha(scope_dir/name)==pin['sha256'] and (scope_dir/name).stat().st_size==pin['bytes']
     assert sha(scope_dir/'REVIEW.json')=='acdb0a0646d47b8773ce8ce9ec672eee157cb5f0b9ccccfd4ed05eb5ec0ceac1'
     state['added_baseline_three_view_scope_20261010']=dict(status='SOURCE_COMPATIBILITY_REVIEW_ONLY',report_path=(scope_dir/'REPORT.md').relative_to(ROOT).as_posix(),review_sha256=sha(scope_dir/'REVIEW.json'),new_evaluations=0,new_fits=0,dispatch=False,test=False,limitation='Four CNN methods need private identity bridges to their original strict checkers; LoGoFair native must preserve fitted DP state and virtual mapping. Its cache valid_native_prediction is FedAvg raw, not LoGo native. Backbone raw/shared diagnostics must be explicitly labelled; final primary endpoint remains undecided.')
+hybrid32_root=ROOT/'tmp/celeba_hybrid_screen_execution_20261009/accepted_delta_after27_20261010/ROOT32_SUMMARY_ADOPTION.json'
+if hybrid32_root.exists():
+    proof=read(hybrid32_root)
+    assert sha(hybrid32_root)=='6fcbdc41c7af01815e15995e0cb3688672404bf3b96844dc8d9bffa21028587f'
+    assert proof['status']=='ROOT_HYBRID32_SUMMARY_ADOPTED' and proof['accepted_total']==32 and proof['all32_offserver_verified']
+    summary_path=ROOT/proof['summary_path'];summary=read(summary_path)
+    assert sha(summary_path)==proof['summary_sha256']=='46b5f8fdca9536166ed868e50d4c7bc2578f8a1100ffea97878cf044c95748ae'
+    assert summary['selected_recipe']==proof['selected_recipe']=='CosineFairness_lam20.0_tau0.1_lr0.001'
+    assert sha(ROOT/proof['independent_review_path'])==proof['independent_review_sha256']
+    assert not proof['final_test'] and not proof['formal100_started'] and not proof['training_authorized_by_this_record']
+    terminal_path=hybrid32_root.parent/'AUTHORIZED_SNAPSHOT.json';terminal=read(terminal_path)
+    assert len(terminal['rows'])==32 and all(r['terminal'] and r['round']==r['result_rounds']==70 and not r['failures'] for r in terminal['rows'])
+    assert 'EXITED' in terminal['service']['stdout'] and not terminal['screen_failure']
+    state['hybrid_screen32_20261009'].update(status=proof['status'],selected_recipe=proof['selected_recipe'],selected_candidate=proof['selected_candidate'],
+        summary_path=proof['summary_path'],summary_sha256=proof['summary_sha256'],summary_root_path=hybrid32_root.relative_to(ROOT).as_posix(),summary_root_sha256=sha(hybrid32_root),
+        offserver_accepted70round_jobs=32,accepted70round_jobs=32,not_yet_accepted=0,terminal_workers=0,
+        accuracy_champion=proof['accuracy_champion'],three_metric_Pareto=proof['three_metric_Pareto'],n_seeds=1,sample_SD=False,significance=False,
+        latest_readonly_terminal_observation=dict(checked_utc=terminal['utc'],observed_complete=32,active=0,pending=0,failures=0,source_bound=True,
+            active_rounds=[],snapshot_path=terminal_path.relative_to(ROOT).as_posix(),snapshot_sha256=sha(terminal_path)))
+    state['active_services']=[name for name in state['active_services'] if name!='guardfed_celeba_hybrid_screen32']
+aux_v2=ROOT/'tmp/celeba_aux_live_followup_20261010_afterHybrid32/attempt_v2'
+if (aux_v2/'FILES_SHA256.json').exists():
+    assert sha(aux_v2/'FILES_SHA256.json')=='5c20e5c77fa7dd50f30bb4d5c464e413ac8cb1568dd51cc40394233f66d69fa0'
+    for name,pin in read(aux_v2/'FILES_SHA256.json')['files'].items():assert sha(aux_v2/name)==pin['sha256']
+    measured=read(aux_v2/'FINDINGS.json');assert measured['new_accepted']==0 and not measured['remote_writes']
+    state['auxiliary_readonly_observation_20261010']=dict(path=(aux_v2/'FINDINGS.json').relative_to(ROOT).as_posix(),sha256=sha(aux_v2/'FINDINGS.json'),
+        utc=measured['actual_snapshot_utc'],FL_observed_terminal=38,FL_accepted=32,Hybrid_observed_terminal=32,Hybrid_accepted=32,
+        gradient_observed_terminal=16,gradient_actual_workers=1,gradient_active_round=None,observation_is_atomic=False,acceptance_unchanged=True)
+    state['flgmm_fullcoverage_v2_20261009']['latest_readonly_terminal_observation']=dict(checked_utc=measured['actual_snapshot_utc'],observed_complete=38,
+        active=2,pending=56,failures=0,active_rounds=[10,10],source_bound=True,snapshot_sha256=measured['snapshot_sha256'])
+    state['gradient64_validation_search_20261010']['latest_measured_observation']=dict(checked_utc=measured['actual_snapshot_utc'],terminal70_observed=16,
+        actual_active_workers=1,active_rounds=[None],round_capture_complete=False,failures=0,snapshot_sha256=measured['snapshot_sha256'])
+gradient8_root=ROOT/'tmp/celeba_gradient64_delta_after10_20261010/ROOT_ADOPTION_REVIEW.json'
+if gradient8_root.exists():
+    proof=read(gradient8_root);prior=state['gradient64_validation_search_20261010']
+    assert sha(gradient8_root)=='83d22e5833fecddb398625893c457d2dfadb3b745bc4c5613d59cf87b6c02d39'
+    assert proof['status']=='ROOT_GRADIENT64_EXACT8_ORIGINAL_STRICT_OFFSERVER_ADOPTED' and (proof['accepted_before'],proof['accepted_new'],proof['accepted_total'])==(10,8,18)
+    assert proof['previous_root_sha256']==prior['root_adoption_sha256']=='99a07fefad41e0f441288f86c5335e175eb5992983fec047ab3a1c9f1eacea57'
+    assert proof['accepted_ids'][:10]==prior['accepted_ids'] and len(set(proof['accepted_ids']))==18 and not proof['constant_negative_ids']
+    assert sha(gradient8_root.parent/'OFFSERVER_ACCEPTANCE.json')==proof['offserver_sha256'] and sha(gradient8_root.parent/'ROOT_READY_HANDOFF.json')==proof['handoff_sha256']
+    auth=read(gradient8_root.parent/'AUTHORIZED_SNAPSHOT.json');assert proof['accepted_new_ids']==auth['authorized_ids'] and proof['CPU110_released'] and proof['new_CNN']==proof['new_training']==0 and not proof['final_test']
+    prior.update(offserver_accepted=18,root_adoption_path=gradient8_root.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient8_root),accepted_ids=proof['accepted_ids'],
+        delta_acceptance_snapshot=dict(path=(gradient8_root.parent/'SNAPSHOT.json').relative_to(ROOT).as_posix(),sha256=sha(gradient8_root.parent/'SNAPSHOT.json'),
+            root_accepted_utc=proof['utc'],terminal70_observed=18,offserver_accepted=18,scope='Exact8 original strict/saved-state delta; prior10 prefix preserved, negative outcomes retained, no recipe selected.'))
+aux_after7=ROOT/'tmp/celeba_aux_live_followup_afterHybrid7_20261010'
+if (aux_after7/'FILES_SHA256.json').exists():
+    assert sha(aux_after7/'FILES_SHA256.json')=='012b366ca0a3f433262420ef7122880c8477bc6c00bd86ca155be5f083b0ed3e'
+    for name,pin in read(aux_after7/'FILES_SHA256.json')['files'].items():assert sha(aux_after7/name)==pin['sha256']
+    measured=read(aux_after7/'FINDINGS.json');queues=measured['queues']
+    assert measured['new_accepted']==0 and measured['no_collection_or_training'] and measured['all_source_data_identity_match'] and not measured['current_failures']
+    assert sha(aux_after7/'SNAPSHOT.json')==measured['snapshot_sha256']
+    state['auxiliary_readonly_observation_after_Hybrid7_20261010']=dict(path=(aux_after7/'FINDINGS.json').relative_to(ROOT).as_posix(),sha256=sha(aux_after7/'FINDINGS.json'),
+        utc=measured['utc'],FL_observed_terminal=40,FL_root_accepted_at_input=38,gradient_observed_terminal=18,gradient_root_accepted_at_input=10,
+        remaining620_remote_closed=56,remaining620_root_accepted_at_input=48,acceptance_unchanged_by_observation=True)
+    state['flgmm_fullcoverage_v2_20261009']['latest_readonly_terminal_observation']=dict(checked_utc=measured['utc'],observed_complete=40,
+        active=len(queues['FLGMM']['active']),pending=54,failures=0,active_rounds=[r['round'] for r in queues['FLGMM']['active']],source_bound=True,snapshot_sha256=measured['snapshot_sha256'])
+    state['gradient64_validation_search_20261010']['latest_measured_observation']=dict(checked_utc=measured['utc'],terminal70_observed=18,
+        actual_active_workers=len(queues['gradient64']['active']),active_rounds=[r['round'] for r in queues['gradient64']['active']],round_capture_complete=True,failures=0,snapshot_sha256=measured['snapshot_sha256'])
+    state['mechanism_remaining620_valid_20261010']['latest_measured_observation']=dict(utc=measured['utc'],remote_strict_closed=56,
+        progress_status=queues['remaining620']['progress_status'],waiting_id=queues['remaining620']['waiting_id'],snapshot_sha256=measured['snapshot_sha256'],source_bound=True)
+hybrid_bound=ROOT/'tmp/celeba_hybrid_fullcoverage_root_binding_v3_20261010'
+if (hybrid_bound/'ROOT_CANARY_STARTUP.json').exists():
+    proof=read(hybrid_bound/'ROOT_CANARY_STARTUP.json');bound=read(hybrid_bound/'ROOT_BOUND_ADOPTION.json')
+    assert sha(hybrid_bound/'ROOT_CANARY_STARTUP.json')=='d90c19c8aedf12a2ac58e37d653b638fcdae8e9b0044d3fcf6487af172a4bbd1'
+    assert bound['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED' and (bound['new'],bound['reused'],bound['canaries'])==(96,4,7)
+    assert sha(hybrid_bound/'BOUND_TRANSFER_VERIFICATION.json')==bound['bound_offserver_sha256']
+    assert sha(ROOT/proof['observation_path'])==proof['observation_sha256']
+    state['hybrid100_fullcoverage_20261010']=dict(status=proof['status'],planned_new=96,reused=4,planned_total=100,new_accepted=0,
+        package_sha256=bound['package_sha256'],implementation_source_seal_sha256=bound['implementation_source_seal_sha256'],
+        bound_root_path=(hybrid_bound/'ROOT_BOUND_ADOPTION.json').relative_to(ROOT).as_posix(),bound_root_sha256=sha(hybrid_bound/'ROOT_BOUND_ADOPTION.json'),
+        canary_start_path=(hybrid_bound/'ROOT_CANARY_STARTUP.json').relative_to(ROOT).as_posix(),canary_start_sha256=sha(hybrid_bound/'ROOT_CANARY_STARTUP.json'),
+        observed_utc=proof['observed_utc'],actual_worker_id=proof['actual_worker_id'],actual_round_at_startup=proof['actual_round'],
+        canary_service='guardfed_celeba_hybrid_fullcoverage_canary',actual_service=None,canary_scope=7,canaries_offserver_adopted=0,
+        CPU104_GPU0_single_worker=True,formal100_started=False,final_test=False,prior_metadata_failure_preserved=True,
+        limits='Original32 selection unchanged; sum compatibility repaired without tolerance change. Actual gate startup is not7 closure or70round performance.')
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_hybrid_fullcoverage_canary']))
+if (hybrid_bound/'ROOT_SEVEN_CANARY_CLOSURE.json').exists():
+    closure=read(hybrid_bound/'ROOT_SEVEN_CANARY_CLOSURE.json')
+    assert sha(hybrid_bound/'ROOT_SEVEN_CANARY_CLOSURE.json')=='eda03511ec037be8d06401886355b3c49929de3523bed272ca8df94e5799b05a'
+    assert closure['status']=='ROOT_SEVEN_HYBRID_CANARIES_OFFSERVER_ADOPTED' and (closure['accepted_new_canaries'],closure['same_horizon_pairs'],closure['total_canary_runs'],closure['rounds'],closure['formal_table_samples'])==(7,2,7,3,0)
+    assert sha(Path(closure['offserver_path']))==closure['offserver_sha256'] and sha(Path(closure['gate_path']))==closure['gate_sha256']
+    state['hybrid100_fullcoverage_20261010'].update(status=closure['status'],canaries_offserver_adopted=7,canary_service_exited=True,
+        canary_closure_path=(hybrid_bound/'ROOT_SEVEN_CANARY_CLOSURE.json').relative_to(ROOT).as_posix(),canary_closure_sha256=sha(hybrid_bound/'ROOT_SEVEN_CANARY_CLOSURE.json'),
+        canary_offserver_sha256=closure['offserver_sha256'],canary_archive_members=closure['archive_members_verified'],canary_closure_utc=closure['checked_utc'],
+        limits=closure['limitations'])
+    state['active_services']=[s for s in state['active_services'] if s!='guardfed_celeba_hybrid_fullcoverage_canary']
+if (hybrid_bound/'ROOT_COVERAGE_STARTUP.json').exists():
+    proof=read(hybrid_bound/'ROOT_COVERAGE_STARTUP.json')
+    assert sha(hybrid_bound/'ROOT_COVERAGE_STARTUP.json')=='136205c2b101c05f3fd0bbfa1fe16df4a364a5b4f64a140aa51ee754ceb50045'
+    assert proof['status']=='ROOT_ACTUAL_HYBRID96_VALID_COVERAGE_STARTUP_AND_ROUNDS_VERIFIED' and proof['formal100_started'] and proof['new_accepted']==0
+    assert sha(ROOT/proof['observation_path'])==proof['observation_sha256'] and sha(ROOT/proof['start_receipt_path'])==proof['start_receipt_sha256']
+    state['hybrid100_fullcoverage_20261010'].update(status=proof['status'],formal100_started=True,actual_service='guardfed_celeba_hybrid_fullcoverage',
+        observed_utc=proof['observed_utc'],actual_worker_id=proof['actual_worker_id'],actual_worker_pid=proof['actual_worker_pid'],actual_round_at_startup=proof['actual_round'],
+        coverage_start_path=(hybrid_bound/'ROOT_COVERAGE_STARTUP.json').relative_to(ROOT).as_posix(),coverage_start_sha256=sha(hybrid_bound/'ROOT_COVERAGE_STARTUP.json'),
+        physical_gpu_uuid=proof['physical_gpu_uuid'],formal_authorization_sha256=proof['authorization_sha256'],canary_previous_authorization_preserved=True,limits=proof['limits'])
+    state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_hybrid_fullcoverage']))
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -3283,6 +3420,10 @@ if main.get('three_view_counts_by_variant',{}).get('minus_A')==20:
     top+='A IID F Flip新增八份已严格离机并与native218/220恢复链对齐：74成员/72指标/192计数/24预测规则及16原model/result成员核验通过，native差0。累计三视图U100+C100+A20=220；Benign和F Flip各10seed齐全，新增两场景表仍须独立统计采用，原Benign表保持。其余八个A场景及其他机制仍在训练。\n'
 if main.get('A_three_view_two_scene_table'):
     top+='A两完整IID场景表已独立采用：Benign/F Flip各十共享seed，324统计/162展示/360计数指标/960基础计数通过；旧24记录和Benign162统计/81展示保持。F Flip native/shared删除A差ACC约+0.001pp、AEOD约+0.00001、ASPD约−0.00088，9/6面板方向变化完整保留；不作每场景不可或缺主张。入口'+main['A_three_view_two_scene_table']['table_path']+'。其他八A场景及六变体余项未齐。\n'
+if main.get('three_view_counts_by_variant',{}).get('minus_A')==28:
+    top+='A新增IID FedSA准确8项已严格离机、独立连接native228并根采用；74成员/72指标/192计数/24规则和16原model/result成员通过，native差0，累计U100+C100+A28=228。FedSA仅8/10，不生成均值或新场景表；原220及A两场景表保持。入口tmp/celeba_mechanism_remaining620_A28_root_adoption_20261010/ROOT_ADOPTION.json。\n'
+if state['celeba_mechanism_v1'].get('three_view_counts_by_variant',{}).get('minus_A')==36:
+    top+='最新A36八项已由原strict/离机74成员和native236恢复链核验并根采用，累计U100+C100+A36=236，原228不变；IID FedSA十seed记录齐备，S-DFA仅6/10不入完整场景均值。已审A20两场景表保持，新增场景统计尚未采用。入口tmp/celeba_mechanism_remaining620_A36_root_adoption_20261010/ROOT_ADOPTION.json。\n'
 if state.get('author_adaptation_reply_patch_20261010'):
     top+='两项作者适配决定的英文回复/正文局部补丁已根核：24审稿原话保持、两个替换段可逆、原数字未变；正文未应用，入口'+state['author_adaptation_reply_patch_20261010']['reply_patch']+'。\n'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
@@ -3291,7 +3432,22 @@ if state.get('gradient200_new_attack_gates_source_20261010'):
     top+='新增攻击14项共同三轮门检源码已独立审查通过，实际图像门检仍0；仅source-only，不授权派发192。原正式70轮验收未放宽。\n'
 if state.get('added_baseline_three_view_scope_20261010'):
     top+='新增五方法三视图接线仅完成源码范围审查：四CNN标签须接各自原strict，LoGo原生必须保留DP后处理与虚拟映射。其cache的valid_native_prediction是FedAvg原始预测，不得冒充LoGo native；backbone raw/shared仅可标为诊断。没有新增评价/拟合，最终主终点未定。\n'
+if hybrid.get('status')=='ROOT_HYBRID32_SUMMARY_ADOPTED':
+    top=top.replace('项已严格验收、离机并通过本机来源绑定的记录复核；尚未完整选recipe','项已严格验收、离机并经独立复核；冻结规则选λ20/τ0.1/lr0.001，n=1')
+    top=top.replace('组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe，组合100项尚未启动。','组合基线32项验证搜索已正常EXITED、0worker，完整严格离机并独立复核；冻结规则选λ20/τ0.1/lr0.001，同时为准确率冠军及唯一三指标Pareto候选。n=1，不报跨seed SD/显著性；100格尚未启动，接线需修复记录状态接口并完成七个真实短程门检。')
+if state.get('hybrid100_fullcoverage_20261010'):
+    top=top.replace('100格尚未启动，接线需修复记录状态接口并完成七个真实短程门检。','100格已生成96新+4显式复用清单；七个真实三轮门检已启动，实测首任务round2，正式70轮队列尚未启动。')
+    top+='\n组合100接线已在独立v3目录实际绑定147个metadata成员，原Python3.10汇总在服务器3.12用显式顺序求和精确重放，未放宽容差/修改选择。原v2绑定失败发生在任务生成前，证据保留。七门检CPU104/GPU0单worker，启动前主队列真实增长/GPU RecoveryNone/CPU配额通过；门检科学70轮样本0。实际入口tmp/celeba_hybrid_fullcoverage_root_binding_v3_20261010/ROOT_CANARY_STARTUP.json。\n'
+    if state['hybrid100_fullcoverage_20261010']['canaries_offserver_adopted']==7:
+        top=top.replace('七个真实三轮门检已启动，实测首任务round2，正式70轮队列尚未启动。','七个真实三轮门检已全部严格验收及离机，254归档成员、两组同轮数新旧对照通过；正式70轮队列尚未启动。')
+        top+='组合七门队列已正常EXITED，原strict/保存终轮张量/RNG摘要及全部成员哈希通过root验收；三轮不能证明70轮等价或每轮权重完整，论文样本0。入口'+state['hybrid100_fullcoverage_20261010']['canary_closure_path']+'。\n'
+    if state['hybrid100_fullcoverage_20261010']['formal100_started']:
+        top=top.replace('正式70轮队列尚未启动。','96新增70轮valid队列已实际启动，另4旧匹配结果显式复用；首worker实测round1，新增70轮接受仍0。')
+        top+='组合完整覆盖CPU104/GPU0单worker/一计算线程，首worker PID85931的真实GPU UUID、源码/数据/配置身份及第一轮已核。旧canary授权原字节保留，新授权精确绑定七门离机root凭据；无自动重试、不运行test。入口'+state['hybrid100_fullcoverage_20261010']['coverage_start_path']+'。\n'
 top+='\n本机存储：2026-10-10用户指定F:/YananResearchStorage/GuardFed/；大文件写入前实核F卷标Yanan 2TB与容量，无内置盘回退。代码/配置/索引/精简报告保留E，服务器大文件优先原地保留；已存在E证据未删除或宣称全量迁移。记录LOCAL_STORAGE_20261010.json。\n\n'
+if state.get('hybrid100_fullcoverage_20261010',{}).get('formal100_started'):
+    top=top.replace('组合基线服务guardfed_celeba_hybrid_screen32仍运行，GPU0/CPU104单线程，未选完整recipe，组合100项尚未启动。',
+        '组合32搜索已正常完成并严格离机，冻结规则选λ20/τ0.1/lr0.001；七个真实三轮门检通过后，guardfed_celeba_hybrid_fullcoverage已实际启动96新+4复用70轮valid覆盖，CPU104/GPU0单线程，新增70轮接受0。')
 running.write_text(top+history,encoding='utf-8')
 execution = TRAIN / 'celeba_mechanism_v1/EXECUTION.md'
 text = execution.read_text(encoding='utf-8')

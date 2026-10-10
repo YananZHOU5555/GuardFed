@@ -1,0 +1,255 @@
+--- canary_operations/v3/launch.py
++++ fullcoverage_operations/v3/launch.py
+@@ -1,38 +1,46 @@
+-"""Future root-approved one-shot canary launcher transport; no implicit approval or retry."""
++"""Root-approved one-shot Hybrid96 launch transport; real seven-canary offserver closure required."""
+ from pathlib import Path
+ import argparse,base64,datetime,hashlib,json,subprocess,sys,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+ HERE=Path(__file__).resolve().parent
+-REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/canary_operations'
++REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/fullcoverage_operations'
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+ def save(p,v):
+  with p.open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+ 
++SERVICE='guardfed_celeba_hybrid_fullcoverage'
++
++def check_closure(approval,gate,offserver,closure):
++ assert approval['status']=='ROOT_AUTHORIZED_HYBRID96_VALID_ONLY' and approval['scope']=='96_new_70round_valid_only'
++ assert approval['service']==SERVICE and approval['cpus']==[104] and approval['cpu_threads']==1
++ assert (approval['planned_new'],approval['reused'],approval['planned_total'])==(96,4,100) and approval['final_test'] is False
++ assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
++ assert gate['status']=='SEVEN_HYBRID_CANARIES_STRICT_PASS_BACKUP_PENDING' and gate['package_sha256']==approval['package_sha256']
++ assert len(gate['accepted_ids'])==len(set(gate['accepted_ids']))==7 and len(gate['pairs'])==2 and gate['scientific70records']==0 and gate['test'] is False
++ assert closure['status']=='ROOT_SEVEN_HYBRID_CANARIES_OFFSERVER_ADOPTED' and closure['package_sha256']==approval['package_sha256']
++ assert closure['gate_sha256']==approval['gate_acceptance_sha256']
++ assert offserver['status']=='PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON'
++ local=offserver['local'];assert local['package_sha256']==approval['package_sha256'] and local['gate_sha256']==closure['gate_sha256']
++ assert (local['accepted_new'],local['same_horizon_pairs'],local['total_runs'],local['rounds'],local['formal_table_samples'])==(7,2,7,3,0)
++ assert local['CNN_calls']==0 and local['local_CUDA_initialized'] is False
++
++
+ def main():
+  parser=argparse.ArgumentParser()
+- for key in ('approval','bound-offserver','bound-root-review','baseline'):
++ for key in ('approval','gate-acceptance','gate-offserver','root-closure','baseline'):
+   parser.add_argument('--'+key,type=Path,required=True);parser.add_argument('--'+key+'-sha256',required=True)
+  parser.add_argument('--package-sha256',required=True);parser.add_argument('--helper-seal-sha256',required=True)
+  a=parser.parse_args();assert sha(HERE/'FILES_SHA256.json')==a.helper_seal_sha256
+  for n,pin in read(HERE/'FILES_SHA256.json')['files'].items():assert sha(HERE/n)==pin['sha256']
+- inputs={'APPROVAL.json':a.approval,'BOUND_OFFSERVER.json':a.bound_offserver,'BOUND_ROOT_REVIEW.json':a.bound_root_review,'BASELINE.json':a.baseline}
+- for path,pin in [(a.approval,a.approval_sha256),(a.bound_offserver,a.bound_offserver_sha256),(a.bound_root_review,a.bound_root_review_sha256),(a.baseline,a.baseline_sha256)]:assert sha(path)==pin
++ inputs={'APPROVAL.json':a.approval,'GATE_ACCEPTANCE.json':a.gate_acceptance,'GATE_OFFSERVER.json':a.gate_offserver,'ROOT_CLOSURE.json':a.root_closure,'BASELINE.json':a.baseline}
++ for path,pin in [(a.approval,a.approval_sha256),(a.gate_acceptance,a.gate_acceptance_sha256),(a.gate_offserver,a.gate_offserver_sha256),(a.root_closure,a.root_closure_sha256),(a.baseline,a.baseline_sha256)]:assert sha(path)==pin
+  approval=read(a.approval)
+- assert approval['status']=='ROOT_AUTHORIZED_SEVEN_HYBRID_CANARIES' and approval['scope']=='seven_same_horizon_3round_canaries'
+  assert approval['package_sha256']==a.package_sha256 and approval['helper_seal_sha256']==a.helper_seal_sha256
+- assert approval['bound_offserver_sha256']==a.bound_offserver_sha256 and approval['bound_root_review_sha256']==a.bound_root_review_sha256
++ assert approval['gate_acceptance_sha256']==a.gate_acceptance_sha256 and approval['gate_offserver_sha256']==a.gate_offserver_sha256 and approval['root_closure_sha256']==a.root_closure_sha256
+  assert approval['baseline_snapshot_sha256']==a.baseline_sha256
+- assert approval['service']=='guardfed_celeba_hybrid_fullcoverage_canary' and approval['cpus']==[104] and approval['cpu_threads']==1
+- assert approval['formal100_started'] is False and approval['final_test'] is False
+- for path in (a.bound_offserver,a.bound_root_review):assert read(path)['package_sha256']==a.package_sha256
+- # One exact adopted proof can legitimately cover both offserver verification and root review.
+- assert read(a.bound_offserver)['status']=='BOUND_METADATA_MEMBERS_RECEIVED_NOT_TRAINING'
+- root=read(a.bound_root_review);assert root['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED'
+- assert root['bound_offserver_sha256']==a.bound_offserver_sha256 and (root['new'],root['reused'],root['canaries'])==(96,4,7)
+- assert root['execution_authorized'] is False and root['final_test'] is False
+- assert root['implementation_source_seal_sha256']==approval['implementation_source_seal_sha256']
+- assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
++ assert len(approval['canary_authorization_sha256'])==64 and set(approval['canary_authorization_sha256'])<=set('0123456789abcdef')
++ check_closure(approval,read(a.gate_acceptance),read(a.gate_offserver),read(a.root_closure))
+  source={n:HERE/n for n in ('remote_launch.py','main_health.py','HEALTH_LINEAGE.json','FILES_SHA256.json')};source.update(inputs)
+  members={n:dict(sha256=sha(path),bytes=path.stat().st_size) for n,path in source.items()}
+  payload={n:base64.b64encode(path.read_bytes()).decode('ascii') for n,path in source.items()}
+@@ -75,21 +83,21 @@
+   save(attempt/'REMOTE_COMMAND.json',dict(returncode=r.returncode,stdout=r.stdout.decode(errors='replace'),stderr=r.stderr.decode(errors='replace')))
+   r.check_returncode();result=json.loads(r.stdout);assert result['returncode']==0,result
+   # Read evidence bytes only; no second launch command, tar APIs or model transfer.
+-  collect="from pathlib import Path\nimport base64,json\np=Path(%r)\nnames=['START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json']\nprint(json.dumps({n:base64.b64encode((p/n).read_bytes()).decode('ascii') for n in names}))\n"%REMOTE
++  collect="from pathlib import Path\nimport base64,json\np=Path(%r)\nnames=['START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json','PREVIOUS_CANARY_AUTHORIZATION.json','NEW_EXECUTION_AUTHORIZATION.json']\nprint(json.dumps({n:base64.b64encode((p/n).read_bytes()).decode('ascii') for n in names}))\n"%REMOTE
+   r2=subprocess.run(ssh+['python -B -'],input=collect.encode(),capture_output=True,timeout=45)
+   save(attempt/'RECEIPT_TRANSFER_COMMAND.json',dict(returncode=r2.returncode,stderr=r2.stderr.decode(errors='replace')));r2.check_returncode()
+   for name,data in json.loads(r2.stdout).items():
+-   assert name in ('START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json')
++   assert name in ('START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json','PREVIOUS_CANARY_AUTHORIZATION.json','NEW_EXECUTION_AUTHORIZATION.json')
+    with (attempt/name).open('xb') as f:f.write(base64.b64decode(data,validate=True))
+   assert sha(attempt/'APPROVAL.json')==a.approval_sha256
+   start=read(attempt/'START.json');assert start['package_sha256']==a.package_sha256 and start['resource_sha256']==sha(attempt/'RESOURCE.json')
+-  save(attempt/'LOCAL_START_RECEIPTS.json',dict(status='START_RECEIPTS_RECEIVED_NOT_CANARY_ACCEPTANCE',files={n:sha(attempt/n) for n in ('START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json')},fullcoverage_started=False))
++  save(attempt/'LOCAL_START_RECEIPTS.json',dict(status='START_RECEIPTS_RECEIVED_NOT_SCIENTIFIC_ACCEPTANCE',files={n:sha(attempt/n) for n in ('START.json','START_COMMANDS.json','RESOURCE.json','SUPERVISOR.conf','APPROVAL.json','PREVIOUS_CANARY_AUTHORIZATION.json','NEW_EXECUTION_AUTHORIZATION.json')},fullcoverage_start_command_succeeded=True,scientific_acceptance=False))
+   print(json.dumps(dict(attempt=str(attempt),service=start['service'],status=start['status'])))
+  except BaseException as e:
+-  save(attempt/'FAILURE.json',dict(error=repr(e),traceback=traceback.format_exc(),automatic_retry=False,
++  save(attempt/'FAILURE.json',dict(error=repr(e),traceback=traceback.format_exc(),automatic_retry=False,resource_guard_inputs=getattr(e,'resource_guard_inputs',None),
+    timeout_stdout=(e.stdout or b'').decode(errors='replace') if isinstance(e,subprocess.TimeoutExpired) else None,
+    timeout_stderr=(e.stderr or b'').decode(errors='replace') if isinstance(e,subprocess.TimeoutExpired) else None,
+-   next='Inspect exact remote canary_operations and service; start may already have happened. Never rerun blindly.'))
++   next='Inspect exact remote fullcoverage_operations and service; start may already have happened. Never rerun blindly.'))
+   raise
+ 
+ if __name__=='__main__':main()
+--- canary_operations/v3/remote_launch.py
++++ fullcoverage_operations/v3/remote_launch.py
+@@ -1,4 +1,4 @@
+-"""One externally approved exact7 canary launch. No fullcoverage queue or other-service mutation."""
++"""One externally approved96-new Hybrid validation launch after real seven-canary closure."""
+ from pathlib import Path
+ from collections import deque
+ import datetime,hashlib,json,os,re,shutil,subprocess,sys,time,traceback
+@@ -6,7 +6,7 @@
+ HERE=Path(__file__).resolve().parent
+ STAGE=Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage')
+ REPO=Path('/workspace/GuardFed-celeba-expanded');MAIN=REPO/'results/revision_20261009/celeba_mechanism_v1'
+-SERVICE='guardfed_celeba_hybrid_fullcoverage_canary'
++SERVICE='guardfed_celeba_hybrid_fullcoverage'
+ PYTHON='/workspace/guardfed_envs/celeba-cu128-20261009/bin/python'
+ from main_health import main_health
+ def sha(p):
+@@ -49,7 +49,7 @@
+     actual_main.append(dict(pid=int(proc.name),id=job.stem,argv=argv))
+   except (FileNotFoundError,ProcessLookupError,PermissionError):continue
+  queue=read(MAIN/'formal_queue_progress.json');service=command(['supervisorctl','status','guardfed_celeba_mechanism_formal'])
+- guard=main_health(service,queue,'hybrid_exact7_launch')
++ guard=main_health(service,queue,'hybrid96_validation_launch')
+  assert 1<=len(actual_main)<=8,'Protected main actual worker count outside1..8'
+  failures=[str(p) for p in (MAIN/'runs').glob('*/failure*.json')];assert not failures
+  errors=[];progress=[];pattern=re.compile(r'Traceback|RuntimeError|CUDA error|out of memory|OutOfMemory|\bnan\b|\binf\b|fatal',re.I)
+@@ -66,7 +66,8 @@
+  assert len(queue['completed'])>=baseline['queue_completed'] and grown,'No measured main round/completion growth versus approved snapshot'
+  baseline_time=datetime.datetime.fromisoformat(baseline['checked_utc']).timestamp();assert 0<=time.time()-baseline_time<=3600
+  old=command(['supervisorctl','status','guardfed_celeba_hybrid_screen32']);sg=command(['supervisorctl','status','sglang'])
+- assert state(old)=='EXITED' and state(sg)=='STOPPED'
++ canary=command(['supervisorctl','status','guardfed_celeba_hybrid_fullcoverage_canary'])
++ assert state(old)=='EXITED' and state(canary)=='EXITED' and state(sg)=='STOPPED'
+  raw={n:Path('/sys/fs/cgroup',n).read_text().strip() for n in ('cpu.max','cpu.stat','memory.current','memory.max','memory.events')}
+  sample_started=time.monotonic();time.sleep(0.2);cpu_stat_after=Path('/sys/fs/cgroup/cpu.stat').read_text().strip()
+  cpu_delta=int(dict(x.split() for x in cpu_stat_after.splitlines())['usage_usec'])-int(dict(x.split() for x in raw['cpu.stat'].splitlines())['usage_usec'])
+@@ -88,44 +89,77 @@
+   original_screen_exited=True,no_duplicate_workers=True,no_restricted_CPU_overlap=True,
+   raw_cgroup=raw,cpu_stat_after=cpu_stat_after,measured_cpu_cores=measured_cpu_cores,all_process_thread_owners=tasks,main_guard=guard,main_actual_workers=actual_main,main_progress=progress,main_round_changes=changes,
+   main_growth_observed=grown,main_failure_files=failures,main_recent_log_errors=errors,baseline_snapshot_sha256=sha(HERE/'BASELINE.json'),
+-  old_hybrid=old,sglang=sg,gpu_query=gpu,gpu_detail=details,disk_free_bytes=disk,reserved_affinity=[104],helper_affinity=[107],computational_threads_per_child=1,
++  old_hybrid=old,completed_canary_service=canary,sglang=sg,gpu_query=gpu,gpu_detail=details,disk_free_bytes=disk,reserved_affinity=[104],helper_affinity=[107],computational_threads_per_child=1,
+   notes='Completed count only supports live health; no scientific acceptance. Auxiliary library threads are not counted as full cores; declared upper thread budgets recorded.')
++
++
++def check_closure(approval,gate,offserver,closure):
++ assert approval['status']=='ROOT_AUTHORIZED_HYBRID96_VALID_ONLY' and approval['scope']=='96_new_70round_valid_only'
++ assert approval['service']==SERVICE and approval['cpus']==[104] and approval['cpu_threads']==1
++ assert (approval['planned_new'],approval['reused'],approval['planned_total'])==(96,4,100) and approval['final_test'] is False
++ assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
++ assert gate['status']=='SEVEN_HYBRID_CANARIES_STRICT_PASS_BACKUP_PENDING' and gate['package_sha256']==approval['package_sha256']
++ assert len(gate['accepted_ids'])==len(set(gate['accepted_ids']))==7 and len(gate['pairs'])==2 and gate['scientific70records']==0 and gate['test'] is False
++ assert closure['status']=='ROOT_SEVEN_HYBRID_CANARIES_OFFSERVER_ADOPTED' and closure['package_sha256']==approval['package_sha256']
++ assert closure['gate_sha256']==approval['gate_acceptance_sha256']
++ assert offserver['status']=='PASS_FULL_MEMBER_SHA_AND_ORIGINAL_SAVED_COMPARISON'
++ local=offserver['local'];assert local['package_sha256']==approval['package_sha256'] and local['gate_sha256']==closure['gate_sha256']
++ assert (local['accepted_new'],local['same_horizon_pairs'],local['total_runs'],local['rounds'],local['formal_table_samples'])==(7,2,7,3,0)
++ assert local['CNN_calls']==0 and local['local_CUDA_initialized'] is False
++
++def unlocked_canary_file(path):
++ import fcntl
++ assert path.is_file() and not path.is_symlink(),'Original canary lock file required'
++ with path.open('r+') as lock:
++  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
++  fcntl.flock(lock,fcntl.LOCK_UN)
++ # The historical lock file remains unchanged; its existence is not a running owner.
+ 
+ def main():
+  assert sha('/etc/vast-agents-guide.md')=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+  transfer=read(HERE/'TRANSFER.json')
+  for name,pin in transfer['members'].items():assert sha(HERE/name)==pin['sha256']
+- approval=read(HERE/'APPROVAL.json');assert approval['status']=='ROOT_AUTHORIZED_SEVEN_HYBRID_CANARIES'
+- assert approval['scope']=='seven_same_horizon_3round_canaries' and approval['service']==SERVICE
+- assert approval['cpus']==[104] and approval['cpu_threads']==1 and approval['formal100_started'] is False and approval['final_test'] is False
++ approval=read(HERE/'APPROVAL.json')
++ assert sha(HERE/'FILES_SHA256.json')==approval['helper_seal_sha256']
+  assert sha(STAGE/'PACKAGE_SHA256.json')==approval['package_sha256']
+- for key,name in [('bound_offserver_sha256','BOUND_OFFSERVER.json'),('bound_root_review_sha256','BOUND_ROOT_REVIEW.json'),('baseline_snapshot_sha256','BASELINE.json')]:assert sha(HERE/name)==approval[key]
+- assert read(HERE/'BOUND_OFFSERVER.json')['package_sha256']==approval['package_sha256']
+- assert read(HERE/'BOUND_OFFSERVER.json')['status']=='BOUND_METADATA_MEMBERS_RECEIVED_NOT_TRAINING'
+- assert read(HERE/'BOUND_ROOT_REVIEW.json')['package_sha256']==approval['package_sha256']
+- root=read(HERE/'BOUND_ROOT_REVIEW.json');assert root['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED'
+- assert root['bound_offserver_sha256']==sha(HERE/'BOUND_OFFSERVER.json') and (root['new'],root['reused'],root['canaries'])==(96,4,7)
+- assert root['execution_authorized'] is False and root['final_test'] is False
+- assert root['implementation_source_seal_sha256']==approval['implementation_source_seal_sha256']
+- assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
+- for n in ('EXECUTION_AUTHORIZATION.json','GATE_ACCEPTANCE.json','GATE_FAILURE.json','gate_runs','gate_logs','coordinator.lock','runs','queue_progress.json'):assert not (STAGE/n).exists(),('Prior execution preserved',n)
++ for key,name in [('gate_acceptance_sha256','GATE_ACCEPTANCE.json'),('gate_offserver_sha256','GATE_OFFSERVER.json'),('root_closure_sha256','ROOT_CLOSURE.json'),('baseline_snapshot_sha256','BASELINE.json')]:assert sha(HERE/name)==approval[key]
++ gate=read(HERE/'GATE_ACCEPTANCE.json');offserver=read(HERE/'GATE_OFFSERVER.json');closure=read(HERE/'ROOT_CLOSURE.json')
++ check_closure(approval,gate,offserver,closure)
++ assert sha(STAGE/'GATE_ACCEPTANCE.json')==approval['gate_acceptance_sha256']
++ previous=(STAGE/'EXECUTION_AUTHORIZATION.json').read_bytes()
++ assert hashlib.sha256(previous).hexdigest()==approval['canary_authorization_sha256']
++ prior=json.loads(previous);assert prior['status']=='AUTHORIZED' and prior['scope']=='seven_same_horizon_3round_canaries' and prior['package_sha256']==approval['package_sha256']
++ assert prior['max_workers']==prior['cpu_threads_per_worker']==1 and prior['allowed_cpus']==[104] and prior['gpu_index']==0 and prior['automatic_retry'] is False and prior['final_test'] is False
++ for n in ('runs','logs','queue_progress.json','summary.json','EXECUTION_AUTHORIZATION.fullcoverage.pending.json'):assert not (STAGE/n).exists(),('Prior fullcoverage output preserved',n)
++ assert not list(STAGE.glob('QUEUE_FAILURE*.json')) and not (STAGE/'GATE_FAILURE.json').exists() and not list((STAGE/'gate_runs').rglob('failure*.json'))
+  assert not list(HERE.glob('FAILURE*.json')) and not (HERE/'START.json').exists()
++ unlocked_canary_file(STAGE/'coordinator.lock')
+  sys.path.insert(0,str(STAGE))
+  from common import local_identity,repo_identity
+  protocol,manifest=local_identity();assert len(manifest['preflight_jobs'])==7 and len(manifest['jobs'])==96 and len(manifest['reused_jobs'])==4
+  assert sha(STAGE/'PREPARED_SOURCE_SEAL.json')==approval['implementation_source_seal_sha256']
+  repo_identity(REPO,protocol);source_data=read(STAGE/'full_scope.json')['protected_source_hashes']
+- assert not any('guardfed_celeba_hybrid_fullcoverage_canary' in p.name for p in Path('/etc/supervisor/conf.d').glob('*'))
++ assert gate['accepted_ids']==[r['id'] for r in manifest['preflight_jobs']]
++ actual={p.relative_to(STAGE).as_posix():sha(p) for parent in ('gate_runs','gate_logs') for p in (STAGE/parent).rglob('*') if p.is_file()}
++ assert actual==gate['artifact_hashes'],'Actual final seven-canary files/logs changed'
++ from run_fullcoverage import original_runner
++ reused=original_runner()['reused_records'](manifest);assert len(reused)==4
++ assert not (Path('/etc/supervisor/conf.d')/(SERVICE+'.conf')).exists()
+  services=command(['supervisorctl','status',SERVICE]);assert 'no such process' in services['stdout'].lower() or 'no such process' in services['stderr'].lower()
+  resource_receipt=resource(read(HERE/'BASELINE.json'));resource_receipt['source_data_verified']=source_data
+  save(HERE/'RESOURCE.json',resource_receipt)
+- authorization=dict(status='AUTHORIZED',scope='seven_same_horizon_3round_canaries',package_sha256=approval['package_sha256'],
++ authorization=dict(status='AUTHORIZED',scope='96_new_70round_valid_only',package_sha256=approval['package_sha256'],
+   resource_review_utc=resource_receipt['utc'],no_duplicate_workers_verified=True,max_workers=1,cpu_threads_per_worker=1,allowed_cpus=[104],gpu_index=0,automatic_retry=False,final_test=False,
+   resource_receipt_path=str(HERE/'RESOURCE.json'),resource_receipt_sha256=sha(HERE/'RESOURCE.json'),root_approval_sha256=sha(HERE/'APPROVAL.json'),
+-  actual_sequential_workers=1,formal100_authorized=False)
+- save(STAGE/'EXECUTION_AUTHORIZATION.json',authorization)
++  gate_acceptance_sha256=closure['gate_sha256'],gate_root_closure_path=str(HERE/'ROOT_CLOSURE.json'),gate_root_closure_sha256=sha(HERE/'ROOT_CLOSURE.json'),planned_new=96,reused=4,planned_total=100)
++ with (HERE/'PREVIOUS_CANARY_AUTHORIZATION.json').open('xb') as f:f.write(previous)
++ save(HERE/'NEW_EXECUTION_AUTHORIZATION.json',authorization)
++ temporary=STAGE/'EXECUTION_AUTHORIZATION.fullcoverage.pending.json'
++ with temporary.open('xb') as f:f.write((HERE/'NEW_EXECUTION_AUTHORIZATION.json').read_bytes())
++ assert sha(STAGE/'EXECUTION_AUTHORIZATION.json')==approval['canary_authorization_sha256']
++ os.replace(temporary,STAGE/'EXECUTION_AUTHORIZATION.json')
+  config=f'''[program:{SERVICE}]
+-command=/usr/bin/taskset -c 104 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 {PYTHON} -B {STAGE}/run_canaries.py --repo {REPO}
++command=/usr/bin/taskset -c 104 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 {PYTHON} -B {STAGE}/run_fullcoverage.py run --repo {REPO}
+ directory={STAGE}
+ autostart=false
+ autorestart=false
+@@ -134,8 +168,8 @@
+ stopasgroup=true
+ killasgroup=true
+ environment=CUDA_VISIBLE_DEVICES="0",GUARDFED_CPU_THREADS="1",OMP_NUM_THREADS="1",MKL_NUM_THREADS="1",OPENBLAS_NUM_THREADS="1",NUMEXPR_NUM_THREADS="1",CUBLAS_WORKSPACE_CONFIG=":4096:8",PYTHONDONTWRITEBYTECODE="1"
+-stdout_logfile={HERE}/canaries.stdout.log
+-stderr_logfile={HERE}/canaries.stderr.log
++stdout_logfile={HERE}/fullcoverage.stdout.log
++stderr_logfile={HERE}/fullcoverage.stderr.log
+ '''
+  path=Path('/etc/supervisor/conf.d')/(SERVICE+'.conf')
+  with path.open('x') as f:f.write(config)
+@@ -146,14 +180,15 @@
+  assert time.time()-resource_receipt['observed_unix']<=120
+  result=command(['supervisorctl','start',SERVICE]);receipts.append(dict(command=['supervisorctl','start',SERVICE],**result))
+  save(HERE/'START_COMMANDS.json',receipts);assert result['returncode']==0,result
+- save(HERE/'START.json',dict(status='START_COMMAND_SUCCEEDED_NOT_GATE_ACCEPTANCE',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++ save(HERE/'START.json',dict(status='START_COMMAND_SUCCEEDED_NOT_SCIENTIFIC_ACCEPTANCE',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+   service=command(['supervisorctl','status',SERVICE]),package_sha256=approval['package_sha256'],authorization_sha256=sha(STAGE/'EXECUTION_AUTHORIZATION.json'),resource_sha256=sha(HERE/'RESOURCE.json'),
+-  only_service_changed=SERVICE,canary_scope=7,fullcoverage_started=False))
++  only_service_changed=SERVICE,planned_new=96,reused=4,planned_total=100,fullcoverage_start_command_succeeded=True,scientific_acceptance=False))
+  print(json.dumps(read(HERE/'START.json')))
+ 
+ if __name__=='__main__':
+  try:main()
+  except BaseException as e:
+   save(HERE/('FAILURE_'+str(time.time_ns())+'.json'),dict(error=repr(e),traceback=traceback.format_exc(),automatic_retry=False,
++   resource_guard_inputs=getattr(e,'resource_guard_inputs',None),
+    timeout_stdout=str(e.stdout) if isinstance(e,subprocess.TimeoutExpired) else None,
+    timeout_stderr=str(e.stderr) if isinstance(e,subprocess.TimeoutExpired) else None));raise

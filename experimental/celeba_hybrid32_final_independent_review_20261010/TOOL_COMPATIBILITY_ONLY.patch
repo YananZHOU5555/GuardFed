@@ -1,0 +1,31 @@
+--- review.py
++++ review_v4.py
+@@ -9,8 +9,10 @@
+ F = Path('F:/YananResearchStorage/GuardFed/celeba_hybrid32_final_collection_20261010')
+ read = lambda p: json.loads(p.read_bytes())
+ def sha(p):
++    digest = hashlib.sha256()
+     with Path(p).open('rb') as handle:
+-        return hashlib.file_digest(handle, 'sha256').hexdigest()
++        for chunk in iter(lambda: handle.read(1024*1024), b''): digest.update(chunk)
++    return digest.hexdigest()
+ def save(name, value):
+     with (OUT / name).open('x', encoding='utf-8', newline='\n') as handle:
+         json.dump(value, handle, indent=2, ensure_ascii=False, allow_nan=False); handle.write('\n')
+@@ -46,7 +48,9 @@
+     assert science(fixed) == science(parent.read_text(encoding='utf-8'))
+     assert ast.dump(ast.parse(science(fixed).replace('\n ', '\n')[1:])) == ast.dump(ast.parse(science(first).replace('\n ', '\n')[1:]))
+     failure = read(B/'FAILURE.json'); assert 'CalledProcessError(3' in failure['error'] and failure['automatic_retry'] is False
+-    assert not (B/'PARTIAL_ACCEPTANCE.json').exists() and not (B/'BACKUP_SHA256.json').exists()
++    assert read(B/'COLLECT_TRANSPORT_RECEIPT.json')['exit_code'] == 1
++    assert sha(B/'PARTIAL_ACCEPTANCE.json') == sha(B/'attempt_v2/PARTIAL_ACCEPTANCE.json')
++    assert sha(B/'BACKUP_SHA256.json') == sha(B/'attempt_v2/BACKUP_SHA256.json')
+     authorized = read(B/'AUTHORIZED_SNAPSHOT.json'); snapshot = read(B/'attempt_v2/live_snapshot.json')
+     assert authorized['service']['returncode'] == 3 and ' EXITED ' in authorized['service']['stdout']
+     assert not authorized['screen_failure'] and ' EXITED ' in snapshot['service']
+@@ -136,4 +140,4 @@
+ if __name__=='__main__':
+     try: main()
+     except BaseException as error:
+-        save('REVIEW_FAILURE.json',dict(error=repr(error),traceback=traceback.format_exc(),automatic_retry=False)); raise
++        save('REVIEW_V4_FAILURE.json',dict(error=repr(error),traceback=traceback.format_exc(),automatic_retry=False)); raise

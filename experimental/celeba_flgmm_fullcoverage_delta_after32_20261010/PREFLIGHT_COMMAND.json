@@ -1,0 +1,17 @@
+{
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 110 ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -"
+  ],
+  "exit_code": 0,
+  "start": "2026-10-10T09:23:32.729337+00:00",
+  "finish": "2026-10-10T09:23:41.974306+00:00",
+  "source_sha256": "36660331f8934a96b24c3b2cbfdc388761259a800e17430d0ee10fcc596b7856"
+}

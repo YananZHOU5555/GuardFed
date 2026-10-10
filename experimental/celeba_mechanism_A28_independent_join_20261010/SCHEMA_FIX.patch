@@ -1,0 +1,19 @@
+--- join.py
++++ join_v2.py
+@@ -128,7 +128,8 @@
+             strict = read(run_dir / 'strict_acceptance.json'); bridge = read(run_dir / 'bridge_receipt.json'); sci = read(run_dir / 'receipt.json')
+             approval = read(runtime / 'APPROVED.json'); complete = read(runtime / 'REMOTE_COMPLETE.json'); inventory = read(runtime / 'inventory.json')
+             assert strict['status'] == 'MECHANISM_VALID_THREE_VIEWS_ACCEPTED' and strict['id'] == identity
+-            assert strict['views'] == bridge['views'] == sci['views'] == rec['views']
++            assert strict['views'] == sci['views'] == rec['views']
++            assert bridge['views'] == list(strict['views'])
+             assert strict['checkpoint_sha256'] == sci['checkpoint_sha256'] == complete['checkpoint_sha256'] == r['checkpoint']['sha256']
+             assert strict['native_comparison']['tolerance'] == bridge['native_tolerance'] == approval['native_tolerance'] == 1e-12
+             assert strict['native_comparison']['accepted'] and strict['native_comparison']['max_abs_difference'] == rec['native_max_abs_difference'] == complete['native_difference'] == 0
+@@ -184,5 +185,5 @@
+         run()
+     except BaseException as exc:
+         failure = dict(status='STOPPED_NO_ADOPTION', error=repr(exc), traceback=traceback.format_exc())
+-        if not (HERE / 'FAILURE.json').exists(): save('FAILURE.json', failure)
++        if not (HERE / 'FAILURE_V2.json').exists(): save('FAILURE_V2.json', failure)
+         raise

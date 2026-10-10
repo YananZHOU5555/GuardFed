@@ -1,0 +1,22 @@
+{
+  "status": "V3_RECORD_ARITHMETIC_COMPATIBILITY_SOURCE_ONLY",
+  "utc": "2026-10-10T09:04:26.610055+00:00",
+  "parent_seal_sha256": "40e6ce83e17b98107a511d8d00162af382af450e4345ce0a62a3505b8452937f",
+  "changed_member": "metadata_contract.py",
+  "unchanged_parent_members": 25,
+  "diagnostic_sha256": "a6f572a585e72772ca77196707539443965e2a4268b14591af3074cc197c6a95",
+  "actual_failed_server_base": "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v2_20261010",
+  "failed_stage_created": false,
+  "original_summary_sha256": "46b5f8fdca9536166ed868e50d4c7bc2578f8a1100ffea97878cf044c95748ae",
+  "original_score_rank_AST_unchanged": true,
+  "selection_and_order_unchanged": true,
+  "native_runtime_summary_scalar_differences": 7,
+  "max_abs_difference": 1.1102230246251565e-16,
+  "sequential_replay_exact": true,
+  "tolerance_relaxed": false,
+  "new_jobs": 0,
+  "training": false,
+  "test": false,
+  "primary_source": "https://docs.python.org/3.12/library/functions.html#sum",
+  "source_note": "Official Python3.12 docs record the float summation algorithm change. Actual diagnostic changes only AST global sum on the same server/records; it reproduces all original summary fields exactly. This is an explicit frozen-record compatibility shim, not a new ranking rule or a change to training/scientific metrics."
+}

@@ -1,0 +1,56 @@
+--- sealed_launcher_v1/remote_launch.py
++++ launcher_v3/remote_launch.py
+@@ -4,7 +4,7 @@
+ import datetime,hashlib,json,os,re,shutil,subprocess,sys,time,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+ HERE=Path(__file__).resolve().parent
+-STAGE=Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v2_20261010/stage')
++STAGE=Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage')
+ REPO=Path('/workspace/GuardFed-celeba-expanded');MAIN=REPO/'results/revision_20261009/celeba_mechanism_v1'
+ SERVICE='guardfed_celeba_hybrid_fullcoverage_canary'
+ PYTHON='/workspace/guardfed_envs/celeba-cu128-20261009/bin/python'
+@@ -106,12 +106,14 @@
+  root=read(HERE/'BOUND_ROOT_REVIEW.json');assert root['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED'
+  assert root['bound_offserver_sha256']==sha(HERE/'BOUND_OFFSERVER.json') and (root['new'],root['reused'],root['canaries'])==(96,4,7)
+  assert root['execution_authorized'] is False and root['final_test'] is False
++ assert root['implementation_source_seal_sha256']==approval['implementation_source_seal_sha256']
++ assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
+  for n in ('EXECUTION_AUTHORIZATION.json','GATE_ACCEPTANCE.json','GATE_FAILURE.json','gate_runs','gate_logs','coordinator.lock','runs','queue_progress.json'):assert not (STAGE/n).exists(),('Prior execution preserved',n)
+  assert not list(HERE.glob('FAILURE*.json')) and not (HERE/'START.json').exists()
+  sys.path.insert(0,str(STAGE))
+  from common import local_identity,repo_identity
+  protocol,manifest=local_identity();assert len(manifest['preflight_jobs'])==7 and len(manifest['jobs'])==96 and len(manifest['reused_jobs'])==4
+- assert sha(STAGE/'PREPARED_SOURCE_SEAL.json')=='40e6ce83e17b98107a511d8d00162af382af450e4345ce0a62a3505b8452937f'
++ assert sha(STAGE/'PREPARED_SOURCE_SEAL.json')==approval['implementation_source_seal_sha256']
+  repo_identity(REPO,protocol);source_data=read(STAGE/'full_scope.json')['protected_source_hashes']
+  assert not any('guardfed_celeba_hybrid_fullcoverage_canary' in p.name for p in Path('/etc/supervisor/conf.d').glob('*'))
+  services=command(['supervisorctl','status',SERVICE]);assert 'no such process' in services['stdout'].lower() or 'no such process' in services['stderr'].lower()
+--- sealed_launcher_v1/launch.py
++++ launcher_v3/launch.py
+@@ -3,7 +3,7 @@
+ import argparse,base64,datetime,hashlib,json,subprocess,sys,traceback
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+ HERE=Path(__file__).resolve().parent
+-REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v2_20261010/canary_operations'
++REMOTE='/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/canary_operations'
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+ def save(p,v):
+@@ -31,6 +31,8 @@
+  root=read(a.bound_root_review);assert root['status']=='ROOT_HYBRID100_BOUND_METADATA_ADOPTED'
+  assert root['bound_offserver_sha256']==a.bound_offserver_sha256 and (root['new'],root['reused'],root['canaries'])==(96,4,7)
+  assert root['execution_authorized'] is False and root['final_test'] is False
++ assert root['implementation_source_seal_sha256']==approval['implementation_source_seal_sha256']
++ assert len(approval['implementation_source_seal_sha256'])==64 and set(approval['implementation_source_seal_sha256'])<=set('0123456789abcdef')
+  source={n:HERE/n for n in ('remote_launch.py','main_health.py','HEALTH_LINEAGE.json','FILES_SHA256.json')};source.update(inputs)
+  members={n:dict(sha256=sha(path),bytes=path.stat().st_size) for n,path in source.items()}
+  payload={n:base64.b64encode(path.read_bytes()).decode('ascii') for n,path in source.items()}
+@@ -41,7 +43,7 @@
+ import base64,hashlib,json,os,subprocess,sys
+ if sys.flags.optimize:raise RuntimeError('Optimized Python forbidden')
+ assert hashlib.sha256(Path('/etc/vast-agents-guide.md').read_bytes()).hexdigest()=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+-target=Path(%r);assert target.parent==Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v2_20261010') and target.parent.resolve()==target.parent
++target=Path(%r);assert target.parent==Path('/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010') and target.parent.resolve()==target.parent
+ assert not target.exists() and not target.is_symlink()
+ payload=json.loads(%r);members=json.loads(base64.b64decode(payload['TRANSFER.json']))['members']
+ assert set(payload)==set(members)|{'TRANSFER.json'}

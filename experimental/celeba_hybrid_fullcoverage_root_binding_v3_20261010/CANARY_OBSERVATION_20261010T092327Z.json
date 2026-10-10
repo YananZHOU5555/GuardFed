@@ -1,0 +1,289 @@
+{
+  "status": "READONLY_ACTUAL_HYBRID7_STARTUP_OBSERVATION_NOT_ACCEPTANCE",
+  "checked_utc": "2026-10-10T09:23:26.068273+00:00",
+  "service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_hybrid_fullcoverage_canary   RUNNING   pid 85182, uptime 0:07:38\n",
+    "stderr": ""
+  },
+  "package_sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+  "authorization_sha256": "7de75426971da9509ae91b81a081977c5aa4160b6d12e706b0b3cca55eb91882",
+  "workers": [
+    {
+      "pid": 85425,
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy",
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary_legacy",
+        "--canary"
+      ],
+      "job_sha256": "e2e2b3946e80d56880f1ff4fca3c46549eb225423a86890bd0a6327f6978fc76",
+      "method": "GuardFed",
+      "attack": "S-DFA",
+      "seed": 91002,
+      "alpha": 5.0,
+      "progress": null,
+      "nice": 10,
+      "thread_affinity": {
+        "85425": [
+          104
+        ],
+        "85426": [
+          104
+        ],
+        "85431": [
+          104
+        ],
+        "85432": [
+          104
+        ],
+        "85433": [
+          104
+        ],
+        "85434": [
+          104
+        ]
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "GUARDFED_CPU_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    }
+  ],
+  "coordinators": [
+    {
+      "pid": 85182,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/run_canaries.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded"
+      ]
+    }
+  ],
+  "terminal_records": [
+    {
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+      "acceptance": {
+        "status": "PASS",
+        "scope_sha256": "06cff3ca41042a91fd24fd251576c4939d104a17ced149498546d347cff3b4ab",
+        "job_sha256": "2de422318373b81265644e083c859c741c4fe6a4babb17065a46e8159b7aebd1",
+        "artifact_hashes": {
+          "result.json": "88cc0d44f47c86a67cb55ff3bab15c5419c45505a9398586451c7c718871f8ef",
+          "model.pt": "bef0b81a67274d91f6c6af480629eb163c4b0070823ef6e6f1f55c357214f570",
+          "diagnostics.json": "15239c7e23e493a55578f497567a18b86d6452cec0a7f460f3c440432b713053",
+          "provenance.json": "41868bf9e37a60db6308b47cd71c38eba0538e69579497cad9ca8799f01622e4",
+          "resource_before.json": "5ee68f76eed4fda6b731dd8e8d20dbfbc6a919e4058139ecb2f0e6bab82e6dd5",
+          "resource_after.json": "7c419dd77f48420ff7525598cb5c0b7f4403ae2c88504ccfcf9660cffe2adaf2",
+          "rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+          "native_replay.json": "a6d3d1185e8cb54bf9f48a086826df0055ec30e9772a472221648c61df238be0",
+          "undefined_diagnostics.json": "5b53c7cde5951e80a568c50c8ea0c8768cab08b669a1fbbfe63473946906f49d"
+        },
+        "checkpoint_tensor_sha256": "aac5b099fd9c8d0fb1837114c4335e95fbbe479968ab89de35c3b8f01e49866a",
+        "elapsed_seconds": 108.72935891151428,
+        "limitation": "Exposed valid-only; terminal native argmax, no test or resume guarantee; canaries are not scientific70 records."
+      }
+    },
+    {
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary_legacy",
+      "acceptance": {
+        "status": "PASS",
+        "scope_sha256": "06cff3ca41042a91fd24fd251576c4939d104a17ced149498546d347cff3b4ab",
+        "job_sha256": "69194b1674e12b05ef27a1c347f6e4efd6dbb51fbffaf1d1d731b7af1f8d855b",
+        "artifact_hashes": {
+          "result.json": "3b42f6abc6da7c1da2a477aa8caa258bc199a585dc80b62c8427cc0398d26228",
+          "model.pt": "bef0b81a67274d91f6c6af480629eb163c4b0070823ef6e6f1f55c357214f570",
+          "diagnostics.json": "d238a60270ccdc827b7a13d9cb29305574c14c8e710210198fcb10c46f4612b4",
+          "provenance.json": "44e0f40e90d4efdb2f3151495c448a8b164e3db0c911b10164e88f56443feeea",
+          "resource_before.json": "4827ed713b2e026124f8b074e5aa3febf15b7a69317828b3682981c76b0cfee7",
+          "resource_after.json": "162618fe3e3608a9ba5ad2cecc2fb7af272ca8860cd7123c7b5f67e314104620",
+          "rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+          "native_replay.json": "a6d3d1185e8cb54bf9f48a086826df0055ec30e9772a472221648c61df238be0",
+          "undefined_diagnostics.json": "b9aefca3247e8d9c227fa950db503c598054478239e0d1b91273aeae530857fd"
+        },
+        "checkpoint_tensor_sha256": "aac5b099fd9c8d0fb1837114c4335e95fbbe479968ab89de35c3b8f01e49866a",
+        "elapsed_seconds": 134.37882828712463,
+        "limitation": "Exposed valid-only; terminal native argmax, no test or resume guarantee; canaries are not scientific70 records."
+      }
+    },
+    {
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_S-DFA_seed91002_canary",
+      "acceptance": {
+        "status": "PASS",
+        "scope_sha256": "06cff3ca41042a91fd24fd251576c4939d104a17ced149498546d347cff3b4ab",
+        "job_sha256": "fc41607743f68b5adc7f0747d094dbd26a56c66e737cbedd4370f2d5cdb7100c",
+        "artifact_hashes": {
+          "result.json": "4fe6d8ce84ca3facd437489a0cd838ad4771d604367fdd2bece78ac1ab847061",
+          "model.pt": "44f32708166f106f66d35c681da4ddcfa36e002e85d2bfdf17d9b221127adb76",
+          "diagnostics.json": "675e5d1292e9ba6c8ccf51634145639483129129773f476e5cfeea169fb52088",
+          "provenance.json": "d531c72b856101c71e159159bd57e99ce18fc9a296aa85648640947d173f0d07",
+          "resource_before.json": "788a7a6d16dacfef37175d18a89a9e819be8aaa043c07701d1ec1d43d33d49e4",
+          "resource_after.json": "2533b65178ab5e87a131b38ba31a1fd6bb5a8e408ac3ff45e4b26cec683c63a7",
+          "rng_final.json": "baa8da4ff76e501265add816e209f64db0ae14786ee74cb84f8774063aebde3d",
+          "native_replay.json": "44c162cc0655eeb6e074c57f3026671f0faa7d8fde74cc31a92496609d338117",
+          "undefined_diagnostics.json": "9fdc66f8743f72a20146e3aba0b526a406d27e48f654b64f978e0fff061a8fd3"
+        },
+        "checkpoint_tensor_sha256": "b5ba09cf186e97cc9460a40fe0a9bef090801030c90508a81eef55eaa2917319",
+        "elapsed_seconds": 150.14743375778198,
+        "limitation": "Exposed valid-only; terminal native argmax, no test or resume guarantee; canaries are not scientific70 records."
+      }
+    }
+  ],
+  "failure_files": [],
+  "gate_acceptance": null,
+  "main_service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 3:04:30\n",
+    "stderr": ""
+  },
+  "main_completed": 236,
+  "main_active": [
+    {
+      "id": "minus_A_IID_S-DFA_seed91007",
+      "pid": 84783,
+      "progress": {
+        "round": 28,
+        "metrics": {
+          "accuracy": 0.7998187949866613,
+          "aeod": 0.0024183832201091215,
+          "aspd": 0.012193965341338653
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91007",
+        "pid": 84783,
+        "elapsed_sec": 1681.9541206359863,
+        "updated_unix": 1791624196.1057198
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91008",
+      "pid": 84811,
+      "progress": {
+        "round": 31,
+        "metrics": {
+          "accuracy": 0.8443146927064982,
+          "aeod": 0.014485547854837577,
+          "aspd": 0.036979647994790976
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91008",
+        "pid": 84811,
+        "elapsed_sec": 1559.7305583953857,
+        "updated_unix": 1791624164.177702
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91009",
+      "pid": 84846,
+      "progress": {
+        "round": 29,
+        "metrics": {
+          "accuracy": 0.8194996728242815,
+          "aeod": 0.019010304388812016,
+          "aspd": 0.005096213965398999
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91009",
+        "pid": 84846,
+        "elapsed_sec": 1519.3589363098145,
+        "updated_unix": 1791624188.8122125
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91010",
+      "pid": 84887,
+      "progress": {
+        "round": 23,
+        "metrics": {
+          "accuracy": 0.772034026274727,
+          "aeod": 0.004906164835804638,
+          "aspd": 0.035785293606386326
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91010",
+        "pid": 84887,
+        "elapsed_sec": 1367.4418153762817,
+        "updated_unix": 1791624177.6616073
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91001",
+      "pid": 84940,
+      "progress": {
+        "round": 21,
+        "metrics": {
+          "accuracy": 0.6591835707454573,
+          "aeod": 0.01746076833735921,
+          "aspd": 0.035979692783598693
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91001",
+        "pid": 84940,
+        "elapsed_sec": 1253.0876989364624,
+        "updated_unix": 1791624157.1070542
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91002",
+      "pid": 84982,
+      "progress": {
+        "round": 21,
+        "metrics": {
+          "accuracy": 0.8147178738611768,
+          "aeod": 0.010751282420589647,
+          "aspd": 0.0035919546036728423
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91002",
+        "pid": 84982,
+        "elapsed_sec": 1070.8814823627472,
+        "updated_unix": 1791624166.6847959
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91003",
+      "pid": 84989,
+      "progress": {
+        "round": 20,
+        "metrics": {
+          "accuracy": 0.7241657019177531,
+          "aeod": 0.010385809348180675,
+          "aspd": 0.008847520141543386
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91003",
+        "pid": 84989,
+        "elapsed_sec": 1055.803599357605,
+        "updated_unix": 1791624179.9996438
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91004",
+      "pid": 84999,
+      "progress": {
+        "round": 16,
+        "metrics": {
+          "accuracy": 0.6378416469522323,
+          "aeod": 0.005306949999446031,
+          "aspd": 0.025873184335623356
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91004",
+        "pid": 84999,
+        "elapsed_sec": 991.6114845275879,
+        "updated_unix": 1791624143.0941453
+      }
+    }
+  ],
+  "main_failures": [],
+  "gpu": {
+    "returncode": 0,
+    "stdout": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 100 %, 6034 MiB, 64\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 99 %, 6036 MiB, 65\n",
+    "stderr": ""
+  },
+  "stdout_tail": [],
+  "stderr_tail": [],
+  "formal100_started": false,
+  "test": false
+}

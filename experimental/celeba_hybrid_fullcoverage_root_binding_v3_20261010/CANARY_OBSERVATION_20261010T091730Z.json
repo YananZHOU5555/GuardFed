@@ -1,0 +1,307 @@
+{
+  "status": "READONLY_ACTUAL_HYBRID7_STARTUP_OBSERVATION_NOT_ACCEPTANCE",
+  "checked_utc": "2026-10-10T09:17:29.721035+00:00",
+  "service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_hybrid_fullcoverage_canary   RUNNING   pid 85182, uptime 0:01:41\n",
+    "stderr": ""
+  },
+  "package_sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+  "authorization_sha256": "7de75426971da9509ae91b81a081977c5aa4160b6d12e706b0b3cca55eb91882",
+  "workers": [
+    {
+      "pid": 85188,
+      "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/run_one.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded",
+        "--job-id",
+        "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+        "--canary"
+      ],
+      "job_sha256": "2de422318373b81265644e083c859c741c4fe6a4babb17065a46e8159b7aebd1",
+      "method": "CosineFairnessHybrid",
+      "attack": "Benign",
+      "seed": 91002,
+      "alpha": 5.0,
+      "progress": {
+        "round": 2,
+        "metrics": {
+          "accuracy": 0.5304776765490512,
+          "aeod": 0.11109325338688451,
+          "aspd": 0.1058057341736385
+        },
+        "id": "CosineFairness_lam20.0_tau0.1_lr0.001_non-IID_Benign_seed91002_canary",
+        "pid": 85188,
+        "elapsed_seconds": 70.07072925567627,
+        "updated_unix": 1791623825.0962138,
+        "resource": {
+          "at_unix": 1791623825.097429,
+          "completed": 236,
+          "failed": [],
+          "active": [
+            {
+              "id": "minus_A_IID_S-DFA_seed91007",
+              "pid": 84783,
+              "round": 22,
+              "updated_unix": 1791623824.2094002
+            },
+            {
+              "id": "minus_A_IID_S-DFA_seed91008",
+              "pid": 84811,
+              "round": 25,
+              "updated_unix": 1791623819.7819123
+            },
+            {
+              "id": "minus_A_IID_S-DFA_seed91009",
+              "pid": 84846,
+              "round": 22,
+              "updated_unix": 1791623803.894833
+            },
+            {
+              "id": "minus_A_IID_S-DFA_seed91010",
+              "pid": 84887,
+              "round": 17,
+              "updated_unix": 1791623806.255325
+            },
+            {
+              "id": "minus_A_IID_Sp-DFA_seed91001",
+              "pid": 84940,
+              "round": 15,
+              "updated_unix": 1791623787.3204405
+            },
+            {
+              "id": "minus_A_IID_Sp-DFA_seed91002",
+              "pid": 84982,
+              "round": 15,
+              "updated_unix": 1791623820.3512406
+            },
+            {
+              "id": "minus_A_IID_Sp-DFA_seed91003",
+              "pid": 84989,
+              "round": 14,
+              "updated_unix": 1791623822.463051
+            },
+            {
+              "id": "minus_A_IID_Sp-DFA_seed91004",
+              "pid": 84999,
+              "round": 10,
+              "updated_unix": 1791623777.4162972
+            }
+          ],
+          "pending": 556,
+          "memory": {
+            "MemTotal": "1056260180 kB",
+            "MemAvailable": "850037024 kB"
+          },
+          "disk_free_bytes": 1060424798208,
+          "gpu": "0, 100 %, 6038 MiB, 71\n1, 100 %, 6036 MiB, 69",
+          "loadavg": "46.16 108.20 132.43 29/7820 85217",
+          "cpu_times": {
+            "user": 71.96,
+            "system": 2.24,
+            "children_user": 0.01,
+            "children_system": 0.11,
+            "elapsed": 5561519.27
+          },
+          "peak_rss_kib": 5420248,
+          "cpu_affinity": [
+            104
+          ]
+        }
+      },
+      "nice": 10,
+      "thread_affinity": {
+        "85188": [
+          104
+        ],
+        "85198": [
+          104
+        ],
+        "85205": [
+          104
+        ],
+        "85206": [
+          104
+        ],
+        "85207": [
+          104
+        ],
+        "85208": [
+          104
+        ]
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "GUARDFED_CPU_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    }
+  ],
+  "coordinators": [
+    {
+      "pid": 85182,
+      "argv": [
+        "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+        "-B",
+        "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/run_canaries.py",
+        "--repo",
+        "/workspace/GuardFed-celeba-expanded"
+      ]
+    }
+  ],
+  "terminal_records": [],
+  "failure_files": [],
+  "gate_acceptance": null,
+  "main_service": {
+    "returncode": 0,
+    "stdout": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 2:58:33\n",
+    "stderr": ""
+  },
+  "main_completed": 236,
+  "main_active": [
+    {
+      "id": "minus_A_IID_S-DFA_seed91007",
+      "pid": 84783,
+      "progress": {
+        "round": 22,
+        "metrics": {
+          "accuracy": 0.7876377913122263,
+          "aeod": 0.036024414845882036,
+          "aspd": 0.05536568154710031
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91007",
+        "pid": 84783,
+        "elapsed_sec": 1310.0578010082245,
+        "updated_unix": 1791623824.2094002
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91008",
+      "pid": 84811,
+      "progress": {
+        "round": 25,
+        "metrics": {
+          "accuracy": 0.8191473297427896,
+          "aeod": 0.004260080859502913,
+          "aspd": 0.018393971596434577
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91008",
+        "pid": 84811,
+        "elapsed_sec": 1215.3347685337067,
+        "updated_unix": 1791623819.7819123
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91009",
+      "pid": 84846,
+      "progress": {
+        "round": 22,
+        "metrics": {
+          "accuracy": 0.7644838173856143,
+          "aeod": 0.02756144079932621,
+          "aspd": 0.02705952813902962
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91009",
+        "pid": 84846,
+        "elapsed_sec": 1134.4415571689606,
+        "updated_unix": 1791623803.894833
+      }
+    },
+    {
+      "id": "minus_A_IID_S-DFA_seed91010",
+      "pid": 84887,
+      "progress": {
+        "round": 17,
+        "metrics": {
+          "accuracy": 0.7288971661549303,
+          "aeod": 0.0036432743313391525,
+          "aspd": 0.019485514841541374
+        },
+        "job_id": "minus_A_IID_S-DFA_seed91010",
+        "pid": 84887,
+        "elapsed_sec": 996.0355339050293,
+        "updated_unix": 1791623806.255325
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91001",
+      "pid": 84940,
+      "progress": {
+        "round": 16,
+        "metrics": {
+          "accuracy": 0.5167362963708663,
+          "aeod": 0.00029027576197387516,
+          "aspd": 0.00011823126034523528
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91001",
+        "pid": 84940,
+        "elapsed_sec": 935.6084969043732,
+        "updated_unix": 1791623839.6278512
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91002",
+      "pid": 84982,
+      "progress": {
+        "round": 15,
+        "metrics": {
+          "accuracy": 0.7518498011778326,
+          "aeod": 0.10078009548408329,
+          "aspd": 0.08881165634834925
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91002",
+        "pid": 84982,
+        "elapsed_sec": 724.5479278564453,
+        "updated_unix": 1791623820.3512406
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91003",
+      "pid": 84989,
+      "progress": {
+        "round": 14,
+        "metrics": {
+          "accuracy": 0.6552071273971913,
+          "aeod": 0.022062466570788142,
+          "aspd": 0.014100868001290234
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91003",
+        "pid": 84989,
+        "elapsed_sec": 698.2670078277588,
+        "updated_unix": 1791623822.463051
+      }
+    },
+    {
+      "id": "minus_A_IID_Sp-DFA_seed91004",
+      "pid": 84999,
+      "progress": {
+        "round": 11,
+        "metrics": {
+          "accuracy": 0.6029093471586047,
+          "aeod": 0.019039016089159977,
+          "aspd": 0.009345761947673503
+        },
+        "job_id": "minus_A_IID_Sp-DFA_seed91004",
+        "pid": 84999,
+        "elapsed_sec": 677.6977844238281,
+        "updated_unix": 1791623829.1804447
+      }
+    }
+  ],
+  "main_failures": [],
+  "gpu": {
+    "returncode": 0,
+    "stdout": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 100 %, 6038 MiB, 69\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 100 %, 6036 MiB, 69\n",
+    "stderr": ""
+  },
+  "stdout_tail": [],
+  "stderr_tail": [],
+  "formal100_started": false,
+  "test": false
+}

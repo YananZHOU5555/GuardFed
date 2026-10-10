@@ -1,0 +1,191 @@
+{
+  "status": "LOCAL_SOURCE_AST_AND_MEMORY_FIXTURES_PASS_NOT_RUNTIME_EVIDENCE",
+  "source_seal_sha256": "04dbe344603a5243dbfa6a00bc89c31ea5208792d88e9371ad7f9873775d17ab",
+  "source_members_verified": 7,
+  "source_files": {
+    "HEALTH_LINEAGE.json": "a49a2bc1cfcdd270e4d0cc02298a2ca5ff9b2a9d44f659a650555dd747f1be7c",
+    "launch.py": "4322500d8f3b983ad027369da5baf4fba11089c33d0ad13e7f7f06a733c67320",
+    "main_health.py": "14c6f2a489c93c98ddf96270426fd33d1ccfa8289524108ac0083225158421c5",
+    "README.md": "b68061edcae667bd62d451ca17add88947c46bbaed6c254844386d612887eae8",
+    "remote_launch.py": "490f5767ccf7e5ac3c9ca5a46303e6686e46f02f7d7040e28a6c9d5d1b34948e",
+    "SOURCE_CHECK.json": "c1db51779d57e94ec652c5ee2185ed6258b5aa3361c8cd08cbbffb04998a7970",
+    "SOURCE_DIFF.patch": "38e5d66b71fe07c90c191b003821d88c029c38a0f65e5ad20a4842091b380f1a"
+  },
+  "checks": [
+    {
+      "name": "actual validation prefix accepts exact7 metadata MOCK",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "root implementation seal drift",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "offserver package drift",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "root canary count8",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "root already execution-authorized",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "96 scope substituted",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "wrong worker CPU105",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "actual root external SHA mismatch",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "main active=0",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "main active=1",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "main active=8",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "main active=9",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "main failed item",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "main EXITED rc3",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "original all-thread worker predicate CPU104 owner",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "original all-thread worker predicate auxiliary thread crossing CPU104",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "original all-thread worker predicate FL102103",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "original all-thread worker predicate gradient105",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "original all-thread worker predicate remaining112119",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "original all-thread worker predicate broad scheduler mask",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "CPU107 restricted owner refuses",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "CPU106 owner remains untouched",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "planned <= cores boundary accepts",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "planned <= cores boundary refuses",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "free >= boundary accepts",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "free >= boundary refuses",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "gpu_free[0] >= boundary accepts",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "gpu_free[0] >= boundary refuses",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "recovery == boundary accepts",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "recovery == boundary refuses",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "no growth",
+      "expected": "REFUSE",
+      "actual": "REFUSE"
+    },
+    {
+      "name": "round grows",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "name": "completion grows",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ],
+  "check_n": 33,
+  "mock_proofs_created_on_disk": false,
+  "actual_bound_proof_read_or_generated": false,
+  "SSH": false,
+  "subprocess_commands_executed": false,
+  "Torch": false,
+  "CNN": false,
+  "no_96_automatic_entry": true,
+  "sequential_synchronous_child_check": true,
+  "called_canary_source_sha256": "722c83d5ebb4c211815480cde267a9250e0216c3cbaddbbf6d7a51d4736df29e"
+}
