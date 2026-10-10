@@ -1,0 +1,157 @@
+{
+  "status": "ROOT_READY_FL96_INCREMENT_STRICT_OFFSERVER_PASS",
+  "utc": "2026-10-09T23:39:11.078188+00:00",
+  "accepted_new_ids": [
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91009_fullcoverage",
+    "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91010_fullcoverage"
+  ],
+  "prior_accepted_new": 7,
+  "accepted_new": 2,
+  "accepted_new_cumulative": 9,
+  "planned_new": 96,
+  "separately_reused70round": 4,
+  "planned_total": 100,
+  "single_collector_snapshot": true,
+  "source_package_sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+  "prepared_helper_seal_sha256": "f6de59a56de25a8d316cf7e05c44eafc9751041757e4dc61c88f7bccfd988472",
+  "offserver_acceptance_sha256": "396543a8effb8f7e0a25ad6130c0f6bc8b957c88bfbe7e862aaa019e14a73684",
+  "server_backup_receipt_sha256": "3b1e8b76a8ed00aecd329270da3ada9d983f7f293bd4ba78b64be2d4abd102ed",
+  "archive_sha256": "52f6f1b915a5901956ddadb72ebaa7f8eb83e4e095248c3b253ba1263f9197a1",
+  "archive_bytes": 919799,
+  "archive_members": 27,
+  "inventory_sha256": "a33f627efce0f978a80793e297d600eab34636db7f8af5eb4587091e05e75db6",
+  "server_strict_sha256": "8ad64d80b1ac2a3d113920e1f2f298ea1dd0c22696204df1a176e45b43267838",
+  "previous_actual_offserver_sha256": "89e6e45173fa0e514a97dbf8cd99072189dabd6c8f00c07cc4bd330fbb41ebf1",
+  "previous_latest_sha256": "97bc8a2f41751603026aaf2260dc495e7aaf2b2b28ba21df830b7503541655ae",
+  "actual_snapshot_utc": "2026-10-09T23:37:43.875730+00:00",
+  "records": [
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91009_fullcoverage",
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "seed": 91009,
+      "distribution": "IID",
+      "attack": "Benign",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.8983741883525445,
+        "aeod": 0.04883506636810897,
+        "aspd": 0.11470720399888401
+      },
+      "evaluation_stats": {
+        "positive_rate": 0.4631298132581668,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "checkpoint_sha256": "aee7d15df2efbe157e706f6ad81aac8e4052562f213504bd7248d3cc875a356f",
+      "original_acceptance_sha256": "35117d19fe089ed9ac51872b6c4500a83e4453b1ab96d5e3d972532f1e3cbc04",
+      "screen_identity_sha256": "f78e07a6142db34670a79b0667ed7e8b370b67ede455121c2d9f651a9aa78b4b",
+      "job_sha256": "abb7ea552d307681b9ba485b547305cc3598a8cc4a2c1d66dad24165a3b00f87",
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_source_hashes": {
+        "flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+        "worker.py": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+        "prepare_jobs.py": "91d33acf2ec25be1d1636a74ee960346548d85c4b17b0bfc1ab12fd5340f9f6c",
+        "protocol.json": "1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4",
+        "sources/flgmm_pinned.py": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+        "sources/flgmm_fedavg.py": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+        "sources/flgmm_license.txt": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+      }
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91010_fullcoverage",
+      "candidate": "FLGMM_Tg20_L2.0_lr0.001",
+      "seed": 91010,
+      "distribution": "IID",
+      "attack": "Benign",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.869381386218352,
+        "aeod": 0.045002596546628304,
+        "aspd": 0.09483495303631329
+      },
+      "evaluation_stats": {
+        "positive_rate": 0.4546735793023607,
+        "majority_accuracy": 0.5166859616449389,
+        "prediction_count": 19867
+      },
+      "checkpoint_sha256": "a496b4f28823d0a6992f0db9a9933811b772b109c2804fe4548b89b95c010631",
+      "original_acceptance_sha256": "6da1bc0e27059c52c880350c7da5e43cdde3606b6e9796a2ce58819e884feb6f",
+      "screen_identity_sha256": "26ec114f2b1009728fea102e204cff72de53582313eb0b6f601053b573c82729",
+      "job_sha256": "3e26840fee6d669f2bc291620647b97cfa64edab63f131ed19ba3966e516ead8",
+      "source_hashes": {
+        "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+        "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+        "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+        "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+        "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+        "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+        "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+        "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+        "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+        "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+        "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+        "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+        "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+        "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+        "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+        "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+        "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+        "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+        "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+        "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+        "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+      },
+      "adapter_source_hashes": {
+        "flgmm_adapter.py": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+        "worker.py": "e8a639c08b7fe51f4ceedf8338b04d61d52bb2d6f6efbd8062e73c9a528bd67d",
+        "prepare_jobs.py": "91d33acf2ec25be1d1636a74ee960346548d85c4b17b0bfc1ab12fd5340f9f6c",
+        "protocol.json": "1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4",
+        "sources/flgmm_pinned.py": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+        "sources/flgmm_fedavg.py": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+        "sources/flgmm_license.txt": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+      }
+    }
+  ],
+  "helper_CPU": 106,
+  "helper_threads": 1,
+  "nice": 10,
+  "IO": "idle",
+  "server_verification_runtime": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "executable": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python",
+    "torch": "2.11.0+cu128",
+    "cuda_initialized": false
+  },
+  "local_verification_runtime": {
+    "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.8.0+cpu",
+    "cuda_initialized": false
+  },
+  "training_runtime_not_recreated": true,
+  "root_adoption_required": true,
+  "no_old_models_repacked": true,
+  "no_CNN_training_test": true,
+  "canonical_state_git_queue_unchanged": true
+}

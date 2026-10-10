@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-09T23:37:41.066028+00:00",
+  "exit_code": 0,
+  "command": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "python3 -B -c 'from pathlib import Path;import hashlib,json;p=Path('\"'\"'/etc/vast-agents-guide.md'\"'\"');print(json.dumps({'\"'\"'path'\"'\"':str(p),'\"'\"'sha256'\"'\"':hashlib.sha256(p.read_bytes()).hexdigest(),'\"'\"'text'\"'\"':p.read_text()}))'"
+  ],
+  "automatic_retry": false
+}

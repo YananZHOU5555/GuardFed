@@ -1,0 +1,15 @@
+# C50 independent arithmetic review
+
+INDEPENDENT_C50_FIVE_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION. The reader executed once on the actual sealed C50 snapshot and passed. ROOT_ARITHMETIC_REVIEW.json is the root review entry; it does not adopt the table.
+
+The reviewer reads a sealed actual snapshot only after explicit ACTUAL_HANDOFF and ACTUAL_FILES_SHA256 external hashes are supplied. It does not import build.py, panels.py, verify_numeric.py, a scientific runtime or the original statistical implementation.
+
+It independently uses math.fsum and ddof=1 for 810 scene mean/SD scalars, 405 rendered cells and 162 separate seed-first cross-scene scalars; derives 900 metrics from saved confusion counts with 2,400 structural count checks; and checks all 10/9/6 same-seed pairings. The original 80 C40 JSON record spans/order, 648 statistics and 324 display cells must remain exact. Source checks connect the previously root-adopted Sp-DFA7 and new Sp-DFA3 scientific receipts, plus ten original Full900 references, while reusing the accepted C40 source proof. No old checkpoint tensor or CNN calculation is repeated.
+
+Actual execution used the independently supplied handoff SHA 84f46bb9656434d9d28eb56f80847ed2e99a5285225ea3176e84c40ec7faaa47 and delivery-seal SHA 68466fc9e7ccc8794f38ab96c4825b874454e30b0a09801efe764da9d6561d71:
+
+    python -B tmp/celeba_mechanism_C50_root_arithmetic_review_20261010/review.py --handoff tmp/celeba_mechanism_three_view_C_five_scenes_prepared_20261010/ACTUAL_HANDOFF.json --handoff-sha256 84f46bb9656434d9d28eb56f80847ed2e99a5285225ea3176e84c40ec7faaa47 --seal-sha256 68466fc9e7ccc8794f38ab96c4825b874454e30b0a09801efe764da9d6561d71
+
+Actual checks: 100 unique records, 50 Full–C pairs, all five IID scenes with ten seeds, 810 scene scalars, 405 displayed cells, 900 count-derived metrics, 2,400 structural count checks and 162 seed-first scalars. Scene maximum absolute statistical difference is 1.4210854715202004e-14. Original C40 80 JSON record spans/order, 648 statistics and 324 display cells remain exact. Sp-DFA7 root 64732337f35f81bed49e40c60fa1d5229fb6a7557c45272505fee488c5ad20ea and Sp-DFA3 root 3859d49fb57c3ecc4b23244012431224d255b02590dab221b2d6464e28aa7dd8 connect the complete Sp-DFA10. Full records remain references to original900, without repeated Full inference. Each scientific receipt is connected to the table and native source; archive member content verification is reused from the actual root adoptions. No old checkpoint tensors or saved prediction arrays were recomputed.
+
+A real numerical/source failure is preserved in ROOT_ARITHMETIC_FAILURE.json and stops execution. This reader neither adopts the table nor edits canonical, shared state, Git, sources, recipes, endpoints or services. All adverse directions are retained in a successful certificate. The equal five-scene mean within seed is descriptive; seed count remains 10/9/6, with selection, mixed replay device, prior validation/test exposure and pending author endpoint limitations retained.

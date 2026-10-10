@@ -84,6 +84,12 @@ if state.get('latest_rebuttal_addendum'):
     if state['latest_rebuttal_addendum']['complete_C_scenes']==4:
         addendum=state['latest_rebuttal_addendum']
         reply_row=(f"| 英文回复 | 24原意见完整稿保持；C40独立英文补稿已核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，全部取舍与未完成边界保留；作者审阅稿，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C20_20261009/rebuttal_integrated_20261009.md)、[C40新增回复](server_deployment_20260923/revision_20260923/rebuttal_C40_addendum_20261010/C40_REVIEWER_ADDENDUM.md) |")
+    if state['latest_rebuttal_addendum']['complete_C_scenes']==5:
+        addendum=state['latest_rebuttal_addendum']
+        reply_row=(f"| 英文回复 | 24原意见完整稿保持；C50英文补稿已核{addendum['scalar_pointer_checks']}数值pointer/{addendum['display_cells_checked']}展示值/{addendum['scope_fact_checks']}范围事实/{addendum['links_checked']}链接，保留Sp-DFA取舍和9/6seed面板反转；作者审阅稿，正文未应用 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C20_20261009/rebuttal_integrated_20261009.md)、[C50新增回复](server_deployment_20260923/revision_20260923/rebuttal_C50_update_20261010/C50_REVIEWER_ADDENDUM.md) |")
+if main.get('C_three_view_five_scene_table'):
+    views_row='| 机制三视图 | U100十场景完整；C50的IID五场景各十seed论文表已独立核验810统计/405单元/900计数指标及162个先seed内平均场景的汇总标量，旧四场景精确保留；五个non-IID C场景及其他六变体待完成 | [C五场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_five_scenes_20261010/snapshot/TABLES.md) |'
+    native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增已严格离机；U100完整、C50的IID五场景完成。10/9/6面板及正负取舍保留，尚未最终test | [U十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md)、[C五场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_five_scenes_20261010/snapshot/TABLES.md) |')
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
 new_stage_note=''
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
@@ -120,6 +126,8 @@ if main.get('C_after36_valid_replay',{}).get('offserver_new_accepted')==4:
     new_stage_note=(f'FLGMM完整验证覆盖新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32、尚未选完整recipe。新增准确4项C checkpoint三视图已正常退出、0残留并严格离机：61归档成员/36指标/96计数/12规则通过，native偏差0，累计U100+C40。IID Benign/F Flip/FedSA/S-DFA各10seed齐备；旧136与Full不重推、未重训、未运行test。')
 if main.get('C_three_view_four_scene_table'):
     new_stage_note+='四场景配对表已独立采用：648均值/样本SD标量、324展示单元及720计数指标通过，旧三场景60记录/486统计/243单元及原S-DFA6记录精确保留。其他六C场景及六个变体未完成，保留全部取舍和10/9/6面板。'
+if main.get('C_three_view_five_scene_table'):
+    new_stage_note=(f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32、尚未选recipe。最新三项C评价已正常退出、0残留并严格离机：54归档成员/27指标/72计数/9规则通过，native偏差0，累计U100+C50。IID五场景各10seed配对表已独立采用：810均值/样本SD标量、405展示单元、900计数指标及162个seed-first跨场景汇总标量通过，旧80记录/648统计/324展示精确保留。五个non-IID C场景及其他六变体仍待完成；保留全部取舍、环境/选择史和10/9/6面板，未重推Full、重训或运行test。')
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)

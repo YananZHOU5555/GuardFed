@@ -88,6 +88,11 @@ if main.get('C_after36_valid_replay',{}).get('offserver_new_accepted')==4:
 if main.get('C_three_view_four_scene_table'):
     C_view_note=C_view_note.replace('the four-scene table requires separate statistical adoption.',
         'the four-scene table is independently adopted:40 pairs/80 records,648 mean/sampleSD scalars,324 cells and720 count-derived metrics. Old60 records/486 statistics/243 cells and the original S-DFA six records remain exact. Full replay3CPU/37GPU versus C40CPU is explicit; all fixed10/9/6 panels and negative results are retained.')
+if main.get('C_after47_valid_replay',{}).get('offserver_new_accepted')==3:
+    C_view_note=('50 C terminal checkpoints now pass strict off-server/root adoption; the latest exact three pass54 archive members,27 saved-array metrics,72 confusion counts and9 prediction rules, with native discrepancies zero. Prior147 and Full were not reinferred. All five IID scenes each have ten paired checkpoints; the five non-IID C scenes and six other controls remain incomplete. The complete five-scene table needs its own independent adoption. Validation, mixed-device/environment and selection/test-exposure limitations remain. ')
+if main.get('C_three_view_five_scene_table'):
+    C_view_note=C_view_note.replace('The complete five-scene table needs its own independent adoption.',
+        'The five-scene table is independently adopted:50 pairs/100 records,810 mean/sampleSD scalars,405 cells,900 count-derived metrics and162 seed-first cross-scene scalars. The old80 records/648 statistics/324 cells remain exact. All10/9/6 panels and negative results are retained; this is descriptive validation evidence, not a component-necessity or final-test conclusion.')
 if state.get('latest_rebuttal_addendum'):
     addendum=state['latest_rebuttal_addendum']
     C_view_note+=(f" A separate C{10*addendum['complete_C_scenes']} English author-review addendum for R3.2/R3.7 is source-checked at{addendum['scalar_pointer_checks']} scalar pointers,{addendum['display_cells_checked']} display values,{addendum['scope_fact_checks']} scope facts and{addendum['links_checked']} links; the frozen24-comment response and submitted manuscript remain unchanged. Entry: "+addendum['entry']+'. ')
