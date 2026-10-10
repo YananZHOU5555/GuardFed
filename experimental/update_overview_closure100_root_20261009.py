@@ -155,6 +155,13 @@ if main.get('C_three_view_six_scene_table',{}).get('incorporated_into_full_rebut
     new_stage_note=new_stage_note.replace('C60表是独立入口，完整英文作者审阅稿仍为C50，未纳入C60、未应用正文。','C60证据已纳入完整英文作者审阅稿，24原意见及C50旧值保持；10处可逆修改/36数值pointer/27方向/50链接通过，提交版正文未应用。')
 if main.get('C_three_view_seven_scene_table'):
     new_stage_note=(f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32、尚未选recipe。十项non-IID F Flip终轮三视图正常退出并严格离机，累计U100+C70=170；103归档成员/90指标/240计数/30规则通过，native偏差0，旧160/Full不重推。C70七场景表已独立采用：140记录/1134统计/567单元/1260指标/3360计数/630配对指标，旧120/972/486和162个IID汇总标量保持。不计算不平衡七场景总均值；Full5CPU/65GPU对C70CPU，环境/选择史及负结果保留。其他三non-IID C场景及六变体仍缺。完整英文作者审阅稿仍为C60，第七场景尚未合入，正文未应用、test未运行。')
+if main.get('C_three_view_eight_scene_table'):
+    views_row='| 机制三视图 | U100十场景完整；C80八场景80对/160记录已独立采用：五IID及non-IID Benign/F Flip/FedSA，1296统计/648单元/1440指标/3840计数/720配对指标通过，旧140/1134/567及162 IID汇总保持；其余两non-IID C场景及六变体未完成 | [C八场景三视图表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_eight_scenes_20261010/snapshot/TABLES.md) |'
+    native_row=(f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增严格离机；U100完整、C80八场景native随三视图表验收，全部10/9/6面板和性能取舍保留；未运行最终test | [U十场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/native_interim100_20261009/rendered/TABLES.md)、[C八场景表](server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_eight_scenes_20261010/snapshot/TABLES.md) |')
+    text='\n'.join(views_row if line.startswith('| 机制三视图 |') else native_row if line.startswith('| 机制native消融 |') else line for line in text.split('\n'))
+    new_stage_note=(f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid已验收{hy_accepted}/32。新增十项non-IID FedSA终轮三视图正常退出、103成员严格离机，累计U100+C80=180，旧170/Full不重推。C80八场景表已独立采用，1296统计/648单元/1440指标/3840计数/720配对指标通过，旧140记录/1134统计/567单元和162 IID汇总保持，不计算八场景总均值。删除C的native/shared FedSA差ACC+0.410pp、AEOD+0.00190、ASPD−0.0000093，9/6面板ASPD变号及全部负结果保留。Full5CPU/75GPU对C80CPU，环境与选择史披露；剩余两non-IID C场景及六变体未完成。完整英文稿仍为C60，C70/C80尚未合入，正文未应用、test未运行。')
+elif main.get('C_after70_valid_replay',{}).get('offserver_new_accepted')==10:
+    new_stage_note+=('后续non-IID FedSA准确十项终轮三视图也已正常退出、0残留worker，103成员/90指标/240计数/30规则与根验收通过，native偏差0，累计U100+C80=180；旧170与Full不重推。第八场景表尚待独立统计采用，C checkpoint覆盖只余non-IID S-DFA/Sp-DFA。')
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)

@@ -1,0 +1,328 @@
+{
+  "build": {
+    "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/source/build.py",
+    "sha256": "b804627db84b0e0bfd91db489f6c487e374ac79ed93e944ceb176595c4ca3734",
+    "effective_sha256": "5194313704b2488d18cffc79fc3ee9777933b828630352752de8aef33b190c97",
+    "replacements": [
+      [
+        "C60",
+        "PREVIOUS_STAGE_TOKEN",
+        6
+      ],
+      [
+        "C70",
+        "CURRENT_STAGE_TOKEN",
+        5
+      ],
+      [
+        "PREVIOUS_STAGE_TOKEN",
+        "C70",
+        6
+      ],
+      [
+        "CURRENT_STAGE_TOKEN",
+        "C80",
+        5
+      ],
+      [
+        "three_view_C_six_scenes_20261010",
+        "three_view_C_seven_scenes_20261010",
+        1
+      ],
+      [
+        "celeba_mechanism_valid_C_after56_20261010",
+        "PREVIOUS_AFTER_STAGE_TOKEN",
+        1
+      ],
+      [
+        "celeba_mechanism_valid_C_after60_20261010",
+        "celeba_mechanism_valid_C_after70_20261010",
+        1
+      ],
+      [
+        "PREVIOUS_AFTER_STAGE_TOKEN",
+        "celeba_mechanism_valid_C_after60_20261010",
+        1
+      ],
+      [
+        "base=module('accepted_C70_helpers',OLD/'build.py')",
+        "base=module('accepted_original_C60_helpers',R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_six_scenes_20261010/build.py')",
+        1
+      ],
+      [
+        "OLD/'verify_numeric.py'",
+        "OLD/'source/verify_numeric.py'",
+        1
+      ],
+      [
+        "minus_C_non-IID_F Flip_seed",
+        "minus_C_non-IID_FedSA_seed",
+        1
+      ],
+      [
+        "('non-IID','Benign'),('non-IID','F Flip')]",
+        "('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]",
+        1
+      ],
+      [
+        "==160",
+        "==PRIOR_COUNT_TOKEN",
+        1
+      ],
+      [
+        "==170",
+        "==180",
+        1
+      ],
+      [
+        "==PRIOR_COUNT_TOKEN",
+        "==170",
+        1
+      ],
+      [
+        "inventory_actual160_",
+        "inventory_actualPRIOR_TOKEN_",
+        2
+      ],
+      [
+        "inventory_actual170_",
+        "inventory_actual180_",
+        4
+      ],
+      [
+        "inventory_actualPRIOR_TOKEN_",
+        "inventory_actual170_",
+        2
+      ],
+      [
+        "len(controls)==70",
+        "len(controls)==80",
+        1
+      ],
+      [
+        "Only seven complete scenes",
+        "Only eight complete scenes",
+        1
+      ],
+      [
+        "ROOT_C_AFTER60_INCREMENT_",
+        "ROOT_C_AFTER70_INCREMENT_",
+        1
+      ],
+      [
+        "==(160,10,170)",
+        "==(170,10,180)",
+        1
+      ],
+      [
+        "Old160",
+        "Old170",
+        2
+      ],
+      [
+        "after160",
+        "after170",
+        1
+      ],
+      [
+        "Exact160/170",
+        "Exact170/180",
+        1
+      ],
+      [
+        "Actual160+10",
+        "Actual170+10",
+        1
+      ],
+      [
+        "original160",
+        "original170",
+        1
+      ],
+      [
+        "prior160",
+        "prior170",
+        2
+      ],
+      [
+        "'Only fixed after60 stage'",
+        "'Only fixed after70 stage'",
+        1
+      ],
+      [
+        "stage/'bridge.py',160,170",
+        "stage/'bridge.py',170,180",
+        1
+      ],
+      [
+        "len(old)==120",
+        "len(old)==140",
+        1
+      ],
+      [
+        "Old120",
+        "Old140",
+        2
+      ],
+      [
+        "[:120]",
+        "[:140]",
+        1
+      ],
+      [
+        "==140,'Exact140 unique records required'",
+        "==160,'Exact160 unique records required'",
+        1
+      ],
+      [
+        "('non-IID','F Flip')]) for p in panels]",
+        "('non-IID','FedSA')]) for p in panels]",
+        1
+      ],
+      [
+        "Old972",
+        "Old1134",
+        1
+      ],
+      [
+        "==189",
+        "==216",
+        1
+      ],
+      [
+        "Exact189",
+        "Exact216",
+        1
+      ],
+      [
+        "five IID and two non-IID scenes",
+        "five IID and three non-IID scenes",
+        1
+      ],
+      [
+        "Seven complete scenes,70 matched pairs",
+        "Eight complete scenes,80 matched pairs",
+        1
+      ],
+      [
+        "non-IID Benign/F Flip are complete; three non-IID C attack scenes",
+        "non-IID Benign/F Flip/FedSA are complete; two non-IID C attack scenes",
+        1
+      ],
+      [
+        "seven-scene global mean",
+        "eight-scene global mean",
+        1
+      ],
+      [
+        "not x.startswith('| non-IID F Flip |')",
+        "not x.startswith('| non-IID FedSA |')",
+        1
+      ],
+      [
+        "==486",
+        "==567",
+        1
+      ],
+      [
+        "Old486",
+        "Old567",
+        1
+      ],
+      [
+        "C_SEVEN_COMPLETE_SCENES",
+        "C_EIGHT_COMPLETE_SCENES",
+        1
+      ],
+      [
+        "unique_records=140,paired_models=70,complete_scenes=7",
+        "unique_records=160,paired_models=80,complete_scenes=8",
+        1
+      ],
+      [
+        "nonIID_complete_scenes=['Benign','F Flip']",
+        "nonIID_complete_scenes=['Benign','F Flip','FedSA']",
+        1
+      ],
+      [
+        "old120_records",
+        "old140_records",
+        1
+      ],
+      [
+        "old972_statistics",
+        "old1134_statistics",
+        1
+      ],
+      [
+        "old486_cells",
+        "old567_cells",
+        1
+      ],
+      [
+        "records=140,mean_SD_scalars=1134,cells=567,count_metrics=1260",
+        "records=160,mean_SD_scalars=1296,cells=648,count_metrics=1440",
+        1
+      ]
+    ]
+  },
+  "panels": {
+    "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/source/panels.py",
+    "sha256": "8562506aa401bcb4a189e38bcf04c5c47ce06633c849b390e5b3fc3f5ded9b71",
+    "effective_sha256": "d3994835a10ce8fb133c0b293bb5ca874dad18da643b6e5dd3445fefadc6eb0c",
+    "replacements": [
+      [
+        "('non-IID','Benign'),('non-IID','F Flip')]",
+        "('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]",
+        1
+      ],
+      [
+        "Only five IID plus non-IID Benign/F Flip10 scenes",
+        "Only five IID plus non-IID Benign/F Flip/FedSA10 scenes",
+        1
+      ]
+    ]
+  },
+  "verify_numeric": {
+    "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_seven_scenes_20261010/source/verify_numeric.py",
+    "sha256": "81410e8bba518a813b242604eb828bf32938737b781599ca359e6798fa35b726",
+    "effective_sha256": "785194c6236422cda617d6d69a99de21bf9a31099e8c36f99d932361ceaef7a2",
+    "replacements": [
+      [
+        "==140",
+        "==160",
+        3
+      ],
+      [
+        "('non-IID','F Flip')}",
+        "('non-IID','F Flip'),('non-IID','FedSA')}",
+        1
+      ],
+      [
+        "len(rows)==21",
+        "len(rows)==24",
+        1
+      ],
+      [
+        "len(errors)==1134",
+        "len(errors)==1296",
+        1
+      ],
+      [
+        "metric_checks==1260 and count_checks==3360",
+        "metric_checks==1440 and count_checks==3840",
+        1
+      ],
+      [
+        "==567",
+        "==648",
+        1
+      ],
+      [
+        "seven-scene",
+        "eight-scene",
+        1
+      ]
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+Await actual native180 and prior170 three-view ROOT closure path/SHA. The observed queue count alone is not an accepted checkpoint input.
+
+Reuse C_after60 prepare, bridge, batch, installer, saved-array strict and backup/verifier. This stage keeps exact10 approval cardinality and changes only target F Flip→FedSA, native170→180, excluded prior160→170, frozen input hashes, and C_after70 namespace/service. Prior service must be C_after60 EXITED with no worker. No global numeric replacement; CPU112–119, eight threads, max one process, nice10/idleIO, CUDA hidden, root-only fitting and native1e-12 remain unchanged.
+
+After actual inputs arrive: independently verify one native delta with old270 records/order, prior26 ledger prefix, original Full100 identities, archive members and exact ten C non-IID FedSA jobs; derive exact native180−closed170. Construct source metadata only, preserving the eleven original bridge functions verbatim and all old170 records/Full references. Execute the real worker approval/pre-bind path in metadata fixtures for every selected ID and bounded failure/refusal cases. Freeze science/execution/package seals only after these actual checks.
+
+Root later supplies independent source review and external execution approval, performs fresh Linux resource/empty-namespace checks, and invokes the inherited installer. Transport must use short SSH argv plus Python stdin; no command here is executed. Preparation never grants dispatch or scientific acceptance.
