@@ -108,10 +108,14 @@ if main.get('C_three_view_seven_scene_table'):
     reply_row=reply_row.replace('正文未应用、最终test未运行','C70另表已验收、尚未合入该封存全文；正文未应用、最终test未运行')
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==10:
     reply_row='| 英文回复 | 完整C100作者审阅稿已纳入U/C各十场景与900校准解释；24原意见逐字、14处可逆修改、90数值pointer/45单元/54方向/60链接经root复核通过。六个其他变体与P1–P6、最终评价/正文未完成 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md) |'
+if state['latest_rebuttal_draft'].get('A_complete_scenes')==2:
+    reply_row='| 英文回复 | 完整作者审阅稿纳入U/C100、A两IID场景、LoGoFair100及十方法native千格表；24原意见逐字、25可逆修改、23新增均值SD单元/59事实/54方向/6取舍均值/82链接通过root与独立语义审阅。七方法覆盖、六机制变体、P1–P6、最终评价和正文未完成 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_A20_LoGo100_20261010/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_A20_LoGo100_20261010/manuscript_insertions_integrated_20261009.md) |'
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
 if state.get('logofair100_fullcoverage_20261010'):
     l=state['logofair100_fullcoverage_20261010']
     row=(f"| LoGoFair完整覆盖 | 96新增30轮后处理+4复用已实际启动，十模型seed/共同fit1719；原strict本机观测{l['local_strict_closed_observed']}/96，新增独立接受0，完整表尚未完成。固定虚拟20组非真实client，不重训CNN/不test | [实际启动核验](../{l['root_startup_path']}) |")
+    if l.get('root_adopted')==100:
+        row='| LoGoFair完整覆盖 | 96新+4复用全部100格已严格及root采用；两分布五场景十模型seed、固定fit1719，保存预测300指标误差0、1027哈希/198统计/99展示通过，1恒定预测保留；虚拟20组非真实client，valid-only | [完整LoGoFair表](server_deployment_20260923/training_20260923/celeba_logofair100_accepted_20261010/TABLES.md) |'
     lines=[line for line in text.split('\n') if not line.startswith('| LoGoFair完整覆盖 |')]
     index=next(i for i,line in enumerate(lines) if line.startswith('| 英文回复 |'))
     lines.insert(index,row)
@@ -191,13 +195,19 @@ if remaining:
     logo_recipe='已完整采用配置07（准确率冠军不同、8项恒定预测均保留），100覆盖待实际输入/映射绑定' if logo.get('root_adopted',0)==32 else '未完整选recipe'
     if state.get('logofair100_fullcoverage_20261010'):
         l100=state['logofair100_fullcoverage_20261010']
-        logo_recipe=f'已完整采用配置07，96新+4复用实际启动，本机原strict观测{l100["local_strict_closed_observed"]}/96、新独立接受0'
+        logo_recipe=(f'已完整采用配置07，96新+4复用实际启动，本机原strict观测{l100["local_strict_closed_observed"]}/96、新独立接受0' if l100.get('root_adopted')!=100 else '固定配置07完整100格已独立采用（96新+4复用），10/9/6表及1恒定预测保留')
     new_stage_note+=f' 当前接续：原800−已验收180的准确620补集CPU评价已实际启动，远端闭合{remote_closed}，新增严格离机并经root采用{remaining.get("new_offserver_accepted",0)}，累计三视图{actual_views}；原180和Full不重复。Fed-NGA/Huber共64项搜索运行，严格离机{gradient.get("offserver_accepted",0)}；首个恒定负预测ACC0.516686/AEOD0/ASPD0完整保留。LoGoFair原30轮后处理搜索本机原strict闭合{logo.get("original_strict_closed",0)}/32，root采用{logo.get("root_adopted",0)}，{logo_recipe}。Huber恒等投影和LoGoFair虚拟20cohort已由作者决定，前者不继承理论保证，后者不称真实client公平性。新bulk仅F盘Yanan 2TB经实时连接/容量校验后写入；原档案保持。'
 if main.get('A_three_view_single_scene_table'):
     A_table=main['A_three_view_single_scene_table']
     A_link='server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_Benign10_20261010/TABLES.md'
-    text+='\nA机制单场景：IID Benign十共享seed三视图表已独立采用；162统计/81单元/216计数指标通过。累计A12中F Flip仅2seed，不入均值。删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A IID Benign表]('+A_link+')。\n'
-    new_stage_note+=' A IID Benign十seed三视图表已独立采用，F Flip仅两seed，A剩余九场景未完成。'
+    A_coverage_note=('A20中Benign和F Flip各10seed已严格采用，新增两场景表仍待独立统计核验；原Benign表保持。' if main.get('three_view_counts_by_variant',{}).get('minus_A')==20 else '累计A12中F Flip仅2seed，不入均值。')
+    if main.get('A_three_view_two_scene_table'):
+        A_link='server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_two_scenes20_20261010/TABLES.md'
+        A_coverage_note='A20两完整IID场景表已独立采用：324统计/162展示/360计数指标/960基础计数通过；旧24记录及Benign162统计/81展示保持。F Flip native/shared删除A差约+0.001pp/+0.00001/−0.00088，9/6方向变化保留；其他八A场景未齐。'
+    text+='\nA机制对照：原IID Benign十共享seed表保持；162统计/81单元/216计数指标通过。'+A_coverage_note+'Benign删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A机制三视图表]('+A_link+')。\n'
+    new_stage_note+=' A IID Benign十seed三视图表已独立采用。'+A_coverage_note
+if state.get('author_adaptation_reply_patch_20261010'):
+    new_stage_note+=' 两项适配决定的英文局部补丁已根核，24原评论/全部旧数字保持、两个替换段可逆；正文未应用，最终主终点未定。'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     new_stage_note+=' 梯度200格192新+8复用源准备已独立通过；无实际recipe/jobs/启动，完整64离机接受及新增攻击真实门检仍待完成。'
 if state.get('gradient200_new_attack_gates_source_20261010'):
@@ -205,6 +215,9 @@ if state.get('gradient200_new_attack_gates_source_20261010'):
 if state.get('added_baseline_three_view_scope_20261010'):
     new_stage_note+=' 新增五方法三视图接线仅源码审查；四CNN须原strict身份桥，LoGo原生须保留DP状态/虚拟映射，不能用FedAvg raw cache冒充；底座raw/shared须明确标诊断，主终点未定。'
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
+if state.get('celeba_native_ten_method_table_20261010'):
+    text=text.replace('剩余8方法忠实实现和完整多种子覆盖','剩余7方法忠实实现和完整多种子覆盖')
+    text+='\n十方法native千格论文表已独立采用，IID/non-IID各五场景、10/9/6seed面板；900场景显示与270先seed内汇总显示通过，原九方法全部810统计对象不变。仍缺七方法覆盖，LoGo使用原DP后处理native而非底座cache；不称1000三视图或final。入口：[十方法IID/non-IID表](../'+state['celeba_native_ten_method_table_20261010']['table_path']+')。\n'
 text=text.replace('LoGoFair人口定义、梯度方法设置和最终主终点保留待决，不擅自代定。','Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。')
 text=text.replace('不代表其余七variant或全部800训练完成','不代表其余六variant或全部800训练完成')
 overview.write_bytes(text.encode('utf8')+marker+history)
@@ -263,14 +276,19 @@ if remaining:
 
 '''
 if state.get('logofair100_fullcoverage_20261010'):
-    top=top.replace('100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；',
-        '100输入及十个人口已实际绑定，原96项runner已启动；首项原strict与真实进程经root核验，完整100独立验收和统计仍未完成；')
+    logo_note=('100格完整原strict及保存预测/独立哈希/统计已采用；96新+4复用、1恒定结果及10/9/6面板保留；' if state['logofair100_fullcoverage_20261010'].get('root_adopted')==100 else '100输入及十个人口已实际绑定，原96项runner已启动；首项原strict与真实进程经root核验，完整100独立验收和统计仍未完成；')
+    top=top.replace('100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；',logo_note)
+if state.get('celeba_native_ten_method_table_20261010'):
+    top=top.replace('8方法覆盖仍未齐','余7方法覆盖仍未齐')
+    top+='十方法native千格表已独立采用，IID/non-IID各五场景、10/9/6面板；原九方法810统计对象保持，1800统计/900显示及540先seed内汇总统计/270显示通过；这不改变原900三视图范围，不是finaltest或完整17方法。入口'+state['celeba_native_ten_method_table_20261010']['table_path']+'。\n'
 if main.get('three_view_counts_by_variant',{}).get('minus_A')==12:
     top=top.replace(f"Native累计{main['scientific_results_offserver_verified']}=U100完整+C{main['scientific_results_offserver_verified']-100}部分",f"Native累计{main['scientific_results_offserver_verified']}=U100+C100完整+A12部分")
     top+='\n当前A12新增三视图已严格离机并核native212恢复链，累计212；IID Benign十seed完整、F Flip仅两seed不入均值，场景表须另行采用。旧200/Full不重推。\n'
 if main.get('A_three_view_single_scene_table'):
     top=top.replace('场景表须另行采用','IID Benign十seed三视图表已独立采用')
     top+='A表入口'+main['A_three_view_single_scene_table']['table_path']+'；162统计/81单元/216计数指标，10/9/6面板及负结果完整；不将该单场景称A完整100格。\n'
+if main.get('A_three_view_two_scene_table'):
+    top+='A两完整IID场景论文表已独立采用，Benign/F Flip各十共享seed，324统计/162单元/360计数指标/960计数检查；旧24记录和原Benign162统计/81展示保持，其他八A场景未齐。入口'+main['A_three_view_two_scene_table']['table_path']+'。\n'
 if state.get('gradient200_fullcoverage_source_preparation_20261010'):
     top+='梯度200格源准备独立审查通过，只含192新+8复用计划；没有实际recipe/jobs/启动，必须先闭合全部64及新攻击门检。\n'
 if state.get('gradient200_new_attack_gates_source_20261010'):

@@ -1,0 +1,71 @@
+{
+  "status": "ROOT_LOGOFAIR_FIXED_RECIPE100_STRICT_SAVED_PREDICTION_AND_TABLES_ADOPTED",
+  "adopted_utc": "2026-10-10T08:02:54.877534+00:00",
+  "accepted_count": 100,
+  "root_adopted": 100,
+  "new_accepted": 96,
+  "reused": 4,
+  "selected_recipe": {
+    "id": "LoGoFair-DP_07",
+    "settings": {
+      "global_delta": 0.06,
+      "local_delta": 0.06,
+      "post_lr": 0.005,
+      "post_rounds": 30,
+      "local_steps": 20,
+      "global_steps": 20,
+      "calibration": true,
+      "beta": 1000.0
+    }
+  },
+  "model_seeds": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005,
+    91006,
+    91007,
+    91008,
+    91009,
+    91010
+  ],
+  "fit_seed": 1719,
+  "virtual_cohorts": 20,
+  "true_client_fairness": false,
+  "records_path": "E:/OneDrive/\u6587\u6863/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_logofair100_accepted_20261010/records100.json",
+  "records_sha256": "fdc7c4f2402e26fdaa7b34bbfa792ceccafc5e3d32759d77940def2ed1fbc98d",
+  "independent_review_path": "tmp/celeba_logofair100_root_review_20261010/ROOT_REVIEW.json",
+  "independent_review_sha256": "b4fc447ba86c2fd40b54a1100c1ca2cdba890546b383feb5ddfa6bae19958610",
+  "original_acceptance_path": "F:/YananResearchStorage/GuardFed/logofair_fullcoverage100_20261010/summary001/ACCEPTANCE100.json",
+  "original_acceptance_sha256": "7f0a509c715d3f762f4184bc4f0d82d3e99ef497f11d74e04b4fb2cb8c36f8e3",
+  "original_summary_command_exit": 0,
+  "strict_index_path": "F:/YananResearchStorage/GuardFed/logofair_fullcoverage100_20261010/attempt001/STRICT100_INDEX.json",
+  "strict_index_sha256": "1d2cbb94e47716dd21854c704f5d78506cf6f075774d38e06d89ec71d3be8ba7",
+  "artifact_hashes_recomputed": 1027,
+  "saved_prediction_items": 1986700,
+  "saved_metric_checks": 300,
+  "saved_metric_max_difference": 0,
+  "mean_SD_scalars_recomputed": 198,
+  "display_cells": 99,
+  "cross_scene_seed_first_metric_checks": 75,
+  "constant_prediction_ids": [
+    "LoGoFair-DP_07_FedAvg_IID_Benign_seed91001"
+  ],
+  "all_negative_and_constant_results_retained": true,
+  "files_sha256": {
+    "ACCEPTANCE100.json": "7f0a509c715d3f762f4184bc4f0d82d3e99ef497f11d74e04b4fb2cb8c36f8e3",
+    "records100.json": "fdc7c4f2402e26fdaa7b34bbfa792ceccafc5e3d32759d77940def2ed1fbc98d",
+    "SUMMARY100.json": "e09cf1139f63661528bfaf7ee730ec558dec72107982bbee07d74d654955acb1",
+    "TABLES.md": "1cd87594eb25f953581a4153a64b4888e4e10c332f972988667810ac3c1c91a8",
+    "RAW_STORAGE_INDEX.json": "7207e8ac749bc42b715ecdfdc1527582c717f43eaf5dd1aaeddde553720e441b"
+  },
+  "canonical_table": "docs/server_deployment_20260923/training_20260923/celeba_logofair100_accepted_20261010/TABLES.md",
+  "new_CNN": 0,
+  "new_fits_during_acceptance": 0,
+  "final_test": false,
+  "incorporated_into_full_rebuttal": false,
+  "primary_endpoint_selected": false,
+  "whole_rebuttal_complete": false,
+  "limitations": "Fixed recipe07; virtual cohorts are not training clients. AEOD is absolute TPR gap. Validation selection seed91001/other exposed validation seeds, mixed pretrained runtimes, float32-margin adaptation and historical test metadata exposure remain. No new search, significance, final-test or primary-endpoint claim."
+}

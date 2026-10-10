@@ -1,0 +1,79 @@
+{
+  "status": "AUTHOR_REVIEW_REVERSIBLE_UNAPPLIED_PATCH",
+  "source_pins": {
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md": {
+      "sha256": "2f70f682d085a228576720fcfde9f145461634be7b80cfe4b3a107f930e6611f",
+      "bytes": 90329
+    },
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md": {
+      "sha256": "316cc83884963d4a52ac3dea650af66c6728d68ea64dcb1d33fa5abea151301c",
+      "bytes": 57659
+    },
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/ROOT_REVIEW.json": {
+      "sha256": "84e73cfb22780deb1a0fdefb328237c0c6a08596bc593ea1da09cb1cd14dbfed",
+      "bytes": 1825
+    },
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/FILES_SHA256.json": {
+      "sha256": "cc80624a16ea2f3045b6629baf05f30d72d405437dc522114356202fc805b315",
+      "bytes": 1568
+    },
+    "docs/server_deployment_20260923/training_20260923/AUTHOR_DECISIONS_20261010.json": {
+      "sha256": "aee89e8210b5aa83d8ee814d5afde4bb655f3ba559bb53ae6ebcd1ca0d46851d",
+      "bytes": 1203
+    },
+    "tmp/celeba_added_baseline_three_view_scope_20261010/REPORT.md": {
+      "sha256": "c4fda39f3bebc42d65873ce7df7a3bd65fc646049d4bf0db39f831801e5aeae0",
+      "bytes": 11555
+    },
+    "tmp/celeba_added_baseline_three_view_scope_20261010/REVIEW.json": {
+      "sha256": "acdb0a0646d47b8773ce8ce9ec672eee157cb5f0b9ccccfd4ed05eb5ec0ceac1",
+      "bytes": 1383
+    },
+    "tmp/celeba_added_baseline_three_view_scope_20261010/SOURCE_PINS.json": {
+      "sha256": "d04c722bd723cea3df99605a6814461a7df62462c0efca3de052204051b9a6a8",
+      "bytes": 15051
+    },
+    "tmp/celeba_added_baseline_three_view_scope_20261010/FILES_SHA256.json": {
+      "sha256": "1cc32cee3f41abcc644510251a79f5751a60fdf8185533c9f0352ba89c150564",
+      "bytes": 488
+    },
+    "tmp/celeba_logofair_screen32_20261010/snapshot/logofair_bridge_20261010/bridge.py": {
+      "sha256": "c1dfa5b5881407c16b0c7c37cfa17cb27c62f9d9fe125a51bdca0c77a0865e81",
+      "bytes": 24354
+    },
+    "tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json": {
+      "sha256": "145f30628270b457d84d47aeab60825c9d4fdb23a0ae27fcd44a35a19e62ae90",
+      "bytes": 5926
+    },
+    "tmp/celeba_logofair32_root_adoption_20261010/COMPLETE32_REVIEW.json": {
+      "sha256": "70f8cf59f11d505bd5d6fd1f9eaf7e9f64be629349bfef3b8fbd995486c06d64",
+      "bytes": 35714
+    }
+  },
+  "changes": [
+    {
+      "document": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md",
+      "source_sha256": "2f70f682d085a228576720fcfde9f145461634be7b80cfe4b3a107f930e6611f",
+      "anchor_line": 360,
+      "anchor_heading": "R3.8 — Explain attacks and comparison methods",
+      "old": "**Remaining-baseline implementation status at this evidence cutoff.** The [author decision](E:/OneDrive/文档/GuardFed/tmp/celeba_gradient_screen64_v2_20261010/AUTHOR_DECISIONS.json) accepts Huber’s practical CNN adaptation with parameter domain R^p and identity projection; it does not inherit a convex-domain or covering-number guarantee. The [complete LoGoFair32 validation search](E:/OneDrive/文档/GuardFed/tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json) has been independently accepted and selects LoGoFair-DP_07 by the original four-condition mean score and candidate tie rule. It uses the author-authorized image-ID hash into 20 declared virtual cohorts, the official DP objective and root-only fitting, not real training-client fairness. Its fit seed is fixed at 1719 and its search uses only seed 91001. This search acceptance does not establish a complete 100-cell LoGoFair evaluation; that fixed-recipe stage remains pending. These updates do not enlarge the accepted nine-method/900-record comparison to the 17-method target or erase constant-prediction and unfavorable results.",
+      "new": "**Remaining-baseline implementation status at this evidence cutoff.** The [recorded author decisions](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/AUTHOR_DECISIONS_20261010.json) explicitly accept Huber’s practical CNN adaptation with parameter domain R^p and identity projection. We use it as an empirical CNN adaptation without transferring the original convex-domain or covering-number guarantee. The [complete LoGoFair32 validation search](E:/OneDrive/文档/GuardFed/tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json) has been independently accepted and selects LoGoFair-DP_07 by the original four-condition mean score and candidate tie rule. Following the author's delegation, we fixed image-ID hashing into 20 declared virtual cohorts, the official DP objective and root-only fitting; this adaptation does not evaluate fairness across real training clients. Its fit seed is fixed at 1719 and its search uses only seed 91001. This search acceptance does not establish a complete 100-cell LoGoFair evaluation; that fixed-recipe stage remains pending. These updates do not enlarge the accepted nine-method/900-record comparison to the 17-method target or erase constant-prediction and unfavorable results.\n\n**LoGoFair prediction scope.** As distinguished in the [source compatibility review](E:/OneDrive/文档/GuardFed/tmp/celeba_added_baseline_three_view_scope_20261010/REPORT.md), LoGoFair native is the saved `prediction` reproduced from the SHA-bound fitted `post_state.pkl`, settings, cohort mapping and FedAvg checkpoint/score cache. The cache field `valid_native_prediction` instead stores the FedAvg backbone's original argmax decision; it is not the fitted LoGoFair output. Raw/shared outputs from that same backbone and the existing shared calibration are backbone/postprocessing-replacement diagnostics and must be labelled separately from LoGoFair native. They do not preserve the official DP postprocessor. This clarification leaves its existing strict source/state/checkpoint and saved-prediction evidence unchanged; it neither defines a new postprocessor-plus-calibration composition nor adopts a combined comparison. The adaptation decisions do not complete the remaining experiments or select the final primary endpoint; the final test under a frozen protocol has not been run.",
+      "old_sha256": "b27392cee56b0b493b66fac9dbf4e606e1762abf294773f0bda0968a63ed52dc",
+      "new_sha256": "7b156c6217a52af32a8d3ae45a687392dda1690b711315f7d76767c456a101b0",
+      "proposed_document_sha256": "ea6c9aca79bbff0c27cd7101bff97292eee2e285cfa035bfce91a04d64374bf0"
+    },
+    {
+      "document": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md",
+      "source_sha256": "316cc83884963d4a52ac3dea650af66c6728d68ea64dcb1d33fa5abea151301c",
+      "anchor_line": 145,
+      "anchor_heading": "Remaining-baseline implementation status at this evidence cutoff",
+      "old": "**Remaining-baseline implementation status at this evidence cutoff.** The [author decision](E:/OneDrive/文档/GuardFed/tmp/celeba_gradient_screen64_v2_20261010/AUTHOR_DECISIONS.json) accepts Huber’s practical CNN adaptation with parameter domain R^p and identity projection; it does not inherit a convex-domain or covering-number guarantee. The [complete LoGoFair32 validation search](E:/OneDrive/文档/GuardFed/tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json) has been independently accepted and selects LoGoFair-DP_07 by the original four-condition mean score and candidate tie rule. It uses the author-authorized image-ID hash into 20 declared virtual cohorts, the official DP objective and root-only fitting, not real training-client fairness. Its fit seed is fixed at 1719 and its search uses only seed 91001. This search acceptance does not establish a complete 100-cell LoGoFair evaluation; that fixed-recipe stage remains pending. These updates do not enlarge the accepted nine-method/900-record comparison to the 17-method target or erase constant-prediction and unfavorable results.",
+      "new": "**Remaining-baseline implementation status at this evidence cutoff.** The [recorded author decisions](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/AUTHOR_DECISIONS_20261010.json) explicitly accept Huber’s practical CNN adaptation with parameter domain R^p and identity projection. We use it as an empirical CNN adaptation without transferring the original convex-domain or covering-number guarantee. The [complete LoGoFair32 validation search](E:/OneDrive/文档/GuardFed/tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json) has been independently accepted and selects LoGoFair-DP_07 by the original four-condition mean score and candidate tie rule. Following the author's delegation, we fixed image-ID hashing into 20 declared virtual cohorts, the official DP objective and root-only fitting; this adaptation does not evaluate fairness across real training clients. Its fit seed is fixed at 1719 and its search uses only seed 91001. This search acceptance does not establish a complete 100-cell LoGoFair evaluation; that fixed-recipe stage remains pending. These updates do not enlarge the accepted nine-method/900-record comparison to the 17-method target or erase constant-prediction and unfavorable results.\n\n**LoGoFair prediction scope.** As distinguished in the [source compatibility review](E:/OneDrive/文档/GuardFed/tmp/celeba_added_baseline_three_view_scope_20261010/REPORT.md), LoGoFair native is the saved `prediction` reproduced from the SHA-bound fitted `post_state.pkl`, settings, cohort mapping and FedAvg checkpoint/score cache. The cache field `valid_native_prediction` instead stores the FedAvg backbone's original argmax decision; it is not the fitted LoGoFair output. Raw/shared outputs from that same backbone and the existing shared calibration are backbone/postprocessing-replacement diagnostics and must be labelled separately from LoGoFair native. They do not preserve the official DP postprocessor. This clarification leaves its existing strict source/state/checkpoint and saved-prediction evidence unchanged; it neither defines a new postprocessor-plus-calibration composition nor adopts a combined comparison. The adaptation decisions do not complete the remaining experiments or select the final primary endpoint; the final test under a frozen protocol has not been run.",
+      "old_sha256": "b27392cee56b0b493b66fac9dbf4e606e1762abf294773f0bda0968a63ed52dc",
+      "new_sha256": "7b156c6217a52af32a8d3ae45a687392dda1690b711315f7d76767c456a101b0",
+      "proposed_document_sha256": "8b5359e8d6a7d6035ca8b916e4f6b82389de41903a27d0dd24413f114d6fb0c7"
+    }
+  ],
+  "full_documents_written": false,
+  "original_comments_modified": false
+}

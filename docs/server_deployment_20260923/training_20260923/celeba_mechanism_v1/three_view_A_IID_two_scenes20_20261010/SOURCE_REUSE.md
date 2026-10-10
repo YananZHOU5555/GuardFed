@@ -1,0 +1,10 @@
+# Minimal source extension from adopted A Benign10
+
+- No original file is edited or copied into a replacement scientific implementation. build.py loads the pinned original A build.py helper functions without calling its main.
+- The complete original `for rid in ids` receipt/binding/strict/native/checkpoint/data-contract/paired-Full loop is extracted and compiled unchanged. It runs once for the original12 and once for the newly adopted8; original12 provenance continues to point to its original adoption/index.
+- `receipt_identity`, `normalized`, `canonical` and `full_record` are extracted unchanged from their original pinned sources. Full records are selected from the actual original900 source using the original100-reference inventory.
+- Original C panels and numeric verification are loaded in memory. The established exact variant-string AST mapping C→A is reused. The only further changes are the complete-scene set Benign→Benign+F Flip, record count24→40, rows3→6, statistics162→324, saved-count metrics216→360, base counts576→960, and partial four-record exclusion→no partial records. Every literal edit is exactly matched once and reversed to prove original source recovery. The original mean, sample-SD, paired-difference and metric equations are unchanged.
+- Original statistic/summarize are imported from the pinned evidence_v4.py. No new statistical selection or aggregate across the two scenes is introduced.
+- Original24 record JSON objects, bytes and filtered order are checked exactly. Each of the nine Benign panels retains its original three rows; all162 scalars and81 rendered values remain exact.
+
+INPUTS.json pins actual roots/indexes, native inspections and original sources. SOURCE_BINDINGS.json additionally carries every20 paired identity link, original function/loop source hashes, scope-only literal diffs and fresh storage inspection. The original backup/member and saved-array strict verification are inherited through the adopted replay chain; this builder reads only small existing receipts and saved metrics, with no checkpoint-tensor/array recomputation or new inference.

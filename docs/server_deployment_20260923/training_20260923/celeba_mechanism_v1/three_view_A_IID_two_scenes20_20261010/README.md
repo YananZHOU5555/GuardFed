@@ -1,0 +1,15 @@
+# Actual minus_A paired tables: two complete IID scenes
+
+This candidate reads the root-adopted cumulative220 replay index. Its scope is exactly20 minus_A models and their20 original Full counterparts: IID Benign and IID F Flip, seeds91001–91010. All40 records contain raw, native and shared_calibration views of the same respective checkpoints. The original24 record objects, including their provenance and serialization order, are preserved as an exact projection. The previously adopted Benign162 mean/SD scalars and81 displayed cells are unchanged.
+
+Read [TABLES.md](TABLES.md), [tables.json](tables.json), [coverage.json](coverage.json), [paired_per_seed.json](paired_per_seed.json), and [SOURCE_BINDINGS.json](SOURCE_BINDINGS.json). The original receipt identity/normalization/Full reader and entire per-record scientific joining loop are reused. The original statistic/summarize and fsum/sample-SD arithmetic remain unchanged; scope-only adapters are listed with reversible literal changes in SOURCE_BINDINGS.json.
+
+The single actual build returned exit0. It checked324 mean/SD scalars,162 display cells,360 metric values against saved group counts, and960 base confusion-count entries. Maximum arithmetic difference was1.4210854715202004e-14, within the original1e-12 tolerance. These are table-builder checks; independent review and root table adoption remain separate steps. The actual A8 replay delta was already root adopted before this build.
+
+Actual replay provenance is Full CPU2/GPU18 and minus_A CPU20; all40 source training records report Torch2.11.0+cu128. Each record retains its source environment, checkpoint, configuration and original data identity. Existing F-volume evidence was read after a fresh Yanan2TB/Healthy/capacity check. No arrays, models, archives, inference, fits, training or test outputs were generated or copied by this builder.
+
+Mean ± sample SD uses ddof1 and paired differences are minus_A − Full. ACC is percent; ΔACC is percentage points. AEOD is the absolute TPR gap and ASPD the absolute positive-prediction-rate gap. The fixed10/9/6 seed panels are descriptive, with identical paired seeds for every metric. Seed91001 selection, exposed validation and historical test exposure remain limitations; no untouched confirmation-set claim is made. Native/shared identical counts and metrics are reported as parallel views rather than independent calibration evidence. The primary endpoint remains pending.
+
+All negative and constant outcomes remain in the records and tables. No scene-pooled average is introduced. The other eight minus_A scenes, A100, remaining image-control variants and whole-mechanism completion are outside this delivery. This table makes no significance, necessity, causal isolation or final-test claim. It does not apply text to the manuscript or alter shared STATE/RUNNING/Git.
+
+The recorded external closure parameters and exact command are in BUILD_COMMAND.json. The builder rejects existing records/tables and any external SHA mismatch; it must not be rerun over this sealed delivery. Root should independently check the sealed files before adopting the table.

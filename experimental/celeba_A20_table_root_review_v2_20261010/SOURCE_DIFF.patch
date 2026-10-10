@@ -1,0 +1,27 @@
+--- original_failed/review.py
++++ display_schema_v2/review.py
+@@ -9,6 +9,8 @@
+ FULL = ROOT / 'outputs/guardfed_tables/celeba_nine_method_three_view_20261009/records_three_views_900.json'
+ REFS = ROOT / 'tmp/celeba_mechanism_valid_C_after1_20261009/inventory_actual112_Full100refs.json'
+ PINS = {
++    'tmp/celeba_A20_table_root_review_20261010/review.py': '56f98589d50cdebd71e2bc2c44cab2b7d904980f4af4dac3f92a36b808cbb737',
++    'tmp/celeba_A20_table_root_review_20261010/REVIEW_FAILURE.json': '51314f65a18108e7d090f4903661d49a411649a9fe674d8a500a0c5342711ca0',
+     'tmp/verify_A_Benign10_root_20261010.py': '2e7407b315f599baea9453e7ebe602a65249f684b579afd5d764bf8a87acca2a',
+     'tmp/celeba_mechanism_remaining620_A12_root_adoption_20261010/ROOT_ADOPTION.json': '1221482d564a2c735b0de0680fe8a42512c9fe5774a9d157bd3bfda5dd9c858b',
+     'tmp/celeba_mechanism_remaining620_A12_root_adoption_20261010/MECHANISM212_INDEX.json': '9a90f3d74a27d9ca4225b850797faec3c3aac2b6e2f83f87d3afe49c21912496',
+@@ -157,12 +159,13 @@
+     display=0; benign_lines=[]
+     for line,row in zip(lines,all_rows):
+         columns=line.strip('| ').split(' | ')
+-        assert columns[0]==row['variant'] and int(columns[1])==row['n']
++        assert columns[0]==f"{row['distribution']} / {row['attack']} / {row['variant']}" and int(columns[1])==row['n']
+         for offset,key in enumerate(('accuracy_pct','aeod','aspd'),2):
+             digits=3 if key=='accuracy_pct' else 5
+             assert columns[offset]==f"{row[key]['mean']:.{digits}f} ± {row[key]['sample_sd_ddof1']:.{digits}f}"; display+=1
+         if row['attack']=='Benign': benign_lines.append(line)
+-    assert benign_lines==old_lines and len(benign_rows)==27
++    assert [line.strip('| ').split(' | ')[1:] for line in benign_lines]==[line.strip('| ').split(' | ')[1:] for line in old_lines] and len(benign_rows)==27
++    assert [line.strip('| ').split(' | ')[0] for line in old_lines]==[row['variant'] for row in benign_rows]
+     assert len(errors)==324 and max(errors)<=1e-12 and display==162 and metric_checks==360 and count_checks==960
+     return dict(status='INDEPENDENT_A20_TWO_IID_SCENE_ARITHMETIC_AND_PROVENANCE_PASS_NO_ADOPTION',
+         utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),paired_models=20,complete_scenes=2,

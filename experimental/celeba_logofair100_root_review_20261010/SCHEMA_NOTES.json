@@ -1,0 +1,25 @@
+{
+  "status": "READ_ONLY_SCHEMA_PROBES_ONLY_NO_SCIENTIFIC_REVIEW",
+  "preserved_probe_errors": [
+    {
+      "error": "TypeError: list indices must be integers or slices, not str",
+      "cause": "records100.json root is a list; initial generic probe assumed dictionary"
+    },
+    {
+      "error": "AttributeError: str object has no attribute read_bytes",
+      "cause": "probe reader required Path but mapping metadata path was a string"
+    },
+    {
+      "error": "TypeError: int object is not iterable",
+      "cause": "inventory root_populations is the count10, not an iterable"
+    }
+  ],
+  "effects": "Only stdout/stderr; no original files/F bulk/scientific outputs changed; review.py not executed",
+  "resolved_schema": {
+    "records100": "list[100]",
+    "summary": "panels dict; per_scene/cross_scene_per_seed/cross_scene",
+    "strict_index": "records96 + reused_jobs4",
+    "old4": "original five strict keys plus exact cell_id alias only",
+    "artifact_hashes": 1027
+  }
+}
