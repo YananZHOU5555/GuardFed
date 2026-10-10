@@ -1,0 +1,46 @@
+"""Prepare the prior root adopter with exact5 scope and externally pinned future actual receipts."""
+from pathlib import Path
+import hashlib, json, difflib
+H=Path(__file__).resolve().parent;O=H.parent/'celeba_remaining_after288_20261011'
+original=(O/'adopt_by_root.py').read_text('utf8');s=original
+def swap(a,b):
+ global s
+ assert a in s,a
+ s=s.replace(a,b)
+swap('seven saved-array records, retaining the prior288','five saved-array records, retaining the prior295')
+swap("S=R/'tmp/celeba_remaining_after288_20261011'","S=R/'tmp/celeba_remaining_after295_20261011'")
+swap("D=R/'tmp/celeba_mechanism_remaining_after288_root_adoption_20261011'","D=R/'tmp/celeba_mechanism_remaining_after295_root_adoption_20261011'")
+swap('assert not D.exists()',"import argparse\nparser=argparse.ArgumentParser();parser.add_argument('--actual-pins-sha256',required=True);args=parser.parse_args()\nassert sha(S/'ROOT_ACTUAL_PINS.json')==args.actual_pins_sha256\nactual=read(S/'ROOT_ACTUAL_PINS.json')\nassert actual['native_total']>=300 and actual['replay_total']==300 and actual['new_replays']==5\nassert not D.exists()")
+swap("'0235071ea0450b36dc7841ff91e4ea442199d901aa082fbcd4880c9b7dc0d1b1'","actual['delivery_sha256']")
+swap('len(files)==54',"len(files)==actual['delivery_members']")
+swap("'48b388cf2cec8bcfc1a1317c5c0b13fd8674243250129853a348795968035307'","actual['handoff_sha256']")
+swap("[f'minus_A_non-IID_S-DFA_seed{s}' for s in (91009,91010)]+[f'minus_A_non-IID_Sp-DFA_seed{s}' for s in range(91001,91006)]","[f'minus_A_non-IID_Sp-DFA_seed{s}' for s in range(91006,91011)]")
+swap('(288,7,295,108,115)','(295,5,300,115,120)');swap('(63,168,21,0)','(45,120,15,0)');swap('(63,168,21)','(45,120,15)')
+swap("'7c46fcb20c15c377b1df17378f14b6282ee394bdcaacecd8d4f92be344777bef'","actual['proposed_index_sha256']")
+swap('15676070f43acab92b7d72aea2235432c459a95a3c6d33c08368f23ad19bb48d','7c46fcb20c15c377b1df17378f14b6282ee394bdcaacecd8d4f92be344777bef')
+swap('7f53a03f055e86fbe2e4fd8a9b92edffa819ec261978813bcb714130b144a5e7','70689e63467d8866caa3beb06d2be5f911defd0a4d5f7f061ab005d20bd1c1bb')
+swap("read(prior_root)['cumulative_accepted']==288","read(prior_root)['cumulative_accepted']==295")
+swap("len(set(index['all_ids']))==295","len(set(index['all_ids']))==300")
+swap('prior288_objects','prior295_objects');swap('old388_native','old395_native')
+swap("join['Full_reference_joins']==7","join['Full_reference_joins']==5")
+swap("len(receipt['all_transported_ids'])==115","len(receipt['all_transported_ids'])==120")
+swap('5a09b651013e38e5428f47ca0dd409e1b7dd9dd73824cf9d450492365dfbe875','37424c0d0bdb2e4b82b0d3b61570e0debb4405677262e86a94c480b0d32ac657')
+swap('original_archive_checker_after288','original_archive_checker_after295');swap("archive_check['members_verified']==65","archive_check['members_verified']==47")
+swap("saved['accepted_n']==7","saved['accepted_n']==5")
+swap("'b9bc8099013b6cc7da17f0b72e60306d384549a1bac2da6a73b5e04ed4fa2128'","actual['native_root_sha256']")
+swap("np['total_new_strict_and_offserver']==295","np['total_new_strict_and_offserver']==actual['native_total']")
+swap('native288_root_path','native295_root_path')
+swap("len(old_inspection['records'])==388 and len(inspection['records'])==395","len(old_inspection['records'])==395 and len(inspection['records'])==100+actual['native_total']")
+swap("len(ledger['entries'])==42","len(ledger['entries'])==43")
+swap('len(native_checks)==14','len(native_checks)==10')
+swap("for attack in ('Benign','F Flip','FedSA','S-DFA'):","for attack in ('Benign','F Flip','FedSA','S-DFA','Sp-DFA'):")
+swap('MECHANISM295_INDEX.json','MECHANISM300_INDEX.json')
+swap('ROOT_AFTER288_EXACT7_SAVED_ARRAYS_NATIVE295_ADOPTED','ROOT_AFTER295_EXACT5_SAVED_ARRAYS_REPLAY300_ADOPTED')
+for a,b in [('new_accepted=7','new_accepted=5'),('prior_accepted=288','prior_accepted=295'),('cumulative_accepted=295','cumulative_accepted=300'),('remaining620_new_accepted=115','remaining620_new_accepted=120'),('archive_members=65','archive_members=47'),('native_members_rehashed=14','native_members_rehashed=10'),('exact_native_records_checked=7','exact_native_records_checked=5'),('independent_metrics=63','independent_metrics=45'),('independent_counts=168','independent_counts=120'),('prediction_rules=21','prediction_rules=15'),('original288_unchanged=True','original295_unchanged=True'),('accepted=295,A=95','accepted=300,A=100')]:swap(a,b)
+swap("[['non-IID',a] for a in ('Benign','F Flip','FedSA','S-DFA')],partial_A_scenes=[['non-IID','Sp-DFA']],partial_A_seed_ids=list(range(91001,91006))","[['non-IID',a] for a in ('Benign','F Flip','FedSA','S-DFA','Sp-DFA')],partial_A_scenes=[],partial_A_seed_ids=[]")
+swap('tmp/remaining_after280_root_adopter_20261011/adopt_by_root.py','tmp/celeba_remaining_after288_20261011/adopt_by_root.py')
+swap("storage=check_bulk_storage()","from verify_native_inputs import verify_native_inputs\nexecution=verify_native_inputs()\nassert execution['native_root_sha256']==actual['native_root_sha256'] and execution['root_native_total']==actual['native_total']\nstorage=check_bulk_storage()")
+compile(s,str(H/'adopt_by_root.py'),'exec')
+with (H/'adopt_by_root.py').open('x',encoding='utf8',newline='\n') as f:f.write(s)
+with (H/'ADOPTER_SOURCE_DIFF.patch').open('x',encoding='utf8',newline='\n') as f:f.writelines(difflib.unified_diff(original.splitlines(True),s.splitlines(True),fromfile='after288/adopt_by_root.py',tofile='after295/adopt_by_root.py'))
+print(json.dumps(dict(status='ADOPTER_SOURCE_ONLY_ACTUAL_PINS_ABSENT',sha256=hashlib.sha256((H/'adopt_by_root.py').read_bytes()).hexdigest())))

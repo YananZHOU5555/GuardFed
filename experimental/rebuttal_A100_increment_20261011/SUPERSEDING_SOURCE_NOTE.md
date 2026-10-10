@@ -1,0 +1,7 @@
+# Explicit Sp-DFA interpretation guard — source only
+
+The prior PREPARED_FILES_SHA256.json remains unchanged as historical source evidence. Its builder bytes are retained in build_before_sign_guard.py.txt. The new current builder adds the exact nine-panel Sp-DFA expected-sign map and explicit direction-reversal prose requested by root. The build derives the signs from the future actual adopted tables and refuses differing signs before writing documents; the original root editorial check verifies the bound mean pointers, then repeats this semantic guard. No tolerant comparison, scientific-statistics calculation or favorable-subset selection is introduced.
+
+Native/shared10/9 deletion: ACC lower, AEOD higher, ASPD lower. Native/shared6 reverses all three. Raw10/9 deletion: ACC lower, both gaps higher. Raw6: ACC lower, both gaps lower—an accuracy/disparity tradeoff, not opposing AEOD/ASPD directions. The prose is explicit on this distinction. Existing A90 history/negative findings and all39 numeric pairs remain.
+
+SIGN_GUARD_SOURCE_DIFF.patch is the exact delta from the preserved prior builder. Compile/original-helper source reuse passed; no binding, draft generation, interpretation-guard execution or editorial/scientific checker ran. Only the candidate table signs were read to confirm root's supplied observation; canonical root adoption is still required. Root's unique actual --check remains reserved.

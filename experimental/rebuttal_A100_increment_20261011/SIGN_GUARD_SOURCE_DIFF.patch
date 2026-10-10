@@ -1,0 +1,47 @@
+--- prior_sealed/build_and_check.py
++++ superseding/build_and_check.py
+@@ -72,6 +72,17 @@
+     require(r['complete'] and r['n']==n and r['seeds']==p['seeds'],'Same paired seed set')
+     return f'{prefix}/{i}/rows/{j}',f'{prefix}/{i}/seeds',r
+ 
++def interpretation_guard(panels):
++    """Refuse prose whose fixed Sp-DFA directions differ from the actual bound table."""
++    expected={
++        ('native',10):['lower','higher','lower'],('native',9):['lower','higher','lower'],('native',6):['higher','lower','higher'],
++        ('shared_calibration',10):['lower','higher','lower'],('shared_calibration',9):['lower','higher','lower'],('shared_calibration',6):['higher','lower','higher'],
++        ('raw',10):['lower','higher','higher'],('raw',9):['lower','higher','higher'],('raw',6):['lower','lower','lower'],
++    }
++    require(len(panels)==9 and {(p['view'],p['seed_count']) for p in panels}==set(expected),'Nine actual Sp-DFA interpretation panels')
++    for p in panels:require(p['directions']==expected[(p['view'],p['seed_count'])],'Actual Sp-DFA signs must support the explicit prose')
++    return panels
++
+ def build():
+     root,table,cross=read('A100_root'),read('tables'),read('cross_scene')
+     require(root['root_adoption'] and root['paired_models']==100 and root['preserved_records']==200 and root['complete_scenes']==10,'Actual adopted A100 required')
+@@ -101,10 +112,13 @@
+         p=next(p for p in directions if p['view']==view and p['seed_count']==10)
+         return label+' deletion yields '+', '.join(w+' mean '+m for w,m in zip(p['directions'],('ACC','AEOD','ASPD')))+'.'
+     direction_text=' '.join(direction_sentence(v,l) for v,l in [('native','Native'),('raw','Raw'),('shared_calibration','Shared-calibration')])
++    interpretation_guard(directions)
+     devices=json.dumps(root['replay_devices'],sort_keys=True);training=json.dumps(root['training_torch'],sort_keys=True)
+     block=f"""**Current A100 extension: all ten A-deletion scenes.** The [accepted A100 table]({BASE}TABLES.md) and [root verification]({BASE}ROOT_VERIFICATION.json) preserve the nine A90 scenes and complete non-IID Sp-DFA. The comparison now contains 100 Full/minus_A pairs (200 records), covering IID and non-IID data under all five scenarios with ten matched model seeds per scene. Every metric uses the same fixed round-70 checkpoint and the same 19,867 validation images. The previous five-seed Sp-DFA exclusion describes the historical A90 cutoff; the ten-seed A100 scene is now included.
+ 
+ **Added non-IID Sp-DFA paired evidence.** The following values are the saved same-seed differences, minus_A−Full, in ΔACC / ΔAEOD / ΔASPD order, reported as means ± sample SD (ddof=1). ΔACC is measured in percentage points; the disparity differences are absolute gaps. {' '.join(descriptions)} These values come directly from the paired rows of the [adopted JSON]({BASE}tables.json), not from separately selected seeds or checkpoints. {direction_text} Lower ACC is unfavorable and lower disparity is favorable. These are panel-mean directions, not a claim about every seed or statistical significance; the fixed 10/9/6 panels remain visible together.
++
++**Fixed-panel direction changes.** In the ten- and nine-seed native/shared panels, retaining A has higher mean ACC and lower mean AEOD, whereas deleting A has lower mean ASPD. All three directions reverse in the six-seed native/shared panel: deleting A has higher mean ACC and lower mean AEOD, but retaining A has lower mean ASPD. Under raw prediction, the ten- and nine-seed means favor retaining A on all three metrics. The six-seed raw panel instead trades lower mean accuracy after deletion for lower means of both disparity gaps. These reversals follow the predefined subsets and prediction rules; we report them together rather than choosing a favorable panel. They do not establish an effect for every seed or statistical significance.
+ 
+ **Seed-first cross-scene evidence.** The [additional saved aggregates]({BASE}CROSS_SCENE_ADDITIONAL.json) now report both the five-non-IID and balanced-ten-scene summaries; the [five-IID summary]({BASE}IID_SEED_FIRST.json) is retained unchanged. Within each seed, scenes receive equal weight before the across-seed mean and sample SD are computed. Thus n remains the model-seed count, rather than five or ten times that count; Full and minus_A use matched seeds. {' '.join(aggregate)} All corresponding 9/6-seed panels remain in the adopted JSON. A favorable average does not imply a gain in every scene or seed, and aggregation does not erase adverse or mixed scene-specific results.
+ 
+@@ -188,10 +202,11 @@
+     for panel in facts['new_nonIID_direction_panels']:
+         words=['lower' if pointer(table,p)<0 else 'higher' if pointer(table,p)>0 else 'unchanged' for p in panel['mean_pointers'].values()]
+         require(words==panel['directions'] and len(pointer(table,panel['seeds_pointer']))==panel['seed_count'],'Actual direction and seed bindings')
++    interpretation_guard(facts['new_nonIID_direction_panels'])
+     require(summary['native_shared_metrics_and_counts_exact'] is True,'Actual native/shared saved-output equality')
+     for fact in facts['scope']+[facts['native_shared_equality']]:require(pointer(root if fact['source']=='A100_root' else summary,fact['pointer'])==fact['expected'],'Root/scope bound fact')
+     globals()['bindings']=facts;result=check_documents_original()
+-    result.update(status='PASS_A100_DETAILED_READER_INTEGRATION_AUTHOR_REVIEW_ONLY',original_document_checks_actually_executed_once=True,original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=39,new_mean_sd_scalar_pointers=78,fixed_10_9_6_direction_panels_bound=9,root_reader_sha256=PINS['reader_root']['sha256'],A100_root_sha256=PINS['A100_root']['sha256'],old_A90_history_and_scientific_tables_preserved=True,source_statistics_recomputed=False,independent_review=False,canonical_written=False,manuscript_applied=False,author_review=True,primary_endpoint_selected=False,final_test=False,new_CNN_fit_training_SSH_Git_bulk_writes=0,manifest_sha256=file_sha(HERE/'EDIT_MANIFEST.json'),fact_bindings_sha256=file_sha(HERE/'FACT_BINDINGS.json'),checker_sha256=file_sha(__file__))
++    result.update(status='PASS_A100_DETAILED_READER_INTEGRATION_AUTHOR_REVIEW_ONLY',original_document_checks_actually_executed_once=True,original_check_reuse=REUSE,new_mean_sd_pairs_bound_to_JSON_pointers=39,new_mean_sd_scalar_pointers=78,fixed_10_9_6_direction_panels_bound=9,explicit_SpDFA_direction_panels_sign_guarded=9,root_reader_sha256=PINS['reader_root']['sha256'],A100_root_sha256=PINS['A100_root']['sha256'],old_A90_history_and_scientific_tables_preserved=True,source_statistics_recomputed=False,independent_review=False,canonical_written=False,manuscript_applied=False,author_review=True,primary_endpoint_selected=False,final_test=False,new_CNN_fit_training_SSH_Git_bulk_writes=0,manifest_sha256=file_sha(HERE/'EDIT_MANIFEST.json'),fact_bindings_sha256=file_sha(HERE/'FACT_BINDINGS.json'),checker_sha256=file_sha(__file__))
+     return result
+ 
+ if __name__=='__main__':

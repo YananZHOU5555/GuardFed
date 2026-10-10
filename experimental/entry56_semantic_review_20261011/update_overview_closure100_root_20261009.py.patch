@@ -1,0 +1,32 @@
+--- before/update_overview_closure100_root_20261009.py
++++ after/update_overview_closure100_root_20261009.py
+@@ -371,6 +371,8 @@
+     current_reply='| 英文回复 | 24条原意见作者审阅稿已纳入A90九场景；13处可逆编辑、6组mean/SD源对、9个方向面板已核；A80历史、负结果及未完成边界保留，正文尚未应用 | [优先阅读清晰版]('+reply.get('clear_reader_entry',reply['entry']).removeprefix('docs/')+')、[详细证据版]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
+     text='\n'.join(current_reply if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
+ if A100:
++    current_native=f'| 机制native消融 | {main["scientific_results_offserver_verified"]}/800新增严格离机；U100/C100/A100均有完整十场景配对表，其他五控制与七方法覆盖未齐；保留性能取舍、未运行最终test | [A十场景表]('+A100['table_path'].removeprefix('docs/')+') |'
++    text='\n'.join(current_native if line.startswith('| 机制native消融 |') else line for line in text.split('\n'))
+     current_views='| 机制三视图 | U100/C100完整；A100十完整场景、100配对/200记录，固定10/9/6面板。A80/A90历史表和负结果保留，其余控制/完整17方法/最终评价未完成 | [A十场景表]('+A100['table_path'].removeprefix('docs/')+') |'
+     text='\n'.join(current_views if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
+ if A100_reply:
+@@ -404,6 +406,7 @@
+     text='\n'.join('历史A20单场景入口截止：'+line if line.startswith('A机制单场景：') else '历史A50表采用截止：'+line if line.startswith('最新A50五IID场景表') else line for line in text.split('\n'))
+ if A100:
+     text='\n'.join('历史295增量截止（当前A100见上）：'+line if line.startswith('最新累计机制295份终轮三视图') else line for line in text.split('\n'))
++    text='\n'.join('历史A90回复截止：'+line if line.startswith('最新24原意见完整英文稿') and 'rebuttal_integrated_A90_reader_' in line else '历史U100消融阶段：'+line if line.startswith('当前机制消融也体现取舍：') else line for line in text.split('\n'))
+ overview.write_bytes(text.encode('utf8')+marker+history)
+ assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
+ handoff=CHECKS/'MONITOR_HANDOFF.md'
+@@ -548,6 +551,12 @@
+     top=top.replace('后续A80见下方','后续A90见下方，A80历史表保留')
+ if A100:
+     top=top.replace('后续A90见下方，A80历史表保留','后续A100见下方，A80/A90历史表保留')
++if A100:
++    top=top.replace(f"- 最新三视图累计{main['three_view_new_models_offserver_verified']}：U100完整；{C_current}。",f"- 最新三视图累计{main['three_view_new_models_offserver_verified']}：U100/C100/A100完整十场景表已采用；其余五控制和七方法覆盖未齐。")
++    top=top.replace('英文完整24意见稿已纳入C100十场景，旧稿保持。','历史C100阶段英文完整24意见稿已纳入十场景；当前A100详细/清晰回复见下方，旧稿保持。')
++    top='\n'.join('历史A10单场景入口：'+line if line.startswith('A表入口') else '历史A20表采用截止：'+line if line.startswith('A两完整IID场景论文表') else line for line in top.split('\n'))
++if state.get('hybrid100_fullcoverage_20261010',{}).get('native_IID_Benign_table'):
++    top=top.replace('IID Benign完整十seed表须独立统计采用，其他场景和最终评价未完成。','在该native增量采用时，IID Benign完整十seed表须独立统计采用；后续已采用表见最新行，其他场景和最终评价未完成。')
+ if increment_note:top+='\n'+increment_note+'\n'
+ handoff.write_bytes(top.encode('utf8')+marker2+history2)
+ assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)

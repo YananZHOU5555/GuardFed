@@ -38,7 +38,31 @@ if A90:
     assert A90_proof['complete_IID_scenes']==5 and A90_proof['complete_nonIID_scenes']==['Benign','F Flip','FedSA','S-DFA']
     assert A90_proof['seed_panels']==[10,9,6]
     assert (A90_proof['mean_SD_scalars_recomputed'],A90_proof['display_cells'])==(1620,810)
-A90_reply=state['latest_rebuttal_draft'].get('A90_incorporated',False)
+A100=main.get('A_three_view_ten_scene_table')
+if A100:
+    assert A100['root_adoption'] is True
+    A100_root=ROOT/A100['root_proof_path']
+    assert hashlib.sha256(A100_root.read_bytes()).hexdigest()==A100['root_proof_sha256']
+    A100_proof=json.loads(A100_root.read_bytes())
+    assert A100_proof['root_adoption'] is True and A100_proof['test'] is False and A100_proof['primary_endpoint_selected'] is False
+    assert A100_proof['canonical_table']==A100['table_path']
+    assert (A100_proof['complete_scenes'],A100_proof['paired_models'],A100_proof['preserved_records'])==(10,100,200)
+    assert A100_proof['complete_IID_scenes']==5 and A100_proof['complete_nonIID_scenes']==['Benign','F Flip','FedSA','S-DFA','Sp-DFA']
+    assert A100_proof['seed_panels']==[10,9,6]
+    assert all(type(A100_proof[k]) is int and A100_proof[k]>0 for k in ('mean_SD_scalars_recomputed','display_cells'))
+    assert A100_proof['mean_SD_scalars_recomputed']==2*A100_proof['display_cells']
+    assert main['three_view_counts_by_variant']['minus_A']==100
+    for k in ('replay_devices','training_torch'):
+        assert all(sum(A100_proof[k][v].values())==100 for v in ('Full','minus_A'))
+A100_reply=state['latest_rebuttal_draft'].get('A100_incorporated',False)
+if A100_reply:
+    assert A100
+    reply_root=ROOT/state['latest_rebuttal_draft']['root_proof_path']
+    assert hashlib.sha256(reply_root.read_bytes()).hexdigest()==state['latest_rebuttal_draft']['root_proof_sha256']
+    reply_proof=json.loads(reply_root.read_bytes())
+    assert reply_proof['A100_incorporated'] is True and reply_proof['A_complete_scenes']==10
+    assert reply_proof['author_review_only'] is True and reply_proof['manuscript_applied'] is False
+A90_reply=state['latest_rebuttal_draft'].get('A90_incorporated',False) and not A100_reply
 if A90_reply:
     reply_root=ROOT/state['latest_rebuttal_draft']['root_proof_path']
     assert hashlib.sha256(reply_root.read_bytes()).hexdigest()==state['latest_rebuttal_draft']['root_proof_sha256']=='17ad95f3c558c78b5c9cadd495c3d7802389ecf780840680fc09e958ffe05d11'
@@ -179,6 +203,8 @@ if main.get('C_three_view_full100_table'):
         '1620 mean/sampleSD scalars,810 display cells,1800 count-derived metrics,4800 confusion counts and900 paired metric checks pass; old160/1296/648 and162 IID aggregate scalars remain exact. '
         'Separate nonIID5 and balanced10 aggregates each have162 checked scalars, averaging scenes within each seed first. Native/shared deletion contrasts show ACC+0.532038pp/AEOD−0.00111223/ASPD−0.00083292 under nonIID S-DFA and+0.680525pp/−0.000584879/+0.00478524 under Sp-DFA. '
         'All subsets and unfavorable effects remain. Full replay5CPU95GPU/training98cu1282cu130 versus C100CPU/cu128, selection history and previous test exposure are disclosed. Six other controls remain unfinished, with no necessity, causality, significance or universal-win claim. ')
+if A100:
+    C_view_note=C_view_note.replace('Six other controls remain unfinished,','At C100 adoption six other controls remained unfinished; current A100 closes one of them,')
 A_view_note=''
 if main.get('three_view_counts_by_variant',{}).get('minus_A')==12:
     A_view_note=(' An additional12 minus_A terminal replays have original strict/offserver checks and root adoption against the native212 restore chain:110 archive members,108 metrics,288 confusion counts,36 prediction rules and24 original model/result members. '
@@ -199,12 +225,14 @@ if main.get('three_view_counts_by_variant',{}).get('minus_A')==36:
     A_view_note=' Cumulative36 minus_A terminal replays are root-adopted, retaining the20 paired IID Benign/F Flip checkpoints and their independently adopted two-scene table. The latest exact8 pass original strict/offserver74-member,72-metric,192-count,24-rule checks and native236 restore-chain joining with16 original model/result hashes; the prior228 index remains exact. IID FedSA now has ten paired checkpoints at record level, whereas S-DFA has only6/10 and is excluded from complete-scene means. No additional A scenario table has been adopted; A100 and remaining controls are incomplete. '
 if main.get('A_three_view_four_scene_table'):
     A_view_note=' Cumulative40 minus_A saved terminal replays are root-adopted against the native243 recovery chain, bringing three-view controls to240. Four complete IID scenes (Benign/F Flip/FedSA/S-DFA), each ten paired model seeds, are independently adopted with648 mean/sampleSD scalars,324 display cells,720 count-derived metrics and1920 integer-count checks; old A20 forty JSON object bytes/order,324 scalars and162 cells remain exact. All native/raw/shared and10/9/6 panels remain. Native/shared deletion differences under S-DFA are approximately ACC−0.361pp/AEOD+0.00542/ASPD−0.00804 and under FedSA+0.134pp/−0.00065/+0.00141, showing tradeoffs. Full3CPU37GPU versus A40CPU and commoncu128 training are disclosed. Six remaining A scenes and other controls are incomplete; no necessity, significance, causal-isolation or final-test claim. Entry: '+main['A_three_view_four_scene_table']['table_path']+'. '
-if A80 and not A90:
+if A80 and not A90 and not A100:
     A_view_note=' '+'Current A80 table is root-adopted: five IID scenes plus non-IID Benign/F Flip/FedSA, eight scenes with ten paired seeds each,80 pairs/160 records,1458 mean/sampleSD scalars and729 display cells; all10/9/6 panels remain. Old A60 preserves120 object bytes/order,972 scene statistics/486 cells and IID seed-first aggregate bytes. Raw FedSA deletion improves all three means; native/shared deletion slightly raises ACC while worsening both gaps. All negative outcomes and view-dependent tradeoffs remain, without necessity or significance claims. Full5CPU75GPU/79cu128+1cu130 versus A80CPU/cu128, selection history and historical test exposure are disclosed. Non-IID S-DFA/Sp-DFA, remaining controls and final evaluation remain unfinished. '+'Entry: '+A80['table_path']+'. '
 if A90:
     A_view_note=' Current A90 table is root-adopted: five IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA, nine complete scenes,90 paired models/180 records,1620 mean/sampleSD scalars and810 display cells under all10/9/6 panels. At this cutoff non-IID Sp-DFA has only five A checkpoints and is excluded from complete-scene statistics. Historical A80 tables and evidence remain retained. Its raw FedSA deletion improves all three means, whereas native/shared deletion slightly raises ACC while worsening both gaps; all negative outcomes and prediction-rule-dependent tradeoffs remain, without necessity or significance claims. Full5CPU85GPU/88cu128+2cu130 versus A90CPU/cu128, validation selection and historical test exposure are disclosed. Remaining A coverage, other controls, full17-method comparisons and final evaluation remain unfinished. Table adoption alone does not establish reply integration. Entry: '+A90['table_path']+'. '
 if A90 and A90_reply:
     A_view_note=A_view_note.replace('Table adoption alone does not establish reply integration. ','A90 nine-scene evidence is incorporated into the root-adopted author-review reply and manuscript candidate through13 reversible edits,6 JSON-bound mean/SD pairs and9 fixed direction panels. Historical A80 evidence remains preserved. ')
+if A100:
+    A_view_note=f" Current A100 table is root-adopted: all five IID and five non-IID scenes,100 paired models/200 records,{A100_proof['mean_SD_scalars_recomputed']} mean/sampleSD scalars and{A100_proof['display_cells']} display cells under fixed10/9/6 panels. Historical A80/A90 tables and all negative outcomes remain. Raw FedSA deletion improves all three means, whereas native/shared deletion slightly raises ACC while worsening both gaps; prediction-rule-dependent tradeoffs do not establish necessity or significance. Actual replay devices: {json.dumps(A100_proof['replay_devices'],sort_keys=True)}; training Torch: {json.dumps(A100_proof['training_torch'],sort_keys=True)}. Validation selection and historical test exposure remain disclosed. A100 closes this A table only: remaining controls, full17-method comparisons, P1/P3-P6, final evaluation and submitted-manuscript integration remain unfinished. "+('A100 is incorporated into the separately root-adopted author-review reply; no manuscript application. ' if A100_reply else 'Table adoption does not establish A100 reply integration. ')+ 'Entry: '+A100['table_path']+'. '
 recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
     'The new GPU worker and strict acceptance entry are being implemented separately; '
@@ -449,19 +477,19 @@ if state.get('celeba_native_ten_method_PDF_20261010'):
     current+='\nThe ten-method native validation table PDF passes all three page visual checks and exact matching of900 mean/sampleSD pairs(1800 numbers) to the accepted source. Pages contain10/9/6 seed panels and both distributions/five scenarios. This is a display artifact, not final test evidence or complete17-method coverage. Entry: '+pinfo['pdf_path']+'.\n'
 if state.get('added_CNN_three_view_bridge_20261010'):
     current+='\nThe four-CNN metadata bridge source passes64 focused root-replayed gates and preserves17 original scientific functions. Only existing exact FL6/Hybrid1/NGA8 root-adopted chunks are registered; Huber without an original70-round proof is refused. This prepares identity handling only: new scientific evaluation, fitting, training and test calls are zero.\n'
-if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table') and not A80 and not A90:
+if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table') and not A80 and not A90 and not A100:
     a=main['A_three_view_five_scene_table']
     current+='\nCurrent A table supersedes the four-scene display boundary: five complete IID scenes,50 Full–minus_A pairs,972 recomputed scalars/486 display cells,900 count-derived metrics and2400 integer-count checks; old80 record bytes/order and648 scalars/324 cells exact. The separate five-IID aggregate first averages within seed; the non-IID singleton is excluded. Native/shared Sp-DFA deletion means are −0.230pp/−0.00950/+0.00117 (ACC/AEOD/ASPD), retaining opposite fairness directions and all10/9/6 panels; the ACC direction is a mean, not every seed. Full3CPU47GPU versus A50CPU/commoncu128 and prior selection/test exposure remain disclosed. Five non-IID A scenes and other controls remain incomplete. Entry: '+a['table_path']+'.\n'
-if main.get('A_three_view_six_scene_table') and not A80 and not A90:
+if main.get('A_three_view_six_scene_table') and not A80 and not A90 and not A100:
     a=main['A_three_view_six_scene_table']
     current+='\nAt A60 table adoption the mechanism acceptance was native264 and three-view260 (U100+C100+A60), with distinct cutoffs. The A60 table covers five IID scenes plus non-IID Benign, each ten paired seeds:120 records,1134 mean/sampleSD scalars,567 cells,1080 count-derived metrics and2880 base-count checks. Original A50 records/statistics and IID-only seed-first aggregate bytes remain exact. Non-IID Benign native/shared deletion means are ACC−0.540pp,AEOD+0.00488,ASPD−0.00582: all tradeoffs and10/9/6 panels remain. Full5CPU55GPU/59cu128+1cu130 versus A60CPU/cu128 is disclosed. Four other non-IID A scenes remain incomplete. '+('A60 is incorporated into the current complete24-comment author-review reply and insertion draft. ' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'The reader reply still has the separate A50 evidence cutoff; A60 is not yet incorporated. ')+'No final test or manuscript application. Entry: '+a['table_path']+'.\n'
-if A80 and not A90:
+if A80 and not A90 and not A100:
     current+='\n'+'Current A80 table is root-adopted: five IID scenes plus non-IID Benign/F Flip/FedSA, eight scenes with ten paired seeds each,80 pairs/160 records,1458 mean/sampleSD scalars and729 display cells; all10/9/6 panels remain. Old A60 preserves120 object bytes/order,972 scene statistics/486 cells and IID seed-first aggregate bytes. Raw FedSA deletion improves all three means; native/shared deletion slightly raises ACC while worsening both gaps. All negative outcomes and view-dependent tradeoffs remain, without necessity or significance claims. Full5CPU75GPU/79cu128+1cu130 versus A80CPU/cu128, selection history and historical test exposure are disclosed. Non-IID S-DFA/Sp-DFA, remaining controls and final evaluation remain unfinished. '+('A80 is incorporated into the root-adopted reader reply; use its linked adoption evidence. ' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'The current reader reply remains at A60; A80 table adoption does not imply reply integration. ')+'Entry: '+A80['table_path']+'.\n'
-if A90:
+if A90 or A100:
     current+='\n'+A_view_note+'\n'
 if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
-    current+='\nThe complete24-comment English reply and manuscript insertion candidate retain all original quotes, prior scientific numbers and tables. Historical details follow the responses. '+('A90 nine-scene evidence is incorporated into the root-adopted author-review reply and manuscript candidate through13 reversible edits,6 JSON-bound mean/SD pairs and9 fixed direction panels. Historical A80 evidence remains preserved. ' if A90_reply else 'The root-adopted A80 reader integration is recorded at the linked reply entry. ' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'The latest A60 increment adds21 exactly reversible spans and6 adopted JSON mean/SD pointer pairs; all2457 prior numeric strings and98 links remain, with five IID scenes plus non-IID Benign and the remaining four non-IID boundary explicit. ' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'The A50 increment retains the five IID scenes and their paired/seed-first tradeoffs. ')+'This is author-review material, not submission-ready or applied manuscript text. Entry: '+state['latest_rebuttal_draft']['entry']+'.\n'
-if A90_reply:
+    current+='\nThe complete24-comment English reply and manuscript insertion candidate retain all original quotes, prior scientific numbers and tables. Historical details follow the responses. '+('A100 ten-scene evidence is incorporated into the separately root-adopted author-review reply and manuscript candidate; historical A80/A90 evidence remains preserved. ' if A100_reply else 'A90 nine-scene evidence is incorporated into the root-adopted author-review reply and manuscript candidate through13 reversible edits,6 JSON-bound mean/SD pairs and9 fixed direction panels. Historical A80 evidence remains preserved. ' if A90_reply else 'The root-adopted A80 reader integration is recorded at the linked reply entry. ' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'The latest A60 increment adds21 exactly reversible spans and6 adopted JSON mean/SD pointer pairs; all2457 prior numeric strings and98 links remain, with five IID scenes plus non-IID Benign and the remaining four non-IID boundary explicit. ' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'The A50 increment retains the five IID scenes and their paired/seed-first tradeoffs. ')+'This is author-review material, not submission-ready or applied manuscript text. Entry: '+state['latest_rebuttal_draft']['entry']+'.\n'
+if A90_reply or A100_reply:
     current+='Preferred clear-reader entry (as currently adopted in STATE): '+state['latest_rebuttal_draft'].get('clear_reader_entry',state['latest_rebuttal_draft']['entry'])+'.\n'
 if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
     e=state['FLGMM_closed47_valid_three_view_20261011']
@@ -489,6 +517,10 @@ if state.get('FLGMM_after48_valid_three_view_20261011'):
 if state.get('FLGMM_after48_valid_three_view_20261011',{}).get('six_scene_table'):
     t=state['FLGMM_after48_valid_three_view_20261011']['six_scene_table']
     current+='\nFLGMM six complete scenes (five IID plus non-IID Benign, ten seeds each) now have root-adopted raw/native/shared-calibration tables. Fixed10/9/6 panels use sample SD(ddof1);324 statistical scalars,162 rendered cells and549 count-derived metrics were independently recomputed. All61 accepted records remain; the single non-IID S-DFA screen record is excluded from complete-scene statistics. IID alpha5000/non-IID alpha5, validation recipe exposure, calibration tradeoffs and preserved Windows refit limits are disclosed. This is60 complete-scene records, not full100 or final test. Entry: '+t['table_path']+'.\n'
+if A100:
+    current=current.replace('Only the minus_U comparison is complete; the other seven variants, isolated-aggregation claims, primary-endpoint choice and final-test evaluation remain open.','At the historical U100 adoption only the minus_U comparison was complete; the other seven variants, isolated-aggregation claims, primary-endpoint choice and final-test evaluation remained open at that cutoff.')
+if state.get('hybrid100_fullcoverage_20261010',{}).get('formal100_started'):
+    current=current.replace('The100-cell coverage has not started; the actual-summary status interface requires a record-layer repair and seven new real-image short-run gates remain prerequisites.','At the historical search-only cutoff the100-cell coverage had not started; the actual-summary status interface required a record-layer repair and seven new real-image short-run gates remained prerequisites. Current coverage startup and adoption are recorded below.')
 start=text.index('## Current accepted increment');end=text.index('## Historical accepted increment',start)
 p.write_text(text[:start]+current+text[end:],encoding='utf8')
 print(json.dumps(dict(updated_current_section=True,mechanism_strict=accepted,baseline_replays=replayed,mechanism_views=mechanism_views,goal_complete=False)))

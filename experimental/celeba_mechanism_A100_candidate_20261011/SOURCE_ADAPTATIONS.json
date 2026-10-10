@@ -1,0 +1,297 @@
+{
+  "build.py": {
+    "A90_mapped_source_sha256": "f7391a36cdb0e85e88147d91ed64bc29aae5c03f60594126aef6ad4bf1e9f9f9",
+    "replacements": [
+      [
+        "Read actual adopted A90 receipts; display five IID plus four non-IID scenes;",
+        "Read actual adopted A100 receipts; display all ten IID/non-IID scenes;"
+      ],
+      [
+        "three_view_A_eight_scenes80_20261011",
+        "three_view_A_nine_scenes90_20261011"
+      ],
+      [
+        "SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign'), ('non-IID', 'F Flip'), ('non-IID', 'FedSA'), ('non-IID', 'S-DFA')]",
+        "SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign'), ('non-IID', 'F Flip'), ('non-IID', 'FedSA'), ('non-IID', 'S-DFA'), ('non-IID', 'Sp-DFA')]"
+      ],
+      [
+        "new_ids = [f'minus_A_non-IID_S-DFA_seed{seed}' for seed in (91009,91010)]+[f'minus_A_non-IID_Sp-DFA_seed{seed}' for seed in range(91001,91006)]",
+        "new_ids = [f'minus_A_non-IID_Sp-DFA_seed{seed}' for seed in range(91006,91011)]"
+      ],
+      [
+        "and adopted['new_accepted']==7 and adopted['prior_accepted']==288",
+        "and adopted['new_accepted']==5 and adopted['prior_accepted']==295"
+      ],
+      [
+        "and adopted['cumulative_accepted']==295 and adopted['original288_unchanged']",
+        "and adopted['cumulative_accepted']==300 and adopted['original295_unchanged']"
+      ],
+      [
+        "Actual exact7 root adoption required",
+        "Actual exact5 root adoption required"
+      ],
+      [
+        "Follow ten SHA-bound adopted increments",
+        "Follow eleven SHA-bound adopted increments"
+      ],
+      [
+        "len(visited)<10",
+        "len(visited)<11"
+      ],
+      [
+        "[12,8,8,8,4,11,9,20,8,7]",
+        "[12,8,8,8,4,11,9,20,8,7,5]"
+      ],
+      [
+        "[212,220,228,236,240,251,260,280,288,295]",
+        "[212,220,228,236,240,251,260,280,288,295,300]"
+      ],
+      [
+        "Wrong exact ten A increments",
+        "Wrong exact eleven A increments"
+      ],
+      [
+        "Five complete IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA required",
+        "All five IID plus five non-IID scenes required"
+      ],
+      [
+        "d2245e4d9de68b415931dccc7d1f70c39a871c226c59d9973675dfc1d3cc1bc7",
+        "445904a761cad8de89b57a9e0dd65fab298dbd097d7a0bd5f3d75458a6f65cdd"
+      ],
+      [
+        "Original A80 root adoption changed",
+        "Original A90 root adoption changed"
+      ],
+      [
+        "Original root-adopted A80 file drift:",
+        "Original root-adopted A90 file drift:"
+      ],
+      [
+        "==180 and len(links)==90, 'Exactly90 A +90 paired Full required'",
+        "==200 and len(links)==100, 'Exactly100 A +100 paired Full required'"
+      ],
+      [
+        "expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')]",
+        "expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA'),('non-IID','Sp-DFA')]"
+      ],
+      [
+        "Only five A IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA with ten shared seeds are publishable",
+        "Only all ten A IID/non-IID scenes with ten shared seeds are publishable"
+      ],
+      [
+        "assert len(records)==180 and len({r['id'] for r in records})==180",
+        "assert len(records)==200 and len({r['id'] for r in records})==200"
+      ],
+      [
+        "assert len(bycell)==180",
+        "assert len(bycell)==200"
+      ],
+      [
+        "scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')}",
+        "scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA'),('non-IID','Sp-DFA')}"
+      ],
+      [
+        "assert len(rows)==27",
+        "assert len(rows)==30"
+      ],
+      [
+        "assert len(errors)==1458",
+        "assert len(errors)==1620"
+      ],
+      [
+        "assert metric_checks==1620 and count_checks==4320",
+        "assert metric_checks==1800 and count_checks==4800"
+      ],
+      [
+        "Old160 records/order changed",
+        "Old180 records/order changed"
+      ],
+      [
+        "Old160 serialized object bytes/order changed",
+        "Old180 serialized object bytes/order changed"
+      ],
+      [
+        "r['distribution']=='IID' or (r['distribution']=='non-IID' and r['attack'] in ('Benign','F Flip','FedSA'))",
+        "r['distribution']=='IID' or (r['distribution']=='non-IID' and r['attack'] in ('Benign','F Flip','FedSA','S-DFA'))"
+      ],
+      [
+        "Old A80 1296 per-scene statistics changed",
+        "Old A90 1458 per-scene statistics changed"
+      ],
+      [
+        "old_cells==648 and checks['mean_sd_scalars']==1458",
+        "old_cells==729 and checks['mean_sd_scalars']==1620"
+      ],
+      [
+        "# CelebA Full–minus_A: five IID plus four non-IID scenes, three views",
+        "# CelebA Full–minus_A: all ten IID/non-IID scenes, three views"
+      ],
+      [
+        "IID Benign, F Flip, FedSA, S-DFA and Sp-DFA plus non-IID Benign, F Flip, FedSA and S-DFA only; non-IID Sp-DFA remains incomplete (five accepted seeds, excluded here).",
+        "IID and non-IID Benign, F Flip, FedSA, S-DFA and Sp-DFA: all ten scenes, 100 matched Full/minus_A pairs."
+      ],
+      [
+        "need(cells==729, 'Display cell count incomplete')",
+        "need(cells==810, 'Display cell count incomplete')"
+      ],
+      [
+        "Actual replay devices across90 pairs:",
+        "Actual replay devices across100 pairs:"
+      ],
+      [
+        "these90 actual source records",
+        "these100 actual source records"
+      ],
+      [
+        "These are all five IID minus_A scenes plus complete ten-seed non-IID Benign, F Flip, FedSA and S-DFA; non-IID Sp-DFA remains incomplete and outside this delivery. No mixed-distribution nine-scene aggregate is reported. The separate five-IID-scene aggregate first averages within each model seed, and scenes are not treated as independent model seeds. This is not A100 or completion of all mechanism controls.",
+        "These are all ten minus_A scenes. Separate five-IID, five-non-IID and balanced-ten-scene summaries first equally average scenes within each model seed, then summarize seeds; scenes are never treated as independent model seeds. This completes A100 coverage only, not the other five image-control variants or all800 controls."
+      ],
+      [
+        "table_record_count=180,preserved_records=180,paired_models=90,complete_scenes=9",
+        "table_record_count=200,preserved_records=200,paired_models=100,complete_scenes=10"
+      ],
+      [
+        "old160_record_JSON_bytes_and_order_exact=True,old1296_scalars_exact=True,old648_display_cells_exact=True",
+        "old180_record_JSON_bytes_and_order_exact=True,old1458_scalars_exact=True,old729_display_cells_exact=True"
+      ],
+      [
+        "status='ACTUAL_A90_FIVE_IID_PLUS_FOUR_NONIID_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=9,paired_models=90",
+        "status='ACTUAL_A100_TEN_SCENE_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=10,paired_models=100"
+      ],
+      [
+        "displayed_records=180,preserved_records=180",
+        "displayed_records=200,preserved_records=200"
+      ],
+      [
+        "actual_A90_root_adoption=args.adoption,actual_A90_root_adoption_sha256=args.adoption_sha256",
+        "actual_A100_root_adoption=args.adoption,actual_A100_root_adoption_sha256=args.adoption_sha256"
+      ],
+      [
+        "original160_provenance_kept=True",
+        "original180_provenance_kept=True"
+      ],
+      [
+        "remaining_A_scenes=1,excluded_partial_id=None,accepted_partial_ids_retained_upstream=[f'minus_A_non-IID_Sp-DFA_seed{s}' for s in range(91001,91006)]",
+        "remaining_A_scenes=0,excluded_partial_id=None,accepted_partial_ids_retained_upstream=[]"
+      ],
+      [
+        "status='ACTUAL_A90_NINE_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=180,pairs=90,stats=1458,cells=729,metrics=1620,counts=4320",
+        "status='ACTUAL_A100_TEN_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=200,pairs=100,stats=1620,cells=810,metrics=1800,counts=4800"
+      ]
+    ]
+  },
+  "finish.py": {
+    "A90_mapped_source_sha256": "734b2f43dc58dc3256ae72c5409881d41aa804aece9953c9d2d85d59bcd39a9a",
+    "replacements": [
+      [
+        "need(len(records)==180, 'Exactly nine paired scenes required')",
+        "need(len(records)==200, 'Exactly ten paired scenes required')"
+      ],
+      [
+        "for a in ('Benign','F Flip','FedSA','S-DFA')), 'Only original five IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA'",
+        "for a in ('Benign','F Flip','FedSA','S-DFA','Sp-DFA')), 'Only five complete IID plus five complete non-IID scenes'"
+      ],
+      [
+        "Original A80 IID aggregate statistics changed",
+        "Original A90 IID aggregate statistics changed"
+      ],
+      [
+        "    # Both functions are original source; variant_module only changes exact variant string constants.",
+        "    # Same distribution projection and original calls as accepted C100 assemble.py.\n    projected=[dict(r,distribution='IID') for r in records if r['distribution']=='non-IID']\n    noniid=panels.aggregate_panels(projected,evidence)\n    noniid_check=numeric.verify_aggregate(projected,noniid)\n    noniid=[dict(p,rows=[dict(r,distribution='non-IID') for r in p['rows']]) for p in noniid]\n    balanced=panels.aggregate_balanced_panels(records,evidence)\n    balanced_check=numeric.verify_balanced_aggregate(records,balanced)\n    # Original functions; variant_module only changes exact variant string constants."
+      ],
+      [
+        "[(panel_path,['aggregate_panels']), (check_path,['verify_aggregate'])]",
+        "[(panel_path,['aggregate_panels','aggregate_balanced_panels']), (check_path,['verify_aggregate','verify_balanced_aggregate'])]"
+      ],
+      [
+        "    checks = read(H/'checks.json')",
+        "    put('CROSS_SCENE_ADDITIONAL.json',dict(nonIID_five_scene_panels=noniid,balanced_ten_scene_panels=balanced,n_is_seed_count=True,scene_mean_before_seed_statistics=True))\n    checks = read(H/'checks.json')"
+      ],
+      [
+        "total_statistic_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars']",
+        "total_statistic_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars']+noniid_check['mean_sd_scalars']+balanced_check['mean_sd_scalars']"
+      ],
+      [
+        "scene_display_cells=729,aggregate_display_cells=81",
+        "scene_display_cells=810,aggregate_display_cells=243,nonIID_seed_first=noniid_check,balanced_seed_first=balanced_check"
+      ],
+      [
+        "This is not a balanced ten-scene or non-IID aggregate.",
+        "The separate five-non-IID and balanced-ten-scene summaries below use the same seed-first rule."
+      ],
+      [
+        "    for panel in aggregate:\n        text +=",
+        "    aggregate_groups=[('Five IID',aggregate),('Five non-IID',noniid),('Balanced ten-scene',balanced)]\n    for panel in aggregate+noniid+balanced:\n        text += ['### '+panel['rows'][0]['distribution']+' / '+panel['rows'][0]['attack'],'']\n        text +="
+      ],
+      [
+        "for panel in tables['panels'] + aggregate:",
+        "for panel in tables['panels'] + aggregate + noniid + balanced:"
+      ],
+      [
+        "is_aggregate=panel['rows'][0]['attack'].startswith('Five-scene')",
+        "is_aggregate=panel['rows'][0]['attack'].startswith(('Five-scene','Ten-scene'))"
+      ],
+      [
+        "('Five IID scenarios, seed-first mean. ' if is_aggregate else 'CelebA, five IID scenarios plus non-IID Benign, F Flip, FedSA and S-DFA. ')",
+        "((panel['rows'][0]['distribution']+' scenes, seed-first mean. ') if is_aggregate else 'CelebA, all ten IID/non-IID scenarios. ')"
+      ],
+      [
+        "attack='Five-IID mean' if is_aggregate else",
+        "attack=panel['rows'][0]['distribution']+' mean' if is_aggregate else"
+      ],
+      [
+        "[('per_scene',tables['panels']),('five_IID_seed_first',aggregate)]",
+        "[('per_scene',tables['panels']),('five_IID_seed_first',aggregate),('five_nonIID_seed_first',noniid),('balanced_ten_scene_seed_first',balanced)]"
+      ],
+      [
+        "total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],total_display_cells=729+81",
+        "total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars']+noniid_check['mean_sd_scalars']+balanced_check['mean_sd_scalars'],total_display_cells=810+243"
+      ]
+    ]
+  },
+  "verify_saved.py": {
+    "A90_mapped_source_sha256": "23310533d2150bb20ba72f4a24af2834d1c70c17b8ce261e4de6328463bc8a33",
+    "replacements": [
+      [
+        "    result = dict(per_scene=numeric.verify(records,panels),seed_first=aggregate_numeric.verify_aggregate([r for r in records if r['distribution']=='IID'],aggregate))",
+        "    additional=read(H/'CROSS_SCENE_ADDITIONAL.json')\n    projected=[dict(r,distribution='IID') for r in records if r['distribution']=='non-IID']\n    result = dict(per_scene=numeric.verify(records,panels),seed_first=aggregate_numeric.verify_aggregate([r for r in records if r['distribution']=='IID'],aggregate),nonIID_seed_first=aggregate_numeric.verify_aggregate(projected,additional['nonIID_five_scene_panels']),balanced_seed_first=aggregate_numeric.verify_balanced_aggregate(records,additional['balanced_ten_scene_panels']))"
+      ],
+      [
+        "len(previous)==160",
+        "len(previous)==180"
+      ],
+      [
+        "row['distribution']=='IID' or (row['distribution']=='non-IID' and row['attack'] in ('Benign','F Flip','FedSA'))",
+        "row['distribution']=='IID' or (row['distribution']=='non-IID' and row['attack'] in ('Benign','F Flip','FedSA','S-DFA'))"
+      ],
+      [
+        "for panel in panels+aggregate:",
+        "for panel in panels+aggregate+additional['nonIID_five_scene_panels']+additional['balanced_ten_scene_panels']:"
+      ],
+      [
+        "cells==810 and tex.count(r'\\begin{table*}')==18 and tex.count(r'\\end{table*}')==18",
+        "cells==1053 and tex.count(r'\\begin{table*}')==36 and tex.count(r'\\end{table*}')==36"
+      ],
+      [
+        "len(records)==180",
+        "len(records)==200"
+      ],
+      [
+        "for a in ('Benign','F Flip','FedSA','S-DFA'))",
+        "for a in ('Benign','F Flip','FedSA','S-DFA','Sp-DFA'))"
+      ],
+      [
+        "all_scalars=result['per_scene']['mean_sd_scalars']+result['seed_first']['mean_sd_scalars']",
+        "all_scalars=result['per_scene']['mean_sd_scalars']+result['seed_first']['mean_sd_scalars']+result['nonIID_seed_first']['mean_sd_scalars']+result['balanced_seed_first']['mean_sd_scalars']"
+      ],
+      [
+        "old160_object_bytes_order_exact=True,old1296_scalars_and648_cells_exact=True",
+        "old180_object_bytes_order_exact=True,old1458_scalars_and729_cells_exact=True"
+      ],
+      [
+        "tex_fragment_tables=18",
+        "tex_fragment_tables=36"
+      ]
+    ]
+  }
+}

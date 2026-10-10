@@ -1,0 +1,87 @@
+--- preliminary/verify_native_inputs.py
++++ exact300/verify_native_inputs.py
+@@ -1,4 +1,4 @@
+-"""Metadata-only native N>=300 / old295; replay exact5 binding; imports never perform transport or science."""
++"""Metadata-only actual native300 / old295; replay exact5 binding; imports never perform transport or science."""
+ from pathlib import Path
+ import hashlib,json
+ H=Path(__file__).resolve().parent;R=H.parents[1]
+@@ -14,11 +14,12 @@
+         assert sha(p[field+'_path'])==p[field+'_sha256']
+     proof=read(e['native_root_path']);inspection=read(e['native_inspection_path']);ledger=read(e['native_ledger_path'])
+     old=read(p['native295_inspection_path']);oldledger=read(p['native295_ledger_path'])
+-    assert proof['root_adopted'] is True and proof['total_new_strict_and_offserver']==e['root_native_total']>=300 and proof['test'] is False
++    assert proof['root_adopted'] is True and proof['total_new_strict_and_offserver']==e['root_native_total']==300 and proof['test'] is False
+     assert proof['inspection_sha256']==e['native_inspection_sha256'] and proof['ledger_sha256']==e['native_ledger_sha256']
+     assert proof['previous_ledger_sha256']==p['native295_ledger_sha256']
+     assert len(proof['new_ids'])==len(set(proof['new_ids']))==e['root_native_total']-295
+-    assert set(p['candidate_ids'])<=set(proof['new_ids'])
++    assert p['candidate_ids']==proof['new_ids']
++    assert e['native_root_path']==p['actual_native_root_path'] and e['native_root_sha256']==p['actual_native_root_sha256']
+     assert p['candidate_ids']==[f'minus_A_non-IID_Sp-DFA_seed{s}' for s in range(91006,91011)]
+     assert e['transport_target_only']==5 and e['proposed_replay_total']==300
+     assert len(old['records'])==395 and len(inspection['records'])==100+e['root_native_total']
+--- preliminary/adopt_by_root.py
++++ exact300/adopt_by_root.py
+@@ -15,7 +15,7 @@
+ parser=argparse.ArgumentParser();parser.add_argument('--actual-pins-sha256',required=True);args=parser.parse_args()
+ assert sha(S/'ROOT_ACTUAL_PINS.json')==args.actual_pins_sha256
+ actual=read(S/'ROOT_ACTUAL_PINS.json')
+-assert actual['native_total']>=300 and actual['replay_total']==300 and actual['new_replays']==5
++assert actual['native_total']==300 and actual['replay_total']==300 and actual['new_replays']==5
+ assert not D.exists()
+ from verify_native_inputs import verify_native_inputs
+ execution=verify_native_inputs()
+--- preliminary/join_saved.py
++++ exact300/join_saved.py
+@@ -1,4 +1,4 @@
+-"""Record-only join of this fixed saved-array batch to the actual adopted native archive (N>=300; only exact5 A replayed)."""
++"""Record-only join of this fixed saved-array batch to the actual adopted native300 archive (only exact5 A replayed)."""
+ from pathlib import Path
+ import hashlib,json,tarfile,contextlib,datetime,traceback
+ H=Path(__file__).resolve().parent;R=H.parents[1]
+@@ -22,7 +22,7 @@
+  prior_proof=pin(P['prior_root_path'],P['prior_root_sha256']);prior=pin(P['prior_index_path'],P['prior_index_sha256'])
+  assert prior_proof['cumulative_accepted']==len(prior['all_ids'])==295 and not set(expected)&set(prior['all_ids'])
+  currentproof=pin(E['native_root_path'],E['native_root_sha256']);inspection=pin(E['native_inspection_path'],E['native_inspection_sha256']);ledger=pin(E['native_ledger_path'],E['native_ledger_sha256'])
+- assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']==E['root_native_total']>=300 and currentproof['inspection_sha256']==E['native_inspection_sha256']
++ assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']==E['root_native_total']==300 and currentproof['inspection_sha256']==E['native_inspection_sha256']
+  previousroot=Path(P['native295_root_path']);previousproof=pin(previousroot,P['native295_root_sha256']);oldinspection=pin(previousroot.parent/'inspection/inspection.json',previousproof['inspection_sha256']);oldledger=pin(previousroot.parent/'verified_ledger.json',previousproof['ledger_sha256'])
+  assert len(oldinspection['records'])==395 and len(inspection['records'])==100+currentproof['total_new_strict_and_offserver']
+  assert [row for row in inspection['records'] if row['id'] not in currentproof['new_ids']]==oldinspection['records']
+--- preliminary/bind_native.py
++++ exact300/bind_native.py
+@@ -1,4 +1,4 @@
+-"""Bind one actual adopted native N>=300 proof (replay remains exact5) before any future execution; no SSH/arrays."""
++"""Bind one actual adopted native300 proof (replay remains exact5) before any future execution; no SSH/arrays."""
+ from pathlib import Path
+ import argparse,hashlib,json
+ from verify_native_inputs import validate
+--- preliminary/check_scope.py
++++ exact300/check_scope.py
+@@ -13,7 +13,8 @@
+     proof=dict(root_adopted=True,total_new_strict_and_offserver=295+len(ids),test=False,inspection_sha256='fixture-inspection',ledger_sha256='fixture-ledger',previous_ledger_sha256=p['native295_ledger_sha256'],new_ids=ids)
+     d={'fixture-root':proof,'fixture-inspection':dict(records=copy.deepcopy(old['records'])+rows,accepted_new_ids=ids),'fixture-ledger':dict(entries=copy.deepcopy(ledger['entries'])+[{'fixture':True}])}
+     e=dict(native_root_verified=True,exact_candidate_ids=p['candidate_ids'],native_root_path='fixture-root',native_root_sha256='fixture-root',native_inspection_path='fixture-inspection',native_inspection_sha256='fixture-inspection',native_ledger_path='fixture-ledger',native_ledger_sha256='fixture-ledger',native_archive_roots=[dict(path='fixture-root',sha256='fixture-root')],root_native_total=295+len(ids),transport_target_only=5,proposed_replay_total=300)
+-    return d,e,copy.deepcopy(p)
++    q=copy.deepcopy(p);q['actual_native_root_path']='fixture-root';q['actual_native_root_sha256']='fixture-root'
++    return d,e,q
+ def run(case,edit=None,reject=False,extra=False):
+     d,e,q=fixture(extra)
+     if edit:edit(d,e,q)
+@@ -24,7 +25,7 @@
+         assert reject,case
+     else:assert not reject,case
+     return dict(case=case,expected_rejection=reject,passed=True)
+-cases=[run('exact5_native300'),run('native301_extraF_not_replayed',extra=True),
++cases=[run('exact5_native300'),run('native301_extraF_rejected_by_exact300',extra=True,reject=True),
+  run('missing_A_in_native_new',lambda d,e,q:d['fixture-root']['new_ids'].pop(),True),
+  run('F_in_replay_scope',lambda d,e,q:q['candidate_ids'].__setitem__(0,'minus_F_IID_Benign_seed91001'),True),
+  run('old395_object_tamper',lambda d,e,q:d['fixture-inspection']['records'][0].update(id='tampered'),True),
+@@ -32,5 +33,5 @@
+  run('duplicate_native_new',lambda d,e,q:d['fixture-root']['new_ids'].__setitem__(0,d['fixture-root']['new_ids'][1]),True),
+  run('replay_count_expansion',lambda d,e,q:e.update(proposed_replay_total=301),True)]
+ result=dict(status='METADATA_SCOPE_FIXTURES_PASS_NO_SCIENTIFIC_EXECUTION',cases=cases,fit=0,CNN=0,SSH=0)
+-with (H/'SELECTION_FIXTURES.json').open('x',encoding='utf8') as f:json.dump(result,f,indent=2);f.write('\n')
++with (H/'EXACT300_SELECTION_FIXTURES.json').open('x',encoding='utf8') as f:json.dump(result,f,indent=2);f.write('\n')
+ print(json.dumps(result))

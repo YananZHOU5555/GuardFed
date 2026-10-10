@@ -1,0 +1,115 @@
+{
+  "status": "ROOT_FIVE_LIVE_QUEUES_IDENTITY_AND_PROGRESS_VERIFIED",
+  "utc": "2026-10-10T17:28:50.027736+00:00",
+  "observed_utc": "2026-10-10T17:25:48.779480+00:00",
+  "snapshots": [
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T171113Z.raw.json",
+      "sha256": "932eeebaa897ad3970df319f237780947738b9a6025ec7f049df1a082a9a143b"
+    },
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T172543Z.raw.json",
+      "sha256": "c3bd0e481f06569bd48b74c061023593699fb28410e71ccf1fe82781bce8e450"
+    }
+  ],
+  "growth": {
+    "FLGMM": {
+      "terminal_before": 61,
+      "terminal_now": 61,
+      "new_terminal": [],
+      "active_now": [
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91005_fullcoverage",
+          "round": 49
+        },
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91006_fullcoverage",
+          "round": 31
+        }
+      ]
+    },
+    "gradient64": {
+      "terminal_before": 43,
+      "terminal_now": 44,
+      "new_terminal": [
+        "Huber_eta0.03_T00.1_M0_non-IID_S-DFA_seed91001_screen"
+      ],
+      "active_now": [
+        {
+          "id": "Huber_eta0.03_T00.1_M1_IID_Benign_seed91001_screen",
+          "round": 36
+        }
+      ]
+    },
+    "Hybrid96": {
+      "terminal_before": 11,
+      "terminal_now": 11,
+      "new_terminal": [],
+      "active_now": [
+        {
+          "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91003_fullcoverage",
+          "pid": 95220,
+          "gpu": 0
+        }
+      ]
+    },
+    "main": {
+      "terminal_before": 296,
+      "terminal_now": 299,
+      "new_terminal": [
+        "minus_A_non-IID_Sp-DFA_seed91007",
+        "minus_A_non-IID_Sp-DFA_seed91008",
+        "minus_A_non-IID_Sp-DFA_seed91009"
+      ],
+      "workers": [
+        {
+          "pid": 94311,
+          "job": "minus_A_non-IID_Sp-DFA_seed91010.json",
+          "round": 66
+        },
+        {
+          "pid": 94414,
+          "job": "minus_F_IID_Benign_seed91001.json",
+          "round": 54
+        },
+        {
+          "pid": 94478,
+          "job": "minus_F_IID_Benign_seed91002.json",
+          "round": 50
+        },
+        {
+          "pid": 94508,
+          "job": "minus_F_IID_Benign_seed91003.json",
+          "round": 49
+        },
+        {
+          "pid": 95056,
+          "job": "minus_F_IID_Benign_seed91004.json",
+          "round": 38
+        },
+        {
+          "pid": 95305,
+          "job": "minus_F_IID_Benign_seed91005.json",
+          "round": 11
+        },
+        {
+          "pid": 95385,
+          "job": "minus_F_IID_Benign_seed91006.json",
+          "round": 2
+        },
+        {
+          "pid": 95417,
+          "job": "minus_F_IID_Benign_seed91007.json",
+          "round": 1
+        }
+      ]
+    }
+  },
+  "main_workers": 8,
+  "remaining620_closed": 118,
+  "source_changes": [],
+  "failures": [],
+  "source_data_scope": "resolved paths/size/mtime only; prior09:41 full SHA retained as historical evidence",
+  "new_scientific_acceptance": 0,
+  "claim": "Observed terminal-set growth with correct source/worker identities; counts are observation only and do not increase scientific acceptance."
+}

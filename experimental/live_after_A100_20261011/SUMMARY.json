@@ -1,0 +1,233 @@
+{
+  "status": "ONE_READONLY_FIVE_QUEUE_OBSERVATION_NO_ACCEPTANCE",
+  "utc": "2026-10-10T18:01:35.988312+00:00",
+  "utc_end": "2026-10-10T18:01:37.030017+00:00",
+  "raw_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T180131Z.raw.json",
+  "raw_sha256": "59f180458fd5fcf06dd2065a80b14150aa3ffc490928eb5bd989963ea7410884",
+  "old_utc": "2026-10-10T17:43:13.117705+00:00",
+  "old_raw_sha256": "454e544c7a74766a2b29c4a2a1db3f496947592e7093dffd0e1d68c198eb0ac0",
+  "observed_counts": {
+    "main": 304,
+    "FL": 63,
+    "gradient": 46,
+    "remaining": 124,
+    "Hybrid": 12
+  },
+  "prior_observed_counts": {
+    "main": 303,
+    "FL": 62,
+    "gradient": 45,
+    "remaining": 121,
+    "Hybrid": 11
+  },
+  "observed_count_growth": {
+    "main": 1,
+    "FL": 1,
+    "gradient": 1,
+    "remaining": 3,
+    "Hybrid": 1
+  },
+  "main": {
+    "completed": 304,
+    "active": 8,
+    "pending": 488,
+    "failed": 0,
+    "rounds": [
+      {
+        "pid": 95305,
+        "job": "minus_F_IID_Benign_seed91005.json",
+        "round": 52
+      },
+      {
+        "pid": 95385,
+        "job": "minus_F_IID_Benign_seed91006.json",
+        "round": 43
+      },
+      {
+        "pid": 95417,
+        "job": "minus_F_IID_Benign_seed91007.json",
+        "round": 42
+      },
+      {
+        "pid": 95534,
+        "job": "minus_F_IID_Benign_seed91008.json",
+        "round": 36
+      },
+      {
+        "pid": 95871,
+        "job": "minus_F_IID_Benign_seed91009.json",
+        "round": 28
+      },
+      {
+        "pid": 95926,
+        "job": "minus_F_IID_Benign_seed91010.json",
+        "round": 24
+      },
+      {
+        "pid": 95956,
+        "job": "minus_F_IID_F Flip_seed91001.json",
+        "round": 23
+      },
+      {
+        "pid": 96083,
+        "job": "minus_F_IID_F Flip_seed91002.json",
+        "round": 11
+      }
+    ]
+  },
+  "FL": {
+    "terminal": 63,
+    "active": [
+      {
+        "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage",
+        "round": 36
+      },
+      {
+        "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage",
+        "round": 23
+      }
+    ],
+    "pending": 31,
+    "failed": false,
+    "failure_paths": [],
+    "separate_reuse": 4
+  },
+  "gradient": {
+    "terminal": 46,
+    "active": [
+      {
+        "id": "Huber_eta0.03_T00.1_M1_non-IID_Benign_seed91001_screen",
+        "round": 38
+      }
+    ],
+    "pending_inferred": 17,
+    "failure_paths": []
+  },
+  "remaining": {
+    "remote_closed": 124,
+    "status": "WAIT_ORIGINAL_PRODUCER",
+    "waiting_for": "minus_F_IID_Benign_seed91005",
+    "failure_paths": {},
+    "accepted_offserver_this_observer": 0
+  },
+  "Hybrid": {
+    "terminal": 12,
+    "active": [
+      {
+        "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91004_fullcoverage",
+        "round": 20
+      }
+    ],
+    "queue_active": [
+      {
+        "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91004_fullcoverage",
+        "pid": 96064,
+        "gpu": 0
+      }
+    ],
+    "pending": 83,
+    "failed": false,
+    "failure_files": [],
+    "reused": 4
+  },
+  "resources": {
+    "quota_cores": 122.87999,
+    "memory_current_bytes": 78072586240,
+    "memory_max_bytes": 519171997696,
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+    "disk": {
+      "total": 1154272460800,
+      "used": 94305361920,
+      "free": 1059967098880
+    },
+    "GPU": [
+      {
+        "id": "00000000:41:00.0",
+        "uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+        "name": "NVIDIA GeForce RTX 5090",
+        "utilization_gpu": "100 %",
+        "memory": {
+          "used": "6036 MiB",
+          "free": "26075 MiB",
+          "total": "32607 MiB"
+        },
+        "temperature_gpu": "64 C",
+        "recovery_fields": {
+          "gpu_recovery_action": "None",
+          "route_recovery_in_progress": "N/A",
+          "access_timeout_recovery": "N/A"
+        }
+      },
+      {
+        "id": "00000000:61:00.0",
+        "uuid": "GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae",
+        "name": "NVIDIA GeForce RTX 5090",
+        "utilization_gpu": "100 %",
+        "memory": {
+          "used": "6036 MiB",
+          "free": "26075 MiB",
+          "total": "32607 MiB"
+        },
+        "temperature_gpu": "60 C",
+        "recovery_fields": {
+          "gpu_recovery_action": "None",
+          "route_recovery_in_progress": "N/A",
+          "access_timeout_recovery": "N/A"
+        }
+      }
+    ]
+  },
+  "services": {
+    "main_mechanism": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 11:42:40",
+    "FLGMM": "guardfed_celeba_flgmm_fullcoverage   RUNNING   pid 66870, uptime 21:27:58",
+    "gradient64": "guardfed_celeba_gradient_screen64_v2a   RUNNING   pid 78631, uptime 13:46:56",
+    "remaining620": "guardfed_celeba_mechanism_remaining620_valid_v2a   RUNNING   pid 78909, uptime 13:30:53",
+    "Hybrid96": "guardfed_celeba_hybrid_fullcoverage   RUNNING   pid 85890, uptime 8:19:39"
+  },
+  "source": {
+    "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+    "main_changed": [],
+    "small_changed_paths": [],
+    "registered_targets_match": true,
+    "role_source_checks": {
+      "FLGMM": {
+        "path": "/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage/PACKAGE_SHA256.json",
+        "sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+        "member_count": 134,
+        "changed_members": []
+      },
+      "gradient64": {
+        "path": "/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010/FILES_SHA256.json",
+        "sha256": "11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced",
+        "member_count": 91,
+        "changed_members": []
+      },
+      "remaining620": {
+        "path": "/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_v2_20261010/FILES_SHA256.json",
+        "sha256": "a3461e20592cd2bda3d53c7215fed377bbaa693360ba1abe02aa87fe8aa6fc03",
+        "member_count": 18,
+        "changed_members": []
+      },
+      "Hybrid96": {
+        "path": "/workspace/guardfed_checks/celeba_hybrid_fullcoverage_v3_20261010/stage/PACKAGE_SHA256.json",
+        "sha256": "a87a050b497a184efbe18b4649ad6bde40b9ea29a16f9e3efddd0ef1156e3b04",
+        "member_count": 144,
+        "changed_members": []
+      }
+    },
+    "bulk_hash_recomputed": false,
+    "bulk_identity_scope": "resolved paths/size/mtime only; prior09:41 full SHA retained as historical evidence"
+  },
+  "possible_log_errors": {
+    "guardfed_celeba_mechanism_formal": [],
+    "guardfed_celeba_flgmm_fullcoverage": [],
+    "guardfed_celeba_mechanism_remaining620_valid_v2a": [],
+    "guardfed_celeba_gradient_screen64_v2a": [],
+    "guardfed_celeba_hybrid_fullcoverage": []
+  },
+  "attempts": 1,
+  "new_accepted": 0,
+  "no_backup": true,
+  "no_Git": true,
+  "limits": "Observed queue terminals/remote closure are not new root acceptance; no bulk data SHA repeated. Non-atomic single snapshot. No growth checker executed."
+}
