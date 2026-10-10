@@ -1,0 +1,13 @@
+# A90 detailed author-review increment
+
+AUTHOR_REVIEW / DO_NOT_SUBMIT. The two complete English candidates preserve the adopted A80 documents and all 24 original reviewer comments. This is an editorial integration of already adopted evidence; it performs no scientific inference, fitting, statistic recomputation or manuscript-source application.
+
+Only non-IID S-DFA is added: nine complete scenes / 90 matched Full–minus_A pairs. The five partial non-IID Sp-DFA pairs are excluded from every scene statistic. A80 passages, numbers, full scientific tables and counterexamples are retained, with explicit historical labels. Current scope is synchronized in the Associate Editor response, R3.2/R3.7, P2 and the evidence history. The companion manuscript insertion file is a complete author-review candidate; it has not been applied to the submitted manuscript. The separate clear-version entry is unchanged.
+
+The source-bound additions comprise six mean ± sample-SD displays / twelve scalar pointers, all nine view × fixed-seed-panel directions and three ten-seed interpretation bindings. ACC differences use percentage points; AEOD/ASPD differences are absolute gaps. The actual S-DFA counterexample and six-seed AEOD/raw-ACC direction changes are retained. No primary endpoint, significance, necessity, causal explanation, untouched-test status or completion of A100/all components/all 17 methods is asserted. Existing official-test exposure and mixed device/build histories remain explicit.
+
+`FACT_BINDINGS.json` maps each added displayed value, direction and scope fact to the adopted `tables.json` or root proof. `EDIT_MANIFEST.json` records exact forward/inverse spans. `TEXT_DIFF.patch` is the reversible human-readable delta. `SOURCE_DIFF.patch` records the source change from the existing A80 builder. Four original helper functions and the seven original document-invariant statements are reused unchanged.
+
+The author build ran once and passed. Root then independently executed the same frozen checker once; `ROOT_CHECK_COMMAND.json`, stdout and empty stderr are included. No further checker execution is needed for this delivery. Root may compare the saved result with `SELF_CHECK.json`, inspect the text/pointers and run the prepared adopter with the externally supplied final seal SHA. The adopter is not executed by the author task.
+
+The 10/9/6 panels remain descriptive exposed-validation evidence. Nine seeds exclude selection seed 91001; six seeds use 91005–91010. Five IID scenes alone enter the preserved seed-first aggregate; no imbalanced nine-scene aggregate is introduced. U100/C100, the old A80 source and canonical documents, STATE and Git are unchanged.

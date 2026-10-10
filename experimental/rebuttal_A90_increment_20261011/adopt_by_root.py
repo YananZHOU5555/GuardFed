@@ -1,0 +1,58 @@
+"""Adopt the root-checked A90 editorial increment; no scientific reruns."""
+from pathlib import Path
+from datetime import datetime, timezone
+import argparse, hashlib, json, sys
+R=Path(__file__).resolve().parents[2]
+S=R/'tmp/rebuttal_A90_increment_20261011'
+D=R/'docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A90_reader_20261011'
+H=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+read=lambda p:json.loads(Path(p).read_bytes())
+
+assert not sys.flags.optimize and not D.exists()
+p=argparse.ArgumentParser();p.add_argument('--delivery-seal-sha256',required=True);args=p.parse_args()
+assert H(S/'FILES_SHA256.json')==args.delivery_seal_sha256
+sealed=read(S/'FILES_SHA256.json')['files'];assert len(sealed)==31
+for name,pin in sealed.items():
+    p=S/name
+    assert p.resolve().is_relative_to(S.resolve()) and not p.is_symlink()
+    assert H(p)==pin['sha256'] and p.stat().st_size==pin['bytes'],name
+assert H(S/'ROOT_CHECK_COMMAND.json')=='9a5f2ec34f74c221ed5678d014ab634cf0f25821176737099fe0d7b2bce99cab'
+assert H(S/'ROOT_CHECK.stdout')=='b0880cb6a52c2ab80bac7d10c1d64a2e1d7f6b12e1455ad5a191db5323b0e32b'
+assert read(S/'ROOT_CHECK_COMMAND.json')['exit_code']==0 and not (S/'ROOT_CHECK.stderr').read_bytes()
+actual=read(S/'ROOT_CHECK.stdout');assert actual==read(S/'SELF_CHECK.json')
+assert actual['status']=='PASS_A90_DETAILED_READER_INTEGRATION_AUTHOR_REVIEW_ONLY'
+assert actual['documents'][0]['original_comment_count']==24
+assert sum(d['all_old_number_string_occurrences_preserved'] for d in actual['documents'])==2842
+assert sum(d['all_old_links_preserved'] for d in actual['documents'])==118
+assert sum(d['edit_operations'] for d in actual['documents'])==13
+assert actual['new_mean_sd_pairs_bound_to_JSON_pointers']==6
+assert actual['fixed_10_9_6_direction_panels_bound']==9
+assert actual['explicit_ten_seed_interpretation_sign_bindings']==3
+assert all(d['forward_and_inverse_bytes_exact'] and d['all_old_scientific_tables_exact'] for d in actual['documents'])
+assert not any(actual[k] for k in ['source_statistics_recomputed','final_test','primary_endpoint_selected','manuscript_applied'])
+A=R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_nine_scenes90_20261011/ROOT_VERIFICATION.json'
+assert H(A)==actual['A90_root_sha256']=='445904a761cad8de89b57a9e0dd65fab298dbd097d7a0bd5f3d75458a6f65cdd'
+mapping={'rebuttal_integrated_A90_reader_20261011.md':'rebuttal_integrated_20261011.md',
+         'manuscript_insertions_integrated_A90_reader_20261011.md':'manuscript_insertions_integrated_20261011.md'}
+D.mkdir(parents=True)
+for old,new in mapping.items():
+    (D/new).write_bytes((S/old).read_bytes());assert H(D/new)==H(S/old)
+(D/'ROOT_ACTUAL_CHECK.json').write_text(json.dumps(actual,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+proof=dict(status='ROOT_COMPLETE24_A90_READER_REBUTTAL_CANDIDATES_ADOPTED_FOR_AUTHOR_REVIEW',utc=datetime.now(timezone.utc).isoformat(),
+    source_seal_sha256=H(S/'FILES_SHA256.json'),source_directory=S.relative_to(R).as_posix(),
+    prior_root_review_sha256=actual['root_reader_sha256'],A90_table_root_sha256=H(A),
+    documents_sha256={n:H(D/n) for n in mapping.values()},entry=(D/'rebuttal_integrated_20261011.md').relative_to(R).as_posix(),
+    manuscript_candidate=(D/'manuscript_insertions_integrated_20261011.md').relative_to(R).as_posix(),
+    actual_root_check_path=(D/'ROOT_ACTUAL_CHECK.json').relative_to(R).as_posix(),actual_root_check_sha256=H(D/'ROOT_ACTUAL_CHECK.json'),
+    root_command_path=(S/'ROOT_CHECK_COMMAND.json').relative_to(R).as_posix(),root_command_sha256=H(S/'ROOT_CHECK_COMMAND.json'),
+    original_comments=24,number_strings_preserved=2842,links_preserved=118,whole_scientific_tables_preserved=True,
+    reversible_edits=13,paired_mean_SD_values_bound_to_JSON=6,new_mean_SD_scalar_pointers=12,fixed_direction_panels=9,interpretation_sign_bindings=3,
+    A90_incorporated=True,A_complete_scenes=9,A_paired_models=90,A_IID_complete_scenes=5,A_nonIID_complete_scenes=4,
+    A_nonIID_scenes=['Benign','F Flip','FedSA','S-DFA'],A_remaining_nonIID_scenes=['Sp-DFA'],partial_SpDFA_seeds_excluded=[91001,91002,91003,91004,91005],
+    prior_A80_values_tables_and_IID_seed_first_bytes_preserved=True,
+    root_editorial_review=True,author_review_only=True,manuscript_applied=False,whole_rebuttal_complete=False,
+    independent_review_scope='13 reversible edits, twelve new scalar pointers and nine fixed-panel directions; original checker independently executed by root; three ten-seed sign bindings and sensitivity reversals read by root; this editorial adoption does not rerun scientific statistics',
+    primary_endpoint_selected=False,final_test=False,new_scientific_results=0,
+    limitations='Nine complete A scenes only; partial Sp-DFA5 excluded. Five other image controls remain incomplete. S-DFA raw deletion improves all three ten-seed means; native/shared accuracy-disparity tradeoff and fixed six-seed AEOD/raw-ACC reversals retained. All A80 text/numbers/tables and counterexamples preserved. No universal necessity, significance, final test or submitted-manuscript application.')
+(D/'ROOT_REVIEW.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(dict(status=proof['status'],proof_sha256=H(D/'ROOT_REVIEW.json'),entry=proof['entry'])))

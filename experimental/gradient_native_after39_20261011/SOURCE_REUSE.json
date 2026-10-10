@@ -1,0 +1,56 @@
+{
+  "status": "SOURCE_READY_EXACT3_PARENT39_FIXED42_NOT_ACCEPTED",
+  "parent_sources": {
+    "run_once.py": {
+      "path": "tmp/gradient_native_after32_20261011/run_once.py",
+      "sha256": "35de11f4be515731d4d44a4968e09630734e40c287bb441e70e934f37a6fd331"
+    },
+    "collect_delta.py": {
+      "path": "tmp/gradient_native_after32_20261011/collect_delta.py",
+      "sha256": "d9a6a3874cd9d49a38d7905d0372b06d8542ec8ca198336dc1f8f1913843561a"
+    },
+    "verify_delta.py": {
+      "path": "tmp/gradient_native_after32_20261011/verify_delta.py",
+      "sha256": "c265256d33a1646c45aa1b00e179b2c970a1409b7b4aff5e02dff0fac7e99547"
+    },
+    "finalize.py": {
+      "path": "tmp/gradient_native_after32_20261011/finalize.py",
+      "sha256": "8866667285a0ce25e4eed5c32b1395160a83f0514d4d455b185c274cd8db78d2"
+    }
+  },
+  "pinned_collect_one_sha256": "985f04d65afd8867cd606ac54b31b081ebeb3626b03b615245abe31a1d5504a7",
+  "scientific_loop_checks": {
+    "collect_delta.py": {
+      "per_ID_loops": 2,
+      "source_segments_byte_exact": true,
+      "AST_exact": true
+    },
+    "verify_delta.py": {
+      "per_ID_loops": 1,
+      "source_segments_byte_exact": true,
+      "AST_exact": true
+    }
+  },
+  "changes": [
+    "parent39 actual root/offserver pins and exact3 scope/archive/namespace",
+    "CPU110 resource policy unchanged; add guide check before remote source writes and recognize gradient_native_after collector namespace in duplicate guard"
+  ],
+  "original_checked_result_sha256": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+  "original_archive_verifier_sha256": "3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef",
+  "new_science": false,
+  "old39_proof_bytes_exact": true,
+  "old7_constant_negative_records_retained": true,
+  "scope": [
+    "Huber_eta0.03_T00.01_M1_non-IID_S-DFA_seed91001_screen",
+    "Huber_eta0.03_T00.1_M0_IID_Benign_seed91001_screen",
+    "Huber_eta0.03_T00.1_M0_IID_S-DFA_seed91001_screen"
+  ],
+  "compiled": [
+    "prepare_source.py",
+    "run_once.py",
+    "collect_delta.py",
+    "verify_delta.py",
+    "finalize.py",
+    "pinned_collect_one.py"
+  ]
+}

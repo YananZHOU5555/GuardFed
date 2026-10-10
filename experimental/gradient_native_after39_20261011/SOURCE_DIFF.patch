@@ -1,0 +1,142 @@
+--- E:\OneDrive\文档\GuardFed\tmp\gradient_native_after32_20261011\run_once.py
++++ E:\OneDrive\文档\GuardFed\tmp\gradient_native_after39_20261011\run_once.py
+@@ -22,9 +22,9 @@
+ def guard_review(args):
+  assert sha(args.review)==args.review_sha256,'Actual root review SHA required'
+  review=read(args.review);auth=read(H/'AUTHORIZED_SNAPSHOT.json')
+- assert review['status']=='PARENT_AUTHORIZED_FIXED_GRADIENT64_DELTA_AFTER32_CLOSED39' and review['root_adoption_performed'] is False
++ assert review['status']=='PARENT_AUTHORIZED_FIXED_GRADIENT64_DELTA_AFTER39_CLOSED42' and review['root_adoption_performed'] is False
+  assert review['source_files_sha256']==sha(H/'SOURCE_FILES_SHA256.json') and review['authorization_sha256']==sha(H/'AUTHORIZED_SNAPSHOT.json')
+- assert review['exact_new_ids']==auth['authorized_ids'] and len(review['exact_new_ids'])==len(auth['authorized_ids'])==7
++ assert review['exact_new_ids']==auth['authorized_ids'] and len(review['exact_new_ids'])==len(auth['authorized_ids'])==3
+  for name,pin in read(H/'SOURCE_FILES_SHA256.json')['files'].items():assert sha(H/name)==pin['sha256']
+  assert sha(R/auth['prior_root_path'])==auth['prior_root_sha256'] and sha(R/auth['prior_offserver_path'])==auth['prior_offserver_sha256']
+  return auth
+@@ -34,12 +34,13 @@
+  pins={n:sha(H/n) for n in payload}
+  code="""from pathlib import Path
+ import base64,hashlib,os,json,subprocess,sys
++assert hashlib.sha256(Path('/etc/vast-agents-guide.md').read_bytes()).hexdigest()=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ busy=[];helpers=[]
+ for p in Path('/proc').iterdir():
+  if not p.name.isdigit() or int(p.name)==os.getpid():continue
+  try:
+   argv=[x.decode(errors='replace') for x in (p/'cmdline').read_bytes().split(b'\\0') if x]
+-  if any('celeba_gradient64_delta' in x and 'collect_delta.py' in x for x in argv):helpers.append(int(p.name))
++  if any(('celeba_gradient64_delta' in x or 'gradient_native_after' in x) and 'collect_delta.py' in x for x in argv):helpers.append(int(p.name))
+   for t in (p/'task').iterdir():
+    try:a=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+@@ -61,7 +62,7 @@
+  save('SERVER_COLLECTOR_RECEIPT.json',receipt)
+  print(json.dumps(dict(server_strict='PASS',new=len(auth['authorized_ids']),archive_sha256=receipt['receipt']['archive_sha256'],members=receipt['receipt']['members'])),flush=True)
+ def download(args):
+- guard_review(args);names=['gradient64_delta_after32_closed39.tar.gz','backup_receipt.json','ORIGINAL_STRICT.json']
++ guard_review(args);names=['gradient64_delta_after39_closed42.tar.gz','backup_receipt.json','ORIGINAL_STRICT.json']
+  code="from pathlib import Path\nimport hashlib,json\nb=Path(%r)\nprint(json.dumps({n:dict(sha256=hashlib.sha256((b/n).read_bytes()).hexdigest(),bytes=(b/n).stat().st_size) for n in %r}))\n"%(REMOTE+'/batch',names)
+  pins=json.loads(run('REMOTE_ARTIFACTS',SSH+['python -B -'],code,60))
+  storage=load(R/'tmp/guardfed_local_storage.py','bulk_storage')
+@@ -74,6 +75,7 @@
+  guard_review(args)
+  code="""from pathlib import Path
+ import os,json,subprocess,hashlib
++assert hashlib.sha256(Path('/etc/vast-agents-guide.md').read_bytes()).hexdigest()=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ busy=[];helpers=[]
+ for p in Path('/proc').iterdir():
+  if not p.name.isdigit() or int(p.name)==os.getpid():continue
+--- E:\OneDrive\文档\GuardFed\tmp\gradient_native_after32_20261011\collect_delta.py
++++ E:\OneDrive\文档\GuardFed\tmp\gradient_native_after39_20261011\collect_delta.py
+@@ -27,9 +27,9 @@
+ require(not DEST.exists(),'Preserve existing delta');DEST.mkdir()
+ try:
+  auth=read(HERE/'AUTHORIZED_SNAPSHOT.json');ids=auth['authorized_ids'];prior=read(HERE/'PREVIOUS_ROOT_ADOPTION.json');previous=read(HERE/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')
+- require(sha(HERE/'PREVIOUS_ROOT_ADOPTION.json')==auth['prior_root_sha256']=='185f0fa292be27b6921776818d13871cb8a5b787a765867b802362991d1f9a81','Prior root changed')
+- require(sha(HERE/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')==auth['prior_offserver_sha256']=='40a8e3f3697c4a9dc32250b3b51b4c7afb56af9a412048c560f128d3d28d77b0','Prior offserver changed')
+- require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==32,'Actual root-adopted accepted32 binding required')
++ require(sha(HERE/'PREVIOUS_ROOT_ADOPTION.json')==auth['prior_root_sha256']=='850b91b68e01f98f53a82f26897a43a486857b69fd4335c2e8e8e79fba9e1e3b','Prior root changed')
++ require(sha(HERE/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')==auth['prior_offserver_sha256']=='82c2912ee80118d8f6c9aa9daf317cb671f4f435801cb6cae467d80fa9968e1a','Prior offserver changed')
++ require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==39,'Actual root-adopted accepted39 binding required')
+  require(ids and len(ids)==len(set(ids)) and not set(ids)&set(prior['accepted_ids']),'Exact nonoverlapping delta required')
+  before=live();save(DEST/'LIVE_BEFORE.json',before)
+  require(not before['restricted_CPU110_owners'],'CPU110 restricted owner')
+@@ -78,13 +78,13 @@
+   count=path.stat().st_size;require(count<=8*1024*1024,'Unexpected shared log size')
+   data=path.open('rb').read(count);target=DEST/(key+'_prefix.log');target.write_bytes(data);add('logs/'+target.name,target)
+   log_receipt.append(dict(source=str(path),prefix_bytes=len(data),sha256=sha(target),complete_per_job_log=False))
+- strict=dict(status='ORIGINAL_CHECKED_RESULT_DELTA_PASS',accepted_new_ids=ids,accepted_before=32,strict_cumulative=32+len(ids),records=records,log_prefixes=log_receipt,scientific_acceptor_unchanged=True,source_seal_sha256=SEAL,source_host=socket.gethostname(),new_CNN=0,new_training=0)
++ strict=dict(status='ORIGINAL_CHECKED_RESULT_DELTA_PASS',accepted_new_ids=ids,accepted_before=39,strict_cumulative=39+len(ids),records=records,log_prefixes=log_receipt,scientific_acceptor_unchanged=True,source_seal_sha256=SEAL,source_host=socket.gethostname(),new_CNN=0,new_training=0)
+  save(DEST/'ORIGINAL_STRICT.json',strict);save(DEST/'LIVE_AFTER.json',live())
+  for n in ('ORIGINAL_STRICT.json','LIVE_BEFORE.json','LIVE_AFTER.json','RESOURCE.json'):add('evidence/'+n,DEST/n)
+  for n in ('AUTHORIZED_SNAPSHOT.json','PREVIOUS_ROOT_ADOPTION.json','PREVIOUS_OFFSERVER_ACCEPTANCE.json','collect_delta.py','pinned_collect_one.py'):add('evidence/'+n,HERE/n)
+  require(sha(VERIFIER)==VERIFIER_SHA,'Original archive verifier changed');add('source/evidence_v4.py',VERIFIER)
+  inventory=dict(accepted_new_ids=ids,members={n:{k:r[k] for k in ('sha256','bytes')} for n,r in files.items()},old_models_repacked=0,selected_only=True,scientific_source_seal=SEAL,previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(HERE/'AUTHORIZED_SNAPSHOT.json'))
+- payload=(json.dumps(inventory,indent=2)+'\n').encode();archive=DEST/'gradient64_delta_after32_closed39.tar.gz'
++ payload=(json.dumps(inventory,indent=2)+'\n').encode();archive=DEST/'gradient64_delta_after39_closed42.tar.gz'
+  with tarfile.open(archive,'w:gz') as t:
+   info=tarfile.TarInfo('backup_inventory.json');info.size=len(payload);t.addfile(info,io.BytesIO(payload))
+   for n,row in sorted(files.items()):
+--- E:\OneDrive\文档\GuardFed\tmp\gradient_native_after32_20261011\verify_delta.py
++++ E:\OneDrive\文档\GuardFed\tmp\gradient_native_after39_20261011\verify_delta.py
+@@ -15,7 +15,7 @@
+ if __name__=='__main__':
+  try:
+   os.environ.update(CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
+-  auth=read(H/'AUTHORIZED_SNAPSHOT.json');receipt=read(F/'backup_receipt.json');archive=F/'gradient64_delta_after32_closed39.tar.gz'
++  auth=read(H/'AUTHORIZED_SNAPSHOT.json');receipt=read(F/'backup_receipt.json');archive=F/'gradient64_delta_after39_closed42.tar.gz'
+   require(sha(F/'backup_receipt.json')==read(H/'DOWNLOAD.json')['receipt_sha256'],'Actual downloaded receipt changed')
+   require(receipt['accepted_new_ids']==auth['authorized_ids'] and receipt['previous_root_sha256']==auth['prior_root_sha256'] and receipt['previous_offserver_sha256']==auth['prior_offserver_sha256'],'Delta/parent receipt mismatch')
+   original=R/'tmp/celeba_mechanism_evidence_20261009/evidence_v4.py'
+@@ -39,7 +39,7 @@
+   require(inventory['accepted_new_ids']==auth['authorized_ids'] and inventory['old_models_repacked']==0 and inventory['selected_only'],'Wrong archive scope')
+   for n,pin in [('PREVIOUS_ROOT_ADOPTION.json',auth['prior_root_sha256']),('PREVIOUS_OFFSERVER_ACCEPTANCE.json',auth['prior_offserver_sha256']),('AUTHORIZED_SNAPSHOT.json',sha(H/'AUTHORIZED_SNAPSHOT.json'))]:require(sha(out/'evidence'/n)==pin,'Parent/auth binding changed')
+   prior=read(out/'evidence/PREVIOUS_ROOT_ADOPTION.json');previous=read(out/'evidence/PREVIOUS_OFFSERVER_ACCEPTANCE.json')
+-  require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==32,'Actual32 parent mismatch')
++  require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==39,'Actual39 parent mismatch')
+   pkg=out/'source/package';seal=pkg/'FILES_SHA256.json'
+   require(sha(seal)==auth['source_seal_sha256']=='11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced','Scientific seal changed')
+   for n,d in read(seal)['files'].items():require(sha(pkg/n)==d,'Scientific source member changed')
+@@ -73,7 +73,7 @@
+    records.append(dict(id=ID,checkpoint_sha256=sha(cp),job_sha256=sha(job),rounds=result['rounds'],metrics=result['metrics'],data_contract=result['data_contract'],original_training_provenance=result['provenance'],tensor_count=len(checkpoint),constant_negative_retained=result['metrics']==dict(accuracy=0.5166859616449389,aeod=0.0,aspd=0.0)))
+   require(not torch.cuda.is_initialized(),'No CUDA compute permitted')
+   save('SAVED_TENSOR_STATE_CHECK.json',dict(status='SAVED_FULL_STATE_LAYOUT_DTYPE_FINITE_PASS_NO_FORWARD',models=len(records),records=tensor_rows,CNN_forward_calls=0,optimizer_calls=0,data_loads=0,cnn_source_sha256=sha(cnn),runtime=dict(python=sys.version,torch=torch.__version__,cuda_initialized=False)))
+-  proof=dict(status='OFFSERVER_ORIGINAL_STRICT_DELTA_PASS',accepted_new_ids=ids,accepted_before=32,accepted_total=32+len(ids),accepted_job_ids=prior['accepted_ids']+ids,records=records,members_verified=member_proof['members_verified'],archive_verification=member_proof,archive_sha256=sha(archive),receipt_sha256=sha(F/'backup_receipt.json'),inventory_sha256=sha(out/'backup_inventory.json'),original_strict_sha256=sha(out/'evidence/ORIGINAL_STRICT.json'),scientific_package_sha256=sha(seal),original_validator_sha256=sha(stage/'accept_result.py'),previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),old32_ordered_prefix_exact=True,local_runtime=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,host=platform.node(),cuda_hidden=True),runtime_equivalence_claim=False,new_inference=0,new_training=0,old_models_repacked=0,root_adopted=False,screen64_completed_claim=False,method_champion_claim=False,archive=str(archive),restored=str(out),tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),prediction_arrays_recomputed=False,shared_log_is_prefix_only=True,all_negative_results_retained=True)
++  proof=dict(status='OFFSERVER_ORIGINAL_STRICT_DELTA_PASS',accepted_new_ids=ids,accepted_before=39,accepted_total=39+len(ids),accepted_job_ids=prior['accepted_ids']+ids,records=records,members_verified=member_proof['members_verified'],archive_verification=member_proof,archive_sha256=sha(archive),receipt_sha256=sha(F/'backup_receipt.json'),inventory_sha256=sha(out/'backup_inventory.json'),original_strict_sha256=sha(out/'evidence/ORIGINAL_STRICT.json'),scientific_package_sha256=sha(seal),original_validator_sha256=sha(stage/'accept_result.py'),previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),old39_ordered_prefix_exact=True,local_runtime=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,host=platform.node(),cuda_hidden=True),runtime_equivalence_claim=False,new_inference=0,new_training=0,old_models_repacked=0,root_adopted=False,screen64_completed_claim=False,method_champion_claim=False,archive=str(archive),restored=str(out),tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),prediction_arrays_recomputed=False,shared_log_is_prefix_only=True,all_negative_results_retained=True)
+   save('OFFSERVER_ACCEPTANCE.json',proof)
+   print(json.dumps(dict(status=proof['status'],new=len(ids),total=proof['accepted_total'],members=proof['members_verified'],proof_sha256=sha(H/'OFFSERVER_ACCEPTANCE.json'))))
+  except BaseException as e:
+--- E:\OneDrive\文档\GuardFed\tmp\gradient_native_after32_20261011\finalize.py
++++ E:\OneDrive\文档\GuardFed\tmp\gradient_native_after39_20261011\finalize.py
+@@ -9,25 +9,25 @@
+  with (H/n).open('x',encoding='utf8',newline='\n') as f:json.dump(v,f,indent=2,ensure_ascii=False);f.write('\n')
+ a=read(H/'AUTHORIZED_SNAPSHOT.json');p=read(H/'OFFSERVER_ACCEPTANCE.json');receipt=read(F/'backup_receipt.json');strict=read(F/'ORIGINAL_STRICT.json');tensor=read(H/'SAVED_TENSOR_STATE_CHECK.json');released=read(H/'COLLECTOR_RELEASE.json')
+ ids=a['authorized_ids'];n=len(ids)
+-assert n==len(a['authorized_ids'])==7 and p['accepted_new_ids']==receipt['accepted_new_ids']==strict['accepted_new_ids']==ids
+-assert p['accepted_before']==32 and p['accepted_total']==39 and p['accepted_job_ids']==a['accepted_prior_ids']+ids
++assert n==len(a['authorized_ids'])==3 and p['accepted_new_ids']==receipt['accepted_new_ids']==strict['accepted_new_ids']==ids
++assert p['accepted_before']==39 and p['accepted_total']==42 and p['accepted_job_ids']==a['accepted_prior_ids']+ids
+ assert sha(R/a['prior_root_path'])==a['prior_root_sha256'] and sha(R/a['prior_offserver_path'])==a['prior_offserver_sha256']
+ assert p['previous_root_sha256']==a['prior_root_sha256'] and p['previous_offserver_sha256']==a['prior_offserver_sha256']
+ assert all(read(H/(name+'_COMMAND.json'))['exit_code']==0 for name in ['COLLECT','REMOTE_ARTIFACTS','SCP','VERIFY','RELEASE'])
+ assert p['status']=='OFFSERVER_ORIGINAL_STRICT_DELTA_PASS' and p['archive_verification']['pass'] and p['archive_verification']['different_host_observed']
+-assert p['members_verified']==receipt['members'] and p['archive_sha256']==sha(F/'gradient64_delta_after32_closed39.tar.gz')==receipt['archive_sha256']
++assert p['members_verified']==receipt['members'] and p['archive_sha256']==sha(F/'gradient64_delta_after39_closed42.tar.gz')==receipt['archive_sha256']
+ assert p['original_strict_sha256']==sha(F/'ORIGINAL_STRICT.json')==receipt['original_strict_sha256']
+-assert p['new_inference']==p['new_training']==p['old_models_repacked']==0 and p['old32_ordered_prefix_exact']
++assert p['new_inference']==p['new_training']==p['old_models_repacked']==0 and p['old39_ordered_prefix_exact']
+ assert [x['id'] for x in p['records']]==[x['id'] for x in tensor['records']]==ids and all(x['rounds']==70 for x in p['records'])
+ assert tensor['CNN_forward_calls']==tensor['optimizer_calls']==tensor['data_loads']==0 and released['CPU110_released']
+ assert released['guide_sha256']=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ assert not p['root_adopted'] and not p['method_champion_claim'] and not p['screen64_completed_claim']
+ raw=read(H/'RAW_STORAGE_INDEX.json')
+ for name,pin in raw['files'].items():assert sha(F/name)==pin['sha256'] and (F/name).stat().st_size==pin['bytes']
+-proof=dict(status='ROOT_READY_GRADIENT64_EXACT7_ORIGINAL_STRICT_OFFSERVER_PASS_NOT_ADOPTED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=ids,accepted_before=32,new_strict_offserver_count=n,strict_offserver_cumulative=39,root_accepted_cumulative_before_this_delivery=32,screen_total=64,all64_complete=False,archive_path=(F/'gradient64_delta_after32_closed39.tar.gz').as_posix(),archive_sha256=sha(F/'gradient64_delta_after32_closed39.tar.gz'),archive_bytes=(F/'gradient64_delta_after32_closed39.tar.gz').stat().st_size,archive_members=receipt['members'],receipt_path=(F/'backup_receipt.json').as_posix(),receipt_sha256=sha(F/'backup_receipt.json'),offserver_path=(H/'OFFSERVER_ACCEPTANCE.json').relative_to(R).as_posix(),offserver_sha256=sha(H/'OFFSERVER_ACCEPTANCE.json'),original_strict_sha256=sha(F/'ORIGINAL_STRICT.json'),inventory_sha256=p['inventory_sha256'],source_seal_sha256=p['scientific_package_sha256'],original_acceptor_sha256=p['original_validator_sha256'],prepared_source_seal_sha256=sha(H/'SOURCE_FILES_SHA256.json'),authorization_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),snapshot_sha256=sha(H/'SNAPSHOT.json'),prior_root_path=a['prior_root_path'],prior_root_sha256=a['prior_root_sha256'],prior_offserver_path=a['prior_offserver_path'],prior_offserver_sha256=a['prior_offserver_sha256'],old32_ordered_prefix_exact=True,accepted_job_ids=p['accepted_job_ids'],records=p['records'],tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),tensor_count=sum(x['tensor_count'] for x in tensor['records']),tensor_elements=sum(x['elements'] for x in tensor['records']),raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),F_raw_storage_root=F.as_posix(),CPU110_released=True,resource_release_sha256=sha(H/'COLLECTOR_RELEASE.json'),source_data_rehashed_before_after=True,original_scientific_acceptor_unchanged=True,local_runtime=p['local_runtime'],runtime_equivalence_claim=False,shared_logs_are_prefixes_only=True,prediction_arrays_recomputed=False,negative_and_constant_results_retained=True,auxiliary_snapshot_schema_failure_preserved=False,science_or_transport_retried=False,new_CNN=0,new_training=0,test=False,recipe_selection_performed=False,root_adoption_required=True,LATEST_STATE_Git_unchanged=True)
++proof=dict(status='ROOT_READY_GRADIENT64_EXACT3_ORIGINAL_STRICT_OFFSERVER_PASS_NOT_ADOPTED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=ids,accepted_before=39,new_strict_offserver_count=n,strict_offserver_cumulative=42,root_accepted_cumulative_before_this_delivery=39,screen_total=64,all64_complete=False,archive_path=(F/'gradient64_delta_after39_closed42.tar.gz').as_posix(),archive_sha256=sha(F/'gradient64_delta_after39_closed42.tar.gz'),archive_bytes=(F/'gradient64_delta_after39_closed42.tar.gz').stat().st_size,archive_members=receipt['members'],receipt_path=(F/'backup_receipt.json').as_posix(),receipt_sha256=sha(F/'backup_receipt.json'),offserver_path=(H/'OFFSERVER_ACCEPTANCE.json').relative_to(R).as_posix(),offserver_sha256=sha(H/'OFFSERVER_ACCEPTANCE.json'),original_strict_sha256=sha(F/'ORIGINAL_STRICT.json'),inventory_sha256=p['inventory_sha256'],source_seal_sha256=p['scientific_package_sha256'],original_acceptor_sha256=p['original_validator_sha256'],prepared_source_seal_sha256=sha(H/'SOURCE_FILES_SHA256.json'),authorization_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),snapshot_sha256=sha(H/'SNAPSHOT.json'),prior_root_path=a['prior_root_path'],prior_root_sha256=a['prior_root_sha256'],prior_offserver_path=a['prior_offserver_path'],prior_offserver_sha256=a['prior_offserver_sha256'],old39_ordered_prefix_exact=True,accepted_job_ids=p['accepted_job_ids'],records=p['records'],tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),tensor_count=sum(x['tensor_count'] for x in tensor['records']),tensor_elements=sum(x['elements'] for x in tensor['records']),raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),F_raw_storage_root=F.as_posix(),CPU110_released=True,resource_release_sha256=sha(H/'COLLECTOR_RELEASE.json'),source_data_rehashed_before_after=True,original_scientific_acceptor_unchanged=True,local_runtime=p['local_runtime'],runtime_equivalence_claim=False,shared_logs_are_prefixes_only=True,prediction_arrays_recomputed=False,negative_and_constant_results_retained=True,auxiliary_snapshot_schema_failure_preserved=False,science_or_transport_retried=False,new_CNN=0,new_training=0,test=False,recipe_selection_performed=False,root_adoption_required=True,LATEST_STATE_Git_unchanged=True)
+ save('ROOT_READY_HANDOFF.json',proof)
+-save('ROOT_READY_CHAIN_LINK.json',dict(status='ROOT_PENDING_GRADIENT64_RECOVERY_CHAIN_LINK',previous_root_path=a['prior_root_path'],previous_root_sha256=a['prior_root_sha256'],previous_offserver_path=a['prior_offserver_path'],previous_offserver_sha256=a['prior_offserver_sha256'],accepted_before=32,accepted_new=n,accepted_total=39,accepted_job_ids=p['accepted_job_ids'],new_ids=ids,next_previous_offserver_path=proof['offserver_path'],next_previous_offserver_sha256=proof['offserver_sha256'],archive_path=proof['archive_path'],archive_sha256=proof['archive_sha256'],receipt_path=proof['receipt_path'],receipt_sha256=proof['receipt_sha256'],handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),root_adoption_required=True,source_package_sha256=p['scientific_package_sha256']))
+-with (H/'README.md').open('x',encoding='utf8',newline='\n') as f:f.write('# Actual gradient64 exact7 delta — root adoption pending\n\nOne actual v2a snapshot fixed 39 terminal jobs minus the root-adopted accepted32; the exact delta comprises seven Huber records. The exact new7 passed original checked_result remotely and locally, original v4 archive/member verification and unchanged saved fullstate layout/dtype/finiteness. Actual cumulative strict/offserver39/64 is not root adoption or completed search; no recipe was selected.\n\nOnly predecessor schema/pins/counts, a fresh namespace/archive and explicit parent-task authorization were rebound in the after1 transport. Original scientific acceptor, original shared input binding, original model checks and archive verifier are unchanged. Previous32 models were not repackaged; all outcomes, including constant predictions, are preserved. Shared live logs are bounded prefixes, not closed per-job logs. All raw/model/archive/restored bulk went directly to freshly checked healthy Yanan 2TB F with required+reserve guard; no internal fallback.\n\nLocal CPU Torch differs from server cu128; no runtime equivalence is claimed. No CNN forward, optimizer, fitting, training, data loading, test or prediction recomputation occurred. CPU110 released. Later queue completions excluded. LATEST/STATE/Git/source/service unchanged. Root must separately adopt this batch.\n')
++save('ROOT_READY_CHAIN_LINK.json',dict(status='ROOT_PENDING_GRADIENT64_RECOVERY_CHAIN_LINK',previous_root_path=a['prior_root_path'],previous_root_sha256=a['prior_root_sha256'],previous_offserver_path=a['prior_offserver_path'],previous_offserver_sha256=a['prior_offserver_sha256'],accepted_before=39,accepted_new=n,accepted_total=42,accepted_job_ids=p['accepted_job_ids'],new_ids=ids,next_previous_offserver_path=proof['offserver_path'],next_previous_offserver_sha256=proof['offserver_sha256'],archive_path=proof['archive_path'],archive_sha256=proof['archive_sha256'],receipt_path=proof['receipt_path'],receipt_sha256=proof['receipt_sha256'],handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),root_adoption_required=True,source_package_sha256=p['scientific_package_sha256']))
++with (H/'README.md').open('x',encoding='utf8',newline='\n') as f:f.write('# Actual gradient64 exact3 delta — root adoption pending\n\nOne actual v2a snapshot fixed 42 terminal jobs minus the root-adopted accepted39; the exact delta comprises three Huber records. The exact new3 passed original checked_result remotely and locally, original v4 archive/member verification and unchanged saved fullstate layout/dtype/finiteness. Actual cumulative strict/offserver42/64 is not root adoption or completed search; no recipe was selected.\n\nOnly predecessor schema/pins/counts, a fresh namespace/archive and explicit parent-task authorization were rebound in the after1 transport. Original scientific acceptor, original shared input binding, original model checks and archive verifier are unchanged. Previous39 models were not repackaged; all outcomes, including constant predictions, are preserved. Shared live logs are bounded prefixes, not closed per-job logs. All raw/model/archive/restored bulk went directly to freshly checked healthy Yanan 2TB F with required+reserve guard; no internal fallback.\n\nLocal CPU Torch differs from server cu128; no runtime equivalence is claimed. No CNN forward, optimizer, fitting, training, data loading, test or prediction recomputation occurred. CPU110 released. Later queue completions excluded. LATEST/STATE/Git/source/service unchanged. Root must separately adopt this batch.\n')
+ files={p.relative_to(H).as_posix():dict(sha256=sha(p),bytes=p.stat().st_size) for p in sorted(H.rglob('*')) if p.is_file() and '__pycache__' not in p.parts}
+ save('DELIVERY_FILES_SHA256.json',dict(status='ACTUAL_GRADIENT64_DELTA_PASS_ROOT_PENDING',files=files,raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),root_adoption_performed=False))
+-print(json.dumps(dict(new=n,total=39,members=receipt['members'],archive_sha256=proof['archive_sha256'],handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),chain_sha256=sha(H/'ROOT_READY_CHAIN_LINK.json'),seal_sha256=sha(H/'DELIVERY_FILES_SHA256.json'),files=len(files))))
++print(json.dumps(dict(new=n,total=42,members=receipt['members'],archive_sha256=proof['archive_sha256'],handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),chain_sha256=sha(H/'ROOT_READY_CHAIN_LINK.json'),seal_sha256=sha(H/'DELIVERY_FILES_SHA256.json'),files=len(files))))

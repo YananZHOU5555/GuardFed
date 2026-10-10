@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 111 nice -n 10 ionice -c 3 python -B -"
+  ],
+  "code": "from pathlib import Path\nimport hashlib,json\na=Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010/exports/after288_20261010T165308825702Z/incremental_valid_three_views.tar.gz');r=Path('/workspace/guardfed_checks/celeba_mechanism_remaining_evaluation_transport_20261010/exports/after288_20261010T165308825702Z/backup_receipt.json')\nprint(json.dumps(dict(archive_bytes=a.stat().st_size,archive_sha256=hashlib.sha256(a.read_bytes()).hexdigest(),receipt_bytes=r.stat().st_size,receipt_sha256=hashlib.sha256(r.read_bytes()).hexdigest(),receipt=json.loads(r.read_bytes()))))\n",
+  "returncode": 0,
+  "automatic_retry": false
+}

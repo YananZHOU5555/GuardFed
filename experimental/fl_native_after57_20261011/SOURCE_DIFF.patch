@@ -1,0 +1,214 @@
+--- parent/collect_delta.py
++++ after57/collect_delta.py
+@@ -57,10 +57,10 @@
+     assert set(previous['accepted_job_ids'])<={x['id'] for x in manifest['jobs']}
+     prior_count=len(previous['accepted_job_ids'])
+     wanted=[row['id'] for row in snapshot['flgmm']['rows'] if row['terminal_acceptance'] and row['progress']['round']==70 and row['id'] not in previous['accepted_job_ids']]
+-    # Parent-authorized fixed snapshot exact3 only; later terminal IDs remain unaccepted.
+-    authorized_ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage']
++    # Parent-authorized fixed snapshot exact2 only; later terminal IDs remain unaccepted.
++    authorized_ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage']
+     wanted=[identity for identity in wanted if identity in authorized_ids]
+-    assert wanted==authorized_ids, 'All three authorized outputs must be terminal, unique and ordered'
++    assert wanted==authorized_ids, 'All two authorized outputs must be terminal, unique and ordered'
+     if not wanted:
+         write_json(BATCH/'NO_NEW_TERMINAL.json',dict(status='NO_NEW_TERMINAL_IN_THIS_SNAPSHOT',snapshot_sha256=digest(BATCH/'live_snapshot.json'),prior_accepted_new=prior_count,backup_created=False));return
+     assert len(wanted)==len(set(wanted)) and not set(wanted)&set(previous['accepted_job_ids']), 'Only this single fresh snapshot delta beyond the pinned offserver chain is authorized'
+--- parent/run_once.py
++++ after57/run_once.py
+@@ -1,4 +1,4 @@
+-"""Direct reuse of original collector/transport/verifier; exact3 after54 only."""
++"""Direct reuse of original collector/transport/verifier; exact2 after57 only."""
+ from pathlib import Path
+ import argparse,ast,base64,datetime,hashlib,json,subprocess,sys,traceback,types
+ sys.dont_write_bytecode=True
+@@ -8,13 +8,13 @@
+ S=Path('F:/YananResearchStorage/GuardFed')/H.name/'batch'
+ REMOTE='/workspace/guardfed_checks/'+H.name
+ SSH=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55']
+-PREFIX='env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 110 ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -'
++PREFIX='env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 109 ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -'
+ PACKAGE='6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230'
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ read=lambda p:json.loads(Path(p).read_bytes())
+-PREVIOUS='d5421aa77d8f6a085bc119d17b8ea261461973421513a2082dbfe17caf8df839'
+-ROOTPROOF='ead149673512a8c900d570d1f6d7c57e88c0608eb1dc0fb3a5c477d542e5a6a6'
+-IDS=['FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage']
++PREVIOUS='37de0c5789e8b6509543fd131c5fb0efc862ce2355c40a78d16a5ce81b4d80bb'
++ROOTPROOF='66f8b578393b76fb8402a2f3c3d29ecbaf3f31aea4459371876c0f9f07e363ee'
++IDS=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage']
+ def save(n, v):
+     with (H/n).open('x', encoding='utf8', newline='\n') as f:
+         json.dump(v, f, ensure_ascii=False, indent=2); f.write('\n')
+@@ -59,16 +59,16 @@
+   for t in (p/'task').iterdir():
+    try:a=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+-   if len(a)<=16 and 110 in a:busy.append(dict(pid=int(p.name),tid=int(t.name),affinity=sorted(a)))
++   if len(a)<=16 and 109 in a:busy.append(dict(pid=int(p.name),tid=int(t.name),affinity=sorted(a)))
+  except (FileNotFoundError,ProcessLookupError):continue
+-print(json.dumps(dict(CPU110_free=not busy,busy=busy,parent_collector_sha256=hashlib.sha256(Path('/workspace/guardfed_checks/celeba_flgmm_fullcoverage_delta_after14_20261010/collect_delta.py').read_bytes()).hexdigest())))
++print(json.dumps(dict(CPU109_free=not busy,busy=busy,parent_collector_sha256=hashlib.sha256(Path('/workspace/guardfed_checks/celeba_flgmm_fullcoverage_delta_after14_20261010/collect_delta.py').read_bytes()).hexdigest())))
+ """
+  ownership=json.loads(run('OWNER',SSH+['python -B -'],owner,30));save('OWNER.json',ownership)
+- if not ownership['CPU110_free']:print('CPU110 occupied; no collector dispatched',flush=True);return
++ if not ownership['CPU109_free']:print('CPU109 occupied; no collector dispatched',flush=True);return
+  assert ownership['parent_collector_sha256']==read(H/'SOURCE_REUSE.json')['parent_collector_sha256']
+  preflight=checked_source(H/'preflight.py',read(H/'PREPARED_FILES_SHA256.json')['files']['preflight.py']['sha256'])
+  save('PREFLIGHT.json',json.loads(run('PREFLIGHT',SSH+[PREFIX],preflight)))
+- print('Guide/source/data/CPU110 all-thread preflight PASS; invoking one collector.',flush=True)
++ print('Guide/source/data/CPU109 all-thread preflight PASS; invoking one collector.',flush=True)
+  payload={n:base64.b64encode(p.read_bytes()).decode() for n,p in [('collect_delta.py',H/'collect_delta.py'),('verify_delta_offserver.py',B/'verify_delta_offserver.py'),('PREVIOUS_OFFSERVER_ACCEPTANCE.json',H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')]}
+  pins={n:hashlib.sha256(base64.b64decode(data)).hexdigest() for n,data in payload.items()}
+  code="""from pathlib import Path
+@@ -78,13 +78,13 @@
+ for n,v in payload.items():
+  data=base64.b64decode(v);assert hashlib.sha256(data).hexdigest()==pins[n]
+  with (b/n).open('xb') as f:f.write(data)
+-cmd=['env','CUDA_VISIBLE_DEVICES=','OMP_NUM_THREADS=1','MKL_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','PYTHONDONTWRITEBYTECODE=1','taskset','-c','110','ionice','-c','3','nice','-n','10','/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(b/'collect_delta.py'),'--out',str(b/'batch'),'--cpu','110','--source-sha256',pins['collect_delta.py'],'--previous',str(b/'PREVIOUS_OFFSERVER_ACCEPTANCE.json'),'--previous-sha256',pins['PREVIOUS_OFFSERVER_ACCEPTANCE.json']]
++cmd=['env','CUDA_VISIBLE_DEVICES=','OMP_NUM_THREADS=1','MKL_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','PYTHONDONTWRITEBYTECODE=1','taskset','-c','109','ionice','-c','3','nice','-n','10','/workspace/guardfed_envs/celeba-cu128-20261009/bin/python','-B',str(b/'collect_delta.py'),'--out',str(b/'batch'),'--cpu','109','--source-sha256',pins['collect_delta.py'],'--previous',str(b/'PREVIOUS_OFFSERVER_ACCEPTANCE.json'),'--previous-sha256',pins['PREVIOUS_OFFSERVER_ACCEPTANCE.json']]
+ r=subprocess.run(cmd,capture_output=True)
+ (b/'COLLECT_STDOUT.txt').write_bytes(r.stdout);(b/'COLLECT_STDERR.txt').write_bytes(r.stderr)
+ sys.stdout.buffer.write(r.stdout);sys.stderr.buffer.write(r.stderr);sys.exit(r.returncode)
+ """%(REMOTE,payload,pins)
+  receipt=json.loads(run('COLLECT',SSH+['python -B -'],code));save('SERVER_COLLECTOR_RECEIPT.json',receipt)
+- assert receipt['accepted_new_ids']==IDS and receipt['accepted_total']==57 and receipt['accepted_new']==3
++ assert receipt['accepted_new_ids']==IDS and receipt['accepted_total']==59 and receipt['accepted_new']==2
+  print('Original server strict/archive PASS:',receipt['archive_sha256'],flush=True)
+ 
+ def verify():
+@@ -102,7 +102,7 @@
+     out = m.run('VERIFY', [sys.executable,'-B',str(B/'verify_delta_offserver.py'),'--batch',str(S),'--release',str(R/'tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage'),'--receipt-sha256',sha(S/'BACKUP_SHA256.json')], timeout=180)
+     print(out.decode(), flush=True)
+     tensor = checked_source(O/'check_saved_tensors.py', '877ab0396a9814fd8c7cb41f1fce03ebdf9b84a04b410edeb5b8663e882e3b8d')
+-    tensor = replace_exact(tensor, "proof['accepted_new']==2 and proof['accepted_total']==16", f"proof['accepted_new']=={len(ids)} and proof['accepted_total']=={54+len(ids)}")
++    tensor = replace_exact(tensor, "proof['accepted_new']==2 and proof['accepted_total']==16", f"proof['accepted_new']=={len(ids)} and proof['accepted_total']=={57+len(ids)}")
+     tensor = tensor.replace("H/'batch/", "S/'")
+     exec(compile(tensor, str(O/'check_saved_tensors.py')+'[COUNT_AND_F_PATH_ONLY]', 'exec'), dict(S=S, __file__=str(H/'check_saved_tensors_reused.py'), __name__='__main__'))
+     closed = checked_source(H/'close_observation.py',read(H/'PREPARED_FILES_SHA256.json')['files']['close_observation.py']['sha256'])
+@@ -113,22 +113,22 @@
+     a=read(H/'AUTHORIZED_SNAPSHOT.json'); prior=read(H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json'); latest=read(H/'PREVIOUS_LATEST.json')
+     p=read(S/'OFFSERVER_ACCEPTANCE.json'); receipt=read(S/'BACKUP_SHA256.json'); server=read(S/'PARTIAL_ACCEPTANCE.json')
+     tensor=read(H/'SAVED_TENSOR_STATE_CHECK.json'); close=read(H/'COLLECTOR_CLOSED.json'); reuse=read(H/'SOURCE_REUSE.json')
+-    ids=a['authorized_ids']; n=len(ids); total=54+n
++    ids=a['authorized_ids']; n=len(ids); total=57+n
+     assert all(read(H/(x+'_COMMAND.json'))['exit_code']==0 for x in ['GUIDE','OWNER','PREFLIGHT','COLLECT','SERVER_SHA','SCP','VERIFY','CLOSED'])
+     assert sha(B/'LATEST_BACKUP.json')==sha(H/'PREVIOUS_LATEST.json') and sha(R/latest['root_adoption_path'])==ROOTPROOF
+     assert sha(H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')==receipt['previous_chain_sha256']==PREVIOUS
+-    assert prior['accepted_total']==54 and p['accepted_total']==total and p['accepted_new']==n
+-    assert p['accepted_job_ids'][:54]==prior['accepted_job_ids'] and len(p['accepted_job_ids'])==len(set(p['accepted_job_ids']))==total
++    assert prior['accepted_total']==57 and p['accepted_total']==total and p['accepted_new']==n
++    assert p['accepted_job_ids'][:57]==prior['accepted_job_ids'] and len(p['accepted_job_ids'])==len(set(p['accepted_job_ids']))==total
+     assert p['new_ids']==receipt['accepted_new_ids']==ids and p['package_sha256']==PACKAGE
+-    assert server['before_source_data']==server['after_source_data'] and (server['helper_cpu'],server['helper_threads'],server['helper_nice'])==(110,1,10)
++    assert server['before_source_data']==server['after_source_data'] and (server['helper_cpu'],server['helper_threads'],server['helper_nice'])==(109,1,10)
+     assert sha(S/'accepted_delta.tar.gz')==receipt['archive_sha256'] and sha(S/'MEMBERS.json')==receipt['inventory_sha256']
+     assert tensor['CNN_forward_calls']==tensor['optimizer_calls']==tensor['data_loads']==0 and [x['id'] for x in tensor['records']]==ids
+-    assert close['CPU110_released'] and not close['queue']['failed'] and reuse['per_ID_scientific_loop_bytes_exact'] and reuse['scientific_body_unchanged']
++    assert close['CPU109_released'] and not close['queue']['failed'] and reuse['per_ID_scientific_loop_bytes_exact'] and reuse['scientific_body_unchanged']
+     assert sha(H/'collect_delta.py')==reuse['thin_entry_sha256']==server['collector_sha256']
+-    ready=dict(status='ROOT_READY_FL96_INCREMENT_STRICT_OFFSERVER_PASS_NOT_ADOPTED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=ids,prior_accepted_new=54,accepted_new=n,accepted_new_cumulative=total,planned_new=96,separately_reused70round=4,planned_total=100,single_fixed_authorization_snapshot=True,authorization_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),source_package_sha256=PACKAGE,collector_sha256=sha(H/'collect_delta.py'),thin_entry_parent_collector_sha256=reuse['parent_collector_sha256'],effective_collector_sha256=reuse['effective_collector_sha256'],original_strict_and_archive_body_unchanged=True,verifier_sha256=reuse['original_verifier_sha256'],source_reuse_sha256=sha(H/'SOURCE_REUSE.json'),raw_storage_root=S.as_posix(),raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),offserver_acceptance_path=(S/'OFFSERVER_ACCEPTANCE.json').as_posix(),offserver_acceptance_sha256=sha(S/'OFFSERVER_ACCEPTANCE.json'),archive_path=(S/'accepted_delta.tar.gz').as_posix(),archive_sha256=receipt['archive_sha256'],archive_bytes=receipt['archive_size'],archive_members=receipt['archived_member_count'],member_manifest_path=(S/'MEMBERS.json').as_posix(),inventory_sha256=receipt['inventory_sha256'],server_backup_receipt_sha256=sha(S/'BACKUP_SHA256.json'),server_strict_sha256=receipt['acceptance_sha256'],previous_root_path=latest['root_adoption_path'],previous_root_sha256=ROOTPROOF,previous_actual_offserver_sha256=PREVIOUS,previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),old54_ordered_prefix_exact=True,full_saved_tensor_check_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),tensor_count=sum(x['tensor_count'] for x in tensor['records']),tensor_elements=sum(x['elements'] for x in tensor['records']),records=p['records'],source_data_before_after_exact=True,helper_CPU=110,helper_threads=1,nice=10,IO='idle',CUDA_VISIBLE_DEVICES='',server_verification_runtime=server['acceptance_runtime'],local_verification_runtime=p['verification_runtime'],resource_preflight_sha256=sha(H/'PREFLIGHT.json'),resource_after_sha256=sha(H/'COLLECTOR_CLOSED.json'),CPU110_released=True,no_old_models_repacked=True,CNN_forward_calls=0,training_calls=0,final_test=False,recipe_selection_performed=False,root_adoption_required=True,LATEST_STATE_Git_unchanged=True,scientific_complete=False,prediction_arrays_recomputed=False)
++    ready=dict(status='ROOT_READY_FL96_INCREMENT_STRICT_OFFSERVER_PASS_NOT_ADOPTED',utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),accepted_new_ids=ids,prior_accepted_new=57,accepted_new=n,accepted_new_cumulative=total,planned_new=96,separately_reused70round=4,planned_total=100,single_fixed_authorization_snapshot=True,authorization_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),source_package_sha256=PACKAGE,collector_sha256=sha(H/'collect_delta.py'),thin_entry_parent_collector_sha256=reuse['parent_collector_sha256'],effective_collector_sha256=reuse['effective_collector_sha256'],original_strict_and_archive_body_unchanged=True,verifier_sha256=reuse['original_verifier_sha256'],source_reuse_sha256=sha(H/'SOURCE_REUSE.json'),raw_storage_root=S.as_posix(),raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),offserver_acceptance_path=(S/'OFFSERVER_ACCEPTANCE.json').as_posix(),offserver_acceptance_sha256=sha(S/'OFFSERVER_ACCEPTANCE.json'),archive_path=(S/'accepted_delta.tar.gz').as_posix(),archive_sha256=receipt['archive_sha256'],archive_bytes=receipt['archive_size'],archive_members=receipt['archived_member_count'],member_manifest_path=(S/'MEMBERS.json').as_posix(),inventory_sha256=receipt['inventory_sha256'],server_backup_receipt_sha256=sha(S/'BACKUP_SHA256.json'),server_strict_sha256=receipt['acceptance_sha256'],previous_root_path=latest['root_adoption_path'],previous_root_sha256=ROOTPROOF,previous_actual_offserver_sha256=PREVIOUS,previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),old57_ordered_prefix_exact=True,full_saved_tensor_check_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),tensor_count=sum(x['tensor_count'] for x in tensor['records']),tensor_elements=sum(x['elements'] for x in tensor['records']),records=p['records'],source_data_before_after_exact=True,helper_CPU=109,helper_threads=1,nice=10,IO='idle',CUDA_VISIBLE_DEVICES='',server_verification_runtime=server['acceptance_runtime'],local_verification_runtime=p['verification_runtime'],resource_preflight_sha256=sha(H/'PREFLIGHT.json'),resource_after_sha256=sha(H/'COLLECTOR_CLOSED.json'),CPU109_released=True,no_old_models_repacked=True,CNN_forward_calls=0,training_calls=0,final_test=False,recipe_selection_performed=False,root_adoption_required=True,LATEST_STATE_Git_unchanged=True,scientific_complete=False,prediction_arrays_recomputed=False)
+     save('ROOT_READY_HANDOFF.json',ready)
+-    save('ROOT_READY_CHAIN_LINK.json',dict(status='ROOT_REVIEW_PENDING_CHAIN_LINK_NO_CANONICAL_WRITE',previous_latest_path=B.relative_to(R).as_posix()+'/LATEST_BACKUP.json',previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),previous_root_path=latest['root_adoption_path'],previous_root_sha256=ROOTPROOF,previous_offserver_path=latest['next_collector_previous_path'],previous_offserver_sha256=PREVIOUS,proposed_next_collector_previous_path=ready['offserver_acceptance_path'],proposed_next_collector_previous_sha256=ready['offserver_acceptance_sha256'],accepted_before=54,accepted_new=n,accepted_total=total,accepted_job_ids=p['accepted_job_ids'],new_ids=ids,archive_sha256=receipt['archive_sha256'],member_manifest_sha256=receipt['inventory_sha256'],source_package_sha256=PACKAGE,handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),old54_ordered_prefix_exact=True,reused4_repacked=False,root_adoption_required=True))
+-    text=f'''# Actual FL96 after54: root adoption pending\n\nOne frozen snapshot {a['snapshot_utc']} selected exactly {n} new terminal IDs, cumulative {total}/96 plus four separate reused references. Original server strict/member/archive and unchanged offserver scientific record checks passed; complete70-round valid-only identities, source/data/checkpoints and ordered prior54 are bound in ROOT_READY_HANDOFF.json. Later completions are excluded.\n\nOriginal after14 collector is directly materialized with the accepted exact-completeness guards and frozen three-ID literal; original per-job science bytes remain exact. Original transport, preflight, tensor and close readers are reused with counts/namespace/CPU110 metadata only. CPU110 one thread, nice10, idleIO, CUDA hidden was verified free and released. The saved tensor check constructs the original CNN state layout without any forward/data/optimizer calls. Server cu128 and local CPU Torch runtimes differ and are recorded. Prediction arrays are absent and were not regenerated. All negative results and failures are preserved. No recipe selection, final test, training or inference was performed.\n\nArchive/models/raw/logprefix/restored files were written directly to a freshly label/health/capacity-checked F:/YananResearchStorage/GuardFed/, with no E fallback. RAW_STORAGE_INDEX.json binds every actual F member. E contains only small code, index, receipts and reports. Shared LATEST/STATE/Git/queue/source/data were not changed. Root must independently review and adopt.\n'''
++    save('ROOT_READY_CHAIN_LINK.json',dict(status='ROOT_REVIEW_PENDING_CHAIN_LINK_NO_CANONICAL_WRITE',previous_latest_path=B.relative_to(R).as_posix()+'/LATEST_BACKUP.json',previous_latest_sha256=sha(H/'PREVIOUS_LATEST.json'),previous_root_path=latest['root_adoption_path'],previous_root_sha256=ROOTPROOF,previous_offserver_path=latest['next_collector_previous_path'],previous_offserver_sha256=PREVIOUS,proposed_next_collector_previous_path=ready['offserver_acceptance_path'],proposed_next_collector_previous_sha256=ready['offserver_acceptance_sha256'],accepted_before=57,accepted_new=n,accepted_total=total,accepted_job_ids=p['accepted_job_ids'],new_ids=ids,archive_sha256=receipt['archive_sha256'],member_manifest_sha256=receipt['inventory_sha256'],source_package_sha256=PACKAGE,handoff_sha256=sha(H/'ROOT_READY_HANDOFF.json'),old57_ordered_prefix_exact=True,reused4_repacked=False,root_adoption_required=True))
++    text=f'''# Actual FL96 after57: root adoption pending\n\nOne frozen snapshot {a['snapshot_utc']} selected exactly {n} new terminal IDs, cumulative {total}/96 plus four separate reused references. Original server strict/member/archive and unchanged offserver scientific record checks passed; complete70-round valid-only identities, source/data/checkpoints and ordered prior57 are bound in ROOT_READY_HANDOFF.json. Later completions are excluded.\n\nOriginal after14 collector is directly materialized with the accepted exact-completeness guards and frozen two-ID literal; original per-job science bytes remain exact. Original transport, preflight, tensor and close readers are reused with counts/namespace/CPU109 metadata only. CPU109 one thread, nice10, idleIO, CUDA hidden was verified free and released. The saved tensor check constructs the original CNN state layout without any forward/data/optimizer calls. Server cu128 and local CPU Torch runtimes differ and are recorded. Prediction arrays are absent and were not regenerated. All negative results and failures are preserved. No recipe selection, final test, training or inference was performed.\n\nArchive/models/raw/logprefix/restored files were written directly to a freshly label/health/capacity-checked F:/YananResearchStorage/GuardFed/, with no E fallback. RAW_STORAGE_INDEX.json binds every actual F member. E contains only small code, index, receipts and reports. Shared LATEST/STATE/Git/queue/source/data were not changed. Root must independently review and adopt.\n'''
+     with (H/'README.md').open('x',encoding='utf8',newline='\n') as f:f.write(text)
+     files={q.relative_to(H).as_posix():dict(sha256=sha(q),bytes=q.stat().st_size) for q in sorted(H.rglob('*')) if q.is_file() and '__pycache__' not in q.parts}
+     save('DELIVERY_FILES_SHA256.json',dict(status='ACTUAL_INCREMENT_OFFSERVER_PASS_ROOT_PENDING',files=files,raw_storage_index_sha256=sha(H/'RAW_STORAGE_INDEX.json'),root_adoption_not_performed=True))
+@@ -141,7 +141,7 @@
+     for n,pin in read(H/'PREPARED_FILES_SHA256.json')['files'].items():
+         assert sha(H/n)==pin['sha256'] and (H/n).stat().st_size==pin['bytes']
+     a=read(H/'AUTHORIZED_SNAPSHOT.json')
+-    assert a['authorized_ids']==IDS and a['prior_count']==54 and a['terminal_count']==57
++    assert a['authorized_ids']==IDS and a['prior_count']==57 and a['terminal_count']==59
+     assert sha(R/a['snapshot_path'])==a['snapshot_sha256']
+     assert sha(B/'LATEST_BACKUP.json')==sha(H/'PREVIOUS_LATEST.json')
+     assert sha(R/a['prior_root_path'])==a['prior_root_sha256']==ROOTPROOF
+--- parent/preflight.py
++++ after57/preflight.py
+@@ -2,7 +2,7 @@
+ import hashlib,json,os,subprocess,sys,datetime
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();read=lambda p:json.loads(Path(p).read_bytes())
+ assert sha('/etc/vast-agents-guide.md')=='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+-assert os.sched_getaffinity(0)=={110} and os.getpriority(os.PRIO_PROCESS,0)==10
++assert os.sched_getaffinity(0)=={109} and os.getpriority(os.PRIO_PROCESS,0)==10
+ assert 'idle' in subprocess.check_output(['ionice','-p',str(os.getpid())],text=True)
+ stage=Path('/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage')
+ assert sha(stage/'PACKAGE_SHA256.json')=='6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230'
+@@ -18,17 +18,17 @@
+   for t in (proc/'task').iterdir():
+    try:aff=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+-   if len(aff)<=16:assert 110 not in aff,('CPU110 conflict',proc.name,t.name)
++   if len(aff)<=16:assert 109 not in aff,('CPU109 conflict',proc.name,t.name)
+   aff=os.sched_getaffinity(int(proc.name))
+   if len(aff)<=16:restricted.append(dict(pid=int(proc.name),affinity=sorted(aff),executable=Path(argv[0]).name))
+   if str(stage/'run_one.py') in argv:workers.append(dict(pid=int(proc.name),argv=argv))
+  except (FileNotFoundError,ProcessLookupError):continue
+ assert not list(stage.glob('*FAILURE*.json')) and 1<=len(workers)<=2
+-q=read(stage/'queue_progress.json');active={r['id'] for r in q['active']};ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage'];rows=[]
++q=read(stage/'queue_progress.json');active={r['id'] for r in q['active']};ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage'];rows=[]
+ for identity_id in ids:
+  item=next(r for r in manifest['jobs'] if r['id']==identity_id);out=stage/'runs'/identity_id
+  assert identity_id not in active and all((out/n).is_file() for n in ('result.json','acceptance.json','screen_identity.json','model.pt','job.json'))
+  progress=read(out/'progress.json');assert progress['round']==70 and not Path('/proc',str(progress['pid'])).exists()
+  assert sha(out/'job.json')==item['job_sha256']
+  rows.append(dict(id=identity_id,round=progress['round'],original_pid_absent=True,job_sha256=item['job_sha256'],model_sha256=sha(out/'model.pt'),result_sha256=sha(out/'result.json')))
+-print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),guide_sha256=sha('/etc/vast-agents-guide.md'),package_sha256=sha(stage/'PACKAGE_SHA256.json'),source_data_verified=identity,scope_jobs=len(manifest['jobs']),reuse_references=len(manifest['reused_jobs']),service=service.stdout,actual_workers=workers,restricted_processes=restricted,CPU110_free=True,collector=dict(pid=os.getpid(),CPU=110,threads=1,nice=os.getpriority(os.PRIO_PROCESS,0),IO='idle'),authorized_terminal_rows=rows,queue=q,cpu_max=Path('/sys/fs/cgroup/cpu.max').read_text().strip(),cpu_stat=Path('/sys/fs/cgroup/cpu.stat').read_text(),memory_current=Path('/sys/fs/cgroup/memory.current').read_text().strip(),memory_events=Path('/sys/fs/cgroup/memory.events').read_text(),disk_free_bytes=__import__('shutil').disk_usage('/workspace').free,gpu=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,memory.total','--format=csv,noheader,nounits'],text=True),scientific_acceptance_performed=False)))
++print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),guide_sha256=sha('/etc/vast-agents-guide.md'),package_sha256=sha(stage/'PACKAGE_SHA256.json'),source_data_verified=identity,scope_jobs=len(manifest['jobs']),reuse_references=len(manifest['reused_jobs']),service=service.stdout,actual_workers=workers,restricted_processes=restricted,CPU109_free=True,collector=dict(pid=os.getpid(),CPU=109,threads=1,nice=os.getpriority(os.PRIO_PROCESS,0),IO='idle'),authorized_terminal_rows=rows,queue=q,cpu_max=Path('/sys/fs/cgroup/cpu.max').read_text().strip(),cpu_stat=Path('/sys/fs/cgroup/cpu.stat').read_text(),memory_current=Path('/sys/fs/cgroup/memory.current').read_text().strip(),memory_events=Path('/sys/fs/cgroup/memory.events').read_text(),disk_free_bytes=__import__('shutil').disk_usage('/workspace').free,gpu=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,memory.total','--format=csv,noheader,nounits'],text=True),scientific_acceptance_performed=False)))
+--- parent/close_observation.py
++++ after57/close_observation.py
+@@ -7,13 +7,13 @@
+  if not p.name.isdigit() or int(p.name)==os.getpid():continue
+  try:
+   argv=(p/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  if any('fl_native_after54_20261011/collect_delta.py' in x for x in argv):collectors.append(dict(pid=int(p.name),argv=argv))
++  if any('fl_native_after57_20261011/collect_delta.py' in x for x in argv):collectors.append(dict(pid=int(p.name),argv=argv))
+   for t in (p/'task').iterdir():
+    try:aff=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+-   if len(aff)<=16 and 110 in aff:busy.append(dict(pid=int(p.name),tid=int(t.name),affinity=sorted(aff)))
++   if len(aff)<=16 and 109 in aff:busy.append(dict(pid=int(p.name),tid=int(t.name),affinity=sorted(aff)))
+  except (FileNotFoundError,ProcessLookupError):continue
+ assert not collectors and not busy
+ stage=Path('/workspace/guardfed_checks/celeba_flgmm_fullcoverage_v2_20261009/stage');q=json.loads((stage/'queue_progress.json').read_bytes())
+ service=subprocess.check_output(['supervisorctl','status','guardfed_celeba_flgmm_fullcoverage'],text=True);assert service.split()[1]=='RUNNING' and not list(stage.glob('*FAILURE*.json'))
+-print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),collector_processes=collectors,restricted_CPU110_threads=busy,CPU110_released=True,service=service.strip(),queue=q,package_sha256=sha(stage/'PACKAGE_SHA256.json'),cpu_max=Path('/sys/fs/cgroup/cpu.max').read_text().strip(),cpu_stat=Path('/sys/fs/cgroup/cpu.stat').read_text(),memory_current=Path('/sys/fs/cgroup/memory.current').read_text().strip(),memory_events=Path('/sys/fs/cgroup/memory.events').read_text(),disk_free_bytes=__import__('shutil').disk_usage('/workspace').free,gpu=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,memory.total','--format=csv,noheader,nounits'],text=True),new_acceptance_performed=False)))
++print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),collector_processes=collectors,restricted_CPU109_threads=busy,CPU109_released=True,service=service.strip(),queue=q,package_sha256=sha(stage/'PACKAGE_SHA256.json'),cpu_max=Path('/sys/fs/cgroup/cpu.max').read_text().strip(),cpu_stat=Path('/sys/fs/cgroup/cpu.stat').read_text(),memory_current=Path('/sys/fs/cgroup/memory.current').read_text().strip(),memory_events=Path('/sys/fs/cgroup/memory.events').read_text(),disk_free_bytes=__import__('shutil').disk_usage('/workspace').free,gpu=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,memory.total','--format=csv,noheader,nounits'],text=True),new_acceptance_performed=False)))
+--- parent/check_source.py
++++ after57/check_source.py
+@@ -22,7 +22,7 @@
+ assert ast.get_source_segment(new,new_loop)==ast.get_source_segment(old,old_loop)
+ assert ast.dump(new_loop,include_attributes=False)==ast.dump(old_loop,include_attributes=False)
+ auth=read(H/'AUTHORIZED_SNAPSHOT.json'); ids=auth['authorized_ids']; prior=read(H/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')['accepted_job_ids']
+-assert len(prior)==54 and not set(ids)&set(prior)
++assert len(prior)==57 and not set(ids)&set(prior)
+ # Execute the original retained selection/refusal statements with metadata only.
+ selection=[]
+ for node in new_fn.body:
+@@ -67,16 +67,16 @@
+ save('PREPARED_OWNER_COMMAND.json',dict(command=command,start_utc=start,end_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                                      exit_code=cp.returncode,source_sha256=hashlib.sha256(owner.encode()).hexdigest(),read_only=True))
+ cp.check_returncode();owner_result=json.loads(cp.stdout)
+-assert owner_result['CPU110_free'] and not owner_result['busy']
++assert owner_result['CPU109_free'] and not owner_result['busy']
+ assert owner_result['parent_collector_sha256']==read(H/'SOURCE_REUSE.json')['parent_collector_sha256']
+ save('PREPARED_OWNER.json',owner_result)
+ save('SOURCE_CHECK.json',dict(status='SOURCE_METADATA_GUARDS_AND_PREPARATION_GATES_PASS_NOT_EXECUTED',
+-    exact_selected_ids=ids,prior_count=54,proposed_total=57,scientific_per_ID_loop_bytes_and_AST_exact=True,
++    exact_selected_ids=ids,prior_count=57,proposed_total=59,scientific_per_ID_loop_bytes_and_AST_exact=True,
+     strict_archive_tail_bytes_exact=True,original_offserver_checker_sha256=sha(ns['B']/'verify_delta_offserver.py'),
+-    fixture_refusals=refused,extra_future_terminal_ignored=True,old54_excluded=True,negative_results_not_filtered=True,
+-    no_runtime_parent_wrapper_chain=True,fresh_F_gate_pass=True,fresh_CPU110_gate_pass=True,
++    fixture_refusals=refused,extra_future_terminal_ignored=True,old57_excluded=True,negative_results_not_filtered=True,
++    no_runtime_parent_wrapper_chain=True,fresh_F_gate_pass=True,fresh_CPU109_gate_pass=True,
+     collect_verify_finalize_executed=False,no_models_loaded=True,no_fit_CNN_predict_training=True,
+-    gate_limit='Preparation-time observation only; collect repeats actual guide/all-thread CPU110 preflight and F check, verify repeats fresh capacity checks.'))
++    gate_limit='Preparation-time observation only; collect repeats actual guide/all-thread CPU109 preflight and F check, verify repeats fresh capacity checks.'))
+ files={p.name:dict(sha256=sha(p),bytes=p.stat().st_size) for p in sorted(H.iterdir()) if p.is_file()}
+-save('PREPARED_FILES_SHA256.json',dict(status='EXACT3_SOURCE_PREPARED_ROOT_REVIEW_REQUIRED',files=files))
+-print(json.dumps({'path':H.relative_to(R).as_posix(),'seal_sha256':sha(H/'PREPARED_FILES_SHA256.json'),'source_check_sha256':sha(H/'SOURCE_CHECK.json'),'refusals':refused,'CPU110_free':True,'scientific_acceptances':0}))
++save('PREPARED_FILES_SHA256.json',dict(status='EXACT2_SOURCE_PREPARED_ROOT_REVIEW_REQUIRED',files=files))
++print(json.dumps({'path':H.relative_to(R).as_posix(),'seal_sha256':sha(H/'PREPARED_FILES_SHA256.json'),'source_check_sha256':sha(H/'SOURCE_CHECK.json'),'refusals':refused,'CPU109_free':True,'scientific_acceptances':0}))

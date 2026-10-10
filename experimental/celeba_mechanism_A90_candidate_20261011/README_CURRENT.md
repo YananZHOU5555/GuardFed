@@ -1,0 +1,1 @@
+Current entry: [TABLES.md](TABLES.md), [ROOT_READY_REPORT.md](ROOT_READY_REPORT.md), and [SAVED_VERIFICATION.json](SAVED_VERIFICATION.json). Actual A90 build/finish and root original saved verification have passed; only canonical table adoption is pending. Earlier README.md/HANDOFF.json remain source-preparation history.

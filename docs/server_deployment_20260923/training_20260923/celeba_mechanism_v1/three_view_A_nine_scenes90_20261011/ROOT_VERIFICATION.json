@@ -1,0 +1,103 @@
+{
+  "status": "ROOT_A90_NINE_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
+  "utc": "2026-10-10T17:03:49.476326+00:00",
+  "root_adoption": true,
+  "canonical_table": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_nine_scenes90_20261011/TABLES.md",
+  "source_candidate": "tmp/celeba_mechanism_A90_candidate_20261011",
+  "source_seal_sha256": "811065967b0515f1a8efee376091477378dcaa061387e5b6a9cb7b8adb14f8d5",
+  "source_handoff_sha256": "f3aa1a5470d65ea45764434cac2f8b08f643eff9b6114cf43ba55af2033be242",
+  "source_acceptance_path": "tmp/celeba_mechanism_remaining_after288_root_adoption_20261011/ROOT_ADOPTION.json",
+  "source_acceptance_sha256": "70689e63467d8866caa3beb06d2be5f911defd0a4d5f7f061ab005d20bd1c1bb",
+  "source_index_sha256": "7c46fcb20c15c377b1df17378f14b6282ee394bdcaacecd8d4f92be344777bef",
+  "preserved_records": 180,
+  "paired_models": 90,
+  "complete_scenes": 9,
+  "complete_IID_scenes": 5,
+  "complete_nonIID_scenes": [
+    "Benign",
+    "F Flip",
+    "FedSA",
+    "S-DFA"
+  ],
+  "mean_SD_scalars_recomputed": 1620,
+  "per_scene_scalars": 1458,
+  "seed_first_scalars": 162,
+  "display_cells": 810,
+  "metrics_from_group_counts": 1620,
+  "base_integer_confusion_counts_checked": 4320,
+  "old160_record_bytes_order_exact": true,
+  "old1296_scalars_exact": true,
+  "old648_cells_exact": true,
+  "IID_seed_first_JSON_bytes_exact": true,
+  "actual_root_command": [
+    "python",
+    "-B",
+    "tmp\\celeba_mechanism_A90_candidate_20261011\\verify_saved.py"
+  ],
+  "actual_root_command_exit": 0,
+  "actual_root_verifier_sha256": "aa039cb93e576d985e118ee485679322e153dfda3e46ab808baf52052c2321d0",
+  "actual_root_output_matches_saved": true,
+  "author_focused_check_sha256": "5c7facf3f06f3e9934656bf5b26b05aebe751ecd565d0f44f920ba71debac48a",
+  "author_focused_check_is_independent_reviewer": false,
+  "replay_devices": {
+    "Full": {
+      "cpu": 5,
+      "cuda:0": 85
+    },
+    "minus_A": {
+      "cpu": 90
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 88,
+      "2.11.0+cu130": 2
+    },
+    "minus_A": {
+      "2.11.0+cu128": 90
+    }
+  },
+  "files_sha256": {
+    "records.json": "7a0d7e4a1dcdcf79a081ebca07b272262742f237294615fe1d6b7ffe7b044914",
+    "tables.json": "d1c2b56a99c5490415868a1a27b2524967615ea6756ccc223baf92bad5d10c8c",
+    "IID_SEED_FIRST.json": "ce6088b23dd0e2181e83393510075a919dc52719d4b654f70a29205d398b5baf",
+    "TABLES.md": "88e4b88a732aa0adcf56f31224eaf783061e62555927f15be7274ad9fc809a6f",
+    "TABLES.tex": "ef3cd2caa277c0f038b28fc68d16bb76df6689ad3bf54898575dca6934048455",
+    "SOURCE_BINDINGS.json": "bf8ebcd8f9326e817f5f1791184801715399cd2d6e41162905acc8e6e00c985c",
+    "SAVED_VERIFICATION.json": "2bfce95aae203672af7645b2bd60747f33f976514a9700ee5a268040a6dfc569",
+    "DIRECTIONS.json": "41483d8f79ee07b1299ce65425b51626ba48f5e88446cb4216508d5d0a9c7678",
+    "ADDED10_FOCUSED_CHECK.json": "5c7facf3f06f3e9934656bf5b26b05aebe751ecd565d0f44f920ba71debac48a",
+    "ROOT_READY_REPORT.md": "9b591e5642a14034d9e1a55de408dbb8ae4ffec536ca0519af835ef44caf8e01",
+    "ROOT_READY_SUMMARY.json": "1beb7629c567a5dc3c537fcdc50e69df4c35123cf7e6ea0ba46291db0e46b9ec",
+    "SUMMARY.json": "ed34cacf6d77fb84e6935d807355e4eaac5b38191a5faa8ec02f75bf17a6d5a9",
+    "REPORT.md": "5b575330d7916b3eb45bb548c0f690958a0d706e6e29d1ecebd58379e443fe49",
+    "README_CURRENT.md": "c23c88094b26ba285bb1befbfa154a2e80abc0044e00fe57131c5849a0f9da23"
+  },
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "aggregate_scope": "Five IID scenes only; mean within seed first; four non-IID scenes reported separately",
+  "accepted_partial_SpDFA_seeds_excluded": [
+    91001,
+    91002,
+    91003,
+    91004,
+    91005
+  ],
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "test": false,
+  "primary_endpoint_selected": false,
+  "tex_compiled": false,
+  "incorporated_into_full_rebuttal": false,
+  "limitations": [
+    "Validation and selection-seed/history exposure retained.",
+    "Native/shared equality is not independent confirmation.",
+    "Actual mixed CPU/CUDA and cu128/cu130 provenance; no trajectory-equivalence claim.",
+    "Sp-DFA partial5 excluded; A100, other controls, full17 coverage, final endpoint/test and submitted-manuscript integration remain incomplete.",
+    "New S-DFA negative/mixed mechanism findings and original Windows baseline failures preserved."
+  ]
+}

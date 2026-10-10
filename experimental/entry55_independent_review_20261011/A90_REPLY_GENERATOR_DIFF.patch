@@ -1,0 +1,99 @@
+--- tmp\update_completion_current_20261009.py:before_A90_reply
++++ tmp\update_completion_current_20261009.py:after_A90_reply
+@@ -38,6 +38,13 @@
+     assert A90_proof['complete_IID_scenes']==5 and A90_proof['complete_nonIID_scenes']==['Benign','F Flip','FedSA','S-DFA']
+     assert A90_proof['seed_panels']==[10,9,6]
+     assert (A90_proof['mean_SD_scalars_recomputed'],A90_proof['display_cells'])==(1620,810)
++A90_reply=state['latest_rebuttal_draft'].get('A90_incorporated',False)
++if A90_reply:
++    reply_root=ROOT/state['latest_rebuttal_draft']['root_proof_path']
++    assert hashlib.sha256(reply_root.read_bytes()).hexdigest()==state['latest_rebuttal_draft']['root_proof_sha256']=='17ad95f3c558c78b5c9cadd495c3d7802389ecf780840680fc09e958ffe05d11'
++    reply_proof=json.loads(reply_root.read_bytes())
++    assert reply_proof['A90_incorporated'] and reply_proof['author_review_only'] and not reply_proof['manuscript_applied']
++    assert (reply_proof['A_complete_scenes'],reply_proof['reversible_edits'],reply_proof['paired_mean_SD_values_bound_to_JSON'],reply_proof['fixed_direction_panels'])==(9,13,6,9)
+ gradient42=state.get('gradient64_validation_search_20261010',{}).get('offserver_accepted')==42
+ if gradient42:
+     gradient42_root=ROOT/'tmp/gradient_native_after39_20261011/ROOT_ADOPTION_REVIEW.json'
+@@ -196,6 +203,8 @@
+     A_view_note=' '+'Current A80 table is root-adopted: five IID scenes plus non-IID Benign/F Flip/FedSA, eight scenes with ten paired seeds each,80 pairs/160 records,1458 mean/sampleSD scalars and729 display cells; all10/9/6 panels remain. Old A60 preserves120 object bytes/order,972 scene statistics/486 cells and IID seed-first aggregate bytes. Raw FedSA deletion improves all three means; native/shared deletion slightly raises ACC while worsening both gaps. All negative outcomes and view-dependent tradeoffs remain, without necessity or significance claims. Full5CPU75GPU/79cu128+1cu130 versus A80CPU/cu128, selection history and historical test exposure are disclosed. Non-IID S-DFA/Sp-DFA, remaining controls and final evaluation remain unfinished. '+'Entry: '+A80['table_path']+'. '
+ if A90:
+     A_view_note=' Current A90 table is root-adopted: five IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA, nine complete scenes,90 paired models/180 records,1620 mean/sampleSD scalars and810 display cells under all10/9/6 panels. At this cutoff non-IID Sp-DFA has only five A checkpoints and is excluded from complete-scene statistics. Historical A80 tables and evidence remain retained. Its raw FedSA deletion improves all three means, whereas native/shared deletion slightly raises ACC while worsening both gaps; all negative outcomes and prediction-rule-dependent tradeoffs remain, without necessity or significance claims. Full5CPU85GPU/88cu128+2cu130 versus A90CPU/cu128, validation selection and historical test exposure are disclosed. Remaining A coverage, other controls, full17-method comparisons and final evaluation remain unfinished. Table adoption alone does not establish reply integration. Entry: '+A90['table_path']+'. '
++if A90 and A90_reply:
++    A_view_note=A_view_note.replace('Table adoption alone does not establish reply integration. ','A90 nine-scene evidence is incorporated into the root-adopted author-review reply and manuscript candidate through13 reversible edits,6 JSON-bound mean/SD pairs and9 fixed direction panels. Historical A80 evidence remains preserved. ')
+ recovery_paragraph=('The exact 900−424 complement is sealed as a prepared-only proposal: 465 unexecuted models, '
+     '10 preserved CPU partial results and one separately verified GPU diagnostic. '
+     'The new GPU worker and strict acceptance entry are being implemented separately; '
+@@ -451,7 +460,9 @@
+ if A90:
+     current+='\n'+A_view_note+'\n'
+ if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
+-    current+='\nThe complete24-comment English reply and manuscript insertion candidate retain all original quotes, prior scientific numbers and tables. Historical details follow the responses. '+('The root-adopted A80 reader integration is recorded at the linked reply entry. ' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'The latest A60 increment adds21 exactly reversible spans and6 adopted JSON mean/SD pointer pairs; all2457 prior numeric strings and98 links remain, with five IID scenes plus non-IID Benign and the remaining four non-IID boundary explicit. ' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'The A50 increment retains the five IID scenes and their paired/seed-first tradeoffs. ')+'This is author-review material, not submission-ready or applied manuscript text. Entry: '+state['latest_rebuttal_draft']['entry']+'.\n'
++    current+='\nThe complete24-comment English reply and manuscript insertion candidate retain all original quotes, prior scientific numbers and tables. Historical details follow the responses. '+('A90 nine-scene evidence is incorporated into the root-adopted author-review reply and manuscript candidate through13 reversible edits,6 JSON-bound mean/SD pairs and9 fixed direction panels. Historical A80 evidence remains preserved. ' if A90_reply else 'The root-adopted A80 reader integration is recorded at the linked reply entry. ' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'The latest A60 increment adds21 exactly reversible spans and6 adopted JSON mean/SD pointer pairs; all2457 prior numeric strings and98 links remain, with five IID scenes plus non-IID Benign and the remaining four non-IID boundary explicit. ' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'The A50 increment retains the five IID scenes and their paired/seed-first tradeoffs. ')+'This is author-review material, not submission-ready or applied manuscript text. Entry: '+state['latest_rebuttal_draft']['entry']+'.\n'
++if A90_reply:
++    current+='Preferred clear-reader entry (as currently adopted in STATE): '+state['latest_rebuttal_draft'].get('clear_reader_entry',state['latest_rebuttal_draft']['entry'])+'.\n'
+ if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
+     e=state['FLGMM_closed47_valid_three_view_20261011']
+     current+='\nFinite47 previously accepted FLGMM checkpoints are now being evaluated on CPU120–127/eight threads/single process, with no training or test. At '+e['observed_utc']+' observed saved replay receipts are '+str(e['receipts_observed'])+'/47; scientific acceptance remains0 pending original whole-saved checks and offserver verification. Source scope44new+4screenreuse−1already-adopted interface; original science and native tolerance unchanged. Entry: '+e['start_receipt_path']+'.\n'
+--- tmp\update_overview_closure100_root_20261009.py:before_A90_reply
++++ tmp\update_overview_closure100_root_20261009.py:after_A90_reply
+@@ -40,6 +40,13 @@
+     assert A90_proof['complete_IID_scenes']==5 and A90_proof['complete_nonIID_scenes']==['Benign','F Flip','FedSA','S-DFA']
+     assert A90_proof['seed_panels']==[10,9,6]
+     assert (A90_proof['mean_SD_scalars_recomputed'],A90_proof['display_cells'])==(1620,810)
++A90_reply=state['latest_rebuttal_draft'].get('A90_incorporated',False)
++if A90_reply:
++    reply_root=ROOT/state['latest_rebuttal_draft']['root_proof_path']
++    assert hashlib.sha256(reply_root.read_bytes()).hexdigest()==state['latest_rebuttal_draft']['root_proof_sha256']=='17ad95f3c558c78b5c9cadd495c3d7802389ecf780840680fc09e958ffe05d11'
++    reply_proof=json.loads(reply_root.read_bytes())
++    assert reply_proof['A90_incorporated'] and reply_proof['author_review_only'] and not reply_proof['manuscript_applied']
++    assert (reply_proof['A_complete_scenes'],reply_proof['reversible_edits'],reply_proof['paired_mean_SD_values_bound_to_JSON'],reply_proof['fixed_direction_panels'])==(9,13,6,9)
+ gradient42=state.get('gradient64_validation_search_20261010',{}).get('offserver_accepted')==42
+ if gradient42:
+     gradient42_root=ROOT/'tmp/gradient_native_after39_20261011/ROOT_ADOPTION_REVIEW.json'
+@@ -267,6 +274,8 @@
+     if A90:
+         A_link=A90['table_path'].removeprefix('docs/')
+         A_coverage_note='最新A90已root采用：五IID＋non-IID Benign/F Flip/FedSA/S-DFA九完整场景，各10配对seed，90对/180记录、1620均值与样本SD统计/810展示单元，10/9/6面板完整。该表cutoff的non-IID Sp-DFA仅5个A记录，排除完整场景统计；A80旧表及来源保留。raw FedSA删除A三项均值改善、native/shared准确率微升而两gap变差的反例和预测规则依赖取舍保留，不作必要性或显著性主张。Full5CPU85GPU/88cu128＋2cu130与A90CPU/cu128、验证集选择和历史test暴露均披露；其余A覆盖/控制、完整17方法和最终评价未齐，表采用不等于回复稿已纳入。'
++    if A90 and A90_reply:
++        A_coverage_note=A_coverage_note.replace('表采用不等于回复稿已纳入。','A90九场景已按实际root凭据纳入作者审阅回复及正文候选：13处可逆编辑、6组JSON均值/SD对和9个固定方向面板核验，历史A80证据保持；')
+     text+='\nA机制对照：原IID Benign十共享seed表保持；162统计/81单元/216计数指标通过。'+A_coverage_note+'IID Benign删除A的native/shared差ACC−0.430个百分点、AEOD+0.002313、ASPD−0.003142，保留9/6方向变化和设备差异，不作必要性主张。入口：[A机制三视图表]('+A_link+')。\n'
+     new_stage_note+=' A IID Benign十seed三视图表已独立采用。'+A_coverage_note
+ if main.get('three_view_counts_by_variant',{}).get('minus_A')==28:
+@@ -298,7 +307,7 @@
+     if state.get('added_CNN_exact3_valid_interface_20261010',{}).get('root_scientific_acceptances')==3:
+         text+='新增三条代表CNN接口已采用（FLGMM/组合/NGA搜索一配置）：Linux完整原检查与F盘原数组/校准重拟合块通过，27指标/72计数/9规则、native差0；Windows完整检查的FL审计group_kl约2.2e-19差异保留，不放宽容差、不称其全文通过。不是完整100格或最终test。入口'+state['added_CNN_exact3_valid_interface_20261010']['root_proof_path']+'。\n'
+ if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
+-    text+='最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。'+('A80已按实际采用记录纳入，具体编辑与证据以回复入口为准；' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'A60已用21处新增可逆编辑及6组JSON均值/SD指针纳入；旧2457数字字串/98链接保留，五IID+non-IID Benign的指标取舍、其余四non-IID未齐边界明确；' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A50五IID配对与seed-first取舍已纳入；')+'仍为作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
++    text+='最新24原意见完整英文稿已复核，全部原话、旧数字与科学整表保留。'+('A90九场景已按实际root凭据纳入作者审阅回复及正文候选：13处可逆编辑、6组JSON均值/SD对和9个固定方向面板核验，历史A80证据保持；' if A90_reply else 'A80已按实际采用记录纳入，具体编辑与证据以回复入口为准；' if state['latest_rebuttal_draft'].get('A80_incorporated') else 'A60已用21处新增可逆编辑及6组JSON均值/SD指针纳入；旧2457数字字串/98链接保留，五IID+non-IID Benign的指标取舍、其余四non-IID未齐边界明确；' if state['latest_rebuttal_draft'].get('A60_incorporated') else 'A50五IID配对与seed-first取舍已纳入；')+'仍为作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
+ if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
+     e=state['FLGMM_closed47_valid_three_view_20261011']
+     text+='FLGMM有限47终轮模型正在CPU补三视图评价，原训练不重跑；'+e['observed_utc']+'观测回放'+str(e['receipts_observed'])+'/47，新增科学采用0，完整原检查与离机验收待完成。入口'+e['start_receipt_path']+'。\n'
+@@ -327,6 +336,10 @@
+ if A90:
+     current_views='| 机制三视图 | U100/C100完整；A90九完整场景、90对/180记录、1620统计/810单元，固定10/9/6面板。Sp-DFA5不入完整均值，A80历史表保留，全部负结果及未完成边界不变 | [A九场景表]('+A90['table_path'].removeprefix('docs/')+') |'
+     text='\n'.join(current_views if line.startswith('| 机制三视图 |') else line for line in text.split('\n'))
++if A90_reply:
++    reply=state['latest_rebuttal_draft']
++    current_reply='| 英文回复 | 24条原意见作者审阅稿已纳入A90九场景；13处可逆编辑、6组mean/SD源对、9个方向面板已核；A80历史、负结果及未完成边界保留，正文尚未应用 | [优先阅读清晰版]('+reply.get('clear_reader_entry',reply['entry']).removeprefix('docs/')+')、[详细证据版]('+reply['entry'].removeprefix('docs/')+')、[正文插入候选]('+reply['manuscript_candidate'].removeprefix('docs/')+') |'
++    text='\n'.join(current_reply if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
+ increment_note=''
+ if main['three_view_new_models_offserver_verified']==288:
+     increment_note+='最新累计机制288份终轮三视图（U100/C100/A88）已严格离机并root采用；新增A的non-IID S-DFA仅8seed，排除完整场景均值，A80八场景表保持。'
+@@ -459,7 +472,7 @@
+ if main.get('A_three_view_five_scene_table') and not main.get('A_three_view_six_scene_table') and not A80 and not A90:
+     top+='最新A50五IID表已root/独审采用，972统计/486单元；五nonIID未齐，旧A40保持，'+('已纳入最新24意见reader稿。' if state['latest_rebuttal_draft'].get('A50_incorporated') else 'A50尚未纳入最新reader稿。')+'入口'+main['A_three_view_five_scene_table']['table_path']+'。\n'
+ if state['latest_rebuttal_draft'].get('editorial_reversible_edits'):
+-    top+='当前24意见reader稿保留全部数字/表/quotes/P1–P6，27可逆改动仅重排和导航；作者审阅，正文未应用。入口'+state['latest_rebuttal_draft']['entry']+'。\n'
++    top+=('A90九场景已按实际root凭据纳入作者审阅回复及正文候选：13处可逆编辑、6组JSON均值/SD对和9个固定方向面板核验，历史A80证据保持；'+'原24意见/旧表/数字/反例保留，正文未应用。' if A90_reply else '当前24意见reader稿保留全部数字/表/quotes/P1–P6，27可逆改动仅重排和导航；作者审阅，正文未应用。')+'入口'+state['latest_rebuttal_draft']['entry']+'；优先阅读'+state['latest_rebuttal_draft'].get('clear_reader_entry',state['latest_rebuttal_draft']['entry'])+'。\n'
+     if state['latest_rebuttal_draft'].get('A50_incorporated') and not state['latest_rebuttal_draft'].get('A60_incorporated'):
+         top+='A50五IID配对和seed-first取舍经16新增可逆编辑纳入；12组mean/SD源指针通过，原24意见/旧数值/表/负结果保留。五non-IID A场景及其余机制尚未齐。\n'
+ if state.get('added_CNN_exact3_valid_interface_20261010',{}).get('root_scientific_acceptances')==3:
+@@ -471,6 +484,8 @@
+     top+='最新A80已root采用：五IID＋non-IID Benign/F Flip/FedSA共8场景、各10配对seed，80对/160记录、1458均值与样本SD统计/729展示单元，10/9/6面板完整。旧A60的120对象字节/顺序、972统计/486单元和IID seed-first聚合原字节保持。新增raw FedSA删除A后三项均值更好，native/shared准确率微升而两项gap变差，保留全部负结果和视图取舍，不作必要性/显著性主张。Full5CPU75GPU/79cu128＋1cu130与A80CPU/cu128、选择史和历史test暴露均披露；两项non-IID A场景S-DFA/Sp-DFA、其余控制和最终评价仍未齐。'+('A80已纳入实际root采用的回复稿，详见回复入口。' if state['latest_rebuttal_draft'].get('A80_incorporated') else '当前回复稿仍为A60，A80表采用不等于已纳入回复。')+'入口'+A80['table_path']+'。\n'
+ if A90:
+     top+='最新A90已root采用：五IID＋non-IID Benign/F Flip/FedSA/S-DFA九完整场景，各10配对seed，90对/180记录、1620均值与样本SD统计/810展示单元，10/9/6面板完整。该表cutoff的non-IID Sp-DFA仅5个A记录，排除完整场景统计；A80旧表及来源保留。raw FedSA删除A三项均值改善、native/shared准确率微升而两gap变差的反例和预测规则依赖取舍保留，不作必要性或显著性主张。Full5CPU85GPU/88cu128＋2cu130与A90CPU/cu128、验证集选择和历史test暴露均披露；其余A覆盖/控制、完整17方法和最终评价未齐，表采用不等于回复稿已纳入。'+'入口'+A90['table_path']+'。\n'
++if A90 and A90_reply:
++    top=top.replace('表采用不等于回复稿已纳入。','A90九场景已按实际root凭据纳入作者审阅回复及正文候选：13处可逆编辑、6组JSON均值/SD对和9个固定方向面板核验，历史A80证据保持；')
+ if fl47_current and not fl47_current.get('validation_hold') and not fl47_current.get('complementary_adopted'):
+     e=state['FLGMM_closed47_valid_three_view_20261011']
+     top+='新增有限47项FLGMM三视图评价实际启动：CPU120–127/8线程单进程，valid-only，精确44已验收新训练+4screen复用−1已采用接口。'+e['observed_utc']+'回放结果观测'+str(e['receipts_observed'])+'/47，当前新增科学采用0。后续须原Linux whole checker及F盘严格成员/数组离机核验，旧Windows whole审计差异保留；不得盲重启或改容差，不并入机制260。票据'+e['start_receipt_path']+'。\n'

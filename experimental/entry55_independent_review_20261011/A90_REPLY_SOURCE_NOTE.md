@@ -1,0 +1,1 @@
+仅源码增补并compile；未运行生成器或验证尚未采用的清晰A90。A90_incorporated真时先核实际详细稿root SHA17ad95f3…05d11及9场景/13可逆/6meanSDpairs/9方向，再优先输出A90。清晰版链接只读取STATE clear_reader_entry（无时退回STATE entry）；A80原分支和历史保持。root需统一运行原两生成器并核历史suffix。

@@ -1,0 +1,157 @@
+{
+  "build.py": {
+    "A80_mapped_source_sha256": "38c7358a26bbaa48bca541ed3df1aef969515da5afe2fb46f92380d371abec47",
+    "replacements": [
+      [
+        "\"\"\"Read actual adopted A80 receipts; display five IID plus three non-IID scenes; preserve original identity loop and arithmetic.\"\"\"\n",
+        "\"\"\"Read actual adopted A90 receipts; display five IID plus four non-IID scenes; preserve original identity loop and arithmetic.\"\"\"\n"
+      ],
+      [
+        "PREV = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_six_scenes60_20261011'\n",
+        "PREV = R/'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_eight_scenes80_20261011'\n"
+      ],
+      [
+        "SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign'), ('non-IID', 'F Flip'), ('non-IID', 'FedSA')]\n",
+        "SCENES = [('IID', 'Benign'), ('IID', 'F Flip'), ('IID', 'FedSA'), ('IID', 'S-DFA'), ('IID', 'Sp-DFA'), ('non-IID', 'Benign'), ('non-IID', 'F Flip'), ('non-IID', 'FedSA'), ('non-IID', 'S-DFA')]\n"
+      ],
+      [
+        "    new_ids = [f'minus_A_non-IID_{attack}_seed{seed}' for attack in ('F Flip','FedSA') for seed in range(91001,91011)]\n",
+        "    new_ids = [f'minus_A_non-IID_S-DFA_seed{seed}' for seed in (91009,91010)]+[f'minus_A_non-IID_Sp-DFA_seed{seed}' for seed in range(91001,91006)]\n"
+      ],
+      [
+        "        and adopted['new_accepted']==20 and adopted['prior_accepted']==260\n        and adopted['cumulative_accepted']==280 and adopted['original260_unchanged']\n        and adopted['native_max_abs_difference']==0, 'Actual exact20 root adoption required')\n",
+        "        and adopted['new_accepted']==7 and adopted['prior_accepted']==288\n        and adopted['cumulative_accepted']==295 and adopted['original288_unchanged']\n        and adopted['native_max_abs_difference']==0, 'Actual exact7 root adoption required')\n"
+      ],
+      [
+        "    # Follow eight SHA-bound adopted increments; stop at the original A12 index.\n",
+        "    # Follow ten SHA-bound adopted increments; stop at the original A12 index.\n"
+      ],
+      [
+        "        need(ip not in visited and len(visited)<8, 'Cycle or unexpected A-chain depth')\n",
+        "        need(ip not in visited and len(visited)<10, 'Cycle or unexpected A-chain depth')\n"
+      ],
+      [
+        "    need([len(x[1]) for x in batches]==[12,8,8,8,4,11,9,20]\n        and [len(x[0]['all_ids']) for x in batches]==[212,220,228,236,240,251,260,280], 'Wrong exact eight A increments')\n",
+        "    need([len(x[1]) for x in batches]==[12,8,8,8,4,11,9,20,8,7]\n        and [len(x[0]['all_ids']) for x in batches]==[212,220,228,236,240,251,260,280,288,295], 'Wrong exact ten A increments')\n"
+      ],
+      [
+        "    need([rid for _,ids,_,_,_ in batches for rid in ids if rid in set(wanted)]==wanted, 'Five complete IID scenes plus non-IID Benign/F Flip/FedSA required')\n    need(sha(PREV/'ROOT_VERIFICATION.json')=='71eda2082961dff461b9507b534168757be7d579dee856f202383e5607bda204', 'Original A60 root adoption changed')\n",
+        "    need([rid for _,ids,_,_,_ in batches for rid in ids if rid in set(wanted)]==wanted, 'Five complete IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA required')\n    need(sha(PREV/'ROOT_VERIFICATION.json')=='d2245e4d9de68b415931dccc7d1f70c39a871c226c59d9973675dfc1d3cc1bc7', 'Original A80 root adoption changed')\n"
+      ],
+      [
+        "        need(sha(PREV/name)==pin, 'Original root-adopted A60 file drift: '+name)\n",
+        "        need(sha(PREV/name)==pin, 'Original root-adopted A80 file drift: '+name)\n"
+      ],
+      [
+        "    need(len(records)==len({r['id'] for r in records})==160 and len(links)==80, 'Exactly80 A +80 paired Full required')\n",
+        "    need(len(records)==len({r['id'] for r in records})==180 and len(links)==90, 'Exactly90 A +90 paired Full required')\n"
+      ],
+      [
+        "    panels_module=scoped_module(old,pins['C_panels'],[(\"expected=[('IID','Benign')]\",\"expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]\"),\n        ('Only the exact C IID Benign ten-shared-seed scene is publishable','Only five A IID scenes plus non-IID Benign/F Flip/FedSA with ten shared seeds are publishable')],changes)\n",
+        "    panels_module=scoped_module(old,pins['C_panels'],[(\"expected=[('IID','Benign')]\",\"expected=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')]\"),\n        ('Only the exact C IID Benign ten-shared-seed scene is publishable','Only five A IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA with ten shared seeds are publishable')],changes)\n"
+      ],
+      [
+        "        (\"assert len(records)==24 and len({r['id'] for r in records})==24\",\"assert len(records)==160 and len({r['id'] for r in records})==160\"),\n        ('assert len(bycell)==24','assert len(bycell)==160'),(\"scenes={('IID','Benign')}\",\"scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')}\"),\n",
+        "        (\"assert len(records)==24 and len({r['id'] for r in records})==24\",\"assert len(records)==180 and len({r['id'] for r in records})==180\"),\n        ('assert len(bycell)==24','assert len(bycell)==180'),(\"scenes={('IID','Benign')}\",\"scenes={('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')}\"),\n"
+      ],
+      [
+        "        ('assert len(rows)==3','assert len(rows)==24'),('assert len(errors)==162','assert len(errors)==1296'),\n        ('assert metric_checks==216 and count_checks==576','assert metric_checks==1440 and count_checks==3840'),(\"'partial_pairs_excluded':2\",\"'partial_pairs_excluded':0\")],changes)\n",
+        "        ('assert len(rows)==3','assert len(rows)==27'),('assert len(errors)==162','assert len(errors)==1458'),\n        ('assert metric_checks==216 and count_checks==576','assert metric_checks==1620 and count_checks==4320'),(\"'partial_pairs_excluded':2\",\"'partial_pairs_excluded':0\")],changes)\n"
+      ],
+      [
+        "    need(old_projection==old_records, 'Old120 records/order changed')\n",
+        "    need(old_projection==old_records, 'Old160 records/order changed')\n"
+      ],
+      [
+        "    need([x for x in record_fragments(serialized) if x[0] in old_ids_set]==record_fragments((PREV/'records.json').read_text(encoding='utf8')), 'Old120 serialized object bytes/order changed')\n",
+        "    need([x for x in record_fragments(serialized) if x[0] in old_ids_set]==record_fragments((PREV/'records.json').read_text(encoding='utf8')), 'Old160 serialized object bytes/order changed')\n"
+      ],
+      [
+        "        need([r for r in current['rows'] if r['distribution']=='IID' or (r['distribution']=='non-IID' and r['attack']=='Benign')]==previous['rows'], 'Old A60 972 per-scene statistics changed')\n",
+        "        need([r for r in current['rows'] if r['distribution']=='IID' or (r['distribution']=='non-IID' and r['attack'] in ('Benign','F Flip','FedSA'))]==previous['rows'], 'Old A80 1296 per-scene statistics changed')\n"
+      ],
+      [
+        "    need(old_cells==486 and checks['mean_sd_scalars']==1296, 'Required original/new checks incomplete')\n",
+        "    need(old_cells==648 and checks['mean_sd_scalars']==1458, 'Required original/new checks incomplete')\n"
+      ],
+      [
+        "    text=['# CelebA Full–minus_A: five IID plus three non-IID scenes, three views','',\n        'IID Benign, F Flip, FedSA, S-DFA and Sp-DFA plus non-IID Benign, F Flip and FedSA only; non-IID S-DFA and Sp-DFA remain incomplete. Validation (19,867 images), round70; ten paired model seeds per scene, with the same checkpoint across raw/native/shared views. Mean ± sample SD (ddof=1). Paired difference = minus_A − Full; ACC is percent and ΔACC is percentage points. AEOD and ASPD are lower-is-better disparities. Formal primary endpoint remains pending.','']\n",
+        "    text=['# CelebA Full–minus_A: five IID plus four non-IID scenes, three views','',\n        'IID Benign, F Flip, FedSA, S-DFA and Sp-DFA plus non-IID Benign, F Flip, FedSA and S-DFA only; non-IID Sp-DFA remains incomplete (five accepted seeds, excluded here). Validation (19,867 images), round70; ten paired model seeds per scene, with the same checkpoint across raw/native/shared views. Mean ± sample SD (ddof=1). Paired difference = minus_A − Full; ACC is percent and ΔACC is percentage points. AEOD and ASPD are lower-is-better disparities. Frozen Dirichlet partitions use alpha = 5000 for IID and alpha = 5 for non-IID. Formal primary endpoint remains pending.','']\n"
+      ],
+      [
+        "    need(cells==648, 'Display cell count incomplete')\n",
+        "    need(cells==729, 'Display cell count incomplete')\n"
+      ],
+      [
+        "        f'Actual replay devices across80 pairs: Full {counts[\"Full\"]}; minus_A {counts[\"minus_A\"]}. Training Torch: Full {torches[\"Full\"]}; minus_A {torches[\"minus_A\"]}. Per-record configuration, source, checkpoint, environment and driver provenance remain in records.json. Broader Full100 history includes98 cu128 and2 cu130 records; these80 actual source records, not that broader count, define this table.',\n        'Seed91001 participated in recipe selection; validation was exposed during development, and historical test exposure remains disclosed. The9/6 panels apply identical predefined seeds to both variants and are descriptive subsets, not untouched confirmation sets. No final test was run for this table.',\n        'All negative and constant outcomes are retained. These are all five IID minus_A scenes plus complete ten-seed non-IID Benign, F Flip and FedSA; non-IID S-DFA and Sp-DFA remain outside this delivery. No mixed-distribution eight-scene aggregate is reported. The separate five-IID-scene aggregate first averages within each model seed, and scenes are not treated as independent model seeds. This is not A100 or completion of all mechanism controls. No significance, necessity, causal-isolation or whole-rebuttal-completion claim is made.','']\n    checks.update(display_mean_sd_cells=cells,table_record_count=160,preserved_records=160,paired_models=80,complete_scenes=8,\n        old120_record_JSON_bytes_and_order_exact=True,old972_scalars_exact=True,old486_display_cells_exact=True,\n",
+        "        f'Actual replay devices across90 pairs: Full {counts[\"Full\"]}; minus_A {counts[\"minus_A\"]}. Training Torch: Full {torches[\"Full\"]}; minus_A {torches[\"minus_A\"]}. Per-record configuration, source, checkpoint, environment and driver provenance remain in records.json. Broader Full100 history includes98 cu128 and2 cu130 records; these90 actual source records, not that broader count, define this table.',\n        'Seed91001 participated in recipe selection; validation was exposed during development, and historical test exposure remains disclosed. The9/6 panels apply identical predefined seeds to both variants and are descriptive subsets, not untouched confirmation sets. No final test was run for this table. Preserved Windows exact-refit/whole-check failures in the broader baseline evaluation remain disclosed; they are not relabelled as passes by this mechanism table.',\n        'All negative and constant outcomes are retained. These are all five IID minus_A scenes plus complete ten-seed non-IID Benign, F Flip, FedSA and S-DFA; non-IID Sp-DFA remains incomplete and outside this delivery. No mixed-distribution nine-scene aggregate is reported. The separate five-IID-scene aggregate first averages within each model seed, and scenes are not treated as independent model seeds. This is not A100 or completion of all mechanism controls. No significance, necessity, causal-isolation or whole-rebuttal-completion claim is made.','']\n    checks.update(display_mean_sd_cells=cells,table_record_count=180,preserved_records=180,paired_models=90,complete_scenes=9,\n        old160_record_JSON_bytes_and_order_exact=True,old1296_scalars_exact=True,old648_display_cells_exact=True,\n"
+      ],
+      [
+        "    write('tables.json',dict(status='ACTUAL_A80_FIVE_IID_PLUS_THREE_NONIID_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=8,paired_models=80,\n        displayed_records=160,preserved_records=160,partial_F_Flip_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,\n",
+        "    write('tables.json',dict(status='ACTUAL_A90_FIVE_IID_PLUS_FOUR_NONIID_CANDIDATE_ROOT_REVIEW_PENDING',complete_scenes=9,paired_models=90,\n        displayed_records=180,preserved_records=180,partial_F_Flip_pairs=0,panels=panels,replay_devices=counts,training_torch=torches,\n"
+      ],
+      [
+        "    write('SOURCE_BINDINGS.json',dict(input_pins=input_files,actual_A80_root_adoption=args.adoption,actual_A80_root_adoption_sha256=args.adoption_sha256,\n",
+        "    write('SOURCE_BINDINGS.json',dict(input_pins=input_files,actual_A90_root_adoption=args.adoption,actual_A90_root_adoption_sha256=args.adoption_sha256,\n"
+      ],
+      [
+        "        original120_provenance_kept=True,paired_identity_links=links,fresh_F_volume=storage,\n        limits=dict(new_CNN=0,new_training=0,new_fit=0,new_predictions=0,test=False,root_table_adopted=False,complete_scenes=SCENES,remaining_A_scenes=2,excluded_partial_id=None)))\n",
+        "        original160_provenance_kept=True,paired_identity_links=links,fresh_F_volume=storage,\n        limits=dict(new_CNN=0,new_training=0,new_fit=0,new_predictions=0,test=False,root_table_adopted=False,complete_scenes=SCENES,remaining_A_scenes=1,excluded_partial_id=None,accepted_partial_ids_retained_upstream=[f'minus_A_non-IID_Sp-DFA_seed{s}' for s in range(91001,91006)])))\n"
+      ],
+      [
+        "    print(json.dumps(dict(status='ACTUAL_A80_EIGHT_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=160,pairs=80,stats=1296,cells=648,metrics=1440,counts=3840,max_abs_difference=checks['max_abs_difference'],replay_devices=counts,training_torch=torches)))\n",
+        "    print(json.dumps(dict(status='ACTUAL_A90_NINE_SCENE_THREE_VIEW_TABLE_BUILT_ROOT_REVIEW_PENDING',records=180,pairs=90,stats=1458,cells=729,metrics=1620,counts=4320,max_abs_difference=checks['max_abs_difference'],replay_devices=counts,training_torch=torches)))\n"
+      ]
+    ]
+  },
+  "finish.py": {
+    "A80_mapped_source_sha256": "580b1763702a0b9ce846c6b18fd2ac58a0994a687af2a2c1512ede1272395bad",
+    "replacements": [
+      [
+        "    need(len(records)==160, 'Exactly eight paired scenes required')\n",
+        "    need(len(records)==180, 'Exactly nine paired scenes required')\n"
+      ],
+      [
+        "    need(len(iid_records)==100 and all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA')), 'Only original five IID scenes plus non-IID Benign/F Flip/FedSA')\n",
+        "    need(len(iid_records)==100 and all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA','S-DFA')), 'Only original five IID scenes plus non-IID Benign/F Flip/FedSA/S-DFA')\n"
+      ],
+      [
+        "    need(aggregate==read(base['PREV']/'IID_SEED_FIRST.json')['panels'], 'Original A60 IID aggregate statistics changed')\n",
+        "    need(aggregate==read(base['PREV']/'IID_SEED_FIRST.json')['panels'], 'Original A80 IID aggregate statistics changed')\n"
+      ],
+      [
+        "        scene_display_cells=648,aggregate_display_cells=81,\n",
+        "        scene_display_cells=729,aggregate_display_cells=81,\n"
+      ],
+      [
+        "            r'\\caption{'+('Five IID scenarios, seed-first mean. ' if is_aggregate else 'CelebA, five IID scenarios plus non-IID Benign, F Flip and FedSA. ')+label+\n",
+        "            r'\\caption{'+('Five IID scenarios, seed-first mean. ' if is_aggregate else 'CelebA, five IID scenarios plus non-IID Benign, F Flip, FedSA and S-DFA. ')+label+\n"
+      ],
+      [
+        "        total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],total_display_cells=648+81,aggregate_max_error=aggregate_check['max_abs_difference'])))\n",
+        "        total_scalars=checks['mean_sd_scalars']+aggregate_check['mean_sd_scalars'],total_display_cells=729+81,aggregate_max_error=aggregate_check['max_abs_difference'])))\n"
+      ]
+    ]
+  },
+  "verify_saved.py": {
+    "A80_mapped_source_sha256": "46d721a0a7181441a1a43e29714d9824985dfd687d8c734e621a9a501805e302",
+    "replacements": [
+      [
+        "    assert [r for r in records if r['id'] in previous_ids]==previous and len(previous)==120\n",
+        "    assert [r for r in records if r['id'] in previous_ids]==previous and len(previous)==160\n"
+      ],
+      [
+        "        assert [row for row in panel['rows'] if row['distribution']=='IID' or (row['distribution']=='non-IID' and row['attack']=='Benign')]==prior['rows']\n",
+        "        assert [row for row in panel['rows'] if row['distribution']=='IID' or (row['distribution']=='non-IID' and row['attack'] in ('Benign','F Flip','FedSA'))]==prior['rows']\n"
+      ],
+      [
+        "    assert cells==729 and tex.count(r'\\begin{table*}')==18 and tex.count(r'\\end{table*}')==18\n    assert len(records)==160 and len([r for r in records if r['distribution']=='IID'])==100\n    assert all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA'))\n",
+        "    assert cells==810 and tex.count(r'\\begin{table*}')==18 and tex.count(r'\\end{table*}')==18\n    assert len(records)==180 and len([r for r in records if r['distribution']=='IID'])==100\n    assert all(len([r for r in records if r['distribution']=='non-IID' and r['attack']==a])==20 for a in ('Benign','F Flip','FedSA','S-DFA'))\n"
+      ],
+      [
+        "        old120_object_bytes_order_exact=True,old972_scalars_and486_cells_exact=True,old_IID_seed_first_JSON_bytes_exact=True,\n",
+        "        old160_object_bytes_order_exact=True,old1296_scalars_and648_cells_exact=True,old_IID_seed_first_JSON_bytes_exact=True,\n"
+      ]
+    ]
+  }
+}

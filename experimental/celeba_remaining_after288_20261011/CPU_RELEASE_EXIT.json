@@ -1,0 +1,1 @@
+{"returncode": 0, "automatic_retry": false, "argv": ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-p", "60350", "root@89.22.197.55", "env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 111 nice -n 10 ionice -c 3 python -B -"]}

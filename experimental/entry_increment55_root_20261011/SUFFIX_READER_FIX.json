@@ -1,0 +1,14 @@
+{
+  "status": "ROOT_NAVIGATION_CHECK_READER_FIXED",
+  "failed_command": "python -B tmp/entry_increment55_root_20261011/check_final_entries.py",
+  "exit_code": 1,
+  "line": 28,
+  "cause": "Path.read_text normalized historical CRLF before comparing raw-byte hashes.",
+  "repair": "Read and decode original bytes, then compare exact suffix bytes.",
+  "all_four_actual_raw_suffixes_checked_unchanged": true,
+  "entry_files_changed_by_checker": false,
+  "science_impact": false,
+  "second_failed_assert_line": 31,
+  "second_reader_cause": "Overview uses a valid docs-relative link instead of repository-relative prefix; normalize only the expected docs prefix for navigation check.",
+  "final_check_pass_sha256": "1241ec268628c9863764ee56f3b7167cb6743d954b8d028294ba92111f062c55"
+}
