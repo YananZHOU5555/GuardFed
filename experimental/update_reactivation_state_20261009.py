@@ -3510,16 +3510,34 @@ if replay304.exists():
     assert len(remaining['accepted_ids'])==len(set(remaining['accepted_ids']))==124
     main.update(three_view_new_models_accepted=304,three_view_new_models_offserver_verified=304,three_view_accepted_ids=index['all_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':4},three_view_root_proof_sha256=sha(replay304),latest_three_view_index=proof['records_index_path'],latest_three_view_index_sha256=proof['records_index_sha256'],three_view_scope_limit='304 original strict/offserver/native-identity replays adopted: U100/C100/A100 and exact4 F IID Benign seeds91001–91004. U/C/A each have ten complete scenes; F is partial4/10, excluded from scene means. Original300/order and all accepted U/C/A tables unchanged. Five control coverages, seven method coverages, final evaluation and submitted manuscript remain incomplete.')
 
-growth=CHECKS/'ROOT_FIVE_QUEUE_GROWTH_20261010T1817.json'
+replay310=ROOT/'tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/ROOT_ADOPTION.json'
+if replay310.exists():
+    proof=read(replay310);remaining=state['mechanism_remaining620_valid_20261010'];main=state['celeba_mechanism_v1']
+    assert sha(replay310)=='6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f'
+    assert proof['status']=='ROOT_F_BENIGN6_EXACT6_SAVED_ARRAYS_REPLAY310_ADOPTED'
+    assert (proof['prior_accepted'],proof['new_accepted'],proof['cumulative_accepted'],proof['remaining620_new_accepted'])==(304,6,310,130)
+    index=read(ROOT/proof['records_index_path']);assert sha(ROOT/proof['records_index_path'])==proof['records_index_sha256']=='d22d828d8978f965d5e7d3c45eac7d91e7f669aeb620a7df3ae9b9999b52f9aa'
+    expected=[f'minus_F_IID_Benign_seed{s}' for s in range(91005,91011)]
+    assert index['all_ids'][:304]==main['three_view_accepted_ids'] and index['all_ids'][304:]==proof['accepted_new_ids']==expected and len(set(index['all_ids']))==310
+    assert (proof['independent_metrics'],proof['independent_counts'],proof['prediction_rules'],proof['native_members_rehashed'],proof['archive_members'])==(54,144,18,12,56)
+    assert proof['original304_unchanged'] and proof['native_max_abs_difference']==0 and not proof['test']
+    assert proof['native_root_sha256']=='206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8' and sha(ROOT/proof['native_root_path'])==proof['native_root_sha256']
+    assert remaining['new_offserver_accepted']==124
+    remaining.update(new_offserver_accepted=130,root_adoption_path=replay310.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(replay310),accepted_ids=remaining['accepted_ids']+expected,latest_accepted_new_ids=expected,F_complete_scenes=proof['complete_F_scenes'],F_partial_scenes=[],F_partial_seed_ids=[])
+    assert len(remaining['accepted_ids'])==len(set(remaining['accepted_ids']))==130
+    main.update(three_view_new_models_accepted=310,three_view_new_models_offserver_verified=310,three_view_accepted_ids=index['all_ids'],three_view_counts_by_variant={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':10},three_view_root_proof_sha256=sha(replay310),latest_three_view_index=proof['records_index_path'],latest_three_view_index_sha256=proof['records_index_sha256'],three_view_scope_limit='310 original strict/offserver/native-identity replays adopted: U100/C100/A100 and F IID Benign10. Native312 is a distinct cutoff, including two F Flip native records excluded from this replay. First F scene statistics require their own root table proof; other nine F scenes, remaining controls, seven method coverages, final evaluation and submitted manuscript remain incomplete.')
+
+growth=CHECKS/'ROOT_FIVE_QUEUE_GROWTH_20261010T1859.json'
 if growth.exists():
     proof=read(growth)
-    assert sha(growth)=='333fd6ee69973b716781f5d0d52a96561503b15992b8cebf81ba9438cda44067'
+    assert sha(growth)=='db150c4245d0d59b7b72ddc3e7f88b9e8ff74afcfe2c3e0e119e78ba677c2ece'
     assert proof['status']=='ROOT_FIVE_LIVE_QUEUES_IDENTITY_AND_PROGRESS_VERIFIED' and not proof['source_changes'] and not proof['failures']
     pin=proof['snapshots'][-1];five_snapshot=ROOT/pin['path'];assert sha(five_snapshot)==pin['sha256']
     obs=read(five_snapshot)
     state['latest_five_queue_readonly_observation']=dict(path=pin['path'],sha256=pin['sha256'],utc=obs['utc'],growth_proof_path=growth.relative_to(ROOT).as_posix(),growth_proof_sha256=sha(growth),counts_are_observation_only=True,main_terminal=len(obs['main_mechanism']['queue']['completed']),main_active=obs['main_mechanism']['worker_count'],main_pending=obs['main_mechanism']['queue']['pending'],main_failures=len(obs['main_mechanism']['queue']['failed']),FLGMM_terminal=len(obs['FLGMM']['terminal_ids']),gradient_terminal=len(obs['gradient64']['terminal_ids']),remaining620_closed=obs['remaining620']['remote_closed_n'],Hybrid_terminal=len(obs['Hybrid96']['terminal_records']),new_acceptance=0)
     measured=state['latest_five_queue_readonly_observation']
-    state['celeba_mechanism_v1'].update(queue_completed_observed=measured['main_terminal'],queue_observation_utc=measured['utc'],queue_observation_path=measured['path'],queue_active_observed=measured['main_active'],queue_pending_observed=measured['main_pending'],queue_failures_observed=measured['main_failures'])
+    state['celeba_mechanism_v1'].update(queue_completed_observed=measured['main_terminal'],queue_observation_utc=measured['utc'],queue_observation_path=measured['path'],queue_active_observed=measured['main_active'],queue_pending_observed=measured['main_pending'],queue_failures_observed=measured['main_failures'],new_started=measured['main_terminal']+measured['main_active'],new_started_observation_utc=measured['utc'])
+    state['server_reactivation_20261009'].update(new_formal_training=measured['main_terminal']+measured['main_active'],new_formal_training_observation_utc=measured['utc'],latest_live_scope='Historical main-only resource sample; latest_five_queue_readonly_observation supplies current queue counts.')
     state['last_health_check_scope']='Historical main-only resource sample at its checked_utc; latest queue observations are in latest_five_queue_readonly_observation, which does not add scientific acceptance.'
     for key,stage in [('flgmm_fullcoverage_v2_20261009','FLGMM'),('gradient64_validation_search_20261010','gradient64')]:
         o=obs[stage];state[key]['latest_measured_observation']=dict(checked_utc=obs['utc'],terminal70_observed=len(o['terminal_ids']),active_rounds=[r['round'] for r in o['active']],snapshot_path=pin['path'],snapshot_sha256=pin['sha256'],acceptance_unchanged_by_observation=True)
@@ -3746,6 +3764,17 @@ if fl_six.exists():
     assert proof['caption_only_body_equality'] and proof['prior_Windows47_exact_refit_failure_preserved'] and not proof['final_test']
     for name,digest in proof['adopted_outputs'].items():assert sha(fl_six.parent/name)==digest
     state['FLGMM_after48_valid_three_view_20261011']['six_scene_table']=dict(root_proof_path=fl_six.relative_to(ROOT).as_posix(),root_proof_sha256=sha(fl_six),table_path=(fl_six.parent/'TABLES.md').relative_to(ROOT).as_posix(),complete_scene_records=60,retained_partial_records=1,scenes=6,views=['raw','native','shared_calibration'],fixed_seed_panels=[10,9,6],sample_SD_ddof=1,validation_only=True,full100_complete=False,final_test=False)
+F10_table=TRAIN/'celeba_mechanism_v1/three_view_F_Benign10_20261011'
+if (F10_table/'ROOT_VERIFICATION.json').exists():
+    proof=read(F10_table/'ROOT_VERIFICATION.json')
+    assert sha(F10_table/'ROOT_VERIFICATION.json')=='30bc95ef503976076774873c3ccfb39384570983f037aa559042a4ad41bfa32d'
+    assert proof['root_adoption'] and (proof['paired_models'],proof['complete_scenes'],proof['preserved_records'])==(10,1,20)
+    assert (proof['mean_SD_scalars_recomputed'],proof['display_cells'],proof['metrics_from_group_counts'],proof['base_integer_confusion_counts_checked'])==(162,81,180,480)
+    assert proof['source_acceptance_sha256']==sha(replay310) and proof['actual_root_command_exit']==0 and not proof['test']
+    for name,digest in proof['files_sha256'].items():assert sha(F10_table/name)==digest
+    main.update(F_three_view_single_scene_table=dict(status=proof['status'],root_adoption=True,table_path=proof['canonical_table'],root_proof_path=(F10_table/'ROOT_VERIFICATION.json').relative_to(ROOT).as_posix(),root_proof_sha256=sha(F10_table/'ROOT_VERIFICATION.json'),complete_scenes=1,paired_models=10,seed_panels=[10,9,6],mean_SD_scalars=162,display_cells=81,replay_devices=proof['replay_devices'],training_torch=proof['training_torch'],native_shared_metrics_and_counts_exact=proof['native_shared_metrics_and_counts_exact'],final_test=False,incorporated_into_full_rebuttal=False),three_view_scope_limit='U100/C100/A100 retain all ten scenes; the first F IID Benign10 paired table is separately root-adopted. Native/shared deletion improves ten/nine-seed mean accuracy and AEOD while worsening ASPD; six-seed accuracy direction changes. Raw fixed panels and all paired differences are retained. No F cross-scene aggregate, necessity or significance claim; other nine F scenes, remaining controls, seven method coverages, final evaluation and submitted manuscript incomplete.')
+    state['mechanism_remaining620_valid_20261010']['F_IID_Benign_table_adopted']=True
+
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 running = TRAIN / 'RUNNING.md'
 old = running.read_text(encoding='utf-8')
@@ -4065,6 +4094,8 @@ detail.parent.mkdir(parents=True,exist_ok=True)
 if detail.exists():assert detail.read_bytes()==top.encode('utf8')
 else:detail.write_bytes(top.encode('utf8'))
 A_current=main.get('A_three_view_ten_scene_table',main.get('A_three_view_nine_scene_table',main.get('A_three_view_eight_scene_table',main.get('A_three_view_six_scene_table',main.get('A_three_view_five_scene_table',main.get('A_three_view_four_scene_table',{}))))))
+F_current=main.get('F_three_view_single_scene_table',{})
+F_scene_note=('F IID Benign首个十seed三视图配对表已独立及root采用：162统计标量/81展示格、180计数派生指标/480基础计数通过，固定10/9/6面板。native/shared数值相同，不当独立确认；删除F在10/9种子下提高ACC并降低AEOD、但ASPD变差，6种子ACC方向变化；raw各面板和全部配对负值保留。仅此场景齐备，未做跨场景均值，不支持三指标不可或缺/显著性主张。入口'+F_current['table_path']+'。' if F_current else '')
 five=state.get('latest_five_queue_readonly_observation',{})
 fl=state['flgmm_fullcoverage_v2_20261009'];gradient=state['gradient64_validation_search_20261010'];hy=state['hybrid100_fullcoverage_20261010']
 hy_scene_note=('组合基线IID Benign十seed native验证表已独立及root采用，固定10/9/6面板、18个均值/样本SD标量和9个展示格核验；来源为9新增+1screen复用。仅此场景齐备，其他九场景和三视图未齐。入口'+hy['native_IID_Benign_table']['table_path']+'。' if hy.get('native_IID_Benign_table') else '')
@@ -4099,7 +4130,7 @@ top=f'''# CURRENT: GuardFed返修实验
 | 阶段 | 已验收 | 实测活动/剩余边界 |
 |---|---:|---|
 | 机制训练 | {main['scientific_results_strictly_accepted']}/800新增，100 Full另复用 | 五队列观测完成{five.get('main_terminal',live['queue_completed'])}、活动{five.get('main_active',len(live['active']))}、等待{five.get('main_pending',live['pending'])}、失败{five.get('main_failures',len(live['failed']))}；固定70轮/8并发 |
-| 机制三视图 | {main['three_view_new_models_offserver_verified']}终轮checkpoint | U100/C100/A100各十场景；F{main['three_view_counts_by_variant'].get('minus_F',0)}为IID Benign部分种子，未入完整场景均值；远端闭合不等于离机验收 |
+| 机制三视图 | {main['three_view_new_models_offserver_verified']}终轮checkpoint | U100/C100/A100各十场景；{'F IID Benign十种子已完成配对表，其他九F场景未齐' if F_current else 'F'+str(main['three_view_counts_by_variant'].get('minus_F',0))+'为IID Benign部分种子，未入完整场景均值'}；远端闭合不等于离机验收 |
 | FLGMM完整覆盖 | {fl['new_accepted']}/96新增，4复用另计 | 观测终轮{five.get('FLGMM_terminal','见STATE')}，2个worker有轮次增长 |
 | Fed-NGA/Huber搜索 | {gradient['offserver_accepted']}/64 | 观测终轮{five.get('gradient_terminal','见STATE')}，单worker推进；所有候选/恒定预测保留，未选recipe |
 | 组合基线完整覆盖 | {hy['new_accepted']}/96新增，4复用另计 | 观测终轮{five.get('Hybrid_terminal','见STATE')}，单worker推进；7个三轮门检不计正式样本 |
@@ -4111,6 +4142,8 @@ top=f'''# CURRENT: GuardFed返修实验
 {hy_scene_note}
 
 {hub_negative_note}
+
+{F_scene_note}
 
 ## 已交付与尚缺
 
@@ -4144,4 +4177,4 @@ marker = '# HISTORICAL PREPARATION SNAPSHOT — no execution at time of preparat
 if marker in text:
     text = text.split(marker,1)[1]
 execution.write_text(top.replace('# CURRENT:', '# CURRENT EXECUTION:')+marker+text,encoding='utf-8')
-print(json.dumps({'status':phase,'measured_utc':live['checked_utc'],'completed':live['queue_completed'],'active':len(live['active']),'formal':formal}))
+print(json.dumps({'status':phase,'measured_utc':five.get('utc',live['checked_utc']),'completed':five.get('main_terminal',live['queue_completed']),'active':five.get('main_active',len(live['active'])),'historical_resource_sample_utc':live['checked_utc'],'formal':formal}))

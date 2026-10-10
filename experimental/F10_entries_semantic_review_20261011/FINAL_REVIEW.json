@@ -1,0 +1,227 @@
+{
+  "status": "PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW",
+  "reviewed_utc": "2026-10-10T19:14:27.183606+00:00",
+  "scope": "Read-only semantic review of current navigation, accepted-versus-observed counts, existing adopted-table interpretation and historical boundaries. Not scientific revalidation or a new server health measurement. Reviewer previously authored entry generators; no independent source review is claimed.",
+  "STATE_sha256": "3bc5679e3670614c325891c1ad1c0b737a5dd51883852f37c3055cb7ecba8980",
+  "entries": {
+    "docs/server_deployment_20260923/training_20260923/RUNNING.md": {
+      "sha256": "06db407df974f56a3c5ad8597a210a302ba7b73b9617cdb500d1cb4bdc82df8d",
+      "historical_suffix_sha256": "203700dc6c349a10fc18f09e271df6db05f0aba0fcdf42617cce1f0bf6328a44",
+      "historical_suffix_bytes": 33562,
+      "history_exact": true
+    },
+    "docs/server_deployment_20260923/training_20260923/REBUTTAL_COMPLETION_20261009.md": {
+      "sha256": "a458181990fd0b9822cdb641a8887cc3baafd6a78015b96089adb6f5ada30a92",
+      "historical_suffix_sha256": "3aa956a830219050d59e9577c87d5b29b66520d26bee018d54335b9cd1630080",
+      "historical_suffix_bytes": 16149,
+      "history_exact": true
+    },
+    "docs/返修实验总览.md": {
+      "sha256": "14cf70811613635399c3b9c928417f1e8e1f5f0c8f91573d5f589a36f007e230",
+      "historical_suffix_sha256": "08b94e001b4ff78474706db0a63cc2c1b626fe5664c01edfafbaefb53fe9b029",
+      "historical_suffix_bytes": 15511,
+      "history_exact": true
+    },
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/MONITOR_HANDOFF.md": {
+      "sha256": "a90c8af1d3e3bd32ab752f14d95e4e7681ed11000c12c041fe1718983c9887b8",
+      "historical_suffix_sha256": "f9dfedaf289de16f1226d2356ccfa451034e2e5e05b19348f0c08095e5a0a1ee",
+      "historical_suffix_bytes": 23396,
+      "history_exact": true
+    }
+  },
+  "current_accepted": {
+    "native_new": 312,
+    "native_denominator": 800,
+    "Full_reuse_separate": 100,
+    "started_observed": 320,
+    "three_view_models": 310,
+    "by_variant": {
+      "minus_U": 100,
+      "minus_C": 100,
+      "minus_A": 100,
+      "minus_F": 10
+    },
+    "F_complete_scenes": 1,
+    "F_paired_models": 10,
+    "F_native_only_Flip_excluded": 2,
+    "FL_native_new": 63,
+    "FL_new_denominator": 96,
+    "FL_screen_reuse_separate": 4,
+    "FL_three_view_source_native": 57,
+    "FL_three_view_screen": 4,
+    "FL_three_view_total": 61,
+    "FL_complete_table_records": 60,
+    "gradient_accepted": 46,
+    "gradient_FedNGA": 32,
+    "gradient_Huber": 14,
+    "Hybrid_native_new": 12,
+    "Hybrid_screen_reuse_separate": 4,
+    "Hybrid_Benign_table_new": 9,
+    "Hybrid_Benign_table_screen": 1,
+    "Hybrid_Flip_partial": 3
+  },
+  "latest_observation_only": {
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T185912Z.raw.json",
+    "sha256": "6c130df4a3e243b0bfa0fba7718cfe00d199cc67ce87798828095cb7e606ebad",
+    "utc": "2026-10-10T18:59:17.269220+00:00",
+    "growth_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T1859.json",
+    "growth_proof_sha256": "db150c4245d0d59b7b72ddc3e7f88b9e8ff74afcfe2c3e0e119e78ba677c2ece",
+    "counts_are_observation_only": true,
+    "main_terminal": 312,
+    "main_active": 8,
+    "main_pending": 480,
+    "main_failures": 0,
+    "FLGMM_terminal": 65,
+    "gradient_terminal": 49,
+    "remaining620_closed": 132,
+    "Hybrid_terminal": 13,
+    "new_acceptance": 0
+  },
+  "F10_interpretation": {
+    "fixed_panels": [
+      10,
+      9,
+      6
+    ],
+    "delta_definition": "minus_F minus Full",
+    "native_shared_delta_ACC_pp": [
+      0.214,
+      0.291,
+      -0.072
+    ],
+    "native_shared_AEOD": "lower in all three panels",
+    "native_shared_ASPD": "higher in all three panels",
+    "raw_10_9": "higher ACC and higher both gaps",
+    "raw_6": "ACC +0.008 pp and lower both gaps",
+    "sample_SD_ddof": 1,
+    "native_shared_not_independent": true,
+    "devices_Full": {
+      "CPU": 2,
+      "GPU": 8
+    },
+    "devices_minus_F": {
+      "CPU": 10
+    },
+    "training_cu128_both": true,
+    "one_scene_not_F100": true,
+    "F10_not_in_A100_reply": true
+  },
+  "source_pins": {
+    "F10_table_root": {
+      "path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_Benign10_20261011/ROOT_VERIFICATION.json",
+      "sha256": "30bc95ef503976076774873c3ccfb39384570983f037aa559042a4ad41bfa32d"
+    },
+    "native312_root": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T184902Z/ROOT_DELTA_VERIFICATION.json",
+      "sha256": "206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8"
+    },
+    "views310_root": {
+      "path": "tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/ROOT_ADOPTION.json",
+      "sha256": "6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f"
+    },
+    "A100_detailed_root": {
+      "path": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_A100_reader_20261011/ROOT_REVIEW.json",
+      "sha256": "195eb98c26cc2a4f0c3576cbb7a6b57a73fbc0d4ccc17a683f9817569e164c54"
+    },
+    "A100_clear_root": {
+      "path": "docs/server_deployment_20260923/revision_20260923/rebuttal_clear_A100_20261011/ROOT_REVIEW.json",
+      "sha256": "6c071c87b07e8fc6b36f93553875cbce33bf034b8b3d71584d37e6b70535096c"
+    },
+    "two_generators_actual": {
+      "path": "tmp/entry_F10_generators_actual_20261011/attempt_v2/ACTUAL_TWO_GENERATORS_RESULT.json",
+      "sha256": "71c4b9078fbbbe24cdea839a0c5d515dd2fa10bdb13da51696ac982b8200b90c"
+    },
+    "executed_main_source": {
+      "path": "tmp/F10_entries_root_execution_20261011/EXECUTED_SOURCE_45570835.py",
+      "sha256": "4557083549480a1d1ce74391cdeebfb10110fa18dc0e8e832ad3714053af60c7"
+    },
+    "executed_source_recovery": {
+      "path": "tmp/F10_entries_root_execution_20261011/EXECUTED_SOURCE_RECOVERY.json",
+      "sha256": "86e3476ee9b982227336670e6999413ed7df2ca7117fe9b5fff3cded5bbce254"
+    },
+    "five_queue_snapshot": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T185912Z.raw.json",
+      "sha256": "6c130df4a3e243b0bfa0fba7718cfe00d199cc67ce87798828095cb7e606ebad"
+    },
+    "five_queue_growth": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_FIVE_QUEUE_GROWTH_20261010T1859.json",
+      "sha256": "db150c4245d0d59b7b72ddc3e7f88b9e8ff74afcfe2c3e0e119e78ba677c2ece"
+    }
+  },
+  "findings_and_resolution": [
+    {
+      "file": "docs/返修实验总览.md",
+      "line": 311,
+      "finding": "An unlabeled duplicated prior increment still says current mechanism304 and Fpartial4/no new table, conflicting with current310/F10.",
+      "required_fix": "Label the whole line historical publication57 without changing its scientific content.",
+      "status": "RESOLVED_BY_OWNER_METADATA_EDIT_VERIFIED",
+      "resolution_proof_sha256": "2609f93607ef2eb1d25a3417b5d247c6d0980c4e56754dd9aa0bc8b8bfcc489e"
+    },
+    {
+      "file": "docs/返修实验总览.md",
+      "line": 306,
+      "finding": "The publication57 historical label is duplicated.",
+      "required_fix": "Collapse to one identical history label.",
+      "status": "RESOLVED_BY_OWNER_METADATA_EDIT_VERIFIED",
+      "resolution_proof_sha256": "2609f93607ef2eb1d25a3417b5d247c6d0980c4e56754dd9aa0bc8b8bfcc489e"
+    },
+    {
+      "file": "docs/返修实验总览.md",
+      "lines": [
+        176,
+        181,
+        222,
+        247
+      ],
+      "finding": "Preserved A40/A50/A60/A80 author drafts retained an unqualified latest label.",
+      "status": "RESOLVED_BY_OWNER_HISTORICAL_PREFIX_ONLY",
+      "all_scientific_body_bytes_preserved": true
+    }
+  ],
+  "remaining_scientific_limitations": [
+    "F other nine scenes and five complete control coverages unfinished",
+    "Seven method coverages and whole17-method benchmark unfinished",
+    "Gradient search incomplete; fourteen Huber constant-negative ACC0.5166859616449389/gaps0 retained; no recipe selected",
+    "A100 detailed/clear24-comment author drafts preserved and not submission-ready; F10 not newly incorporated",
+    "Historical Windows FL47 exact-refit and whole-check failures retained; no cross-platform bitwise claim",
+    "Historical validation selection, prior test exposure and mixed replay/training environments retained",
+    "Primary endpoint/final evaluation and submitted manuscript integration unresolved; synthetic original provenance unresolved",
+    "Native chat monitor PAUSED; historical health_monitor ACTIVE field is superseded by native_monitor_20261009",
+    "Git57 actual7cf342c4dc7ce4ecd09a3bdf1c7cbb64283978ed/397blobs is historical304 publication cutoff, not current312/310 push"
+  ],
+  "execution_boundaries": {
+    "scientific_checkers_run": 0,
+    "generators_run_by_reviewer": 0,
+    "SSH": 0,
+    "Git": 0,
+    "future_main_source_323ff_not_executed": true,
+    "started_counter_metadata_correction_preserved": true
+  },
+  "final_reviewed_utc": "2026-10-10T19:15:49.423712+00:00",
+  "initial_review": {
+    "path": "tmp/F10_entries_semantic_review_20261011/INITIAL_REVIEW.json",
+    "sha256": "fdf90bf787e1f66c008887c84d609dd73e0078dfb1c606503132f7931538cded",
+    "status": "NEEDS_NAVIGATION_LABEL_FIX"
+  },
+  "limited_correction_verification": {
+    "proof_path": "tmp/entry_F10_generators_actual_20261011/overview_history_label_correction/CORRECTION_PROOF.json",
+    "proof_sha256": "2609f93607ef2eb1d25a3417b5d247c6d0980c4e56754dd9aa0bc8b8bfcc489e",
+    "exact_six_line_inverse_to_initial_overview": true,
+    "changed_lines": [
+      176,
+      181,
+      222,
+      247,
+      306,
+      311
+    ],
+    "other_three_entries_and_STATE_exact": true,
+    "all_four_historical_suffixes_exact": true,
+    "executed_overview_source_sha256": "7061bd5dcdf71bf5e63a6e6782daec2aa6b0e62a7814df87e6420afa3e7af7f1",
+    "future_overview_source_sha256": "9c39f0f281de41d304d6078575896511aba00dc47f713375dacd08046cbff638",
+    "future_source_not_executed": true,
+    "source_change": "Whole-line labeling replaces substring replacement; prevents matching a preserved old body inside an already labeled line.",
+    "no_generator_rerun": true
+  },
+  "review_outcome": "No unresolved material count, unit, source-cutoff, prediction-rule, method-fidelity or completion-boundary error found within reviewed current/navigation scope. Initial navigation conflicts resolved by six history-prefix-only edits. This review does not certify current server state or repeat scientific/editorial checkers."
+}

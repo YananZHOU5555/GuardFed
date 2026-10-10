@@ -1,0 +1,18 @@
+--- executed_source_45570835
++++ future_source_323ff72b
+@@ -3536,7 +3536,8 @@
+     obs=read(five_snapshot)
+     state['latest_five_queue_readonly_observation']=dict(path=pin['path'],sha256=pin['sha256'],utc=obs['utc'],growth_proof_path=growth.relative_to(ROOT).as_posix(),growth_proof_sha256=sha(growth),counts_are_observation_only=True,main_terminal=len(obs['main_mechanism']['queue']['completed']),main_active=obs['main_mechanism']['worker_count'],main_pending=obs['main_mechanism']['queue']['pending'],main_failures=len(obs['main_mechanism']['queue']['failed']),FLGMM_terminal=len(obs['FLGMM']['terminal_ids']),gradient_terminal=len(obs['gradient64']['terminal_ids']),remaining620_closed=obs['remaining620']['remote_closed_n'],Hybrid_terminal=len(obs['Hybrid96']['terminal_records']),new_acceptance=0)
+     measured=state['latest_five_queue_readonly_observation']
+-    state['celeba_mechanism_v1'].update(queue_completed_observed=measured['main_terminal'],queue_observation_utc=measured['utc'],queue_observation_path=measured['path'],queue_active_observed=measured['main_active'],queue_pending_observed=measured['main_pending'],queue_failures_observed=measured['main_failures'])
++    state['celeba_mechanism_v1'].update(queue_completed_observed=measured['main_terminal'],queue_observation_utc=measured['utc'],queue_observation_path=measured['path'],queue_active_observed=measured['main_active'],queue_pending_observed=measured['main_pending'],queue_failures_observed=measured['main_failures'],new_started=measured['main_terminal']+measured['main_active'],new_started_observation_utc=measured['utc'])
++    state['server_reactivation_20261009'].update(new_formal_training=measured['main_terminal']+measured['main_active'],new_formal_training_observation_utc=measured['utc'],latest_live_scope='Historical main-only resource sample; latest_five_queue_readonly_observation supplies current queue counts.')
+     state['last_health_check_scope']='Historical main-only resource sample at its checked_utc; latest queue observations are in latest_five_queue_readonly_observation, which does not add scientific acceptance.'
+     for key,stage in [('flgmm_fullcoverage_v2_20261009','FLGMM'),('gradient64_validation_search_20261010','gradient64')]:
+         o=obs[stage];state[key]['latest_measured_observation']=dict(checked_utc=obs['utc'],terminal70_observed=len(o['terminal_ids']),active_rounds=[r['round'] for r in o['active']],snapshot_path=pin['path'],snapshot_sha256=pin['sha256'],acceptance_unchanged_by_observation=True)
+@@ -4176,4 +4177,4 @@
+ if marker in text:
+     text = text.split(marker,1)[1]
+ execution.write_text(top.replace('# CURRENT:', '# CURRENT EXECUTION:')+marker+text,encoding='utf-8')
+-print(json.dumps({'status':phase,'measured_utc':live['checked_utc'],'completed':live['queue_completed'],'active':len(live['active']),'formal':formal}))
++print(json.dumps({'status':phase,'measured_utc':five.get('utc',live['checked_utc']),'completed':five.get('main_terminal',live['queue_completed']),'active':five.get('main_active',len(live['active'])),'historical_resource_sample_utc':live['checked_utc'],'formal':formal}))

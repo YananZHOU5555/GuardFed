@@ -1,0 +1,9 @@
+--- root_tool_inline_attempt001
++++ root_tool_inline_attempt_v2
+@@ historical suffix pre-execution capture @@
+-  b=p.read_bytes();assert b.count(m)==1,(str(p),'historical marker')
+-  tail=b.split(m,1)[1];assert sha(tail)==expected,(str(p),'historical suffix')
++  b=p.read_bytes();assert m in b,(str(p),'historical marker missing')
++  tail=m+b.split(m,1)[1];assert sha(tail)==expected and len(tail)==size,(str(p),'historical suffix hash/size')
+
+The four frozen suffix hashes include the first marker itself. RUNNING has16 historical markers. Attempt001 failed before either generator was called; its no_retry=true remains literal and the old wrapper was not rerun. The authorized corrected attempt_v2 called each unchanged approved generator once. No scientific condition, source pin or shared STATE changed.

@@ -5,8 +5,8 @@ ROOT=Path(__file__).resolve().parents[1]
 TRAIN=ROOT/'docs/server_deployment_20260923/training_20260923'
 state=json.loads((TRAIN/'TRAINING_STATE.json').read_bytes())
 latest_observation=state['latest_five_queue_readonly_observation']
-assert hashlib.sha256((ROOT/latest_observation['path']).read_bytes()).hexdigest()==latest_observation['sha256']=='b84763754dd5b969a2069cd8798755a185c15f1d3a27c33db514cba371a10a2c'
-assert hashlib.sha256((ROOT/latest_observation['growth_proof_path']).read_bytes()).hexdigest()==latest_observation['growth_proof_sha256']=='333fd6ee69973b716781f5d0d52a96561503b15992b8cebf81ba9438cda44067'
+assert hashlib.sha256((ROOT/latest_observation['path']).read_bytes()).hexdigest()==latest_observation['sha256']=='6c130df4a3e243b0bfa0fba7718cfe00d199cc67ce87798828095cb7e606ebad'
+assert hashlib.sha256((ROOT/latest_observation['growth_proof_path']).read_bytes()).hexdigest()==latest_observation['growth_proof_sha256']=='db150c4245d0d59b7b72ddc3e7f88b9e8ff74afcfe2c3e0e119e78ba677c2ece'
 assert latest_observation['counts_are_observation_only'] is True and latest_observation['new_acceptance']==0
 fl47_current=state.get('FLGMM_closed47_valid_three_view_20261011',{})
 if fl47_current.get('complementary_adopted'):
@@ -142,6 +142,46 @@ if views304:
     assert views304_proof['original300_unchanged'] is True and views304_proof['native_root_sha256']=='f1d25b2150d0a6f8a949fdd0745b2163e4aacfea20333e3012e8cd9dcf16f76a'
     assert (views304_proof['independent_metrics'],views304_proof['independent_counts'],views304_proof['prediction_rules'],views304_proof['native_max_abs_difference'])==(36,96,12,0) and views304_proof['archive_members']==38
     assert views304_proof['new_scene_table_created'] is False and views304_proof['test'] is False and views304_proof['Full_inference']==views304_proof['new_CNN']==views304_proof['new_fit']==0
+native312=main['scientific_results_offserver_verified']==312
+if native312:
+    native312_root=TRAIN/'server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T184902Z/ROOT_DELTA_VERIFICATION.json'
+    assert hashlib.sha256(native312_root.read_bytes()).hexdigest()=='206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8'
+    native312_proof=json.loads(native312_root.read_bytes())
+    assert native312_proof['root_adopted'] is True and native312_proof['total_new_strict_and_offserver']==312 and native312_proof['old404_records_exact'] is True
+    assert native312_proof['root_checked_archive_members']==94 and native312_proof['test'] is False
+    assert native312_proof['ledger_sha256']=='9baf997fcb87ec7da604af076945aab5637ef828b6cf8bccb560a4d93c2a26c2'
+views310=main['three_view_new_models_offserver_verified']==310
+F10_note=''
+if views310:
+    assert native312 and main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':10}
+    views310_root=ROOT/'tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/ROOT_ADOPTION.json'
+    assert hashlib.sha256(views310_root.read_bytes()).hexdigest()=='6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f'
+    views310_proof=json.loads(views310_root.read_bytes())
+    assert views310_proof['status']=='ROOT_F_BENIGN6_EXACT6_SAVED_ARRAYS_REPLAY310_ADOPTED'
+    assert (views310_proof['prior_accepted'],views310_proof['new_accepted'],views310_proof['cumulative_accepted'],views310_proof['remaining620_new_accepted'])==(304,6,310,130)
+    assert views310_proof['accepted_new_ids']==[f'minus_F_IID_Benign_seed{s}' for s in range(91005,91011)] and views310_proof['original304_unchanged'] is True
+    assert (views310_proof['archive_members'],views310_proof['independent_metrics'],views310_proof['independent_counts'],views310_proof['prediction_rules'],views310_proof['native_max_abs_difference'])==(56,54,144,18,0)
+    assert views310_proof['native_root_sha256']=='206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8' and views310_proof['test'] is False
+    F10_root=TRAIN/'celeba_mechanism_v1/three_view_F_Benign10_20261011/ROOT_VERIFICATION.json'
+    assert hashlib.sha256(F10_root.read_bytes()).hexdigest()=='30bc95ef503976076774873c3ccfb39384570983f037aa559042a4ad41bfa32d'
+    F10_proof=json.loads(F10_root.read_bytes())
+    assert F10_proof['root_adoption'] is True and (F10_proof['preserved_records'],F10_proof['paired_models'],F10_proof['complete_scenes'])==(20,10,1)
+    assert (F10_proof['mean_SD_scalars_recomputed'],F10_proof['display_cells'],F10_proof['metrics_from_group_counts'],F10_proof['base_integer_confusion_counts_checked'])==(162,81,180,480)
+    assert F10_proof['seed_panels']==[10,9,6] and F10_proof['actual_root_command_exit']==0 and F10_proof['test'] is False
+    assert F10_proof['source_acceptance_sha256']=='6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f' and F10_proof['source_native_root_sha256']=='206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8'
+    assert F10_proof['original_Full10_records_exact'] and F10_proof['original_F10_saved_views_exact'] and F10_proof['native_shared_metrics_and_counts_exact']
+    F10_tables_path=F10_root.parent/'tables.json'
+    assert hashlib.sha256(F10_tables_path.read_bytes()).hexdigest()==F10_proof['files_sha256']['tables.json']=='9bd62bd2949220d059cf966d4b383ff5f7c70c5de8fd1daf2a53d564a8efaff9'
+    assert hashlib.sha256((F10_root.parent/'TABLES.md').read_bytes()).hexdigest()==F10_proof['files_sha256']['TABLES.md']=='004f572b185b5b1302c093c74d06362347ad8e2de85cca28ced8a02db83fde61'
+    F10_tables=json.loads(F10_tables_path.read_bytes())
+    F10_delta=[p['rows'][2] for p in F10_tables['panels']]
+    assert [p['view'] for p in F10_tables['panels']]==['native']*3+['raw']*3+['shared_calibration']*3
+    assert F10_delta[:3]==F10_delta[6:] and all(r['aeod']['mean']<0 and r['aspd']['mean']>0 for r in F10_delta[:3])
+    assert [r['accuracy_pct']['mean']>0 for r in F10_delta[:3]]==[True,True,False]
+    assert all(F10_delta[i]['accuracy_pct']['mean']>0 and F10_delta[i]['aeod']['mean']>0 and F10_delta[i]['aspd']['mean']>0 for i in (3,4))
+    assert F10_delta[5]['accuracy_pct']['mean']>0 and F10_delta[5]['aeod']['mean']<0 and F10_delta[5]['aspd']['mean']<0
+if views310:
+    F10_note=(f"The first F IID Benign table is separately root-adopted:20 records/10 Full–minus_F pairs in one complete scene, raw/native/shared and fixed10/9/6 panels,162 mean/sampleSD scalars/81 cells/180 count-derived metrics/480 integer counts. Under minus_F−Full, native/shared ACC means are {F10_delta[0]['accuracy_pct']['mean']:+.3f}/{F10_delta[1]['accuracy_pct']['mean']:+.3f}/{F10_delta[2]['accuracy_pct']['mean']:+.3f}pp for10/9/6; AEOD decreases but ASPD increases in all three panels. Raw10/9 retain higher ACC and both larger gaps; raw6 gives ACC{F10_delta[5]['accuracy_pct']['mean']:+.3f}pp and both lower gaps. Native/shared coincide and are not independent confirmation. Full2CPU/8GPU versus F10CPU, both trainingcu128, seed91001 validation selection and post-initial-test development remain disclosed. The two native-only IID F Flip records are excluded. This is not F100, a necessity/significance claim or final test; the A100 detailed/clear24-comment drafts remain unchanged. Table: "+F10_proof['canonical_table']+".\n")
 accepted=main['scientific_results_offserver_verified'];replayed=baseline['actual_native_valid_image_replays_accepted']
 mechanism_views=main['three_view_new_models_offserver_verified']
 C_views=main.get('three_view_counts_by_variant',{}).get('minus_C',0)
@@ -437,6 +477,7 @@ current=f'''## Current accepted increment — observed {latest_observation['utc'
 
 The main mechanism queue has{latest_observation['main_terminal']} terminal jobs observed, with{accepted} independently accepted and backed up off server in{len(increments)} linked increments;100 Full controls remain explicit reuse. The latest{len(latest_increment['new_ids'])}-ID increment has{latest_increment['members_verified']} verified members, archive `{latest_increment['archive_sha256']}`. At that observation the queue has{latest_observation['main_active']} active workers and{latest_observation['main_failures']} failures. The separate resource sample at{state['last_health_check']['checked_utc']} is historical and is not a fresh resource measurement. These counts do not establish all800 controls or the whole rebuttal.
 
+{F10_note}
 The existing nine-method terminal-model validation replay has {replayed} distinct accepted and off-server-verified models, with {900-replayed} still missing. Each closed increment has original strict acceptance and independent raw/native/shared prediction-array checks; all preserve native metrics exactly. The cumulative collector is `{baseline['accepted_collection_path']}`. {failure_paragraph}{diagnostic_paragraph}{recovery_paragraph}This is validation replay, not final-test evaluation or new model training.
 
 The approved exact15 mechanism replay increment is complete and its service is EXITED: three disjoint backups contain149 content members plus three inventories, with135 metrics,360 confusion counts and45 prediction rules independently reconstructed. Together with the original eight, the historical increment closed23 actual minus_U terminal checkpoints. Subsequent explicitly adopted increments bring the current total to{mechanism_views} strict, off-server raw/native/shared validation replays: complete U100 plus{C_view_note}{A_view_note}Native discrepancies in these accepted increments are zero. {paired_note}This does not establish the complete mechanism comparison.
@@ -539,6 +580,8 @@ if mechanism_views==295:
     current+='\nCurrent295 root-adopted mechanism three-view checkpoints comprise U100/C100/A95. Non-IID S-DFA now has all10 A seeds; Sp-DFA has only5 and is excluded from complete-scene means. A90 statistics are adopted only when the separately hash-checked A90 STATE entry exists; the historical A80 table remains retained. No new fitting or inference was used for this transport. Entry: '+state['mechanism_remaining620_valid_20261010']['root_adoption_path']+'.\n'
 if views304:
     current+='Current304 root-adopted mechanism three-view checkpoints comprise U100/C100/A100 and four F IID Benign seeds91001–91004; original300 and Full are unchanged. The exact increment passes38 members/36 metrics/96 counts/12 rules with zero native discrepancy and no new fitting or inference. F remains a partial4/10 scene: no new scene mean, SD or table is adopted. Other five controls, complete17-method coverage and final evaluation remain unfinished. Entry: '+str(views304_root.relative_to(ROOT))+'.\n'
+if views310:
+    current+='Current native312 and mechanism three-view310 are distinct cutoffs:U100/C100/A100/F10 three-view records, plus two native-only F IID F Flip records. The exact latest6 transport preserves304/Full and passes56 members/54 metrics/144 counts/18 rules with zero native discrepancy. Only F IID Benign has a complete10-pair F table; other F scenes/five controls, complete17 methods and final evaluation remain unfinished. Entry: '+str(views310_root.relative_to(ROOT))+'.\n'
 if state.get('celeba_native_ten_method_PDF_20261010'):
     pinfo=state['celeba_native_ten_method_PDF_20261010']
     current+='\nThe ten-method native validation table PDF passes all three page visual checks and exact matching of900 mean/sampleSD pairs(1800 numbers) to the accepted source. Pages contain10/9/6 seed panels and both distributions/five scenarios. This is a display artifact, not final test evidence or complete17-method coverage. Entry: '+pinfo['pdf_path']+'.\n'

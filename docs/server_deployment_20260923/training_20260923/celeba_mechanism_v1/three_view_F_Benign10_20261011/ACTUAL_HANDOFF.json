@@ -1,0 +1,403 @@
+{
+  "status": "ACTUAL_F_IID_BENIGN10_BUILT_ROOT_SAVED_CHECK_PENDING",
+  "utc": "2026-10-10T18:57:00.093219+00:00",
+  "binding_sha256": "be6fb6c77cdbf3f734fc8d84c7c847f31d1d4bb22b4d1ad4547a250d24e45306",
+  "source_seal_sha256": "b36f28bb0501453ffd2cf021bd3f9dd493474a110365847e98292d31d0ab5b1a",
+  "root_source_review_sha256": "2cd5a7b78ee3826d72e8cc24fac773e7fb3e71958d19a72f7a857d7919ae1d77",
+  "build_command_sha256": "79b06faea37a26e6ef7993c4e9664b515e1ca4de055cf02ffa1e96c731726f6c",
+  "build_exit_code": 0,
+  "build_calls": 1,
+  "saved_verifier_calls": 0,
+  "records": 20,
+  "paired_models": 10,
+  "complete_scenes": 1,
+  "checks": {
+    "mean_sd_scalars": 162,
+    "max_abs_difference": 1.4210854715202004e-14,
+    "partial_pairs_excluded": 0,
+    "receipt_metrics_from_group_counts": 180,
+    "base_confusion_counts_structurally_checked": 480,
+    "display_mean_sd_cells": 81,
+    "table_record_count": 20,
+    "preserved_records": 20,
+    "paired_models": 10,
+    "native_shared_metrics_and_counts_exact": true,
+    "original_full_record_and_receipt_identity_sources_unmodified": true,
+    "variant_only_AST_rebind": true,
+    "new_threshold_fits": 0,
+    "new_CNN": 0,
+    "new_training": 0,
+    "test": false
+  },
+  "replay_devices": {
+    "Full": {
+      "cpu": 2,
+      "cuda:0": 8
+    },
+    "minus_F": {
+      "cpu": 10
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 10
+    },
+    "minus_F": {
+      "2.11.0+cu128": 10
+    }
+  },
+  "paired_deltas": [
+    {
+      "view": "native",
+      "label": "All 10 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 10,
+        "expected_n": 10,
+        "complete": true,
+        "seeds": [
+          91001,
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.2139225851915228,
+          "sample_sd_ddof1": 1.4510516852473982
+        },
+        "aeod": {
+          "mean": -0.003412854685558564,
+          "sample_sd_ddof1": 0.00803974306104146
+        },
+        "aspd": {
+          "mean": 0.0029515430490392345,
+          "sample_sd_ddof1": 0.020363112883998894
+        }
+      }
+    },
+    {
+      "view": "native",
+      "label": "Exclude selection seed: 9 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 9,
+        "expected_n": 9,
+        "complete": true,
+        "seeds": [
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.29082286091396425,
+          "sample_sd_ddof1": 1.5173055980411856
+        },
+        "aeod": {
+          "mean": -0.004255602022831238,
+          "sample_sd_ddof1": 0.008045318045957402
+        },
+        "aspd": {
+          "mean": 0.007798017211066013,
+          "sample_sd_ddof1": 0.014221283498030998
+        }
+      }
+    },
+    {
+      "view": "native",
+      "label": "Seeds 91005–91010: 6 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 6,
+        "expected_n": 6,
+        "complete": true,
+        "seeds": [
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": -0.07214644049596568,
+          "sample_sd_ddof1": 1.0820850068663863
+        },
+        "aeod": {
+          "mean": -0.005420233136806729,
+          "sample_sd_ddof1": 0.009169915125585877
+        },
+        "aspd": {
+          "mean": 0.004360146906460287,
+          "sample_sd_ddof1": 0.014943227344672098
+        }
+      }
+    },
+    {
+      "view": "raw",
+      "label": "All 10 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 10,
+        "expected_n": 10,
+        "complete": true,
+        "seeds": [
+          91001,
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.22902300296974687,
+          "sample_sd_ddof1": 1.374073996783569
+        },
+        "aeod": {
+          "mean": 0.0057812588029766635,
+          "sample_sd_ddof1": 0.015375601305228947
+        },
+        "aspd": {
+          "mean": 0.006578681012515575,
+          "sample_sd_ddof1": 0.015497245559435498
+        }
+      }
+    },
+    {
+      "view": "raw",
+      "label": "Exclude selection seed: 9 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 9,
+        "expected_n": 9,
+        "complete": true,
+        "seeds": [
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.3327684658534796,
+          "sample_sd_ddof1": 1.415275293075721
+        },
+        "aeod": {
+          "mean": 0.003970894685865509,
+          "sample_sd_ddof1": 0.015135696210403962
+        },
+        "aspd": {
+          "mean": 0.005687828541213031,
+          "sample_sd_ddof1": 0.016163446213828685
+        }
+      }
+    },
+    {
+      "view": "raw",
+      "label": "Seeds 91005–91010: 6 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 6,
+        "expected_n": 6,
+        "complete": true,
+        "seeds": [
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.0083891209878999,
+          "sample_sd_ddof1": 1.0043646803619064
+        },
+        "aeod": {
+          "mean": -0.0012129789772050148,
+          "sample_sd_ddof1": 0.01600492738913532
+        },
+        "aspd": {
+          "mean": -0.00101291757436886,
+          "sample_sd_ddof1": 0.010149597115780857
+        }
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "label": "All 10 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 10,
+        "expected_n": 10,
+        "complete": true,
+        "seeds": [
+          91001,
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.2139225851915228,
+          "sample_sd_ddof1": 1.4510516852473982
+        },
+        "aeod": {
+          "mean": -0.003412854685558564,
+          "sample_sd_ddof1": 0.00803974306104146
+        },
+        "aspd": {
+          "mean": 0.0029515430490392345,
+          "sample_sd_ddof1": 0.020363112883998894
+        }
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "label": "Exclude selection seed: 9 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 9,
+        "expected_n": 9,
+        "complete": true,
+        "seeds": [
+          91002,
+          91003,
+          91004,
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": 0.29082286091396425,
+          "sample_sd_ddof1": 1.5173055980411856
+        },
+        "aeod": {
+          "mean": -0.004255602022831238,
+          "sample_sd_ddof1": 0.008045318045957402
+        },
+        "aspd": {
+          "mean": 0.007798017211066013,
+          "sample_sd_ddof1": 0.014221283498030998
+        }
+      }
+    },
+    {
+      "view": "shared_calibration",
+      "label": "Seeds 91005–91010: 6 seeds",
+      "row": {
+        "distribution": "IID",
+        "attack": "Benign",
+        "variant": "minus_F minus Full",
+        "n": 6,
+        "expected_n": 6,
+        "complete": true,
+        "seeds": [
+          91005,
+          91006,
+          91007,
+          91008,
+          91009,
+          91010
+        ],
+        "accuracy_pct": {
+          "mean": -0.07214644049596568,
+          "sample_sd_ddof1": 1.0820850068663863
+        },
+        "aeod": {
+          "mean": -0.005420233136806729,
+          "sample_sd_ddof1": 0.009169915125585877
+        },
+        "aspd": {
+          "mean": 0.004360146906460287,
+          "sample_sd_ddof1": 0.014943227344672098
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "records.json": {
+      "sha256": "49443b1ccd9cb505cd3d2d43247c7926e2df4af6b42f341d791a8e914d5d6b79",
+      "bytes": 292591
+    },
+    "tables.json": {
+      "sha256": "9bd62bd2949220d059cf966d4b383ff5f7c70c5de8fd1daf2a53d564a8efaff9",
+      "bytes": 23593
+    },
+    "TABLES.md": {
+      "sha256": "004f572b185b5b1302c093c74d06362347ad8e2de85cca28ced8a02db83fde61",
+      "bytes": 5154
+    },
+    "coverage.json": {
+      "sha256": "47372c60b24ccafb69215734e79589d79f62856119178a192213c9a767a9359e",
+      "bytes": 5892
+    },
+    "paired_per_seed.json": {
+      "sha256": "33374028b50c7619f4594129ae43408e6ce77992030235f53140f9f49eb3f429",
+      "bytes": 8325
+    },
+    "checks.json": {
+      "sha256": "44d9d13151fdb84a5c1722b933a5a96f13fcbbd6dfd5c17cedb8164c5946f07f",
+      "bytes": 552
+    },
+    "SOURCE_BINDINGS.json": {
+      "sha256": "847eb49c6bdbb53a8a77836e19b2050c34f840d7752240790bbf464ecf448ed7",
+      "bytes": 10051
+    }
+  },
+  "interpretation": "Difference is minus_F minus Full. Native/shared are identical here. All10/9 native panels trade higher ACC and lower AEOD for higher ASPD; six-seed native ACC reverses. Raw10/9 trade higher ACC for worse gaps; raw6 improves all three means descriptively. No necessity, significance or superiority claim follows; one validation scene only.",
+  "root_verifier_command": [
+    "python",
+    "-B",
+    "tmp/celeba_F_IID_Benign10_table_20261011/verify_saved.py",
+    "--binding-sha256",
+    "be6fb6c77cdbf3f734fc8d84c7c847f31d1d4bb22b4d1ad4547a250d24e45306"
+  ],
+  "new_fit": 0,
+  "new_CNN": 0,
+  "new_training": 0,
+  "test": false,
+  "canonical_writes": 0
+}

@@ -1,0 +1,113 @@
+{
+  "status": "ROOT_FIVE_LIVE_QUEUES_IDENTITY_AND_PROGRESS_VERIFIED",
+  "utc": "2026-10-10T18:59:37.134509+00:00",
+  "observed_utc": "2026-10-10T18:59:17.269220+00:00",
+  "snapshots": [
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T184239Z.raw.json",
+      "sha256": "981f18ac13be9ecdb1ebbd237b8fd681a9bd10e52f0b20e4a0905eeacf184d7a"
+    },
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T185912Z.raw.json",
+      "sha256": "6c130df4a3e243b0bfa0fba7718cfe00d199cc67ce87798828095cb7e606ebad"
+    }
+  ],
+  "growth": {
+    "FLGMM": {
+      "terminal_before": 65,
+      "terminal_now": 65,
+      "new_terminal": [],
+      "active_now": [
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage",
+          "round": 61
+        },
+        {
+          "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage",
+          "round": 52
+        }
+      ]
+    },
+    "gradient64": {
+      "terminal_before": 48,
+      "terminal_now": 49,
+      "new_terminal": [
+        "Huber_eta0.3_T00.01_M0_IID_Benign_seed91001_screen"
+      ],
+      "active_now": [
+        {
+          "id": "Huber_eta0.3_T00.01_M0_IID_S-DFA_seed91001_screen",
+          "round": 59
+        }
+      ]
+    },
+    "Hybrid96": {
+      "terminal_before": 13,
+      "terminal_now": 13,
+      "new_terminal": [],
+      "active_now": [
+        {
+          "id": "CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91005_fullcoverage",
+          "pid": 97021,
+          "gpu": 0
+        }
+      ]
+    },
+    "main": {
+      "terminal_before": 311,
+      "terminal_now": 312,
+      "new_terminal": [
+        "minus_F_IID_F Flip_seed91002"
+      ],
+      "workers": [
+        {
+          "pid": 96725,
+          "job": "minus_F_IID_F Flip_seed91003.json",
+          "round": 48
+        },
+        {
+          "pid": 96909,
+          "job": "minus_F_IID_F Flip_seed91004.json",
+          "round": 40
+        },
+        {
+          "pid": 96952,
+          "job": "minus_F_IID_F Flip_seed91005.json",
+          "round": 38
+        },
+        {
+          "pid": 97035,
+          "job": "minus_F_IID_F Flip_seed91006.json",
+          "round": 33
+        },
+        {
+          "pid": 97108,
+          "job": "minus_F_IID_F Flip_seed91007.json",
+          "round": 30
+        },
+        {
+          "pid": 97139,
+          "job": "minus_F_IID_F Flip_seed91008.json",
+          "round": 26
+        },
+        {
+          "pid": 97175,
+          "job": "minus_F_IID_F Flip_seed91009.json",
+          "round": 25
+        },
+        {
+          "pid": 97285,
+          "job": "minus_F_IID_F Flip_seed91010.json",
+          "round": 14
+        }
+      ]
+    }
+  },
+  "main_workers": 8,
+  "remaining620_closed": 132,
+  "source_changes": [],
+  "failures": [],
+  "source_data_scope": "resolved paths/size/mtime only; prior09:41 full SHA retained as historical evidence",
+  "new_scientific_acceptance": 0,
+  "claim": "Observed terminal-set growth with correct source/worker identities, not scientific result acceptance; active rounds and terminal sets describe this one snapshot."
+}
