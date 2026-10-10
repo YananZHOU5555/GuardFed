@@ -1,0 +1,16 @@
+{
+  "status": "CHECK_BRIDGE_NAMEERROR_PRESERVED",
+  "recorded_utc": "2026-10-10T13:31:35.456933+00:00",
+  "command": "python -B tmp/rebuttal_A60_reader_integration_20261011/build_and_check.py",
+  "actual_exit_code": 1,
+  "source_sha256_before_fix": "9aee29796a168610e50086edd5b1ba56673afe7554d3498999d7b02aff27c05a",
+  "error": "NameError: name 'bindings' is not defined",
+  "location": "unchanged A50 document-check AST, original line241",
+  "cause": "The reusable document-invariant block references its original enclosing bindings variable; the A60 wrapper did not inject this variable.",
+  "impact": "Prose/facts were generated; no scientific statistics recomputed and no candidate text/values altered by this failure. No SELF_CHECK or successful ACTUAL_COMMAND existed.",
+  "bounded_fix": "Pass already-read FACT_BINDINGS as bindings to the unchanged original document-check namespace.",
+  "candidate_sha256": {
+    "manuscript_insertions_integrated_A60_reader_20261011.md": "109bdb7a17ebd8312b1081c18b335e434e45bc5aedb48d7497c014f8aa4fc9f3",
+    "rebuttal_integrated_A60_reader_20261011.md": "e3f364dff41a6acf74569afa3bb81ddcca4595ce26c474e145720185b4ec83a8"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "status": "ROOT_METADATA_WRAPPER_ASSERTION_FAILURE_BEFORE_REMOTE_DEPLOYMENT",
+  "recorded_utc": "2026-10-10T13:32:05.191335+00:00",
+  "actual_exit": 1,
+  "source_sha256": "09429d0af3917bfbad21c97763c1c8d4fc12f7583214d75d3e6893f2c7f015c0",
+  "assertion": "'torch' not in sys.modules and 'numpy' not in sys.modules",
+  "cause": "Original bridge imports NumPy when loaded for metadata identity; no scientific function was invoked. Torch was not imported.",
+  "completed_before_assertion": "All47 original bridge metadata identities equalled manifest identities",
+  "source_package_changed": false,
+  "remote_deployment_started": false,
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "new_scientific_acceptances": 0,
+  "recovery": "Correct wrapper import-only assumption; preserve candidate/science/tolerance. Re-run bounded metadata check before first deployment."
+}

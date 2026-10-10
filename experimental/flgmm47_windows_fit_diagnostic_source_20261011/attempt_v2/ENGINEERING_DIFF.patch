@@ -1,0 +1,75 @@
+--- original sealed diagnose_one.py
++++ attempt_v2/diagnose_one.py
+@@ -3,13 +3,14 @@
+ import argparse, ast, datetime, hashlib, importlib.util, json, sys, traceback
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[1]
++ROOT = HERE.parents[2]
+ ACTUAL = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001'
+ PREPARED = ROOT / 'tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/attempt_v2'
+ RID = 'FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage'
+-OUTPUT = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC.json'
+-STARTED = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC.started.json'
+-FAILED = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC.failure.json'
++OUTPUT = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.json'
++STARTED = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.started.json'
++FAILED = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.failure.json'
++MEASURED = ACTUAL / 'OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.MEASURED.json'
+ read = lambda p: json.loads(Path(p).read_bytes())
+ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ 
+@@ -23,6 +24,15 @@
+     with path.open('x', encoding='utf-8') as f:
+         json.dump(value, f, ensure_ascii=False, indent=2, allow_nan=False)
+         f.write('\n')
++
++
++def json_form(value):
++    # The receipt's JSON representation changes dictionary keys, never numeric values.
++    def unique_object(pairs):
++        result = dict(pairs)
++        need(len(result) == len(pairs), 'JSON key normalization would lose a field')
++        return result
++    return json.loads(json.dumps(value, ensure_ascii=False, allow_nan=False), object_pairs_hook=unique_object)
+ 
+ 
+ def setup_nodes(text):
+@@ -50,7 +60,7 @@
+         need(sha(ROOT / rel) == h, 'Source/proof changed: ' + rel)
+     failure = read(ACTUAL / 'OFFSERVER_ARRAY_REFIT_CHECK.failure.json')
+     need(failure['completed'] == 4 and 'Root-only threshold fit changed' in failure['traceback'], 'Wrong preserved failure')
+-    need(not any(p.exists() for p in (OUTPUT, STARTED, FAILED)), 'One diagnostic attempt only; preserve existing evidence')
++    need(not any(p.exists() for p in (OUTPUT, STARTED, FAILED, MEASURED)), 'One diagnostic attempt only; preserve existing evidence')
+     save(STARTED, {'id': RID, 'scope': 'SINGLE_RECORD_DIAGNOSTIC_NOT_ACCEPTANCE', 'source_seal_sha256': args.source_seal_sha256})
+     fits_called = 0
+     try:
+@@ -84,6 +94,18 @@
+             predictions = ev.predict_views(z['valid_margins'], ns['sensitive'][162770:], fits)
+             mismatches = {v: int(np.count_nonzero(predictions[v] != z['prediction_' + v])) for v in ev.VIEWS}
+             scored = ev.evaluate_frozen_predictions(predictions, ns['y'][162770:], ns['sensitive'][162770:])
++        save(MEASURED, {'status': 'SINGLE_RECORD_RAW_MEASUREMENTS_DIAGNOSTIC_NOT_ACCEPTANCE',
++                        'id': RID, 'checkpoint_sha256': receipt['checkpoint_sha256'],
++                        'array_sha256': pins['array_sha256'], 'receipt_sha256': pins['receipt_sha256'],
++                        'original_failure_sha256': pins['failure_sha256'], 'source_seal_sha256': args.source_seal_sha256,
++                        'actual_fits': fits, 'saved_fits': receipt['fits'],
++                        'actual_root_receipt': root_receipt, 'saved_root_receipt': receipt['root_reconstruction'],
++                        'actual_views': scored, 'saved_views': receipt['views'],
++                        'prediction_mismatch_counts': mismatches, 'fit_views_calls': fits_called,
++                        'runtime': {'python': sys.version, 'numpy': np.__version__, 'pandas': ns['pd'].__version__,
++                                    'torch': ns['torch'].__version__, 'device': 'cpu'},
++                        'root_adopted': False, 'test': False, 'new_CNN': 0, 'new_training': 0})
++        fits, root_receipt, scored = (json_form(value) for value in (fits, root_receipt, scored))
+         differences = ns['diff_ns']['diff']
+         after = ns['b'].measure(ctx['paths'], ctx['record'])
+         need(ctx['before'] == ctx['second'] == after, 'Original accepted artifacts changed')
+@@ -102,7 +124,8 @@
+                   'runtime': {'python': sys.version, 'numpy': np.__version__, 'pandas': ns['pd'].__version__, 'torch': ns['torch'].__version__, 'device': 'cpu'},
+                   'fit_views_calls': fits_called, 'diagnostic_records': 1, 'scientific_acceptances': 0, 'root_adopted': False,
+                   'Windows_whole_check_pass': None, 'original_tolerance': 1e-12, 'test': False, 'new_CNN': 0, 'new_training': 0,
+-                  'labels': 'Original train+valid prefix only; 182637 rows', 'original_failure_preserved': True}
++                  'labels': 'Original train+valid prefix only; 182637 rows', 'original_failure_preserved': True, 'measured_path': str(MEASURED), 'measured_sha256': sha(MEASURED),
++                  'JSON_key_representation_normalized_only': True, 'cause_not_inferred_from_prior_comparator_failure': True}
+         save(OUTPUT, report)
+         print(json.dumps({'status': report['status'], 'id': RID, 'report_sha256': sha(OUTPUT), 'fit_differences': len(report['fit_field_differences']), 'prediction_mismatches': mismatches}))
+     except BaseException:

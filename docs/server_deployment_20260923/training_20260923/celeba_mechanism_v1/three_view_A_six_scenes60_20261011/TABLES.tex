@@ -1,0 +1,409 @@
+% AUTHOR-REVIEW CANDIDATE — VALIDATION, not final test.
+% Requires booktabs; input as a fragment. Nine panels preserve raw/native/shared and 10/9/6 seeds.
+% Difference = minus_A - Full; ACC in percent / paired ACC in percentage points.
+% AEOD = absolute TPR gap; ASPD = absolute positive-prediction-rate gap.
+% All three metrics come from the same terminal round-70 checkpoint.
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. native; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 10 & $88.258 \pm 1.039$ & $0.00973 \pm 0.00751$ & $0.06254 \pm 0.01377$ \\
+Benign & $-A$ & 10 & $87.829 \pm 1.625$ & $0.01205 \pm 0.00918$ & $0.05940 \pm 0.00995$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.430 \pm 1.259$ & $0.00231 \pm 0.01461$ & $-0.00314 \pm 0.01805$ \\
+F Flip & Full & 10 & $88.391 \pm 0.626$ & $0.01068 \pm 0.00958$ & $0.06068 \pm 0.01026$ \\
+F Flip & $-A$ & 10 & $88.392 \pm 1.190$ & $0.01069 \pm 0.00706$ & $0.05980 \pm 0.01789$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 10 & $0.001 \pm 1.030$ & $0.00001 \pm 0.01228$ & $-0.00088 \pm 0.02417$ \\
+FedSA & Full & 10 & $88.470 \pm 0.909$ & $0.00607 \pm 0.00416$ & $0.06402 \pm 0.01425$ \\
+FedSA & $-A$ & 10 & $88.604 \pm 1.348$ & $0.00543 \pm 0.00508$ & $0.06543 \pm 0.01689$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 10 & $0.134 \pm 0.985$ & $-0.00065 \pm 0.00662$ & $0.00141 \pm 0.01497$ \\
+S-DFA & Full & 10 & $88.689 \pm 0.809$ & $0.00769 \pm 0.00463$ & $0.06377 \pm 0.00697$ \\
+S-DFA & $-A$ & 10 & $88.328 \pm 0.734$ & $0.01311 \pm 0.00684$ & $0.05573 \pm 0.01404$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.361 \pm 0.901$ & $0.00542 \pm 0.00901$ & $-0.00804 \pm 0.01754$ \\
+Sp-DFA & Full & 10 & $88.382 \pm 0.889$ & $0.01648 \pm 0.00719$ & $0.05588 \pm 0.01561$ \\
+Sp-DFA & $-A$ & 10 & $88.152 \pm 0.807$ & $0.00697 \pm 0.00296$ & $0.05705 \pm 0.00990$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.230 \pm 0.746$ & $-0.00950 \pm 0.00897$ & $0.00117 \pm 0.01870$ \\
+non-IID / Benign & Full & 10 & $88.594 \pm 1.168$ & $0.00696 \pm 0.00423$ & $0.06511 \pm 0.00902$ \\
+non-IID / Benign & $-A$ & 10 & $88.054 \pm 0.979$ & $0.01183 \pm 0.00727$ & $0.05929 \pm 0.01867$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.540 \pm 0.561$ & $0.00488 \pm 0.00856$ & $-0.00582 \pm 0.01772$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. native; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 9 & $88.352 \pm 1.056$ & $0.00975 \pm 0.00797$ & $0.06232 \pm 0.01459$ \\
+Benign & $-A$ & 9 & $88.265 \pm 0.908$ & $0.01077 \pm 0.00874$ & $0.05949 \pm 0.01054$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.087 \pm 0.678$ & $0.00102 \pm 0.01488$ & $-0.00283 \pm 0.01912$ \\
+F Flip & Full & 9 & $88.412 \pm 0.660$ & $0.01147 \pm 0.00981$ & $0.06043 \pm 0.01085$ \\
+F Flip & $-A$ & 9 & $88.382 \pm 1.262$ & $0.01122 \pm 0.00728$ & $0.05889 \pm 0.01872$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.030 \pm 1.088$ & $-0.00024 \pm 0.01300$ & $-0.00154 \pm 0.02554$ \\
+FedSA & Full & 9 & $88.622 \pm 0.819$ & $0.00544 \pm 0.00388$ & $0.06675 \pm 0.01202$ \\
+FedSA & $-A$ & 9 & $88.895 \pm 1.044$ & $0.00432 \pm 0.00392$ & $0.06988 \pm 0.00993$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 9 & $0.273 \pm 0.933$ & $-0.00112 \pm 0.00684$ & $0.00313 \pm 0.01480$ \\
+S-DFA & Full & 9 & $88.845 \pm 0.681$ & $0.00675 \pm 0.00376$ & $0.06329 \pm 0.00721$ \\
+S-DFA & $-A$ & 9 & $88.367 \pm 0.768$ & $0.01362 \pm 0.00705$ & $0.05476 \pm 0.01453$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.478 \pm 0.872$ & $0.00687 \pm 0.00822$ & $-0.00853 \pm 0.01853$ \\
+Sp-DFA & Full & 9 & $88.546 \pm 0.765$ & $0.01706 \pm 0.00737$ & $0.05548 \pm 0.01650$ \\
+Sp-DFA & $-A$ & 9 & $88.272 \pm 0.756$ & $0.00705 \pm 0.00313$ & $0.05775 \pm 0.01024$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.274 \pm 0.777$ & $-0.01001 \pm 0.00936$ & $0.00226 \pm 0.01949$ \\
+non-IID / Benign & Full & 9 & $88.591 \pm 1.239$ & $0.00632 \pm 0.00394$ & $0.06384 \pm 0.00856$ \\
+non-IID / Benign & $-A$ & 9 & $88.008 \pm 1.027$ & $0.01116 \pm 0.00738$ & $0.05767 \pm 0.01905$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.583 \pm 0.577$ & $0.00485 \pm 0.00908$ & $-0.00617 \pm 0.01876$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. native; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 6 & $88.558 \pm 0.680$ & $0.01138 \pm 0.00734$ & $0.06649 \pm 0.01593$ \\
+Benign & $-A$ & 6 & $88.248 \pm 0.624$ & $0.01098 \pm 0.00794$ & $0.06189 \pm 0.00863$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.310 \pm 0.703$ & $-0.00040 \pm 0.01398$ & $-0.00460 \pm 0.02052$ \\
+F Flip & Full & 6 & $88.288 \pm 0.746$ & $0.01484 \pm 0.01041$ & $0.05808 \pm 0.01290$ \\
+F Flip & $-A$ & 6 & $88.090 \pm 1.453$ & $0.00958 \pm 0.00537$ & $0.05617 \pm 0.01602$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.198 \pm 1.213$ & $-0.00526 \pm 0.01077$ & $-0.00190 \pm 0.02730$ \\
+FedSA & Full & 6 & $88.569 \pm 0.867$ & $0.00550 \pm 0.00361$ & $0.06965 \pm 0.01099$ \\
+FedSA & $-A$ & 6 & $88.564 \pm 1.127$ & $0.00371 \pm 0.00249$ & $0.06690 \pm 0.00935$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.005 \pm 0.983$ & $-0.00179 \pm 0.00515$ & $-0.00276 \pm 0.01435$ \\
+S-DFA & Full & 6 & $88.745 \pm 0.786$ & $0.00703 \pm 0.00401$ & $0.06171 \pm 0.00850$ \\
+S-DFA & $-A$ & 6 & $88.491 \pm 0.715$ & $0.01312 \pm 0.00636$ & $0.05497 \pm 0.00805$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.254 \pm 0.535$ & $0.00609 \pm 0.00817$ & $-0.00674 \pm 0.01486$ \\
+Sp-DFA & Full & 6 & $88.354 \pm 0.873$ & $0.01710 \pm 0.00828$ & $0.05595 \pm 0.02031$ \\
+Sp-DFA & $-A$ & 6 & $88.185 \pm 0.731$ & $0.00694 \pm 0.00230$ & $0.05833 \pm 0.01110$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.169 \pm 0.749$ & $-0.01016 \pm 0.01011$ & $0.00239 \pm 0.02216$ \\
+non-IID / Benign & Full & 6 & $88.585 \pm 1.423$ & $0.00623 \pm 0.00389$ & $0.06411 \pm 0.00673$ \\
+non-IID / Benign & $-A$ & 6 & $88.004 \pm 1.241$ & $0.00800 \pm 0.00500$ & $0.06022 \pm 0.00618$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.581 \pm 0.413$ & $0.00177 \pm 0.00568$ & $-0.00388 \pm 0.00654$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. raw; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 10 & $88.549 \pm 1.038$ & $0.04027 \pm 0.01035$ & $0.10308 \pm 0.01007$ \\
+Benign & $-A$ & 10 & $88.214 \pm 1.695$ & $0.04092 \pm 0.00933$ & $0.10124 \pm 0.00931$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.335 \pm 1.319$ & $0.00064 \pm 0.01538$ & $-0.00184 \pm 0.01319$ \\
+F Flip & Full & 10 & $88.703 \pm 0.733$ & $0.03684 \pm 0.01343$ & $0.10080 \pm 0.01032$ \\
+F Flip & $-A$ & 10 & $88.774 \pm 1.169$ & $0.03945 \pm 0.01694$ & $0.10525 \pm 0.00936$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 10 & $0.070 \pm 1.194$ & $0.00261 \pm 0.01613$ & $0.00445 \pm 0.00985$ \\
+FedSA & Full & 10 & $88.832 \pm 0.899$ & $0.03716 \pm 0.00699$ & $0.10257 \pm 0.01155$ \\
+FedSA & $-A$ & 10 & $88.996 \pm 1.217$ & $0.04106 \pm 0.00989$ & $0.10687 \pm 0.00661$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 10 & $0.164 \pm 0.771$ & $0.00390 \pm 0.01159$ & $0.00430 \pm 0.01102$ \\
+S-DFA & Full & 10 & $89.059 \pm 0.840$ & $0.03671 \pm 0.00377$ & $0.10194 \pm 0.00664$ \\
+S-DFA & $-A$ & 10 & $88.757 \pm 0.821$ & $0.03773 \pm 0.00712$ & $0.10191 \pm 0.00517$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.302 \pm 0.939$ & $0.00102 \pm 0.00865$ & $-0.00003 \pm 0.00644$ \\
+Sp-DFA & Full & 10 & $88.766 \pm 0.924$ & $0.03465 \pm 0.01394$ & $0.09978 \pm 0.01059$ \\
+Sp-DFA & $-A$ & 10 & $88.500 \pm 0.783$ & $0.04196 \pm 0.01721$ & $0.10123 \pm 0.01657$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.266 \pm 0.612$ & $0.00731 \pm 0.02104$ & $0.00145 \pm 0.01756$ \\
+non-IID / Benign & Full & 10 & $88.875 \pm 1.209$ & $0.03157 \pm 0.00643$ & $0.09978 \pm 0.00770$ \\
+non-IID / Benign & $-A$ & 10 & $88.331 \pm 0.928$ & $0.03210 \pm 0.01097$ & $0.09587 \pm 0.01073$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.544 \pm 0.488$ & $0.00053 \pm 0.01126$ & $-0.00391 \pm 0.01100$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. raw; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 9 & $88.646 \pm 1.052$ & $0.04004 \pm 0.01095$ & $0.10338 \pm 0.01063$ \\
+Benign & $-A$ & 9 & $88.676 \pm 0.910$ & $0.04071 \pm 0.00987$ & $0.10366 \pm 0.00560$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $0.030 \pm 0.675$ & $0.00067 \pm 0.01631$ & $0.00028 \pm 0.01204$ \\
+F Flip & Full & 9 & $88.731 \pm 0.772$ & $0.03770 \pm 0.01396$ & $0.10200 \pm 0.01017$ \\
+F Flip & $-A$ & 9 & $88.763 \pm 1.240$ & $0.03930 \pm 0.01796$ & $0.10519 \pm 0.00992$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 9 & $0.032 \pm 1.260$ & $0.00161 \pm 0.01677$ & $0.00318 \pm 0.00954$ \\
+FedSA & Full & 9 & $89.001 \pm 0.767$ & $0.03797 \pm 0.00689$ & $0.10454 \pm 0.01032$ \\
+FedSA & $-A$ & 9 & $89.269 \pm 0.911$ & $0.03894 \pm 0.00773$ & $0.10614 \pm 0.00657$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 9 & $0.267 \pm 0.740$ & $0.00097 \pm 0.00740$ & $0.00160 \pm 0.00741$ \\
+S-DFA & Full & 9 & $89.233 \pm 0.673$ & $0.03652 \pm 0.00395$ & $0.10342 \pm 0.00500$ \\
+S-DFA & $-A$ & 9 & $88.801 \pm 0.859$ & $0.03781 \pm 0.00754$ & $0.10248 \pm 0.00513$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.432 \pm 0.894$ & $0.00130 \pm 0.00913$ & $-0.00094 \pm 0.00612$ \\
+Sp-DFA & Full & 9 & $88.925 \pm 0.824$ & $0.03222 \pm 0.01233$ & $0.09968 \pm 0.01123$ \\
+Sp-DFA & $-A$ & 9 & $88.619 \pm 0.728$ & $0.04238 \pm 0.01820$ & $0.10220 \pm 0.01727$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.306 \pm 0.635$ & $0.01016 \pm 0.02016$ & $0.00252 \pm 0.01827$ \\
+non-IID / Benign & Full & 9 & $88.877 \pm 1.282$ & $0.03006 \pm 0.00454$ & $0.09914 \pm 0.00788$ \\
+non-IID / Benign & $-A$ & 9 & $88.307 \pm 0.981$ & $0.03109 \pm 0.01113$ & $0.09542 \pm 0.01128$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.570 \pm 0.510$ & $0.00103 \pm 0.01183$ & $-0.00372 \pm 0.01165$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. raw; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 6 & $88.813 \pm 0.633$ & $0.04225 \pm 0.01270$ & $0.10710 \pm 0.00862$ \\
+Benign & $-A$ & 6 & $88.683 \pm 0.631$ & $0.04186 \pm 0.00928$ & $0.10352 \pm 0.00430$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.130 \pm 0.778$ & $-0.00040 \pm 0.01774$ & $-0.00358 \pm 0.01009$ \\
+F Flip & Full & 6 & $88.651 \pm 0.877$ & $0.03646 \pm 0.00936$ & $0.10113 \pm 0.00686$ \\
+F Flip & $-A$ & 6 & $88.493 \pm 1.430$ & $0.04089 \pm 0.02240$ & $0.10482 \pm 0.01182$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.159 \pm 1.343$ & $0.00443 \pm 0.01417$ & $0.00369 \pm 0.00911$ \\
+FedSA & Full & 6 & $88.894 \pm 0.796$ & $0.03453 \pm 0.00524$ & $0.10012 \pm 0.00832$ \\
+FedSA & $-A$ & 6 & $89.005 \pm 1.000$ & $0.03717 \pm 0.00593$ & $0.10292 \pm 0.00230$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 6 & $0.112 \pm 0.812$ & $0.00264 \pm 0.00726$ & $0.00280 \pm 0.00806$ \\
+S-DFA & Full & 6 & $89.175 \pm 0.783$ & $0.03681 \pm 0.00432$ & $0.10370 \pm 0.00558$ \\
+S-DFA & $-A$ & 6 & $88.964 \pm 0.813$ & $0.03741 \pm 0.00650$ & $0.10101 \pm 0.00517$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.211 \pm 0.505$ & $0.00060 \pm 0.00661$ & $-0.00269 \pm 0.00552$ \\
+Sp-DFA & Full & 6 & $88.713 \pm 0.934$ & $0.03446 \pm 0.01385$ & $0.09848 \pm 0.01283$ \\
+Sp-DFA & $-A$ & 6 & $88.520 \pm 0.771$ & $0.03705 \pm 0.00732$ & $0.09719 \pm 0.00875$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.193 \pm 0.711$ & $0.00260 \pm 0.01612$ & $-0.00129 \pm 0.01838$ \\
+non-IID / Benign & Full & 6 & $88.879 \pm 1.416$ & $0.02856 \pm 0.00486$ & $0.09666 \pm 0.00846$ \\
+non-IID / Benign & $-A$ & 6 & $88.259 \pm 1.137$ & $0.02965 \pm 0.00874$ & $0.09408 \pm 0.00535$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.620 \pm 0.454$ & $0.00110 \pm 0.00929$ & $-0.00259 \pm 0.00870$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. shared\_calibration; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 10 & $88.258 \pm 1.039$ & $0.00973 \pm 0.00751$ & $0.06254 \pm 0.01377$ \\
+Benign & $-A$ & 10 & $87.829 \pm 1.625$ & $0.01205 \pm 0.00918$ & $0.05940 \pm 0.00995$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.430 \pm 1.259$ & $0.00231 \pm 0.01461$ & $-0.00314 \pm 0.01805$ \\
+F Flip & Full & 10 & $88.391 \pm 0.626$ & $0.01068 \pm 0.00958$ & $0.06068 \pm 0.01026$ \\
+F Flip & $-A$ & 10 & $88.392 \pm 1.190$ & $0.01069 \pm 0.00706$ & $0.05980 \pm 0.01789$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 10 & $0.001 \pm 1.030$ & $0.00001 \pm 0.01228$ & $-0.00088 \pm 0.02417$ \\
+FedSA & Full & 10 & $88.470 \pm 0.909$ & $0.00607 \pm 0.00416$ & $0.06402 \pm 0.01425$ \\
+FedSA & $-A$ & 10 & $88.604 \pm 1.348$ & $0.00543 \pm 0.00508$ & $0.06543 \pm 0.01689$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 10 & $0.134 \pm 0.985$ & $-0.00065 \pm 0.00662$ & $0.00141 \pm 0.01497$ \\
+S-DFA & Full & 10 & $88.689 \pm 0.809$ & $0.00769 \pm 0.00463$ & $0.06377 \pm 0.00697$ \\
+S-DFA & $-A$ & 10 & $88.328 \pm 0.734$ & $0.01311 \pm 0.00684$ & $0.05573 \pm 0.01404$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.361 \pm 0.901$ & $0.00542 \pm 0.00901$ & $-0.00804 \pm 0.01754$ \\
+Sp-DFA & Full & 10 & $88.382 \pm 0.889$ & $0.01648 \pm 0.00719$ & $0.05588 \pm 0.01561$ \\
+Sp-DFA & $-A$ & 10 & $88.152 \pm 0.807$ & $0.00697 \pm 0.00296$ & $0.05705 \pm 0.00990$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.230 \pm 0.746$ & $-0.00950 \pm 0.00897$ & $0.00117 \pm 0.01870$ \\
+non-IID / Benign & Full & 10 & $88.594 \pm 1.168$ & $0.00696 \pm 0.00423$ & $0.06511 \pm 0.00902$ \\
+non-IID / Benign & $-A$ & 10 & $88.054 \pm 0.979$ & $0.01183 \pm 0.00727$ & $0.05929 \pm 0.01867$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.540 \pm 0.561$ & $0.00488 \pm 0.00856$ & $-0.00582 \pm 0.01772$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. shared\_calibration; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 9 & $88.352 \pm 1.056$ & $0.00975 \pm 0.00797$ & $0.06232 \pm 0.01459$ \\
+Benign & $-A$ & 9 & $88.265 \pm 0.908$ & $0.01077 \pm 0.00874$ & $0.05949 \pm 0.01054$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.087 \pm 0.678$ & $0.00102 \pm 0.01488$ & $-0.00283 \pm 0.01912$ \\
+F Flip & Full & 9 & $88.412 \pm 0.660$ & $0.01147 \pm 0.00981$ & $0.06043 \pm 0.01085$ \\
+F Flip & $-A$ & 9 & $88.382 \pm 1.262$ & $0.01122 \pm 0.00728$ & $0.05889 \pm 0.01872$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.030 \pm 1.088$ & $-0.00024 \pm 0.01300$ & $-0.00154 \pm 0.02554$ \\
+FedSA & Full & 9 & $88.622 \pm 0.819$ & $0.00544 \pm 0.00388$ & $0.06675 \pm 0.01202$ \\
+FedSA & $-A$ & 9 & $88.895 \pm 1.044$ & $0.00432 \pm 0.00392$ & $0.06988 \pm 0.00993$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 9 & $0.273 \pm 0.933$ & $-0.00112 \pm 0.00684$ & $0.00313 \pm 0.01480$ \\
+S-DFA & Full & 9 & $88.845 \pm 0.681$ & $0.00675 \pm 0.00376$ & $0.06329 \pm 0.00721$ \\
+S-DFA & $-A$ & 9 & $88.367 \pm 0.768$ & $0.01362 \pm 0.00705$ & $0.05476 \pm 0.01453$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.478 \pm 0.872$ & $0.00687 \pm 0.00822$ & $-0.00853 \pm 0.01853$ \\
+Sp-DFA & Full & 9 & $88.546 \pm 0.765$ & $0.01706 \pm 0.00737$ & $0.05548 \pm 0.01650$ \\
+Sp-DFA & $-A$ & 9 & $88.272 \pm 0.756$ & $0.00705 \pm 0.00313$ & $0.05775 \pm 0.01024$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.274 \pm 0.777$ & $-0.01001 \pm 0.00936$ & $0.00226 \pm 0.01949$ \\
+non-IID / Benign & Full & 9 & $88.591 \pm 1.239$ & $0.00632 \pm 0.00394$ & $0.06384 \pm 0.00856$ \\
+non-IID / Benign & $-A$ & 9 & $88.008 \pm 1.027$ & $0.01116 \pm 0.00738$ & $0.05767 \pm 0.01905$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.583 \pm 0.577$ & $0.00485 \pm 0.00908$ & $-0.00617 \pm 0.01876$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{CelebA, five IID scenarios plus non-IID Benign. shared\_calibration; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Benign & Full & 6 & $88.558 \pm 0.680$ & $0.01138 \pm 0.00734$ & $0.06649 \pm 0.01593$ \\
+Benign & $-A$ & 6 & $88.248 \pm 0.624$ & $0.01098 \pm 0.00794$ & $0.06189 \pm 0.00863$ \\
+Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.310 \pm 0.703$ & $-0.00040 \pm 0.01398$ & $-0.00460 \pm 0.02052$ \\
+F Flip & Full & 6 & $88.288 \pm 0.746$ & $0.01484 \pm 0.01041$ & $0.05808 \pm 0.01290$ \\
+F Flip & $-A$ & 6 & $88.090 \pm 1.453$ & $0.00958 \pm 0.00537$ & $0.05617 \pm 0.01602$ \\
+F Flip & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.198 \pm 1.213$ & $-0.00526 \pm 0.01077$ & $-0.00190 \pm 0.02730$ \\
+FedSA & Full & 6 & $88.569 \pm 0.867$ & $0.00550 \pm 0.00361$ & $0.06965 \pm 0.01099$ \\
+FedSA & $-A$ & 6 & $88.564 \pm 1.127$ & $0.00371 \pm 0.00249$ & $0.06690 \pm 0.00935$ \\
+FedSA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.005 \pm 0.983$ & $-0.00179 \pm 0.00515$ & $-0.00276 \pm 0.01435$ \\
+S-DFA & Full & 6 & $88.745 \pm 0.786$ & $0.00703 \pm 0.00401$ & $0.06171 \pm 0.00850$ \\
+S-DFA & $-A$ & 6 & $88.491 \pm 0.715$ & $0.01312 \pm 0.00636$ & $0.05497 \pm 0.00805$ \\
+S-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.254 \pm 0.535$ & $0.00609 \pm 0.00817$ & $-0.00674 \pm 0.01486$ \\
+Sp-DFA & Full & 6 & $88.354 \pm 0.873$ & $0.01710 \pm 0.00828$ & $0.05595 \pm 0.02031$ \\
+Sp-DFA & $-A$ & 6 & $88.185 \pm 0.731$ & $0.00694 \pm 0.00230$ & $0.05833 \pm 0.01110$ \\
+Sp-DFA & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.169 \pm 0.749$ & $-0.01016 \pm 0.01011$ & $0.00239 \pm 0.02216$ \\
+non-IID / Benign & Full & 6 & $88.585 \pm 1.423$ & $0.00623 \pm 0.00389$ & $0.06411 \pm 0.00673$ \\
+non-IID / Benign & $-A$ & 6 & $88.004 \pm 1.241$ & $0.00800 \pm 0.00500$ & $0.06022 \pm 0.00618$ \\
+non-IID / Benign & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.581 \pm 0.413$ & $0.00177 \pm 0.00568$ & $-0.00388 \pm 0.00654$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. native; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 10 & $88.438 \pm 0.670$ & $0.01013 \pm 0.00323$ & $0.06138 \pm 0.00730$ \\
+Five-IID mean & $-A$ & 10 & $88.261 \pm 0.897$ & $0.00965 \pm 0.00324$ & $0.05948 \pm 0.00567$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.177 \pm 0.454$ & $-0.00048 \pm 0.00533$ & $-0.00190 \pm 0.00941$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. native; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 9 & $88.555 \pm 0.592$ & $0.01009 \pm 0.00342$ & $0.06165 \pm 0.00768$ \\
+Five-IID mean & $-A$ & 9 & $88.436 \pm 0.748$ & $0.00940 \pm 0.00333$ & $0.06015 \pm 0.00557$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.119 \pm 0.440$ & $-0.00070 \pm 0.00561$ & $-0.00150 \pm 0.00990$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. native; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 6 & $88.503 \pm 0.634$ & $0.01117 \pm 0.00371$ & $0.06237 \pm 0.00943$ \\
+Five-IID mean & $-A$ & 6 & $88.315 \pm 0.851$ & $0.00886 \pm 0.00238$ & $0.05965 \pm 0.00572$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.187 \pm 0.441$ & $-0.00231 \pm 0.00594$ & $-0.00272 \pm 0.01100$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. raw; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 10 & $88.782 \pm 0.693$ & $0.03713 \pm 0.00423$ & $0.10163 \pm 0.00429$ \\
+Five-IID mean & $-A$ & 10 & $88.648 \pm 0.888$ & $0.04022 \pm 0.00701$ & $0.10330 \pm 0.00530$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.134 \pm 0.400$ & $0.00310 \pm 0.00449$ & $0.00167 \pm 0.00275$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. raw; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 9 & $88.907 \pm 0.604$ & $0.03689 \pm 0.00442$ & $0.10260 \pm 0.00318$ \\
+Five-IID mean & $-A$ & 9 & $88.825 \pm 0.730$ & $0.03983 \pm 0.00732$ & $0.10393 \pm 0.00520$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.082 \pm 0.386$ & $0.00294 \pm 0.00473$ & $0.00133 \pm 0.00269$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. raw; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 6 & $88.849 \pm 0.640$ & $0.03690 \pm 0.00488$ & $0.10211 \pm 0.00289$ \\
+Five-IID mean & $-A$ & 6 & $88.733 \pm 0.840$ & $0.03887 \pm 0.00725$ & $0.10189 \pm 0.00335$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.116 \pm 0.383$ & $0.00197 \pm 0.00466$ & $-0.00021 \pm 0.00088$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. shared\_calibration; All 10 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 10 & $88.438 \pm 0.670$ & $0.01013 \pm 0.00323$ & $0.06138 \pm 0.00730$ \\
+Five-IID mean & $-A$ & 10 & $88.261 \pm 0.897$ & $0.00965 \pm 0.00324$ & $0.05948 \pm 0.00567$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 10 & $-0.177 \pm 0.454$ & $-0.00048 \pm 0.00533$ & $-0.00190 \pm 0.00941$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. shared\_calibration; Exclude selection seed: 9 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 9 & $88.555 \pm 0.592$ & $0.01009 \pm 0.00342$ & $0.06165 \pm 0.00768$ \\
+Five-IID mean & $-A$ & 9 & $88.436 \pm 0.748$ & $0.00940 \pm 0.00333$ & $0.06015 \pm 0.00557$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 9 & $-0.119 \pm 0.440$ & $-0.00070 \pm 0.00561$ & $-0.00150 \pm 0.00990$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Five IID scenarios, seed-first mean. shared\_calibration; Seeds 91005–91010: 6 seeds. Mean $\pm$ sample SD across paired model seeds; validation only.}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Variant & $n$ & ACC $\uparrow$ & AEOD $\downarrow$ & ASPD $\downarrow$ \\
+\midrule
+Five-IID mean & Full & 6 & $88.503 \pm 0.634$ & $0.01117 \pm 0.00371$ & $0.06237 \pm 0.00943$ \\
+Five-IID mean & $-A$ & 6 & $88.315 \pm 0.851$ & $0.00886 \pm 0.00238$ & $0.05965 \pm 0.00572$ \\
+Five-IID mean & $\Delta(-A-\mathrm{Full})$ & 6 & $-0.187 \pm 0.441$ & $-0.00231 \pm 0.00594$ & $-0.00272 \pm 0.01100$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

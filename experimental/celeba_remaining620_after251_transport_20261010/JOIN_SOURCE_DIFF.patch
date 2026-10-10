@@ -1,0 +1,51 @@
+--- after240/join_saved.py
++++ after251/join_saved.py
+@@ -16,18 +16,18 @@
+  with (H/n).open('x',encoding='utf8') as f:json.dump(x,f,ensure_ascii=False,indent=2,allow_nan=False);f.write('\n')
+ def main():
+  E=read(H/'EXECUTION_INPUTS.json');P=read(H/'PREPARED.json');pre=read(H/'PREFLIGHT.stdout.json');raw=read(H/'RAW_STORAGE_INDEX.json');expected=pre['selected_ids'];N=len(expected)
+- assert 1<=N<=11 and set(expected)<=set(P['candidate_ids']) and raw['accepted_new_ids']==expected
++ assert N==9 and expected==P['candidate_ids'] and raw['accepted_new_ids']==expected
+  assert (raw['metrics'],raw['counts'],raw['rules'])==(9*N,24*N,3*N)
+  prior_proof=pin(P['prior_root_path'],P['prior_root_sha256']);prior=pin(P['prior_index_path'],P['prior_index_sha256'])
+- assert prior_proof['cumulative_accepted']==len(prior['all_ids'])==240 and not set(expected)&set(prior['all_ids'])
++ assert prior_proof['cumulative_accepted']==len(prior['all_ids'])==251 and not set(expected)&set(prior['all_ids'])
+  currentproof=pin(E['native_root_path'],E['native_root_sha256']);inspection=pin(E['native_inspection_path'],E['native_inspection_sha256']);ledger=pin(E['native_ledger_path'],E['native_ledger_sha256'])
+- assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']==251 and currentproof['inspection_sha256']==E['native_inspection_sha256']
++ assert currentproof['root_adopted'] and currentproof['total_new_strict_and_offserver']>=260 and currentproof['inspection_sha256']==E['native_inspection_sha256']
+  previousroot=R/prior_proof['native_root_path'];previousproof=pin(previousroot,prior_proof['native_root_sha256']);oldinspection=pin(previousroot.parent/'inspection/inspection.json',previousproof['inspection_sha256']);oldledger=pin(previousroot.parent/'verified_ledger.json',previousproof['ledger_sha256'])
+- assert len(oldinspection['records'])==343 and len(inspection['records'])==351
++ assert len(oldinspection['records'])==351 and len(inspection['records'])==100+currentproof['total_new_strict_and_offserver']
+  assert [row for row in inspection['records'] if row['id'] not in currentproof['new_ids']]==oldinspection['records']
+- assert ledger['entries'][:-1]==oldledger['entries'] and len(ledger['entries'])==37
++ assert ledger['entries'][:-1]==oldledger['entries'] and len(ledger['entries'])==len(oldledger['entries'])+1
+  native_rows={row['id']:row for row in inspection['records']}
+- assert set(inspection['accepted_new_ids'])-set(prior['all_ids'])==set(P['candidate_ids'])
++ assert set(P['candidate_ids'])<=set(inspection['accepted_new_ids'])-set(prior['all_ids'])
+  receipt=pin(raw['receipt'],raw['receipt_sha256']);off=pin(raw['offserver_verification'],raw['offserver_verification_sha256'])
+  assert sha(raw['archive'])==raw['archive_sha256']==receipt['archive_sha256']==off['actual_transport_archive_sha256']
+  assert receipt['previous_backup_receipt_sha256']==P['previous_receipt_sha256']==sha(P['previous_local_receipt'])
+@@ -41,7 +41,7 @@
+  baseline=pin(R/'docs/server_deployment_20260923/training_20260923/final_evaluation_prepared_20261009/model_inventory.json','3486a9f185f40294553de9e487e9d9b5d142098a819f6cfb3adbbd2d6a6420cd');full_rows={x['id']:x for x in baseline['records']}
+  extract=Path(raw['offserver_verification']).parent/'verified_extract';bindings={};binding_files={};artifacts={};member_checks=[];native_archives=[];archives_by_id={}
+  with contextlib.ExitStack() as stack:
+-  for proof,path in ((previousproof,previousroot),(currentproof,Path(E['native_root_path']))):
++  for proof,path in ((currentproof,Path(E['native_root_path'])),):
+    ap=Path(proof['archive_local_path']);assert sha(ap)==proof['archive_sha256']
+    archive=stack.enter_context(tarfile.open(ap,'r:gz'));inv=json.load(archive.extractfile('backup_inventory.json'));assert inv['accepted_new_ids']==proof['new_ids']
+    native_archives.append(dict(path=str(ap),sha256=sha(ap),root_verification_path=str(path.relative_to(R)),root_verification_sha256=sha(path)))
+@@ -105,11 +105,11 @@
+           ('delegated_approval', runtime / 'APPROVED.json'), ('bound_inventory', runtime / 'inventory.json'), ('remote_complete', runtime / 'REMOTE_COMPLETE.json'))}
+ 
+  assert len(member_checks)==2*N
+- allids=prior['all_ids']+expected;assert len(allids)==len(set(allids))==240+N and allids[:240]==prior['all_ids']
++ allids=prior['all_ids']+expected;assert len(allids)==len(set(allids))==251+N and allids[:251]==prior['all_ids']
+  index=dict(status='PROPOSED_REPLAY_ID_INDEX_PENDING_ROOT_ADOPTION',prior_index_path=str(Path(P['prior_index_path']).relative_to(R)),prior_index_sha256=P['prior_index_sha256'],prior_adoption_path=str(Path(P['prior_root_path']).relative_to(R)),prior_adoption_sha256=P['prior_root_sha256'],all_ids=allids,new_ids=expected,new_records=records,new_bindings=bindings,new_binding_files=binding_files,new_artifacts=artifacts,new_archive=raw,native_inspection_path=str(Path(E['native_inspection_path']).relative_to(R)),native_inspection_sha256=E['native_inspection_sha256'],native_archives=native_archives,native_members_rehashed=2*N,Full_inference=0,test=False,root_adopted=False)
+  save('MECHANISM_INDEX.json',index)
+- save('NATIVE_IDENTITY_JOIN.json',dict(status='SAVED_ARRAY_BATCH_NATIVE251_IDENTITY_JOIN_PASS_PENDING_ROOT',new_ids=expected,prior240_objects_and_order_unchanged=True,old343_native_records_exact=True,old36_native_ledger_entries_exact=True,native_model_result_members_rehashed=2*N,native_member_checks=member_checks,new_source_config_data_checkpoint_receipt_identities_exact=N,Full_reference_joins=N,Full_weights_repacked=0,metrics=9*N,counts=24*N,rules=3*N,native_max_abs_difference=max(v['native_max_abs_difference'] for v in records),index_sha256=sha(H/'MECHANISM_INDEX.json'),root_adopted=False))
+- print(json.dumps(dict(index_sha256=sha(H/'MECHANISM_INDEX.json'),join_sha256=sha(H/'NATIVE_IDENTITY_JOIN.json'),N=N,cumulative=240+N)))
++ save('NATIVE_IDENTITY_JOIN.json',dict(status='SAVED_ARRAY_EXACT9_NATIVE_IDENTITY_JOIN_PASS_PENDING_ROOT',new_ids=expected,prior251_objects_and_order_unchanged=True,old351_native_records_exact=True,old_native_ledger_entries_exact=True,native_model_result_members_rehashed=2*N,native_member_checks=member_checks,new_source_config_data_checkpoint_receipt_identities_exact=N,Full_reference_joins=N,Full_weights_repacked=0,metrics=9*N,counts=24*N,rules=3*N,native_max_abs_difference=max(v['native_max_abs_difference'] for v in records),index_sha256=sha(H/'MECHANISM_INDEX.json'),root_adopted=False))
++ print(json.dumps(dict(index_sha256=sha(H/'MECHANISM_INDEX.json'),join_sha256=sha(H/'NATIVE_IDENTITY_JOIN.json'),N=N,cumulative=251+N)))
+ if __name__=='__main__':
+  try:main()
+  except BaseException as e:save('JOIN_FAILURE.json',dict(error=repr(e),traceback=traceback.format_exc(),no_retry=True));raise

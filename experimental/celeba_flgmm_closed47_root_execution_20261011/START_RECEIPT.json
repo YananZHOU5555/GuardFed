@@ -1,0 +1,54 @@
+{
+  "status": "ROOT_FLGMM_FINITE47_SUPERVISOR_STARTED_NOT_SCIENTIFIC_ACCEPTANCE",
+  "utc": "2026-10-10T13:34:00.394071+00:00",
+  "program": "guardfed_flgmm_closed47_valid",
+  "commands": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_closed47_valid: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "add",
+        "guardfed_flgmm_closed47_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_closed47_valid: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_flgmm_closed47_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_closed47_valid: started\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "status",
+        "guardfed_flgmm_closed47_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_closed47_valid    RUNNING   pid 90210, uptime 0:00:02\n",
+      "stderr": ""
+    }
+  ],
+  "config_sha256": "8fd0439cbe1f7db53d067d2629ae60e539570362e58cb2d7e2534d3521f46ec5",
+  "authorization_sha256": "8b335322aabc83d84134b9b5895dc432ed5c1ba5eb8c720d57303fddb20559a6",
+  "linux_preflight_sha256": "b3bc4a6cd8a19c6ee5c63fc1283cee9cbf1b010a548878c59173714eac2f7e42",
+  "package_sha256": "43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023",
+  "autostart": false,
+  "autorestart": false,
+  "startretries": 0,
+  "new_scientific_acceptances": 0
+}

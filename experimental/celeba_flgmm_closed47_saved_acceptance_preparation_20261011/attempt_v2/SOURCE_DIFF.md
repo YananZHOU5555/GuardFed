@@ -1,0 +1,7 @@
+# Bounded source delta
+
+`LINUX_SOURCE_DIFF.patch` and `TRANSPORT_REMOTE_DIFF.patch` are deterministic diffs from the successful exact3 originals. The Linux scientific per-record loop still compiles the unchanged whole `check_saved`; only fixed package/namespace/count, completion/resource gates and output bindings differ. ZIP collection, per-receipt SHA binding, before/after hash and ZIP-writing loops retain seven original AST subtrees.
+
+The local drivers accept explicit actual proof SHAs/report paths rather than old hardcoded exact3 paths. `verify_arrays.py` imports original binding privately, executes its unchanged preamble, then executes the original array AST block. It uses the already root-tested local metadata resolver. It records every actual root-receipt difference; no exact3-specific difference is assumed. The prior Windows whole failure remains source-pinned and is never rewritten as whole PASS. No scientific formula, margin threshold, rule or tolerance changes.
+
+The argv worker guard is an engineering correction within new prepared source: match actual `candidate.py` argv tokens, not a source-text substring in this checker's own `python -c` command. No failed remote attempt occurred. The one-time initial source check preceded `check_linux.py`; retained `SOURCE_CHECK_FINAL.json` includes all eight final Python entries. No runtime scientific/SSH/transport call has been made.

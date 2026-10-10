@@ -1,0 +1,52 @@
+{
+  "status": "STDLIB_ACTUAL_GUARD_EXPRESSION_CHECK_PASS_NO_SCIENCE",
+  "array_guard_before_Torch_import": true,
+  "actual_array_guard_cases": [
+    {
+      "output_exists": false,
+      "failure_exists": false,
+      "allowed": true
+    },
+    {
+      "output_exists": true,
+      "failure_exists": false,
+      "allowed": false
+    },
+    {
+      "output_exists": false,
+      "failure_exists": true,
+      "allowed": false
+    },
+    {
+      "output_exists": true,
+      "failure_exists": true,
+      "allowed": false
+    }
+  ],
+  "actual_transport_exit_cases": [
+    {
+      "exit": 0,
+      "timeout": false,
+      "allowed": true
+    },
+    {
+      "exit": 1,
+      "timeout": false,
+      "allowed": false
+    },
+    {
+      "exit": null,
+      "timeout": true,
+      "allowed": false
+    },
+    {
+      "exit": 0,
+      "timeout": true,
+      "allowed": false
+    }
+  ],
+  "SSH": false,
+  "refits": 0,
+  "CNN": 0,
+  "new_acceptance": 0
+}

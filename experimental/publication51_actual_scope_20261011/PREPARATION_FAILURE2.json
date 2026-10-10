@@ -1,0 +1,10 @@
+{
+  "status":"SOURCE_FINISHER_IMPORT_ERROR_PRESERVED_NO_EXECUTION",
+  "command":"python -B tmp/publication51_actual_scope_20261011/finish_source.py",
+  "error":"NameError: name 'difflib' is not defined at prepare_source.py:208",
+  "impact":"Publisher, finalizer, verifier and inverse-rebinding record were written; unified diff remained empty. No source entrypoint was executed.",
+  "recovery":"Fix finisher's stdlib import for provenance; generate only the unwritten unified diff and run metadata-only source check; do not rerun preparation",
+  "F_written":false,
+  "Git_commands":0,
+  "science_executed":0
+}

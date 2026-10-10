@@ -1,0 +1,9 @@
+# Bounded author source review
+
+Actual `SOURCE_CHECK.json` passed without Git/F/network/scientific execution. The twelve immutable role proofs and53 JSON pointer facts match their source hashes. All372 fixed files are read/hash checked; the eight mutable pins and the current-state role remain unfilled.
+
+`SOURCE_REBINDINGS.json` is a reversible metadata delta to successful50; inverse text recovery passed. `SOURCE_DIFF.patch` shows the complete three-entrypoint difference. Parent, cutoffs, roles, fixed held/diagnostic boundaries, source namespace, source extension allowlist and short first-copy layout are the changes. The finalizer changes only its imported module,51 status tags and a role-count comment. The committed-blob verifier changes only its imported module name. Original43 stage science-independent byte transport and original44 storage/safe-directory guard bodies remain reused, with storage ROOT at E and the frozen reader private to F.
+
+The exact four operation streams use a narrowly guarded relative-path adapter to the unchanged original path/source functions. Original banned `.stdout/.stderr` suffixes remain enabled for every other name. Their hashes/sizes and actual stream contents are checked before and after freeze. This is a transport metadata exception, not a scientific-check exception. Four existing tiny preparation `.txt` names are the only text exceptions.
+
+First-attempt source and both auxiliary errors are retained in `PREPARATION_ATTEMPT1.py`, `PREPARATION_FAILURE.json`, `PREPARATION_FAILURE2.json` and the empty initial diff `SOURCE_DIFF_ATTEMPT2.patch`. The original plan seal and original input scientific sources were not rewritten. Source files compiled, pending mutable/extras/ref/held-boundary refusal checks passed. Root independent review and the actual finalizer/Ffreeze/stage/commit/remote blob verification are still required.

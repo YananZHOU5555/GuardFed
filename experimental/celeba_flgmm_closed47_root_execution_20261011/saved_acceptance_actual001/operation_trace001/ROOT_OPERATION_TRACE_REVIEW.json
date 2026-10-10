@@ -1,0 +1,45 @@
+{
+  "status": "ROOT_STDLIB_TWO_RUNTIME_OPERATION_TRACE_DIAGNOSTIC_NOT_ACCEPTANCE",
+  "utc": "2026-10-10T14:29:33.928299+00:00",
+  "source_seal_sha256": "cf2a49473573a721956993bdee9b3128f1ae3a2f78ee9716324fda79e48cb536",
+  "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage",
+  "first_different_operation": "log1p",
+  "differences": [
+    {
+      "operation": "log1p",
+      "windows": {
+        "value": 0.7375780601662502,
+        "hex": "0x1.79a3d4dd52843p-1"
+      },
+      "linux": {
+        "value": 0.7375780601662503,
+        "hex": "0x1.79a3d4dd52844p-1"
+      }
+    },
+    {
+      "operation": "weight_times_log1p",
+      "windows": {
+        "value": 0.7375780601662502,
+        "hex": "0x1.79a3d4dd52843p-1"
+      },
+      "linux": {
+        "value": 0.7375780601662503,
+        "hex": "0x1.79a3d4dd52844p-1"
+      }
+    }
+  ],
+  "windows_captured_lambda_reproduced": true,
+  "linux_captured_lambda_reproduced": true,
+  "files": {
+    "ACTUAL_COMMANDS.json": "72002f4b3f20f6e4688315284626ea22357c0a7481d861e135c873ad3938b960",
+    "LINUX.stderr": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0",
+    "LINUX.stdout": "363fff799d56e172c43a625a8b1a9c1a657a17c51fc538af075eb1aaf6f7c315",
+    "WINDOWS.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "WINDOWS.stdout": "6581050ecda50d3687fc6013b1eb1405eafc7e4fdab8830846cc09dc2689c482"
+  },
+  "interpretation": "Same exact operands first differ at the recorded elementary math operation in the two existing runtimes. This localizes the drift; OS/libm/Python causal factor is not separately isolated. No fit, arrays, CNN, training, tolerance change or scientific acceptance.",
+  "fit_calls": 0,
+  "scientific_acceptances": 0,
+  "root_adopted": false,
+  "test": false
+}

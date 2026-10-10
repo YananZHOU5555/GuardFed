@@ -1,0 +1,19 @@
+{
+  "status": "PREFLIGHT_CONTROL_AFFINITY_REFUSAL_PRESERVED_BEFORE_SCIENCE",
+  "recorded_utc": "2026-10-10T13:33:34.784816+00:00",
+  "actual_exit": 1,
+  "source_sha256": "270f76800f7136567d9c87df2d087c30bfa69d5fa188206387dbd30ca14743e2",
+  "observation_sha256": "27cf146f33b3bbb3b52046f35ca3b6b3e597bde92ed6270f58574a73673562e6",
+  "actual_observer_inherited_affinity": [
+    110
+  ],
+  "nominal_budget": 76,
+  "actual_quota": 122.87999,
+  "source_model_data_hashes_verified": true,
+  "cause": "Control launcher pinned observer to CPU110 before it measured its inherited affinity; actual requested120..127 were therefore correctly refused. This is not an instance cpuset fault.",
+  "recovery": "Run unchanged original observer from normal SSH affinity; observer itself selects one eligible CPU after reading its real allowed mask. Preserve all previous outputs and recheck fresh before any start.",
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "new_scientific_acceptances": 0
+}

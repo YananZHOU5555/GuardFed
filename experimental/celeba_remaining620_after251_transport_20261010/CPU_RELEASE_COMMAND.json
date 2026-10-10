@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 taskset -c 111 nice -n 10 ionice -c 3 python -B -"
+  ],
+  "source_sha256": "c77b70603ec0b828b23118c85e487087947307c015e13110ca7cbb436221643b",
+  "returncode": 0
+}

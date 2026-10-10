@@ -1,0 +1,18 @@
+{
+  "utc_started": "2026-10-10T13:32:11.474116+00:00",
+  "utc_finished": "2026-10-10T13:32:18.989313+00:00",
+  "argv": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 taskset -c 110 ionice -c 3 nice -n 10 /workspace/guardfed_envs/celeba-cu128-20261009/bin/python -B -c '\nimport base64,datetime,hashlib,json,pathlib,sys\np=json.load(sys.stdin); base=pathlib.Path(p['\"'\"'base'\"'\"'])\nassert str(base)=='\"'\"'/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011'\"'\"'\nassert not base.exists(), '\"'\"'Fresh deployment path required; preserve existing attempt'\"'\"'\nchecked={}\nfor rel,pin in p['\"'\"'members'\"'\"'].items():\n target=base/rel\n assert target.is_relative_to(base) and '\"'\"'..'\"'\"' not in pathlib.PurePosixPath(rel).parts\n b=base64.b64decode(pin['\"'\"'base64'\"'\"'],validate=True)\n assert hashlib.sha256(b).hexdigest()==pin['\"'\"'sha256'\"'\"'] and len(b)==pin['\"'\"'bytes'\"'\"']\n checked[rel]=(target,b,pin)\nbase.mkdir(parents=True,exist_ok=False)\nfor rel,(target,b,pin) in checked.items():\n target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(b)\n assert hashlib.sha256(target.read_bytes()).hexdigest()==pin['\"'\"'sha256'\"'\"']\nr={'\"'\"'status'\"'\"':'\"'\"'ROOT_SMALL_SOURCE_DEPLOYED_BYTES_VERIFIED_NOT_STARTED'\"'\"','\"'\"'utc'\"'\"':datetime.datetime.now(datetime.timezone.utc).isoformat(),'\"'\"'base'\"'\"':str(base),'\"'\"'members'\"'\"':{r:{'\"'\"'sha256'\"'\"':v[2]['\"'\"'sha256'\"'\"'],'\"'\"'bytes'\"'\"':v[2]['\"'\"'bytes'\"'\"']} for r,v in checked.items()},'\"'\"'new_inference'\"'\"':0,'\"'\"'new_fit'\"'\"':0,'\"'\"'new_training'\"'\"':0}\n(base/'\"'\"'SOURCE_DEPLOYMENT.json'\"'\"').write_text(json.dumps(r,indent=2)+'\"'\"'\\n'\"'\"')\nprint(json.dumps(r))\n'"
+  ],
+  "source_sha256": "7a1eaff809262b4c2264529374d18433154a2b8ee856a6e6a18ca09549b25156",
+  "payload_sha256": "03a61e593fb44c535fdabde7ca63d3892da423cd916c4489771934fc218dff0c",
+  "exit": 0
+}

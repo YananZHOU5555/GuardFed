@@ -1,0 +1,85 @@
+--- initial/contract.py
++++ attempt_v2/contract.py
+@@ -3,7 +3,7 @@
+ import datetime, hashlib, json, re, subprocess
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[1]
++ROOT = HERE.parents[2]
+ CANDIDATE = ROOT/'tmp/celeba_flgmm_three_view_closed_batch_preparation_20261011'
+ PACKAGE = '43b53caf0d6a0b4ac268fdad6597065cd76eee26d52f6d4929d45478e47cf023'
+ SAVED_SOURCE_SHA = 'd512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+--- initial/derive_sources.py
++++ attempt_v2/derive_sources.py
+@@ -6,7 +6,7 @@
+ import json
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parent.parent
++ROOT = HERE.parent.parent.parent
+ OLD_BASE = '/workspace/guardfed_checks/celeba_added_cnn_three_view_gate_20261010'
+ BASE = '/workspace/guardfed_checks/celeba_flgmm_three_view_closed_batch_20261011'
+ OLD_PACKAGE = '49c42b90214eae57d456f8ded1d2a4ff2de2762a78d6bcf5c4ae1a5766de9434'
+--- initial/verify_arrays.py
++++ attempt_v2/verify_arrays.py
+@@ -18,7 +18,7 @@
+     p.add_argument('--allow-original-cached-root-refit',action='store_true',required=True)
+     a=p.parse_args()
+     need(sys.platform=='win32' and __debug__,'Explicit Windows F offserver host without -O required')
+-    vol=volume();need(not a.output.exists(),'Preserve prior result; no retries')
++    vol=volume();need(not a.output.exists() and not a.output.with_suffix('.failure.json').exists(),'Preserve prior result/failure; no retries')
+     need(not a.output.resolve().is_relative_to(HERE),'Prepared source stays immutable')
+     need(sha(a.transport_proof)==a.transport_proof_sha256,'Actual transport proof differs')
+     transport=read(a.transport_proof)
+--- initial/transport.py
++++ attempt_v2/transport.py
+@@ -37,6 +37,12 @@
+         (out/'TRANSPORT_STDERR.txt').write_bytes(c.stderr)
+         save(out/'TRANSPORT_SSH_EXIT.json',{'exit':c.returncode})
+         need(c.returncode==0,'Transport failed; preserve attempt and stop')
++    need((out/'TRANSPORT_SSH_EXIT.json').is_file() and (out/'TRANSPORT_COMMAND.json').is_file() and (out/'TRANSPORT_STDERR.txt').is_file(),'Original command/stderr/exit provenance required')
++    exit_record=read(out/'TRANSPORT_SSH_EXIT.json')
++    need(exit_record.get('exit')==0 and not exit_record.get('timeout',False),'Failed or unknown transport cannot be resumed; root diagnosis required')
++    command=read(out/'TRANSPORT_COMMAND.json')
++    need(command['gate_result_sha256']==a.gate_result_sha256 and command['linux_proof_sha256']==a.linux_proof_sha256 and command['destination']==dest.as_posix() and command['remote_source_sha256']==hashlib.sha256(remote.encode()).hexdigest(),'Existing transport provenance/pins differ')
++    need(archive.is_file(),'Completed original archive required')
+     raw_stderr=(out/'TRANSPORT_STDERR.txt').read_text(encoding='utf-8')
+     candidates=[json.loads(line) for line in raw_stderr.splitlines() if line.startswith('{')]
+     need(len(candidates)==1 and set(candidates[0])=={'archive_sha256','archive_bytes','members'},'Require one exact archive record')
+--- initial/README.md
++++ attempt_v2/README.md
+@@ -13,3 +13,5 @@
+ The prior exact3 Windows whole check failed only on its recorded FL `server_sampling_audit/group_kl` last-bit difference; that failure is pinned and retained. Linux whole PASS and Windows original-array-block PASS have different scopes. This tool **does not execute or claim a Windows whole PASS**, and it does not predict the new47 root-receipt differences. The unchanged Linux whole47 check must actually pass before transport/closure. A Windows array-block failure is fail-stop and never converted into acceptance.
+ 
+ Source checks only: stdlib compilation, exact source/function/array AST hashes, deterministic remote derivation, seven retained original archive/member AST subtrees, synthetic exact47 positive and four focused metadata refusals. Synthetic fixtures are not actual receipts. Startup pins prove the authorized finite47 job started; they do not prove completion. All future gate/whole/transport/array results remain absent here. Root performs separate scientific adoption; no shared index/STATE/Git changes occur.
++
++V2 engineering recovery preserves the initial19-member seal in the parent directory. Before scientific imports, the Windows entry now refuses either prior output or same-name failure. Existing-archive verification now requires original command, stderr and exit0 (no timeout), exact gate/Linux/destination/remote-source bindings and a complete archive. Nonzero/unknown transport requires root diagnosis and cannot be resumed. Scientific bodies remain unchanged.
+--- initial/COMMANDS.md
++++ attempt_v2/COMMANDS.md
+@@ -3,7 +3,7 @@
+ Run from `E:/OneDrive/文档/GuardFed`. Read the current server guide first. Obtain the actual full47 `GATE_RESULT.json` SHA only after service `guardfed_flgmm_closed47_valid` is EXITED with rc3, no live candidate worker and no failures. No repeated polling or automatic retry is supplied. Check CPU110 across all threads before the one-shot Linux command; the remote source also refuses restricted-thread overlap.
+ 
+ ```powershell
+-python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/check_linux.py --gate-result-sha256 <ACTUAL_GATE_SHA256> --report-dir tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001 --allow-original-cached-root-refit
++python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/attempt_v2/check_linux.py --gate-result-sha256 <ACTUAL_GATE_SHA256> --report-dir tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001 --allow-original-cached-root-refit
+ ```
+ 
+ The returned `linux_proof_sha256` hashes the exact remote proof bytes copied through stdout. Stop on any error. A timeout leaves remote state unknown: inspect the existing process/receipt before any recovery; never resubmit blindly. Linux whole validation re-fits the unchanged cached-root calibration; it performs no CNN inference.
+@@ -11,7 +11,7 @@
+ After actual whole PASS, use its actual SHA:
+ 
+ ```powershell
+-python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/transport.py --gate-result-sha256 <SAME_ACTUAL_GATE_SHA256> --linux-proof-sha256 <ACTUAL_LINUX_PROOF_SHA256> --destination F:/YananResearchStorage/GuardFed/flgmm_closed47_saved_20261011/attempt001 --report-dir tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001
++python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/attempt_v2/transport.py --gate-result-sha256 <SAME_ACTUAL_GATE_SHA256> --linux-proof-sha256 <ACTUAL_LINUX_PROOF_SHA256> --destination F:/YananResearchStorage/GuardFed/flgmm_closed47_saved_20261011/attempt001 --report-dir tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001
+ ```
+ 
+ Fresh F guard requires >1 GiB plus 256 MB for archive/extraction. Destination must be new; failure keeps partial bytes and reports. If transport completed but only local verification needs explicit recovery, `--verify-existing` reads that same archive/stderr without SSH or downloading. It does not overwrite any existing extraction.
+@@ -19,7 +19,7 @@
+ After successful F transport, bind its compact proof SHA:
+ 
+ ```powershell
+-python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/verify_arrays.py --transport-proof tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/TRANSPORT_VERIFICATION.json --transport-proof-sha256 <ACTUAL_TRANSPORT_PROOF_SHA256> --linux-proof-sha256 <SAME_ACTUAL_LINUX_PROOF_SHA256> --metadata-npz F:/YananResearchStorage/GuardFed/added_cnn_exact3_valid_20261010/attempt001/verified_extract/metadata.npz --output tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_ARRAY_REFIT_CHECK.json --allow-original-cached-root-refit
++python -B tmp/celeba_flgmm_closed47_saved_acceptance_preparation_20261011/attempt_v2/verify_arrays.py --transport-proof tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/TRANSPORT_VERIFICATION.json --transport-proof-sha256 <ACTUAL_TRANSPORT_PROOF_SHA256> --linux-proof-sha256 <SAME_ACTUAL_LINUX_PROOF_SHA256> --metadata-npz F:/YananResearchStorage/GuardFed/added_cnn_exact3_valid_20261010/attempt001/verified_extract/metadata.npz --output tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_ARRAY_REFIT_CHECK.json --allow-original-cached-root-refit
+ ```
+ 
+ Windows reports original array-block validation and actual root-receipt differences separately. It never reports whole-check PASS. Root must review the actual47 Linux proof, F transport/member proof, Windows array report/differences and original accepted FL identities before adopting any additional three-view records. The prior adopted FL interface stays excluded. These commands do not update shared acceptance or dispatch further work.

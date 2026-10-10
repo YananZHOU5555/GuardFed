@@ -1,0 +1,134 @@
+{
+  "id": "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage",
+  "checkpoint_sha256": "e39793d19c66347b2a50c33915890277f64094716c3a786f55299229d0bef054",
+  "array_sha256": "44de2a647591756294bd75393b55bb1b20c18751f0151648d84a175abe794914",
+  "receipt_sha256": "445f127ef6cf73a7354c7f0e85a97e5b773a5cb93b7a142d9f52983c522748fc",
+  "source_and_evidence_pins": {
+    "tmp/celeba_flgmm_three_view_closed_batch_preparation_20261011/originals/core.py": {
+      "sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "bytes": 122793
+    },
+    "tmp/celeba_flgmm_three_view_closed_batch_preparation_20261011/originals/evaluator.py": {
+      "sha256": "805eedf1fb08137cd86a543a80c83b9527e5c8937be02f7d2dca83a33b86e04c",
+      "bytes": 19796
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.json": {
+      "sha256": "e2aee292f365bfdaedb1f9810baf1d530774da4c9d3edb317902ba5711bfe883",
+      "bytes": 19095
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_SINGLE_RECORD_DIAGNOSTIC_V2.MEASURED.json": {
+      "sha256": "086f43dae84f6f79b8c4cff19dfd016ec54acdd33a87530efb311db05aa9c318",
+      "bytes": 17245
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_ARRAY_REFIT_CHECK.failure.json": {
+      "sha256": "c93d11ee41400659f74597beb1ca0cab19a64b647c805ee0534051fb55f41812",
+      "bytes": 766
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/OFFSERVER_SINGLE_RECORD_DIAGNOSTIC.failure.json": {
+      "sha256": "cbc5d0b59804931f08002e3064b6f9745c38ec17a3e6740a6349ff3d90584b84",
+      "bytes": 727
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/LINUX_SAVED_CHECK.json": {
+      "sha256": "8e8f4fa867073d3d4745b016e8e1446932f5071d8d867e3030c5e8e42bfc6b3b",
+      "bytes": 48951
+    },
+    "tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001/TRANSPORT_VERIFICATION.json": {
+      "sha256": "e106ee9bada4d7a10afc3ad7e5badb68e270d709769df53da0932f63d97b3ea6",
+      "bytes": 58700
+    },
+    "tmp/flgmm47_windows_fit_diagnostic_source_20261011/attempt_v2/FILES_SHA256.json": {
+      "sha256": "f98f19b646f8cc2f62da187440394a713fa23c0f020d88b24ba015740998135a",
+      "bytes": 801
+    }
+  },
+  "original_lambda_expression": "config.ad2_calibration_base_weight * math.log1p(math.exp((base_risk - config.ad2_calibration_budget) / temp))",
+  "original_lambda_assignment_source": "adaptive_lambda = config.ad2_calibration_base_weight * math.log1p(math.exp((base_risk - config.ad2_calibration_budget) / temp))",
+  "original_calibration_risk_function": "def calibration_risk(metrics: Dict[str, Any]) -> float:\n    aeod = float(metrics[\"aeod\"]) if not math.isnan(float(metrics[\"aeod\"])) else 1.0\n    aspd = float(metrics[\"aspd\"]) if not math.isnan(float(metrics[\"aspd\"])) else 1.0\n    return 0.5 * (aeod + aspd)",
+  "original_shared_calibration": {
+    "ad2_calibration_base_weight": 1.0,
+    "ad2_calibration_budget": 0.06,
+    "ad2_calibration_temperature": 0.03,
+    "ad2_calibration_quantiles": 41,
+    "ad2_calibration_max_acc_drop": 0.005,
+    "ad2_calibration_objective": "acc_floor",
+    "ad2_calibration_enabled": true
+  },
+  "operands": {
+    "base_aeod": {
+      "value": 0.029524926868719215,
+      "hex": "0x1.e3bc84d459240p-6"
+    },
+    "base_aspd": {
+      "value": 0.09569335418675129,
+      "hex": "0x1.87f5c12ad3860p-4"
+    },
+    "captured_base_risk": {
+      "value": 0.06260914052773525,
+      "hex": "0x1.0072712ff4e78p-4"
+    },
+    "base_weight": {
+      "value": 1.0,
+      "hex": "0x1.0000000000000p+0"
+    },
+    "budget": {
+      "value": 0.06,
+      "hex": "0x1.eb851eb851eb8p-5"
+    },
+    "temperature": {
+      "value": 0.03,
+      "hex": "0x1.eb851eb851eb8p-6"
+    },
+    "risk_multiplier": {
+      "value": 0.5,
+      "hex": "0x1.0000000000000p-1"
+    },
+    "temperature_minimum": {
+      "value": 1e-06,
+      "hex": "0x1.0c6f7a0b5ed8dp-20"
+    }
+  },
+  "captured_lambdas": {
+    "windows": {
+      "value": 0.7375780601662502,
+      "hex": "0x1.79a3d4dd52843p-1"
+    },
+    "linux": {
+      "value": 0.7375780601662503,
+      "hex": "0x1.79a3d4dd52844p-1"
+    }
+  },
+  "observed_runtimes": {
+    "windows": {
+      "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+      "numpy": "2.2.6",
+      "pandas": "2.3.1",
+      "torch": "2.8.0+cpu",
+      "device": "cpu"
+    },
+    "linux": {
+      "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "torch": "2.11.0+cu128",
+      "device": "cpu",
+      "cpu_affinity": [
+        110
+      ]
+    }
+  },
+  "independent_actual_review": {
+    "report_SHA_verified": true,
+    "only_fit_differences": [
+      "/shared_calibration/fit_diagnostics/server_adaptive_lambda",
+      "/shared_calibration/fit_sha256"
+    ],
+    "fit_seals_recomputed_from_saved_payloads_match": true,
+    "root_receipt_thresholds_predictions_metrics_counts_exact": true,
+    "original_scientific_failure_and_first_diagnostic_failure_preserved": true,
+    "actual_single_record_fit_calls": 1,
+    "source_only_operation_probe_executed": false,
+    "new_fit": 0,
+    "scientific_acceptances": 0,
+    "platform_cause_established": false
+  }
+}

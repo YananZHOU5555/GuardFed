@@ -1,0 +1,31 @@
+--- E:\OneDrive\文档\GuardFed\tmp\celeba_mechanism_native_delta_after251_20261010\run_once.py
++++ E:\OneDrive\文档\GuardFed\tmp\celeba_native_after264_closed272_20261011\run_once.py
+@@ -25,8 +25,8 @@
+ folder=LOCAL/tag; assert not folder.exists(); folder.mkdir()
+ save(folder/'STORAGE_PREFLIGHT.json', storage_check)
+ ssh=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55']
+-inspection=REMOTE+'/native_delta_after251_20261010/'+tag+'/inspection'
+-remote_archive=REMOTE+'/native_delta_after251_20261010/'+tag+'/'+tag+'.tar.gz'
++inspection=REMOTE+'/native_delta_after264_20261011/'+tag+'/inspection'
++remote_archive=REMOTE+'/native_delta_after264_20261011/'+tag+'/'+tag+'.tar.gz'
+ code="""from pathlib import Path
+ import hashlib,json,subprocess
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+@@ -66,7 +66,7 @@
+ print(json.dumps({'preflight':preflight,'canonical_ledger_unchanged':sha(canonical)==PREVIOUS,'logs':logs,'ledger_sha256':sha(LEDGER),'tool_sha256':sha(TOOL),'archive_size_bytes':Path(ARCHIVE).stat().st_size if Path(ARCHIVE).is_file() else None}))
+ raise SystemExit(logs[-1]['returncode'])
+ """
+-bindings=dict(TOOL=TOOL,HASH=HASH,LEDGER=REMOTE+'/native_delta_after251_20261010/'+tag+'/verified_ledger.json',PREVIOUS=previous,
++bindings=dict(TOOL=TOOL,HASH=HASH,LEDGER=REMOTE+'/native_delta_after264_20261011/'+tag+'/verified_ledger.json',PREVIOUS=previous,
+               INSPECTION=inspection,ARCHIVE=remote_archive,PY=PY,REMOTE=REMOTE)
+ bound='\n'.join(k+'='+repr(v) for k,v in bindings.items())+'\n'+code
+ result=subprocess.run(ssh+['python -c '+shlex.quote(bound)],capture_output=True)
+@@ -77,7 +77,7 @@
+ def fetch(remote,local):
+     subprocess.run(['scp','-o','BatchMode=yes','-o','ConnectTimeout=15','-P','60350','root@89.22.197.55:'+remote,str(local)],check=True,timeout=180)
+ storage_check = check_bulk_storage(after['archive_size_bytes'])
+-bulk_folder = STORAGE_ROOT/'mechanism_science_backups_20261009'/tag
++bulk_folder = STORAGE_ROOT/'celeba_native_after264_closed272_20261011'/tag
+ assert not bulk_folder.exists(), 'Never overwrite external evidence'
+ bulk_folder.mkdir(parents=True)
+ archive=bulk_folder/(tag+'.tar.gz'); receipt=folder/(tag+'.tar.gz.receipt.json')

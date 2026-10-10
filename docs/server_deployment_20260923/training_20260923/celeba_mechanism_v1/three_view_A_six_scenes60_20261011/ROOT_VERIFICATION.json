@@ -1,0 +1,83 @@
+{
+  "status": "ROOT_A60_SIX_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
+  "utc": "2026-10-10T13:15:23.017204+00:00",
+  "root_adoption": true,
+  "canonical_table": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_six_scenes60_20261011/TABLES.md",
+  "source_candidate": "tmp/celeba_mechanism_A60_candidate_20261010",
+  "source_seal_sha256": "ba26052defbb44aca625bdc34e14d8761b4e3c225c5743258f55898c3264c1ec",
+  "source_handoff_sha256": "4df60cb54f4fb9ccc492645feefb91266fcc20378be9b74a0929630c4e6ff90d",
+  "source_acceptance_path": "tmp/celeba_mechanism_remaining620_after251_root_adoption_20261010/ROOT_ADOPTION.json",
+  "source_acceptance_sha256": "e0a7ebef21f5cf9dad24fbb92ee4a874efc10fbb7f2ed7f507d9b4dfaef85200",
+  "source_index_sha256": "aff72cb0b530622e4fb3d2e5f7a1ee89cc741d02f6cf27665d2f3c6f77e28d1c",
+  "preserved_records": 120,
+  "paired_models": 60,
+  "complete_scenes": 6,
+  "complete_IID_scenes": 5,
+  "complete_nonIID_scenes": [
+    "Benign"
+  ],
+  "mean_SD_scalars_recomputed": 1134,
+  "per_scene_scalars": 972,
+  "seed_first_scalars": 162,
+  "display_cells": 567,
+  "metrics_from_group_counts": 1080,
+  "base_integer_confusion_counts_checked": 2880,
+  "old100_record_bytes_order_exact": true,
+  "old810_scalars_exact": true,
+  "old405_cells_exact": true,
+  "IID_seed_first_JSON_bytes_exact": true,
+  "actual_root_command": "python -B tmp/celeba_mechanism_A60_candidate_20261010/verify_saved.py",
+  "actual_root_command_exit": 0,
+  "actual_root_verifier_sha256": "57d49c94a89b261063302a9f87752fb730908127def0c8cc75237163c6dbb369",
+  "actual_root_output_matches_saved": true,
+  "independent_scope_review_agent": "/root/baseline_fidelity_v2",
+  "independent_scope_review_status": "PASS",
+  "independent_scope_review_limit": "Review received in this chat: new20 records,10 paired identities and54 independently recomputed new-scene scalars; preserved old100 records/810 scalars/IID aggregate bytes and distribution labels. Original full checker was replayed by root, not by this reviewer.",
+  "replay_devices": {
+    "Full": {
+      "cpu": 5,
+      "cuda:0": 55
+    },
+    "minus_A": {
+      "cpu": 60
+    }
+  },
+  "training_torch": {
+    "Full": {
+      "2.11.0+cu128": 59,
+      "2.11.0+cu130": 1
+    },
+    "minus_A": {
+      "2.11.0+cu128": 60
+    }
+  },
+  "files_sha256": {
+    "records.json": "f8c69ab1bfbcce8fb25615faebe75248d781531e8dfd0835da9c7ed63c1571f6",
+    "tables.json": "7c37e7f02195a152d2884c3536429229bacca75f6026ad06e63417158a68ff05",
+    "IID_SEED_FIRST.json": "ce6088b23dd0e2181e83393510075a919dc52719d4b654f70a29205d398b5baf",
+    "TABLES.md": "3d6bea379385c6826b4c73db12a4f48a82d74d8ae23628b466dcd71e201bb442",
+    "TABLES.tex": "7cc3e9cd58dbd860d6bc682da602786131b49bcb5b84624d8fa34fd51cec569f",
+    "SUMMARY.json": "61d8254e14fe0ec83a165448ccfaf5d235cee7abe7205b021d3732071b6adc8c",
+    "SOURCE_BINDINGS.json": "a24bfb820f21782a78e7211c1f22bc1c1d4126488c4845c8fec7668b5124729f",
+    "SAVED_VERIFICATION.json": "8bc455d9955f8d99dee3973970dd679f2df8f4762a30184b5afd0d08bfd66a00",
+    "DIRECTIONS.json": "00e4e39d37d6127fb44f05d475eb7af93dd9ffba4388524d0f1b61befe6abf99",
+    "REPORT.md": "50dce3b2ae6b1060af25656e2910b452c77b1d9660af8c26255a07f7bc9796df",
+    "README_CURRENT.md": "2812aebe784c5f5ea1cb913b98005dd3ba3ca0f2f334b1b6f1c32afdb313b827"
+  },
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "aggregate_scope": "Original five IID scenes only; mean within seed first; non-IID Benign reported separately",
+  "new_CNN": 0,
+  "new_fit": 0,
+  "new_training": 0,
+  "test": false,
+  "primary_endpoint_selected": false,
+  "tex_compiled": false,
+  "incorporated_into_full_rebuttal": false,
+  "limitations": "Six complete scenes, with non-IID coverage limited to Benign. Same checkpoint across three views; validation and prior selection/test exposure remain. Native/shared coincide within records, not independent confirmation. Mixed replay devices/cu128-cu130 provenance is retained. No necessity, significance, isolated causal mechanism, A100 or whole-rebuttal completion claim.",
+  "independent_scope_review_received_in_current_turn": true,
+  "independent_scope_review_time_note": "Exact delivery time was not independently measured; review is recorded in the current chat turn."
+}

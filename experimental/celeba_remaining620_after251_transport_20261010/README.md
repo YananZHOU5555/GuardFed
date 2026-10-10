@@ -1,0 +1,11 @@
+# Remaining620 after251: fixed9 transport
+
+Candidate IDs are only minus_A_non-IID_Benign_seed91002 through 91010. Seed91001 is already within accepted251 and transported71. Parent root SHA edd16e71d6fef9f6e2fc7fd15a7b824d2dfb2a7f809290990878b23477a1e838; parent index SHA fd1531be09ccaa90190e174dc46296632023db38fdfc11ed249c1e188310c5e6. Previous receipt SHA cbcbbed0d17aad648aa0c783119c04738e2bef312ef0ba4c4762d6174c500100.
+
+This bounded preparation reuses after240 once-only execute/export/download and record join. Native root proof, inspection and ledger must be received and SHA-bound, with all9 IDs newly accepted, before EXECUTION_INPUTS can permit any export. Exactly9 remote tasks must be closed in one preflight snapshot, no selected workers/failures/duplicate exporter or CPU111 narrow-owner conflict. No partial batch is exported. Source and guide pins, actual cgroup quota, single CPU111, nice10, idle I/O and hidden CUDA are retained. Only the established one-literal CPU110-to111 export affinity adaptation occurs in memory; transport.py f71e6e4152625a5a0582a61ff9b3e55e4ccee65dfd70a4e657851c0247f9c9d7 remains byte unchanged.
+
+Only the new small saved-array batch and its runtime receipts go to fresh guarded F storage (Yanan 2TB/Healthy/headroom). No native models, Full weights or old251 arrays are exported. The original archive verifier and saved-array verifier run once on F; any original root-only refit inside that checker is the sole allowed fit. No CNN, new training or final test. Failures retain stdout/stderr/exit/evidence and stop without automatic retry.
+
+After PASS, the inherited metadata join checks only this batch's model/result members in its already-accepted native archive (no new model download), source/config/data/checkpoint/Full-reference identities, and old351 native record objects/order plus previous ledger prefix. The proposed index points to the unchanged SHA of prior251 and preserves its all_ids order, adding only9. Root scientific adoption, canonical STATE/ledger and Git remain outside this agent's write scope.
+
+Run execute_once.py only after actual native proof is bound and verify_native_inputs succeeds. Then run join_saved.py once after the original offserver verifier succeeds. Source generators are retained preparation history, not retry commands.
