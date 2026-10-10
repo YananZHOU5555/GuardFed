@@ -1,0 +1,109 @@
+{
+  "status": "SOURCE_ONLY_EXACT10_F_FFLIP_COMPILE_REUSE_METADATA_FIXTURES_PASS",
+  "compiled": {
+    "adopt_by_root.py": {
+      "sha256": "9e6797ac84ab8860be3c132016d9fb9245a85c9a4eb06828d5c00bb24dc37242",
+      "compile": true,
+      "parent_sha256": "8037985a59bcf61f3c3e9ad57e30491e898d9a0df8dda53a0b3b340f560bec88"
+    },
+    "bind_native.py": {
+      "sha256": "2f09a94d06adc28395dd58dba99a0905d7ab4edbc36f0a2ff1afee553994f9f0",
+      "compile": true,
+      "parent_sha256": "856e875a552a6ba3612adf89bf5ec6a43c3bd189b7c3e1f509f8deb38ce82837"
+    },
+    "check_scope.py": {
+      "sha256": "ff1209c3608ddac467dc5bdc59b95d4465c2b516f41c2ff47951028d7ba18aab",
+      "compile": true,
+      "parent_sha256": "7213e5bb92ac21099fa566c24aaef1a51a9fe1df854169924eecc06cff8ac46e"
+    },
+    "cpu_release_readonly.py": {
+      "sha256": "f0bc25bb0b2788187284c4c4edc6dd31ce17b63693251ff6a1c6ac136f3db69e",
+      "compile": true,
+      "parent_sha256": "f0bc25bb0b2788187284c4c4edc6dd31ce17b63693251ff6a1c6ac136f3db69e"
+    },
+    "download_verify_once.py": {
+      "sha256": "205ac23becb85fb6be32436e44b95bfe5a27cbe2ec1817ecb1cc9c12c2ee2b20",
+      "compile": true,
+      "parent_sha256": "44705ac5e45bbb58b46554eee9f199afa6ff473c8d35398310fd7df2196317cc"
+    },
+    "execute_once.py": {
+      "sha256": "c5e45209a2b9521a6224be3b32a8b7819ebc9df20b2bd107fdbebca5feb12c6f",
+      "compile": true,
+      "parent_sha256": "c5e45209a2b9521a6224be3b32a8b7819ebc9df20b2bd107fdbebca5feb12c6f"
+    },
+    "export_once.py": {
+      "sha256": "6de7b71a9e55c23c76d6e46bfa97f052dd77d137e2eb9a910e5c48821c4e8d94",
+      "compile": true,
+      "parent_sha256": "0152208e029a9d1bd64b9113d496df9c93802ee7e95b68e58579c633a087132a"
+    },
+    "finalize_actual_handoff.py": {
+      "sha256": "ec71ef88e2154c839d78732ec57531a5070cad040ea3876dac3c159246190f78",
+      "compile": true,
+      "parent_sha256": "b741c539d3459482d749a17323b35ca848eafed639e0439c9237a01f24031918"
+    },
+    "join_saved.py": {
+      "sha256": "8885f8a9fc05f71e71303c20aa5cb87b2aba1d45aa03e95edcad2bcb1b2b5722",
+      "compile": true,
+      "parent_sha256": "cec87b72c27898eaaeb1349df190d27382396ce19a7f41e931ab34275efffadf"
+    },
+    "remote_cpu111_export.py": {
+      "sha256": "9283f42a98d8426ace56bc4d778bb7c40dd1f45ef59d482513d92b00cd40eb40",
+      "compile": true,
+      "parent_sha256": "9283f42a98d8426ace56bc4d778bb7c40dd1f45ef59d482513d92b00cd40eb40"
+    },
+    "remote_preflight.py": {
+      "sha256": "f7b2b9f2801cbd90882caaef8e57e28802bc67c9734b062093dd410bbf7d85bc",
+      "compile": true,
+      "parent_sha256": "53672535926cc6a544cff37cf909426a3ee248e754fa1e1ac8a1fa5036da9ac7"
+    },
+    "verify_native_inputs.py": {
+      "sha256": "a6287276746937f9ecd72f21e20adfe77ce7b4a37a61ca7668b2fa7633e690e4",
+      "compile": true,
+      "parent_sha256": "c20e61047802c089cf666113de1ad7e6285af009c4c82510d4aa17b9b40ef703"
+    }
+  },
+  "scientific_record_loops": [
+    {
+      "file": "join_saved.py",
+      "target": "rec",
+      "iter": "records",
+      "byte_AST_exact": true,
+      "after_only_attack_identity_literal_mapping_exact": true
+    },
+    {
+      "file": "adopt_by_root.py",
+      "target": "na",
+      "iter": "index['native_archives']",
+      "byte_AST_exact": false,
+      "after_only_attack_identity_literal_mapping_exact": true
+    },
+    {
+      "file": "adopt_by_root.py",
+      "target": "rec",
+      "iter": "records",
+      "byte_AST_exact": true,
+      "after_only_attack_identity_literal_mapping_exact": true
+    }
+  ],
+  "preflight_for_loops_AST_exact": 7,
+  "execute_CPUbridge_CPUrelease_byte_exact": true,
+  "original_download_saved_checker_invocation_body_bytes_exact": true,
+  "original_saved_checker_sha256": "939a3b47f04f4aba88f735b63e64354f9b8e879b6870a72fc86b5ae651c5edee",
+  "original_transport_sha256": "f71e6e4152625a5a0582a61ff9b3e55e4ccee65dfd70a4e657851c0247f9c9d7",
+  "metadata_fixtures_sha256": "8453004c7e3b75f8714f5999fdaa4bd7499a21ff423409a14e7ada0c20d72aa0",
+  "metadata_fixture_pass_cases": 3,
+  "metadata_fixture_rejections": 9,
+  "actual_native_root_not_bound": true,
+  "remote_complete_not_yet_verified": true,
+  "source_diff": "SOURCE_DIFF.patch",
+  "no_future_actual_hashes": true,
+  "SSH": 0,
+  "numerical_science": 0,
+  "fit": 0,
+  "CNN": 0,
+  "bulk_write": 0,
+  "root_adoption": false,
+  "source_line_ending_failure_preserved_and_fixed": true,
+  "historical_dependency_v2_fix": "V2_HISTORY_PATH_REVIEW.json",
+  "original_fixture_proof_preserved_not_rerun": true
+}

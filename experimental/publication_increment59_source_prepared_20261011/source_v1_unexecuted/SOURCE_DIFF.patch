@@ -1,0 +1,216 @@
+--- tmp/publish_guardfed_increment58_20261011.py
++++ tmp/publish_guardfed_increment59_20261011.py
+@@ -1,22 +1,26 @@
+-"""Publish adopted native312/views310 and first F IID Benign10 table; other accepted cutoffs unchanged, compact metadata only."""
++"""Publish adopted native320/views320 and two F IID scenes; FL native67, all other cutoffs unchanged; compact metadata only."""
+ from pathlib import Path
+ from datetime import datetime,timezone
+ import json,subprocess,hashlib,re,argparse
+ R=Path(__file__).resolve().parents[1]
+ W=Path('F:/YananResearchStorage/GuardFed/git_publication/current')
+ T=R/'docs/server_deployment_20260923/training_20260923'
+-PARENT='7cf342c4dc7ce4ecd09a3bdf1c7cbb64283978ed'
++PARENT='31b55b6e925af02db5fdb7d8deec4e25ac54307d'
+ BRANCH='codex/revision-evidence-baselines-20260928'
+ H=lambda b:hashlib.sha256(b).hexdigest()
+ parser=argparse.ArgumentParser(description=__doc__)
+-parser.add_argument('--semantic-review',type=Path,required=True,help='Actual root-accepted increment58 entry semantic review JSON under this repository')
++parser.add_argument('--semantic-review',type=Path,required=True,help='Actual root-accepted increment59 entry semantic review JSON under this repository')
+ parser.add_argument('--semantic-review-sha256',required=True)
++parser.add_argument('--F20-root',type=Path,required=True,help='Actual adopted canonical two-scene F20 ROOT_VERIFICATION.json; no prepared proof')
++parser.add_argument('--F20-root-sha256',required=True)
+ a=parser.parse_args()
+ semantic_review=(R/a.semantic_review).resolve()
+ assert semantic_review.relative_to(R).parts[0]=='tmp' and semantic_review.suffix=='.json'
+ assert semantic_review.is_file() and not semantic_review.is_symlink() and semantic_review.stat().st_size<2_000_000
+-assert re.fullmatch('[0-9a-f]{64}',a.semantic_review_sha256) and H(semantic_review.read_bytes())==a.semantic_review_sha256=='7f2a2ce33fd3223d5de63c6345938f25f0f054944a0ece48c5cf41c6397e8909'
+-assert semantic_review.relative_to(R).as_posix()=='tmp/F10_entries_semantic_review_20261011/FINAL_REVIEW.json'
++assert re.fullmatch('[0-9a-f]{64}',a.semantic_review_sha256) and H(semantic_review.read_bytes())==a.semantic_review_sha256
++F20_path=(R/a.F20_root).resolve()
++assert F20_path==(T/'celeba_mechanism_v1/three_view_F_IID_two_scenes20_20261011/ROOT_VERIFICATION.json').resolve()
++assert re.fullmatch('[0-9a-f]{64}',a.F20_root_sha256) and a.F20_root_sha256=='9d222cea9e55a00442ff278eb47fa1b622938611049c44d0565644047a8894ac'
+ 
+ def pinned_json(path,sha):
+     assert path.is_file() and not path.is_symlink() and H(path.read_bytes())==sha,path
+@@ -41,32 +45,36 @@
+ table=pinned_json(T/'celeba_mechanism_v1/three_view_A_ten_scenes100_20261011/ROOT_VERIFICATION.json',TABLE_ROOT)
+ assert table['root_adoption'] is True and (table['preserved_records'],table['paired_models'],table['complete_scenes'])==(200,100,10)
+ assert table['test'] is False and table['primary_endpoint_selected'] is False
+-NATIVE_ROOT='206f11451d02478602a093014d459dc656424568be3cde26bed6db8797a92ac8'
+-REPLAY_ROOT='6cb8cc46848612defa38b72e00bae40b7533a131a43a68cf2d0efe90b0bd878f'
+-F10_ROOT='30bc95ef503976076774873c3ccfb39384570983f037aa559042a4ad41bfa32d'
+-native=pinned_json(T/'server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T184902Z/ROOT_DELTA_VERIFICATION.json',NATIVE_ROOT)
+-assert native['root_adopted'] is True and native['total_new_strict_and_offserver']==312 and native['old404_records_exact'] is True and native['test'] is False
+-assert native['root_checked_archive_members']==94 and native['previous_ledger_sha256']=='44afd080678b145eb1d014926d28ff60d46ce3c0c006ad98566e9e48fc64b306'
+-assert native['ledger_sha256']=='9baf997fcb87ec7da604af076945aab5637ef828b6cf8bccb560a4d93c2a26c2'
+-assert native['new_ids']==[f'minus_F_IID_Benign_seed{s}' for s in range(91005,91011)]+[f'minus_F_IID_F Flip_seed{s}' for s in (91001,91002)]
+-replay=pinned_json(R/'tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011/ROOT_ADOPTION.json',REPLAY_ROOT)
+-assert replay['status']=='ROOT_F_BENIGN6_EXACT6_SAVED_ARRAYS_REPLAY310_ADOPTED'
+-assert (replay['prior_accepted'],replay['new_accepted'],replay['cumulative_accepted'],replay['remaining620_new_accepted'])==(304,6,310,130) and replay['original304_unchanged'] is True
++NATIVE_ROOT='749577f73d151c958f6dc646a1e15714db7c72a8b099a75f22298b58b8c728bb'
++REPLAY_ROOT='b427a751a127242d75a6f47426f60067b15345ef47b8704ba000b28925185317'
++F20_ROOT=a.F20_root_sha256
++native=pinned_json(T/'server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T194755Z/ROOT_DELTA_VERIFICATION.json',NATIVE_ROOT)
++assert native['root_adopted'] is True and native['total_new_strict_and_offserver']==320 and native['old412_records_exact'] is True and native['test'] is False
++assert native['root_checked_archive_members']==94 and native['previous_ledger_sha256']=='9baf997fcb87ec7da604af076945aab5637ef828b6cf8bccb560a4d93c2a26c2'
++assert native['ledger_sha256']=='0674614906f4667f03fae0033aa5f6dfdd87b8275db5d38a7dcd90643dc3fb32'
++assert native['new_ids']==[f'minus_F_IID_F Flip_seed{s}' for s in range(91003,91011)]
++replay=pinned_json(R/'tmp/celeba_mechanism_remaining_F_FFlip10_root_adoption_20261011/ROOT_ADOPTION.json',REPLAY_ROOT)
++assert replay['status']=='ROOT_F_FFLIP10_EXACT10_SAVED_ARRAYS_REPLAY320_ADOPTED'
++assert (replay['prior_accepted'],replay['new_accepted'],replay['cumulative_accepted'],replay['remaining620_new_accepted'])==(310,10,320,140) and replay['original310_unchanged'] is True
+ assert replay['native_root_sha256']==NATIVE_ROOT and replay['test'] is False
+-assert replay['accepted_new_ids']==[f'minus_F_IID_Benign_seed{s}' for s in range(91005,91011)]
+-assert (replay['archive_members'],replay['independent_metrics'],replay['independent_counts'],replay['prediction_rules'],replay['native_max_abs_difference'])==(56,54,144,18,0)
++assert replay['accepted_new_ids']==[f'minus_F_IID_F Flip_seed{s}' for s in range(91001,91011)]
++assert (replay['archive_members'],replay['independent_metrics'],replay['independent_counts'],replay['prediction_rules'],replay['native_max_abs_difference'])==(92,90,240,30,0)
+ assert replay['new_scene_table_created'] is False and replay['Full_inference']==replay['new_CNN']==replay['new_fit']==0
+-F10=pinned_json(T/'celeba_mechanism_v1/three_view_F_Benign10_20261011/ROOT_VERIFICATION.json',F10_ROOT)
+-assert F10['status']=='ROOT_F10_SINGLE_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED' and F10['root_adoption'] is True
+-assert (F10['preserved_records'],F10['paired_models'],F10['complete_scenes'],F10['partial_other_scene_pairs'])==(20,10,1,0)
+-assert F10['seed_panels']==[10,9,6] and (F10['mean_SD_scalars_recomputed'],F10['display_cells'],F10['metrics_from_group_counts'],F10['base_integer_confusion_counts_checked'])==(162,81,180,480)
+-assert F10['source_acceptance_sha256']==REPLAY_ROOT and F10['source_native_root_sha256']==NATIVE_ROOT
+-assert F10['original_Full10_records_exact'] and F10['original_F10_saved_views_exact'] and F10['native_shared_metrics_and_counts_exact']
+-assert F10['actual_root_command_exit']==0 and F10['new_CNN']==F10['new_fits']==F10['new_training']==0 and not F10['test'] and not F10['whole_rebuttal_complete']
+-for name,pin in F10['files_sha256'].items():
+-    assert H((T/'celeba_mechanism_v1/three_view_F_Benign10_20261011'/name).read_bytes())==pin
+-FL=pinned_json(R/'tmp/fl_native_after59_20261011/ROOT_ADOPTION_REVIEW.json','1b137d080aa48b3cff8705aa60d8cd090d52595988dd31c26f1f25f8ae0ca553')
+-assert (FL['accepted_before'],FL['accepted_new'],FL['accepted_total'],FL['reused_separately'])==(59,4,63,4) and FL['old59_ordered_prefix_exact'] is True and FL['final_test'] is False
++F20=pinned_json(F20_path,F20_ROOT)
++assert F20['root_adoption'] is True and F20['status']=='ROOT_F20_TWO_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED'
++assert (F20['preserved_records'],F20['paired_models'],F20['complete_scenes'])==(40,20,2) and F20['seed_panels']==[10,9,6]
++assert F20['source_acceptance_sha256']==REPLAY_ROOT and F20['source_native_root_sha256']==NATIVE_ROOT
++assert F20['actual_root_command_exit']==0 and F20['new_CNN']==F20['new_fits']==F20['new_training']==0 and not F20['test'] and not F20['whole_rebuttal_complete']
++f20_names={'records.json','tables.json','TABLES.md','coverage.json','paired_per_seed.json','checks.json','SOURCE_BINDINGS.json','ROOT_BINDING.json','ROOT_SOURCE_REVIEW.json','FILES_SHA256.json','ACTUAL_HANDOFF.json','OUTPUTS_SHA256.json','ROOT_VERIFY_COMMAND.json','ROOT_VERIFY.stdout','ROOT_VERIFY.stderr','ROOT_VERIFY.stdout.json','ROOT_VERIFY.stderr.txt','ROOT_VERIFY_EXIT.json'}
++assert set(F20['files_sha256'])<=f20_names and {'records.json','tables.json','TABLES.md','checks.json'}<=set(F20['files_sha256'])
++for name,pin in F20['files_sha256'].items():
++    assert H((F20_path.parent/name).read_bytes())==pin
++checks=json.loads((F20_path.parent/'checks.json').read_bytes())
++assert (checks['mean_sd_scalars'],checks['display_mean_sd_cells'],checks['receipt_metrics_from_group_counts'],checks['base_confusion_counts_structurally_checked'],checks['table_record_count'])==(324,162,360,960,40)
++assert checks['old20_record_JSON_bytes_and_order_exact'] and checks['old162_scalars_exact'] and checks['old81_cells_preserved'] and checks['native_shared_metrics_and_counts_exact']
++assert checks['max_abs_difference']<=1e-12 and checks['partial_pairs_excluded']==0 and checks['new_threshold_fits']==checks['new_CNN']==checks['new_training']==0 and checks['test'] is False
++FL=pinned_json(R/'tmp/fl_native_after63_20261011/ROOT_ADOPTION_REVIEW.json','a11cd9ed94ab136b49dd41975d45f684d88236b6918c295461089a98adbc7db0')
++assert (FL['accepted_before'],FL['accepted_new'],FL['accepted_total'],FL['reused_separately'])==(63,4,67,4) and FL['old63_ordered_prefix_exact'] is True and FL['final_test'] is False
+ gradient=pinned_json(R/'tmp/gradient_native_after42_20261011/ROOT_ADOPTION_REVIEW.json','e5875e4d6a5e15c95d7fb94686411a106b1db39681341c92e51e9e821867f1e6')
+ assert (gradient['accepted_before'],gradient['accepted_new'],gradient['accepted_total'])==(42,4,46)
+ assert not gradient['screen64_complete'] and not gradient['method_champion_claim'] and not gradient['final_test']
+@@ -85,9 +93,9 @@
+ assert git('remote','get-url','origin').decode().strip()=='https://github.com/YananZHOU5555/GuardFed.git'
+ assert git('ls-remote','origin','refs/heads/'+BRANCH).decode().split()[0]==PARENT
+ state=json.loads((T/'TRAINING_STATE.json').read_bytes())
+-assert state['celeba_mechanism_v1']['scientific_results_offserver_verified']==312
+-assert state['celeba_mechanism_v1']['three_view_new_models_offserver_verified']==310
+-assert state['flgmm_fullcoverage_v2_20261009']['new_accepted']==63
++assert state['celeba_mechanism_v1']['scientific_results_offserver_verified']==320
++assert state['celeba_mechanism_v1']['three_view_new_models_offserver_verified']==320
++assert state['flgmm_fullcoverage_v2_20261009']['new_accepted']==67
+ assert state['gradient64_validation_search_20261010']['offserver_accepted']==46
+ assert state['hybrid100_fullcoverage_20261010']['new_accepted']==12
+ assert state['FLGMM_after48_valid_three_view_20261011']['FLGMM_total_three_view_records']==61
+@@ -96,64 +104,51 @@
+ assert state['celeba_mechanism_v1']['A_three_view_ten_scene_table']['root_proof_sha256']==TABLE_ROOT
+ assert state['latest_rebuttal_draft']['A100_incorporated'] and state['latest_rebuttal_draft']['clear_A100_incorporated']
+ assert state['latest_rebuttal_draft']['root_proof_sha256']==DETAILED_ROOT and state['latest_rebuttal_draft']['clear_reader_root_sha256']==CLEAR_ROOT
+-assert state['celeba_mechanism_v1']['F_three_view_single_scene_table']['root_proof_sha256']==F10_ROOT
++assert any(isinstance(v,dict) and v.get('root_proof_sha256')==F20_ROOT and (v.get('paired_models'),v.get('complete_scenes'))==(20,2) for v in state['celeba_mechanism_v1'].values())
+ entry=pinned_json(semantic_review,a.semantic_review_sha256)
+ assert entry['status']=='PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW'
+ assert H((T/'TRAINING_STATE.json').read_bytes())==entry['STATE_sha256']
+ accepted=entry['current_accepted']
+-assert (accepted['native_new'],accepted['three_view_models'],accepted['F_paired_models'],accepted['F_complete_scenes'])==(312,310,10,1)
+-assert (accepted['FL_native_new'],accepted['FL_three_view_total'],accepted['FL_complete_table_records'],accepted['gradient_accepted'],accepted['Hybrid_native_new'])==(63,61,60,46,12)
+-assert accepted['started_observed']==320 and accepted['F_native_only_Flip_excluded']==2
+-assert state['celeba_mechanism_v1']['three_view_counts_by_variant']==accepted['by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':10}
++assert (accepted['native_new'],accepted['three_view_models'],accepted['F_paired_models'],accepted['F_complete_scenes'])==(320,320,20,2)
++assert (accepted['FL_native_new'],accepted['FL_three_view_total'],accepted['FL_complete_table_records'],accepted['gradient_accepted'],accepted['Hybrid_native_new'])==(67,61,60,46,12)
++assert state['celeba_mechanism_v1']['three_view_counts_by_variant']==accepted['by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':20}
+ assert state['latest_five_queue_readonly_observation']==entry['latest_observation_only']
+-assert entry['latest_observation_only']['sha256']=='6c130df4a3e243b0bfa0fba7718cfe00d199cc67ce87798828095cb7e606ebad'
+-assert entry['latest_observation_only']['growth_proof_sha256']=='db150c4245d0d59b7b72ddc3e7f88b9e8ff74afcfe2c3e0e119e78ba677c2ece'
++assert entry['latest_observation_only']['sha256']=='78a5ef2b40184bcd652678cb22620dd10811b98c5db53833427b2795373969a5'
++assert entry['latest_observation_only']['growth_proof_sha256']=='1ff95525cce03031a5a1d155dcc34319b2a5f601e5d0655331c0ecd8bc686929'
++assert (entry['latest_observation_only']['FLGMM_terminal'],entry['latest_observation_only']['gradient_terminal'],entry['latest_observation_only']['Hybrid_terminal'])==(69,53,15)
+ assert entry['latest_observation_only']['new_acceptance']==0 and entry['latest_observation_only']['counts_are_observation_only'] is True
+ for rel,pin in entry['entries'].items():
+     assert H((R/rel).read_bytes())==pin['sha256'] and pin['history_exact'] is True
+ for pin in entry['source_pins'].values():
+     assert H((R/pin['path']).read_bytes())==pin['sha256']
+-# Executed snapshots and current future sources have distinct hashes; neither future source is claimed reexecuted.
+-assert H((R/'tmp/F10_entries_root_execution_20261011/EXECUTED_SOURCE_45570835.py').read_bytes())=='4557083549480a1d1ce74391cdeebfb10110fa18dc0e8e832ad3714053af60c7'
+-assert H((R/'tmp/update_reactivation_state_20261009.py').read_bytes())=='323ff72bc4c5ceae40903632d1cfde4fd08468e689e31444540048f6ad94c73a'
+-assert H((R/'tmp/entry_F10_generators_actual_20261011/overview_history_label_correction/EXECUTED_SOURCE_7061bd5d.py').read_bytes())=='7061bd5dcdf71bf5e63a6e6782daec2aa6b0e62a7814df87e6420afa3e7af7f1'
+-assert H((R/'tmp/update_overview_closure100_root_20261009.py').read_bytes())=='9c39f0f281de41d304d6078575896511aba00dc47f713375dacd08046cbff638'
+-assert H((R/'tmp/update_completion_current_20261009.py').read_bytes())=='e1ca896c8bcaa7505ca53f28e9c3b560133b22885f03c78f2ce79ce303791d05'
+-previous=pinned_json(T/'publication_closed_increment57_verified_20261011.json','2cc2f24bd50d5593a70e4b081bd21927d2bc3e72224cd58f6f538c8eff9853c9')
++# Actual entry/source pins come from the required final semantic proof; old executed and future source snapshots stay distinct in parent58.
++previous=pinned_json(T/'publication_closed_increment58_verified_20261011.json','efa2025fb3e499f1ee7241878ebd37dbe091410e56bf440e8d3ae519092c8815')
+ assert previous['commit']==PARENT and previous['status']=='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'
+-paths=[T/n for n in ['RUNNING.md','TRAINING_STATE.json','REBUTTAL_COMPLETION_20261009.md','publication_closed_increment57_verified_20261011.json']]
++paths=[T/n for n in ['RUNNING.md','TRAINING_STATE.json','REBUTTAL_COMPLETION_20261009.md','publication_closed_increment58_verified_20261011.json']]
+ paths.append(T/'celeba_mechanism_v1/EXECUTION.md')
+ paths += [R/'docs/返修实验总览.md',T/'server_reactivation_20261009/MONITOR_HANDOFF.md']
+ current=(T/'RUNNING.md').read_text(encoding='utf8').split('# HISTORICAL:',1)[0]
+ details=re.findall(r'detailed_current_[0-9a-f]+\.md',current)
+ assert len(set(details))==1
+ paths.append(T/'server_reactivation_20261009/entry_history'/details[0])
+-paths += [R/'tmp'/n for n in ['update_reactivation_state_20261009.py','update_completion_current_20261009.py','update_overview_closure100_root_20261009.py','publish_guardfed_increment58_20261011.py','recover_F10_executed_generator_20261011.py','adopt_F_Benign10_root_20261011.py']]
+-paths += [semantic_review]
+-dirs=['tmp/celeba_native_after304_20261011','tmp/celeba_remaining_F_Benign6_20261011',
+-      'tmp/celeba_mechanism_remaining_F_Benign6_root_adoption_20261011',
+-      'tmp/entry_F10_source_delta_20261011','tmp/entry_F10_generators_actual_20261011',
+-      'tmp/F10_entries_root_execution_20261011','tmp/F10_entries_semantic_review_20261011',
+-      'tmp/publication_increment58_source_prepared_20261011',
+-      'docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_Benign10_20261011']
+-# A100 two replies, original FL63/gradient46/Hybrid12 proofs, old native304/replay304 and historical resources remain in parent57.
+-# Publish F10 canonical records/table only once; candidate directory contributes source and command metadata below.
++paths += [R/'tmp'/n for n in ['update_reactivation_state_20261009.py','update_completion_current_20261009.py','update_overview_closure100_root_20261009.py','publish_guardfed_increment59_20261011.py']]
++paths += [semantic_review,F20_path]
++scope_path=R/'tmp/publication_increment59_source_prepared_20261011/COMPACT_SELECTION.json'
++selection=pinned_json(scope_path,'e68a03af74134c5b1940b7a63ee8f637448799accecfc90dde3d9a41e805947f')
++for rel,pin in selection['files'].items():
++    p=R/rel
++    assert p.is_file() and H(p.read_bytes())==pin['sha256'] and p.stat().st_size==pin['bytes'],rel
++    paths.append(p)
++# Publish one canonical F20 output copy, exactly the root-pinned names; no candidate output duplicates.
++paths += [F20_path.parent/name for name in F20['files_sha256']]
++source_dir=R/'tmp/publication_increment59_source_prepared_20261011'
++paths += [source_dir/name for name in ['COMPACT_SELECTION.json','SOURCE_DIFF.patch','SOURCE_CHECK.json','INVERSE_EDITS.json','README.md','HANDOFF.json','FILES_SHA256.json']]
+ compact_limit=lambda p:2_000_000
+ allowed={'.py','.json','.md','.patch','.txt','.stderr','.stdout','.sha256','.csv','.tex','.diff'}
+-for directory in dirs:
+-    base=R/directory
+-    assert base.is_dir(),directory
+-    for p in base.rglob('*'):
+-        if not p.is_file() or p.suffix not in allowed:continue
+-        if p.stat().st_size>=compact_limit(p) or p.name in ['OBSERVATION.stdout','FRESH_OBSERVATION.stdout']:continue
+-        paths.append(p)
+-base=T/'server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T184902Z'
+-paths += [p for p in base.rglob('*') if p.is_file() and p.suffix in allowed]
+-F10_source_files=['binding.py','build.py','check_source.py','verify_numeric.py','verify_saved.py','README.md','HANDOFF.json','FILES_SHA256.json','ROOT_BINDING.template.json','SOURCE_INPUTS.json','SOURCE_DIFF.patch','ROOT_SOURCE_REVIEW.json','SOURCE_CHECK_COMMAND.json','SOURCE_CHECK.stdout','SOURCE_CHECK.stderr','BUILD_COMMAND.json','BUILD_COMMAND_STARTED.json','BUILD.stdout','BUILD.stderr']
+-paths += [R/'tmp/celeba_F_IID_Benign10_table_20261011'/name for name in F10_source_files]
+-for name in ['root_five_queue_20261010T185912Z.raw.json','ROOT_FIVE_QUEUE_GROWTH_20261010T1859.json']:
+-    paths.append(T/'server_reactivation_20261009'/name)
+ paths=list(dict.fromkeys(paths))
++for p in paths:
++    assert p.is_file() and p.suffix in allowed and p.resolve().is_relative_to(R.resolve())
++assert sum(p.stat().st_size for p in paths)<100_000_000
+ pins={}
+ for p in paths:
+     assert p.stat().st_size<compact_limit(p) and not p.is_symlink()
+@@ -169,7 +164,7 @@
+ for i in range(0,len(names),30):git('add','--sparse','-f','--',*names[i:i+30])
+ changed=[p for p in git('diff','--cached','--name-only','-z').decode('utf8').split('\0') if p]
+ assert changed and set(changed)<=set(pins)
+-git('commit','-m','Accept native312 replay310 and first paired F Benign10 scene')
++git('commit','-m','Accept native320 replay320 two paired F scenes and FL67 native')
+ commit=git('rev-parse','HEAD').decode().strip();assert git('rev-parse','HEAD^').decode().strip()==PARENT
+ raw=git('cat-file','--batch',data=''.join('HEAD:'+p+'\n' for p in changed).encode('utf8'));pos=0
+ for path in changed:
+@@ -179,6 +174,6 @@
+ assert pos==len(raw) and not git('status','--porcelain')
+ git('push','origin','HEAD:refs/heads/'+BRANCH)
+ assert git('ls-remote','origin','refs/heads/'+BRANCH).decode().split()[0]==commit
+-proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=dict(native=312,three_view=310,FLGMM_native_new=63,FLGMM_three_views=61,FLGMM_table_complete_scene_records=60,FLGMM_table_complete_scenes=6,gradient_search=46,Hybrid_native_new=12,Hybrid_native_complete_scenes=1,A_checkpoint_records=100,A_table_pairs=100,A_table_scenes=10,F_checkpoint_records=10,F_table_pairs=10,F_table_scenes=1,F_table_records=20,reviewer_comments=24),A100_detailed_reply_root_sha256=state['latest_rebuttal_draft']['root_proof_sha256'],A100_clear_reply_root_sha256=state['latest_rebuttal_draft']['clear_reader_root_sha256'],F10_table_root_sha256=F10_ROOT,native312_root_sha256=NATIVE_ROOT,replay310_root_sha256=REPLAY_ROOT,semantic_review_sha256=a.semantic_review_sha256,latest_observation_sha256=entry['latest_observation_only']['sha256'],new_terminal_results_adopted=True,final_test=False,whole_rebuttal_complete=False)
+-(T/'publication_closed_increment58_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
++proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=dict(native=320,three_view=320,FLGMM_native_new=67,FLGMM_three_views=61,FLGMM_table_complete_scene_records=60,FLGMM_table_complete_scenes=6,gradient_search=46,Hybrid_native_new=12,Hybrid_native_complete_scenes=1,A_checkpoint_records=100,A_table_pairs=100,A_table_scenes=10,F_checkpoint_records=20,F_table_pairs=20,F_table_scenes=2,F_table_records=40,reviewer_comments=24),A100_detailed_reply_root_sha256=state['latest_rebuttal_draft']['root_proof_sha256'],A100_clear_reply_root_sha256=state['latest_rebuttal_draft']['clear_reader_root_sha256'],F20_table_root_sha256=F20_ROOT,native320_root_sha256=NATIVE_ROOT,replay320_root_sha256=REPLAY_ROOT,semantic_review_sha256=a.semantic_review_sha256,latest_observation_sha256=entry['latest_observation_only']['sha256'],new_terminal_results_adopted=True,final_test=False,whole_rebuttal_complete=False)
++(T/'publication_closed_increment59_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ print(json.dumps({k:v for k,v in proof.items() if k!='files'}))

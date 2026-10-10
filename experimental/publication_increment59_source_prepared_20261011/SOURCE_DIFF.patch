@@ -1,0 +1,56 @@
+--- source_v1_unexecuted/publish_guardfed_increment59_20261011.py
++++ tmp/publish_guardfed_increment59_20261011.py
+@@ -17,7 +17,8 @@
+ semantic_review=(R/a.semantic_review).resolve()
+ assert semantic_review.relative_to(R).parts[0]=='tmp' and semantic_review.suffix=='.json'
+ assert semantic_review.is_file() and not semantic_review.is_symlink() and semantic_review.stat().st_size<2_000_000
+-assert re.fullmatch('[0-9a-f]{64}',a.semantic_review_sha256) and H(semantic_review.read_bytes())==a.semantic_review_sha256
++assert re.fullmatch('[0-9a-f]{64}',a.semantic_review_sha256) and H(semantic_review.read_bytes())==a.semantic_review_sha256=='71519a3620bca13467415142ca3d6d575227eee10f10da9ec5a05c7b47c65189'
++assert semantic_review.relative_to(R).as_posix()=='tmp/entry_increment59_independent_review_20261011/ROOT_INDEPENDENT_REVIEW.json'
+ F20_path=(R/a.F20_root).resolve()
+ assert F20_path==(T/'celeba_mechanism_v1/three_view_F_IID_two_scenes20_20261011/ROOT_VERIFICATION.json').resolve()
+ assert re.fullmatch('[0-9a-f]{64}',a.F20_root_sha256) and a.F20_root_sha256=='9d222cea9e55a00442ff278eb47fa1b622938611049c44d0565644047a8894ac'
+@@ -121,24 +122,36 @@
+     assert H((R/rel).read_bytes())==pin['sha256'] and pin['history_exact'] is True
+ for pin in entry['source_pins'].values():
+     assert H((R/pin['path']).read_bytes())==pin['sha256']
+-# Actual entry/source pins come from the required final semantic proof; old executed and future source snapshots stay distinct in parent58.
++# Current entry writer is the actual executed969c source, not the historical three generators.
++assert H((R/'tmp/update_increment59_entries_20261011.py').read_bytes())=='969c567f5a7277a2da8576db7acb654aaf4292cab4cd7d346dc90576f4344305'
++update=pinned_json(R/'tmp/entry_increment59_actual_20261011/UPDATE_PROOF.json','ca824b30d6bcaa307ff567b26fcdfe13cffba4fadf4bdc00b6fd26d9da6a103f')
++assert update['status']=='CURRENT_ENTRIES_UPDATED_FROM_ACTUAL320_F20_FL67_PROOFS' and update['STATE_sha256']==entry['STATE_sha256']
++assert update['entries']=={rel:{k:v for k,v in pin.items() if k!='prefix_sha256'} for rel,pin in entry['entries'].items()}
++actual_exit=pinned_json(R/'tmp/entry_increment59_execution_20261011/EXIT.json','27b45bd8cb2e6679ec05e2c6464d29884687fd7ff013763aee6a7feaa1eba028')
++assert actual_exit['exit_code']==0 and actual_exit['source_sha256']=='969c567f5a7277a2da8576db7acb654aaf4292cab4cd7d346dc90576f4344305'
++for stream in ('stdout','stderr'):
++    assert H((R/'tmp/entry_increment59_execution_20261011'/stream).read_bytes())==actual_exit[stream+'_sha256']
++deployment=pinned_json(R/'tmp/fl_three_view_FFlip10_cpu136_20261011/runtime/SOURCE_DEPLOYMENT.json','1070c5f7640477c55faa247c352612b22d76ad1c34b4043d7ae08dbedbf13f85')
++assert deployment['status']=='ROOT_SMALL_SOURCE_DEPLOYED_BYTES_VERIFIED_NOT_STARTED' and deployment['new_inference']==deployment['new_fit']==deployment['new_training']==0
++refusal=pinned_json(R/'tmp/fl_three_view_FFlip10_cpu136_20261011/runtime/LAUNCH_REFUSAL.json','a974849e5b617dbdf708a1ebc60ccc9b6328b7d5e99ed6fbcdde6fcac5ec3f0a')
++assert refusal['status']=='CPU136_LAUNCH_REFUSED_ACTIVE_WIDE_THREAD_NO_RETRY' and refusal['no_new_CNN_fit_training'] and not refusal['retry_authorized'] and not any(refusal['gate_status_files_present'].values())
+ previous=pinned_json(T/'publication_closed_increment58_verified_20261011.json','efa2025fb3e499f1ee7241878ebd37dbe091410e56bf440e8d3ae519092c8815')
+ assert previous['commit']==PARENT and previous['status']=='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS'
+ paths=[T/n for n in ['RUNNING.md','TRAINING_STATE.json','REBUTTAL_COMPLETION_20261009.md','publication_closed_increment58_verified_20261011.json']]
+ paths.append(T/'celeba_mechanism_v1/EXECUTION.md')
+ paths += [R/'docs/返修实验总览.md',T/'server_reactivation_20261009/MONITOR_HANDOFF.md']
+-current=(T/'RUNNING.md').read_text(encoding='utf8').split('# HISTORICAL:',1)[0]
+-details=re.findall(r'detailed_current_[0-9a-f]+\.md',current)
+-assert len(set(details))==1
+-paths.append(T/'server_reactivation_20261009/entry_history'/details[0])
+-paths += [R/'tmp'/n for n in ['update_reactivation_state_20261009.py','update_completion_current_20261009.py','update_overview_closure100_root_20261009.py','publish_guardfed_increment59_20261011.py']]
++paths += [R/'tmp/update_increment59_entries_20261011.py',R/'tmp/publish_guardfed_increment59_20261011.py']
+ paths += [semantic_review,F20_path]
+ scope_path=R/'tmp/publication_increment59_source_prepared_20261011/COMPACT_SELECTION.json'
+-selection=pinned_json(scope_path,'e68a03af74134c5b1940b7a63ee8f637448799accecfc90dde3d9a41e805947f')
++selection=pinned_json(scope_path,'7868b3bcc811d1ca73064be8fd358a0544549bbb849a71994a2e3556949b122e')
+ for rel,pin in selection['files'].items():
+     p=R/rel
+     assert p.is_file() and H(p.read_bytes())==pin['sha256'] and p.stat().st_size==pin['bytes'],rel
+     paths.append(p)
++# Actual semantic source pins must be members of this closed selection or the exact F20 root; no arbitrary extra paths.
++for pin in entry['source_pins'].values():
++    assert pin['path'] in selection['files'] or pin['path']==F20_path.relative_to(R).as_posix()
++    paths.append(R/pin['path'])
+ # Publish one canonical F20 output copy, exactly the root-pinned names; no candidate output duplicates.
+ paths += [F20_path.parent/name for name in F20['files_sha256']]
+ source_dir=R/'tmp/publication_increment59_source_prepared_20261011'

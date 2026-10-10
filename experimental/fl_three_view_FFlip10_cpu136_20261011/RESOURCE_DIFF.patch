@@ -1,0 +1,266 @@
+--- prior/candidate.py
++++ cpu136/candidate.py
+@@ -14,7 +14,7 @@
+ import types
+ 
+ HERE = Path(__file__).resolve().parent
+-CPUS = list(range(120, 128))
++CPUS = list(range(136, 144))
+ 
+ 
+ def require(ok, message):
+@@ -265,13 +265,13 @@
+     m = read(HERE / 'MANIFEST.json')
+     validate_manifest(m)
+     authorize(a, m)
+-    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/fl_three_view_FFlip10_20261011/outputs'), 'Fresh fixed server output required')
++    require(not a.output.exists() and a.output.is_absolute() and a.output.is_relative_to('/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011/outputs'), 'Fresh fixed server output required')
+     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CUDA must be hidden before importing Torch')
+     for k, v in {'OMP_NUM_THREADS': '8', 'MKL_NUM_THREADS': '8', 'OPENBLAS_NUM_THREADS': '1', 'NUMEXPR_NUM_THREADS': '1'}.items():
+         require(os.environ.get(k) == v, 'Thread environment drift: ' + k)
+     import fcntl, signal, traceback
+     exclusive_cpus()
+-    lock = open('/tmp/guardfed_flgmm_FFlip10_valid.lock', 'a')
++    lock = open('/tmp/guardfed_flgmm_FFlip10_cpu136_valid.lock', 'a')
+     fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+     import numpy as np, pandas as pd, torch
+     torch.set_num_threads(8)
+--- prior/MANIFEST.json
++++ cpu136/MANIFEST.json
+@@ -11,14 +11,14 @@
+   ],
+   "native_tolerance": 1e-12,
+   "cpu_affinity": [
+-    120,
+-    121,
+-    122,
+-    123,
+-    124,
+-    125,
+-    126,
+-    127
++    136,
++    137,
++    138,
++    139,
++    140,
++    141,
++    142,
++    143
+   ],
+   "threads": 8,
+   "new_scientific_acceptances": 0,
+@@ -4054,7 +4054,7 @@
+   },
+   "authorizations_and_runtime_facts_pending": [
+     "independent/root source review and explicit exact10 authorization",
+-    "fresh Linux CPU120-127 eligible/all-thread freedom and quota/memory/GPU/storage preflight",
++    "fresh Linux CPU136-143 eligible/all-thread freedom and quota/memory/GPU/storage preflight",
+     "actual original server artifact/source/data SHA and selected-producer quiescence checks",
+     "actual replay receipts and unchanged Linux whole saved checker; F offserver arrays/members and root adoption"
+   ],
+--- prior/runtime_v2/deploy_once.py
++++ cpu136/runtime/deploy_once.py
+@@ -16,14 +16,14 @@
+  b=p.read_bytes();members[rel]={'base64':base64.b64encode(b).decode(),'sha256':sha(p),'bytes':len(b)}
+ assert members['source/originals/saved_science.py']['sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ old=R/'tmp/celeba_flgmm_closed47_root_execution_20261011/SOURCE_DEPLOYMENT_remote.py'
+-source=old.read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_three_view_FFlip10_20261011')
++source=old.read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_three_view_FFlip10_cpu136_20261011')
+ compile(source,'deploy_remote','exec')
+ (H/'DEPLOY_REMOTE.py').write_text(source)
+ code="import base64;exec(compile(base64.b64decode('"+base64.b64encode(source.encode()).decode()+"'),'<source-deploy>','exec'))"
+ cmd=['ssh','-p','60350','-o','BatchMode=yes','root@89.22.197.55','python3 -c "'+code+'"']
+ assert not (H/'DEPLOY_COMMAND.json').exists()
+ (H/'DEPLOY_COMMAND.json').write_text(json.dumps({'argv':cmd,'package_sha256':package,'members':len(members)},indent=2))
+-p=subprocess.run(cmd,input=json.dumps({'base':'/workspace/guardfed_checks/fl_three_view_FFlip10_20261011','members':members}).encode(),capture_output=True,timeout=60)
++p=subprocess.run(cmd,input=json.dumps({'base':'/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011','members':members}).encode(),capture_output=True,timeout=60)
+ (H/'DEPLOY.stdout').write_bytes(p.stdout);(H/'DEPLOY.stderr').write_bytes(p.stderr)
+ (H/'DEPLOY_EXIT.json').write_text(json.dumps({'exit':p.returncode})+'\n')
+ assert p.returncode==0,p.stderr.decode(errors='replace')
+--- prior/runtime_v2/launch_once.py
++++ cpu136/runtime/launch_once.py
+@@ -24,9 +24,9 @@
+  hashes.append(dict(previous, stat_refreshed=True))
+ '''+s[b:]
+ fresh=remote(s,dict(read(H/'observer_payload.json'),previous_hashes=first['hashes']),'FRESH_OBSERVATION')
+-assert fresh['source_model_data_hashes_verified'] and not fresh['narrow_cpu120_127_conflicts'] and not fresh['duplicate_gate']
++assert fresh['source_model_data_hashes_verified'] and not fresh['narrow_cpu136_143_conflicts'] and not fresh['duplicate_gate']
+ assert all(not x['failures'] and not x['live_producers'] for x in fresh['selected'])
+-rows=fresh['guardfed_processes'];cpus=set(range(120,128))
++rows=fresh['guardfed_processes'];cpus=set(range(136,144))
+ active_conflict=[{'pid':r['pid'],'tid':t['tid']} for r in rows for t in r['threads'] if (t.get('delta_cpu_ticks_2s') or 0)>0 and t['last_cpu'] in cpus]
+ assert not active_conflict,active_conflict
+ service=fresh['services'];assert service['returncode']==0 and len(service['stdout'].splitlines())==5 and all('RUNNING' in l for l in service['stdout'].splitlines())
+@@ -48,15 +48,15 @@
+ assert fresh['disk']['free']>20*1024**3
+ assert fresh['gpu_recovery']['returncode']==0 and all(l.endswith('None') for l in fresh['gpu_recovery']['stdout'].strip().splitlines())
+ assert fresh['gpu']['returncode']==0 and all(int(l.split(',')[-1])<85 for l in fresh['gpu']['stdout'].strip().splitlines())
+-pre={'status':'ROOT_LINUX_FLGMM_EXACT10_PREFLIGHT_PASS','utc':fresh['utc'],'cpu_affinity':sorted(cpus),'eligible_cpus':fresh['eligible_cpus'],'actual_quota_cores':quota,'nominal_reserved_cores_including_gate':sum(components.values()),'nominal_budget_components':components,'nominal_budget_not_hard_peak_bound':True,'no_duplicate_gate':True,'all_thread_cpus_free':True,'all_thread_cpus_free_definition':'No narrow reservation overlap or sampled active wide-thread last_cpu120..127. Wide masks can migrate; coordinator dormant numerical pool is not a reservation.','source_model_data_hashes_verified':True,'selected_producers_quiescent':True,'services_healthy':True,'gpu_health_verified':True,'cgroup_and_memory_headroom_verified':True,'storage_headroom_verified':True,'original_hash_observation_sha256':ref['sha256'],'stat_resource_refresh_sha256':read(H/'FRESH_OBSERVATION_REF.json')['sha256'],'hashed_files':len(first['hashes']),'main_progressed_ids':main_growth,'package_sha256':sha(C/'FILES_SHA256.json'),'new_CNN':0,'new_fit':0,'test':False}
++pre={'status':'ROOT_LINUX_FLGMM_EXACT10_PREFLIGHT_PASS','utc':fresh['utc'],'cpu_affinity':sorted(cpus),'eligible_cpus':fresh['eligible_cpus'],'actual_quota_cores':quota,'nominal_reserved_cores_including_gate':sum(components.values()),'nominal_budget_components':components,'nominal_budget_not_hard_peak_bound':True,'no_duplicate_gate':True,'all_thread_cpus_free':True,'all_thread_cpus_free_definition':'No narrow reservation overlap or sampled active wide-thread last_cpu136..143. Wide masks can migrate; coordinator dormant numerical pool is not a reservation.','source_model_data_hashes_verified':True,'selected_producers_quiescent':True,'services_healthy':True,'gpu_health_verified':True,'cgroup_and_memory_headroom_verified':True,'storage_headroom_verified':True,'original_hash_observation_sha256':ref['sha256'],'stat_resource_refresh_sha256':read(H/'FRESH_OBSERVATION_REF.json')['sha256'],'hashed_files':len(first['hashes']),'main_progressed_ids':main_growth,'package_sha256':sha(C/'FILES_SHA256.json'),'new_CNN':0,'new_fit':0,'test':False}
+ save('LINUX_PREFLIGHT.json',pre)
+ auth={'status':'ROOT_AUTHORIZED_FLGMM_CLOSED_EXACT10_THREE_VIEW','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'package_sha256':sha(C/'FILES_SHA256.json'),'manifest_sha256':sha(C/'MANIFEST.json'),'source_review_sha256':sha(C/'ROOT_SOURCE_REVIEW.json'),'linux_preflight_sha256':sha(H/'LINUX_PREFLIGHT.json'),'exact_ids':m['exact_ids'],'cpu_affinity':sorted(cpus),'device':'cpu','max_processes':1,'test':False,'delegated_root_authorization':'Parent root explicit exact10 execution authorization after native67 adoption and actual source review; prior61 unchanged.'}
+ save('AUTHORIZATION.json',auth)
+-base='/workspace/guardfed_checks/fl_three_view_FFlip10_20261011';program='guardfed_flgmm_FFlip10_valid'
++base='/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011';program='guardfed_flgmm_FFlip10_cpu136_valid'
+ args=['--package-sha256',auth['package_sha256'],'--authorization',base+'/AUTHORIZATION.json','--authorization-sha256',sha(H/'AUTHORIZATION.json'),'--preflight',base+'/LINUX_PREFLIGHT.json','--preflight-sha256',auth['linux_preflight_sha256'],'--source-review',base+'/ROOT_SOURCE_REVIEW.json','--source-review-sha256',auth['source_review_sha256'],'--output',base+'/outputs/attempt001']
+-config='[program:'+program+']\ncommand=/usr/bin/env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/taskset -c 120-127 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 '+m['server_python']+' -B '+base+'/source/candidate.py '+' '.join(args)+'\ndirectory='+base+'\nautostart=false\nautorestart=false\nstartretries=0\nstartsecs=1\nstopasgroup=true\nkillasgroup=true\nstdout_logfile='+base+'/execution/stdout.log\nstderr_logfile='+base+'/execution/stderr.log\nstdout_logfile_maxbytes=0\nstderr_logfile_maxbytes=0\n'
++config='[program:'+program+']\ncommand=/usr/bin/env CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/taskset -c 136-143 /usr/bin/ionice -c 3 /usr/bin/nice -n 10 '+m['server_python']+' -B '+base+'/source/candidate.py '+' '.join(args)+'\ndirectory='+base+'\nautostart=false\nautorestart=false\nstartretries=0\nstartsecs=1\nstopasgroup=true\nkillasgroup=true\nstdout_logfile='+base+'/execution/stdout.log\nstderr_logfile='+base+'/execution/stderr.log\nstdout_logfile_maxbytes=0\nstderr_logfile_maxbytes=0\n'
+ payload={'base':base,'program':program,'package':auth['package_sha256'],'source_review_sha256':auth['source_review_sha256'],'config':config,'config_sha256':hashlib.sha256(config.encode()).hexdigest(),'files':{}}
+ for name in ['LINUX_PREFLIGHT.json','AUTHORIZATION.json']:
+  b=(H/name).read_bytes();payload['files'][name]={'sha256':sha(H/name),'bytes':len(b),'base64':base64.b64encode(b).decode()}
+-s=(R/'tmp/celeba_flgmm_closed47_root_execution_20261011/START_RECEIPT_remote.py').read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_three_view_FFlip10_20261011').replace('guardfed_flgmm_closed47_valid',program).replace('FINITE47','FINITE10')
++s=(R/'tmp/celeba_flgmm_closed47_root_execution_20261011/START_RECEIPT_remote.py').read_text().replace('celeba_flgmm_three_view_closed_batch_20261011','fl_three_view_FFlip10_cpu136_20261011').replace('guardfed_flgmm_closed47_valid',program).replace('FINITE47','FINITE10')
+ result=remote(s,payload,'START_RECEIPT');print(json.dumps({'status':result['status'],'utc':result['utc'],'cpu_budget':sum(components.values()),'quota':quota}))
+--- prior/runtime_v2/observation_storage.py
++++ cpu136/runtime/observation_storage.py
+@@ -2,7 +2,7 @@
+ import datetime,hashlib,json,subprocess
+ from pathlib import Path
+ H=Path(__file__).resolve().parent
+-F=Path('F:/YananResearchStorage/GuardFed/fl_three_view_FFlip10_20261011/runtime')
++F=Path('F:/YananResearchStorage/GuardFed/fl_three_view_FFlip10_cpu136_20261011/runtime')
+ sha=lambda b:hashlib.sha256(b).hexdigest()
+ def save(p,v):
+  with p.open('x',encoding='utf8') as f:json.dump(v,f,indent=2);f.write('\n')
+--- prior/runtime_v2/observer.py
++++ cpu136/runtime/observer.py
+@@ -28,7 +28,7 @@
+                     st=(t/'stat').read_text().rsplit(')',1)[1].split()
+                     item={'tid':int(t.name),'affinity':affinity,'state':st[0],'cpu_ticks':int(st[11])+int(st[12]),'last_cpu':int(st[36])}
+                     threads.append(item)
+-                    if len(affinity)<=8 and set(affinity)&set(range(120,128)): all_narrow.append({'pid':pid,'argv':argv,'thread':item})
++                    if len(affinity)<=8 and set(affinity)&set(range(136,144)): all_narrow.append({'pid':pid,'argv':argv,'thread':item})
+                 except (OSError,ValueError): pass
+             if argv and any('guardfed' in a.lower() or 'celeba' in a.lower() for a in argv):
+                 env={}
+@@ -98,7 +98,7 @@
+                 progress=read(out/'progress.json') if (out/'progress.json').exists() else None
+                 workers.append({'pid':r['pid'],'job_path':str(jp),'id':job['id'],'progress':progress})
+         except (OSError,KeyError,ValueError): pass
+-duplicate=[r for r in after if any('fl_three_view_FFlip10_20261011/source/candidate.py' in a for a in r['argv'])]
++duplicate=[r for r in after if any('fl_three_view_FFlip10_cpu136_20261011/source/candidate.py' in a for a in r['argv'])]
+ lock_lines=[x for x in P('/proc/locks').read_text().splitlines() if 'guardfed' in x]
+-result={'status':'READONLY_OBSERVATION_NOT_PREFLIGHT_DECISION','started_utc':started,'hash_end_utc':hash_end,'utc':utc(),'guide_sha256':guide,'eligible_cpus':eligible,'observer_affinity':sorted(os.sched_getaffinity(0)),'observer_nice':os.getpriority(os.PRIO_PROCESS,0),'hashes':hashes,'unique_inodes_hashed':len(seen),'source_model_data_hashes_verified':all(x['match'] for x in hashes),'services':services,'supervisor_configs':configs,'gpu':gpu,'gpu_health':gpu_health,'gpu_recovery':gpu_recovery,'cgroup':cg,'disk':dict(total=disk.total,used=disk.used,free=disk.free),'guardfed_processes':after,'narrow_cpu120_127_conflicts':narrow_after,'selected':selected,'duplicate_gate':duplicate,'main_queue':queue,'main_workers':workers,'no_remote_writes':True,'Torch_imported':False,'CNN':0,'fit':0,'training':0}
++result={'status':'READONLY_OBSERVATION_NOT_PREFLIGHT_DECISION','started_utc':started,'hash_end_utc':hash_end,'utc':utc(),'guide_sha256':guide,'eligible_cpus':eligible,'observer_affinity':sorted(os.sched_getaffinity(0)),'observer_nice':os.getpriority(os.PRIO_PROCESS,0),'hashes':hashes,'unique_inodes_hashed':len(seen),'source_model_data_hashes_verified':all(x['match'] for x in hashes),'services':services,'supervisor_configs':configs,'gpu':gpu,'gpu_health':gpu_health,'gpu_recovery':gpu_recovery,'cgroup':cg,'disk':dict(total=disk.total,used=disk.used,free=disk.free),'guardfed_processes':after,'narrow_cpu136_143_conflicts':narrow_after,'selected':selected,'duplicate_gate':duplicate,'main_queue':queue,'main_workers':workers,'no_remote_writes':True,'Torch_imported':False,'CNN':0,'fit':0,'training':0}
+ print(json.dumps(result,ensure_ascii=False))
+--- prior/runtime_v2/observe_once.py
++++ cpu136/runtime/observe_once.py
+@@ -13,5 +13,5 @@
+  manifest=json.loads((C/'MANIFEST.json').read_bytes());payload=dict(guide_sha256='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa',manifest=manifest)
+  save(H/'observer_payload.json',payload);save(H/'OBSERVATION_COMMAND.json',dict(command=cmd,source_sha256=sha(H/'observer.py'),package_sha256=sha(C/'FILES_SHA256.json'),source_review_sha256=args.source_review_sha256))
+  j=run_capture(cmd,json.dumps(payload).encode(),'OBSERVATION',300,bulk=True)['value']
+- print(json.dumps(dict(utc=j['utc'],hashes=len(j['hashes']),hashes_OK=j['source_model_data_hashes_verified'],restricted_conflicts=len(j['narrow_cpu120_127_conflicts']),selected_producers=sum(len(x['live_producers']) for x in j['selected']),duplicate_gates=len(j['duplicate_gate']),raw_stored_on_F=True)))
++ print(json.dumps(dict(utc=j['utc'],hashes=len(j['hashes']),hashes_OK=j['source_model_data_hashes_verified'],restricted_conflicts=len(j['narrow_cpu136_143_conflicts']),selected_producers=sum(len(x['live_producers']) for x in j['selected']),duplicate_gates=len(j['duplicate_gate']),raw_stored_on_F=True)))
+ if __name__=='__main__':main()
+--- prior/saved_v2/audit_saved.py
++++ cpu136/saved_v2/audit_saved.py
+@@ -4,7 +4,7 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+-ACTUAL = ROOT / 'tmp/fl_three_view_FFlip10_20261011/actual/saved001'
++ACTUAL = ROOT / 'tmp/fl_three_view_FFlip10_cpu136_20261011/actual/saved001'
+ HISTORICAL = ROOT / 'tmp/celeba_flgmm_closed47_root_execution_20261011/saved_acceptance_actual001'
+ PREPARED = HERE
+ OUTPUT = ACTUAL / 'SAVED_OUTPUTS_AUDIT_NO_REFIT.json'
+--- prior/saved_v2/contract.py
++++ cpu136/saved_v2/contract.py
+@@ -4,8 +4,8 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+-CANDIDATE = ROOT/'tmp/fl_three_view_FFlip10_20261011'
+-PACKAGE = '26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675'
++CANDIDATE = ROOT/'tmp/fl_three_view_FFlip10_cpu136_20261011'
++PACKAGE = 'e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383'
+ SAVED_SOURCE_SHA = 'd512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ IDS = json.loads((HERE/'FIXED_IDS.json').read_bytes())['exact_ids']
+ FROOT = Path('F:/YananResearchStorage/GuardFed')
+--- prior/saved_v2/linux_saved_remote.py
++++ cpu136/saved_v2/linux_saved_remote.py
+@@ -5,31 +5,31 @@
+ ap.add_argument('--gate-result-sha256',required=True)
+ ap.add_argument('--allow-original-cached-root-refit',action='store_true',required=True)
+ a=ap.parse_args()
+-saved=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_20261011/source/originals/saved_science.py')
++saved=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011/source/originals/saved_science.py')
+ payload={'saved_check_source':saved.read_text(encoding='utf-8'),'source_sha256':hashlib.sha256(saved.read_bytes()).hexdigest()}
+ assert hashlib.sha256(payload['saved_check_source'].encode()).hexdigest()==payload['source_sha256']
+ assert payload['source_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+-base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_20261011'); output=base/'LINUX_SAVED_CHECK.json'
++base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011'); output=base/'LINUX_SAVED_CHECK.json'
+ assert not output.exists() and not (base/'LINUX_SAVED_FAILURE.json').exists()
+ assert os.environ['CUDA_VISIBLE_DEVICES']=='' and os.getpriority(os.PRIO_PROCESS,0)>=10 and len(os.sched_getaffinity(0))==1
+ quota,period=pathlib.Path('/sys/fs/cgroup/cpu.max').read_text().split();assert quota=='max' or int(quota)/int(period)>=32
+ spec=importlib.util.spec_from_file_location('root_exact3_source',base/'source/candidate.py');c=importlib.util.module_from_spec(spec);sys.modules[spec.name]=c;spec.loader.exec_module(c)
+-c.package_check('26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675')
++c.package_check('e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383')
+ m=c.read(base/'source/MANIFEST.json');c.validate_manifest(m)
+ out=base/'outputs/attempt001'
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()==a.gate_result_sha256
+ gate=c.read(out/'GATE_RESULT.json')
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert gate['status']=='FLGMM_EXACT10_THREE_VIEW_PASS_NOT_ROOT_ADOPTED'
+-assert gate['package_sha256']=='26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675'
++assert gate['package_sha256']=='e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383'
+ assert len(gate['receipts'])==10 and [r['id'] for r in gate['receipts']]==m['exact_ids']
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_valid','EXITED'],status.stdout
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_cpu136_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_cpu136_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   cmd=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_FFlip10_20261011' in token for token in cmd),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_FFlip10_cpu136_20261011' in token for token in cmd),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -68,7 +68,7 @@
+   comp=ns['check_saved'](record,base/'outputs/attempt001'/row['id'],r,proof,types.SimpleNamespace(repo=repo),None,core,None,ev,ids,y,s)
+   assert measure()==before
+   results.append({'id':row['id'],'native_comparison':comp,'root_receipt_exact':True,'cached_root_fit_exact':True,'saved_predictions_metrics_counts_exact':True,'checkpoint_sha256':r['checkpoint_sha256'],'array_sha256':r['prediction_arrays_sha256'],'receipt_sha256':c.sha(base/'outputs/attempt001'/row['id']/'receipt.json')})
+- report={'status':'LINUX_ORIGINAL_FLGMM10_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675','cached_root_refits':10,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
++ report={'status':'LINUX_ORIGINAL_FLGMM10_WHOLE_SAVED_CHECK_PASS_NOT_ROOT_ADOPTED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'records':results,'original_check_saved_sha256':payload['source_sha256'],'gate_result_sha256':a.gate_result_sha256,'package_sha256':'e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383','cached_root_refits':10,'new_CNN':0,'new_training':0,'test':False,'runtime':{'python':sys.version,'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'device':'cpu','cpu_affinity':list(os.sched_getaffinity(0))},'Windows_group_KL_difference_remains_preserved':True,'native_tolerance_unchanged':1e-12}
+  output.write_text(json.dumps(report,indent=2)+'\n');sys.stdout.write(output.read_text())
+ except BaseException:
+  import traceback
+--- prior/saved_v2/transport_remote.py
++++ cpu136/saved_v2/transport_remote.py
+@@ -1,20 +1,20 @@
+ 
+ import datetime,hashlib,io,json,os,pathlib,subprocess,sys,zipfile
+-base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_20261011')
++base=pathlib.Path('/workspace/guardfed_checks/fl_three_view_FFlip10_cpu136_20261011')
+ out=base/'outputs/attempt001'
+ assert not (out/'FAILURE.json').exists() and not list(out.rglob('FAILURE.json'))
+ assert hashlib.sha256((out/'GATE_RESULT.json').read_bytes()).hexdigest()=='__GATE_RESULT_SHA256__'
+ gate=json.loads((out/'GATE_RESULT.json').read_text())
+ ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage']
+ assert gate['status']=='FLGMM_EXACT10_THREE_VIEW_PASS_NOT_ROOT_ADOPTED' and [r['id'] for r in gate['receipts']]==ids
+-assert gate['package_sha256']=='26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675'
+-status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_valid'],capture_output=True,text=True)
+-assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_valid','EXITED'],status.stdout
++assert gate['package_sha256']=='e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383'
++status=subprocess.run(['supervisorctl','status','guardfed_flgmm_FFlip10_cpu136_valid'],capture_output=True,text=True)
++assert status.returncode==3 and status.stdout.split()[:2]==['guardfed_flgmm_FFlip10_cpu136_valid','EXITED'],status.stdout
+ for proc in pathlib.Path('/proc').glob('[0-9]*'):
+  if int(proc.name)==os.getpid():continue
+  try:
+   command=(proc/'cmdline').read_bytes().decode(errors='replace').split('\0')
+-  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_FFlip10_20261011' in token for token in command),'Live replay worker'
++  assert not any(pathlib.Path(token).name=='candidate.py' and 'fl_three_view_FFlip10_cpu136_20261011' in token for token in command),'Live replay worker'
+  except (FileNotFoundError,ProcessLookupError):pass
+  for task in (proc/'task').glob('*'):
+   try:
+@@ -30,7 +30,7 @@
+ assert linux['original_check_saved_sha256']=='d512e5b2b6614b762d921dd94b2b5162687c0bbddde4caaf8b584b3b22dba745'
+ assert all(r['root_receipt_exact'] and r['cached_root_fit_exact'] and r['saved_predictions_metrics_counts_exact'] for r in linux['records'])
+ assert linux['new_CNN']==0 and linux['new_training']==0 and linux['test'] is False
+-assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='26cf63fb47d9b59965e6231912cd072de06e6fa1b3bfad13f17866f5bd60c675'
++assert linux['gate_result_sha256']=='__GATE_RESULT_SHA256__' and linux['package_sha256']=='e79ce116657b81d5ef06016186382a54666039df6472d23a1c8dc3d7e4dac383'
+ files={'bundle/GATE_RESULT.json':out/'GATE_RESULT.json','bundle/metadata_receipt.json':out/'metadata_receipt.json','LINUX_SAVED_CHECK.json':proof}
+ for ident in ids:
+  for name in ['receipt.json','validation_predictions.npz']:files['bundle/'+ident+'/'+name]=out/ident/name
