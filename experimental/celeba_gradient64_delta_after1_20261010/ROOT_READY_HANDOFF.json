@@ -1,0 +1,597 @@
+{
+  "status": "ROOT_READY_GRADIENT64_EXACT4_ORIGINAL_STRICT_OFFSERVER_PASS_NOT_ADOPTED",
+  "utc": "2026-10-10T06:03:41.832876+00:00",
+  "accepted_new_ids": [
+    "FedNGA_eta0.001_IID_S-DFA_seed91001_screen",
+    "FedNGA_eta0.001_non-IID_Benign_seed91001_screen",
+    "FedNGA_eta0.001_non-IID_S-DFA_seed91001_screen",
+    "FedNGA_eta0.003_IID_Benign_seed91001_screen"
+  ],
+  "accepted_before": 1,
+  "new_strict_offserver_count": 4,
+  "strict_offserver_cumulative": 5,
+  "root_accepted_cumulative_before_this_delivery": 1,
+  "screen_total": 64,
+  "all64_complete": false,
+  "archive_path": "F:/YananResearchStorage/GuardFed/celeba_gradient64_delta_after1_20261010/batch/gradient64_delta_after1.tar.gz",
+  "archive_sha256": "f1a2133af5b537246570c80d732bfdebc86037b7bc46d87ca6c55d2e070c8c10",
+  "archive_bytes": 1785181,
+  "archive_members": 132,
+  "receipt_path": "F:/YananResearchStorage/GuardFed/celeba_gradient64_delta_after1_20261010/batch/backup_receipt.json",
+  "receipt_sha256": "740d68269cccdea4fd4abdabe90701abcddda6e77d608ea12702f0a4e5ff5163",
+  "offserver_path": "tmp/celeba_gradient64_delta_after1_20261010/OFFSERVER_ACCEPTANCE.json",
+  "offserver_sha256": "b3250c5986728a734dfee38eceef63ab160e65222dc875e8a1f310fc6848e6dd",
+  "original_strict_sha256": "2d6a008fb36c1808325af928ce8111eacad1e1fa17cda13608c1d00221296a71",
+  "inventory_sha256": "2435c698668762283204eac9912d74a373c146ae36257dadb4515ad2d345819b",
+  "source_seal_sha256": "11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced",
+  "original_acceptor_sha256": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+  "prepared_source_seal_sha256": "f7a6c18d5b030a3709a5a1af3db841f06bc2cb7c5ff30341a83c844a5bc69d01",
+  "authorization_sha256": "a3b1ac55c09e1149e72b3155abd6b4f36886956613dce879ee48b56f19e7c9fb",
+  "snapshot_sha256": "ce5ed7cb9741d9fe81403835885c38da55ceee1bfec334858e84c1b6f58935ca",
+  "prior_root_path": "tmp/root_adopt_first_closed_20261010/GRADIENT1_ROOT_ADOPTION.json",
+  "prior_root_sha256": "ca4a38076e5080d94069cdabd50a032d84a96a339914761ec568db44a43db978",
+  "prior_offserver_path": "tmp/celeba_gradient64_first_closed_adoption_20261010/OFFSERVER_ACCEPTANCE.json",
+  "prior_offserver_sha256": "35089298546d72ef6b6503b63c7887912c8cd88e97a87d297d766245193e7cfa",
+  "old1_ordered_prefix_exact": true,
+  "accepted_job_ids": [
+    "FedNGA_eta0.001_IID_Benign_seed91001_screen",
+    "FedNGA_eta0.001_IID_S-DFA_seed91001_screen",
+    "FedNGA_eta0.001_non-IID_Benign_seed91001_screen",
+    "FedNGA_eta0.001_non-IID_S-DFA_seed91001_screen",
+    "FedNGA_eta0.003_IID_Benign_seed91001_screen"
+  ],
+  "records": [
+    {
+      "id": "FedNGA_eta0.001_IID_S-DFA_seed91001_screen",
+      "checkpoint_sha256": "e622153adabff338d7779db995fe2c3ff04a9342d0f2bd0a9578b4d82c0e1460",
+      "job_sha256": "309b454e32e7328dc3a1292d56f744a8004b658a2d7e082c1d3a3e29d86efcc8",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7351,
+            7320,
+            7305,
+            7336,
+            7261,
+            7406,
+            7410,
+            7412,
+            7233,
+            7259,
+            7287,
+            7403,
+            7365,
+            7383,
+            7284,
+            7387,
+            7302,
+            7252,
+            7255,
+            7282
+          ]
+        }
+      },
+      "original_training_provenance": {
+        "job_sha256": "309b454e32e7328dc3a1292d56f744a8004b658a2d7e082c1d3a3e29d86efcc8",
+        "source_hashes": {
+          "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+          "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+          "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+          "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+          "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+          "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+          "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+          "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+          "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+          "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+          "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+          "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+          "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+          "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+          "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+          "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+          "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+          "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+          "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+          "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+        },
+        "local_hashes": {
+          "accept_result.py": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+          "prepare.py": "2dff355bfecbb191a3a8e2cec64769b5721f57d699a77d6cebd1783e6dbe84a9",
+          "protocol.json": "c5010a3438365c4e2350618c0ae763a9122f8c0b5b433692842e268a5b4aa496",
+          "worker.py": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4"
+        },
+        "component_hashes": {
+          "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+          "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+        },
+        "started_unix": 1791606685.3726308,
+        "resume_supported": false,
+        "environment": {
+          "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+          "torch": "2.11.0+cu128",
+          "cuda": "12.8",
+          "device": "cuda",
+          "gpu_name": "NVIDIA GeForce RTX 5090"
+        }
+      },
+      "tensor_count": 8,
+      "constant_negative_retained": true
+    },
+    {
+      "id": "FedNGA_eta0.001_non-IID_Benign_seed91001_screen",
+      "checkpoint_sha256": "46ceb4001721fcde5e97439c96d8f2764a049ef1347bba4ffed0f68ed6d3d3d8",
+      "job_sha256": "29855b9b5785359d06197c7492ba636bc9e33c23dc7d3475cafe769b290d6011",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7925,
+            7132,
+            6815,
+            8131,
+            5247,
+            10128,
+            9987,
+            10121,
+            4683,
+            5182,
+            6465,
+            9759,
+            8341,
+            8946,
+            5833,
+            9161,
+            6359,
+            5115,
+            5449,
+            5714
+          ]
+        }
+      },
+      "original_training_provenance": {
+        "job_sha256": "29855b9b5785359d06197c7492ba636bc9e33c23dc7d3475cafe769b290d6011",
+        "source_hashes": {
+          "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+          "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+          "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+          "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+          "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+          "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+          "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+          "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+          "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+          "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+          "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+          "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+          "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+          "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+          "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+          "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+          "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+          "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+          "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+          "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+        },
+        "local_hashes": {
+          "accept_result.py": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+          "prepare.py": "2dff355bfecbb191a3a8e2cec64769b5721f57d699a77d6cebd1783e6dbe84a9",
+          "protocol.json": "c5010a3438365c4e2350618c0ae763a9122f8c0b5b433692842e268a5b4aa496",
+          "worker.py": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4"
+        },
+        "component_hashes": {
+          "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+          "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+        },
+        "started_unix": 1791607777.0687308,
+        "resume_supported": false,
+        "environment": {
+          "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+          "torch": "2.11.0+cu128",
+          "cuda": "12.8",
+          "device": "cuda",
+          "gpu_name": "NVIDIA GeForce RTX 5090"
+        }
+      },
+      "tensor_count": 8,
+      "constant_negative_retained": true
+    },
+    {
+      "id": "FedNGA_eta0.001_non-IID_S-DFA_seed91001_screen",
+      "checkpoint_sha256": "89096c0f72827e2e4438a5e92a2de08bf1af8b81a2d888d15492518bb939ee9e",
+      "job_sha256": "1b335ffc0c14898d07f131a078ab0572d8a3b2624c578c0d4643a65c536be360",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7925,
+            7132,
+            6815,
+            8131,
+            5247,
+            10128,
+            9987,
+            10121,
+            4683,
+            5182,
+            6465,
+            9759,
+            8341,
+            8946,
+            5833,
+            9161,
+            6359,
+            5115,
+            5449,
+            5714
+          ]
+        }
+      },
+      "original_training_provenance": {
+        "job_sha256": "1b335ffc0c14898d07f131a078ab0572d8a3b2624c578c0d4643a65c536be360",
+        "source_hashes": {
+          "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+          "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+          "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+          "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+          "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+          "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+          "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+          "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+          "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+          "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+          "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+          "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+          "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+          "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+          "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+          "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+          "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+          "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+          "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+          "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+        },
+        "local_hashes": {
+          "accept_result.py": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+          "prepare.py": "2dff355bfecbb191a3a8e2cec64769b5721f57d699a77d6cebd1783e6dbe84a9",
+          "protocol.json": "c5010a3438365c4e2350618c0ae763a9122f8c0b5b433692842e268a5b4aa496",
+          "worker.py": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4"
+        },
+        "component_hashes": {
+          "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+          "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+        },
+        "started_unix": 1791608758.2670877,
+        "resume_supported": false,
+        "environment": {
+          "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+          "torch": "2.11.0+cu128",
+          "cuda": "12.8",
+          "device": "cuda",
+          "gpu_name": "NVIDIA GeForce RTX 5090"
+        }
+      },
+      "tensor_count": 8,
+      "constant_negative_retained": true
+    },
+    {
+      "id": "FedNGA_eta0.003_IID_Benign_seed91001_screen",
+      "checkpoint_sha256": "353dd16f40f83f2b26f9be5933f2d80b801945ba67a8650ff628150ae755fa8c",
+      "job_sha256": "18c767f4a42568e4eff12f3b9ac87108e19da5ca5d05390522222c198da6ee64",
+      "rounds": 70,
+      "metrics": {
+        "accuracy": 0.5166859616449389,
+        "aeod": 0.0,
+        "aspd": 0.0
+      },
+      "data_contract": {
+        "label_col": "Smiling",
+        "sensitive_col": "Male",
+        "feature_includes_label": false,
+        "feature_includes_sensitive": false,
+        "num_features": 3,
+        "train_rows": 162770,
+        "test_rows": 19867,
+        "root_clean_rows": 16277,
+        "root_synthetic_rows": 0,
+        "image_data_contract": {
+          "numerical_execution": {
+            "version": "celeba_deterministic_fp32_v1",
+            "deterministic_algorithms": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "cudnn_allow_tf32": false,
+            "matmul_allow_tf32": false,
+            "cublas_workspace_config": ":4096:8"
+          },
+          "model": "Conv32/64/128_3x3_ReLU_MaxPool_GAP_Linear2",
+          "image_shape": [
+            3,
+            64,
+            64
+          ],
+          "normalization": "uint8 divided by 255 per batch",
+          "augmentation": "none",
+          "target": "Smiling",
+          "sensitive": "Male",
+          "evaluation_split": "valid",
+          "official_split_sizes": {
+            "0": 162770,
+            "1": 19867,
+            "2": 19962
+          },
+          "actual_train_rows": 162770,
+          "actual_evaluation_rows": 19867,
+          "evidence_stage": "full_official_split",
+          "train_image_ids_sha256": "46d42484d5b5f53af8747fcf44ee11a0b051af27f10383d32254faee0311bc99",
+          "evaluation_image_ids_sha256": "64a15cf28caf1d177ac3dcf96a4408bc21091796974b243923ca947a37b554bf",
+          "root_image_ids_sha256": "b8a09c34ab73d6291d0e8e7aa2c58773dcae985c7010155a7df2d9adec6fb479",
+          "cache_manifest_sha256": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "official_metadata": {
+            "list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+            "list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7"
+          },
+          "train_eval_disjoint": true,
+          "root_client_disjoint": true,
+          "client_sample_counts": [
+            7351,
+            7320,
+            7305,
+            7336,
+            7261,
+            7406,
+            7410,
+            7412,
+            7233,
+            7259,
+            7287,
+            7403,
+            7365,
+            7383,
+            7284,
+            7387,
+            7302,
+            7252,
+            7255,
+            7282
+          ]
+        }
+      },
+      "original_training_provenance": {
+        "job_sha256": "18c767f4a42568e4eff12f3b9ac87108e19da5ca5d05390522222c198da6ee64",
+        "source_hashes": {
+          "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+          "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+          "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+          "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+          "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+          "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+          "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+          "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+          "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+          "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+          "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+          "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+          "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+          "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+          "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+          "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+          "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+          "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+          "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+          "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+          "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+        },
+        "local_hashes": {
+          "accept_result.py": "2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9",
+          "prepare.py": "2dff355bfecbb191a3a8e2cec64769b5721f57d699a77d6cebd1783e6dbe84a9",
+          "protocol.json": "c5010a3438365c4e2350618c0ae763a9122f8c0b5b433692842e268a5b4aa496",
+          "worker.py": "f16070353e2705929ab32d1397abd883534d2dea8f3b61fc6cc785e088df0ab4"
+        },
+        "component_hashes": {
+          "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+          "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+        },
+        "started_unix": 1791609846.9862075,
+        "resume_supported": false,
+        "environment": {
+          "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+          "torch": "2.11.0+cu128",
+          "cuda": "12.8",
+          "device": "cuda",
+          "gpu_name": "NVIDIA GeForce RTX 5090"
+        }
+      },
+      "tensor_count": 8,
+      "constant_negative_retained": true
+    }
+  ],
+  "tensor_proof_sha256": "8e09fe10fe29e09342f90c62eb42616fd790f1ca181104792ed8bfcf04374c1d",
+  "tensor_count": 32,
+  "tensor_elements": 374024,
+  "raw_storage_index_sha256": "9996a0b647f24e63a708cdb7e0297e135831625b3fd3f33097a8e4fc966f48b2",
+  "F_raw_storage_root": "F:/YananResearchStorage/GuardFed/celeba_gradient64_delta_after1_20261010/batch",
+  "CPU106_released": true,
+  "resource_release_sha256": "5821300a861d7007bc4060982e5afbe5006e5f4dec54343c5f13cd9d976304b9",
+  "source_data_rehashed_before_after": true,
+  "original_scientific_acceptor_unchanged": true,
+  "local_runtime": {
+    "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.8.0+cpu",
+    "cuda": null,
+    "host": "BlueBook",
+    "cuda_hidden": true
+  },
+  "runtime_equivalence_claim": false,
+  "shared_logs_are_prefixes_only": true,
+  "prediction_arrays_recomputed": false,
+  "negative_and_constant_results_retained": true,
+  "auxiliary_snapshot_schema_failure_preserved": true,
+  "science_or_transport_retried": false,
+  "new_CNN": 0,
+  "new_training": 0,
+  "test": false,
+  "recipe_selection_performed": false,
+  "root_adoption_required": true,
+  "LATEST_STATE_Git_unchanged": true
+}

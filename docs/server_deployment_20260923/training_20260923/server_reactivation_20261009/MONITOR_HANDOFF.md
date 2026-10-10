@@ -1,18 +1,18 @@
 # GuardFed 当前巡检交接
 
-主机制实测2026-10-10T05:37:24.908537+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
+主机制实测2026-10-10T06:11:48.847472+00:00；其他阶段的观测时间和接受凭据分别见TRAINING_STATE，下一次须重新核验，不能用旧标签代替实时事实。
 
 - 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。先遵守/etc/vast-agents-guide.md。sglang已按用户授权停止，文件保留；213.224.31.105不自动切回。
-- 主机制guardfed_celeba_mechanism_formal：204观测终轮，200/800新增严格离机，100Full显式复用；8活动/588等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
-- 最新三视图累计200：U100完整、C80八场景表已独立验收；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
-- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T05:38:07.188284+00:00远端原strict闭合24，本阶段root离机采用20。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
-- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机1。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
-- LoGoFair原32项搜索原strict闭合32/32，root采用32；已完整采用配置07（准确率冠军不同、8项恒定预测均保留），100覆盖待实际输入/映射绑定。原child不能重复启动，选参与原summary/独立完整32复核绑定。100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；明确虚拟cohort人口适配而非真实client公平性。
+- 主机制guardfed_celeba_mechanism_formal：210观测终轮，208/800新增严格离机，100Full显式复用；8活动/582等待/0失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
+- 最新三视图累计200：U100完整；C100完整十场景统计表已独立采用，六变体余项继续等待原checkpoint；完整英文稿已纳入C100。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
+- 准确620补集服务guardfed_celeba_mechanism_remaining620_valid_v2a已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新2026-10-10T06:11:47.141060+00:00远端原strict闭合30，本阶段root离机采用20。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
+- Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机5。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
+- LoGoFair原32项搜索原strict闭合32/32，root采用32；已完整采用配置07，96新+4复用实际启动，本机原strict观测8/96、新独立接受0。原child不能重复启动，选参与原summary/独立完整32复核绑定。100输入及十个人口已实际绑定，原96项runner已启动；首项原strict与真实进程经root核验，完整100独立验收和统计仍未完成；明确虚拟cohort人口适配而非真实client公平性。
 - FLGMM96新+4复用完整覆盖严格离机28/96；Hybrid原搜索严格离机27/32，完整32闭合/择优前不启动Hybrid100。按既有LATEST_BACKUP链增量处理，未验收终轮不计接受。
 - Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
 - 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
 - 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与8方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
-- Git已验证7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3，430blob；Git43接受cutoff为native188/三视图180，之后本地采用200及新文件不算已推送。
+- Git已验证3fc72d336d80a7e51d1f0682de269fca22902938，258blob；该提交接受cutoff为native200/三视图200；之后新增或变更文件另行核验同步。
 - 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
 
 后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。

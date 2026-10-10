@@ -1,0 +1,40 @@
+{
+  "status": "PASS_SOURCE_READY_ONLY_ROOT_CANCELLATION_AND_LIVE_EMPTY_STAGE_STILL_REQUIRED",
+  "source_sha256": "d8158c1ab988e10f650aab994a2815aee15e74d9af8fdbef5e4c14e28702ad1e",
+  "input_pins": {
+    "tmp/celeba_logofair100_reader_v2_20261010/bind_with_read_guard.py": "d8158c1ab988e10f650aab994a2815aee15e74d9af8fdbef5e4c14e28702ad1e",
+    "tmp/celeba_logofair100_root_operations_20261010/FILES_SHA256.json": "1f27eafe56693216ca30f6bd03e92f4c9e3c9e0b14d0248a28e6b29db9a7514f",
+    "tmp/celeba_logofair100_root_operations_20261010/prepare_inputs_and_bind_approval.py": "336f9345a2a315bbda32a0c20cf37cca1c429261737a417bdd3b4d18093fda9b",
+    "tmp/celeba_logofair100_root_operations_20261010/common.py": "5682463b634ed33090d4922c13aa584ac14bafdd3741393132d1fd3749016a59",
+    "tmp/celeba_logofair_fullcoverage_20261010/metadata.py": "59162579c2c00ac8952ed524627b118ab4b5e1ad585730d25eeb2d76a928c05b"
+  },
+  "original_operations_members_verified": 7,
+  "positive_read_path_checks": 1,
+  "unsafe_read_path_refusals": 6,
+  "original_positive_write_delegations": 3,
+  "negative_size_original_refusal": true,
+  "original_bind_same_code_object": true,
+  "only_bind_global_changed": "bulk_path",
+  "original_root_run_not_invoked": true,
+  "original_common_save_globals_untouched": true,
+  "findings": [],
+  "boundaries": [
+    "This is source/path-only review, not actual cancellation, volume health, bind or100-record acceptance.",
+    "Root must independently verify PID133008 stopped and stage001 absent, and supply externally SHA-pinned actual cancellation/inputs/approval.",
+    "Read-only requests reuse initial volume proof; actual byte digests/mapping verification still fail on missing/detached/mismatched files. The cached proof is not a live mount claim.",
+    "All original positive write boundaries remain fresh. Original metadata.bind guards its16MiB stage write once before the write batch; this is not a new per-file volume check.",
+    "The continuation leaves prior approved inputs/attempt001 unchanged; partial new-stage failure remains non-resumable without separate review.",
+    "New continuation has no structured exception handler; root command stderr/returncode and partial directory must be preserved on error."
+  ],
+  "executions": {
+    "bind": false,
+    "cancellation": false,
+    "volume_query": false,
+    "process_query": false,
+    "original_script_import": false,
+    "CNN": false,
+    "fit": false,
+    "network": false,
+    "Git": false
+  }
+}

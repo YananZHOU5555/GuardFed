@@ -1,0 +1,1130 @@
+{
+  "status": "DRAFT_REQUIRES_ROOT_FRESH_STATE_PINS",
+  "parent": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3",
+  "branch": "codex/revision-evidence-baselines-20260928",
+  "scope": "CLOSED200_COMPACT_EVIDENCE_AND_AUTHOR_REVIEW_NO_BULK",
+  "accepted": {
+    "native": 200,
+    "three_view": 200
+  },
+  "test_started": false,
+  "goal_complete": false,
+  "bindings": {
+    "native200": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/ROOT_DELTA_VERIFICATION.json",
+      "sha256": "9d3c69b3319e548d659b71a0bf825d45c052252ff0b2742caa81a32054b88fb6",
+      "expect": {
+        "/total_new_strict_and_offserver": 200
+      }
+    },
+    "replay200": {
+      "path": "tmp/celeba_mechanism_remaining620_C100_root_adoption_20261010/ROOT_ADOPTION.json",
+      "sha256": "2ac1d2f200d9671de5271f24b0cbb3a0772afb88c16ae6ccf71805ed1588ee46",
+      "expect": {
+        "/cumulative_accepted": 200
+      }
+    },
+    "tableC100": {
+      "path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ROOT_VERIFICATION.json",
+      "sha256": "0bed6d372c63a60a978f8faa1353ec3257dcba66cc236b01906abd7097a0d0e7",
+      "expect": {
+        "/paired_models": 100,
+        "/complete_scenes": 10
+      }
+    },
+    "rebuttalC100": {
+      "path": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/ROOT_REVIEW.json",
+      "sha256": "84e73cfb22780deb1a0fdefb328237c0c6a08596bc593ea1da09cb1cd14dbfed",
+      "expect": {
+        "/complete_C_scenes": 10,
+        "/author_review_only": true,
+        "/manuscript_applied": false
+      }
+    },
+    "logofair32": {
+      "path": "tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json",
+      "sha256": "145f30628270b457d84d47aeab60825c9d4fdb23a0ae27fcd44a35a19e62ae90",
+      "expect": {
+        "/accepted_count": 32,
+        "/selected_recipe/id": "LoGoFair-DP_07"
+      }
+    },
+    "current_state": null
+  },
+  "optional_bindings": {
+    "hybrid27": null,
+    "logofair100_startup": null
+  },
+  "allowed_paths": [
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/CHECK_RESULTS.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/FILES_SHA256.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/HANDOFF.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/MINIMAL_DIFF.md",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/README.md",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/ROOT_REVIEW.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/SOURCE_CHANGES.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/SOURCE_POINTERS.json",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/UPDATE_DIFF.patch",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/check_sources.py",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/prepare.py",
+    "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md",
+    "docs/server_deployment_20260923/training_20260923/REBUTTAL_COMPLETION_20261009.md",
+    "docs/server_deployment_20260923/training_20260923/RUNNING.md",
+    "docs/server_deployment_20260923/training_20260923/TRAINING_STATE.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ACTUAL_FILES_SHA256.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ROOT_VERIFICATION.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/FILES_SHA256.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/HANDOFF.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/REPORT.md",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/ROOT_ARITHMETIC_FAILURE.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/ROOT_ARITHMETIC_REVIEW.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/review.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/FILES_SHA256.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/SOURCE_BINDINGS.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/TABLES.md",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/coverage.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/cross_scene_additional.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/cross_scene_seed_first.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/paired_per_seed.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/records.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/tables.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/verification.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/ACTUAL_FILES_SHA256.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/ACTUAL_HANDOFF.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/COMMANDS.md",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/FINAL_SOURCE_CHECK.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/INPUT_PINS.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/README_PREPARED.md",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/REPORT.md",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SAVED_NUMERIC_VERIFICATION.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_CHECK.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_FILES_SHA256.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_REUSE.json",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/STATISTICS_SOURCE_DIFF.patch",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/assemble.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/build.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/common.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/panels.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/verify_numeric.py",
+    "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/verify_saved.py",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/MONITOR_HANDOFF.md",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/ARCHIVE_LOCATION.json",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/OFFSERVER_VERIFICATION.json",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/ROOT_DELTA_VERIFICATION.json",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/inspection/inspection.json",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/root_delta_20261010T045743Z.tar.gz.receipt.json",
+    "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/verified_ledger.json",
+    "docs/返修实验总览.md",
+    "tmp/adopt_C100_table_root_20261010.py",
+    "tmp/adopt_rebuttal_C100_root_20261010.py",
+    "tmp/celeba_logofair100_independent_review_20261010/FILES_SHA256.json",
+    "tmp/celeba_logofair100_independent_review_20261010/READ_SCHEMA_FAILURE.json",
+    "tmp/celeba_logofair100_independent_review_20261010/REPORT.md",
+    "tmp/celeba_logofair100_independent_review_20261010/REVIEW.json",
+    "tmp/celeba_logofair100_independent_review_20261010/review_source.py",
+    "tmp/celeba_logofair100_input_staging_20261010/FILES_SHA256.json",
+    "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_COMMAND_OUTPUT.txt",
+    "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_COMMAND_RESULT.json",
+    "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_DIFF.patch",
+    "tmp/celeba_logofair100_input_staging_20261010/HANDOFF.json",
+    "tmp/celeba_logofair100_input_staging_20261010/OLD4_IDENTITY_REVIEW.json",
+    "tmp/celeba_logofair100_input_staging_20261010/README.md",
+    "tmp/celeba_logofair100_input_staging_20261010/STAGING_FAILURE.json",
+    "tmp/celeba_logofair100_input_staging_20261010/STAGING_FAILURE_DIAGNOSIS.json",
+    "tmp/celeba_logofair100_input_staging_20261010/STORAGE_WORDING_CLARIFICATION.json",
+    "tmp/celeba_logofair100_input_staging_20261010/VERIFY_V2_COMMAND_OUTPUT.txt",
+    "tmp/celeba_logofair100_input_staging_20261010/VERIFY_V2_COMMAND_RESULT.json",
+    "tmp/celeba_logofair100_input_staging_20261010/finalize_v2.py",
+    "tmp/celeba_logofair100_input_staging_20261010/stage100_once.py",
+    "tmp/celeba_logofair100_input_staging_20261010/v2/STAGING_RESULT.json",
+    "tmp/celeba_logofair100_input_staging_20261010/v2/VERIFICATION.json",
+    "tmp/celeba_logofair100_input_staging_20261010/verify_staged.py",
+    "tmp/celeba_logofair100_input_staging_20261010/verify_staged_v2.py",
+    "tmp/celeba_logofair100_root_operations_20261010/FILES_SHA256.json",
+    "tmp/celeba_logofair100_root_operations_20261010/HANDOFF.json",
+    "tmp/celeba_logofair100_root_operations_20261010/INPUT_PINS.json",
+    "tmp/celeba_logofair100_root_operations_20261010/README.md",
+    "tmp/celeba_logofair100_root_operations_20261010/SELF_CHECK.json",
+    "tmp/celeba_logofair100_root_operations_20261010/common.py",
+    "tmp/celeba_logofair100_root_operations_20261010/prepare_execution.py",
+    "tmp/celeba_logofair100_root_operations_20261010/prepare_inputs_and_bind_approval.py",
+    "tmp/celeba_logofair32_root_adoption_20261010/COMPLETE32_REVIEW.json",
+    "tmp/celeba_logofair32_root_adoption_20261010/RESULTS.md",
+    "tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json",
+    "tmp/celeba_logofair32_root_adoption_20261010/adopt_actual32.py",
+    "tmp/celeba_logofair_fullcoverage_20261010/BINDING_TEMPLATE.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/BRIDGE_IDENTITY_DIFF.patch",
+    "tmp/celeba_logofair_fullcoverage_20261010/CACHE_IDENTITIES100.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/COMMANDS.md",
+    "tmp/celeba_logofair_fullcoverage_20261010/EXISTING_F_PATHS.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/FILES_SHA256.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/HANDOFF.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/INPUT_PINS.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/README.md",
+    "tmp/celeba_logofair_fullcoverage_20261010/SELF_CHECK.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/SOURCE_REUSE.json",
+    "tmp/celeba_logofair_fullcoverage_20261010/check_prepared.py",
+    "tmp/celeba_logofair_fullcoverage_20261010/metadata.py",
+    "tmp/celeba_logofair_fullcoverage_20261010/population.py",
+    "tmp/celeba_logofair_fullcoverage_20261010/run96.py",
+    "tmp/celeba_mechanism_remaining620_C100_root_adoption_20261010/MECHANISM200_INDEX.json",
+    "tmp/celeba_mechanism_remaining620_C100_root_adoption_20261010/ROOT_ADOPTION.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/DOWNLOAD_STARTED.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/EXPORT.stdout.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/EXPORT_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/EXPORT_EXIT.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/FILES_SHA256.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/FINALIZE_FIELD_ERROR.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/FINALIZE_HANDOFF_ERROR.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/GUIDE_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/HANDOFF.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/NATIVE200_CHECKPOINT_BINDINGS.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_EXIT.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_TRANSPORT_VERIFICATION.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/PREFLIGHT.stdout.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/PREFLIGHT_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/RAW_STORAGE_INDEX.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/README.md",
+    "tmp/celeba_remaining620_C19_transport_20261010/REMOTE_ARTIFACTS.stdout.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/REMOTE_ARTIFACTS_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/ROOT_READY_CHAIN_LINK.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/SCP_COMMAND.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/SCP_EXIT.json",
+    "tmp/celeba_remaining620_C19_transport_20261010/download_verify_once.py",
+    "tmp/celeba_remaining620_C19_transport_20261010/export_once.py",
+    "tmp/celeba_remaining620_C19_transport_20261010/finalize.py",
+    "tmp/celeba_remaining620_C19_transport_20261010/remote_preflight.py",
+    "tmp/publication43_root_20261010/REMOTE_VERIFICATION.json",
+    "tmp/publication_increment44_20261010/LOGOFAIR_STRICT32_INDEX.json",
+    "tmp/publication_increment44_20261010/LOGOFAIR_SUMMARY32.json",
+    "tmp/publication_increment44_20261010/README.md",
+    "tmp/publication_increment44_20261010/SELF_CHECK.json",
+    "tmp/publication_increment44_20261010/check_source.py",
+    "tmp/publication_increment44_20261010/prepare_spec.py",
+    "tmp/publication_increment44_20261010/publish_increment44.py",
+    "tmp/publication_increment44_20261010/verify_increment44.py",
+    "tmp/root_adopt_first_closed_20261010/MECHANISM181_INDEX.json",
+    "tmp/root_adopt_first_closed_20261010/MECHANISM1_ROOT_ADOPTION.json",
+    "tmp/update_completion_current_20261009.py",
+    "tmp/update_overview_closure100_root_20261009.py",
+    "tmp/update_reactivation_state_20261009.py"
+  ],
+  "files": [
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/CHECK_RESULTS.json",
+      "sha256": "58694f5c6b64e35641171daae35ef498ec59d1bf00db0e9f1a4be5fd742c309c",
+      "bytes": 39206
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/FILES_SHA256.json",
+      "sha256": "cc80624a16ea2f3045b6629baf05f30d72d405437dc522114356202fc805b315",
+      "bytes": 1568
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/HANDOFF.json",
+      "sha256": "cd76c430200ea7bc5fd5a3fabce51ff27ecd203b28520505b56f1a037208099c",
+      "bytes": 1266
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/MINIMAL_DIFF.md",
+      "sha256": "8907f2c928c05f93c9e976e2fa2c5318f99a2ddb5c816f5f2b1e801e407fde0f",
+      "bytes": 779
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/README.md",
+      "sha256": "b7a8479a0d027afcbb667c88a8311c6c9201270761fae7daa021481dd3ddc5fd",
+      "bytes": 2123
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/ROOT_REVIEW.json",
+      "sha256": "84e73cfb22780deb1a0fdefb328237c0c6a08596bc593ea1da09cb1cd14dbfed",
+      "bytes": 1825
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/SOURCE_CHANGES.json",
+      "sha256": "8b7130df65f420ad564f370d1c3a6c9b1792019914695d6ff0c7badf65bca2a8",
+      "bytes": 57579
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/SOURCE_POINTERS.json",
+      "sha256": "bcffb23106eabd31ecffaabedde2ff8e27e30a9f1d6c2efce68e79a62b51e89d",
+      "bytes": 15320
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/UPDATE_DIFF.patch",
+      "sha256": "a2ff69af63b2b9579b5d42a9d70f3b46d93838df3fd8ceea74289dd298b48db1",
+      "bytes": 62224
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/check_sources.py",
+      "sha256": "fd6fa8bc88f32212dae55ea04a86f61c21d2a9f570dfdce12bdd34fd28bfedd0",
+      "bytes": 7133
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md",
+      "sha256": "316cc83884963d4a52ac3dea650af66c6728d68ea64dcb1d33fa5abea151301c",
+      "bytes": 57659
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/prepare.py",
+      "sha256": "deb08e00b4e9d83bc91d7e172da4c1f53a79834ceed089b8a0bec2584e7689e1",
+      "bytes": 13285
+    },
+    {
+      "source": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md",
+      "sha256": "2f70f682d085a228576720fcfde9f145461634be7b80cfe4b3a107f930e6611f",
+      "bytes": 90329
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/REBUTTAL_COMPLETION_20261009.md",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/RUNNING.md",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/TRAINING_STATE.json",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ACTUAL_FILES_SHA256.json",
+      "sha256": "d874fcfe58bcb98f642672a7c631613f9da356aac4fc15d10c4dfbbf71ad146a",
+      "bytes": 5338
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ROOT_VERIFICATION.json",
+      "sha256": "0bed6d372c63a60a978f8faa1353ec3257dcba66cc236b01906abd7097a0d0e7",
+      "bytes": 2668
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/FILES_SHA256.json",
+      "sha256": "f107f5be42cff7980cdc9357133e705a4999123a195becd177e160df1182ec77",
+      "bytes": 789
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/HANDOFF.json",
+      "sha256": "e7989be943acf16f34ee717f0fba6b8ccae1182bd96c57ab550e79cfb8110d40",
+      "bytes": 971
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/REPORT.md",
+      "sha256": "97f7312bf81eb5fdbf2ff4b7e12ec3acd59962d38a7e7440c516a27385b4e3dd",
+      "bytes": 3916
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/ROOT_ARITHMETIC_FAILURE.json",
+      "sha256": "28934ce3bb7566d9ae7aac0727ea3a058b851f823d183779141a191536676046",
+      "bytes": 936
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/ROOT_ARITHMETIC_REVIEW.json",
+      "sha256": "b8f835ecfbd42f9a6de4e3f9b954ac40baeb0dd13df0d29b29e81420e033836c",
+      "bytes": 25599
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/independent_review/review.py",
+      "sha256": "0cfdf9b6436e20ff117d71fe1b933ead8d8be7fe5edab171ad37ad9782b9d5db",
+      "bytes": 24524
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/FILES_SHA256.json",
+      "sha256": "00a6a877e861391d587f360ac4c7252a51f22d00520784f52631266507a9da8b",
+      "bytes": 1276
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/SOURCE_BINDINGS.json",
+      "sha256": "c502b1ec14f1404319b9e342147c0b605964af5bfb7ee5ca15c118126890d6d0",
+      "bytes": 63403
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/TABLES.md",
+      "sha256": "de1b20e6b4d72dd1e7d07b9d7207eef8000e121176295885bfcc3284cbb78978",
+      "bytes": 28143
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/coverage.json",
+      "sha256": "ca929d090a58902baa2826834ee95f18f339caa4fc535f1cfada06dcf6d7efce",
+      "bytes": 10104
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/cross_scene_additional.json",
+      "sha256": "a79f6d2bbbe632fadd85704a20f19835dfe7a2b2b5677561773b22292a6eb1e0",
+      "bytes": 48190
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/cross_scene_seed_first.json",
+      "sha256": "7f80df55d025f1928e78e35df5eed94f6010a5facaa321b37fc24d308df6e9dc",
+      "bytes": 24046
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/paired_per_seed.json",
+      "sha256": "9f4d5b1940861a5fe83cbcbbcd9d85c4eea8272e16eb0c1c66888be1d890ab57",
+      "bytes": 83692
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/records.json",
+      "sha256": "9dff019109b77ea60e1a4c223ed7acfedf8f9000ea92175be1fbc18ba1cbaf2e",
+      "bytes": 2717513
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/tables.json",
+      "sha256": "68a7e3adab2b4c0f33fa520a486a32860450e2991c00546ff8f94faa19d73869",
+      "bytes": 209944
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/snapshot/verification.json",
+      "sha256": "8029ba588ac0a37cd1f8f80b1f07dd7a050ead95d35a0b873cdac1d2153a7e8f",
+      "bytes": 1170
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/ACTUAL_FILES_SHA256.json",
+      "sha256": "7dc195a38f0062f910bb01e32708fb8446d963e01612d3262b69fba9cfd9f6cf",
+      "bytes": 3839
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/ACTUAL_HANDOFF.json",
+      "sha256": "97419752aeab767f68fdc394a1e85724c061a688f7bd9ce6dfea6cf8e5a4afe9",
+      "bytes": 1821
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/COMMANDS.md",
+      "sha256": "a5e449cbb56d3037be1c5406256120f4f10f5e5421d462f51c1d8d652bab958c",
+      "bytes": 1226
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/FINAL_SOURCE_CHECK.json",
+      "sha256": "d7aa73140da53e50da22efe1d3e1a06722443bbc99132ee100d6ca7b8d010027",
+      "bytes": 893
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/INPUT_PINS.json",
+      "sha256": "2de1b79cd367fdfaa401ba391ea055c313cdfca2d7f59fa2530b7dc21ebc56bd",
+      "bytes": 5970
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/README_PREPARED.md",
+      "sha256": "1758afa6c64d731a748f2d1c5aae879e328d41e66cee12faf3a384bcf0768269",
+      "bytes": 1464
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/REPORT.md",
+      "sha256": "1c52f668360e4653ac10d498bf23ad7c68234f146dbe048844914a04e262a15a",
+      "bytes": 3894
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SAVED_NUMERIC_VERIFICATION.json",
+      "sha256": "bb959682cac1df9a74553e68326b745157401d656d61f93dda14cc412e6e7aeb",
+      "bytes": 1679
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_CHECK.json",
+      "sha256": "4911c7dd4df06d7331caacb4ffbc5e5e05db3fbdc94aa4e23af5fa266e61877a",
+      "bytes": 654
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_FILES_SHA256.json",
+      "sha256": "15dcead777b13a07896e08fe2fba434754f7099838c3d3d65ce07ba51bc544db",
+      "bytes": 2070
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/SOURCE_REUSE.json",
+      "sha256": "e3b4843c40d677f4096532bc3d3a1334aba0c7254b72cf97985ec9cde0529f00",
+      "bytes": 527
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/STATISTICS_SOURCE_DIFF.patch",
+      "sha256": "860c39698699d17cdad85ecd42bd242f3544802eceab769584049b639ac4ccea",
+      "bytes": 9815
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/assemble.py",
+      "sha256": "d8889cfa925b01029aefd5307052f5b47e66495394e1dc47b21fc675c8bdb576",
+      "bytes": 7480
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/build.py",
+      "sha256": "0fc87aa2b2d6707c959e884e4d1c1b84329580eabf5ee6a931ec7efd4ae609fd",
+      "bytes": 8211
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/common.py",
+      "sha256": "d57f65e854679e0eac940468fae1f0b94fd195be43577f4bcaa86dbd1935c090",
+      "bytes": 3409
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/panels.py",
+      "sha256": "4e293daa657f07658f8cde9ffcad4dde64b6577b0990b6cf7c93acf8044d2b7a",
+      "bytes": 5648
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/verify_numeric.py",
+      "sha256": "8548ee59842471f0908230f5c470867907860bba2abe84db9f4decda80c5e92e",
+      "bytes": 6787
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/source/verify_saved.py",
+      "sha256": "a1d0c1444a1cb5eedfbcdcd83f8eff768eddac24fab8ef9e9013d16944f2a418",
+      "bytes": 2106
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/MONITOR_HANDOFF.md",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/ARCHIVE_LOCATION.json",
+      "sha256": "375ecee6c5806da9214862022fa215c35c549edf4ef898eaa495df91ed4c9b72",
+      "bytes": 624
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/OFFSERVER_VERIFICATION.json",
+      "sha256": "58ca65162848a4507756ad8d1465131ffead82637858c75c805f9bd64dd9a6d3",
+      "bytes": 743
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/ROOT_DELTA_VERIFICATION.json",
+      "sha256": "9d3c69b3319e548d659b71a0bf825d45c052252ff0b2742caa81a32054b88fb6",
+      "bytes": 1613
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/inspection/inspection.json",
+      "sha256": "de989e02e299d3b4ff26f91fe704d93c1c71b21ac9b1a508fa0d6f813352962d",
+      "bytes": 931996
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/root_delta_20261010T045743Z.tar.gz.receipt.json",
+      "sha256": "10e05e320b8e27ed3209d56a6e4356c061dd9f8ca27b69e6cd6a0c3ab81fe62a",
+      "bytes": 1209
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T045743Z/verified_ledger.json",
+      "sha256": "4ac4d4f1e4a641394771638c7ff60d670cada5884756e3cfecc5b53c58d8899b",
+      "bytes": 12171
+    },
+    {
+      "source": "docs/返修实验总览.md",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "tmp/adopt_C100_table_root_20261010.py",
+      "sha256": "19421b9b11679c5454fa5da754d29c3506dde7126974e9880688439456b717b5",
+      "bytes": 7338
+    },
+    {
+      "source": "tmp/adopt_rebuttal_C100_root_20261010.py",
+      "sha256": "3dacef334f6ef8d1076ef7abdd1b90b51030ba65ffd2bf6cd7217292fee6686e",
+      "bytes": 4125
+    },
+    {
+      "source": "tmp/celeba_logofair100_independent_review_20261010/FILES_SHA256.json",
+      "sha256": "2b030c50c612658ef336330e5c995ad3322b2bc0181131b8762632eeb02274cd",
+      "bytes": 683
+    },
+    {
+      "source": "tmp/celeba_logofair100_independent_review_20261010/READ_SCHEMA_FAILURE.json",
+      "sha256": "77a3dd8742a1fe94935b2818fed68ce0a3a73e3fc05d7a8845a8cfccb35da8f7",
+      "bytes": 414
+    },
+    {
+      "source": "tmp/celeba_logofair100_independent_review_20261010/REPORT.md",
+      "sha256": "f422e13570de6f60e7f2d8a31a373296aa9830ba436622a7afea7316698b082c",
+      "bytes": 3259
+    },
+    {
+      "source": "tmp/celeba_logofair100_independent_review_20261010/REVIEW.json",
+      "sha256": "483b971a7ef8c56707585dd3c25fbc2c32f51252d01a2912e2666b529ea24d68",
+      "bytes": 3538
+    },
+    {
+      "source": "tmp/celeba_logofair100_independent_review_20261010/review_source.py",
+      "sha256": "307822a74361b29540d1dd8d1944a6096013788a9d0c1cc7d05e85d87a3cac05",
+      "bytes": 10259
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/FILES_SHA256.json",
+      "sha256": "2805bb5c77cd0f5972d9240fbb5ef67b1ddde6e2384582bbc77cf0e5ca4983e5",
+      "bytes": 2524
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_COMMAND_OUTPUT.txt",
+      "sha256": "9f032731469f5313e4d9dc8c378a9a16ad3038db33983ae55222c210df1e1a6d",
+      "bytes": 849
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_COMMAND_RESULT.json",
+      "sha256": "4e4f5287de6a21fe74e537b8a9e7fb1eeb21a2ddcd6f39f2e5dac6b0595063f6",
+      "bytes": 305
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/FINALIZER_V2_DIFF.patch",
+      "sha256": "5feeebb47ea54533b85298de422f9c9a48ab3d1fd5cf5701ed3bd1a7eba3a919",
+      "bytes": 11770
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/HANDOFF.json",
+      "sha256": "67a595e14e5fc208800dc5f1b7556d53590c52ca30f1edcd9f75b2fad09f138c",
+      "bytes": 15875
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/OLD4_IDENTITY_REVIEW.json",
+      "sha256": "8c1f58c7dc9925d3d0044ecf5a43bbb0edb43800f6269158219ba08a8146b098",
+      "bytes": 11249
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/README.md",
+      "sha256": "ba01ae0c25b6ed643e642ad9ca6be3091bfd9a8376b1e5f4e7b488183310c3d2",
+      "bytes": 5550
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/STAGING_FAILURE.json",
+      "sha256": "d593b04fed4c7eeced25ed6dd8300466b47005b3f0fcbe3384c440cce6b63e4b",
+      "bytes": 707
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/STAGING_FAILURE_DIAGNOSIS.json",
+      "sha256": "a1fe89c758c497fec129248f8bbe9713ede65dc1d23d927f2f3667ccb8bb50f0",
+      "bytes": 23543
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/STORAGE_WORDING_CLARIFICATION.json",
+      "sha256": "4937a45393dfc22989d81a5cc0b423aba03e3bbf53007b97f6d0cbd33efa6989",
+      "bytes": 789
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/VERIFY_V2_COMMAND_OUTPUT.txt",
+      "sha256": "c30ebd3ea185a659d08f17cd13cc2a95ed6ea29248e8ab19a3a4147a1785a7e9",
+      "bytes": 179
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/VERIFY_V2_COMMAND_RESULT.json",
+      "sha256": "f1f88f814822c4022ad4bb7176fb641c9fafa4019ec57cb850eb63ae54720cc5",
+      "bytes": 354
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/finalize_v2.py",
+      "sha256": "6d44a159310bd9da70abfc46c3ab879e2dc22a253578454fdb4a00c1efe283a9",
+      "bytes": 12135
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/stage100_once.py",
+      "sha256": "b100124a70c9a9cf1330a669a24144a24d84e6229e6bfd440e06e36b48b4a77c",
+      "bytes": 10633
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/v2/STAGING_RESULT.json",
+      "sha256": "880ba51013aaef6fd7a8f965d1ac1fdd20893b6a6f65033c1d5e6f417535f49f",
+      "bytes": 906
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/v2/VERIFICATION.json",
+      "sha256": "30e1607d8c94b2992f9b390a7a177983f502fe93436ca6921431d08fda0d112d",
+      "bytes": 66633
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/verify_staged.py",
+      "sha256": "ac6cc26dbb5c7c1521c8e1763d6a04f320927837c8c72ebdff8a1bf41670b727",
+      "bytes": 8249
+    },
+    {
+      "source": "tmp/celeba_logofair100_input_staging_20261010/verify_staged_v2.py",
+      "sha256": "c5356759d2d7112b534753482a5863c0d779890a8fb132656c0fe2f1d936751c",
+      "bytes": 478
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/FILES_SHA256.json",
+      "sha256": "1f27eafe56693216ca30f6bd03e92f4c9e3c9e0b14d0248a28e6b29db9a7514f",
+      "bytes": 980
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/HANDOFF.json",
+      "sha256": "1bb1208684c26fab5f1e3081083fb1f6702c89b0fd68941b7261b66c7de35f65",
+      "bytes": 890
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/INPUT_PINS.json",
+      "sha256": "9587c72a8b26dee76f2d1bda553a23c3b199ca384036e13a17e6206e69fa3a89",
+      "bytes": 1260
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/README.md",
+      "sha256": "f3c3d0dc611bf7cb9184b14a5a11d850341368af9d38d136962e04a9e85290dc",
+      "bytes": 3354
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/SELF_CHECK.json",
+      "sha256": "83ddd243640e52c47f7a65a7cfd4de938992bd0630dd58ec41396952bb35eb1a",
+      "bytes": 259
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/common.py",
+      "sha256": "5682463b634ed33090d4922c13aa584ac14bafdd3741393132d1fd3749016a59",
+      "bytes": 2136
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/prepare_execution.py",
+      "sha256": "52e7340abf351e74a9a01e818b519dfd518393ad21f2343446d7a799b193203b",
+      "bytes": 4717
+    },
+    {
+      "source": "tmp/celeba_logofair100_root_operations_20261010/prepare_inputs_and_bind_approval.py",
+      "sha256": "336f9345a2a315bbda32a0c20cf37cca1c429261737a417bdd3b4d18093fda9b",
+      "bytes": 6817
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/COMPLETE32_REVIEW.json",
+      "sha256": "70f8cf59f11d505bd5d6fd1f9eaf7e9f64be629349bfef3b8fbd995486c06d64",
+      "bytes": 35714
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/RESULTS.md",
+      "sha256": "c825ee7dca1568127c3fc8cbda67f098a33e0b0be93b02300a8e4006af50de26",
+      "bytes": 1179
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/ROOT_ADOPTION.json",
+      "sha256": "145f30628270b457d84d47aeab60825c9d4fdb23a0ae27fcd44a35a19e62ae90",
+      "bytes": 5926
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/adopt_actual32.py",
+      "sha256": "7c528c40bc38481eb4360e12f18ffba03e287dc9165fdfb80a77fa8502823816",
+      "bytes": 6005
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/BINDING_TEMPLATE.json",
+      "sha256": "86909479ef7ff65552f42f83a6684a341e33ec82f5daca372a42ea858d31e825",
+      "bytes": 327
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/BRIDGE_IDENTITY_DIFF.patch",
+      "sha256": "2cfefaa37ddc0e5ff2994d3520a524eff1ceb3f17c342cc6739b43dc6bdf83f2",
+      "bytes": 785
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/CACHE_IDENTITIES100.json",
+      "sha256": "21c534337bc35e4a53b904bc103431acc4d2672bc54f3f8f23c87eb79e743d0f",
+      "bytes": 369501
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/COMMANDS.md",
+      "sha256": "220cbc20b5e2cf28045db26622b3cdcb585d3ced8b1878eecce83dccbf8f0a8a",
+      "bytes": 1891
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/EXISTING_F_PATHS.json",
+      "sha256": "2b100bb2b5618a6a36a25e208d134388f9cf00893351f186470017ff4100ac0b",
+      "bytes": 1079
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/FILES_SHA256.json",
+      "sha256": "89f3e4b4fd02352fa3c0f5080ce00ab6854eaabb4e3803a2635a1d3ba51196c3",
+      "bytes": 1357
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/HANDOFF.json",
+      "sha256": "e595d3d2bd8bd1a005de02af9e34d89e2b9e3f1cfcae83ec00051dced39226ac",
+      "bytes": 2308
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/INPUT_PINS.json",
+      "sha256": "bdef532eae445af8b210c14180fb72922ac085706ac43f8debdd4a7a271c2f87",
+      "bytes": 1800
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/README.md",
+      "sha256": "8f28cd4132bb0067a1deebe26c71c5cc815e1440fc507d43d6321c7fa0841b5e",
+      "bytes": 4822
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/SELF_CHECK.json",
+      "sha256": "f9829bddb83677686fe6feddcf0778d9a9e7fd2c65d19cb7317d5f540a54f31c",
+      "bytes": 920
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/SOURCE_REUSE.json",
+      "sha256": "f1ee9fb5b7f3fa23741955bc4e76687d258ba4b415100f69870cca52266f9062",
+      "bytes": 1679
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/check_prepared.py",
+      "sha256": "3c919633ae5aab60412c06114263e370920150d1de988f425c61e16c36530df6",
+      "bytes": 4372
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/metadata.py",
+      "sha256": "59162579c2c00ac8952ed524627b118ab4b5e1ad585730d25eeb2d76a928c05b",
+      "bytes": 10607
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/population.py",
+      "sha256": "a4fbaf87a66b6662f18240f4b8773b9ccb33241e1c857b24233583d75633907d",
+      "bytes": 3076
+    },
+    {
+      "source": "tmp/celeba_logofair_fullcoverage_20261010/run96.py",
+      "sha256": "7da9a4f8ad67944c1fb86f1b0fbf9706b8e5a9cae35ff890896e1de910654300",
+      "bytes": 4186
+    },
+    {
+      "source": "tmp/celeba_mechanism_remaining620_C100_root_adoption_20261010/MECHANISM200_INDEX.json",
+      "sha256": "0940513f702c42ce9451d42ba6d66cbc9ab70868c90ca2137612b8555ca5dc96",
+      "bytes": 562698
+    },
+    {
+      "source": "tmp/celeba_mechanism_remaining620_C100_root_adoption_20261010/ROOT_ADOPTION.json",
+      "sha256": "2ac1d2f200d9671de5271f24b0cbb3a0772afb88c16ae6ccf71805ed1588ee46",
+      "bytes": 3343
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/DOWNLOAD_STARTED.json",
+      "sha256": "b736012a5be5bc28d2722317343fcf30b75e1ce2abb219e4136af99635388c4e",
+      "bytes": 560
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/EXPORT.stdout.json",
+      "sha256": "4f34ea907e1a2340b3b56a10a7b56d4a5fb62853ba176eaa1064b87b72e7270c",
+      "bytes": 2657
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/EXPORT_COMMAND.json",
+      "sha256": "301d63e3596e92e8c652776cee172f281d949335b1cc0c38a85ccc5b38dfa576",
+      "bytes": 3943
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/EXPORT_EXIT.json",
+      "sha256": "d65200ebf2b732c251739b6b28a1f15b449a8a6da901f13ba35ac0e8da45624b",
+      "bytes": 82
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/FILES_SHA256.json",
+      "sha256": "08a1cfcd2695f18fcf19ba6aeffb47ad43e94d2eed012f9f1c0e5e07bb70feb4",
+      "bytes": 5112
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/FINALIZE_FIELD_ERROR.json",
+      "sha256": "42569193d8b5ca254a61b1b55482032e0f4a21a06cd00bee30dc14709ea9130c",
+      "bytes": 778
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/FINALIZE_HANDOFF_ERROR.json",
+      "sha256": "268776124517c1d7d963fb1dfb3c45f405ad57915079027dc7a95b24743a6bf2",
+      "bytes": 685
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/GUIDE_COMMAND.json",
+      "sha256": "8709c57d9f4ebe91bd3d5f6855c28288cd0fd1b8888766290a23aa82631183af",
+      "bytes": 295
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/HANDOFF.json",
+      "sha256": "a987e251961faf0ce2ed7ba003dc51ee44af5c18db312bd3e95abab25635ee2f",
+      "bytes": 5192
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/NATIVE200_CHECKPOINT_BINDINGS.json",
+      "sha256": "208a30c926da7817e82155b558e53b694cbda00e4870bff6d682a6dcd8ea2d05",
+      "bytes": 103008
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_COMMAND.json",
+      "sha256": "c6f73511e31a9c81b51f80629470b0c8e4398db554e73c03d2b428946856e90d",
+      "bytes": 2748
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_EXIT.json",
+      "sha256": "c94c62fedccb7cd3c5cf39eb1d9c48969f9155bb9b3812dfaf69de4b8f817050",
+      "bytes": 96
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER_TRANSPORT_VERIFICATION.json",
+      "sha256": "a1b4cfa5eddf4a3263c2b9b4809edfaf52e46e89f438c07757883e1c07b7d9c3",
+      "bytes": 97426
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/PREFLIGHT.stdout.json",
+      "sha256": "6933190b659d613eb1ecf2a490a8aefceb3eb11692a50977f93d7f6c188da29a",
+      "bytes": 7326
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/PREFLIGHT_COMMAND.json",
+      "sha256": "fd7d126fe807bba67ab42851b2b1740dfe77479addd535c7caa9090ebfddacd4",
+      "bytes": 351
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/RAW_STORAGE_INDEX.json",
+      "sha256": "763fa4dc7922fda8918a2d4af0962be2c6f875449fcc217f68a191c95f1d61f9",
+      "bytes": 3342
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/README.md",
+      "sha256": "d18d6193a4b5560be8a9938a22e31e7a6ec7795a2305fc5617f9ba3ae1689e3c",
+      "bytes": 2692
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/REMOTE_ARTIFACTS.stdout.json",
+      "sha256": "399dedd5ef7f7091e5f68b4865f901bbdb6eb9614879837b2f4dc6fc57cd8e42",
+      "bytes": 2891
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/REMOTE_ARTIFACTS_COMMAND.json",
+      "sha256": "55d398b42235680443ea5c19ab0cc33dd0db76659be8e092bbec44f316288e0f",
+      "bytes": 880
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/ROOT_READY_CHAIN_LINK.json",
+      "sha256": "19f477a1f0f934aa5e7e8c86a4860c9b2bb8732383b8d64276dc4cd9b769ab49",
+      "bytes": 4130
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/SCP_COMMAND.json",
+      "sha256": "a10b2797a56256977399617d08627510fa46ed04ceed99db7fd204377ccc7bf6",
+      "bytes": 625
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/SCP_EXIT.json",
+      "sha256": "909da2aa5268def5d9b5086dee4d808c7c5dd91fd85246fed1f038c49040e00f",
+      "bytes": 54
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/download_verify_once.py",
+      "sha256": "a74b8eb4c707e25b05cdf31d5b7a74fd83381d603a54175bb6cc39f0666b7e98",
+      "bytes": 6419
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/export_once.py",
+      "sha256": "0a0a9a4f48bbb215ce7f1dd9064fa22ad56da04abed381d92a32529335e6802c",
+      "bytes": 2356
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/finalize.py",
+      "sha256": "2f12e75a726a363243f61e93737030f05e452a729474310c12e1dd1fa22a47cc",
+      "bytes": 8068
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/remote_preflight.py",
+      "sha256": "f8095b97edd08225a43b87d63008f166afc0354a7e5dacc7631e309eb5773516",
+      "bytes": 4050
+    },
+    {
+      "source": "tmp/publication43_root_20261010/REMOTE_VERIFICATION.json",
+      "sha256": "bec888106fb3cb2c8e8d9501393eb268a48c3c3920578a36e3cbb7ff4a10f601",
+      "bytes": 956
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/LOGOFAIR_STRICT32_INDEX.json",
+      "sha256": "53a73e8409b53c3ecaec52ec859fd64dea45f7f3461edca159dbe325c217806b",
+      "bytes": 18412
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/LOGOFAIR_SUMMARY32.json",
+      "sha256": "c051c4ebbe22a43519bf4ede715d1f54093bf77baa4e5f613be36e9841eb74c6",
+      "bytes": 23193
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/README.md",
+      "sha256": "f17039f8bc8490a443cf9be3b9f011ce770a0901d98ec96e6efaf097f7c3adaf",
+      "bytes": 2827
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/SELF_CHECK.json",
+      "sha256": "26255561b4f364f1b72883ce7770bc3efeaa83a6474024822b6b79071ceca285",
+      "bytes": 604
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/check_source.py",
+      "sha256": "55301461cd1a00f5835c3e410391755fa4ccfbd04c0754d03202443bf6bf737c",
+      "bytes": 3662
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/prepare_spec.py",
+      "sha256": "2be5efda748abe852fc4e8f98facbe80b0b8dde0ec3f81dc3bb78630fc1bacc6",
+      "bytes": 6419
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/publish_increment44.py",
+      "sha256": "bed6371471a687184655a8ae99cc2cf6112e957a507ff868ae1098026eda07ac",
+      "bytes": 6615
+    },
+    {
+      "source": "tmp/publication_increment44_20261010/verify_increment44.py",
+      "sha256": "8edd7636637b7a77b9005404949483cea60968eecc2a1d1cef6c02481cc69665",
+      "bytes": 1066
+    },
+    {
+      "source": "tmp/root_adopt_first_closed_20261010/MECHANISM181_INDEX.json",
+      "sha256": "df9860c05831764765295a046afd72af49805086ee371bb68d30e9c366165029",
+      "bytes": 19184
+    },
+    {
+      "source": "tmp/root_adopt_first_closed_20261010/MECHANISM1_ROOT_ADOPTION.json",
+      "sha256": "ef9b6cc30821b3c376a7560e4317b790524365849c31609ab557a26185f7815b",
+      "bytes": 2501
+    },
+    {
+      "source": "tmp/update_completion_current_20261009.py",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "tmp/update_overview_closure100_root_20261009.py",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "source": "tmp/update_reactivation_state_20261009.py",
+      "sha256": null,
+      "bytes": null
+    }
+  ],
+  "parent_recovery_references": [
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/EXTERNAL_GIT_STORAGE_20261010.json",
+      "destination": "docs/server_deployment_20260923/training_20260923/EXTERNAL_GIT_STORAGE_20261010.json",
+      "sha256": "523aafc000b22b515760747e860d06279e04fba18cd96c27b3700208d670e196",
+      "bytes": 1423,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "docs/server_deployment_20260923/training_20260923/LOCAL_STORAGE_20261010.json",
+      "destination": "docs/server_deployment_20260923/training_20260923/LOCAL_STORAGE_20261010.json",
+      "sha256": "63de23ee9d85dd170baa18703869c913b064461b7e8b314956277ede585650fc",
+      "bytes": 905,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/BOUNDED_SNAPSHOT.json",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/BOUNDED_SNAPSHOT.json",
+      "sha256": "1f0e5c93f55476eb6ea99e9dd2a4c40316d7e42358322c8ac882fc20246cfd99",
+      "bytes": 8546,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/FILES_SHA256.json",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/FILES_SHA256.json",
+      "sha256": "77600bdc38e27af3055c5de826130bdb84a4da3e945e44a63441556529643bae",
+      "bytes": 827,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/HANDOFF.json",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/HANDOFF.json",
+      "sha256": "ecbf97a8af4cf79c843b165dc825251787882fe1325edc2b21cec7642bc40c4b",
+      "bytes": 1968,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/PREPARED_CHECK.json",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/PREPARED_CHECK.json",
+      "sha256": "40218ab4c2cdcc0b8794b6a79affce189fb8b464870e7f88af90a797ff16ff08",
+      "bytes": 767,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/README.md",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/README.md",
+      "sha256": "4db881cacecf374320cc72c97dc4f35e0f700393c775d28948da8c1d93d892c5",
+      "bytes": 2244,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    },
+    {
+      "source": "tmp/celeba_logofair32_root_adoption_20261010/review_complete32.py",
+      "destination": "experimental/celeba_logofair32_root_adoption_20261010/review_complete32.py",
+      "sha256": "dad6dd58d674f31db89a8464b4083713bfa5760f307da4d18b11e4943b6f60f9",
+      "bytes": 9100,
+      "parent_commit": "7ef54a00a3ef0af32e0805b6a16a4e21f081dcb3"
+    }
+  ],
+  "original_seals_verified": [
+    {
+      "path": "tmp/celeba_remaining620_C19_transport_20261010/FILES_SHA256.json",
+      "sha256": "08a1cfcd2695f18fcf19ba6aeffb47ad43e94d2eed012f9f1c0e5e07bb70feb4",
+      "all_local_members_verified": 34
+    },
+    {
+      "path": "tmp/celeba_logofair_fullcoverage_20261010/FILES_SHA256.json",
+      "sha256": "89f3e4b4fd02352fa3c0f5080ce00ab6854eaabb4e3803a2635a1d3ba51196c3",
+      "all_local_members_verified": 14
+    },
+    {
+      "path": "tmp/celeba_logofair100_independent_review_20261010/FILES_SHA256.json",
+      "sha256": "2b030c50c612658ef336330e5c995ad3322b2bc0181131b8762632eeb02274cd",
+      "all_local_members_verified": 4
+    },
+    {
+      "path": "tmp/celeba_logofair100_root_operations_20261010/FILES_SHA256.json",
+      "sha256": "1f27eafe56693216ca30f6bd03e92f4c9e3c9e0b14d0248a28e6b29db9a7514f",
+      "all_local_members_verified": 7
+    },
+    {
+      "path": "tmp/celeba_logofair100_input_staging_20261010/FILES_SHA256.json",
+      "sha256": "2805bb5c77cd0f5972d9240fbb5ef67b1ddde6e2384582bbc77cf0e5ca4983e5",
+      "all_local_members_verified": 16
+    },
+    {
+      "path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_C_full100_20261010/ACTUAL_FILES_SHA256.json",
+      "sha256": "d874fcfe58bcb98f642672a7c631613f9da356aac4fc15d10c4dfbbf71ad146a",
+      "all_local_members_verified": 35
+    },
+    {
+      "path": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/FILES_SHA256.json",
+      "sha256": "cc80624a16ea2f3045b6629baf05f30d72d405437dc522114356202fc805b315",
+      "all_local_members_verified": 11
+    }
+  ],
+  "excluded_non_scientific_console": [
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/EXPORT.stderr.txt",
+      "sha256": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/GUIDE.stderr.txt",
+      "sha256": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/GUIDE.stdout.md",
+      "sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/OFFSERVER.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/PREFLIGHT.stderr.txt",
+      "sha256": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/REMOTE_ARTIFACTS.stderr.txt",
+      "sha256": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/SCP.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    },
+    {
+      "source": "tmp/celeba_remaining620_C19_transport_20261010/SCP.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Runtime console/guide bytes remain in original delivery; not needed for compact scientific recovery"
+    }
+  ],
+  "bulk_policy": "Archives/models/arrays/cache remain at original SHA-bound external paths; this is not a raw-artifact Git backup",
+  "pending": "Parent refreshes exact mutable inputs/live and optional actual receipts, then reviews plan before freeze/stage"
+}

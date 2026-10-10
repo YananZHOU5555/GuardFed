@@ -640,6 +640,7 @@ if publication_proofs:
         commit=verified['commit'], branch=verified['branch'], verified_utc=verified['verified_utc'],
         committed_blobs_sha256_verified=verified['committed_blobs_sha256_verified'],
         proof_path=publication_proof.relative_to(TRAIN).as_posix(), proof_sha256=sha(publication_proof),
+        acceptance_cutoff=verified.get('acceptance_cutoff',{}),
         earlier_publication_snapshot_is_historical=True)
 fifteen_final_path = ROOT/'tmp/celeba_mechanism_valid_incremental_v2_execution_20261009/FINAL_DELIVERY.json'
 fifteen_complete = fifteen_final_path.exists() and len(newly_accepted_ids) == 15
@@ -2718,6 +2719,33 @@ if logofair_adoption.exists():
         root_adoption_path=logofair_adoption.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(logofair_adoption),
         selected_recipe=accepted['selected_recipe'],constant_prediction_ids=accepted['constant_prediction_ids'],
         seed_n=1,fit_seed=1719,fullcoverage100_started=False)
+logofair100_startup=ROOT/'tmp/celeba_logofair100_root_operations_20261010/ROOT_STARTUP_REVIEW.json'
+if logofair100_startup.exists():
+    verified=read(logofair100_startup)
+    assert sha(logofair100_startup)=='1ee8a6b002320e6dae552f816772f298d1ecf15e085a90fbecec775dbece8694'
+    assert verified['status']=='ROOT_LOGOFAIR100_FIXED_RECIPE_ACTUAL_STARTUP_AND_FIRST_STRICT_FIT_PASS'
+    assert verified['new_fits_planned']==96 and verified['reused']==4 and verified['first_rounds']==30
+    assert verified['model_seeds']==list(range(91001,91011)) and verified['fit_seed']==1719
+    assert verified['root_adopted']==verified['offserver_accepted']==verified['CNN_training']==verified['CNN_inference']==0
+    binding=ROOT/'tmp/celeba_logofair100_root_operations_20261010/bind_attempt002/BIND_RESULT.json'
+    assert sha(binding)==verified['bind_result_sha256']=='527440e974ce83510310c7692f088cb87e6fd5b07b36f8c4ffa2280f4e558962'
+    cancellation=ROOT/'tmp/celeba_logofair100_reader_v2_20261010/CANCELLATION.json'
+    assert sha(cancellation)==read(binding)['cancellation_sha256']=='287191c7d11bcf069d46fdf8eaac2cdc9e282c444cef33ce83c6a6cad7cb7ee0'
+    assert read(cancellation)['original_process_stopped'] and read(cancellation)['stage_absent_after_stop']
+    progress_path=Path(verified['output'])/'PROGRESS.json'
+    progress=read(progress_path)
+    failure_path=Path(verified['output'])/'QUEUE_FAILURE.json'
+    state['logofair100_fullcoverage_20261010']=dict(status=verified['status'],
+        root_startup_path=logofair100_startup.relative_to(ROOT).as_posix(),root_startup_sha256=sha(logofair100_startup),
+        startup_checked_utc=verified['checked_utc'],coordinator_pid=verified['coordinator_pid'],
+        selected_recipe=verified['selected_recipe'],new_fits_planned=96,reused=4,model_seeds=verified['model_seeds'],fit_seed=1719,
+        output=verified['output'],stage=verified['stage'],binding_sha256=sha(binding),
+        metadata_reader_cancellation_sha256=sha(cancellation),original_readonly_attempt_preserved=True,
+        local_strict_closed_observed=len(progress['records']),progress_checked_utc=now,progress_sha256=sha(progress_path),
+        failure=read(failure_path) if failure_path.exists() else None,
+        root_adopted=0,offserver_accepted=0,new_CNN=0,final_test=False,automatic_retry=False,
+        limitation='Fixed virtual20 cohorts, original DP/root-only adaptation; ten model seeds with shared post-fit seed1719; validation selection history retained')
+    state['logofair32_validation_search_20261010']['fullcoverage100_started']=True
 remaining620_startup=ROOT/'tmp/celeba_mechanism_remaining620_root_operations_20261010/ROOT_STARTUP_REVIEW_V2.json'
 if remaining620_startup.exists():
     verified=read(remaining620_startup)
@@ -2742,6 +2770,25 @@ if (root_first/'GRADIENT1_ROOT_ADOPTION.json').exists():
     assert proof['accepted_count']==1 and not proof['method_champion_claim'] and proof['constant_negative_retained']
     state['gradient64_validation_search_20261010'].update(offserver_accepted=1,root_adoption_path=(root_first/'GRADIENT1_ROOT_ADOPTION.json').relative_to(ROOT).as_posix(),root_adoption_sha256=sha(root_first/'GRADIENT1_ROOT_ADOPTION.json'),accepted_ids=proof['accepted_ids'],first_negative_metrics=proof['metrics'])
     state['active_services']=list(dict.fromkeys(state['active_services']+['guardfed_celeba_gradient_screen64_v2a']))
+gradient4_root=ROOT/'tmp/celeba_gradient64_delta_after1_20261010/ROOT_ADOPTION_REVIEW.json'
+if gradient4_root.exists():
+    proof=read(gradient4_root)
+    assert sha(gradient4_root)=='e040d742c082dbc65dbb8b7cc36055cf869b5e75950dd927d24a362471b0ff95'
+    assert proof['status']=='ROOT_GRADIENT64_EXACT4_ORIGINAL_STRICT_OFFSERVER_ADOPTED'
+    assert (proof['accepted_before'],proof['accepted_new'],proof['accepted_total'])==(1,4,5)
+    assert proof['archive_members_root_verified']==132 and proof['raw_files_root_verified']==135
+    assert proof['previous_root_sha256']==state['gradient64_validation_search_20261010']['root_adoption_sha256']
+    auth=read(gradient4_root.parent/'AUTHORIZED_SNAPSHOT.json')
+    assert proof['accepted_new_ids']==auth['authorized_ids'] and proof['all_negative_results_retained']
+    state['gradient64_validation_search_20261010'].update(offserver_accepted=5,
+        root_adoption_path=gradient4_root.relative_to(ROOT).as_posix(),root_adoption_sha256=sha(gradient4_root),
+        accepted_ids=proof['accepted_ids'],all_negative_results_retained=True,
+        delta_acceptance_snapshot=dict(path=(gradient4_root.parent/'SNAPSHOT.json').relative_to(ROOT).as_posix(),
+            sha256=sha(gradient4_root.parent/'SNAPSHOT.json'),at_unix=auth['snapshot_unix'],
+            terminal70_observed=auth['terminal_count'],offserver_accepted=5,
+            scope='Same frozen five-terminal snapshot; exact four delta excludes original accepted one'))
+    if auth['snapshot_unix']>state['gradient64_validation_search_20261010'].get('latest_measured_observation',{}).get('at_unix',0):
+        state['gradient64_validation_search_20261010']['latest_measured_observation']=state['gradient64_validation_search_20261010']['delta_acceptance_snapshot']
 if (root_first/'MECHANISM1_ROOT_ADOPTION.json').exists():
     p=root_first/'MECHANISM1_ROOT_ADOPTION.json';proof=read(p)
     assert sha(p)=='ef9b6cc30821b3c376a7560e4317b790524365849c31609ab557a26185f7815b'
@@ -3030,7 +3077,10 @@ if state.get('logofair32_validation_search_20261010'):
     entry=state['logofair32_validation_search_20261010']
     top+='\nLoGoFair32原30post-round搜索在F运行，4个原接受模型/cache已实际提取并核SHA；已原strict闭合'+str(entry['original_strict_closed'])+'/32，root adopted'+str(entry['root_adopted'])+'；不重训CNN、不评价test、不选未齐recipe，保留恒定预测与全部候选。输出'+entry['output']+'。\n'
     if entry['root_adopted']==32:
-        top+='完整32原strict及635744项保存预测复核通过，冻结规则选LoGoFair-DP_07（global/local delta0.06、post_lr0.005、30轮）；准确率冠军不同、四项Pareto和8项恒定预测保留。单模型seed91001/fit_seed1719，四条件不当独立seed；虚拟20cohort非真实client公平性，100完整覆盖仍待实际100输入与9人口绑定、启动。\n'
+        top+='完整32原strict及635744项保存预测复核通过，冻结规则选LoGoFair-DP_07（global/local delta0.06、post_lr0.005、30轮）；准确率冠军不同、四项Pareto和8项恒定预测保留。单模型seed91001/fit_seed1719，四条件不当独立seed；虚拟20cohort非真实client公平性。\n'
+if state.get('logofair100_fullcoverage_20261010'):
+    l=state['logofair100_fullcoverage_20261010']
+    top+=f"\nLoGoFair固定配置100覆盖已完成实际输入和十个人口绑定并启动：96新增30轮后处理+4已接受复用，十个模型seed/共同fit_seed1719。root已核真实进程与首项原strict；最新本机原strict观测{l['local_strict_closed_observed']}/96，新独立接受0。只读元数据旧进程在stage创建前安全取消，原尝试和approved inputs保留；300只读路径校验复用初始F卷证明，实际哈希与原正数写边界不变，不重训CNN或测试。入口{l['root_startup_path']}；完整100独立保存预测验收与统计仍待完成。\n"
 if state.get('mechanism_remaining620_valid_20261010'):
     entry=state['mechanism_remaining620_valid_20261010']
     top+='\n剩余620机制终轮valid三视图评价已实际启动'+entry['actual_service']+'，排除原180与Full重复推理；CPU112–119单进程8计算线程/nice10/idleIO/CUDA隐藏，首条原strict闭合native差0且绑定原已接受checkpoint。最新remote闭合'+str(entry.get('latest_measured_observation',{}).get('remote_strict_closed',entry['remote_strict_closed_at_startup']))+'，新离机根接受'+str(entry['new_offserver_accepted'])+'；不把服务运行或服务器闭合计入论文表。首次taskset包装语法错误发生在Python执行前，失败字节保留。首条运输因原验证工具路径缺失停止后，已有归档未重建，原49成员与9指标/24计数/3规则离机核验并与原native188 checkpoint恢复链精确join；单次有限恢复凭据独立保存，不盲重试、不重复推理。入口'+entry['root_startup_path']+'。\n'

@@ -1,0 +1,7 @@
+# Actual gradient64 exact4 delta — root adoption pending
+
+The single saved snapshot selected four70-round terminal jobs minus the root-adopted first1. Original checked_result passed each exact result on the server and locally; original v4 archive/member verification, all source/data/job/checkpoint bindings, absent producers and saved fullstate layout/dtype/finiteness passed. ROOT_READY_HANDOFF.json preserves all raw metrics and constant/negative outcomes. Cumulative strict/offserver5/64 is not root adoption or a completed method search. No recipe was selected.
+
+The unchanged scientific acceptor and archive verifier are SHA-bound. Only a bounded transport loop, prior proof binding, CPU106 metadata and F destinations were added. The first auxiliary observer's nonexistent queue.failed KeyError is preserved; its same saved snapshot was rebound to the actual gradient queue schema without another SSH observation. No scientific checker, archive transfer or tensor validation was retried.
+
+All archive/models/raw/log-prefix/restored artifacts went directly to freshly label/health/capacity-checked F; E contains compact code/proofs/index/reports. Shared live logs are prefixes, not closed per-job logs. Local CPU Torch differs from server cu128; no runtime-equivalence claim is made. No CNN forward, training, optimizer, data load, test or prediction-array regeneration occurred. Prior first1 models were not repackaged. Shared LATEST/STATE/Git/service/scientific source are unchanged. Root must independently adopt.

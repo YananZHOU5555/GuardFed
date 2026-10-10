@@ -1,0 +1,113 @@
+{
+  "status": "SOURCE_ONLY_NOT_EXECUTED_ROOT_REVIEW_REQUIRED",
+  "summary_script": "summary100.py",
+  "summary_script_sha256": "d8b702281d45d5da75b24222e44d5b8f699f8c975da503b636d2088443af7414",
+  "selfcheck": "SELF_CHECK.json",
+  "selfcheck_sha256": "e758d89315026c5e88793d023271f8630baf04284197993c7cc7a01a3606e031",
+  "input_pins": "INPUT_PINS.json",
+  "input_pins_sha256": "7b23b849f802520239102fb73014bf99eb35054e90b0770735b18cee87edcdee",
+  "source_reuse": "SOURCE_REUSE.json",
+  "source_reuse_sha256": "98e70737c4a9912b77777a1489fed45dc73dcc74767d8da1f2b3540701c04e6f",
+  "final_current_sources_AST_parse": true,
+  "fixed_recipe": "LoGoFair-DP_07",
+  "screen32_root_adoption_sha256": "145f30628270b457d84d47aeab60825c9d4fdb23a0ae27fcd44a35a19e62ae90",
+  "prepared_fullcoverage_source_seal_sha256": "89f3e4b4fd02352fa3c0f5080ce00ab6854eaabb4e3803a2635a1d3ba51196c3",
+  "runtime_expected_scope": {
+    "new": 96,
+    "reused": 4,
+    "unique_cells": 100,
+    "conditions": "IID/non-IID x5 attacks x10 model seeds",
+    "post_rounds": 30,
+    "fit_seed": 1719,
+    "evaluation_split": "valid19867",
+    "CNN_rounds": 70,
+    "metric_tolerance": 1e-12
+  },
+  "runtime_input_contract": {
+    "required_external_SHA_args": [
+      "source-sha",
+      "stage-sha",
+      "manifest-sha",
+      "index-sha",
+      "inputs-sha"
+    ],
+    "stage": "F:/YananResearchStorage/GuardFed/logofair_fullcoverage100_20261010/stage001",
+    "index": "F:/YananResearchStorage/GuardFed/logofair_fullcoverage100_20261010/attempt001/STRICT100_INDEX.json",
+    "stage_source_sha256": null,
+    "manifest_sha256": null,
+    "actual_strict100_index_sha256": null,
+    "actual_root_accepted_inputs_sha256": null,
+    "root_must_supply_actual_closed_inputs": true
+  },
+  "runtime_outputs": [
+    "records100.json",
+    "SUMMARY100.json",
+    "TABLES.md",
+    "ACCEPTANCE100.json (root pending)",
+    "SUMMARY_FAILURE.json (only on failure)"
+  ],
+  "statistics": {
+    "model_seed_panels": {
+      "ten_seed": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "exclude_selection": [
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "matching_six": [
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ]
+    },
+    "method": "original evidence_v4.statistic mean/sampleSD ddof1; original statistics.mean within each model seed across10 scenes",
+    "ACC": "percent",
+    "AEOD": "absoluteTPRgap",
+    "ASPD": "absolutepositive_rate_gap",
+    "complete_only": true,
+    "reselect_or_score_ranking": false,
+    "constant_and_negative_predictions_retained": true
+  },
+  "actual_work": {
+    "source_fixtures_passed": true,
+    "metadata_refusals": 19,
+    "synthetic_arithmetic_checks": 18,
+    "original_scientific_functions_source_exact": 15,
+    "real100_results_accepted": 0,
+    "real100_summary_executed": false,
+    "real_arrays_or_models_read": false,
+    "fits": 0,
+    "CNN": 0,
+    "new_bulk_files": 0,
+    "SSH": false,
+    "STATE_Git_old_sources_or_approvals_changed": false
+  },
+  "limits": [
+    "No actual100 performance result or completion claim. Runtime/independent root acceptance still required.",
+    "The original strict applies the saved fitted post classifier; it does not refit or run CNN.",
+    "The varying10 seeds are model/partition seeds; fixed post-fitseed1719 is not10 independent fit seeds.",
+    "Twenty deterministic virtual cohorts are not actual training clients; calibrated DP does not establish EO or aggregation-only causality.",
+    "Validation selection/exposure, original pretrained runtime/device history, sigmoid-vs-softmax and historical test metadata exposure remain disclosed.",
+    "Primary manuscript endpoint/final test remain author decisions."
+  ]
+}

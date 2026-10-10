@@ -30,6 +30,7 @@ fl_accepted=state['flgmm_screen32_20261009']['offserver_accepted70round_jobs']
 hy_accepted=state['hybrid_screen32_20261009']['offserver_accepted70round_jobs']
 aux_row=(f'| FLGMM / 组合控制 | 已严格验收离机{fl_accepted}/32与{hy_accepted}/32；{fo["checked_utc"]}只读实测分别'
     f'{fo["observed_complete"]}/{ho["observed_complete"]}终轮、{fo["active"]}/{ho["active"]}活动、{fo["pending"]}/{ho["pending"]}等待、失败0。FLGMM已按冻结规则选Tg20/L2/lr0.001，n=1；组合未选recipe，100项确认未启动 | TRAINING_STATE对应搜索记录及备份链 |')
+aux_row=aux_row.replace(f'{fo["checked_utc"]}只读实测分别',f'两份只读快照分别为{fo["checked_utc"]}/{ho["checked_utc"]}，观测分别')
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('formal100_started'):
     aux_row=aux_row.replace('组合未选recipe，100项确认未启动',f'FLGMM七项短程严格离机后已启动96新+4复用，新增已严格离机{state["flgmm_fullcoverage_v2_20261009"].get("new_accepted",0)}/96、双GPU各1线程；组合未选recipe/100项未启动')
 text='\n'.join(resource_row if line.startswith('| 服务器与资源 |') else aux_row if line.startswith('| FLGMM / 组合控制 |') else line for line in text.split('\n'))
@@ -108,6 +109,13 @@ if main.get('C_three_view_seven_scene_table'):
 if state['latest_rebuttal_draft'].get('complete_C_scenes')==10:
     reply_row='| 英文回复 | 完整C100作者审阅稿已纳入U/C各十场景与900校准解释；24原意见逐字、14处可逆修改、90数值pointer/45单元/54方向/60链接经root复核通过。六个其他变体与P1–P6、最终评价/正文未完成 | [完整回复草稿](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/rebuttal_integrated_20261009.md)、[完整正文插入候选](server_deployment_20260923/revision_20260923/rebuttal_integrated_C100_20261010/manuscript_insertions_integrated_20261009.md) |'
 text='\n'.join(native_row if line.startswith('| 机制native消融 |') else views_row if line.startswith('| 机制三视图 |') else reply_row if line.startswith('| 英文回复 |') else line for line in text.split('\n'))
+if state.get('logofair100_fullcoverage_20261010'):
+    l=state['logofair100_fullcoverage_20261010']
+    row=(f"| LoGoFair完整覆盖 | 96新增30轮后处理+4复用已实际启动，十模型seed/共同fit1719；原strict本机观测{l['local_strict_closed_observed']}/96，新增独立接受0，完整表尚未完成。固定虚拟20组非真实client，不重训CNN/不test | [实际启动核验](../{l['root_startup_path']}) |")
+    lines=[line for line in text.split('\n') if not line.startswith('| LoGoFair完整覆盖 |')]
+    index=next(i for i,line in enumerate(lines) if line.startswith('| 英文回复 |'))
+    lines.insert(index,row)
+    text='\n'.join(lines)
 new_stage_note=''
 if state.get('flgmm_fullcoverage_v2_20261009',{}).get('canary_runner_started'):
     new_stage_note+='FLGMM七项短程检查队列已实际启动，完成验收仍待原科学检查和离机备份；96新+4复用的70轮覆盖未启动。'
@@ -181,8 +189,13 @@ if remaining:
         new_stage_note=f'FLGMM新增严格离机{state.get("flgmm_fullcoverage_v2_20261009",{}).get("new_accepted",0)}/96，4复用另计；Hybrid{hy_accepted}/32。U/C完整十场景三视图均已独立采用，各100对模型；C新增1620统计/810展示/1800指标/4800计数/900配对指标及两个新seed-first汇总通过，旧C80保持。non-IID S-DFA删除C的十seed三项均值更好，Sp-DFA保留准确率–ASPD取舍；无必要性/因果/显著性主张。其他六变体与最终评价/正文仍缺，完整回复已纳入C100。'
     remote_closed=remaining.get('latest_measured_observation',{}).get('remote_strict_closed',0)
     logo_recipe='已完整采用配置07（准确率冠军不同、8项恒定预测均保留），100覆盖待实际输入/映射绑定' if logo.get('root_adopted',0)==32 else '未完整选recipe'
+    if state.get('logofair100_fullcoverage_20261010'):
+        l100=state['logofair100_fullcoverage_20261010']
+        logo_recipe=f'已完整采用配置07，96新+4复用实际启动，本机原strict观测{l100["local_strict_closed_observed"]}/96、新独立接受0'
     new_stage_note+=f' 当前接续：原800−已验收180的准确620补集CPU评价已实际启动，远端闭合{remote_closed}，新增严格离机并经root采用{remaining.get("new_offserver_accepted",0)}，累计三视图{actual_views}；原180和Full不重复。Fed-NGA/Huber共64项搜索运行，严格离机{gradient.get("offserver_accepted",0)}；首个恒定负预测ACC0.516686/AEOD0/ASPD0完整保留。LoGoFair原30轮后处理搜索本机原strict闭合{logo.get("original_strict_closed",0)}/32，root采用{logo.get("root_adopted",0)}，{logo_recipe}。Huber恒等投影和LoGoFair虚拟20cohort已由作者决定，前者不继承理论保证，后者不称真实client公平性。新bulk仅F盘Yanan 2TB经实时连接/容量校验后写入；原档案保持。'
 if new_stage_note:text+='\n当前新增执行：'+new_stage_note+'\n'
+text=text.replace('LoGoFair人口定义、梯度方法设置和最终主终点保留待决，不擅自代定。','Huber恒等投影与LoGoFair虚拟20组已经决定并落实；最终主终点和test边界仍待冻结。')
+text=text.replace('不代表其余七variant或全部800训练完成','不代表其余六variant或全部800训练完成')
 overview.write_bytes(text.encode('utf8')+marker+history)
 assert sha(overview.read_bytes().split(marker,1)[1])==sha(history)
 handoff=CHECKS/'MONITOR_HANDOFF.md'
@@ -224,7 +237,7 @@ if remaining:
 
 - 服务器ssh -p60350 root@89.22.197.55，实例52183675；repo /workspace/GuardFed-celeba-expanded。先遵守/etc/vast-agents-guide.md。sglang已按用户授权停止，文件保留；213.224.31.105不自动切回。
 - 主机制guardfed_celeba_mechanism_formal：{live['queue_completed']}观测终轮，{main['scientific_results_offserver_verified']}/800新增严格离机，100Full显式复用；{len(live['active'])}活动/{live['pending']}等待/{len(live['failed'])}失败。冻结8并发，依据真实round和日志增长判断健康，不为瞬时利用率重启。
-- 最新三视图累计{main['three_view_new_models_offserver_verified']}：U100完整、C80八场景表已独立验收；{C_current}。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
+- 最新三视图累计{main['three_view_new_models_offserver_verified']}：U100完整；{C_current}。既有180和Full不重推；10/9/6seed面板、负结果、混合环境及validation选择史保留。
 - 准确620补集服务{remaining['actual_service']}已实际运行，CPU112..119/8线程/CUDA隐藏，只有一个评价child；原800训练产物完整终轮后才原子绑定，13日有限依赖期限。最新{ro.get('utc')}远端原strict闭合{ro.get('remote_strict_closed',0)}，本阶段root离机采用{remaining.get('new_offserver_accepted',0)}。只按新closed ID差集运输，首个原归档不变恢复凭据及接受链见STATE；禁止盲重启/重复旧180/Full/缺checkpoint推断。
 - Fed-NGA/Huber64搜索guardfed_celeba_gradient_screen64_v2a已运行，CPU105/GPU1/单线程；严格离机{gradient.get('offserver_accepted',0)}。恒定负预测保留。读tmp/celeba_gradient_screen64_v2_root_operations_20261010/observe_attempt2.py；不改变候选/seed/指标/并发。
 - LoGoFair原32项搜索原strict闭合{logo.get('original_strict_closed',0)}/32，root采用{logo.get('root_adopted',0)}；{logo_recipe}。原child不能重复启动，选参与原summary/独立完整32复核绑定。100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；明确虚拟cohort人口适配而非真实client公平性。
@@ -232,12 +245,15 @@ if remaining:
 - Huber恒等投影CNN适配已作者接受，不继承理论保证；LoGoFair虚拟20cohort由作者委托root采用，不再询问H/L。FedWA/SmartFL/FedDNA忠实规格仍缺，不能以简化分支冒充。最终主终点/test边界及匹配提交版LaTeX仍待作者决定/路径，监控不自行启动test。
 - 新bulk仅F:/YananResearchStorage/GuardFed；写前实际核F卷标Yanan 2TB/Healthy/容量+reserve。服务器大文件优先留存，内置盘只代码/配置/compact索引报告；原科学证据不删改。
 - 九方法900三视图及旧TableII追溯保持；英文完整24意见稿已纳入C100十场景，旧稿保持。机制剩余与8方法覆盖仍未齐，正文未应用、最终test未完成，不称返修完成。
-- Git已验证{published['commit']}，{published['committed_blobs_sha256_verified']}blob；Git43接受cutoff为native188/三视图180，之后本地采用200及新文件不算已推送。
+- Git已验证{published['commit']}，{published['committed_blobs_sha256_verified']}blob；该提交接受cutoff为native{published['acceptance_cutoff']['native']}/三视图{published['acceptance_cutoff']['three_view']}；之后新增或变更文件另行核验同步。
 - 聊天任务guardfed-training-health仍PAUSED；本会话无automation_update工具，未声称恢复或创建其他监督机制。
 
 后续先读RUNNING/STATE和对应冻结协议/源封条，再合并核SSH、实际worker/round/日志、错误/OOM/GPU Recovery及实际cgroup资源。外部中断仅在身份全部一致、无重复进程、runner严格跳过已验收项时有限恢复。数值或逻辑错误保留现场，不循环重试，不改driver/实例/其他项目，不购买资源。只通知重要变化、完成、故障或需用户处理事项。
 
 '''
+if state.get('logofair100_fullcoverage_20261010'):
+    top=top.replace('100格source-only准备不等于执行许可或结果，其他9seed人口按相同image-ID规则准备、待实际绑定；',
+        '100输入及十个人口已实际绑定，原96项runner已启动；首项原strict与真实进程经root核验，完整100独立验收和统计仍未完成；')
 handoff.write_bytes(top.encode('utf8')+marker2+history2)
 assert sha(handoff.read_bytes().split(marker2,1)[1])==sha(history2)
 print(json.dumps(dict(status='CURRENT_OVERVIEW_AND_HANDOFF_UPDATED_HISTORY_BYTES_EXACT',overview_sha256=sha(overview.read_bytes()),handoff_sha256=sha(handoff.read_bytes()))))

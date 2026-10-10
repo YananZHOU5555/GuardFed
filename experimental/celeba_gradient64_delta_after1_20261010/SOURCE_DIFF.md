@@ -1,0 +1,11 @@
+# Exact4 gradient delta: prepared, not accepted
+
+Original `collect_one.py` and `verify_offserver.py` support only the hardcoded first ID. These thin delta readers reuse the same original `checked_result` scientific acceptor (`2c5d7699...`) from the sealed V2 package (`11e2ae63...`), and the same original `evidence_v4.py.verify_archive` (`3d78db7e...`). Neither scientific function is replaced or edited.
+
+The added transport loop binds four IDs from one saved actual snapshot minus root-adopted1. It archives their result/model/diagnostics/provenance/job/progress plus one copy of the frozen source and prior proof metadata. It checks absent producers, every source/data SHA before and after collection, original full70-round strict diagnostics and stable archive input bytes. No prior model is repackaged. The already proven original verifier path is used directly; the first1 historical missing-path failures remain outside this new batch.
+
+Original first collector hash/read/save/require/command/live helpers are extracted by AST from its exact pinned bytes. Only `live` CPU metadata changes111→106. CPU106/one thread/nice10/idleIO/CUDA-hidden and no duplicate collector are checked. F label/health/capacity guards precede archive transfer and restore; all raw/models/log prefixes/restored files go directly to F. Local supplementary fullstate shape/dtype/finiteness uses the original SHA-bound CNN class without forward/data/optimizer calls. Runtime differences remain explicit. Shared live logs are prefixes, not closed per-job logs. Prediction arrays are absent and not regenerated.
+
+The first read-only metadata observer failed on an assumed `queue.failed` key. The actual gradient queue schema has `strict_server_completed_ids/offserver_accepted/test`; its original failure rule uses preserved QUEUE_FAILURE/job failure paths. The failure and first source are retained. `freeze_saved_snapshot.py` binds the same saved snapshot after checking its exact schema and empty failure paths. No network observation or science was repeated.
+
+Collection remains blocked until an actual root source review binds the source seal, frozen authorization and exact4 IDs. This preparation does not authorize a method/recipe change or imply any new accepted result.
