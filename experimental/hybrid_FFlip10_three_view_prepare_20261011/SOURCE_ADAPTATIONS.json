@@ -1,0 +1,711 @@
+{
+  "candidate.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_pool32_runtime_prepared_20261011/candidate.py",
+      "sha256": "0d1dc5f52f67c87e4759c1468a2701a5a0144af41a899202a2658e0fdc158cd6",
+      "bytes": 15494
+    },
+    "spans": [
+      {
+        "old": "exact8",
+        "new": "exact10",
+        "count": 1,
+        "positions": [
+          12
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "Exact8",
+        "new": "Exact10",
+        "count": 1,
+        "positions": [
+          3177
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "celeba_hybrid_three_view_missing8_20261011",
+        "new": "hybrid_FFlip10_three_view_prepare_20261011",
+        "count": 1,
+        "positions": [
+          321
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "guardfed_hybrid_missing8_valid.lock",
+        "new": "guardfed_hybrid_FFlip10_valid.lock",
+        "count": 1,
+        "positions": [
+          12314
+        ],
+        "role": "lock namespace"
+      },
+      {
+        "old": "HYBRID_MISSING8",
+        "new": "HYBRID_FFLIP10",
+        "count": 3,
+        "positions": [
+          8555,
+          9336,
+          14663
+        ],
+        "role": "scope status"
+      },
+      {
+        "old": "HYBRID_ADOPTED_BENIGN_MISSING8_CANARY_FIRST_SOURCE_ONLY",
+        "new": "HYBRID_ADOPTED_FFLIP10_CANARY_FIRST_SOURCE_ONLY",
+        "count": 1,
+        "positions": [
+          3033
+        ],
+        "role": "scope"
+      },
+      {
+        "old": "Exactly8 adopted Hybrid IID Benign checkpoints; first91003 canary then seven sequentially;",
+        "new": "Exactly10 adopted Hybrid IID F Flip checkpoints; first91001 canary then nine sequentially;",
+        "count": 1,
+        "positions": [
+          2354
+        ],
+        "role": "scope text"
+      },
+      {
+        "old": "IID_Benign_seed%d_fullcoverage",
+        "new": "IID_F Flip_seed%d_fullcoverage",
+        "count": 1,
+        "positions": [
+          443
+        ],
+        "role": "fixed attack"
+      },
+      {
+        "old": "range(91003, 91011)",
+        "new": "range(91001, 91011)",
+        "count": 1,
+        "positions": [
+          488
+        ],
+        "role": "fixed seeds"
+      },
+      {
+        "old": "previously_accepted_skip_ids'] == [IDS[0].replace('91003', '91002')]",
+        "new": "previously_accepted_skip_ids'] == []",
+        "count": 1,
+        "positions": [
+          3238
+        ],
+        "role": "no FFlip prior replay"
+      },
+      {
+        "old": "1434b40de5116bf3d53bc5a6ae2bd3b90f4e54222f23ad099ff72b1fd3ef1775",
+        "new": "ba51c5308427a512d13f3fc06ebd5dc006ec1e0002fecb9708228f2f4fa867b2",
+        "count": 1,
+        "positions": [
+          3350
+        ],
+        "role": "actual native19 root"
+      },
+      {
+        "old": "631d7ee2acf1cbe3453d849523e262f29ff5b354b5ddb56c60e5779e94364456",
+        "new": "02b5f2c8fd26808f62a9e94d1901f4587d09d13dcce29b118113ccc0e1374e06",
+        "count": 1,
+        "positions": [
+          3497
+        ],
+        "role": "actual prior Benign10 replay"
+      },
+      {
+        "old": "(METHOD, 'IID', 'Benign', 91003 + IDS.index(row['id']), 70, 19867)",
+        "new": "(METHOD, 'IID', 'F Flip', 91001 + IDS.index(row['id']), 70, 19867)",
+        "count": 1,
+        "positions": [
+          4164
+        ],
+        "role": "accepted identity"
+      },
+      {
+        "old": "First91003 must pass before the remaining seven.",
+        "new": "First91001 must pass before the remaining nine.",
+        "count": 1,
+        "positions": [
+          35
+        ],
+        "role": "scope text"
+      },
+      {
+        "old": "Canary failed; remaining seven forbidden",
+        "new": "Canary failed; remaining nine forbidden",
+        "count": 1,
+        "positions": [
+          14267
+        ],
+        "role": "scope text"
+      },
+      {
+        "old": "CPUS = None  # Root binds an 8-CPU mask or a same-socket 32-CPU pool; computation stays 8 threads.",
+        "new": "CPUS = None; SMT_SIBLINGS = None  # Actual same-socket32 pool/siblings late-bound by root; computation stays8.",
+        "count": 1,
+        "positions": [
+          508
+        ],
+        "role": "external resource binding"
+      },
+      {
+        "old": "global CPUS",
+        "new": "global CPUS, SMT_SIBLINGS",
+        "count": 1,
+        "positions": [
+          7885
+        ],
+        "role": "external resource binding"
+      },
+      {
+        "old": "CPUS == list(range(64, 96))",
+        "new": "CPUS == sorted(set(CPUS)) and len(CPUS) == 32 and min(CPUS) >= 0",
+        "count": 1,
+        "positions": [
+          7970
+        ],
+        "role": "pool late binding"
+      },
+      {
+        "old": "Fixed64..95 pool required; computation remains8 threads",
+        "new": "Explicit same-socket32 pool required; computation remains8 threads",
+        "count": 1,
+        "positions": [
+          8037
+        ],
+        "role": "pool late binding"
+      },
+      {
+        "old": "auth, p, review = read(a.authorization), read(a.preflight), read(a.source_review)",
+        "new": "auth, p, review = read(a.authorization), read(a.preflight), read(a.source_review)\n    SMT_SIBLINGS = p['smt_sibling_cpus']\n    require(SMT_SIBLINGS == sorted(set(SMT_SIBLINGS)) and len(SMT_SIBLINGS) == 32 and not set(SMT_SIBLINGS).intersection(CPUS) and auth['smt_sibling_cpus'] == SMT_SIBLINGS, 'Actual root-bound32 SMT siblings required')",
+        "count": 1,
+        "positions": [
+          8459
+        ],
+        "role": "actual topology late binding"
+      },
+      {
+        "old": "list(range(320, 352))",
+        "new": "SMT_SIBLINGS",
+        "count": 1,
+        "positions": [
+          1890
+        ],
+        "role": "actual siblings"
+      },
+      {
+        "old": "set(range(320, 352))",
+        "new": "set(SMT_SIBLINGS)",
+        "count": 1,
+        "positions": [
+          10182
+        ],
+        "role": "actual siblings"
+      },
+      {
+        "old": "set(range(11, 19)) | set(range(32, 64)) | set(range(102, 120))",
+        "new": "set(range(11, 19)) | set(range(32, 64)) | set(range(88, 96)) | set(range(102, 120))",
+        "count": 1,
+        "positions": [
+          8112
+        ],
+        "role": "exclude live gate88..95"
+      },
+      {
+        "old": "Reserved FL32..63/old11..18/102..119 refused",
+        "new": "Reserved FL32..63/old11..18/gate88..95/102..119 refused",
+        "count": 1,
+        "positions": [
+          8247
+        ],
+        "role": "resource label"
+      },
+      {
+        "old": "auth, p, review = read(a.authorization), read(a.preflight), read(a.source_review)\n    SMT_SIBLINGS = p['smt_sibling_cpus']",
+        "new": "auth, p, review = read(a.authorization), read(a.preflight), read(a.source_review)\n    excluded_gate_smt = p['excluded_gate_smt_cpus']\n    require(excluded_gate_smt == sorted(set(excluded_gate_smt)) and len(excluded_gate_smt) >= 8 and auth['excluded_gate_smt_cpus'] == excluded_gate_smt, 'Actual gate SMT exclusion required')\n    require(not set(CPUS).intersection(excluded_gate_smt), 'Gate SMT CPUs refused')\n    SMT_SIBLINGS = p['smt_sibling_cpus']",
+        "count": 1,
+        "positions": [
+          8482
+        ],
+        "role": "fresh gate SMT exclusion"
+      },
+      {
+        "old": "not set(SMT_SIBLINGS).intersection(CPUS) and auth",
+        "new": "not set(SMT_SIBLINGS).intersection(set(CPUS) | set(range(88, 96)) | set(excluded_gate_smt)) and auth",
+        "count": 1,
+        "positions": [
+          9018
+        ],
+        "role": "exclude gate/siblings from monitored pool"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "check_saved.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_pool32_runtime_prepared_20261011/check_saved.py",
+      "sha256": "1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924",
+      "bytes": 18374
+    },
+    "spans": [
+      {
+        "old": "exact8",
+        "new": "exact10",
+        "count": 3,
+        "positions": [
+          2665,
+          5015,
+          6347
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "HYBRID_MISSING8",
+        "new": "HYBRID_FFLIP10",
+        "count": 5,
+        "positions": [
+          2549,
+          4911,
+          5951,
+          17243,
+          17323
+        ],
+        "role": "scope status"
+      },
+      {
+        "old": "guardfed_hybrid_missing8_valid",
+        "new": "guardfed_hybrid_FFlip10_valid",
+        "count": 2,
+        "positions": [
+          3618,
+          3753
+        ],
+        "role": "service namespace"
+      },
+      {
+        "old": "hybrid_three_view_missing8",
+        "new": "hybrid_FFlip10_three_view_prepare",
+        "count": 1,
+        "positions": [
+          4116
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "attack='Benign'",
+        "new": "attack='F Flip'",
+        "count": 1,
+        "positions": [
+          12486
+        ],
+        "role": "accepted header"
+      },
+      {
+        "old": "linux['cached_root_refits'] == 8",
+        "new": "linux['cached_root_refits'] == 10",
+        "count": 1,
+        "positions": [
+          6308
+        ],
+        "role": "exact10 metadata count"
+      },
+      {
+        "old": "cached_root_refits=8 if linux_mode else 0, fit_calls=8 if linux_mode else 0",
+        "new": "cached_root_refits=10 if linux_mode else 0, fit_calls=10 if linux_mode else 0",
+        "count": 1,
+        "positions": [
+          17561
+        ],
+        "role": "exact10 metadata count"
+      },
+      {
+        "old": "records=8, fit_calls=",
+        "new": "records=10, fit_calls=",
+        "count": 1,
+        "positions": [
+          18049
+        ],
+        "role": "exact10 metadata count"
+      },
+      {
+        "old": "Exact19 saved members",
+        "new": "Exact23 saved members",
+        "count": 1,
+        "positions": [
+          5507
+        ],
+        "role": "exact10 inventory label"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "saved/contract.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_runtime_prepared_20261011/contract.py",
+      "sha256": "bd287db6656a197bbc32332033fd36931b180a2178c5e416376ff6619523652e",
+      "bytes": 3078
+    },
+    "spans": [
+      {
+        "old": "exact8",
+        "new": "exact10",
+        "count": 1,
+        "positions": [
+          2985
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "Exact8",
+        "new": "Exact10",
+        "count": 1,
+        "positions": [
+          1962
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "hybrid_missing8_pool32_runtime_prepared_20261011",
+        "new": "hybrid_FFlip10_three_view_prepare_20261011",
+        "count": 1,
+        "positions": [
+          237
+        ],
+        "role": "local namespace"
+      },
+      {
+        "old": "HYBRID_MISSING8",
+        "new": "HYBRID_FFLIP10",
+        "count": 2,
+        "positions": [
+          1785,
+          2748
+        ],
+        "role": "scope status"
+      },
+      {
+        "old": "f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239",
+        "new": "dba3be02ec034dcf6e46772a6d8ccfd879e273ef6bdfd66099fb24b027fe5440",
+        "count": 1,
+        "positions": [
+          292
+        ],
+        "role": "actual prepared package"
+      },
+      {
+        "old": "ROOT = HERE.parents[1]",
+        "new": "ROOT = HERE.parents[2]",
+        "count": 1,
+        "positions": [
+          192
+        ],
+        "role": "helper subdirectory"
+      },
+      {
+        "old": "CANDIDATE = ROOT/'tmp/hybrid_FFlip10_three_view_prepare_20261011'",
+        "new": "CANDIDATE = HERE.parent",
+        "count": 1,
+        "positions": [
+          215
+        ],
+        "role": "helper subdirectory"
+      },
+      {
+        "old": "len(set(IDS))==8",
+        "new": "len(set(IDS))==10",
+        "count": 1,
+        "positions": [
+          1894
+        ],
+        "role": "exact10 count"
+      },
+      {
+        "old": "value['cached_root_refits']==8",
+        "new": "value['cached_root_refits']==10",
+        "count": 1,
+        "positions": [
+          2358
+        ],
+        "role": "exact10 count"
+      },
+      {
+        "old": "value['fit_calls']==8",
+        "new": "value['fit_calls']==10",
+        "count": 1,
+        "positions": [
+          2530
+        ],
+        "role": "exact10 count"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "saved/check_linux.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_runtime_prepared_20261011/check_linux.py",
+      "sha256": "3abec87b058aec8cf8c09c382d25414e7c0d269fec3b5e52414350d6c969ba85",
+      "bytes": 3343
+    },
+    "spans": [
+      {
+        "old": "f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239",
+        "new": "dba3be02ec034dcf6e46772a6d8ccfd879e273ef6bdfd66099fb24b027fe5440",
+        "count": 1,
+        "positions": [
+          2035
+        ],
+        "role": "actual prepared package"
+      },
+      {
+        "old": "'records':8",
+        "new": "'records':10",
+        "count": 1,
+        "positions": [
+          3241
+        ],
+        "role": "exact10 count"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "saved/linux_saved_remote.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_runtime_prepared_20261011/linux_saved_remote.py",
+      "sha256": "3be45a46941fd9b4e4b36c055376c52891e5ddacfe50c70d7a88b5ad9a83948a",
+      "bytes": 4419
+    },
+    "spans": [
+      {
+        "old": "celeba_hybrid_three_view_missing8_20261011",
+        "new": "hybrid_FFlip10_three_view_prepare_20261011",
+        "count": 2,
+        "positions": [
+          226,
+          3022
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "hybrid_missing8",
+        "new": "hybrid_FFlip10",
+        "count": 1,
+        "positions": [
+          2552
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239",
+        "new": "dba3be02ec034dcf6e46772a6d8ccfd879e273ef6bdfd66099fb24b027fe5440",
+        "count": 1,
+        "positions": [
+          280
+        ],
+        "role": "actual prepared package"
+      },
+      {
+        "old": "1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924",
+        "new": "848ae6dad450e11df4ac9541af754a7fc55d14006e462d1429ce588aa97d2bc5",
+        "count": 1,
+        "positions": [
+          426
+        ],
+        "role": "actual prepared consumer"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "saved/transport.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_runtime_prepared_20261011/transport.py",
+      "sha256": "15f7e7c9d4a2768ffbb18124146cc166f267dda5fc722c7f6400dd5d3a17ec49",
+      "bytes": 6756
+    },
+    "spans": [
+      {
+        "old": "exact8",
+        "new": "exact10",
+        "count": 1,
+        "positions": [
+          68
+        ],
+        "role": "scope label"
+      },
+      {
+        "old": "HYBRID_MISSING8",
+        "new": "HYBRID_FFLIP10",
+        "count": 1,
+        "positions": [
+          6080
+        ],
+        "role": "scope status"
+      },
+      {
+        "old": "hybrid_missing8",
+        "new": "hybrid_FFlip10",
+        "count": 1,
+        "positions": [
+          1594
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "==len(expected)+1==20",
+        "new": "==len(expected)+1==24",
+        "count": 1,
+        "positions": [
+          4522
+        ],
+        "role": "exact10 archive layout"
+      },
+      {
+        "old": "member_count=20",
+        "new": "member_count=24",
+        "count": 1,
+        "positions": [
+          6290
+        ],
+        "role": "exact10 archive layout"
+      },
+      {
+        "old": "'members':20",
+        "new": "'members':24",
+        "count": 1,
+        "positions": [
+          6653
+        ],
+        "role": "exact10 archive layout"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "saved/transport_remote.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_runtime_prepared_20261011/transport_remote.py",
+      "sha256": "fe26e8f3c2813c1803e3f029a9a1f9774031b04706bec471d569abeba841bafc",
+      "bytes": 5817
+    },
+    "spans": [
+      {
+        "old": "celeba_hybrid_three_view_missing8_20261011",
+        "new": "hybrid_FFlip10_three_view_prepare_20261011",
+        "count": 2,
+        "positions": [
+          113,
+          2521
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "HYBRID_MISSING8",
+        "new": "HYBRID_FFLIP10",
+        "count": 3,
+        "positions": [
+          1506,
+          3248,
+          5141
+        ],
+        "role": "scope status"
+      },
+      {
+        "old": "hybrid_missing8",
+        "new": "hybrid_FFlip10",
+        "count": 2,
+        "positions": [
+          1814,
+          1938
+        ],
+        "role": "namespace"
+      },
+      {
+        "old": "f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239",
+        "new": "dba3be02ec034dcf6e46772a6d8ccfd879e273ef6bdfd66099fb24b027fe5440",
+        "count": 3,
+        "positions": [
+          430,
+          1632,
+          3845
+        ],
+        "role": "actual prepared package"
+      },
+      {
+        "old": "1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924",
+        "new": "848ae6dad450e11df4ac9541af754a7fc55d14006e462d1429ce588aa97d2bc5",
+        "count": 1,
+        "positions": [
+          577
+        ],
+        "role": "actual prepared consumer"
+      },
+      {
+        "old": "['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91003_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91004_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91005_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91006_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91007_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91008_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91009_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed91010_fullcoverage']",
+        "new": "['CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91001_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91002_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91003_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91004_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91005_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91006_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91007_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91008_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91009_fullcoverage', 'CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed91010_fullcoverage']",
+        "count": 1,
+        "positions": [
+          881
+        ],
+        "role": "exact10 fixed IDs"
+      },
+      {
+        "old": "len(linux['records'])==8",
+        "new": "len(linux['records'])==10",
+        "count": 1,
+        "positions": [
+          3463
+        ],
+        "role": "exact10 count"
+      },
+      {
+        "old": "linux['cached_root_refits']==8",
+        "new": "linux['cached_root_refits']==10",
+        "count": 1,
+        "positions": [
+          3874
+        ],
+        "role": "exact10 count"
+      }
+    ],
+    "inverse_raw_exact": true
+  },
+  "windows_runtime_wrapper.py": {
+    "parent": {
+      "path": "E:/OneDrive/文档/GuardFed/tmp/hybrid_missing8_saved_root_execution_20261011/windows_runtime_wrapper.py",
+      "sha256": "5c691934efc0ee7f3cc66edb3cbcc4eea8e2a85fe8bfb4747231ba8e7d39ef05",
+      "bytes": 2509
+    },
+    "spans": [
+      {
+        "old": "tmp/hybrid_missing8_pool32_runtime_prepared_20261011",
+        "new": "tmp/hybrid_FFlip10_three_view_prepare_20261011",
+        "count": 1,
+        "positions": [
+          445
+        ],
+        "role": "local package namespace"
+      },
+      {
+        "old": "f3b197ce786a3f391f820baf8767fa25fba2d2387002acf654bced7dc8e95239",
+        "new": "dba3be02ec034dcf6e46772a6d8ccfd879e273ef6bdfd66099fb24b027fe5440",
+        "count": 1,
+        "positions": [
+          821
+        ],
+        "role": "actual prepared package"
+      },
+      {
+        "old": "1410e344f07cb7d5987dcf773de4dab968bb3f03d21b378f59704e67074bd924",
+        "new": "848ae6dad450e11df4ac9541af754a7fc55d14006e462d1429ce588aa97d2bc5",
+        "count": 1,
+        "positions": [
+          920
+        ],
+        "role": "actual prepared consumer"
+      }
+    ],
+    "inverse_raw_exact": true
+  }
+}

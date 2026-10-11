@@ -1,0 +1,1787 @@
+{
+  "build.py": {
+    "parent_sha256": "c5b9c1acbb03f85cd66c96ae8d257603a09e7b9b390e4d70907a8c43fcf3aa61",
+    "source_sha256": "a7f91face74d00da6bfb2a5f799b6ed96150a7c6650eb1110b10cdc4c98f9af7",
+    "replacements": [
+      {
+        "old": "Read ten root-adopted receipts; reuse original statistic without fitting.",
+        "new": "Preserve adopted Benign10; append adopted F Flip10 with original statistics, no fitting.",
+        "count": 1
+      },
+      {
+        "old": "ROOT=R/'tmp/hybrid_missing8_root_adoption_prepared_20261011/ROOT_SCIENTIFIC_ADOPTION.json'",
+        "new": "ROOT=R/'tmp/hybrid_FFlip10_root_adoption_20261011/ROOT_SCIENTIFIC_ADOPTION.json'",
+        "count": 1
+      },
+      {
+        "old": "OLD=R/'outputs/guardfed_tables/celeba_hybrid_IID_Benign10_20261011'",
+        "new": "OLD=R/'outputs/guardfed_tables/celeba_hybrid_three_view_IID_Benign10_20261011'",
+        "count": 1
+      },
+      {
+        "old": " need(sha(ROOT)=='02b5f2c8fd26808f62a9e94d1901f4587d09d13dcce29b118113ccc0e1374e06','Adopted root changed')",
+        "new": " need(sha(ROOT)=='ed315fe982eae5a51fca97b658898b90eb7150cc9b29df8bc0597122d3544c94','Adopted root changed')\n inputs=read(H/'ROOT_INPUTS.json');need(sha(H/'ROOT_INPUTS.json')==BINDING_SHA and inputs['execution_authorized'] is True,'Actual root authorization/binding required')\n need(inputs['FFlip_root_sha256']==sha(ROOT) and inputs['Benign_table_root_sha256']==sha(OLD/'ROOT_VERIFICATION.json'),'Actual root bindings changed')\n for n,pin in read(OLD/'ROOT_VERIFICATION.json')['files'].items():need(sha(OLD/n)==pin['sha256'],'Old adopted table member changed')",
+        "count": 1
+      },
+      {
+        "old": "adopted['new_three_view_records_accepted']==9 and adopted['Hybrid_total_three_view_records']==10",
+        "new": "adopted['new_three_view_records_accepted']==10 and adopted['Hybrid_total_three_view_records']==20",
+        "count": 1
+      },
+      {
+        "old": " prior=adopted['prior_interface_explicitly_reused'];accepted=adopted['records']+prior",
+        "new": " accepted=adopted['new_records']\n need(adopted['old_Benign10_root']['sha256']=='02b5f2c8fd26808f62a9e94d1901f4587d09d13dcce29b118113ccc0e1374e06','Old Benign root changed')\n need(adopted['Linux_whole_original_saved_check_pass'] and adopted['Windows_saved_outputs_audit_pass'] and adopted['Windows_saved_outputs_audit_fit_calls']==0 and adopted['cross_platform_bitwise_recalibration_claimed'] is False,'Complementary saved proof roles changed')",
+        "count": 1
+      },
+      {
+        "old": "expected=['CosineFairness_lam20.0_tau0.1_lr0.001_IID_Benign_seed'+str(s)+('_screen' if s==91001 else '_fullcoverage') for s in range(91001,91011)]",
+        "new": "expected=['CosineFairness_lam20.0_tau0.1_lr0.001_IID_F Flip_seed'+str(s)+'_fullcoverage' for s in range(91001,91011)]",
+        "count": 1
+      },
+      {
+        "old": " reuse=read(R/'tmp/hybrid_missing8_pool32_runtime_prepared_20261011/proofs/existing_replay_reuse_check.json')\n transports={8:read(R/adopted['proof_files']['F_transport']['path']),1:read(R/adopted['proof_files']['screen_F_transport']['path'])}",
+        "new": " reuse=read(OLD/'ENVIRONMENT_SCOPE.json')\n transport_pin=next(x for x in adopted['proof_files'] if x['path'].endswith('/TRANSPORT_VERIFICATION.json'));need(sha(R/transport_pin['path'])==transport_pin['sha256'],'Adopted transport changed')\n transport=read(R/transport_pin['path']);need(transport['archive_sha256']==adopted['archive_sha256'] and transport['member_count']==adopted['archive_members']==24,'Adopted saved member scope changed')",
+        "count": 1
+      },
+      {
+        "old": "old_records=read(OLD/'records.json')['records'];oldby={r['id']:r for r in old_records};need(set(oldby)==set(expected),'Old native ten identity grid differs')",
+        "new": "old_records=read(OLD/'records.json')['records'];old_tables=read(OLD/'tables.json');need(len(old_records)==10 and len(old_tables['panels'])==9,'Old Benign table scope differs')\n oldby={r['id']:{'checkpoint_sha256':r['checkpoint_sha256'],'metrics':r['native_comparison']['expected']} for r in accepted}",
+        "count": 1
+      },
+      {
+        "old": "a=byid[rid];seed=a['seed'];phase='screen' if seed==91001 else 'fullcoverage'",
+        "new": "a=byid[rid];seed=a['seed'];phase='fullcoverage'",
+        "count": 1
+      },
+      {
+        "old": "  if seed==91002:\n   pin=reuse['existing_saved_members']['receipt.json'];path=Path(pin['path']);role='prior_root_adopted_interface_reuse'\n  else:\n   t=transports[1 if seed==91001 else 8];member='bundle/'+rid+'/receipt.json';pin=t['members'][member];path=Path(t['verified_extract'])/member;role='actual_selected_screen1' if seed==91001 else 'actual_root_adopted_formal8'\n",
+        "new": "  member='bundle/'+rid+'/receipt.json';pin=transport['members'][member];path=Path(transport['verified_extract'])/member;role='actual_root_adopted_FFlip10'\n",
+        "count": 1
+      },
+      {
+        "old": "receipt['attack']=='Benign'",
+        "new": "receipt['attack']=='F Flip'",
+        "count": 1
+      },
+      {
+        "old": "'adopted_source_pointer':'/prior_interface_explicitly_reused/0' if seed==91002 else '/records/'+str(adopted['records'].index(a))",
+        "new": "'adopted_source_pointer':'/new_records/'+str(adopted['new_records'].index(a))",
+        "count": 1
+      },
+      {
+        "old": " panels=[]",
+        "new": " panels=list(old_tables['panels'])",
+        "count": 1
+      },
+      {
+        "old": "attack='Benign',**ns['statistic']",
+        "new": "attack='F Flip',**ns['statistic']",
+        "count": 1
+      },
+      {
+        "old": " environment={'recipe':",
+        "new": " records=old_records+records\n environment={'recipe':",
+        "count": 1
+      },
+      {
+        "old": "reuse['shared_calibration']",
+        "new": "reuse['root_only_shared_calibration_original_recipe']",
+        "count": 1
+      },
+      {
+        "old": "'formal8':adopted['exact_diagnostic_map_sha256'],'screen1':adopted['proof_files']['screen_exact_diagnostic_map']['sha256']",
+        "new": "'Benign':reuse['exact_diagnostic_maps'],'FFlip':adopted['exact_root_receipt_differences']",
+        "count": 1
+      },
+      {
+        "old": "text=['# CosineFairnessHybrid: IID Benign, three validation views'",
+        "new": "text=['# CosineFairnessHybrid: two IID scenes, three validation views'",
+        "count": 1
+      },
+      {
+        "old": "Ten fixed round-70 checkpoints",
+        "new": "Twenty fixed round-70 checkpoints across two separately reported scenes",
+        "count": 1
+      },
+      {
+        "old": " for p in panels:\n  row=p['rows'][0];text.append",
+        "new": " for index,p in enumerate(panels):\n  if index==9:text += ['', '## IID / F Flip', '', '| View | Fixed seed panel | n | ACC (%) ↑ | AEOD ↓ | ASPD ↓ |','|---|---|---:|---:|---:|---:|']\n  row=p['rows'][0];text.append",
+        "count": 1
+      },
+      {
+        "old": "Seed91001 is the originally selected screen checkpoint; seeds91002–91010 are formal-coverage checkpoints.",
+        "new": "Benign seed91001 is the originally selected screen checkpoint; its other nine and all ten F Flip checkpoints retain their formal-coverage phase. Seed91001 was exposed during recipe selection in both conditions.",
+        "count": 1
+      },
+      {
+        "old": "Raw/native equality is retained as measured, not treated as independent confirmation.",
+        "new": "Any raw/native equality is retained as measured, not treated as independent confirmation.",
+        "count": 1
+      },
+      {
+        "old": "All10 training receipts report",
+        "new": "All20 training receipts report",
+        "count": 1
+      },
+      {
+        "old": "This is one IID Benign scene only, with nine formal endpoints plus one selected screen checkpoint.",
+        "new": "These are IID Benign and IID F Flip only, with nineteen formal endpoints plus one selected screen checkpoint. No across-scene mean is formed.",
+        "count": 1
+      },
+      {
+        "old": "'complete_scenes':1,'unique_checkpoints':10",
+        "new": "'complete_scenes':2,'unique_checkpoints':20",
+        "count": 1
+      },
+      {
+        "old": "'mean_SD_scalars':54,'display_cells':27",
+        "new": "'mean_SD_scalars':108,'display_cells':54",
+        "count": 2
+      },
+      {
+        "old": "{'complete_scenes':1,'distribution':'IID','attack':'Benign'",
+        "new": "{'complete_scenes':2,'distribution':'IID','attacks':['Benign','F Flip']",
+        "count": 1
+      },
+      {
+        "old": "'formal_checkpoints':9,'selected_screen_checkpoints':1",
+        "new": "'formal_checkpoints':19,'selected_screen_checkpoints':1",
+        "count": 1
+      },
+      {
+        "old": "'ids':expected,'old_native_checkpoint_metrics_exact':True",
+        "new": "'ids':[r['id'] for r in records],'old_Benign10_records_panels_and_display_exact':True",
+        "count": 1
+      },
+      {
+        "old": "'old_native_seal_sha256':sha(OLD/'FILES_SHA256.json')",
+        "new": "'old_Benign_table_root_sha256':sha(OLD/'ROOT_VERIFICATION.json'),'old_native_seal_sha256':sha(OLD/'FILES_SHA256.json')",
+        "count": 1
+      },
+      {
+        "old": "'receipt_bindings':bindings",
+        "new": "'receipt_bindings':read(OLD/'SOURCE_BINDINGS.json')['receipt_bindings']+bindings",
+        "count": 1
+      },
+      {
+        "old": "'HYBRID_BENIGN10_THREE_VIEW_TABLE_BUILT_ROOT_TABLE_REVIEW_PENDING','checkpoints':10,'panels':9",
+        "new": "'HYBRID_TWO_SCENES20_THREE_VIEW_TABLE_BUILT_ROOT_TABLE_REVIEW_PENDING','checkpoints':20,'panels':18",
+        "count": 1
+      },
+      {
+        "old": "if __name__=='__main__':main()",
+        "new": "if __name__=='__main__':\n import argparse\n parser=argparse.ArgumentParser();parser.add_argument('--binding-sha256',required=True);BINDING_SHA=parser.parse_args().binding_sha256;main()",
+        "count": 1
+      }
+    ],
+    "raw_inverse_spans": [
+      {
+        "old_start": 3,
+        "old_end": 4,
+        "new_start": 3,
+        "new_end": 5,
+        "old_hex": "52",
+        "new_hex": "5072"
+      },
+      {
+        "old_start": 5,
+        "old_end": 7,
+        "new_start": 6,
+        "new_end": 11,
+        "old_hex": "6164",
+        "new_hex": "7365727665"
+      },
+      {
+        "old_start": 8,
+        "old_end": 17,
+        "new_start": 12,
+        "new_end": 12,
+        "old_hex": "74656e20726f6f742d",
+        "new_hex": ""
+      },
+      {
+        "old_start": 25,
+        "old_end": 26,
+        "new_start": 20,
+        "new_end": 21,
+        "old_hex": "72",
+        "new_hex": "42"
+      },
+      {
+        "old_start": 27,
+        "old_end": 28,
+        "new_start": 22,
+        "new_end": 33,
+        "old_hex": "63",
+        "new_hex": "6e69676e31303b20617070"
+      },
+      {
+        "old_start": 29,
+        "old_end": 29,
+        "new_start": 34,
+        "new_end": 49,
+        "old_hex": "",
+        "new_hex": "6e642061646f70746564204620466c"
+      },
+      {
+        "old_start": 31,
+        "old_end": 31,
+        "new_start": 51,
+        "new_end": 56,
+        "old_hex": "",
+        "new_hex": "3130207769"
+      },
+      {
+        "old_start": 32,
+        "old_end": 40,
+        "new_start": 57,
+        "new_end": 58,
+        "old_hex": "733b207265757365",
+        "new_hex": "68"
+      },
+      {
+        "old_start": 59,
+        "old_end": 59,
+        "new_start": 77,
+        "new_end": 79,
+        "old_hex": "",
+        "new_hex": "732c"
+      },
+      {
+        "old_start": 60,
+        "old_end": 64,
+        "new_start": 80,
+        "new_end": 81,
+        "old_hex": "77697468",
+        "new_hex": "6e"
+      },
+      {
+        "old_start": 65,
+        "old_end": 67,
+        "new_start": 82,
+        "new_end": 82,
+        "old_hex": "7574",
+        "new_hex": ""
+      },
+      {
+        "old_start": 251,
+        "old_end": 252,
+        "new_start": 266,
+        "new_end": 269,
+        "old_hex": "6d",
+        "new_hex": "46466c"
+      },
+      {
+        "old_start": 253,
+        "old_end": 259,
+        "new_start": 270,
+        "new_end": 273,
+        "old_hex": "7373696e6738",
+        "new_hex": "703130"
+      },
+      {
+        "old_start": 273,
+        "old_end": 282,
+        "new_start": 287,
+        "new_end": 287,
+        "old_hex": "5f7072657061726564",
+        "new_hex": ""
+      },
+      {
+        "old_start": 367,
+        "old_end": 367,
+        "new_start": 372,
+        "new_end": 383,
+        "old_hex": "",
+        "new_hex": "5f74687265655f76696577"
+      },
+      {
+        "old_start": 1167,
+        "old_end": 1170,
+        "new_start": 1183,
+        "new_end": 1187,
+        "old_hex": "303262",
+        "new_hex": "65643331"
+      },
+      {
+        "old_start": 1172,
+        "old_end": 1172,
+        "new_start": 1189,
+        "new_end": 1192,
+        "old_hex": "",
+        "new_hex": "653938"
+      },
+      {
+        "old_start": 1173,
+        "old_end": 1173,
+        "new_start": 1193,
+        "new_end": 1201,
+        "old_hex": "",
+        "new_hex": "6561653561353166"
+      },
+      {
+        "old_start": 1174,
+        "old_end": 1185,
+        "new_start": 1202,
+        "new_end": 1202,
+        "old_hex": "3866643236383038663632",
+        "new_hex": ""
+      },
+      {
+        "old_start": 1187,
+        "old_end": 1187,
+        "new_start": 1204,
+        "new_end": 1215,
+        "old_hex": "",
+        "new_hex": "3762363538383938623930"
+      },
+      {
+        "old_start": 1188,
+        "old_end": 1188,
+        "new_start": 1216,
+        "new_end": 1245,
+        "old_hex": "",
+        "new_hex": "6237313530636339623239646638626330353937313232643335343463"
+      },
+      {
+        "old_start": 1190,
+        "old_end": 1231,
+        "new_start": 1247,
+        "new_end": 1247,
+        "old_hex": "6431393031663435383764303964313364636365323962313138313133636363306531333734653036",
+        "new_hex": ""
+      },
+      {
+        "old_start": 1246,
+        "old_end": 1246,
+        "new_start": 1262,
+        "new_end": 1714,
+        "old_hex": "",
+        "new_hex": "206368616e67656427290a20696e707574733d7265616428482f27524f4f545f494e505554532e6a736f6e27293b6e6565642873686128482f27524f4f545f494e505554532e6a736f6e27293d3d42494e44494e475f53484120616e6420696e707574735b27657865637574696f6e5f617574686f72697a6564275d20697320547275652c2741637475616c20726f6f7420617574686f72697a6174696f6e2f62696e64696e6720726571756972656427290a206e65656428696e707574735b2746466c69705f726f6f745f736861323536275d3d3d73686128524f4f542920616e6420696e707574735b2742656e69676e5f7461626c655f726f6f745f736861323536275d3d3d736861284f4c442f27524f4f545f564552494649434154494f4e2e6a736f6e27292c2741637475616c20726f6f742062696e64696e6773206368616e67656427290a20666f72206e2c70696e20696e2072656164284f4c442f27524f4f545f564552494649434154494f4e2e6a736f6e27295b2766696c6573275d2e6974656d7328293a6e65656428736861284f4c442f6e293d3d70696e5b27736861323536275d2c274f6c642061646f70746564207461626c65206d656d626572"
+      },
+      {
+        "old_start": 1363,
+        "old_end": 1364,
+        "new_start": 1831,
+        "new_end": 1833,
+        "old_hex": "39",
+        "new_hex": "3130"
+      },
+      {
+        "old_start": 1413,
+        "old_end": 1414,
+        "new_start": 1882,
+        "new_end": 1883,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 1752,
+        "old_end": 1803,
+        "new_start": 2221,
+        "new_end": 2221,
+        "old_hex": "7072696f723d61646f707465645b277072696f725f696e746572666163655f6578706c696369746c795f726575736564275d3b",
+        "new_hex": ""
+      },
+      {
+        "old_start": 1821,
+        "old_end": 1821,
+        "new_start": 2239,
+        "new_end": 2243,
+        "old_hex": "",
+        "new_hex": "6e65775f"
+      },
+      {
+        "old_start": 1830,
+        "old_end": 1831,
+        "new_start": 2252,
+        "new_end": 2642,
+        "old_hex": "2b",
+        "new_hex": "0a206e6565642861646f707465645b276f6c645f42656e69676e31305f726f6f74275d5b27736861323536275d3d3d2730326235663263386664323638303866363261396539346431393031663435383764303964313364636365323962313138313133636363306531333734653036272c274f6c642042656e69676e20726f6f74206368616e67656427290a206e6565642861646f707465645b274c696e75785f77686f6c655f6f726967696e616c5f73617665645f636865636b5f70617373275d20616e642061646f707465645b2757696e646f77735f73617665645f6f7574707574735f61756469745f70617373275d20616e642061646f707465645b2757696e646f77735f73617665645f6f7574707574735f61756469745f6669745f63616c6c73275d3d3d3020616e642061646f707465645b2763726f73735f706c6174666f726d5f626974776973655f726563616c6962726174696f6e5f636c61696d6564275d2069732046616c73652c27436f6d706c656d656e7461727920736176656420"
+      },
+      {
+        "old_start": 1833,
+        "old_end": 1834,
+        "new_start": 2644,
+        "new_end": 2644,
+        "old_hex": "69",
+        "new_hex": ""
+      },
+      {
+        "old_start": 1835,
+        "old_end": 1835,
+        "new_start": 2645,
+        "new_end": 2648,
+        "old_hex": "",
+        "new_hex": "6f6620"
+      },
+      {
+        "old_start": 1836,
+        "old_end": 1836,
+        "new_start": 2649,
+        "new_end": 2663,
+        "old_hex": "",
+        "new_hex": "6f6c6573206368616e6765642729"
+      },
+      {
+        "old_start": 1891,
+        "old_end": 1894,
+        "new_start": 2718,
+        "new_end": 2722,
+        "old_hex": "42656e",
+        "new_hex": "4620466c"
+      },
+      {
+        "old_start": 1895,
+        "old_end": 1897,
+        "new_start": 2723,
+        "new_end": 2724,
+        "old_hex": "676e",
+        "new_hex": "70"
+      },
+      {
+        "old_start": 1911,
+        "old_end": 1939,
+        "new_start": 2738,
+        "new_end": 2738,
+        "old_hex": "28275f73637265656e2720696620733d3d393130303120656c736520",
+        "new_hex": ""
+      },
+      {
+        "old_start": 1954,
+        "old_end": 1955,
+        "new_start": 2753,
+        "new_end": 2753,
+        "old_hex": "29",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2137,
+        "old_end": 2138,
+        "new_start": 2935,
+        "new_end": 2938,
+        "old_hex": "52",
+        "new_hex": "4f4c44"
+      },
+      {
+        "old_start": 2140,
+        "old_end": 2150,
+        "new_start": 2940,
+        "new_end": 2951,
+        "old_hex": "746d702f687962726964",
+        "new_hex": "454e5649524f4e4d454e54"
+      },
+      {
+        "old_start": 2151,
+        "old_end": 2227,
+        "new_start": 2952,
+        "new_end": 2957,
+        "old_hex": "6d697373696e67385f706f6f6c33325f72756e74696d655f70726570617265645f32303236313031312f70726f6f66732f6578697374696e675f7265706c61795f72657573655f636865636b",
+        "new_hex": "53434f5045"
+      },
+      {
+        "old_start": 2245,
+        "old_end": 2246,
+        "new_start": 2975,
+        "new_end": 2979,
+        "old_hex": "73",
+        "new_hex": "5f70696e"
+      },
+      {
+        "old_start": 2247,
+        "old_end": 2250,
+        "new_start": 2980,
+        "new_end": 2989,
+        "old_hex": "7b383a",
+        "new_hex": "6e657874287820666f"
+      },
+      {
+        "old_start": 2251,
+        "old_end": 2257,
+        "new_start": 2990,
+        "new_end": 2996,
+        "old_hex": "65616428522f",
+        "new_hex": "207820696e20"
+      },
+      {
+        "old_start": 2279,
+        "old_end": 2279,
+        "new_start": 3018,
+        "new_end": 3023,
+        "old_hex": "",
+        "new_hex": "2069662078"
+      },
+      {
+        "old_start": 2281,
+        "old_end": 2281,
+        "new_start": 3025,
+        "new_end": 3057,
+        "old_hex": "",
+        "new_hex": "70617468275d2e656e64737769746828272f5452414e53504f52545f56455249"
+      },
+      {
+        "old_start": 2282,
+        "old_end": 2283,
+        "new_start": 3058,
+        "new_end": 3085,
+        "old_hex": "5f",
+        "new_hex": "49434154494f4e2e6a736f6e2729293b6e6565642873686128522f"
+      },
+      {
+        "old_start": 2292,
+        "old_end": 2294,
+        "new_start": 3094,
+        "new_end": 3098,
+        "old_hex": "275d",
+        "new_hex": "5f70696e"
+      },
+      {
+        "old_start": 2303,
+        "old_end": 2303,
+        "new_start": 3107,
+        "new_end": 3132,
+        "old_hex": "",
+        "new_hex": "3d3d7472616e73706f72745f70696e5b27736861323536275d"
+      },
+      {
+        "old_start": 2304,
+        "old_end": 2306,
+        "new_start": 3133,
+        "new_end": 3173,
+        "old_hex": "313a",
+        "new_hex": "2741646f70746564207472616e73706f7274206368616e67656427290a207472616e73706f72743d"
+      },
+      {
+        "old_start": 2313,
+        "old_end": 2313,
+        "new_start": 3180,
+        "new_end": 3237,
+        "old_hex": "",
+        "new_hex": "7472616e73706f72745f70696e5b2770617468275d293b6e656564287472616e73706f72745b27617263686976655f736861323536275d3d3d"
+      },
+      {
+        "old_start": 2322,
+        "old_end": 2323,
+        "new_start": 3246,
+        "new_end": 3247,
+        "old_hex": "70",
+        "new_hex": "61"
+      },
+      {
+        "old_start": 2324,
+        "old_end": 2327,
+        "new_start": 3248,
+        "new_end": 3253,
+        "old_hex": "6f6f66",
+        "new_hex": "6368697665"
+      },
+      {
+        "old_start": 2328,
+        "old_end": 2332,
+        "new_start": 3254,
+        "new_end": 3254,
+        "old_hex": "66696c65",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2333,
+        "old_end": 2333,
+        "new_start": 3255,
+        "new_end": 3260,
+        "old_hex": "",
+        "new_hex": "6861323536"
+      },
+      {
+        "old_start": 2335,
+        "old_end": 2342,
+        "new_start": 3262,
+        "new_end": 3264,
+        "old_hex": "5b277363726565",
+        "new_hex": "2061"
+      },
+      {
+        "old_start": 2343,
+        "old_end": 2346,
+        "new_start": 3265,
+        "new_end": 3267,
+        "old_hex": "5f465f",
+        "new_hex": "6420"
+      },
+      {
+        "old_start": 2355,
+        "old_end": 2355,
+        "new_start": 3276,
+        "new_end": 3290,
+        "old_hex": "",
+        "new_hex": "5b276d656d6265725f636f756e74"
+      },
+      {
+        "old_start": 2357,
+        "old_end": 2357,
+        "new_start": 3292,
+        "new_end": 3301,
+        "old_hex": "",
+        "new_hex": "3d3d61646f70746564"
+      },
+      {
+        "old_start": 2359,
+        "old_end": 2360,
+        "new_start": 3303,
+        "new_end": 3303,
+        "old_hex": "70",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2361,
+        "old_end": 2362,
+        "new_start": 3304,
+        "new_end": 3306,
+        "old_hex": "74",
+        "new_hex": "7263"
+      },
+      {
+        "old_start": 2363,
+        "old_end": 2363,
+        "new_start": 3307,
+        "new_end": 3318,
+        "old_hex": "",
+        "new_hex": "6976655f6d656d62657273"
+      },
+      {
+        "old_start": 2365,
+        "old_end": 2365,
+        "new_start": 3320,
+        "new_end": 3361,
+        "old_hex": "",
+        "new_hex": "3d3d32342c2741646f70746564207361766564206d656d6265722073636f7065206368616e67656427"
+      },
+      {
+        "old_start": 2366,
+        "old_end": 2367,
+        "new_start": 3362,
+        "new_end": 3362,
+        "old_hex": "7d",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2420,
+        "old_end": 2420,
+        "new_start": 3415,
+        "new_end": 3544,
+        "old_hex": "",
+        "new_hex": "5f7461626c65733d72656164284f4c442f277461626c65732e6a736f6e27293b6e656564286c656e286f6c645f7265636f726473293d3d313020616e64206c656e286f6c645f7461626c65735b2770616e656c73275d293d3d392c274f6c642042656e69676e207461626c652073636f7065206469666665727327290a206f6c64"
+      },
+      {
+        "old_start": 2432,
+        "old_end": 2432,
+        "new_start": 3556,
+        "new_end": 3577,
+        "old_hex": "",
+        "new_hex": "7b27636865636b706f696e745f736861323536273a"
+      },
+      {
+        "old_start": 2433,
+        "old_end": 2433,
+        "new_start": 3578,
+        "new_end": 3645,
+        "old_hex": "",
+        "new_hex": "5b27636865636b706f696e745f736861323536275d2c276d657472696373273a725b276e61746976655f636f6d70617269736f6e275d5b276578706563746564275d7d"
+      },
+      {
+        "old_start": 2443,
+        "old_end": 2448,
+        "new_start": 3655,
+        "new_end": 3658,
+        "old_hex": "6f6c645f72",
+        "new_hex": "616363"
+      },
+      {
+        "old_start": 2449,
+        "old_end": 2479,
+        "new_start": 3659,
+        "new_end": 3659,
+        "old_hex": "636f7264737d3b6e65656428736574286f6c646279293d3d736574286578",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2480,
+        "old_end": 2482,
+        "new_start": 3660,
+        "new_end": 3660,
+        "old_hex": "6563",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2485,
+        "old_end": 2526,
+        "new_start": 3663,
+        "new_end": 3664,
+        "old_hex": "292c274f6c64206e61746976652074656e206964656e74697479206772696420646966666572732729",
+        "new_hex": "7d"
+      },
+      {
+        "old_start": 2609,
+        "old_end": 2638,
+        "new_start": 3747,
+        "new_end": 3747,
+        "old_hex": "73637265656e2720696620736565643d3d393130303120656c73652027",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2654,
+        "old_end": 2839,
+        "new_start": 3763,
+        "new_end": 3763,
+        "old_hex": "696620736565643d3d39313030323a0a20202070696e3d72657573655b276578697374696e675f73617665645f6d656d62657273275d5b27726563656970742e6a736f6e275d3b706174683d506174682870696e5b2770617468275d293b726f6c653d277072696f725f726f6f745f61646f707465645f696e746572666163655f7265757365270a2020656c73653a0a202020743d7472616e73706f7274735b3120696620736565643d3d393130303120656c736520385d3b",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2881,
+        "old_end": 2881,
+        "new_start": 3805,
+        "new_end": 3813,
+        "old_hex": "",
+        "new_hex": "72616e73706f7274"
+      },
+      {
+        "old_start": 2911,
+        "old_end": 2911,
+        "new_start": 3843,
+        "new_end": 3851,
+        "old_hex": "",
+        "new_hex": "7472616e73706f72"
+      },
+      {
+        "old_start": 2954,
+        "old_end": 3000,
+        "new_start": 3894,
+        "new_end": 3894,
+        "old_hex": "73656c65637465645f73637265656e312720696620736565643d3d393130303120656c7365202761637475616c5f",
+        "new_hex": ""
+      },
+      {
+        "old_start": 3013,
+        "old_end": 3018,
+        "new_start": 3907,
+        "new_end": 3909,
+        "old_hex": "666f726d61",
+        "new_hex": "4646"
+      },
+      {
+        "old_start": 3019,
+        "old_end": 3020,
+        "new_start": 3910,
+        "new_end": 3914,
+        "old_hex": "38",
+        "new_hex": "69703130"
+      },
+      {
+        "old_start": 3387,
+        "old_end": 3390,
+        "new_start": 4281,
+        "new_end": 4285,
+        "old_hex": "42656e",
+        "new_hex": "4620466c"
+      },
+      {
+        "old_start": 3391,
+        "old_end": 3393,
+        "new_start": 4286,
+        "new_end": 4287,
+        "old_hex": "676e",
+        "new_hex": "70"
+      },
+      {
+        "old_start": 5906,
+        "old_end": 5911,
+        "new_start": 6800,
+        "new_end": 6803,
+        "old_hex": "7072696f72",
+        "new_hex": "6e6577"
+      },
+      {
+        "old_start": 5912,
+        "old_end": 5965,
+        "new_start": 6804,
+        "new_end": 6804,
+        "old_hex": "696e746572666163655f6578706c696369746c795f7265757365642f302720696620736565643d3d393130303220656c736520272f",
+        "new_hex": ""
+      },
+      {
+        "old_start": 5988,
+        "old_end": 5988,
+        "new_start": 6827,
+        "new_end": 6831,
+        "old_hex": "",
+        "new_hex": "6e65775f"
+      },
+      {
+        "old_start": 6432,
+        "old_end": 6432,
+        "new_start": 7275,
+        "new_end": 7290,
+        "old_hex": "",
+        "new_hex": "6c697374286f6c645f7461626c6573"
+      },
+      {
+        "old_start": 6433,
+        "old_end": 6433,
+        "new_start": 7291,
+        "new_end": 7299,
+        "old_hex": "",
+        "new_hex": "2770616e656c7327"
+      },
+      {
+        "old_start": 6434,
+        "old_end": 6434,
+        "new_start": 7300,
+        "new_end": 7301,
+        "old_hex": "",
+        "new_hex": "29"
+      },
+      {
+        "old_start": 6839,
+        "old_end": 6842,
+        "new_start": 7706,
+        "new_end": 7710,
+        "old_hex": "42656e",
+        "new_hex": "4620466c"
+      },
+      {
+        "old_start": 6843,
+        "old_end": 6845,
+        "new_start": 7711,
+        "new_end": 7712,
+        "old_hex": "676e",
+        "new_hex": "70"
+      },
+      {
+        "old_start": 7210,
+        "old_end": 7210,
+        "new_start": 8077,
+        "new_end": 8106,
+        "old_hex": "",
+        "new_hex": "0a207265636f7264733d6f6c645f7265636f7264732b7265636f726473"
+      },
+      {
+        "old_start": 7920,
+        "old_end": 7920,
+        "new_start": 8816,
+        "new_end": 8826,
+        "old_hex": "",
+        "new_hex": "726f6f745f6f6e6c795f"
+      },
+      {
+        "old_start": 7938,
+        "old_end": 7938,
+        "new_start": 8844,
+        "new_end": 8860,
+        "old_hex": "",
+        "new_hex": "5f6f726967696e616c5f726563697065"
+      },
+      {
+        "old_start": 8198,
+        "old_end": 8205,
+        "new_start": 9120,
+        "new_end": 9126,
+        "old_hex": "666f726d616c38",
+        "new_hex": "42656e69676e"
+      },
+      {
+        "old_start": 8207,
+        "old_end": 8212,
+        "new_start": 9128,
+        "new_end": 9129,
+        "old_hex": "61646f7074",
+        "new_hex": "72"
+      },
+      {
+        "old_start": 8213,
+        "old_end": 8214,
+        "new_start": 9130,
+        "new_end": 9133,
+        "old_hex": "64",
+        "new_hex": "757365"
+      },
+      {
+        "old_start": 8236,
+        "old_end": 8237,
+        "new_start": 9155,
+        "new_end": 9155,
+        "old_hex": "5f",
+        "new_hex": ""
+      },
+      {
+        "old_start": 8238,
+        "old_end": 8243,
+        "new_start": 9156,
+        "new_end": 9156,
+        "old_hex": "6861323536",
+        "new_hex": ""
+      },
+      {
+        "old_start": 8247,
+        "old_end": 8254,
+        "new_start": 9160,
+        "new_end": 9165,
+        "old_hex": "73637265656e31",
+        "new_hex": "46466c6970"
+      },
+      {
+        "old_start": 8265,
+        "old_end": 8287,
+        "new_start": 9176,
+        "new_end": 9176,
+        "old_hex": "70726f6f665f66696c6573275d5b2773637265656e5f",
+        "new_hex": ""
+      },
+      {
+        "old_start": 8293,
+        "old_end": 8293,
+        "new_start": 9182,
+        "new_end": 9195,
+        "old_hex": "",
+        "new_hex": "726f6f745f726563656970745f"
+      },
+      {
+        "old_start": 8295,
+        "old_end": 8297,
+        "new_start": 9197,
+        "new_end": 9202,
+        "old_hex": "6167",
+        "new_hex": "6666657265"
+      },
+      {
+        "old_start": 8298,
+        "old_end": 8299,
+        "new_start": 9203,
+        "new_end": 9205,
+        "old_hex": "6f",
+        "new_hex": "6365"
+      },
+      {
+        "old_start": 8300,
+        "old_end": 8317,
+        "new_start": 9206,
+        "new_end": 9206,
+        "old_hex": "7469635f6d6170275d5b27736861323536",
+        "new_hex": ""
+      },
+      {
+        "old_start": 8516,
+        "old_end": 8516,
+        "new_start": 9405,
+        "new_end": 9409,
+        "old_hex": "",
+        "new_hex": "74776f20"
+      },
+      {
+        "old_start": 8520,
+        "old_end": 8521,
+        "new_start": 9413,
+        "new_end": 9415,
+        "old_hex": "42",
+        "new_hex": "7363"
+      },
+      {
+        "old_start": 8523,
+        "old_end": 8526,
+        "new_start": 9417,
+        "new_end": 9419,
+        "old_hex": "69676e",
+        "new_hex": "6573"
+      },
+      {
+        "old_start": 8559,
+        "old_end": 8559,
+        "new_start": 9452,
+        "new_end": 9453,
+        "old_hex": "",
+        "new_hex": "77"
+      },
+      {
+        "old_start": 8561,
+        "old_end": 8561,
+        "new_start": 9455,
+        "new_end": 9457,
+        "old_hex": "",
+        "new_hex": "7479"
+      },
+      {
+        "old_start": 8587,
+        "old_end": 8587,
+        "new_start": 9483,
+        "new_end": 9521,
+        "old_hex": "",
+        "new_hex": "73206163726f73732074776f2073657061726174656c79207265706f72746564207363656e65"
+      },
+      {
+        "old_start": 8837,
+        "old_end": 8837,
+        "new_start": 9771,
+        "new_end": 9794,
+        "old_hex": "",
+        "new_hex": "232320494944202f2042656e69676e272c2027272c2027"
+      },
+      {
+        "old_start": 8944,
+        "old_end": 8944,
+        "new_start": 9901,
+        "new_end": 9907,
+        "old_hex": "",
+        "new_hex": "696e6465782c"
+      },
+      {
+        "old_start": 8948,
+        "old_end": 8948,
+        "new_start": 9911,
+        "new_end": 10001,
+        "old_hex": "",
+        "new_hex": "20656e756d65726174652870616e656c73293a0a2020696620696e6465783d3d393a74657874202b3d205b27272c2027232320494944202f204620466c6970272c2027272c20277c2056696577207c2046697865642073656564"
+      },
+      {
+        "old_start": 8954,
+        "old_end": 8955,
+        "new_start": 10007,
+        "new_end": 10064,
+        "old_hex": "73",
+        "new_hex": "207c206e207c204143432028252920e28691207c2041454f4420e28693207c204153504420e28693207c272c277c2d2d2d7c2d2d2d7c2d2d2d"
+      },
+      {
+        "old_start": 8956,
+        "old_end": 8956,
+        "new_start": 10065,
+        "new_end": 10083,
+        "old_hex": "",
+        "new_hex": "7c2d2d2d3a7c2d2d2d3a7c2d2d2d3a7c275d"
+      },
+      {
+        "old_start": 9102,
+        "old_end": 9103,
+        "new_start": 10229,
+        "new_end": 10237,
+        "old_hex": "53",
+        "new_hex": "42656e69676e2073"
+      },
+      {
+        "old_start": 9158,
+        "old_end": 9158,
+        "new_start": 10292,
+        "new_end": 10294,
+        "old_hex": "",
+        "new_hex": "6974"
+      },
+      {
+        "old_start": 9159,
+        "old_end": 9159,
+        "new_start": 10295,
+        "new_end": 10299,
+        "old_hex": "",
+        "new_hex": "206f7468"
+      },
+      {
+        "old_start": 9160,
+        "old_end": 9160,
+        "new_start": 10300,
+        "new_end": 10305,
+        "old_hex": "",
+        "new_hex": "72206e696e"
+      },
+      {
+        "old_start": 9161,
+        "old_end": 9176,
+        "new_start": 10306,
+        "new_end": 10306,
+        "old_hex": "64733931303032e280933931303130",
+        "new_hex": ""
+      },
+      {
+        "old_start": 9178,
+        "old_end": 9178,
+        "new_start": 10308,
+        "new_end": 10338,
+        "old_hex": "",
+        "new_hex": "6e6420616c6c2074656e204620466c697020636865636b706f696e747320"
+      },
+      {
+        "old_start": 9180,
+        "old_end": 9180,
+        "new_start": 10340,
+        "new_end": 10350,
+        "old_hex": "",
+        "new_hex": "7461696e207468656972"
+      },
+      {
+        "old_start": 9197,
+        "old_end": 9198,
+        "new_start": 10367,
+        "new_end": 10368,
+        "old_hex": "63",
+        "new_hex": "70"
+      },
+      {
+        "old_start": 9199,
+        "old_end": 9199,
+        "new_start": 10369,
+        "new_end": 10404,
+        "old_hex": "",
+        "new_hex": "6173652e2053656564393130303120776173206578706f73656420647572696e672072"
+      },
+      {
+        "old_start": 9201,
+        "old_end": 9202,
+        "new_start": 10406,
+        "new_end": 10407,
+        "old_hex": "6b",
+        "new_hex": "69"
+      },
+      {
+        "old_start": 9203,
+        "old_end": 9203,
+        "new_start": 10408,
+        "new_end": 10417,
+        "old_hex": "",
+        "new_hex": "652073656c65637469"
+      },
+      {
+        "old_start": 9204,
+        "old_end": 9204,
+        "new_start": 10418,
+        "new_end": 10420,
+        "old_hex": "",
+        "new_hex": "6e20"
+      },
+      {
+        "old_start": 9206,
+        "old_end": 9206,
+        "new_start": 10422,
+        "new_end": 10425,
+        "old_hex": "",
+        "new_hex": "20626f"
+      },
+      {
+        "old_start": 9207,
+        "old_end": 9207,
+        "new_start": 10426,
+        "new_end": 10437,
+        "old_hex": "",
+        "new_hex": "6820636f6e646974696f6e"
+      },
+      {
+        "old_start": 9806,
+        "old_end": 9807,
+        "new_start": 11036,
+        "new_end": 11041,
+        "old_hex": "52",
+        "new_hex": "416e792072"
+      },
+      {
+        "old_start": 9987,
+        "old_end": 9988,
+        "new_start": 11221,
+        "new_end": 11222,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 10489,
+        "old_end": 10492,
+        "new_start": 11723,
+        "new_end": 11726,
+        "old_hex": "546865",
+        "new_hex": "466f72"
+      },
+      {
+        "old_start": 10493,
+        "old_end": 10498,
+        "new_start": 11727,
+        "new_end": 11733,
+        "old_hex": "6578616374",
+        "new_hex": "4620466c6970"
+      },
+      {
+        "old_start": 10508,
+        "old_end": 10508,
+        "new_start": 11743,
+        "new_end": 11744,
+        "old_hex": "",
+        "new_hex": "2c"
+      },
+      {
+        "old_start": 10509,
+        "old_end": 10509,
+        "new_start": 11745,
+        "new_end": 11772,
+        "old_hex": "",
+        "new_hex": "746865202f7365727665725f73616d706c696e675f61756469742f"
+      },
+      {
+        "old_start": 10514,
+        "old_end": 10528,
+        "new_start": 11777,
+        "new_end": 11780,
+        "old_hex": "2d4b4c20646961676e6f73746963",
+        "new_hex": "5f6b6c"
+      },
+      {
+        "old_start": 10542,
+        "old_end": 10542,
+        "new_start": 11794,
+        "new_end": 11861,
+        "old_hex": "",
+        "new_hex": "20e28892322e31363834303433343439373130303965e2889231393b20746865206f726967696e616c20657861637420646961676e6f73746963206d61707320617265"
+      },
+      {
+        "old_start": 10562,
+        "old_end": 10563,
+        "new_start": 11881,
+        "new_end": 11882,
+        "old_hex": "3b",
+        "new_hex": "2e"
+      },
+      {
+        "old_start": 10564,
+        "old_end": 10564,
+        "new_start": 11883,
+        "new_end": 11885,
+        "old_hex": "",
+        "new_hex": "5468"
+      },
+      {
+        "old_start": 10565,
+        "old_end": 10566,
+        "new_start": 11886,
+        "new_end": 11898,
+        "old_hex": "74",
+        "new_hex": "7320646966666572656e6365"
+      },
+      {
+        "old_start": 10631,
+        "old_end": 10631,
+        "new_start": 11963,
+        "new_end": 12020,
+        "old_hex": "",
+        "new_hex": "20616e64206973206e6f742072656c6162656c6c65642061732063726f73732d706c6174666f726d2062697477697365206964656e74697479"
+      },
+      {
+        "old_start": 10639,
+        "old_end": 10640,
+        "new_start": 12028,
+        "new_end": 12029,
+        "old_hex": "69",
+        "new_hex": "65"
+      },
+      {
+        "old_start": 10641,
+        "old_end": 10641,
+        "new_start": 12030,
+        "new_end": 12031,
+        "old_hex": "",
+        "new_hex": "65"
+      },
+      {
+        "old_start": 10642,
+        "old_end": 10647,
+        "new_start": 12032,
+        "new_end": 12034,
+        "old_hex": "6973206f6e",
+        "new_hex": "6172"
+      },
+      {
+        "old_start": 10660,
+        "old_end": 10663,
+        "new_start": 12047,
+        "new_end": 12048,
+        "old_hex": "736365",
+        "new_hex": "61"
+      },
+      {
+        "old_start": 10664,
+        "old_end": 10665,
+        "new_start": 12049,
+        "new_end": 12061,
+        "old_hex": "65",
+        "new_hex": "6420494944204620466c6970"
+      },
+      {
+        "old_start": 10681,
+        "old_end": 10681,
+        "new_start": 12077,
+        "new_end": 12081,
+        "old_hex": "",
+        "new_hex": "7465656e"
+      },
+      {
+        "old_start": 10734,
+        "old_end": 10734,
+        "new_start": 12134,
+        "new_end": 12166,
+        "old_hex": "",
+        "new_hex": "2e204e6f206163726f73732d7363656e65206d65616e20697320666f726d6564"
+      },
+      {
+        "old_start": 11177,
+        "old_end": 11178,
+        "new_start": 12609,
+        "new_end": 12610,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 11200,
+        "old_end": 11201,
+        "new_start": 12632,
+        "new_end": 12633,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 11334,
+        "old_end": 11336,
+        "new_start": 12766,
+        "new_end": 12769,
+        "old_hex": "3534",
+        "new_hex": "313038"
+      },
+      {
+        "old_start": 11353,
+        "old_end": 11355,
+        "new_start": 12786,
+        "new_end": 12788,
+        "old_hex": "3237",
+        "new_hex": "3534"
+      },
+      {
+        "old_start": 11465,
+        "old_end": 11466,
+        "new_start": 12898,
+        "new_end": 12899,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 11495,
+        "old_end": 11495,
+        "new_start": 12928,
+        "new_end": 12929,
+        "old_hex": "",
+        "new_hex": "73"
+      },
+      {
+        "old_start": 11497,
+        "old_end": 11497,
+        "new_start": 12931,
+        "new_end": 12932,
+        "old_hex": "",
+        "new_hex": "5b"
+      },
+      {
+        "old_start": 11505,
+        "old_end": 11505,
+        "new_start": 12940,
+        "new_end": 12950,
+        "old_hex": "",
+        "new_hex": "2c274620466c6970275d"
+      },
+      {
+        "old_start": 11560,
+        "old_end": 11560,
+        "new_start": 13005,
+        "new_end": 13006,
+        "old_hex": "",
+        "new_hex": "31"
+      },
+      {
+        "old_start": 11636,
+        "old_end": 11639,
+        "new_start": 13082,
+        "new_end": 13101,
+        "old_hex": "657870",
+        "new_hex": "5b725b276964275d20666f72207220696e2072"
+      },
+      {
+        "old_start": 11641,
+        "old_end": 11643,
+        "new_start": 13103,
+        "new_end": 13105,
+        "old_hex": "7465",
+        "new_hex": "6f72"
+      },
+      {
+        "old_start": 11644,
+        "old_end": 11644,
+        "new_start": 13106,
+        "new_end": 13108,
+        "old_hex": "",
+        "new_hex": "735d"
+      },
+      {
+        "old_start": 11650,
+        "old_end": 11650,
+        "new_start": 13114,
+        "new_end": 13116,
+        "old_hex": "",
+        "new_hex": "4265"
+      },
+      {
+        "old_start": 11651,
+        "old_end": 11653,
+        "new_start": 13117,
+        "new_end": 13117,
+        "old_hex": "6174",
+        "new_hex": ""
+      },
+      {
+        "old_start": 11654,
+        "old_end": 11656,
+        "new_start": 13118,
+        "new_end": 13122,
+        "old_hex": "7665",
+        "new_hex": "676e3130"
+      },
+      {
+        "old_start": 11657,
+        "old_end": 11659,
+        "new_start": 13123,
+        "new_end": 13124,
+        "old_hex": "6368",
+        "new_hex": "72"
+      },
+      {
+        "old_start": 11661,
+        "old_end": 11662,
+        "new_start": 13126,
+        "new_end": 13131,
+        "old_hex": "6b",
+        "new_hex": "6f7264735f"
+      },
+      {
+        "old_start": 11663,
+        "old_end": 11664,
+        "new_start": 13132,
+        "new_end": 13143,
+        "old_hex": "6f",
+        "new_hex": "616e656c735f616e645f64"
+      },
+      {
+        "old_start": 11665,
+        "old_end": 11674,
+        "new_start": 13144,
+        "new_end": 13144,
+        "old_hex": "6e745f6d6574726963",
+        "new_hex": ""
+      },
+      {
+        "old_start": 11675,
+        "old_end": 11675,
+        "new_start": 13145,
+        "new_end": 13149,
+        "old_hex": "",
+        "new_hex": "706c6179"
+      },
+      {
+        "old_start": 11883,
+        "old_end": 11883,
+        "new_start": 13357,
+        "new_end": 13422,
+        "old_hex": "",
+        "new_hex": "292c276f6c645f42656e69676e5f7461626c655f726f6f745f736861323536273a736861284f4c442f27524f4f545f564552494649434154494f4e2e6a736f6e27"
+      },
+      {
+        "old_start": 12276,
+        "old_end": 12276,
+        "new_start": 13815,
+        "new_end": 13868,
+        "old_hex": "",
+        "new_hex": "72656164284f4c442f27534f555243455f42494e44494e47532e6a736f6e27295b27726563656970745f62696e64696e6773275d2b"
+      },
+      {
+        "old_start": 12473,
+        "old_end": 12474,
+        "new_start": 14065,
+        "new_end": 14071,
+        "old_hex": "42",
+        "new_hex": "54574f5f5343"
+      },
+      {
+        "old_start": 12476,
+        "old_end": 12480,
+        "new_start": 14073,
+        "new_end": 14076,
+        "old_hex": "49474e31",
+        "new_hex": "455332"
+      },
+      {
+        "old_start": 12546,
+        "old_end": 12547,
+        "new_start": 14142,
+        "new_end": 14143,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 12558,
+        "old_end": 12559,
+        "new_start": 14154,
+        "new_end": 14156,
+        "old_hex": "39",
+        "new_hex": "3138"
+      },
+      {
+        "old_start": 12578,
+        "old_end": 12580,
+        "new_start": 14175,
+        "new_end": 14178,
+        "old_hex": "3534",
+        "new_hex": "313038"
+      },
+      {
+        "old_start": 12597,
+        "old_end": 12599,
+        "new_start": 14195,
+        "new_end": 14197,
+        "old_hex": "3237",
+        "new_hex": "3534"
+      },
+      {
+        "old_start": 12784,
+        "old_end": 12784,
+        "new_start": 14382,
+        "new_end": 14535,
+        "old_hex": "",
+        "new_hex": "0a20696d706f72742061726770617273650a207061727365723d61726770617273652e417267756d656e7450617273657228293b7061727365722e6164645f617267756d656e7428272d2d62696e64696e672d736861323536272c72657175697265643d54727565293b42494e44494e475f5348413d7061727365722e70617273655f6172677328292e62696e64696e675f7368613235363b"
+      }
+    ]
+  },
+  "verify_numeric.py": {
+    "parent_sha256": "cb3cc4fc71c74bfc2980e650a48f4a4eee35c5d9990e2ee52f3a2ceb3c465a60",
+    "source_sha256": "b30082efc3b6773ec5683273032fd81d5d4fa7e8704cf9784a35940a80cf2f16",
+    "replacements": [
+      {
+        "old": "==10 and [r['seed'] for r in records]==list(range(91001,91011))",
+        "new": "==20 and [r['seed'] for r in records]==list(range(91001,91011))*2",
+        "count": 1
+      },
+      {
+        "old": "sum(r['selection_seed'] for r in records)==1",
+        "new": "sum(r['selection_seed'] for r in records)==2",
+        "count": 1
+      },
+      {
+        "old": "byseed={r['seed']:r for r in records};errors=[];strings=[]",
+        "new": "errors=[];strings=[]",
+        "count": 1
+      },
+      {
+        "old": "len(panels)==9 and len({(p['view'],tuple(p['seeds'])) for p in panels})==9",
+        "new": "len(panels)==18 and len({(p['view'],p['rows'][0]['attack'],tuple(p['seeds'])) for p in panels})==18",
+        "count": 1
+      },
+      {
+        "old": " for p in panels:\n",
+        "new": " for p in panels:\n  byseed={r['seed']:r for r in records if r['attack']==p['rows'][0]['attack']}\n  assert len(byseed)==10 and p['rows'][0]['attack'] in ['Benign','F Flip']\n",
+        "count": 1
+      },
+      {
+        "old": "len(errors)==54",
+        "new": "len(errors)==108",
+        "count": 1
+      },
+      {
+        "old": "if l.startswith('| ')][1:];assert len(lines)==9",
+        "new": "if l.startswith('| ') and not l.startswith('| View |')];assert len(lines)==18",
+        "count": 1
+      },
+      {
+        "old": "ns['metric_checks']==90 and ns['count_checks']==240",
+        "new": "ns['metric_checks']==180 and ns['count_checks']==480",
+        "count": 1
+      },
+      {
+        "old": " result={'status':",
+        "new": " oldtable=R/'outputs/guardfed_tables/celeba_hybrid_three_view_IID_Benign10_20261011'\n old_records=json.loads((oldtable/'records.json').read_bytes())['records'];old_panels=json.loads((oldtable/'tables.json').read_bytes())['panels']\n assert records[:10]==old_records and panels[:9]==old_panels\n assert json.dumps(records[:10],ensure_ascii=False,indent=2)==json.dumps(old_records,ensure_ascii=False,indent=2)\n assert [l for l in (H/'TABLES.md').read_text('utf8').splitlines() if l.startswith('| ') and not l.startswith('| View |')][:9]==[l for l in (oldtable/'TABLES.md').read_text('utf8').splitlines() if l.startswith('| ') and not l.startswith('| View |')]\n result={'status':",
+        "count": 1
+      },
+      {
+        "old": "'HYBRID_BENIGN10_SAVED_RECEIPT_TABLE_ARITHMETIC_PASS_NOT_ROOT_TABLE_ADOPTION','unique_checkpoints':10",
+        "new": "'HYBRID_TWO_SCENES20_SAVED_RECEIPT_TABLE_ARITHMETIC_PASS_NOT_ROOT_TABLE_ADOPTION','unique_checkpoints':20,'complete_scenes':2,'old_Benign10_records_54_scalars_27_cells_exact':True",
+        "count": 1
+      },
+      {
+        "old": "'mean_SD_scalars_recomputed':54,'display_cells_checked':27",
+        "new": "'mean_SD_scalars_recomputed':108,'display_cells_checked':54",
+        "count": 1
+      }
+    ],
+    "raw_inverse_spans": [
+      {
+        "old_start": 511,
+        "old_end": 512,
+        "new_start": 511,
+        "new_end": 512,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 572,
+        "old_end": 572,
+        "new_start": 572,
+        "new_end": 574,
+        "old_hex": "",
+        "new_hex": "2a32"
+      },
+      {
+        "old_start": 624,
+        "old_end": 625,
+        "new_start": 626,
+        "new_end": 627,
+        "old_hex": "31",
+        "new_hex": "32"
+      },
+      {
+        "old_start": 718,
+        "old_end": 756,
+        "new_start": 720,
+        "new_end": 720,
+        "old_hex": "6279736565643d7b725b2773656564275d3a7220666f72207220696e207265636f7264737d3b",
+        "new_hex": ""
+      },
+      {
+        "old_start": 798,
+        "old_end": 799,
+        "new_start": 762,
+        "new_end": 764,
+        "old_hex": "39",
+        "new_hex": "3138"
+      },
+      {
+        "old_start": 817,
+        "old_end": 817,
+        "new_start": 782,
+        "new_end": 805,
+        "old_hex": "",
+        "new_hex": "275d2c705b27726f7773275d5b305d5b2761747461636b"
+      },
+      {
+        "old_start": 858,
+        "old_end": 859,
+        "new_start": 846,
+        "new_end": 848,
+        "old_hex": "39",
+        "new_hex": "3138"
+      },
+      {
+        "old_start": 877,
+        "old_end": 877,
+        "new_start": 866,
+        "new_end": 1020,
+        "old_hex": "",
+        "new_hex": "0a20206279736565643d7b725b2773656564275d3a7220666f72207220696e207265636f72647320696620725b2761747461636b275d3d3d705b27726f7773275d5b305d5b2761747461636b275d7d0a2020617373657274206c656e28627973656564293d3d313020616e6420705b27726f7773275d5b305d5b2761747461636b275d20696e205b2742656e69676e272c274620466c6970275d"
+      },
+      {
+        "old_start": 1912,
+        "old_end": 1914,
+        "new_start": 2055,
+        "new_end": 2058,
+        "old_hex": "3534",
+        "new_hex": "313038"
+      },
+      {
+        "old_start": 2034,
+        "old_end": 2038,
+        "new_start": 2178,
+        "new_end": 2211,
+        "old_hex": "5d5b313a",
+        "new_hex": "20616e64206e6f74206c2e7374617274737769746828277c2056696577207c2729"
+      },
+      {
+        "old_start": 2059,
+        "old_end": 2060,
+        "new_start": 2232,
+        "new_end": 2234,
+        "old_hex": "39",
+        "new_hex": "3138"
+      },
+      {
+        "old_start": 2934,
+        "old_end": 2935,
+        "new_start": 3108,
+        "new_end": 3110,
+        "old_hex": "39",
+        "new_hex": "3138"
+      },
+      {
+        "old_start": 2961,
+        "old_end": 2962,
+        "new_start": 3136,
+        "new_end": 3136,
+        "old_hex": "32",
+        "new_hex": ""
+      },
+      {
+        "old_start": 2963,
+        "old_end": 2963,
+        "new_start": 3137,
+        "new_end": 3138,
+        "old_hex": "",
+        "new_hex": "38"
+      },
+      {
+        "old_start": 3426,
+        "old_end": 3426,
+        "new_start": 3601,
+        "new_end": 4257,
+        "old_hex": "",
+        "new_hex": "6f6c647461626c653d522f276f7574707574732f67756172646665645f7461626c65732f63656c6562615f6879627269645f74687265655f766965775f4949445f42656e69676e31305f3230323631303131270a206f6c645f7265636f7264733d6a736f6e2e6c6f61647328286f6c647461626c652f277265636f7264732e6a736f6e27292e726561645f62797465732829295b277265636f726473275d3b6f6c645f70616e656c733d6a736f6e2e6c6f61647328286f6c647461626c652f277461626c65732e6a736f6e27292e726561645f62797465732829295b2770616e656c73275d0a20617373657274207265636f7264735b3a31305d3d3d6f6c645f7265636f72647320616e642070616e656c735b3a395d3d3d6f6c645f70616e656c730a20617373657274206a736f6e2e64756d7073287265636f7264735b3a31305d2c656e737572655f61736369693d46616c73652c696e64656e743d32293d3d6a736f6e2e64756d7073286f6c645f7265636f7264732c656e737572655f61736369693d46616c73652c696e64656e743d32290a20617373657274205b6c20666f72206c20696e2028482f275441424c45532e6d6427292e726561645f7465787428277574663827292e73706c69746c696e65732829206966206c2e7374617274737769746828277c20272920616e64206e6f74206c2e7374617274737769746828277c2056696577207c27295d5b3a395d3d3d5b6c20666f72206c20696e20286f6c647461626c652f275441424c45532e6d6427292e726561645f7465787428277574663827292e73706c69746c696e65732829206966206c2e7374617274737769746828277c20272920616e64206e6f74206c2e7374617274737769746828277c2056696577207c27295d0a20"
+      },
+      {
+        "old_start": 3451,
+        "old_end": 3452,
+        "new_start": 4282,
+        "new_end": 4288,
+        "old_hex": "42",
+        "new_hex": "54574f5f5343"
+      },
+      {
+        "old_start": 3454,
+        "old_end": 3458,
+        "new_start": 4290,
+        "new_end": 4293,
+        "old_hex": "49474e31",
+        "new_hex": "455332"
+      },
+      {
+        "old_start": 3542,
+        "old_end": 3542,
+        "new_start": 4377,
+        "new_end": 4411,
+        "old_hex": "",
+        "new_hex": "32302c27636f6d706c6574655f7363656e6573273a322c276f6c645f42656e69676e"
+      },
+      {
+        "old_start": 3544,
+        "old_end": 3544,
+        "new_start": 4413,
+        "new_end": 4453,
+        "old_hex": "",
+        "new_hex": "5f7265636f7264735f35345f7363616c6172735f32375f63656c6c735f6578616374273a54727565"
+      },
+      {
+        "old_start": 3632,
+        "old_end": 3634,
+        "new_start": 4541,
+        "new_end": 4544,
+        "old_hex": "3534",
+        "new_hex": "313038"
+      },
+      {
+        "old_start": 3659,
+        "old_end": 3661,
+        "new_start": 4569,
+        "new_end": 4571,
+        "old_hex": "3237",
+        "new_hex": "3534"
+      }
+    ]
+  }
+}

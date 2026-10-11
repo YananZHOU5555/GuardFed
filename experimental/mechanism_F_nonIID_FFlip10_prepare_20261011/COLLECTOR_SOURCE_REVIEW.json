@@ -1,0 +1,130 @@
+{
+  "status": "ROOT_NATIVE370_FIXED10_COLLECTOR_AND_ADOPTER_REVIEW",
+  "utc": "2026-10-11T01:50:27.145232+00:00",
+  "original_collector_review": {
+    "status": "ROOT_FIXED_NATIVE10_SOURCE_REVIEW_AND_ACTUAL_CLOSED_IDS_DISPATCH_AUTHORIZED_ONCE",
+    "utc": "2026-10-11T01:46:21.965847+00:00",
+    "source_seal_sha256": "b213c893904be9b780381a4d27ef26976eb7a955321da01fecb58778706b79de",
+    "driver_sha256": "c5dcabc47c5dd2c930413a296c26bf27aae01286833c3001390f66935b36ceff",
+    "selector_sha256": "84f8734aaa39ebca9167d03b926b1290777c0e22860851a475c236681f1abb32",
+    "root_read_entire_driver_and_backup": true,
+    "original_scientific_per_ID_archive_and_offserver_loops_unchanged": true,
+    "only_delta_selection_and_accepted_vs_observed_metadata_changed": true,
+    "fixed_ids": [
+      "minus_F_non-IID_F Flip_seed91001",
+      "minus_F_non-IID_F Flip_seed91002",
+      "minus_F_non-IID_F Flip_seed91003",
+      "minus_F_non-IID_F Flip_seed91004",
+      "minus_F_non-IID_F Flip_seed91005",
+      "minus_F_non-IID_F Flip_seed91006",
+      "minus_F_non-IID_F Flip_seed91007",
+      "minus_F_non-IID_F Flip_seed91008",
+      "minus_F_non-IID_F Flip_seed91009",
+      "minus_F_non-IID_F Flip_seed91010"
+    ],
+    "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T014505Z.raw.json",
+    "snapshot_sha256": "8b0927dbb314d40de986db2e25472bd024d75d26c4d05f0aa14859a591c91bb6",
+    "observed_main_completed": 371,
+    "prior_native_accepted": 360,
+    "target_native_if_root_adopted": 370,
+    "extras_retained_pending": true,
+    "storage": {
+      "FileSystemLabel": "Yanan 2TB",
+      "HealthStatus": "Healthy",
+      "SizeRemaining": 349985308672
+    },
+    "automatic_retry": false,
+    "final_test": false
+  },
+  "metadata_namespace_repair": {
+    "status": "ROOT_METADATA_NAMESPACE_H_REPAIR_AFTER_PRE_SSH_FAILURE",
+    "utc": "2026-10-11T01:47:06.799868+00:00",
+    "failed_command_sha256": "819b465de3a88f6622e3f0b94f7663e8655a3b9f16f6439cfcbb36c6de6c9a94",
+    "failed_stderr_sha256": "3ad77420cd4ef78ec5cd2a0657d2fd4ac31597cdd544631654891cfa6a3615af",
+    "failed_artifacts": [
+      "STORAGE_PREFLIGHT.json"
+    ],
+    "no_remote_command_was_dispatched": true,
+    "original_sealed_source_unchanged": true,
+    "only_change": "Pass H=original source directory into the unchanged derived exec namespace; no numeric/checked_result/archive/resource changes.",
+    "root_read_entire_original_driver": true,
+    "one_new_attempt_authorized": true,
+    "scientific_retry": false,
+    "automatic_retry": false,
+    "source_review_sha256": "93bd38b5a66bb516f587bd4e08f16a8687a794a6f359fc123803b60955ff3ad6",
+    "final_test": false
+  },
+  "parent_adopter_sha256": "b8372a24f55018937e4650d6d2ea3cf3ab8cb2510e0192a65b05ec540cb4827d",
+  "adopter_sha256": "d2e4fc9bb212b1b0ff06ff84e2a120d2c5244cbd52566b972066cf06e049b072",
+  "complete_raw_inverse_exact": true,
+  "metadata_replacements": [
+    [
+      "ROOT_REVIEWED_ACTUAL_NATIVE_DELTA_AFTER350_NONIID_BENIGN10_READY_TO_ADOPT",
+      "ROOT_REVIEWED_ACTUAL_NATIVE_DELTA_AFTER360_NONIID_FFLIP10_READY_TO_ADOPT"
+    ],
+    [
+      "==TOTAL-350 and TOTAL==360",
+      "==TOTAL-360 and TOTAL==370"
+    ],
+    [
+      "minus_F_non-IID_Benign_seed",
+      "minus_F_non-IID_F Flip_seed"
+    ],
+    [
+      "root_delta_20261010T232753Z",
+      "root_delta_20261011T002530Z"
+    ],
+    [
+      "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770",
+      "396e40654b6dfc75029d4a7a42dbfafe4caaf111a872ae2ece5045f6d1203418"
+    ],
+    [
+      "sha(BASE / 'run_once.py') == 'a0e4e9fa0b28217f0973e12ae1c44440bf0c98c58b64f21da88209e3cd6b7c9a'",
+      "sha(BASE / 'run_native_once.py') == 'c5dcabc47c5dd2c930413a296c26bf27aae01286833c3001390f66935b36ceff'"
+    ],
+    [
+      "cfd096af7e787f419774e140ede4ebaadefe5770e5768c5754bd8932894050d0",
+      "67c32aced70438bf7bf614c5862792f1887ddeb4fbede5e4da06cc157fd992ef"
+    ],
+    [
+      "len(old_ledger['entries']) == 49",
+      "len(old_ledger['entries']) == 50"
+    ],
+    [
+      "assert report['new_count'] == TOTAL and report['reused_count'] == 100 and not report['invalid']",
+      "assert report['new_count'] == ACTUAL['observed_native_count'] >= TOTAL and report['reused_count'] == 100 and not report['invalid']"
+    ],
+    [
+      "assert len(report['records'])==TOTAL+100",
+      "assert len(report['records'])==ACTUAL['observed_native_count']+100"
+    ],
+    [
+      "assert len(old_ids) == 450",
+      "assert len(old_ids) == 460"
+    ],
+    [
+      "assert set(report['accepted_new_ids']) - set(old_report['accepted_new_ids']) == set(proof['new_ids'])",
+      "assert set(proof['new_ids']) <= set(report['accepted_new_ids']) - set(old_report['accepted_new_ids'])\nassert sorted(set(report['accepted_new_ids']) - set(old_report['accepted_new_ids']) - set(proof['new_ids'])) == proof['observed_not_backed_up_ids'] == ACTUAL['pending_closed_ids']"
+    ],
+    [
+      "native_delta_after350_nonIID_Benign10_20261011",
+      "native_delta_after360_nonIID_FFlip10_20261011"
+    ],
+    [
+      "verified_ledger.after350_nonIID_Benign10.root.tmp",
+      "verified_ledger.after360_nonIID_FFlip10.root.tmp"
+    ],
+    [
+      "old450_records_exact=True",
+      "old460_records_exact=True"
+    ]
+  ],
+  "original_archive_and_per_record_scientific_identity_loops_unchanged": true,
+  "fixed_selected10_only": true,
+  "full_raw_inspection_preserved": true,
+  "pending_closed_ids": [
+    "minus_F_non-IID_FedSA_seed91001"
+  ],
+  "original_preSSH_failure_preserved": true,
+  "final_test": false
+}

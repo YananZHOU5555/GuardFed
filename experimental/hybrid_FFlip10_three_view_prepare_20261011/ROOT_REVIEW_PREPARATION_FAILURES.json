@@ -1,0 +1,21 @@
+{
+  "status": "ROOT_LOCAL_SOURCE_VERIFIER_PREPARATION_FAILURES_PRESERVED",
+  "scientific_execution": false,
+  "SSH": false,
+  "model_or_array_reads": false,
+  "failures": [
+    {
+      "step": 1,
+      "error": "AssertionError: candidate.py scope status",
+      "cause": "Root verifier initially interpreted recorded span positions as stepwise transformed offsets. Forward/inverse verification was corrected to compute actual offsets independently."
+    },
+    {
+      "step": 2,
+      "error": "AssertionError comparing whole candidate row loop",
+      "cause": "Whole loop includes the declared seven-to-nine canary error-message change. Root checked the message-only inverse; scientific calls and complete inverse bytes are unchanged."
+    }
+  ],
+  "final_source_review_sha256": "6901bcf5828a56f53f7e29b73ff699da17373436c86b241f26a3844a01ee593c",
+  "algorithm_source_modified": false,
+  "runtime_retry": false
+}

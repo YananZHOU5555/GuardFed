@@ -1,0 +1,103 @@
+{
+  "parent_path": "E:/OneDrive/文档/GuardFed/tmp/celeba_native_after350_nonIID_Benign10_prepared_20261011/run_once.py",
+  "parent_sha256": "a0e4e9fa0b28217f0973e12ae1c44440bf0c98c58b64f21da88209e3cd6b7c9a",
+  "changes": [
+    {
+      "old": "native_delta_after350_nonIID_Benign10_20261011",
+      "new": "native_delta_after360_nonIID_FFlip10_20261011",
+      "positions": [
+        2254
+      ],
+      "role": "remote namespace"
+    },
+    {
+      "old": "celeba_native_after350_nonIID_Benign10_prepared_20261011",
+      "new": "mechanism_F_nonIID_FFlip10_prepare_20261011",
+      "positions": [
+        2338
+      ],
+      "role": "local and F namespace"
+    },
+    {
+      "old": "minus_F_non-IID_Benign_seed",
+      "new": "minus_F_non-IID_F Flip_seed",
+      "positions": [
+        1968
+      ],
+      "role": "fixed identity"
+    },
+    {
+      "old": "cfd096af7e787f419774e140ede4ebaadefe5770e5768c5754bd8932894050d0",
+      "new": "67c32aced70438bf7bf614c5862792f1887ddeb4fbede5e4da06cc157fd992ef",
+      "positions": [
+        1805
+      ],
+      "role": "parent50 ledger"
+    },
+    {
+      "old": "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770",
+      "new": "396e40654b6dfc75029d4a7a42dbfafe4caaf111a872ae2ece5045f6d1203418",
+      "positions": [
+        2104
+      ],
+      "role": "native360 root"
+    },
+    {
+      "old": "prior_inspected['new_count']==350 and len(prior_inspected['accepted_new_ids'])==350",
+      "new": "prior_inspected['new_count']==360 and len(prior_inspected['accepted_new_ids'])==360",
+      "positions": [
+        1086
+      ],
+      "role": "parent360 guard"
+    },
+    {
+      "old": "inspected['new_count']==len(inspected['accepted_new_ids'])==360",
+      "new": "inspected['new_count']==len(inspected['accepted_new_ids']) and inspected['new_count']>=370",
+      "positions": [
+        1425
+      ],
+      "role": "allow observed extras without accepting them"
+    },
+    {
+      "old": "scope['actual_delta']==EXACT_IDS and not scope['extra_ids'] and not scope['missing_ids'], 'Exact10 cutoff refused; preserve inspection; no backup or retry'",
+      "new": "set(EXACT_IDS)<=set(scope['actual_delta']) and not scope['missing_ids'], 'Fixed10 incomplete/refused; preserve full inspection; no backup or retry'",
+      "positions": [
+        1531
+      ],
+      "role": "only fixed10 readiness"
+    },
+    {
+      "old": "    text=P.read_text('utf8')",
+      "new": "    assert sha(H/'fixed_backup.py')==scope['fixed_backup_source_sha256']\n    text=P.read_text('utf8')",
+      "positions": [
+        2189
+      ],
+      "role": "pin selector before future execution"
+    },
+    {
+      "old": "bindings=dict(EXACT_IDS=SCOPE['candidate_ids'],PRIOR_INSPECTION=",
+      "new": "bindings=dict(FIXED_BACKUP_SOURCE=(H/'fixed_backup.py').read_text('utf8'),EXACT_IDS=SCOPE['candidate_ids'],PRIOR_INSPECTION=",
+      "positions": [
+        2767
+      ],
+      "role": "pass exact small selector source to original remote loop"
+    },
+    {
+      "old": "    return text,scope",
+      "new": "    old_call = '    result=subprocess.run(argv,capture_output=True,text=True)\\n'\n    new_call = '    if argv[len(prefix)]==\"backup\": argv=prefix[:-1]+[\"-c\",FIXED_BACKUP_SOURCE]+argv[len(prefix)+1:]\\n' + old_call\n    assert text.count(old_call)==1\n    text=text.replace(old_call,new_call)\n    old_count = \"'total_new_strict_and_offserver':report['new_count'],\"\n    new_count = \"'total_new_strict_and_offserver':SCOPE['parent_native']+len(closed['accepted_new_ids']),'observed_native_count':report['new_count'],'observed_not_backed_up_ids':sorted(set(report['accepted_new_ids'])-set(SCOPE['candidate_ids'])-set(json.loads(Path(ROOT/SCOPE['parent_inspection_path']).read_bytes())['accepted_new_ids'])),'fixed_scope_only':True,\"\n    assert text.count(old_count)==1\n    text=text.replace(old_count,new_count)\n    return text,scope",
+      "positions": [
+        3008
+      ],
+      "role": "select only fixed10; separate observed count from archived count"
+    },
+    {
+      "old": "':EXACT10_METADATA_GUARD_AFTER350'",
+      "new": "':FIXED10_SELECTION_METADATA_AFTER360'",
+      "positions": [
+        3912
+      ],
+      "role": "trace namespace"
+    }
+  ],
+  "complete_raw_inverse_exact": true
+}

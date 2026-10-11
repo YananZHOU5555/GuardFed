@@ -1,0 +1,13 @@
+--- original_v4.backup
++++ fixed10_metadata_backup
+@@ -15,7 +15,9 @@
+         require(row["output"] == entries[identity]["output"] and row["job"] == entries[identity]["job"], "Backup row refers to a different job/model path")
+         require(row["files"].get(str(Path(row["output"]) / "model.pt")) == row["checkpoint_sha256"], "Backup row mixes checkpoints")
+     ledger, already, prior_failures, previous = verified_ledger(ledger_path, report["manifest_sha256"], planned, initialize)
+-    delta = sorted(accepted - already)
++    require(len(FIXED_IDS) == len(set(FIXED_IDS)) == 10 and FIXED_IDS == sorted(FIXED_IDS), 'Fixed exact10 order required')
++    require(set(FIXED_IDS) <= accepted - already, 'Missing, unfinished or previously backed-up fixed ID')
++    delta = list(FIXED_IDS)
+     failure_files = {path: expected for row in report["invalid"] for path, expected in row["preserved_files"].items()}
+     failure_identities = {path: row['failure_identities'][path] for row in report['invalid'] for path in row['preserved_files']}
+     fresh_failures = {path: expected for path, expected in failure_files.items() if failure_identities[path] not in prior_failures}

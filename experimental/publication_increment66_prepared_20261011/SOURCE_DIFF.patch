@@ -1,0 +1,221 @@
+--- E:\OneDrive\文档\GuardFed\tmp\publication_increment65_prepared_20261011\publish_guardfed_increment65_20261011.py
++++ E:\OneDrive\文档\GuardFed\tmp\publication_increment66_prepared_20261011\publish_guardfed_increment66_20261011.py
+@@ -1,11 +1,11 @@
+-"""Publish closed native360/F60/FL81/gradient64 compact evidence; no192 result claim."""
++"""Publish closed native/views370 F70 Hybrid20 and FL86-native compact evidence; gates14 excluded."""
+ from pathlib import Path
+ from datetime import datetime,timezone
+ import json,subprocess,hashlib,re,argparse
+ R=Path(__file__).resolve().parents[2]
+ W=Path('F:/YananResearchStorage/GuardFed/git_publication/current')
+ T=R/'docs/server_deployment_20260923/training_20260923'
+-PARENT='3edbd954d91bbc5e4993546950202645d82ccbb0'
++PARENT='8515952b668c3a22427a8d0db5cc0a2d4c7cf6e3'
+ BRANCH='codex/revision-evidence-baselines-20260928'
+ H=lambda b:hashlib.sha256(b).hexdigest()
+ parser=argparse.ArgumentParser(description=__doc__)
+@@ -34,100 +34,120 @@
+ entry=pinned_json(semantic_review,a.semantic_review_sha256)
+ selection=pinned_json(scope_path,a.compact_selection_sha256)
+ assert entry['status']=='PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW' and entry['root_accepted'] is True
+-assert selection['status']=='ROOT_CLOSED_INCREMENT65_COMPACT_SELECTION' and selection['root_accepted'] is True
++assert selection['status']=='ROOT_CLOSED_INCREMENT66_COMPACT_SELECTION' and selection['root_accepted'] is True
+ assert selection['parent_commit']==PARENT and selection['semantic_review_sha256']==a.semantic_review_sha256
+-stable_input=pinned_json(HERE/'STABLE_INPUTS.json','25eae03a22761c930e9feed8eb480595c1c50784515850c9fa91da656058c143')
+-assert stable_input['parent_commit']==PARENT
++template=pinned_json(HERE/'INPUTS_TEMPLATE.json','d11b26e1db08ac16d3f8263b3465e4d0f0f9d35aa8ef10580ed7aaefa7a8f7f1')
++stable_input=pinned_json(HERE/'STABLE_INPUTS.json',selection['stable_input_sha256'])
++assert stable_input['status']=='ROOT_BOUND_INCREMENT66_INPUTS' and stable_input['root_accepted'] is True
++assert stable_input['parent_commit']==template['parent_commit']==PARENT
+ assert selection['STATE_sha256']==entry['STATE_sha256']==stable_input['STATE_sha256']
++for key in ['parent_references','entry_paths','STATE_path','current_accepted','draft_path','draft_sha256','late_role_names']:
++    assert stable_input[key]==template[key],key
+ roles=stable_input['proof_roles'];assert selection['proof_roles']==roles
+-for role,pin in roles.items():assert entry['source_pins'][role]==pin
++assert set(roles)==set(template['proof_roles'])
++for role,pin in roles.items():
++    assert set(pin)=={'path','sha256'} and isinstance(pin['path'],str)
++    assert entry['source_pins'][role]==pin
++    if role not in template['late_role_names']:assert pin==template['proof_roles'][role]
++    else:
++        assert pin['path'].startswith(('tmp/','docs/server_deployment_20260923/')) and Path(pin['path']).suffix in {'.py','.json'}
+ proofs={role:pinned_json(repo_path(pin['path']),pin['sha256']) for role,pin in roles.items() if Path(pin['path']).suffix=='.json'}
+-previous_rel='docs/server_deployment_20260923/training_20260923/publication_closed_increment64_verified_20261011.json'
+-previous=pinned_json(repo_path(previous_rel),'ceb120bf2ebc7fe8d635c2fd554f1c69787f70dc0e112398600ca265cdc9add2')
++previous_rel='docs/server_deployment_20260923/training_20260923/publication_closed_increment65_verified_20261011.json'
++previous=pinned_json(repo_path(previous_rel),'844ffa5ee7a42a1de54d8465edec0150dd9c9dc42677e67657aebba5e2aa671d')
+ assert previous['status']=='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS' and previous['commit']==PARENT
+-assert (previous['acceptance_cutoff']['native'],previous['acceptance_cutoff']['three_view'],previous['acceptance_cutoff']['F_table_pairs'])==(350,350,50)
+-ids=['minus_F_non-IID_Benign_seed'+str(s) for s in range(91001,91011)]
+-native=proofs['native360_root'];views=proofs['current_three_view_root'];table=proofs['F60_table_root']
++assert (previous['acceptance_cutoff']['native'],previous['acceptance_cutoff']['three_view'],previous['acceptance_cutoff']['F_table_pairs'])==(360,360,60)
++ids=['minus_F_non-IID_F Flip_seed'+str(s) for s in range(91001,91011)]
++native=proofs['native370_root'];views=proofs['current_three_view_root'];table=proofs['F70_table_root']
+ assert native['status']=='ROOT_ORIGINAL_STRICT_DELTA_ARCHIVE_AND_OFFSERVER_PASS' and native['root_adopted'] is True
+-assert native['total_new_strict_and_offserver']==360 and native['new_ids']==ids and native['old450_records_exact'] is True and native['test'] is False
+-assert views['status']=='ROOT_F_NONIID_BENIGN10_EXACT10_SAVED_ARRAYS_REPLAY360_ADOPTED'
+-assert (views['prior_accepted'],views['new_accepted'],views['cumulative_accepted'],views['remaining620_new_accepted'])==(350,10,360,180)
+-assert views['original350_unchanged'] is True and views['accepted_new_ids']==ids and views['test'] is False
+-assert views['native_root_sha256']==roles['native360_root']['sha256'] and views['native_max_abs_difference']==0
++assert native['total_new_strict_and_offserver']==370 and native['new_ids']==ids and native['old460_records_exact'] is True and native['test'] is False
++assert views['status']=='ROOT_F_NONIID_FFLIP10_EXACT10_SAVED_ARRAYS_REPLAY370_ADOPTED'
++assert (views['prior_accepted'],views['new_accepted'],views['cumulative_accepted'],views['remaining620_new_accepted'])==(360,10,370,190)
++assert views['original360_unchanged'] is True and views['accepted_new_ids']==ids and views['test'] is False
++assert views['native_root_sha256']==roles['native370_root']['sha256'] and views['native_max_abs_difference']==0
+ assert views['Full_inference']==views['new_CNN']==views['new_fit']==views['new_training']==0
+-assert table['status']=='ROOT_F60_SIX_SCENES_COUNTS_PAIRED_STATISTICS_DISPLAY_AND_PRIOR_ROWS_PASS'
+-assert (table['paired_models'],table['complete_scenes'],table['records'])==(60,6,120)
+-assert table['old100_record_objects_order_exact'] is True and table['old810_statistical_scalars_exact'] is True and table['old405_display_cells_preserved'] is True
+-assert table['actual_views360_root_sha256']==roles['current_three_view_root']['sha256'] and table['actual_views360_index_sha256']==views['records_index_sha256']
++assert table['status']=='ROOT_F70_SEVEN_SCENES_COUNTS_PAIRED_STATISTICS_DISPLAY_AND_PRIOR_ROWS_PASS'
++assert (table['paired_models'],table['complete_scenes'],table['records'])==(70,7,140)
++assert table['old120_record_objects_order_exact'] is True and table['old972_statistical_scalars_exact'] is True and table['old486_display_cells_preserved'] is True
++assert table['actual_views370_root_sha256']==roles['current_three_view_root']['sha256'] and table['actual_views370_index_sha256']==views['records_index_sha256']
+ assert table['seed_panels']==[10,9,6] and table['sampleSD_ddof']==1 and table['root_executed_saved_verifier_once'] is True
+ assert table['final_test'] is False and table['primary_endpoint_selected'] is False
+-assert (table['original_fsum_verification']['mean_sd_scalars'],table['original_fsum_verification']['display_cells'])==(972,486)
+-flnative=proofs['FL_native77_root'];flproof=proofs['FL_three_view81_root'];ftproof=proofs['FL_eight_scene80_table_root']
+-assert (flnative['accepted_total'],flnative['reused_separately'])==(77,4) and flnative['final_test'] is False
++assert (table['original_fsum_verification']['mean_sd_scalars'],table['original_fsum_verification']['display_cells'])==(1134,567)
++flnative=proofs['FL_native86_root'];flprior=proofs['FL_native77_root'];flproof=proofs['FL_three_view81_root'];ftproof=proofs['FL_eight_scene80_table_root']
++assert (flnative['accepted_before'],flnative['accepted_new'],flnative['accepted_total'],flnative['reused_separately'])==(77,9,86,4)
++assert flnative['previous_root_adoption_sha256']==roles['FL_native77_root']['sha256'] and flnative['final_test'] is False
++assert flnative['accepted_new_ids']==['FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed'+str(s)+'_fullcoverage' for s in range(91002,91011)]
++assert (flprior['accepted_total'],flprior['reused_separately'])==(77,4)
+ assert flproof['root_adoption'] is True and flproof['FLGMM_total_three_view_records']==81
+ assert flproof['native_root_sha256']==roles['FL_native77_root']['sha256']
+ assert flproof['Linux_root_fit_verified'] is True and flproof['Windows_saved_outputs_audit_pass'] is True
+ assert flproof['Windows_saved_outputs_audit_fit_calls']==0 and flproof['Windows_whole_saved_check_pass'] is False and flproof['Windows_original47_exact_refit_pass'] is False
+ assert ftproof['root_adoption'] is True and (ftproof['complete_scene_records'],ftproof['retained_partial_records'],ftproof['scenes'])==(80,1,8)
+ assert ftproof['source_root81_sha256']==roles['FL_three_view81_root']['sha256'] and ftproof['final_test'] is False and ftproof['prior_windows_failure_preserved'] is True
++hn=proofs['Hybrid_native19_root'];hv=proofs['Hybrid_three_view20_root'];ht=proofs['Hybrid_table20_root']
++assert hn['status']=='ROOT_HYBRID_EXACT7_ORIGINAL_STRICT_OFFSERVER_CHAIN_ADOPTED'
++assert (hn['prior_accepted'],hn['new_accepted'],hn['cumulative_accepted'],hn['reused_separate'])==(12,7,19,4) and hn['final_test'] is False
++assert hv['root_adoption'] is True and (hv['new_three_view_records_accepted'],hv['Hybrid_total_three_view_records'])==(10,20)
++assert hv['native_root']['sha256']==roles['Hybrid_native19_root']['sha256']
++assert hv['Linux_whole_original_saved_check_pass'] is True and hv['Windows_saved_outputs_audit_pass'] is True
++assert hv['Windows_saved_outputs_audit_fit_calls']==0 and hv['Windows_whole_saved_check_pass'] is False
++assert hv['prior_failures_unchanged'] is True and hv['cross_platform_bitwise_recalibration_claimed'] is False and hv['final_test'] is False
++assert ht['status']=='ROOT_ACCEPTED_HYBRID_TWO_SCENES20_THREE_VIEW_TABLE_VALID_ONLY' and ht['root_adoption'] is True
++assert ht['FFlip_scientific_root_sha256']==roles['Hybrid_three_view20_root']['sha256'] and ht['old_Benign10_records_panels_display_exact'] is True
++assert ht['final_test'] is False and ht['new_fit_inference_training']==0
+ grad=proofs['gradient64_root'];chosen=proofs['gradient64_selected_root'];frozen=proofs['gradient200_frozen_source_root']
+ assert grad['accepted_total']==64 and grad['screen64_complete'] is True and grad['all_negative_results_retained'] is True and grad['final_test'] is False
+ assert chosen['accepted_count']==64 and chosen['all64_native_root_sha256']==roles['gradient64_root']['sha256'] and chosen['final_test'] is False
+ assert frozen['root_selected64_sha256']==roles['gradient64_selected_root']['sha256'] and (frozen['new_frozen_jobs'],frozen['reused_original_screen_records'])==(192,8)
+ assert frozen['workers_started']==0 and frozen['test'] is False
+-editorial=proofs['current_working_editorial_root'];prior_editorial=proofs['working_FL81_F50_editorial_root']
+-assert editorial['status']=='ROOT_UNIFIED_COMPLETE24_F60_FL81_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW'
+-assert editorial['parent_sha256']==prior_editorial['draft_sha256']
+-assert prior_editorial['parent_sha256']==proofs['working_F50_editorial_root']['draft_sha256']
+-assert editorial['quote_blocks']==24 and editorial['quote_lines']==38 and editorial['headings_order_exact'] is True
+-assert editorial['eighteen_mean_SD_pairs_from_saved_JSON_exact'] is True and editorial['nine_panel_directions_retained'] is True
+-assert editorial['final_test'] is False and editorial['submitted_manuscript_edited'] is False and editorial['whole_rebuttal_complete'] is False
+-for ed in (editorial,prior_editorial):assert H(repo_path(ed['draft_path']).read_bytes())==ed['draft_sha256']
++editorial=proofs['current_working_editorial_root'];prior_editorial=proofs['previous_working_editorial_root']
++assert editorial['status'].startswith('ROOT_') and 'ADOPTED' in editorial['status']
++assert editorial['root_accepted'] is True
++assert editorial['candidate_path'].replace('\\','/')==template['draft_path'] and editorial['candidate_sha256']==template['draft_sha256']
++assert editorial['old_F60_sha256']==prior_editorial['draft_sha256']
++assert editorial['quote_blocks']==24 and editorial['quote_lines']==38 and editorial['quote_order_exact'] is True
++assert editorial['full_agent_and_root_inverse_exact'] is True and editorial['new_saved_mean_SD_pairs_checked']==24 and editorial['new_statistics_computed']==0
++assert (editorial['F_pair_count'],editorial['F_scenes'],editorial['Hybrid_checkpoints'],editorial['Hybrid_scenes'])==(70,7,20,2)
++assert editorial['final_test'] is False and editorial['manuscript_applied'] is False and editorial['whole_rebuttal_complete'] is False
++assert H(repo_path(template['draft_path']).read_bytes())==editorial['candidate_sha256']
++assert editorial['source_sha256']==roles['editorial_adopter']['sha256']
+ state_path=T/'TRAINING_STATE.json';state=pinned_json(state_path,entry['STATE_sha256']);main=state['celeba_mechanism_v1']
+-assert (main['scientific_results_offserver_verified'],main['three_view_new_models_offserver_verified'])==(360,360)
+-assert main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':60}
+-assert main['latest_native_root_proof_sha256']==roles['native360_root']['sha256'] and main['three_view_root_proof_sha256']==roles['current_three_view_root']['sha256']
+-assert state['flgmm_fullcoverage_v2_20261009']['new_accepted']==77 and state['gradient64_validation_search_20261010']['offserver_accepted']==64
+-assert state['hybrid100_fullcoverage_20261010']['new_accepted']==12 and state['mechanism_remaining620_valid_20261010']['new_offserver_accepted']==180
+-assert state['latest_working_rebuttal_draft']['sha256']==editorial['draft_sha256']
+-alias=proofs['editorial_alias_reconciliation']
+-assert alias['STATE_sha256']==entry['STATE_sha256'] and alias['current_full_draft_sha256']==editorial['draft_sha256']
+-assert alias['all_scientific_stage_objects_unchanged'] is True and alias['five_entry_bytes_unchanged'] is True
+-assert state['latest_rebuttal_draft']['sha256']==editorial['draft_sha256']
++assert (main['scientific_results_offserver_verified'],main['three_view_new_models_offserver_verified'])==(370,370)
++assert main['three_view_counts_by_variant']=={'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':70}
++assert main['latest_native_root_proof_sha256']==roles['native370_root']['sha256'] and main['three_view_root_proof_sha256']==roles['current_three_view_root']['sha256']
++assert state['flgmm_fullcoverage_v2_20261009']['new_accepted']==86 and state['gradient64_validation_search_20261010']['offserver_accepted']==64
++assert state['hybrid100_fullcoverage_20261010']['new_accepted']==19 and state['mechanism_remaining620_valid_20261010']['new_offserver_accepted']==190
++assert state['latest_working_rebuttal_draft']['sha256']==state['latest_rebuttal_draft']['sha256']==editorial['candidate_sha256']
+ assert H(repo_path(roles['entry_writer']['path']).read_bytes())==state['current_entry_writer']['sha256']
+-accepted=entry['current_accepted']
+-assert accepted=={'native_new':360,'three_view_models':360,'F_paired_models':60,'F_complete_scenes':6,'FL_native_new':77,'FL_screen_reuse_separate':4,'FL_three_view_total':81,'FL_complete_table_records':80,'FL_complete_table_scenes':8,'gradient_accepted':64,'Hybrid_native_new':12,'Hybrid_three_view_total':10,'gradient200_new_scientific_accepted':0,'by_variant':{'minus_U':100,'minus_C':100,'minus_A':100,'minus_F':60}}
+-assert entry['working_draft_content_cutoff']==editorial['content_cutoff']
+-assert entry['historical_Git64_cutoff']==previous['acceptance_cutoff']
++assert entry['current_accepted']==template['current_accepted']
++assert entry['working_draft_content_cutoff']==state['latest_working_rebuttal_draft']['content_cutoff']=={'native':370,'three_view':370,'F_pairs':70,'F_scenes':7,'FL_native_new':86,'FL_screen_reuse':4,'FL_three_view':81,'FL_complete_scene_records':80,'Hybrid_three_view':20,'Hybrid_complete_scenes':2,'gradient_search':64}
++assert entry['historical_Git65_cutoff']==previous['acceptance_cutoff']
+ assert entry['latest_observation_only']==state['latest_five_queue_readonly_observation']
+ assert entry['latest_observation_only']['new_acceptance']==0 and entry['latest_observation_only']['counts_are_observation_only'] is True
+-gates=proofs['gradient14_current_metadata']
+-assert gates['completed']==7 and gates['total']==14 and len(gates['items'])==7
+-assert gates['whole_comparison'] is False and gates['offserver_whole14'] is False and gates['coverage192_started'] is False and gates['scientific_table_records']==0
++assert entry['gradient14_excluded'] is True
+ assert state['gradient200_fullcoverage_source_preparation_20261010']['actual_jobs']==0
+-assert state['gradient200_fullcoverage_source_preparation_20261010']['exact14_completed_at_cutoff']==7
+-assert entry['gradient14_cutoff']=={'individual_CPU3_passes':7,'whole14_accepted':False,'coverage192_scientific_records':0}
+-for item in gates['items']:
+-    p=pinned_json(repo_path(item['path']),item['sha256'])
+-    assert p['acceptance']['status']=='PASS'
+ entry_paths={x['path'] for x in proofs['entry_update_proof']['entries']}
+-assert set(entry['entries'])==entry_paths and len(entry_paths)==5
++assert set(entry['entries'])==entry_paths==set(template['entry_paths']) and len(entry_paths)==5
+ for rel,pin in entry['entries'].items():assert H(repo_path(rel).read_bytes())==pin['sha256'] and pin['history_exact'] is True
+ for pin in entry['source_pins'].values():assert H(repo_path(pin['path']).read_bytes())==pin['sha256']
+ selected=selection['files'];parent_refs=selection['parent_references'];late_files=selection['root_late_bound_files']
+ assert parent_refs==stable_input['parent_references'] and not set(parent_refs)&set(selected)
+-own_names={'publish_guardfed_increment65_20261011.py','prepare_source.py','derive_publisher.py','STABLE_INPUTS.json','SELECTION_CANDIDATE.json','SEMANTIC_CANDIDATE.json','SOURCE_CHECK.json','SOURCE_DIFF.patch','INVERSE_DIFF.json','README.md','HANDOFF.json','FILES_SHA256.json','PREPARATION_FAILURE.json','prepare_source_initial_STATE7ec.py'}
++own_names={'publish_guardfed_increment66_20261011.py','prepare_source.py','derive_publisher.py','INPUTS_TEMPLATE.json','STABLE_INPUTS.json','SELECTION_TEMPLATE.json','SEMANTIC_TEMPLATE.json','BOUND_INPUTS_CANDIDATE.json','SEMANTIC_CANDIDATE.json','SOURCE_CHECK.json','SOURCE_DIFF.patch','INVERSE_DIFF.json','README.md','HANDOFF.json','FILES_SHA256.json'}
+ own_paths={(HERE/n).relative_to(R).as_posix() for n in own_names}
+-assert set(selected)==set(stable_input['files'])|own_paths
+-assert set(late_files)==own_paths
++bound_paths={roles[k]['path'] for k in template['late_role_names']}|entry_paths|{template['STATE_path']}
++assert len(bound_paths)==len(template['late_role_names'])+6
++assert set(stable_input['late_files'])==bound_paths
++assert set(stable_input['files'])==set(template['files'])|bound_paths
++for rel,pin in template['files'].items():assert stable_input['files'][rel]==pin
++for rel,pin in stable_input['late_files'].items():assert stable_input['files'][rel]==pin
++assert set(selected)==set(stable_input['files'])|own_paths and set(late_files)==own_paths
+ for rel,pin in stable_input['files'].items():assert selected[rel]==pin
+ for rel,pin in late_files.items():assert selected[rel]==pin
+ for rel,pin in parent_refs.items():
+     p=repo_path(rel);assert set(pin)=={'sha256','bytes'} and p.is_file() and not p.is_symlink()
+     assert p.stat().st_size==pin['bytes']<2_000_000 and H(p.read_bytes())==pin['sha256'],rel
+     dest='experimental/'+rel[4:] if rel.startswith('tmp/') else rel
+-    old=previous['files'][dest]
+-    assert (old['sha256'],old['bytes'])==(pin['sha256'],pin['bytes']),rel
++    old=previous['files'].get(dest) or previous.get('parent_references',{}).get(rel)
++    assert old and (old['sha256'],old['bytes'])==(pin['sha256'],pin['bytes']),rel
+ assert scope_path.relative_to(R).as_posix() not in selected
+ paths=[]
+ for rel,pin in selected.items():
+@@ -156,7 +176,7 @@
+     assert p.stat().st_size<compact_limit(p) and not p.is_symlink()
+ destinations=['experimental/'+p.relative_to(R).as_posix()[4:] if p.relative_to(R).as_posix().startswith('tmp/') else p.relative_to(R).as_posix() for p in paths]
+ assert len(destinations)==len(set(destinations)),'Publication destination collision'
+-assert not (T/'publication_closed_increment65_verified_20261011.json').exists(),'One publication attempt only'
++assert not (T/'publication_closed_increment66_verified_20261011.json').exists(),'One publication attempt only'
+ G=['git','-c','safe.directory='+W.as_posix(),'-c','core.longpaths=true','-C',str(W)]
+ def git(*args,data=None):
+     p=subprocess.run(G+list(args),input=data,capture_output=True)
+@@ -199,7 +219,7 @@
+         expected_sha=a.semantic_review_sha256 if rel==semantic_review.relative_to(R).as_posix() else a.compact_selection_sha256
+         assert pin['sha256']==expected_sha,rel
+ assert H(state_path.read_bytes())==entry['STATE_sha256'],'Current STATE drifted before commit'
+-git('commit','-m','Publish adopted native360 F60 and FL81 editorial evidence')
++git('commit','-m','Publish adopted native370 F70 Hybrid20 and FL86 native evidence')
+ commit=git('rev-parse','HEAD').decode().strip();assert git('rev-parse','HEAD^').decode().strip()==PARENT
+ raw=git('cat-file','--batch',data=''.join('HEAD:'+p+'\n' for p in changed).encode('utf8'));pos=0
+ for path in changed:
+@@ -209,6 +229,6 @@
+ assert pos==len(raw) and not git('status','--porcelain')
+ git('push','origin','HEAD:refs/heads/'+BRANCH)
+ assert git('ls-remote','origin','refs/heads/'+BRANCH).decode().split()[0]==commit
+-proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=dict(native=360,three_view=360,FLGMM_native_new=77,FLGMM_screen_reuse_separate=4,FLGMM_three_views=81,FLGMM_table_complete_scene_records=80,FLGMM_table_partial_records=1,FLGMM_table_scenes=8,gradient_search=64,gradient200_frozen_new_jobs=192,gradient200_screen_reuse_separate=8,gradient200_new_scientific_accepted=0,Hybrid_native_new=12,Hybrid_three_views=10,UCA_models=300,F_table_pairs=60,F_table_scenes=6,reviewer_comments=24),proof_roles=roles,STATE_sha256=entry['STATE_sha256'],semantic_review_sha256=a.semantic_review_sha256,compact_selection_sha256=a.compact_selection_sha256,latest_observation_sha256=entry['latest_observation_only']['sha256'],new_scientific_acceptances=0,scientific_acceptances_created_by_publisher=0,new_adopted_views_published=dict(mechanism=10,FLGMM=0,Hybrid=0),new_native_records_published=10,new_gradient_search_records_published=0,working_draft_content_cutoff=entry['working_draft_content_cutoff'],historical_Git64_cutoff=entry['historical_Git64_cutoff'],parent_references=parent_refs,gradient14_evidence_scope='Exactly7 original individual CPU3 item proofs and cutoff metadata; no whole14 acceptance or192 scientific results',original_Windows47_refit_failure_preserved=True,Windows_whole_refit_pass=False,manuscript_applied=False,final_test=False,whole_rebuttal_complete=False)
+-(T/'publication_closed_increment65_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
++proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=dict(native=370,three_view=370,FLGMM_native_new=86,FLGMM_screen_reuse_separate=4,FLGMM_three_views=81,FLGMM_table_complete_scene_records=80,FLGMM_table_partial_records=1,FLGMM_table_scenes=8,gradient_search=64,gradient200_frozen_new_jobs=192,gradient200_screen_reuse_separate=8,gradient200_new_scientific_accepted=0,Hybrid_native_new=19,Hybrid_three_views=20,Hybrid_table_scenes=2,UCA_models=300,F_table_pairs=70,F_table_scenes=7,reviewer_comments=24),proof_roles=roles,STATE_sha256=entry['STATE_sha256'],semantic_review_sha256=a.semantic_review_sha256,compact_selection_sha256=a.compact_selection_sha256,latest_observation_sha256=entry['latest_observation_only']['sha256'],new_scientific_acceptances=0,scientific_acceptances_created_by_publisher=0,new_adopted_views_published=dict(mechanism=10,FLGMM=0,Hybrid=10),new_native_records_published=10,new_native_records_by_queue=dict(mechanism=10,FLGMM=9,Hybrid=7),new_gradient_search_records_published=0,working_draft_content_cutoff=entry['working_draft_content_cutoff'],historical_Git65_cutoff=entry['historical_Git65_cutoff'],parent_references=parent_refs,gradient14_evidence_scope='Excluded; no whole14 root acceptance or192 scientific results included',original_Windows47_refit_failure_preserved=True,Windows_whole_refit_pass=False,manuscript_applied=False,final_test=False,whole_rebuttal_complete=False)
++(T/'publication_closed_increment66_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ print(json.dumps({k:v for k,v in proof.items() if k!='files'}))

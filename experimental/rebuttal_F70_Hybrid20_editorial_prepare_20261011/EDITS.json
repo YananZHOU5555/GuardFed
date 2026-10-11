@@ -1,0 +1,112 @@
+[
+  {
+    "old": "accepted six-scene F-deletion, eight-complete-scene FLGMM and IID Benign hybrid-control evidence",
+    "new": "accepted seven-scene F-deletion, eight-complete-scene FLGMM and two-scene hybrid-control evidence",
+    "count": 1
+  },
+  {
+    "old": "360 native and 360 three-view mechanism checkpoints, F60",
+    "new": "370 native and 370 three-view mechanism checkpoints, F70",
+    "count": 1
+  },
+  {
+    "old": "and the ten-checkpoint hybrid scene.",
+    "new": "and the 20-checkpoint hybrid comparison in IID Benign and F Flip. Separate FLGMM native acceptance covers 86 new coverage checkpoints plus four reused screen checkpoints; this does not expand its 81-record three-view table.",
+    "count": 1
+  },
+  {
+    "old": "—and non-IID Benign, each with ten paired seeds. An additional ten-checkpoint IID Benign hybrid-control comparison separates native/raw prediction from shared calibration.",
+    "new": "—and non-IID Benign and F Flip, each with ten paired seeds. An additional 20-checkpoint hybrid-control comparison covers IID Benign and F Flip, with ten seeds per scene, and separates native/raw prediction from shared calibration.",
+    "count": 1
+  },
+  {
+    "old": "A further FLGMM extension has 81 accepted checkpoints:",
+    "new": "A further FLGMM extension has 81 accepted three-view checkpoints:",
+    "count": 1
+  },
+  {
+    "old": "These are reported separately; non-IID S-DFA and Sp-DFA still lack complete accepted ten-seed coverage.",
+    "new": "These are reported separately; non-IID S-DFA and Sp-DFA still lack complete accepted ten-seed three-view coverage.",
+    "count": 1
+  },
+  {
+    "old": "The [six-scene F extension](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/TABLES.md) additionally includes non-IID Benign (α=5) with ten paired seeds under the same checkpoint and prediction-view rules.",
+    "new": "The [seven-scene F extension](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_seven_scenes70_20261011/TABLES.md) additionally includes non-IID Benign and F Flip (α=5), each with ten paired seeds under the same checkpoint and prediction-view rules.",
+    "count": 1
+  },
+  {
+    "old": "The other four non-IID F scenes and four other image controls remain unfinished;",
+    "new": "The other three non-IID F scenes and four other image controls remain unfinished;",
+    "count": 1
+  },
+  {
+    "old": "U100 + C100 + A100 + F60 = 360 deletion checkpoints",
+    "new": "U100 + C100 + A100 + F70 = 370 deletion checkpoints",
+    "count": 1
+  },
+  {
+    "old": "both cover these 360/800 deletion checkpoints",
+    "new": "both cover these 370/800 deletion checkpoints",
+    "count": 1
+  },
+  {
+    "old": "Across the six-scene extension, Full has 5 CPU and 55 GPU evaluations, whereas all 60 F-deletion evaluations use CPU. The corresponding training provenance is 59 cu128 and one cu130 Full checkpoint, versus 60 cu128 deletion checkpoints.",
+    "new": "Across the seven-scene extension, Full has 5 CPU and 65 GPU evaluations, whereas all 70 F-deletion evaluations use CPU. The corresponding training provenance is 69 cu128 and one cu130 Full checkpoint, versus 70 cu128 deletion checkpoints.",
+    "count": 1
+  },
+  {
+    "old": "Correlated scores, compensation by candidate selection and root-estimation variability are plausible explanations, not isolated causes.",
+    "new": "The added non-IID F Flip scene shows a mixed trade-off and near-equal ten-seed mean accuracy. Its saved paired differences (minus_F−Full, mean±sample SD, ddof=1) are:\n\n| Prediction view | n | ΔACC (percentage points) | ΔAEOD | ΔASPD |\n|---|---:|---:|---:|---:|\n| Native/shared | 10 | +0.006 ± 0.846 | -0.00113 ± 0.01122 | +0.00518 ± 0.01759 |\n| Native/shared | 9 | +0.130 ± 0.795 | -0.00110 ± 0.01190 | +0.00827 ± 0.01551 |\n| Native/shared | 6 | +0.049 ± 0.974 | -0.00214 ± 0.01489 | +0.00787 ± 0.01663 |\n| Raw | 10 | +0.108 ± 0.785 | +0.01367 ± 0.01175 | +0.00982 ± 0.01137 |\n| Raw | 9 | +0.209 ± 0.759 | +0.01406 ± 0.01240 | +0.01103 ± 0.01136 |\n| Raw | 6 | +0.138 ± 0.945 | +0.01775 ± 0.01021 | +0.01390 ± 0.01205 |\n\nThe ten-seed native/shared accuracy difference is only +0.006 percentage points, with a paired sample SD of 0.846 percentage points; this descriptive near-tie is not an equivalence test. Removing F lowers mean AEOD but raises mean ASPD in all three native/shared panels. Raw prediction instead gives higher mean accuracy and higher values of both disparities after deletion in each panel. Thus the AEOD direction depends on the prediction rule, while the nine- and six-seed panels are retained rather than selected for a favorable result. Native/shared outputs coincide and are not independent confirmations. These matched-checkpoint results do not establish per-seed dominance, significance, isolated causality or universal necessity of F.\n\nCorrelated scores, compensation by candidate selection and root-estimation variability are plausible explanations, not isolated causes.",
+    "count": 1
+  },
+  {
+    "old": "Non-IID S-DFA and Sp-DFA therefore remain incomplete. Neither these partial additions nor the hybrid scene are folded into the earlier nine-method denominator.",
+    "new": "Non-IID S-DFA and Sp-DFA therefore remain incomplete in the three-view comparison. Separately, native checkpoint acceptance now covers 86 new coverage runs plus the same four reused screen checkpoints, including nine additional non-IID S-DFA seeds (91002–91010). Those nine are not included in the 81-record three-view result or its eight-scene table. Neither these additions nor the hybrid scenes are folded into the earlier nine-method denominator.",
+    "count": 1
+  },
+  {
+    "old": "All three fixed seed panels exhibit lower mean ACC together with lower mean disparities after shared calibration.",
+    "new": "For this Benign scene, all three fixed seed panels exhibit lower mean ACC together with lower mean disparities after shared calibration.",
+    "count": 1
+  },
+  {
+    "old": "The hybrid is a project control, not a faithful implementation of an external named method.",
+    "new": "The hybrid is a project control, not a faithful implementation of an external named method.\n\nThe accepted [two-scene hybrid table](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_hybrid_three_view_two_scenes20_20261011/TABLES.md) adds IID F Flip, giving 20 checkpoints across two complete scenes. For the ten F Flip seeds, the saved means and sample SDs (ddof=1) are:\n\n| Prediction view | ACC (%) | AEOD | ASPD |\n|---|---:|---:|---:|\n| Native/raw | 89.010 ± 1.128 | 0.03192 ± 0.00767 | 0.09939 ± 0.01030 |\n| Shared calibration | 88.600 ± 1.187 | 0.00981 ± 0.00772 | 0.05572 ± 0.01848 |\n\nThe fixed nine- and six-seed F Flip panels also have lower mean accuracy and lower mean disparities under shared calibration. This is a calibration trade-off, not evidence that aggregation alone provides the disparity reduction. Native/raw outputs are identical for all 20 checkpoints; the three views of a checkpoint are not independent model replicates. All ten F Flip checkpoints are coverage runs, while the retained Benign seed91001 checkpoint is a reused screen result. The recipe and original validation-selection history remain unchanged, including selection seed91001; the nine- and six-seed subsets do not create an untouched test. All 20 checkpoints retain cu128 training/replay provenance and CPU replay. The saved evidence retains the original Windows failure and diagnostic differences; Linux whole-replay verification and Windows saved-output verification do not establish cross-platform bitwise recalibration. The other eight hybrid scenes remain outside this accepted two-scene table.",
+    "count": 1
+  },
+  {
+    "old": "alongside A100, F60, the IID Benign hybrid-control evidence and the gradient search. That fixed Git64 release stops at F50; the new non-IID Benign F-deletion evidence and this F60/FLGMM prose expansion have not yet been published in it.",
+    "new": "alongside A100, F70, the two-scene hybrid-control evidence and the gradient search. That fixed Git64 release stops at F50; it does not include the subsequent non-IID F-deletion scenes, the two-scene hybrid extension or this F70/Hybrid20 prose update. This new author-review draft has not yet been published.",
+    "count": 1
+  },
+  {
+    "old": "FLGMM has 77 new coverage checkpoints plus four reused screen checkpoints; its eight complete scenes contain 80 three-view records, with the non-IID S-DFA seed91001 record retained separately. Complete non-IID S-DFA and Sp-DFA coverage remains pending.",
+    "new": "FLGMM native acceptance covers 86 new coverage checkpoints plus four reused screen checkpoints, whereas its accepted three-view evidence still covers 81: 80 in eight complete scenes and the non-IID S-DFA seed91001 record separately. Complete non-IID S-DFA and Sp-DFA three-view coverage remains pending.",
+    "count": 1
+  },
+  {
+    "old": "The hybrid IID Benign three-view result completes one scene, not the entire method comparison.",
+    "new": "The hybrid three-view table completes IID Benign and F Flip (20 checkpoints); eight other scenes remain. No completed 14-job deployment-gate stage or completed expansion is claimed here.",
+    "count": 1
+  },
+  {
+    "old": "At this draft's accepted cutoff, 360 deletion checkpoints have complete three-view evidence: U100, C100 and A100 each cover all ten cells, and F60 covers all five IID scenes plus non-IID Benign with ten paired seeds per scene. The remaining 440 planned mechanism-control checkpoints comprise 40 runs for the other four non-IID F-deletion scenes and 100 runs for each of four other controls. Native acceptance is also 360/800, leaving 440 without native acceptance; that is not a claim that all 440 remain untrained.",
+    "new": "At this draft's accepted cutoff, 370 deletion checkpoints have complete three-view evidence: U100, C100 and A100 each cover all ten cells, and F70 covers all five IID scenes plus non-IID Benign and F Flip with ten paired seeds per scene. The remaining 430 planned mechanism-control checkpoints comprise 30 runs for the other three non-IID F-deletion scenes and 100 runs for each of four other controls. Native acceptance is also 370/800, leaving 430 without native acceptance; that is not a claim that all 430 remain untrained.",
+    "count": 1
+  },
+  {
+    "old": "- [F-deletion extension: five IID scenes plus non-IID Benign, matched raw/native/shared tables](",
+    "new": "- [Historical F60 extension: five IID scenes plus non-IID Benign, matched raw/native/shared tables](",
+    "count": 1
+  },
+  {
+    "old": "- [Completed 64-run Fed-NGA/Huber validation-search records and retained negative outcomes](",
+    "new": "- [Current F70 extension: five IID scenes plus non-IID Benign and F Flip, all fixed panels and paired differences](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_seven_scenes70_20261011/TABLES.md).\n- [Completed 64-run Fed-NGA/Huber validation-search records and retained negative outcomes](",
+    "count": 1
+  },
+  {
+    "old": "- [Method, root-update pseudocode, theory, notation and manuscript insertion candidates](",
+    "new": "- [Current hybrid control: IID Benign and F Flip, 20 checkpoints and three prediction views](E:/OneDrive/文档/GuardFed/outputs/guardfed_tables/celeba_hybrid_three_view_two_scenes20_20261011/TABLES.md).\n- [Method, root-update pseudocode, theory, notation and manuscript insertion candidates](",
+    "count": 1
+  }
+]

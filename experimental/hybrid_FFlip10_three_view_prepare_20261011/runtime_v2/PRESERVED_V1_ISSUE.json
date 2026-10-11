@@ -1,0 +1,10 @@
+{
+  "status": "ROOT_SOURCE_REVIEW_FOUND_UNEXECUTED_OPERATIONAL_SCHEMA_BUG",
+  "prior_runtime_path": "tmp/hybrid_FFlip10_three_view_prepare_20261011/runtime",
+  "prior_seal_sha256": "715e99a7c15336ca6346bd0a9ee49b3982644a259407d04d4459d36ff426d944",
+  "cause": "V1 EXITED FL replay guard wrongly read GATE_RESULT.exact_ids; original producer has receipts only. It would refuse before authorization/launch, not corrupt a scientific result.",
+  "fix": "Restore original [r.id for r in receipts] ordered-ID guard. Dedicated F runtime_v2 observation namespace prevents attempt/output overlap.",
+  "scientific_failure": false,
+  "V1_deployed": false,
+  "V1_launched": false
+}
