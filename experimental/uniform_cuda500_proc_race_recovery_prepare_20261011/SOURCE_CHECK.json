@@ -1,0 +1,90 @@
+{
+  "status": "SOURCE_ONLY_MINIMAL_GUARD_FIX_CHECKED_NOT_DEPLOYABLE_RECOVERY",
+  "original_sha256": "6771f78d4d6d07aea831c870c89a0eae2375211961d997387963a559a9c6d57f",
+  "candidate_sha256": "cb35f5b373eb8a548e19c9bdeaf2fa162c536c4f45f38c73d40756a01ab2b008",
+  "full_inverse_original_bytes_exact": true,
+  "single_edit_only_resources_exception_branch": true,
+  "all_other_functions_AST_exact": true,
+  "science_or_module_imports_executed": false,
+  "synthetic_tests": [
+    {
+      "case": "vanished_ENOENT",
+      "result": "verified_skip"
+    },
+    {
+      "case": "vanished_ESRCH",
+      "result": "verified_skip"
+    },
+    {
+      "case": "fresh_zombie",
+      "result": "verified_skip"
+    },
+    {
+      "case": "fresh_dead",
+      "result": "verified_skip"
+    },
+    {
+      "case": "zombie_comm_with_parentheses",
+      "result": "verified_skip"
+    },
+    {
+      "case": "stat_still_inaccessible",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "stat_IO_error",
+      "result": "fail_closed",
+      "error_type": "OSError"
+    },
+    {
+      "case": "stat_malformed",
+      "result": "fail_closed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "stat_empty_state",
+      "result": "fail_closed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "live_or_unknown_R",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_S",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_D",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_T",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_t",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_I",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    },
+    {
+      "case": "live_or_unknown_?",
+      "result": "fail_closed",
+      "error_type": "PermissionError"
+    }
+  ],
+  "limitations": [
+    "Candidate intentionally retains original namespace; root must derive a new successor namespace and independently bind its source and recovery scope.",
+    "Tests exercise only the actual handler AST with synthetic stat replies; no live process race or scientific execution was performed."
+  ]
+}

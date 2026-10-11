@@ -1,0 +1,16 @@
+--- dispatch6771f78d.py
++++ dispatch_proc_race_candidate.py
+@@ -72,6 +72,13 @@
+                     need(107 not in affinity, 'Another restricted task ownsCPU107')
+                     if is_project: reserved.update(affinity)
+         except (FileNotFoundError, ProcessLookupError): continue
++        except PermissionError:
++            # Only a freshly verified vanished/dead process may leave this scan.
++            try:
++                state = (p / 'stat').read_text().rsplit(')', 1)[1].split()[0]
++            except (FileNotFoundError, ProcessLookupError): continue
++            if state in ('Z', 'X'): continue
++            raise
+     quota, period = Path('/sys/fs/cgroup/cpu.max').read_text().split()
+     need(quota != 'max', 'Finite actual cgroup quota required')
+     cores = int(quota) / int(period)
