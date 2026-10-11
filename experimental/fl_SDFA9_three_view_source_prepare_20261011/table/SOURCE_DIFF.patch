@@ -1,0 +1,252 @@
+--- tmp\fl_eight_scenes80_table_source_prepared_20261011\build.py
++++ tmp\fl_SDFA9_three_view_source_prepare_20261011\table\build.py
+@@ -5,13 +5,13 @@
+ from collections import defaultdict,Counter
+ from statistics import mean,stdev
+ import ast,copy,csv,datetime,hashlib,json,subprocess
+-H=Path(__file__).resolve().parent;R=H.parents[1]
++H=Path(__file__).resolve().parent;R=H.parents[2]
+ O=H/'candidate'
+-OLD_TABLE=R/'outputs/guardfed_tables/celeba_flgmm_seven_scenes70_20261011'
+-ROOT71=R/'tmp/fl_FFlip10_capacity_pool32_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
+-ROOT71_SHA='fe400060961fb923cbac79443f735fab6824b06689d45fb3bbf8d56307c95421'
++OLD_TABLE=R/'outputs/guardfed_tables/celeba_flgmm_eight_scenes80_20261011'
++ROOT81=R/'tmp/fl_FedSA10_three_view_prepared_20261011/ROOT_SCIENTIFIC_ADOPTION.json'
++ROOT81_SHA='adc7726ca05561c6903ebb153e34fb3dc69a1df0118d87e6bf7dfa3e31655799'
+ VIEWS=['raw','native','shared_calibration'];METRICS=[('accuracy','ACC (%) ↑',100,2),('aeod','AEOD ↓',1,4),('aspd','ASPD ↓',1,4)]
+-SCENES=[('IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']]+[('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]
++SCENES=[('IID',a) for a in ['Benign','F Flip','FedSA','S-DFA','Sp-DFA']]+[('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')]
+ PARTIAL='FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen'
+ pins={}
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+@@ -27,26 +27,26 @@
+  need(not O.exists(),'Fresh output directory only; preserve existing attempt')
+  volume=json.loads(subprocess.check_output(['powershell','-NoProfile','-Command','Get-Volume -DriveLetter F | Select-Object FileSystemLabel,HealthStatus,SizeRemaining | ConvertTo-Json -Compress'],text=True));need(volume['FileSystemLabel']=='Yanan 2TB' and volume['HealthStatus']=='Healthy','Required F evidence volume unavailable')
+  ap=argparse.ArgumentParser();ap.add_argument('--binding-sha256',required=True);args=ap.parse_args()
+- need(sha(H/'ROOT_BINDING.json')==args.binding_sha256,'Actual adopted81 binding differs')
++ need(sha(H/'ROOT_BINDING.json')==args.binding_sha256,'Actual adopted90 binding differs')
+  binding=read(H/'ROOT_BINDING.json');validate_binding(binding)
+- root=read(R/binding['root81'],binding['root81_sha256']);old=read(ROOT71,ROOT71_SHA)
+- need(root['root_adoption'] is True and root['FLGMM_total_three_view_records']==81 and root['new_three_view_records_accepted']==10,'Actual81 adoption required')
++ root=read(R/binding['root90'],binding['root90_sha256']);old=read(ROOT81,ROOT81_SHA)
++ need(root['root_adoption'] is True and root['FLGMM_total_three_view_records']==90 and root['new_three_view_records_accepted']==9,'Actual90 adoption required')
+  need(root['Linux_whole_original_saved_check_pass'] and root['Windows_saved_outputs_audit_pass'] and root['Windows_saved_outputs_audit_fit_calls']==0 and root['Windows_whole_saved_check_pass'] is False,'Complementary evidence incomplete')
+- need(root['records'][:70]==old['records'] and root['prior_interface_explicitly_reused']==old['prior_interface_explicitly_reused'],'Prior71 root objects/order differ')
+- expected=['FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed'+str(seed)+'_fullcoverage' for seed in range(91001,91011)]
+- validate_root(root,old,binding);validate_new_rows(root['new_records']);need([r['id'] for r in root['new_records']]==expected and root['records']==old['records']+root['new_records'],'Exact new10 root list required')
+- oldroot=read(OLD_TABLE/'ROOT_VERIFICATION.json','bcf0b16a6838114444080f95b6bd282b16f79f0052bee0598c7c0728e54fc8d8')
+- for name in ('records71.json','tables.json','TABLES.md','cells.csv'):need(sha(OLD_TABLE/name)==oldroot['adopted_outputs'][name],'Prior adopted table bytes changed')
+- olddata=read(OLD_TABLE/'records71.json','214bf3b8fb1a653726491d20dfb2522d99783a8265320bfd8272abb0ec871c50')
+- oldtables=read(OLD_TABLE/'tables.json','8fafd55aeefe141e3a351b5f60812f90b562cac749b4785a76364ac64b9368f8')
++ need(root['records'][:80]==old['records'] and root['prior_interface_explicitly_reused']==old['prior_interface_explicitly_reused'],'Prior81 root objects/order differ')
++ expected=['FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed'+str(seed)+'_fullcoverage' for seed in range(91002,91011)]
++ validate_root(root,old,binding);validate_new_rows(root['new_records']);need([r['id'] for r in root['new_records']]==expected and root['records']==old['records']+root['new_records'],'Exact new9 root list required')
++ oldroot=read(OLD_TABLE/'ROOT_VERIFICATION.json','bf44b6e8d7a46ea0ffe14077939bd9c3886901c4063c5c6c8ff20a21415cee66')
++ for name in ('records81.json','tables.json','TABLES.md','cells.csv'):need(sha(OLD_TABLE/name)==oldroot['adopted_outputs'][name],'Prior adopted table bytes changed')
++ olddata=read(OLD_TABLE/'records81.json','54a0af5b4f2cf8da2c3e9e2092b347db37bbf0edf9923b6a2eab39291a9cf0f9')
++ oldtables=read(OLD_TABLE/'tables.json','707d8d4b806be30e17f2c5e3119833c93994cfba35f2c408990f27d15a983bbd')
+  oldmap={r['id']:r for r in old['records']+old['prior_interface_explicitly_reused']}
+- need(len(oldmap)==len(olddata['records'])==71 and [r['root_adoption_record'] for r in olddata['records']]==[oldmap[r['id']] for r in olddata['records']],'Accepted old table root identities differ')
++ need(len(oldmap)==len(olddata['records'])==81 and [r['root_adoption_record'] for r in olddata['records']]==[oldmap[r['id']] for r in olddata['records']],'Accepted old table root identities differ')
+  adopted=[r['root_adoption_record'] for r in olddata['records']]+root['new_records']
+- need(len(adopted)==len({x['id'] for x in adopted})==81,'Unique accepted81 required')
++ need(len(adopted)==len({x['id'] for x in adopted})==90,'Unique accepted90 required')
+  source_groups=[(R/binding['candidate'],binding['candidate_seal_sha256'],R/binding['transport'],binding['transport_sha256'],expected)]
+  accepted={x['id']:x for x in adopted};records={r['id']:copy.deepcopy(r) for r in olddata['records']}
+  for base,seal_sha,transport_path,transport_sha,ids in source_groups:
+-  seal=read(base/'FILES_SHA256.json',seal_sha);m=read(base/'MANIFEST.json',seal['files']['MANIFEST.json']['sha256']);byid={x['id']:x for x in m['records']};need([x['id'] for x in m['records']]==expected,'Candidate manifest must be exact FedSA10')
++  seal=read(base/'FILES_SHA256.json',seal_sha);m=read(base/'MANIFEST.json',seal['files']['MANIFEST.json']['sha256']);byid={x['id']:x for x in m['records']};need([x['id'] for x in m['records']]==expected,'Candidate manifest must be exact S-DFA9')
+   transport=read(transport_path,transport_sha);fbase=Path(transport['verified_extract']).resolve();need(fbase.is_relative_to(Path('F:/YananResearchStorage/GuardFed').resolve()),'Non-F receipt storage refused')
+   for rid in ids:
+    a=accepted[rid];row=byid[rid];rel='bundle/'+rid+'/receipt.json';receipt_path=fbase/rel;receipt_pin=transport['members'][rel]
+@@ -66,8 +66,8 @@
+    need(r['views']['native']==r['views']['raw'],'FLGMM native/raw must remain identical')
+    for view,fit in r['fits'].items():need(canonical({k:v for k,v in fit.items() if k!='fit_sha256'})==fit['fit_sha256'],'Fit payload pin differs')
+    records[rid]={'id':rid,'method':'FLGMM','distribution':r['distribution'],'attack':r['attack'],'seed':r['seed'],'checkpoint_sha256':r['checkpoint_sha256'],'receipt_path':receipt_path.as_posix(),'receipt_sha256':a['receipt_sha256'],'array_sha256':a['array_sha256'],'source_manifest_path':(base/'MANIFEST.json').resolve().as_posix(),'source_manifest_sha256':sha(base/'MANIFEST.json'),'external_identity_record_sha256':r['external_identity_record_sha256'],'config_canonical_sha256':r['config_canonical_sha256'],'terminal_round':70,'evaluation_split':'valid','valid_n':19867,'valid_image_ids_sha256':r['valid_image_ids_sha256'],'training_torch':r['original_training_torch'],'original_training_device':row['original_training_device'],'runtime':r['runtime'],'views':r['views'],'fits':r['fits'],'native_comparison':r['native_comparison'],'root_adoption_record':a,'included_complete_scene':(r['distribution'],r['attack']) in SCENES,'same_checkpoint_all_views':True}
+- ordered=[records[x['id']] for x in adopted];complete=[r for r in ordered if r['included_complete_scene']];partial=[r for r in ordered if not r['included_complete_scene']]
+- need(len(complete)==80 and [r['id'] for r in partial]==[PARTIAL],'Exactly eight full scenes plus retained nonIID S-DFA seed1')
++ ordered=[records[x['id']] for x in adopted];complete=[r for r in ordered if (r['distribution'],r['attack']) in SCENES];partial=[r for r in ordered if (r['distribution'],r['attack']) not in SCENES]
++ need(len(complete)==90 and partial==[],'Exactly nine full scenes; original screen seed1 is explicitly reused')
+  for d,a in SCENES:need(sorted(r['seed'] for r in complete if (r['distribution'],r['attack'])==(d,a))==list(range(91001,91011)),'Incomplete/duplicate scene seeds')
+  seed_source=R/'tmp/celeba_nine_method_three_view_tables_20261009/build_three_view_tables.py';need(sha(seed_source)=='589394fbf1264d172257647b9ff2ce5b81dcda6e14aead637dd79fad2ea5b83f','Original fixed panel source differs')
+  seed_node=next(n for n in ast.parse(seed_source.read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SEEDS' for t in n.targets));ns={};exec(compile(ast.Module(body=[seed_node],type_ignores=[]),'<original fixed SEEDS>','exec'),ns);seeds=ns['SEEDS']
+@@ -77,7 +77,7 @@
+  for view in VIEWS:
+   groups=defaultdict(list)
+   for r in complete:
+-   if r['id'] not in expected:continue
++   if (r['distribution'],r['attack']) != SCENES[-1]:continue
+    groups['FLGMM',r['distribution'],r['attack']].append(dict(r,**{k:r['views'][view][k] for k,_,_,_ in METRICS}))
+   fn_ns={'groups':groups,'mean':mean,'stdev':stdev,'metrics':METRICS};exec(compile(ast.Module(body=[fn],type_ignores=[]),'<unchanged original values_for>','exec'),fn_ns)
+   for panel,ss in seeds.items():
+@@ -92,25 +92,25 @@
+  protocol=R/'tmp/celeba_flgmm_fullcoverage_root_operations_20261009/attempt_20261009T200518912319Z/verified_manual_v2/stage/source/protocol.json';p=read(protocol,'1006bcc7c614e2111490f0c57949107d23a52cc5301c849578768273dd6964f4')
+  need(p['selected_recipe']['id']=='FLGMM_Tg20_L2.0_lr0.001','Recipe source differs')
+  O.mkdir(parents=True)
+- for name in ('records71.json','tables.json','TABLES.md','cells.csv'):
+-  (O/('PREVIOUS70_'+name)).write_bytes((OLD_TABLE/name).read_bytes())
+- need(ordered[:71]==olddata['records'],'Old71 normalized objects/order changed')
+- for newpan,oldpan in zip(summaries,oldtables['panels']):need(dict(newpan,scenes=newpan['scenes'][:7])==oldpan,'Old seven scene statistics/order changed')
+- write('records81.json',{'root81_sha256':binding['root81_sha256'],'prior71_sha256':ROOT71_SHA,'old71_order_preserved_then_exact10_appended':True,'records':ordered,'table_records':80,'retained_partial_ids':[PARTIAL]})
++ for name in ('records81.json','tables.json','TABLES.md','cells.csv'):
++  (O/('PREVIOUS80_'+name)).write_bytes((OLD_TABLE/name).read_bytes())
++ need(ordered[:81]==olddata['records'],'Old81 normalized objects/order changed')
++ for newpan,oldpan in zip(summaries,oldtables['panels']):need(dict(newpan,scenes=newpan['scenes'][:8])==oldpan,'Old eight scene statistics/order changed')
++ write('records90.json',{'root90_sha256':binding['root90_sha256'],'prior81_sha256':ROOT81_SHA,'old81_order_preserved_then_exact9_appended':True,'records':ordered,'table_records':90,'retained_partial_ids':[]})
+  write('tables.json',{'method':'FLGMM','scenes':[list(x) for x in SCENES],'views':VIEWS,'fixed_seed_panels':seeds,'panels':summaries,'statistics':'arithmetic mean and sample SD (ddof=1)','final_test':False})
+  notes=['Terminal round70; validation only,19,867 images; IID/non-IID use frozen Dirichlet alpha5000/5; all three metrics and views use the same checkpoint per ID. Mean ± sample SD (ddof=1); ACC in percent, AEOD/ASPD on [0,1]. AEOD is the absolute TPR gap, not full equalized odds.',
+- 'Panels are fixed:10 seeds91001–91010;9 seeds91002–91010;6 seeds91005–91010. No per-cell best-seed selection. The9-seed panel excludes selection seed91001; it does not undo repeated validation exposure. The6-seed panel preserves the earlier common-seed comparison subset; all81 FLGMM records themselves use the same declared cu128 version.',
+- 'Selected recipe: warmup20, control width2.0, local learning rate0.001. Recipe selection used seed91001 validation scores across IID/non-IID Benign/S-DFA; three of the four reused screen checkpoints enter these complete tables. The fourth, non-IID S-DFA seed91001, is retained in records81.json but excluded from scene statistics.',
++ 'Panels are fixed:10 seeds91001–91010;9 seeds91002–91010;6 seeds91005–91010. No per-cell best-seed selection. The9-seed panel excludes selection seed91001; it does not undo repeated validation exposure. The6-seed panel preserves the earlier common-seed comparison subset; all90 FLGMM records themselves use the same declared cu128 version.',
++ 'Selected recipe: warmup20, control width2.0, local learning rate0.001. Recipe selection used seed91001 validation scores across IID/non-IID Benign/S-DFA; All four screen checkpoints now enter complete scenes; non-IID S-DFA seed91001 keeps its original screen ID and original accepted output without replay.',
+  'FLGMM follows the frozen author-code adaptation, including its largest-cluster choice, upstream bounds behavior and declared zero-standard-deviation extension. Native and raw are identical uncalibrated margin>0 outputs, not independent replications. Shared calibration applies the existing common clean train-root group thresholds (margin≥threshold), not FLGMM-native calibration.',
+- 'All81 accepted records were trained on CUDA with torch2.11.0+cu128 and evaluated on CPU with torch2.11.0+cu128; this is not a CPU/GPU training-equivalence claim. Windows saved-output audit runtime is separately retained in the root proofs.',
+- 'Original Linux whole checks supply root-refit evidence. The original Windows47 exact-refit/whole failure remains preserved; The previously adopted13 and10 and this new10 Windows saved-output checks use zero refits; Linux original whole checks provide cached root-refit evidence. The prior71 group-KL audit micro-differences and original Windows47 failure are retained; new10 diagnostics must remain explicit in the adopted81 proof. Saved-output agreement is not whole Windows root-reconstruction equality. No universal bitwise recalibration claim.',
+- 'This is eight complete FLGMM scenes (80 records) plus one retained partial record, not FLGMM100, a17-method comparison or final test. Values are descriptive; all outcomes are retained, without a superiority or significance claim.']
++ 'All90 accepted records were trained on CUDA with torch2.11.0+cu128 and evaluated on CPU with torch2.11.0+cu128; this is not a CPU/GPU training-equivalence claim. Windows saved-output audit runtime is separately retained in the root proofs.',
++ 'Original Linux whole checks supply root-refit evidence. The original Windows47 exact-refit/whole failure remains preserved; The previously adopted13 and10 and this new9 Windows saved-output checks use zero refits; Linux original whole checks provide cached root-refit evidence. The prior81 group-KL audit micro-differences and original Windows47 failure are retained; new9 diagnostics must remain explicit in the adopted90 proof. Saved-output agreement is not whole Windows root-reconstruction equality. No universal bitwise recalibration claim.',
++ 'This is nine complete FLGMM scenes (90 records), with original screen seed91001 explicitly reused, not FLGMM100, a17-method comparison or final test. Values are descriptive; all outcomes are retained, without a superiority or significance claim.']
+  # Environment and preserved audit counts below are measured, not guessed.
+- env={'all81_training_torch':dict(Counter(r['training_torch'] for r in ordered)),'all81_training_device':dict(Counter(r['original_training_device'] for r in ordered)),'all81_inference_torch':dict(Counter(r['runtime']['torch'] for r in ordered)),'all81_inference_device':dict(Counter(r['runtime']['device'] for r in ordered))}
+- need(env['all81_training_torch']==env['all81_inference_torch']=={'2.11.0+cu128':81} and env['all81_inference_device']=={'cpu':81},'Environment note differs from actual records')
+- blocks=['# FLGMM: eight complete CelebA validation scenes','']
++ env={'all90_training_torch':dict(Counter(r['training_torch'] for r in ordered)),'all90_training_device':dict(Counter(r['original_training_device'] for r in ordered)),'all90_inference_torch':dict(Counter(r['runtime']['torch'] for r in ordered)),'all90_inference_device':dict(Counter(r['runtime']['device'] for r in ordered))}
++ need(env['all90_training_torch']==env['all90_inference_torch']=={'2.11.0+cu128':90} and env['all90_inference_device']=={'cpu':90},'Environment note differs from actual records')
++ blocks=['# FLGMM: nine complete CelebA validation scenes','']
+  for pan in summaries:
+-  blocks+=['## '+pan['view']+' · '+str(pan['n'])+' fixed seeds','', '| Metric | '+' | '.join(d+': '+a.replace('F Flip','F-Flip') for d,a in SCENES)+' |','| --- | '+' | '.join(['---']*8)+' |']
++  blocks+=['## '+pan['view']+' · '+str(pan['n'])+' fixed seeds','', '| Metric | '+' | '.join(d+': '+a.replace('F Flip','F-Flip') for d,a in SCENES)+' |','| --- | '+' | '.join(['---']*9)+' |']
+   for metric,label,_,_ in METRICS:blocks.append('| '+label+' | '+' | '.join(cell['metrics'][metric]['display'] for cell in pan['scenes'])+' |')
+   blocks.append('')
+  blocks+=['## Scope and interpretation','']+['- '+s for s in notes]
+@@ -120,6 +120,6 @@
+   for pan in summaries:
+    for cell in pan['scenes']:
+     for k,_,_,_ in METRICS:w.writerow([pan['view'],pan['panel'],pan['n'],cell['distribution'],cell['attack'],k,cell['metrics'][k]['mean'],cell['metrics'][k]['sample_sd'],cell['metrics'][k]['display']])
+- write('SOURCE_BINDINGS.json',{'root81':{'path':str(R/binding['root81']),'sha256':binding['root81_sha256']},'prior71_sha256':ROOT71_SHA,'prior71_table_records_sha256':'214bf3b8fb1a653726491d20dfb2522d99783a8265320bfd8272abb0ec871c50','prior_seven_scene_tables_sha256':'8fafd55aeefe141e3a351b5f60812f90b562cac749b4785a76364ac64b9368f8','old71_objects_order_unchanged':True,'old378_statistics_189_cells_unchanged':True,'new_scene_statistical_scalars':54,'new_scene_display_cells':27,'old_scene_statistics_recomputed':False,'sources':pins,'renderer':{'path':renderer.as_posix(),'sha256':sha(renderer),'values_for_source_sha256':hashlib.sha256(fn_text.encode()).hexdigest()},'panel_source':{'path':seed_source.as_posix(),'sha256':sha(seed_source)},'environment':env,'selection_rule':p['selection_rule'],'selected_recipe':p['selected_recipe'],'limitations':notes,'partial_retained_excluded':PARTIAL,'arrays_read':False,'new_fit':0,'new_CNN':0,'test':False,'builder_sha256':sha(__file__),'input_contract_sha256':sha(H/'input_contract.py'),'F_volume':volume})
+- print(json.dumps({'status':'FLGMM_EIGHT_SCENE_TABLE_BUILT_NOT_ROOT_TABLE_ADOPTED','records':81,'complete_records':80,'retained_partial':1,'mean_SD_pairs':216,'numeric_scalars':432,'panels':9,'new_fit':0,'new_CNN':0}))
++ write('SOURCE_BINDINGS.json',{'root90':{'path':str(R/binding['root90']),'sha256':binding['root90_sha256']},'prior81_sha256':ROOT81_SHA,'prior81_table_records_sha256':'54a0af5b4f2cf8da2c3e9e2092b347db37bbf0edf9923b6a2eab39291a9cf0f9','prior_eight_scene_tables_sha256':'707d8d4b806be30e17f2c5e3119833c93994cfba35f2c408990f27d15a983bbd','old81_objects_order_unchanged':True,'old432_statistics_216_cells_unchanged':True,'new_scene_statistical_scalars':54,'new_scene_display_cells':27,'old_scene_statistics_recomputed':False,'sources':pins,'renderer':{'path':renderer.as_posix(),'sha256':sha(renderer),'values_for_source_sha256':hashlib.sha256(fn_text.encode()).hexdigest()},'panel_source':{'path':seed_source.as_posix(),'sha256':sha(seed_source)},'environment':env,'selection_rule':p['selection_rule'],'selected_recipe':p['selected_recipe'],'limitations':notes,'partial_retained_excluded':None, 'old_partial_screen_ID_now_in_complete_scene':PARTIAL,'arrays_read':False,'new_fit':0,'new_CNN':0,'test':False,'builder_sha256':sha(__file__),'input_contract_sha256':sha(H/'input_contract.py'),'F_volume':volume})
++ print(json.dumps({'status':'FLGMM_NINE_SCENE_TABLE_BUILT_NOT_ROOT_TABLE_ADOPTED','records':90,'complete_records':90,'retained_partial':0,'mean_SD_pairs':243,'numeric_scalars':486,'panels':9,'new_fit':0,'new_CNN':0}))
+ if __name__=='__main__':main()
+--- tmp\fl_eight_scenes80_table_source_prepared_20261011\input_contract.py
++++ tmp\fl_SDFA9_three_view_source_prepare_20261011\table\input_contract.py
+@@ -2,7 +2,7 @@
+ import re
+ from pathlib import PurePosixPath
+ 
+-IDS=['FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed'+str(s)+'_fullcoverage' for s in range(91001,91011)]
++IDS=['FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed'+str(s)+'_fullcoverage' for s in range(91002,91011)]
+ 
+ 
+ def require(ok,message):
+@@ -16,21 +16,21 @@
+     require('..' not in PurePosixPath(value).parts and PurePosixPath(value).as_posix()==value,'Noncanonical path refused')
+ 
+ def validate_binding(binding):
+-    require(binding.get('root_adopted') is True,'Actual root81 adoption must precede table construction')
+-    for key in ('root81','candidate','transport'):relative(binding.get(key))
+-    for key in ('root81_sha256','candidate_seal_sha256','transport_sha256','native77_root_sha256'):sha(binding.get(key))
+-    require(binding['root81'].endswith('/ROOT_SCIENTIFIC_ADOPTION.json'),'Actual root adoption proof required')
++    require(binding.get('root_adopted') is True,'Actual root90 adoption must precede table construction')
++    for key in ('root90','candidate','transport'):relative(binding.get(key))
++    for key in ('root90_sha256','candidate_seal_sha256','transport_sha256','native86_root_sha256'):sha(binding.get(key))
++    require(binding['root90'].endswith('/ROOT_SCIENTIFIC_ADOPTION.json'),'Actual root adoption proof required')
+     require(binding['transport'].endswith('/TRANSPORT_VERIFICATION.json'),'Actual verified F transport proof required')
+ 
+ 
+ def validate_root(root,old,binding):
+     validate_binding(binding)
+-    require(root['root_adoption'] is True and root['FLGMM_total_three_view_records']==81 and root['new_three_view_records_accepted']==10,'Only actual81 accepted scope')
+-    require(root['native_training_records']==77 and root['original_screen_reuse_separate']==4,'Native77 plus four screen reuse required')
+-    require(root['prior_root_sha256']=='fe400060961fb923cbac79443f735fab6824b06689d45fb3bbf8d56307c95421','Actual parent71 required')
+-    require(root['native_root_sha256']==binding['native77_root_sha256'],'Native77 adopted source differs')
++    require(root['root_adoption'] is True and root['FLGMM_total_three_view_records']==90 and root['new_three_view_records_accepted']==9,'Only actual90 accepted scope')
++    require(root['native_training_records']==86 and root['original_screen_reuse_separate']==4,'Native77 plus four screen reuse required')
++    require(root['prior_root_sha256']=='adc7726ca05561c6903ebb153e34fb3dc69a1df0118d87e6bf7dfa3e31655799','Actual parent71 required')
++    require(root['native_root_sha256']==binding['native86_root_sha256'],'Native77 adopted source differs')
+     validate_new_rows(root['new_records'])
+-    require(root['records']==old['records']+root['new_records'] and root['prior_interface_explicitly_reused']==old['prior_interface_explicitly_reused'],'Prior71 objects/order or exact new10 differ')
++    require(root['records']==old['records']+root['new_records'] and root['prior_interface_explicitly_reused']==old['prior_interface_explicitly_reused'],'Prior81 objects/order or exact new10 differ')
+     require(root['Linux_whole_original_saved_check_pass'] is True and root['Linux_root_fit_verified'] is True and root['Windows_saved_outputs_audit_pass'] is True and root['Windows_saved_outputs_audit_fit_calls']==0,'Complementary evidence incomplete')
+     require(root['Windows_whole_saved_check_pass'] is False and root['Windows_original47_exact_refit_pass'] is False and root['cross_platform_bitwise_recalibration_claimed'] is False and root['test'] is False,'Preserved failure or test boundary differs')
+     require(root['original_Windows47_failure_sha256']==old['original_Windows47_failure_sha256'],'Original Windows failure pin changed')
+@@ -39,8 +39,8 @@
+ 
+ 
+ def validate_new_rows(rows):
+-    require(isinstance(rows,list) and len(rows)==10,'Exactly ten new rows required')
++    require(isinstance(rows,list) and len(rows)==9,'Exactly nine new rows required')
+     require([r.get('id') for r in rows]==IDS,'Exact new10 IDs and order required')
+-    for seed,r in zip(range(91001,91011),rows):
+-        require((r.get('method'),r.get('distribution'),r.get('attack'),r.get('seed'))==('FLGMM','non-IID','FedSA',seed),'Only non-IID FedSA ten-seed scope allowed')
++    for seed,r in zip(range(91002,91011),rows):
++        require((r.get('method'),r.get('distribution'),r.get('attack'),r.get('seed'))==('FLGMM','non-IID','S-DFA',seed),'Only non-IID S-DFA nine-new-seed scope allowed')
+         for key in ('checkpoint_sha256','array_sha256','receipt_sha256'):sha(r.get(key))
+--- tmp\fl_eight_scenes80_table_source_prepared_20261011\verify.py
++++ tmp\fl_SDFA9_three_view_source_prepare_20261011\table\verify.py
+@@ -1,7 +1,7 @@
+ """Independent saved-count, fsum two-pass sample SD and rendered-cell verification."""
+ from pathlib import Path
+ import csv,hashlib,json,math
+-H=Path(__file__).resolve().parent;R=H.parents[1];O=H/'candidate';OLD_TABLE=R/'outputs/guardfed_tables/celeba_flgmm_seven_scenes70_20261011'
++H=Path(__file__).resolve().parent;R=H.parents[2];O=H/'candidate';OLD_TABLE=R/'outputs/guardfed_tables/celeba_flgmm_eight_scenes80_20261011'
+ read=lambda p:json.loads(Path(p).read_bytes())
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def need(ok,msg):
+@@ -9,21 +9,21 @@
+ def main():
+  need(not (O/'VERIFICATION.json').exists(),'Fresh independent verification only')
+  b=read(O/'SOURCE_BINDINGS.json');binding=read(H/'ROOT_BINDING.json')
+- need(binding['root_adopted'] is True and sha(b['root81']['path'])==b['root81']['sha256']==binding['root81_sha256'],'Actual81 changed')
++ need(binding['root_adopted'] is True and sha(b['root90']['path'])==b['root90']['sha256']==binding['root90_sha256'],'Actual90 changed')
+  for p,pin in b['sources'].items():need(sha(p)==pin['sha256'] and Path(p).stat().st_size==pin['bytes'],'Source identity changed')
+- root=read(b['root81']['path']);old=read(R/'tmp/fl_FFlip10_capacity_pool32_20261011/ROOT_SCIENTIFIC_ADOPTION.json')
+- need(root['root_adoption'] and root['FLGMM_total_three_view_records']==81 and root['new_three_view_records_accepted']==10,'Actual81 required')
+- accepted=[r['root_adoption_record'] for r in read(OLD_TABLE/'records71.json')['records']]+root['new_records']
+- data=read(O/'records81.json');rows=data['records'];need([r['root_adoption_record'] for r in rows]==accepted,'Accepted objects/order differ')
+- need(len(rows)==len({r['id'] for r in rows})==81,'Accepted81 not unique')
+- need(rows[:71]==read(OLD_TABLE/'records71.json')['records'],'Old71 objects/order changed')
+- scene_list=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA')]
++ root=read(b['root90']['path']);old=read(R/'tmp/fl_FedSA10_three_view_prepared_20261011/ROOT_SCIENTIFIC_ADOPTION.json')
++ need(root['root_adoption'] and root['FLGMM_total_three_view_records']==90 and root['new_three_view_records_accepted']==9,'Actual90 required')
++ accepted=[r['root_adoption_record'] for r in read(OLD_TABLE/'records81.json')['records']]+root['new_records']
++ data=read(O/'records90.json');rows=data['records'];need([r['root_adoption_record'] for r in rows]==accepted,'Accepted objects/order differ')
++ need(len(rows)==len({r['id'] for r in rows})==90,'Accepted90 not unique')
++ need(rows[:81]==read(OLD_TABLE/'records81.json')['records'],'Old81 objects/order changed')
++ scene_list=[('IID','Benign'),('IID','F Flip'),('IID','FedSA'),('IID','S-DFA'),('IID','Sp-DFA'),('non-IID','Benign'),('non-IID','F Flip'),('non-IID','FedSA'),('non-IID','S-DFA')]
+  views=['raw','native','shared_calibration'];panels={'ten':list(range(91001,91011)),'nonselection_nine':list(range(91002,91011)),'matching_six':list(range(91005,91011))}
+  partial=[r['id'] for r in rows if (r['distribution'],r['attack']) not in scene_list]
+- need(partial==data['retained_partial_ids']==['FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91001_screen'],'Partial boundary differs')
+- need(sum(r['included_complete_scene'] for r in rows)==80,'Complete80 boundary differs')
++ need(partial==data['retained_partial_ids']==[],'Partial boundary differs')
++ need(sum((r['distribution'],r['attack']) in scene_list for r in rows)==90,'Complete80 boundary differs')
+  verified_metrics=0;verified_counts=0;max_count_delta=0.;environments={};raw_native=0
+- for r in rows[71:]:
++ for r in rows[81:]:
+   receipt=read(r['receipt_path']);need(sha(r['receipt_path'])==r['receipt_sha256'] and receipt['checkpoint_sha256']==r['checkpoint_sha256'] and receipt['views']==r['views'] and receipt['fits']==r['fits'],'Saved accepted receipt differs')
+   need(r['terminal_round']==70 and r['evaluation_split']=='valid' and r['valid_n']==19867 and r['same_checkpoint_all_views'],'Round/split mismatch')
+   need(receipt['weights_before']==receipt['weights_after'] and receipt['valid_n']==19867,'Weight/count differs')
+@@ -51,7 +51,7 @@
+   need([(c['distribution'],c['attack']) for c in pan['scenes']]==scene_list,'Scene labels/order differ')
+   md_rows={k:[] for k in ['accuracy','aeod','aspd']}
+   for cell in pan['scenes']:
+-   if (cell['distribution'],cell['attack'])!=('non-IID','FedSA'):
++   if (cell['distribution'],cell['attack'])!=('non-IID','S-DFA'):
+     for metric in ['accuracy','aeod','aspd']:
+      actual=cell['metrics'][metric];display=actual['display'];md_rows[metric].append(display)
+      csv_expect.append([pan['view'],pan['panel'],str(cell['n']),cell['distribution'],cell['attack'],metric,str(actual['mean']),str(actual['sample_sd']),display])
+@@ -71,10 +71,10 @@
+  actual_display=[line for line in md.splitlines() if line.startswith(('| ACC (%) ↑ |','| AEOD ↓ |','| ASPD ↓ |'))];need(actual_display==expected_display,'Markdown labels/value/order differs')
+  with (O/'cells.csv').open(encoding='utf8',newline='') as f:csv_rows=list(csv.reader(f))
+  need(csv_rows[1:]==csv_expect,'CSV value/order differs')
+- need(verified_metrics==90 and verified_counts==240 and scalars==54 and len(csv_expect)==216,'Verification denominator changed')
+- for newpan,oldpan in zip(table['panels'],read(OLD_TABLE/'tables.json')['panels']):need(dict(newpan,scenes=newpan['scenes'][:7])==oldpan,'Old378 statistics/189 cells/order changed')
+- for name in ('records71.json','tables.json','TABLES.md','cells.csv'):need((O/('PREVIOUS70_'+name)).read_bytes()==(OLD_TABLE/name).read_bytes(),'Old table bytes differ')
+- report={'status':'INDEPENDENT_RECEIPT_COUNTS_FSUM_SAMPLE_SD_DISPLAY_PASS','records':81,'complete_scene_records':80,'retained_partial_records':1,'scene_count':8,'panels':9,'mean_SD_pairs':216,'statistical_scalars':432,'new_scene_statistical_scalars_recomputed':54,'old378_statistics_preserved_not_recomputed':True,'metrics_recomputed_from_counts':90,'integer_base_counts_verified':240,'native_raw_equal_records':raw_native,'max_count_metric_absolute_difference':max_count_delta,'max_fsum_statistics_absolute_difference':max_stats_delta,'Markdown_cells_verified':216,'CSV_cells_verified':216,'partial_record_excluded_from_all_panels':True,'all_adopted_records_retained':True,'source_identity_pins_verified':len(b['sources']),'environment_scope':'new10 only; prior71 retained in source table','environment':[dict(zip(['training_torch','training_device','inference_torch','inference_device','n'],(*k,v))) for k,v in environments.items()],'arrays_read':False,'new_inference':0,'new_fit':0,'new_training':0,'test':False,'root_table_adopted':False,'verifier_sha256':sha(__file__),'outputs_sha256':{name:sha(O/name) for name in ['records81.json','tables.json','TABLES.md','cells.csv','SOURCE_BINDINGS.json']}}
++ need(verified_metrics==81 and verified_counts==216 and scalars==54 and len(csv_expect)==243,'Verification denominator changed')
++ for newpan,oldpan in zip(table['panels'],read(OLD_TABLE/'tables.json')['panels']):need(dict(newpan,scenes=newpan['scenes'][:8])==oldpan,'Old432 statistics/189 cells/order changed')
++ for name in ('records81.json','tables.json','TABLES.md','cells.csv'):need((O/('PREVIOUS80_'+name)).read_bytes()==(OLD_TABLE/name).read_bytes(),'Old table bytes differ')
++ report={'status':'INDEPENDENT_RECEIPT_COUNTS_FSUM_SAMPLE_SD_DISPLAY_PASS','records':90,'complete_scene_records':90,'retained_partial_records':0,'scene_count':9,'panels':9,'mean_SD_pairs':243,'statistical_scalars':486,'new_scene_statistical_scalars_recomputed':54,'old432_statistics_preserved_not_recomputed':True,'metrics_recomputed_from_counts':81,'integer_base_counts_verified':216,'native_raw_equal_records':raw_native,'max_count_metric_absolute_difference':max_count_delta,'max_fsum_statistics_absolute_difference':max_stats_delta,'Markdown_cells_verified':243,'CSV_cells_verified':243,'old_partial_screen_record_explicitly_included_in_completed_scene':True,'all_adopted_records_retained':True,'source_identity_pins_verified':len(b['sources']),'environment_scope':'new9 only; prior81 retained in source table','environment':[dict(zip(['training_torch','training_device','inference_torch','inference_device','n'],(*k,v))) for k,v in environments.items()],'arrays_read':False,'new_inference':0,'new_fit':0,'new_training':0,'test':False,'root_table_adopted':False,'verifier_sha256':sha(__file__),'outputs_sha256':{name:sha(O/name) for name in ['records90.json','tables.json','TABLES.md','cells.csv','SOURCE_BINDINGS.json']}}
+  with (O/'VERIFICATION.json').open('x',encoding='utf8') as f:json.dump(report,f,indent=2);f.write('\n')
+  print(json.dumps(report))
+ if __name__=='__main__':main()

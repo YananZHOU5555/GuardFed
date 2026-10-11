@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "-p",
+    "60350",
+    "root@89.22.197.55",
+    "python -B -c '\nfrom pathlib import Path,PurePosixPath\nimport hashlib,io,json,subprocess,sys,tarfile\nH=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()\nstage=Path('\"'\"'/workspace/guardfed_checks/celeba_gradient_fullcoverage_exact14_20261011'\"'\"')\nassert H('\"'\"'/etc/vast-agents-guide.md'\"'\"')=='\"'\"'42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'\"'\"'\nassert not (stage/'\"'\"'closure_source/RUNTIME_MEMBERS.json'\"'\"').exists()\nold={'\"'\"'ROLE_CONTRACT.json'\"'\"': {'\"'\"'sha256'\"'\"': '\"'\"'24f84afe55b29c442e93258bd342eadeb94982d5b81ae3d22bca6b78d78b3888'\"'\"', '\"'\"'bytes'\"'\"': 69272}, '\"'\"'ROOT_BINDING.json'\"'\"': {'\"'\"'sha256'\"'\"': '\"'\"'1ab04de81cd19344a979680a2ba276ae773d2cc02526496b6b2a66dac5cd19ff'\"'\"', '\"'\"'bytes'\"'\"': 65560}}\nfor n,pin in old.items():assert H(stage/'\"'\"'runtime/closure_role_binding'\"'\"'/n)==pin['\"'\"'sha256'\"'\"']\nwith tarfile.open(fileobj=io.BytesIO(sys.stdin.buffer.read()),mode='\"'\"'r:gz'\"'\"') as t:\n ms=t.getmembers();assert all(m.isfile() for m in ms) and len(ms)==len({m.name for m in ms})\n pins=json.load(t.extractfile('\"'\"'TRANSFER.json'\"'\"'));assert set(pins)|{'\"'\"'TRANSFER.json'\"'\"'}=={m.name for m in ms}\n for name,pin in pins.items():\n  q=PurePosixPath(name);assert '\"'\"'..'\"'\"' not in q.parts and '\"'\"':'\"'\"' not in name and '\"'\"'\\\\'\"'\"' not in name\n  assert name.startswith('\"'\"'runtime/local_evidence/runtime_role_binding_duplicate_failure/'\"'\"') or name in {'\"'\"'runtime/closure_role_binding/ROLE_CONTRACT.json'\"'\"','\"'\"'runtime/closure_role_binding/ROOT_BINDING.json'\"'\"'}\n  p=stage/name;assert p.resolve().is_relative_to(stage.resolve()) and not p.is_symlink()\n  v=t.extractfile(name).read();assert len(v)==pin['\"'\"'bytes'\"'\"']<2_000_000 and hashlib.sha256(v).hexdigest()==pin['\"'\"'sha256'\"'\"']\n  if name.startswith('\"'\"'runtime/local_evidence/'\"'\"'):\n   assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(v)\n # Preserve actual refused inputs before changing only the two current metadata pointers.\n for n in old:\n  assert H(stage/'\"'\"'runtime/local_evidence/runtime_role_binding_duplicate_failure'\"'\"'/n)==old[n]['\"'\"'sha256'\"'\"']\n for n in old:(stage/'\"'\"'runtime/closure_role_binding'\"'\"'/n).write_bytes(t.extractfile('\"'\"'runtime/closure_role_binding/'\"'\"'+n).read())\ncontract=stage/'\"'\"'runtime/closure_role_binding/ROLE_CONTRACT.json'\"'\"';binding=stage/'\"'\"'runtime/closure_role_binding/ROOT_BINDING.json'\"'\"'\ncmd=['\"'\"'taskset'\"'\"','\"'\"'-c'\"'\"','\"'\"'110'\"'\"','\"'\"'nice'\"'\"','\"'\"'-n'\"'\"','\"'\"'10'\"'\"','\"'\"'ionice'\"'\"','\"'\"'-c'\"'\"','\"'\"'3'\"'\"','\"'\"'/workspace/guardfed_envs/celeba-cu128-20261009/bin/python'\"'\"','\"'\"'-B'\"'\"',str(stage/'\"'\"'runtime/local_evidence/runtime_role_binder_source/bind_runtime_roles_once.py'\"'\"'),'\"'\"'--stage'\"'\"',str(stage),'\"'\"'--contract'\"'\"',str(contract),'\"'\"'--contract-sha256'\"'\"',H(contract),'\"'\"'--root-binding'\"'\"',str(binding),'\"'\"'--root-binding-sha256'\"'\"',H(binding)]\nr=subprocess.run(cmd,capture_output=True);print(json.dumps({'\"'\"'returncode'\"'\"':r.returncode,'\"'\"'binder_stdout'\"'\"':r.stdout.decode(),'\"'\"'binder_stderr'\"'\"':r.stderr.decode(),'\"'\"'contract_sha256'\"'\"':H(contract),'\"'\"'binding_sha256'\"'\"':H(binding),'\"'\"'prior_refusal_preserved'\"'\"':True}));sys.exit(r.returncode)\n'"
+  ],
+  "start": "2026-10-11T02:36:19.302884+00:00",
+  "end": "2026-10-11T02:36:24.172085+00:00",
+  "returncode": 0,
+  "remote_source_sha256": "2fdac1b8a5d3fb086fec320d0e0313d858b06b9f4a22a04ad32e4ba4f05b3909",
+  "transfer_sha256": "e2ee360b4d5059a139280ca38be4e309b8066bdfbd4c05cc458efd6cf0dda063",
+  "transfer_bytes": 45331,
+  "automatic_retry": false,
+  "specific_repair": "one redundant root-added role; original216 and binder untouched"
+}

@@ -1,0 +1,72 @@
+{
+  "parent_path": "tmp/mechanism_F_nonIID_FFlip10_prepare_20261011/adopt_root_370.py",
+  "parent_sha256": "d2e4fc9bb212b1b0ff06ff84e2a120d2c5244cbd52566b972066cf06e049b072",
+  "source_sha256": "e1d291904c4a1eede4083c2bc9da2649c3a889c85d5700d2977aca82966f0f1f",
+  "complete_raw_inverse_exact": true,
+  "edits": [
+    {
+      "before": "BASE = Path(__file__).resolve().parent",
+      "after": "HERE = Path(__file__).resolve().parent\nBASE = ROOT / 'tmp/mechanism_F_nonIID_FedSA10_prepare_20261011'"
+    },
+    {
+      "before": "actual_path=BASE/'ACTUAL_INPUTS.json'",
+      "after": "actual_path=HERE/'ACTUAL_INPUTS.json'"
+    },
+    {
+      "before": "ROOT_REVIEWED_ACTUAL_NATIVE_DELTA_AFTER360_NONIID_FFLIP10_READY_TO_ADOPT",
+      "after": "ROOT_REVIEWED_ACTUAL_NATIVE_DELTA_AFTER370_NONIID_FEDSA10_READY_TO_ADOPT"
+    },
+    {
+      "before": "==TOTAL-360 and TOTAL==370",
+      "after": "==TOTAL-370 and TOTAL==380"
+    },
+    {
+      "before": "minus_F_non-IID_F Flip_seed",
+      "after": "minus_F_non-IID_FedSA_seed"
+    },
+    {
+      "before": "root_delta_20261011T002530Z",
+      "after": "root_delta_20261011T014706Z"
+    },
+    {
+      "before": "396e40654b6dfc75029d4a7a42dbfafe4caaf111a872ae2ece5045f6d1203418",
+      "after": "4ae0a66ca2cc48289b9a7a18272b83652c73c9da16b2d65989ecd5a1166d002e"
+    },
+    {
+      "before": "c5dcabc47c5dd2c930413a296c26bf27aae01286833c3001390f66935b36ceff",
+      "after": "2c741a36168e6604790648948dfef81e0c869b3fb2b486e5f5eabff3c1df98b1"
+    },
+    {
+      "before": "BASE / 'COLLECTOR_SOURCE_REVIEW.json'",
+      "after": "HERE / 'ROOT_SOURCE_REVIEW.json'"
+    },
+    {
+      "before": "BASE/'COLLECTOR_SOURCE_REVIEW.json'",
+      "after": "HERE/'ROOT_SOURCE_REVIEW.json'"
+    },
+    {
+      "before": "67c32aced70438bf7bf614c5862792f1887ddeb4fbede5e4da06cc157fd992ef",
+      "after": "4baa91c13e3310c851291ba65c34ba60af188d14b2d02d5eba72b1193bbfd38a"
+    },
+    {
+      "before": "len(old_ledger['entries']) == 50",
+      "after": "len(old_ledger['entries']) == 51"
+    },
+    {
+      "before": "old_ids = {row['id'] for row in old_report['records']}\nassert len(old_ids) == 460 and [row for row in report['records'] if row['id'] in old_ids] == old_report['records']\nassert set(proof['new_ids']) <= set(report['accepted_new_ids']) - set(old_report['accepted_new_ids'])\nassert sorted(set(report['accepted_new_ids']) - set(old_report['accepted_new_ids']) - set(proof['new_ids'])) == proof['observed_not_backed_up_ids'] == ACTUAL['pending_closed_ids']",
+      "after": "prior_root = read(PRIOR / 'ROOT_DELTA_VERIFICATION.json')\nassert sha(PRIOR / 'inspection/inspection.json') == prior_root['inspection_sha256']\nprior_pending = prior_root['observed_not_backed_up_ids']\nassert prior_pending == ['minus_F_non-IID_FedSA_seed91001'] and old_report['new_count'] == 371 and len(old_report['records']) == 471\nold_records = [row for row in old_report['records'] if row['id'] not in prior_pending]\nold_ids = {row['id'] for row in old_records}\nprior_accepted_ids = set(old_report['accepted_new_ids']) - set(prior_pending)\nassert len(old_ids) == len(old_records) == 470 and len(prior_accepted_ids) == 370\nassert [row for row in report['records'] if row['id'] in old_ids] == old_records\nassert set(proof['new_ids']) <= set(report['accepted_new_ids']) - prior_accepted_ids\nassert sorted(set(report['accepted_new_ids']) - prior_accepted_ids - set(proof['new_ids'])) == proof['observed_not_backed_up_ids'] == ACTUAL['pending_closed_ids']"
+    },
+    {
+      "before": "native_delta_after360_nonIID_FFlip10_20261011",
+      "after": "native_delta_after370_nonIID_FedSA10_20261011"
+    },
+    {
+      "before": "verified_ledger.after360_nonIID_FFlip10.root.tmp",
+      "after": "verified_ledger.after370_nonIID_FedSA10.root.tmp"
+    },
+    {
+      "before": "old460_records_exact=True",
+      "after": "old470_records_exact=True"
+    }
+  ]
+}
