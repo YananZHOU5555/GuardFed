@@ -1,0 +1,101 @@
+--- tmp\LoGo100_cuda_actual_prerequisites_20261011\transfer_originals_proposal.py
++++ tmp\LoGo100_cuda_actual_prerequisites_v2_20261011\transfer_originals_proposal.py
+@@ -1,7 +1,8 @@
+ """Future exact F/E->SSH stream; no local archive or scientific deserialization."""
+ from pathlib import Path
+-import argparse,base64,hashlib,io,json,shlex,subprocess,tarfile
++import argparse,base64,hashlib,io,json,shlex,subprocess,tarfile,time
+ HERE=Path(__file__).resolve().parent
++ORIGINAL=HERE.parent/'LoGo100_cuda_actual_prerequisites_20261011'
+ def need(ok,msg):
+     if not ok:raise ValueError(msg)
+ def sha(p):
+@@ -9,11 +10,24 @@
+     with p.open('rb') as f:
+         for b in iter(lambda:f.read(8*1024**2),b''):h.update(b)
+     return h.hexdigest()
++def drain_failed(process,exc):
++    if process is None:return b'',b'',None
++    if process.stdin is not None:
++        try:process.stdin.close()
++        except (BrokenPipeError,OSError):pass
++        process.stdin=None
++    if isinstance(exc,subprocess.TimeoutExpired) and process.poll() is None:process.kill()
++    try:return (*process.communicate(timeout=5),None)
++    except subprocess.TimeoutExpired:
++        if process.poll() is None:process.kill()
++        try:return (*process.communicate(timeout=10),None)
++        except subprocess.TimeoutExpired as last:
++            return last.output or b'',last.stderr or b'',repr(last)
+ def main():
+     p=argparse.ArgumentParser();p.add_argument('--root-approval',type=Path,required=True);p.add_argument('--root-approval-sha256',required=True);args=p.parse_args()
+     raw=args.root_approval.read_bytes();need(hashlib.sha256(raw).hexdigest()==args.root_approval_sha256,'Actual root approval SHA required');auth=json.loads(raw)
+     need(auth['execution_authorized'] is True and auth['status']=='ROOT_AUTHORIZED_ORIGINAL_LOGO_ARTIFACT_TRANSFER_ONLY','No transfer authorization')
+-    inventory=HERE/'ACTUAL_ORIGINAL_INVENTORY.json';receiver=HERE/'receive_originals_proposal.py'
++    inventory=ORIGINAL/'ACTUAL_ORIGINAL_INVENTORY.json';receiver=HERE/'receive_originals_proposal.py'
+     need(sha(inventory)==auth['inventory_sha256'] and sha(receiver)==auth['receiver_sha256'] and sha(Path(__file__))==auth['sender_sha256'],'Changed source/inventory')
+     guard=subprocess.run(['powershell','-NoProfile','-Command',"Get-Volume -DriveLetter F | Select-Object FileSystemLabel,HealthStatus,OperationalStatus,SizeRemaining,UniqueId | ConvertTo-Json"],capture_output=True,text=True,check=True)
+     volume=json.loads(guard.stdout);need(volume['FileSystemLabel']=='Yanan 2TB' and volume['HealthStatus']=='Healthy' and volume['OperationalStatus']=='OK' and volume['UniqueId']==auth['F_volume_unique_id'],'Wrong/offline F physical volume')
+@@ -21,8 +35,12 @@
+     # Source delivered as -c, while stdin remains the raw tar stream. shlex quotes
+     # exact UTF-8 source and base64 approval; no shell interpolation of paths.
+     command='env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 nice -n 10 ionice -c 3 python3 -B -c '+shlex.quote(receiver.read_text(encoding='utf8'))+' --approval-base64 '+shlex.quote(base64.b64encode(raw).decode())+' --approval-sha256 '+shlex.quote(args.root_approval_sha256)
+-    process=subprocess.Popen(['ssh','-p','60350','-o','BatchMode=yes','-o','ConnectTimeout=15','root@89.22.197.55',command],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
++    lognames=['TRANSFER.stdout','TRANSFER.stderr','ACTUAL_TRANSFER_COMMAND.json']
++    need(not any((HERE/n).exists() or (HERE/n).is_symlink() for n in lognames),'Preserve prior command evidence; no retry')
++    argv=['ssh','-p','60350','-o','BatchMode=yes','-o','ConnectTimeout=15','root@89.22.197.55',command]
++    process=None;stdout=b'';stderr=b'';error=None;drain_error=None;communicated=False;started=time.time()
+     try:
++        process=subprocess.Popen(argv,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+         with tarfile.open(fileobj=process.stdin,mode='w|',format=tarfile.PAX_FORMAT) as archive:
+             rawindex=inventory.read_bytes();entry=tarfile.TarInfo('ROOT_TRANSFER_INDEX.json');entry.size=len(rawindex);entry.mode=0o600;archive.addfile(entry,io.BytesIO(rawindex))
+             for row in index['members']:
+@@ -30,14 +48,19 @@
+                 entry=tarfile.TarInfo(row['relative_destination']);entry.size=row['bytes'];entry.mode=0o600
+                 with source.open('rb') as f:archive.addfile(entry,f)
+         process.stdin.close();process.stdin=None
+-        stdout,stderr=process.communicate(timeout=600)
++        stdout,stderr=process.communicate(timeout=600);communicated=True
++        need(process.returncode==0,'Transfer failed; preserve remote partial evidence, no retry')
++    except BaseException as exc:
++        error={'type':type(exc).__name__,'message':str(exc)}
++        # Do not communicate twice after a completed call: keep its exact bytes.
++        if not communicated:
++            stdout,stderr,drain_error=drain_failed(process,exc)
++        raise
++    finally:
+         # Compact logs only; preserve any partial remote destination on failure.
+         for name,data in [('TRANSFER.stdout',stdout),('TRANSFER.stderr',stderr)]:
+             with (HERE/name).open('xb') as f:f.write(data)
+-        result={'returncode':process.returncode,'root_approval_sha256':args.root_approval_sha256,'inventory_sha256':auth['inventory_sha256'],'sender_sha256':sha(Path(__file__)),'receiver_sha256':sha(receiver),'stdout_sha256':hashlib.sha256(stdout).hexdigest(),'stderr_sha256':hashlib.sha256(stderr).hexdigest(),'automatic_retry':False}
++        result={'argv':argv,'start_unix':started,'end_unix':time.time(),'returncode':process.returncode if process is not None else None,'exception':error,'drain_error':drain_error,'root_approval_sha256':args.root_approval_sha256,'inventory_sha256':auth['inventory_sha256'],'sender_sha256':sha(Path(__file__)),'receiver_sha256':sha(receiver),'stdout_sha256':hashlib.sha256(stdout).hexdigest(),'stderr_sha256':hashlib.sha256(stderr).hexdigest(),'automatic_retry':False}
+         with (HERE/'ACTUAL_TRANSFER_COMMAND.json').open('x',encoding='utf8') as f:json.dump(result,f,indent=2);f.write('\n')
+-        need(process.returncode==0,'Transfer failed; preserve remote partial evidence, no retry');print(stdout.decode())
+-    except BaseException:
+-        if process.poll() is None:process.kill();process.wait()
+-        raise
++    print(stdout.decode())
+ if __name__=='__main__':main()
+--- tmp\LoGo100_cuda_actual_prerequisites_20261011\create_cpu_environment_proposal.sh
++++ tmp\LoGo100_cuda_actual_prerequisites_v2_20261011\create_cpu_environment_proposal.sh
+@@ -5,12 +5,20 @@
+ test "$(sha256sum /etc/vast-agents-guide.md | cut -d ' ' -f1)" = '42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ LoGo_ENV='/workspace/guardfed_envs/logofair-frozen-post-cpu310-20261011'
+ test ! -e "$LoGo_ENV"
++test ! -L "$LoGo_ENV"
+ export CUDA_VISIBLE_DEVICES=''
+ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+ # Managed Python is isolated from /venv/main and current CUDA queues.
+ export UV_PYTHON_INSTALL_DIR='/workspace/guardfed_envs/logofair-python-managed-20261011'
++test ! -e "$UV_PYTHON_INSTALL_DIR"
++test ! -L "$UV_PYTHON_INSTALL_DIR"
+ nice -n 10 ionice -c 3 /usr/local/bin/uv python install 3.10
+ LoGo_PYTHON=$(/usr/local/bin/uv python find 3.10)
++LoGo_PYTHON=$(readlink -f "$LoGo_PYTHON")
++case "$LoGo_PYTHON" in
++  "$UV_PYTHON_INSTALL_DIR"/*) test -f "$LoGo_PYTHON" ;;
++  *) echo 'Refusing Python outside the exclusive managed directory' >&2; exit 1 ;;
++esac
+ nice -n 10 ionice -c 3 "$LoGo_PYTHON" -m venv --copies "$LoGo_ENV"
+ test -f "$LoGo_ENV/bin/python"
+ test ! -L "$LoGo_ENV/bin/python"

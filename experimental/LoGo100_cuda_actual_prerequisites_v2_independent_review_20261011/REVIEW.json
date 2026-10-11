@@ -1,0 +1,113 @@
+{
+  "status": "PASS_LIMITED_V2_SOURCE_REVIEW_RUNTIME_UNBOUND",
+  "review_utc": "2026-10-11T08:42:10.550266+00:00",
+  "source_adoptable": true,
+  "runtime_execution_authorized": false,
+  "candidate_pins": {
+    "FILES_SHA256.json": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/FILES_SHA256.json",
+      "sha256": "9fdbeeba73294387b3eef3102c2357466a90a873a26830b536be18a3c506eec4"
+    },
+    "HANDOFF.json": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/HANDOFF.json",
+      "sha256": "b46574be23dff3ea7f13cd4809a5ee35e62f9d6b9567d5ab14a0c49c228e1dd3"
+    },
+    "transfer_originals_proposal.py": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/transfer_originals_proposal.py",
+      "sha256": "66a8575f7b658d9ad859658c016eae8366a864650c29830da7cf83dd044ba853"
+    },
+    "receive_originals_proposal.py": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/receive_originals_proposal.py",
+      "sha256": "76bb8146eca66eab56fe8ac92ff21c4045ed78b51bd09da5e224f46a6cbc4a64"
+    },
+    "create_cpu_environment_proposal.sh": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/create_cpu_environment_proposal.sh",
+      "sha256": "c8881b16b5d5cbc5b9a82f3808b7f968f7ebd4eaf8ee079ad84bfc2cf7fb7334"
+    },
+    "DIFF.patch": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/DIFF.patch",
+      "sha256": "da0958319edcd855aca110ea3d0b641bcfcd828128fd56288e6e87542ab36874"
+    },
+    "INVERSE.json": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/INVERSE.json",
+      "sha256": "0375503109025c8a98d8f14390181a44401fc9fdf7189bab97a278d3fde1d0a4"
+    },
+    "SOURCE_CHECK.json": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/SOURCE_CHECK.json",
+      "sha256": "865172d821882785904edd14e73df3a2b40f343dc49049bb8c9876aa441cfaaa"
+    },
+    "TRANSFER_AUTH.template.json": {
+      "path": "tmp/LoGo100_cuda_actual_prerequisites_v2_20261011/TRANSFER_AUTH.template.json",
+      "sha256": "581cfddb9dafbbe04d896c4b2a4396c07de0615428096067faf3a2ff58e74d5f"
+    }
+  },
+  "prior_review": {
+    "path": "tmp/LoGo100_cuda_actual_prerequisites_independent_review_20261011/REVIEW.json",
+    "sha256": "5508c217b14a1c3a463a9a9a1f5a6bdb7fd5a6b5c380b65ef18dc8c4e9e3266b",
+    "seal_sha256": "0bd05ea349492474e312d72691ab4dc288c1a6b9f68af457c32c02c3e7ad05fa"
+  },
+  "prior_candidate_seal_sha256": "eca43efd64fef253f4227a75945fbe216215452fff7b3d153140e3bbae2e61f3",
+  "immutable_inventory_sha256": "926b478ea38d977f21151ddf3d2f7ca1cd14e6430caa2abcd8e1a699356b2a2b",
+  "closed_findings": {
+    "TRANSFER_EXCEPTION_EVIDENCE": {
+      "resolved": true,
+      "source_lines": [
+        13,
+        25,
+        53,
+        64
+      ],
+      "incomplete_drain_explicitly_not_success": true,
+      "normal_nonzero_exit_outputs_not_recommunicated": true,
+      "Popen_failure_recorded": true,
+      "exclusive_logs_no_retry": true
+    },
+    "ISOLATED_ENV_FRESHNESS_AND_PYTHON_SELECTION": {
+      "resolved": true,
+      "source_lines": [
+        7,
+        20
+      ],
+      "both_paths_e_and_L_refusal": true,
+      "canonical_selected_python_managed_prefix_required": true
+    }
+  },
+  "blocking_source_findings": [],
+  "independent_static_checks": {
+    "seal_member_count": 10,
+    "all_member_hash_and_size_exact": true,
+    "three_old_preimages_raw_exact": true,
+    "receiver_whole_file_raw_exact": true,
+    "sender_per_member_loop_raw_and_AST_exact": true,
+    "need_sha_functions_raw_and_AST_exact": true,
+    "compile_count": 3,
+    "proposals_raw_LF": true,
+    "template_future_authorization_false_and_destination_null": true,
+    "source_check_fixture_code_read_not_executed": true,
+    "original_712_artifacts_not_rehashed_by_reviewer": true
+  },
+  "required_runtime_gates": [
+    "actual root authorization pins V2 sender/receiver/immutable inventory/independent review and fresh destination",
+    "fresh guide/F physical volume guard",
+    "fresh CPU113 plus SMT369/all-task restricted owner/nominal quota/protected services and OS affinity thread1/nice10/idleIO",
+    "actual root-adopted FedAvg CUDA100 cache/index",
+    "actual restoration adoption",
+    "actual isolated installation metadata and executable/package pins",
+    "original Windows pickle/import compatibility on Linux",
+    "preserve any failure or partial remote destination without automatic retry"
+  ],
+  "actual_transfer": null,
+  "actual_environment": null,
+  "actual_scientific_acceptance": null,
+  "performed": {
+    "metadata_and_source_only": true,
+    "SSH": false,
+    "F": false,
+    "scientific_execution": false,
+    "fixture_execution": false,
+    "installation": false,
+    "original_candidate_edit": false,
+    "STATE_Git": false
+  },
+  "report_sha256": "d1c3caf86d0a7348bb11abbf5adcbeb2c3e1560795cf70e6d7278b13ec6cb485"
+}

@@ -43,3 +43,7 @@
 该800批的启动模块命名冲突与一次资源读取失败均保留在旧目录。第三目录 `uniform_cuda_formal_original800_20261011_attempt003` 复用第一次真正通过的FedAvg单例，仅新做固定FedAA/LASA两例。三例均通过原Linux完整保存验收（native三指标差0）、离机零拟合27指标/72计数/9预测规则核对及F盘85成员SHA备份，root记录 `tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json`。其余797项于07:46 UTC实际启动；07:54实测服务器累计23/800、无失败。本地严格采用3/800，不能把服务器进度直接等同论文验收。
 
 以上两批共冻结1300个互不重复的逻辑记录；本地严格CUDA采用共10（7+3），完整目标2500尚未齐备。FL100运行调用器和LoGo100冻结后处理缓存适配仍在源审查/输入准备阶段，未据方案称实际运行。LoGo需要完整、根采用的FedAvg CUDA100缓存后才可评价；原已冻结CPU netcal后处理状态保持不变，不通过新缓存重新择优或拟合。其余正在训练的方法和四控制需各自完成后增量接入，不启动未经冻结的finaltest。
+
+## 2026-10-11 08:20 UTC FL100实际执行追加
+
+FL100原终轮输入与七包身份冻结（cohort8c16d111…），未回填此前冻结时刻。固定screen IID Benign91001、fullcoverage non-IID F Flip91001和non-IID Sp-DFA91001均通过原Linux完整验收、native三指标差0、离机零拟合27指标/72计数/9规则及F盘77成员SHA核验。root tmp/FL100_cuda3_saved_closure_prepare_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json SHA e6db56a24eda9ea9840caba54958e79ee77bb427a4b11804e0b03b2462f8c905。2026-10-11T08:20:21Z在原namespace实际启动剩余97，service guardfed_uniform_cuda_FL100_remaining_valid；原顺序补集、CPU111/GPU0、单线程、原1e-12不变，无自动重试。共实际冻结1400逻辑记录，Full仍只一次；当前本地CUDA13不代表全比较或finaltest完成。LoGo仅源码已审，须FedAvg CUDA100根采用缓存、原poststate精确恢复和Linux CPU环境通过实际门后才能运行。

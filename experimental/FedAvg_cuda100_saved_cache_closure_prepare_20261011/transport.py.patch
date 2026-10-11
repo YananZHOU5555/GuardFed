@@ -1,0 +1,76 @@
+--- mixed_v2/transport.py
++++ FedAvg100/transport.py
+@@ -1,6 +1,6 @@
+ from pathlib import Path,PurePosixPath
+ import argparse,base64,datetime,hashlib,json,subprocess,sys,tarfile
+-R=Path.cwd();H=R/'tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2';sys.path.insert(0,str(R/'tmp'))
++R=Path.cwd();H=R/'tmp/FedAvg_cuda100_saved_cache_closure_prepare_20261011';sys.path.insert(0,str(R/'tmp'))
+ from guardfed_local_storage import check_bulk_storage
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def put(p,v):
+@@ -19,7 +19,7 @@
+ assert set(inp['deployment_sha256'])==set(template['producers']) and all(isinstance(v,str) and len(v)==64 for v in inp['deployment_sha256'].values())
+ assert isinstance(inp['cohort_sha256'],str) and len(inp['cohort_sha256'])==64
+ assert isinstance(inp['attempt002_failure']['sha256'],str) and len(inp['attempt002_failure']['sha256'])==64
+-volume=check_bulk_storage(50*1024**2);F=Path('F:/YananResearchStorage/GuardFed/uniform_cuda_old800_20261011/canary3_mixed_attempt003');assert not F.exists();F.mkdir(parents=True)
++volume=check_bulk_storage(250*1024**2);F=Path('F:/YananResearchStorage/GuardFed/uniform_cuda_old800_20261011/FedAvg100_mixed_attempt003');assert not F.exists();F.mkdir(parents=True)
+ code=r'''
+ from pathlib import Path
+ import base64,datetime,hashlib,json,tarfile,os
+@@ -36,7 +36,7 @@
+ inp=json.loads(base64.b64decode('__ROOT_INPUTS__'))
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();read=lambda p:json.loads(Path(p).read_bytes())
+ canonical=lambda v:hashlib.sha256(json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+-ids=inp['exact_ids'];assert ids==['FedAvg_IID_Benign_seed91001','FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001','LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen']
++ids=inp['exact_ids'];assert ids==['FedAvg_IID_Benign_seed91001', 'FedAvg_IID_Benign_seed91002', 'FedAvg_IID_Benign_seed91003', 'FedAvg_IID_Benign_seed91004', 'FedAvg_IID_Benign_seed91005', 'FedAvg_IID_Benign_seed91006', 'FedAvg_IID_Benign_seed91007', 'FedAvg_IID_Benign_seed91008', 'FedAvg_IID_Benign_seed91009', 'FedAvg_IID_Benign_seed91010', 'FedAvg_IID_F-Flip_seed91001', 'FedAvg_IID_F-Flip_seed91002', 'FedAvg_IID_F-Flip_seed91003', 'FedAvg_IID_F-Flip_seed91004', 'FedAvg_IID_F-Flip_seed91005', 'FedAvg_IID_F-Flip_seed91006', 'FedAvg_IID_F-Flip_seed91007', 'FedAvg_IID_F-Flip_seed91008', 'FedAvg_IID_F-Flip_seed91009', 'FedAvg_IID_F-Flip_seed91010', 'FedAvg_IID_FedSA_seed91001', 'FedAvg_IID_FedSA_seed91002', 'FedAvg_IID_FedSA_seed91003', 'FedAvg_IID_FedSA_seed91004', 'FedAvg_IID_FedSA_seed91005', 'FedAvg_IID_FedSA_seed91006', 'FedAvg_IID_FedSA_seed91007', 'FedAvg_IID_FedSA_seed91008', 'FedAvg_IID_FedSA_seed91009', 'FedAvg_IID_FedSA_seed91010', 'FedAvg_IID_S-DFA_seed91001', 'FedAvg_IID_S-DFA_seed91002', 'FedAvg_IID_S-DFA_seed91003', 'FedAvg_IID_S-DFA_seed91004', 'FedAvg_IID_S-DFA_seed91005', 'FedAvg_IID_S-DFA_seed91006', 'FedAvg_IID_S-DFA_seed91007', 'FedAvg_IID_S-DFA_seed91008', 'FedAvg_IID_S-DFA_seed91009', 'FedAvg_IID_S-DFA_seed91010', 'FedAvg_IID_Sp-DFA_seed91001', 'FedAvg_IID_Sp-DFA_seed91002', 'FedAvg_IID_Sp-DFA_seed91003', 'FedAvg_IID_Sp-DFA_seed91004', 'FedAvg_IID_Sp-DFA_seed91005', 'FedAvg_IID_Sp-DFA_seed91006', 'FedAvg_IID_Sp-DFA_seed91007', 'FedAvg_IID_Sp-DFA_seed91008', 'FedAvg_IID_Sp-DFA_seed91009', 'FedAvg_IID_Sp-DFA_seed91010', 'FedAvg_lr0.002_Benign_seed91001', 'FedAvg_lr0.002_Benign_seed91002', 'FedAvg_lr0.002_Benign_seed91003', 'FedAvg_lr0.002_Benign_seed91004', 'FedAvg_non-IID_Benign_seed91005', 'FedAvg_non-IID_Benign_seed91006', 'FedAvg_non-IID_Benign_seed91007', 'FedAvg_non-IID_Benign_seed91008', 'FedAvg_non-IID_Benign_seed91009', 'FedAvg_non-IID_Benign_seed91010', 'FedAvg_non-IID_F-Flip_seed91001', 'FedAvg_non-IID_F-Flip_seed91002', 'FedAvg_non-IID_F-Flip_seed91003', 'FedAvg_non-IID_F-Flip_seed91004', 'FedAvg_non-IID_F-Flip_seed91005', 'FedAvg_non-IID_F-Flip_seed91006', 'FedAvg_non-IID_F-Flip_seed91007', 'FedAvg_non-IID_F-Flip_seed91008', 'FedAvg_non-IID_F-Flip_seed91009', 'FedAvg_non-IID_F-Flip_seed91010', 'FedAvg_non-IID_FedSA_seed91001', 'FedAvg_non-IID_FedSA_seed91002', 'FedAvg_non-IID_FedSA_seed91003', 'FedAvg_non-IID_FedSA_seed91004', 'FedAvg_non-IID_FedSA_seed91005', 'FedAvg_non-IID_FedSA_seed91006', 'FedAvg_non-IID_FedSA_seed91007', 'FedAvg_non-IID_FedSA_seed91008', 'FedAvg_non-IID_FedSA_seed91009', 'FedAvg_non-IID_FedSA_seed91010', 'FedAvg_lr0.002_S-DFA_seed91001', 'FedAvg_lr0.002_S-DFA_seed91002', 'FedAvg_lr0.002_S-DFA_seed91003', 'FedAvg_lr0.002_S-DFA_seed91004', 'FedAvg_non-IID_S-DFA_seed91005', 'FedAvg_non-IID_S-DFA_seed91006', 'FedAvg_non-IID_S-DFA_seed91007', 'FedAvg_non-IID_S-DFA_seed91008', 'FedAvg_non-IID_S-DFA_seed91009', 'FedAvg_non-IID_S-DFA_seed91010', 'FedAvg_non-IID_Sp-DFA_seed91001', 'FedAvg_non-IID_Sp-DFA_seed91002', 'FedAvg_non-IID_Sp-DFA_seed91003', 'FedAvg_non-IID_Sp-DFA_seed91004', 'FedAvg_non-IID_Sp-DFA_seed91005', 'FedAvg_non-IID_Sp-DFA_seed91006', 'FedAvg_non-IID_Sp-DFA_seed91007', 'FedAvg_non-IID_Sp-DFA_seed91008', 'FedAvg_non-IID_Sp-DFA_seed91009', 'FedAvg_non-IID_Sp-DFA_seed91010']
+ producers={'attempt002':'/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt002','attempt003':'/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt003'}
+ record_producers={i:('attempt002' if n==0 else 'attempt003') for n,i in enumerate(ids)}
+ assert inp['producers']==producers and inp['record_producers']==record_producers
+@@ -51,18 +51,21 @@
+  auth=read(B/'ROOT_QUEUE_AUTH.json')
+  assert auth['execution_authorized'] is True and auth['ordered_ids']==cohort['ordered_ids']
+  assert auth['exact_cohort']=={'path':str(B/'EXACT800_INPUTS.json'),'sha256':inp['cohort_sha256']}
+- assert {i for i in ids if record_producers[i]==producer}<=set(auth['canary_ids'])
++ assert {i for i in ids if record_producers[i]==producer}<=set(auth['ordered_ids'])
+  for proc in Path('/proc').glob('[0-9]*'):
+   try:
+    argv=[v.decode(errors='replace') for v in (proc/'cmdline').read_bytes().split(b'\0') if v]
+-   assert not (str(B/'worker.py') in argv or (str(B/'run_queue.py') in argv and 'canary' in argv)),('Selected producer still live',producer,proc.name)
++   if str(B/'worker.py') in argv:
++    assert '--approval' in argv and argv.index('--approval')+1<len(argv),('Unidentified producer worker',proc.name)
++    approval_path=Path(argv[argv.index('--approval')+1]);worker_approval=read(approval_path)
++    assert worker_approval['id'] not in ids,('Selected FedAvg producer still live',producer,proc.name)
+   except (FileNotFoundError,ProcessLookupError):continue
+ B=Path(producers['attempt003']);assert not (B/'canary/QUEUE_FAILURE.json').exists()
+ failure=Path(producers['attempt002'])/'canary/QUEUE_FAILURE.json'
+-assert inp['attempt002_failure']=={'path':str(failure),'sha256':sha(failure)} and read(failure)['id']==ids[1]
+-export=B/'exports/old800_fixed3_mixed_saved_audit_attempt001';assert not export.exists();export.mkdir(parents=True)
+-selected=[next(r for r in cohort['records'] if r['id']==i) for i in ids]
+-selection=dict(scope='ORIGINAL800_FIXED3_MIXED_PRODUCER_SELECTION_V2',exact_ids=ids,records=selected,
++assert inp['attempt002_failure']=={'path':str(failure),'sha256':sha(failure)} and read(failure)['id']=='FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001'
++export=B/'exports/FedAvg100_mixed_saved_audit_attempt001';assert not export.exists();export.mkdir(parents=True)
++selected=[r for r in cohort['records'] if r['method']=='FedAvg'];assert [r['id'] for r in selected]==ids and len(selected)==100
++selection=dict(scope='ORIGINAL800_FEDAVG100_MIXED_PRODUCER_SELECTION_V1',exact_ids=ids,records=selected,
+  producers=producers,record_producers=record_producers,full_cohort_sha256=inp['cohort_sha256'],original_count=800,
+  ordered_full_ids_sha256=canonical(cohort['ordered_ids']),original_inventory_sha256=cohort['original_inventory_sha256'],
+  Full_excluded_and_reused_separately=cohort['Full_excluded_and_reused_separately'],selection_basis=cohort['selection_basis'],
+@@ -92,6 +95,10 @@
+  assert binding['id']==identity and binding['receipt_sha256']==sha(out/'receipt.json') and binding['approval_sha256']==sha(task/'approval.json') and binding['input_scope_sha256']==inp['cohort_sha256']
+  assert binding['source_before']==binding['source_after'] and binding['artifact_before']==binding['artifact_after']
+  assert not (out.parent/(identity+'.formal_failure.json')).exists()
++ record=next(r for r in selected if r['id']==identity)
++ originals=[Path(path) for path,meta in binding['artifact_before'].items() if meta['sha256']==record['result']['sha256']]
++ assert len(originals)==1 and sha(originals[0])==record['result']['sha256'] and originals[0].stat().st_size==record['result']['bytes']
++ files['original_results/'+identity+'.json']=originals[0]
+  for name in ['approval.json','preflight.json','preflight_command.json','worker_command.json','ACCEPTED.json']:
+   files[producer+'/tasks/'+identity+'/'+name]=task/name
+  for name in ['receipt.json','validation_predictions.npz','formal_binding.json','formal_saved_acceptance.json']:
+@@ -109,7 +116,7 @@
+ '''
+ code=code.replace('__ROOT_INPUTS__',base64.b64encode(json.dumps(inp,allow_nan=False).encode()).decode())
+ cmd=['ssh','-p','60350','-o','BatchMode=yes','-o','ConnectTimeout=20','root@89.22.197.55','env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 taskset -c 110 nice -n 10 ionice -c 3 python3 -B -']
+-p=subprocess.run(cmd,input=code.encode(),capture_output=True,timeout=90)
++p=subprocess.run(cmd,input=code.encode(),capture_output=True,timeout=300)
+ (H/'OLD800_FIXED3_ATTEMPT1_BACKUP.stdout').write_bytes(p.stdout);(H/'OLD800_FIXED3_ATTEMPT1_BACKUP.stderr').write_bytes(p.stderr)
+ put(H/'OLD800_FIXED3_ATTEMPT1_BACKUP_COMMAND.json',dict(command=cmd,payload_sha256=hashlib.sha256(code.encode()).hexdigest(),exit_code=p.returncode,utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),stdout_sha256=sha(H/'OLD800_FIXED3_ATTEMPT1_BACKUP.stdout'),stderr_sha256=sha(H/'OLD800_FIXED3_ATTEMPT1_BACKUP.stderr')))
+ assert p.returncode==0,p.stderr.decode(errors='replace');remote=json.loads(p.stdout)
