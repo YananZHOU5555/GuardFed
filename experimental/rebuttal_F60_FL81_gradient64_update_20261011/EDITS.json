@@ -1,0 +1,57 @@
+[
+  {
+    "old": "accepted five-scene F-deletion, eight-complete-scene FLGMM",
+    "new": "accepted six-scene F-deletion, eight-complete-scene FLGMM",
+    "count": 1
+  },
+  {
+    "old": "350 native and 350 three-view mechanism checkpoints, F50",
+    "new": "360 native and 360 three-view mechanism checkpoints, F60",
+    "count": 1
+  },
+  {
+    "old": "plus F-deletion results for all five IID scenarios—Benign, F Flip, FedSA, S-DFA and Sp-DFA—each with ten paired seeds.",
+    "new": "plus F-deletion results for all five IID scenarios—Benign, F Flip, FedSA, S-DFA and Sp-DFA—and non-IID Benign, each with ten paired seeds.",
+    "count": 1
+  },
+  {
+    "old": "The five non-IID F scenes and four other image controls remain unfinished; this is not F100 or an all-component completion claim.",
+    "new": "The [six-scene F extension](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/TABLES.md) additionally includes non-IID Benign (α=5) with ten paired seeds under the same checkpoint and prediction-view rules. The other four non-IID F scenes and four other image controls remain unfinished; this is not F100 or an all-component completion claim.",
+    "count": 1
+  },
+  {
+    "old": "U100 + C100 + A100 + F50 = 350 deletion checkpoints",
+    "new": "U100 + C100 + A100 + F60 = 360 deletion checkpoints",
+    "count": 1
+  },
+  {
+    "old": "Native and three-view acceptance both cover these 350/800 deletion checkpoints at this cutoff.",
+    "new": "Native and three-view acceptance both cover these 360/800 deletion checkpoints at this cutoff.",
+    "count": 1
+  },
+  {
+    "old": "For these five F scenes, the reused Full predictions comprise 3 CPU and 47 GPU evaluations, whereas all 50 F-deletion evaluations use CPU; the selected models all retain their recorded Torch 2.11.0+cu128 training provenance.",
+    "new": "Within the original five IID F scenes, the reused Full predictions comprise 3 CPU and 47 GPU evaluations, whereas all 50 F-deletion evaluations use CPU; those selected models all retain their recorded Torch 2.11.0+cu128 training provenance. Across the six-scene extension, Full has 5 CPU and 55 GPU evaluations, whereas all 60 F-deletion evaluations use CPU. The corresponding training provenance is 59 cu128 and one cu130 Full checkpoint, versus 60 cu128 deletion checkpoints.",
+    "count": 1
+  },
+  {
+    "old": "Correlated scores, compensation by candidate selection and root-estimation variability are plausible explanations, not isolated causes.",
+    "new": "The added non-IID Benign scene retains another utility–disparity trade-off. The table below reports the existing paired differences (minus_F−Full, mean±sample SD, ddof=1) for each fixed panel:\n\n| Prediction view | n | ΔACC (percentage points) | ΔAEOD | ΔASPD |\n|---|---:|---:|---:|---:|\n| Native/shared | 10 | +0.175 ± 1.283 | +0.00227 ± 0.00752 | +0.00425 ± 0.01616 |\n| Native/shared | 9 | +0.336 ± 1.248 | +0.00260 ± 0.00790 | +0.00582 ± 0.01631 |\n| Native/shared | 6 | -0.028 ± 1.290 | +0.00216 ± 0.00899 | +0.00154 ± 0.01804 |\n| Raw | 10 | +0.130 ± 1.188 | +0.00835 ± 0.01020 | +0.00724 ± 0.01106 |\n| Raw | 9 | +0.285 ± 1.148 | +0.00936 ± 0.01029 | +0.00875 ± 0.01057 |\n| Raw | 6 | -0.024 ± 1.140 | +0.00624 ± 0.00882 | +0.00533 ± 0.01116 |\n\nIn both the ten- and nine-seed panels, removing F increases mean accuracy while worsening both disparities, for raw as well as native/shared predictions. The six-seed panel reverses the accuracy direction: Full has higher mean accuracy and lower mean disparities in all three views. Native and shared results coincide and are not independent confirmations. These are descriptive paired means from matched round-70 checkpoints, not claims about every seed or statistical significance. We retain all panels, including the accuracy reversal; neither a selected subset nor the mixed environments identifies an isolated causal effect. The primary endpoint remains undecided, and no cross-scene F aggregate or untouched-test confirmation is supplied.\n\nCorrelated scores, compensation by candidate selection and root-estimation variability are plausible explanations, not isolated causes.",
+    "count": 1
+  },
+  {
+    "old": "alongside A100, F50, the IID Benign hybrid-control evidence and the gradient search. This FLGMM prose expansion has not yet been published in that fixed commit.",
+    "new": "alongside A100, F60, the IID Benign hybrid-control evidence and the gradient search. That fixed Git64 release stops at F50; the new non-IID Benign F-deletion evidence and this F60/FLGMM prose expansion have not yet been published in it.",
+    "count": 1
+  },
+  {
+    "old": "At this draft's accepted cutoff, 350 deletion checkpoints have complete three-view evidence: U100, C100 and A100 each cover all ten cells, and F50 covers all five IID scenes with ten paired seeds per scene. The remaining 450 planned mechanism-control checkpoints comprise 50 non-IID F-deletion runs and 100 runs for each of four other controls. Native acceptance is also 350/800, leaving 450 without native acceptance; that is not a claim that all 450 remain untrained.",
+    "new": "At this draft's accepted cutoff, 360 deletion checkpoints have complete three-view evidence: U100, C100 and A100 each cover all ten cells, and F60 covers all five IID scenes plus non-IID Benign with ten paired seeds per scene. The remaining 440 planned mechanism-control checkpoints comprise 40 runs for the other four non-IID F-deletion scenes and 100 runs for each of four other controls. Native acceptance is also 360/800, leaving 440 without native acceptance; that is not a claim that all 440 remain untrained.",
+    "count": 1
+  },
+  {
+    "old": "- [Completed 64-run Fed-NGA/Huber validation-search records and retained negative outcomes]",
+    "new": "- [F-deletion extension: five IID scenes plus non-IID Benign, matched raw/native/shared tables](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/TABLES.md).\n- [Completed 64-run Fed-NGA/Huber validation-search records and retained negative outcomes]",
+    "count": 1
+  }
+]

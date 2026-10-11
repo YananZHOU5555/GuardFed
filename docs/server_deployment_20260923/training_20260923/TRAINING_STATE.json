@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791676603.110861,
+  "updated_unix": 1791679720.407132,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -189,7 +189,6 @@
     "guardfed_celeba_mechanism_formal",
     "guardfed_celeba_flgmm_fullcoverage",
     "guardfed_celeba_mechanism_remaining620_valid_v2a",
-    "guardfed_celeba_gradient_screen64_v2a",
     "guardfed_celeba_hybrid_fullcoverage"
   ],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
@@ -201,166 +200,63 @@
     "notes": "254CPU matches plus6originalGPU matches; rawCPU mismatch files preserved."
   },
   "last_health_check": {
-    "checked_utc": "2026-10-10T17:33:53.592547+00:00",
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+    "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+    "checked_utc": "2026-10-11T00:41:52.396973+00:00",
     "server": "89.22.197.55:60350",
     "instance": 52183675,
-    "phase": "formal",
-    "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 11:14:57",
-    "queue_completed": 300,
-    "failed": [],
-    "failure_files": [],
-    "active": [
+    "phase": "multiple_authorized_queues",
+    "queue_completed": 360,
+    "active": 8,
+    "pending": 432,
+    "failed": 0,
+    "resources": {
+      "cpu.max": "12287999 100000",
+      "cpu.stat": "usage_usec 4539250900350\nuser_usec 3694864968952\nsystem_usec 844385931398\ncore_sched.force_idle_usec 0\nnr_periods 13222936\nnr_throttled 775\nthrottled_usec 4669417723\nnr_bursts 0\nburst_usec 0",
+      "memory.current": "76318625792",
+      "memory.max": "519171997696",
+      "memory.peak": "87059689472",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "memory.events.local": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "GPU": [
       {
-        "id": "minus_F_IID_Benign_seed91001",
-        "pid": 94414,
-        "progress": {
-          "round": 63,
-          "metrics": {
-            "accuracy": 0.8717471183369406,
-            "aeod": 0.009780034901924028,
-            "aspd": 0.04603000278080255
-          },
-          "job_id": "minus_F_IID_Benign_seed91001",
-          "pid": 94414,
-          "elapsed_sec": 3046.8763892650604,
-          "updated_unix": 1791653584.2715805
+        "id": "00000000:41:00.0",
+        "uuid": "GPU-da357477-30a7-fddc-344b-a20513b9a2d0",
+        "name": "NVIDIA GeForce RTX 5090",
+        "utilization_gpu": "100 %",
+        "memory": {
+          "used": "6036 MiB",
+          "free": "26075 MiB",
+          "total": "32607 MiB"
         },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91001.json "
+        "temperature_gpu": "67 C",
+        "recovery_fields": {
+          "gpu_recovery_action": "None",
+          "route_recovery_in_progress": "N/A",
+          "access_timeout_recovery": "N/A"
+        }
       },
       {
-        "id": "minus_F_IID_Benign_seed91002",
-        "pid": 94478,
-        "progress": {
-          "round": 60,
-          "metrics": {
-            "accuracy": 0.8889615946041174,
-            "aeod": 0.004091959474542883,
-            "aspd": 0.0659048963037544
-          },
-          "job_id": "minus_F_IID_Benign_seed91002",
-          "pid": 94478,
-          "elapsed_sec": 2903.9452607631683,
-          "updated_unix": 1791653626.5871515
+        "id": "00000000:61:00.0",
+        "uuid": "GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae",
+        "name": "NVIDIA GeForce RTX 5090",
+        "utilization_gpu": "100 %",
+        "memory": {
+          "used": "5039 MiB",
+          "free": "27073 MiB",
+          "total": "32607 MiB"
         },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91002.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91003",
-        "pid": 94508,
-        "progress": {
-          "round": 59,
-          "metrics": {
-            "accuracy": 0.8690290431368601,
-            "aeod": 0.012097762161043413,
-            "aspd": 0.06159174033865933
-          },
-          "job_id": "minus_F_IID_Benign_seed91003",
-          "pid": 94508,
-          "elapsed_sec": 2867.1477434635162,
-          "updated_unix": 1791653624.9801092
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91003.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91004",
-        "pid": 95056,
-        "progress": {
-          "round": 48,
-          "metrics": {
-            "accuracy": 0.8822167413298435,
-            "aeod": 0.004025295526608685,
-            "aspd": 0.06924088525482608
-          },
-          "job_id": "minus_F_IID_Benign_seed91004",
-          "pid": 95056,
-          "elapsed_sec": 2339.6586787700653,
-          "updated_unix": 1791653627.569478
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91004.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91005",
-        "pid": 95305,
-        "progress": {
-          "round": 20,
-          "metrics": {
-            "accuracy": 0.7425882116071878,
-            "aeod": 0.006725232563594141,
-            "aspd": 0.002796326306340413
-          },
-          "job_id": "minus_F_IID_Benign_seed91005",
-          "pid": 95305,
-          "elapsed_sec": 1054.0262699127197,
-          "updated_unix": 1791653617.4262178
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91005.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91006",
-        "pid": 95385,
-        "progress": {
-          "round": 11,
-          "metrics": {
-            "accuracy": 0.6525393869230383,
-            "aeod": 0.00038235121481366985,
-            "aspd": 0.022544604916600708
-          },
-          "job_id": "minus_F_IID_Benign_seed91006",
-          "pid": 95385,
-          "elapsed_sec": 608.7206819057465,
-          "updated_unix": 1791653615.0901082
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91006.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91007",
-        "pid": 95417,
-        "progress": {
-          "round": 9,
-          "metrics": {
-            "accuracy": 0.5544873408164293,
-            "aeod": 0.0035390824466611237,
-            "aspd": 0.013263476886954395
-          },
-          "job_id": "minus_F_IID_Benign_seed91007",
-          "pid": 95417,
-          "elapsed_sec": 508.64456152915955,
-          "updated_unix": 1791653585.7897294
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91007.json "
-      },
-      {
-        "id": "minus_F_IID_Benign_seed91008",
-        "pid": 95534,
-        "progress": {
-          "round": 4,
-          "metrics": {
-            "accuracy": 0.5166859616449389,
-            "aeod": 0.0005805515239477503,
-            "aspd": 0.0004729250413809411
-          },
-          "job_id": "minus_F_IID_Benign_seed91008",
-          "pid": 95534,
-          "elapsed_sec": 217.22935223579407,
-          "updated_unix": 1791653616.4224098
-        },
-        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91008.json "
+        "temperature_gpu": "61 C",
+        "recovery_fields": {
+          "gpu_recovery_action": "None",
+          "route_recovery_in_progress": "N/A",
+          "access_timeout_recovery": "N/A"
+        }
       }
     ],
-    "pending": 492,
-    "queue_updated_unix": 1791653627.7757943,
-    "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 100 %, 6036 MiB, 64\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 100 %, 6038 MiB, 62\n",
-    "gpu_recovery": [
-      "GPU Recovery Action                                : None",
-      "GPU Recovery Action                                : None"
-    ],
-    "cpu_used_cores_2sec": 12.014965469220101,
-    "cpu_quota_cores": 122.87999,
-    "memory_used_bytes": 78084767744,
-    "memory_limit": "519171997696",
-    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
-    "disk_free_bytes": 1059986628608,
-    "recent_active_log_errors": []
+    "disk_free_bytes": 1059602677760,
+    "scope": "Readonly snapshot; no scientific acceptance comes from PID/RUNNING/utilization."
   },
   "celeba_tuning_v1": {
     "status": "complete_verified_backed_up",
@@ -2754,8 +2650,8 @@
     "status": "FORMAL800_RUNNING",
     "new_total_prepared": 800,
     "reused_full": 100,
-    "new_completed": 350,
-    "new_started": 360,
+    "new_completed": 360,
+    "new_started": 368,
     "prepared_gate_jobs": 18,
     "reference_jobs": 2,
     "cpu_component_tests_passed": 6,
@@ -2767,9 +2663,9 @@
     "real_image_cu130_gates_accepted": 20,
     "current_runtime": "torch2.11.0+cu128 driver595.84",
     "preflight_queue_completed": 20,
-    "scientific_results_completed": 350,
-    "queue_completed_observed": 352,
-    "scientific_results_strictly_accepted": 350,
+    "scientific_results_completed": 360,
+    "queue_completed_observed": 360,
+    "scientific_results_strictly_accepted": 360,
     "real_image_cu128_gates_accepted": 20,
     "cross_runtime_three_round_exact": 20,
     "full_reuse_strictly_accepted": 100,
@@ -2777,10 +2673,10 @@
     "dispatch_receipt_sha256": "5d1bddcf5622904edfaf528981df95f2a82db0cb7178224d693f6be5eb21b189",
     "validation_only": true,
     "test_started": false,
-    "scientific_results_offserver_verified": 350,
-    "science_acceptance_inspection": "server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/inspection/inspection.json",
-    "latest_science_backup_sha256": "fed2b44c97abb3313956913cbe1cf4e66885e64d3d64aec935c3c4b46bda2390",
-    "latest_science_backup_members_verified": 102,
+    "scientific_results_offserver_verified": 360,
+    "science_acceptance_inspection": "server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261011T002530Z/inspection/inspection.json",
+    "latest_science_backup_sha256": "2307a246e95c17e96d265b95b0be1fe65e63cfcc65a080d60df477781e6f5916",
+    "latest_science_backup_members_verified": 110,
     "backup_tool_version": "evidence_v4.py; sealed v1/v2/v3 and original five-model archive unchanged",
     "active_partial_outputs_are_pending": true,
     "mechanism_raw_native_shared_evaluation": "INCREMENTAL_STRICT_VALID_REPLAYS_OFFSERVER_VERIFIED",
@@ -3432,10 +3328,26 @@
           "minus_F_IID_Sp-DFA_seed91010"
         ],
         "members_verified": 102
+      },
+      {
+        "archive_sha256": "2307a246e95c17e96d265b95b0be1fe65e63cfcc65a080d60df477781e6f5916",
+        "new_ids": [
+          "minus_F_non-IID_Benign_seed91001",
+          "minus_F_non-IID_Benign_seed91002",
+          "minus_F_non-IID_Benign_seed91003",
+          "minus_F_non-IID_Benign_seed91004",
+          "minus_F_non-IID_Benign_seed91005",
+          "minus_F_non-IID_Benign_seed91006",
+          "minus_F_non-IID_Benign_seed91007",
+          "minus_F_non-IID_Benign_seed91008",
+          "minus_F_non-IID_Benign_seed91009",
+          "minus_F_non-IID_Benign_seed91010"
+        ],
+        "members_verified": 110
       }
     ],
-    "three_view_new_models_accepted": 350,
-    "three_view_new_models_offserver_verified": 350,
+    "three_view_new_models_accepted": 360,
+    "three_view_new_models_offserver_verified": 360,
     "three_view_accepted_ids": [
       "minus_U_IID_Benign_seed91001",
       "minus_U_IID_Benign_seed91002",
@@ -3786,11 +3698,21 @@
       "minus_F_IID_Sp-DFA_seed91007",
       "minus_F_IID_Sp-DFA_seed91008",
       "minus_F_IID_Sp-DFA_seed91009",
-      "minus_F_IID_Sp-DFA_seed91010"
+      "minus_F_IID_Sp-DFA_seed91010",
+      "minus_F_non-IID_Benign_seed91001",
+      "minus_F_non-IID_Benign_seed91002",
+      "minus_F_non-IID_Benign_seed91003",
+      "minus_F_non-IID_Benign_seed91004",
+      "minus_F_non-IID_Benign_seed91005",
+      "minus_F_non-IID_Benign_seed91006",
+      "minus_F_non-IID_Benign_seed91007",
+      "minus_F_non-IID_Benign_seed91008",
+      "minus_F_non-IID_Benign_seed91009",
+      "minus_F_non-IID_Benign_seed91010"
     ],
     "three_view_native_max_abs_difference": 0,
-    "three_view_root_proof_sha256": "3f7b436e0b2fec0401d7bf6117d6dca48aef21c185b6f170d37954e2cafee5a4",
-    "three_view_scope_limit": "U/C/A each100 plus F50; native350 and saved-view350 accepted. Five nonIID F scenes50 plus four controls400 remain450. Validation only; prediction-rule tradeoffs retained, no universal necessity/significance/final-test claim.",
+    "three_view_root_proof_sha256": "ca558d6e558d26afe6b172b65eded83b51ad02eedddc0f9e2d2cbadf7cdf5a11",
+    "three_view_scope_limit": "U/C/A each100, F60: five IID scenes plus non-IID Benign. Remaining four nonIID F scenes40 plus four controls400. All accepted views are validation; no universal necessity/significance/final-test claim.",
     "original_two_engineering_failures_preserved": true,
     "remaining_seven_valid_replay": {
       "status": "SEVEN_COMPLETE_STRICT_OFFSERVER_AND_ROOT_INDEPENDENTLY_ACCEPTED",
@@ -4338,7 +4260,7 @@
       "minus_U": 100,
       "minus_C": 100,
       "minus_A": 100,
-      "minus_F": 50
+      "minus_F": 60
     },
     "C1_valid_gate": {
       "status": "SINGLE_C_GATE_COMPLETE_STRICT_OFFSERVER",
@@ -5052,8 +4974,8 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": true
     },
-    "latest_three_view_index": "tmp/celeba_mechanism_remaining_F_SpDFA10_root_adoption_20261011/MECHANISM350_INDEX.json",
-    "latest_three_view_index_sha256": "5b24956b4f14707e2a284fe73ffb538545b4aad218c833e31427720402ff02b3",
+    "latest_three_view_index": "tmp/celeba_mechanism_remaining_F_nonIID_Benign10_root_adoption_20261011/MECHANISM360_INDEX.json",
+    "latest_three_view_index_sha256": "16299ca4ade394a1b89edb3f9230845cda7ce826c783645b9aada4ea359a5c37",
     "A_three_view_five_scene_table": {
       "status": "ROOT_A50_FIVE_COMPLETE_IID_SCENE_THREE_VIEW_TABLE_ADOPTED",
       "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md",
@@ -5183,10 +5105,10 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": true
     },
-    "queue_observation_utc": "2026-10-10T23:50:58.834797+00:00",
-    "queue_observation_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
+    "queue_observation_utc": "2026-10-11T00:41:52.396973+00:00",
+    "queue_observation_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
     "queue_active_observed": 8,
-    "queue_pending_observed": 440,
+    "queue_pending_observed": 432,
     "queue_failures_observed": 0,
     "F_three_view_single_scene_table": {
       "status": "ROOT_F10_SINGLE_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
@@ -5224,7 +5146,7 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": false
     },
-    "new_started_observation_utc": "2026-10-10T23:50:58.834797+00:00",
+    "new_started_observation_utc": "2026-10-11T00:41:52.396973+00:00",
     "F_three_view_two_scene_table": {
       "root_adoption": true,
       "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_two_scenes20_20261011/TABLES.md",
@@ -5243,8 +5165,8 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": false
     },
-    "latest_native_root_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/ROOT_DELTA_VERIFICATION.json",
-    "latest_native_root_proof_sha256": "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770",
+    "latest_native_root_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261011T002530Z/ROOT_DELTA_VERIFICATION.json",
+    "latest_native_root_proof_sha256": "396e40654b6dfc75029d4a7a42dbfafe4caaf111a872ae2ece5045f6d1203418",
     "native_after320_root_adoption": {
       "new_accepted": 13,
       "total_accepted": 333,
@@ -5308,10 +5230,10 @@
       "whole_rebuttal_complete": false
     },
     "latest_native_root": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/ROOT_DELTA_VERIFICATION.json",
-      "sha256": "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770"
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261011T002530Z/ROOT_DELTA_VERIFICATION.json",
+      "sha256": "396e40654b6dfc75029d4a7a42dbfafe4caaf111a872ae2ece5045f6d1203418"
     },
-    "native_unaccepted": 450,
+    "native_unaccepted": 440,
     "F_three_view_five_scene_table": {
       "root_proof_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_five_scenes50_20261011/ROOT_VERIFICATION.json",
       "root_proof_sha256": "cf89d438b80f48df617c994084a69d8d913cf7dc35c65c762d8800517b89590b",
@@ -5328,6 +5250,42 @@
       "display_cells": 405,
       "validation_only": true,
       "final_test": false,
+      "whole_rebuttal_complete": false
+    },
+    "latest_three_view_root": {
+      "path": "tmp/celeba_mechanism_remaining_F_nonIID_Benign10_root_adoption_20261011/ROOT_ADOPTION.json",
+      "sha256": "ca558d6e558d26afe6b172b65eded83b51ad02eedddc0f9e2d2cbadf7cdf5a11"
+    },
+    "F_three_view_six_scene_table": {
+      "root_proof_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/ROOT_VERIFICATION.json",
+      "root_proof_sha256": "cbba6a6cdfb9b861202422f867c847800474961cd02784dd207f87f51c386164",
+      "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/TABLES.md",
+      "paired_models": 60,
+      "complete_scenes": 6,
+      "complete_IID_scenes": 5,
+      "complete_nonIID_scenes": [
+        "Benign"
+      ],
+      "displayed_records": 120,
+      "seed_panels": [
+        10,
+        9,
+        6
+      ],
+      "mean_SD_scalars": 972,
+      "display_cells": 486,
+      "replay_devices": {
+        "Full": {
+          "cpu": 5,
+          "cuda:0": 55
+        },
+        "minus_F": {
+          "cpu": 60
+        }
+      },
+      "validation_only": true,
+      "final_test": false,
+      "incorporated_into_full_rebuttal": true,
       "whole_rebuttal_complete": false
     }
   },
@@ -5356,7 +5314,7 @@
     "sha256": "ca05374c46d041f59dd45dde9cdf19547d88a5a1f12d87d75d0ca80a05cef3aa",
     "verification_sha256": "21349fb769884f12e1c44fe1ca0262b2e5ae26543a9c2bdeb5b7b0e1b61fcc56"
   },
-  "local_work_verified_utc": "2026-10-10T23:56:43.104332+00:00",
+  "local_work_verified_utc": "2026-10-11T00:45:53.508890+00:00",
   "tabular_partition_audit_20261009": {
     "status": "PASS",
     "partitions": 60,
@@ -6214,31 +6172,31 @@
     "significance_claimed": false
   },
   "latest_publication_verification": {
-    "commit": "ccb5207c24762d3ac92ed76b40bd40b3e2330954",
+    "commit": "3edbd954d91bbc5e4993546950202645d82ccbb0",
     "branch": "codex/revision-evidence-baselines-20260928",
-    "verified_utc": "2026-10-10T22:45:49.939495+00:00",
-    "committed_blobs_sha256_verified": 191,
+    "verified_utc": "2026-10-11T00:04:28.791272+00:00",
+    "committed_blobs_sha256_verified": 529,
     "acceptance_cutoff": {
-      "native": 341,
-      "three_view": 340,
-      "FLGMM_native_new": 67,
-      "FLGMM_three_views": 71,
-      "FLGMM_table_complete_scene_records": 70,
-      "FLGMM_table_scenes": 7,
-      "Hybrid_three_views": 10,
-      "Hybrid_table_checkpoints": 10,
-      "Hybrid_table_scenes": 1,
-      "Hybrid_new_three_views": 9,
-      "Hybrid_prior_seed91002_reused": 1,
-      "gradient_search": 46,
+      "native": 350,
+      "three_view": 350,
+      "FLGMM_native_new": 77,
+      "FLGMM_screen_reuse_separate": 4,
+      "FLGMM_three_views": 81,
+      "FLGMM_table_complete_scene_records": 80,
+      "FLGMM_table_partial_records": 1,
+      "FLGMM_table_scenes": 8,
+      "gradient_search": 64,
+      "gradient200_frozen_new_jobs": 192,
+      "gradient200_screen_reuse_separate": 8,
+      "gradient200_new_scientific_accepted": 0,
       "Hybrid_native_new": 12,
       "UCA_models": 300,
-      "F_table_pairs": 40,
-      "F_table_scenes": 4,
+      "F_table_pairs": 50,
+      "F_table_scenes": 5,
       "reviewer_comments": 24
     },
-    "proof_path": "publication_closed_increment63_verified_20261011.json",
-    "proof_sha256": "88b77f1d4fe27016c57bf45931fff2a03be582b4c01be361ca865a0525fb0d8c",
+    "proof_path": "publication_closed_increment64_verified_20261011.json",
+    "proof_sha256": "ceb120bf2ebc7fe8d635c2fd554f1c69787f70dc0e112398600ca265cdc9add2",
     "earlier_publication_snapshot_is_historical": true
   },
   "hybrid_cuda_gate_20261009": {
@@ -6656,27 +6614,33 @@
     "GPU_provenance_n": 466
   },
   "latest_rebuttal_draft": {
-    "status": "ROOT_F20_COMPLETE24_EDITORIAL_CANDIDATES_ADOPTED_FOR_AUTHOR_REVIEW",
-    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/rebuttal_integrated_20261011.md",
-    "manuscript_candidate": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/manuscript_insertions_integrated_20261011.md",
-    "clear_reader_entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_clear_F20_20261011/rebuttal_clear_20261011.md",
-    "clear_reader_sha256": "2f5f07cd26bd8a7eb8f4279d5c0b260924e2ec5fc5c5a32759ea1f3ff3fa7b6a",
-    "root_proof_path": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/ROOT_EDITORIAL_REVIEW.json",
-    "root_proof_sha256": "60bc906155a6dbb9e4c73f42d788b66579b731e8fe843b6f1c712202892409ab",
+    "status": "ROOT_UNIFIED_COMPLETE24_F60_FL81_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F60_FL81_gradient64_20261011.md",
+    "sha256": "e76df8e53b7379a437bf09426c4b576443022f7766ae77d4ff444c456fd650b6",
+    "root_proof": {
+      "path": "tmp/rebuttal_F60_FL81_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+      "sha256": "a79984bdcf3eaacdc7d7e0f68b8810f972ded45e4c0e4303c4b8262bab969f31"
+    },
     "comments_verbatim": 24,
-    "A100_incorporated": true,
-    "F20_incorporated": true,
-    "F_paired_models": 20,
-    "F_complete_scenes": 2,
-    "remaining_control_variants": 5,
-    "remaining_control_runs": 480,
-    "remaining_method_coverages": 7,
+    "content_cutoff": {
+      "native": 360,
+      "three_view": 360,
+      "F_pairs": 60,
+      "F_scenes": 6,
+      "FL_native_new": 77,
+      "FL_three_view": 81,
+      "FL_complete_scene_records": 80,
+      "Hybrid_three_view": 10,
+      "gradient_search": 64
+    },
+    "F60_incorporated": true,
+    "FL81_incorporated": true,
+    "gate14_incorporated_as_scientific_results": false,
     "author_review_only": true,
     "submitted_manuscript_edited": false,
-    "manuscript_applied": false,
     "final_test": false,
     "whole_rebuttal_complete": false,
-    "historical_A100_state_key": "historical_rebuttal_snapshot_A100_20261011"
+    "entry_role": "Current adopted full24 working draft; matching submitted manuscript application remains pending."
   },
   "nine_method_view_attribution_20261009": {
     "status": "ROOT_ACCEPTED900_DESCRIPTIVE_ATTRIBUTION_INPUT_GRID_AND_FSUM_STATISTICS_PASS",
@@ -6828,9 +6792,9 @@
     "startup_root_path": "tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_CANARY_STARTUP.json",
     "startup_root_sha256": "22486ecfd6e4012fcb30a27c120574dee918c62069dec55c6ad225e24d68d68b",
     "startup_observed_utc": "2026-10-09T20:17:24.706406+00:00",
-    "latest_readonly_observation_path": "tmp/celeba_flgmm_fullcoverage_root_operations_20261009/observation_20261010T051815017090Z/SNAPSHOT.json",
-    "latest_readonly_observation_sha256": "68a0633779a76156f8195621f61a469bf992220af61fe30c1450d3c48bdf97d8",
-    "latest_observed_utc": "2026-10-10T05:18:19.112582+00:00",
+    "latest_readonly_observation_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+    "latest_readonly_observation_sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+    "latest_observed_utc": "2026-10-11T00:41:52.396973+00:00",
     "service_observed": {
       "returncode": 3,
       "stdout": "guardfed_celeba_flgmm_fullcoverage_canary   EXITED    Oct 09 08:30 PM\n",
@@ -6848,22 +6812,27 @@
     "canary_archive_sha256": "37f80f4ba715e6b851beeb8e47bb62523d0f89dc30116f161b847d5a35887f41",
     "coverage_startup_root_path": "tmp/celeba_flgmm_fullcoverage_binding_20261009/ROOT_COVERAGE_STARTUP.json",
     "coverage_startup_root_sha256": "abfa572c21cd5724379ff007a71c1a030f69c773dfc3021358cee4fe08845d1d",
-    "coverage_observed_utc": "2026-10-10T05:18:19.112582+00:00",
+    "coverage_observed_utc": "2026-10-11T00:41:52.396973+00:00",
     "active": 2,
-    "pending": 67,
+    "pending": 11,
     "active_rounds": [
-      51,
-      13
+      35,
+      12
     ],
-    "new_completed_observed": 27,
+    "new_completed_observed": 83,
     "worker_pids": [
-      79826,
-      80354
+      104697,
+      105077
     ],
     "canary_authorization_preserved": true,
     "coverage_service_observed": {
+      "command": [
+        "supervisorctl",
+        "status",
+        "guardfed_celeba_flgmm_fullcoverage"
+      ],
       "returncode": 0,
-      "stdout": "guardfed_celeba_flgmm_fullcoverage   RUNNING   pid 66870, uptime 8:44:41\n",
+      "stdout": "guardfed_celeba_flgmm_fullcoverage   RUNNING   pid 66870, uptime 1 day, 4:08:14",
       "stderr": ""
     },
     "accepted_new_ids": [
@@ -6959,18 +6928,18 @@
     "latest_full70_root_adoption_path": "tmp/fl_native_after67_FedSA10_prepared_20261011/ROOT_ADOPTION_REVIEW.json",
     "latest_full70_root_adoption_sha256": "5fdf135fd13665df6d528818db81765ad3567d5d754b18c538b1772f3994c80d",
     "latest_readonly_terminal_observation": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
-      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
-      "utc": "2026-10-10T23:50:58.834797+00:00",
-      "new_terminal": 79,
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+      "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+      "utc": "2026-10-11T00:41:52.396973+00:00",
+      "new_terminal": 83,
       "new_accepted": 77,
       "reuse_separate": 4
     },
     "latest_measured_observation": {
-      "checked_utc": "2026-10-10T22:39:26.289735+00:00",
-      "terminal_observed": 77,
-      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-      "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
+      "checked_utc": "2026-10-11T00:41:52.396973+00:00",
+      "terminal_observed": 83,
+      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+      "snapshot_sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
       "acceptance_unchanged_by_observation": true
     },
     "latest_native_after67_increment": {
@@ -6983,6 +6952,28 @@
       "not_published_in_Git63": true,
       "archive_sha256": "ac7a1679cabefb934ffb4dbc92849f18ffec363cce807eaac98fa5028e62fc70",
       "archive_members_verified": 107
+    },
+    "prior_coverage_observational_aliases_20261011": {
+      "latest_readonly_observation_path": "tmp/celeba_flgmm_fullcoverage_root_operations_20261009/observation_20261010T051815017090Z/SNAPSHOT.json",
+      "latest_readonly_observation_sha256": "68a0633779a76156f8195621f61a469bf992220af61fe30c1450d3c48bdf97d8",
+      "latest_observed_utc": "2026-10-10T05:18:19.112582+00:00",
+      "coverage_observed_utc": "2026-10-10T05:18:19.112582+00:00",
+      "active": 2,
+      "pending": 67,
+      "active_rounds": [
+        51,
+        13
+      ],
+      "new_completed_observed": 27,
+      "worker_pids": [
+        79826,
+        80354
+      ],
+      "coverage_service_observed": {
+        "returncode": 0,
+        "stdout": "guardfed_celeba_flgmm_fullcoverage   RUNNING   pid 66870, uptime 8:44:41\n",
+        "stderr": ""
+      }
     }
   },
   "latest_rebuttal_addendum": {
@@ -6997,7 +6988,9 @@
     "links_checked": 4,
     "author_review_only": true,
     "whole_rebuttal_complete": false,
-    "manuscript_applied": false
+    "manuscript_applied": false,
+    "historical_artifact_not_current_full_draft": true,
+    "current_full_draft_entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F60_FL81_gradient64_20261011.md"
   },
   "prior_rebuttal_C50_draft": {
     "status": "ROOT_C50_COMPLETE_AUTHOR_REVIEW_TEXT_REVERSIBLE_DELTA_AND_SOURCE_POINTERS_PASS",
@@ -7331,7 +7324,7 @@
     "observed_utc": "2026-10-10T04:32:17.971910+00:00",
     "root_approval_sha256": "55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c",
     "remote_strict_closed_at_startup": 1,
-    "new_offserver_accepted": 170,
+    "new_offserver_accepted": 180,
     "selected_count": 620,
     "original180_excluded": true,
     "Full_inference": 0,
@@ -7347,14 +7340,14 @@
       "scientific_outputs_unchanged": true
     },
     "latest_measured_observation": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
-      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
-      "utc": "2026-10-10T23:50:58.834797+00:00",
-      "remote_closed": 172,
-      "offserver_accepted": 170
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+      "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+      "utc": "2026-10-11T00:41:52.396973+00:00",
+      "remote_closed": 180,
+      "offserver_accepted": 180
     },
-    "root_adoption_path": "tmp/celeba_mechanism_remaining_F_SpDFA10_root_adoption_20261011/ROOT_ADOPTION.json",
-    "root_adoption_sha256": "3f7b436e0b2fec0401d7bf6117d6dca48aef21c185b6f170d37954e2cafee5a4",
+    "root_adoption_path": "tmp/celeba_mechanism_remaining_F_nonIID_Benign10_root_adoption_20261011/ROOT_ADOPTION.json",
+    "root_adoption_sha256": "ca558d6e558d26afe6b172b65eded83b51ad02eedddc0f9e2d2cbadf7cdf5a11",
     "accepted_ids": [
       "minus_C_non-IID_S-DFA_seed91001",
       "minus_C_non-IID_S-DFA_seed91002",
@@ -7525,7 +7518,17 @@
       "minus_F_IID_Sp-DFA_seed91007",
       "minus_F_IID_Sp-DFA_seed91008",
       "minus_F_IID_Sp-DFA_seed91009",
-      "minus_F_IID_Sp-DFA_seed91010"
+      "minus_F_IID_Sp-DFA_seed91010",
+      "minus_F_non-IID_Benign_seed91001",
+      "minus_F_non-IID_Benign_seed91002",
+      "minus_F_non-IID_Benign_seed91003",
+      "minus_F_non-IID_Benign_seed91004",
+      "minus_F_non-IID_Benign_seed91005",
+      "minus_F_non-IID_Benign_seed91006",
+      "minus_F_non-IID_Benign_seed91007",
+      "minus_F_non-IID_Benign_seed91008",
+      "minus_F_non-IID_Benign_seed91009",
+      "minus_F_non-IID_Benign_seed91010"
     ],
     "first_transport_recovered_original_archive_unchanged": true,
     "C100_replay_complete": true,
@@ -7597,16 +7600,16 @@
     "A_five_scene_table_adopted": true,
     "A_six_scene_table_adopted": true,
     "latest_accepted_new_ids": [
-      "minus_F_IID_Sp-DFA_seed91001",
-      "minus_F_IID_Sp-DFA_seed91002",
-      "minus_F_IID_Sp-DFA_seed91003",
-      "minus_F_IID_Sp-DFA_seed91004",
-      "minus_F_IID_Sp-DFA_seed91005",
-      "minus_F_IID_Sp-DFA_seed91006",
-      "minus_F_IID_Sp-DFA_seed91007",
-      "minus_F_IID_Sp-DFA_seed91008",
-      "minus_F_IID_Sp-DFA_seed91009",
-      "minus_F_IID_Sp-DFA_seed91010"
+      "minus_F_non-IID_Benign_seed91001",
+      "minus_F_non-IID_Benign_seed91002",
+      "minus_F_non-IID_Benign_seed91003",
+      "minus_F_non-IID_Benign_seed91004",
+      "minus_F_non-IID_Benign_seed91005",
+      "minus_F_non-IID_Benign_seed91006",
+      "minus_F_non-IID_Benign_seed91007",
+      "minus_F_non-IID_Benign_seed91008",
+      "minus_F_non-IID_Benign_seed91009",
+      "minus_F_non-IID_Benign_seed91010"
     ],
     "A_eight_scene_table_adopted": true,
     "A_nine_scene_table_adopted": true,
@@ -7633,13 +7636,18 @@
       [
         "IID",
         "Sp-DFA"
+      ],
+      [
+        "non-IID",
+        "Benign"
       ]
     ],
     "F_IID_Benign_table_adopted": true,
     "F_IID_two_scene_table_adopted": true,
     "F_IID_three_scene_table_adopted": true,
     "F_IID_four_scene_table_adopted": true,
-    "F_IID_five_scene_table_adopted": true
+    "F_IID_five_scene_table_adopted": true,
+    "F_six_scene_table_adopted": true
   },
   "logofair100_fullcoverage_20261010": {
     "status": "ROOT_LOGOFAIR_FIXED_RECIPE100_STRICT_SAVED_PREDICTION_AND_TABLES_ADOPTED",
@@ -7713,7 +7721,7 @@
     "selected_recipes": 2,
     "actual_dispatch": false,
     "test": false,
-    "limitations": "192new+8reuse source frozen; original CPU3 individual gates3/14 pass, index3 running. Whole saved comparison/strict offserver/root closure and fresh dispatch review pending. No192 training, final test or short-gate scientific table claim. Initial metadata preflight refusal retained; one fresh resource check passed, no scientific retry.",
+    "limitations": "Frozen192new+8reuse; 7/14 original individual CPU3 gates PASS at metadata cutoff. Whole saved comparison/offserver/root closure and fresh resource review pending. No192 performance records or final test. Two initial resource preflight refusals preserved; no scientific failure retried.",
     "selected_candidates": {
       "Fed-NGA-gradient": "FedNGA_eta0.001",
       "Huber-BRFL-gradient": "Huber_eta0.3_T00.01_M0"
@@ -7722,15 +7730,15 @@
       "path": "tmp/gradient_source_freeze_deployment_index_20261011/freeze_actual001/ROOT_SOURCE_APPROVAL.json",
       "sha256": "79edd0dde78c9dc23583a22953d3babebb357a4fcebb7197941cc5726b2ff961"
     },
-    "exact14_completed_at_cutoff": 3,
+    "exact14_completed_at_cutoff": 7,
     "exact14_first_item": {
       "path": "tmp/gradient_source_freeze_deployment_index_20261011/gate14_job00_actual002/ITEM_PROOF.json",
       "sha256": "f4d6738d9299468aa78cb2d8c9bc5c272c0e3f3a328dd60874f60c622bd61a12"
     },
     "exact14_total": 14,
     "exact14_partial_progress": {
-      "path": "tmp/gradient_source_freeze_deployment_index_20261011/GATES_PROGRESS03.json",
-      "sha256": "e672e4257ad2d4c41729874d5f68759082718b2f340a7bba9fac03129fe2a349"
+      "path": "tmp/gradient_source_freeze_deployment_index_20261011/GATES_F60_CUTOFF.json",
+      "sha256": "25b3eb5644606caba3ffc47e0da543a406ec31b2996aa19a21e749b45c14d6f6"
     }
   },
   "auxiliary_readonly_observation_20261010": {
@@ -7893,17 +7901,17 @@
       "final_test": false
     },
     "latest_measured_observation": {
-      "checked_utc": "2026-10-10T22:39:26.289735+00:00",
-      "terminal_observed": 19,
-      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-      "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
+      "checked_utc": "2026-10-11T00:41:52.396973+00:00",
+      "terminal_observed": 22,
+      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+      "snapshot_sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
       "acceptance_unchanged_by_observation": true
     },
     "latest_readonly_terminal_observation": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
-      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
-      "utc": "2026-10-10T23:50:58.834797+00:00",
-      "new_terminal": 21,
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+      "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+      "utc": "2026-10-11T00:41:52.396973+00:00",
+      "new_terminal": 22,
       "new_accepted": 12,
       "reuse_separate": 4
     }
@@ -8031,21 +8039,21 @@
     "root_review_sha256": "f187b7a3efc721218fa393048ecabf2ea6a7fbbd4bea0ef263e57ad972ee7611"
   },
   "latest_five_queue_readonly_observation": {
-    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
-    "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
-    "utc": "2026-10-10T23:50:58.834797+00:00",
-    "main_completed": 352,
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+    "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+    "utc": "2026-10-11T00:41:52.396973+00:00",
+    "main_completed": 360,
     "main_active": 8,
-    "main_pending": 440,
+    "main_pending": 432,
     "failed": 0,
-    "FLGMM_new_terminal": 79,
+    "FLGMM_new_terminal": 83,
     "gradient_terminal": 64,
-    "Hybrid_new_terminal": 21,
-    "remaining620_remote_closed": 172,
+    "Hybrid_new_terminal": 22,
+    "remaining620_remote_closed": 180,
     "counts_are_observation_only": true,
     "new_acceptance": 0,
-    "source_hash_scope": "Small frozen source/data pins unchanged; large images historical full SHA plus stat only",
-    "scope": "Terminal observation distinct from strict/offserver acceptance; FL/Hybrid screen4 reuse separate."
+    "source_hash_scope": "Small source/data pins unchanged; large images prior full SHA plus current stat only",
+    "scope": "Terminal observation distinct from strict/offserver acceptance. FL/Hybrid screen4 references are separate."
   },
   "added_CNN_exact3_valid_interface_20261010": {
     "status": "ROOT_EXACT3_VALID_INTERFACES_ADOPTED_WITH_PRESERVED_WINDOWS_AUDIT_FAILURE",
@@ -8352,7 +8360,7 @@
       "final_test": false
     }
   },
-  "last_health_check_scope": "Historical main-only resource sample at its checked_utc; latest queue observations are in latest_five_queue_readonly_observation, which does not add scientific acceptance.",
+  "last_health_check_scope": "Current compact combined snapshot at checked_utc. All scientific counters link independent strict/offserver/root proofs; historical previous snapshot retained.",
   "FLGMM_FFlip10_resource_rebind_20261011": {
     "status": "CPU136_LAUNCH_REFUSED_ACTIVE_WIDE_THREAD_NO_RETRY",
     "original_attempts_preserved": [
@@ -8420,9 +8428,9 @@
     }
   },
   "current_entry_writer": {
-    "path": "tmp/update_increment64_final_entries_20261011.py",
-    "sha256": "f2161fd3ee81011828bba35b0d50dc161d3822d2dcfae565a8699cc2076db4f5",
-    "utc": "2026-10-10T23:56:43.104332+00:00"
+    "path": "tmp/update_F60_closed_current_entries_20261011.py",
+    "sha256": "56a46bb5a3c31083569a4e2400415736cb83ec8241caaa26a6658752f8e72744",
+    "utc": "2026-10-11T00:45:53.508890+00:00"
   },
   "author_baseline_adaptation_decisions_20261011": {
     "Huber": "Identity projection; empirical CNN adaptation, no inherited constrained-domain theoretical guarantee.",
@@ -8430,10 +8438,11 @@
     "no_method_or_seed_change": true
   },
   "current_entry_postpublication_refresh": {
-    "path": "tmp/refresh_git63_and_FL77_pointers_20261011.py",
-    "sha256": "cd3dc43351e4701a8ab9aa5a811318f40459f135e9d955155c4561a29a1dd9c4",
-    "commit": "ccb5207c24762d3ac92ed76b40bd40b3e2330954",
-    "FL77_later_than_publication_cutoff": true
+    "path": "tmp/refresh_git64_pointer_20261011.py",
+    "sha256": "f130c7a13e047301793e86545d124068be4d62bb205fc8ca75aa04bc1bf943bb",
+    "commit": "3edbd954d91bbc5e4993546950202645d82ccbb0",
+    "local_pointer_refresh_not_part_of_verified_commit": true,
+    "scientific_counts_changed": 0
   },
   "historical_rebuttal_snapshot_A100_20261011": {
     "status": "ROOT_COMPLETE24_A100_READER_REBUTTAL_CANDIDATES_ADOPTED_FOR_AUTHOR_REVIEW",
@@ -8535,9 +8544,8 @@
     }
   },
   "current_editorial_adoption_source": {
-    "path": "tmp/adopt_F20_editorial_20261011.py",
-    "sha256": "e32607759ff94eaee1a092d29a6636bb3ec3b5d607e589dc376c056cac848b13",
-    "previous_drafts_preserved": true
+    "path": "tmp/rebuttal_F60_FL81_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+    "sha256": "a79984bdcf3eaacdc7d7e0f68b8810f972ded45e4c0e4303c4b8262bab969f31"
   },
   "Huber_constant_prediction_review_20261011": {
     "report": "tmp/huber_constant_prediction_review_20261011/REVIEW.md",
@@ -8626,12 +8634,12 @@
     }
   },
   "latest_main_queue_readonly_observation": {
-    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-    "sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
-    "utc": "2026-10-10T22:39:26.289735+00:00",
-    "completed": 344,
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T004147Z.raw.json",
+    "sha256": "58909812013a8f0aa2c9a1e2c0ecbca3782f0e7ab86d54fd5125b31c0a351464",
+    "utc": "2026-10-11T00:41:52.396973+00:00",
+    "completed": 360,
     "active": 8,
-    "pending": 448,
+    "pending": 432,
     "failed": 0,
     "observation_only": true,
     "science_acceptance_created": 0
@@ -8656,27 +8664,33 @@
     "original24_comment_draft_unchanged": true,
     "submitted_manuscript_edited": false,
     "final_test": false,
-    "whole_rebuttal_complete": false
+    "whole_rebuttal_complete": false,
+    "historical_artifact_not_current_full_draft": true,
+    "current_full_draft_entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F60_FL81_gradient64_20261011.md"
   },
   "latest_working_rebuttal_draft": {
-    "status": "ROOT_UNIFIED_COMPLETE24_F50_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
-    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F50_gradient64_20261011.md",
-    "sha256": "b6e1c35be9dd0bea4867ff8486c23f7b7d39d0a6966e449dda5ec0664d515670",
+    "status": "ROOT_UNIFIED_COMPLETE24_F60_FL81_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F60_FL81_gradient64_20261011.md",
+    "sha256": "e76df8e53b7379a437bf09426c4b576443022f7766ae77d4ff444c456fd650b6",
     "root_proof": {
-      "path": "tmp/rebuttal_working_F50_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
-      "sha256": "72fe35446ef5efc6f39455b56466803f5123fe0dce4f25b6ca654d1a6eee09cb"
+      "path": "tmp/rebuttal_F60_FL81_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+      "sha256": "a79984bdcf3eaacdc7d7e0f68b8810f972ded45e4c0e4303c4b8262bab969f31"
     },
     "comments_verbatim": 24,
     "content_cutoff": {
-      "native": 350,
-      "three_view": 350,
-      "F_pairs": 50,
-      "F_scenes": 5,
+      "native": 360,
+      "three_view": 360,
+      "F_pairs": 60,
+      "F_scenes": 6,
+      "FL_native_new": 77,
+      "FL_three_view": 81,
+      "FL_complete_scene_records": 80,
       "Hybrid_three_view": 10,
       "gradient_search": 64
     },
-    "F50_incorporated": true,
-    "FL81_or_gate14_incorporated": false,
+    "F60_incorporated": true,
+    "FL81_incorporated": true,
+    "gate14_incorporated_as_scientific_results": false,
     "author_review_only": true,
     "submitted_manuscript_edited": false,
     "final_test": false,
@@ -8734,5 +8748,219 @@
     "submitted_manuscript_edited": false,
     "final_test": false,
     "whole_rebuttal_complete": false
+  },
+  "prior_working_F50_draft_fixed_cutoff": {
+    "status": "ROOT_UNIFIED_COMPLETE24_F50_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F50_gradient64_20261011.md",
+    "sha256": "b6e1c35be9dd0bea4867ff8486c23f7b7d39d0a6966e449dda5ec0664d515670",
+    "root_proof": {
+      "path": "tmp/rebuttal_working_F50_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+      "sha256": "72fe35446ef5efc6f39455b56466803f5123fe0dce4f25b6ca654d1a6eee09cb"
+    },
+    "comments_verbatim": 24,
+    "content_cutoff": {
+      "native": 350,
+      "three_view": 350,
+      "F_pairs": 50,
+      "F_scenes": 5,
+      "Hybrid_three_view": 10,
+      "gradient_search": 64
+    },
+    "F50_incorporated": true,
+    "FL81_or_gate14_incorporated": false,
+    "author_review_only": true,
+    "submitted_manuscript_edited": false,
+    "final_test": false,
+    "whole_rebuttal_complete": false
+  },
+  "last_health_check_historical_before_F60": {
+    "checked_utc": "2026-10-10T17:33:53.592547+00:00",
+    "server": "89.22.197.55:60350",
+    "instance": 52183675,
+    "phase": "formal",
+    "service": "guardfed_celeba_mechanism_formal   RUNNING   pid 9179, uptime 1 day, 11:14:57",
+    "queue_completed": 300,
+    "failed": [],
+    "failure_files": [],
+    "active": [
+      {
+        "id": "minus_F_IID_Benign_seed91001",
+        "pid": 94414,
+        "progress": {
+          "round": 63,
+          "metrics": {
+            "accuracy": 0.8717471183369406,
+            "aeod": 0.009780034901924028,
+            "aspd": 0.04603000278080255
+          },
+          "job_id": "minus_F_IID_Benign_seed91001",
+          "pid": 94414,
+          "elapsed_sec": 3046.8763892650604,
+          "updated_unix": 1791653584.2715805
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91001.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91002",
+        "pid": 94478,
+        "progress": {
+          "round": 60,
+          "metrics": {
+            "accuracy": 0.8889615946041174,
+            "aeod": 0.004091959474542883,
+            "aspd": 0.0659048963037544
+          },
+          "job_id": "minus_F_IID_Benign_seed91002",
+          "pid": 94478,
+          "elapsed_sec": 2903.9452607631683,
+          "updated_unix": 1791653626.5871515
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91002.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91003",
+        "pid": 94508,
+        "progress": {
+          "round": 59,
+          "metrics": {
+            "accuracy": 0.8690290431368601,
+            "aeod": 0.012097762161043413,
+            "aspd": 0.06159174033865933
+          },
+          "job_id": "minus_F_IID_Benign_seed91003",
+          "pid": 94508,
+          "elapsed_sec": 2867.1477434635162,
+          "updated_unix": 1791653624.9801092
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91003.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91004",
+        "pid": 95056,
+        "progress": {
+          "round": 48,
+          "metrics": {
+            "accuracy": 0.8822167413298435,
+            "aeod": 0.004025295526608685,
+            "aspd": 0.06924088525482608
+          },
+          "job_id": "minus_F_IID_Benign_seed91004",
+          "pid": 95056,
+          "elapsed_sec": 2339.6586787700653,
+          "updated_unix": 1791653627.569478
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91004.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91005",
+        "pid": 95305,
+        "progress": {
+          "round": 20,
+          "metrics": {
+            "accuracy": 0.7425882116071878,
+            "aeod": 0.006725232563594141,
+            "aspd": 0.002796326306340413
+          },
+          "job_id": "minus_F_IID_Benign_seed91005",
+          "pid": 95305,
+          "elapsed_sec": 1054.0262699127197,
+          "updated_unix": 1791653617.4262178
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91005.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91006",
+        "pid": 95385,
+        "progress": {
+          "round": 11,
+          "metrics": {
+            "accuracy": 0.6525393869230383,
+            "aeod": 0.00038235121481366985,
+            "aspd": 0.022544604916600708
+          },
+          "job_id": "minus_F_IID_Benign_seed91006",
+          "pid": 95385,
+          "elapsed_sec": 608.7206819057465,
+          "updated_unix": 1791653615.0901082
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91006.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91007",
+        "pid": 95417,
+        "progress": {
+          "round": 9,
+          "metrics": {
+            "accuracy": 0.5544873408164293,
+            "aeod": 0.0035390824466611237,
+            "aspd": 0.013263476886954395
+          },
+          "job_id": "minus_F_IID_Benign_seed91007",
+          "pid": 95417,
+          "elapsed_sec": 508.64456152915955,
+          "updated_unix": 1791653585.7897294
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91007.json "
+      },
+      {
+        "id": "minus_F_IID_Benign_seed91008",
+        "pid": 95534,
+        "progress": {
+          "round": 4,
+          "metrics": {
+            "accuracy": 0.5166859616449389,
+            "aeod": 0.0005805515239477503,
+            "aspd": 0.0004729250413809411
+          },
+          "job_id": "minus_F_IID_Benign_seed91008",
+          "pid": 95534,
+          "elapsed_sec": 217.22935223579407,
+          "updated_unix": 1791653616.4224098
+        },
+        "process": "/workspace/guardfed_envs/celeba-cu128-20261009/bin/python /workspace/GuardFed-celeba-expanded/deployment/celeba_mechanism_20261009/worker.py --repo /workspace/GuardFed-celeba-expanded --job /workspace/GuardFed-celeba-expanded/results/revision_20261009/celeba_mechanism_v1/jobs/minus_F_IID_Benign_seed91008.json "
+      }
+    ],
+    "pending": 492,
+    "queue_updated_unix": 1791653627.7757943,
+    "gpu_csv": "0, GPU-da357477-30a7-fddc-344b-a20513b9a2d0, 100 %, 6036 MiB, 64\n1, GPU-9a424316-0f5c-5e05-0291-a4ee24bed9ae, 100 %, 6038 MiB, 62\n",
+    "gpu_recovery": [
+      "GPU Recovery Action                                : None",
+      "GPU Recovery Action                                : None"
+    ],
+    "cpu_used_cores_2sec": 12.014965469220101,
+    "cpu_quota_cores": 122.87999,
+    "memory_used_bytes": 78084767744,
+    "memory_limit": "519171997696",
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "disk_free_bytes": 1059986628608,
+    "recent_active_log_errors": []
+  },
+  "historical_integrated_F20_editorial_entry": {
+    "status": "ROOT_F20_COMPLETE24_EDITORIAL_CANDIDATES_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/rebuttal_integrated_20261011.md",
+    "manuscript_candidate": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/manuscript_insertions_integrated_20261011.md",
+    "clear_reader_entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_clear_F20_20261011/rebuttal_clear_20261011.md",
+    "clear_reader_sha256": "2f5f07cd26bd8a7eb8f4279d5c0b260924e2ec5fc5c5a32759ea1f3ff3fa7b6a",
+    "root_proof_path": "docs/server_deployment_20260923/revision_20260923/rebuttal_integrated_F20_20261011/ROOT_EDITORIAL_REVIEW.json",
+    "root_proof_sha256": "60bc906155a6dbb9e4c73f42d788b66579b731e8fe843b6f1c712202892409ab",
+    "comments_verbatim": 24,
+    "A100_incorporated": true,
+    "F20_incorporated": true,
+    "F_paired_models": 20,
+    "F_complete_scenes": 2,
+    "remaining_control_variants": 5,
+    "remaining_control_runs": 480,
+    "remaining_method_coverages": 7,
+    "author_review_only": true,
+    "submitted_manuscript_edited": false,
+    "manuscript_applied": false,
+    "final_test": false,
+    "whole_rebuttal_complete": false,
+    "historical_A100_state_key": "historical_rebuttal_snapshot_A100_20261011"
+  },
+  "current_editorial_alias_reconciliation": {
+    "path": "tmp/reconcile_F60_editorial_aliases_20261011.py",
+    "sha256": "9977c81d89510e1f68f065887ae24f993ae6cff608c1ab4d192ce07612f1d7c8",
+    "utc": "2026-10-11T00:48:40.406131+00:00"
   }
 }

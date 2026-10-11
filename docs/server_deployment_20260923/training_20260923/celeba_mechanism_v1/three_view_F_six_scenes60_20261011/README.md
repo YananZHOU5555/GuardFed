@@ -1,0 +1,1 @@
+Accepted five IID scenes plus non-IID Benign Full versus minus_F table. See TABLES.md and ROOT_VERIFICATION.json. Mean ± sampleSD(ddof1), paired seeds91001..91010 plus fixed9/6 panels. See actual checks for native/shared equality. Four non-IID F scenes and four other controls remain incomplete. Validation only; no final-test or universal necessity claim.

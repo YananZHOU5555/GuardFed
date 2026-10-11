@@ -1,0 +1,194 @@
+{
+  "status": "ROOT_F60_SIX_SCENES_COUNTS_PAIRED_STATISTICS_DISPLAY_AND_PRIOR_ROWS_PASS",
+  "utc": "2026-10-11T00:41:16.644240+00:00",
+  "complete_scenes": 6,
+  "paired_models": 60,
+  "records": 120,
+  "preserved_pairs": 60,
+  "old100_record_objects_order_exact": true,
+  "old810_statistical_scalars_exact": true,
+  "old405_display_cells_preserved": true,
+  "original_fsum_verification": {
+    "status": "PASS_ORIGINAL_FSUM_COUNTS_AND_SAVED_DISPLAY_SCOPE",
+    "mean_sd_scalars": 972,
+    "max_abs_difference": 1.4210854715202004e-14,
+    "partial_pairs_excluded": 0,
+    "receipt_metrics_from_group_counts": 1080,
+    "base_confusion_counts_structurally_checked": 2880,
+    "display_cells": 486,
+    "root_adopted_by_this_checker": false,
+    "fit": 0,
+    "CNN": 0,
+    "test": false
+  },
+  "source_prepared_path": "tmp/celeba_F_six_scenes60_table_prepare_20261011",
+  "source_seal_sha256": "5e2c3e5bc5d68cf3f674b856b6457ec33b51d06c6a80225a1342b1b1ada43ae9",
+  "source_root_review_sha256": "57c9d4940e6f21e66ec53168a20488d8578cd22726ddff7135a457f007a0817f",
+  "binding_sha256": "02dac3196f5116ec1b929bcd320b967710bd87e81b07650110f3b6aa325695b4",
+  "original_parent_root_sha256": "cf89d438b80f48df617c994084a69d8d913cf7dc35c65c762d8800517b89590b",
+  "actual_views360_root_sha256": "ca558d6e558d26afe6b172b65eded83b51ad02eedddc0f9e2d2cbadf7cdf5a11",
+  "actual_views360_index_sha256": "16299ca4ade394a1b89edb3f9230845cda7ce826c783645b9aada4ea359a5c37",
+  "root_executed_saved_verifier_once": true,
+  "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_six_scenes60_20261011/TABLES.md",
+  "table_sha256": "56353691ab7a3a798f2cc7e485977f464c415e30dad603906db684ab817f1f58",
+  "files": {
+    "records.json": {
+      "sha256": "502852f95972b0b454fdae4b345fa38dce8dda5398fe0faeef262ba29f878865",
+      "bytes": 1698125
+    },
+    "tables.json": {
+      "sha256": "497126f23be22533830d00389799c28238a4456382862d802a48c27cb2307b59",
+      "bytes": 127077
+    },
+    "coverage.json": {
+      "sha256": "df52e081425b8b6f3db31c676359ab029f7480f693ff08f26c0ca0289e1cc9aa",
+      "bytes": 8232
+    },
+    "paired_per_seed.json": {
+      "sha256": "127804e86a2efec55fa6c1e9cbd613deda2a9f8db58bb7d448201796a07908ae",
+      "bytes": 49763
+    },
+    "checks.json": {
+      "sha256": "52e97cdb6b0671a60a23426dab6d3e76b58393f514b2436291dec3701b0b4d8d",
+      "bytes": 675
+    },
+    "SOURCE_BINDINGS.json": {
+      "sha256": "37b1e0824673b5ea37c34757450ea2310bdcb9a1ef6b7cfe561d02fd6e3a9d58",
+      "bytes": 20128
+    },
+    "TABLES.md": {
+      "sha256": "56353691ab7a3a798f2cc7e485977f464c415e30dad603906db684ab817f1f58",
+      "bytes": 18516
+    }
+  },
+  "views": [
+    "raw",
+    "native",
+    "shared_calibration"
+  ],
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "sampleSD_ddof": 1,
+  "Full_replay_devices": {
+    "cpu": 5,
+    "cuda:0": 55
+  },
+  "minus_F_replay_devices": {
+    "cpu": 60
+  },
+  "native_shared_metrics_and_counts_exact": true,
+  "nonIID_F_scenes_remaining": 4,
+  "other_control_runs_remaining": 400,
+  "new_nonIID_Benign_native10_rows": [
+    {
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "variant": "Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 88.59364775758796,
+        "sample_sd_ddof1": 1.167949922464089
+      },
+      "aeod": {
+        "mean": 0.0069566752699619094,
+        "sample_sd_ddof1": 0.004230262408363805
+      },
+      "aspd": {
+        "mean": 0.06511219658510314,
+        "sample_sd_ddof1": 0.009015921130819527
+      }
+    },
+    {
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "variant": "minus_F",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 88.7683092565561,
+        "sample_sd_ddof1": 0.9364580025624326
+      },
+      "aeod": {
+        "mean": 0.009230764516204326,
+        "sample_sd_ddof1": 0.0070411316788523744
+      },
+      "aspd": {
+        "mean": 0.06936042846867814,
+        "sample_sd_ddof1": 0.012659974501280995
+      }
+    },
+    {
+      "distribution": "non-IID",
+      "attack": "Benign",
+      "variant": "minus_F minus Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 0.17466149896813477,
+        "sample_sd_ddof1": 1.2827754400993077
+      },
+      "aeod": {
+        "mean": 0.0022740892462424166,
+        "sample_sd_ddof1": 0.007521152233381249
+      },
+      "aspd": {
+        "mean": 0.0042482318835749934,
+        "sample_sd_ddof1": 0.01615887613454096
+      }
+    }
+  ],
+  "scope": "Five IID scenes plus non-IID Benign only. All fixed10/9/6 panels and all signed paired differences retained; no cross-scene aggregate, significance, universal necessity or isolated-causality claim. Mixed replay devices/selection history retained.",
+  "primary_endpoint_selected": false,
+  "new_threshold_fits": 0,
+  "new_CNN": 0,
+  "new_training": 0,
+  "final_test": false,
+  "whole_mechanism_complete": false,
+  "whole_rebuttal_complete": false,
+  "root_adopter_path": "tmp/celeba_F_six_scenes60_table_prepare_20261011/root_adopt_actual.py",
+  "root_adopter_sha256": "abe394c0268bdbe43015889542b8aaf4d248ce48ea218efb4d890b68d0d429bc",
+  "root_reader_note": "Adopts only outputs pinned to the actual future views360 root and independently saved verifier; source preparation itself is not statistical acceptance."
+}

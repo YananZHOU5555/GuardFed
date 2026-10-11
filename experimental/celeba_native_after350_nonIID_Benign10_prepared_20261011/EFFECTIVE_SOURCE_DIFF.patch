@@ -1,0 +1,45 @@
+--- original_after288/run_once.py
++++ effective_exact10_after350/run_once.py
+@@ -25,8 +25,8 @@
+ folder=LOCAL/tag; assert not folder.exists(); folder.mkdir()
+ save(folder/'STORAGE_PREFLIGHT.json', storage_check)
+ ssh=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=15','-p','60350','root@89.22.197.55']
+-inspection=REMOTE+'/native_delta_after288_20261011/'+tag+'/inspection'
+-remote_archive=REMOTE+'/native_delta_after288_20261011/'+tag+'/'+tag+'.tar.gz'
++inspection=REMOTE+'/native_delta_after350_nonIID_Benign10_20261011/'+tag+'/inspection'
++remote_archive=REMOTE+'/native_delta_after350_nonIID_Benign10_20261011/'+tag+'/'+tag+'.tar.gz'
+ code="""from pathlib import Path
+ import hashlib,json,subprocess
+ sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+@@ -63,10 +63,21 @@
+     result=subprocess.run(argv,capture_output=True,text=True)
+     logs.append({'argv':argv,'returncode':result.returncode,'stdout':result.stdout,'stderr':result.stderr})
+     if result.returncode:break
++    if argv[len(prefix)]=='inspect':
++        inspected=json.loads(Path(INSPECTION+'/inspection.json').read_bytes())
++        assert sha(PRIOR_INSPECTION)==PRIOR_INSPECTION_SHA
++        prior_inspected=json.loads(Path(PRIOR_INSPECTION).read_bytes())
++        scope=dict(prior_native=prior_inspected['new_count'],observed_native=inspected['new_count'],fixed_ids=EXACT_IDS,actual_delta=sorted(set(inspected['accepted_new_ids'])-set(prior_inspected['accepted_new_ids'])),extra_ids=sorted(set(inspected['accepted_new_ids'])-set(prior_inspected['accepted_new_ids'])-set(EXACT_IDS)),missing_ids=sorted(set(EXACT_IDS)-set(inspected['accepted_new_ids'])),backup_dispatched=False)
++        (base/'EXACT_DELTA_SCOPE.json').write_text(json.dumps(scope,indent=2))
++        assert prior_inspected['new_count']==350 and len(prior_inspected['accepted_new_ids'])==350
++        assert len(EXACT_IDS)==len(set(EXACT_IDS))==10 and not set(EXACT_IDS)&set(prior_inspected['accepted_new_ids'])
++        assert set(prior_inspected['accepted_new_ids'])<=set(inspected['accepted_new_ids'])
++        assert not inspected['invalid'] and inspected['new_count']==len(inspected['accepted_new_ids'])==360
++        assert scope['actual_delta']==EXACT_IDS and not scope['extra_ids'] and not scope['missing_ids'], 'Exact10 cutoff refused; preserve inspection; no backup or retry'
+ print(json.dumps({'preflight':preflight,'canonical_ledger_unchanged':sha(canonical)==PREVIOUS,'logs':logs,'ledger_sha256':sha(LEDGER),'tool_sha256':sha(TOOL),'archive_size_bytes':Path(ARCHIVE).stat().st_size if Path(ARCHIVE).is_file() else None}))
+ raise SystemExit(logs[-1]['returncode'])
+ """
+-bindings=dict(TOOL=TOOL,HASH=HASH,LEDGER=REMOTE+'/native_delta_after288_20261011/'+tag+'/verified_ledger.json',PREVIOUS=previous,
++bindings=dict(EXACT_IDS=SCOPE['candidate_ids'],PRIOR_INSPECTION=SCOPE['parent_remote_inspection_path'],PRIOR_INSPECTION_SHA=SCOPE['parent_inspection_sha256'],TOOL=TOOL,HASH=HASH,LEDGER=REMOTE+'/native_delta_after350_nonIID_Benign10_20261011/'+tag+'/verified_ledger.json',PREVIOUS=previous,
+               INSPECTION=inspection,ARCHIVE=remote_archive,PY=PY,REMOTE=REMOTE)
+ bound='\n'.join(k+'='+repr(v) for k,v in bindings.items())+'\n'+code
+ result=subprocess.run(ssh+['python -c '+shlex.quote(bound)],capture_output=True)
+@@ -77,7 +88,7 @@
+ def fetch(remote,local):
+     subprocess.run(['scp','-o','BatchMode=yes','-o','ConnectTimeout=15','-P','60350','root@89.22.197.55:'+remote,str(local)],check=True,timeout=180)
+ storage_check = check_bulk_storage(after['archive_size_bytes'])
+-bulk_folder = STORAGE_ROOT/'celeba_native_after288_20261011'/tag
++bulk_folder = STORAGE_ROOT/'celeba_native_after350_nonIID_Benign10_prepared_20261011'/tag
+ assert not bulk_folder.exists(), 'Never overwrite external evidence'
+ bulk_folder.mkdir(parents=True)
+ archive=bulk_folder/(tag+'.tar.gz'); receipt=folder/(tag+'.tar.gz.receipt.json')
