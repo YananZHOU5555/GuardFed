@@ -1,0 +1,42 @@
+{
+  "status": "FINAL_THREE_PAGE_VISUAL_QA_PASS",
+  "utc": "2026-10-11T05:01:44.767024+00:00",
+  "pdf_sha256": "fc2156b2fe7945bfd4334043dd824b15966c793eaef17d3d4c265f73e197b826",
+  "reviewed_final_pages": [
+    1,
+    2,
+    3
+  ],
+  "layout": "A3 landscape, two distribution blocks per page; page1 main10seed, pages2-3 sensitivity9/6seed",
+  "renderers": [
+    "PyMuPDF 1.15x",
+    "Poppler pdftoppm 90dpi"
+  ],
+  "visual_findings": {
+    "all_headers_and_seed_labels_legible": true,
+    "all11_method_labels_present_per_distribution": true,
+    "all_five_scenario_headers_present": true,
+    "no_clipped_table_or_footnotes": true,
+    "no_overlapping_numeric_spans": true,
+    "no_missing_numeric_or_plusminus_glyphs_observed": true,
+    "page_numbering_correct": true,
+    "guardfed_shading_is_identity_only_not_best_value": true
+  },
+  "source_numeric_pairs": 990,
+  "spatial_cell_check": {
+    "path": "SPATIAL_CELL_VERIFICATION.json",
+    "sha256": "7f33ba12a0535173a27fceffa3517d9676657cc93954f5794ca2b2094bb4ebd3"
+  },
+  "minimum_numeric_span_gap_points": 12.34521484375,
+  "render_warning": {
+    "pdftoppm_exit_code": 0,
+    "stderr": [
+      "Syntax Error: No display font for 'Symbol'",
+      "Syntax Error: No display font for 'ArialUnicode'"
+    ],
+    "impact": "Renderer emitted font-configuration warnings; all3 pages generated and visually inspected. Numeric text/plusminus is complete and independently matches990 source cells; no observed missing glyphs."
+  },
+  "limitation": "Paper-style review display, not an IEEE manuscript compilation or final two-column page-fit verification.",
+  "new_science_or_statistics": false,
+  "source_bytes_unchanged": true
+}

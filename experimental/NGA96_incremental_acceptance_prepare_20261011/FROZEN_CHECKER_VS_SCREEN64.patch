@@ -1,0 +1,46 @@
+--- accepted_screen64/accept_result.py
++++ already_frozen_coverage/accept_result.py
+@@ -25,7 +25,7 @@
+     for name, expected in receipt["artifact_hashes"].items():
+         if digest(output / name) != expected:
+             raise ValueError("Artifact SHA mismatch: " + name)
+-    if result["status"] != "screen_complete" or result["evidence_stage"] != "validation_screen":
++    if result["status"] != "coverage_complete" or result["evidence_stage"] != "validation_fullcoverage":
+         raise ValueError("Incomplete/non-screen result")
+     if json.loads((output / "job.json").read_text(encoding="utf8")) != job or result["revision_job"] != job:
+         raise ValueError("Stored job identity mismatch")
+@@ -35,7 +35,7 @@
+         if result[key] != job[key]:
+             raise ValueError("Method/condition identity mismatch")
+     if (result["seed"], result["rounds"], result["alpha"], result["num_clients"], result["num_malicious"]) != (
+-            91001, 70, job["config"]["client_alpha"], 20, 4):
++            job["config"]["seed"], 70, job["config"]["client_alpha"], 20, 4):
+         raise ValueError("Seed/round/alpha/client contract mismatch")
+     provenance = json.loads((output / "provenance.json").read_text(encoding="utf8"))
+     if result["provenance"] != provenance or provenance["job_sha256"] != digest(job_path):
+@@ -64,7 +64,7 @@
+     diagnostic = json.loads((output / "diagnostics.json").read_text(encoding="utf8"))
+     if diagnostic != result["round_summaries"]:
+         raise ValueError("Diagnostic trajectory mismatch")
+-    root_expected = job["attack"] == "S-DFA"
++    root_expected = job["attack"] in {"FedSA", "S-DFA", "Sp-DFA"}
+     for row in diagnostic:
+         info = row["aggregate"]
+         if (info["actual_parameters"], info["aggregation_weighting"], info["client_order"],
+@@ -106,8 +106,14 @@
+     audits = result["attack_audit"]
+     if [row["client_id"] for row in audits] != list(range(20)) or any(row.get("label_changed_count", 0) for row in audits):
+         raise ValueError("Client/label audit mismatch")
+-    if root_expected and any(row["attack_types"] != ["fflip", "foe"] or "gradient sign-conjugacy" not in row["foe_impl"] for row in audits[:4]):
+-        raise ValueError("Incomplete S-DFA gradient upload audit")
++    for cid, row in enumerate(audits):
++        expected = [] if cid >= 4 or job["attack"] == "Benign" else {
++            "F Flip": ["fflip"], "FedSA": ["foe"], "S-DFA": ["fflip", "foe"],
++            "Sp-DFA": ["fflip"] if cid < 2 else ["foe"]}[job["attack"]]
++        if row["attack_types"] != expected:
++            raise ValueError("Changed five-scene client assignment")
++        if "foe" in expected and (row["foe_mode"] != "fedsa" or "gradient sign-conjugacy" not in row["foe_impl"]):
++            raise ValueError("Changed gradient upload threat")
+     checkpoint = torch.load(output / "model.pt", map_location="cpu", weights_only=True)
+     if not isinstance(checkpoint, dict) or not checkpoint or any(not isinstance(value, torch.Tensor) or not torch.isfinite(value).all() for value in checkpoint.values()):
+         raise ValueError("Invalid terminal checkpoint")

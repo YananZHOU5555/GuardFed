@@ -1,0 +1,230 @@
+--- tmp/gradient_native_after42_20261011/pinned_collect_one.py
++++ tmp\NGA96_incremental_acceptance_prepare_20261011\pinned_collect_one.py
+@@ -37,7 +37,7 @@
+                 elif 111 in cpus:broad+=1
+         except (FileNotFoundError,ProcessLookupError):continue
+     return dict(at_unix=time.time(),restricted_CPU111_owners=owners,broad_mask_threads_containing111=broad,workers=workers,
+-        service=command(['supervisorctl','status','guardfed_celeba_gradient_screen64_v2a']),queue=read(RUNS/'QUEUE_PROGRESS.json'))
++        service=command(['supervisorctl','status','guardfed_celeba_fednga_fullcoverage_v1']),queue=read(RUNS/'QUEUE_PROGRESS.json'))
+ 
+ require(sha('/etc/vast-agents-guide.md')==GUIDE,'guide changed')
+ require(os.sched_getaffinity(0)=={111} and os.getpriority(os.PRIO_PROCESS,0)==10,'CPU111 nice10 required')
+@@ -76,11 +76,11 @@
+     add('source/package/FILES_SHA256.json',PKG/'FILES_SHA256.json')
+     # Preserve a measured prefix of the active shared log, never relabel it as a closed per-job log.
+     log_receipt=[]
+-    conf=Path('/etc/supervisor/conf.d/guardfed_celeba_gradient_screen64_v2a.conf')
++    conf=Path('/etc/supervisor/conf.d/guardfed_celeba_fednga_fullcoverage_v1.conf')
+     if conf.exists():
+         add('source/supervisor.conf',conf);cfg=configparser.ConfigParser(interpolation=None);cfg.read(conf)
+         for key in ('stdout_logfile','stderr_logfile'):
+-            value=cfg.get('program:guardfed_celeba_gradient_screen64_v2a',key,fallback=None)
++            value=cfg.get('program:guardfed_celeba_fednga_fullcoverage_v1',key,fallback=None)
+             if not value or value.startswith('/dev/'):continue
+             path=Path(value)
+             if not path.exists():continue
+--- tmp/gradient_native_after42_20261011/collect_delta.py
++++ tmp\NGA96_incremental_acceptance_prepare_20261011\collect_delta.py
+@@ -3,16 +3,16 @@
+ import ast, configparser, hashlib, importlib.util, io, json, os, socket, subprocess, sys, tarfile, time, traceback
+ sys.dont_write_bytecode=True
+ HERE=Path(__file__).resolve().parent
+-PKG=Path('/workspace/guardfed_checks/celeba_gradient_screen64_v2_20261010')
++PKG=Path('/workspace/guardfed_checks/celeba_gradient_fullcoverage_selected_20261011/Fed-NGA-gradient')
+ REPO=Path('/workspace/GuardFed-celeba-expanded')
+-RUNS=Path('/workspace/celeba_gradient_screen64_v2_results_20261010')
++RUNS=Path('/workspace/celeba_fednga_fullcoverage_results_20261011/attempt001')
+ DEST=HERE/'batch'
+-SEAL='11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced'
++SEAL='06e3d638aea70123d7fcf73e5a219a0c0d3165c8cf60acb9dee4eace5faad09b'
+ GUIDE='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+ VERIFIER=Path('/workspace/guardfed_checks/server_reactivation_20261009/evidence_v4.py')
+ VERIFIER_SHA='3d78db7e67275dce2d52bc8927dd86fc1c517708224a994345b70cadc56427ef'
+ # Reuse the actual first collector helpers; only CPU ownership metadata is rebound.
+-p=HERE/'pinned_collect_one.py';assert hashlib.sha256(p.read_bytes()).hexdigest()=='985f04d65afd8867cd606ac54b31b081ebeb3626b03b615245abe31a1d5504a7'
++p=HERE/'pinned_collect_one.py';assert hashlib.sha256(p.read_bytes()).hexdigest()=='b18206c0c831d80cddd76c095b02d2d54b59afb8cdf617042927e74c1a78c8c8'
+ text=p.read_text('utf8');tree=ast.parse(text)
+ for node in tree.body:
+  if isinstance(node,ast.FunctionDef) and node.name in ('sha','read','save','require','command','live'):
+@@ -26,32 +26,32 @@
+ require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','CUDA hidden required')
+ require(not DEST.exists(),'Preserve existing delta');DEST.mkdir()
+ try:
+- auth=read(HERE/'AUTHORIZED_SNAPSHOT.json');ids=auth['authorized_ids'];prior=read(HERE/'PREVIOUS_ROOT_ADOPTION.json');previous=read(HERE/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')
+- require(sha(HERE/'PREVIOUS_ROOT_ADOPTION.json')==auth['prior_root_sha256']=='7eec0792793dab9777fda31ca55c779dd68827e9827186f45dbe706cb9fea1ea','Prior root changed')
+- require(sha(HERE/'PREVIOUS_OFFSERVER_ACCEPTANCE.json')==auth['prior_offserver_sha256']=='abf8d3050973d7ab1dbc244cfd74a4e410b7e9b5748b2c7e12d93f62b74428bb','Prior offserver changed')
+- require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==42,'Actual root-adopted accepted42 binding required')
+- require(ids and len(ids)==len(set(ids)) and not set(ids)&set(prior['accepted_ids']),'Exact nonoverlapping delta required')
++ auth=read(HERE/'AUTHORIZED_SNAPSHOT.json');ids=auth['authorized_ids']
++ from scope import validate,manifest_jobs
++ prior,previous=validate(auth,read(HERE/'SCOPE.json'),HERE)
+  before=live();save(DEST/'LIVE_BEFORE.json',before)
+  require(not before['restricted_CPU110_owners'],'CPU110 restricted owner')
+- require(before['service']['returncode']==0 and 'RUNNING' in before['service']['stdout'],'Queue unhealthy')
++ require((before['service']['returncode']==0 and before['service']['stdout'].split()[:2]==['guardfed_celeba_fednga_fullcoverage_v1','RUNNING']) or (before['service']['returncode']==3 and before['service']['stdout'].split()[:2]==['guardfed_celeba_fednga_fullcoverage_v1','EXITED'] and not before['workers'] and before['queue']['strict_server_completed_ids']==read(HERE/'SCOPE.json')['new_ids']),'Queue neither healthy running nor exact96 terminal')
+  require(not list(RUNS.rglob('*FAILURE*')) and not list(RUNS.rglob('failure.json')),'Preserved queue/job failure')
+  require(set(ids)<=set(before['queue']['strict_server_completed_ids']),'Frozen IDs not completed')
+  require(sha(PKG/'FILES_SHA256.json')==SEAL,'Frozen package seal drift')
+  for n,pin in read(PKG/'FILES_SHA256.json')['files'].items():require(sha(PKG/n)==pin,'Frozen member drift: '+n)
+- manifest=read(PKG/'jobs/manifest.json');require(len(manifest['jobs'])==len({x['id'] for x in manifest['jobs']})==64 and sha(PKG/'jobs/manifest.json')==auth['manifest_sha256'],'Exact frozen64 grid changed')
++ manifest=manifest_jobs(read(PKG/'jobs/manifest.json'),read(HERE/'SCOPE.json'));require(sha(PKG/'jobs/manifest.json')==auth['manifest_sha256'],'Frozen96+4 manifest changed')
+  require([x['id'] for x in manifest['jobs'] if x['id'] in ids]==ids,'Manifest order/foreign ID')
+  quota,period=Path('/sys/fs/cgroup/cpu.max').read_text().split();require(quota!='max','Explicit quota required')
+  memory=int(Path('/sys/fs/cgroup/memory.max').read_text())-int(Path('/sys/fs/cgroup/memory.current').read_text())
+  require(int(quota)/int(period)>=24 and memory>=2*1024**3,'CPU/RAM headroom')
+  save(DEST/'RESOURCE.json',dict(pid=os.getpid(),cpu_ids=[110],threads=1,nice=10,io='idle',quota_cores=int(quota)/int(period),RAM_headroom_bytes=memory,guide_sha256=GUIDE))
+  sys.path.insert(0,str(PKG));import run_queue
++ from types import SimpleNamespace
++ run_queue.coverage_contract.validate(PKG,SimpleNamespace(source_approval=Path(auth['source_approval_path']),source_approval_sha256=auth['source_approval_sha256'],gate14_adoption=Path(auth['gate14_adoption_path']),gate14_adoption_sha256=auth['gate14_adoption_sha256']))
+  stage=run_queue.STAGE;sys.path.insert(0,str(stage));import worker
+  run_queue.bind_shared_inputs(worker,REPO.resolve())
+  import torch
+  torch.set_num_threads(1);torch.set_num_interop_threads(1)
+  require(torch.__version__=='2.11.0+cu128','Original isolated environment required')
+  from accept_result import checked_result
+- require(sha(stage/'accept_result.py')=='2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9','Original scientific acceptor changed')
++ require(sha(stage/'accept_result.py')=='d00dd2f3c0d8486f3e32044c3553972d1ff98515b54834a0a8b51048d2a5555e','Original scientific acceptor changed')
+  files={};records=[]
+  def add(name,path):
+   path=Path(path);require(path.is_file() and not path.is_symlink() and name not in files,'Invalid archive member');files[name]=dict(path=path,sha256=sha(path),bytes=path.stat().st_size)
+@@ -67,24 +67,27 @@
+  for n in read(PKG/'FILES_SHA256.json')['files']:add('source/package/'+n,PKG/n)
+  add('source/package/FILES_SHA256.json',PKG/'FILES_SHA256.json')
+  # Shared live log is a measured prefix, never a closed per-job log.
+- log_receipt=[];conf=Path('/etc/supervisor/conf.d/guardfed_celeba_gradient_screen64_v2a.conf')
++ log_receipt=[];conf=Path('/etc/supervisor/conf.d/guardfed_celeba_fednga_fullcoverage_v1.conf')
+  require(conf.is_file(),'Actual service configuration required');add('source/supervisor.conf',conf)
+  cfg=configparser.ConfigParser(interpolation=None);cfg.read(conf)
+  for key in ('stdout_logfile','stderr_logfile'):
+-  value=cfg.get('program:guardfed_celeba_gradient_screen64_v2a',key,fallback=None)
++  value=cfg.get('program:guardfed_celeba_fednga_fullcoverage_v1',key,fallback=None)
+   if not value or value.startswith('/dev/'):continue
+   path=Path(value)
+   if not path.exists():continue
+   count=path.stat().st_size;require(count<=8*1024*1024,'Unexpected shared log size')
+   data=path.open('rb').read(count);target=DEST/(key+'_prefix.log');target.write_bytes(data);add('logs/'+target.name,target)
+   log_receipt.append(dict(source=str(path),prefix_bytes=len(data),sha256=sha(target),complete_per_job_log=False))
+- strict=dict(status='ORIGINAL_CHECKED_RESULT_DELTA_PASS',accepted_new_ids=ids,accepted_before=42,strict_cumulative=42+len(ids),records=records,log_prefixes=log_receipt,scientific_acceptor_unchanged=True,source_seal_sha256=SEAL,source_host=socket.gethostname(),new_CNN=0,new_training=0)
++ strict=dict(status='ORIGINAL_CHECKED_RESULT_DELTA_PASS',accepted_new_ids=ids,accepted_before=len(prior['accepted_ids']),strict_cumulative=len(prior['accepted_ids'])+len(ids),records=records,log_prefixes=log_receipt,scientific_acceptor_unchanged=True,source_seal_sha256=SEAL,source_host=socket.gethostname(),new_CNN=0,new_training=0)
+  save(DEST/'ORIGINAL_STRICT.json',strict);save(DEST/'LIVE_AFTER.json',live())
+  for n in ('ORIGINAL_STRICT.json','LIVE_BEFORE.json','LIVE_AFTER.json','RESOURCE.json'):add('evidence/'+n,DEST/n)
+- for n in ('AUTHORIZED_SNAPSHOT.json','PREVIOUS_ROOT_ADOPTION.json','PREVIOUS_OFFSERVER_ACCEPTANCE.json','collect_delta.py','pinned_collect_one.py'):add('evidence/'+n,HERE/n)
++ for n in ('AUTHORIZED_SNAPSHOT.json','SCOPE.json','scope.py','collect_delta.py','pinned_collect_one.py'):add('evidence/'+n,HERE/n)
++ if prior['accepted_ids']:
++  for n in ('PREVIOUS_ROOT_ADOPTION.json','PREVIOUS_OFFSERVER_ACCEPTANCE.json'):add('evidence/'+n,HERE/n)
++ for label,key in [('source_approval','source_approval_path'),('gate14_adoption','gate14_adoption_path')]:add('evidence/'+label+'.json',auth[key])
+  require(sha(VERIFIER)==VERIFIER_SHA,'Original archive verifier changed');add('source/evidence_v4.py',VERIFIER)
+  inventory=dict(accepted_new_ids=ids,members={n:{k:r[k] for k in ('sha256','bytes')} for n,r in files.items()},old_models_repacked=0,selected_only=True,scientific_source_seal=SEAL,previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(HERE/'AUTHORIZED_SNAPSHOT.json'))
+- payload=(json.dumps(inventory,indent=2)+'\n').encode();archive=DEST/'gradient64_delta_after42_closed46.tar.gz'
++ payload=(json.dumps(inventory,indent=2)+'\n').encode();archive=DEST/'nga96_incremental.tar.gz'
+  with tarfile.open(archive,'w:gz') as t:
+   info=tarfile.TarInfo('backup_inventory.json');info.size=len(payload);t.addfile(info,io.BytesIO(payload))
+   for n,row in sorted(files.items()):
+--- tmp/gradient64_final_acceptance_prepared_20261011/verify_delta.py
++++ tmp\NGA96_incremental_acceptance_prepare_20261011\verify_delta.py
+@@ -15,7 +15,7 @@
+ if __name__=='__main__':
+  try:
+   os.environ.update(CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
+-  auth=read(H/'AUTHORIZED_SNAPSHOT.json');receipt=read(F/'backup_receipt.json');archive=F/'gradient64_delta_after46_closed64.tar.gz'
++  auth=read(H/'AUTHORIZED_SNAPSHOT.json');receipt=read(F/'backup_receipt.json');archive=F/'nga96_incremental.tar.gz'
+   require(sha(F/'backup_receipt.json')==read(H/'DOWNLOAD.json')['receipt_sha256'],'Actual downloaded receipt changed')
+   require(receipt['accepted_new_ids']==auth['authorized_ids'] and receipt['previous_root_sha256']==auth['prior_root_sha256'] and receipt['previous_offserver_sha256']==auth['prior_offserver_sha256'],'Delta/parent receipt mismatch')
+   original=R/'tmp/celeba_mechanism_evidence_20261009/evidence_v4.py'
+@@ -37,22 +37,23 @@
+   for n,row in inventory['members'].items():
+    p=out/n;require(p.stat().st_size==row['bytes'] and sha(p)==row['sha256'],'Extracted member changed: '+n)
+   require(inventory['accepted_new_ids']==auth['authorized_ids'] and inventory['old_models_repacked']==0 and inventory['selected_only'],'Wrong archive scope')
+-  for n,pin in [('PREVIOUS_ROOT_ADOPTION.json',auth['prior_root_sha256']),('PREVIOUS_OFFSERVER_ACCEPTANCE.json',auth['prior_offserver_sha256']),('AUTHORIZED_SNAPSHOT.json',sha(H/'AUTHORIZED_SNAPSHOT.json'))]:require(sha(out/'evidence'/n)==pin,'Parent/auth binding changed')
+-  prior=read(out/'evidence/PREVIOUS_ROOT_ADOPTION.json');previous=read(out/'evidence/PREVIOUS_OFFSERVER_ACCEPTANCE.json')
+-  require(prior['accepted_ids']==previous['accepted_job_ids']==auth['accepted_prior_ids'] and prior['accepted_total']==46,'Actual46 parent mismatch')
++  from scope import validate,manifest_jobs
++  require(sha(out/'evidence/AUTHORIZED_SNAPSHOT.json')==sha(H/'AUTHORIZED_SNAPSHOT.json'),'Actual selection changed')
++  require(sha(out/'evidence/SCOPE.json')==sha(H/'SCOPE.json'),'Source scope changed')
++  for label in ('source_approval','gate14_adoption'):require(sha(out/'evidence'/(label+'.json'))==auth[label+'_sha256'],'Frozen source/gate14 proof archive differs')
++  prior,previous=validate(auth,read(H/'SCOPE.json'),out/'evidence')
+   pkg=out/'source/package';seal=pkg/'FILES_SHA256.json'
+-  require(sha(seal)==auth['source_seal_sha256']=='11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced','Scientific seal changed')
++  require(sha(seal)==auth['source_seal_sha256']=='06e3d638aea70123d7fcf73e5a219a0c0d3165c8cf60acb9dee4eace5faad09b','Scientific seal changed')
+   for n,d in read(seal)['files'].items():require(sha(pkg/n)==d,'Scientific source member changed')
+-  stage=pkg/'snapshot/gradient_bridge_20261010';sys.path.insert(0,str(stage))
++  stage=pkg/'snapshot/gradient_bridge_fullcoverage';sys.path.insert(0,str(stage))
+   import torch
+   torch.set_num_threads(1);torch.set_num_interop_threads(1)
+   from accept_result import checked_result
+-  require(sha(stage/'accept_result.py')=='2c5d7699c6e9967d32c9080fb56b4672beb821cee0b20187c68195fb37d204e9','Original strict function changed')
+-  remote=read(out/'evidence/ORIGINAL_STRICT.json');manifest=read(pkg/'jobs/manifest.json');ids=auth['authorized_ids']
++  require(sha(stage/'accept_result.py')=='d00dd2f3c0d8486f3e32044c3553972d1ff98515b54834a0a8b51048d2a5555e','Original strict function changed')
++  remote=read(out/'evidence/ORIGINAL_STRICT.json');manifest=manifest_jobs(read(pkg/'jobs/manifest.json'),read(H/'SCOPE.json'));ids=auth['authorized_ids']
+   require(remote['accepted_new_ids']==ids and [x['id'] for x in remote['records']]==ids,'Server strict scope mismatch')
+-  require(len(manifest['jobs'])==len({x['id'] for x in manifest['jobs']})==64 and [x['id'] for x in manifest['jobs'] if x['id'] in ids]==ids,'Frozen64 grid/order mismatch')
++  require(len(manifest['jobs'])==len({x['id'] for x in manifest['jobs']})==96 and [x['id'] for x in manifest['jobs'] if x['id'] in ids]==ids,'Frozen96+4 grid/order mismatch')
+   require(not set(ids)&set(prior['accepted_ids']) and len(ids)==len(set(ids)),'Repeated old/duplicate ID')
+-  require(len(ids)==18 and prior['accepted_ids']+ids==[x['id'] for x in manifest['jobs']],'Exact ordered64 closure required')
+   records=[];tensor_rows=[]
+   for ID in ids:
+    entry=next(r for r in manifest['jobs'] if r['id']==ID);job=pkg/'jobs'/entry['job'];require(sha(job)==entry['job_sha256'],'Frozen job changed')
+@@ -74,7 +75,7 @@
+    records.append(dict(id=ID,checkpoint_sha256=sha(cp),job_sha256=sha(job),rounds=result['rounds'],metrics=result['metrics'],data_contract=result['data_contract'],original_training_provenance=result['provenance'],tensor_count=len(checkpoint),constant_negative_retained=result['metrics']==dict(accuracy=0.5166859616449389,aeod=0.0,aspd=0.0)))
+   require(not torch.cuda.is_initialized(),'No CUDA compute permitted')
+   save('SAVED_TENSOR_STATE_CHECK.json',dict(status='SAVED_FULL_STATE_LAYOUT_DTYPE_FINITE_PASS_NO_FORWARD',models=len(records),records=tensor_rows,CNN_forward_calls=0,optimizer_calls=0,data_loads=0,cnn_source_sha256=sha(cnn),runtime=dict(python=sys.version,torch=torch.__version__,cuda_initialized=False)))
+-  proof=dict(status='OFFSERVER_ORIGINAL_STRICT_DELTA_PASS',accepted_new_ids=ids,accepted_before=46,accepted_total=46+len(ids),accepted_job_ids=prior['accepted_ids']+ids,records=records,members_verified=member_proof['members_verified'],archive_verification=member_proof,archive_sha256=sha(archive),receipt_sha256=sha(F/'backup_receipt.json'),inventory_sha256=sha(out/'backup_inventory.json'),original_strict_sha256=sha(out/'evidence/ORIGINAL_STRICT.json'),scientific_package_sha256=sha(seal),original_validator_sha256=sha(stage/'accept_result.py'),previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),old46_ordered_prefix_exact=True,local_runtime=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,host=platform.node(),cuda_hidden=True),runtime_equivalence_claim=False,new_inference=0,new_training=0,old_models_repacked=0,root_adopted=False,screen64_completed_claim=False,method_champion_claim=False,archive=str(archive),restored=str(out),tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),prediction_arrays_recomputed=False,shared_log_is_prefix_only=True,all_negative_results_retained=True)
++  proof=dict(status='OFFSERVER_ORIGINAL_STRICT_DELTA_PASS',accepted_new_ids=ids,accepted_before=len(prior['accepted_ids']),accepted_total=len(prior['accepted_ids'])+len(ids),accepted_job_ids=prior['accepted_ids']+ids,records=records,members_verified=member_proof['members_verified'],archive_verification=member_proof,archive_sha256=sha(archive),receipt_sha256=sha(F/'backup_receipt.json'),inventory_sha256=sha(out/'backup_inventory.json'),original_strict_sha256=sha(out/'evidence/ORIGINAL_STRICT.json'),scientific_package_sha256=sha(seal),original_validator_sha256=sha(stage/'accept_result.py'),previous_root_sha256=auth['prior_root_sha256'],previous_offserver_sha256=auth['prior_offserver_sha256'],authorized_snapshot_sha256=sha(H/'AUTHORIZED_SNAPSHOT.json'),previous_accepted_ordered_prefix_exact=True,local_runtime=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,host=platform.node(),cuda_hidden=True),runtime_equivalence_claim=False,new_inference=0,new_training=0,old_models_repacked=0,root_adopted=False,coverage100_completed_claim=False,reused_screen4_count=4,reused_screen4_repacked=0,method_champion_claim=False,archive=str(archive),restored=str(out),tensor_proof_sha256=sha(H/'SAVED_TENSOR_STATE_CHECK.json'),prediction_arrays_recomputed=False,shared_log_is_prefix_only=True,all_negative_results_retained=True)
+   save('OFFSERVER_ACCEPTANCE.json',proof)
+   print(json.dumps(dict(status=proof['status'],new=len(ids),total=proof['accepted_total'],members=proof['members_verified'],proof_sha256=sha(H/'OFFSERVER_ACCEPTANCE.json'))))
+  except BaseException as e:
+--- tmp/gradient_native_after42_20261011/run_once.py
++++ tmp\NGA96_incremental_acceptance_prepare_20261011\run_once.py
+@@ -22,17 +22,19 @@
+ def guard_review(args):
+  assert sha(args.review)==args.review_sha256,'Actual root review SHA required'
+  review=read(args.review);auth=read(H/'AUTHORIZED_SNAPSHOT.json')
+- assert review['status']=='PARENT_AUTHORIZED_FIXED_GRADIENT64_DELTA_AFTER42_CLOSED46' and review['root_adoption_performed'] is False
++ assert review['status']=='PARENT_AUTHORIZED_FIXED_NGA96_INCREMENTAL_DELTA' and review['root_adoption_performed'] is False
+  assert review['source_files_sha256']==sha(H/'SOURCE_FILES_SHA256.json') and review['authorization_sha256']==sha(H/'AUTHORIZED_SNAPSHOT.json')
+- assert review['exact_new_ids']==auth['authorized_ids'] and len(review['exact_new_ids'])==len(auth['authorized_ids'])==4
++ assert review['exact_new_ids']==auth['authorized_ids'] and len(review['exact_new_ids'])==len(auth['authorized_ids'])>0
+  for name,pin in read(H/'SOURCE_FILES_SHA256.json')['files'].items():assert sha(H/name)==pin['sha256']
+- assert sha(R/auth['prior_root_path'])==auth['prior_root_sha256'] and sha(R/auth['prior_offserver_path'])==auth['prior_offserver_sha256']
++ from scope import validate
++ validate(auth,read(H/'SCOPE.json'),H)
++ assert sha(auth['snapshot_path'])==auth['snapshot_sha256']
+  return auth
+ def collect(args):
+  auth=guard_review(args)
+  storage=load(R/'tmp/guardfed_local_storage.py','bulk_storage_precollect')
+  save('F_VOLUME_BEFORE_COLLECT.json',storage.check_bulk_storage(0))
+- payload={n:base64.b64encode((H/n).read_bytes()).decode() for n in ['collect_delta.py','pinned_collect_one.py','AUTHORIZED_SNAPSHOT.json','PREVIOUS_ROOT_ADOPTION.json','PREVIOUS_OFFSERVER_ACCEPTANCE.json']}
++ payload={n:base64.b64encode((H/n).read_bytes()).decode() for n in (['collect_delta.py','pinned_collect_one.py','scope.py','SCOPE.json','AUTHORIZED_SNAPSHOT.json']+(['PREVIOUS_ROOT_ADOPTION.json','PREVIOUS_OFFSERVER_ACCEPTANCE.json'] if auth['accepted_prior_ids'] else []))}
+  pins={n:sha(H/n) for n in payload}
+  code="""from pathlib import Path
+ import base64,hashlib,os,json,subprocess,sys
+@@ -42,7 +44,7 @@
+  if not p.name.isdigit() or int(p.name)==os.getpid():continue
+  try:
+   argv=[x.decode(errors='replace') for x in (p/'cmdline').read_bytes().split(b'\\0') if x]
+-  if any(('celeba_gradient64_delta' in x or 'gradient_native_after' in x) and 'collect_delta.py' in x for x in argv):helpers.append(int(p.name))
++  if any(('celeba_gradient64_delta' in x or 'gradient_native_after' in x or 'NGA96_incremental' in x) and 'collect_delta.py' in x for x in argv):helpers.append(int(p.name))
+   for t in (p/'task').iterdir():
+    try:a=os.sched_getaffinity(int(t.name))
+    except ProcessLookupError:continue
+@@ -64,7 +66,7 @@
+  save('SERVER_COLLECTOR_RECEIPT.json',receipt)
+  print(json.dumps(dict(server_strict='PASS',new=len(auth['authorized_ids']),archive_sha256=receipt['receipt']['archive_sha256'],members=receipt['receipt']['members'])),flush=True)
+ def download(args):
+- guard_review(args);names=['gradient64_delta_after42_closed46.tar.gz','backup_receipt.json','ORIGINAL_STRICT.json']
++ guard_review(args);names=['nga96_incremental.tar.gz','backup_receipt.json','ORIGINAL_STRICT.json']
+  code="from pathlib import Path\nimport hashlib,json\nb=Path(%r)\nprint(json.dumps({n:dict(sha256=hashlib.sha256((b/n).read_bytes()).hexdigest(),bytes=(b/n).stat().st_size) for n in %r}))\n"%(REMOTE+'/batch',names)
+  pins=json.loads(run('REMOTE_ARTIFACTS',SSH+['python -B -'],code,60))
+  storage=load(R/'tmp/guardfed_local_storage.py','bulk_storage')
+@@ -90,8 +92,8 @@
+    if len(a)<=16 and 110 in a:busy.append(dict(pid=int(p.name),tid=int(t.name),cpus=sorted(a)))
+  except (FileNotFoundError,ProcessLookupError):continue
+ assert not busy and not helpers
+-service=subprocess.run(['supervisorctl','status','guardfed_celeba_gradient_screen64_v2a'],capture_output=True,text=True)
+-assert service.returncode==0 and 'RUNNING' in service.stdout
++service=subprocess.run(['supervisorctl','status','guardfed_celeba_fednga_fullcoverage_v1'],capture_output=True,text=True)
++assert (service.returncode==0 and service.stdout.split()[:2]==['guardfed_celeba_fednga_fullcoverage_v1','RUNNING']) or (service.returncode==3 and service.stdout.split()[:2]==['guardfed_celeba_fednga_fullcoverage_v1','EXITED'] and len(json.loads(Path('/workspace/celeba_fednga_fullcoverage_results_20261011/attempt001/QUEUE_PROGRESS.json').read_bytes())['strict_server_completed_ids'])==96)
+ print(json.dumps(dict(CPU110_released=True,restricted_owners=busy,collector_processes=helpers,service=service.stdout,guide_sha256=hashlib.sha256(Path('/etc/vast-agents-guide.md').read_bytes()).hexdigest())))
+ """%REMOTE
+  save('COLLECTOR_RELEASE.json',json.loads(run('RELEASE',SSH+['python -B -'],code,60)))

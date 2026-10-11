@@ -1,0 +1,271 @@
+{
+  "utc": "2026-10-11T04:45:40.713782+00:00",
+  "guide_sha256": "42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa",
+  "package_sha256": "6200c40f22a8ea670cfa02f0e74bbd81dc4ef9adecc258f979ddacc078a5d230",
+  "source_data_verified": {
+    "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+    "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+    "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+    "data/adult/adult.data": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+    "data/adult/adult.test": "72567b94f5c1a6f8501377dd80f93892c3848ff071cf91ba47e00b0785a28074",
+    "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+    "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+    "data/celeba/derived/rgb64_v1/manifest.json": "ef77efd89a11035ffa5d641df5221a44c6ce90c0d66a33efb0a8f7b61de1d643",
+    "data/celeba/derived/rgb64_v1/metadata.npz": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091",
+    "data/celeba/derived/rgb64_v1/images.npy": "ab44c5a33d18c9caf8ab4820aeb6a006d9ddf659aea7a8a20abf1d743fa2481f",
+    "data/celeba/derived/rgb64_v1/available.npy": "6c98acb9999be5b42ed87f3388c56ef414733a40e9fda2e3d3165f81cecd8dca",
+    "data/celeba/list_attr_celeba.txt": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+    "data/celeba/list_eval_partition.txt": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+    "deployment/prepare_celeba_expanded.py": "4bf6caa2ac280e702f927ecf325cb767ee10945da077612fee4c4d652a4d62ab",
+    "deployment/prepare_seedcheck.py": "7834a11c2eab2bef4bf8f9f49eab698307ee9dc64368f217b418348c06b0c6c5",
+    "deployment/CELEBA_SEEDCHECK_PROTOCOL.md": "ffea8d769720031a90975427db266383c963473514fb294a461c19eaf6c24cb8",
+    "results/revision_20260925/celeba_seedcheck_v1/selected_recipes.json": "e27a79bd651fedf49fcc3c383de10e068c7fed47492ef5d6bcb096632c846ec0",
+    "deployment/run_celeba_migration.py": "ee5068fca7b23e1ed5ef37f69535a2c6e63987f27e4f9dd727ee9bf1feae3419",
+    "deployment/prepare_fullcoverage.py": "ca58fae82e14d1585d8066eea0e9a3b3378a7fa567883a9e1acb26683f5bde0b",
+    "deployment/CELEBA_FULLCOVERAGE_PROTOCOL.md": "a092d04e21b9a3433f6528b4d035165d6bd871e56e62ca15237fbb1eeeebf444",
+    "results/revision_20260925/celeba_seedcheck_v1/manifest.json": "28bc18bcc4b7b86c6715708ded90aa3c7881896c4761b4115d1fe12acc1326dc"
+  },
+  "scope_jobs": 96,
+  "reuse_references": 4,
+  "service": "guardfed_celeba_flgmm_fullcoverage   EXITED    Oct 11 04:43 AM\n",
+  "service_terminal_gate": {
+    "mode": "NORMAL_EXITED_ZERO_WORKER_EXACT96_TERMINAL_NOT_SCIENTIFIC_ACCEPTANCE",
+    "supervisor_status_returncode": 3,
+    "supervisor_exitstatus": 0,
+    "completed_ids_checked": [
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_F Flip_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_FedSA_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_S-DFA_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_IID_Sp-DFA_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Benign_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_S-DFA_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91010_fullcoverage"
+    ],
+    "scientific_acceptance": false
+  },
+  "actual_workers": [],
+  "restricted_processes": [
+    {
+      "pid": 85890,
+      "affinity": [
+        104
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 108479,
+      "affinity": [
+        105
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 109948,
+      "affinity": [
+        104
+      ],
+      "executable": "python"
+    },
+    {
+      "pid": 110156,
+      "affinity": [
+        105
+      ],
+      "executable": "python"
+    }
+  ],
+  "CPU110_free": true,
+  "collector": {
+    "pid": 110373,
+    "CPU": 110,
+    "threads": 1,
+    "nice": 10,
+    "IO": "idle"
+  },
+  "authorized_terminal_rows": [
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91001_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "6deef7911ebf3a4060cc5846da1de6aea037d0c5b0ac685b1390a47f76d480af",
+      "model_sha256": "66d0860e16b180685db01c34198e3e59e34b9cbb45a5de99d7c157ce64960990",
+      "result_sha256": "91ee03df97307f79dfdc8c4647fdcdd8569caf598bccfc2c085e61a54dccd81a"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91002_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "39183feb02ffd707e820e0909de9ab317bd7aaa4d3c591f8b9a4527bf496a5e0",
+      "model_sha256": "33c0d12eae01dc5754bbe966792267bd463951d541cf42a535a71660a4cc28da",
+      "result_sha256": "b49b1d73c58fd02d56fbed399e9b65fb0d8011a9e9d252976da48110a97a7b15"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91003_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "f58d93456781ce6426868f4e3abb8fc4dc4e7262120cabd709a6f9bcf4bc4c5d",
+      "model_sha256": "142a87fe9eba02781f0debc95950745c57243fcc77b2b66ee6a3e3a92dda4cdb",
+      "result_sha256": "09f36cab2cf5063b3530c6b4d7a403d9ff37d502abfc5e8f450fe39fc81689d5"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91004_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "21a9987f73418d5fd47657396066084a71808444b50e79cd589153cb40b1ae72",
+      "model_sha256": "4500105eee730e2e04a2f23822bafdcec1c933d70c823f4651054fc8259d8fb0",
+      "result_sha256": "9819a1713fc299d9127e238d55595bf025824f8f4ab1785f9f961da544fc3758"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91005_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "e21467a5faf3c9404375eaa107cdd6c2c106fcf43407400b74d77acaace8f867",
+      "model_sha256": "ea230d44ce4fe35d785636c831125aa759e45b789a5d549e61558c529b9b78cb",
+      "result_sha256": "ed394f2286b215e7d59123120ab25714e6069cc1d2f2ad27c444b81210b21cb5"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91006_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "ae38db8260be321fd4af89ec13d409103fc19e9da33bb546075c6a75bd138c11",
+      "model_sha256": "79fb8f99fd3343101fb38d03cb32f6d5c55eaa7c4029521b512c7453ed5b09ef",
+      "result_sha256": "8711bc7a1da2f67e72979ecb1b4b84fd5f8fffe1c77c30146973b349eb9546e1"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91007_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "4a2019e5355cbf9ad1675cf79cf0de68e099e46f256ef835e756c437e6c214ee",
+      "model_sha256": "d20834f9b3a8ca1ec18441f57366d515429e9f5705174f0a2f22b46f51497518",
+      "result_sha256": "9dc6311284e90a5f194628b53b9f53573916492bf39a66791bb57d58627d7feb"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91008_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "6ca3c107491bd23ae3721b4b5131c960cbffaef85814bd5435c4038bbc4d4e8a",
+      "model_sha256": "b15c976fe7640d9db48d046d7ec27d5cbb4e39ccdcb50f434f807247a793f5ba",
+      "result_sha256": "81b5453953e53479911fd3b80fd2e4a44ad86dc201a6dd1199f342223b97870e"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91009_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "eda9e9f41b2596eb960517eb634b4132424545579e1722a03a966431ccacf347",
+      "model_sha256": "7b67ea147ec70abaa3fac14cde37fc3a5eb89af1cc6b9e42e6db0ca2f31e8f13",
+      "result_sha256": "7b237f456fde334c8277fd8cadb8497ac3da2931605e37b0f05b9a95091c035f"
+    },
+    {
+      "id": "FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91010_fullcoverage",
+      "round": 70,
+      "original_pid_absent": true,
+      "job_sha256": "40af58aa9facc6d046bca15d594dcc7f09ea84599ebcbfd4e6dd4f2ece009988",
+      "model_sha256": "c45f7feb47a69b407ba5815ea6596181d0b1090070a9eecd0c4a4ec2ed16ca53",
+      "result_sha256": "fd98240436da5575683db7bdfacd1d341b1eaa9f9256bfbab93610907ac269fd"
+    }
+  ],
+  "queue": {
+    "updated_unix": 1791693803.0743191,
+    "active": [],
+    "pending": 0,
+    "completed_new": 96,
+    "reused": 4,
+    "failed": false
+  },
+  "cpu_max": "12287999 100000",
+  "cpu_stat": "usage_usec 4748344195141\nuser_usec 3896792226162\nsystem_usec 851551968979\ncore_sched.force_idle_usec 0\nnr_periods 13369219\nnr_throttled 784\nthrottled_usec 4714761825\nnr_bursts 0\nburst_usec 0\n",
+  "memory_current": "69404008448",
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "disk_free_bytes": 1059400630272,
+  "gpu": "0, 100, 5041, 32607\n1, 100, 5033, 32607\n",
+  "scientific_acceptance_performed": false
+}

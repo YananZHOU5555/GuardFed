@@ -1,22 +1,29 @@
-# CURRENT — GuardFed revision evidence (2026-10-11T03:20:15.858260+00:00)
+# CURRENT: GuardFed返修实验
 
-用户已授权补全返修实验。Huber采用恒等投影，标为CNN项目适配且不沿用原约束域理论保证；LoGoFair采用固定图像ID的20虚拟cohort，仅称人口适配。主评价端点和final-test边界仍待作者决定，不能保证方法全面获胜。
+核验入口更新：2026-10-11T05:12:07.556730+00:00。最近合并实测2026-10-11T05:02:03.780720+00:00；NGA窄观测2026-10-11T04:58:03.095044+00:00。服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。sglang已按授权停止。
 
-严格采用：机制native/views380（U100/C100/A100/F80，Full100显式复用）；F80八场景/160记录表，10/9/6种子及sampleSD(ddof1)、paired差异完整，1296统计标量/648显示格；旧F70的140对象、1134统计标量、567单元原样保留。FLGMM native86新增＋4screen引用、三视图90及九场景表；Hybrid native19新增、三视图20/两场景表；gradient搜索64。控制400和F20尚未闭合，不称整个机制完成。
+| 阶段 | 严格验收、离机SHA及root已采用 | 最新实测与边界 |
+|---|---:|---|
+| 机制训练 | 新400/800，Full100显式复用 | 实测400终轮、8活动、392等待、训练失败0；U/C/A/F各100 native完成，另四类400继续 |
+| 机制三视图 | U100/C100/A100/F80，共380 | remaining620已远端闭合213，本机已采用200；seed91004去F/non-IID/Sp-DFA CPU重放数值失败，队列已停止；不得宣称F100闭合 |
+| FLGMM | 96新+4screen=100 native完整 | 三视图仍90；最后10独立评价因配套服务失败状态被启动检查拒绝，未启动，正在准备隔离资源检查 |
+| 主比较表 | 11方法native1100及三页PDF已采用 | IID/non-IID各5场景、每格10seed；9/6seed为敏感性，不是未触碰test；仍非目标17方法 |
+| 组合控制 | native19、三视图20已采用 | 实测29新终轮；尚非完整100 |
+| Fed-NGA/Huber | 搜索64、部署门检14、NGA新1已采用 | NGA实测7新终轮、第8项seed91009在60轮；96新+4复用，1worker CPU105/GPU1；Huber96未开始 |
 
-最新五队列实测2026-10-11T03:10:16.129291+00:00：主队列383/800终轮、8活动、409待运行、失败0；FL90/96新增终轮，Hybrid26/96新增终轮，三视图远端203闭合但本机仅380总采用，观察不等于验收。记录：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261011T031011Z.raw.json。两张5090正常，资源以该实时快照为准，低瞬时利用率不重启健康任务。
+本次机制native最后20仅non-IID S-DFA/Sp-DFA，终轮70/valid19867/source/data/config/checkpoint核验、190归档成员与离机SHA通过，旧480对象及52账本前缀保留，canonical账本53项已在本地/服务器同步采用。根：docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261011T050221Z/ROOT_DELTA_VERIFICATION.json。保存三视图380、F80表与既有负结果不变；训练完成不能替代校准评价验收。
 
-14个CPU三轮部署门已严格离机核验（457成员、14完整state、112张量），性能表0记录。NGA96冻结runner运行，2026-10-11T03:08:56.993139+00:00首任务70轮已落result，下一任务第9轮，当前failure0；科学接受仍0，不能把终轮文件存在当验收。Huber96未启动，按原定随后串行。首次输出父目录接线失败及一次有限修复保留，训练源码/数学/参数/seed未改。当前SSH60350 root@89.22.197.55；213旧实例不启队列。
+已保存故障证据：tmp/fl_final10_completed_aux_runtime_prepare_20261011/ACTUAL_NATIVE_ARTIFACTS.json。失败ID minus_F_non-IID_Sp-DFA_seed91004；训练native ACC/AEOD/ASPD=.8928877032/.0011269696/.0705992338，CPU重放=.8930890421/.0032383875/.0679697308，最大差.0026295030，原容差1e-12拒绝。源码、数据、模型/result/job SHA吻合；尚不能判定原因。不改容差、不抹除失败、不盲重试剩余620；主训练、NGA和Hybrid独立继续。已验收380与原生400仍有效，失败CPU数组不计入论文结果。
 
-完整24点工作稿：docs/server_deployment_20260923/revision_20260923/rebuttal_working_F80_FL90_Hybrid20_release_20261011.md（a4fd92d065eb78e4cf325dd87f6fa33168380cb4453ce73a62a9015a4d3f795f）。24原话块/38引文行顺序exact，稿固定native/views380/F80、FL90、Hybrid20、gradient64；从保存JSON复制新FedSA六行统计，不重算。non-IID FedSA十seed Full native ACC88.41±0.92%、AEOD0.0078±0.0056、ASPD0.0616±0.0141；去F−Full ΔACC−0.239±1.297pp、ΔAEOD+0.00359±0.01201、ΔASPD+0.00047±0.01507。方向随面板变化和旧F70负结果全部保留，不称普遍必要或显著。FL新S-DFA校准的准确率代价及−2.1684e−19 group_KL诊断差、旧Windows47 exact-refit失败保留；不称跨平台逐位一致。
+FLGMM完整native根 tmp/fl_native_final10_prepared_20261011/ROOT_ADOPTION_REVIEW.json；最后10归档107成员，旧86有序链不变。新增11方法表 outputs/guardfed_tables/celeba_eleven_method_native_20261011/TABLES.md，三页PDF outputs/guardfed_tables/celeba_eleven_method_native_pdf_20261011/celeba_eleven_method_native.pdf。1100为方法–场景–种子评估记录，LoGoFair复用FedAvg checkpoint，不能称1100次独立训练。1980场景统计数值/990显示格独立核验，误差至1.11e-16；旧1000对象和统计精确保留。balanced十seed：GF88.42%/.0097/.0610，FLGMM89.35%/.0439/.1119；准确率代价、LoGo更低ASPD及FLTrust更高准确率都保留，不称全面领先或显著。
 
-Git67已验证远端：3ffad7675c82c4ec7a8e29db541c437e93969590，196个committed blobs逐个SHA和remote通过。其固定截止native380/views370/F70、FL90、Hybrid20、14部署及NGA启动；F80/new views10为下一次发布，不改写旧receipt。当前本机证据更近，Git状态只依真实publication receipt。
+当前完整24条英文回复：docs/server_deployment_20260923/revision_20260923/rebuttal_working_F80_FL90_Hybrid20_native11_20261011.md。38条审稿引文和既有统计范围修正保留；该稿机制固定截止380/F80、FL三视图90、Hybrid20，新增native11已写入；后来的native400/本次故障尚未写入固定截止稿。正文插入候选、14方法信息访问附录及作者入口在revision_20260923；尚未移入匹配投稿LaTeX、未做最终IEEE排版验收。旧TableII全部480格均已追溯（包括原44个N/E），实际n1=294/n10=180/n3=6，单次SD不可计算；历史选轮与round70修正候选分开，不能宣称旧值全是同checkpoint。
 
-仍待：剩余机制与新基线完整多seed、三视图验收和IID/non-IID表；FedWA/SmartFL/FedDNA忠实定义；最终主评价端点与冻结final-test决策；匹配提交版LaTeX和正文/rebuttal整合。TableII旧480格追溯中的单次值不能伪造SD。原1390及已完成队列不重跑。当前稿仅作者审阅，未修改提交LaTeX或启用最终测试。
+Huber采用用户同意的恒等投影，标CNN适配、不沿用约束域理论；LoGoFair固定image_id的20虚拟cohort仅人口适配，DP不是差分隐私。剩余六个native方法覆盖、其他图像控制400、共享校准闭合、忠实FedWA/SmartFL/FedDNA资料、主端点/最终评价边界、匹配LaTeX与最终发布仍待完成。官方test曾暴露，当前只valid；不挑seed、不用Full最佳对比消融均值、不混checkpoint指标、不删负结果。
 
-三小时桌面监控最后实际为暂停，当前automation_update不可用，不能声称启用；服务器Supervisor独立继续，无新cron/Windows任务或其他监督机制。大数据、模型、归档留服务器或已检查的F:/YananResearchStorage/GuardFed（Yanan 2TB），不回退内置盘；本机仅代码/配置/必要索引与精简报告。
+最近双5090为100/100%、64/61°C、约5GB显存，RecoveryAction None；cgroup OOM0，内存约69.4/519.2GB、CPU配额122.87999核、磁盘余1.059TB。累计CPU计数不等于瞬时利用率，不据占用重启健康任务。大型证据留服务器或F:/YananResearchStorage/GuardFed，写前核Yanan2TB/Healthy/容量，无内置盘回退。Git68为f252db2c固定历史截止，本次native400/11方法/新全文尚未发布；不改旧发布回执。三小时聊天automation仍PAUSED，当前无可调用更新工具，未创建替代监督。
 
-写入器：tmp/refresh_saved380_F80_editorial_root_20261011.py。本次只更新已验收证据入口，无训练/fit/新科学检查。五入口历史尾部逐字保留。
+本入口只采用上述实际根证明和带时间观测；全部历史尾字节保持，原STATE/当前前缀另存在tmp/root_native400_native11_replay_failure_20261011。整个返修未完成。
 
 # HISTORICAL: Nine-method coverage COMPLETE, ongoing monitor ACTIVE — 2026-10-04 Sydney
 
