@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 RAYON_NUM_THREADS=1 UV_CONCURRENT_DOWNLOADS=1 UV_CONCURRENT_BUILDS=1 UV_CONCURRENT_INSTALLS=1 nice -n 10 ionice -c 3 taskset -c 113 /bin/sh -s"
+  ],
+  "source_sha256": "c8881b16b5d5cbc5b9a82f3808b7f968f7ebd4eaf8ee079ad84bfc2cf7fb7334",
+  "authorization_sha256": "0481e10481ec8eb73f2d45e995e6b814be52a7ea0ef6ce871597610da945e13d",
+  "start_utc": "2026-10-11T08:44:36.374351+00:00",
+  "end_utc": "2026-10-11T08:45:33.070639+00:00",
+  "returncode": 1,
+  "exception": null,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "c4d2a9dd90cfc0a8bb6afb948f35a5c95bdcbbe329de59ab7e0d4e3b2f47a4c4",
+  "automatic_retry": false
+}

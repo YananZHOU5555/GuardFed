@@ -47,3 +47,12 @@
 ## 2026-10-11 08:20 UTC FL100实际执行追加
 
 FL100原终轮输入与七包身份冻结（cohort8c16d111…），未回填此前冻结时刻。固定screen IID Benign91001、fullcoverage non-IID F Flip91001和non-IID Sp-DFA91001均通过原Linux完整验收、native三指标差0、离机零拟合27指标/72计数/9规则及F盘77成员SHA核验。root tmp/FL100_cuda3_saved_closure_prepare_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json SHA e6db56a24eda9ea9840caba54958e79ee77bb427a4b11804e0b03b2462f8c905。2026-10-11T08:20:21Z在原namespace实际启动剩余97，service guardfed_uniform_cuda_FL100_remaining_valid；原顺序补集、CPU111/GPU0、单线程、原1e-12不变，无自动重试。共实际冻结1400逻辑记录，Full仍只一次；当前本地CUDA13不代表全比较或finaltest完成。LoGo仅源码已审，须FedAvg CUDA100根采用缓存、原poststate精确恢复和Linux CPU环境通过实际门后才能运行。
+
+
+## 2026-10-11 actual LoGo100 deployment and closure increment
+
+Recorded 2026-10-11T09:27:12.686305+00:00. Author approval a1f1be… remains unchanged. Actual disjoint frozen scope is now1500=first500+original800+FL100+LoGo100. This is an execution addition within the approved uniform-CUDA scope, not a new training/test campaign or a changed metric/fit/selection rule. LoGo reuses root-adopted FedAvg100 CUDA caches and original frozen CPU netcal postprocessors. 712 original artifacts SHA matched; independent Python3.10.20 versus original3.10.4 is disclosed. Failed environment attempt retained; repaired pinned direct CPU packages and actual2 checks passed.
+
+Root adopted FL100=prior3+new97 (900 metrics/2400 counts/300 decision rules/native max0), and LoGo fixed2 (39734 predictions/6 metrics/16 recomputed confusion counts/error0). LoGo remaining98 started only after fixed2 offserver audit/root adoption and fresh unchanged CPU113 guard. Exact root proofs: {'path': 'tmp/FL100_cuda100_saved_closure_prepare_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json', 'sha256': 'ea935ead7da50ba7eff0dd7e4e4b289ca9365427096ad8431808ae4d76acb751'} and {'path': 'tmp/LoGo_cuda_fixed2_saved_audit_prepare_v2_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json', 'sha256': 'cdf9a578fd26a9a85ae674aff7e55932e9cd6e75b895b8e3b39adc1ad12753bc'}; actual start {'path': 'tmp/LoGo100_remaining98_root_start_prepare_20261011/ROOT_REMAINING98_START_COMMAND.json', 'sha256': '4c200beebdc55c69ef62155060829dfe7c5f4d0235f3a416e43ff062c5e51130'}. LoGo native frozen-post view is not an independent newly trained model; no new CNN/fit/refit/test. Historical CPU differences are retained diagnostics, not a required equality gate.
+
+Total unique root adoption211=first7+old800 unique102+FL100+LoGo2; Full appears only once. Pending server saved results do not become adopted evidence. Target2500 and complete comparison remain incomplete.

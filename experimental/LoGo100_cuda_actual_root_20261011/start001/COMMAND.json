@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "ssh",
+    "-p",
+    "60350",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "root@89.22.197.55",
+    "env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 ionice -c 3 python3 -B -"
+  ],
+  "mode": "start",
+  "start_utc": "2026-10-11T09:11:09.832620+00:00",
+  "source_sha256": "ef9408922d7c9c7368c9ba53eac9fe8da9fb002457548a1f54b70a15a300afe5",
+  "launcher_sha256": "0d8ecb63dd24b6e839a14cc573c9bc2ddf48b1474e386da21b1a5934381a4b77",
+  "expanded_source_sha256": "444cb9751890801ce6e3de1848e337f24520478f7d020ff9d25cd2674c91a0bc",
+  "root_inputs_sha256": "daabec80ccaf068f8beae60ea1532d115ab5c4ea4c2998c050cde2e25a551f14",
+  "returncode": 0,
+  "exception": null,
+  "automatic_retry": false,
+  "end_utc": "2026-10-11T09:11:17.214617+00:00",
+  "stdout_sha256": "469b68d75de82b40b39e9bc26726cce70cb7e1cc7bb9804758356ae2cf905e0f",
+  "stderr_sha256": "94d5f06b0cd6051cb132f1af494647103f0cccb4496338cd81d29c7ed6e0d1b0"
+}
