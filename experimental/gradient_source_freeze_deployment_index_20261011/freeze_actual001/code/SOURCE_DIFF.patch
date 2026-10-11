@@ -1,0 +1,88 @@
+--- original/worker.py
++++ prepared/worker.py
+@@ -24,7 +24,7 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ METHODS = {"Fed-NGA-gradient", "Huber-BRFL-gradient"}
+-LOCAL_SOURCES = {"worker.py", "accept_result.py", "prepare.py", "protocol.json"}
++LOCAL_SOURCES = {"worker.py", "accept_result.py", "protocol.json"}
+ COMPONENTS = {
+     "remaining_20261009/group_a/adapters.py": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+     "fednga/fednga.py": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee",
+@@ -294,13 +294,18 @@
+     distribution, attack = job["distribution"], job["attack"]
+     if distribution not in protocol["distributions"] or attack not in protocol["attacks"]:
+         raise ValueError("Unknown screen condition")
+-    identity = candidate["id"] + "_" + distribution + "_" + attack + "_seed91001_screen"
+-    expected = dict(protocol["base_config"], seed=91001, rounds=70,
++    seed = job.get("config", {}).get("seed")
++    if type(seed) is not int or seed not in range(91001, 91011):
++        raise ValueError("Fullcoverage requires shared model seed91001..91010")
++    if seed == 91001 and attack in {"Benign", "S-DFA"}:
++        raise ValueError("Selected original four screen records must be referenced, not rerun")
++    identity = candidate["id"] + "_" + distribution + "_" + attack + "_seed" + str(seed) + "_coverage"
++    expected = dict(protocol["base_config"], seed=seed, rounds=70,
+         client_alpha=protocol["distributions"][distribution],
+         use_reweighting=candidate["adapter"]["objective"] == "shared_reweighted_ce",
+         experiment_suite=protocol["version"], experiment_tag=identity)
+     if (job.get("id"), job.get("dataset"), job.get("evidence_stage"), job.get("config")) != (
+-            identity, "celeba", "validation_screen", expected):
++            identity, "celeba", "validation_fullcoverage", expected):
+         raise ValueError("Gradient config/identity mismatch")
+     if job.get("source_hashes") != protocol["source_hashes"] or job.get("component_hashes") != COMPONENTS:
+         raise ValueError("Frozen core/data/component identity mismatch")
+@@ -347,7 +352,7 @@
+         result = train_pipeline(core, components, job["method"], job["distribution"], job["attack"], config,
+             job["adapter"], device, progress_callback=progress, checkpoint_path=output / "model.pt",
+             diagnostics_callback=lambda rows: write_json(output / "diagnostics.json", rows))
+-        result.update(status="screen_complete", evidence_stage="validation_screen", revision_job=job,
++        result.update(status="coverage_complete", evidence_stage="validation_fullcoverage", revision_job=job,
+                       tuning_candidate=job["tuning_candidate"], provenance=provenance)
+         write_json(output / "result.json", result)
+         write_json(output / "acceptance.json", dict(status="PASS", artifact_hashes={name: digest(output / name) for name in
+--- original/accept_result.py
++++ prepared/accept_result.py
+@@ -25,7 +25,7 @@
+     for name, expected in receipt["artifact_hashes"].items():
+         if digest(output / name) != expected:
+             raise ValueError("Artifact SHA mismatch: " + name)
+-    if result["status"] != "screen_complete" or result["evidence_stage"] != "validation_screen":
++    if result["status"] != "coverage_complete" or result["evidence_stage"] != "validation_fullcoverage":
+         raise ValueError("Incomplete/non-screen result")
+     if json.loads((output / "job.json").read_text(encoding="utf8")) != job or result["revision_job"] != job:
+         raise ValueError("Stored job identity mismatch")
+@@ -35,7 +35,7 @@
+         if result[key] != job[key]:
+             raise ValueError("Method/condition identity mismatch")
+     if (result["seed"], result["rounds"], result["alpha"], result["num_clients"], result["num_malicious"]) != (
+-            91001, 70, job["config"]["client_alpha"], 20, 4):
++            job["config"]["seed"], 70, job["config"]["client_alpha"], 20, 4):
+         raise ValueError("Seed/round/alpha/client contract mismatch")
+     provenance = json.loads((output / "provenance.json").read_text(encoding="utf8"))
+     if result["provenance"] != provenance or provenance["job_sha256"] != digest(job_path):
+@@ -64,7 +64,7 @@
+     diagnostic = json.loads((output / "diagnostics.json").read_text(encoding="utf8"))
+     if diagnostic != result["round_summaries"]:
+         raise ValueError("Diagnostic trajectory mismatch")
+-    root_expected = job["attack"] == "S-DFA"
++    root_expected = job["attack"] in {"FedSA", "S-DFA", "Sp-DFA"}
+     for row in diagnostic:
+         info = row["aggregate"]
+         if (info["actual_parameters"], info["aggregation_weighting"], info["client_order"],
+@@ -106,8 +106,14 @@
+     audits = result["attack_audit"]
+     if [row["client_id"] for row in audits] != list(range(20)) or any(row.get("label_changed_count", 0) for row in audits):
+         raise ValueError("Client/label audit mismatch")
+-    if root_expected and any(row["attack_types"] != ["fflip", "foe"] or "gradient sign-conjugacy" not in row["foe_impl"] for row in audits[:4]):
+-        raise ValueError("Incomplete S-DFA gradient upload audit")
++    for cid, row in enumerate(audits):
++        expected = [] if cid >= 4 or job["attack"] == "Benign" else {
++            "F Flip": ["fflip"], "FedSA": ["foe"], "S-DFA": ["fflip", "foe"],
++            "Sp-DFA": ["fflip"] if cid < 2 else ["foe"]}[job["attack"]]
++        if row["attack_types"] != expected:
++            raise ValueError("Changed five-scene client assignment")
++        if "foe" in expected and (row["foe_mode"] != "fedsa" or "gradient sign-conjugacy" not in row["foe_impl"]):
++            raise ValueError("Changed gradient upload threat")
+     checkpoint = torch.load(output / "model.pt", map_location="cpu", weights_only=True)
+     if not isinstance(checkpoint, dict) or not checkpoint or any(not isinstance(value, torch.Tensor) or not torch.isfinite(value).all() for value in checkpoint.values()):
+         raise ValueError("Invalid terminal checkpoint")

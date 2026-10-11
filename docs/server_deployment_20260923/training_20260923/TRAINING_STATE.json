@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791672123.363604,
+  "updated_unix": 1791676603.110861,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -2754,8 +2754,8 @@
     "status": "FORMAL800_RUNNING",
     "new_total_prepared": 800,
     "reused_full": 100,
-    "new_completed": 341,
-    "new_started": 352,
+    "new_completed": 350,
+    "new_started": 360,
     "prepared_gate_jobs": 18,
     "reference_jobs": 2,
     "cpu_component_tests_passed": 6,
@@ -2767,9 +2767,9 @@
     "real_image_cu130_gates_accepted": 20,
     "current_runtime": "torch2.11.0+cu128 driver595.84",
     "preflight_queue_completed": 20,
-    "scientific_results_completed": 341,
-    "queue_completed_observed": 344,
-    "scientific_results_strictly_accepted": 341,
+    "scientific_results_completed": 350,
+    "queue_completed_observed": 352,
+    "scientific_results_strictly_accepted": 350,
     "real_image_cu128_gates_accepted": 20,
     "cross_runtime_three_round_exact": 20,
     "full_reuse_strictly_accepted": 100,
@@ -2777,10 +2777,10 @@
     "dispatch_receipt_sha256": "5d1bddcf5622904edfaf528981df95f2a82db0cb7178224d693f6be5eb21b189",
     "validation_only": true,
     "test_started": false,
-    "scientific_results_offserver_verified": 341,
-    "science_acceptance_inspection": "server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T222658Z/inspection/inspection.json",
-    "latest_science_backup_sha256": "15ea184dce72b8592bae56124299f9e959944c83e674ef726e3c347b2462ce51",
-    "latest_science_backup_members_verified": 94,
+    "scientific_results_offserver_verified": 350,
+    "science_acceptance_inspection": "server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/inspection/inspection.json",
+    "latest_science_backup_sha256": "fed2b44c97abb3313956913cbe1cf4e66885e64d3d64aec935c3c4b46bda2390",
+    "latest_science_backup_members_verified": 102,
     "backup_tool_version": "evidence_v4.py; sealed v1/v2/v3 and original five-model archive unchanged",
     "active_partial_outputs_are_pending": true,
     "mechanism_raw_native_shared_evaluation": "INCREMENTAL_STRICT_VALID_REPLAYS_OFFSERVER_VERIFIED",
@@ -3417,10 +3417,25 @@
         "members_verified": 94,
         "root_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T222658Z/ROOT_DELTA_VERIFICATION.json",
         "root_proof_sha256": "755f996594675c858b696ec1e0ac7038de9e8ad2a1fd011212fc78a38b736ba4"
+      },
+      {
+        "archive_sha256": "fed2b44c97abb3313956913cbe1cf4e66885e64d3d64aec935c3c4b46bda2390",
+        "new_ids": [
+          "minus_F_IID_Sp-DFA_seed91002",
+          "minus_F_IID_Sp-DFA_seed91003",
+          "minus_F_IID_Sp-DFA_seed91004",
+          "minus_F_IID_Sp-DFA_seed91005",
+          "minus_F_IID_Sp-DFA_seed91006",
+          "minus_F_IID_Sp-DFA_seed91007",
+          "minus_F_IID_Sp-DFA_seed91008",
+          "minus_F_IID_Sp-DFA_seed91009",
+          "minus_F_IID_Sp-DFA_seed91010"
+        ],
+        "members_verified": 102
       }
     ],
-    "three_view_new_models_accepted": 340,
-    "three_view_new_models_offserver_verified": 340,
+    "three_view_new_models_accepted": 350,
+    "three_view_new_models_offserver_verified": 350,
     "three_view_accepted_ids": [
       "minus_U_IID_Benign_seed91001",
       "minus_U_IID_Benign_seed91002",
@@ -3761,11 +3776,21 @@
       "minus_F_IID_S-DFA_seed91007",
       "minus_F_IID_S-DFA_seed91008",
       "minus_F_IID_S-DFA_seed91009",
-      "minus_F_IID_S-DFA_seed91010"
+      "minus_F_IID_S-DFA_seed91010",
+      "minus_F_IID_Sp-DFA_seed91001",
+      "minus_F_IID_Sp-DFA_seed91002",
+      "minus_F_IID_Sp-DFA_seed91003",
+      "minus_F_IID_Sp-DFA_seed91004",
+      "minus_F_IID_Sp-DFA_seed91005",
+      "minus_F_IID_Sp-DFA_seed91006",
+      "minus_F_IID_Sp-DFA_seed91007",
+      "minus_F_IID_Sp-DFA_seed91008",
+      "minus_F_IID_Sp-DFA_seed91009",
+      "minus_F_IID_Sp-DFA_seed91010"
     ],
     "three_view_native_max_abs_difference": 0,
-    "three_view_root_proof_sha256": "80a7f38890c2a7f8c75c0472489315bb2acb9e43c9e28d686a799cfea9709a02",
-    "three_view_scope_limit": "U/C/A each100; F40 covers IID Benign/F Flip/FedSA/S-DFA; fixed10/9/6 panels retain all reversals. Six F scenes60 plus four controls400 remain; native341 and saved340 differ. Validation only, no universal necessity, significance or final-test claim.",
+    "three_view_root_proof_sha256": "3f7b436e0b2fec0401d7bf6117d6dca48aef21c185b6f170d37954e2cafee5a4",
+    "three_view_scope_limit": "U/C/A each100 plus F50; native350 and saved-view350 accepted. Five nonIID F scenes50 plus four controls400 remain450. Validation only; prediction-rule tradeoffs retained, no universal necessity/significance/final-test claim.",
     "original_two_engineering_failures_preserved": true,
     "remaining_seven_valid_replay": {
       "status": "SEVEN_COMPLETE_STRICT_OFFSERVER_AND_ROOT_INDEPENDENTLY_ACCEPTED",
@@ -4313,7 +4338,7 @@
       "minus_U": 100,
       "minus_C": 100,
       "minus_A": 100,
-      "minus_F": 40
+      "minus_F": 50
     },
     "C1_valid_gate": {
       "status": "SINGLE_C_GATE_COMPLETE_STRICT_OFFSERVER",
@@ -5027,8 +5052,8 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": true
     },
-    "latest_three_view_index": "tmp/celeba_mechanism_remaining_F_SDFA10_root_adoption_20261011/MECHANISM340_INDEX.json",
-    "latest_three_view_index_sha256": "a92ca53bf7beb7fac0951381ba1807ff0ee4f6d74d040826b0137cfb700d1d99",
+    "latest_three_view_index": "tmp/celeba_mechanism_remaining_F_SpDFA10_root_adoption_20261011/MECHANISM350_INDEX.json",
+    "latest_three_view_index_sha256": "5b24956b4f14707e2a284fe73ffb538545b4aad218c833e31427720402ff02b3",
     "A_three_view_five_scene_table": {
       "status": "ROOT_A50_FIVE_COMPLETE_IID_SCENE_THREE_VIEW_TABLE_ADOPTED",
       "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_A_IID_five_scenes50_20261010/TABLES.md",
@@ -5158,10 +5183,10 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": true
     },
-    "queue_observation_utc": "2026-10-10T22:39:26.289735+00:00",
-    "queue_observation_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
+    "queue_observation_utc": "2026-10-10T23:50:58.834797+00:00",
+    "queue_observation_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
     "queue_active_observed": 8,
-    "queue_pending_observed": 448,
+    "queue_pending_observed": 440,
     "queue_failures_observed": 0,
     "F_three_view_single_scene_table": {
       "status": "ROOT_F10_SINGLE_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
@@ -5199,7 +5224,7 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": false
     },
-    "new_started_observation_utc": "2026-10-10T22:39:26.289735+00:00",
+    "new_started_observation_utc": "2026-10-10T23:50:58.834797+00:00",
     "F_three_view_two_scene_table": {
       "root_adoption": true,
       "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_two_scenes20_20261011/TABLES.md",
@@ -5218,8 +5243,8 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": false
     },
-    "latest_native_root_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T222658Z/ROOT_DELTA_VERIFICATION.json",
-    "latest_native_root_proof_sha256": "755f996594675c858b696ec1e0ac7038de9e8ad2a1fd011212fc78a38b736ba4",
+    "latest_native_root_proof_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/ROOT_DELTA_VERIFICATION.json",
+    "latest_native_root_proof_sha256": "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770",
     "native_after320_root_adoption": {
       "new_accepted": 13,
       "total_accepted": 333,
@@ -5281,6 +5306,29 @@
       "validation_only": true,
       "final_test": false,
       "whole_rebuttal_complete": false
+    },
+    "latest_native_root": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261010T232753Z/ROOT_DELTA_VERIFICATION.json",
+      "sha256": "706b528831145c2a2402eb040f1e8a19279b09b29171e99082aa1c410db69770"
+    },
+    "native_unaccepted": 450,
+    "F_three_view_five_scene_table": {
+      "root_proof_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_five_scenes50_20261011/ROOT_VERIFICATION.json",
+      "root_proof_sha256": "cf89d438b80f48df617c994084a69d8d913cf7dc35c65c762d8800517b89590b",
+      "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_five_scenes50_20261011/TABLES.md",
+      "paired_models": 50,
+      "complete_scenes": 5,
+      "displayed_records": 100,
+      "seed_panels": [
+        10,
+        9,
+        6
+      ],
+      "mean_SD_scalars": 810,
+      "display_cells": 405,
+      "validation_only": true,
+      "final_test": false,
+      "whole_rebuttal_complete": false
     }
   },
   "celeba_partition_audit_20261009": {
@@ -5308,7 +5356,7 @@
     "sha256": "ca05374c46d041f59dd45dde9cdf19547d88a5a1f12d87d75d0ca80a05cef3aa",
     "verification_sha256": "21349fb769884f12e1c44fe1ca0262b2e5ae26543a9c2bdeb5b7b0e1b61fcc56"
   },
-  "local_work_verified_utc": "2026-10-09T05:36:37.095505+00:00",
+  "local_work_verified_utc": "2026-10-10T23:56:43.104332+00:00",
   "tabular_partition_audit_20261009": {
     "status": "PASS",
     "partitions": 60,
@@ -6166,13 +6214,13 @@
     "significance_claimed": false
   },
   "latest_publication_verification": {
-    "commit": "fb1f31031aad89206f252969a6c26af6cde9efa4",
+    "commit": "ccb5207c24762d3ac92ed76b40bd40b3e2330954",
     "branch": "codex/revision-evidence-baselines-20260928",
-    "verified_utc": "2026-10-10T22:06:27.033497+00:00",
-    "committed_blobs_sha256_verified": 245,
+    "verified_utc": "2026-10-10T22:45:49.939495+00:00",
+    "committed_blobs_sha256_verified": 191,
     "acceptance_cutoff": {
-      "native": 333,
-      "three_view": 330,
+      "native": 341,
+      "three_view": 340,
       "FLGMM_native_new": 67,
       "FLGMM_three_views": 71,
       "FLGMM_table_complete_scene_records": 70,
@@ -6185,12 +6233,12 @@
       "gradient_search": 46,
       "Hybrid_native_new": 12,
       "UCA_models": 300,
-      "F_table_pairs": 30,
-      "F_table_scenes": 3,
+      "F_table_pairs": 40,
+      "F_table_scenes": 4,
       "reviewer_comments": 24
     },
-    "proof_path": "publication_closed_increment62_verified_20261011.json",
-    "proof_sha256": "ec82d144d9a1a1e185d7d2d264e374539294ca247d50e44d6f971ca546aff919",
+    "proof_path": "publication_closed_increment63_verified_20261011.json",
+    "proof_sha256": "88b77f1d4fe27016c57bf45931fff2a03be582b4c01be361ca865a0525fb0d8c",
     "earlier_publication_snapshot_is_historical": true
   },
   "hybrid_cuda_gate_20261009": {
@@ -6765,7 +6813,7 @@
     "planned_total": 100,
     "prepared_new_canaries": 5,
     "original_references": 2,
-    "new_accepted": 67,
+    "new_accepted": 77,
     "actual_metadata_archive_members": 144,
     "source_v2_minimal_engineering_repairs": true,
     "local_extract_failure_preserved": true,
@@ -6885,33 +6933,38 @@
       "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage",
       "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage",
       "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage",
-      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage"
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91001_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91002_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91003_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91004_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91005_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91006_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91007_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91008_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91009_fullcoverage",
+      "FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91010_fullcoverage"
     ],
-    "coverage_verified_cells_including_reuse": 67,
+    "coverage_verified_cells_including_reuse": 81,
     "latest_backup": {
-      "accepted_total": 63,
-      "root_adoption_path": "tmp/fl_native_after59_20261011/ROOT_ADOPTION_REVIEW.json",
-      "root_adoption_sha256": "1b137d080aa48b3cff8705aa60d8cd090d52595988dd31c26f1f25f8ae0ca553",
-      "next_collector_previous_path": "F:/YananResearchStorage/GuardFed/fl_native_after59_20261011/batch/OFFSERVER_ACCEPTANCE.json",
-      "next_collector_previous_sha256": "002257200838f76f930deb62d62c4b680742eaa8b67b74416d79af5fb3a420d8"
+      "accepted_total": 77,
+      "root_adoption_path": "tmp/fl_native_after67_FedSA10_prepared_20261011/ROOT_ADOPTION_REVIEW.json",
+      "root_adoption_sha256": "5fdf135fd13665df6d528818db81765ad3567d5d754b18c538b1772f3994c80d",
+      "next_collector_previous_path": "F:/YananResearchStorage/GuardFed/fl_native_after67_FedSA10_prepared_20261011/batch/OFFSERVER_ACCEPTANCE.json",
+      "next_collector_previous_sha256": "7c79ee6a2434b1a1c1df1977a9ac7091b386a78412c7ad838ed44c907c448ab0"
     },
-    "archive_members_verified": 47,
+    "archive_members_verified": 107,
     "first_full70_root_adoption_path": "tmp/celeba_flgmm_fullcoverage_incremental_20261009/attempt_20261009T210943751719Z/ROOT_ADOPTION_REVIEW.json",
     "first_full70_root_adoption_sha256": "9663fe584e27eadcd6b81260e676e4a37a47331d6e31e6098c3cb2c407ba8a65",
-    "latest_full70_root_adoption_path": "tmp/fl_native_after63_20261011/ROOT_ADOPTION_REVIEW.json",
-    "latest_full70_root_adoption_sha256": "a11cd9ed94ab136b49dd41975d45f684d88236b6918c295461089a98adbc7db0",
+    "latest_full70_root_adoption_path": "tmp/fl_native_after67_FedSA10_prepared_20261011/ROOT_ADOPTION_REVIEW.json",
+    "latest_full70_root_adoption_sha256": "5fdf135fd13665df6d528818db81765ad3567d5d754b18c538b1772f3994c80d",
     "latest_readonly_terminal_observation": {
-      "checked_utc": "2026-10-10T09:41:39.473165+00:00",
-      "observed_complete": 40,
-      "active": 2,
-      "pending": 54,
-      "failures": 0,
-      "active_rounds": [
-        9,
-        1
-      ],
-      "source_bound": true,
-      "snapshot_sha256": "05ce0f0a2882dea31cdae5bb57309f08a04537da3c07e0cbcc289ffbdecde9c3"
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
+      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
+      "utc": "2026-10-10T23:50:58.834797+00:00",
+      "new_terminal": 79,
+      "new_accepted": 77,
+      "reuse_separate": 4
     },
     "latest_measured_observation": {
       "checked_utc": "2026-10-10T22:39:26.289735+00:00",
@@ -6919,6 +6972,17 @@
       "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
       "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
       "acceptance_unchanged_by_observation": true
+    },
+    "latest_native_after67_increment": {
+      "root_path": "tmp/fl_native_after67_FedSA10_prepared_20261011/ROOT_ADOPTION_REVIEW.json",
+      "root_sha256": "5fdf135fd13665df6d528818db81765ad3567d5d754b18c538b1772f3994c80d",
+      "new_accepted": 10,
+      "total_new_accepted": 77,
+      "reused_screen_separate": 4,
+      "three_view_acceptance_unchanged": 71,
+      "not_published_in_Git63": true,
+      "archive_sha256": "ac7a1679cabefb934ffb4dbc92849f18ffec363cce807eaac98fa5028e62fc70",
+      "archive_members_verified": 107
     }
   },
   "latest_rebuttal_addendum": {
@@ -7042,7 +7106,7 @@
     "failure_preserved": true
   },
   "gradient64_validation_search_20261010": {
-    "status": "ROOT_ACTUAL_GRADIENT64_SINGLE_GPU_WORKER_AND_ROUND_PROGRESS_VERIFIED",
+    "status": "ROOT_ALL64_STRICT_OFFSERVER_ACCEPTED_AND_FROZEN_RULE_SELECTED",
     "root_startup_path": "tmp/celeba_gradient_screen64_v2_root_operations_20261010/ROOT_STARTUP_REVIEW.json",
     "root_startup_sha256": "d3be2a065f3294e23cf7ec5bcb1ca9c8ecf7b2fe424a4a29565ec769e77605be",
     "root_startup": {
@@ -7070,17 +7134,17 @@
     "source_seal_sha256": "11e2ae63c87e0440669a047c930f5465b13babf559cca17bd8808bf693ce7ced",
     "jobs": 64,
     "actual_training_started": true,
-    "offserver_accepted": 46,
+    "offserver_accepted": 64,
     "test": false,
     "latest_measured_observation": {
-      "checked_utc": "2026-10-10T22:39:26.289735+00:00",
-      "terminal_observed": 62,
-      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-      "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
-      "acceptance_unchanged_by_observation": true
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T233639Z.raw.json",
+      "sha256": "92d48120f2dcdc45e473aabc9fa07b8f6a6f1055d20d7f3e36fb7cc5d2a74133",
+      "utc": "2026-10-10T23:36:44.133512+00:00",
+      "terminal_observed": 64,
+      "accepted": 64
     },
-    "root_adoption_path": "tmp/gradient_native_after42_20261011/ROOT_ADOPTION_REVIEW.json",
-    "root_adoption_sha256": "e5875e4d6a5e15c95d7fb94686411a106b1db39681341c92e51e9e821867f1e6",
+    "root_adoption_path": "tmp/gradient64_final_acceptance_prepared_20261011/ROOT_ADOPTION_REVIEW.json",
+    "root_adoption_sha256": "883c050f422da4c46a209d3f10739b42dd010b2da5f106710a6447adebeb7437",
     "accepted_ids": [
       "FedNGA_eta0.001_IID_Benign_seed91001_screen",
       "FedNGA_eta0.001_IID_S-DFA_seed91001_screen",
@@ -7127,7 +7191,25 @@
       "Huber_eta0.03_T00.1_M0_non-IID_Benign_seed91001_screen",
       "Huber_eta0.03_T00.1_M0_non-IID_S-DFA_seed91001_screen",
       "Huber_eta0.03_T00.1_M1_IID_Benign_seed91001_screen",
-      "Huber_eta0.03_T00.1_M1_IID_S-DFA_seed91001_screen"
+      "Huber_eta0.03_T00.1_M1_IID_S-DFA_seed91001_screen",
+      "Huber_eta0.03_T00.1_M1_non-IID_Benign_seed91001_screen",
+      "Huber_eta0.03_T00.1_M1_non-IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.01_M0_IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.01_M0_IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.01_M0_non-IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.01_M0_non-IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.01_M1_IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.01_M1_IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.01_M1_non-IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.01_M1_non-IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.1_M0_IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.1_M0_IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.1_M0_non-IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.1_M0_non-IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.1_M1_IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.1_M1_IID_S-DFA_seed91001_screen",
+      "Huber_eta0.3_T00.1_M1_non-IID_Benign_seed91001_screen",
+      "Huber_eta0.3_T00.1_M1_non-IID_S-DFA_seed91001_screen"
     ],
     "first_negative_metrics": {
       "accuracy": 0.5166859616449389,
@@ -7150,8 +7232,24 @@
       "Huber_eta0.03_T00.1_M1_IID_S-DFA_seed91001_screen"
     ],
     "FedNGA_screen32_accepted": true,
-    "Huber_screen_accepted": 14,
-    "recipe_selected": false
+    "Huber_screen_accepted": 32,
+    "recipe_selected": true,
+    "recipe_selection": {
+      "path": "tmp/gradient64_final_acceptance_prepared_20261011/SELECTED64_ROOT.json",
+      "sha256": "9aad5ca1eff130b2943013ad79145f50a8777debf5715997d715a0b202caad06"
+    },
+    "selected_candidates": {
+      "Fed-NGA-gradient": "FedNGA_eta0.001",
+      "Huber-BRFL-gradient": "Huber_eta0.3_T00.01_M0"
+    },
+    "constant_negative_by_method": {
+      "Fed-NGA-gradient": 12,
+      "Huber-BRFL-gradient": 27
+    },
+    "sampleSD": null,
+    "model_seed_count": 1,
+    "significance_claim": false,
+    "scope": "Two methods x8 candidates x4conditions, shared seed91001, 70round valid. Huber27/32 and NGA12/32 exact constant-negative; all negative results retained. Identity projection empirical CNN adaptation; no original constrained-domain guarantee."
   },
   "logofair32_validation_search_20261010": {
     "status": "ROOT_LOGOFAIR_SCREEN32_ADOPTED",
@@ -7233,7 +7331,7 @@
     "observed_utc": "2026-10-10T04:32:17.971910+00:00",
     "root_approval_sha256": "55e0c1a5c08fd00a33ff1caaa862b5b1e67c4328559b750a95b6d0a5d1aebb6c",
     "remote_strict_closed_at_startup": 1,
-    "new_offserver_accepted": 160,
+    "new_offserver_accepted": 170,
     "selected_count": 620,
     "original180_excluded": true,
     "Full_inference": 0,
@@ -7249,14 +7347,14 @@
       "scientific_outputs_unchanged": true
     },
     "latest_measured_observation": {
-      "checked_utc": "2026-10-10T22:39:26.289735+00:00",
-      "terminal_observed": 164,
-      "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-      "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
-      "acceptance_unchanged_by_observation": true
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
+      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
+      "utc": "2026-10-10T23:50:58.834797+00:00",
+      "remote_closed": 172,
+      "offserver_accepted": 170
     },
-    "root_adoption_path": "tmp/celeba_mechanism_remaining_F_SDFA10_root_adoption_20261011/ROOT_ADOPTION.json",
-    "root_adoption_sha256": "80a7f38890c2a7f8c75c0472489315bb2acb9e43c9e28d686a799cfea9709a02",
+    "root_adoption_path": "tmp/celeba_mechanism_remaining_F_SpDFA10_root_adoption_20261011/ROOT_ADOPTION.json",
+    "root_adoption_sha256": "3f7b436e0b2fec0401d7bf6117d6dca48aef21c185b6f170d37954e2cafee5a4",
     "accepted_ids": [
       "minus_C_non-IID_S-DFA_seed91001",
       "minus_C_non-IID_S-DFA_seed91002",
@@ -7417,7 +7515,17 @@
       "minus_F_IID_S-DFA_seed91007",
       "minus_F_IID_S-DFA_seed91008",
       "minus_F_IID_S-DFA_seed91009",
-      "minus_F_IID_S-DFA_seed91010"
+      "minus_F_IID_S-DFA_seed91010",
+      "minus_F_IID_Sp-DFA_seed91001",
+      "minus_F_IID_Sp-DFA_seed91002",
+      "minus_F_IID_Sp-DFA_seed91003",
+      "minus_F_IID_Sp-DFA_seed91004",
+      "minus_F_IID_Sp-DFA_seed91005",
+      "minus_F_IID_Sp-DFA_seed91006",
+      "minus_F_IID_Sp-DFA_seed91007",
+      "minus_F_IID_Sp-DFA_seed91008",
+      "minus_F_IID_Sp-DFA_seed91009",
+      "minus_F_IID_Sp-DFA_seed91010"
     ],
     "first_transport_recovered_original_archive_unchanged": true,
     "C100_replay_complete": true,
@@ -7489,16 +7597,16 @@
     "A_five_scene_table_adopted": true,
     "A_six_scene_table_adopted": true,
     "latest_accepted_new_ids": [
-      "minus_F_IID_S-DFA_seed91001",
-      "minus_F_IID_S-DFA_seed91002",
-      "minus_F_IID_S-DFA_seed91003",
-      "minus_F_IID_S-DFA_seed91004",
-      "minus_F_IID_S-DFA_seed91005",
-      "minus_F_IID_S-DFA_seed91006",
-      "minus_F_IID_S-DFA_seed91007",
-      "minus_F_IID_S-DFA_seed91008",
-      "minus_F_IID_S-DFA_seed91009",
-      "minus_F_IID_S-DFA_seed91010"
+      "minus_F_IID_Sp-DFA_seed91001",
+      "minus_F_IID_Sp-DFA_seed91002",
+      "minus_F_IID_Sp-DFA_seed91003",
+      "minus_F_IID_Sp-DFA_seed91004",
+      "minus_F_IID_Sp-DFA_seed91005",
+      "minus_F_IID_Sp-DFA_seed91006",
+      "minus_F_IID_Sp-DFA_seed91007",
+      "minus_F_IID_Sp-DFA_seed91008",
+      "minus_F_IID_Sp-DFA_seed91009",
+      "minus_F_IID_Sp-DFA_seed91010"
     ],
     "A_eight_scene_table_adopted": true,
     "A_nine_scene_table_adopted": true,
@@ -7521,12 +7629,17 @@
       [
         "IID",
         "S-DFA"
+      ],
+      [
+        "IID",
+        "Sp-DFA"
       ]
     ],
     "F_IID_Benign_table_adopted": true,
     "F_IID_two_scene_table_adopted": true,
     "F_IID_three_scene_table_adopted": true,
-    "F_IID_four_scene_table_adopted": true
+    "F_IID_four_scene_table_adopted": true,
+    "F_IID_five_scene_table_adopted": true
   },
   "logofair100_fullcoverage_20261010": {
     "status": "ROOT_LOGOFAIR_FIXED_RECIPE100_STRICT_SAVED_PREDICTION_AND_TABLES_ADOPTED",
@@ -7590,17 +7703,35 @@
     "incorporated_into_full_rebuttal": true
   },
   "gradient200_fullcoverage_source_preparation_20261010": {
-    "status": "PASS_SOURCE_PREPARATION_ONLY_NO_EXECUTION_APPROVAL",
+    "status": "ROOT_FROZEN_SELECTED_SOURCE_AND_EXACT14_CPU3_GATE_STAGE_BOUND",
     "review_path": "tmp/celeba_gradient_fullcoverage_prepare_review_20261010/REVIEW.json",
     "review_sha256": "792da228c102a7044628aa30f2fc6310bb486441c822d321ab62a2ee78843d09",
     "source_seal_sha256": "ea5a565d35c4f8df7d108679d1010baec92993da8f4b181a14ccde359334ed39",
     "new_jobs_planned": 192,
     "reused_jobs_planned": 8,
     "actual_jobs": 0,
-    "selected_recipes": 0,
+    "selected_recipes": 2,
     "actual_dispatch": false,
     "test": false,
-    "limitations": "Requires complete64 strict/offserver/root acceptance, frozen source and real-image new-attack gates before execution; preparation is not a result."
+    "limitations": "192new+8reuse source frozen; original CPU3 individual gates3/14 pass, index3 running. Whole saved comparison/strict offserver/root closure and fresh dispatch review pending. No192 training, final test or short-gate scientific table claim. Initial metadata preflight refusal retained; one fresh resource check passed, no scientific retry.",
+    "selected_candidates": {
+      "Fed-NGA-gradient": "FedNGA_eta0.001",
+      "Huber-BRFL-gradient": "Huber_eta0.3_T00.01_M0"
+    },
+    "frozen_source": {
+      "path": "tmp/gradient_source_freeze_deployment_index_20261011/freeze_actual001/ROOT_SOURCE_APPROVAL.json",
+      "sha256": "79edd0dde78c9dc23583a22953d3babebb357a4fcebb7197941cc5726b2ff961"
+    },
+    "exact14_completed_at_cutoff": 3,
+    "exact14_first_item": {
+      "path": "tmp/gradient_source_freeze_deployment_index_20261011/gate14_job00_actual002/ITEM_PROOF.json",
+      "sha256": "f4d6738d9299468aa78cb2d8c9bc5c272c0e3f3a328dd60874f60c622bd61a12"
+    },
+    "exact14_total": 14,
+    "exact14_partial_progress": {
+      "path": "tmp/gradient_source_freeze_deployment_index_20261011/GATES_PROGRESS03.json",
+      "sha256": "e672e4257ad2d4c41729874d5f68759082718b2f340a7bba9fac03129fe2a349"
+    }
   },
   "auxiliary_readonly_observation_20261010": {
     "path": "tmp/celeba_aux_live_followup_20261010_afterHybrid32/attempt_v2/FINDINGS.json",
@@ -7767,6 +7898,14 @@
       "snapshot_path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
       "snapshot_sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
       "acceptance_unchanged_by_observation": true
+    },
+    "latest_readonly_terminal_observation": {
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
+      "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
+      "utc": "2026-10-10T23:50:58.834797+00:00",
+      "new_terminal": 21,
+      "new_accepted": 12,
+      "reuse_separate": 4
     }
   },
   "auxiliary_readonly_observation_after_Hybrid7_20261010": {
@@ -7892,21 +8031,21 @@
     "root_review_sha256": "f187b7a3efc721218fa393048ecabf2ea6a7fbbd4bea0ef263e57ad972ee7611"
   },
   "latest_five_queue_readonly_observation": {
-    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T223921Z.raw.json",
-    "sha256": "3bc6db9fcd3b5d2ed350d92b5144fb90fc101fddcbd382cd38aababbb4e62a71",
-    "utc": "2026-10-10T22:39:26.289735+00:00",
-    "main_completed": 344,
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/root_five_queue_20261010T235053Z.raw.json",
+    "sha256": "af956c7e32e6bf3496d6e4a7b6b4ce11effbb0d27ac67c26b9d4ea1684cca992",
+    "utc": "2026-10-10T23:50:58.834797+00:00",
+    "main_completed": 352,
     "main_active": 8,
-    "main_pending": 448,
+    "main_pending": 440,
     "failed": 0,
-    "FLGMM_new_terminal": 77,
-    "gradient_terminal": 62,
-    "Hybrid_new_terminal": 19,
-    "remaining620_remote_closed": 164,
+    "FLGMM_new_terminal": 79,
+    "gradient_terminal": 64,
+    "Hybrid_new_terminal": 21,
+    "remaining620_remote_closed": 172,
     "counts_are_observation_only": true,
     "new_acceptance": 0,
     "source_hash_scope": "Small frozen source/data pins unchanged; large images historical full SHA plus stat only",
-    "scope": "Five live service/worker identities and source/data pins checked; terminal observations do not replace strict/offserver acceptance. FL and Hybrid screen4 reuse separate."
+    "scope": "Terminal observation distinct from strict/offserver acceptance; FL/Hybrid screen4 reuse separate."
   },
   "added_CNN_exact3_valid_interface_20261010": {
     "status": "ROOT_EXACT3_VALID_INTERFACES_ADOPTED_WITH_PRESERVED_WINDOWS_AUDIT_FAILURE",
@@ -8281,9 +8420,9 @@
     }
   },
   "current_entry_writer": {
-    "path": "tmp/update_increment63_F40_entries_20261011.py",
-    "sha256": "8d67e67fcd7896ae02dbe2ed58c7dd53f66004c08aa3d8c22f1b1def3825a129",
-    "utc": "2026-10-10T22:42:03.307776+00:00"
+    "path": "tmp/update_increment64_final_entries_20261011.py",
+    "sha256": "f2161fd3ee81011828bba35b0d50dc161d3822d2dcfae565a8699cc2076db4f5",
+    "utc": "2026-10-10T23:56:43.104332+00:00"
   },
   "author_baseline_adaptation_decisions_20261011": {
     "Huber": "Identity projection; empirical CNN adaptation, no inherited constrained-domain theoretical guarantee.",
@@ -8291,10 +8430,10 @@
     "no_method_or_seed_change": true
   },
   "current_entry_postpublication_refresh": {
-    "path": "tmp/refresh_native333_and_increment61_pointers_20261011.py",
-    "sha256": "8efeecc854356f6ce4444ecaf08df0a235d06e4a45938f5f892727d8eaba41fe",
-    "commit": "a3fd1aa9667cf1e177860872192001f8c4111f40",
-    "native333_is_later_than_publication_cutoff": true
+    "path": "tmp/refresh_git63_and_FL77_pointers_20261011.py",
+    "sha256": "cd3dc43351e4701a8ab9aa5a811318f40459f135e9d955155c4561a29a1dd9c4",
+    "commit": "ccb5207c24762d3ac92ed76b40bd40b3e2330954",
+    "FL77_later_than_publication_cutoff": true
   },
   "historical_rebuttal_snapshot_A100_20261011": {
     "status": "ROOT_COMPLETE24_A100_READER_REBUTTAL_CANDIDATES_ADOPTED_FOR_AUTHOR_REVIEW",
@@ -8520,20 +8659,24 @@
     "whole_rebuttal_complete": false
   },
   "latest_working_rebuttal_draft": {
-    "status": "ROOT_UNIFIED_COMPLETE24_F30_HYBRID10_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
-    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_20261011.md",
-    "sha256": "0f0dc123ce25b57544b70752ee686f5d1384773eb5954dd7cdebad4c02853fb4",
-    "root_proof_path": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_20261011.root_editorial_review.json",
-    "root_proof_sha256": "0cf74dba2727092895f6792d0aaea91c27957791aa3ba1bd93be2fc3e943833b",
+    "status": "ROOT_UNIFIED_COMPLETE24_F50_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F50_gradient64_20261011.md",
+    "sha256": "b6e1c35be9dd0bea4867ff8486c23f7b7d39d0a6966e449dda5ec0664d515670",
+    "root_proof": {
+      "path": "tmp/rebuttal_working_F50_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+      "sha256": "72fe35446ef5efc6f39455b56466803f5123fe0dce4f25b6ca654d1a6eee09cb"
+    },
     "comments_verbatim": 24,
     "content_cutoff": {
-      "native": 333,
-      "three_view": 330,
-      "F_pairs": 30,
-      "F_scenes": 3,
-      "Hybrid_table_checkpoints": 10
+      "native": 350,
+      "three_view": 350,
+      "F_pairs": 50,
+      "F_scenes": 5,
+      "Hybrid_three_view": 10,
+      "gradient_search": 64
     },
-    "F40_incorporated": false,
+    "F50_incorporated": true,
+    "FL81_or_gate14_incorporated": false,
     "author_review_only": true,
     "submitted_manuscript_edited": false,
     "final_test": false,
@@ -8544,5 +8687,52 @@
     "sha256": "a7950b1020b77fccbc9f7fb539a0ec8fe3c7e25e7495798db84a9b80cc6860bd",
     "science_or_resource_settings_changed": false,
     "scope": "15.18s/4 snapshots; ~12 active single-thread workers/~12.09 cgroup cores; bothGPU100% in samples, no sampled disk reads or new throttle. Consistent with frozen worker/thread structure; not a proved operator bottleneck or optimal throughput."
+  },
+  "FLGMM_after71_valid_three_view_20261011": {
+    "root_proof": {
+      "path": "tmp/fl_FedSA10_three_view_prepared_20261011/ROOT_SCIENTIFIC_ADOPTION.json",
+      "sha256": "adc7726ca05561c6903ebb153e34fb3dc69a1df0118d87e6bf7dfa3e31655799"
+    },
+    "accepted_records": 81,
+    "complete_scene_records": 80,
+    "retained_partial_records": 1,
+    "old71_objects_order_exact": true,
+    "Linux_original_root_refit10_pass": true,
+    "Windows_saved_output_audit_fit_calls": 0,
+    "original_Windows47_refit_failure_preserved": true,
+    "cross_platform_bitwise_recalibration_claimed": false,
+    "table_root": {
+      "path": "outputs/guardfed_tables/celeba_flgmm_eight_scenes80_20261011/ROOT_VERIFICATION.json",
+      "sha256": "bf44b6e8d7a46ea0ffe14077939bd9c3886901c4063c5c6c8ff20a21415cee66"
+    },
+    "table_path": "outputs/guardfed_tables/celeba_flgmm_eight_scenes80_20261011/TABLES.md",
+    "native_training_new_accepted": 77,
+    "original_screen_reuse": 4,
+    "exact_groupKL_difference": -2.168404344971009e-19,
+    "final_test": false
+  },
+  "prior_working_F40_draft_fixed_cutoff": {
+    "status": "ROOT_UNIFIED_COMPLETE24_F40_GRADIENT64_WORKING_REBUTTAL_ADOPTED_FOR_AUTHOR_REVIEW",
+    "entry": "docs/server_deployment_20260923/revision_20260923/rebuttal_working_F40_gradient64_20261011.md",
+    "sha256": "98d721bcc7bcb1543ddc1586e0ecec0abe477babb0bc59ce6139f3ba0dbb5d7a",
+    "root_proof": {
+      "path": "tmp/rebuttal_working_F40_gradient64_update_20261011/ROOT_EDITORIAL_ADOPTION.json",
+      "sha256": "0c6370833f61f4dd5b659c477a9768d26692764a58235678a25f9e4566c4bd7a"
+    },
+    "comments_verbatim": 24,
+    "content_cutoff": {
+      "native": 341,
+      "three_view": 340,
+      "F_pairs": 40,
+      "F_scenes": 4,
+      "Hybrid_table_checkpoints": 10,
+      "gradient_search": 64
+    },
+    "F40_incorporated": true,
+    "current_native350_or_FL81_incorporated": false,
+    "author_review_only": true,
+    "submitted_manuscript_edited": false,
+    "final_test": false,
+    "whole_rebuttal_complete": false
   }
 }

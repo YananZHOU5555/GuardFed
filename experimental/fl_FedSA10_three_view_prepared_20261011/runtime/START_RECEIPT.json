@@ -1,0 +1,54 @@
+{
+  "status": "ROOT_FLGMM_FINITE10_SUPERVISOR_STARTED_NOT_SCIENTIFIC_ACCEPTANCE",
+  "utc": "2026-10-10T23:06:48.611245+00:00",
+  "program": "guardfed_flgmm_FedSA10_valid",
+  "commands": [
+    {
+      "argv": [
+        "supervisorctl",
+        "reread"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_FedSA10_valid: available\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "add",
+        "guardfed_flgmm_FedSA10_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_FedSA10_valid: added process group\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "start",
+        "guardfed_flgmm_FedSA10_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_FedSA10_valid: started\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "supervisorctl",
+        "status",
+        "guardfed_flgmm_FedSA10_valid"
+      ],
+      "exit": 0,
+      "stdout": "guardfed_flgmm_FedSA10_valid     RUNNING   pid 102515, uptime 0:00:01\n",
+      "stderr": ""
+    }
+  ],
+  "config_sha256": "83547bdcda94247419e4cf5395d92bb508dfade73e9cf579ab611eaf85d4713c",
+  "authorization_sha256": "42782e7138841c6a27ec2f125acd499e86eca3b2634bf8e499709e53dcffb352",
+  "linux_preflight_sha256": "9aa1ebd9cf2b802bb9921d09da700f3744a28a38beb95b7a4df3ebe4855bccfa",
+  "package_sha256": "da73ce851d63cd21a33c85e63311ba8ed3300c8b5d8be9d466076d5d9d00d505",
+  "autostart": false,
+  "autorestart": false,
+  "startretries": 0,
+  "new_scientific_acceptances": 0
+}

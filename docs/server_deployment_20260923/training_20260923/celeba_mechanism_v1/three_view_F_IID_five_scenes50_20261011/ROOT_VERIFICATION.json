@@ -1,0 +1,194 @@
+{
+  "status": "ROOT_F50_FIVE_IID_SCENES_COUNTS_PAIRED_STATISTICS_DISPLAY_AND_PRIOR_ROWS_PASS",
+  "utc": "2026-10-10T23:47:27.033668+00:00",
+  "complete_scenes": 5,
+  "paired_models": 50,
+  "records": 100,
+  "preserved_pairs": 50,
+  "old80_record_objects_order_exact": true,
+  "old648_statistical_scalars_exact": true,
+  "old324_display_cells_preserved": true,
+  "original_fsum_verification": {
+    "status": "PASS_ORIGINAL_FSUM_COUNTS_AND_SAVED_DISPLAY_SCOPE",
+    "mean_sd_scalars": 810,
+    "max_abs_difference": 1.4210854715202004e-14,
+    "partial_pairs_excluded": 0,
+    "receipt_metrics_from_group_counts": 900,
+    "base_confusion_counts_structurally_checked": 2400,
+    "display_cells": 405,
+    "root_adopted_by_this_checker": false,
+    "fit": 0,
+    "CNN": 0,
+    "test": false
+  },
+  "source_prepared_path": "tmp/celeba_F_IID_five_scenes50_table_prepared_20261011",
+  "source_seal_sha256": "7a62ad193fdab09d5a071c5debe266e8a77cf5b7d28792c233fc67ecbc22d793",
+  "source_root_review_sha256": "a002920acd14e2986300af2b5fa3abd23f1576be98ce9a50648e7c824609e2e6",
+  "binding_sha256": "3c259365f013aa9bf23ee279438c95b2e64644a7c8e0f20d81921734b4fed440",
+  "original_parent_root_sha256": "a57b5d235a39190e6a2a88e1ebe291813f976efbe91fcf571f17357837304f23",
+  "actual_views350_root_sha256": "3f7b436e0b2fec0401d7bf6117d6dca48aef21c185b6f170d37954e2cafee5a4",
+  "actual_views350_index_sha256": "5b24956b4f14707e2a284fe73ffb538545b4aad218c833e31427720402ff02b3",
+  "root_executed_saved_verifier_once": true,
+  "table_path": "docs/server_deployment_20260923/training_20260923/celeba_mechanism_v1/three_view_F_IID_five_scenes50_20261011/TABLES.md",
+  "table_sha256": "8a09dd8169afaefdeb777b76da24597315a39067c171486f687b8cc02e62fe21",
+  "files": {
+    "records.json": {
+      "sha256": "994d80f9cf02b0317e56e6477a53778c5345dc620231fcfe6ef8aa72ecf4f284",
+      "bytes": 1401571
+    },
+    "tables.json": {
+      "sha256": "c7a6e30ef60485ee4955052ec26abfa2b709e9bcde92ff6e4a18fa871f9da44f",
+      "bytes": 106271
+    },
+    "coverage.json": {
+      "sha256": "03de3b749f8472d00bb874b770e93cb6e3b8306d970d9b742c5e4d8f26dc4534",
+      "bytes": 7764
+    },
+    "paired_per_seed.json": {
+      "sha256": "7385b0d38ea814016fff868887261e804cacda80564acd1b65f87d0cd3aa21a4",
+      "bytes": 41263
+    },
+    "checks.json": {
+      "sha256": "8fabfa6c2d45472c64694fe09cbb9fdc8871de044263ca3a53006e197f65a3bc",
+      "bytes": 673
+    },
+    "SOURCE_BINDINGS.json": {
+      "sha256": "4e1c403c0ca7ac8705d164abfa6a1c2de02537ed4b01e51c19dce1c68c20ec11",
+      "bytes": 17257
+    },
+    "TABLES.md": {
+      "sha256": "8a09dd8169afaefdeb777b76da24597315a39067c171486f687b8cc02e62fe21",
+      "bytes": 15860
+    }
+  },
+  "views": [
+    "raw",
+    "native",
+    "shared_calibration"
+  ],
+  "seed_panels": [
+    10,
+    9,
+    6
+  ],
+  "sampleSD_ddof": 1,
+  "Full_replay_devices": {
+    "cpu": 3,
+    "cuda:0": 47
+  },
+  "minus_F_replay_devices": {
+    "cpu": 50
+  },
+  "native_shared_metrics_and_counts_exact": true,
+  "nonIID_F_scenes_remaining": 5,
+  "other_control_runs_remaining": 400,
+  "new_SpDFA_native10_rows": [
+    {
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "variant": "Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 88.38173856143354,
+        "sample_sd_ddof1": 0.8891512152556666
+      },
+      "aeod": {
+        "mean": 0.01647849345135145,
+        "sample_sd_ddof1": 0.00718716091311577
+      },
+      "aspd": {
+        "mean": 0.0558797517717642,
+        "sample_sd_ddof1": 0.015606458524027497
+      }
+    },
+    {
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "variant": "minus_F",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 88.49901847284441,
+        "sample_sd_ddof1": 1.1712882191182687
+      },
+      "aeod": {
+        "mean": 0.009869894509252708,
+        "sample_sd_ddof1": 0.007161739736638617
+      },
+      "aspd": {
+        "mean": 0.07312846671537683,
+        "sample_sd_ddof1": 0.01145425436283144
+      }
+    },
+    {
+      "distribution": "IID",
+      "attack": "Sp-DFA",
+      "variant": "minus_F minus Full",
+      "n": 10,
+      "expected_n": 10,
+      "complete": true,
+      "seeds": [
+        91001,
+        91002,
+        91003,
+        91004,
+        91005,
+        91006,
+        91007,
+        91008,
+        91009,
+        91010
+      ],
+      "accuracy_pct": {
+        "mean": 0.11727991141088268,
+        "sample_sd_ddof1": 0.9946541761936778
+      },
+      "aeod": {
+        "mean": -0.006608598942098742,
+        "sample_sd_ddof1": 0.010172597103040268
+      },
+      "aspd": {
+        "mean": 0.017248714943612624,
+        "sample_sd_ddof1": 0.014334210548952987
+      }
+    }
+  ],
+  "scope": "Five IID scenes only. SpDFA native/shared minusF improves ACC and AEOD means but worsens ASPD; raw both disparities worsen while ACC slightly rises. Retain all directions; no significance, universal necessity or isolated-causality claim. Mixed replay devices/selection history retained.",
+  "primary_endpoint_selected": false,
+  "new_threshold_fits": 0,
+  "new_CNN": 0,
+  "new_training": 0,
+  "final_test": false,
+  "whole_mechanism_complete": false,
+  "whole_rebuttal_complete": false,
+  "root_adopter_path": "tmp/celeba_F_IID_five_scenes50_table_prepared_20261011/root_adopt_actual.py",
+  "root_adopter_sha256": "83468fdea4194df959a781e52e256f1cae05813f69450c2976ba8a5529385a39",
+  "root_reader_note": "An earlier inline metadata adopter failed to parse before executing any statement. No outputs or scientific results were affected; this saved adopter is the actual adoption source."
+}

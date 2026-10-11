@@ -1,0 +1,70 @@
+{
+  "transport_remote.py": {
+    "parent": "saved_v2/transport_remote.py",
+    "parent_sha256": "e97833ae19a332275b9c0a0ebf979e0e31a6c46d2cb4ae7def672528d86b91e5",
+    "edits": [
+      {
+        "before": "ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91010_fullcoverage']",
+        "after": "ids=['FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91002_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91003_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91004_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91005_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91006_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91007_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91008_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91009_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_FedSA_seed91010_fullcoverage']",
+        "count": 1
+      }
+    ],
+    "raw_inverse_exact": true
+  },
+  "transport.py": {
+    "parent": "saved_v2/transport.py",
+    "parent_sha256": "bcbcb2b5002182625739c393349b8cfe6409fadd9f26aec52e810e0b5d09fb4f",
+    "edits": [],
+    "raw_inverse_exact": true
+  },
+  "contract.py": {
+    "parent": "saved_v2/contract.py",
+    "parent_sha256": "5ef613509309d05ec822e58cdeed1052bbdbe0c600f8f67d732b99c3d1ea05cc",
+    "edits": [],
+    "raw_inverse_exact": true
+  },
+  "bind_audit.py": {
+    "parent": "actual/bind_audit.py",
+    "parent_sha256": "4c123004367f660592b7ec4c1acbb43c475673f891261fe9963866e60a8b1ef2",
+    "edits": [
+      {
+        "before": "H=Path(__file__).resolve().parent;C=H.parent;S=C/'saved_v2';R=C.parents[1];A=H/'saved001'",
+        "after": "H=Path(__file__).resolve().parent;C=H.parent;S=C/'saved_v2';R=C.parents[1];A=C/'actual/saved002'",
+        "count": 1
+      },
+      {
+        "before": " a=parser.parse_args()\n",
+        "after": " parser.add_argument('--transport-v2-seal-sha256',required=True,type=k.digest_arg)\n parser.add_argument('--transport-v2-review-sha256',required=True,type=k.digest_arg)\n a=parser.parse_args()\n PINNED[H/'FILES_SHA256.json']=a.transport_v2_seal_sha256\n PINNED[H/'ROOT_SOURCE_REVIEW.json']=a.transport_v2_review_sha256\n assert sha(H/'FILES_SHA256.json')==a.transport_v2_seal_sha256\n for rel,pin in read(H/'FILES_SHA256.json')['files'].items():\n  path=(H/rel).resolve();assert path.is_relative_to(H.resolve()) and path.is_file() and sha(path)==pin['sha256'] and path.stat().st_size==pin['bytes']\n v2review=read(H/'ROOT_SOURCE_REVIEW.json');assert v2review['source_adoptable'] is True and v2review['transport_v2_seal_sha256']==a.transport_v2_seal_sha256\n",
+        "count": 1
+      },
+      {
+        "before": "(S/'transport_remote.py')",
+        "after": "(H/'transport_remote.py')",
+        "count": 1
+      },
+      {
+        "before": " qfiles=list(PINNED)+",
+        "after": " qfiles=[H/rel for rel in read(H/'FILES_SHA256.json')['files']]+[C/'actual/saved001'/name for name in ('TRANSPORT_COMMAND.json','TRANSPORT_SSH_EXIT.json','TRANSPORT_STDERR.txt','TRANSPORT_REMOTE_BOUND.py')]+list(PINNED)+",
+        "count": 1
+      }
+    ],
+    "raw_inverse_exact": true
+  },
+  "adopt_root.py": {
+    "parent": "adopt_root.py",
+    "parent_sha256": "53efb96614755d25e6d0856f5dcff8297b0c8612e0d12a298ab0784846a87cb3",
+    "edits": [
+      {
+        "before": "H=Path(__file__).resolve().parent;R=H.parents[1];A=H/'actual/saved001'",
+        "after": "H=Path(__file__).resolve().parent.parent;R=H.parents[1];A=H/'actual/saved002'",
+        "count": 1
+      },
+      {
+        "before": "H/'ROOT_INPUTS.json'",
+        "after": "H/'ROOT_INPUTS_v2.json'",
+        "count": 2
+      }
+    ],
+    "raw_inverse_exact": true
+  }
+}

@@ -1,0 +1,5 @@
+# Author-review candidate only
+
+`rebuttal_working_candidate.md` minimally updates the unchanged canonical 24-comment working draft. The F40 cutoff is native341/three-view340: four IID F scenes, not all F100. R3.7 adds the accepted S-DFA direction and three paired mean±sample-SD values; all older Benign/F Flip/FedSA trade-offs remain. R3.8/P1 add the completed one-seed64 search and retain27/32 Huber and12/32 Fed-NGA constant-negative runs. Neither zero disparity nor frozen192 source is treated as successful full coverage.
+
+Checks: original38 quote lines and24 section mappings/order exact; full source reverses byte-for-byte via CHANGESET; source pins, three new mean/SD pairs, nine directional panels, counts/denominators/devices and14 local links checked against accepted metadata only. No new statistics, model/array reads, fitting, test or experiment. Original canonical document, STATE and Git were not modified. FL81/native350 and pending14 gates are excluded. Root editorial review/adoption remains pending; no rendering was needed for the unchanged Markdown format.
