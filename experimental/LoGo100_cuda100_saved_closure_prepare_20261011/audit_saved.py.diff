@@ -1,0 +1,36 @@
+--- v2/audit_saved.py
++++ all100/audit_saved.py
+@@ -30,11 +30,17 @@
+             wanted=members.get(member.name,{'sha256':t['member_index_sha256'],'bytes':local.stat().st_size});raw=tar.extractfile(member).read()
+             g.need(hashlib.sha256(raw).hexdigest()==g.sha(local)==wanted['sha256'] and len(raw)==local.stat().st_size==wanted['bytes'],'Member changed')
+             g.need(not member.name.endswith(('.pkl','.pt','.pth','.npy')) and (not member.name.endswith('.npz') or member.name in {'runs/'+i+'/scores_predictions.npz' for i in g.IDS}),'Forbidden bulk member')
++    from prior2_overlay import join_prior
++    paths,member_roots,members=join_prior(x,folder,index,t)
+     archive_folder=folder
+     def localpin(pin):
+-        g.need(pin['path'] in paths,'Missing transported proof');p=archive_folder/paths[pin['path']];g.need(g.sha(p)==pin['sha256'],'Transported pin changed');return p
++        g.need(pin['path'] in paths,'Missing transported proof');p=member_roots[paths[pin['path']]]/paths[pin['path']];g.need(g.sha(p)==pin['sha256'],'Transported pin changed');return p
+     def load(pin):return g.read(localpin(pin))
+-    refs=g.read(HERE/'EXACT2_REFS.json');items=[g.verify_record(x,row,load) for row in refs['records']]
++    for pin,ids in [(x['canary_complete'],g.CANARY_IDS),(x['remaining_complete'],g.REMAINING_IDS)]:
++        c=load(pin);g.need(c['ids']==ids and c['server_saved_accepted'] is True and c['cohort']==load(x['root_queue_auth'])['exact_cohort'],'Different transported COMPLETE')
++    gate=load(x['root_canary_gate']);g.need(gate['root_accepted'] is True and gate['ids']==g.CANARY_IDS and gate['cohort']==load(x['root_queue_auth'])['exact_cohort'] and gate['FedAvg_CUDA_root']==x['FedAvg_CUDA_root'],'Different transported prior2 root gate')
++    for i in g.CANARY_IDS:g.need(gate['records'][i]['task_acceptance']==x['task_accepted'][i],'Transported prior2 task differs')
++    refs=g.read(HERE/'EXACT100_REFS.json');items=[g.verify_record(x,row,load) for row in refs['records']]
+     # Read current original F files only by SHA. Never unpickle or refit old state.
+     originals=[]
+     for row in refs['records']:
+@@ -82,10 +88,10 @@
+             g.need(sum(counts[k]['tp']+counts[k]['tn'] for k in ['0','1'])==int(np.sum(values['prediction']==values['valid_y'])),'Accuracy/count disagreement')
+             results.append(dict(post_id=row['post_id'],baseline_id=row['baseline_id'],metrics=result['metrics'],group_confusion_counts=counts,constant_prediction=constant,max_metric_error=error,scores_sha256=v['scores']['sha256'],Linux_whole_acceptance=x['task_accepted'][row['post_id']],frozen_post_state_sha256=row['original_artifacts']['post_state.pkl']['sha256']))
+         for p,s in originals:g.need(g.sha(p)==s,'Original changed during audit')
+-        for rel,p in members.items():g.need(g.sha(Path(t['verified_extract'])/rel)==p['sha256'],'Export changed during audit')
++        for rel,p in members.items():g.need(g.sha(member_roots[rel]/rel)==p['sha256'],'Export changed during audit')
+         sealed(a.source_seal_sha256)
+-        save(out/'SAVED_AUDIT.json',dict(status='LOGO_FIXED2_SAVED_PREDICTIONS_NO_REFIT_PASS_NOT_ROOT_ADOPTED',records=results,ids=g.IDS,prediction_items_checked=39734,metric_values_checked=6,integer_confusion_counts_recomputed=16,max_metric_error=worst,transport_sha256=x['transport']['sha256'],archive_sha256=x['archive_sha256'],source_seal_sha256=a.source_seal_sha256,inputs_sha256=a.inputs_sha256,F_volume=volume,new_fit=0,new_CNN=0,pickle_loads=0,test=False,root_adopted=False,offserver_whole_predict_reexecuted=False,historical_CPU_equality_required=False))
+-        print(json.dumps(dict(status='PASS',audit_sha256=g.sha(out/'SAVED_AUDIT.json'),records=2,metrics=6,counts=16)))
++        save(out/'SAVED_AUDIT.json',dict(status='LOGO100_ALL100_CUDA_SAVED_PREDICTIONS_NO_REFIT_PASS_NOT_ROOT_ADOPTED',records=results,ids=g.IDS,prediction_items_checked=1986700,metric_values_checked=300,integer_confusion_counts_recomputed=800,max_metric_error=worst,transport_sha256=x['transport']['sha256'],archive_sha256=x['archive_sha256'],source_seal_sha256=a.source_seal_sha256,inputs_sha256=a.inputs_sha256,F_volume=volume,new_fit=0,new_CNN=0,pickle_loads=0,test=False,root_adopted=False,offserver_whole_predict_reexecuted=False,historical_CPU_equality_required=False))
++        print(json.dumps(dict(status='PASS',audit_sha256=g.sha(out/'SAVED_AUDIT.json'),records=100,metrics=300,counts=800)))
+     except BaseException as exc:
+         save(out/'FAILURE.json',dict(error=repr(exc),automatic_retry=False));raise
+ if __name__=='__main__':main()

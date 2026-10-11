@@ -1,0 +1,46 @@
+{
+  "status": "STATIC_EXISTING_ACTUAL_SCHEMA_REVIEW_NO_NEW_ARRAY_ACCESS",
+  "evidence": {
+    "actual7_command": {
+      "path": "tmp\\uniform_cuda7_saved_audit_prepare_20261011\\OUTER_AUDIT_COMMAND.json",
+      "sha256": "7386b4f2bad529f739c4c59b89d64ed8ff043b4ddfe0e8a97567e7838ad2a5a8",
+      "exit_code": 0
+    },
+    "actual7_audit": {
+      "path": "tmp\\uniform_cuda7_saved_audit_prepare_20261011\\actual\\SAVED_OUTPUTS_AUDIT.json",
+      "sha256": "3a2d0728a6e3c26bd591831b44f849f638e7a831e10b20286c18de0f6b36efaf",
+      "records": 7
+    },
+    "actual7_root": {
+      "path": "tmp\\uniform_cuda7_saved_audit_prepare_20261011\\root_adoption\\ROOT_SCIENTIFIC_ADOPTION.json",
+      "sha256": "3ed2e1fe79edbc5c196d428305bf27201856f2e6d5589c6e4752255accec4dda"
+    },
+    "actual002_index": {
+      "path": "tmp\\FedAvg100_cuda_linux_index_actual002_20261011\\ROOT_CACHE_INDEX.json",
+      "sha256": "6a21265f08fb26da130d95c67bf4130039b25916f44a543cd695e15665a25b64",
+      "metadata": {
+        "path": "/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/metadata.npz",
+        "sha256": "161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091"
+      }
+    }
+  },
+  "schema_evidence_kind": "Actual old7 zero-fit audit rc0 and exact source predicates; no raw F receipt reread in this task",
+  "unchanged_predicates": [
+    "need(record['terminal_round']==70 and record['original_split']=='valid' and record['method']=='GuardFed-AD2+','Wrong terminal/model interface')",
+    "need(r['valid_n']==19867 and r['valid_image_ids_sha256']==VALID_SHA and r['prediction_arrays_sha256']==sha(array_path),'Wrong valid/array identity')",
+    "need(r['runtime']['device']=='cuda:0' and r['runtime']['torch']=='2.11.0+cu128' and r['runtime']['cuda_device_count']==1 and r['runtime']['torch_threads']==r['runtime']['interop_threads']==1,'Wrong actual CUDA runtime')",
+    "need(binding['id']==identity and binding['approval_sha256']==sha(approval_path) and binding['source_before']==binding['source_after'] and binding['artifact_before']==binding['artifact_after'],'Linux whole identity changed')",
+    "need(acceptance['status']=='PER_RECORD_FULL_CUDA_SAVED_WHOLE_ACCEPTED' and acceptance['scope']==binding['scope']=='UNIFORM_CUDA_FULL_FORMAL_V1' and acceptance['binding_sha256']==sha(x/run/'formal_binding.json') and binding['receipt_sha256']==sha(receipt_path),'Missing original Full saved-whole acceptance')"
+  ],
+  "collector_cuda_requirements": {
+    "device": "cuda:0",
+    "torch": "2.11.0+cu128",
+    "valid_n": 19867,
+    "saved_acceptance": "PER_RECORD_FULL_CUDA_SAVED_WHOLE_ACCEPTED",
+    "native_max_abs_tolerance": 1e-12
+  },
+  "CPU_routes_not_adoptable": true,
+  "future98_receipts_still_require_individual_actual_validation": true,
+  "no_claim_Full100_complete": true,
+  "SSH_F_arrays_science": false
+}

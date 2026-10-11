@@ -1,0 +1,9 @@
+# Increment74 source-only handoff
+
+Closed evidence is CUDA407 = first500 unique105 + old800 unique102 + FL100 + LoGo100. Full100 and LoGo100 each add98 to prior2. Partial four-method native400 table uses only adopted CUDA records, includes FedAvg1/LoGo1 constant predictors, and adds zero scientific records. Observed500108/800277/main447/NGA27/Hybrid37 do not increase accepted native400/NGA19/Hybrid29. Fixed full24 draft SHA910b263 is unchanged.
+
+Root must read current eight mutable files, verify metadata.state_after plus five suffixes/reader/protocol, then bind STABLE_INPUTS from INPUTS_TEMPLATE with status ROOT_BOUND_INCREMENT74_INPUTS and root_accepted true. Copy fixed files/proof roles/parent references/cutoff exactly; late_files is a mapping for exact late_mutable_names, not a template field named late_files. Fill actual semantic review from SEMANTIC_TEMPLATE. COMPACT_SELECTION must equal stable files plus exact own_names; root_late_bound_files is exact own_names. Hash original bytes and reject any stale metadata/source before F/Git operations. Receipt73.commit is parent74; receipt73.parent is older72. INVERSE_DIFF uses parent_path/parent_sha256, not parent.
+
+Root alone executes publisher74 with --semantic-review PATH --semantic-review-sha256 SHA --compact-selection tmp/publication_increment74_prepared_20261011/COMPACT_SELECTION.json --compact-selection-sha256 SHA. False/null templates cannot execute. Actual bind/review/selection are not fabricated by preparation.
+
+The three original73 Git/F/copy/blob/clean/push/remote blocks are raw-byte and AST exact. Compact explicit selection only, each file below2MB and total below100MB. Models/NPZ/datasets/archives/images/environments remain excluded; extensionless runtime logs are referenced by original command/index SHA without renaming. Source preparation performs no Git, F, SSH or scientific execution. Old refusal/failure sources remain preserved.

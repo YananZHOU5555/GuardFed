@@ -1,0 +1,209 @@
+--- increment73
++++ increment74
+@@ -1,11 +1,11 @@
+-"""Publish closed CUDA211/FL100/LoGo2 compact proofs; remaining98 start is not acceptance."""
++"""Publish closed CUDA407/Full100/LoGo100 and partial four-method native400 proofs."""
+ from pathlib import Path
+ from datetime import datetime,timezone
+ import json,subprocess,hashlib,re,argparse
+ R=Path(__file__).resolve().parents[2]
+ W=Path('F:/YananResearchStorage/GuardFed/git_publication/current')
+ T=R/'docs/server_deployment_20260923/training_20260923'
+-PARENT='51a27b50c6c1880d3fb3c6b5c45b750d0cc68d12'
++PARENT='f1148225d99e5b5f469e18bcd3d44f0a1c817875'
+ BRANCH='codex/revision-evidence-baselines-20260928'
+ H=lambda b:hashlib.sha256(b).hexdigest()
+ parser=argparse.ArgumentParser(description=__doc__)
+@@ -34,11 +34,11 @@
+ entry=pinned_json(semantic_review,a.semantic_review_sha256)
+ selection=pinned_json(scope_path,a.compact_selection_sha256)
+ assert entry['status']=='PASS_LIMITED_CURRENT_ENTRY_SEMANTIC_REVIEW' and entry['root_accepted'] is True
+-assert selection['status']=='ROOT_CLOSED_INCREMENT73_COMPACT_SELECTION' and selection['root_accepted'] is True
++assert selection['status']=='ROOT_CLOSED_INCREMENT74_COMPACT_SELECTION' and selection['root_accepted'] is True
+ assert selection['parent_commit']==PARENT and selection['semantic_review_sha256']==a.semantic_review_sha256
+-template=pinned_json(HERE/'INPUTS_TEMPLATE.json','04a82a823623c070ef58a5292d825c81fcffff402da9f6b0292e517afa09874f')
++template=pinned_json(HERE/'INPUTS_TEMPLATE.json','4ec65c97c450fb059f1206b191bd71b55b111309e79599646f4dacb625a7d8b0')
+ stable_input=pinned_json(HERE/'STABLE_INPUTS.json',selection['stable_input_sha256'])
+-assert stable_input['status']=='ROOT_BOUND_INCREMENT73_INPUTS' and stable_input['root_accepted'] is True
++assert stable_input['status']=='ROOT_BOUND_INCREMENT74_INPUTS' and stable_input['root_accepted'] is True
+ assert stable_input['parent_commit']==template['parent_commit']==PARENT
+ assert selection['STATE_sha256']==entry['STATE_sha256']==stable_input['STATE_sha256']
+ for key in ['parent_references','entry_paths','STATE_path','reader_path','protocol_path','current_accepted','draft_path','draft_sha256','late_role_names','omitted_large_artifacts','native11_PDF_path','fixed_observed_cutoff']:
+@@ -46,79 +46,99 @@
+ roles=stable_input['proof_roles'];assert selection['proof_roles']==roles==template['proof_roles']
+ for role,pin in roles.items():assert entry['source_pins'][role]==pin
+ proofs={role:pinned_json(repo_path(pin['path']),pin['sha256']) for role,pin in roles.items()}
+-previous_rel='docs/server_deployment_20260923/training_20260923/publication_closed_increment72_verified_20261011.json'
+-previous=pinned_json(repo_path(previous_rel),'a246527f9cb72f656650f29b37a5c49475d8baf318dbc2addfa3377474368126')
++previous_rel='docs/server_deployment_20260923/training_20260923/publication_closed_increment73_verified_20261011.json'
++previous=pinned_json(repo_path(previous_rel),'dd7145de8cc8b9ec311e545836204e7dfd83b2e96e018195a086bcf7f3efcdd6')
+ assert previous['status']=='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS' and previous['commit']==PARENT
+-assert previous['acceptance_cutoff']['uniform_CUDA_root_accepted']==112
+-metadata=proofs['metadata'];fl=proofs['FL100_root'];logo=proofs['LoGo2_root']
+-assert metadata['status']=='ROOT_CUDA211_FL100_LOGO2_GIT72_CURRENT_ENTRIES_RECORDED' and metadata['history_tails_exact'] is True
+-assert (metadata['root_adopted_CUDA'],metadata['old800_unique_accepted'],metadata['FL100_accepted'],metadata['LoGo2_accepted'])==(211,102,100,2)
+-assert metadata['LoGo98_started'] is True and metadata['new_scientific_adoptions_in_metadata_writer']==0
+-assert (metadata['remote500_saved_accepted'],metadata['remote800_saved_accepted'])==(95,220)
+-assert 7+102+100+2==metadata['root_adopted_CUDA']
+-assert fl['status']=='ROOT_ALL100_FL100_CUDA_ORIGINAL_LINUX_WHOLE_AND_OFFSERVER_SAVED_AUDIT_ADOPTED'
+-assert (fl['accepted'],fl['new_unique'],fl['reused_already_adopted'])==(100,97,3)
+-assert fl['prior3_root']['sha256']==previous['proof_roles']['FL3_root']['sha256']
+-fa=proofs['FL100_audit'];ft=proofs['FL100_transport']
+-assert fl['audit']['sha256']==roles['FL100_audit']['sha256'] and fl['transport']['sha256']==roles['FL100_transport']['sha256']
+-assert fl['archive_all_members_rehashed'] is True and fl['archive']['members']==959
+-assert fl['ids']==fa['exact_ids'] and len(fl['records'])==100 and len(set(fl['ids']))==100
+-assert (fa['metric_values_checked'],fa['integer_base_counts_checked'],fa['prediction_rules_checked'])==(900,2400,300)
+-assert fa['fit_calls']==fa['new_CNN']==fa['new_training']==0 and fa['root_adopted'] is False
+-assert ft['all_members_verified'] is True and ft['archive_members']==959
+-assert fa['archive_sha256']==ft['archive_sha256']==fl['archive']['sha256']
+-assert all(r['native_max_abs_difference']==0 for r in fl['records'].values())
+-assert logo['status']=='ROOT_LOGO_FIXED2_CUDA_CACHE_FROZEN_POST_AND_OFFSERVER_SAVED_AUDIT_ADOPTED' and logo['root_accepted'] is True
+-assert logo['accepted']==len(logo['records'])==len(logo['ids'])==2
+-assert logo['ids']==['LoGoFair-DP_07_FedAvg_IID_Benign_seed91001','LoGoFair-DP_07_FedAvg_IID_F Flip_seed91001']
+-assert logo['FedAvg_CUDA_root']['sha256']==previous['proof_roles']['FedAvg100_root']['sha256']
++assert previous['acceptance_cutoff']['uniform_CUDA_root_accepted']==211
++metadata=proofs['metadata'];full=proofs['Full100_root'];logo=proofs['LoGo100_root'];table=proofs['four_method_root']
++assert metadata['status']=='ROOT_CUDA407_FULL100_LOGO100_GIT73_CURRENT_ENTRIES_RECORDED' and metadata['history_tails_exact'] is True
++assert (metadata['root_adopted_CUDA'],metadata['first500_unique_accepted'],metadata['old800_unique_accepted'],metadata['FL100_accepted'],metadata['LoGo100_accepted'],metadata['Full100_accepted'])==(407,105,102,100,100,100)
++assert metadata['first500_Full100_overlap_prior7']==2 and metadata['first500_other_controls']==5
++assert metadata['new_scientific_adoptions_in_metadata_writer']==0 and metadata['remote_observations_do_not_adopt'] is True
++assert (metadata['remote500_saved_accepted'],metadata['remote800_saved_accepted'])==(108,277)
++assert 105+102+100+100==metadata['root_adopted_CUDA'] and metadata['Git74_published'] is False
++assert full['status']=='ROOT_FULL100_CUDA_ORIGINAL_LINUX_WHOLE_AND_OFFSERVER_SAVED_AUDIT_ADOPTED'
++assert (full['accepted'],full['new_unique'],full['reused_already_adopted'])==(100,98,2)
++assert full['prior']['root']['sha256']==previous['parent_references']['tmp/uniform_cuda7_saved_audit_prepare_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json']['sha256']
++fa=proofs['Full100_audit'];ft=proofs['Full100_transport']
++assert full['audit']['sha256']==roles['Full100_audit']['sha256'] and full['transport']['sha256']==roles['Full100_transport']['sha256']
++assert full['archive_all_members_rehashed'] is True and full['archive']['members']==ft['archive_members']==609
++assert full['ids']==fa['ids'] and len(full['records'])==len(set(full['ids']))==100
++assert (fa['total_metric_values'],fa['total_integer_base_counts'],fa['total_prediction_rules'])==(900,2400,300)
++assert (fa['new_zero_fit_checked'],fa['prior_adopted_reused'])==(98,2)
++assert fa['fit_calls']==fa['new_CNN']==0 and fa['root_adopted'] is False
++assert ft['all_members_verified'] is True and ft['archive_sha256']==full['archive']['sha256']
++assert full['native_max_abs_difference']==0
++assert logo['status']=='ROOT_LOGO_ALL100_CUDA_CACHE_FROZEN_POST_AND_OFFSERVER_SAVED_AUDIT_ADOPTED'
++assert (logo['accepted'],logo['newly_adopted'],logo['previously_adopted_reused'])==(100,98,2)
++assert logo['prior2']['sha256']==previous['proof_roles']['LoGo2_root']['sha256'] and logo['prior2_records_exact'] is True
+ assert logo['FedAvg_CUDA_index']['sha256']=='6a21265f08fb26da130d95c67bf4130039b25916f44a543cd695e15665a25b64'
+-la=proofs['LoGo2_audit'];lt=proofs['LoGo2_transport']
+-assert logo['offserver_audit']['sha256']==roles['LoGo2_audit']['sha256'] and logo['transport']['sha256']==roles['LoGo2_transport']['sha256']
+-assert logo['archive_all_members_rehashed'] is logo['original_artifacts_immutable_rehashed'] is True
+-assert logo['archive']['members']==lt['archive_members']==34 and lt['all_members_verified'] is True
++la=proofs['LoGo100_audit'];lt=proofs['LoGo100_transport']
++assert logo['offserver_audit']['sha256']==roles['LoGo100_audit']['sha256'] and logo['transport']['sha256']==roles['LoGo100_transport']['sha256']
++assert logo['ids']==la['ids'] and len(logo['records'])==len(set(logo['ids']))==100
++assert logo['archive_all_members_rehashed'] is logo['original_artifacts_immutable_rehashed'] is logo['prior33_members_rehashed'] is True
++assert logo['archive']['members']==lt['archive_members']==885 and lt['all_members_verified'] is True
+ assert la['archive_sha256']==lt['archive_sha256']==logo['archive']['sha256']
+-assert (la['metric_values_checked'],la['integer_confusion_counts_recomputed'],la['prediction_items_checked'],la['max_metric_error'])==(6,16,39734,0.0)
++assert (la['metric_values_checked'],la['integer_confusion_counts_recomputed'],la['prediction_items_checked'],la['max_metric_error'])==(300,800,1986700,0.0)
+ assert la['new_fit']==la['new_CNN']==la['pickle_loads']==0 and la['root_adopted'] is False
+-assert logo['records'][logo['ids'][0]]['constant_prediction']==0
+-for root in [fl,logo]:
++assert logo['offserver_whole_predict_reexecuted'] is logo['historical_CPU_equality_required'] is False
++assert [k for k,v in logo['records'].items() if v['constant_prediction'] is not None]==['LoGoFair-DP_07_FedAvg_IID_Benign_seed91001']
++assert logo['records']['LoGoFair-DP_07_FedAvg_IID_Benign_seed91001']['constant_prediction']==0
++for root in [full,logo]:
++    assert root['root_accepted'] is root['whole100_complete'] is root['old_CPU_outputs_preserved'] is True
+     assert root['whole_comparison_complete'] is root['test'] is root['parameters_changed'] is root['tolerance_changed'] is False
+-    assert root['old_CPU_outputs_preserved'] is True
+-assert logo['whole100_complete'] is False
+-assert proofs['LoGo_remaining98_start']['exit_code']==0
+-assert proofs['LoGo_installer_v1_review']['source_adoptable'] is False
+-assert proofs['LoGo_installer_v2_review']['source_adoptable'] is True
+-for role,evidence_name in [('FL100_root','FL_root'),('LoGo2_root','LoGo_root'),('LoGo_remaining98_start','LoGo_start98'),('LoGo_deployment','LoGo_deployment'),('LoGo_env','LoGo_env'),('LoGo_restore','LoGo_restore'),('health','health'),('cuda500','cuda500'),('cuda800','cuda800')]:
++build=proofs['four_method_build'];review=proofs['four_method_review']
++assert table['status']=='ROOT_PARTIAL_FOUR_METHOD_UNIFORM_CUDA_VALIDATION_TABLE_ADOPTED' and table['root_accepted'] is True
++assert table['records']==build['records']==review['identity_grid_records']==400
++assert table['methods']==build['methods']==['FedAvg','GuardFed-AD2+','FLGMM','LoGoFair-DP']
++assert build['view']=='native' and build['ddof']==table['ddof']==1 and table['seed_panels']==[10,9,6]
++assert table['seed_first_aggregation'] is table['outputs_all_SHA_rechecked'] is True
++assert table['constant_predictors']=={'FedAvg':1,'GuardFed-AD2+':0,'FLGMM':0,'LoGoFair-DP':1}
++assert table['numeric_comparisons']==2772 and table['new_scientific_adoptions']==0
++assert table['build_receipt']['sha256']==roles['four_method_build']['sha256']==review['build_receipt_sha256']
++assert table['independent_review']['sha256']==roles['four_method_review']['sha256']
++assert review['status']=='PASS_INDEPENDENT_ARITHMETIC_AND_FORMAT_VERIFICATION' and not review['unit_findings'] and not review['blocking_findings']
++assert table['roots']['GuardFed-AD2+']['sha256']==roles['Full100_root']['sha256'] and table['roots']['LoGoFair-DP']['sha256']==roles['LoGo100_root']['sha256']
++assert table['roots']['FLGMM']['sha256']==previous['proof_roles']['FL100_root']['sha256']
++assert build['source_seal_sha256']=='4ffb108466144a3c619b149bf41b414b940a77174a5bc9359b8408d602850b14'
++assert build['new_fit']==build['new_inference']==0 and build['test'] is build['new_primary_endpoint'] is False
++assert table['whole_comparison_complete'] is table['whole_rebuttal_complete'] is table['test'] is table['primary_endpoint_selected'] is False
++for name,pin in build['files'].items():
++    rel='tmp/celeba_uniform_cuda_fourmethod_partial_20261011/actual_partial400/'+name
++    assert template['files'][rel]==pin and H(repo_path(rel).read_bytes())==pin['sha256']
++assert table['table']['sha256']==build['files']['TABLES.md']['sha256']
++for role,evidence_name in [('Full100_root','Full_root'),('LoGo100_root','LoGo_root'),('four_method_root','partial400_root'),('four_method_build','partial400_build'),('four_method_review','partial400_review'),('health','health'),('cuda500','cuda500'),('cuda800','cuda800')]:
+     assert metadata['evidence'][evidence_name]['path']==roles[role]['path'] and metadata['evidence'][evidence_name]['sha256']==roles[role]['sha256']
+ state_path=T/'TRAINING_STATE.json';state=pinned_json(state_path,entry['STATE_sha256']);main=state['celeba_mechanism_v1'];cuda=state['uniform_CUDA_evaluation_v1']
+ assert metadata['state_after']['sha256']==entry['STATE_sha256']
+ assert (main['scientific_results_offserver_verified'],main['three_view_new_models_offserver_verified'])==(400,380)
+-assert (cuda['uniform_CUDA_scientific_accepted'],cuda['root_adopted_old800_unique'],cuda['FedAvg100_scientific_accepted'],cuda['root_adopted_FL100'],cuda['root_adopted_LoGo100'])==(211,102,100,100,2)
+-assert (cuda['current_remote_saved_accepted'],cuda['old800_remote_saved_accepted'],cuda['FL100_server_saved_accepted'],cuda['actual_all_frozen'])==(95,220,100,1500)
+-assert cuda['whole500_complete'] is cuda['whole_comparison_complete'] is cuda['CPU_outputs_reused_as_CUDA'] is cuda['LoGo_whole100_complete'] is False
+-assert cuda['FL100_runtime_started'] is cuda['LoGo100_runtime_started'] is cuda['LoGo_remaining98_started'] is True
+-assert cuda['FL100_root']['sha256']==roles['FL100_root']['sha256'] and cuda['LoGo100_root']['sha256']==roles['LoGo2_root']['sha256']
+-assert state['latest_current_resource_observation']['main_terminal']==440 and state['latest_current_resource_observation']['NGA_new_accepted']==19
+-assert state['latest_current_resource_observation']['not_new_scientific_acceptance'] is True
+-assert entry['latest_observation_only']==state['latest_current_resource_observation']
++assert (cuda['uniform_CUDA_scientific_accepted'],cuda['root_adopted_first500'],cuda['root_adopted_old800_unique'],cuda['root_adopted_FL100'],cuda['root_adopted_LoGo100'])==(407,105,102,100,100)
++assert (cuda['root_adopted_Full100'],cuda['FedAvg100_scientific_accepted'],cuda['current_remote_saved_accepted'],cuda['old800_remote_saved_accepted'],cuda['actual_all_frozen'])==(100,100,108,277,1500)
++assert cuda['whole500_complete'] is cuda['whole_comparison_complete'] is cuda['CPU_outputs_reused_as_CUDA'] is False
++assert cuda['Full100_whole_complete'] is cuda['LoGo_whole100_complete'] is cuda['LoGo_remaining98_complete'] is True
++assert cuda['Full100_root']['sha256']==roles['Full100_root']['sha256'] and cuda['LoGo100_root']['sha256']==roles['LoGo100_root']['sha256']
++partial=cuda['partial_fourmethod_native400'];assert partial['root']['sha256']==roles['four_method_root']['sha256'] and partial['root_adopted'] is True and partial['final_17_method_table'] is False
++observed=state['latest_current_resource_observation']
++assert (observed['main_terminal'],observed['NGA_terminal_observed'],observed['Hybrid_terminal_observed'],observed['NGA_new_accepted'],observed['Hybrid_native_new_accepted'])==(447,27,37,19,29)
++assert observed['not_new_scientific_acceptance'] is True and entry['latest_observation_only']==observed
+ assert state['latest_working_rebuttal_draft']['entry']==template['draft_path'] and state['latest_working_rebuttal_draft']['sha256']==template['draft_sha256']
+ assert H(repo_path(template['draft_path']).read_bytes())==template['draft_sha256']
+ assert entry['working_draft_content_cutoff']==state['latest_working_rebuttal_draft']['content_cutoff']
+ assert entry['current_accepted']==template['current_accepted'] and entry['fixed_observed_cutoff']==template['fixed_observed_cutoff']
+-assert entry['LoGo_scientific_accepted']==2 and entry['LoGo_remaining98_started_not_accepted'] is True
+-assert entry['no_final_test_or_complete_comparison_claim'] is True and entry['historical_Git72_cutoff']==previous['acceptance_cutoff']
++assert entry['no_final_test_or_complete_comparison_claim'] is True and entry['historical_Git73_cutoff']==previous['acceptance_cutoff']
+ entry_paths=set(template['entry_paths']);assert set(entry['entries'])==entry_paths and len(entry_paths)==5
+ assert {p['path']:p['sha256'] for p in metadata['five_entries']}=={p:pin['sha256'] for p,pin in entry['entries'].items()}
+ for rel,pin in entry['entries'].items():assert H(repo_path(rel).read_bytes())==pin['sha256'] and pin['history_exact'] is True
+ for role in ['reader','protocol']:
+     pin=entry[role];assert pin['path']==template[role+'_path'] and H(repo_path(pin['path']).read_bytes())==pin['sha256'] and metadata[role]==pin
+ for pin in entry['source_pins'].values():assert H(repo_path(pin['path']).read_bytes())==pin['sha256']
++
+ selected=selection['files'];parent_refs=selection['parent_references'];late_files=selection['root_late_bound_files']
+ assert not set(template['omitted_large_artifacts'])&set(selected)
+ for rel,pin in template['omitted_large_artifacts'].items():
+     assert rel not in selected and re.fullmatch('[0-9a-f]{64}',pin['sha256']) and pin['bytes']>2_000_000
+ assert parent_refs==stable_input['parent_references'] and not set(parent_refs)&set(selected)
+-own_names={'STABLE_INPUTS.json', 'SOURCE_REUSE.json', 'INPUTS_TEMPLATE.json', 'INVERSE_DIFF.json', 'SOURCE_DIFF.patch', 'prepare_source.py', 'HANDOFF.json', 'publish_guardfed_increment73_20261011.py', 'PARENT_PRE_GIT_FAILURE.json', 'SEMANTIC_TEMPLATE.json', 'EXPLICIT_SELECTION_PROPOSAL.json', 'SELECTION_TEMPLATE.json', 'README.md', 'OMISSIONS.json', 'FILES_SHA256.json', 'SOURCE_CHECK.json'}
++own_names={'publish_guardfed_increment74_20261011.py', 'OMISSIONS.json', 'SOURCE_DIFF.patch', 'FILES_SHA256.json', 'STABLE_INPUTS.json', 'README.md', 'SELECTION_TEMPLATE.json', 'INPUTS_TEMPLATE.json', 'current_guards.py.txt', 'FREEZE_PLAN.json', 'SOURCE_CHECK.json', 'SOURCE_REUSE.json', 'EXPLICIT_SELECTION_PROPOSAL.json', 'HANDOFF.json', 'PROVISIONAL_SELECTION.json', 'finalize_source.py', 'SEMANTIC_TEMPLATE.json', 'prepare_source.py', 'INVERSE_DIFF.json'}
+ assert own_names==set(template['own_names'])
+ own_paths={(HERE/n).relative_to(R).as_posix() for n in own_names}
+ bound_paths=entry_paths|{template['STATE_path'],template['reader_path'],template['protocol_path']}
+@@ -165,7 +185,7 @@
+     assert p.stat().st_size<compact_limit(p) and not p.is_symlink()
+ destinations=['experimental/'+p.relative_to(R).as_posix()[4:] if p.relative_to(R).as_posix().startswith('tmp/') else p.relative_to(R).as_posix() for p in paths]
+ assert len(destinations)==len(set(destinations)),'Publication destination collision'
+-assert not (T/'publication_closed_increment73_verified_20261011.json').exists(),'One publication attempt only'
++assert not (T/'publication_closed_increment74_verified_20261011.json').exists(),'One publication attempt only'
+ G=['git','-c','safe.directory='+W.as_posix(),'-c','core.longpaths=true','-C',str(W)]
+ def git(*args,data=None):
+     p=subprocess.run(G+list(args),input=data,capture_output=True)
+@@ -208,7 +228,7 @@
+         expected_sha=a.semantic_review_sha256 if rel==semantic_review.relative_to(R).as_posix() else a.compact_selection_sha256
+         assert pin['sha256']==expected_sha,rel
+ assert H(state_path.read_bytes())==entry['STATE_sha256'],'Current STATE drifted before commit'
+-git('commit','-m','Publish CUDA211 FL100 LoGo2 and preserved prerequisite failures')
++git('commit','-m','Publish CUDA407 Full100 LoGo100 and partial four-method validation table')
+ commit=git('rev-parse','HEAD').decode().strip();assert git('rev-parse','HEAD^').decode().strip()==PARENT
+ raw=git('cat-file','--batch',data=''.join('HEAD:'+p+'\n' for p in changed).encode('utf8'));pos=0
+ for path in changed:
+@@ -218,7 +238,7 @@
+ assert pos==len(raw) and not git('status','--porcelain')
+ git('push','origin','HEAD:refs/heads/'+BRANCH)
+ assert git('ls-remote','origin','refs/heads/'+BRANCH).decode().split()[0]==commit
+-cutoff=dict(previous['acceptance_cutoff'],uniform_CUDA_root_accepted=211,uniform_CUDA_old800_root_accepted=102,uniform_CUDA_available_phase=1500,uniform_CUDA_FedAvg100=100,uniform_CUDA_FL100_root_accepted=100,uniform_CUDA_LoGo_root_accepted=2,NGA96_completed_scientific_records=19,gradient200_new_scientific_accepted=19)
+-proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=cutoff,proof_roles=roles,STATE_sha256=entry['STATE_sha256'],semantic_review_sha256=a.semantic_review_sha256,compact_selection_sha256=a.compact_selection_sha256,parent_references=parent_refs,observed_only_cutoff=entry['fixed_observed_cutoff'],historical_Git72_cutoff=previous['acceptance_cutoff'],working_draft_content_cutoff=entry['working_draft_content_cutoff'],new_scientific_acceptances=0,scientific_acceptances_created_by_publisher=0,new_adopted_views_published={'FL100_new_unique':97,'LoGo_fixed2':2},LoGo_remaining98_started=True,LoGo_remaining98_scientific_accepted=0,whole_comparison_complete=False,whole_rebuttal_complete=False,final_test=False,primary_endpoint_selected=False,original_negative_results_preserved=True,scientific_scope='CUDA211=7 prior500+102 unique old800+100 FL+2 LoGo. FL100=prior3+new97, without duplication. LoGo uses adopted CUDA FedAvg caches and frozen CPU postprocessing; remaining98 start is not scientific acceptance. Observed95/220/main440 are separate. Original failures, CPU/mixed tables and fixed full24 prose are preserved. Compact evidence only, not an archive/source mirror or complete comparison/test.')
+-(T/'publication_closed_increment73_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
++cutoff=dict(previous['acceptance_cutoff'],uniform_CUDA_root_accepted=407,uniform_CUDA_first500_root_accepted=105,uniform_CUDA_Full100=100,uniform_CUDA_old800_root_accepted=102,uniform_CUDA_FL100_root_accepted=100,uniform_CUDA_LoGo_root_accepted=100,uniform_CUDA_partial_four_method_records=400)
++proof=dict(status='COMMITTED_BLOB_SHA_AND_REMOTE_BRANCH_PASS',verified_utc=datetime.now(timezone.utc).isoformat(),parent=PARENT,commit=commit,branch=BRANCH,committed_blobs_sha256_verified=len(changed),files={p:pins[p] for p in changed},acceptance_cutoff=cutoff,proof_roles=roles,STATE_sha256=entry['STATE_sha256'],semantic_review_sha256=a.semantic_review_sha256,compact_selection_sha256=a.compact_selection_sha256,parent_references=parent_refs,observed_only_cutoff=entry['fixed_observed_cutoff'],historical_Git73_cutoff=previous['acceptance_cutoff'],working_draft_content_cutoff=entry['working_draft_content_cutoff'],new_scientific_acceptances=0,scientific_acceptances_created_by_publisher=0,new_adopted_views_published={'Full100_new_unique':98,'LoGo100_new_unique':98},whole_comparison_complete=False,whole_rebuttal_complete=False,final_test=False,primary_endpoint_selected=False,original_negative_results_preserved=True,scientific_scope='CUDA407=105 first500 +102 unique old800 +100 FL +100 LoGo. Full100 and LoGo100 each reuse prior2 and add98. Four-method native400 validation table is partial and adds zero scientific records. Observations108/277/main447/NGA27/Hybrid37 are separate from native400/NGA19/Hybrid29 acceptance. Fixed24 draft and old CPU tables/failures preserved. Compact proof publication only, no final comparison or test claim.')
++(T/'publication_closed_increment74_verified_20261011.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ print(json.dumps({k:v for k,v in proof.items() if k!='files'}))

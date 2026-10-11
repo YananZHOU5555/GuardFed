@@ -1,0 +1,5 @@
+            with old_bridge.np.load(folder / 'scores_predictions.npz', allow_pickle=False) as cache:
+                prediction = cache['prediction']; computed = core.compute_metrics(cache['valid_y'], prediction, cache['valid_sensitive'])
+                need(len(prediction) == 19867 and set(old_bridge.np.unique(prediction)) <= {0, 1}, 'Invalid saved decisions')
+                constant = int(prediction[0]) if old_bridge.np.unique(prediction).size == 1 else None
+            error = saved_metric_error(computed, result['metrics']); worst = max(worst, error)

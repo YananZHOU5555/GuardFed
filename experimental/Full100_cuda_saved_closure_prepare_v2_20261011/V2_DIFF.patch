@@ -1,0 +1,193 @@
+--- v1/collect_remote.py
++++ v2/collect_remote.py
+@@ -1,93 +1,97 @@
+-"""Metadata-only fixed Full100 capture; original 98 prediction files, no inference."""
+-from pathlib import Path
+-import hashlib,io,json,os,tarfile
+-GUIDE='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
+-def sha(p):
+- h=hashlib.sha256()
+- with Path(p).open('rb') as f:
+-  for b in iter(lambda:f.read(4*1024**2),b''):h.update(b)
+- return h.hexdigest()
+-def need(v,m):
+- if not v:raise ValueError(m)
+-def read(p):return json.loads(Path(p).read_bytes())
+-def pin(p):return {'path':str(p),'sha256':sha(p)}
+-need(sha('/etc/vast-agents-guide.md')==GUIDE,'Guide changed')
+-need(BIND['execution_authorized'] is True,'Root capture not authorized')
+-need(os.sched_getaffinity(0)=={110},'Collector requires exclusive CPU110')
+-siblings=set(map(int,Path('/sys/devices/system/cpu/cpu110/topology/thread_siblings_list').read_text().strip().split(',')))
+-for proc in Path('/proc').iterdir():
+- if not proc.name.isdigit() or int(proc.name)==os.getpid():continue
+- try:
+-  for task in (proc/'task').iterdir():
+-   aff=os.sched_getaffinity(int(task.name));need(not (len(aff)<=16 and siblings&aff),'CPU110/SMT occupied')
+- except (FileNotFoundError,ProcessLookupError):continue
+- except PermissionError:
+-  try:state=(proc/'stat').read_text().rsplit(')',1)[1].split()[0]
+-  except (FileNotFoundError,ProcessLookupError):continue
+-  if state in ('Z','X'):continue
+-  raise
+-scope=BIND['scope'];need(len(scope['ids'])==100 and len(scope['delta_ids'])==98,'Wrong Full scope')
+-prior=BIND['prior_members'];byhash={(v['sha256'],v['bytes']):k for k,v in prior.items()}
+-files={};remote={};snapshots={};acceptedpins={};recordobjects={};parent_success={}
+-def add(path,rel):
+- path=Path(path);need(path.resolve()==path and path.is_file() and not path.is_symlink(),'Non-regular source')
+- meta={'sha256':sha(path),'bytes':path.stat().st_size};key=(meta['sha256'],meta['bytes'])
+- # Existing adopted2 arrays and original metadata may only be referenced.
+- isoldarray=path.name=='validation_predictions.npz' and path.parent.name in scope['reused_adopted_ids']
+- reusable=key in byhash and (path.suffix!='.npz' or isoldarray or path.name=='metadata.npz')
+- if isoldarray or path.name=='metadata.npz':need(reusable,'Missing original adopted array/metadata; do not redownload')
+- storage={'kind':'prior','member':byhash[key]} if reusable else {'kind':'delta','member':rel}
+- remote[str(path)]=dict(meta,storage=storage)
+- if not reusable:files[rel]=path
+- return meta
+-for group in scope['groups']:
+- base=Path(group['base']);tag=group['tag']
+- need(pin(base/'DEPLOYMENT_SEAL.json')==group['deployment'] and pin(base/'cohort.json')==group['cohort'],'Wrong producer seal/cohort')
+- seal=read(base/'DEPLOYMENT_SEAL.json');cohort=read(base/'cohort.json')
+- for rel,v in seal['files'].items():
+-  need(sha(base/rel)==v['sha256'],'Producer source changed')
+-  add(base/rel,tag+'/'+rel)
+- for name in ['DEPLOYMENT_SEAL.json','cohort.json','ROOT_QUEUE_AUTH.json','STARTED.json','author.json']:
+-  add(base/name,tag+'/'+name)
+- if group['queue_success_snapshot']:
+-  sp=Path(group['queue_success_snapshot']['path']);need(pin(sp)==group['queue_success_snapshot'],'Historical failure/parent proof changed');snapshot=read(sp)
+-  add(sp,tag+'/QUEUE_FAILURE.json')
+- else:
+-  need(pin(base/'ROOT_RESUME_AUTH.json')==group['resume_auth'],'Recovery auth changed');add(base/'ROOT_RESUME_AUTH.json',tag+'/ROOT_RESUME_AUTH.json')
+-  raw=(base/'progress.json').read_bytes();snapshot=json.loads(raw);snapshots[tag+'/PARENT_SUCCESS_SNAPSHOT.json']=raw
+-  # Read a coherent actual parent snapshot; do not require whole500 EXITED or no unrelated failure.
+- successful=snapshot[group['completed_field']]
+- need(set(group['full_ids'])<=set(successful) and snapshot.get('active') not in group['full_ids'],'Full records not yet returned successfully to parent')
+- parent_success[tag]={'successful_ids':group['full_ids'],'snapshot_sha256':hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':')).encode()).hexdigest(),'semantics':'IDs appended only after frozen parent subprocess returncode==0; not a fabricated exit JSON'}
+- for identity in group['full_ids']:
+-  task=base/'tasks'/identity;out=base/'runs'/identity;a=read(task/'ACCEPTED.json');r=read(out/'receipt.json');b=read(out/'formal_binding.json')
+-  fixed=group['fixed_accepted'].get(identity)
+-  if fixed:need(sha(task/'ACCEPTED.json')==fixed,'Prior CUDA acceptance changed')
+-  need(a['id']==identity and a['cohort']==group['cohort'] and a['root_offserver_adopted'] is False,'Wrong Full acceptance')
+-  for role in ['approval','receipt','arrays']:need(pin(a[role]['path'])==a[role],'Accepted member changed')
+-  need(a['receipt']['path']==str(out/'receipt.json') and a['arrays']['path']==str(out/'validation_predictions.npz'),'Wrong producer output')
+-  need(a['acceptance']['status']=='PER_RECORD_FULL_CUDA_SAVED_WHOLE_ACCEPTED' and a['acceptance']['binding_sha256']==sha(out/'formal_binding.json'),'Original Linux saved gate missing')
+-  need(a['acceptance']['views']==r['views'] and a['acceptance']['native_comparison']==r['native_comparison'] and r['native_comparison']['accepted'] and r['native_comparison']['max_abs_difference']<=1e-12,'Native or saved acceptance differs')
+-  need(r['runtime']['device']=='cuda:0' and r['runtime']['torch']=='2.11.0+cu128' and r['valid_n']==19867,'CPU/foreign output cannot be used')
+-  need(b['source_before']==b['source_after'] and b['artifact_before']==b['artifact_after'] and b['receipt_sha256']==sha(out/'receipt.json'),'Changed Linux identity')
+-  record=next(v for v in cohort['records'] if v['id']==identity);recordobjects[identity]=record
+-  for field,key in [('checkpoint_sha256','checkpoint'),('original_result_sha256','result'),('original_job_sha256','raw_job')]:need(r[field]==record[key]['sha256'],'Mixed model/result/job')
+-  need(record['terminal_round']==70 and record['original_split']=='valid','Wrong endpoint')
+-  need(not (task/'FAILURE.json').exists() and not out.with_name(identity+'.formal_failure.json').exists(),'Failed record cannot be captured')
+-  acceptedpins[identity]=sha(task/'ACCEPTED.json')
+-  for name in ['ACCEPTED.json','approval.json','preflight.json']:add(task/name,tag+'/tasks/'+identity+'/'+name)
+-  for name in ['receipt.json','formal_binding.json','validation_predictions.npz']:add(out/name,tag+'/runs/'+identity+'/'+name)
+-need(set(recordobjects)==set(scope['ids']) and len(acceptedpins)==100,'Full100 identity coverage missing')
+-need({(r['distribution'],r['attack'],r['seed']) for r in recordobjects.values()}=={(r['distribution'],r['attack'],r['seed']) for r in scope['cells']},'Grid differs')
+-meta=Path('/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz');add(meta,'source/metadata.npz')
+-need(sum(p.name=='validation_predictions.npz' for p in files.values())==98,'Delta must contain exactly98 new arrays')
+-namespace=Path('/workspace/guardfed_checks/Full100_cuda_saved_closure_20261011_attempt001');need(not namespace.exists(),'Preserve prior capture; no retry');namespace.mkdir()
+-manifest={'files':{n:{'sha256':sha(f),'bytes':f.stat().st_size} for n,f in files.items()},'remote_members':remote,'exact_ids':scope['ids'],'delta_ids':scope['delta_ids'],'accepted_sha256':acceptedpins,'parent_success':parent_success,'scope':scope,'prior_transport_sha256':BIND['prior_transport_sha256'],'prior_root_sha256':BIND['prior_root_sha256'],'root_adopted':False}
+-for name,raw in snapshots.items():manifest['files'][name]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
+-index=json.dumps(manifest,indent=2).encode()+b'\n';(namespace/'ROOT_MEMBERS.json').write_bytes(index);archive=namespace/'FULL100_DELTA98.tar.gz'
+-with tarfile.open(archive,'w:gz') as tar:
+- for name,f in files.items():tar.add(f,arcname=name,recursive=False)
+- for name,raw in dict(snapshots,**{'ROOT_MEMBERS.json':index}).items():
+-  info=tarfile.TarInfo(name);info.size=len(raw);tar.addfile(info,io.BytesIO(raw))
+-need(all(sha(f)==manifest['files'][n]['sha256'] for n,f in files.items()),'Immutable captured file changed')
+-print(json.dumps({'archive_path':str(archive),'archive_sha256':sha(archive),'archive_bytes':archive.stat().st_size,'archive_members':len(manifest['files'])+1,'payload_members':len(manifest['files']),'member_index_sha256':hashlib.sha256(index).hexdigest(),'ids':scope['ids'],'new_npz':98,'metadata_downloaded':False,'root_adopted':False}))
++"""Metadata-only fixed Full100 capture; original 98 prediction files, no inference."""
++from pathlib import Path
++import hashlib,io,json,os,tarfile
++GUIDE='42be4f7a84349c7bca6f6b35c10e94d70ddeb9239bcdeaf0c56317d4ab3fd2aa'
++def sha(p):
++ h=hashlib.sha256()
++ with Path(p).open('rb') as f:
++  for b in iter(lambda:f.read(4*1024**2),b''):h.update(b)
++ return h.hexdigest()
++def need(v,m):
++ if not v:raise ValueError(m)
++def read(p):return json.loads(Path(p).read_bytes())
++def pin(p):return {'path':str(p),'sha256':sha(p)}
++need(sha('/etc/vast-agents-guide.md')==GUIDE,'Guide changed')
++need(BIND['execution_authorized'] is True,'Root capture not authorized')
++need(os.sched_getaffinity(0)=={110},'Collector requires exclusive CPU110')
++siblings=set(map(int,Path('/sys/devices/system/cpu/cpu110/topology/thread_siblings_list').read_text().strip().split(',')))
++for proc in Path('/proc').iterdir():
++ if not proc.name.isdigit() or int(proc.name)==os.getpid():continue
++ try:
++  for task in (proc/'task').iterdir():
++   aff=os.sched_getaffinity(int(task.name));need(not (len(aff)<=16 and siblings&aff),'CPU110/SMT occupied')
++ except (FileNotFoundError,ProcessLookupError):continue
++ except PermissionError:
++  try:state=(proc/'stat').read_text().rsplit(')',1)[1].split()[0]
++  except (FileNotFoundError,ProcessLookupError):continue
++  if state in ('Z','X'):continue
++  raise
++scope=BIND['scope'];need(len(scope['ids'])==100 and len(scope['delta_ids'])==98,'Wrong Full scope')
++prior=BIND['prior_members'];byhash={(v['sha256'],v['bytes']):k for k,v in prior.items()}
++files={};remote={};snapshots={};acceptedpins={};recordobjects={};parent_success={}
++def add(path,rel):
++ path=Path(path)
++ if str(path)=='/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz':
++  expected=Path('/workspace/GuardFed-revision/data/celeba/derived/rgb64_v1/metadata.npz')
++  need(path.resolve()==expected and expected.resolve()==expected and expected.is_file() and not path.is_symlink() and not expected.is_symlink() and sha(expected)=='161f8028f1c29ba470afa60cbd9fb54d7bf61b3cec5c525830ad7a3ef7ab2091','Only frozen metadata alias/canonical/SHA allowed')
++ else:need(path.resolve()==path and path.is_file() and not path.is_symlink(),'Non-regular source')
++ meta={'sha256':sha(path),'bytes':path.stat().st_size};key=(meta['sha256'],meta['bytes'])
++ # Existing adopted2 arrays and original metadata may only be referenced.
++ isoldarray=path.name=='validation_predictions.npz' and path.parent.name in scope['reused_adopted_ids']
++ reusable=key in byhash and (path.suffix!='.npz' or isoldarray or path.name=='metadata.npz')
++ if isoldarray or path.name=='metadata.npz':need(reusable,'Missing original adopted array/metadata; do not redownload')
++ storage={'kind':'prior','member':byhash[key]} if reusable else {'kind':'delta','member':rel}
++ remote[str(path)]=dict(meta,storage=storage)
++ if not reusable:files[rel]=path
++ return meta
++for group in scope['groups']:
++ base=Path(group['base']);tag=group['tag']
++ need(pin(base/'DEPLOYMENT_SEAL.json')==group['deployment'] and pin(base/'cohort.json')==group['cohort'],'Wrong producer seal/cohort')
++ seal=read(base/'DEPLOYMENT_SEAL.json');cohort=read(base/'cohort.json')
++ for rel,v in seal['files'].items():
++  need(sha(base/rel)==v['sha256'],'Producer source changed')
++  add(base/rel,tag+'/'+rel)
++ for name in ['DEPLOYMENT_SEAL.json','cohort.json','ROOT_QUEUE_AUTH.json','STARTED.json','author.json']:
++  add(base/name,tag+'/'+name)
++ if group['queue_success_snapshot']:
++  sp=Path(group['queue_success_snapshot']['path']);need(pin(sp)==group['queue_success_snapshot'],'Historical failure/parent proof changed');snapshot=read(sp)
++  add(sp,tag+'/QUEUE_FAILURE.json')
++ else:
++  need(pin(base/'ROOT_RESUME_AUTH.json')==group['resume_auth'],'Recovery auth changed');add(base/'ROOT_RESUME_AUTH.json',tag+'/ROOT_RESUME_AUTH.json')
++  raw=(base/'progress.json').read_bytes();snapshot=json.loads(raw);snapshots[tag+'/PARENT_SUCCESS_SNAPSHOT.json']=raw
++  # Read a coherent actual parent snapshot; do not require whole500 EXITED or no unrelated failure.
++ successful=snapshot[group['completed_field']]
++ need(set(group['full_ids'])<=set(successful) and snapshot.get('active') not in group['full_ids'],'Full records not yet returned successfully to parent')
++ parent_success[tag]={'successful_ids':group['full_ids'],'snapshot_sha256':hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':')).encode()).hexdigest(),'semantics':'IDs appended only after frozen parent subprocess returncode==0; not a fabricated exit JSON'}
++ for identity in group['full_ids']:
++  task=base/'tasks'/identity;out=base/'runs'/identity;a=read(task/'ACCEPTED.json');r=read(out/'receipt.json');b=read(out/'formal_binding.json')
++  fixed=group['fixed_accepted'].get(identity)
++  if fixed:need(sha(task/'ACCEPTED.json')==fixed,'Prior CUDA acceptance changed')
++  need(a['id']==identity and a['cohort']==group['cohort'] and a['root_offserver_adopted'] is False,'Wrong Full acceptance')
++  for role in ['approval','receipt','arrays']:need(pin(a[role]['path'])==a[role],'Accepted member changed')
++  need(a['receipt']['path']==str(out/'receipt.json') and a['arrays']['path']==str(out/'validation_predictions.npz'),'Wrong producer output')
++  need(a['acceptance']['status']=='PER_RECORD_FULL_CUDA_SAVED_WHOLE_ACCEPTED' and a['acceptance']['binding_sha256']==sha(out/'formal_binding.json'),'Original Linux saved gate missing')
++  need(a['acceptance']['views']==r['views'] and a['acceptance']['native_comparison']==r['native_comparison'] and r['native_comparison']['accepted'] and r['native_comparison']['max_abs_difference']<=1e-12,'Native or saved acceptance differs')
++  need(r['runtime']['device']=='cuda:0' and r['runtime']['torch']=='2.11.0+cu128' and r['valid_n']==19867,'CPU/foreign output cannot be used')
++  need(b['source_before']==b['source_after'] and b['artifact_before']==b['artifact_after'] and b['receipt_sha256']==sha(out/'receipt.json'),'Changed Linux identity')
++  record=next(v for v in cohort['records'] if v['id']==identity);recordobjects[identity]=record
++  for field,key in [('checkpoint_sha256','checkpoint'),('original_result_sha256','result'),('original_job_sha256','raw_job')]:need(r[field]==record[key]['sha256'],'Mixed model/result/job')
++  need(record['terminal_round']==70 and record['original_split']=='valid','Wrong endpoint')
++  need(not (task/'FAILURE.json').exists() and not out.with_name(identity+'.formal_failure.json').exists(),'Failed record cannot be captured')
++  acceptedpins[identity]=sha(task/'ACCEPTED.json')
++  for name in ['ACCEPTED.json','approval.json','preflight.json']:add(task/name,tag+'/tasks/'+identity+'/'+name)
++  for name in ['receipt.json','formal_binding.json','validation_predictions.npz']:add(out/name,tag+'/runs/'+identity+'/'+name)
++need(set(recordobjects)==set(scope['ids']) and len(acceptedpins)==100,'Full100 identity coverage missing')
++need({(r['distribution'],r['attack'],r['seed']) for r in recordobjects.values()}=={(r['distribution'],r['attack'],r['seed']) for r in scope['cells']},'Grid differs')
++meta=Path('/workspace/GuardFed-celeba-expanded/data/celeba/derived/rgb64_v1/metadata.npz');add(meta,'source/metadata.npz')
++need(sum(p.name=='validation_predictions.npz' for p in files.values())==98,'Delta must contain exactly98 new arrays')
++namespace=Path('/workspace/guardfed_checks/Full100_cuda_saved_closure_20261011_attempt001');need(not namespace.exists(),'Preserve prior capture; no retry');namespace.mkdir()
++manifest={'files':{n:{'sha256':sha(f),'bytes':f.stat().st_size} for n,f in files.items()},'remote_members':remote,'exact_ids':scope['ids'],'delta_ids':scope['delta_ids'],'accepted_sha256':acceptedpins,'parent_success':parent_success,'scope':scope,'prior_transport_sha256':BIND['prior_transport_sha256'],'prior_root_sha256':BIND['prior_root_sha256'],'root_adopted':False}
++for name,raw in snapshots.items():manifest['files'][name]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
++index=json.dumps(manifest,indent=2).encode()+b'\n';(namespace/'ROOT_MEMBERS.json').write_bytes(index);archive=namespace/'FULL100_DELTA98.tar.gz'
++with tarfile.open(archive,'w:gz') as tar:
++ for name,f in files.items():tar.add(f,arcname=name,recursive=False)
++ for name,raw in dict(snapshots,**{'ROOT_MEMBERS.json':index}).items():
++  info=tarfile.TarInfo(name);info.size=len(raw);tar.addfile(info,io.BytesIO(raw))
++need(all(sha(f)==manifest['files'][n]['sha256'] for n,f in files.items()),'Immutable captured file changed')
++print(json.dumps({'archive_path':str(archive),'archive_sha256':sha(archive),'archive_bytes':archive.stat().st_size,'archive_members':len(manifest['files'])+1,'payload_members':len(manifest['files']),'member_index_sha256':hashlib.sha256(index).hexdigest(),'ids':scope['ids'],'new_npz':98,'metadata_downloaded':False,'root_adopted':False}))
