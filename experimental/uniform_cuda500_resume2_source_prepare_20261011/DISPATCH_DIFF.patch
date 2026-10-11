@@ -1,0 +1,22 @@
+--- parent dispatch_resume1
++++ dispatch_resume2
+@@ -7,8 +7,8 @@
+ import argparse,copy,fcntl,hashlib,importlib.util,json,os,signal,subprocess,sys,time,traceback,types
+ sys.dont_write_bytecode=True
+ HERE=Path(__file__).resolve().parent
+-BASE=Path('/workspace/guardfed_checks/uniform_cuda_formal_20261011_resume1')
+-MECH=Path('/workspace/guardfed_checks/mechanism_cuda_formal_20261011_resume1')
++BASE=Path('/workspace/guardfed_checks/uniform_cuda_formal_20261011_resume2')
++MECH=Path('/workspace/guardfed_checks/mechanism_cuda_formal_20261011_resume2')
+ REPO=Path('/workspace/GuardFed-celeba-expanded')
+ PY='/workspace/guardfed_envs/celeba-cu128-20261009/bin/python'
+ ID='UNIFORM_CUDA500_NO_TARGET_DURING_PREPARE'
+@@ -56,7 +56,7 @@
+             argv = [v.decode(errors='replace') for v in (p / 'cmdline').read_bytes().split(b'\0') if v]
+             if not argv: continue
+             is_python = Path(argv[0]).name.startswith('python')
+-            process_cwd = str((p / 'cwd').resolve())
++            process_cwd = str((p / 'cwd').resolve()) if is_python else ''
+             is_project = is_python and (process_cwd.startswith(('/workspace/GuardFed-', '/workspace/guardfed_checks/'))
+                 or any('/workspace/GuardFed-' in v or '/workspace/guardfed_checks/' in v for v in argv[1:]))
+             if is_project:

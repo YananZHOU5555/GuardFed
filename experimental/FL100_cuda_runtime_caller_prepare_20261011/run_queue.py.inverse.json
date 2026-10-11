@@ -1,0 +1,58 @@
+{
+  "parent": {
+    "path": "tmp/baseline_old800_runtime_root_20261011_attempt002/run_queue.py",
+    "sha256": "7036785bd12ecc591174a6c526315073c0828d1bae6399a9cb15c84fc71f9044"
+  },
+  "spans": [
+    {
+      "before": "Finite original800 CUDA evaluation, canary then exact remaining cohort.",
+      "after": "Finite FL100 CUDA evaluation: fixed3 source-interface canaries, externally gated remaining97."
+    },
+    {
+      "before": "scope=read(BASE/'EXACT800_INPUTS.json')",
+      "after": "scope=read(BASE/'adapter/EXACT100.json')"
+    },
+    {
+      "before": "auth['exact_cohort']==pin(BASE/'EXACT800_INPUTS.json')",
+      "after": "auth['exact_cohort']==pin(BASE/'adapter/EXACT100.json')"
+    },
+    {
+      "before": "auth['ordered_ids']==scope['ordered_ids'] and len(scope['records'])==800,'Wrong original800'",
+      "after": "auth['ordered_ids']==[r['id'] for r in scope['records']] and len(scope['records'])==100,'Wrong exact FL100'"
+    },
+    {
+      "before": "    canaries=auth['canary_ids'];selected=canaries if args.phase=='canary' else [i for i in auth['ordered_ids'] if i not in canaries]",
+      "after": "    canaries=auth['canary_ids'];selected=canaries if args.phase=='canary' else [i for i in auth['ordered_ids'] if i not in canaries]\n    need(canaries==['FLGMM_Tg20_L2.0_lr0.001_IID_Benign_seed91001_screen', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_F Flip_seed91001_fullcoverage', 'FLGMM_Tg20_L2.0_lr0.001_non-IID_Sp-DFA_seed91001_fullcoverage'],'Only fixed outcome-independent source-schema canaries')\n    need(len(selected)==(3 if args.phase=='canary' else 97),'Only fixed3 or ordered remaining97')"
+    },
+    {
+      "before": "'Exactly three fixed source-schema canaries'",
+      "after": "'Exactly three fixed FL source-schema canaries'"
+    },
+    {
+      "before": "            pre=subprocess.run(['nice','-n','10','ionice','-c','3','taskset','-c','109',PY,str(BASE/'guard.py'),'--id',identity],capture_output=True,timeout=60)\n",
+      "after": "            pre=subprocess.run(['nice','-n','10','ionice','-c','3','taskset','-c','111',PY,str(BASE/'guard.py'),'--id',identity],capture_output=True,timeout=60)\n"
+    },
+    {
+      "before": "                   record_canonical_sha256=hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest(),",
+      "after": "                   native_index=record['native_index'],identity_canonical_sha256=record['identity_canonical_sha256'],\n                   runtime_dependencies=read(BASE/'RUNTIME_DEPENDENCIES.json')[record['identity_source']],"
+    },
+    {
+      "before": "command=['nice','-n','10','ionice','-c','3','taskset','-c','109',PY",
+      "after": "command=['nice','-n','10','ionice','-c','3','taskset','-c','111',PY"
+    },
+    {
+      "before": "'Original800 worker rejected; preserve evidence and stop'",
+      "after": "'FL100 worker rejected; preserve evidence and stop'"
+    },
+    {
+      "before": "PER_RECORD_ORIGINAL800_CUDA_SAVED_WHOLE_ACCEPTED",
+      "after": "PER_RECORD_FL100_CUDA_SAVED_WHOLE_ACCEPTED"
+    },
+    {
+      "before": "'Wrong saved original800 acceptance'",
+      "after": "'Wrong original Linux whole FL acceptance'"
+    }
+  ],
+  "raw_inverse_exact": true,
+  "source_sha256": "350f7b9b242b8433c1af790e0fd317b8d99bf5cf9ed31c5834c3668ad6584a16"
+}

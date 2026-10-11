@@ -1,0 +1,101 @@
+{
+  "status": "SOURCE_ONLY_FIXED3_MIXED_PRODUCER_READY_FOR_ROOT_REVIEW",
+  "created_utc": "2026-10-11T07:38:08.397869+00:00",
+  "parent_source_seal": {
+    "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/FILES_SHA256.json",
+    "sha256": "ad8df469c7ca5e24e9d8b621b18973505ae1824d81c9f92a57371a076dce4c0c",
+    "unchanged_members": 22
+  },
+  "exact_ids": [
+    "FedAvg_IID_Benign_seed91001",
+    "FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001",
+    "LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen"
+  ],
+  "producers": {
+    "attempt002": "/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt002",
+    "attempt003": "/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt003"
+  },
+  "record_producers": {
+    "FedAvg_IID_Benign_seed91001": "attempt002",
+    "FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001": "attempt003",
+    "LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen": "attempt003"
+  },
+  "closed_basis": "Three externally pinned original Linux whole ACCEPTED + original binding/acceptance + no active selected producer; not attempt002 COMPLETE.",
+  "future_check_counts": {
+    "records": 3,
+    "metric_values": 27,
+    "base_counts": 72,
+    "prediction_rules": 9
+  },
+  "sources": {
+    "audit_saved.py": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/audit_saved.py",
+      "sha256": "d997367234aa2c57c076004930fc13d8cc986abe80f8c30d7e81d5d861194bfa"
+    },
+    "transport.py": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/transport.py",
+      "sha256": "d8a7ff04473fc0a4894ac5ab524b19515bb1e0bbba9d3d759a823ee87276d904"
+    },
+    "SOURCE_CHECK.json": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/SOURCE_CHECK.json",
+      "sha256": "b0203128598984f62d539716f5db5898b9e9c6dca0ee91752eeebeba6d702dd0"
+    },
+    "SOURCE_PINS.json": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/SOURCE_PINS.json",
+      "sha256": "14c86df5e15e475540881fed3c4a73ddb12c4b1309fb80e9875101f9626eda35"
+    },
+    "ROOT_INPUTS.template.json": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/ROOT_INPUTS.template.json",
+      "sha256": "1344d8b1fbc95cbc14e7f5e669674767c1ec7eb86e0ce31121920b0e3d39043b"
+    }
+  },
+  "raw_inverse": {
+    "audit_saved.py": {
+      "raw_inverse_exact": true,
+      "spans": 16,
+      "source_sha256": "d997367234aa2c57c076004930fc13d8cc986abe80f8c30d7e81d5d861194bfa"
+    },
+    "transport.py": {
+      "raw_inverse_exact": true,
+      "spans": 5,
+      "source_sha256": "d8a7ff04473fc0a4894ac5ab524b19515bb1e0bbba9d3d759a823ee87276d904"
+    }
+  },
+  "unchanged_science": [
+    "Zero-fit per-record scientific block raw+AST",
+    "Original per-ID receipt/binding/acceptance guard block raw",
+    "Original nine scientific functions/seven saved statements in sealed v1",
+    "Original guide/CPU110 all-thread guard and archive/member/extraction SHA tail raw"
+  ],
+  "failure_boundaries": {
+    "attempt001": "Original queue.py import shadow failure preserved by root; never accepted.",
+    "attempt002": "FedAA resource(before) PermissionError; its actual canary QUEUE_FAILURE pin mandatory separate archive member; no FedAA receipt from this producer.",
+    "attempt003": "Must have no canary QUEUE_FAILURE or selected formal_failure; only two new items produced.",
+    "local_source_preparation": "V1 filename inverse failure kept unchanged in original sealed22; no scientific/transport execution."
+  },
+  "future_root_fields": [
+    "Two actual deployment seal SHAs",
+    "Exact cohort SHA",
+    "Three actual ACCEPTED SHAs",
+    "Actual attempt002 failure path/SHA",
+    "Actual root source review path/SHA + current source seal",
+    "Actual transport/archive SHA before zero-fit audit"
+  ],
+  "actual_transport": null,
+  "actual_archive_sha256": null,
+  "actual_saved_audit_sha256": null,
+  "root_adoption_sha256": null,
+  "root_adopted": false,
+  "new_accepted": 0,
+  "SSH": 0,
+  "F_access": 0,
+  "model_or_array_reads": 0,
+  "fit": 0,
+  "CNN": 0,
+  "test": false,
+  "limits": "Fixed3 only: FedAvg reused once, FedAA/LASA new. No Windows whole refit, complete800, training equivalence, new table or test claim. Full/FL/LoGo excluded. No model/full800 scope/full inventory bulk.",
+  "commands": {
+    "transport": "python -B tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/transport.py --inputs <actual-inputs.json> --inputs-sha256 <actual-sha> --source-seal-sha256 <actual-v2-seal>",
+    "audit": "python -B tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/audit_saved.py --inputs <actual-audit-inputs.json> --inputs-sha256 <actual-sha> --source-seal-sha256 <actual-v2-seal>"
+  }
+}

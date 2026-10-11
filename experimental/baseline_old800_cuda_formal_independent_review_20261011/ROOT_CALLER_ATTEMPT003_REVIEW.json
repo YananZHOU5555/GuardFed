@@ -1,0 +1,101 @@
+{
+  "status": "PASS_ATTEMPT003_SOURCE_REVIEW_RUNTIME_UNVERIFIED",
+  "blocking_source": [],
+  "guard_sha256": "92c02babe4c9e6fc15faae73f2999f0fa4cfb80cfb41ef1f0cd00bfbcef62e4b",
+  "queue_sha256": "73583eb164d36a6a799aed3198bd947999c6e3e9e799990c134bb3bf37c1feaf",
+  "worker_sha256": "cd15480764def5e85f88700f93212cd7f7adec87431d2e3ccad643670fe5e4ca",
+  "reuse_validator_sha256": "bcdf3c81eb4f480028726b541253ed65ad4dcd84999324d2cc714d839763a824",
+  "installer_sha256": "b75ca98271343dbfab23b7eb40f28b3bef222f2748e5381496fbd0f0bb2731b9",
+  "root_preparation_sha256": "62b475336e90234de4e767811b26cece459924155a2bc7153df748b3ad4b70fd",
+  "generation_sources": {
+    "tmp\\prepare_old800_root_caller_attempt003_20261011.py": "d26aab49d423cd99d5d2d0d8aabe4f432d4eaa6b27331bc3b512351701b9ac41",
+    "tmp\\prepare_old800_installer_attempt003_20261011.py": "eb0f37d890872fd714c7397b4bf0008679da27dddcdfe1da197fd46f534cbab3"
+  },
+  "findings": [
+    {
+      "file": "guard.py",
+      "lines": [
+        35,
+        36,
+        44,
+        49,
+        59
+      ],
+      "finding": "Only namespace and Python-only cwd conditional differ from attempt002; full byte inverse verified. All process/task CPU109 checks, finite quota, GPU1, and live-Python failclosed remain unchanged."
+    },
+    {
+      "file": "worker.py",
+      "finding": "Whole-file byte exact attempt002 cd1548. No scientific bootstrap, inference, calibration, saved acceptance or tolerance changes."
+    },
+    {
+      "file": "reuse_fedavg.py",
+      "lines": [
+        66,
+        69,
+        76,
+        92,
+        99,
+        115,
+        144,
+        154
+      ],
+      "finding": "Exactly fixed FedAvg1. Original observed ACCEPTED matches all fixed links. Requires old deployment/auth/cohort, checkpoint/result/job and current structured source/artifact hash+stat, original receipt/native-zero/1e-12/valid-only CUDA acceptance; record-specific failure rejects. Global failed queue is preserved but not wrongly assigned to this successful record. No CNN/fit/array parsing."
+    },
+    {
+      "file": "run_queue.py",
+      "lines": [
+        21,
+        22,
+        24,
+        31,
+        35,
+        66,
+        78
+      ],
+      "finding": "Canary runs two new fixed IDs, skips original FedAvg. Remaining797 excludes all three canaries and needs externally pinned root canary acceptance and exact saved links, including original FedAvg path. No retry or overwrite."
+    },
+    {
+      "file": "tmp\\install_old800_cuda_canary_attempt003_root_once_20261011.py",
+      "finding": "Fresh namespace/service. Exact historical failures and old EXITED checked. Fixed reuse verified before fresh CPU109/GPU1 preflight and new2 start. Healthy500 unmodified. ROOT_PREPARATION has four source pins and corrected resource-function SHA."
+    }
+  ],
+  "checks": {
+    "guard_inverse_bytes_exact": true,
+    "worker_bytes_exact": true,
+    "local_source_and_remote_literal_compile_only": true,
+    "reuse_package_all_6_sealed_members_verified": true,
+    "independent_actual_queue_AST_metadata_fixtures": {
+      "passed": [
+        "canary_new2_reused1",
+        "remaining797_excludes_all3"
+      ],
+      "rejected": [
+        "missing_external_root_sha",
+        "changed_external_root_sha",
+        "root_not_accepted",
+        "root_wrong_cohort",
+        "changed_original_FedAvg_acceptance",
+        "changed_new_acceptance",
+        "changed_canary_order"
+      ]
+    },
+    "prior_14_guard_semantics_fixtures": {
+      "path": "tmp/old800_proc_guard_semantics_review_20261011/SOURCE_REVIEW.json",
+      "sha256": "561bae41800cb0a19784cdc52f02e5b4236802a4f3a873df7f5ee7ad75d74cc3",
+      "basis": "Actual guard byte inverse matches tested single conditional; no repeat"
+    },
+    "validator_author_13_fixture_evidence": {
+      "path": "tmp/old800_reuse_FedAvg_guard_prepare_20261011/SYNTHETIC_CHECK.json",
+      "sha256": "4c30e3867b664eda08128aa3634e5492102470a10d39fe72adb10389f53bed16",
+      "independently_read_and_seal_verified": true,
+      "rerun": false
+    },
+    "resource_function_hash_convention": "AST function source plus terminal LF; initial segment-only local assertion rejected before any output write, corrected to original complete-line convention"
+  },
+  "limitations": [
+    "Source and synthetic metadata only; actual Linux imports, current preserved FedAvg files and fresh resource/duplicate gates still require runtime verification.",
+    "Historical PID117708 type/root cause UNKNOWN; later disappearance does not prove non-Python. Genuinely unreadable live Python still rejects.",
+    "FedAvg reuse is original Linux saved acceptance, not root/offserver adoption. No remaining797/800-complete/final-test result claim.",
+    "No SSH, F access, Torch, CNN, fit, scientific import, training, shared source edits, STATE or Git mutation by this review."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "parent": {
+    "path": "tmp/baseline_old800_runtime_root_20261011_attempt003/worker.py",
+    "sha256": "cd15480764def5e85f88700f93212cd7f7adec87431d2e3ccad643670fe5e4ca"
+  },
+  "spans": [
+    {
+      "before": "\"\"\"SOURCE-ONLY single root-worker example. No queue, discovery or authorization.\n\nDo not call until root freezes the cohort, dependencies, guard and approval.\nImport is stdlib-only; main is deliberately not exercised in local source checks.\n\"\"\"\n",
+      "after": "\"\"\"Single FL100 saved-checkpoint CUDA worker; no training, test or retry.\"\"\"\n"
+    },
+    {
+      "before": "Original800 formal worker interrupted",
+      "after": "FL100 formal worker interrupted"
+    },
+    {
+      "before": "    # The sole original v2 import sets CUDA hidden and interop=1 itself.\n    # Restore the root-bound UUID only afterwards and before any CUDA initialization.\n    os.environ.update(OMP_NUM_THREADS='1', MKL_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1',\n                      NUMEXPR_NUM_THREADS='1', CUDA_VISIBLE_DEVICES='',\n                      CUBLAS_WORKSPACE_CONFIG=':4096:8')\n    sys.path.insert(0, str(Path(dependencies['v2']['path']).parent))\n    v2 = load('replay', dependencies['v2'])\n    need(not v2.torch.cuda.is_initialized() and v2.torch.get_num_interop_threads() == 1,\n         'Original single bootstrap required before CUDA initialization')\n    os.environ.update(CUDA_VISIBLE_DEVICES=approval['gpu_uuid'], OMP_NUM_THREADS='1',\n                      MKL_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', NUMEXPR_NUM_THREADS='1')\n    t = v2.torch\n    t.set_num_threads(1)\n    t.use_deterministic_algorithms(True)\n    t.backends.cudnn.deterministic = True\n    t.backends.cudnn.benchmark = False\n    t.backends.cudnn.allow_tf32 = False\n    t.backends.cuda.matmul.allow_tf32 = False\n    need(len(approval['allowed_cpus']) == 1, 'This example is one CPU/one sequential worker')\n    for tid in Path('/proc/self/task').iterdir():\n        os.sched_setaffinity(int(tid.name), approval['allowed_cpus'])\n    # v3 imports replay; v4 imports replay_v3. Both resolve these same instances.\n    v3 = load('replay_v3', dependencies['v3'])\n    v4 = load('uniform_original800_v4', dependencies['v4'])\n    need(v3.v2 is v2 and v4.v3 is v3 and v4.v2 is v2, 'Mixed original runtime instances')\n    adapter = load('uniform_original800_formal', approval['adapter'])\n    guard = load('uniform_original800_root_guard', approval['resource_gate_source'])\n    inputs = approval['original_inputs']\n    args = types.SimpleNamespace(\n        command='worker', repo=Path(inputs['repo']), inventory=Path(inputs['inventory']['path']),\n        storage_map=Path(inputs['storage_map']['path']), storage_map_sha256=inputs['storage_map']['sha256'],\n        restore_receipt=Path(inputs['restore_receipt']['path']), restore_receipt_sha256=inputs['restore_receipt']['sha256'],\n        restore_acceptance=Path(inputs['restore_acceptance']['path']), restore_acceptance_sha256=inputs['restore_acceptance']['sha256'])\n",
+      "after": "    need(approval['allowed_cpus']==[111] and set(os.sched_getaffinity(0))=={111},\n         'OS taskset CPU111 must precede all scientific imports')\n    for tid in Path('/proc/self/task').iterdir():\n        need(os.sched_getaffinity(int(tid.name))=={111},'Pre-import thread escaped CPU111')\n    os.environ.update(OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',\n                      NUMEXPR_NUM_THREADS='1',CUDA_VISIBLE_DEVICES=approval['gpu_uuid'],\n                      CUBLAS_WORKSPACE_CONFIG=':4096:8',PYTHONDONTWRITEBYTECODE='1')\n    sys.path.insert(0,approval['repo'])\n    # One direct bootstrap. FL bound_bridge constructs original function AST;\n    # importing replay.py here would reset its CPU8/CUDA-hidden globals.\n    import torch\n    import pandas\n    need(not torch.cuda.is_initialized(),'CUDA initialized before approved bootstrap')\n    torch.set_num_threads(1);torch.set_num_interop_threads(1)\n    torch.use_deterministic_algorithms(True)\n    torch.backends.cudnn.deterministic=True;torch.backends.cudnn.benchmark=False\n    torch.backends.cudnn.allow_tf32=False;torch.backends.cuda.matmul.allow_tf32=False\n    for tid in Path('/proc/self/task').iterdir():os.sched_setaffinity(int(tid.name),[111])\n    candidate=load('uniform_FL100_original_candidate',dependencies['candidate'])\n    adapter=load('uniform_FL100_formal',approval['adapter'])\n    guard=load('uniform_FL100_root_guard',approval['resource_gate_source'])\n    args=types.SimpleNamespace(repo=Path(approval['repo']),torch_module=torch,pandas_module=pandas)\n"
+    },
+    {
+      "before": "    bound = adapter.bind_old800(v4, args, approval['exact_cohort'],",
+      "after": "    bound = adapter.bind_fl(candidate, args, approval['exact_cohort'],"
+    }
+  ],
+  "raw_inverse_exact": true,
+  "source_sha256": "8013dc53f8f508ad58e534dfe9bfe6bf7b0adfe608526704d1562338f53cfae8"
+}

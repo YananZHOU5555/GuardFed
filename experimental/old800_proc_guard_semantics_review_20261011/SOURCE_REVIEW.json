@@ -1,0 +1,406 @@
+{
+  "status": "PASS_SOURCE_SEMANTICS_MINIMAL_CONDITIONAL_CWD_CHANGE_NOT_EXECUTED",
+  "source": {
+    "path": "tmp/baseline_old800_runtime_root_20261011_attempt002/guard.py",
+    "sha256": "1309c8697c43593e5ca1bd5ab015a1f96ac409d6b0b219d6fbddb4a2c572c5f2"
+  },
+  "proposed_single_replacement": {
+    "old": "process_cwd = str((p / 'cwd').resolve())",
+    "new": "process_cwd = str((p / 'cwd').resolve()) if is_python else ''",
+    "line": 35
+  },
+  "proposed_source_sha256": "59e31c079304dc36642b116541f7224d14fd1800b912616ebb5ddec4442d149d",
+  "raw_inverse_exact": true,
+  "evidence": [
+    {
+      "path": "tmp/baseline_old800_runtime_root_20261011_attempt002/OBSERVATION_20261011T072309Z.json",
+      "sha256": "9aba4bdfb0bcd36fa18e86390a9bc39054147f7222c3fd107e26372f46565373"
+    },
+    {
+      "path": "tmp/baseline_old800_runtime_root_20261011_attempt002/PROC_DIAGNOSIS_20261011T072443Z.json",
+      "sha256": "bc83e7b63474e3fe70193b93e3bcc5d121324ed8739aa832dd0baf0890fcfee1"
+    }
+  ],
+  "interpretation": {
+    "project_predicate": "is_python AND (cwd in project OR argv names project); only Python needs cwd to decide project membership",
+    "Python_classifier_unchanged": "Path(argv[0]).name.startswith('python'); no new interpreter discovery claim",
+    "all_process_thread_affinity_loop": "Unchanged and still runs for non-Python rows with readable cmdline; second-thread ownership conflict rejects",
+    "unknown_live_process": "Unreadable stat/cmdline/task or Python cwd remains failclosed unless fresh stat proves gone/Z/X",
+    "budget": "nominal project threads, project reserved union, self+1 finite cgroup, CPU109, RAM, GPU UUID/headroom/recovery and protected services unchanged",
+    "historical_pid117708_type": "UNKNOWN; later disappearance does not establish it was non-Python or prove root cause",
+    "observed_failure_boundary": "GPU body resource_gate(before), before extract_and_predict; no FedAA receipt. Model loading/root reconstruction may already have happened.",
+    "FedAvg": "One original Linux saved acceptance diff0 remains valid; observer says root/offserver not yet adopted"
+  },
+  "fixtures": [
+    {
+      "name": "readable_nonPython",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "unreadable_cwd_nonPython",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "readable_project_Python",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "unreadable_cwd_live_Python",
+      "expected": "PermissionError",
+      "result": "PermissionError",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ]
+      ]
+    },
+    {
+      "name": "unreadable_cwd_explicit_project_Python",
+      "expected": "PermissionError",
+      "result": "PermissionError",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ]
+      ]
+    },
+    {
+      "name": "unreadable_unknown_cmdline",
+      "expected": "PermissionError",
+      "result": "PermissionError",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ]
+      ]
+    },
+    {
+      "name": "nonPython_second_thread_CPU109",
+      "expected": "ValueError",
+      "result": "ValueError",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "Python_second_thread_CPU109",
+      "expected": "ValueError",
+      "result": "ValueError",
+      "original_result": "ValueError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "nonPython_unreadable_task",
+      "expected": "PermissionError",
+      "result": "PermissionError",
+      "original_result": "PermissionError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ]
+      ]
+    },
+    {
+      "name": "outside_project_Python",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "project_nominal_budget_exceeded",
+      "expected": "ValueError",
+      "result": "ValueError",
+      "original_result": "ValueError",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ],
+        [
+          "cwd",
+          111
+        ],
+        [
+          "affinity",
+          111
+        ],
+        [
+          "affinity",
+          112
+        ]
+      ]
+    },
+    {
+      "name": "zombie_skip_unchanged",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ]
+      ]
+    },
+    {
+      "name": "dead_skip_unchanged",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ]
+      ]
+    },
+    {
+      "name": "vanished_skip_unchanged",
+      "expected": "PASS",
+      "result": "PASS",
+      "original_result": "PASS",
+      "synthetic_calls": [
+        [
+          "affinity",
+          0
+        ],
+        [
+          "affinity",
+          99000
+        ],
+        [
+          "affinity",
+          99001
+        ]
+      ]
+    }
+  ],
+  "blocking_findings": [],
+  "limits": [
+    "Synthetic OS/metadata fixtures only; no live /proc/SSH/F/GPU or scientific execution.",
+    "This conditional cannot resolve a genuinely unreadable live Python cwd; such a case must still stop.",
+    "Do not alter healthy500 queue; any attempt003 must preserve failures, use new authorization/namespace and reuse valid FedAvg1 without another CNN."
+  ],
+  "changed_shared_source": false,
+  "Git": false,
+  "STATE_modified": false,
+  "runtime_executed": false
+}

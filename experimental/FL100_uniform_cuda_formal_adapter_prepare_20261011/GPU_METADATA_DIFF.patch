@@ -1,0 +1,38 @@
+--- actual500/gpu_body.py
++++ FL100/gpu_body.py
+@@ -1,12 +1,12 @@
+ def replay_one(core, original, cnn, evaluator, record, repo, ids, y, s, output, wall_limit):
+     started, usage_start = time.monotonic(), resource.getrusage(resource.RUSAGE_SELF)
+     signal.alarm(wall_limit)
+-    result = validate_original(original, record, repo)
++    result = validate_external(record)
+     cfg = core.ExperimentConfig(**record['config'])  # original config bytes remain unchanged, including device string
+     core.set_seed(cfg.seed, deterministic_image=True)
+     root_ids, root_y, root_sensitive, root_receipt = rebuild_root(core, cfg, record, ids, y, s)
+     model = cnn.CelebACNN(seed=cfg.seed).to('cuda:0')
+-    state = torch.load(inside(repo, record['checkpoint']['member']), map_location='cpu', weights_only=True)
++    state = torch.load(runtime_checkpoint(record), map_location='cpu', weights_only=True)
+     require(state and all(isinstance(v, torch.Tensor) and torch.isfinite(v).all().item() for v in state.values()), 'Invalid/nonfinite checkpoint tensors')
+     model.load_state_dict(state, strict=True)
+     model.eval()
+@@ -33,9 +33,9 @@
+                         valid_image_ids=ids[162770:182637], root_margins=root_margins, valid_margins=valid_margins,
+                         **{'prediction_' + k: v for k, v in predictions.items()})
+     receipt = {
+-        'scope': 'FORMAL_MECHANISM_CUDA_VERSION1_PER_RECORD', 'status': 'NATIVE_VALID_REPLAY_PASS' if comparison['accepted'] else 'NATIVE_VALID_REPLAY_MISMATCH',
++        'scope': 'FORMAL_FL100_CUDA_PER_RECORD_V1', 'status': 'NATIVE_VALID_REPLAY_PASS' if comparison['accepted'] else 'NATIVE_VALID_REPLAY_MISMATCH',
+         'id': record['id'], 'method': record['method'], 'distribution': record['distribution'], 'attack': record['attack'], 'seed': record['seed'],
+-        'model_inventory_record_sha256': canonical(record), 'checkpoint_sha256': record['checkpoint']['sha256'],
++        'external_identity_record_sha256': canonical(record), 'checkpoint_sha256': record['checkpoint']['sha256'],
+         'original_result_sha256': record['result']['sha256'], 'original_job_sha256': record['raw_job']['sha256'],
+         'config_canonical_sha256': record['config_canonical_sha256'], 'original_training_torch': record['training_torch'],
+         'runtime': {'python': sys.executable, 'torch': torch.__version__, 'device': 'cuda:0', 'original_config_device': cfg.device,
+@@ -50,7 +50,7 @@
+         'cpu_user_seconds': usage_end.ru_utime - usage_start.ru_utime, 'cpu_system_seconds': usage_end.ru_stime - usage_start.ru_stime,
+         'peak_rss_kib': usage_end.ru_maxrss, 'before_resources': before, 'after_resources': after,
+         'test_labels_accessed': False, 'test_inference_performed': False, 'final_dispatch_created': False,
+-        'claim_limit': 'New formally authorized per-record CUDA replay only; preserves old CPU failure; no cohort completion, training or test claim',
++        'claim_limit': 'New formal FL100 per-record CUDA replay; preserves legacy CPU evidence and Windows refit failure; no cohort completion, training or test claim',
+     }
+     receipt['effective_cpu_cores'] = (receipt['cpu_user_seconds'] + receipt['cpu_system_seconds']) / receipt['elapsed_seconds']
+     save(output / 'receipt.json', receipt)

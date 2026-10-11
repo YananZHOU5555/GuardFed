@@ -1,0 +1,76 @@
+{
+  "status": "PASS_FORMAL_API_SOURCE_REVIEW_RUNTIME_UNBOUND",
+  "blocking_api_findings": [],
+  "package_seal_sha256": "3a2d6300ff521ce92c75cc566045ba3d468bd4d426e5eb5ac8cac8dc42de1b31",
+  "adapter_sha256": "78e6b22d9ba672a8117d891073246fc7f23e356b00a18f3073c648077d490640",
+  "check": {
+    "path": "tmp\\baseline_old800_cuda_formal_independent_review_20261011\\INDEPENDENT_CHECK.json",
+    "sha256": "ef511e5b1c937e7f85e09a146f2873a9ae450ab796bdc172aba0a084c2bb6b1a"
+  },
+  "reviewed_utc": "2026-10-11T07:10:52.854405+00:00",
+  "checks": {
+    "members": 18,
+    "parent_Full_complete_inverse_spans": 23,
+    "original_GPU_raw_AST_exact": true,
+    "original_saved_science_raw_exact": true,
+    "actual_original800_pure_metadata_positive": 800,
+    "negative_metadata_cases": 12,
+    "v4_shared_EXTRA_preserved_by_private_function_globals": true,
+    "actual_path_SHA_original_layout_enforced": true,
+    "command_inspect_explicitly_rejected": true,
+    "original900_semantic_source_token_gate_preserved": true,
+    "FedAA_LASA_v4_normalized_views_mapped_functions_preserved": true,
+    "one_v2_v3_instance_guard": true,
+    "saved_context_complete": true,
+    "Full_FL_LoGo_rejected_from_old800": true
+  },
+  "worker_example_blockers": [
+    {
+      "id": "SIGNAL_HANDLERS",
+      "detail": "worker_call_example does not install SIGALRM/SIGTERM exception handlers. Original replay sets signal.alarm; direct use may kill the process without inner formal_failure receipt. Root caller must install reviewed handlers before replay."
+    },
+    {
+      "id": "THREAD_ENV_RESTORE",
+      "detail": "Original v2 import sets OMP_NUM_THREADS/MKL_NUM_THREADS=8. Example restores CUDA UUID and torch intra-op but not those environment variables; actual caller must reset OMP/MKL/OPENBLAS/NUMEXPR to1 after bootstrap."
+    }
+  ],
+  "caller_requirements": [
+    "OS taskset/low priority/idleIO must precede v2 import; internal affinity assignment occurs after transient8 import.",
+    "Root must actual-bind exact800scope, full runtime dependency/module paths, original inventory/storage/restore/semantic files and source seal, with fresh<=90sec matching scope/adapter/GPU/CPU.",
+    "Fresh guard must enforce actual CPU ownership/quota/all-thread affinity, actual GPU UUID/memory/recovery, RAM/disk/protected services/no duplicate and deadline.",
+    "Create fresh runs parent and reject existing output/failure; install signals; preserve native failures and partial receipts, never relabel diagnostics.",
+    "Runtime API only returns per-record replay and saved acceptance; offserver/root adoption and Full100 reuse need their actual independent evidence."
+  ],
+  "minimal_API": {
+    "bind": "bind_old800(v4, args, exactcohortpin, actualapprovalpin, resource_gate)",
+    "args_fields": [
+      "command (not inspect)",
+      "repo",
+      "inventory",
+      "storage_map",
+      "storage_map_sha256",
+      "restore_receipt",
+      "restore_receipt_sha256",
+      "restore_acceptance",
+      "restore_acceptance_sha256"
+    ],
+    "dependencies": [
+      "v2",
+      "v3",
+      "v4",
+      "evaluator",
+      "semantic_inspection"
+    ],
+    "returned_calls": [
+      "runtime[replay_one](wall_seconds=1800)",
+      "runtime[accept_saved_predictions]()"
+    ],
+    "private_semantic_binding": "Original v4 read_inputs/source_pins code objects receive private EXTRA with actual semantic receipt; shared v4.EXTRA remains untouched."
+  },
+  "limitations": [
+    "No bind_old800, replay, accept_saved_predictions, Torch/NumPy import, SSH/F or model/array access occurred.",
+    "Pure metadata fixtures and existing accepted records do not prove live current source tokens/resources or new CUDA acceptance.",
+    "This API review does not approve running the unmodified worker example; root caller review is separate."
+  ],
+  "preparation_note": "Initial local pure metadata extraction omitted SCOPE global and stopped with NameError; corrected by reading the actual AST literal. No source package or scientific data modified."
+}

@@ -1,0 +1,74 @@
+{
+  "parent": {
+    "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/audit_saved.py",
+    "sha256": "9a1f1724151dd26bb5d77989e2bb4281949bccad7f0053d046c640a50491c627"
+  },
+  "spans": [
+    {
+      "before": "HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1]",
+      "after": "HERE=Path(__file__).resolve().parent;ORIGINALS=HERE.parent;ROOT=HERE.parents[2]"
+    },
+    {
+      "before": "BASE='/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt002'",
+      "after": "PRODUCERS={'attempt002': '/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt002', 'attempt003': '/workspace/guardfed_checks/uniform_cuda_formal_original800_20261011_attempt003'}\nRECORD_PRODUCERS={'FedAvg_IID_Benign_seed91001': 'attempt002', 'FedAA-DDPG_policy0.001_keep16_local0.001_IID_Benign_seed91001': 'attempt003', 'LASA_s0.3_l2_lr0.001_IID_Benign_seed91001_screen': 'attempt003'}"
+    },
+    {
+      "before": "need(sha(HERE/name)==pins[name]['sha256'],'Original source changed')",
+      "after": "need(sha(ORIGINALS/name)==pins[name]['sha256'],'Original source changed')\n    need(sha(ORIGINALS/'FILES_SHA256.json')==pins['sealed_v1_source']['sha256'],'Sealed parent differs')\n    for rel,item in read(ORIGINALS/'FILES_SHA256.json')['files'].items():\n        need(sha(ORIGINALS/rel)==item['sha256'],'Sealed parent member differs')"
+    },
+    {
+      "before": "need(inp['root_authorized_audit'] is True and inp['exact_ids']==IDS,'Root audit binding absent or wrong fixed3')",
+      "after": "need(inp['root_authorized_audit'] is True and inp['exact_ids']==IDS and inp['record_producers']==RECORD_PRODUCERS and inp['producers']==PRODUCERS,'Root audit binding absent or wrong fixed3')"
+    },
+    {
+      "before": "allowed={'source/metadata.npz'}|{'base/runs/'+i+'/validation_predictions.npz' for i in IDS}",
+      "after": "allowed={'source/metadata.npz'}|{RECORD_PRODUCERS[i]+'/runs/'+i+'/validation_predictions.npz' for i in IDS}"
+    },
+    {
+      "before": "        def remote_pin(pin):\n            original=pin['path']\n            need(original.startswith(BASE+'/'),'Unexpected original800 runtime path')\n            q=member('base/'+original[len(BASE)+1:]);need(sha(q)==pin['sha256'],'Pinned formal member changed');return q\n        deployment=read(member('base/DEPLOYMENT_SEAL.json'))\n        need(sha(x/'base/DEPLOYMENT_SEAL.json')==inp['deployment_sha256'],'Wrong actual deployed source version')\n        for rel,v in deployment['files'].items():\n            if 'base/'+rel in members:need(sha(x/'base'/rel)==v['sha256'],'Deployed source/member differs')\n        for rel in ('guard.py','run_queue.py','worker.py','adapter/adapter.py','adapter/gpu_body.py','adapter/old800_saved_science.py.txt','adapter/SOURCE_PINS.json','adapter/FILES_SHA256.json'):\n            need(sha(member('base/'+rel))==deployment['files'][rel]['sha256'],'Required scientific source missing')\n        need(sha(member('base/adapter/FILES_SHA256.json'))==FORMAL_API_SEAL_SHA,'Wrong formal API seal')\n        for rel,v in read(x/'base/adapter/FILES_SHA256.json')['files'].items():\n            need(sha(member('base/adapter/'+rel))==v['sha256'],'Formal API source missing or changed')\n        selection=read(member('base/COHORT_SELECTION.json'));cohort_sha=selection['full_cohort']['sha256']\n        need(selection['scope']=='ORIGINAL800_FIXED3_SAVED_OUTPUT_SELECTION_V1' and selection['exact_ids']==IDS,'Wrong fixed selection')\n        need(selection['full_cohort']=={'path':BASE+'/EXACT800_INPUTS.json','sha256':inp['cohort_sha256']}\n             and selection['original_count']==800 and selection['Full_excluded_and_reused_separately'] is True\n             and selection['selection_basis']=='all_original900_records_except_GuardFed-AD2+'\n             and selection['outcome_independent'] is True,'Wrong original800 lineage')\n        need([r['id'] for r in selection['records']]==IDS and {r['method'] for r in selection['records']}=={'FedAvg','FedAA','LASA'},'Wrong three original records')\n        author=read(member('base/author.json'));need(sha(x/'base/author.json')==AUTHOR_SHA and author['approved']['uniform_CUDA_evaluation'] and author['approved']['corresponding_Full_included'] and not author['existing_diagnostic_retroactively_adopted'],'Author scope differs')\n        qauth=read(member('base/ROOT_QUEUE_AUTH.json'));complete=read(member('base/canary/COMPLETE.json'))\n        need(qauth['execution_authorized'] is True and qauth['canary_ids']==IDS\n             and qauth['exact_cohort']==selection['full_cohort']\n             and canonical(qauth['ordered_ids'])==selection['ordered_full_ids_sha256'],'Wrong actual authorized cohort')\n        need(sha(x/'base/canary/COMPLETE.json')==inp['canary_complete_sha256'] and complete['ids']==IDS\n             and complete['cohort']==selection['full_cohort'] and complete['server_saved_accepted'] is True\n             and complete['root_offserver_adopted'] is False,'All three original Linux saved whole checks required')\n        need(set(inp['accepted_sha256'])==set(IDS),'Exactly three actual ACCEPTED pins required')\n",
+      "after": "        def remote_pin(pin):\n            matches=[(name,base) for name,base in PRODUCERS.items() if pin['path'].startswith(base+'/')]\n            need(len(matches)==1,'Unexpected actual producer path')\n            name,base=matches[0];q=member(name+'/'+pin['path'][len(base)+1:])\n            need(sha(q)==pin['sha256'],'Pinned producer member changed');return q\n        selection=read(member('base/COHORT_SELECTION.json'));cohort_sha=selection['full_cohort_sha256']\n        need(selection['scope']=='ORIGINAL800_FIXED3_MIXED_PRODUCER_SELECTION_V2' and selection['exact_ids']==IDS\n             and selection['record_producers']==RECORD_PRODUCERS and selection['producers']==PRODUCERS,'Wrong fixed mixed producers')\n        need(cohort_sha==inp['cohort_sha256']=='d39e29333c40e8a5b63f1344487225abac4ba83216dc32e75f64badc87bc0b71'\n             and selection['original_count']==800 and selection['Full_excluded_and_reused_separately'] is True\n             and selection['selection_basis']=='all_original900_records_except_GuardFed-AD2+'\n             and selection['outcome_independent'] is True,'Wrong original800 lineage')\n        need([r['id'] for r in selection['records']]==IDS and {r['method'] for r in selection['records']}=={'FedAvg','FedAA','LASA'},'Wrong three original records')\n        deployments={};auths={}\n        for producer,base in PRODUCERS.items():\n            deployment=read(member(producer+'/DEPLOYMENT_SEAL.json'));deployments[producer]=deployment\n            need(sha(x/producer/'DEPLOYMENT_SEAL.json')==inp['deployment_sha256'][producer],'Wrong deployed producer source')\n            for rel,item in deployment['files'].items():\n                if producer+'/'+rel in members:need(sha(x/producer/rel)==item['sha256'],'Deployed producer source/member differs')\n            for rel in ('guard.py','run_queue.py','worker.py','adapter/adapter.py','adapter/gpu_body.py','adapter/old800_saved_science.py.txt','adapter/SOURCE_PINS.json','adapter/FILES_SHA256.json'):\n                need(sha(member(producer+'/'+rel))==deployment['files'][rel]['sha256'],'Required producer source missing')\n            need(sha(member(producer+'/adapter/FILES_SHA256.json'))==FORMAL_API_SEAL_SHA,'Wrong formal API seal')\n            for rel,item in read(x/producer/'adapter/FILES_SHA256.json')['files'].items():\n                need(sha(member(producer+'/adapter/'+rel))==item['sha256'],'Formal API source missing or changed')\n            author=read(member(producer+'/author.json'))\n            need(sha(x/producer/'author.json')==AUTHOR_SHA and author['approved']['uniform_CUDA_evaluation']\n                 and author['approved']['corresponding_Full_included'] and not author['existing_diagnostic_retroactively_adopted'],'Author scope differs')\n            qauth=read(member(producer+'/ROOT_QUEUE_AUTH.json'));auths[producer]=qauth\n            need(qauth['execution_authorized'] is True and qauth['exact_cohort']=={'path':base+'/EXACT800_INPUTS.json','sha256':cohort_sha}\n                 and canonical(qauth['ordered_ids'])==selection['ordered_full_ids_sha256']\n                 and {i for i in IDS if RECORD_PRODUCERS[i]==producer}<=set(qauth['canary_ids']),'Wrong actual authorized cohort/producer')\n        failure=remote_pin(inp['attempt002_failure']);failure_record=read(failure)\n        need(failure==member('attempt002/canary/QUEUE_FAILURE.json') and failure_record['id']==IDS[1]\n             and selection['attempt002_failure']==inp['attempt002_failure'] and selection['attempt003_failure_absent'] is True,'Prior PermissionError missing or attempt003 failed')\n        need(set(inp['accepted_sha256'])==set(IDS),'Exactly three actual original Linux ACCEPTED pins required')\n"
+    },
+    {
+      "before": "HERE/'original_evaluator.py.txt'",
+      "after": "ORIGINALS/'original_evaluator.py.txt'"
+    },
+    {
+      "before": "HERE/'original_replay.py.txt'",
+      "after": "ORIGINALS/'original_replay.py.txt'"
+    },
+    {
+      "before": "HERE/'original_fl_audit.py.txt'",
+      "after": "ORIGINALS/'original_fl_audit.py.txt'"
+    },
+    {
+      "before": "HERE/'original_full_saved_science.py.txt'",
+      "after": "ORIGINALS/'original_full_saved_science.py.txt'"
+    },
+    {
+      "before": "        from saved_fit_binding import saved_fits_for_original_predict",
+      "after": "        sys.path.insert(0,str(ORIGINALS))\n        from saved_fit_binding import saved_fits_for_original_predict"
+    },
+    {
+      "before": "            record=next(r for r in selection['records'] if r['id']==identity)\n            task='base/tasks/'+identity;run='base/runs/'+identity",
+      "after": "            record=next(r for r in selection['records'] if r['id']==identity)\n            producer=RECORD_PRODUCERS[identity];BASE=PRODUCERS[producer]\n            deployment=deployments[producer];qauth=auths[producer]\n            task=producer+'/tasks/'+identity;run=producer+'/runs/'+identity"
+    },
+    {
+      "before": "approval['exact_cohort']==selection['full_cohort']",
+      "after": "approval['exact_cohort']=={'path':BASE+'/EXACT800_INPUTS.json','sha256':cohort_sha}"
+    },
+    {
+      "before": "if originalpath.startswith(BASE+'/') and 'base/'+originalpath[len(BASE)+1:] in members:need(sha(x/'base'/originalpath[len(BASE)+1:])==meta['sha256'],'Whole proof/source member differs')",
+      "after": "if originalpath.startswith(BASE+'/') and producer+'/'+originalpath[len(BASE)+1:] in members:need(sha(x/producer/originalpath[len(BASE)+1:])==meta['sha256'],'Whole proof/source member differs')"
+    },
+    {
+      "before": "rows.append(dict(id=identity,receipt_sha256",
+      "after": "rows.append(dict(id=identity,producer=producer,receipt_sha256"
+    },
+    {
+      "before": "old_CPU_failure_preserved=True,metric_values_checked=27",
+      "after": "old_CPU_failure_preserved=True,attempt002_failure_sha256=inp['attempt002_failure']['sha256'],record_producers=RECORD_PRODUCERS,metric_values_checked=27"
+    }
+  ],
+  "full_raw_inverse_exact": true,
+  "derived_sha256": "d997367234aa2c57c076004930fc13d8cc986abe80f8c30d7e81d5d861194bfa"
+}

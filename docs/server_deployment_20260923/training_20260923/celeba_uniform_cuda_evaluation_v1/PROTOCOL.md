@@ -31,3 +31,15 @@
 服务器保存模型与原始结果，本机只按验收差集取最小预测/receipt/配置/日志证据，写入前核 `F:/YananResearchStorage/` 为 Yanan 2TB；不得回退内置盘存放批量数据。归档与每个成员均核 SHA，保存原失败和完整恢复链。
 
 论文表必须等相应场景 10 seed 完整验收再生成，使用均值 ± sample SD（ddof=1）；另列排除配置选择 seed91001 的 9 seed 和未参与早期搜索的 91005–91010 六 seed。跨场景先在 seed 内平均，再跨 seed 统计，不把场景充当独立 seed。披露 2 个 Full 的 cu130 历史训练身份，其余首阶段记录为 cu128；统一重评不证明两种训练环境数值等价。旧 CPU 表完整保留并明确标识，不能与新 CUDA 表拼成同一设备协议。
+
+## 2026-10-11 实际执行增量（07:55 UTC 截止）
+
+以下为实际执行后的追加记录，不追改上述首阶段冻结时间。首阶段后续于 Full/non-IID/Benign/91002 的后置资源检查再次发生 `/proc/117589/cwd` PermissionError。其 receipt 和 binding 已生成，但无最终 ACCEPTED，未作为已完成项复用。原首次10项和 resume1 新47项合计 **57项**；47是新增数，不能作为累计数。故障当时的进程类别与状态未能回溯证明，原因不称 zombie 或非Python。
+
+经独立审查，资源检查仅对明确非Python进程免读 cwd，所有PID/task的CPU affinity和名义预算仍核查；存活但不可读的Python及未知进程仍拒绝。科学worker原文、参数、容差、GPU0/CPU107及单线程未变。新 namespace `uniform_cuda_formal_20261011_resume2` 于07:50 UTC实际启动，逐项重核原57项来源、模型、数组、binding、SHA和stat后复用，只执行原顺序剩余443项。07:55实测累计服务器保存验收58/500，失败模型已在新目录通过、原生三指标最大差0；本地严格离机采用仍为首7项。旧失败证据与部分输出全部保留，无自动重试。
+
+另批原八方法800条库存已冻结，cohort SHA `d39e29333c40e8a5b63f1344487225abac4ba83216dc32e75f64badc87bc0b71`：FedAvg、FairFed、Median、FLTrust、FairGuard、FLTrust+FairGuard、FedAA、LASA各100条。Full不在此800内，不与首500重复计数。原788条cu128、12条cu130训练身份保留；本次评价统一设备不等于训练环境等价。原生实现和第70轮checkpoint不变。
+
+该800批的启动模块命名冲突与一次资源读取失败均保留在旧目录。第三目录 `uniform_cuda_formal_original800_20261011_attempt003` 复用第一次真正通过的FedAvg单例，仅新做固定FedAA/LASA两例。三例均通过原Linux完整保存验收（native三指标差0）、离机零拟合27指标/72计数/9预测规则核对及F盘85成员SHA备份，root记录 `tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json`。其余797项于07:46 UTC实际启动；07:54实测服务器累计23/800、无失败。本地严格采用3/800，不能把服务器进度直接等同论文验收。
+
+以上两批共冻结1300个互不重复的逻辑记录；本地严格CUDA采用共10（7+3），完整目标2500尚未齐备。FL100运行调用器和LoGo100冻结后处理缓存适配仍在源审查/输入准备阶段，未据方案称实际运行。LoGo需要完整、根采用的FedAvg CUDA100缓存后才可评价；原已冻结CPU netcal后处理状态保持不变，不通过新缓存重新择优或拟合。其余正在训练的方法和四控制需各自完成后增量接入，不启动未经冻结的finaltest。

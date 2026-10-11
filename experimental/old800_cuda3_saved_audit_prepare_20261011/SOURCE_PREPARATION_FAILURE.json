@@ -1,0 +1,14 @@
+{
+  "status": "STATIC_SOURCE_DERIVATION_FAILURE_PRESERVED",
+  "source_sha256": "e84a830fc723009fc0f2b5de701314a48c8231f3e08ac296c7726eb02c7a1c2a",
+  "command": [
+    "python",
+    "-B",
+    "tmp/old800_cuda3_saved_audit_prepare_20261011/prepare_transport.py"
+  ],
+  "actual_exit": 1,
+  "tool_chunk": "fbda9a",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\OneDrive\\文档\\GuardFed\\tmp\\old800_cuda3_saved_audit_prepare_20261011\\prepare_transport.py\", line 94, in <module>\n    assert recovered.count(s['after'])==s.get('count',1),s['after'][:80]\nAssertionError: OLD800_FIXED3_ATTEMPT1\n",
+  "impact": "Inverse replacement filename overlapped earlier replacement; no transport source/file/archive/F/SSH/science write or execution occurred.",
+  "resolution": "Keep old archive token until final name replacement so the inverse replacement counts are exact."
+}

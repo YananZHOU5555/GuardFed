@@ -1,0 +1,44 @@
+{
+  "original_GPU": {
+    "path": "tmp/mechanism_cuda_formal_adapter_prepared_20261011/gpu_body.py",
+    "sha256": "a00d8d74eeb5c75dfa7c3cc0300a067d89beaecb9939019f4f14c716d26ea8b9",
+    "bytes": 5127
+  },
+  "candidate_GPU_sha256": "980d3585c1d84768b5f22a812760c7d7ac6e382d1d47f74318114dd742a96ee5",
+  "raw_inverse_exact": true,
+  "replacements": [
+    [
+      "validate_original(original, record, repo)",
+      "validate_external(record)"
+    ],
+    [
+      "inside(repo, record['checkpoint']['member'])",
+      "runtime_checkpoint(record)"
+    ],
+    [
+      "'model_inventory_record_sha256'",
+      "'external_identity_record_sha256'"
+    ],
+    [
+      "FORMAL_MECHANISM_CUDA_VERSION1_PER_RECORD",
+      "FORMAL_FL100_CUDA_PER_RECORD_V1"
+    ],
+    [
+      "New formally authorized per-record CUDA replay only; preserves old CPU failure; no cohort completion, training or test claim",
+      "New formal FL100 per-record CUDA replay; preserves legacy CPU evidence and Windows refit failure; no cohort completion, training or test claim"
+    ]
+  ],
+  "unchanged": [
+    "CNN architecture/weights/config",
+    "GPU FP32 forward",
+    "root/valid image selection",
+    "fit_views/predict_views/metrics",
+    "native tolerance1e-12",
+    "original FL bound_bridge and seven proof registries",
+    "original Linux check_saved entire file"
+  ],
+  "context": "Same original Linux check_saved v2/mapping/full_hashes/mapped_functions/KINDS context; no old800 method or inventory assumptions.",
+  "identity_binding": "Same original_fl_identity candidate.bound_bridge(runtime=True) then bridge.identity_record; exact per-package source,manifest and canonical identity checked.",
+  "old_CPU_outputs_reused": false,
+  "science_executed": false
+}

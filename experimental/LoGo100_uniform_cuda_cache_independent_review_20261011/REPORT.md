@@ -1,0 +1,7 @@
+LoGo100 源基础可接纳，当前不能运行。独立核13成员、10来源pin、100个已采用post/job/checkpoint/mapping对象；4screen+96新记录、90旧mapping null及后续100真实mapping SHA均保持。四原函数只有checked_output的reuse列表取值换成私有已验CUDA cache；独立read_bytes按AST行列切原函数后，逆恢复物理raw字节、规范化文本与AST均完全一致，原1e-12和保存预测逐元素判定不变。
+
+该路径是“原post_state不变，输入新FedAvg CUDA margins”的冻结模型重评：CPU float32 sigmoid、netcal1.3.6、seed1719拟合历史与20虚拟cohort不变。不会重新fit，不将旧CPU LoGo值设为native0diff门；旧FedAvg valid_native_prediction与LoGo最终prediction仍分开。当前未见科学算法阻塞。
+
+真实执行仍缺FedAvg100 root/index及cache-verifier实际绑定、原post/source文件恢复、CPU资源与实际批准。cache_verifier新候选已出现，另行独审；不能据来源通过宣称100已闭合。LoGo原接受顺序可能不同于FedAvg库存顺序，callback须先核全部100再按显式ID join返回，不能按结果筛选。
+
+审阅记录层更正：首稿未经实际EOL核验而误写原桥CRLF，已保留首报告/封条。实际read_bytes证实原桥CRLF数0，四函数物理raw逆恢复也全部exact；候选与科学源均未改。作者若改为在新root scores重拟合postprocessor，应另立显式范围，本包不支持也未授权该路线。未读取F/模型/数组、未import科学模块、无SSH或科学执行。审阅者独立于LoGo作者，但曾编写old800 formal接口和FL100 caller，角色如实披露。

@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1791701405.005784,
+  "updated_unix": 1791705554.479797,
   "authorization": "Run supplementary experiments using actual5090AD2+; preserve all old results; no rerun of old main experiments.",
   "original_immutable_repo": "/workspace/GuardFed",
   "source_commits": {
@@ -187,10 +187,10 @@
   "formal_total_planned_new_runs": 1390,
   "active_services": [
     "guardfed_celeba_mechanism_formal",
-    "guardfed_celeba_flgmm_fullcoverage",
-    "guardfed_celeba_mechanism_remaining620_valid_v2a",
     "guardfed_celeba_hybrid_fullcoverage",
-    "guardfed_celeba_fednga_fullcoverage_v1"
+    "guardfed_celeba_fednga_fullcoverage_v1",
+    "guardfed_uniform_cuda500_resume2_valid",
+    "guardfed_uniform_cuda800_remaining_v3_valid"
   ],
   "continuation_evidence": "/workspace/GuardFed-next/deployment/continuation_evidence_20260923",
   "acs_acceptance": "/workspace/GuardFed-acs/deployment/acs_income_v1/acceptance.json",
@@ -2686,7 +2686,7 @@
     "current_runtime": "torch2.11.0+cu128 driver595.84",
     "preflight_queue_completed": 20,
     "scientific_results_completed": 400,
-    "queue_completed_observed": 416,
+    "queue_completed_observed": 427,
     "scientific_results_strictly_accepted": 400,
     "real_image_cu128_gates_accepted": 20,
     "cross_runtime_three_round_exact": 20,
@@ -5205,10 +5205,10 @@
       "final_test": false,
       "incorporated_into_full_rebuttal": true
     },
-    "queue_observation_utc": "2026-10-11T06:43:59.720224+00:00",
-    "queue_observation_path": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\server_reactivation_20261009\\ROOT_COMPACT_20261011T064401Z.json",
+    "queue_observation_utc": "2026-10-11T07:54:58.907976+00:00",
+    "queue_observation_path": "E:\\OneDrive\\文档\\GuardFed\\docs\\server_deployment_20260923\\training_20260923\\server_reactivation_20261009\\ROOT_COMPACT_20261011T075500Z.json",
     "queue_active_observed": 8,
-    "queue_pending_observed": 376,
+    "queue_pending_observed": 365,
     "queue_failures_observed": 0,
     "F_three_view_single_scene_table": {
       "status": "ROOT_F10_SINGLE_COMPLETE_SCENE_THREE_VIEW_TABLE_ADOPTED",
@@ -5437,7 +5437,7 @@
       "incorporated_into_full_rebuttal": true,
       "whole_rebuttal_complete": false
     },
-    "queue_observation_sha256": "97fcd632a29df8593a739a179113278df0282bb32ee39b0aee034d90fa6fa4f6",
+    "queue_observation_sha256": "2d130fd4e1e319147135cf7a1145dcd8e575202bdcce20fd8d78fd68dd52f38a",
     "latest_native380_accepted_delta": {
       "root": {
         "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/mechanism_science_backups_20261009/root_delta_20261011T024637Z/ROOT_DELTA_VERIFICATION.json",
@@ -5559,7 +5559,7 @@
     "sha256": "ca05374c46d041f59dd45dde9cdf19547d88a5a1f12d87d75d0ca80a05cef3aa",
     "verification_sha256": "21349fb769884f12e1c44fe1ca0262b2e5ae26543a9c2bdeb5b7b0e1b61fcc56"
   },
-  "local_work_verified_utc": "2026-10-11T06:50:05.004774+00:00",
+  "local_work_verified_utc": "2026-10-11T07:59:14.454238+00:00",
   "tabular_partition_audit_20261009": {
     "status": "PASS",
     "partitions": 60,
@@ -6417,29 +6417,13 @@
     "significance_claimed": false
   },
   "latest_publication_verification": {
-    "commit": "0a276220b447645020e8dca8ee092ce411367bb7",
+    "path": "docs/server_deployment_20260923/training_20260923/publication_closed_increment70_verified_20261011.json",
+    "sha256": "d9d28f34b443306f67f2828fd7c74b7dba44cd8422129181e8b4b5d17c6aeb4d",
+    "commit": "4fccc8b8d1d56492ac9cffd0cf27ca390e78bd20",
     "branch": "codex/revision-evidence-baselines-20260928",
-    "verified_utc": "2026-10-11T05:31:19.433057+00:00",
-    "committed_blobs_sha256_verified": 251,
-    "proof_path": "publication_closed_increment69_verified_20261011.json",
-    "proof_sha256": "4667bab2574b294c66cb48c537e77c5586d86f54934304134ec4d862fa7b47e6",
-    "acceptance_cutoff": {
-      "native": 400,
-      "three_view": 380,
-      "FLGMM_native_new": 96,
-      "FLGMM_screen_reuse_separate": 4,
-      "FLGMM_three_views": 90,
-      "native_methods": 11,
-      "native_evaluation_records": 1100,
-      "NGA96_completed_scientific_records": 1,
-      "Hybrid_native_new": 19,
-      "Hybrid_three_views": 20,
-      "gradient_search": 64,
-      "gradient14_gate_jobs": 14,
-      "reviewer_comments": 24
-    },
-    "fixed_historical_cutoff": true,
-    "later_NGA9_GPUdiagnostic_FLactual_not_in_commit": true
+    "verified_utc": "2026-10-11T07:02:30.522508+00:00",
+    "committed_blobs_sha256_verified": 197,
+    "subsequent_runtime_changes_published": false
   },
   "hybrid_cuda_gate_20261009": {
     "status": "FOUR_CUDA_CANARIES_STRICT_ACCEPTED_OFFSERVER",
@@ -8292,11 +8276,11 @@
       "final_test": false
     },
     "latest_measured_observation": {
-      "utc": "2026-10-11T06:43:59.720224+00:00",
-      "terminal_observed": 32,
+      "utc": "2026-10-11T07:54:58.907976+00:00",
+      "terminal_observed": 34,
       "source": {
-        "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T064401Z.json",
-        "sha256": "97fcd632a29df8593a739a179113278df0282bb32ee39b0aee034d90fa6fa4f6"
+        "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T075500Z.json",
+        "sha256": "2d130fd4e1e319147135cf7a1145dcd8e575202bdcce20fd8d78fd68dd52f38a"
       },
       "acceptance_unchanged_by_observation": true
     },
@@ -8835,9 +8819,9 @@
     }
   },
   "current_entry_writer": {
-    "path": "tmp/refresh_rebuttal_FL100_aliases_root_20261011.py",
-    "sha256": "0bfb87a26814f5f93a69caf3f3847ec193c2343c4569f45fad18bfb4b4520114",
-    "utc": "2026-10-11T06:50:05.004774+00:00"
+    "path": "tmp/record_CUDA10_two_queues_Git70_root_20261011.py",
+    "sha256": "5d286036074ad21717e0100c9081f9946056839556aa50c9fc22c989a0ba1713",
+    "utc": "2026-10-11T07:59:14.454238+00:00"
   },
   "author_baseline_adaptation_decisions_20261011": {
     "Huber": "Identity projection; empirical CNN adaptation, no inherited constrained-domain theoretical guarantee.",
@@ -9635,15 +9619,15 @@
     "automatic_retry": false,
     "final_test": false,
     "latest_readonly_observation": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T064401Z.json",
-      "sha256": "97fcd632a29df8593a739a179113278df0282bb32ee39b0aee034d90fa6fa4f6"
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T075500Z.json",
+      "sha256": "2d130fd4e1e319147135cf7a1145dcd8e575202bdcce20fd8d78fd68dd52f38a"
     },
-    "terminal_result_directories_observed": 15,
+    "terminal_result_directories_observed": 20,
     "latest_observed_rounds": [
       {
-        "id": "FedNGA_eta0.001_IID_F Flip_seed91007_coverage",
-        "round": 35,
-        "updated_unix": 1791701029.495887
+        "id": "FedNGA_eta0.001_IID_FedSA_seed91002_coverage",
+        "round": 32,
+        "updated_unix": 1791705295.1999745
       }
     ],
     "latest_root_acceptance": {
@@ -9908,26 +9892,26 @@
     "Git68_contains_this_update": false
   },
   "latest_NGA96_readonly_observation": {
-    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T064401Z.json",
-    "sha256": "97fcd632a29df8593a739a179113278df0282bb32ee39b0aee034d90fa6fa4f6",
-    "utc": "2026-10-11T06:43:59.720224+00:00",
-    "terminal_observed": 15,
+    "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T075500Z.json",
+    "sha256": "2d130fd4e1e319147135cf7a1145dcd8e575202bdcce20fd8d78fd68dd52f38a",
+    "utc": "2026-10-11T07:54:58.907976+00:00",
+    "terminal_observed": 20,
     "accepted_new": 9,
     "active": [
       {
-        "id": "FedNGA_eta0.001_IID_F Flip_seed91007_coverage",
-        "round": 35,
-        "updated_unix": 1791701029.495887
+        "id": "FedNGA_eta0.001_IID_FedSA_seed91002_coverage",
+        "round": 32,
+        "updated_unix": 1791705295.1999745
       }
     ],
     "Huber_started": false
   },
   "author_review_reading_entry_20261011": {
-    "utc": "2026-10-11T06:46:49.839641+00:00",
+    "utc": "2026-10-11T07:59:14.454238+00:00",
     "status": "REVIEWED_READING_ARTIFACTS_NOT_FINAL_SUBMISSION",
     "reader": {
       "path": "docs/server_deployment_20260923/revision_20260923/AUTHOR_REVIEW_START_HERE.md",
-      "sha256": "66d1af987db5a20b9c11da7ee93ab378defaeaea343bc1e7c3f8809f04b0ffcf"
+      "sha256": "4e8f2175079c638bff2db17f1ac187095fd26d8501561b370f1bd9b50fd901cd"
     },
     "appendix_review": {
       "path": "docs/server_deployment_20260923/revision_20260923/method_information_access_paper_appendix_20261011/ROOT_EDITORIAL_REVIEW.json",
@@ -9962,7 +9946,8 @@
       "sha256": "0f6b6342cd01eba3e7495040433e491f920078b41f650bb9d4e0ddd9a7440fff"
     },
     "uniform_CUDA_author_decision_recorded": true,
-    "uniform_CUDA_first7_adopted": true
+    "uniform_CUDA_first7_adopted": true,
+    "uniform_CUDA_root_adopted": 10
   },
   "prior_working_F80_argument_clarified_fixed_cutoff": {
     "status": "ROOT_EDITORIAL_ADOPTED_COMPLETE24_F80_FL90_HYBRID20_CLEARER_CONDITIONAL_ARGUMENTS",
@@ -10188,41 +10173,41 @@
     "Windows_whole_refit_claim": false
   },
   "latest_current_resource_observation": {
-    "utc": "2026-10-11T06:43:59.720224+00:00",
+    "utc": "2026-10-11T07:54:58.907976+00:00",
     "source_ref": {
-      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T064401Z.json",
-      "sha256": "97fcd632a29df8593a739a179113278df0282bb32ee39b0aee034d90fa6fa4f6"
+      "path": "docs/server_deployment_20260923/training_20260923/server_reactivation_20261009/ROOT_COMPACT_20261011T075500Z.json",
+      "sha256": "2d130fd4e1e319147135cf7a1145dcd8e575202bdcce20fd8d78fd68dd52f38a"
     },
-    "main_terminal": 416,
+    "main_terminal": 427,
     "main_active": 8,
-    "main_pending": 376,
+    "main_pending": 365,
     "main_failed": 0,
-    "NGA_terminal_observed": 15,
+    "NGA_terminal_observed": 20,
     "NGA_new_accepted": 9,
-    "Hybrid_terminal_observed": 32,
+    "Hybrid_terminal_observed": 34,
     "Hybrid_native_new_accepted": 29,
     "GPU_utilization": [
-      100,
+      99,
       100
     ],
     "GPU_C": [
-      67,
+      65,
       62
     ],
     "GPU_RecoveryAction": [
       "None",
       "None"
     ],
-    "memory_current_B": 70203088896,
+    "memory_current_B": 70145347584,
     "memory_max_B": 519171997696,
-    "disk_free_B": 1059255627776,
+    "disk_free_B": 1059151810560,
     "cgroup_CPU_quota_cores": 122.87999,
-    "cgroup_CPU_measured_cores": 11.02545721288883,
+    "cgroup_CPU_measured_cores": 12.021205491534442,
     "cgroup_OOM": 0,
     "not_new_scientific_acceptance": true
   },
   "uniform_CUDA_evaluation_v1": {
-    "status": "FIRST7_STRICT_OFFSERVER_ROOT_ADOPTED_RESUME490_ACTUAL_PROGRESS",
+    "status": "ROOT10_ADOPTED_TWO_FROZEN_QUEUES_RUNNING",
     "author_decision": {
       "path": "docs/server_deployment_20260923/training_20260923/celeba_uniform_cuda_evaluation_v1/AUTHOR_DECISION_20261011.json",
       "sha256": "a1f1be152a0aa5668b91d73d7297ea3e9275efaac8d82c3b22cfbe97b7b08fce"
@@ -10236,7 +10221,7 @@
     "tolerance_changed": false,
     "old_CPU_tables_preserved": true,
     "diagnostic_retroactively_adopted": false,
-    "uniform_CUDA_scientific_accepted": 7,
+    "uniform_CUDA_scientific_accepted": 10,
     "ready_native_inputs": 1500,
     "ready_inputs_counts": {
       "native_methods": 1100,
@@ -10247,7 +10232,7 @@
     "complete_target_inventory_frozen": false,
     "protocol": {
       "path": "docs/server_deployment_20260923/training_20260923/celeba_uniform_cuda_evaluation_v1/PROTOCOL.md",
-      "sha256": "6f0502f95c5179bff11771ee3859d44314f879b7e4dd5ed0d83634bc45a02827"
+      "sha256": "e57dcd2850c0ed3356dabd76e1f3b35906faf0305a319e43426a9c440627c5ca"
     },
     "first7_root": {
       "path": "tmp/uniform_cuda7_saved_audit_prepare_20261011/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json",
@@ -10255,31 +10240,54 @@
     },
     "first7_native_max_difference": 0,
     "actual_phase_frozen": 500,
-    "current_remote_saved_accepted": 11,
+    "current_remote_saved_accepted": 58,
     "current_remote_new_after_resume": 1,
-    "current_remote_active": "GuardFed-AD2+_IID_Benign_seed91006",
-    "current_remote_pending": 488,
+    "current_remote_active": null,
+    "current_remote_pending": 442,
     "current_remote_failed": 0,
     "current_observation": {
-      "path": "tmp/uniform_cuda500_root_dispatch_20261011/RESUME1_OBSERVATION_20261011T064429Z.json",
-      "sha256": "cc9d592785478dd61074d0d926f08e58353e8b08b193d7c2913cbae1a7042204"
+      "path": "tmp/uniform_cuda500_root_dispatch_20261011/RESUME2_OBSERVATION_20261011T075524Z.json",
+      "sha256": "9ac19c18782c77a7c6a07dbc5b964519f58812030665f46e0893b538e25dca65"
     },
-    "current_service": "guardfed_uniform_cuda500_resume1_valid",
-    "current_base": "/workspace/guardfed_checks/uniform_cuda_formal_20261011_resume1",
-    "current_mechanism_base": "/workspace/guardfed_checks/mechanism_cuda_formal_20261011_resume1",
+    "current_service": "guardfed_uniform_cuda500_resume2_valid",
+    "current_base": "/workspace/guardfed_checks/uniform_cuda_formal_20261011_resume2",
+    "current_mechanism_base": "/workspace/guardfed_checks/mechanism_cuda_formal_20261011_resume2",
     "resume_source_review": {
-      "path": "tmp/uniform_cuda500_proc_race_recovery_prepare_20261011/REVIEW_SUCCESSOR.json",
-      "sha256": "b6e2cd119597e0846cc8d20dcd16e4415e6765d3f582cb231e6109e08a5d7f98"
+      "path": "tmp/uniform_cuda500_resume2_independent_review_20261011/SOURCE_REVIEW.json",
+      "sha256": "88b22ac6eb63ac1171d4c2b04f929276c41db8f47b7c19cb867a8e652502f6d3"
     },
     "actual_resume_command": {
-      "path": "tmp/uniform_cuda500_root_dispatch_20261011/RESUME1_INSTALL_COMMAND.json",
-      "sha256": "4cefe20e2013ab264443ea4724bb4d26092f23aa403fd1c88d48c50fa3b9a356"
+      "path": "tmp/uniform_cuda500_root_dispatch_20261011/RESUME2_INSTALL_COMMAND.json",
+      "sha256": "aa9926620fe224d882200e8a3787aa588e057e6ba83756a6919c34b65b389822"
     },
     "prior10_original_CUDA_reused": true,
     "CPU_outputs_reused_as_CUDA": false,
     "one_failed_record_replay_completed": true,
     "whole500_complete": false,
-    "whole_comparison_complete": false
+    "whole_comparison_complete": false,
+    "actual_all_frozen": 1300,
+    "prior_CUDA_reused": 57,
+    "original10_plus_resume1_new47": true,
+    "root_adopted_first500": 7,
+    "root_adopted_old800": 3,
+    "old800_root": {
+      "path": "tmp/old800_cuda3_saved_audit_prepare_20261011/mixed_producer_v2/root_adoption/ROOT_SCIENTIFIC_ADOPTION.json",
+      "sha256": "f700def3a48621f132ee3ac6ed7257f52ba65fc9598a4202e18174dbba6f39c5"
+    },
+    "old800_observation": {
+      "path": "tmp/baseline_old800_runtime_root_20261011_attempt003/OBSERVATION_20261011T075457Z.json",
+      "sha256": "f95e546eb48ff606f41a4ef7bcac23cb9d9d23af71e6f0389182262409378e12"
+    },
+    "old800_remote_saved_accepted": 23,
+    "old800_remaining_queue_new_accepted": 20,
+    "old800_current_pending": 777,
+    "old800_service": "guardfed_uniform_cuda800_remaining_v3_valid",
+    "old800_actual_remaining_command": {
+      "path": "tmp/baseline_old800_runtime_root_20261011_attempt003/REMAINING797_START_COMMAND.json",
+      "sha256": "c05606f3afc2172d1f529c68a1c9b501b7a7801f8b63e0e331eaca0cf13073e4"
+    },
+    "FL100_runtime_started": false,
+    "LoGo100_runtime_started": false
   },
   "latest_complete24_rebuttal_FL100": {
     "draft": {
@@ -10316,5 +10324,22 @@
     "new_namespace": true,
     "recovered_full_native_difference": 0,
     "automatic_retry": false
+  },
+  "uniform_CUDA_resume1_interruption_20261011": {
+    "status": "PRESERVED_TOTAL57_EXPLICIT_RESUME2_MISSING_FULL_PASSED",
+    "diagnosis": {
+      "path": "tmp/uniform_cuda500_root_dispatch_20261011/RESUME1_INTERRUPTION_DIAGNOSIS_20261011T073527Z.json",
+      "sha256": "d3eb976c2dcf74b7aa69d7025b490a7c9ee80f9d37737b0b6038689432555b46"
+    },
+    "total_accepted_before_interruption": 57,
+    "new_accepted_before_interruption": 47,
+    "prior_original_accepted": 10,
+    "failed_id": "GuardFed-AD2+_lr0.0005_drop0.005_Benign_seed91002",
+    "original_partial_adopted": false,
+    "historical_process_type_and_state_proven": false,
+    "scientific_worker_unchanged": true,
+    "new_namespace": true,
+    "automatic_retry": false,
+    "recovered_native_difference": 0
   }
 }
