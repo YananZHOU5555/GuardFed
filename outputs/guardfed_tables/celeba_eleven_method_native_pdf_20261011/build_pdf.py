@@ -5,7 +5,6 @@ from decimal import Decimal
 import hashlib
 import json
 import re
-import shutil
 
 import fitz
 from reportlab.lib import colors
@@ -17,6 +16,8 @@ from reportlab.platypus import Paragraph, Table, TableStyle
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SOURCE = ROOT / 'outputs/guardfed_tables/celeba_eleven_method_native_20261011'
+ARCHIVE = SOURCE / 'ALL_PANELS_ARCHIVE.md'
+ARCHIVE_SHA = '3d0c562713997b1e03799de81a221e77660de6551c6b2bbc1c21539ae1cf2c25'
 TABLE_SHA = 'c40f7909e79a16fcd18b9fb1980decfe541d33195b24caac335555844dbeea76'
 LEGACY_LEGEND = ('**Best** and <u>second-best</u> means are marked separately within each distribution, seed panel, '
           'scenario and metric (and within each aggregate scope). ACC: higher is better; AEOD/ASPD: lower is better. '
@@ -119,14 +120,16 @@ def highlight_table(original):
 def parse_panels(text):
     panels = {}
     for title, body in re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', text, re.M | re.S):
+        title = title.strip()
         rows = [line.split('|')[1:-1] for line in body.splitlines()
                 if line.startswith('| ') and '±' in line]
         rows = [[cell.strip() for cell in row] for row in rows]
-        # The source also retains a separate seed-first aggregate table. This PDF displays the six scene panels only.
+        # Parse the complete archive; the main display uses only the two ten-seed panels.
         rows = [row for row in rows if row[1] in ('ACC (%) ↑', 'AEOD ↓', 'ASPD ↓')]
         assert len(rows) == 33 and all(len(row) == 7 for row in rows), title
         methods = list(dict.fromkeys(row[0] for row in rows))
         assert len(methods) == 11
+        methods = [method for method in methods if method != 'GuardFed-AD2+'] + ['GuardFed-AD2+']
         values = {}
         for method in methods:
             group = [row for row in rows if row[0] == method]
@@ -139,9 +142,43 @@ def parse_panels(text):
     return panels
 
 
+def main_table_markdown(panels):
+    lines = ['# CelebA: ten-seed IID and non-IID main tables', '',
+             'Eleven methods; fixed shared seeds 91001-91010; five scenarios per distribution. '
+             'Mean ± sample SD (ddof=1). ACC is percent; AEOD/ASPD are gaps in [0,1]. '
+             'AEOD is the absolute TPR gap. GuardFed-AD2+ is placed last in both tables.', '',
+             '**Best** and <u>second-best</u> eligible displayed means are marked within each scenario and metric; '
+             'displayed ties share a rank. ACC: higher is better; AEOD/ASPD: lower is better. '
+             '† retains an AEOD/ASPD value whose corresponding full-precision mean ACC is <=80%; '
+             'only mean ACC >80% qualifies for fairness ranking. ACC ranking is unrestricted. '
+             'All ten seeds, means and SDs are retained. This display convention was author-approved on '
+             '2026-10-12 after viewing the results; it is not preregistered or a significance test.', '',
+             'Native validation predictions retain each method\'s postprocessing and documented adaptations. '
+             'Training/replay runtimes are historically mixed; this is not a uniformly-CUDA or final-test table. '
+             'Seed 91001 participated in validation selection, and historical validation/test metadata were exposed. '
+             'Eleven methods do not complete the 17-method target. Full provenance and the fixed 9/6-seed '
+             'sensitivity/aggregate views remain in ALL_PANELS_ARCHIVE.md and the unchanged scientific JSON files.', '']
+    for number, distribution in enumerate(('IID', 'non-IID'), 1):
+        methods, values = panels[distribution + ' / ten']
+        alpha = 5000 if distribution == 'IID' else 5
+        lines += [f'## Table {number}. CelebA {distribution} — 10 seeds (alpha={alpha})', '',
+                  '| Method | Metric | Benign | F Flip | FedSA | S-DFA | Sp-DFA |',
+                  '|---|---|---:|---:|---:|---:|---:|']
+        for method in methods:
+            for metric, label in enumerate(('ACC (%) ↑', 'AEOD ↓', 'ASPD ↓')):
+                lines.append('| ' + ' | '.join([method, label] + [values[method][attack * 3 + metric]
+                                                               for attack in range(5)]) + ' |')
+        lines.append('')
+    return ('\r\n'.join(lines) + '\r\n').encode('utf-8')
+
+
 def main():
     assert sha(SOURCE / 'ROOT_REVIEW.json') == '69e9c479c061a1aa428157b6f1d121aa5dd72a48e0e6d1d16dd21ac296391d02'
-    original = unhighlight_table((SOURCE / 'TABLES.md').read_bytes())
+    if not ARCHIVE.exists():
+        assert sha(SOURCE / 'TABLES.md') == ARCHIVE_SHA
+        ARCHIVE.write_bytes((SOURCE / 'TABLES.md').read_bytes())
+    assert sha(ARCHIVE) == ARCHIVE_SHA
+    original = unhighlight_table(ARCHIVE.read_bytes())
     assert hashlib.sha256(original).hexdigest() == TABLE_SHA
     proof = json.loads((SOURCE / 'ROOT_REVIEW.json').read_bytes())
     assert proof['status'] == 'ROOT_ELEVEN_METHOD_NATIVE1100_DESCRIPTIVE_VALIDATION_TABLE_ADOPTED'
@@ -149,16 +186,15 @@ def main():
     before = {name: sha(SOURCE / name) for name in proof['files_sha256'] if name != 'TABLES.md'}
     assert before == {name: digest for name, digest in proof['files_sha256'].items() if name != 'TABLES.md'}
     formatted, highlight_checks = highlight_table(original)
-    (SOURCE / 'TABLES.md').write_bytes(formatted)
-    panels = parse_panels((SOURCE / 'TABLES.md').read_text(encoding='utf-8'))
+    assert formatted == ARCHIVE.read_bytes()
+    panels = parse_panels(formatted.decode('utf-8'))
+    (SOURCE / 'TABLES.md').write_bytes(main_table_markdown(panels))
     out = HERE / 'celeba_eleven_method_native.pdf'
     previous = HERE / 'previous_unhighlighted.pdf'
-    if out.exists() and not previous.exists():
-        shutil.copy2(out, previous)
     width, height = landscape(A3)
     margin = 34
     c = canvas.Canvas(str(out), pagesize=(width, height), pageCompression=1)
-    c.setTitle('CelebA: eleven-method native validation tables')
+    c.setTitle('CelebA: ten-seed IID and non-IID main tables')
     c.setAuthor('GuardFed revision evidence')
     page_checks = []
     all_cells = []
@@ -166,9 +202,9 @@ def main():
                                leading=11, textColor=colors.HexColor('#333333'))
     cell_style = ParagraphStyle('numeric', fontName='Times-Roman', fontSize=8.2,
                                leading=9.5, alignment=1)
-    for page, (panel, seed_label) in enumerate(PANELS, 1):
+    for page, (panel, seed_label) in enumerate(PANELS[:1], 1):
         c.setFont('Times-Bold', 17)
-        c.drawString(margin, height - 44, 'CelebA - eleven-method native validation comparison')
+        c.drawString(margin, height - 44, 'CelebA - ten-seed IID and non-IID main tables')
         c.setFont('Times-Roman', 11)
         section = 'Main table' if panel == 'ten' else 'Appendix sensitivity analysis'
         c.drawString(margin, height - 64, section + ' | ' + seed_label + ' | mean +/- sample SD (ddof=1)')
@@ -177,10 +213,10 @@ def main():
                      'Best: bold. Second-best: underlined. Fairness ranking requires mean ACC >80%; dagger marks ineligible values. Displayed ties share rank.')
         y = height - 107
         page_cells = []
-        for distribution in ('IID', 'non-IID'):
+        for number, distribution in enumerate(('IID', 'non-IID'), 1):
             methods, values = panels[distribution + ' / ' + panel]
             c.setFont('Times-Bold', 12)
-            c.drawString(margin, y, distribution + (' (alpha=5000)' if distribution == 'IID' else ' (alpha=5)'))
+            c.drawString(margin, y, f'Table {number}. ' + distribution + (' (alpha=5000)' if distribution == 'IID' else ' (alpha=5)'))
             y -= 10
             top = ['Method'] + [attack if metric == 0 else '' for attack in ATTACKS for metric in range(3)]
             sub = [''] + ['ACC (%)', 'AEOD', 'ASPD'] * 5
@@ -205,7 +241,8 @@ def main():
                     styles.append(('LINEBEFORE', (left, 0), (left, -1), .3, colors.HexColor('#aaaaaa')))
             guard_row = methods.index('GuardFed-AD2+') + 2
             styles += [('FONTNAME', (0, guard_row), (0, guard_row), 'Times-Bold'),
-                       ('BACKGROUND', (0, guard_row), (-1, guard_row), colors.HexColor('#f2f2f2'))]
+                       ('BACKGROUND', (0, guard_row), (-1, guard_row), colors.HexColor('#f2f2f2')),
+                       ('LINEABOVE', (0, guard_row), (-1, guard_row), .65, colors.black)]
             table = Table(data, colWidths=[130] + [(width - 2 * margin - 130) / 15] * 15,
                           rowHeights=[20, 18] + [18.5] * 11)
             table.setStyle(TableStyle(styles))
@@ -217,7 +254,7 @@ def main():
             '<b>Reading:</b> Higher ACC and lower AEOD/ASPD are better. Best/second-best eligible displayed means are <b>bold</b>/<u>underlined</u>; displayed ties share rank. † retains a disparity whose corresponding mean ACC is <=80%, excluding it only from fairness ranking. ACC ranking and all seeds/means/sample SDs are unchanged. Eligibility uses unrounded mean ACC; SD does not rank. This post-hoc display rule was author-approved on 2026-10-12, not preregistered. Marks do not establish significance or undefined metrics. ACC is percent; gaps are [0,1]; AEOD is the absolute TPR gap, not full equalized odds. Shading identifies GuardFed.',
             '<b>Method scope:</b> Native predictions preserve each method\'s own postprocessing; this does not isolate aggregation effects. FairFed/FairGuard/composition, FedAA and LASA are documented adaptations. LoGoFair-DP uses fitted demographic-parity postprocessing, 20 image-ID virtual cohorts (not training clients), fit seed 1719 and 30 postprocessing rounds. FLGMM uses the author-code full-model/largest-cluster adaptation and native uncalibrated outputs.',
             '<b>Coverage and provenance:</b> Eleven methods, two distributions, five conditions and 10 seeds give 1100 evaluation records, not 1100 independent training models: LoGoFair reuses FedAvg checkpoints. Backbone checkpoints are terminal round 70. FLGMM contributes 96 new and 4 explicitly reused screen records; its selected recipe is warmup 20/control width 2.0/local learning rate 0.001. Original mixed training/replay environments and separate CPU saved-state verification remain disclosed; no cross-runtime equivalence is claimed.',
-            '<b>Selection boundary:</b> Seed 91001 participated in validation selection; other validation seeds and historical test metadata were exposed. The 9/6-seed panels are sensitivity views, not untouched test cohorts. No score ranking, significance, final-test or complete 17-method claim is made. This display does not select the manuscript\'s final primary endpoint.',
+            '<b>Selection boundary:</b> Seed 91001 participated in validation selection; other validation seeds and historical test metadata were exposed. The archived fixed 9/6-seed sensitivity views remain available separately. No score ranking, significance, final-test or complete 17-method claim is made. This display does not select the manuscript\'s final primary endpoint.',
         ]
         y -= 1
         for note in notes:
@@ -228,13 +265,13 @@ def main():
         assert y > 36, ('Page overflow', page, y)
         c.setFont('Times-Roman', 8)
         c.drawString(margin, 22, 'Source: root-adopted eleven-method native1100 display table; no new statistics, fits, inference or training.')
-        c.drawRightString(width - margin, 22, f'{page} / 3')
+        c.drawRightString(width - margin, 22, f'{page} / 1')
         c.showPage()
         page_checks.append(dict(page=page, panel=panel, display_cells=len(page_cells), content_lower_y=y))
         all_cells += page_cells
     c.save()
     doc = fitz.open(out)
-    assert len(doc) == 3
+    assert len(doc) == 1
     render = HERE / 'preview'
     render.mkdir(exist_ok=True)
     for page, check in zip(doc, page_checks):
@@ -246,16 +283,27 @@ def main():
                    for block in page.get_text('dict')['blocks'] if 'lines' in block for line in block['lines'] for span in line['spans'])
         page.get_pixmap(matrix=fitz.Matrix(1.15, 1.15), alpha=False).save(render / f'page-{check["page"]}.png')
         check.update(numeric_pairs_extracted_exact=True, text_spans_within_page=True)
-    assert len(all_cells) == 990
+    assert len(all_cells) == 330
     assert before == {name: sha(SOURCE / name) for name in before}
-    result = dict(status='HIGHLIGHT_NUMERIC_AND_PAGE_BOUNDS_PASS_VISUAL_REVIEW_PENDING',
+    display_values = [value for distribution in ('IID', 'non-IID')
+                      for method in panels[distribution + ' / ten'][0]
+                      for value in panels[distribution + ' / ten'][1][method]]
+    main_checks = dict(groups=30, numeric_cells=330,
+                       best_cells=sum(value.startswith('**') for value in display_values),
+                       second_cells=sum(value.startswith('<u>') for value in display_values),
+                       excluded_fairness_cells=sum(value.endswith('†') for value in display_values),
+                       method_order=panels['IID / ten'][0], ours_last=True, seeds=list(range(91001, 91011)))
+    assert (main_checks['best_cells'], main_checks['second_cells'], main_checks['excluded_fairness_cells']) == (31, 30, 40)
+    result = dict(status='TEN_SEED_MAIN_TABLE_NUMERIC_AND_PAGE_BOUNDS_PASS_VISUAL_REVIEW_PENDING',
                   source_root_sha256=sha(SOURCE / 'ROOT_REVIEW.json'), original_table_sha256=TABLE_SHA,
-                  formatted_table_sha256=sha(SOURCE / 'TABLES.md'), highlight=highlight_checks,
+                  formatted_table_sha256=sha(SOURCE / 'TABLES.md'), highlight=main_checks,
+                  archived_all_panels=dict(path=ARCHIVE.relative_to(ROOT).as_posix(), sha256=sha(ARCHIVE),
+                                           original_highlight_checks=highlight_checks),
                   source_member_hashes=before, pdf_sha256=sha(out), pages=page_checks,
-                  displayed_mean_SD_pairs=990, displayed_numeric_values=1980,
+                  displayed_mean_SD_pairs=330, displayed_numeric_values=660,
                   new_statistics=0, new_inference=0, new_fit=0, new_training=0,
                   final_test=False, full17_complete=False, scientific_source_bytes_unchanged=True,
-                  original_table_recovered_exactly_by_removing_highlights=True,
+                  complete_original_table_recovered_exactly_from_archive=True,
                   previous_pdf_sha256=sha(previous),
                   historical_checks='ROOT_REVIEW, NUMERIC_LAYOUT_VERIFICATION, SPATIAL_CELL_VERIFICATION and VISUAL_QA predate this formatting edit')
     (HERE / 'HIGHLIGHT_VERIFICATION.json').write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8')
