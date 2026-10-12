@@ -1,3 +1,32 @@
+# CURRENT: GuardFed执行状态 — 2026-10-12
+
+日常阅读统一看[返修审阅入口](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/AUTHOR_REVIEW_START_HERE.md)。本文件只记录执行实况与恢复边界。
+
+实测：2026-10-12 14:38悉尼 / 03:38 UTC。服务器 `ssh -p60350 root@89.22.197.55`，实例52183675，repo `/workspace/GuardFed-celeba-expanded`；先读 `/etc/vast-agents-guide.md`。当前cgroup-v2，不沿用旧机v1路径。
+
+| 队列 | 当次实况 | 已验收与下一步 |
+|---|---|---|
+| 机制800 / guardfed_celeba_mechanism_formal | 619终轮、8活动（6–65轮）、173待跑、失败0 | 已离机验收400；保留健康队列 |
+| Hybrid96 / guardfed_celeba_hybrid_fullcoverage | 70终轮、1活动（4轮） | 已验收新29；4复用另计 |
+| NGA96 / guardfed_celeba_fednga_fullcoverage_v1 | 96终轮、0活动，服务EXITED | 新19已验收；其余待严格验收，不能因EXITED即称全部科学完成 |
+| 统一CUDA首500 / guardfed_uniform_cuda500_resume2_valid | 保存验收500/500、0失败，服务EXITED | 离机采用105；待完成剩余离机核对与增量证据保存 |
+| 统一CUDA原800 / guardfed_uniform_cuda800_remaining_v3_valid | 保存验收800/800、0失败，服务EXITED | 离机采用102；待完成剩余离机核对与增量证据保存 |
+| FL100与LoGo100 CUDA | 各100已验收 | 不重跑；共享Full100不重复计数 |
+| Huber96 | 未见训练worker，尚未启动 | 已获准适配；计划不能当已运行 |
+
+CUDA服务器端当前1500条完成，离机去重采用仍407=105+102+100+100；新增终轮/服务器检查不增加科学采用。主比较1100与机制400包含在1500中，不能重复相加。整个2500目标尚未齐备。
+
+GPU利用率100/98%、温度68/63°C、Recovery None；CPU9.13/122.87999核，RAM70.90/519.17GB，OOM0，磁盘1.043TB余。主训练较昨日448增至619；不因低CPU或瞬时GPU空闲重启健康任务。
+
+当次实测原件：`server_reactivation_20261009/ROOT_COMPACT_20261012T033812Z.json`；repo内`tmp/uniform_cuda500_root_dispatch_20261011/RESUME2_OBSERVATION_20261012T033811Z.json`、`tmp/baseline_old800_runtime_root_20261011_attempt003/OBSERVATION_20261012T033811Z.json`。这些是观测，不是新增离机验收。
+
+只继续已授权且冻结的队列。已完成500/800评价、原1390及历史队列不重启；不改方法、seed、参数、指标、并发或容差，不启动test。恢复须先核源码/数据/配置身份、无重复进程及可靠跳过机制；数值问题保留证据，不盲重试。三小时聊天automation最后核验为PAUSED，编辑工具当前不可用；不声称持续巡检、不创建替代监督。
+
+大文件留服务器或经核验的F:/YananResearchStorage/GuardFed；本机C/D/E仅代码、配置、索引和精简报告。实验协议见`celeba_uniform_cuda_evaluation_v1/PROTOCOL.md`及各阶段manifest。本文档整理不修改实验协议或既有科学验收数。
+
+<details>
+<summary>截至2026-10-11及更早的执行记录（历史，不代表当前状态）</summary>
+
 # CURRENT: GuardFed返修实验
 
 入口更新：2026-10-11T10:01:52.359879+00:00。当前服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。以下将实际采用与带时间的运行观测分开。
@@ -180,3 +209,5 @@ FINAL — 2026-09-24 02:14:41 UTC: 240/240 image runs accepted, 24 complete10-se
 TUNING latest 2026-09-24 04:15:44 UTC: 17/40 accepted,8 active rounds17-67,0 failures; both GPUs100%,68/63C. First17 completed runs/checkpoints backed up off-server in celeba_tuning_accepted17_20260924T041544Z.tar.gz, SHA256 480306517396418a3a3b2cb7f40c796988391d4b34930a0c9b7c3b3db64d652f verified. Continue remaining validation queue. All completed so far Benign; no cross-condition ranking yet.
 
 Local completion increment 2026-10-09: strong-alpha60 partitions and840 historical synthetic numerical records audited; 900 preserved terminal-model identities verified in25 backups. Gradient64 and final-evaluation900 jobs remain PREPARED_NOT_FROZEN. No real GPU training or test inference started. See REBUTTAL_COMPLETION_20261009.md.
+
+</details>

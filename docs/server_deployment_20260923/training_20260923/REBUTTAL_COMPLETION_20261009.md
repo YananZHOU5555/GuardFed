@@ -1,4 +1,6 @@
-# CURRENT: GuardFed返修实验
+# 历史返修完成度记录（2026-10-11截止）
+
+当前进度与剩余工作统一看[返修审阅入口](E:/OneDrive/文档/GuardFed/docs/server_deployment_20260923/revision_20260923/AUTHOR_REVIEW_START_HERE.md)。下文保留当时证据和判断，不再作为实时状态入口。
 
 入口更新：2026-10-11T10:01:52.359879+00:00。当前服务器 ssh -p60350 root@89.22.197.55，实例52183675，repo /workspace/GuardFed-celeba-expanded；先遵守/etc/vast-agents-guide.md。以下将实际采用与带时间的运行观测分开。
 
