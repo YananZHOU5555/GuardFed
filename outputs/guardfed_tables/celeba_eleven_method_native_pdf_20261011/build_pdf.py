@@ -18,10 +18,17 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SOURCE = ROOT / 'outputs/guardfed_tables/celeba_eleven_method_native_20261011'
 TABLE_SHA = 'c40f7909e79a16fcd18b9fb1980decfe541d33195b24caac335555844dbeea76'
-LEGEND = ('**Best** and <u>second-best</u> means are marked separately within each distribution, seed panel, '
+LEGACY_LEGEND = ('**Best** and <u>second-best</u> means are marked separately within each distribution, seed panel, '
           'scenario and metric (and within each aggregate scope). ACC: higher is better; AEOD/ASPD: lower is better. '
           'Ranking uses the displayed mean precision; equal displayed means share a rank. SD does not determine rank. '
           'These marks are descriptive, not significance tests.')
+LEGEND = (LEGACY_LEGEND + ' Fairness-ranking eligibility: the corresponding full-precision mean ACC must be >80%. '
+          'AEOD/ASPD marked † have mean ACC <=80% and are retained but excluded from bold/underline ranking. '
+          'The same rule applies to every method and to each aggregate scope, using its corresponding mean ACC. '
+          'ACC ranking is unrestricted. All seeds and original statistics are retained; no conditional means are recomputed. '
+          'This CelebA display rule was explicitly approved by the author on 2026-10-12 after viewing the results; '
+          'it is not a preregistered experiment rule or a claim that the marked disparities are undefined.')
+ACC_FLOOR = 0.8
 PANELS = [('ten', '10 shared seeds: 91001-91010'),
           ('nonselection_nine', '9 shared seeds: 91002-91010'),
           ('matching_six', '6 shared seeds: 91005-91010')]
@@ -31,21 +38,30 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 
 
 def plain_cell(value):
-    return value.removeprefix('**').removesuffix('**').removeprefix('<u>').removesuffix('</u>')
+    return value.removesuffix('†').removeprefix('**').removesuffix('**').removeprefix('<u>').removesuffix('</u>')
 
 
 def unhighlight_table(marked):
     text = marked.decode('utf-8')
     newline = '\r\n' if b'\r\n' in marked else '\n'
-    text = text.replace(LEGEND + newline + newline, '', 1)
+    for legend in (LEGEND, LEGACY_LEGEND):
+        text = text.replace(legend + newline + newline, '', 1)
+    text = re.sub(r'(?<=\d)†', '', text)
     return re.sub(r'\*\*([\d.]+\s*±\s*[\d.]+)\*\*|<u>([\d.]+\s*±\s*[\d.]+)</u>',
                   lambda match: match[1] or match[2], text).encode('utf-8')
 
 
 def highlight_table(original):
     # Work only on the accepted display strings; never recompute the statistics.
+    statistics = json.loads((SOURCE / 'summary_statistics.json').read_bytes())
+    aggregates = json.loads((SOURCE / 'seed_first_aggregates.json').read_bytes())
+    scene_acc = {(panel, row['distribution'], row['attack'], row['method']): row['accuracy']['mean']
+                 for panel, rows in statistics.items() for row in rows}
+    aggregate_acc = {(panel, row['scope'], row['method']): row['accuracy']['mean']
+                     for panel, rows in aggregates.items() for row in rows}
     lines = original.decode('utf-8').splitlines(keepends=True)
     groups = collections.defaultdict(list)
+    eligible = {}
     section = ''
     for index, line in enumerate(lines):
         if line.startswith('#'):
@@ -54,36 +70,50 @@ def highlight_table(original):
             continue
         cells = line.split('|')
         if cells[2].strip() in ('ACC (%) ↑', 'AEOD ↓', 'ASPD ↓'):
+            distribution, panel = section.removeprefix('## ').split(' / ')
             for column in range(3, 8):
                 groups[(section, cells[2].strip(), column)].append((index, column))
+                acc = scene_acc[(panel, distribution, ATTACKS[column - 3], cells[1].strip())]
+                eligible[index, column] = cells[2].strip() == 'ACC (%) ↑' or acc > ACC_FLOOR
         elif section == '# Seed-first descriptive aggregates':
             for column in range(5, 8):
                 groups[(cells[1].strip(), cells[2].strip(), column)].append((index, column))
+                acc = aggregate_acc[(cells[1].strip(), cells[2].strip(), cells[3].strip())]
+                eligible[index, column] = column == 5 or acc > ACC_FLOOR
     marks = collections.Counter()
     for key, positions in groups.items():
         assert len(positions) == 11, key
         means = {position: Decimal(lines[position[0]].split('|')[position[1]].split('±')[0].strip())
                  for position in positions}
         higher = key[1] == 'ACC (%) ↑' or (key[0] in dict(PANELS) and key[2] == 5)
-        levels = sorted(set(means.values()), reverse=higher)
-        assert len(levels) >= 2
+        levels = sorted({mean for position, mean in means.items() if eligible[position]}, reverse=higher)
         for (index, column), mean in means.items():
-            if mean not in levels[:2]:
+            if eligible[index, column] and mean not in levels[:2]:
                 continue
             cells = lines[index].split('|')
             value = cells[column].strip()
             assert PAIR.fullmatch(value)
-            rank = levels.index(mean) + 1
-            cells[column] = ' ' + ('**' + value + '**' if rank == 1 else '<u>' + value + '</u>') + ' '
+            if not eligible[index, column]:
+                marked = value + '†'
+                marks['excluded_fairness'] += 1
+            else:
+                rank = levels.index(mean) + 1
+                marked = '**' + value + '**' if rank == 1 else '<u>' + value + '</u>'
+                marks[rank] += 1
+            cells[column] = ' ' + marked + ' '
             lines[index] = '|'.join(cells)
-            marks[rank] += 1
-    assert len(groups) == 117 and marks == {1: 119, 2: 117}, (len(groups), marks)
+    assert len(groups) == 117 and len(eligible) == 1287
+    assert marks['excluded_fairness'] == sum(not value for value in eligible.values())
     newline = '\r\n' if b'\r\n' in original else '\n'
     highlighted = ''.join(lines).replace(newline + newline, newline + newline + LEGEND + newline + newline, 1)
     assert unhighlight_table(highlighted.encode('utf-8')) == original
     return highlighted.encode('utf-8'), dict(groups=len(groups), numeric_cells=1287,
                                             best_cells=marks[1], second_cells=marks[2],
-                                            ranking='displayed means; dense ranks; display ties share marks')
+                                            excluded_fairness_cells=marks['excluded_fairness'],
+                                            fairness_eligibility='corresponding full-precision mean accuracy > 0.8',
+                                            approved_date='2026-10-12',
+                                            posthoc_display_rule=True, seed_filtering=False,
+                                            ranking='displayed means among eligible methods; dense ranks; display ties share marks')
 
 
 def parse_panels(text):
@@ -119,7 +149,6 @@ def main():
     before = {name: sha(SOURCE / name) for name in proof['files_sha256'] if name != 'TABLES.md'}
     assert before == {name: digest for name, digest in proof['files_sha256'].items() if name != 'TABLES.md'}
     formatted, highlight_checks = highlight_table(original)
-    assert (SOURCE / 'TABLES.md').read_bytes() in (original, formatted)
     (SOURCE / 'TABLES.md').write_bytes(formatted)
     panels = parse_panels((SOURCE / 'TABLES.md').read_text(encoding='utf-8'))
     out = HERE / 'celeba_eleven_method_native.pdf'
@@ -145,7 +174,7 @@ def main():
         c.drawString(margin, height - 64, section + ' | ' + seed_label + ' | mean +/- sample SD (ddof=1)')
         c.setFont('Times-Italic', 9.5)
         c.drawString(margin, height - 80,
-                     'Best mean: bold. Second-best: underlined. Equal displayed means share a rank. Eleven methods do not constitute the full 17.')
+                     'Best: bold. Second-best: underlined. Fairness ranking requires mean ACC >80%; dagger marks ineligible values. Displayed ties share rank.')
         y = height - 107
         page_cells = []
         for distribution in ('IID', 'non-IID'):
@@ -155,7 +184,8 @@ def main():
             y -= 10
             top = ['Method'] + [attack if metric == 0 else '' for attack in ATTACKS for metric in range(3)]
             sub = [''] + ['ACC (%)', 'AEOD', 'ASPD'] * 5
-            data = [top, sub] + [[method] + [Paragraph(value.replace('**', '<b>', 1).replace('**', '</b>', 1), cell_style)
+            data = [top, sub] + [[method] + [Paragraph(value.replace('**', '<b>', 1).replace('**', '</b>', 1)
+                                                      .replace('†', '<super>†</super>'), cell_style)
                                             for value in values[method]] for method in methods]
             styles = [('FONTNAME', (0, 0), (-1, -1), 'Times-Roman'),
                       ('FONTSIZE', (0, 0), (-1, -1), 8.2),
@@ -184,7 +214,7 @@ def main():
             y -= th + 30
             page_cells += [plain_cell(value) for method in methods for value in values[method]]
         notes = [
-            '<b>Reading:</b> Higher ACC and lower AEOD/ASPD are better. Best displayed mean: <b>bold</b>; second-best distinct displayed mean: <u>underlined</u>; displayed ties share a rank. SD does not determine rank; marks are descriptive, not significance tests. ACC is in percent; gaps are in [0,1]. AEOD is the absolute TPR gap, not full equalized odds. Entries are mean +/- sample SD across shared seeds. Low gaps can accompany constant or poor predictions; all outcomes are retained. Shading identifies GuardFed.',
+            '<b>Reading:</b> Higher ACC and lower AEOD/ASPD are better. Best/second-best eligible displayed means are <b>bold</b>/<u>underlined</u>; displayed ties share rank. † retains a disparity whose corresponding mean ACC is <=80%, excluding it only from fairness ranking. ACC ranking and all seeds/means/sample SDs are unchanged. Eligibility uses unrounded mean ACC; SD does not rank. This post-hoc display rule was author-approved on 2026-10-12, not preregistered. Marks do not establish significance or undefined metrics. ACC is percent; gaps are [0,1]; AEOD is the absolute TPR gap, not full equalized odds. Shading identifies GuardFed.',
             '<b>Method scope:</b> Native predictions preserve each method\'s own postprocessing; this does not isolate aggregation effects. FairFed/FairGuard/composition, FedAA and LASA are documented adaptations. LoGoFair-DP uses fitted demographic-parity postprocessing, 20 image-ID virtual cohorts (not training clients), fit seed 1719 and 30 postprocessing rounds. FLGMM uses the author-code full-model/largest-cluster adaptation and native uncalibrated outputs.',
             '<b>Coverage and provenance:</b> Eleven methods, two distributions, five conditions and 10 seeds give 1100 evaluation records, not 1100 independent training models: LoGoFair reuses FedAvg checkpoints. Backbone checkpoints are terminal round 70. FLGMM contributes 96 new and 4 explicitly reused screen records; its selected recipe is warmup 20/control width 2.0/local learning rate 0.001. Original mixed training/replay environments and separate CPU saved-state verification remain disclosed; no cross-runtime equivalence is claimed.',
             '<b>Selection boundary:</b> Seed 91001 participated in validation selection; other validation seeds and historical test metadata were exposed. The 9/6-seed panels are sensitivity views, not untouched test cohorts. No score ranking, significance, final-test or complete 17-method claim is made. This display does not select the manuscript\'s final primary endpoint.',

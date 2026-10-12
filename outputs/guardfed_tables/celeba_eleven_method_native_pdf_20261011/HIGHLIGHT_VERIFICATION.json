@@ -1,26 +1,44 @@
 {
-  "status": "HIGHLIGHT_NUMERIC_SPATIAL_FONT_UNDERLINE_AND_VISUAL_REVIEW_PASS",
+  "status": "UTILITY80_HIGHLIGHT_NUMERIC_SPATIAL_FONT_DAGGER_AND_VISUAL_REVIEW_PASS",
   "edit_date": "2026-10-12",
+  "author_approval": {
+    "user_reply": "实行",
+    "approved_rule": "Use corresponding mean ACC >80% for AEOD/ASPD highlighting; retain all values, SDs and seeds; no N/E suppression or conditional recomputation",
+    "timing": "After results were available; display-only convention, not a preregistered training/evaluation rule"
+  },
   "edit_marker": {
     "command": "node container_tools/mark_artifact_operation_started.mjs --operation-kind edit --expected-output-count 1 --output-format pdf",
     "working_directory": "D:/CodexHome/plugins/cache/openai-primary-runtime/pdf/26.1007.11041/skills/pdf",
     "exit_code": 0,
-    "chunk_id": "63d84d",
+    "chunk_id": "36b654",
     "successful_calls_for_this_edit": 1
+  },
+  "supersedes_unrestricted_highlighting": {
+    "git_commit": "bda2277332e398c6afcc45273ea1d7cc5a254d40",
+    "table_sha256": "9736ac0e9501450e1d01bf3177ff38da71ba835895e8a8c92938f4d57d2edaa2",
+    "pdf_sha256": "111bf013104311be5ae333c22611f98296730c9c6ff2d924b7a83838aa4ea081"
   },
   "independent_readonly_review": {
     "agent": "/root/table_highlight_check",
     "markdown_numeric_cells": 1287,
-    "markdown_best_cells": 119,
+    "markdown_best_cells": 118,
     "markdown_second_cells": 117,
+    "markdown_dagger_cells": 152,
     "pdf_numeric_cells": 990,
-    "pdf_best_cells": 92,
+    "pdf_best_cells": 91,
     "pdf_second_cells": 90,
+    "pdf_dagger_cells": 118,
+    "per_page_best_second_dagger": [[31, 30, 40], [30, 30, 42], [30, 30, 36]],
     "per_cell_values_and_SD_exact": true,
-    "per_cell_font_and_underline_correct": true
+    "per_cell_font_underline_and_dagger_correct": true,
+    "eligibility_checked_against_frozen_unrounded_accuracy_means": true,
+    "all_scientific_source_hashes_unchanged": true
   },
-  "root_visual_review": {
+  "root_checks": {
+    "original_table_recovered_byte_for_byte": true,
+    "formatting_idempotent": true,
     "final_pymupdf_pages_inspected": [1, 2, 3],
+    "poppler_all_pages_rendered": true,
     "poppler_page1_inspected": true,
     "clipping_overlap_or_missing_glyphs": false,
     "poppler_exit_code": 0,
@@ -28,13 +46,18 @@
   },
   "source_root_sha256": "69e9c479c061a1aa428157b6f1d121aa5dd72a48e0e6d1d16dd21ac296391d02",
   "original_table_sha256": "c40f7909e79a16fcd18b9fb1980decfe541d33195b24caac335555844dbeea76",
-  "formatted_table_sha256": "9736ac0e9501450e1d01bf3177ff38da71ba835895e8a8c92938f4d57d2edaa2",
+  "formatted_table_sha256": "3d0c562713997b1e03799de81a221e77660de6551c6b2bbc1c21539ae1cf2c25",
   "highlight": {
     "groups": 117,
     "numeric_cells": 1287,
-    "best_cells": 119,
+    "best_cells": 118,
     "second_cells": 117,
-    "ranking": "displayed means; dense ranks; display ties share marks"
+    "excluded_fairness_cells": 152,
+    "fairness_eligibility": "corresponding full-precision mean accuracy > 0.8",
+    "approved_date": "2026-10-12",
+    "posthoc_display_rule": true,
+    "seed_filtering": false,
+    "ranking": "displayed means among eligible methods; dense ranks; display ties share marks"
   },
   "source_member_hashes": {
     "NUMERIC_VERIFICATION.json": "b71ba2558001377ffc8232cc3ee1f03020211b048f2ee88c85ec98a78706f403",
@@ -43,7 +66,7 @@
     "SOURCE_BINDINGS.json": "2383634b426d0692e5f5857207571f17bce61bbf164fed70b79a74dcaff6f6d7",
     "summary_statistics.json": "f7d1d0e79240d3883ecb60448cbd5dc89d755d9157fcb036303f26a93700b5a3"
   },
-  "pdf_sha256": "111bf013104311be5ae333c22611f98296730c9c6ff2d924b7a83838aa4ea081",
+  "pdf_sha256": "45fa028eb946c06421edd48c989bb0bd164b07e4a95e39e4769af0f333f0df5d",
   "pages": [
     {
       "page": 1,
