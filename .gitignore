@@ -1,98 +1,26 @@
-# Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Environment
-.env
-.venv
-env/
+.pytest_cache/
+.venv/
 venv/
-ENV/
-env.bak/
-venv.bak/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Project specific
-*.csv
-*.xlsx
-*.png
-*.pdf
+.env
+.env.*
+node_modules/
+data/
 results/
+outputs/
 logs/
 checkpoints/
-
-# Keep data directory structure but ignore large files
-data/adult/*.data
-data/adult/*.test
-data/compas/*.csv
-
-# Keep example files
-!data/adult/adult.names
-!data/compas/README
-
-# Machine environments and migration scratch
-/GuardFed/
-.svn/
-/tmp/
-/.codex-pet-runs/
-/$outdir/
-*.before_*
+tmp/
+.codex*/
 *.log
-*.aux
-*.out
-*.jsonl
-*.ndjson
-*.tar.gz
-*.zip
 *.pt
 *.pth
 *.ckpt
+*.npy
+*.npz
+*.parquet
+*.tar.gz
+*.zip
 *.pem
 *.key
-.env.*
-# Public benchmark inputs required by the server runner
-!data/adult/adult.data
-!data/adult/adult.test
-!data/compas/compas-scores-two-years.csv
-# Frozen calibration metadata for resuming the existing protocol
-!configs/calibration_results_5090.jsonl
-node_modules/
-
-/data/celeba/
-
-/data/acs_income/
-
-/deployment/
-
-/data/celeba

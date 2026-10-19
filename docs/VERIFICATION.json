@@ -1,0 +1,60 @@
+{
+  "verified_date_sydney": "2026-10-19",
+  "source_commit": "37c35d6c954d0a94e4221c378f9405a278c59df5",
+  "python": "3.10.4",
+  "platform": "Windows",
+  "source_blob_identity": {
+    "files": 178,
+    "all_matched": true
+  },
+  "syntax": {
+    "python_files": 135,
+    "all_parsed": true
+  },
+  "entry_checks": [
+    {
+      "command": "python scripts/reproduce_paper_tables.py --help",
+      "returncode": 0,
+      "stdout_bytes": 7913,
+      "stderr_bytes": 0
+    },
+    {
+      "command": "python scripts/run_attack_strength_study.py --help",
+      "returncode": 0,
+      "stdout_bytes": 411,
+      "stderr_bytes": 0
+    },
+    {
+      "command": "python scripts/run_revision_ablation.py --help",
+      "returncode": 0,
+      "stdout_bytes": 550,
+      "stderr_bytes": 0
+    },
+    {
+      "command": "python scripts/run_ad2plus_advisor_experiments.py --suite ablation --dry-run",
+      "returncode": 0,
+      "stdout_bytes": 14337,
+      "stderr_bytes": 0
+    }
+  ],
+  "regression": {
+    "command": "python -m pytest -q -p no:cacheprovider tests",
+    "cwd": "source worktree with complete Git history and existing COMPAS data",
+    "passed": 11,
+    "skipped": 1,
+    "seconds": 16.47,
+    "skip_reason": "CUDA is unavailable on the validation host",
+    "exported_cuda_check": "1 skipped in 9.31s"
+  },
+  "not_executed": [
+    "new model training",
+    "CelebA cache rebuild",
+    "GPU replay",
+    "end-to-end baseline deployment",
+    "final paper reproduction"
+  ],
+  "code_changes": "No source algorithm, default configuration or attack logic modified.",
+  "handoff_doc_links": {
+    "broken": []
+  }
+}

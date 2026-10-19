@@ -1,5 +1,0 @@
-# Fixed F20 native400 adopter — source only
-
-Reuses the actual native380 adopter. Only fixed20 membership, namespaces, prior380/480-object/52-ledger boundaries and pinned source hashes change. The complete inverse and original archive/per-record block are checked. No SSH, F access, scientific acceptance or ledger promotion occurred in preparation.
-
-After the original final20 collector has actually passed, fill ACTUAL_INPUTS.json from the null template using its DELTA_VERIFICATION, receipt, inventory and full inspection. Keep any extra observed control IDs as pending, outside accepted400. Root must freshly check F Yanan2TB/Healthy/capacity, read source/diff and actual proofs, then authorize the actual inputs. Run once: python -B tmp/native400_adopter_prepare_20261011/adopt_root.py --actual-inputs-sha256 ACTUAL_SHA. The adopter rehashes all archive members, preserves old480 records and the52-entry ledger prefix, and promotes the canonical ledger locally and remotely. Failure evidence is preserved, with no automatic retry. This does not accept saved400/F100 or the other400 controls.
