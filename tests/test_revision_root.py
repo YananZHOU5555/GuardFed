@@ -28,8 +28,12 @@ class FakeLoader:
 class RootNoiseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        source = subprocess.check_output(
-            ["git", "show", "9e62b78:scripts/reproduce_paper_tables.py"], cwd=ROOT, text=True)
+        try:
+            source = subprocess.check_output(
+                ["git", "show", "9e62b78:scripts/reproduce_paper_tables.py"], cwd=ROOT,
+                text=True, stderr=subprocess.PIPE)
+        except (OSError, subprocess.CalledProcessError):
+            raise unittest.SkipTest("Historical reference commit 9e62b78 is unavailable")
         cls.legacy = types.ModuleType("root_noise_legacy_reference")
         cls.legacy.__file__ = str(ROOT / "scripts" / "reproduce_paper_tables.py")
         sys.modules[cls.legacy.__name__] = cls.legacy

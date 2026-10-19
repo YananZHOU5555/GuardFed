@@ -17,9 +17,12 @@ from scripts import reproduce_paper_tables as core
 
 
 def legacy_module():
-    source = subprocess.check_output(
-        ["git", "show", "ec419b7:scripts/reproduce_paper_tables.py"], cwd=ROOT, text=True
-    )
+    try:
+        source = subprocess.check_output(
+            ["git", "show", "ec419b7:scripts/reproduce_paper_tables.py"], cwd=ROOT,
+            text=True, stderr=subprocess.PIPE)
+    except (OSError, subprocess.CalledProcessError):
+        raise unittest.SkipTest("Historical reference commit ec419b7 is unavailable")
     module = types.ModuleType("revision_legacy_reference")
     module.__file__ = str(ROOT / "scripts" / "reproduce_paper_tables.py")
     sys.modules[module.__name__] = module

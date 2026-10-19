@@ -1,0 +1,270 @@
+{
+  "source_repository": "https://github.com/YananZHOU5555/GuardFed",
+  "research_commit": "37c35d6c954d0a94e4221c378f9405a278c59df5",
+  "prior_handoff_commit": "6547cb088281cb50a95702e19d63e2a84ddf858b",
+  "server_checked_utc": "2026-10-19T03:00:10.140514+00:00",
+  "server_reference_sha256": {
+    "scripts/reproduce_paper_tables.py": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+    "scripts/run_revision_ablation.py": "4ae9f1e7f53e5fdbe1fe00e16fa5d1852ecf55c9644cf4462f1fe6b73df480a1",
+    "src/data_loader.py": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+    "src/celeba_data.py": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+    "scripts/build_celeba_cache.py": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be"
+  },
+  "core_definitions_unchanged": [
+    "ExperimentConfig",
+    "SimpleMLP",
+    "_adjust_counts_to_total",
+    "_integer_like",
+    "_project_synthetic_columns",
+    "act_fairness_risks",
+    "ad2plus_candidate_overrides",
+    "ad2plus_root_loss",
+    "adaaggrl_aggregate",
+    "aggregate_round",
+    "apply_foe_if_needed",
+    "apply_root_noise",
+    "apply_update",
+    "attack_types_for_client",
+    "bootstrap_augment",
+    "calibration_risk",
+    "choose_device",
+    "client_runtime_data",
+    "clone_config_with",
+    "clone_state",
+    "compute_metrics",
+    "compute_reweighing_weights",
+    "cosine_between",
+    "create_client_data_dict",
+    "ctgan_augment",
+    "devectorize",
+    "evaluate_for_reporting",
+    "evaluate_model",
+    "evaluate_model_calibrated",
+    "evaluate_state_on_server",
+    "fairguard_select",
+    "fed_nga_aggregate",
+    "fedaa_aggregate",
+    "fedamm_aggregate",
+    "feddna_aggregate",
+    "finite_metric",
+    "fit_group_thresholds",
+    "flaura_aggregate",
+    "flgmm_aggregate",
+    "flgmm_select_from_distances",
+    "fltg_aggregate",
+    "fltrust_aggregate",
+    "gaussian_copula_augment",
+    "guardfed_act_aggregate",
+    "guardfed_ad2plus_adaptive_aggregate",
+    "huber_brfl_aggregate",
+    "lasa_aggregate",
+    "layerguard_aggregate",
+    "load_bundle",
+    "make_model",
+    "make_optimizer",
+    "make_run_id",
+    "make_synthetic_root",
+    "median_update",
+    "metrics_from_group_thresholds",
+    "model_margins",
+    "noisy_bootstrap_augment",
+    "normalize_scores",
+    "pca_gaussian_augment",
+    "robust_median_mad",
+    "run_experiment",
+    "sample_server_dataframe",
+    "select_top_scores",
+    "set_seed",
+    "sigmoid",
+    "smartfl_aggregate",
+    "smote_augment",
+    "softmax_weights",
+    "sparsify_tensor",
+    "sparsify_update",
+    "state_delta",
+    "threshold_candidates",
+    "train_local_model",
+    "train_server_update",
+    "update_distance",
+    "update_norm",
+    "validate_attack_audit",
+    "vectorize",
+    "weighted_average",
+    "weighted_ce",
+    "zero_like"
+  ],
+  "core_change_scope": "Removed the old CLI and reporting helpers; all retained training, attack, calibration, model and metric definitions are identical ASTs.",
+  "source_files": [
+    {
+      "path": "scripts/build_celeba_cache.py",
+      "source_path": "scripts/build_celeba_cache.py",
+      "source_sha256": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be",
+      "release_sha256": "e88543ad57c21d45296e0076a451983bfd77551e0d059bc034bc99ec834b95be"
+    },
+    {
+      "path": "scripts/reproduce_paper_tables.py",
+      "source_path": "scripts/reproduce_paper_tables.py",
+      "source_sha256": "cdd5586517d6a5d51a455d01384dd3093f5bd79947f6ba829bfab42520cb5eed",
+      "release_sha256": "cfadb89171474dc3983dc01373481869deeaccbaa987ff037b9dd0f5c0d2c8de"
+    },
+    {
+      "path": "scripts/validate_reproduction_data.py",
+      "source_path": "scripts/validate_reproduction_data.py",
+      "source_sha256": "9543539e7c798bfbf6ac24128cb59998888a90e86095b9a4436bfa8fe10146ac",
+      "release_sha256": "9543539e7c798bfbf6ac24128cb59998888a90e86095b9a4436bfa8fe10146ac"
+    },
+    {
+      "path": "src/__init__.py",
+      "source_path": "src/__init__.py",
+      "source_sha256": "e79f4e088ae5241afe5408b20ac963bdc80477c7f5b610173f6861fe2dc7306e",
+      "release_sha256": "e79f4e088ae5241afe5408b20ac963bdc80477c7f5b610173f6861fe2dc7306e"
+    },
+    {
+      "path": "src/celeba_data.py",
+      "source_path": "src/celeba_data.py",
+      "source_sha256": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce",
+      "release_sha256": "0f48fbc6d241e7d0cde692839659e817feab407991795a6f92a33052a9cc07ce"
+    },
+    {
+      "path": "src/data_loader.py",
+      "source_path": "src/data_loader.py",
+      "source_sha256": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091",
+      "release_sha256": "41723cc5dd57d7d7c4878bb93989426569279d608c0357cf0b6429c8c4a2a091"
+    },
+    {
+      "path": "tests/test_compas_train_only.py",
+      "source_path": "tests/test_compas_train_only.py",
+      "source_sha256": "bcd113ee73e59e8b0caa8766944af164ffc16e37f9cf92225a97548a96545663",
+      "release_sha256": "3220219bb1ecd590e088ee6c3ae2eeac069dd05c174f8fd7dbb5243011f18c6d"
+    },
+    {
+      "path": "tests/test_image_deterministic_median.py",
+      "source_path": "tests/test_image_deterministic_median.py",
+      "source_sha256": "35ef84ab859605c428c117e5ae6fd4bd1ef716172e94c522e9c79d5f113568c0",
+      "release_sha256": "35ef84ab859605c428c117e5ae6fd4bd1ef716172e94c522e9c79d5f113568c0"
+    },
+    {
+      "path": "tests/test_revision_ablation.py",
+      "source_path": "tests/test_revision_ablation.py",
+      "source_sha256": "624c722d668700ffa243d4ae425df4f24fef4c3df8e3a35109f93d3d1974c1a0",
+      "release_sha256": "3a302f317415f78804322256b1f51e426b2e09d5d9a5c623db8534d9393af66c"
+    },
+    {
+      "path": "tests/test_revision_root.py",
+      "source_path": "tests/test_revision_root.py",
+      "source_sha256": "2f4ec414cfdf307be576cbde1f3f4ac725b600e3a28b6fe4dbccf0dee9d2544e",
+      "release_sha256": "a45bbf176aed6d89864a142e9b29d6d95e938d1decc8fc87cd58d68d693d1a51"
+    },
+    {
+      "path": "baselines/fedaa/fedaa_official_adapter.py",
+      "source_path": "deployment/baseline_adapters_20260928/fedaa/fedaa_official_adapter.py",
+      "source_sha256": "d0d571eedc675fb871804bce00b26f0775658d9cfdef684c6dd88bc6a772c421",
+      "release_sha256": "8251485cb512af0840672bb7fce3125046cba2c879f685176a7b61c8d9ea5993"
+    },
+    {
+      "path": "baselines/fedaa/official/DDPG/DDPG.py",
+      "source_path": "deployment/baseline_adapters_20260928/fedaa/official/DDPG/DDPG.py",
+      "source_sha256": "e9bdbccdaf3aba7e1eece10370cbf7cedfe66104a691bc24a9d4e1300cd12d68",
+      "release_sha256": "e9bdbccdaf3aba7e1eece10370cbf7cedfe66104a691bc24a9d4e1300cd12d68"
+    },
+    {
+      "path": "baselines/fedaa/official/README.md",
+      "source_path": "deployment/baseline_adapters_20260928/fedaa/official/README.md",
+      "source_sha256": "ad24b3ccae95232f82159e17f34d88ca3474f6bdd398741ff60893fdfbf17cba",
+      "release_sha256": "ad24b3ccae95232f82159e17f34d88ca3474f6bdd398741ff60893fdfbf17cba"
+    },
+    {
+      "path": "baselines/fedaa/official/requirements.txt",
+      "source_path": "deployment/baseline_adapters_20260928/fedaa/official/requirements.txt",
+      "source_sha256": "382ed94ac5aaf984acae43d5e71fd3a8c76e8937a76eea4997cb531c8a768538",
+      "release_sha256": "382ed94ac5aaf984acae43d5e71fd3a8c76e8937a76eea4997cb531c8a768538"
+    },
+    {
+      "path": "baselines/fednga/fednga.py",
+      "source_path": "experimental/celeba_baselines/fednga/fednga.py",
+      "source_sha256": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee",
+      "release_sha256": "9784ece5bd88aa4813693ed69aaf7f7505b5d16d2a6eb18c23700a1bab4de6ee"
+    },
+    {
+      "path": "baselines/aggregation/fedaa/fedaa_round_adapter.py",
+      "source_path": "experimental/celeba_baselines/fullcoverage_20261003/fedaa/fedaa_round_adapter.py",
+      "source_sha256": "609942950ff7e81825fa328616e211942846e1099d09ee2569b2f2a0c440db3c",
+      "release_sha256": "609942950ff7e81825fa328616e211942846e1099d09ee2569b2f2a0c440db3c"
+    },
+    {
+      "path": "baselines/lasa/adapter.py",
+      "source_path": "experimental/celeba_baselines/fullcoverage_20261003/lasa/adapter.py",
+      "source_sha256": "41062ed1c44714fbe7c387bc5891fd19cbf97022634dff55400c16f0b32fe50c",
+      "release_sha256": "fa758cdeb7749127db1343d972f542f64bdc477959a26215b271b6b6b5520aaa"
+    },
+    {
+      "path": "baselines/logofair/adapter.py",
+      "source_path": "experimental/celeba_baselines/logofair/adapter.py",
+      "source_sha256": "8ac65ac38812b90ab44c71284d19184fe55f120e9d44262841ca9d925c26a5a7",
+      "release_sha256": "3709103490d5479d92b84ba5bcb1806b2a88bbe12cfa2e7ba6600a927d91218a"
+    },
+    {
+      "path": "baselines/aggregation/group_a/adapters.py",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_a/adapters.py",
+      "source_sha256": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0",
+      "release_sha256": "55ca0f22836e2e6b86ccb4798bb13948a211db4cc09e4c076a45e1411c3125c0"
+    },
+    {
+      "path": "baselines/flgmm/check_flgmm.py",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_b/check_flgmm.py",
+      "source_sha256": "77ce6cc44301bbda0ab8785949c8abf127e76fda8708a5ababd29c9d53e41e34",
+      "release_sha256": "77ce6cc44301bbda0ab8785949c8abf127e76fda8708a5ababd29c9d53e41e34"
+    },
+    {
+      "path": "baselines/flgmm/flgmm_adapter.py",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_b/flgmm_adapter.py",
+      "source_sha256": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453",
+      "release_sha256": "3d03b2ac53883ffecf40a5025bf6a5440824ccbf7c05c032535de18b74ff9453"
+    },
+    {
+      "path": "baselines/flgmm/sources/flgmm_fedavg.py",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_b/sources/flgmm_fedavg.py",
+      "source_sha256": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48",
+      "release_sha256": "d92d39813b21a0df030d96536c122542bc6aab0e7de31fe7f23a5f6020ac6e48"
+    },
+    {
+      "path": "baselines/flgmm/sources/flgmm_license.txt",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_b/sources/flgmm_license.txt",
+      "source_sha256": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8",
+      "release_sha256": "9a84c14aeed0cc1ed54841412ae8480b3602108e59cf02d12655912c98cac3d8"
+    },
+    {
+      "path": "baselines/flgmm/sources/flgmm_pinned.py",
+      "source_path": "experimental/celeba_baselines/remaining_20261009/group_b/sources/flgmm_pinned.py",
+      "source_sha256": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff",
+      "release_sha256": "a3f8ff07cffcf451d7aae83a3dd08949495da598fb2e688f8278d057ca6b0aff"
+    },
+    {
+      "path": "requirements.txt",
+      "source_path": "requirements.txt",
+      "source_sha256": "d85034e1137455714902f7c340cbcd0b9d32dfc5357365839c93d12bcfafe099",
+      "release_sha256": "d85034e1137455714902f7c340cbcd0b9d32dfc5357365839c93d12bcfafe099"
+    }
+  ],
+  "fixed_configs": [
+    {
+      "path": "configs/celeba_smallalpha/FedAvg.json",
+      "server_job_sha256": "39bbeb6401235049d820233e2968cf6c8c3a7a2a447739f4377c0177d82f1150",
+      "config_fields": 63,
+      "config_content_matches_server": true
+    },
+    {
+      "path": "configs/celeba_smallalpha/FLTrust.json",
+      "server_job_sha256": "c5fae5665b7936470713702576294588fc14b0737201eaa377c7f05e243a2e50",
+      "config_fields": 63,
+      "config_content_matches_server": true
+    },
+    {
+      "path": "configs/celeba_smallalpha/GuardFed-AD2+.json",
+      "server_job_sha256": "d923e05960e9ea894645d74b648ed267b3570d6d175fc4ee8886075fbaf735af",
+      "config_fields": 63,
+      "config_content_matches_server": true
+    }
+  ],
+  "history": "Original research results and prior source versions remain preserved. New entry points do not renew historical acceptance claims."
+}

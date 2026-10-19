@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Run GuardFed paper Table II/III reproduction experiments."""
+"""Core training and evaluation shared with the server experiments."""
 from __future__ import annotations
-import argparse, copy, csv, hashlib, json, math, random, subprocess, sys, time
+import copy, hashlib, json, math, random, sys, time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -19,10 +19,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from src.data_loader import DatasetLoader  # noqa: E402
 
-RESULTS_DIR = ROOT / "results" / "paper_tables"
-RAW_PATH = RESULTS_DIR / "raw_results.jsonl"
-TABLE_PATHS = {"adult": RESULTS_DIR / "table_adult.csv", "compas": RESULTS_DIR / "table_compas.csv"}
-REPORT_PATH = RESULTS_DIR / "reproduction_report.md"
 METHODS = ["FedAvg", "FairFed", "Median", "FLTrust", "FairGuard", "FLTrust+FairGuard", "GuardFed", "FLGMM", "FLAURA", "LayerGuard", "SmartFL", "FLTG", "FedDNA", "LASA", "Fed-NGA", "Huber-BRFL", "LoGoFair", "AdaAggRL", "FedAMM", "FedAA", "GuardFed-AD2", "GuardFed-AD2+"]
 ATTACKS = ["Benign", "F Flip", "FOE", "S-DFA", "Sp-DFA"]
 EXTRA_ATTACKS = ["FedSA"]
@@ -1773,142 +1769,3 @@ def make_run_id(mode: str, dataset: str, distribution: str, method: str, attack:
     if config.ablation_component != "none" or config.client_alpha is not None or config.full_round_diagnostics:
         revision_id += f"|ablation={config.ablation_component}|clientalpha={config.client_alpha}|fullrounddiag={int(config.full_round_diagnostics)}"
     return "|".join([mode, dataset, distribution, method, attack, f"rounds={config.rounds}", f"seed={config.seed}", f"clients={config.num_clients}", f"malicious={config.num_malicious}", f"epochs={config.local_epochs}", f"batch={config.batch_size}", f"lr={config.learning_rate}", f"opt={config.optimizer}", f"root={config.server_ratio}+{config.synthetic_ratio}", f"serversamp={config.server_sampling}", f"serveralpha={config.server_alpha}", f"servertarget={config.server_target_sensitive}:{config.server_target_label}", f"synth={config.synthetic_method}", f"synth_epochs={config.synthetic_epochs}", f"sensfeat={int(config.include_sensitive_feature)}", f"agg={config.aggregation_weighting}", f"fflip={config.fflip_mode}", f"rw={int(config.use_reweighting)}", f"foe={config.foe_mode}", f"sdfafoe={config.sdfa_foe_mode or config.foe_mode}", f"spdfafoe={config.spdfa_foe_mode or config.foe_mode}", f"fedsa_gain={config.fedsa_gain}", f"fedsa_norm={config.fedsa_norm_ratio}", f"fg={config.fairguard_mode}", f"actfb={config.act_fairness_budget}", f"acttemp={config.act_temperature}", f"actkeep={config.act_keep_ratio}", f"actmetric={config.act_fairness_metric}", f"actdrop={config.act_anchor_drop}", f"actrisk={config.act_risk_weight}", f"actviol={config.act_violation_weight}", f"ad2calw={config.ad2_calibration_base_weight}", f"ad2calb={config.ad2_calibration_budget}", f"ad2calt={config.ad2_calibration_temperature}", f"ad2calq={config.ad2_calibration_quantiles}", f"ad2clip={config.ad2_score_clip}", f"ad2normclip={config.ad2_norm_clip_scale}", f"ad2accdrop={config.ad2_calibration_max_acc_drop}", f"ad2calobj={config.ad2_calibration_objective}", f"ad2calen={int(config.ad2_calibration_enabled)}", f"ad2normmode={config.ad2_norm_mode}", f"ad2uw={config.ad2_utility_weight}", f"ad2cw={config.ad2_centrality_weight}", f"ad2aw={config.ad2_alignment_weight}", f"ad2plus={config.ad2_plus_mode}", f"suite={config.experiment_suite}", f"tag={config.experiment_tag}"]) + revision_id
-
-def load_completed(path: Path) -> set[str]:
-    if not path.exists(): return set()
-    done=set()
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            try: done.add(json.loads(line)["run_id"])
-            except Exception: pass
-    return done
-
-def append_result(path: Path, result: Dict[str, Any]) -> None:
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f: f.write(json.dumps(result, ensure_ascii=False) + "\n"); f.flush()
-
-def make_jobs(args: argparse.Namespace) -> List[Tuple[str, str, str, str]]:
-    datasets = args.datasets or DATASETS
-    methods = args.methods or METHODS
-    distributions = args.distributions or list(DISTRIBUTIONS.keys())
-    attacks = args.attacks or ATTACKS
-    jobs=[]
-    if args.smoke:
-        for dataset in datasets:
-            for method in methods: jobs.append((dataset, "IID", method, "Benign"))
-        for attack in ["F Flip", "FOE", "S-DFA", "Sp-DFA"]: jobs.append(("adult", "IID", "GuardFed", attack))
-        return jobs
-    for dataset in datasets:
-        for dist in distributions:
-            for method in methods:
-                for attack in attacks: jobs.append((dataset, dist, method, attack))
-    return jobs
-
-def write_summary_tables(raw_path: Path = RAW_PATH) -> None:
-    if not raw_path.exists(): return
-    rows=[json.loads(line) for line in raw_path.read_text(encoding="utf-8").splitlines() if line.strip()]
-    full=[r for r in rows if r.get("mode") == "full"]; source=full if full else rows; latest={}
-    for r in source: latest[(r["dataset"], r["method"], r["distribution"], r["attack"])] = r
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    for dataset, path in TABLE_PATHS.items():
-        cols=["method", "metric"] + [f"{dist}_{attack}" for dist in DISTRIBUTIONS for attack in ATTACKS]
-        with path.open("w", newline="", encoding="utf-8") as f:
-            w=csv.DictWriter(f, fieldnames=cols); w.writeheader()
-            for method in METHODS:
-                for metric in METRICS:
-                    out={"method": method, "metric": metric}
-                    for dist in DISTRIBUTIONS:
-                        for attack in ATTACKS:
-                            r=latest.get((dataset, method, dist, attack)); value=""
-                            if r is not None:
-                                value=r["metrics"].get(metric, "")
-                                if metric == "accuracy" and value != "": value=float(value)*100.0
-                            out[f"{dist}_{attack}"]=value
-                    w.writerow(out)
-
-def write_reproduction_report(results: List[Dict[str, Any]], mode: str, config: ExperimentConfig) -> None:
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True); lines=["# GuardFed Table II/III Reproduction Report", "", f"Mode: {mode}", f"Completed cells in this invocation: {len(results)}", "", "## Protocol", "- Datasets: adult, compas", "- Distributions: IID alpha=5000, non-IID alpha=5", "- Methods: " + ", ".join(METHODS), "- Attacks: " + ", ".join(ATTACKS), "- Class-B FL: excluded", f"- Config: {asdict(config)}", f"- Sensitive attribute included in model inputs: {config.include_sensitive_feature}.", f"- Client aggregation weighting: {config.aggregation_weighting}.", f"- F Flip mode: {config.fflip_mode}; labels are unchanged.", f"- FOE mode: {config.foe_mode}; S-DFA FOE mode: {config.sdfa_foe_mode or config.foe_mode}; Sp-DFA FOE mode: {config.spdfa_foe_mode or config.foe_mode}.", f"- FairGuard mode: {config.fairguard_mode}.", f"- Reweighting enabled: {config.use_reweighting}.", "- Adult: label income (>50K=1), sensitive sex (Male=1, Female=0).", "- COMPAS: label two_year_recid, sensitive race (African-American=1, Others=0).", f"- Server/root data: {config.server_ratio:.1%} clean + {config.synthetic_ratio:.1%} Gaussian Copula synthetic.", "- FOE default: existing Git attack_acc_0.5 state_dict mode; S-DFA/Sp-DFA can override this and are recorded per run.", "", "## Outputs", f"- Raw JSONL: {RAW_PATH}", f"- Adult table: {TABLE_PATHS['adult']}", f"- COMPAS table: {TABLE_PATHS['compas']}", ""]
-    if results:
-        lines.append("## Latest Invocation Results")
-        for r in results:
-            m=r["metrics"]; warn=f" warnings={len(r.get('warnings', []))}" if r.get("warnings") else ""; lines.append(f"- {r['dataset']} {r['distribution']} {r['attack']} {r['method']}: ACC={m['accuracy']:.6f}, AEOD={m['aeod']:.6f}, ASPD={m['aspd']:.6f}, time={r['duration_sec']:.1f}s{warn}")
-    else: lines.append("No new cells were run in this invocation; existing raw results were reused.")
-    REPORT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-def run_validation() -> None:
-    proc = subprocess.run([sys.executable, str(ROOT / "scripts" / "validate_reproduction_data.py")], cwd=str(ROOT))
-    if proc.returncode != 0: raise RuntimeError("Data/metric validation failed; full experiments are blocked")
-
-def main() -> int:
-    p=argparse.ArgumentParser(); g=p.add_mutually_exclusive_group(required=True); g.add_argument("--smoke", action="store_true"); g.add_argument("--full", action="store_true")
-    p.add_argument("--datasets", nargs="*", choices=DATASETS)
-    p.add_argument("--methods", nargs="*", choices=METHODS)
-    p.add_argument("--distributions", nargs="*", choices=list(DISTRIBUTIONS.keys()))
-    p.add_argument("--attacks", nargs="*", choices=ALL_ATTACKS)
-    p.add_argument("--rounds", type=int)
-    p.add_argument("--seed", type=int, default=123)
-    p.add_argument("--num-clients", type=int, default=20)
-    p.add_argument("--num-malicious", type=int, default=4)
-    p.add_argument("--local-epochs", type=int, default=1)
-    p.add_argument("--batch-size", type=int, default=256)
-    p.add_argument("--learning-rate", type=float, default=0.005)
-    p.add_argument("--device", default="cuda", choices=["cuda", "cpu", "auto"])
-    p.add_argument("--optimizer", default="adam", choices=["adam", "sgd"])
-    p.add_argument("--server-ratio", type=float, default=0.05)
-    p.add_argument("--synthetic-ratio", type=float, default=0.0)
-    p.add_argument("--server-sampling", default="stratified_sensitive", choices=["stratified_sensitive", "iid_random", "dirichlet_strata", "dirichlet_strata_floor", "dirichlet_label_preserved", "dirichlet_label_preserved_strong_floor", "controlled_group_skew", "controlled_positive_sensitive_skew", "controlled_target_group_skew", "group_balanced", "sensitive_balanced", "class_balanced"])
-    p.add_argument("--server-alpha", type=float)
-    p.add_argument("--server-target-sensitive", type=int, choices=[0, 1])
-    p.add_argument("--server-target-label", type=int, choices=[0, 1])
-    p.add_argument("--synthetic-method", default="gaussian_copula", choices=["none", "gaussian_copula", "ctgan", "tvae", "bootstrap", "noisy_bootstrap", "smote", "pca_gaussian"])
-    p.add_argument("--synthetic-epochs", type=int, default=50)
-    p.add_argument("--include-sensitive-feature", action="store_true")
-    p.add_argument("--aggregation-weighting", default="count", choices=["count", "equal"])
-    p.add_argument("--fflip-mode", default="invert", choices=["invert", "label_conditioned", "label_conditioned_reverse", "all_privileged", "all_unprivileged"])
-    p.add_argument("--foe-mode", default="state", choices=["state", "delta", "zero", "fedsa"])
-    p.add_argument("--sdfa-foe-mode", choices=["state", "delta", "zero", "fedsa"])
-    p.add_argument("--spdfa-foe-mode", choices=["state", "delta", "zero", "fedsa"])
-    p.add_argument("--fedsa-gain", type=float, default=1.75)
-    p.add_argument("--fedsa-norm-ratio", type=float, default=2.0)
-    p.add_argument("--fairguard-mode", default="server_aeod", choices=["server_aeod", "none"])
-    p.add_argument("--act-fairness-budget", type=float, default=0.06)
-    p.add_argument("--act-temperature", type=float, default=0.35)
-    p.add_argument("--act-keep-ratio", type=float, default=0.80)
-    p.add_argument("--act-fairness-metric", default="aeod_aspd", choices=["aeod", "aspd", "aeod_aspd", "max"])
-    p.add_argument("--act-anchor-drop", type=float, default=0.005)
-    p.add_argument("--act-risk-weight", type=float, default=1.0)
-    p.add_argument("--act-violation-weight", type=float, default=1.0)
-    p.add_argument("--ad2-calibration-base-weight", type=float, default=1.0)
-    p.add_argument("--ad2-calibration-budget", type=float, default=0.06)
-    p.add_argument("--ad2-calibration-temperature", type=float, default=0.03)
-    p.add_argument("--ad2-calibration-quantiles", type=int, default=41)
-    p.add_argument("--ad2-score-clip", type=float, default=5.0)
-    p.add_argument("--ad2-norm-clip-scale", type=float, default=2.5)
-    p.add_argument("--ad2-calibration-max-acc-drop", type=float, default=0.03)
-    p.add_argument("--ad2-calibration-objective", default="acc_floor", choices=["acc_floor", "original"])
-    p.add_argument("--disable-ad2-calibration", action="store_true")
-    p.add_argument("--ad2-norm-mode", default="adaptive", choices=["adaptive", "root"])
-    p.add_argument("--ad2-utility-weight", type=float, default=1.0)
-    p.add_argument("--ad2-centrality-weight", type=float, default=0.35)
-    p.add_argument("--ad2-alignment-weight", type=float, default=0.35)
-    p.add_argument("--ad2-plus-mode", default="adaptive", choices=["adaptive", "fixed"])
-    p.add_argument("--experiment-suite", default="main")
-    p.add_argument("--experiment-tag", default="default")
-    p.add_argument("--no-reweighting", action="store_true")
-    p.add_argument("--ablation-component", default="none", choices=["none", "U", "C", "A", "F", "V", "N"])
-    p.add_argument("--client-alpha", type=float)
-    p.add_argument("--full-round-diagnostics", action="store_true")
-    p.add_argument("--root-label-noise", type=float, default=0.0)
-    p.add_argument("--root-sensitive-noise", type=float, default=0.0)
-    p.add_argument("--compas-preprocessing-version", choices=["legacy", "train_only"], default="legacy")
-    p.add_argument("--force", action="store_true")
-    args=p.parse_args(); rounds=args.rounds if args.rounds is not None else (1 if args.smoke else 70); config=ExperimentConfig(root_label_noise=args.root_label_noise, root_sensitive_noise=args.root_sensitive_noise, compas_preprocessing_version=args.compas_preprocessing_version, ablation_component=args.ablation_component, client_alpha=args.client_alpha, full_round_diagnostics=args.full_round_diagnostics, seed=args.seed, num_clients=args.num_clients, num_malicious=args.num_malicious, local_epochs=args.local_epochs, batch_size=args.batch_size, learning_rate=args.learning_rate, rounds=rounds, device=args.device, optimizer=args.optimizer, server_ratio=args.server_ratio, synthetic_ratio=args.synthetic_ratio, server_sampling=args.server_sampling, server_alpha=args.server_alpha, server_target_sensitive=args.server_target_sensitive, server_target_label=args.server_target_label, synthetic_method=args.synthetic_method, synthetic_epochs=args.synthetic_epochs, include_sensitive_feature=args.include_sensitive_feature, aggregation_weighting=args.aggregation_weighting, fflip_mode=args.fflip_mode, foe_mode=args.foe_mode, sdfa_foe_mode=args.sdfa_foe_mode, spdfa_foe_mode=args.spdfa_foe_mode, fedsa_gain=args.fedsa_gain, fedsa_norm_ratio=args.fedsa_norm_ratio, fairguard_mode=args.fairguard_mode, use_reweighting=not args.no_reweighting, act_fairness_budget=args.act_fairness_budget, act_temperature=args.act_temperature, act_keep_ratio=args.act_keep_ratio, act_fairness_metric=args.act_fairness_metric, act_anchor_drop=args.act_anchor_drop, act_risk_weight=args.act_risk_weight, act_violation_weight=args.act_violation_weight, ad2_calibration_base_weight=args.ad2_calibration_base_weight, ad2_calibration_budget=args.ad2_calibration_budget, ad2_calibration_temperature=args.ad2_calibration_temperature, ad2_calibration_quantiles=args.ad2_calibration_quantiles, ad2_score_clip=args.ad2_score_clip, ad2_norm_clip_scale=args.ad2_norm_clip_scale, ad2_calibration_max_acc_drop=args.ad2_calibration_max_acc_drop, ad2_calibration_objective=args.ad2_calibration_objective, ad2_calibration_enabled=not args.disable_ad2_calibration, ad2_norm_mode=args.ad2_norm_mode, ad2_utility_weight=args.ad2_utility_weight, ad2_centrality_weight=args.ad2_centrality_weight, ad2_alignment_weight=args.ad2_alignment_weight, ad2_plus_mode=args.ad2_plus_mode, experiment_suite=args.experiment_suite, experiment_tag=args.experiment_tag)
-    run_validation(); device=choose_device(args.device); mode="smoke" if args.smoke else "full"; jobs=make_jobs(args); completed=load_completed(RAW_PATH); print(f"Running {len(jobs)} {mode} jobs on {device}"); new=[]
-    for idx, (dataset, dist, method, attack) in enumerate(jobs, 1):
-        run_id=make_run_id(mode, dataset, dist, method, attack, config)
-        if run_id in completed and not args.force: print(f"[{idx}/{len(jobs)}] skip existing {run_id}"); continue
-        print(f"[{idx}/{len(jobs)}] {dataset} {dist} {method} {attack}", flush=True); result=run_experiment(dataset, dist, method, attack, config, mode, device); append_result(RAW_PATH, result); completed.add(run_id); new.append(result); m=result["metrics"]; print(f"  -> ACC={m['accuracy']:.6f} AEOD={m['aeod']:.6f} ASPD={m['aspd']:.6f} time={result['duration_sec']:.1f}s", flush=True)
-    write_summary_tables(RAW_PATH); write_reproduction_report(new, mode, config)
-    if args.full: subprocess.run([sys.executable, str(ROOT / "scripts" / "compare_paper_tables.py")], cwd=str(ROOT), check=False)
-    print(f"Done. Raw results: {RAW_PATH}"); return 0
-if __name__ == "__main__": raise SystemExit(main())

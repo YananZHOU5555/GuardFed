@@ -18,10 +18,15 @@ from src.data_loader import DatasetLoader
 class CompasTrainOnlyTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not (ROOT / "data/compas/compas-scores-two-years.csv").is_file():
+            raise unittest.SkipTest("COMPAS dataset is not installed")
         cls.raw = pd.read_csv(ROOT / "data/compas/compas-scores-two-years.csv")
-        source = subprocess.check_output(
-            ["git", "show", "9e62b78:src/data_loader.py"], cwd=ROOT, text=True
-        )
+        try:
+            source = subprocess.check_output(
+                ["git", "show", "9e62b78:src/data_loader.py"], cwd=ROOT, text=True,
+                stderr=subprocess.PIPE)
+        except (OSError, subprocess.CalledProcessError):
+            raise unittest.SkipTest("Historical reference commit 9e62b78 is unavailable")
         old = types.ModuleType("compas_legacy_reference")
         old.__file__ = str(ROOT / "src/data_loader.py")
         exec(compile(source, old.__file__, "exec"), old.__dict__)

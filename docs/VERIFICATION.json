@@ -1,60 +1,65 @@
 {
   "verified_date_sydney": "2026-10-19",
-  "source_commit": "37c35d6c954d0a94e4221c378f9405a278c59df5",
   "python": "3.10.4",
-  "platform": "Windows",
-  "source_blob_identity": {
-    "files": 178,
-    "all_matched": true
+  "torch": "2.8.0+cpu",
+  "core_definitions_AST_matches": 81,
+  "server_reference_source_files_verified": 5,
+  "metrics": {
+    "reference_compact_sha256": "1d659f15f312727c4f71ebbe196ab0e1e679567dfdee1019bafd3fcd239608ab",
+    "reference_records": 1500,
+    "confusion_count_views_recomputed": 4200,
+    "scalar_values_recomputed": 16800,
+    "max_abs_error": 0.0,
+    "tolerance": 1e-12,
+    "records_without_counts": 100,
+    "without_counts_scope": "LoGoFair native metrics remain authenticated stored references; no independent prediction recomputation in this check.",
+    "server_function_AST_matches": [
+      "ExperimentConfig",
+      "compute_metrics",
+      "fit_group_thresholds",
+      "evaluate_for_reporting",
+      "run_experiment"
+    ],
+    "new_training": false,
+    "new_GPU_inference": false
   },
-  "syntax": {
-    "python_files": 135,
-    "all_parsed": true
+  "tests": {
+    "passed": 22,
+    "skipped": 4,
+    "subtests_passed": 17,
+    "seconds": 12.13,
+    "skip_reason": "3 COMPAS dataset checks and 1 CUDA check unavailable in this code-only package / CPU host",
+    "temporary_directory": "workspace scratch used because sandbox temporary-volume rename permissions differ"
   },
-  "entry_checks": [
-    {
-      "command": "python scripts/reproduce_paper_tables.py --help",
-      "returncode": 0,
-      "stdout_bytes": 7913,
-      "stderr_bytes": 0
-    },
-    {
-      "command": "python scripts/run_attack_strength_study.py --help",
-      "returncode": 0,
-      "stdout_bytes": 411,
-      "stderr_bytes": 0
-    },
-    {
-      "command": "python scripts/run_revision_ablation.py --help",
-      "returncode": 0,
-      "stdout_bytes": 550,
-      "stderr_bytes": 0
-    },
-    {
-      "command": "python scripts/run_ad2plus_advisor_experiments.py --suite ablation --dry-run",
-      "returncode": 0,
-      "stdout_bytes": 14337,
-      "stderr_bytes": 0
-    }
-  ],
-  "regression": {
-    "command": "python -m pytest -q -p no:cacheprovider tests",
-    "cwd": "source worktree with complete Git history and existing COMPAS data",
-    "passed": 11,
-    "skipped": 1,
-    "seconds": 16.47,
-    "skip_reason": "CUDA is unavailable on the validation host",
-    "exported_cuda_check": "1 skipped in 9.31s"
+  "baseline_component_checks": {
+    "FedNGA": "PASS: analytical CPU checks",
+    "FLGMM": "PASS: 12 author-code / edge-condition gates"
   },
   "not_executed": [
-    "new model training",
-    "CelebA cache rebuild",
-    "GPU replay",
-    "end-to-end baseline deployment",
-    "final paper reproduction"
+    "new training",
+    "new GPU inference",
+    "full external-baseline training integration",
+    "independent final-test evaluation"
   ],
-  "code_changes": "No source algorithm, default configuration or attack logic modified.",
-  "handoff_doc_links": {
-    "broken": []
+  "removed_reporting": "Legacy per-metric/run/round selection tools and automatic historical comparison were removed; historical outputs are not retroactively certified.",
+  "entry_checks": [
+    {
+      "script": "scripts/run_experiment.py",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/summarize_results.py",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/build_celeba_cache.py",
+      "status": "optional pyarrow preprocessing dependency not installed"
+    }
+  ],
+  "syntax_python_files": 26,
+  "broken_release_doc_links": [],
+  "final_runner_check": {
+    "passed": 3,
+    "seconds": 6.7
   }
 }
